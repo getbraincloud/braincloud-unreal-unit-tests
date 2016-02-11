@@ -1,0 +1,1632 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		D84A705C1C7370AA00291D06 /* BrainCloudAsyncMatch.h in Headers */ = {isa = PBXBuildFile; fileRef = D84A70321C7370AA00291D06 /* BrainCloudAsyncMatch.h */; };
+		D84A705D1C7370AA00291D06 /* BrainCloudAuthentication.h in Headers */ = {isa = PBXBuildFile; fileRef = D84A70331C7370AA00291D06 /* BrainCloudAuthentication.h */; };
+		D84A705E1C7370AA00291D06 /* BrainCloudClient.h in Headers */ = {isa = PBXBuildFile; fileRef = D84A70341C7370AA00291D06 /* BrainCloudClient.h */; };
+		D84A705F1C7370AA00291D06 /* BrainCloudDataStream.h in Headers */ = {isa = PBXBuildFile; fileRef = D84A70351C7370AA00291D06 /* BrainCloudDataStream.h */; };
+		D84A70601C7370AA00291D06 /* BrainCloudEntity.h in Headers */ = {isa = PBXBuildFile; fileRef = D84A70361C7370AA00291D06 /* BrainCloudEntity.h */; };
+		D84A70611C7370AA00291D06 /* BrainCloudEvent.h in Headers */ = {isa = PBXBuildFile; fileRef = D84A70371C7370AA00291D06 /* BrainCloudEvent.h */; };
+		D84A70621C7370AA00291D06 /* BrainCloudFile.h in Headers */ = {isa = PBXBuildFile; fileRef = D84A70381C7370AA00291D06 /* BrainCloudFile.h */; };
+		D84A70631C7370AA00291D06 /* BrainCloudFriend.h in Headers */ = {isa = PBXBuildFile; fileRef = D84A70391C7370AA00291D06 /* BrainCloudFriend.h */; };
+		D84A70641C7370AA00291D06 /* BrainCloudGamification.h in Headers */ = {isa = PBXBuildFile; fileRef = D84A703A1C7370AA00291D06 /* BrainCloudGamification.h */; };
+		D84A70651C7370AA00291D06 /* BrainCloudGlobalApp.h in Headers */ = {isa = PBXBuildFile; fileRef = D84A703B1C7370AA00291D06 /* BrainCloudGlobalApp.h */; };
+		D84A70661C7370AA00291D06 /* BrainCloudGlobalEntity.h in Headers */ = {isa = PBXBuildFile; fileRef = D84A703C1C7370AA00291D06 /* BrainCloudGlobalEntity.h */; };
+		D84A70671C7370AA00291D06 /* BrainCloudGlobalStatistics.h in Headers */ = {isa = PBXBuildFile; fileRef = D84A703D1C7370AA00291D06 /* BrainCloudGlobalStatistics.h */; };
+		D84A70681C7370AA00291D06 /* BrainCloudIdentity.h in Headers */ = {isa = PBXBuildFile; fileRef = D84A703E1C7370AA00291D06 /* BrainCloudIdentity.h */; };
+		D84A70691C7370AA00291D06 /* BrainCloudMatchmaking.h in Headers */ = {isa = PBXBuildFile; fileRef = D84A703F1C7370AA00291D06 /* BrainCloudMatchmaking.h */; };
+		D84A706A1C7370AA00291D06 /* BrainCloudOneWayMatch.h in Headers */ = {isa = PBXBuildFile; fileRef = D84A70401C7370AA00291D06 /* BrainCloudOneWayMatch.h */; };
+		D84A706B1C7370AA00291D06 /* BrainCloudPlaybackStream.h in Headers */ = {isa = PBXBuildFile; fileRef = D84A70411C7370AA00291D06 /* BrainCloudPlaybackStream.h */; };
+		D84A706C1C7370AA00291D06 /* BrainCloudPlayerState.h in Headers */ = {isa = PBXBuildFile; fileRef = D84A70421C7370AA00291D06 /* BrainCloudPlayerState.h */; };
+		D84A706D1C7370AA00291D06 /* BrainCloudPlayerStatistics.h in Headers */ = {isa = PBXBuildFile; fileRef = D84A70431C7370AA00291D06 /* BrainCloudPlayerStatistics.h */; };
+		D84A706E1C7370AA00291D06 /* BrainCloudPlayerStatisticsEvent.h in Headers */ = {isa = PBXBuildFile; fileRef = D84A70441C7370AA00291D06 /* BrainCloudPlayerStatisticsEvent.h */; };
+		D84A706F1C7370AA00291D06 /* BrainCloudProduct.h in Headers */ = {isa = PBXBuildFile; fileRef = D84A70451C7370AA00291D06 /* BrainCloudProduct.h */; };
+		D84A70701C7370AA00291D06 /* BrainCloudProfanity.h in Headers */ = {isa = PBXBuildFile; fileRef = D84A70461C7370AA00291D06 /* BrainCloudProfanity.h */; };
+		D84A70711C7370AA00291D06 /* BrainCloudPushNotification.h in Headers */ = {isa = PBXBuildFile; fileRef = D84A70471C7370AA00291D06 /* BrainCloudPushNotification.h */; };
+		D84A70721C7370AA00291D06 /* BrainCloudRedemptionCode.h in Headers */ = {isa = PBXBuildFile; fileRef = D84A70481C7370AA00291D06 /* BrainCloudRedemptionCode.h */; };
+		D84A70731C7370AA00291D06 /* BrainCloudS3Handling.h in Headers */ = {isa = PBXBuildFile; fileRef = D84A70491C7370AA00291D06 /* BrainCloudS3Handling.h */; };
+		D84A70741C7370AA00291D06 /* BrainCloudScript.h in Headers */ = {isa = PBXBuildFile; fileRef = D84A704A1C7370AA00291D06 /* BrainCloudScript.h */; };
+		D84A70751C7370AA00291D06 /* BrainCloudSocialLeaderboard.h in Headers */ = {isa = PBXBuildFile; fileRef = D84A704B1C7370AA00291D06 /* BrainCloudSocialLeaderboard.h */; };
+		D84A70761C7370AA00291D06 /* BrainCloudSteam.h in Headers */ = {isa = PBXBuildFile; fileRef = D84A704C1C7370AA00291D06 /* BrainCloudSteam.h */; };
+		D84A70771C7370AA00291D06 /* BrainCloudTime.h in Headers */ = {isa = PBXBuildFile; fileRef = D84A704D1C7370AA00291D06 /* BrainCloudTime.h */; };
+		D84A70781C7370AA00291D06 /* BrainCloudTwitter.h in Headers */ = {isa = PBXBuildFile; fileRef = D84A704E1C7370AA00291D06 /* BrainCloudTwitter.h */; };
+		D84A70791C7370AA00291D06 /* BrainCloudTypes.h in Headers */ = {isa = PBXBuildFile; fileRef = D84A704F1C7370AA00291D06 /* BrainCloudTypes.h */; };
+		D84A707A1C7370AA00291D06 /* http_codes.h in Headers */ = {isa = PBXBuildFile; fileRef = D84A70501C7370AA00291D06 /* http_codes.h */; };
+		D84A707B1C7370AA00291D06 /* IBrainCloudComms.h in Headers */ = {isa = PBXBuildFile; fileRef = D84A70511C7370AA00291D06 /* IBrainCloudComms.h */; };
+		D84A707C1C7370AA00291D06 /* IEventCallback.h in Headers */ = {isa = PBXBuildFile; fileRef = D84A70521C7370AA00291D06 /* IEventCallback.h */; };
+		D84A707D1C7370AA00291D06 /* IFileUploadCallback.h in Headers */ = {isa = PBXBuildFile; fileRef = D84A70531C7370AA00291D06 /* IFileUploadCallback.h */; };
+		D84A707E1C7370AA00291D06 /* IRewardCallback.h in Headers */ = {isa = PBXBuildFile; fileRef = D84A70541C7370AA00291D06 /* IRewardCallback.h */; };
+		D84A707F1C7370AA00291D06 /* IServerCallback.h in Headers */ = {isa = PBXBuildFile; fileRef = D84A70551C7370AA00291D06 /* IServerCallback.h */; };
+		D84A70801C7370AA00291D06 /* OperationParam.h in Headers */ = {isa = PBXBuildFile; fileRef = D84A70561C7370AA00291D06 /* OperationParam.h */; };
+		D84A70811C7370AA00291D06 /* Platform.h in Headers */ = {isa = PBXBuildFile; fileRef = D84A70571C7370AA00291D06 /* Platform.h */; };
+		D84A70821C7370AA00291D06 /* reason_codes.h in Headers */ = {isa = PBXBuildFile; fileRef = D84A70581C7370AA00291D06 /* reason_codes.h */; };
+		D84A70831C7370AA00291D06 /* ServerCall.h in Headers */ = {isa = PBXBuildFile; fileRef = D84A70591C7370AA00291D06 /* ServerCall.h */; };
+		D84A70841C7370AA00291D06 /* ServiceName.h in Headers */ = {isa = PBXBuildFile; fileRef = D84A705A1C7370AA00291D06 /* ServiceName.h */; };
+		D84A70851C7370AA00291D06 /* ServiceOperation.h in Headers */ = {isa = PBXBuildFile; fileRef = D84A705B1C7370AA00291D06 /* ServiceOperation.h */; };
+		D84A70F41C73711A00291D06 /* BrainCloudAsyncMatch.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D84A70C11C73711900291D06 /* BrainCloudAsyncMatch.cpp */; };
+		D84A70F51C73711A00291D06 /* BrainCloudAsyncMatch.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D84A70C11C73711900291D06 /* BrainCloudAsyncMatch.cpp */; };
+		D84A70F61C73711A00291D06 /* BrainCloudAsyncMatch.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D84A70C11C73711900291D06 /* BrainCloudAsyncMatch.cpp */; };
+		D84A70F71C73711A00291D06 /* BrainCloudAuthentication.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D84A70C21C73711900291D06 /* BrainCloudAuthentication.cpp */; };
+		D84A70F81C73711A00291D06 /* BrainCloudAuthentication.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D84A70C21C73711900291D06 /* BrainCloudAuthentication.cpp */; };
+		D84A70F91C73711A00291D06 /* BrainCloudAuthentication.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D84A70C21C73711900291D06 /* BrainCloudAuthentication.cpp */; };
+		D84A70FA1C73711A00291D06 /* BrainCloudClient.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D84A70C31C73711900291D06 /* BrainCloudClient.cpp */; };
+		D84A70FB1C73711A00291D06 /* BrainCloudClient.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D84A70C31C73711900291D06 /* BrainCloudClient.cpp */; };
+		D84A70FC1C73711A00291D06 /* BrainCloudClient.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D84A70C31C73711900291D06 /* BrainCloudClient.cpp */; };
+		D84A70FD1C73711A00291D06 /* BrainCloudComms.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D84A70C41C73711900291D06 /* BrainCloudComms.cpp */; };
+		D84A70FE1C73711A00291D06 /* BrainCloudComms.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D84A70C41C73711900291D06 /* BrainCloudComms.cpp */; };
+		D84A70FF1C73711A00291D06 /* BrainCloudComms.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D84A70C41C73711900291D06 /* BrainCloudComms.cpp */; };
+		D84A71001C73711A00291D06 /* BrainCloudComms.h in Headers */ = {isa = PBXBuildFile; fileRef = D84A70C51C73711900291D06 /* BrainCloudComms.h */; };
+		D84A71011C73711A00291D06 /* BrainCloudDataStream.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D84A70C61C73711900291D06 /* BrainCloudDataStream.cpp */; };
+		D84A71021C73711A00291D06 /* BrainCloudDataStream.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D84A70C61C73711900291D06 /* BrainCloudDataStream.cpp */; };
+		D84A71031C73711A00291D06 /* BrainCloudDataStream.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D84A70C61C73711900291D06 /* BrainCloudDataStream.cpp */; };
+		D84A71041C73711A00291D06 /* BrainCloudEntity.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D84A70C71C73711900291D06 /* BrainCloudEntity.cpp */; };
+		D84A71051C73711A00291D06 /* BrainCloudEntity.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D84A70C71C73711900291D06 /* BrainCloudEntity.cpp */; };
+		D84A71061C73711A00291D06 /* BrainCloudEntity.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D84A70C71C73711900291D06 /* BrainCloudEntity.cpp */; };
+		D84A71071C73711A00291D06 /* BrainCloudEvent.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D84A70C81C73711900291D06 /* BrainCloudEvent.cpp */; };
+		D84A71081C73711A00291D06 /* BrainCloudEvent.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D84A70C81C73711900291D06 /* BrainCloudEvent.cpp */; };
+		D84A71091C73711A00291D06 /* BrainCloudEvent.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D84A70C81C73711900291D06 /* BrainCloudEvent.cpp */; };
+		D84A710A1C73711A00291D06 /* BrainCloudFile.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D84A70C91C73711900291D06 /* BrainCloudFile.cpp */; };
+		D84A710B1C73711A00291D06 /* BrainCloudFile.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D84A70C91C73711900291D06 /* BrainCloudFile.cpp */; };
+		D84A710C1C73711A00291D06 /* BrainCloudFile.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D84A70C91C73711900291D06 /* BrainCloudFile.cpp */; };
+		D84A710D1C73711A00291D06 /* BrainCloudFriend.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D84A70CA1C73711900291D06 /* BrainCloudFriend.cpp */; };
+		D84A710E1C73711A00291D06 /* BrainCloudFriend.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D84A70CA1C73711900291D06 /* BrainCloudFriend.cpp */; };
+		D84A710F1C73711A00291D06 /* BrainCloudFriend.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D84A70CA1C73711900291D06 /* BrainCloudFriend.cpp */; };
+		D84A71101C73711A00291D06 /* BrainCloudGamification.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D84A70CB1C73711900291D06 /* BrainCloudGamification.cpp */; };
+		D84A71111C73711A00291D06 /* BrainCloudGamification.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D84A70CB1C73711900291D06 /* BrainCloudGamification.cpp */; };
+		D84A71121C73711A00291D06 /* BrainCloudGamification.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D84A70CB1C73711900291D06 /* BrainCloudGamification.cpp */; };
+		D84A71131C73711A00291D06 /* BrainCloudGlobalApp.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D84A70CC1C73711900291D06 /* BrainCloudGlobalApp.cpp */; };
+		D84A71141C73711A00291D06 /* BrainCloudGlobalApp.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D84A70CC1C73711900291D06 /* BrainCloudGlobalApp.cpp */; };
+		D84A71151C73711A00291D06 /* BrainCloudGlobalApp.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D84A70CC1C73711900291D06 /* BrainCloudGlobalApp.cpp */; };
+		D84A71161C73711A00291D06 /* BrainCloudGlobalEntity.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D84A70CD1C73711900291D06 /* BrainCloudGlobalEntity.cpp */; };
+		D84A71171C73711A00291D06 /* BrainCloudGlobalEntity.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D84A70CD1C73711900291D06 /* BrainCloudGlobalEntity.cpp */; };
+		D84A71181C73711A00291D06 /* BrainCloudGlobalEntity.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D84A70CD1C73711900291D06 /* BrainCloudGlobalEntity.cpp */; };
+		D84A71191C73711A00291D06 /* BrainCloudGlobalStatistics.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D84A70CE1C73711900291D06 /* BrainCloudGlobalStatistics.cpp */; };
+		D84A711A1C73711A00291D06 /* BrainCloudGlobalStatistics.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D84A70CE1C73711900291D06 /* BrainCloudGlobalStatistics.cpp */; };
+		D84A711B1C73711A00291D06 /* BrainCloudGlobalStatistics.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D84A70CE1C73711900291D06 /* BrainCloudGlobalStatistics.cpp */; };
+		D84A711C1C73711A00291D06 /* BrainCloudIdentity.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D84A70CF1C73711900291D06 /* BrainCloudIdentity.cpp */; };
+		D84A711D1C73711A00291D06 /* BrainCloudIdentity.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D84A70CF1C73711900291D06 /* BrainCloudIdentity.cpp */; };
+		D84A711E1C73711A00291D06 /* BrainCloudIdentity.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D84A70CF1C73711900291D06 /* BrainCloudIdentity.cpp */; };
+		D84A711F1C73711A00291D06 /* BrainCloudMatchmaking.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D84A70D01C73711900291D06 /* BrainCloudMatchmaking.cpp */; };
+		D84A71201C73711A00291D06 /* BrainCloudMatchmaking.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D84A70D01C73711900291D06 /* BrainCloudMatchmaking.cpp */; };
+		D84A71211C73711A00291D06 /* BrainCloudMatchmaking.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D84A70D01C73711900291D06 /* BrainCloudMatchmaking.cpp */; };
+		D84A71221C73711A00291D06 /* BrainCloudOneWayMatch.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D84A70D11C73711900291D06 /* BrainCloudOneWayMatch.cpp */; };
+		D84A71231C73711A00291D06 /* BrainCloudOneWayMatch.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D84A70D11C73711900291D06 /* BrainCloudOneWayMatch.cpp */; };
+		D84A71241C73711A00291D06 /* BrainCloudOneWayMatch.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D84A70D11C73711900291D06 /* BrainCloudOneWayMatch.cpp */; };
+		D84A71251C73711A00291D06 /* BrainCloudPlaybackStream.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D84A70D21C73711900291D06 /* BrainCloudPlaybackStream.cpp */; };
+		D84A71261C73711A00291D06 /* BrainCloudPlaybackStream.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D84A70D21C73711900291D06 /* BrainCloudPlaybackStream.cpp */; };
+		D84A71271C73711A00291D06 /* BrainCloudPlaybackStream.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D84A70D21C73711900291D06 /* BrainCloudPlaybackStream.cpp */; };
+		D84A71281C73711A00291D06 /* BrainCloudPlayerState.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D84A70D31C73711900291D06 /* BrainCloudPlayerState.cpp */; };
+		D84A71291C73711A00291D06 /* BrainCloudPlayerState.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D84A70D31C73711900291D06 /* BrainCloudPlayerState.cpp */; };
+		D84A712A1C73711A00291D06 /* BrainCloudPlayerState.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D84A70D31C73711900291D06 /* BrainCloudPlayerState.cpp */; };
+		D84A712B1C73711A00291D06 /* BrainCloudPlayerStatistics.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D84A70D41C73711900291D06 /* BrainCloudPlayerStatistics.cpp */; };
+		D84A712C1C73711A00291D06 /* BrainCloudPlayerStatistics.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D84A70D41C73711900291D06 /* BrainCloudPlayerStatistics.cpp */; };
+		D84A712D1C73711A00291D06 /* BrainCloudPlayerStatistics.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D84A70D41C73711900291D06 /* BrainCloudPlayerStatistics.cpp */; };
+		D84A712E1C73711A00291D06 /* BrainCloudPlayerStatisticsEvent.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D84A70D51C73711900291D06 /* BrainCloudPlayerStatisticsEvent.cpp */; };
+		D84A712F1C73711A00291D06 /* BrainCloudPlayerStatisticsEvent.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D84A70D51C73711900291D06 /* BrainCloudPlayerStatisticsEvent.cpp */; };
+		D84A71301C73711A00291D06 /* BrainCloudPlayerStatisticsEvent.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D84A70D51C73711900291D06 /* BrainCloudPlayerStatisticsEvent.cpp */; };
+		D84A71311C73711A00291D06 /* BrainCloudProduct.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D84A70D61C73711A00291D06 /* BrainCloudProduct.cpp */; };
+		D84A71321C73711A00291D06 /* BrainCloudProduct.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D84A70D61C73711A00291D06 /* BrainCloudProduct.cpp */; };
+		D84A71331C73711A00291D06 /* BrainCloudProduct.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D84A70D61C73711A00291D06 /* BrainCloudProduct.cpp */; };
+		D84A71341C73711A00291D06 /* BrainCloudProfanity.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D84A70D71C73711A00291D06 /* BrainCloudProfanity.cpp */; };
+		D84A71351C73711A00291D06 /* BrainCloudProfanity.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D84A70D71C73711A00291D06 /* BrainCloudProfanity.cpp */; };
+		D84A71361C73711A00291D06 /* BrainCloudProfanity.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D84A70D71C73711A00291D06 /* BrainCloudProfanity.cpp */; };
+		D84A71371C73711A00291D06 /* BrainCloudPushNotification.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D84A70D81C73711A00291D06 /* BrainCloudPushNotification.cpp */; };
+		D84A71381C73711A00291D06 /* BrainCloudPushNotification.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D84A70D81C73711A00291D06 /* BrainCloudPushNotification.cpp */; };
+		D84A71391C73711A00291D06 /* BrainCloudPushNotification.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D84A70D81C73711A00291D06 /* BrainCloudPushNotification.cpp */; };
+		D84A713A1C73711A00291D06 /* BrainCloudRedemptionCode.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D84A70D91C73711A00291D06 /* BrainCloudRedemptionCode.cpp */; };
+		D84A713B1C73711A00291D06 /* BrainCloudRedemptionCode.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D84A70D91C73711A00291D06 /* BrainCloudRedemptionCode.cpp */; };
+		D84A713C1C73711A00291D06 /* BrainCloudRedemptionCode.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D84A70D91C73711A00291D06 /* BrainCloudRedemptionCode.cpp */; };
+		D84A713D1C73711A00291D06 /* BrainCloudS3Handling.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D84A70DA1C73711A00291D06 /* BrainCloudS3Handling.cpp */; };
+		D84A713E1C73711A00291D06 /* BrainCloudS3Handling.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D84A70DA1C73711A00291D06 /* BrainCloudS3Handling.cpp */; };
+		D84A713F1C73711A00291D06 /* BrainCloudS3Handling.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D84A70DA1C73711A00291D06 /* BrainCloudS3Handling.cpp */; };
+		D84A71401C73711A00291D06 /* BrainCloudScript.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D84A70DB1C73711A00291D06 /* BrainCloudScript.cpp */; };
+		D84A71411C73711A00291D06 /* BrainCloudScript.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D84A70DB1C73711A00291D06 /* BrainCloudScript.cpp */; };
+		D84A71421C73711A00291D06 /* BrainCloudScript.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D84A70DB1C73711A00291D06 /* BrainCloudScript.cpp */; };
+		D84A71431C73711A00291D06 /* BrainCloudSocialLeaderboard.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D84A70DC1C73711A00291D06 /* BrainCloudSocialLeaderboard.cpp */; };
+		D84A71441C73711A00291D06 /* BrainCloudSocialLeaderboard.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D84A70DC1C73711A00291D06 /* BrainCloudSocialLeaderboard.cpp */; };
+		D84A71451C73711A00291D06 /* BrainCloudSocialLeaderboard.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D84A70DC1C73711A00291D06 /* BrainCloudSocialLeaderboard.cpp */; };
+		D84A71461C73711A00291D06 /* BrainCloudSteam.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D84A70DD1C73711A00291D06 /* BrainCloudSteam.cpp */; };
+		D84A71471C73711A00291D06 /* BrainCloudSteam.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D84A70DD1C73711A00291D06 /* BrainCloudSteam.cpp */; };
+		D84A71481C73711A00291D06 /* BrainCloudSteam.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D84A70DD1C73711A00291D06 /* BrainCloudSteam.cpp */; };
+		D84A71491C73711A00291D06 /* BrainCloudTime.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D84A70DE1C73711A00291D06 /* BrainCloudTime.cpp */; };
+		D84A714A1C73711A00291D06 /* BrainCloudTime.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D84A70DE1C73711A00291D06 /* BrainCloudTime.cpp */; };
+		D84A714B1C73711A00291D06 /* BrainCloudTime.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D84A70DE1C73711A00291D06 /* BrainCloudTime.cpp */; };
+		D84A714C1C73711A00291D06 /* BrainCloudTwitter.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D84A70DF1C73711A00291D06 /* BrainCloudTwitter.cpp */; };
+		D84A714D1C73711A00291D06 /* BrainCloudTwitter.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D84A70DF1C73711A00291D06 /* BrainCloudTwitter.cpp */; };
+		D84A714E1C73711A00291D06 /* BrainCloudTwitter.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D84A70DF1C73711A00291D06 /* BrainCloudTwitter.cpp */; };
+		D84A714F1C73711A00291D06 /* GUID.h in Headers */ = {isa = PBXBuildFile; fileRef = D84A70E01C73711A00291D06 /* GUID.h */; };
+		D84A71501C73711A00291D06 /* GUID.mm in Sources */ = {isa = PBXBuildFile; fileRef = D84A70E11C73711A00291D06 /* GUID.mm */; };
+		D84A71511C73711A00291D06 /* GUID.mm in Sources */ = {isa = PBXBuildFile; fileRef = D84A70E11C73711A00291D06 /* GUID.mm */; };
+		D84A71521C73711A00291D06 /* GUID.mm in Sources */ = {isa = PBXBuildFile; fileRef = D84A70E11C73711A00291D06 /* GUID.mm */; };
+		D84A71531C73711A00291D06 /* IBrainCloudComms.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D84A70E21C73711A00291D06 /* IBrainCloudComms.cpp */; };
+		D84A71541C73711A00291D06 /* IBrainCloudComms.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D84A70E21C73711A00291D06 /* IBrainCloudComms.cpp */; };
+		D84A71551C73711A00291D06 /* IBrainCloudComms.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D84A70E21C73711A00291D06 /* IBrainCloudComms.cpp */; };
+		D84A71561C73711A00291D06 /* JsonUtil.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D84A70E31C73711A00291D06 /* JsonUtil.cpp */; };
+		D84A71571C73711A00291D06 /* JsonUtil.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D84A70E31C73711A00291D06 /* JsonUtil.cpp */; };
+		D84A71581C73711A00291D06 /* JsonUtil.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D84A70E31C73711A00291D06 /* JsonUtil.cpp */; };
+		D84A71591C73711A00291D06 /* JsonUtil.h in Headers */ = {isa = PBXBuildFile; fileRef = D84A70E41C73711A00291D06 /* JsonUtil.h */; };
+		D84A715A1C73711A00291D06 /* OperationParam.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D84A70E51C73711A00291D06 /* OperationParam.cpp */; };
+		D84A715B1C73711A00291D06 /* OperationParam.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D84A70E51C73711A00291D06 /* OperationParam.cpp */; };
+		D84A715C1C73711A00291D06 /* OperationParam.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D84A70E51C73711A00291D06 /* OperationParam.cpp */; };
+		D84A715D1C73711A00291D06 /* PantheiosStub.h in Headers */ = {isa = PBXBuildFile; fileRef = D84A70E61C73711A00291D06 /* PantheiosStub.h */; };
+		D84A715E1C73711A00291D06 /* Platform.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D84A70E71C73711A00291D06 /* Platform.cpp */; };
+		D84A715F1C73711A00291D06 /* Platform.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D84A70E71C73711A00291D06 /* Platform.cpp */; };
+		D84A71601C73711A00291D06 /* Platform.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D84A70E71C73711A00291D06 /* Platform.cpp */; };
+		D84A71611C73711A00291D06 /* ServerCall.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D84A70E81C73711A00291D06 /* ServerCall.cpp */; };
+		D84A71621C73711A00291D06 /* ServerCall.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D84A70E81C73711A00291D06 /* ServerCall.cpp */; };
+		D84A71631C73711A00291D06 /* ServerCall.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D84A70E81C73711A00291D06 /* ServerCall.cpp */; };
+		D84A71641C73711A00291D06 /* ServiceName.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D84A70E91C73711A00291D06 /* ServiceName.cpp */; };
+		D84A71651C73711A00291D06 /* ServiceName.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D84A70E91C73711A00291D06 /* ServiceName.cpp */; };
+		D84A71661C73711A00291D06 /* ServiceName.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D84A70E91C73711A00291D06 /* ServiceName.cpp */; };
+		D84A71671C73711A00291D06 /* ServiceOperation.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D84A70EA1C73711A00291D06 /* ServiceOperation.cpp */; };
+		D84A71681C73711A00291D06 /* ServiceOperation.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D84A70EA1C73711A00291D06 /* ServiceOperation.cpp */; };
+		D84A71691C73711A00291D06 /* ServiceOperation.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D84A70EA1C73711A00291D06 /* ServiceOperation.cpp */; };
+		D84A716A1C73711A00291D06 /* stdafx.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D84A70EB1C73711A00291D06 /* stdafx.cpp */; };
+		D84A716B1C73711A00291D06 /* stdafx.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D84A70EB1C73711A00291D06 /* stdafx.cpp */; };
+		D84A716C1C73711A00291D06 /* stdafx.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D84A70EB1C73711A00291D06 /* stdafx.cpp */; };
+		D84A716D1C73711A00291D06 /* stdafx.h in Headers */ = {isa = PBXBuildFile; fileRef = D84A70EC1C73711A00291D06 /* stdafx.h */; };
+		D84A716E1C73711A00291D06 /* StringUtil.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D84A70ED1C73711A00291D06 /* StringUtil.cpp */; };
+		D84A716F1C73711A00291D06 /* StringUtil.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D84A70ED1C73711A00291D06 /* StringUtil.cpp */; };
+		D84A71701C73711A00291D06 /* StringUtil.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D84A70ED1C73711A00291D06 /* StringUtil.cpp */; };
+		D84A71711C73711A00291D06 /* StringUtil.h in Headers */ = {isa = PBXBuildFile; fileRef = D84A70EE1C73711A00291D06 /* StringUtil.h */; };
+		D84A71721C73711A00291D06 /* targetver.h in Headers */ = {isa = PBXBuildFile; fileRef = D84A70EF1C73711A00291D06 /* targetver.h */; };
+		D84A71731C73711A00291D06 /* Timer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D84A70F01C73711A00291D06 /* Timer.cpp */; };
+		D84A71741C73711A00291D06 /* Timer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D84A70F01C73711A00291D06 /* Timer.cpp */; };
+		D84A71751C73711A00291D06 /* Timer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D84A70F01C73711A00291D06 /* Timer.cpp */; };
+		D84A71761C73711A00291D06 /* Timer.h in Headers */ = {isa = PBXBuildFile; fileRef = D84A70F11C73711A00291D06 /* Timer.h */; };
+		D84A71771C73711A00291D06 /* TimerCallback.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D84A70F21C73711A00291D06 /* TimerCallback.cpp */; };
+		D84A71781C73711A00291D06 /* TimerCallback.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D84A70F21C73711A00291D06 /* TimerCallback.cpp */; };
+		D84A71791C73711A00291D06 /* TimerCallback.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D84A70F21C73711A00291D06 /* TimerCallback.cpp */; };
+		D84A717A1C73711A00291D06 /* TimerCallback.h in Headers */ = {isa = PBXBuildFile; fileRef = D84A70F31C73711A00291D06 /* TimerCallback.h */; };
+		D84A71801C73716C00291D06 /* json-forwards.h in Headers */ = {isa = PBXBuildFile; fileRef = D84A717D1C73716C00291D06 /* json-forwards.h */; };
+		D84A71811C73716C00291D06 /* json.h in Headers */ = {isa = PBXBuildFile; fileRef = D84A717E1C73716C00291D06 /* json.h */; };
+		D84A71821C73716C00291D06 /* jsoncpp.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D84A717F1C73716C00291D06 /* jsoncpp.cpp */; };
+		D84A71831C73716C00291D06 /* jsoncpp.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D84A717F1C73716C00291D06 /* jsoncpp.cpp */; };
+		D84A71841C73716C00291D06 /* jsoncpp.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D84A717F1C73716C00291D06 /* jsoncpp.cpp */; };
+		D84A71961C7371B400291D06 /* cURLFileUploader.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D84A71851C7371B400291D06 /* cURLFileUploader.cpp */; };
+		D84A71971C7371B400291D06 /* cURLFileUploader.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D84A71851C7371B400291D06 /* cURLFileUploader.cpp */; };
+		D84A71981C7371B400291D06 /* cURLFileUploader.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D84A71851C7371B400291D06 /* cURLFileUploader.cpp */; };
+		D84A71991C7371B400291D06 /* cURLFileUploader.h in Headers */ = {isa = PBXBuildFile; fileRef = D84A71861C7371B400291D06 /* cURLFileUploader.h */; };
+		D84A719A1C7371B400291D06 /* cURLLoader.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D84A71871C7371B400291D06 /* cURLLoader.cpp */; };
+		D84A719B1C7371B400291D06 /* cURLLoader.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D84A71871C7371B400291D06 /* cURLLoader.cpp */; };
+		D84A719C1C7371B400291D06 /* cURLLoader.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D84A71871C7371B400291D06 /* cURLLoader.cpp */; };
+		D84A719D1C7371B400291D06 /* cURLLoader.h in Headers */ = {isa = PBXBuildFile; fileRef = D84A71881C7371B400291D06 /* cURLLoader.h */; };
+		D84A719E1C7371B400291D06 /* IFileUploader.h in Headers */ = {isa = PBXBuildFile; fileRef = D84A71891C7371B400291D06 /* IFileUploader.h */; };
+		D84A719F1C7371B400291D06 /* URLLoader.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D84A718A1C7371B400291D06 /* URLLoader.cpp */; };
+		D84A71A01C7371B400291D06 /* URLLoader.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D84A718A1C7371B400291D06 /* URLLoader.cpp */; };
+		D84A71A11C7371B400291D06 /* URLLoader.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D84A718A1C7371B400291D06 /* URLLoader.cpp */; };
+		D84A71A21C7371B400291D06 /* URLLoader.h in Headers */ = {isa = PBXBuildFile; fileRef = D84A718B1C7371B400291D06 /* URLLoader.h */; };
+		D84A71A31C7371B400291D06 /* URLLoaderClient.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D84A718C1C7371B400291D06 /* URLLoaderClient.cpp */; };
+		D84A71A41C7371B400291D06 /* URLLoaderClient.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D84A718C1C7371B400291D06 /* URLLoaderClient.cpp */; };
+		D84A71A51C7371B400291D06 /* URLLoaderClient.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D84A718C1C7371B400291D06 /* URLLoaderClient.cpp */; };
+		D84A71A61C7371B400291D06 /* URLLoaderClient.h in Headers */ = {isa = PBXBuildFile; fileRef = D84A718D1C7371B400291D06 /* URLLoaderClient.h */; };
+		D84A71A71C7371B400291D06 /* URLRequest.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D84A718E1C7371B400291D06 /* URLRequest.cpp */; };
+		D84A71A81C7371B400291D06 /* URLRequest.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D84A718E1C7371B400291D06 /* URLRequest.cpp */; };
+		D84A71A91C7371B400291D06 /* URLRequest.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D84A718E1C7371B400291D06 /* URLRequest.cpp */; };
+		D84A71AA1C7371B400291D06 /* URLRequest.h in Headers */ = {isa = PBXBuildFile; fileRef = D84A718F1C7371B400291D06 /* URLRequest.h */; };
+		D84A71AB1C7371B400291D06 /* URLRequestHeader.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D84A71901C7371B400291D06 /* URLRequestHeader.cpp */; };
+		D84A71AC1C7371B400291D06 /* URLRequestHeader.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D84A71901C7371B400291D06 /* URLRequestHeader.cpp */; };
+		D84A71AD1C7371B400291D06 /* URLRequestHeader.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D84A71901C7371B400291D06 /* URLRequestHeader.cpp */; };
+		D84A71AE1C7371B400291D06 /* URLRequestHeader.h in Headers */ = {isa = PBXBuildFile; fileRef = D84A71911C7371B400291D06 /* URLRequestHeader.h */; };
+		D84A71AF1C7371B400291D06 /* URLRequestMethod.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D84A71921C7371B400291D06 /* URLRequestMethod.cpp */; };
+		D84A71B01C7371B400291D06 /* URLRequestMethod.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D84A71921C7371B400291D06 /* URLRequestMethod.cpp */; };
+		D84A71B11C7371B400291D06 /* URLRequestMethod.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D84A71921C7371B400291D06 /* URLRequestMethod.cpp */; };
+		D84A71B21C7371B400291D06 /* URLRequestMethod.h in Headers */ = {isa = PBXBuildFile; fileRef = D84A71931C7371B400291D06 /* URLRequestMethod.h */; };
+		D84A71B31C7371B400291D06 /* URLResponse.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D84A71941C7371B400291D06 /* URLResponse.cpp */; };
+		D84A71B41C7371B400291D06 /* URLResponse.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D84A71941C7371B400291D06 /* URLResponse.cpp */; };
+		D84A71B51C7371B400291D06 /* URLResponse.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D84A71941C7371B400291D06 /* URLResponse.cpp */; };
+		D84A71B61C7371B400291D06 /* URLResponse.h in Headers */ = {isa = PBXBuildFile; fileRef = D84A71951C7371B400291D06 /* URLResponse.h */; };
+		D84A71C41C7372F500291D06 /* curl.h in Headers */ = {isa = PBXBuildFile; fileRef = D84A71BB1C7372F500291D06 /* curl.h */; };
+		D84A71C51C7372F500291D06 /* curlbuild.h in Headers */ = {isa = PBXBuildFile; fileRef = D84A71BC1C7372F500291D06 /* curlbuild.h */; };
+		D84A71C61C7372F500291D06 /* curlrules.h in Headers */ = {isa = PBXBuildFile; fileRef = D84A71BD1C7372F500291D06 /* curlrules.h */; };
+		D84A71C71C7372F500291D06 /* curlver.h in Headers */ = {isa = PBXBuildFile; fileRef = D84A71BE1C7372F500291D06 /* curlver.h */; };
+		D84A71C81C7372F500291D06 /* easy.h in Headers */ = {isa = PBXBuildFile; fileRef = D84A71BF1C7372F500291D06 /* easy.h */; };
+		D84A71C91C7372F500291D06 /* mprintf.h in Headers */ = {isa = PBXBuildFile; fileRef = D84A71C01C7372F500291D06 /* mprintf.h */; };
+		D84A71CA1C7372F500291D06 /* multi.h in Headers */ = {isa = PBXBuildFile; fileRef = D84A71C11C7372F500291D06 /* multi.h */; };
+		D84A71CB1C7372F500291D06 /* stdcheaders.h in Headers */ = {isa = PBXBuildFile; fileRef = D84A71C21C7372F500291D06 /* stdcheaders.h */; };
+		D84A71CC1C7372F500291D06 /* typecheck-gcc.h in Headers */ = {isa = PBXBuildFile; fileRef = D84A71C31C7372F500291D06 /* typecheck-gcc.h */; };
+		D84A71CF1C7373B100291D06 /* md5x.c in Sources */ = {isa = PBXBuildFile; fileRef = D84A71CD1C7373B100291D06 /* md5x.c */; };
+		D84A71D01C7373B100291D06 /* md5x.c in Sources */ = {isa = PBXBuildFile; fileRef = D84A71CD1C7373B100291D06 /* md5x.c */; };
+		D84A71D11C7373B100291D06 /* md5x.c in Sources */ = {isa = PBXBuildFile; fileRef = D84A71CD1C7373B100291D06 /* md5x.c */; };
+		D84A71D21C7373B100291D06 /* md5x.h in Headers */ = {isa = PBXBuildFile; fileRef = D84A71CE1C7373B100291D06 /* md5x.h */; };
+		D84A721F1C73740F00291D06 /* aes.h in Headers */ = {isa = PBXBuildFile; fileRef = D84A71D41C73740E00291D06 /* aes.h */; };
+		D84A72201C73740F00291D06 /* asn1_mac.h in Headers */ = {isa = PBXBuildFile; fileRef = D84A71D51C73740E00291D06 /* asn1_mac.h */; };
+		D84A72211C73740F00291D06 /* asn1.h in Headers */ = {isa = PBXBuildFile; fileRef = D84A71D61C73740E00291D06 /* asn1.h */; };
+		D84A72221C73740F00291D06 /* asn1t.h in Headers */ = {isa = PBXBuildFile; fileRef = D84A71D71C73740E00291D06 /* asn1t.h */; };
+		D84A72231C73740F00291D06 /* bio.h in Headers */ = {isa = PBXBuildFile; fileRef = D84A71D81C73740E00291D06 /* bio.h */; };
+		D84A72241C73740F00291D06 /* blowfish.h in Headers */ = {isa = PBXBuildFile; fileRef = D84A71D91C73740E00291D06 /* blowfish.h */; };
+		D84A72251C73740F00291D06 /* bn.h in Headers */ = {isa = PBXBuildFile; fileRef = D84A71DA1C73740E00291D06 /* bn.h */; };
+		D84A72261C73740F00291D06 /* buffer.h in Headers */ = {isa = PBXBuildFile; fileRef = D84A71DB1C73740E00291D06 /* buffer.h */; };
+		D84A72271C73740F00291D06 /* camellia.h in Headers */ = {isa = PBXBuildFile; fileRef = D84A71DC1C73740E00291D06 /* camellia.h */; };
+		D84A72281C73740F00291D06 /* cast.h in Headers */ = {isa = PBXBuildFile; fileRef = D84A71DD1C73740E00291D06 /* cast.h */; };
+		D84A72291C73740F00291D06 /* cmac.h in Headers */ = {isa = PBXBuildFile; fileRef = D84A71DE1C73740E00291D06 /* cmac.h */; };
+		D84A722A1C73740F00291D06 /* cms.h in Headers */ = {isa = PBXBuildFile; fileRef = D84A71DF1C73740E00291D06 /* cms.h */; };
+		D84A722B1C73740F00291D06 /* comp.h in Headers */ = {isa = PBXBuildFile; fileRef = D84A71E01C73740E00291D06 /* comp.h */; };
+		D84A722C1C73740F00291D06 /* conf_api.h in Headers */ = {isa = PBXBuildFile; fileRef = D84A71E11C73740E00291D06 /* conf_api.h */; };
+		D84A722D1C73740F00291D06 /* conf.h in Headers */ = {isa = PBXBuildFile; fileRef = D84A71E21C73740E00291D06 /* conf.h */; };
+		D84A722E1C73740F00291D06 /* crypto.h in Headers */ = {isa = PBXBuildFile; fileRef = D84A71E31C73740E00291D06 /* crypto.h */; };
+		D84A722F1C73740F00291D06 /* des_old.h in Headers */ = {isa = PBXBuildFile; fileRef = D84A71E41C73740E00291D06 /* des_old.h */; };
+		D84A72301C73740F00291D06 /* des.h in Headers */ = {isa = PBXBuildFile; fileRef = D84A71E51C73740E00291D06 /* des.h */; };
+		D84A72311C73740F00291D06 /* dh.h in Headers */ = {isa = PBXBuildFile; fileRef = D84A71E61C73740E00291D06 /* dh.h */; };
+		D84A72321C73740F00291D06 /* dsa.h in Headers */ = {isa = PBXBuildFile; fileRef = D84A71E71C73740E00291D06 /* dsa.h */; };
+		D84A72331C73740F00291D06 /* dso.h in Headers */ = {isa = PBXBuildFile; fileRef = D84A71E81C73740E00291D06 /* dso.h */; };
+		D84A72341C73740F00291D06 /* dtls1.h in Headers */ = {isa = PBXBuildFile; fileRef = D84A71E91C73740E00291D06 /* dtls1.h */; };
+		D84A72351C73740F00291D06 /* e_os2.h in Headers */ = {isa = PBXBuildFile; fileRef = D84A71EA1C73740E00291D06 /* e_os2.h */; };
+		D84A72361C73740F00291D06 /* ebcdic.h in Headers */ = {isa = PBXBuildFile; fileRef = D84A71EB1C73740E00291D06 /* ebcdic.h */; };
+		D84A72371C73740F00291D06 /* ec.h in Headers */ = {isa = PBXBuildFile; fileRef = D84A71EC1C73740E00291D06 /* ec.h */; };
+		D84A72381C73740F00291D06 /* ecdh.h in Headers */ = {isa = PBXBuildFile; fileRef = D84A71ED1C73740E00291D06 /* ecdh.h */; };
+		D84A72391C73740F00291D06 /* ecdsa.h in Headers */ = {isa = PBXBuildFile; fileRef = D84A71EE1C73740E00291D06 /* ecdsa.h */; };
+		D84A723A1C73740F00291D06 /* engine.h in Headers */ = {isa = PBXBuildFile; fileRef = D84A71EF1C73740E00291D06 /* engine.h */; };
+		D84A723B1C73740F00291D06 /* err.h in Headers */ = {isa = PBXBuildFile; fileRef = D84A71F01C73740E00291D06 /* err.h */; };
+		D84A723C1C73740F00291D06 /* evp.h in Headers */ = {isa = PBXBuildFile; fileRef = D84A71F11C73740E00291D06 /* evp.h */; };
+		D84A723D1C73740F00291D06 /* hmac.h in Headers */ = {isa = PBXBuildFile; fileRef = D84A71F21C73740E00291D06 /* hmac.h */; };
+		D84A723E1C73740F00291D06 /* idea.h in Headers */ = {isa = PBXBuildFile; fileRef = D84A71F31C73740E00291D06 /* idea.h */; };
+		D84A723F1C73740F00291D06 /* krb5_asn.h in Headers */ = {isa = PBXBuildFile; fileRef = D84A71F41C73740E00291D06 /* krb5_asn.h */; };
+		D84A72401C73740F00291D06 /* kssl.h in Headers */ = {isa = PBXBuildFile; fileRef = D84A71F51C73740E00291D06 /* kssl.h */; };
+		D84A72411C73740F00291D06 /* lhash.h in Headers */ = {isa = PBXBuildFile; fileRef = D84A71F61C73740E00291D06 /* lhash.h */; };
+		D84A72421C73740F00291D06 /* md4.h in Headers */ = {isa = PBXBuildFile; fileRef = D84A71F71C73740E00291D06 /* md4.h */; };
+		D84A72431C73740F00291D06 /* md5.h in Headers */ = {isa = PBXBuildFile; fileRef = D84A71F81C73740E00291D06 /* md5.h */; };
+		D84A72441C73740F00291D06 /* mdc2.h in Headers */ = {isa = PBXBuildFile; fileRef = D84A71F91C73740E00291D06 /* mdc2.h */; };
+		D84A72451C73740F00291D06 /* modes.h in Headers */ = {isa = PBXBuildFile; fileRef = D84A71FA1C73740E00291D06 /* modes.h */; };
+		D84A72461C73740F00291D06 /* obj_mac.h in Headers */ = {isa = PBXBuildFile; fileRef = D84A71FB1C73740E00291D06 /* obj_mac.h */; };
+		D84A72471C73740F00291D06 /* objects.h in Headers */ = {isa = PBXBuildFile; fileRef = D84A71FC1C73740E00291D06 /* objects.h */; };
+		D84A72481C73740F00291D06 /* ocsp.h in Headers */ = {isa = PBXBuildFile; fileRef = D84A71FD1C73740E00291D06 /* ocsp.h */; };
+		D84A72491C73740F00291D06 /* opensslconf.h in Headers */ = {isa = PBXBuildFile; fileRef = D84A71FE1C73740E00291D06 /* opensslconf.h */; };
+		D84A724A1C73740F00291D06 /* opensslv.h in Headers */ = {isa = PBXBuildFile; fileRef = D84A71FF1C73740E00291D06 /* opensslv.h */; };
+		D84A724B1C73740F00291D06 /* ossl_typ.h in Headers */ = {isa = PBXBuildFile; fileRef = D84A72001C73740E00291D06 /* ossl_typ.h */; };
+		D84A724C1C73740F00291D06 /* pem.h in Headers */ = {isa = PBXBuildFile; fileRef = D84A72011C73740E00291D06 /* pem.h */; };
+		D84A724D1C73740F00291D06 /* pem2.h in Headers */ = {isa = PBXBuildFile; fileRef = D84A72021C73740E00291D06 /* pem2.h */; };
+		D84A724E1C73740F00291D06 /* pkcs7.h in Headers */ = {isa = PBXBuildFile; fileRef = D84A72031C73740E00291D06 /* pkcs7.h */; };
+		D84A724F1C73740F00291D06 /* pkcs12.h in Headers */ = {isa = PBXBuildFile; fileRef = D84A72041C73740E00291D06 /* pkcs12.h */; };
+		D84A72501C73740F00291D06 /* pqueue.h in Headers */ = {isa = PBXBuildFile; fileRef = D84A72051C73740E00291D06 /* pqueue.h */; };
+		D84A72511C73740F00291D06 /* rand.h in Headers */ = {isa = PBXBuildFile; fileRef = D84A72061C73740E00291D06 /* rand.h */; };
+		D84A72521C73740F00291D06 /* rc2.h in Headers */ = {isa = PBXBuildFile; fileRef = D84A72071C73740E00291D06 /* rc2.h */; };
+		D84A72531C73740F00291D06 /* rc4.h in Headers */ = {isa = PBXBuildFile; fileRef = D84A72081C73740E00291D06 /* rc4.h */; };
+		D84A72541C73740F00291D06 /* ripemd.h in Headers */ = {isa = PBXBuildFile; fileRef = D84A72091C73740E00291D06 /* ripemd.h */; };
+		D84A72551C73740F00291D06 /* rsa.h in Headers */ = {isa = PBXBuildFile; fileRef = D84A720A1C73740E00291D06 /* rsa.h */; };
+		D84A72561C73740F00291D06 /* safestack.h in Headers */ = {isa = PBXBuildFile; fileRef = D84A720B1C73740E00291D06 /* safestack.h */; };
+		D84A72571C73740F00291D06 /* seed.h in Headers */ = {isa = PBXBuildFile; fileRef = D84A720C1C73740E00291D06 /* seed.h */; };
+		D84A72581C73740F00291D06 /* sha.h in Headers */ = {isa = PBXBuildFile; fileRef = D84A720D1C73740E00291D06 /* sha.h */; };
+		D84A72591C73740F00291D06 /* srp.h in Headers */ = {isa = PBXBuildFile; fileRef = D84A720E1C73740E00291D06 /* srp.h */; };
+		D84A725A1C73740F00291D06 /* srtp.h in Headers */ = {isa = PBXBuildFile; fileRef = D84A720F1C73740E00291D06 /* srtp.h */; };
+		D84A725B1C73740F00291D06 /* ssl.h in Headers */ = {isa = PBXBuildFile; fileRef = D84A72101C73740E00291D06 /* ssl.h */; };
+		D84A725C1C73740F00291D06 /* ssl2.h in Headers */ = {isa = PBXBuildFile; fileRef = D84A72111C73740E00291D06 /* ssl2.h */; };
+		D84A725D1C73740F00291D06 /* ssl3.h in Headers */ = {isa = PBXBuildFile; fileRef = D84A72121C73740E00291D06 /* ssl3.h */; };
+		D84A725E1C73740F00291D06 /* ssl23.h in Headers */ = {isa = PBXBuildFile; fileRef = D84A72131C73740E00291D06 /* ssl23.h */; };
+		D84A725F1C73740F00291D06 /* stack.h in Headers */ = {isa = PBXBuildFile; fileRef = D84A72141C73740E00291D06 /* stack.h */; };
+		D84A72601C73740F00291D06 /* symhacks.h in Headers */ = {isa = PBXBuildFile; fileRef = D84A72151C73740E00291D06 /* symhacks.h */; };
+		D84A72611C73740F00291D06 /* tls1.h in Headers */ = {isa = PBXBuildFile; fileRef = D84A72161C73740E00291D06 /* tls1.h */; };
+		D84A72621C73740F00291D06 /* ts.h in Headers */ = {isa = PBXBuildFile; fileRef = D84A72171C73740F00291D06 /* ts.h */; };
+		D84A72631C73740F00291D06 /* txt_db.h in Headers */ = {isa = PBXBuildFile; fileRef = D84A72181C73740F00291D06 /* txt_db.h */; };
+		D84A72641C73740F00291D06 /* ui_compat.h in Headers */ = {isa = PBXBuildFile; fileRef = D84A72191C73740F00291D06 /* ui_compat.h */; };
+		D84A72651C73740F00291D06 /* ui.h in Headers */ = {isa = PBXBuildFile; fileRef = D84A721A1C73740F00291D06 /* ui.h */; };
+		D84A72661C73740F00291D06 /* whrlpool.h in Headers */ = {isa = PBXBuildFile; fileRef = D84A721B1C73740F00291D06 /* whrlpool.h */; };
+		D84A72671C73740F00291D06 /* x509_vfy.h in Headers */ = {isa = PBXBuildFile; fileRef = D84A721C1C73740F00291D06 /* x509_vfy.h */; };
+		D84A72681C73740F00291D06 /* x509.h in Headers */ = {isa = PBXBuildFile; fileRef = D84A721D1C73740F00291D06 /* x509.h */; };
+		D84A72691C73740F00291D06 /* x509v3.h in Headers */ = {isa = PBXBuildFile; fileRef = D84A721E1C73740F00291D06 /* x509v3.h */; };
+		D84A726E1C7374A800291D06 /* libcurl_iOS.a in Frameworks */ = {isa = PBXBuildFile; fileRef = D84A726D1C7374A800291D06 /* libcurl_iOS.a */; };
+		D84A72711C7374B000291D06 /* libcrypto.a in Frameworks */ = {isa = PBXBuildFile; fileRef = D84A726F1C7374B000291D06 /* libcrypto.a */; };
+		D84A72721C7374B000291D06 /* libssl.a in Frameworks */ = {isa = PBXBuildFile; fileRef = D84A72701C7374B000291D06 /* libssl.a */; };
+		D84A72781C73753200291D06 /* libcrypto.a in Frameworks */ = {isa = PBXBuildFile; fileRef = D84A72761C73753200291D06 /* libcrypto.a */; };
+		D84A72791C73753200291D06 /* libssl.a in Frameworks */ = {isa = PBXBuildFile; fileRef = D84A72771C73753200291D06 /* libssl.a */; };
+		D84A727B1C73753700291D06 /* libcurl_tvOS.a in Frameworks */ = {isa = PBXBuildFile; fileRef = D84A727A1C73753700291D06 /* libcurl_tvOS.a */; };
+		D84A72811C73755D00291D06 /* libcrypto.a in Frameworks */ = {isa = PBXBuildFile; fileRef = D84A727F1C73755D00291D06 /* libcrypto.a */; };
+		D84A72821C73755D00291D06 /* libssl.a in Frameworks */ = {isa = PBXBuildFile; fileRef = D84A72801C73755D00291D06 /* libssl.a */; };
+		D84A72841C73756300291D06 /* libcurl_Mac.a in Frameworks */ = {isa = PBXBuildFile; fileRef = D84A72831C73756300291D06 /* libcurl_Mac.a */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		D84A700C1C73704D00291D06 /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "include/$(PRODUCT_NAME)";
+			dstSubfolderSpec = 16;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		D84A70191C73706900291D06 /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "include/$(PRODUCT_NAME)";
+			dstSubfolderSpec = 16;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
+/* Begin PBXFileReference section */
+		D84A700E1C73704D00291D06 /* libBrainCloudCpp-iOS.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libBrainCloudCpp-iOS.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		D84A701B1C73706900291D06 /* libBrainCloudCpp-iOS.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libBrainCloudCpp-iOS.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		D84A70281C73707C00291D06 /* libBrainCloudCpp-iOS.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libBrainCloudCpp-iOS.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		D84A70321C7370AA00291D06 /* BrainCloudAsyncMatch.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BrainCloudAsyncMatch.h; sourceTree = "<group>"; };
+		D84A70331C7370AA00291D06 /* BrainCloudAuthentication.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BrainCloudAuthentication.h; sourceTree = "<group>"; };
+		D84A70341C7370AA00291D06 /* BrainCloudClient.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BrainCloudClient.h; sourceTree = "<group>"; };
+		D84A70351C7370AA00291D06 /* BrainCloudDataStream.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BrainCloudDataStream.h; sourceTree = "<group>"; };
+		D84A70361C7370AA00291D06 /* BrainCloudEntity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BrainCloudEntity.h; sourceTree = "<group>"; };
+		D84A70371C7370AA00291D06 /* BrainCloudEvent.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BrainCloudEvent.h; sourceTree = "<group>"; };
+		D84A70381C7370AA00291D06 /* BrainCloudFile.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BrainCloudFile.h; sourceTree = "<group>"; };
+		D84A70391C7370AA00291D06 /* BrainCloudFriend.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BrainCloudFriend.h; sourceTree = "<group>"; };
+		D84A703A1C7370AA00291D06 /* BrainCloudGamification.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BrainCloudGamification.h; sourceTree = "<group>"; };
+		D84A703B1C7370AA00291D06 /* BrainCloudGlobalApp.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BrainCloudGlobalApp.h; sourceTree = "<group>"; };
+		D84A703C1C7370AA00291D06 /* BrainCloudGlobalEntity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BrainCloudGlobalEntity.h; sourceTree = "<group>"; };
+		D84A703D1C7370AA00291D06 /* BrainCloudGlobalStatistics.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BrainCloudGlobalStatistics.h; sourceTree = "<group>"; };
+		D84A703E1C7370AA00291D06 /* BrainCloudIdentity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BrainCloudIdentity.h; sourceTree = "<group>"; };
+		D84A703F1C7370AA00291D06 /* BrainCloudMatchmaking.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BrainCloudMatchmaking.h; sourceTree = "<group>"; };
+		D84A70401C7370AA00291D06 /* BrainCloudOneWayMatch.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BrainCloudOneWayMatch.h; sourceTree = "<group>"; };
+		D84A70411C7370AA00291D06 /* BrainCloudPlaybackStream.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BrainCloudPlaybackStream.h; sourceTree = "<group>"; };
+		D84A70421C7370AA00291D06 /* BrainCloudPlayerState.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BrainCloudPlayerState.h; sourceTree = "<group>"; };
+		D84A70431C7370AA00291D06 /* BrainCloudPlayerStatistics.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BrainCloudPlayerStatistics.h; sourceTree = "<group>"; };
+		D84A70441C7370AA00291D06 /* BrainCloudPlayerStatisticsEvent.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BrainCloudPlayerStatisticsEvent.h; sourceTree = "<group>"; };
+		D84A70451C7370AA00291D06 /* BrainCloudProduct.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BrainCloudProduct.h; sourceTree = "<group>"; };
+		D84A70461C7370AA00291D06 /* BrainCloudProfanity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BrainCloudProfanity.h; sourceTree = "<group>"; };
+		D84A70471C7370AA00291D06 /* BrainCloudPushNotification.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BrainCloudPushNotification.h; sourceTree = "<group>"; };
+		D84A70481C7370AA00291D06 /* BrainCloudRedemptionCode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BrainCloudRedemptionCode.h; sourceTree = "<group>"; };
+		D84A70491C7370AA00291D06 /* BrainCloudS3Handling.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BrainCloudS3Handling.h; sourceTree = "<group>"; };
+		D84A704A1C7370AA00291D06 /* BrainCloudScript.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BrainCloudScript.h; sourceTree = "<group>"; };
+		D84A704B1C7370AA00291D06 /* BrainCloudSocialLeaderboard.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BrainCloudSocialLeaderboard.h; sourceTree = "<group>"; };
+		D84A704C1C7370AA00291D06 /* BrainCloudSteam.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BrainCloudSteam.h; sourceTree = "<group>"; };
+		D84A704D1C7370AA00291D06 /* BrainCloudTime.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BrainCloudTime.h; sourceTree = "<group>"; };
+		D84A704E1C7370AA00291D06 /* BrainCloudTwitter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BrainCloudTwitter.h; sourceTree = "<group>"; };
+		D84A704F1C7370AA00291D06 /* BrainCloudTypes.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BrainCloudTypes.h; sourceTree = "<group>"; };
+		D84A70501C7370AA00291D06 /* http_codes.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = http_codes.h; sourceTree = "<group>"; };
+		D84A70511C7370AA00291D06 /* IBrainCloudComms.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IBrainCloudComms.h; sourceTree = "<group>"; };
+		D84A70521C7370AA00291D06 /* IEventCallback.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IEventCallback.h; sourceTree = "<group>"; };
+		D84A70531C7370AA00291D06 /* IFileUploadCallback.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IFileUploadCallback.h; sourceTree = "<group>"; };
+		D84A70541C7370AA00291D06 /* IRewardCallback.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IRewardCallback.h; sourceTree = "<group>"; };
+		D84A70551C7370AA00291D06 /* IServerCallback.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IServerCallback.h; sourceTree = "<group>"; };
+		D84A70561C7370AA00291D06 /* OperationParam.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OperationParam.h; sourceTree = "<group>"; };
+		D84A70571C7370AA00291D06 /* Platform.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Platform.h; sourceTree = "<group>"; };
+		D84A70581C7370AA00291D06 /* reason_codes.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = reason_codes.h; sourceTree = "<group>"; };
+		D84A70591C7370AA00291D06 /* ServerCall.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ServerCall.h; sourceTree = "<group>"; };
+		D84A705A1C7370AA00291D06 /* ServiceName.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ServiceName.h; sourceTree = "<group>"; };
+		D84A705B1C7370AA00291D06 /* ServiceOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ServiceOperation.h; sourceTree = "<group>"; };
+		D84A70C11C73711900291D06 /* BrainCloudAsyncMatch.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = BrainCloudAsyncMatch.cpp; sourceTree = "<group>"; };
+		D84A70C21C73711900291D06 /* BrainCloudAuthentication.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = BrainCloudAuthentication.cpp; sourceTree = "<group>"; };
+		D84A70C31C73711900291D06 /* BrainCloudClient.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = BrainCloudClient.cpp; sourceTree = "<group>"; };
+		D84A70C41C73711900291D06 /* BrainCloudComms.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = BrainCloudComms.cpp; sourceTree = "<group>"; };
+		D84A70C51C73711900291D06 /* BrainCloudComms.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BrainCloudComms.h; sourceTree = "<group>"; };
+		D84A70C61C73711900291D06 /* BrainCloudDataStream.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = BrainCloudDataStream.cpp; sourceTree = "<group>"; };
+		D84A70C71C73711900291D06 /* BrainCloudEntity.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = BrainCloudEntity.cpp; sourceTree = "<group>"; };
+		D84A70C81C73711900291D06 /* BrainCloudEvent.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = BrainCloudEvent.cpp; sourceTree = "<group>"; };
+		D84A70C91C73711900291D06 /* BrainCloudFile.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = BrainCloudFile.cpp; sourceTree = "<group>"; };
+		D84A70CA1C73711900291D06 /* BrainCloudFriend.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = BrainCloudFriend.cpp; sourceTree = "<group>"; };
+		D84A70CB1C73711900291D06 /* BrainCloudGamification.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = BrainCloudGamification.cpp; sourceTree = "<group>"; };
+		D84A70CC1C73711900291D06 /* BrainCloudGlobalApp.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = BrainCloudGlobalApp.cpp; sourceTree = "<group>"; };
+		D84A70CD1C73711900291D06 /* BrainCloudGlobalEntity.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = BrainCloudGlobalEntity.cpp; sourceTree = "<group>"; };
+		D84A70CE1C73711900291D06 /* BrainCloudGlobalStatistics.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = BrainCloudGlobalStatistics.cpp; sourceTree = "<group>"; };
+		D84A70CF1C73711900291D06 /* BrainCloudIdentity.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = BrainCloudIdentity.cpp; sourceTree = "<group>"; };
+		D84A70D01C73711900291D06 /* BrainCloudMatchmaking.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = BrainCloudMatchmaking.cpp; sourceTree = "<group>"; };
+		D84A70D11C73711900291D06 /* BrainCloudOneWayMatch.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = BrainCloudOneWayMatch.cpp; sourceTree = "<group>"; };
+		D84A70D21C73711900291D06 /* BrainCloudPlaybackStream.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = BrainCloudPlaybackStream.cpp; sourceTree = "<group>"; };
+		D84A70D31C73711900291D06 /* BrainCloudPlayerState.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = BrainCloudPlayerState.cpp; sourceTree = "<group>"; };
+		D84A70D41C73711900291D06 /* BrainCloudPlayerStatistics.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = BrainCloudPlayerStatistics.cpp; sourceTree = "<group>"; };
+		D84A70D51C73711900291D06 /* BrainCloudPlayerStatisticsEvent.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = BrainCloudPlayerStatisticsEvent.cpp; sourceTree = "<group>"; };
+		D84A70D61C73711A00291D06 /* BrainCloudProduct.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = BrainCloudProduct.cpp; sourceTree = "<group>"; };
+		D84A70D71C73711A00291D06 /* BrainCloudProfanity.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = BrainCloudProfanity.cpp; sourceTree = "<group>"; };
+		D84A70D81C73711A00291D06 /* BrainCloudPushNotification.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = BrainCloudPushNotification.cpp; sourceTree = "<group>"; };
+		D84A70D91C73711A00291D06 /* BrainCloudRedemptionCode.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = BrainCloudRedemptionCode.cpp; sourceTree = "<group>"; };
+		D84A70DA1C73711A00291D06 /* BrainCloudS3Handling.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = BrainCloudS3Handling.cpp; sourceTree = "<group>"; };
+		D84A70DB1C73711A00291D06 /* BrainCloudScript.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = BrainCloudScript.cpp; sourceTree = "<group>"; };
+		D84A70DC1C73711A00291D06 /* BrainCloudSocialLeaderboard.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = BrainCloudSocialLeaderboard.cpp; sourceTree = "<group>"; };
+		D84A70DD1C73711A00291D06 /* BrainCloudSteam.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = BrainCloudSteam.cpp; sourceTree = "<group>"; };
+		D84A70DE1C73711A00291D06 /* BrainCloudTime.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = BrainCloudTime.cpp; sourceTree = "<group>"; };
+		D84A70DF1C73711A00291D06 /* BrainCloudTwitter.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = BrainCloudTwitter.cpp; sourceTree = "<group>"; };
+		D84A70E01C73711A00291D06 /* GUID.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GUID.h; sourceTree = "<group>"; };
+		D84A70E11C73711A00291D06 /* GUID.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = GUID.mm; sourceTree = "<group>"; };
+		D84A70E21C73711A00291D06 /* IBrainCloudComms.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = IBrainCloudComms.cpp; sourceTree = "<group>"; };
+		D84A70E31C73711A00291D06 /* JsonUtil.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = JsonUtil.cpp; sourceTree = "<group>"; };
+		D84A70E41C73711A00291D06 /* JsonUtil.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JsonUtil.h; sourceTree = "<group>"; };
+		D84A70E51C73711A00291D06 /* OperationParam.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = OperationParam.cpp; sourceTree = "<group>"; };
+		D84A70E61C73711A00291D06 /* PantheiosStub.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PantheiosStub.h; sourceTree = "<group>"; };
+		D84A70E71C73711A00291D06 /* Platform.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Platform.cpp; sourceTree = "<group>"; };
+		D84A70E81C73711A00291D06 /* ServerCall.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ServerCall.cpp; sourceTree = "<group>"; };
+		D84A70E91C73711A00291D06 /* ServiceName.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ServiceName.cpp; sourceTree = "<group>"; };
+		D84A70EA1C73711A00291D06 /* ServiceOperation.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ServiceOperation.cpp; sourceTree = "<group>"; };
+		D84A70EB1C73711A00291D06 /* stdafx.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = stdafx.cpp; sourceTree = "<group>"; };
+		D84A70EC1C73711A00291D06 /* stdafx.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = stdafx.h; sourceTree = "<group>"; };
+		D84A70ED1C73711A00291D06 /* StringUtil.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = StringUtil.cpp; sourceTree = "<group>"; };
+		D84A70EE1C73711A00291D06 /* StringUtil.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StringUtil.h; sourceTree = "<group>"; };
+		D84A70EF1C73711A00291D06 /* targetver.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = targetver.h; sourceTree = "<group>"; };
+		D84A70F01C73711A00291D06 /* Timer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Timer.cpp; sourceTree = "<group>"; };
+		D84A70F11C73711A00291D06 /* Timer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Timer.h; sourceTree = "<group>"; };
+		D84A70F21C73711A00291D06 /* TimerCallback.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = TimerCallback.cpp; sourceTree = "<group>"; };
+		D84A70F31C73711A00291D06 /* TimerCallback.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TimerCallback.h; sourceTree = "<group>"; };
+		D84A717D1C73716C00291D06 /* json-forwards.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "json-forwards.h"; sourceTree = "<group>"; };
+		D84A717E1C73716C00291D06 /* json.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = json.h; sourceTree = "<group>"; };
+		D84A717F1C73716C00291D06 /* jsoncpp.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = jsoncpp.cpp; sourceTree = "<group>"; };
+		D84A71851C7371B400291D06 /* cURLFileUploader.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = cURLFileUploader.cpp; sourceTree = "<group>"; };
+		D84A71861C7371B400291D06 /* cURLFileUploader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = cURLFileUploader.h; sourceTree = "<group>"; };
+		D84A71871C7371B400291D06 /* cURLLoader.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = cURLLoader.cpp; sourceTree = "<group>"; };
+		D84A71881C7371B400291D06 /* cURLLoader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = cURLLoader.h; sourceTree = "<group>"; };
+		D84A71891C7371B400291D06 /* IFileUploader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IFileUploader.h; sourceTree = "<group>"; };
+		D84A718A1C7371B400291D06 /* URLLoader.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = URLLoader.cpp; sourceTree = "<group>"; };
+		D84A718B1C7371B400291D06 /* URLLoader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = URLLoader.h; sourceTree = "<group>"; };
+		D84A718C1C7371B400291D06 /* URLLoaderClient.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = URLLoaderClient.cpp; sourceTree = "<group>"; };
+		D84A718D1C7371B400291D06 /* URLLoaderClient.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = URLLoaderClient.h; sourceTree = "<group>"; };
+		D84A718E1C7371B400291D06 /* URLRequest.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = URLRequest.cpp; sourceTree = "<group>"; };
+		D84A718F1C7371B400291D06 /* URLRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = URLRequest.h; sourceTree = "<group>"; };
+		D84A71901C7371B400291D06 /* URLRequestHeader.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = URLRequestHeader.cpp; sourceTree = "<group>"; };
+		D84A71911C7371B400291D06 /* URLRequestHeader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = URLRequestHeader.h; sourceTree = "<group>"; };
+		D84A71921C7371B400291D06 /* URLRequestMethod.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = URLRequestMethod.cpp; sourceTree = "<group>"; };
+		D84A71931C7371B400291D06 /* URLRequestMethod.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = URLRequestMethod.h; sourceTree = "<group>"; };
+		D84A71941C7371B400291D06 /* URLResponse.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = URLResponse.cpp; sourceTree = "<group>"; };
+		D84A71951C7371B400291D06 /* URLResponse.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = URLResponse.h; sourceTree = "<group>"; };
+		D84A71BB1C7372F500291D06 /* curl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = curl.h; sourceTree = "<group>"; };
+		D84A71BC1C7372F500291D06 /* curlbuild.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = curlbuild.h; sourceTree = "<group>"; };
+		D84A71BD1C7372F500291D06 /* curlrules.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = curlrules.h; sourceTree = "<group>"; };
+		D84A71BE1C7372F500291D06 /* curlver.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = curlver.h; sourceTree = "<group>"; };
+		D84A71BF1C7372F500291D06 /* easy.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = easy.h; sourceTree = "<group>"; };
+		D84A71C01C7372F500291D06 /* mprintf.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = mprintf.h; sourceTree = "<group>"; };
+		D84A71C11C7372F500291D06 /* multi.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = multi.h; sourceTree = "<group>"; };
+		D84A71C21C7372F500291D06 /* stdcheaders.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = stdcheaders.h; sourceTree = "<group>"; };
+		D84A71C31C7372F500291D06 /* typecheck-gcc.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "typecheck-gcc.h"; sourceTree = "<group>"; };
+		D84A71CD1C7373B100291D06 /* md5x.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = md5x.c; sourceTree = "<group>"; };
+		D84A71CE1C7373B100291D06 /* md5x.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = md5x.h; sourceTree = "<group>"; };
+		D84A71D41C73740E00291D06 /* aes.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = aes.h; sourceTree = "<group>"; };
+		D84A71D51C73740E00291D06 /* asn1_mac.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = asn1_mac.h; sourceTree = "<group>"; };
+		D84A71D61C73740E00291D06 /* asn1.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = asn1.h; sourceTree = "<group>"; };
+		D84A71D71C73740E00291D06 /* asn1t.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = asn1t.h; sourceTree = "<group>"; };
+		D84A71D81C73740E00291D06 /* bio.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = bio.h; sourceTree = "<group>"; };
+		D84A71D91C73740E00291D06 /* blowfish.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = blowfish.h; sourceTree = "<group>"; };
+		D84A71DA1C73740E00291D06 /* bn.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = bn.h; sourceTree = "<group>"; };
+		D84A71DB1C73740E00291D06 /* buffer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = buffer.h; sourceTree = "<group>"; };
+		D84A71DC1C73740E00291D06 /* camellia.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = camellia.h; sourceTree = "<group>"; };
+		D84A71DD1C73740E00291D06 /* cast.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = cast.h; sourceTree = "<group>"; };
+		D84A71DE1C73740E00291D06 /* cmac.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = cmac.h; sourceTree = "<group>"; };
+		D84A71DF1C73740E00291D06 /* cms.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = cms.h; sourceTree = "<group>"; };
+		D84A71E01C73740E00291D06 /* comp.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = comp.h; sourceTree = "<group>"; };
+		D84A71E11C73740E00291D06 /* conf_api.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = conf_api.h; sourceTree = "<group>"; };
+		D84A71E21C73740E00291D06 /* conf.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = conf.h; sourceTree = "<group>"; };
+		D84A71E31C73740E00291D06 /* crypto.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = crypto.h; sourceTree = "<group>"; };
+		D84A71E41C73740E00291D06 /* des_old.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = des_old.h; sourceTree = "<group>"; };
+		D84A71E51C73740E00291D06 /* des.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = des.h; sourceTree = "<group>"; };
+		D84A71E61C73740E00291D06 /* dh.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = dh.h; sourceTree = "<group>"; };
+		D84A71E71C73740E00291D06 /* dsa.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = dsa.h; sourceTree = "<group>"; };
+		D84A71E81C73740E00291D06 /* dso.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = dso.h; sourceTree = "<group>"; };
+		D84A71E91C73740E00291D06 /* dtls1.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = dtls1.h; sourceTree = "<group>"; };
+		D84A71EA1C73740E00291D06 /* e_os2.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = e_os2.h; sourceTree = "<group>"; };
+		D84A71EB1C73740E00291D06 /* ebcdic.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ebcdic.h; sourceTree = "<group>"; };
+		D84A71EC1C73740E00291D06 /* ec.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ec.h; sourceTree = "<group>"; };
+		D84A71ED1C73740E00291D06 /* ecdh.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ecdh.h; sourceTree = "<group>"; };
+		D84A71EE1C73740E00291D06 /* ecdsa.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ecdsa.h; sourceTree = "<group>"; };
+		D84A71EF1C73740E00291D06 /* engine.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = engine.h; sourceTree = "<group>"; };
+		D84A71F01C73740E00291D06 /* err.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = err.h; sourceTree = "<group>"; };
+		D84A71F11C73740E00291D06 /* evp.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = evp.h; sourceTree = "<group>"; };
+		D84A71F21C73740E00291D06 /* hmac.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = hmac.h; sourceTree = "<group>"; };
+		D84A71F31C73740E00291D06 /* idea.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = idea.h; sourceTree = "<group>"; };
+		D84A71F41C73740E00291D06 /* krb5_asn.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = krb5_asn.h; sourceTree = "<group>"; };
+		D84A71F51C73740E00291D06 /* kssl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = kssl.h; sourceTree = "<group>"; };
+		D84A71F61C73740E00291D06 /* lhash.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = lhash.h; sourceTree = "<group>"; };
+		D84A71F71C73740E00291D06 /* md4.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = md4.h; sourceTree = "<group>"; };
+		D84A71F81C73740E00291D06 /* md5.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = md5.h; sourceTree = "<group>"; };
+		D84A71F91C73740E00291D06 /* mdc2.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = mdc2.h; sourceTree = "<group>"; };
+		D84A71FA1C73740E00291D06 /* modes.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = modes.h; sourceTree = "<group>"; };
+		D84A71FB1C73740E00291D06 /* obj_mac.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = obj_mac.h; sourceTree = "<group>"; };
+		D84A71FC1C73740E00291D06 /* objects.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = objects.h; sourceTree = "<group>"; };
+		D84A71FD1C73740E00291D06 /* ocsp.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ocsp.h; sourceTree = "<group>"; };
+		D84A71FE1C73740E00291D06 /* opensslconf.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = opensslconf.h; sourceTree = "<group>"; };
+		D84A71FF1C73740E00291D06 /* opensslv.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = opensslv.h; sourceTree = "<group>"; };
+		D84A72001C73740E00291D06 /* ossl_typ.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ossl_typ.h; sourceTree = "<group>"; };
+		D84A72011C73740E00291D06 /* pem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = pem.h; sourceTree = "<group>"; };
+		D84A72021C73740E00291D06 /* pem2.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = pem2.h; sourceTree = "<group>"; };
+		D84A72031C73740E00291D06 /* pkcs7.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = pkcs7.h; sourceTree = "<group>"; };
+		D84A72041C73740E00291D06 /* pkcs12.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = pkcs12.h; sourceTree = "<group>"; };
+		D84A72051C73740E00291D06 /* pqueue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = pqueue.h; sourceTree = "<group>"; };
+		D84A72061C73740E00291D06 /* rand.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = rand.h; sourceTree = "<group>"; };
+		D84A72071C73740E00291D06 /* rc2.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = rc2.h; sourceTree = "<group>"; };
+		D84A72081C73740E00291D06 /* rc4.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = rc4.h; sourceTree = "<group>"; };
+		D84A72091C73740E00291D06 /* ripemd.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ripemd.h; sourceTree = "<group>"; };
+		D84A720A1C73740E00291D06 /* rsa.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = rsa.h; sourceTree = "<group>"; };
+		D84A720B1C73740E00291D06 /* safestack.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = safestack.h; sourceTree = "<group>"; };
+		D84A720C1C73740E00291D06 /* seed.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = seed.h; sourceTree = "<group>"; };
+		D84A720D1C73740E00291D06 /* sha.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = sha.h; sourceTree = "<group>"; };
+		D84A720E1C73740E00291D06 /* srp.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = srp.h; sourceTree = "<group>"; };
+		D84A720F1C73740E00291D06 /* srtp.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = srtp.h; sourceTree = "<group>"; };
+		D84A72101C73740E00291D06 /* ssl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ssl.h; sourceTree = "<group>"; };
+		D84A72111C73740E00291D06 /* ssl2.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ssl2.h; sourceTree = "<group>"; };
+		D84A72121C73740E00291D06 /* ssl3.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ssl3.h; sourceTree = "<group>"; };
+		D84A72131C73740E00291D06 /* ssl23.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ssl23.h; sourceTree = "<group>"; };
+		D84A72141C73740E00291D06 /* stack.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = stack.h; sourceTree = "<group>"; };
+		D84A72151C73740E00291D06 /* symhacks.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = symhacks.h; sourceTree = "<group>"; };
+		D84A72161C73740E00291D06 /* tls1.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = tls1.h; sourceTree = "<group>"; };
+		D84A72171C73740F00291D06 /* ts.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ts.h; sourceTree = "<group>"; };
+		D84A72181C73740F00291D06 /* txt_db.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = txt_db.h; sourceTree = "<group>"; };
+		D84A72191C73740F00291D06 /* ui_compat.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ui_compat.h; sourceTree = "<group>"; };
+		D84A721A1C73740F00291D06 /* ui.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ui.h; sourceTree = "<group>"; };
+		D84A721B1C73740F00291D06 /* whrlpool.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = whrlpool.h; sourceTree = "<group>"; };
+		D84A721C1C73740F00291D06 /* x509_vfy.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = x509_vfy.h; sourceTree = "<group>"; };
+		D84A721D1C73740F00291D06 /* x509.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = x509.h; sourceTree = "<group>"; };
+		D84A721E1C73740F00291D06 /* x509v3.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = x509v3.h; sourceTree = "<group>"; };
+		D84A726D1C7374A800291D06 /* libcurl_iOS.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libcurl_iOS.a; sourceTree = "<group>"; };
+		D84A726F1C7374B000291D06 /* libcrypto.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libcrypto.a; sourceTree = "<group>"; };
+		D84A72701C7374B000291D06 /* libssl.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libssl.a; sourceTree = "<group>"; };
+		D84A72761C73753200291D06 /* libcrypto.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libcrypto.a; sourceTree = "<group>"; };
+		D84A72771C73753200291D06 /* libssl.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libssl.a; sourceTree = "<group>"; };
+		D84A727A1C73753700291D06 /* libcurl_tvOS.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libcurl_tvOS.a; sourceTree = "<group>"; };
+		D84A727F1C73755D00291D06 /* libcrypto.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libcrypto.a; sourceTree = "<group>"; };
+		D84A72801C73755D00291D06 /* libssl.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libssl.a; sourceTree = "<group>"; };
+		D84A72831C73756300291D06 /* libcurl_Mac.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libcurl_Mac.a; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		D84A700B1C73704D00291D06 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				D84A72711C7374B000291D06 /* libcrypto.a in Frameworks */,
+				D84A726E1C7374A800291D06 /* libcurl_iOS.a in Frameworks */,
+				D84A72721C7374B000291D06 /* libssl.a in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		D84A70181C73706900291D06 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				D84A72791C73753200291D06 /* libssl.a in Frameworks */,
+				D84A727B1C73753700291D06 /* libcurl_tvOS.a in Frameworks */,
+				D84A72781C73753200291D06 /* libcrypto.a in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		D84A70251C73707C00291D06 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				D84A72821C73755D00291D06 /* libssl.a in Frameworks */,
+				D84A72811C73755D00291D06 /* libcrypto.a in Frameworks */,
+				D84A72841C73756300291D06 /* libcurl_Mac.a in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		D84A6FE51C736F7800291D06 = {
+			isa = PBXGroup;
+			children = (
+				D84A700F1C73704D00291D06 /* BrainCloudCpp-iOS */,
+				D84A701C1C73706900291D06 /* BrainCloudCpp-tvOS */,
+				D84A70291C73707C00291D06 /* BrainCloudCpp-OSX */,
+				D84A70091C736FC600291D06 /* Shared */,
+				D84A6FF01C736F7800291D06 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		D84A6FF01C736F7800291D06 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				D84A700E1C73704D00291D06 /* libBrainCloudCpp-iOS.a */,
+				D84A701B1C73706900291D06 /* libBrainCloudCpp-iOS.a */,
+				D84A70281C73707C00291D06 /* libBrainCloudCpp-iOS.a */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		D84A70091C736FC600291D06 /* Shared */ = {
+			isa = PBXGroup;
+			children = (
+				D84A717B1C73713500291D06 /* Libraries */,
+				D84A70311C73709700291D06 /* Source */,
+			);
+			path = Shared;
+			sourceTree = "<group>";
+		};
+		D84A700F1C73704D00291D06 /* BrainCloudCpp-iOS */ = {
+			isa = PBXGroup;
+			children = (
+				D84A726A1C73746600291D06 /* Libraries */,
+			);
+			path = "BrainCloudCpp-iOS";
+			sourceTree = "<group>";
+		};
+		D84A701C1C73706900291D06 /* BrainCloudCpp-tvOS */ = {
+			isa = PBXGroup;
+			children = (
+				D84A72731C7374BD00291D06 /* Libraries */,
+			);
+			path = "BrainCloudCpp-tvOS";
+			sourceTree = "<group>";
+		};
+		D84A70291C73707C00291D06 /* BrainCloudCpp-OSX */ = {
+			isa = PBXGroup;
+			children = (
+				D84A727C1C73753F00291D06 /* Libraries */,
+			);
+			path = "BrainCloudCpp-OSX";
+			sourceTree = "<group>";
+		};
+		D84A70311C73709700291D06 /* Source */ = {
+			isa = PBXGroup;
+			children = (
+				D84A70861C7370B900291D06 /* ApiHeaders */,
+				D84A70C11C73711900291D06 /* BrainCloudAsyncMatch.cpp */,
+				D84A70C21C73711900291D06 /* BrainCloudAuthentication.cpp */,
+				D84A70C31C73711900291D06 /* BrainCloudClient.cpp */,
+				D84A70C41C73711900291D06 /* BrainCloudComms.cpp */,
+				D84A70C51C73711900291D06 /* BrainCloudComms.h */,
+				D84A70C61C73711900291D06 /* BrainCloudDataStream.cpp */,
+				D84A70C71C73711900291D06 /* BrainCloudEntity.cpp */,
+				D84A70C81C73711900291D06 /* BrainCloudEvent.cpp */,
+				D84A70C91C73711900291D06 /* BrainCloudFile.cpp */,
+				D84A70CA1C73711900291D06 /* BrainCloudFriend.cpp */,
+				D84A70CB1C73711900291D06 /* BrainCloudGamification.cpp */,
+				D84A70CC1C73711900291D06 /* BrainCloudGlobalApp.cpp */,
+				D84A70CD1C73711900291D06 /* BrainCloudGlobalEntity.cpp */,
+				D84A70CE1C73711900291D06 /* BrainCloudGlobalStatistics.cpp */,
+				D84A70CF1C73711900291D06 /* BrainCloudIdentity.cpp */,
+				D84A70D01C73711900291D06 /* BrainCloudMatchmaking.cpp */,
+				D84A70D11C73711900291D06 /* BrainCloudOneWayMatch.cpp */,
+				D84A70D21C73711900291D06 /* BrainCloudPlaybackStream.cpp */,
+				D84A70D31C73711900291D06 /* BrainCloudPlayerState.cpp */,
+				D84A70D41C73711900291D06 /* BrainCloudPlayerStatistics.cpp */,
+				D84A70D51C73711900291D06 /* BrainCloudPlayerStatisticsEvent.cpp */,
+				D84A70D61C73711A00291D06 /* BrainCloudProduct.cpp */,
+				D84A70D71C73711A00291D06 /* BrainCloudProfanity.cpp */,
+				D84A70D81C73711A00291D06 /* BrainCloudPushNotification.cpp */,
+				D84A70D91C73711A00291D06 /* BrainCloudRedemptionCode.cpp */,
+				D84A70DA1C73711A00291D06 /* BrainCloudS3Handling.cpp */,
+				D84A70DB1C73711A00291D06 /* BrainCloudScript.cpp */,
+				D84A70DC1C73711A00291D06 /* BrainCloudSocialLeaderboard.cpp */,
+				D84A70DD1C73711A00291D06 /* BrainCloudSteam.cpp */,
+				D84A70DE1C73711A00291D06 /* BrainCloudTime.cpp */,
+				D84A70DF1C73711A00291D06 /* BrainCloudTwitter.cpp */,
+				D84A70E01C73711A00291D06 /* GUID.h */,
+				D84A70E11C73711A00291D06 /* GUID.mm */,
+				D84A708D1C7370D500291D06 /* HGEngine */,
+				D84A70C01C7370F400291D06 /* HTTP */,
+				D84A70E21C73711A00291D06 /* IBrainCloudComms.cpp */,
+				D84A70E31C73711A00291D06 /* JsonUtil.cpp */,
+				D84A70E41C73711A00291D06 /* JsonUtil.h */,
+				D84A70E51C73711A00291D06 /* OperationParam.cpp */,
+				D84A70E61C73711A00291D06 /* PantheiosStub.h */,
+				D84A70E71C73711A00291D06 /* Platform.cpp */,
+				D84A70E81C73711A00291D06 /* ServerCall.cpp */,
+				D84A70E91C73711A00291D06 /* ServiceName.cpp */,
+				D84A70EA1C73711A00291D06 /* ServiceOperation.cpp */,
+				D84A70EB1C73711A00291D06 /* stdafx.cpp */,
+				D84A70EC1C73711A00291D06 /* stdafx.h */,
+				D84A70ED1C73711A00291D06 /* StringUtil.cpp */,
+				D84A70EE1C73711A00291D06 /* StringUtil.h */,
+				D84A70EF1C73711A00291D06 /* targetver.h */,
+				D84A70F01C73711A00291D06 /* Timer.cpp */,
+				D84A70F11C73711A00291D06 /* Timer.h */,
+				D84A70F21C73711A00291D06 /* TimerCallback.cpp */,
+				D84A70F31C73711A00291D06 /* TimerCallback.h */,
+			);
+			name = Source;
+			sourceTree = "<group>";
+		};
+		D84A70861C7370B900291D06 /* ApiHeaders */ = {
+			isa = PBXGroup;
+			children = (
+				D84A70321C7370AA00291D06 /* BrainCloudAsyncMatch.h */,
+				D84A70331C7370AA00291D06 /* BrainCloudAuthentication.h */,
+				D84A70341C7370AA00291D06 /* BrainCloudClient.h */,
+				D84A70351C7370AA00291D06 /* BrainCloudDataStream.h */,
+				D84A70361C7370AA00291D06 /* BrainCloudEntity.h */,
+				D84A70371C7370AA00291D06 /* BrainCloudEvent.h */,
+				D84A70381C7370AA00291D06 /* BrainCloudFile.h */,
+				D84A70391C7370AA00291D06 /* BrainCloudFriend.h */,
+				D84A703A1C7370AA00291D06 /* BrainCloudGamification.h */,
+				D84A703B1C7370AA00291D06 /* BrainCloudGlobalApp.h */,
+				D84A703C1C7370AA00291D06 /* BrainCloudGlobalEntity.h */,
+				D84A703D1C7370AA00291D06 /* BrainCloudGlobalStatistics.h */,
+				D84A703E1C7370AA00291D06 /* BrainCloudIdentity.h */,
+				D84A703F1C7370AA00291D06 /* BrainCloudMatchmaking.h */,
+				D84A70401C7370AA00291D06 /* BrainCloudOneWayMatch.h */,
+				D84A70411C7370AA00291D06 /* BrainCloudPlaybackStream.h */,
+				D84A70421C7370AA00291D06 /* BrainCloudPlayerState.h */,
+				D84A70431C7370AA00291D06 /* BrainCloudPlayerStatistics.h */,
+				D84A70441C7370AA00291D06 /* BrainCloudPlayerStatisticsEvent.h */,
+				D84A70451C7370AA00291D06 /* BrainCloudProduct.h */,
+				D84A70461C7370AA00291D06 /* BrainCloudProfanity.h */,
+				D84A70471C7370AA00291D06 /* BrainCloudPushNotification.h */,
+				D84A70481C7370AA00291D06 /* BrainCloudRedemptionCode.h */,
+				D84A70491C7370AA00291D06 /* BrainCloudS3Handling.h */,
+				D84A704A1C7370AA00291D06 /* BrainCloudScript.h */,
+				D84A704B1C7370AA00291D06 /* BrainCloudSocialLeaderboard.h */,
+				D84A704C1C7370AA00291D06 /* BrainCloudSteam.h */,
+				D84A704D1C7370AA00291D06 /* BrainCloudTime.h */,
+				D84A704E1C7370AA00291D06 /* BrainCloudTwitter.h */,
+				D84A704F1C7370AA00291D06 /* BrainCloudTypes.h */,
+				D84A70501C7370AA00291D06 /* http_codes.h */,
+				D84A70511C7370AA00291D06 /* IBrainCloudComms.h */,
+				D84A70521C7370AA00291D06 /* IEventCallback.h */,
+				D84A70531C7370AA00291D06 /* IFileUploadCallback.h */,
+				D84A70541C7370AA00291D06 /* IRewardCallback.h */,
+				D84A70551C7370AA00291D06 /* IServerCallback.h */,
+				D84A70561C7370AA00291D06 /* OperationParam.h */,
+				D84A70571C7370AA00291D06 /* Platform.h */,
+				D84A70581C7370AA00291D06 /* reason_codes.h */,
+				D84A70591C7370AA00291D06 /* ServerCall.h */,
+				D84A705A1C7370AA00291D06 /* ServiceName.h */,
+				D84A705B1C7370AA00291D06 /* ServiceOperation.h */,
+			);
+			name = ApiHeaders;
+			sourceTree = "<group>";
+		};
+		D84A708D1C7370D500291D06 /* HGEngine */ = {
+			isa = PBXGroup;
+			children = (
+				D84A71CD1C7373B100291D06 /* md5x.c */,
+				D84A71CE1C7373B100291D06 /* md5x.h */,
+			);
+			path = HGEngine;
+			sourceTree = "<group>";
+		};
+		D84A70C01C7370F400291D06 /* HTTP */ = {
+			isa = PBXGroup;
+			children = (
+				D84A71851C7371B400291D06 /* cURLFileUploader.cpp */,
+				D84A71861C7371B400291D06 /* cURLFileUploader.h */,
+				D84A71871C7371B400291D06 /* cURLLoader.cpp */,
+				D84A71881C7371B400291D06 /* cURLLoader.h */,
+				D84A71891C7371B400291D06 /* IFileUploader.h */,
+				D84A718A1C7371B400291D06 /* URLLoader.cpp */,
+				D84A718B1C7371B400291D06 /* URLLoader.h */,
+				D84A718C1C7371B400291D06 /* URLLoaderClient.cpp */,
+				D84A718D1C7371B400291D06 /* URLLoaderClient.h */,
+				D84A718E1C7371B400291D06 /* URLRequest.cpp */,
+				D84A718F1C7371B400291D06 /* URLRequest.h */,
+				D84A71901C7371B400291D06 /* URLRequestHeader.cpp */,
+				D84A71911C7371B400291D06 /* URLRequestHeader.h */,
+				D84A71921C7371B400291D06 /* URLRequestMethod.cpp */,
+				D84A71931C7371B400291D06 /* URLRequestMethod.h */,
+				D84A71941C7371B400291D06 /* URLResponse.cpp */,
+				D84A71951C7371B400291D06 /* URLResponse.h */,
+			);
+			path = HTTP;
+			sourceTree = "<group>";
+		};
+		D84A717B1C73713500291D06 /* Libraries */ = {
+			isa = PBXGroup;
+			children = (
+				D84A71D31C7373F600291D06 /* openssl */,
+				D84A71BA1C7372CE00291D06 /* curl */,
+				D84A717C1C73714600291D06 /* json */,
+			);
+			name = Libraries;
+			sourceTree = "<group>";
+		};
+		D84A717C1C73714600291D06 /* json */ = {
+			isa = PBXGroup;
+			children = (
+				D84A717D1C73716C00291D06 /* json-forwards.h */,
+				D84A717E1C73716C00291D06 /* json.h */,
+				D84A717F1C73716C00291D06 /* jsoncpp.cpp */,
+			);
+			path = json;
+			sourceTree = "<group>";
+		};
+		D84A71BA1C7372CE00291D06 /* curl */ = {
+			isa = PBXGroup;
+			children = (
+				D84A71BB1C7372F500291D06 /* curl.h */,
+				D84A71BC1C7372F500291D06 /* curlbuild.h */,
+				D84A71BD1C7372F500291D06 /* curlrules.h */,
+				D84A71BE1C7372F500291D06 /* curlver.h */,
+				D84A71BF1C7372F500291D06 /* easy.h */,
+				D84A71C01C7372F500291D06 /* mprintf.h */,
+				D84A71C11C7372F500291D06 /* multi.h */,
+				D84A71C21C7372F500291D06 /* stdcheaders.h */,
+				D84A71C31C7372F500291D06 /* typecheck-gcc.h */,
+			);
+			path = curl;
+			sourceTree = "<group>";
+		};
+		D84A71D31C7373F600291D06 /* openssl */ = {
+			isa = PBXGroup;
+			children = (
+				D84A71D41C73740E00291D06 /* aes.h */,
+				D84A71D51C73740E00291D06 /* asn1_mac.h */,
+				D84A71D61C73740E00291D06 /* asn1.h */,
+				D84A71D71C73740E00291D06 /* asn1t.h */,
+				D84A71D81C73740E00291D06 /* bio.h */,
+				D84A71D91C73740E00291D06 /* blowfish.h */,
+				D84A71DA1C73740E00291D06 /* bn.h */,
+				D84A71DB1C73740E00291D06 /* buffer.h */,
+				D84A71DC1C73740E00291D06 /* camellia.h */,
+				D84A71DD1C73740E00291D06 /* cast.h */,
+				D84A71DE1C73740E00291D06 /* cmac.h */,
+				D84A71DF1C73740E00291D06 /* cms.h */,
+				D84A71E01C73740E00291D06 /* comp.h */,
+				D84A71E11C73740E00291D06 /* conf_api.h */,
+				D84A71E21C73740E00291D06 /* conf.h */,
+				D84A71E31C73740E00291D06 /* crypto.h */,
+				D84A71E41C73740E00291D06 /* des_old.h */,
+				D84A71E51C73740E00291D06 /* des.h */,
+				D84A71E61C73740E00291D06 /* dh.h */,
+				D84A71E71C73740E00291D06 /* dsa.h */,
+				D84A71E81C73740E00291D06 /* dso.h */,
+				D84A71E91C73740E00291D06 /* dtls1.h */,
+				D84A71EA1C73740E00291D06 /* e_os2.h */,
+				D84A71EB1C73740E00291D06 /* ebcdic.h */,
+				D84A71EC1C73740E00291D06 /* ec.h */,
+				D84A71ED1C73740E00291D06 /* ecdh.h */,
+				D84A71EE1C73740E00291D06 /* ecdsa.h */,
+				D84A71EF1C73740E00291D06 /* engine.h */,
+				D84A71F01C73740E00291D06 /* err.h */,
+				D84A71F11C73740E00291D06 /* evp.h */,
+				D84A71F21C73740E00291D06 /* hmac.h */,
+				D84A71F31C73740E00291D06 /* idea.h */,
+				D84A71F41C73740E00291D06 /* krb5_asn.h */,
+				D84A71F51C73740E00291D06 /* kssl.h */,
+				D84A71F61C73740E00291D06 /* lhash.h */,
+				D84A71F71C73740E00291D06 /* md4.h */,
+				D84A71F81C73740E00291D06 /* md5.h */,
+				D84A71F91C73740E00291D06 /* mdc2.h */,
+				D84A71FA1C73740E00291D06 /* modes.h */,
+				D84A71FB1C73740E00291D06 /* obj_mac.h */,
+				D84A71FC1C73740E00291D06 /* objects.h */,
+				D84A71FD1C73740E00291D06 /* ocsp.h */,
+				D84A71FE1C73740E00291D06 /* opensslconf.h */,
+				D84A71FF1C73740E00291D06 /* opensslv.h */,
+				D84A72001C73740E00291D06 /* ossl_typ.h */,
+				D84A72011C73740E00291D06 /* pem.h */,
+				D84A72021C73740E00291D06 /* pem2.h */,
+				D84A72031C73740E00291D06 /* pkcs7.h */,
+				D84A72041C73740E00291D06 /* pkcs12.h */,
+				D84A72051C73740E00291D06 /* pqueue.h */,
+				D84A72061C73740E00291D06 /* rand.h */,
+				D84A72071C73740E00291D06 /* rc2.h */,
+				D84A72081C73740E00291D06 /* rc4.h */,
+				D84A72091C73740E00291D06 /* ripemd.h */,
+				D84A720A1C73740E00291D06 /* rsa.h */,
+				D84A720B1C73740E00291D06 /* safestack.h */,
+				D84A720C1C73740E00291D06 /* seed.h */,
+				D84A720D1C73740E00291D06 /* sha.h */,
+				D84A720E1C73740E00291D06 /* srp.h */,
+				D84A720F1C73740E00291D06 /* srtp.h */,
+				D84A72101C73740E00291D06 /* ssl.h */,
+				D84A72111C73740E00291D06 /* ssl2.h */,
+				D84A72121C73740E00291D06 /* ssl3.h */,
+				D84A72131C73740E00291D06 /* ssl23.h */,
+				D84A72141C73740E00291D06 /* stack.h */,
+				D84A72151C73740E00291D06 /* symhacks.h */,
+				D84A72161C73740E00291D06 /* tls1.h */,
+				D84A72171C73740F00291D06 /* ts.h */,
+				D84A72181C73740F00291D06 /* txt_db.h */,
+				D84A72191C73740F00291D06 /* ui_compat.h */,
+				D84A721A1C73740F00291D06 /* ui.h */,
+				D84A721B1C73740F00291D06 /* whrlpool.h */,
+				D84A721C1C73740F00291D06 /* x509_vfy.h */,
+				D84A721D1C73740F00291D06 /* x509.h */,
+				D84A721E1C73740F00291D06 /* x509v3.h */,
+			);
+			path = openssl;
+			sourceTree = "<group>";
+		};
+		D84A726A1C73746600291D06 /* Libraries */ = {
+			isa = PBXGroup;
+			children = (
+				D84A726B1C73748E00291D06 /* curl */,
+				D84A726C1C73749600291D06 /* openssl */,
+			);
+			name = Libraries;
+			sourceTree = "<group>";
+		};
+		D84A726B1C73748E00291D06 /* curl */ = {
+			isa = PBXGroup;
+			children = (
+				D84A726D1C7374A800291D06 /* libcurl_iOS.a */,
+			);
+			name = curl;
+			sourceTree = "<group>";
+		};
+		D84A726C1C73749600291D06 /* openssl */ = {
+			isa = PBXGroup;
+			children = (
+				D84A726F1C7374B000291D06 /* libcrypto.a */,
+				D84A72701C7374B000291D06 /* libssl.a */,
+			);
+			name = openssl;
+			sourceTree = "<group>";
+		};
+		D84A72731C7374BD00291D06 /* Libraries */ = {
+			isa = PBXGroup;
+			children = (
+				D84A72741C7374C200291D06 /* curl */,
+				D84A72751C7374C600291D06 /* openssl */,
+			);
+			name = Libraries;
+			sourceTree = "<group>";
+		};
+		D84A72741C7374C200291D06 /* curl */ = {
+			isa = PBXGroup;
+			children = (
+				D84A727A1C73753700291D06 /* libcurl_tvOS.a */,
+			);
+			name = curl;
+			sourceTree = "<group>";
+		};
+		D84A72751C7374C600291D06 /* openssl */ = {
+			isa = PBXGroup;
+			children = (
+				D84A72761C73753200291D06 /* libcrypto.a */,
+				D84A72771C73753200291D06 /* libssl.a */,
+			);
+			name = openssl;
+			sourceTree = "<group>";
+		};
+		D84A727C1C73753F00291D06 /* Libraries */ = {
+			isa = PBXGroup;
+			children = (
+				D84A727D1C73754600291D06 /* curl */,
+				D84A727E1C73754B00291D06 /* openssl */,
+			);
+			name = Libraries;
+			sourceTree = "<group>";
+		};
+		D84A727D1C73754600291D06 /* curl */ = {
+			isa = PBXGroup;
+			children = (
+				D84A72831C73756300291D06 /* libcurl_Mac.a */,
+			);
+			name = curl;
+			sourceTree = "<group>";
+		};
+		D84A727E1C73754B00291D06 /* openssl */ = {
+			isa = PBXGroup;
+			children = (
+				D84A727F1C73755D00291D06 /* libcrypto.a */,
+				D84A72801C73755D00291D06 /* libssl.a */,
+			);
+			name = openssl;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXHeadersBuildPhase section */
+		D84A70261C73707C00291D06 /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				D84A72611C73740F00291D06 /* tls1.h in Headers */,
+				D84A72591C73740F00291D06 /* srp.h in Headers */,
+				D84A724D1C73740F00291D06 /* pem2.h in Headers */,
+				D84A72581C73740F00291D06 /* sha.h in Headers */,
+				D84A72551C73740F00291D06 /* rsa.h in Headers */,
+				D84A71CA1C7372F500291D06 /* multi.h in Headers */,
+				D84A724F1C73740F00291D06 /* pkcs12.h in Headers */,
+				D84A724C1C73740F00291D06 /* pem.h in Headers */,
+				D84A71591C73711A00291D06 /* JsonUtil.h in Headers */,
+				D84A706A1C7370AA00291D06 /* BrainCloudOneWayMatch.h in Headers */,
+				D84A72601C73740F00291D06 /* symhacks.h in Headers */,
+				D84A716D1C73711A00291D06 /* stdafx.h in Headers */,
+				D84A70751C7370AA00291D06 /* BrainCloudSocialLeaderboard.h in Headers */,
+				D84A72481C73740F00291D06 /* ocsp.h in Headers */,
+				D84A71D21C7373B100291D06 /* md5x.h in Headers */,
+				D84A706B1C7370AA00291D06 /* BrainCloudPlaybackStream.h in Headers */,
+				D84A71C91C7372F500291D06 /* mprintf.h in Headers */,
+				D84A72301C73740F00291D06 /* des.h in Headers */,
+				D84A72391C73740F00291D06 /* ecdsa.h in Headers */,
+				D84A70811C7370AA00291D06 /* Platform.h in Headers */,
+				D84A72431C73740F00291D06 /* md5.h in Headers */,
+				D84A70691C7370AA00291D06 /* BrainCloudMatchmaking.h in Headers */,
+				D84A72461C73740F00291D06 /* obj_mac.h in Headers */,
+				D84A724B1C73740F00291D06 /* ossl_typ.h in Headers */,
+				D84A722D1C73740F00291D06 /* conf.h in Headers */,
+				D84A723D1C73740F00291D06 /* hmac.h in Headers */,
+				D84A72251C73740F00291D06 /* bn.h in Headers */,
+				D84A721F1C73740F00291D06 /* aes.h in Headers */,
+				D84A72311C73740F00291D06 /* dh.h in Headers */,
+				D84A71001C73711A00291D06 /* BrainCloudComms.h in Headers */,
+				D84A72401C73740F00291D06 /* kssl.h in Headers */,
+				D84A72631C73740F00291D06 /* txt_db.h in Headers */,
+				D84A722B1C73740F00291D06 /* comp.h in Headers */,
+				D84A70641C7370AA00291D06 /* BrainCloudGamification.h in Headers */,
+				D84A72621C73740F00291D06 /* ts.h in Headers */,
+				D84A723E1C73740F00291D06 /* idea.h in Headers */,
+				D84A72271C73740F00291D06 /* camellia.h in Headers */,
+				D84A705C1C7370AA00291D06 /* BrainCloudAsyncMatch.h in Headers */,
+				D84A707E1C7370AA00291D06 /* IRewardCallback.h in Headers */,
+				D84A72351C73740F00291D06 /* e_os2.h in Headers */,
+				D84A72371C73740F00291D06 /* ec.h in Headers */,
+				D84A72641C73740F00291D06 /* ui_compat.h in Headers */,
+				D84A707B1C7370AA00291D06 /* IBrainCloudComms.h in Headers */,
+				D84A722E1C73740F00291D06 /* crypto.h in Headers */,
+				D84A70821C7370AA00291D06 /* reason_codes.h in Headers */,
+				D84A71C41C7372F500291D06 /* curl.h in Headers */,
+				D84A71B21C7371B400291D06 /* URLRequestMethod.h in Headers */,
+				D84A71761C73711A00291D06 /* Timer.h in Headers */,
+				D84A71CC1C7372F500291D06 /* typecheck-gcc.h in Headers */,
+				D84A70851C7370AA00291D06 /* ServiceOperation.h in Headers */,
+				D84A72561C73740F00291D06 /* safestack.h in Headers */,
+				D84A72681C73740F00291D06 /* x509.h in Headers */,
+				D84A70621C7370AA00291D06 /* BrainCloudFile.h in Headers */,
+				D84A71A61C7371B400291D06 /* URLLoaderClient.h in Headers */,
+				D84A72661C73740F00291D06 /* whrlpool.h in Headers */,
+				D84A71AE1C7371B400291D06 /* URLRequestHeader.h in Headers */,
+				D84A71C71C7372F500291D06 /* curlver.h in Headers */,
+				D84A72691C73740F00291D06 /* x509v3.h in Headers */,
+				D84A723B1C73740F00291D06 /* err.h in Headers */,
+				D84A72651C73740F00291D06 /* ui.h in Headers */,
+				D84A705F1C7370AA00291D06 /* BrainCloudDataStream.h in Headers */,
+				D84A71A21C7371B400291D06 /* URLLoader.h in Headers */,
+				D84A723A1C73740F00291D06 /* engine.h in Headers */,
+				D84A70671C7370AA00291D06 /* BrainCloudGlobalStatistics.h in Headers */,
+				D84A72421C73740F00291D06 /* md4.h in Headers */,
+				D84A72201C73740F00291D06 /* asn1_mac.h in Headers */,
+				D84A72331C73740F00291D06 /* dso.h in Headers */,
+				D84A717A1C73711A00291D06 /* TimerCallback.h in Headers */,
+				D84A72241C73740F00291D06 /* blowfish.h in Headers */,
+				D84A70701C7370AA00291D06 /* BrainCloudProfanity.h in Headers */,
+				D84A71811C73716C00291D06 /* json.h in Headers */,
+				D84A722A1C73740F00291D06 /* cms.h in Headers */,
+				D84A72221C73740F00291D06 /* asn1t.h in Headers */,
+				D84A70791C7370AA00291D06 /* BrainCloudTypes.h in Headers */,
+				D84A705D1C7370AA00291D06 /* BrainCloudAuthentication.h in Headers */,
+				D84A722F1C73740F00291D06 /* des_old.h in Headers */,
+				D84A72571C73740F00291D06 /* seed.h in Headers */,
+				D84A705E1C7370AA00291D06 /* BrainCloudClient.h in Headers */,
+				D84A707C1C7370AA00291D06 /* IEventCallback.h in Headers */,
+				D84A72411C73740F00291D06 /* lhash.h in Headers */,
+				D84A719D1C7371B400291D06 /* cURLLoader.h in Headers */,
+				D84A724E1C73740F00291D06 /* pkcs7.h in Headers */,
+				D84A725D1C73740F00291D06 /* ssl3.h in Headers */,
+				D84A707F1C7370AA00291D06 /* IServerCallback.h in Headers */,
+				D84A725F1C73740F00291D06 /* stack.h in Headers */,
+				D84A714F1C73711A00291D06 /* GUID.h in Headers */,
+				D84A72291C73740F00291D06 /* cmac.h in Headers */,
+				D84A71711C73711A00291D06 /* StringUtil.h in Headers */,
+				D84A70631C7370AA00291D06 /* BrainCloudFriend.h in Headers */,
+				D84A72441C73740F00291D06 /* mdc2.h in Headers */,
+				D84A70601C7370AA00291D06 /* BrainCloudEntity.h in Headers */,
+				D84A723F1C73740F00291D06 /* krb5_asn.h in Headers */,
+				D84A72521C73740F00291D06 /* rc2.h in Headers */,
+				D84A707A1C7370AA00291D06 /* http_codes.h in Headers */,
+				D84A719E1C7371B400291D06 /* IFileUploader.h in Headers */,
+				D84A72491C73740F00291D06 /* opensslconf.h in Headers */,
+				D84A72501C73740F00291D06 /* pqueue.h in Headers */,
+				D84A71B61C7371B400291D06 /* URLResponse.h in Headers */,
+				D84A72471C73740F00291D06 /* objects.h in Headers */,
+				D84A707D1C7370AA00291D06 /* IFileUploadCallback.h in Headers */,
+				D84A72211C73740F00291D06 /* asn1.h in Headers */,
+				D84A71801C73716C00291D06 /* json-forwards.h in Headers */,
+				D84A71AA1C7371B400291D06 /* URLRequest.h in Headers */,
+				D84A706E1C7370AA00291D06 /* BrainCloudPlayerStatisticsEvent.h in Headers */,
+				D84A706D1C7370AA00291D06 /* BrainCloudPlayerStatistics.h in Headers */,
+				D84A70711C7370AA00291D06 /* BrainCloudPushNotification.h in Headers */,
+				D84A72361C73740F00291D06 /* ebcdic.h in Headers */,
+				D84A72381C73740F00291D06 /* ecdh.h in Headers */,
+				D84A72671C73740F00291D06 /* x509_vfy.h in Headers */,
+				D84A72261C73740F00291D06 /* buffer.h in Headers */,
+				D84A72281C73740F00291D06 /* cast.h in Headers */,
+				D84A70741C7370AA00291D06 /* BrainCloudScript.h in Headers */,
+				D84A70681C7370AA00291D06 /* BrainCloudIdentity.h in Headers */,
+				D84A72451C73740F00291D06 /* modes.h in Headers */,
+				D84A70651C7370AA00291D06 /* BrainCloudGlobalApp.h in Headers */,
+				D84A725B1C73740F00291D06 /* ssl.h in Headers */,
+				D84A71C81C7372F500291D06 /* easy.h in Headers */,
+				D84A722C1C73740F00291D06 /* conf_api.h in Headers */,
+				D84A706C1C7370AA00291D06 /* BrainCloudPlayerState.h in Headers */,
+				D84A723C1C73740F00291D06 /* evp.h in Headers */,
+				D84A725A1C73740F00291D06 /* srtp.h in Headers */,
+				D84A72531C73740F00291D06 /* rc4.h in Headers */,
+				D84A71721C73711A00291D06 /* targetver.h in Headers */,
+				D84A70731C7370AA00291D06 /* BrainCloudS3Handling.h in Headers */,
+				D84A70781C7370AA00291D06 /* BrainCloudTwitter.h in Headers */,
+				D84A72511C73740F00291D06 /* rand.h in Headers */,
+				D84A72231C73740F00291D06 /* bio.h in Headers */,
+				D84A72321C73740F00291D06 /* dsa.h in Headers */,
+				D84A706F1C7370AA00291D06 /* BrainCloudProduct.h in Headers */,
+				D84A70801C7370AA00291D06 /* OperationParam.h in Headers */,
+				D84A71C51C7372F500291D06 /* curlbuild.h in Headers */,
+				D84A725C1C73740F00291D06 /* ssl2.h in Headers */,
+				D84A724A1C73740F00291D06 /* opensslv.h in Headers */,
+				D84A715D1C73711A00291D06 /* PantheiosStub.h in Headers */,
+				D84A71C61C7372F500291D06 /* curlrules.h in Headers */,
+				D84A70761C7370AA00291D06 /* BrainCloudSteam.h in Headers */,
+				D84A72541C73740F00291D06 /* ripemd.h in Headers */,
+				D84A70721C7370AA00291D06 /* BrainCloudRedemptionCode.h in Headers */,
+				D84A71991C7371B400291D06 /* cURLFileUploader.h in Headers */,
+				D84A70771C7370AA00291D06 /* BrainCloudTime.h in Headers */,
+				D84A71CB1C7372F500291D06 /* stdcheaders.h in Headers */,
+				D84A70611C7370AA00291D06 /* BrainCloudEvent.h in Headers */,
+				D84A70661C7370AA00291D06 /* BrainCloudGlobalEntity.h in Headers */,
+				D84A70831C7370AA00291D06 /* ServerCall.h in Headers */,
+				D84A725E1C73740F00291D06 /* ssl23.h in Headers */,
+				D84A72341C73740F00291D06 /* dtls1.h in Headers */,
+				D84A70841C7370AA00291D06 /* ServiceName.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXHeadersBuildPhase section */
+
+/* Begin PBXNativeTarget section */
+		D84A700D1C73704D00291D06 /* BrainCloudCpp-iOS */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = D84A70141C73704D00291D06 /* Build configuration list for PBXNativeTarget "BrainCloudCpp-iOS" */;
+			buildPhases = (
+				D84A700A1C73704D00291D06 /* Sources */,
+				D84A700B1C73704D00291D06 /* Frameworks */,
+				D84A700C1C73704D00291D06 /* CopyFiles */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "BrainCloudCpp-iOS";
+			productName = "BrainCloudSDK-iOS";
+			productReference = D84A700E1C73704D00291D06 /* libBrainCloudCpp-iOS.a */;
+			productType = "com.apple.product-type.library.static";
+		};
+		D84A701A1C73706900291D06 /* BrainCloudCpp-tvOS */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = D84A70211C73706900291D06 /* Build configuration list for PBXNativeTarget "BrainCloudCpp-tvOS" */;
+			buildPhases = (
+				D84A70171C73706900291D06 /* Sources */,
+				D84A70181C73706900291D06 /* Frameworks */,
+				D84A70191C73706900291D06 /* CopyFiles */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "BrainCloudCpp-tvOS";
+			productName = "BrainCloudSDK-tvOS";
+			productReference = D84A701B1C73706900291D06 /* libBrainCloudCpp-iOS.a */;
+			productType = "com.apple.product-type.library.static";
+		};
+		D84A70271C73707C00291D06 /* BrainCloudCpp-OSX */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = D84A702E1C73707C00291D06 /* Build configuration list for PBXNativeTarget "BrainCloudCpp-OSX" */;
+			buildPhases = (
+				D84A70241C73707C00291D06 /* Sources */,
+				D84A70251C73707C00291D06 /* Frameworks */,
+				D84A70261C73707C00291D06 /* Headers */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "BrainCloudCpp-OSX";
+			productName = "BrainCloudSDK-OSX";
+			productReference = D84A70281C73707C00291D06 /* libBrainCloudCpp-iOS.a */;
+			productType = "com.apple.product-type.library.static";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		D84A6FE61C736F7800291D06 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0720;
+				ORGANIZATIONNAME = "BitHeads Inc.";
+				TargetAttributes = {
+					D84A700D1C73704D00291D06 = {
+						CreatedOnToolsVersion = 7.2.1;
+					};
+					D84A701A1C73706900291D06 = {
+						CreatedOnToolsVersion = 7.2.1;
+					};
+					D84A70271C73707C00291D06 = {
+						CreatedOnToolsVersion = 7.2.1;
+					};
+				};
+			};
+			buildConfigurationList = D84A6FE91C736F7800291D06 /* Build configuration list for PBXProject "BrainCloudCpp" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+			);
+			mainGroup = D84A6FE51C736F7800291D06;
+			productRefGroup = D84A6FF01C736F7800291D06 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				D84A700D1C73704D00291D06 /* BrainCloudCpp-iOS */,
+				D84A701A1C73706900291D06 /* BrainCloudCpp-tvOS */,
+				D84A70271C73707C00291D06 /* BrainCloudCpp-OSX */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXSourcesBuildPhase section */
+		D84A700A1C73704D00291D06 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				D84A71101C73711A00291D06 /* BrainCloudGamification.cpp in Sources */,
+				D84A70FA1C73711A00291D06 /* BrainCloudClient.cpp in Sources */,
+				D84A71AF1C7371B400291D06 /* URLRequestMethod.cpp in Sources */,
+				D84A71281C73711A00291D06 /* BrainCloudPlayerState.cpp in Sources */,
+				D84A71491C73711A00291D06 /* BrainCloudTime.cpp in Sources */,
+				D84A71611C73711A00291D06 /* ServerCall.cpp in Sources */,
+				D84A70F41C73711A00291D06 /* BrainCloudAsyncMatch.cpp in Sources */,
+				D84A71771C73711A00291D06 /* TimerCallback.cpp in Sources */,
+				D84A71371C73711A00291D06 /* BrainCloudPushNotification.cpp in Sources */,
+				D84A71341C73711A00291D06 /* BrainCloudProfanity.cpp in Sources */,
+				D84A71251C73711A00291D06 /* BrainCloudPlaybackStream.cpp in Sources */,
+				D84A716E1C73711A00291D06 /* StringUtil.cpp in Sources */,
+				D84A71041C73711A00291D06 /* BrainCloudEntity.cpp in Sources */,
+				D84A710A1C73711A00291D06 /* BrainCloudFile.cpp in Sources */,
+				D84A715A1C73711A00291D06 /* OperationParam.cpp in Sources */,
+				D84A713A1C73711A00291D06 /* BrainCloudRedemptionCode.cpp in Sources */,
+				D84A71191C73711A00291D06 /* BrainCloudGlobalStatistics.cpp in Sources */,
+				D84A71AB1C7371B400291D06 /* URLRequestHeader.cpp in Sources */,
+				D84A71B31C7371B400291D06 /* URLResponse.cpp in Sources */,
+				D84A71821C73716C00291D06 /* jsoncpp.cpp in Sources */,
+				D84A712E1C73711A00291D06 /* BrainCloudPlayerStatisticsEvent.cpp in Sources */,
+				D84A71461C73711A00291D06 /* BrainCloudSteam.cpp in Sources */,
+				D84A71221C73711A00291D06 /* BrainCloudOneWayMatch.cpp in Sources */,
+				D84A71531C73711A00291D06 /* IBrainCloudComms.cpp in Sources */,
+				D84A71A31C7371B400291D06 /* URLLoaderClient.cpp in Sources */,
+				D84A70F71C73711A00291D06 /* BrainCloudAuthentication.cpp in Sources */,
+				D84A71431C73711A00291D06 /* BrainCloudSocialLeaderboard.cpp in Sources */,
+				D84A71671C73711A00291D06 /* ServiceOperation.cpp in Sources */,
+				D84A71A71C7371B400291D06 /* URLRequest.cpp in Sources */,
+				D84A719F1C7371B400291D06 /* URLLoader.cpp in Sources */,
+				D84A71641C73711A00291D06 /* ServiceName.cpp in Sources */,
+				D84A714C1C73711A00291D06 /* BrainCloudTwitter.cpp in Sources */,
+				D84A71CF1C7373B100291D06 /* md5x.c in Sources */,
+				D84A710D1C73711A00291D06 /* BrainCloudFriend.cpp in Sources */,
+				D84A71401C73711A00291D06 /* BrainCloudScript.cpp in Sources */,
+				D84A711F1C73711A00291D06 /* BrainCloudMatchmaking.cpp in Sources */,
+				D84A71501C73711A00291D06 /* GUID.mm in Sources */,
+				D84A71161C73711A00291D06 /* BrainCloudGlobalEntity.cpp in Sources */,
+				D84A71311C73711A00291D06 /* BrainCloudProduct.cpp in Sources */,
+				D84A71131C73711A00291D06 /* BrainCloudGlobalApp.cpp in Sources */,
+				D84A715E1C73711A00291D06 /* Platform.cpp in Sources */,
+				D84A71011C73711A00291D06 /* BrainCloudDataStream.cpp in Sources */,
+				D84A716A1C73711A00291D06 /* stdafx.cpp in Sources */,
+				D84A713D1C73711A00291D06 /* BrainCloudS3Handling.cpp in Sources */,
+				D84A712B1C73711A00291D06 /* BrainCloudPlayerStatistics.cpp in Sources */,
+				D84A711C1C73711A00291D06 /* BrainCloudIdentity.cpp in Sources */,
+				D84A719A1C7371B400291D06 /* cURLLoader.cpp in Sources */,
+				D84A70FD1C73711A00291D06 /* BrainCloudComms.cpp in Sources */,
+				D84A71961C7371B400291D06 /* cURLFileUploader.cpp in Sources */,
+				D84A71731C73711A00291D06 /* Timer.cpp in Sources */,
+				D84A71071C73711A00291D06 /* BrainCloudEvent.cpp in Sources */,
+				D84A71561C73711A00291D06 /* JsonUtil.cpp in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		D84A70171C73706900291D06 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				D84A71111C73711A00291D06 /* BrainCloudGamification.cpp in Sources */,
+				D84A70FB1C73711A00291D06 /* BrainCloudClient.cpp in Sources */,
+				D84A71B01C7371B400291D06 /* URLRequestMethod.cpp in Sources */,
+				D84A71291C73711A00291D06 /* BrainCloudPlayerState.cpp in Sources */,
+				D84A714A1C73711A00291D06 /* BrainCloudTime.cpp in Sources */,
+				D84A71621C73711A00291D06 /* ServerCall.cpp in Sources */,
+				D84A70F51C73711A00291D06 /* BrainCloudAsyncMatch.cpp in Sources */,
+				D84A71781C73711A00291D06 /* TimerCallback.cpp in Sources */,
+				D84A71381C73711A00291D06 /* BrainCloudPushNotification.cpp in Sources */,
+				D84A71351C73711A00291D06 /* BrainCloudProfanity.cpp in Sources */,
+				D84A71261C73711A00291D06 /* BrainCloudPlaybackStream.cpp in Sources */,
+				D84A716F1C73711A00291D06 /* StringUtil.cpp in Sources */,
+				D84A71051C73711A00291D06 /* BrainCloudEntity.cpp in Sources */,
+				D84A710B1C73711A00291D06 /* BrainCloudFile.cpp in Sources */,
+				D84A715B1C73711A00291D06 /* OperationParam.cpp in Sources */,
+				D84A713B1C73711A00291D06 /* BrainCloudRedemptionCode.cpp in Sources */,
+				D84A711A1C73711A00291D06 /* BrainCloudGlobalStatistics.cpp in Sources */,
+				D84A71AC1C7371B400291D06 /* URLRequestHeader.cpp in Sources */,
+				D84A71B41C7371B400291D06 /* URLResponse.cpp in Sources */,
+				D84A71831C73716C00291D06 /* jsoncpp.cpp in Sources */,
+				D84A712F1C73711A00291D06 /* BrainCloudPlayerStatisticsEvent.cpp in Sources */,
+				D84A71471C73711A00291D06 /* BrainCloudSteam.cpp in Sources */,
+				D84A71231C73711A00291D06 /* BrainCloudOneWayMatch.cpp in Sources */,
+				D84A71541C73711A00291D06 /* IBrainCloudComms.cpp in Sources */,
+				D84A71A41C7371B400291D06 /* URLLoaderClient.cpp in Sources */,
+				D84A70F81C73711A00291D06 /* BrainCloudAuthentication.cpp in Sources */,
+				D84A71441C73711A00291D06 /* BrainCloudSocialLeaderboard.cpp in Sources */,
+				D84A71681C73711A00291D06 /* ServiceOperation.cpp in Sources */,
+				D84A71A81C7371B400291D06 /* URLRequest.cpp in Sources */,
+				D84A71A01C7371B400291D06 /* URLLoader.cpp in Sources */,
+				D84A71651C73711A00291D06 /* ServiceName.cpp in Sources */,
+				D84A714D1C73711A00291D06 /* BrainCloudTwitter.cpp in Sources */,
+				D84A71D01C7373B100291D06 /* md5x.c in Sources */,
+				D84A710E1C73711A00291D06 /* BrainCloudFriend.cpp in Sources */,
+				D84A71411C73711A00291D06 /* BrainCloudScript.cpp in Sources */,
+				D84A71201C73711A00291D06 /* BrainCloudMatchmaking.cpp in Sources */,
+				D84A71511C73711A00291D06 /* GUID.mm in Sources */,
+				D84A71171C73711A00291D06 /* BrainCloudGlobalEntity.cpp in Sources */,
+				D84A71321C73711A00291D06 /* BrainCloudProduct.cpp in Sources */,
+				D84A71141C73711A00291D06 /* BrainCloudGlobalApp.cpp in Sources */,
+				D84A715F1C73711A00291D06 /* Platform.cpp in Sources */,
+				D84A71021C73711A00291D06 /* BrainCloudDataStream.cpp in Sources */,
+				D84A716B1C73711A00291D06 /* stdafx.cpp in Sources */,
+				D84A713E1C73711A00291D06 /* BrainCloudS3Handling.cpp in Sources */,
+				D84A712C1C73711A00291D06 /* BrainCloudPlayerStatistics.cpp in Sources */,
+				D84A711D1C73711A00291D06 /* BrainCloudIdentity.cpp in Sources */,
+				D84A719B1C7371B400291D06 /* cURLLoader.cpp in Sources */,
+				D84A70FE1C73711A00291D06 /* BrainCloudComms.cpp in Sources */,
+				D84A71971C7371B400291D06 /* cURLFileUploader.cpp in Sources */,
+				D84A71741C73711A00291D06 /* Timer.cpp in Sources */,
+				D84A71081C73711A00291D06 /* BrainCloudEvent.cpp in Sources */,
+				D84A71571C73711A00291D06 /* JsonUtil.cpp in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		D84A70241C73707C00291D06 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				D84A71121C73711A00291D06 /* BrainCloudGamification.cpp in Sources */,
+				D84A70FC1C73711A00291D06 /* BrainCloudClient.cpp in Sources */,
+				D84A71B11C7371B400291D06 /* URLRequestMethod.cpp in Sources */,
+				D84A712A1C73711A00291D06 /* BrainCloudPlayerState.cpp in Sources */,
+				D84A714B1C73711A00291D06 /* BrainCloudTime.cpp in Sources */,
+				D84A71631C73711A00291D06 /* ServerCall.cpp in Sources */,
+				D84A70F61C73711A00291D06 /* BrainCloudAsyncMatch.cpp in Sources */,
+				D84A71791C73711A00291D06 /* TimerCallback.cpp in Sources */,
+				D84A71391C73711A00291D06 /* BrainCloudPushNotification.cpp in Sources */,
+				D84A71361C73711A00291D06 /* BrainCloudProfanity.cpp in Sources */,
+				D84A71271C73711A00291D06 /* BrainCloudPlaybackStream.cpp in Sources */,
+				D84A71701C73711A00291D06 /* StringUtil.cpp in Sources */,
+				D84A71061C73711A00291D06 /* BrainCloudEntity.cpp in Sources */,
+				D84A710C1C73711A00291D06 /* BrainCloudFile.cpp in Sources */,
+				D84A715C1C73711A00291D06 /* OperationParam.cpp in Sources */,
+				D84A713C1C73711A00291D06 /* BrainCloudRedemptionCode.cpp in Sources */,
+				D84A711B1C73711A00291D06 /* BrainCloudGlobalStatistics.cpp in Sources */,
+				D84A71AD1C7371B400291D06 /* URLRequestHeader.cpp in Sources */,
+				D84A71B51C7371B400291D06 /* URLResponse.cpp in Sources */,
+				D84A71841C73716C00291D06 /* jsoncpp.cpp in Sources */,
+				D84A71301C73711A00291D06 /* BrainCloudPlayerStatisticsEvent.cpp in Sources */,
+				D84A71481C73711A00291D06 /* BrainCloudSteam.cpp in Sources */,
+				D84A71241C73711A00291D06 /* BrainCloudOneWayMatch.cpp in Sources */,
+				D84A71551C73711A00291D06 /* IBrainCloudComms.cpp in Sources */,
+				D84A71A51C7371B400291D06 /* URLLoaderClient.cpp in Sources */,
+				D84A70F91C73711A00291D06 /* BrainCloudAuthentication.cpp in Sources */,
+				D84A71451C73711A00291D06 /* BrainCloudSocialLeaderboard.cpp in Sources */,
+				D84A71691C73711A00291D06 /* ServiceOperation.cpp in Sources */,
+				D84A71A91C7371B400291D06 /* URLRequest.cpp in Sources */,
+				D84A71A11C7371B400291D06 /* URLLoader.cpp in Sources */,
+				D84A71661C73711A00291D06 /* ServiceName.cpp in Sources */,
+				D84A714E1C73711A00291D06 /* BrainCloudTwitter.cpp in Sources */,
+				D84A71D11C7373B100291D06 /* md5x.c in Sources */,
+				D84A710F1C73711A00291D06 /* BrainCloudFriend.cpp in Sources */,
+				D84A71421C73711A00291D06 /* BrainCloudScript.cpp in Sources */,
+				D84A71211C73711A00291D06 /* BrainCloudMatchmaking.cpp in Sources */,
+				D84A71521C73711A00291D06 /* GUID.mm in Sources */,
+				D84A71181C73711A00291D06 /* BrainCloudGlobalEntity.cpp in Sources */,
+				D84A71331C73711A00291D06 /* BrainCloudProduct.cpp in Sources */,
+				D84A71151C73711A00291D06 /* BrainCloudGlobalApp.cpp in Sources */,
+				D84A71601C73711A00291D06 /* Platform.cpp in Sources */,
+				D84A71031C73711A00291D06 /* BrainCloudDataStream.cpp in Sources */,
+				D84A716C1C73711A00291D06 /* stdafx.cpp in Sources */,
+				D84A713F1C73711A00291D06 /* BrainCloudS3Handling.cpp in Sources */,
+				D84A712D1C73711A00291D06 /* BrainCloudPlayerStatistics.cpp in Sources */,
+				D84A711E1C73711A00291D06 /* BrainCloudIdentity.cpp in Sources */,
+				D84A719C1C7371B400291D06 /* cURLLoader.cpp in Sources */,
+				D84A70FF1C73711A00291D06 /* BrainCloudComms.cpp in Sources */,
+				D84A71981C7371B400291D06 /* cURLFileUploader.cpp in Sources */,
+				D84A71751C73711A00291D06 /* Timer.cpp in Sources */,
+				D84A71091C73711A00291D06 /* BrainCloudEvent.cpp in Sources */,
+				D84A71581C73711A00291D06 /* JsonUtil.cpp in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin XCBuildConfiguration section */
+		D84A70011C736F7800291D06 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "-";
+				COPY_PHASE_STRIP = NO;
+				CURRENT_PROJECT_VERSION = 1;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.11;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = macosx;
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Debug;
+		};
+		D84A70021C736F7800291D06 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "-";
+				COPY_PHASE_STRIP = NO;
+				CURRENT_PROJECT_VERSION = 1;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.11;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = macosx;
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Release;
+		};
+		D84A70151C73704D00291D06 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				IPHONEOS_DEPLOYMENT_TARGET = 9.2;
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/$(TARGET_NAME)",
+				);
+				OTHER_LDFLAGS = "-ObjC";
+				PRODUCT_NAME = "BrainCloudCpp-iOS";
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+			};
+			name = Debug;
+		};
+		D84A70161C73704D00291D06 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				IPHONEOS_DEPLOYMENT_TARGET = 9.2;
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/$(TARGET_NAME)",
+				);
+				OTHER_LDFLAGS = "-ObjC";
+				PRODUCT_NAME = "BrainCloudCpp-iOS";
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		D84A70221C73706900291D06 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/$(TARGET_NAME)",
+				);
+				OTHER_LDFLAGS = "-ObjC";
+				PRODUCT_NAME = "BrainCloudCpp-iOS";
+				SDKROOT = appletvos;
+				SKIP_INSTALL = YES;
+				TVOS_DEPLOYMENT_TARGET = 9.1;
+			};
+			name = Debug;
+		};
+		D84A70231C73706900291D06 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/$(TARGET_NAME)",
+				);
+				OTHER_LDFLAGS = "-ObjC";
+				PRODUCT_NAME = "BrainCloudCpp-iOS";
+				SDKROOT = appletvos;
+				SKIP_INSTALL = YES;
+				TVOS_DEPLOYMENT_TARGET = 9.1;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		D84A702F1C73707C00291D06 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				EXECUTABLE_PREFIX = lib;
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/$(TARGET_NAME)",
+				);
+				PRODUCT_NAME = "BrainCloudCpp-iOS";
+			};
+			name = Debug;
+		};
+		D84A70301C73707C00291D06 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				EXECUTABLE_PREFIX = lib;
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/$(TARGET_NAME)",
+				);
+				PRODUCT_NAME = "BrainCloudCpp-iOS";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		D84A6FE91C736F7800291D06 /* Build configuration list for PBXProject "BrainCloudCpp" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				D84A70011C736F7800291D06 /* Debug */,
+				D84A70021C736F7800291D06 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		D84A70141C73704D00291D06 /* Build configuration list for PBXNativeTarget "BrainCloudCpp-iOS" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				D84A70151C73704D00291D06 /* Debug */,
+				D84A70161C73704D00291D06 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		D84A70211C73706900291D06 /* Build configuration list for PBXNativeTarget "BrainCloudCpp-tvOS" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				D84A70221C73706900291D06 /* Debug */,
+				D84A70231C73706900291D06 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		D84A702E1C73707C00291D06 /* Build configuration list for PBXNativeTarget "BrainCloudCpp-OSX" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				D84A702F1C73707C00291D06 /* Debug */,
+				D84A70301C73707C00291D06 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = D84A6FE61C736F7800291D06 /* Project object */;
+}
