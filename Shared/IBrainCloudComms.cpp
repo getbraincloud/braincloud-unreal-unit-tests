@@ -10,7 +10,7 @@
 #include <ctype.h>
 #include <string>
 #include <list>
-#include "HTTP/IFileUploader.h"
+#include "IFileUploader.h"
 
 
 namespace BrainCloud {
@@ -31,9 +31,14 @@ namespace BrainCloud {
         , _loggingEnabled(false)
         , _authenticationTimeoutMillis(DEFAULT_AUTHENTICATION_TIMEOUT_MILLIS)
         , _oldStyleStatusMessageErrorCallback(false)
+        , _cacheMessagesOnNetworkError(false)
+        , _errorCallbackOn202(true)
+        , _blockingQueue(false)
         , _eventCallback(NULL)
         , _fileUploadCallback(NULL)
+        , _globalErrorCallback(NULL)
         , _rewardCallback(NULL)
+        , _networkErrorCallback(NULL)
         , _uploadLowTransferRateTimeoutSecs(120)
         , _uploadLowTransferRateThresholdBytesPerSec(50)
         , _uploadOverallTimeoutSecs(0)
@@ -133,6 +138,11 @@ namespace BrainCloud {
     void IBrainCloudComms::setOldStyleStatusMessageErrorCallback(bool in_enabled)
     {
         _oldStyleStatusMessageErrorCallback = in_enabled;
+    }
+
+    void IBrainCloudComms::setErrorCallbackOn202Status(bool in_isError)
+    {
+        _errorCallbackOn202 = in_isError;
     }
     
     int IBrainCloudComms::getUploadLowTransferRateTimeout()

@@ -146,6 +146,7 @@ namespace BrainCloud
 	const OperationParam OperationParam::FriendServiceAuthenticationType					= OperationParam("authenticationType");
 	const OperationParam OperationParam::FriendServiceEntityId								= OperationParam("entityId");
 	const OperationParam OperationParam::FriendServiceExternalId							= OperationParam("externalId");
+    const OperationParam OperationParam::FriendServiceProfileId                             = OperationParam("profileId");
 	const OperationParam OperationParam::FriendServiceFriendId								= OperationParam("friendId");
 	const OperationParam OperationParam::FriendServiceEntityType							= OperationParam("entityType");
 	const OperationParam OperationParam::FriendServiceEntitySubType							= OperationParam("entitySubtype");

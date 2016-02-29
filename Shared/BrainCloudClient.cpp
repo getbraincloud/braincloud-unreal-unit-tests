@@ -37,13 +37,6 @@ namespace BrainCloud {
     // Define all static member variables.
     BrainCloudClient * BrainCloudClient::_instance      = NULL;
 
-	// Indicates if the client should operate in single-threaded mode.
-	//   - When enabled, callbacks for braincloud events will be bufferred until the application
-	//     makes a call to runCallbacks().
-	//   - When disabled, callbacks for braincloud events will be executed immediately upon receipt
-	//     using multiple threads.
-	bool BrainCloudClient::SINGLE_THREADED     = true;
-
 	// Push notification device types
 	const char * BrainCloudClient::DEVICE_TYPE_IOS   = "IOS";
 	 
@@ -262,6 +255,26 @@ namespace BrainCloud {
         _brainCloudComms->deregisterFileUploadCallback();
     }
     
+    void BrainCloudClient::registerGlobalErrorCallback(IGlobalErrorCallback * in_globalErrorCallback)
+    {
+        _brainCloudComms->registerGlobalErrorCallback(in_globalErrorCallback);
+    }
+    
+    void BrainCloudClient::deregisterGlobalErrorCallback()
+    {
+        _brainCloudComms->deregisterGlobalErrorCallback();
+    }
+    
+    void BrainCloudClient::registerNetworkErrorCallback(INetworkErrorCallback * in_networkErrorCallback)
+    {
+        _brainCloudComms->registerNetworkErrorCallback(in_networkErrorCallback);
+    }
+    
+    void BrainCloudClient::deregisterNetworkErrorCallback()
+    {
+        _brainCloudComms->deregisterNetworkErrorCallback();
+    }
+    
     void BrainCloudClient::enableLogging(bool shouldEnable)
     {
         _brainCloudComms->enableLogging(shouldEnable);
@@ -272,7 +285,7 @@ namespace BrainCloud {
      */
     void BrainCloudClient::heartbeat( )
 	{
-		_brainCloudComms->heartbeat();
+		_brainCloudComms->sendHeartbeat();
     }
 	
 	void BrainCloudClient::sendRequest(ServerCall * in_serviceMessage)
@@ -286,10 +299,22 @@ namespace BrainCloud {
         _brainCloudComms->setSessionId("");
         _authenticationService->setProfileId("");
     }
+
+    void BrainCloudClient::shutdown()
+    {
+        _brainCloudComms->shutdown();
+        _brainCloudComms->setSessionId("");
+        _authenticationService->setProfileId("");
+    }
     
     bool BrainCloudClient::isAuthenticated()
     {
         return _brainCloudComms->isAuthenticated();
+    }
+    
+    bool BrainCloudClient::isInitialized()
+    {
+        return _brainCloudComms->isInitialized();
     }
     
     void BrainCloudClient::setImmediateRetryOnError(bool value)
@@ -394,6 +419,11 @@ namespace BrainCloud {
         _brainCloudComms->setOldStyleStatusMessageErrorCallback(in_enabled);
     }
 
+    void BrainCloudClient::setErrorCallbackOn202Status(bool in_isError)
+    {
+        _brainCloudComms->setErrorCallbackOn202Status(in_isError);
+    }
+
     int BrainCloudClient::getUploadLowTransferRateTimeout()
     {
         return _brainCloudComms->getUploadLowTransferRateTimeout();
@@ -412,6 +442,21 @@ namespace BrainCloud {
     void BrainCloudClient::setUploadLowTransferRateThreshold(int in_bytesPerSec)
     {
         _brainCloudComms->setUploadLowTransferRateThreshold(in_bytesPerSec);
+    }
+    
+    void BrainCloudClient::enableNetworkErrorMessageCaching(bool in_enabled)
+    {
+        _brainCloudComms->enableNetworkErrorMessageCaching(in_enabled);
+    }
+    
+    void BrainCloudClient::retryCachedMessages()
+    {
+        _brainCloudComms->retryCachedMessages();
+    }
+    
+    void BrainCloudClient::flushCachedMessages(bool in_sendApiErrorCallbacks)
+    {
+        _brainCloudComms->flushCachedMessages(in_sendApiErrorCallbacks);
     }
     
 	Json::Value BrainCloudClient::jsonStringToValue(const std::string& in_jsonString)

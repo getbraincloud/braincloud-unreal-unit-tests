@@ -2,10 +2,12 @@
 
 #include "BrainCloudTypes.h"
 
-#include "IServerCallback.h"
 #include "IEventCallback.h"
 #include "IFileUploadCallback.h"
+#include "IGlobalErrorCallback.h"
+#include "INetworkErrorCallback.h"
 #include "IRewardCallback.h"
+#include "IServerCallback.h"
 
 #include "ServerCall.h"
 #include "ServiceName.h"
@@ -64,8 +66,9 @@ namespace BrainCloud {
 		virtual void initialize(const char * serverURL, const char * gameId, const char * secretKey) = 0;
 		virtual void addToQueue(ServerCall *) = 0;
 
-		virtual void heartbeat() = 0;
+        virtual void sendHeartbeat() = 0;
 		virtual void resetCommunication() = 0;
+        virtual void shutdown() = 0;
 		virtual void runCallbacks() = 0;
 
         virtual void registerEventCallback(IEventCallback *in_eventCallback) = 0;
@@ -77,10 +80,20 @@ namespace BrainCloud {
         virtual void registerRewardCallback(IRewardCallback *in_rewardCallback) = 0;
         virtual void deregisterRewardCallback() = 0;
         
+        virtual void registerGlobalErrorCallback(IGlobalErrorCallback *in_globalErrorCallback) = 0;
+        virtual void deregisterGlobalErrorCallback() = 0;
+        
+        virtual void registerNetworkErrorCallback(INetworkErrorCallback * in_networkErrorCallback) = 0;
+        virtual void deregisterNetworkErrorCallback() = 0;
+        
         virtual void cancelUpload(const char * in_fileUploadId) = 0;
         virtual double getUploadProgress(const char * in_fileUploadId) = 0;
         virtual int64_t getUploadTotalBytesToTransfer(const char * in_fileUploadId) = 0;
         virtual int64_t getUploadBytesTransferred(const char * in_fileUploadId) = 0;
+       
+        virtual void enableNetworkErrorMessageCaching(bool in_enabled) = 0;
+        virtual void retryCachedMessages() = 0;
+        virtual void flushCachedMessages(bool in_sendApiErrorCallbacks) = 0;
         
         // implemented methods
         void enableLogging(bool shouldEnable);
@@ -101,6 +114,7 @@ namespace BrainCloud {
         void setAuthenticationPacketTimeout(int in_timeoutSecs);
         int getAuthenticationPacketTimeout();
         void setOldStyleStatusMessageErrorCallback(bool in_enabled);
+        void setErrorCallbackOn202Status(bool in_isError);
 
         int getUploadLowTransferRateTimeout();
         void setUploadLowTransferRateTimeout(int in_timeoutSecs);
@@ -125,9 +139,19 @@ namespace BrainCloud {
         bool _loggingEnabled;
         int _authenticationTimeoutMillis;
         bool _oldStyleStatusMessageErrorCallback;
+        bool _cacheMessagesOnNetworkError;
+        bool _errorCallbackOn202;
+        
+        /// This flag is set when _cacheMessagesOnNetworkError is true
+        /// and a network error occurs. It is reset when a call is made
+        /// to either retryCachedMessages or flushCachedMessages
+        bool _blockingQueue;
+
         IEventCallback *_eventCallback;
         IFileUploadCallback *_fileUploadCallback;
+        IGlobalErrorCallback * _globalErrorCallback;
         IRewardCallback *_rewardCallback;
+        INetworkErrorCallback *_networkErrorCallback;
         
         std::string _gameId;
         std::string _sessionId;

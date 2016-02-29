@@ -25,8 +25,8 @@ public:
         return(*this);
     }
 
-    std::string getName( ) const    { return(_name); }
-    std::string getValue( ) const   { return(_value); }
+    const std::string & getName( ) const    { return _name; }
+    const std::string & getValue( ) const   { return _value; }
 
     void        setValue( std::string const & = std::string() );
 

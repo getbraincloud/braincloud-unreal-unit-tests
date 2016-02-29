@@ -23,14 +23,14 @@ public:
     bool        authenticate( ) const       { return _authenticate; }
     bool        cacheResponse( ) const      { return _cacheResponse; }
     bool        followRedirects( ) const    { return _followRedirects; }
-    std::string getContentType( ) const     { return _contentType; }
-    std::string getData( ) const            { return _data; }
-    std::vector<URLRequestHeader>   getHeaders( ) const
+	const std::string & getContentType( ) const     { return _contentType; }
+	const std::string & getData( ) const            { return _data; }
+    const std::vector<URLRequestHeader> & getHeaders( ) const
                                             { return _requestHeaders; }
     int         getIdleTimeout( ) const     { return _idleTimeout; }
-    std::string getMethod( ) const          { return _method; }
-    std::string getUrl( ) const             { return _url; }
-    std::string getUserAgent( ) const       { return _userAgent; }
+    const std::string & getMethod( ) const  { return _method; }
+    const std::string & getUrl( ) const             { return _url; }
+    const std::string & getUserAgent( ) const       { return _userAgent; }
     bool        manageCookies( ) const      { return _manageCookies; }
     bool        useCache( ) const           { return _useCache; }
 

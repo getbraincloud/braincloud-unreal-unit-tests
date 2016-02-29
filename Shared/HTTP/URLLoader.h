@@ -1,46 +1,31 @@
-//
-//  URLLoader.h
-//  GameClientLib
-//
-
-
 #ifndef _URLLOADER_H_
 #define _URLLOADER_H_
-
 
 #include "URLLoaderClient.h"
 #include "URLRequest.h"
 
-
 class URLLoader {
 
 public:
-    // Constructors
-    URLLoader( URLLoaderClient * = NULL );
-    URLLoader( URLLoader const & );
+    URLLoader();
+    virtual ~URLLoader();
 
-    // Destructor
-    virtual ~URLLoader( );
+    virtual void        close( ) = 0;
+    virtual void        load( URLRequest const & ) = 0;
+    virtual void        load( URLRequest const * ) = 0;
+	virtual void	    setTimeout( int milliseconds ) = 0;
+    virtual bool        isDone() = 0;
 
-    // Methods which must be overwritten.
-    virtual void    close( ) = 0;
-    virtual void    load( URLRequest const & ) = 0;
-    virtual void    load( URLRequest const * ) = 0;
-	virtual void	setTimeout( int milliseconds ) = 0;
-
-    // Common methods.
-    URLLoaderClient     * getClient( )          { return _client; }
     URLRequest const    getRequest( ) const     { return _urlRequest; }
-    void    setClient( URLLoaderClient * c )    { _client = c; }
-    void    setRequest( URLRequest const & r)   { _urlRequest = r; }
+    URLResponse &       getResponse() { return _urlResponse; }
+    void                setRequest( URLRequest const & r)   { _urlRequest = r; }
+	void				setLoggingEnabled(bool in_enabled) { _loggingEnabled = in_enabled; }
 
 protected:
-
-private:
-	URLLoaderClient * _client;
-    URLRequest      _urlRequest;
-
-};  // end class
+    URLRequest          _urlRequest;
+    URLResponse         _urlResponse;
+	bool				_loggingEnabled;
+};
 
 
 #endif  // _URLLOADER_H_

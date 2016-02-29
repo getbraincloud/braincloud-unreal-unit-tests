@@ -154,6 +154,7 @@ namespace BrainCloud {
         static const OperationParam FriendServiceAuthenticationType;
         static const OperationParam FriendServiceEntityId;
         static const OperationParam FriendServiceExternalId;
+        static const OperationParam FriendServiceProfileId;
         static const OperationParam FriendServiceFriendId;
         static const OperationParam FriendServiceEntityType;
         static const OperationParam FriendServiceIncludeSummaryData;

@@ -31,66 +31,49 @@ long cURLLoader::_timeoutInterval = 0;
  *   - NOTE:  If a URLRequest is given, the object will try to contact the
  *            server immediately by calling the load() method.
  */
-cURLLoader::cURLLoader( URLLoaderClient * client )
-    : URLLoader(client)
-    , _threadRunning(false)
-{
-    memset(&_threadId, 0, sizeof(pthread_t));
-    memset(&_threadAttributes, 0, sizeof(_threadAttributes));
-}  // end URLLoader::URLLoader
 
-cURLLoader::cURLLoader( cURLLoader const & urlLoader )
-    : URLLoader(urlLoader), _threadRunning(false)
-{
-    memset(&_threadId, 0, sizeof(pthread_t));
-    memset(&_threadAttributes, 0, sizeof(_threadAttributes));
-}  // end URLLoader::URLLoader
-
-cURLLoader::cURLLoader( URLRequest const & urlRequest )
+cURLLoader::cURLLoader() 
     : _threadRunning(false)
 {
+#ifndef WIN32
+    _socket = -1;
+#else
+    _socket = INVALID_SOCKET;
+#endif
+
     memset(&_threadId, 0, sizeof(pthread_t));
     memset(&_threadAttributes, 0, sizeof(_threadAttributes));
-    load( urlRequest );
-}  // end cURLLoader::cURLLoader
+}
 
-cURLLoader::cURLLoader( URLRequest const * urlRequest )
-    : _threadRunning(false)
+cURLLoader::~cURLLoader( )
 {
-    memset(&_threadId, 0, sizeof(pthread_t));
-    memset(&_threadAttributes, 0, sizeof(_threadAttributes));
-    load( urlRequest );
-}  // end URLLoader::URLLoader
-
-
-/**
- * Destructor
- */
-cURLLoader::~cURLLoader( ) {
-
     close();
-
-}  // end cURLLoader::~cURLLoader
-
-
-/*
- * Public Methods
- */
-
+}
 
 /**
  * Close a currently running load operation, if in progress.
  */
-void cURLLoader::close() {
-
+void cURLLoader::close()
+{
     // We can stop loading the page by killing its thread.
-    if ( _threadRunning ) {
+    if (_threadRunning)
+    {
+        // close socket directly to kill the curl request more quickly
+#ifndef WIN32
+        if (_socket >= 0)  
+        {
+            ::close(_socket);
+        }
+#else
+        if (_socket != INVALID_SOCKET)
+        {
+            shutdown(_socket, SD_BOTH);
+            closesocket(_socket);
+        }
+#endif
         pthread_attr_destroy(&_threadAttributes);
-        _threadRunning = false;
-    }  // end if
-
-
-}  // end cURLLoader::close
+    }
+}
 
 
 /**
@@ -98,17 +81,16 @@ void cURLLoader::close() {
  *
  * @param urlRequest - HTTP Request
  */
-void cURLLoader::load( URLRequest const & urlRequest ) {
-
+void cURLLoader::load( URLRequest const & urlRequest )
+{
     // Assume the specified URL in the request is valid.
     setRequest(urlRequest);
 
-    if ( ! _initialized ) {
-        // Initialize libcurl before any threads are started.
+    if ( ! _initialized )
+    {
         curl_global_init(CURL_GLOBAL_ALL);
-
         _initialized = true;
-    }  // end if
+    }
     
     // load is sometimes called while prev thread is processing
     // so make sure to cleanup beforehand...
@@ -141,51 +123,46 @@ void cURLLoader::load( URLRequest const & urlRequest ) {
     } else {
         // Error
     }  // end if
+}
 
-
-}  // end cURLLoader::load
-
-
-/*
- * Protected Methods
- */
-
-
-/*
- * Private Methods
- */
+bool cURLLoader::isDone()
+{
+    return !_threadRunning;
+}
 
 
 /**
  * This is the writer call back function used by curl
  *
- * @param data - data received from the remote server
+ * @param toWrite - data received from the remote server
  * @param size - size of a character (?)
  * @param nmemb - number of characters
- * @param response - pointer to the object to receive the data
+ * @param data - pointer to the curlloader
  *
  * @return int - number of characters received (should equal size * nmemb)
  */
-size_t cURLLoader::parseData( char * data, size_t size, size_t nmemb,
-                             URLResponse * response ) {
-
+size_t cURLLoader::writeData(
+    char * toWrite,
+    size_t size,
+    size_t nmemb,
+    void * data)
+{
+    cURLLoader * loader = (cURLLoader*)data;
 
     // What we will return
     size_t result = 0;
 
     // Check for a valid response object.
-    if ( response != NULL ) {
+    if (loader != NULL) {
         // Append the data to the buffer
-        response->addData(std::string(data, size * nmemb));
+        loader->_urlResponse.addData(std::string(toWrite, size * nmemb));
 
         // How much did we write?
         result = size * nmemb;
-    }  // end if
-
-
+    }
 
     return result;
-}  // end cURLLoader::parseData
+}
 
 
 /**
@@ -198,44 +175,49 @@ size_t cURLLoader::parseData( char * data, size_t size, size_t nmemb,
  * @param nmemb - number of characters
  * @param response - pointer to the object to receive the response
  */
-size_t cURLLoader::parseHeader( char * line, size_t size, size_t nmemb,
-                               URLResponse * response ) {
-
-
+size_t cURLLoader::writeHeader(
+    char * line,
+    size_t size,
+    size_t nmemb,
+    void * data )
+{
+    cURLLoader * loader = (cURLLoader*)data;
     size_t num_processed = 0;   // Number of bytes processed for this header
                                 // -1 means terminate URL request with an error
 
     // Check for a valid response object.
-    if ( response != NULL ) {
+    if (loader != NULL)
+    {
         // Parse the header line for Header: Value
         std::string headerLine(line, size * nmemb);
         std::string::size_type colon = headerLine.find(':');
 
         // Make sure the line contains a colon.
-        if ( colon != std::string::npos ) {
+        if ( colon != std::string::npos )
+        {
             // The header name consists of everything up to the colon.
             URLRequestHeader header(headerLine.substr(0, colon));
 
             // The value starts at the first non-space after the colon.
-            for ( colon += 1; colon < headerLine.length(); colon += 1 ) {
-                if ( ! isspace(headerLine[colon]) ) {
+            for ( colon += 1; colon < headerLine.length(); colon += 1 )
+            {
+                if ( ! isspace(headerLine[colon]) )
+                {
                     header.setValue(headerLine.substr(colon));
                     break;
-                }  // end if
-            }  // end for
+                }
+            }
 
             // Add the new header to the response.
-            response->addHeader(header);
-        }  // end if
+            loader->_urlResponse.addHeader(header);
+        }
 
         // We have processed the entire header message.
         num_processed = size * nmemb;
-    }  // end if
-
-
+    }
 
     return num_processed;
-}  // end cURLLoader::parseHeader
+}
 
 
 /**
@@ -244,31 +226,22 @@ size_t cURLLoader::parseHeader( char * line, size_t size, size_t nmemb,
  *
  * @param urlLoader - pointer to the object which is loading the web page
  */
-void * cURLLoader::loadThread( void * urlLoader ) {
-
-
+void * cURLLoader::loadThread( void * urlLoader )
+{
     // This is the starting point of a new thread.
     // A pointer to the object should have been passed as urlLoader.
     // Verify the pointer.
-    if ( urlLoader != NULL ) {
+    if ( urlLoader != NULL )
+    {
         cURLLoader * loader = reinterpret_cast<cURLLoader *>(urlLoader);
-
-        // We now have a pointer to the actual object loading the remote URL.
-        // Make the request.
         loadThreadCurl( loader );
-    }  // end if
-
-
+    }
 
     return NULL;
-}  // end cURLLoader::loadThread
-
-#include <stdio.h>
+}
 
 
-static
-void dump(const char *text,
-          FILE *stream, unsigned char *ptr, size_t size)
+static void dump(const char *text, FILE *stream, unsigned char *ptr, size_t size)
 {
     size_t i;
     size_t c;
@@ -297,10 +270,7 @@ void dump(const char *text,
 }
 
 
-static
-int my_trace(CURL *handle, curl_infotype type,
-             char *data, size_t size,
-             void *userp)
+static int my_trace(CURL *handle, curl_infotype type, char *data, size_t size, void *userp)
 {
     const char *text;
     (void)handle; /* prevent compiler warning */
@@ -335,30 +305,47 @@ int my_trace(CURL *handle, curl_infotype type,
     return 0;
 }
 
+curl_socket_t cURLLoader::openSocket(void *data, curlsocktype purpose, struct curl_sockaddr *addr)
+{
+    cURLLoader * loader = (cURLLoader*) data;
+    loader->_socket = socket(addr->family, addr->socktype, addr->protocol);
+    return loader->_socket;
+}
+
+/*
+size_t abort_payload(void *ptr, size_t size, size_t nmemb, SOCKET *curl_socket) {
+    SOCKET l_socket = INVALID_SOCKET;
+    swap(l_socket, *curl_socket);
+    if (l_socket != INVALID_SOCKET) {
+        shutdown(l_socket, SD_BOTH);
+        closesocket(l_socket);
+    }
+    return CURL_READFUNC_ABORT;
+}
+*/
 
 /**
  * Use libCurl to load up the web page.
- *
  * @param loader - pointer to the object which is loading the web page
  */
-void cURLLoader::loadThreadCurl( cURLLoader * loader ) {
+void cURLLoader::loadThreadCurl( cURLLoader * loader )
+{
     CURL * curl = curl_easy_init();
 
-
-    if ( curl != NULL ) {
+    if ( curl != NULL )
+    {
         CURLcode rc = CURLE_OK;
         char curlError[CURL_ERROR_SIZE];
 
         // Use an error buffer to store the description of any errors.
         curl_easy_setopt(curl, CURLOPT_ERRORBUFFER, curlError);
 
-
         // Set the headers.
         struct curl_slist * headers = NULL;
 
-
         std::vector<URLRequestHeader> h = loader->getRequest().getHeaders();
-        for ( std::string::size_type i = 0; i < h.size(); i ++ ) {
+        for ( std::string::size_type i = 0; i < h.size(); i ++ )
+        {
             std::string headerLine = h[i].getName();
             headerLine.append(": ");
             headerLine.append(h[i].getValue());
@@ -371,28 +358,26 @@ void cURLLoader::loadThreadCurl( cURLLoader * loader ) {
         contentType.append(loader->getRequest().getContentType());
         headers = curl_slist_append(headers, contentType.c_str());
 
-
-
         // User Agent (special header)
-        if ( loader->getRequest().getUserAgent().length() > 0 ) {
+        if ( loader->getRequest().getUserAgent().length() > 0 )
+        {
             std::string userAgent = "User-Agent: ";
             userAgent.append(loader->getRequest().getUserAgent());
             headers = curl_slist_append(headers, userAgent.c_str());
-
-
-        }  // end if
+        }
 
         curl_easy_setopt(curl, CURLOPT_HTTPHEADER, headers);
 
-        URLResponse response;
+        curl_easy_setopt(curl, CURLOPT_OPENSOCKETFUNCTION, openSocket);
+        curl_easy_setopt(curl, CURLOPT_OPENSOCKETDATA, loader);
 
         // Set up the object to store the content of the response.
-        curl_easy_setopt(curl, CURLOPT_WRITEDATA, &response);
-        curl_easy_setopt(curl, CURLOPT_WRITEFUNCTION, parseData);
+        curl_easy_setopt(curl, CURLOPT_WRITEDATA, loader);
+        curl_easy_setopt(curl, CURLOPT_WRITEFUNCTION, writeData);
 
         // Set up the object to store the response headers.
-        curl_easy_setopt(curl, CURLOPT_WRITEHEADER, &response);
-        curl_easy_setopt(curl, CURLOPT_HEADERFUNCTION, parseHeader);
+        curl_easy_setopt(curl, CURLOPT_WRITEHEADER, loader);
+        curl_easy_setopt(curl, CURLOPT_HEADERFUNCTION, writeHeader);
 		
 		curl_easy_setopt(curl, CURLOPT_SSL_VERIFYPEER, (long)0);
 		curl_easy_setopt(curl, CURLOPT_SSL_VERIFYHOST, (long)0);
@@ -408,96 +393,97 @@ void cURLLoader::loadThreadCurl( cURLLoader * loader ) {
 		}
 		
         // Determine the type of request being made.
-        if ( loader->getRequest().getMethod() == URLRequestMethod::GET ) {
-
-
+        if ( loader->getRequest().getMethod() == URLRequestMethod::GET )
+        {
             std::string url = loader->getRequest().getUrl();
             std::string data = loader->getRequest().getData();
 
-            if ( data.length() > 0 ) {
+            if ( data.length() > 0 )
+            {
                 // Append the request data to the end of the URL.
                 url.append("?");
                 url.append(data);
-            }  // end if
+            }
 
             // Set the URL for the request.
             curl_easy_setopt(curl, CURLOPT_URL, url.c_str());
 
-
             rc = curl_easy_perform(curl);
-        } else if ( loader->getRequest().getMethod() ==
-                                                    URLRequestMethod::POST ) {
-
-
+        }
+        else if ( loader->getRequest().getMethod() == URLRequestMethod::POST )
+        {
             // Set the base URL for the request.
-            curl_easy_setopt(curl, CURLOPT_URL,
-                             loader->getRequest().getUrl().c_str());
-
+            curl_easy_setopt(curl, CURLOPT_URL, loader->getRequest().getUrl().c_str());
 
             // Create all of the form data.
             curl_easy_setopt(curl, CURLOPT_POST, 1);
-            curl_easy_setopt(curl, CURLOPT_POSTFIELDSIZE,
-                             loader->getRequest().getData().length());
-
-            curl_easy_setopt(curl, CURLOPT_COPYPOSTFIELDS,
-                             loader->getRequest().getData().c_str());
-
+            curl_easy_setopt(curl, CURLOPT_POSTFIELDSIZE, loader->getRequest().getData().length());
+            curl_easy_setopt(curl, CURLOPT_COPYPOSTFIELDS, loader->getRequest().getData().c_str());
 
             rc = curl_easy_perform(curl);
-        } else if ( loader->getRequest().getMethod() == URLRequestMethod::PUT )
+        }
+        else if ( loader->getRequest().getMethod() == URLRequestMethod::PUT )
         {
-
-
             // Set the base URL for the request.
-            curl_easy_setopt(curl, CURLOPT_URL,
-                             loader->getRequest().getUrl().c_str());
-
+            curl_easy_setopt(curl, CURLOPT_URL, loader->getRequest().getUrl().c_str());
 
             // Create all of the form data.
             curl_easy_setopt(curl, CURLOPT_UPLOAD, 1);
-            curl_easy_setopt(curl, CURLOPT_POSTFIELDSIZE,
-                             loader->getRequest().getData().length());
-
-            curl_easy_setopt(curl, CURLOPT_COPYPOSTFIELDS,
-                             loader->getRequest().getData().c_str());
-
+            curl_easy_setopt(curl, CURLOPT_POSTFIELDSIZE, loader->getRequest().getData().length());
+            curl_easy_setopt(curl, CURLOPT_COPYPOSTFIELDS, loader->getRequest().getData().c_str());
 
             rc = curl_easy_perform(curl);
-        } else {
+        }
+        else
+        {
             // Method type not supported.
             rc = CURLE_FAILED_INIT;
+        }
 
 
-        }  // end if
-
-        // Get the HTTP response status code.
-		if ( rc == CURLE_OK ) {
+        if (rc == CURLE_ABORTED_BY_CALLBACK)
+        {
+            // aborted by caller
+            loader->_urlResponse.setStatusCode(HTTP_CUSTOM);
+            loader->_urlResponse.setReasonPhrase(curlError);
+        }
+		else if (rc == CURLE_OK)
+        {
             long statusCode;
             curl_easy_getinfo(curl, CURLINFO_RESPONSE_CODE, &statusCode);
-            response.setStatusCode(static_cast<unsigned short>(statusCode));
-        } else if ( rc == CURLE_OPERATION_TIMEDOUT ) {
-        	response.setStatusCode(HTTP_CUSTOM/*408*/);
-        	response.setReasonPhrase("Operation timed out");
+            loader->_urlResponse.setStatusCode(static_cast<unsigned short>(statusCode));
+        }
+        else if (rc == CURLE_OPERATION_TIMEDOUT)
+        {
+            loader->_urlResponse.setStatusCode(HTTP_CUSTOM/*408*/);
+            loader->_urlResponse.setReasonPhrase("Operation timed out");
 		}
-        else {
-            response.setStatusCode(HTTP_CUSTOM);
-            response.setReasonPhrase(curlError);
+        else
+        {
+            loader->_urlResponse.setStatusCode(HTTP_CUSTOM);
+            loader->_urlResponse.setReasonPhrase(curlError);
         }
 
         // Clean up memory.
-        if ( headers != NULL ) curl_slist_free_all(headers);
+        if (headers != NULL)
+        {
+            curl_slist_free_all(headers);
+        }
         curl_easy_cleanup(curl);
 
         // We're done.  Fire the appropriate event.
-        if ( loader->getClient() != NULL ) {
-			loader->getClient()->handleResult(response);
-        }  // end if
-    } else {
-        if ( loader->getClient() != NULL ) {
-            URLResponse response;
-            response.setStatusCode(503);
-            response.setReasonPhrase("cURL Out of Memory");
-            loader->getClient()->handleError(response);
-        }  // end if
-    }  // end if
-}  // end cURLLoader::loadThreadCurl
+        /*
+        if (loader->getClient() != NULL)
+        {
+            loader->getClient()->handleResult(loader->_urlResponse);
+        }*/
+    }
+    else
+    {
+        URLResponse response;
+        response.setStatusCode(503);
+        response.setReasonPhrase("cURL Out of Memory");
+        //loader->getClient()->handleError(response);
+    }
+    loader->_threadRunning = false;
+}

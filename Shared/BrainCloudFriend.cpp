@@ -26,6 +26,16 @@ namespace BrainCloud {
         ServerCall * sc = new ServerCall(ServiceName::Friend, ServiceOperation::GetFriendProfileInfoForExternalId, message, in_callback);
         BrainCloudClient::getInstance()->getBrainCloudComms()->addToQueue(sc);
     }
+
+    void BrainCloudFriend::getExternalIdForProfileId(const char * in_profileId, const char * in_authenticationType, IServerCallback * in_callback)
+    {
+        Json::Value message;
+        message[OperationParam::FriendServiceProfileId.getValue()] = in_profileId;
+        message[OperationParam::FriendServiceAuthenticationType.getValue()] = in_authenticationType;
+
+        ServerCall * sc = new ServerCall(ServiceName::Friend, ServiceOperation::GetExternalIdForProfileId, message, in_callback);
+        BrainCloudClient::getInstance()->getBrainCloudComms()->addToQueue(sc);
+    }
     
 	void BrainCloudFriend::readFriendEntity(const char* in_entityId, const char*  in_friendId, IServerCallback * in_callback)
 	{

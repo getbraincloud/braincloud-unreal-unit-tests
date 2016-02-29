@@ -319,6 +319,7 @@
 		D84A72811C73755D00291D06 /* libcrypto.a in Frameworks */ = {isa = PBXBuildFile; fileRef = D84A727F1C73755D00291D06 /* libcrypto.a */; };
 		D84A72821C73755D00291D06 /* libssl.a in Frameworks */ = {isa = PBXBuildFile; fileRef = D84A72801C73755D00291D06 /* libssl.a */; };
 		D84A72841C73756300291D06 /* libcurl_Mac.a in Frameworks */ = {isa = PBXBuildFile; fileRef = D84A72831C73756300291D06 /* libcurl_Mac.a */; };
+		DFCAF72A1C84B927006CB8EA /* TimeUtil.cpp in Sources */ = {isa = PBXBuildFile; fileRef = DFCAF7281C84B927006CB8EA /* TimeUtil.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -554,6 +555,10 @@
 		D84A727F1C73755D00291D06 /* libcrypto.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libcrypto.a; sourceTree = "<group>"; };
 		D84A72801C73755D00291D06 /* libssl.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libssl.a; sourceTree = "<group>"; };
 		D84A72831C73756300291D06 /* libcurl_Mac.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libcurl_Mac.a; sourceTree = "<group>"; };
+		DFCAF7261C84B91B006CB8EA /* IGlobalErrorCallback.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IGlobalErrorCallback.h; sourceTree = "<group>"; };
+		DFCAF7271C84B91B006CB8EA /* INetworkErrorCallback.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = INetworkErrorCallback.h; sourceTree = "<group>"; };
+		DFCAF7281C84B927006CB8EA /* TimeUtil.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = TimeUtil.cpp; sourceTree = "<group>"; };
+		DFCAF7291C84B927006CB8EA /* TimeUtil.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TimeUtil.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -701,6 +706,8 @@
 				D84A70F11C73711A00291D06 /* Timer.h */,
 				D84A70F21C73711A00291D06 /* TimerCallback.cpp */,
 				D84A70F31C73711A00291D06 /* TimerCallback.h */,
+				DFCAF7281C84B927006CB8EA /* TimeUtil.cpp */,
+				DFCAF7291C84B927006CB8EA /* TimeUtil.h */,
 			);
 			name = Source;
 			sourceTree = "<group>";
@@ -708,6 +715,8 @@
 		D84A70861C7370B900291D06 /* ApiHeaders */ = {
 			isa = PBXGroup;
 			children = (
+				DFCAF7261C84B91B006CB8EA /* IGlobalErrorCallback.h */,
+				DFCAF7271C84B91B006CB8EA /* INetworkErrorCallback.h */,
 				D84A70321C7370AA00291D06 /* BrainCloudAsyncMatch.h */,
 				D84A70331C7370AA00291D06 /* BrainCloudAuthentication.h */,
 				D84A70341C7370AA00291D06 /* BrainCloudClient.h */,
@@ -1289,6 +1298,7 @@
 				D84A71961C7371B400291D06 /* cURLFileUploader.cpp in Sources */,
 				D84A71731C73711A00291D06 /* Timer.cpp in Sources */,
 				D84A71071C73711A00291D06 /* BrainCloudEvent.cpp in Sources */,
+				DFCAF72A1C84B927006CB8EA /* TimeUtil.cpp in Sources */,
 				D84A71561C73711A00291D06 /* JsonUtil.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

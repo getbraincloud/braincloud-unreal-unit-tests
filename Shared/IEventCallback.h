@@ -9,6 +9,8 @@
 #ifndef _IEVENTCALLBACK_H_
 #define _IEVENTCALLBACK_H_
 
+#include <string>
+
 namespace BrainCloud {
     
     class IEventCallback

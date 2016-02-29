@@ -21,11 +21,11 @@ public:
 
     void        addData( std::string const & );
     void        addHeader( URLRequestHeader const & );
-    std::string getContentType( ) const     { return _contentType; }
-    std::string getData( ) const            { return _data; }
-    std::vector<URLRequestHeader>   getHeaders( ) const
+    const std::string & getContentType( ) const     { return _contentType; }
+    const std::string & getData( ) const            { return _data; }
+    const std::vector<URLRequestHeader> & getHeaders( ) const
                                             { return _responseHeaders; }
-    std::string getReasonPhrase( ) const    { return _reasonPhrase; }
+    const std::string & getReasonPhrase( ) const    { return _reasonPhrase; }
     unsigned short  getStatusCode( ) const  { return _statusCode; }
 
     void        setContentType( std::string const & );

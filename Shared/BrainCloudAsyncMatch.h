@@ -38,7 +38,6 @@ namespace BrainCloud {
          *
          * @param in_pushNotificationMessage Optional push notification message to send to the other party.
          *  Refer to the Push Notification functions for the syntax required.
-         * @param in_matchId Optional match identifier. An id will be generated if not provided.
          * @param in_callback Optional instance of IServerCallback to call when the server response is received.
          *
          * @returns The JSON returned in the callback is as follows:
@@ -71,6 +70,12 @@ namespace BrainCloud {
         void createMatch(
             const char * in_jsonOpponentIds,
             const char * in_pushNotificationMessage = NULL,
+            IServerCallback * in_callback = NULL );
+        
+        // Removal after May 10 2016 - Use method without in_matchId instead
+        DEPRECATED void createMatch(
+            const char * in_jsonOpponentIds,
+            const char * in_pushNotificationMessage = NULL,
             const char * in_matchId = NULL,
             IServerCallback * in_callback = NULL );
     
@@ -101,7 +106,6 @@ namespace BrainCloud {
          * @param in_jsonMatchState    JSON string blob provided by the caller
          * @param in_pushNotificationMessage Optional push notification message to send to the other party.
          * Refer to the Push Notification functions for the syntax required.
-         * @param in_matchId Optional match identifier. An id will be generated if not provided.
          * @param in_nextPlayer Optionally, force the next player player to be a specific player
          * @param in_jsonSummary Optional JSON string defining what the other player will see as a summary of the game when listing their games
          * @param in_callback Optional instance of IServerCallback to call when the server response is received.
@@ -134,6 +138,15 @@ namespace BrainCloud {
          * }
          */
         void createMatchWithInitialTurn(
+            const char * in_jsonOpponentIds,
+            const char * in_jsonMatchState,
+            const char * in_pushNotificationMessage = NULL,
+            const char * in_nextPlayer = NULL,
+            const char * in_jsonSummary = NULL,
+            IServerCallback * in_callback = NULL);
+        
+        // Removal after May 10 2016 - Use method without in_matchId instead
+        DEPRECATED void createMatchWithInitialTurn(
             const char * in_jsonOpponentIds,
             const char * in_jsonMatchState,
             const char * in_pushNotificationMessage = NULL,

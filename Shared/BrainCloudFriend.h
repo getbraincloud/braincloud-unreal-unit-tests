@@ -34,6 +34,22 @@ namespace BrainCloud {
          * }
          */
         void getFriendProfileInfoForExternalId(const char *in_externalId, const char *in_authenticationType, IServerCallback * in_callback = NULL);
+
+        /**
+         * Retrieves the external ID for the specified user profile ID on the specified social platform.
+         *
+         * @param in_profileId Profile (player) ID.
+         * @param in_authenticationType Associated authentication type.
+         *
+         * @return The JSON returned in the callback
+         * {
+         *    "status": 200,
+         *    "data": {
+         *        "externalId": "19e1c0cf-9a2d-4d5c-9a71-1b0f6asdfb4b"
+         *    }
+         * }
+         */
+        void getExternalIdForProfileId(const char * in_profileId, const char * in_authenticationType, IServerCallback * in_callback = NULL);
         
 		/**
 		* Returns a particular entity of a particular friend.

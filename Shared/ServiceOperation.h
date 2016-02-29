@@ -54,6 +54,7 @@ namespace BrainCloud {
 		static const ServiceOperation UpdateIncrementToMaximum;
 		
 		static const ServiceOperation GetFriendProfileInfoForExternalId;
+        static const ServiceOperation GetExternalIdForProfileId;
 		static const ServiceOperation ReadFriendEntity;
 		static const ServiceOperation ReadFriendsEntities;
 		static const ServiceOperation ReadFriendsWithApplication;

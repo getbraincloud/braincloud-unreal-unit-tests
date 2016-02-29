@@ -9,6 +9,8 @@
 #ifndef _IFILEUPLOADCALLBACK_H_
 #define _IFILEUPLOADCALLBACK_H_
 
+#include <string>
+
 namespace BrainCloud {
     class IFileUploadCallback
     {

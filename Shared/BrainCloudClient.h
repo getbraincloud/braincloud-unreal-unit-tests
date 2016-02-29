@@ -8,12 +8,15 @@
 #define _BRAINCLOUDCLIENT_H_
 
 #ifdef WIN32
+#include <WinSock2.h>
 #include <windows.h>
 #endif
 
 #include <string>
 #include "IEventCallback.h"
 #include "IFileUploadCallback.h"
+#include "IGlobalErrorCallback.h"
+#include "INetworkErrorCallback.h"
 #include "IRewardCallback.h"
 #include "IServerCallback.h"
 #include "reason_codes.h"
@@ -70,11 +73,6 @@ namespace BrainCloud {
      * The BrainCloudClient will have only one HTTP connection to a game server at a
      * time (to make sure that data doesn't arrive out of order, and to make
      * recovery of communication problems more simple).
-     *
-     * TODO: This protocol could be compressed on the client, and uncompressed
-     *       on the server to save bandwidth - also look at encryption.
-     * TODO: The error handling and return codes are not yet established.
-     * TODO: Notification interface (will only be needed for iOS clients).
      */
     class BrainCloudClient {
 
@@ -82,10 +80,7 @@ namespace BrainCloud {
 
         /** @name Public constants */
         //@{
-		static bool SINGLE_THREADED;
-
 		static const char * DEVICE_TYPE_IOS;
-
         //@}
 
         // ---------------------------------------------------------------------
@@ -138,7 +133,7 @@ namespace BrainCloud {
          * @param in_gameVersion The game version
          */
         void initialize(const char * in_serverURL, const char * in_secretKey, const char * in_gameId, const char * in_gameVersion);
-        
+
         /**
         * Initialize - initializes the identity service with the saved
         * anonymous installation id and most recently used profile id
@@ -147,18 +142,18 @@ namespace BrainCloud {
         * @param in_anonymousId  The anonymous installation id that was generated for this device
         */
 		void initializeIdentity(const char * in_profileId, const char * in_anonymousId);
-		
+
 		/**
 		 * Return a reference to the game client manager.
 		 * Not meant to be called by external clients, just for internal testing and use.
 		 */
 		IBrainCloudComms * getBrainCloudComms() const { return _brainCloudComms; }
-		
+
 		/**
 		 * Run callbacks, to be called once per frame from your main thread
 		 */
 		void runCallbacks();
-        
+
         /**
          * Sets a callback handler for any out of band event messages that come from
          * brainCloud.
@@ -179,12 +174,12 @@ namespace BrainCloud {
          *	}
          */
         void registerEventCallback(IEventCallback *in_eventCallback);
-        
+
         /**
          * Deregisters the event callback
          */
         void deregisterEventCallback();
-        
+
         /**
          * Sets a reward handler for any api call results that return rewards.
          *
@@ -192,35 +187,61 @@ namespace BrainCloud {
          * @see The brainCloud apidocs site for more information on the return JSON
          */
         void registerRewardCallback(IRewardCallback * in_rewardCallback);
-        
+
         /**
          * Deregisters the reward callback
          */
         void deregisterRewardCallback();
-        
+
         /**
          * Registers a file upload callback handler to listen for status updates on uploads
-         * 
+         *
          * @param in_fileUploadCallback The file upload callback handler.
          */
         void registerFileUploadCallback(IFileUploadCallback * in_fileUploadCallback);
-        
+
         /**
          * Deregisters the file upload callback
          */
         void deregisterFileUploadCallback();
+
+        /**
+         * Registers a callback that is invoked for all errors generated
+         *
+         * @param in_globalErrorCallback The global error callback handler.
+         */
+        void registerGlobalErrorCallback(IGlobalErrorCallback * in_globalErrorCallback);
+
+        /**
+         * Deregisters the global error callback
+         */
+        void deregisterGlobalErrorCallback();
+
+        /**
+         * Registers a callback that is invoked for network errors.
+         * Note this is only called if enableNetworkErrorMessageCaching
+         * has been set to true.
+         *
+         * @param in_networkErrorCallback The network error callback handler.
+         */
+        void registerNetworkErrorCallback(INetworkErrorCallback * in_networkErrorCallback);
+        
+        /**
+         * Deregisters the network error callback
+         */
+        void deregisterNetworkErrorCallback();
         
         /**
          * Set to true to enable logging packets to std::out
          */
         void enableLogging(bool shouldEnable);
-		
+
 		/**
          * Send an empty message to the server, which essentially polls the
          * server for any new events to send to this client.
          */
 		void heartbeat( );
-		
+
 		/**
          * Sends a service request message to the server. This will most likely be placed
          * in a queue...
@@ -228,22 +249,33 @@ namespace BrainCloud {
          * @param in_serviceMessage
          */
 		void sendRequest(ServerCall * in_serviceMessage);
-		
+
 		/**
          * Clears any pending messages from communication library.
          */
 		void resetCommunication( );
 
         /**
+         * Shuts the brainCloud client down.
+         */
+        void shutdown();
+
+        /**
          * Returns whether the client is authenticated with the brainCloud server.
          * @return True if authenticated, false otherwise.
          */
         bool isAuthenticated();
-        
+
+        /**
+         * Returns whether the client is initialized.
+         * @return True if initialized, false otherwise.
+         */
+        bool isInitialized();
+
         /**
          * If true, tells the comms library to immediately retry a packet
-         * when an error is received. 
-         * 
+         * when an error is received.
+         *
          * If false, comms will wait until the retry timeout is hit before
          * resending a packet. Although slower, this allows a bit of time
          * before discarding the packet in case the user is on a lossy
@@ -252,7 +284,7 @@ namespace BrainCloud {
          * Defaults to false
          */
         void setImmediateRetryOnError(bool value);
-        
+
 
         // ---------------------------------------------------------------------
         //  Getter methods
@@ -260,14 +292,14 @@ namespace BrainCloud {
 
         /** @name Getter methods */
         //@{
-        
+
         /**
          * Returns the sessionId or empty string if no session present.
          *
          * @returns The sessionId or empty string if no session present.
          */
         const char * getSessionId( ) const;
-		
+
 		BrainCloudPlayerStatistics * getPlayerStatisticsService() { return _playerStatisticsService; }
 		BrainCloudGlobalStatistics * getGlobalStatisticsService() { return _globalStatisticsService; }
 		BrainCloudIdentity * getIdentityService() { return _identityService; }
@@ -296,7 +328,7 @@ namespace BrainCloud {
         BrainCloudDataStream * getDataStreamService() { return _dataStreamService; }
         BrainCloudProfanity * getProfanityService() { return _profanityService; }
         BrainCloudFile * getFileService() { return _fileService; }
-		
+
 		const std::string & getGameId() const
         {
             if (_brainCloudComms != NULL)
@@ -313,7 +345,7 @@ namespace BrainCloud {
 		const std::string& getCountryCode() const { return _countryCode; }
 		const std::string& getLanguageCode() const { return _languageCode; }
 		float getTimezoneOffset() { return _timezoneOffset;  }
-        
+
 #ifdef __ANDROID__
         // we provide setters for Android as these values need to come from
         // the java side
@@ -343,7 +375,7 @@ namespace BrainCloud {
          *                                 the authenticate call.
          * @return true if user is authenticated, false otherwise
          */
-		bool    setCredentials( const Json::Value& in_jsonAuthenticationResponse );
+		bool setCredentials( const Json::Value& in_jsonAuthenticationResponse );
 
         /**
          * Set the credentials for communication after authentication has
@@ -364,30 +396,32 @@ namespace BrainCloud {
          *
          * @param in_serverUrl - the server event callback handler
          */
-        void    setServerUrl( const char * in_serverUrl);
+        void setServerUrl( const char * in_serverUrl);
 
         /**
          * Used for setting authentication session info - Not currently used,
          * and you probably won't need to call this directly (but we're keeping
          * it public just in case...)
-		 
+
 		 *@param in_id - the session id
          */
-        void    setSessionId( const char * in_id);
+        void setSessionId( const char * in_id);
 
 		/**
-		 * set an interval in ms for which the BrainCloud will contact the server
+		 * Deprecated - Removal after May 10 2016
+         *
+         * set an interval in ms for which the BrainCloud will contact the server
 		 * and receive any pending events
 		 *
 		 * @param in_intervalInMilliseconds The time between heartbeats in milliseconds
 		 */
-		void	setHeartbeatInterval(int in_intervalInMilliseconds);
-        
+		DEPRECATED void	setHeartbeatInterval(int in_intervalInMilliseconds);
+
         /**
          * Returns the list of packet timeouts.
          */
         const std::vector<int> & getPacketTimeouts();
-        
+
         /**
          * Sets the packet timeouts using a list of integers that
          * represent timeout values in seconds for each packet retry. The
@@ -405,12 +439,12 @@ namespace BrainCloud {
          * @param in_timeouts A vector of packet timeouts.
          */
         void setPacketTimeouts(const std::vector<int> & in_packetTimeouts);
-        
+
         /**
          * Sets the packet timeouts back to the default ie {10, 10, 10}
          */
         void setPacketTimeoutsToDefault();
-        
+
         /**
          * Gets the authentication packet timeout which is tracked separately
          * from all other packets. Note that authentication packets are never
@@ -421,7 +455,7 @@ namespace BrainCloud {
          * @return The timeout in seconds
          */
         int getAuthenticationPacketTimeout();
-        
+
         /**
          * Sets the authentication packet timeout which is tracked separately
          * from all other packets. Note that authentication packets are never
@@ -432,7 +466,7 @@ namespace BrainCloud {
          * @param in_timeoutSecs The timeout in seconds
          */
         void setAuthenticationPacketTimeout(int in_timeoutSecs);
-        
+
         /**
          * Sets the error callback to return the status message instead of the
          * error json string. This flag is used to conform to pre-2.17 client
@@ -441,14 +475,23 @@ namespace BrainCloud {
          * @param in_enabled If set to true, enable
          */
         void setOldStyleStatusMessageErrorCallback(bool in_enabled);
-        
+
+        /**
+        * Sets whether the error callback is triggered when a 202 status
+        * is received from the server. By default this is true and should
+        * only be set to false for backward compatibility.
+        *
+        * @param in_isError If set to true, 202 is treated as an error
+        */
+        void setErrorCallbackOn202Status(bool in_isError);
+
         /**
          * Returns the low transfer rate timeout in secs
          *
          * @returns The low transfer rate timeout in secs
          */
         int getUploadLowTransferRateTimeout();
-        
+
         /**
          * Sets the timeout in seconds of a low speed upload
          * (ie transfer rate which is underneath the low transfer rate threshold).
@@ -458,14 +501,14 @@ namespace BrainCloud {
          * @param in_timeoutSecs The timeout in secs
          */
         void setUploadLowTransferRateTimeout(int in_timeoutSecs);
-        
+
         /**
          * Returns the low transfer rate threshold in bytes/sec
-         * 
+         *
          * @returns The low transfer rate threshold in bytes/sec
          */
         int getUploadLowTransferRateThreshold();
-        
+
         /**
          * Sets the low transfer rate threshold of an upload in bytes/sec.
          * If the transfer rate dips below the given threshold longer
@@ -478,6 +521,48 @@ namespace BrainCloud {
          */
         void setUploadLowTransferRateThreshold(int in_bytesPerSec);
         
+        /**
+         * Enables the message caching upon network error, which is disabled by default.
+         * Once enabled, if a client side network error is encountered
+         * (i.e. brainCloud server is unreachable presumably due to the client
+         * network being down) the sdk will do the following:
+         *
+         * 1 - cache the currently queued messages to brainCloud
+         * 2 - call the network error callback
+         * 3 - then expect the app to call either:
+         *     a) retryCachedMessages() to retry sending to brainCloud
+         *     b) flushCachedMessages() to dump all messages in the queue.
+         *
+         * Between steps 2 & 3, the app can prompt the user to retry connecting
+         * to brainCloud to determine whether to follow path 3a or 3b.
+         *
+         * Note that if path 3a is followed, and another network error is encountered,
+         * the process will begin all over again from step 1.
+         *
+         * WARNING - the brainCloud sdk will cache *all* api calls sent
+         * when a network error is encountered if this mechanism is enabled.
+         * This effectively freezes all communication with brainCloud.
+         * Apps must call either retryCachedMessages() or flushCachedMessages()
+         * for the brainCloud SDK to resume sending messages.
+         * resetCommunication() will also clear the message cache.
+         *
+         * @param in_enabled True if message should be cached on timeout
+         */
+        void enableNetworkErrorMessageCaching(bool in_enabled);
+        
+        /** Attempts to resend any cached messages. If no messages are in the cache,
+         * this method does nothing.
+         */
+        void retryCachedMessages();
+        
+        /** Flushs the cached messages to resume api call processing. This will dump
+         * all of the cached messages in the queue.
+         * @param in_sendApiErrorCallbacks If set to true API error callbacks will
+         * be called for every cached message with statusCode CLIENT_NETWORK_ERROR
+         * and reasonCode CLIENT_NETWORK_ERROR_TIMEOUT.
+         */
+        void flushCachedMessages(bool in_sendApiErrorCallbacks);
+
         //@}
 
 
@@ -516,9 +601,9 @@ namespace BrainCloud {
         BrainCloudDataStream * _dataStreamService;
         BrainCloudProfanity * _profanityService;
         BrainCloudFile * _fileService;
-		
+
 		static std::string s_brainCloudClientVersion;
-		
+
 		std::string _releasePlatform;
 		std::string _gameVersion;
 

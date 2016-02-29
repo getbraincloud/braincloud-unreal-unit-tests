@@ -11,11 +11,10 @@
 #include <vector>
 #include <list>
 #include <queue>
+#include <pthread.h>
 
 #include "json/json.h"
-#include "Timer.h"
 #include "IBrainCloudComms.h"
-#include "TimerCallback.h"
 #include "IServerCallback.h"
 #include "ServerCall.h"
 #include "BrainCloudClient.h"
@@ -24,12 +23,11 @@
 #include "HTTP/URLRequest.h"
 #include "HTTP/URLResponse.h"
 
+#define RETRY_TIME_NOT_RETRYING 0
+
 namespace BrainCloud
 {
-	class BrainCloudComms :
-        virtual public IBrainCloudComms,
-        virtual public TimerCallback,
-        virtual public URLLoaderClient
+	class BrainCloudComms : public IBrainCloudComms
     {
         
 	public:
@@ -41,8 +39,13 @@ namespace BrainCloud
 		
 		virtual void addToQueue( ServerCall * );
         
-		virtual void heartbeat( );
+        virtual void enableNetworkErrorMessageCaching(bool in_enabled);
+        virtual void retryCachedMessages();
+        virtual void flushCachedMessages(bool in_sendApiErrorCallbacks);
+        
+        virtual void sendHeartbeat();
 		virtual void resetCommunication();
+        virtual void shutdown();
 		virtual void runCallbacks();
         virtual void registerEventCallback(IEventCallback *in_eventCallback);
         virtual void deregisterEventCallback();
@@ -50,27 +53,25 @@ namespace BrainCloud
         virtual void deregisterFileUploadCallback();
         virtual void registerRewardCallback(IRewardCallback *in_rewardCallback);
         virtual void deregisterRewardCallback();
+        virtual void registerGlobalErrorCallback(IGlobalErrorCallback *in_globalErrorCallback);
+        virtual void deregisterGlobalErrorCallback();
+        virtual void registerNetworkErrorCallback(INetworkErrorCallback * in_networkErrorCallback);
+        virtual void deregisterNetworkErrorCallback();
         
         virtual void cancelUpload(const char * in_fileUploadId);
         virtual double getUploadProgress(const char * in_fileUploadId);
         virtual int64_t getUploadTotalBytesToTransfer(const char * in_fileUploadId);
         virtual int64_t getUploadBytesTransferred(const char * in_fileUploadId);
 
-        // from URLLoaderClient
-		virtual void handleResult( URLResponse const & );
-		virtual void cacheResult( URLResponse const & );
-
-        // from TimerCallback
-		virtual void handleAlarm( Timer * );
+        // returns true if packet requires a retry
+		bool handleResult( URLResponse const & );
         
     protected:
         virtual void startFileUpload(const Json::Value & in_jsonPrepareUploadResponse);
         
 	private:
-		Timer * _heartbeatTimer;
 		URLLoader * _loader;
 		URLRequest  * _request;
-		Timer * _retryTimer;
         
 		std::vector<ServerCall*> _queue;
 		std::queue<BrainCloudCallbackEvent *>  _apiCallbackQueue;
@@ -82,17 +83,20 @@ namespace BrainCloud
 		pthread_mutex_t _loaderMutex;
 		pthread_mutex_t _queueMutex;
 		pthread_mutex_t _mutex;
+        
+        int64_t _retryTimeMillis;
 
         void handleResponseBundle(Json::Value & root);
 		void handleError( URLResponse const & );
+        void triggerCommsError(int statusCode, int responseCode, const std::string & in_error, const std::string & in_severity);
 		void processEvents( Json::Value *, bool = true );
         bool shouldRetryPacket();
         long getRetryTimeoutMillis(int retry);
         int getMaxSendAttempts();
         
 		void resend();
-		bool startLoader();
-		bool cleanQueueHead();
+		void createAndSendBundle();
+        void startHttpRequest();
         
         void resetErrorCache();
         void handleNoAuth();

@@ -22,7 +22,36 @@ namespace BrainCloud {
                             NULL,
                             in_callback);
 	}
+    
+    void BrainCloudAsyncMatch::createMatch( const char * in_jsonOpponentIds,
+                                           const char * in_pushNotificationMessage,
+                                           IServerCallback * in_callback )
+    {
+        createMatchInternal(in_jsonOpponentIds,
+                            NULL,
+                            in_pushNotificationMessage,
+                            NULL,
+                            NULL,
+                            NULL,
+                            in_callback);
+    }
 
+    void BrainCloudAsyncMatch::createMatchWithInitialTurn( const char * in_jsonOpponentIds,
+                                                          const char * in_jsonMatchState,
+                                                          const char * in_pushNotificationMessage,
+                                                          const char * in_nextPlayer,
+                                                          const char * in_jsonSummary,
+                                                          IServerCallback * in_callback )
+    {
+        createMatchInternal(in_jsonOpponentIds,
+                            StringUtil::IsOptionalParameterValid(in_jsonMatchState) ? in_jsonMatchState : "{}",
+                            in_pushNotificationMessage,
+                            NULL,
+                            in_nextPlayer,
+                            in_jsonSummary,
+                            in_callback);
+    }
+    
 	void BrainCloudAsyncMatch::createMatchWithInitialTurn( const char * in_jsonOpponentIds,
 				const char * in_jsonMatchState,
 				const char * in_pushNotificationMessage,
