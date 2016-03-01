@@ -321,7 +321,7 @@ namespace BrainCloud
             if (in_sendApiErrorCallbacks)
             {
                 _expectedPacketId = _packetId - 1;
-                triggerCommsError(HTTP_CUSTOM, CLIENT_NETWORK_ERROR_TIMEOUT, "Network timeout", "ERROR");
+                triggerCommsError(HTTP_CLIENT_NETWORK_ERROR, CLIENT_NETWORK_ERROR_TIMEOUT, "Network timeout", "ERROR");
             }
             while (!_inProgress.empty())
             {
@@ -579,7 +579,7 @@ namespace BrainCloud
                 }
                 else
                 {
-                    triggerCommsError(HTTP_CUSTOM, CLIENT_NETWORK_ERROR_TIMEOUT, "Network timeout", "ERROR");
+                    triggerCommsError(HTTP_CLIENT_NETWORK_ERROR, CLIENT_NETWORK_ERROR_TIMEOUT, "Network timeout", "ERROR");
                     flushInProgressQueue = true;
                 }
             }
@@ -612,7 +612,7 @@ namespace BrainCloud
         for (size_t i = 0, isize = _inProgress.size(); i < isize; ++i)
         {
             Json::Value msg;
-            msg["status"] = HTTP_CUSTOM;
+            msg["status"] = HTTP_CLIENT_NETWORK_ERROR;
             msg["reason_code"] = CLIENT_NETWORK_ERROR_TIMEOUT;
             msg["status_message"] = "Network timeout";
             msg["severity"] = "ERROR";

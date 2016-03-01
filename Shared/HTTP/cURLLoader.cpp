@@ -444,7 +444,7 @@ void cURLLoader::loadThreadCurl( cURLLoader * loader )
         if (rc == CURLE_ABORTED_BY_CALLBACK)
         {
             // aborted by caller
-            loader->_urlResponse.setStatusCode(HTTP_CUSTOM);
+            loader->_urlResponse.setStatusCode(HTTP_CLIENT_NETWORK_ERROR);
             loader->_urlResponse.setReasonPhrase(curlError);
         }
 		else if (rc == CURLE_OK)
@@ -455,12 +455,12 @@ void cURLLoader::loadThreadCurl( cURLLoader * loader )
         }
         else if (rc == CURLE_OPERATION_TIMEDOUT)
         {
-            loader->_urlResponse.setStatusCode(HTTP_CUSTOM/*408*/);
+            loader->_urlResponse.setStatusCode(HTTP_CLIENT_NETWORK_ERROR/*408*/);
             loader->_urlResponse.setReasonPhrase("Operation timed out");
 		}
         else
         {
-            loader->_urlResponse.setStatusCode(HTTP_CUSTOM);
+            loader->_urlResponse.setStatusCode(HTTP_CLIENT_NETWORK_ERROR);
             loader->_urlResponse.setReasonPhrase(curlError);
         }
 

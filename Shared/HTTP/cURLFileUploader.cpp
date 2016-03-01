@@ -465,7 +465,7 @@ namespace BrainCloud
         }
         else
         {
-            fileUploader->_httpStatus = HTTP_CUSTOM;
+            fileUploader->_httpStatus = HTTP_CLIENT_NETWORK_ERROR;
             fileUploader->_errorReasonCode = 0;
             std::string statusMessage;
             if (rc == CURLE_OPERATION_TIMEDOUT)

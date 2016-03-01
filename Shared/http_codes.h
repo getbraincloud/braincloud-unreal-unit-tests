@@ -38,6 +38,7 @@ static const int HTTP_UNSUPPORTED_TYPE = 415;	// HTTP Status-Code 415: Unsupport
 static const int HTTP_USE_PROXY = 305;			// HTTP Status-Code 305: Use Proxy.
 static const int HTTP_VERSION = 505;			// HTTP Status-Code 505: HTTP Version Not Supported.
 
-static const int HTTP_CUSTOM = 900;             // A custom status code raised internally by bc client
+static const int HTTP_CUSTOM = 900;
+static const int HTTP_CLIENT_NETWORK_ERROR= 900; // A custom status code raised internally by bc client
 
 #endif

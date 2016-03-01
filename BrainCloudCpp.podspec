@@ -11,7 +11,7 @@ Pod::Spec.new do |s|
   # ―――  Spec Metadata  ―――――――――――――――――――――――――――――――――――――――――――――――――――――――――― #
 
   s.name     = "BrainCloudCpp"
-  s.version  = "2.21.0"
+  s.version  = "2.21.1"
   s.summary  = "The C++ client library for brainCloud"
   s.homepage = "http://getbraincloud.com/"
 
@@ -43,6 +43,6 @@ Pod::Spec.new do |s|
 
   # ――― Project Linking ―――――――――――――――――――――――――――――――――――――――――――――――――――――――――― #
 
-  s.library                = 'z'
+  s.libraries              = 'c++', 'z'
 
 end
