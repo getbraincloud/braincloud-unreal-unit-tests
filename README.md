@@ -16,7 +16,7 @@ The library is distributed through `CocoaPods`. In order to install the library,
 pod 'BrainCloudCpp'
 ```
 
-If you're a newcomer to the `CocoaPods` world, you can find documentation on how to set up your Xcode project:
+If you're a newcomer to the `CocoaPods` world, you can find documentation on how to set up your Xcode project here:
 
 https://guides.cocoapods.org/
 
