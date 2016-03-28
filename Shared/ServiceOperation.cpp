@@ -21,6 +21,7 @@ namespace BrainCloud
 	const ServiceOperation ServiceOperation::ReadByType = ServiceOperation("READ_BY_TYPE");
 	const ServiceOperation ServiceOperation::Verify = ServiceOperation("VERIFY");
 	const ServiceOperation ServiceOperation::ReadShared = ServiceOperation("READ_SHARED");
+    const ServiceOperation ServiceOperation::ReadSharedEntity = ServiceOperation("READ_SHARED_ENTITY");
     
     // push notification
 	const ServiceOperation ServiceOperation::Deregister = ServiceOperation("DEREGISTER");
@@ -56,6 +57,10 @@ namespace BrainCloud
 	const ServiceOperation ServiceOperation::ReadFriends = ServiceOperation("READ_FRIENDS");
 	const ServiceOperation ServiceOperation::ReadFriendsPlayerState = ServiceOperation("READ_FRIEND_PLAYER_STATE");
     const ServiceOperation ServiceOperation::FindPlayerByName = ServiceOperation("FIND_PLAYER_BY_NAME");
+    const ServiceOperation ServiceOperation::ListFriends = ServiceOperation("LIST_FRIENDS");
+    const ServiceOperation ServiceOperation::AddFriends = ServiceOperation("ADD_FRIENDS");
+    const ServiceOperation ServiceOperation::RemoveFriends = ServiceOperation("REMOVE_FRIENDS");
+    const ServiceOperation ServiceOperation::FindPlayerByUniversalId = ServiceOperation("FIND_PLAYER_BY_UNIVERSAL_ID");
 	const ServiceOperation ServiceOperation::GetSocialLeaderboard = ServiceOperation("GET_SOCIAL_LEADERBOARD");
     const ServiceOperation ServiceOperation::GetMultiSocialLeaderboard = ServiceOperation("GET_MULTI_SOCIAL_LEADERBOARD");
 	const ServiceOperation ServiceOperation::GetGlobalLeaderboard = ServiceOperation("GET_GLOBAL_LEADERBOARD");

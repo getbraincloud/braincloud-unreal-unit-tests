@@ -1,20 +1,19 @@
+// Copyright 2016 bitHeads, Inc. All Rights Reserved.
+
 #pragma once
 
 #include <string>
-
-#include "IServerCallback.h"
-#include "ServiceName.h"
-#include "ServiceOperation.h"
-#include "OperationParam.h"
 #include "BrainCloudTypes.h"
 
-namespace BrainCloud {
+namespace BrainCloud
+{
+    class IServerCallback;
+    class BrainCloudClient;
 
     class BrainCloudGlobalEntity
     {
     public:
-        BrainCloudGlobalEntity();
-        ~BrainCloudGlobalEntity();
+        BrainCloudGlobalEntity(BrainCloudClient* in_client);
 
         /**
         * Method creates a new entity on the server.
@@ -56,7 +55,7 @@ namespace BrainCloud {
         * }
         */
         void createEntity(std::string& in_entityType, int64_t in_timeToLive, std::string& in_jsonEntityAcl,
-                        std::string& in_jsonEntityData, IServerCallback * in_callback = NULL);
+            std::string& in_jsonEntityData, IServerCallback * in_callback = NULL);
 
         /**
         * Method creates a new entity on the server with an indexed id.
@@ -523,7 +522,9 @@ namespace BrainCloud {
          * }
          */
         void getPageOffset(const char * in_context, int in_pageOffset, IServerCallback * in_callback = NULL);
-    };
 
+    private:
+        BrainCloudClient * m_client;
+    };
 }
 

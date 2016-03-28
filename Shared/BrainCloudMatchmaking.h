@@ -1,15 +1,20 @@
+// Copyright 2016 bitHeads, Inc. All Rights Reserved.
+
 #pragma once
 
 #include <string>
-
 #include "BrainCloudTypes.h"
-#include "IServerCallback.h"
 
-namespace BrainCloud {
-    
+namespace BrainCloud
+{
+    class IServerCallback;
+    class BrainCloudClient;
+
     class BrainCloudMatchmaking
     {
     public:
+        BrainCloudMatchmaking(BrainCloudClient* in_client);
+
         /**
          * Read match making record
          *
@@ -33,7 +38,7 @@ namespace BrainCloud {
          * }
          */
         void read(IServerCallback * in_callback = NULL);
-        
+
         /**
          * Sets player rating
          *
@@ -50,7 +55,7 @@ namespace BrainCloud {
          * }
          */
         void setPlayerRating(int32_t in_playerRating, IServerCallback * in_callback = NULL);
-        
+
         /**
          * Resets player rating
          *
@@ -66,7 +71,7 @@ namespace BrainCloud {
          * }
          */
         void resetPlayerRating(IServerCallback * in_callback = NULL);
-        
+
         /**
          * Increments player rating
          *
@@ -83,7 +88,7 @@ namespace BrainCloud {
          * }
          */
         void incrementPlayerRating(int32_t in_increment, IServerCallback * in_callback = NULL);
-        
+
         /**
          * Decrements player rating
          *
@@ -100,7 +105,7 @@ namespace BrainCloud {
          * }
          */
         void decrementPlayerRating(int32_t in_decrement, IServerCallback * in_callback = NULL);
-        
+
         /**
          * Turns shield on
          *
@@ -116,7 +121,7 @@ namespace BrainCloud {
          * }
          */
         void turnShieldOn(IServerCallback * in_callback = NULL);
-        
+
         /**
          * Turns shield on for the specified number of minutes
          *
@@ -133,7 +138,7 @@ namespace BrainCloud {
          * }
          */
         void turnShieldOnFor(int32_t in_minutes, IServerCallback * in_callback = NULL);
-        
+
         /**
          * Turns shield off
          *
@@ -149,7 +154,7 @@ namespace BrainCloud {
          * }
          */
         void turnShieldOff(IServerCallback * in_callback = NULL);
-        
+
         /**
          * Gets the shield expiry for the given player id. Passing in a null player id
          * will return the shield expiry for the current player. The value returned is
@@ -170,12 +175,12 @@ namespace BrainCloud {
          * }
          */
         void getShieldExpiry(const char * in_playerId, IServerCallback * in_callback = NULL);
-        
+
         /**
          * Finds matchmaking enabled players
          *
          * Service Name - MatchMaking
-         * Service Operation - FindPlayers
+         * Service Operation - FIND_PLAYERS
          *
          * @param in_rangeDelta The range delta
          * @param in_numMatches The maximum number of matches to return
@@ -205,18 +210,52 @@ namespace BrainCloud {
          * }
          */
         void findPlayers(int32_t in_rangeDelta, int32_t in_numMatches, IServerCallback * in_callback = NULL);
-        
-        DEPRECATED void getOneWayPlayers(int32_t in_rangeDelta, int32_t in_numMatches, IServerCallback * in_callback = NULL);
-        
+
+        /**
+         * Finds matchmaking enabled players with additional attributes
+         *
+         * Service Name - MatchMaking
+         * Service Operation - FIND_PLAYERS
+         *
+         * @param in_rangeDelta The range delta
+         * @param in_numMatches The maximum number of matches to return
+         * @param in_jsonAttributes Attributes match criteria
+         * @param in_callback The method to be invoked when the server response is received
+         *
+         * @return The JSON returned in the callback is as follows:
+         * {
+         *   "status": 200,
+         *   "data": {
+         *     "matchesFound" : [
+         *       {
+         *         "playerId" : "9073dff7-0df6-437e-9be6-39cd704dcoj4",
+         *         "playerName" : "Jane Smith",
+         *         "playerRating" : 25,
+         *         "pictureUrl" : "",
+         *         "summaryFriendData" : null
+         *       },
+         *       {
+         *         "playerId" : "9073dff7-0df6-437e-9be6-39cd704dcoj4",
+         *         "playerName" : "John Smith",
+         *         "playerRating" : 30,
+         *         "pictureUrl" : "",
+         *         "summaryFriendData" : null
+         *       }
+         *     ]
+         *   }
+         * }
+         */
+        void findPlayersWithAttributes(int32_t in_rangeDelta, int32_t in_numMatches, std::string in_jsonAttributes, IServerCallback * in_callback = NULL);
+
         /**
          * Finds matchmaking enabled players
          *
          * Service Name - MatchMaking
-         * Service Operation - FindPlayersUsingFilter
+         * Service Operation - FIND_PLAYERS_USING_FILTER
          *
          * @param in_rangeDelta The range delta
          * @param in_numMatches The maximum number of matches to return
-         * @param in_jsonExtraParms Other parameters
+         * @param in_jsonExtraParms Parameters to pass to the CloudCode filter script
          * @param in_callback The method to be invoked when the server response is received
          *
          * @return The JSON returned in the callback is as follows:
@@ -243,10 +282,50 @@ namespace BrainCloud {
          * }
          */
         void findPlayersUsingFilter(int32_t in_rangeDelta, int32_t in_numMatches, std::string in_jsonExtraParms, IServerCallback * in_callback = NULL);
-        
-        DEPRECATED void getOneWayPlayersWithFilter(int32_t in_rangeDelta, int32_t in_numMatches, std::string in_jsonExtraParms, IServerCallback * in_callback = NULL);
-        
-        
+
+        /**
+        * Finds matchmaking enabled players using a cloud code filter
+        * and additional attributes
+        *
+        * Service Name - MatchMaking
+        * Service Operation - FIND_PLAYERS_USING_FILTER
+        *
+        * @param in_rangeDelta The range delta
+        * @param in_numMatches The maximum number of matches to return
+        * @param in_jsonAttributes Attributes match criteria
+        * @param in_jsonExtraParms Parameters to pass to the CloudCode filter script
+        * @param in_callback The method to be invoked when the server response is received
+        *
+        * @return The JSON returned in the callback is as follows:
+        * {
+        *   "status": 200,
+        *   "data": {
+        *     "matchesFound" : [
+        *       {
+        *         "playerId" : "9073dff7-0df6-437e-9be6-39cd704dcoj4",
+        *         "playerName" : "Jane Smith",
+        *         "playerRating" : 25,
+        *         "pictureUrl" : "",
+        *         "summaryFriendData" : null
+        *       },
+        *       {
+        *         "playerId" : "9073dff7-0df6-437e-9be6-39cd704dcoj4",
+        *         "playerName" : "John Smith",
+        *         "playerRating" : 30,
+        *         "pictureUrl" : "",
+        *         "summaryFriendData" : null
+        *       }
+        *     ]
+        *   }
+        * }
+        */
+        void findPlayersWithAttributesUsingFilter(
+            int32_t in_rangeDelta,
+            int32_t in_numMatches,
+            std::string in_jsonAttributes,
+            std::string in_jsonExtraParms,
+            IServerCallback * in_callback = NULL);
+
         /**
          * Enables Match Making for the Player
          *
@@ -262,5 +341,8 @@ namespace BrainCloud {
          * }
          */
         void enableMatchMaking(IServerCallback * in_callback = NULL);
+
+    private:
+        BrainCloudClient * m_client;
     };
 }

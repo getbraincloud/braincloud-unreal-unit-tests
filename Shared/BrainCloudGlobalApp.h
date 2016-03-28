@@ -1,17 +1,20 @@
+// Copyright 2016 bitHeads, Inc. All Rights Reserved.
+
 #pragma once
 
-#include "ServiceName.h"
-#include "ServiceOperation.h"
-#include "OperationParam.h"
-#include "IServerCallback.h"
-#include "BrainCloudTypes.h"
+#include <stddef.h>
 
-namespace BrainCloud {
-	
-	class BrainCloudGlobalApp
-	{
-	public:
-		/**
+namespace BrainCloud
+{
+    class IServerCallback;
+    class BrainCloudClient;
+
+    class BrainCloudGlobalApp
+    {
+    public:
+        BrainCloudGlobalApp(BrainCloudClient* in_client);
+
+        /**
          * Read game's global properties
          *
          * Service Name - GlobalApp
@@ -19,23 +22,23 @@ namespace BrainCloud {
          *
          * @param in_callback The method to be invoked when the server response is received
          *
-		 * @return JSON describing the global properties:
-		 * {
-		 *   "status":200,   
-		 *   "data":{    
-		 *     {
-		 *		 "pName": {
-		 *		  "name": "pName",
-		 *		  "description": "pValue",
-		 *		  "value": "pDescription"
-		 *		 }
-		 *		}
-		 *   }
-		 * }
+         * @return JSON describing the global properties:
+         * {
+         *   "status":200,
+         *   "data":{
+         *     {
+         *		 "pName": {
+         *		  "name": "pName",
+         *		  "description": "pValue",
+         *		  "value": "pDescription"
+         *		 }
+         *		}
+         *   }
+         * }
          */
-		void readProperties(IServerCallback * in_callback = NULL);
-		
-	protected:
-		
-	};
+        void readProperties(IServerCallback * in_callback = NULL);
+
+    private:
+        BrainCloudClient * m_client;
+    };
 }

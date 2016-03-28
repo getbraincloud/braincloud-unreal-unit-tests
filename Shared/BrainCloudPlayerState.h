@@ -1,29 +1,30 @@
+// Copyright 2016 bitHeads, Inc. All Rights Reserved.
+
 #pragma once
 
 #include <string>
 #include <vector>
 
-#include "IServerCallback.h"
-#include "ServiceName.h"
-#include "ServiceOperation.h"
-#include "OperationParam.h"
-#include "BrainCloudTypes.h"
+namespace BrainCloud
+{
+    class IServerCallback;
+    class BrainCloudClient;
 
-namespace BrainCloud {
-	
-	class BrainCloudPlayerState
-	{
-	public:
-		/**
+    class BrainCloudPlayerState
+    {
+    public:
+        BrainCloudPlayerState(BrainCloudClient* in_client);
+
+        /**
          * Read the state of the currently logged in player.
          * This method returns a JSON object describing most of the
          * player's data: entities, statistics, level, currency.
          * Apps will typically call this method after authenticating to get an
          * up-to-date view of the player's data.
          *
-		 * Service Name - PlayerState
-	     * Service Operation - Read
-	   	 *
+         * Service Name - PlayerState
+         * Service Operation - Read
+         *
          * @param in_callback The method to be invoked when the server response is received
          *
          * @return The JSON returned in the callback is as follows:
@@ -63,16 +64,16 @@ namespace BrainCloud {
          * }
          */
         void readPlayerState(IServerCallback * in_callback, const char* in_entityTypeFilter = NULL);
-		
-		/**
+
+        /**
          * Completely deletes the player record and all data fully owned
          * by the player. After calling this method, the player will need
          * to re-authenticate and create a new profile.
          * This is mostly used for debugging/qa.
          *
-		 * Service Name - PlayerState
-	     * Service Operation - FullReset
-	   	 *
+         * Service Name - PlayerState
+         * Service Operation - FullReset
+         *
          * @param in_callback The method to be invoked when the server response is received
          *
          * @return The JSON returned in the callback is as follows:
@@ -81,8 +82,8 @@ namespace BrainCloud {
          *   "data":null
          * }
          */
-		void deletePlayer (IServerCallback * in_callback = NULL);
-		
+        void deletePlayer(IServerCallback * in_callback = NULL);
+
         /**
          * This method will delete *most* data for the currently logged in player.
          * Data which is not deleted includes: currency, credentials, and
@@ -90,9 +91,9 @@ namespace BrainCloud {
          * the player record will continue to exist after the reset (so the user
          * does not need to re-authenticate).
          *
-		 * Service Name - PlayerState
-	     * Service Operation - DataReset
-	   	 *
+         * Service Name - PlayerState
+         * Service Operation - DataReset
+         *
          * @param in_callback The method to be invoked when the server response is received
          *
          * @return The JSON returned in the callback is as follows:
@@ -102,13 +103,13 @@ namespace BrainCloud {
          * }
          */
         void resetPlayerState(IServerCallback * in_callback = NULL);
-		
-		/**
+
+        /**
          * Logs player out of server.
          *
-		 * Service Name - PlayerState
-	     * Service Operation - Logout
-	   	 *
+         * Service Name - PlayerState
+         * Service Operation - Logout
+         *
          * @param in_callback The method to be invoked when the server response is received
          *
          * @return The JSON returned in the callback is as follows:
@@ -117,27 +118,27 @@ namespace BrainCloud {
          *   "data":null
          * }
          */
-		void logout(IServerCallback * in_callback = NULL);
-		
-		/**
-		* Sets the players name.
-		*
-		* Service Name - playerState
-		* Service Operation - UPDATE_NAME
-		*
-		* @param in_playerName The name of the player
-		* @param in_callback The method to be invoked when the server response is received
-		*
-		* @return The JSON returned in the callback is as follows:
-		* {
-		*   "status":200,
-		*   "data":
-		*   {
-		*     "playerName": "someName"
-		*   }
-		* }
-		*/
-		void updatePlayerName(const char * in_playerName, IServerCallback * in_callback = NULL);
+        void logout(IServerCallback * in_callback = NULL);
+
+        /**
+        * Sets the players name.
+        *
+        * Service Name - playerState
+        * Service Operation - UPDATE_NAME
+        *
+        * @param in_playerName The name of the player
+        * @param in_callback The method to be invoked when the server response is received
+        *
+        * @return The JSON returned in the callback is as follows:
+        * {
+        *   "status":200,
+        *   "data":
+        *   {
+        *     "playerName": "someName"
+        *   }
+        * }
+        */
+        void updatePlayerName(const char * in_playerName, IServerCallback * in_callback = NULL);
 
         /**
          * Updates the "friend summary data" associated with the logged in player.
@@ -165,62 +166,62 @@ namespace BrainCloud {
          *   "data":null
          * }
          */
-        void updateSummaryFriendData(const char * in_jsonSummaryData,  IServerCallback * in_callback = NULL );
-        
-		/**
-		* Retrieve the player attributes.
-		*
-		* Service Name - PlayerState
-		* Service Operation - GetAttributes
-		*
-		* @param in_callback The method to be invoked when the server response is received
-		*
-		* @return The JSON returned in the callback is as follows:
-		* {
-		*   "status": 200,
-		*   "data": {
-		*     "attributes": {
-		*          "key1": "value1",
-		*          "key2": "value2"
-		*     }
-		*   }
-		* }
-		*/
-		void getAttributes(IServerCallback * in_callback = NULL);
+        void updateSummaryFriendData(const char * in_jsonSummaryData, IServerCallback * in_callback = NULL);
 
-		/**
-		* Update player attributes.
-		*
-		* Service Name - PlayerState
-		* Service Operation - UpdateAttributes
-		*
-		* @param in_jsonAttributes Single layer json string that is a set of key-value pairs
-		* @param in_wipeExisting Whether to wipe existing attributes prior to update.
-		* @param in_callback The method to be invoked when the server response is received
-		*
-		* @return The JSON returned in the callback is as follows:
-		* {
-		*   "status": 200,
-		* }
-		*/
-		void updateAttributes(const std::string& in_jsonAttributes, bool in_wipeExisting, IServerCallback * in_callback = NULL);
+        /**
+        * Retrieve the player attributes.
+        *
+        * Service Name - PlayerState
+        * Service Operation - GetAttributes
+        *
+        * @param in_callback The method to be invoked when the server response is received
+        *
+        * @return The JSON returned in the callback is as follows:
+        * {
+        *   "status": 200,
+        *   "data": {
+        *     "attributes": {
+        *          "key1": "value1",
+        *          "key2": "value2"
+        *     }
+        *   }
+        * }
+        */
+        void getAttributes(IServerCallback * in_callback = NULL);
 
-		/**
-		* Remove player attributes.
-		*
-		* Service Name - PlayerState
-		* Service Operation - RemoveAttributes
-		*
-		* @param in_attributeNames Collection of attribute names.
-		* @param in_callback The method to be invoked when the server response is received
-		*
-		* @return The JSON returned in the callback is as follows:
-		* {
-		*   "status": 200,
-		* }
-		*/
+        /**
+        * Update player attributes.
+        *
+        * Service Name - PlayerState
+        * Service Operation - UpdateAttributes
+        *
+        * @param in_jsonAttributes Single layer json string that is a set of key-value pairs
+        * @param in_wipeExisting Whether to wipe existing attributes prior to update.
+        * @param in_callback The method to be invoked when the server response is received
+        *
+        * @return The JSON returned in the callback is as follows:
+        * {
+        *   "status": 200,
+        * }
+        */
+        void updateAttributes(const std::string& in_jsonAttributes, bool in_wipeExisting, IServerCallback * in_callback = NULL);
+
+        /**
+        * Remove player attributes.
+        *
+        * Service Name - PlayerState
+        * Service Operation - RemoveAttributes
+        *
+        * @param in_attributeNames Collection of attribute names.
+        * @param in_callback The method to be invoked when the server response is received
+        *
+        * @return The JSON returned in the callback is as follows:
+        * {
+        *   "status": 200,
+        * }
+        */
         void removeAttributes(const std::vector<std::string> & in_attributeNames, IServerCallback * in_callback = NULL);
-        
+
         /**
          * Update Player picture URL.
          *
@@ -239,9 +240,9 @@ namespace BrainCloud {
          * }
          */
         void updatePlayerPictureUrl(const char * in_pictureUrl, IServerCallback * in_callback = NULL);
-        
+
         /**
-         * Update the player's contact email. 
+         * Update the player's contact email.
          * Note this is unrelated to email authentication.
          *
          * Service Name - PlayerState
@@ -259,11 +260,8 @@ namespace BrainCloud {
          * }
          */
         void updateContactEmail(const char * in_contactEmail, IServerCallback * in_callback = NULL);
-        
-        //Removal after March 04 2016
-        DEPRECATED void removeAttributes(const std::string& in_jsonAttributeNameList, IServerCallback * in_callback = NULL);
 
-	private:
-
-	};
+    private:
+        BrainCloudClient * m_client;
+    };
 }

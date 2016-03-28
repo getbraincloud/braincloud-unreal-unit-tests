@@ -188,7 +188,7 @@ namespace BrainCloud {
 		if (servercall->getService() == ServiceName::AuthenticateV2 && servercall->getOperation() == ServiceOperation::Authenticate)
 		{
             _isAuthenticated = true;
-			BrainCloudClient::getInstance()->setCredentials(response);
+			setCredentials(response);
             
             // pick up the timeout interval from the auth call
             if (_heartbeatInterval == 0)

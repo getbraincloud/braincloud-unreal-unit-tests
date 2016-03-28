@@ -1,18 +1,19 @@
+// Copyright 2016 bitHeads, Inc. All Rights Reserved.
+
 #pragma once
 
 #include <string>
 
-#include "IServerCallback.h"
-#include "ServiceName.h"
-#include "ServiceOperation.h"
-#include "OperationParam.h"
-#include "BrainCloudTypes.h"
+namespace BrainCloud
+{
+    class IServerCallback;
+    class BrainCloudClient;
 
-namespace BrainCloud {
-    
     class BrainCloudProfanity
     {
     public:
+        BrainCloudProfanity(BrainCloudClient* in_client);
+
         /**
          * Checks supplied text for profanity.
          *
@@ -43,13 +44,13 @@ namespace BrainCloud {
          * 40424 - WebPurify not enabled
          */
         void profanityCheck(const char * in_text,
-                            const char * in_languages,
-                            bool in_flagEmail,
-                            bool in_flagPhone,
-                            bool in_flagUrls,
-                            IServerCallback * in_callback = NULL);
-        
-        
+            const char * in_languages,
+            bool in_flagEmail,
+            bool in_flagPhone,
+            bool in_flagUrls,
+            IServerCallback * in_callback = NULL);
+
+
         /**
          * Replaces the characters of profanity text with a passed character(s).
          *
@@ -82,14 +83,14 @@ namespace BrainCloud {
          * 40424 - WebPurify not enabled
          */
         void profanityReplaceText(const char * in_text,
-                                  const char * in_replaceSymbol,
-                                  const char * in_languages,
-                                  bool in_flagEmail,
-                                  bool in_flagPhone,
-                                  bool in_flagUrls,
-                                  IServerCallback * in_callback = NULL);
-        
-        
+            const char * in_replaceSymbol,
+            const char * in_languages,
+            bool in_flagEmail,
+            bool in_flagPhone,
+            bool in_flagUrls,
+            IServerCallback * in_callback = NULL);
+
+
         /**
          * Checks supplied text for profanity and returns a list of bad wors.
          *
@@ -121,11 +122,14 @@ namespace BrainCloud {
          * 40424 - WebPurify not enabled
          */
         void profanityIdentifyBadWords(const char * in_text,
-                                       const char * in_languages,
-                                       bool in_flagEmail,
-                                       bool in_flagPhone,
-                                       bool in_flagUrls,
-                                       IServerCallback * in_callback = NULL);
+            const char * in_languages,
+            bool in_flagEmail,
+            bool in_flagPhone,
+            bool in_flagUrls,
+            IServerCallback * in_callback = NULL);
+
+    private:
+        BrainCloudClient * m_client;
     };
 }
 

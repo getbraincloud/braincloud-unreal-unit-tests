@@ -1,17 +1,19 @@
+// Copyright 2016 bitHeads, Inc. All Rights Reserved.
+
 #pragma once
 
 #include <string>
 
-#include "IServerCallback.h"
-#include "ServiceName.h"
-#include "ServiceOperation.h"
-#include "OperationParam.h"
-
 namespace BrainCloud
 {
+    class IServerCallback;
+    class BrainCloudClient;
+
 	class BrainCloudTime
 	{
 	public:
+        BrainCloudTime(BrainCloudClient* in_client);
+
 		/**
          * Method returns the server time in UTC. This is in UNIX millis time format.
          * For instance 1396378241893 represents 2014-04-01 2:50:41.893 in GMT-4.
@@ -32,5 +34,8 @@ namespace BrainCloud
          * }
          */
 		void readServerTime( IServerCallback * in_callback = NULL);
+
+    private:
+        BrainCloudClient * m_client;
 	};
 }

@@ -11,6 +11,10 @@
 #include <vector>
 #include <list>
 #include <queue>
+#if defined(WIN32)
+#include <Windows.h>
+#define HAVE_STRUCT_TIMESPEC 1
+#endif
 #include <pthread.h>
 
 #include "json/json.h"

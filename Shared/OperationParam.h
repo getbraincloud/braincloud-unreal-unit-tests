@@ -81,38 +81,16 @@ namespace BrainCloud {
         static const OperationParam AsyncMatchServiceStatistics;
         static const OperationParam AsyncMatchServiceMatchStatus;
 
-        // Entity Service - Create Params
-        static const OperationParam EntityServiceCreateEntityId;
-        static const OperationParam EntityServiceCreateEntityType;
-        static const OperationParam EntityServiceCreateEntitySubtype;
-        static const OperationParam EntityServiceCreateData;
-        static const OperationParam EntityServiceCreateAcl;
-        static const OperationParam EntityServiceCreateFriendData;
-
-        // Entity Service - Update Params
-        static const OperationParam EntityServiceUpdateEntityType;
-        static const OperationParam EntityServiceUpdateEntityId;
-        static const OperationParam EntityServiceUpdateData;
-        static const OperationParam EntityServiceUpdateAcl;
-        static const OperationParam EntityServiceUpdateVersion;
-        static const OperationParam EntityServiceUpdateTargetPlayerId;
-
-        // Entity Service - Update Partial Params
-        static const OperationParam EntityServiceUpdatePartialEntityType;
-        static const OperationParam EntityServiceUpdatePartialEntityId;
-        static const OperationParam EntityServiceUpdatePartialUpdateOps;
-
-        // Entity Service - Get Entities By Type
-        static const OperationParam EntityServiceGetEntitiesByTypeEntityType;
-
-        // Entity Service - Delete Params
-        static const OperationParam EntityServiceDeleteEntityType;
-        static const OperationParam EntityServiceDeleteEntityId;
-
-        // Entity Service - GetSharedEntitiesForPlayerId
-        static const OperationParam EntityServiceGetSharedEntitiesTargetPlayerId;
-        static const OperationParam EntityServiceGetSharedStatsTargetPlayerId;
-        static const OperationParam EntityServiceGetSharedPlayerStateTargetPlayerId;
+        // Entity Service
+        static const OperationParam EntityServiceEntityId;
+        static const OperationParam EntityServiceEntityType;
+        static const OperationParam EntityServiceEntitySubtype;
+        static const OperationParam EntityServiceData;
+        static const OperationParam EntityServiceAcl;
+        static const OperationParam EntityServiceVersion;
+        static const OperationParam EntityServiceFriendData;
+        static const OperationParam EntityServiceTargetPlayerId;
+        static const OperationParam EntityServiceUpdateOps;
 
         // Global Entity Service - Params
         static const OperationParam GlobalEntityServiceEntityId;
@@ -162,6 +140,8 @@ namespace BrainCloud {
         static const OperationParam FriendServiceReadPlayerStateFriendId;
         static const OperationParam FriendServiceSearchText;
         static const OperationParam FriendServiceMaxResults;
+        static const OperationParam FriendServiceFriendPlatform;
+        static const OperationParam FriendServiceProfileIds;
 
         //Achievements Event Data Params
         static const OperationParam GamificationServiceAchievementsName;
@@ -274,6 +254,7 @@ namespace BrainCloud {
         static const OperationParam MatchMakingServiceRangeDelta;
         static const OperationParam MatchMakingServiceNumMatches;
         static const OperationParam MatchMakingServiceExtraParams;
+        static const OperationParam MatchMakingServiceAttributes;
         static const OperationParam MatchMakingServicePlayerId;
         static const OperationParam MatchMakingServicePlaybackStreamId;
 

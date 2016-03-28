@@ -1,17 +1,19 @@
+// Copyright 2016 bitHeads, Inc. All Rights Reserved.
+
 #pragma once
 
-#include <string>
-
-#include "IServerCallback.h"
-#include "ServiceName.h"
-#include "ServiceOperation.h"
-#include "OperationParam.h"
+#include <stddef.h>
 
 namespace BrainCloud
 {
+    class IServerCallback;
+    class BrainCloudClient;
+
     class BrainCloudS3Handling
     {
     public:
+        BrainCloudS3Handling(BrainCloudClient* in_client);
+
         /*
          * Sends an array of file details and returns
          * the details of any of those files that have changed
@@ -39,13 +41,14 @@ namespace BrainCloud
          *             "dateUploaded": 1437154770000,
          *             "relativeUrl": "/cust/testDoc.txt",
          *             "absoluteUrl": "http://internal.braincloudservers.com/s3/portal/g/12311331/cust/testDoc.txt",
-         *             "md5Hash": "d41d8cd98f00b204e9800998ecf8427e"
+         *             "md5Hash": "d41d8cd98f00b204e9800998ecf8427e",
+         *             "md5HashHex" : "b895454d7210f7cb84aab76289ffd39c"
          *         }]
          *     }
          * }
          */
         void getUpdatedFiles(const char * in_category, const char * in_fileDetails, IServerCallback * in_callback = NULL);
-        
+
         /*
          * Retrieves the details of custom files stored on the server
          *
@@ -71,11 +74,15 @@ namespace BrainCloud
          *             "dateUploaded": 1437154770000,
          *             "relativeUrl": "/cust/testDoc.txt",
          *             "absoluteUrl": "http://internal.braincloudservers.com/s3/portal/g/12311331/cust/testDoc.txt",
-         *             "md5Hash": "d41d8cd98f00b204e9800998ecf8427e"
+         *             "md5Hash": "d41d8cd98f00b204e9800998ecf8427e",
+         *             "md5HashHex" : "b895454d7210f7cb84aab76289ffd39c"
          *         }]
          *     }
          * }
          */
         void getFileList(const char * in_category, IServerCallback * in_callback = NULL);
+
+    private:
+        BrainCloudClient * m_client;
     };
 }

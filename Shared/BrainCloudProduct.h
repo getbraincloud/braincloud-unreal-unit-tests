@@ -1,28 +1,30 @@
+// Copyright 2016 bitHeads, Inc. All Rights Reserved.
+
 #pragma once
 
 #include <string>
-
-#include "ServiceName.h"
-#include "ServiceOperation.h"
-#include "OperationParam.h"
-#include "IServerCallback.h"
 #include "BrainCloudTypes.h"
 
-namespace BrainCloud {
-	
-	class BrainCloudProduct
-	{
-	public:
-		/**
+namespace BrainCloud
+{
+    class IServerCallback;
+    class BrainCloudClient;
+
+    class BrainCloudProduct
+    {
+    public:
+        BrainCloudProduct(BrainCloudClient* in_client);
+
+        /**
          * Gets the player's currency for the given currency type
          * or all currency types if null passed in.
          *
-		 * Service Name - Product
-	     * Service Operation - GetPlayerVC
-	   	 *
+         * Service Name - Product
+         * Service Operation - GetPlayerVC
+         *
          * @param in_currencyType The currency type to retrieve or null
          * if all currency types are being requested.
-		 *
+         *
          * @param in_callback The method to be invoked when the server response is received
          *
          * @return The JSON returned in the callback is as follows:
@@ -43,17 +45,17 @@ namespace BrainCloud {
          *   }
          * }
          */
-		void getCurrency(const char* in_currencyType, IServerCallback * in_callback = NULL);
-		
-		/**
+        void getCurrency(const char* in_currencyType, IServerCallback * in_callback = NULL);
+
+        /**
          * Award player the passed-in amount of currency. Returns
          * JSON representing the new currency values.
          *
-		 * Service Name - Product
-	     * Service Operation - AwardVC
-	   	 *
-		 * @param in_currencyType The currency type to award
-		 * @param in_amount The amount of currency to award
+         * Service Name - Product
+         * Service Operation - AwardVC
+         *
+         * @param in_currencyType The currency type to award
+         * @param in_amount The amount of currency to award
          * @param in_callback The method to be invoked when the server response is received
          *
          * @return The JSON returned in the callback is as follows:
@@ -80,14 +82,14 @@ namespace BrainCloud {
          *   }
          * }
          */
-		void awardCurrency(const char* in_currencyType, int32_t in_amount, IServerCallback * in_callback = NULL);
-		
-		/**
+        void awardCurrency(const char* in_currencyType, int32_t in_amount, IServerCallback * in_callback = NULL);
+
+        /**
          * Consume the passed-in amount of currency from the player.
          *
-		 * Service Name - Product
-	     * Service Operation - ConsumePlayerVC
-	   	 *
+         * Service Name - Product
+         * Service Operation - ConsumePlayerVC
+         *
          * @param in_currencyType The currency type to consume.
          * @param in_amount The amount of currency to consume.
          * @param in_callback The method to be invoked when the server response is received
@@ -116,14 +118,14 @@ namespace BrainCloud {
          *   }
          * }
          */
-		void consumeCurrency(const char* in_currencyType, int32_t in_amount, IServerCallback * in_callback = NULL);
-		
-		/**
+        void consumeCurrency(const char* in_currencyType, int32_t in_amount, IServerCallback * in_callback = NULL);
+
+        /**
          * Resets the player's currency back to zero.
          *
-		 * Service Name - Product
-	     * Service Operation - ResetPlayerVC
-	   	 *
+         * Service Name - Product
+         * Service Operation - ResetPlayerVC
+         *
          * @param in_callback The method to be invoked when the server response is received
          *
          * @return The JSON returned in the callback is as follows:
@@ -132,15 +134,15 @@ namespace BrainCloud {
          *   "data":null
          * }
          */
-		void resetCurrency(IServerCallback * in_callback = NULL);
-		
-		/**
+        void resetCurrency(IServerCallback * in_callback = NULL);
+
+        /**
          * Method gets the active sales inventory for the passed-in platform and
          * currency type.
          *
-		 * Service Name - Product
-	     * Service Operation - GetInventory
-	   	 *
+         * Service Name - Product
+         * Service Operation - GetInventory
+         *
          * @param in_platform The store platform. Valid stores are:
          * - itunes
          * - facebook
@@ -154,27 +156,27 @@ namespace BrainCloud {
          * @param in_callback The method to be invoked when the server response is received
          *
          * @return The JSON returned in the callback is as follows:
-		 * {
-		 *   "status":200,
-		 *   "data":{
-		 *      "product_inventory":[
-		 *          {
-		 *              "gameId":"com.roger.football",
-		 *              "itemId":"0000001",
-		 *              "title":"Item 0000001",
-		 *              "description":"Buy 5 footballs",
-		 *              "imageUrl":"http:",
-		 *              "fbUrl":"http:",
-		 *              "currency":{"footballs":5},
-		 *              "priceData":{"currency":"USD","price":1000}
-		 *           }
-		 *       ],
-		 *       "server_time":1398960658981
-		 *    }
-		 * }
-		 */
-		void getSalesInventory(const char * in_platform, const char * in_userCurrency, IServerCallback * in_callback = NULL);
-        
+         * {
+         *   "status":200,
+         *   "data":{
+         *      "product_inventory":[
+         *          {
+         *              "gameId":"com.roger.football",
+         *              "itemId":"0000001",
+         *              "title":"Item 0000001",
+         *              "description":"Buy 5 footballs",
+         *              "imageUrl":"http:",
+         *              "fbUrl":"http:",
+         *              "currency":{"footballs":5},
+         *              "priceData":{"currency":"USD","price":1000}
+         *           }
+         *       ],
+         *       "server_time":1398960658981
+         *    }
+         * }
+         */
+        void getSalesInventory(const char * in_platform, const char * in_userCurrency, IServerCallback * in_callback = NULL);
+
         /**
          * Method gets the active sales inventory for the passed-in platform,
          * currency type and category.
@@ -192,7 +194,7 @@ namespace BrainCloud {
          * - googlePlay
          * @param in_userCurrency The currency to retrieve the sales
          * inventory for. This is only used for Steam and Facebook stores.
-		 * @param in_category Inventory category to retrieve
+         * @param in_category Inventory category to retrieve
          * @param in_callback The method to be invoked when the server response is received
          *
          * @return The JSON returned in the callback is as follows:
@@ -219,9 +221,9 @@ namespace BrainCloud {
 
 
         // deprecated - use verifyItunesReceipt as method has been renamed
-		void cashInItunesReceipt( const std::string& in_base64EncReceiptData, IServerCallback * in_callback, bool in_useSandbox );
-        
-		/**
+        void cashInItunesReceipt(const std::string& in_base64EncReceiptData, IServerCallback * in_callback, bool in_useSandbox);
+
+        /**
          * Method verifies an iTunes receipt and awards the items related to this receipt.
          *
          * Service Name - Product
@@ -229,41 +231,41 @@ namespace BrainCloud {
          *
          * @param in_base64EncReceiptData The iTunes receipt
          * @param in_callback The method to be invoked when the server response is received
-		 *
-		 * @return The JSON returned in the callback is as follows:
-		 * {
-		 *   "status": 200,
-		 *   "data":
-		 *   {
-		 *      "playerCurrency" : {
-		 *         "playerId" : "sfhsjdfhfjhf",
-		 *         "currencyMap" : {
-		 *             "coin" : {
-		 *                 "purchased" : NumberLong(0),
-		 *                 "balance" : NumberLong(5000),
-		 *                 "consumed" : NumberLong(0),
-		 *                 "awarded" : NumberLong(5000)
-		 *             },
-		 *             "bar" : {
-		 *                 "purchased" : NumberLong(0),
-		 *                 "balance" : NumberLong(2),
-		 *                 "consumed" : NumberLong(0),
-		 *                 "awarded" : NumberLong(2)
-		 *             }
-		 *         },
-		 *         "createdAt" : 763578645786,
-		 *         "updatedAt" : 8692486255764,
-		 *       },
-		 *       "appleReceipt" : "gsgsfvgvg",
-		 *       "status" : 0,
-		 *       "server_time" : 987490827457
-		 *   }
-		 * }
-		 */
-        void verifyItunesReceipt( const std::string& in_base64EncReceiptData, IServerCallback * in_callback = NULL);
+         *
+         * @return The JSON returned in the callback is as follows:
+         * {
+         *   "status": 200,
+         *   "data":
+         *   {
+         *      "playerCurrency" : {
+         *         "playerId" : "sfhsjdfhfjhf",
+         *         "currencyMap" : {
+         *             "coin" : {
+         *                 "purchased" : NumberLong(0),
+         *                 "balance" : NumberLong(5000),
+         *                 "consumed" : NumberLong(0),
+         *                 "awarded" : NumberLong(5000)
+         *             },
+         *             "bar" : {
+         *                 "purchased" : NumberLong(0),
+         *                 "balance" : NumberLong(2),
+         *                 "consumed" : NumberLong(0),
+         *                 "awarded" : NumberLong(2)
+         *             }
+         *         },
+         *         "createdAt" : 763578645786,
+         *         "updatedAt" : 8692486255764,
+         *       },
+         *       "appleReceipt" : "gsgsfvgvg",
+         *       "status" : 0,
+         *       "server_time" : 987490827457
+         *   }
+         * }
+         */
+        void verifyItunesReceipt(const std::string& in_base64EncReceiptData, IServerCallback * in_callback = NULL);
 
 
-		/**
+        /**
          * Initialize Steam Transaction
          *
          * Service Name - Product
@@ -285,9 +287,9 @@ namespace BrainCloud {
          *   }
          * }
          */
-		void startSteamTransaction( const char* in_language, const char* in_itemId, IServerCallback * in_callback = NULL);
-		
-		/**
+        void startSteamTransaction(const char* in_language, const char* in_itemId, IServerCallback * in_callback = NULL);
+
+        /**
          * Finalize Steam Transaction. On success, the player will be awarded the
          * associated currencies.
          *
@@ -309,9 +311,9 @@ namespace BrainCloud {
          *   }
          * }
          */
-		void finalizeSteamTransaction(const char* in_transId, IServerCallback * in_callback = NULL);
-		
-		/**
+        void finalizeSteamTransaction(const char* in_transId, IServerCallback * in_callback = NULL);
+
+        /**
          * Verify Microsoft Receipt. On success, the player will be awarded the
          * associated currencies.
          *
@@ -330,15 +332,15 @@ namespace BrainCloud {
          *   }
          * }
          */
-		void verifyMicrosoftReceipt(const char* in_receipt, IServerCallback * in_callback = NULL);
-        
+        void verifyMicrosoftReceipt(const char* in_receipt, IServerCallback * in_callback = NULL);
+
         /**
          * Confirms a google play purchase. On success, the player will be awarded the
          * associated currencies.
-         * 
+         *
          * Service Name - Product
          * Server Operation - CONFIRM_GOOGLEPLAY_PURCHASE
-         * 
+         *
          * @param in_orderId The order id
          * @param in_productId The product id
          * @param in_token Google Play token string
@@ -353,12 +355,12 @@ namespace BrainCloud {
          * }
          */
         void confirmGooglePlayPurchase(
-                const char * in_orderId,
-                const char * in_productId,
-                const char * in_token,
-                IServerCallback * in_callback = NULL);
+            const char * in_orderId,
+            const char * in_productId,
+            const char * in_token,
+            IServerCallback * in_callback = NULL);
 
-		/**
+        /**
          * Get Eligible Promotions
          *
          * Service Name - Product
@@ -372,42 +374,42 @@ namespace BrainCloud {
          *   "data":
          *   {
          *      {
-		* "promotions": [
-		*  {
-		*   "gameId": "10019",
-		*   "promotionId": 9,
-		*   "type": "SCHEDULED",
-		*   "name": "session >= 2",
-		*   "message": "test1",
-		*   "enabled": true,
-		*   "targetAllUsers": false,
-		*   "segments": [
-		*    5
-		*   ],
-		*   "prices": [
-		*    {
-		*     "itemId": "regGems150",
-		*     "priceId": 1
-		*    }
-		*   ],
-		*   "notifications": [
-		*    {
-		*     "trigger": "ACTIVATED",
-		*     "notificationTemplateId": 10
-		*    }
-		*   ],
-		*   "startAt": 1415374185745,
-		*   "endAt": 1415806185745,
-		*   "createdAt": 0,
-		*   "updatedAt": 1415729753294
-		*  }
-		* ]
-		*}
+         * "promotions": [
+         *  {
+         *   "gameId": "10019",
+         *   "promotionId": 9,
+         *   "type": "SCHEDULED",
+         *   "name": "session >= 2",
+         *   "message": "test1",
+         *   "enabled": true,
+         *   "targetAllUsers": false,
+         *   "segments": [
+         *    5
+         *   ],
+         *   "prices": [
+         *    {
+         *     "itemId": "regGems150",
+         *     "priceId": 1
+         *    }
+         *   ],
+         *   "notifications": [
+         *    {
+         *     "trigger": "ACTIVATED",
+         *     "notificationTemplateId": 10
+         *    }
+         *   ],
+         *   "startAt": 1415374185745,
+         *   "endAt": 1415806185745,
+         *   "createdAt": 0,
+         *   "updatedAt": 1415729753294
+         *  }
+         * ]
+         *}
          *   }
          * }
          */
-		void getEligiblePromotions(IServerCallback * in_callback = NULL);
-        
+        void getEligiblePromotions(IServerCallback * in_callback = NULL);
+
         /**
          * Awards currency in a parent app.
          *
@@ -444,7 +446,7 @@ namespace BrainCloud {
          * }
          */
         void awardParentCurrency(const char* in_currencyType, int32_t in_amount, const char * in_parentLevel, IServerCallback * in_callback = NULL);
-        
+
         /**
          * Consumes currency in a parent app.
          *
@@ -479,9 +481,9 @@ namespace BrainCloud {
          *     "createdAt": 1395693907421
          *   }
          * }
-         */    
+         */
         void consumeParentCurrency(const char* in_currencyType, int32_t in_amount, const char * in_parentLevel, IServerCallback * in_callback = NULL);
-        
+
         /**
          * Gets information on a single currency in a parent app
          * or all currency types if a null type is passed in.
@@ -512,7 +514,7 @@ namespace BrainCloud {
          * }
          */
         void getParentCurrency(const char* in_currencyType, const char * in_parentLevel, IServerCallback * in_callback = NULL);
-        
+
         /**
          * Resets all currencies in a parent app.
          *
@@ -529,6 +531,8 @@ namespace BrainCloud {
          * }
          */
         void resetParentCurrency(const char * in_parentLevel, IServerCallback * in_callback = NULL);
-		
-	};
+
+    private:
+        BrainCloudClient * m_client;
+    };
 }

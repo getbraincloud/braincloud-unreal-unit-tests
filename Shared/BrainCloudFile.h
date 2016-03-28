@@ -1,28 +1,20 @@
-//
-//  BrainCloudFile.h
-//  GameClientLib
-//
-//  Created by Preston Jennings on 2016-01-13.
-//
-//
+// Copyright 2016 bitHeads, Inc. All Rights Reserved.
 
-#ifndef _BRAINCLOUDFILE_H_
-#define _BRAINCLOUDFILE_H_
+#pragma once
 
 #include <string>
-
-#include "IServerCallback.h"
-#include "ServiceName.h"
-#include "ServiceOperation.h"
-#include "OperationParam.h"
 #include "BrainCloudTypes.h"
 
 namespace BrainCloud
 {
+    class IServerCallback;
+    class BrainCloudClient;
+
     class BrainCloudFile
     {
     public:
-        
+        BrainCloudFile(BrainCloudClient* in_client);
+
         /**
          * Prepares a user file upload. On success the file will begin uploading
          * to the brainCloud server. To be informed of success/failure of the upload
@@ -58,17 +50,17 @@ namespace BrainCloud
          * }
          *
          * Significant error codes:
-         * 
+         *
          * 40429 - File maximum file size exceeded
          * 40430 - File exists, replaceIfExists not set
          */
         bool uploadFile(const char * in_cloudPath,
-                        const char * in_cloudFilename,
-                        bool in_shareable,
-                        bool in_replaceIfExists,
-                        const char * in_localPath,
-                        IServerCallback * in_callback = NULL);
-        
+            const char * in_cloudFilename,
+            bool in_shareable,
+            bool in_replaceIfExists,
+            const char * in_localPath,
+            IServerCallback * in_callback = NULL);
+
         /**
          * List all user files
          *
@@ -97,7 +89,7 @@ namespace BrainCloud
          *
          */
         void listUserFiles(IServerCallback * in_callback = NULL);
-        
+
         /**
          * List user files from the given cloud path
          *
@@ -124,11 +116,11 @@ namespace BrainCloud
          *    }
          *   ]
          *  }
-         * }  
-         * 
+         * }
+         *
          */
         void listUserFiles(const char * in_cloudPath, bool in_recurse, IServerCallback * in_callback = NULL);
-        
+
         /**
          * Deletes a single user file.
          *
@@ -162,7 +154,7 @@ namespace BrainCloud
          *
          */
         void deleteUserFile(const char * in_cloudPath, const char * in_cloudFilename, IServerCallback * in_callback = NULL);
-        
+
         /**
          * Delete multiple user files
          *
@@ -190,10 +182,10 @@ namespace BrainCloud
          *   ]
          *  }
          * }
-         * 
+         *
          */
         void deleteUserFiles(const char * in_cloudPath, bool in_recurse, IServerCallback * in_callback = NULL);
-        
+
         /**
          * Method cancels an upload. If an IFileUploadCallback has been registered with the BrainCloudClient class,
          * the fileUploadFailed callback method will be called once the upload has been canceled.
@@ -201,7 +193,7 @@ namespace BrainCloud
          * @param in_uploadId The id of the upload
          */
         void cancelUpload(const char * in_uploadId);
-        
+
         /**
          * Returns the progress of the given upload from 0.0 to 1.0
          * or -1 if upload not found.
@@ -210,7 +202,7 @@ namespace BrainCloud
          * @return A progress from 0.0 to 1.0 or -1 if upload not found.
          */
         double getUploadProgress(const char * in_uploadId);
-        
+
         /**
          * Returns the number of bytes uploaded or -1 if upload not found.
          *
@@ -218,7 +210,7 @@ namespace BrainCloud
          * @return The number of bytes uploaded or -1 if upload not found.
          */
         int64_t getUploadBytesTransferred(const char * in_uploadId);
-        
+
         /**
          * Returns the total number of bytes that will be uploaded or -1 if upload not found.
          *
@@ -226,7 +218,8 @@ namespace BrainCloud
          * @return The total number of bytes that will be uploaded or -1 if upload not found.
          */
         int64_t getUploadTotalBytesToTransfer(const char * in_uploadId);
+
+    private:
+        BrainCloudClient * m_client;
     };
 }
-
-#endif /* _BRAINCLOUDFILE_H_ */

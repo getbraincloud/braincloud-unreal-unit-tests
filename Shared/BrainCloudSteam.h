@@ -1,18 +1,22 @@
+// Copyright 2016 bitHeads, Inc. All Rights Reserved.
+
 #pragma once
 
-#include <string>
+#include <stddef.h>
 
-#include "IServerCallback.h"
-#include "ServiceName.h"
-#include "ServiceOperation.h"
-#include "OperationParam.h"
-#include "BrainCloudTypes.h"
+namespace BrainCloud
+{
+    class IServerCallback;
+    class BrainCloudClient;
 
-namespace BrainCloud {
-	
-	class BrainCloudSteam
-	{
-		public:
-		void getUserInfo(IServerCallback * in_callback = NULL);
-	};
+    class BrainCloudSteam
+    {
+    public:
+        BrainCloudSteam(BrainCloudClient* in_client);
+
+        void getUserInfo(IServerCallback * in_callback = NULL);
+
+    private:
+        BrainCloudClient * m_client;
+    };
 }

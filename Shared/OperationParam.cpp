@@ -73,38 +73,16 @@ namespace BrainCloud
     const OperationParam OperationParam::AsyncMatchServiceStatistics                        = OperationParam("statistics");
     const OperationParam OperationParam::AsyncMatchServiceMatchStatus                       = OperationParam("status");
 
-	// Entity Service - Create Params
-	const OperationParam OperationParam::EntityServiceCreateEntityId						= OperationParam("entityId");
-	const OperationParam OperationParam::EntityServiceCreateEntityType						= OperationParam("entityType");
-	const OperationParam OperationParam::EntityServiceCreateEntitySubtype					= OperationParam("entitySubtype");
-	const OperationParam OperationParam::EntityServiceCreateData							= OperationParam("data");
-	const OperationParam OperationParam::EntityServiceCreateAcl								= OperationParam("acl");
-	const OperationParam OperationParam::EntityServiceCreateFriendData						= OperationParam("friendData");
-
-	// Entity Service - Update Params
-	const OperationParam OperationParam::EntityServiceUpdateEntityType						= OperationParam("entityType");
-	const OperationParam OperationParam::EntityServiceUpdateEntityId						= OperationParam("entityId");
-	const OperationParam OperationParam::EntityServiceUpdateData							= OperationParam("data");
-	const OperationParam OperationParam::EntityServiceUpdateAcl								= OperationParam("acl");
-	const OperationParam OperationParam::EntityServiceUpdateVersion							= OperationParam("version");
-	const OperationParam OperationParam::EntityServiceUpdateTargetPlayerId					= OperationParam("targetPlayerId");
-
-	// Entity Service - Update Partial Params
-	const OperationParam OperationParam::EntityServiceUpdatePartialEntityType				= OperationParam("entityType");
-	const OperationParam OperationParam::EntityServiceUpdatePartialEntityId					= OperationParam("entityId");
-	const OperationParam OperationParam::EntityServiceUpdatePartialUpdateOps				= OperationParam("updateOps");
-
-	// Entity Service - Delete Params
-	const OperationParam OperationParam::EntityServiceDeleteEntityType						= OperationParam("entityType");
-	const OperationParam OperationParam::EntityServiceDeleteEntityId						= OperationParam("entityId");
-
-	// Entity Service - GetEntitiesByType
-	const OperationParam OperationParam::EntityServiceGetEntitiesByTypeEntityType			= OperationParam("entityType");
-	
-	// Entity Service - GetSharedEntitiesForPlayerId
-	const OperationParam OperationParam::EntityServiceGetSharedEntitiesTargetPlayerId		= OperationParam("targetPlayerId");
-	const OperationParam OperationParam::EntityServiceGetSharedStatsTargetPlayerId			= OperationParam("targetPlayerId");
-	const OperationParam OperationParam::EntityServiceGetSharedPlayerStateTargetPlayerId	= OperationParam("targetPlayerId");
+    // Entity Service
+    const OperationParam OperationParam::EntityServiceEntityId = OperationParam("entityId");
+    const OperationParam OperationParam::EntityServiceEntityType = OperationParam("entityType");
+    const OperationParam OperationParam::EntityServiceEntitySubtype = OperationParam("entitySubtype");
+    const OperationParam OperationParam::EntityServiceData = OperationParam("data");
+    const OperationParam OperationParam::EntityServiceAcl = OperationParam("acl");
+    const OperationParam OperationParam::EntityServiceVersion = OperationParam("version");
+    const OperationParam OperationParam::EntityServiceFriendData = OperationParam("friendData");
+    const OperationParam OperationParam::EntityServiceTargetPlayerId = OperationParam("targetPlayerId");
+    const OperationParam OperationParam::EntityServiceUpdateOps = OperationParam("updateOps");
 	
 	// Global Entity Service - Params
 	const OperationParam OperationParam::GlobalEntityServiceEntityId						= OperationParam("entityId");
@@ -142,7 +120,7 @@ namespace BrainCloud
     const OperationParam OperationParam::EventServiceIncludeIncomingEvents					= OperationParam("includeIncomingEvents");
     const OperationParam OperationParam::EventServiceIncludeSentEvents                      = OperationParam("includeSentEvents");
 
-	// Friend Service - Read Player State Params
+	// Friend Service - Params
 	const OperationParam OperationParam::FriendServiceAuthenticationType					= OperationParam("authenticationType");
 	const OperationParam OperationParam::FriendServiceEntityId								= OperationParam("entityId");
 	const OperationParam OperationParam::FriendServiceExternalId							= OperationParam("externalId");
@@ -154,6 +132,8 @@ namespace BrainCloud
 	const OperationParam OperationParam::FriendServiceReadPlayerStateFriendId               = OperationParam("friendId");
     const OperationParam OperationParam::FriendServiceSearchText                            = OperationParam("searchText");
     const OperationParam OperationParam::FriendServiceMaxResults                            = OperationParam("maxResults");
+    const OperationParam OperationParam::FriendServiceFriendPlatform                        = OperationParam("friendPlatform");
+    const OperationParam OperationParam::FriendServiceProfileIds                            = OperationParam("profileIds");
 
 	//Achievements Event Data Params
 	const OperationParam OperationParam::GamificationServiceAchievementsName				= OperationParam("achievements");
@@ -268,6 +248,7 @@ namespace BrainCloud
 	const OperationParam OperationParam::MatchMakingServiceRangeDelta						= OperationParam("rangeDelta");
 	const OperationParam OperationParam::MatchMakingServiceNumMatches						= OperationParam("numMatches");
 	const OperationParam OperationParam::MatchMakingServiceExtraParams						= OperationParam("extraParms");
+    const OperationParam OperationParam::MatchMakingServiceAttributes                       = OperationParam("attributes");
 	const OperationParam OperationParam::MatchMakingServicePlayerId							= OperationParam("playerId");
 	const OperationParam OperationParam::MatchMakingServicePlaybackStreamId					= OperationParam("playbackStreamId");
 	

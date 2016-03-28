@@ -26,6 +26,7 @@ namespace BrainCloud {
 		static const ServiceOperation ReadByType;
 		static const ServiceOperation Verify;
 		static const ServiceOperation ReadShared;
+        static const ServiceOperation ReadSharedEntity;
         
         // push notification
 		static const ServiceOperation Deregister;
@@ -61,6 +62,10 @@ namespace BrainCloud {
 		static const ServiceOperation ReadFriends;
 		static const ServiceOperation ReadFriendsPlayerState;
         static const ServiceOperation FindPlayerByName;
+        static const ServiceOperation ListFriends;
+        static const ServiceOperation AddFriends;
+        static const ServiceOperation RemoveFriends;
+        static const ServiceOperation FindPlayerByUniversalId;
 		static const ServiceOperation GetSocialLeaderboard;
         static const ServiceOperation GetMultiSocialLeaderboard;
 		static const ServiceOperation GetGlobalLeaderboard;

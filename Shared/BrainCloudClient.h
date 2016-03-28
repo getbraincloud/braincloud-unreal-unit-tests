@@ -1,11 +1,8 @@
-//
 //  BrainCloudClient.h
 //  BrainCloudLib
-//
+//  Copyright 2016 bitHeads, Inc. All Rights Reserved.
 
-
-#ifndef _BRAINCLOUDCLIENT_H_
-#define _BRAINCLOUDCLIENT_H_
+#pragma once
 
 #ifdef WIN32
 #include <WinSock2.h>
@@ -54,14 +51,11 @@
 #include "BrainCloudFile.h"
 
 namespace Json {
-	class Value;
+    class Value;
 }
 
-namespace BrainCloud {
-
-	class IBrainCloudComms;
-	class ServerCall;
-
+namespace BrainCloud
+{
     /**
      * This class is responsible for accumulating client requests, bundling
      * them together and sending them off to the server...
@@ -74,27 +68,13 @@ namespace BrainCloud {
      * time (to make sure that data doesn't arrive out of order, and to make
      * recovery of communication problems more simple).
      */
-    class BrainCloudClient {
-
+    class BrainCloudClient
+    {
     public:
-
-        /** @name Public constants */
-        //@{
-		static const char * DEVICE_TYPE_IOS;
-        //@}
-
-        // ---------------------------------------------------------------------
-        //  Constructors and Destructor
-        // ---------------------------------------------------------------------
-        /** @name Destructor */
-        //@{
-
         /**
          * Destructor
          */
-        virtual ~BrainCloudClient( );
-        //@}
-
+        virtual ~BrainCloudClient() { };
 
         /**
          * BrainCloudClient is a singleton object. This method gives the caller access
@@ -102,32 +82,19 @@ namespace BrainCloud {
          *
          * @return BrainCloudClient * - pointer to the singleton BrainCloudClient object
          */
-        static BrainCloudClient   * getInstance( );
-
-		/**
-		 * Never call this - for testing only!!!!
-		 */
-		static BrainCloudClient   * getNewInstanceForTestingOnly( );
+        static BrainCloudClient * getInstance();
 
         /**
-        * Method initializes the BrainCloudClient.
-        *
-        * @param in_serverURL The url to the brainCloud server
-        * @param in_secretKey The secret key for your game
-        * @param in_gameId The game id
-        * @param in_gameVersion The game version
-        * @param in_appId
-        * @param in_region
-        *
         * @deprecated - use initialize(const char * in_serverURL, const char * in_secretKey, const char * in_gameId, const char * in_gameVersion)
-        * as appId and region are not used
+        * as appId and region are not used. Removal after June 21 2016
         */
-		void initialize(const char * in_serverURL, const char * in_secretKey, const char * in_gameId, const char * in_gameVersion, const char * in_appId, const char * in_region);
+        DEPRECATED void initialize(const char * in_serverURL, const char * in_secretKey, const char * in_gameId, const char * in_gameVersion, const char * in_appId, const char * in_region);
 
         /**
          * Method initializes the BrainCloudClient.
          *
          * @param in_serverURL The url to the brainCloud server
+         *     Currently this should be:  https://sharedprod.braincloudservers.com/dispatcherv2
          * @param in_secretKey The secret key for your game
          * @param in_gameId The game id
          * @param in_gameVersion The game version
@@ -141,18 +108,18 @@ namespace BrainCloud {
         * @param in_profileId The id of the profile id that was most recently used by the app (on this device)
         * @param in_anonymousId  The anonymous installation id that was generated for this device
         */
-		void initializeIdentity(const char * in_profileId, const char * in_anonymousId);
+        void initializeIdentity(const char * in_profileId, const char * in_anonymousId);
 
-		/**
-		 * Return a reference to the game client manager.
-		 * Not meant to be called by external clients, just for internal testing and use.
-		 */
-		IBrainCloudComms * getBrainCloudComms() const { return _brainCloudComms; }
+        /**
+         * Return a reference to the game client manager.
+         * Not meant to be called by external clients, just for internal testing and use.
+         */
+        IBrainCloudComms * getBrainCloudComms() const { return _brainCloudComms; }
 
-		/**
-		 * Run callbacks, to be called once per frame from your main thread
-		 */
-		void runCallbacks();
+        /**
+         * Run callbacks, to be called once per frame from your main thread
+         */
+        void runCallbacks();
 
         /**
          * Sets a callback handler for any out of band event messages that come from
@@ -225,35 +192,35 @@ namespace BrainCloud {
          * @param in_networkErrorCallback The network error callback handler.
          */
         void registerNetworkErrorCallback(INetworkErrorCallback * in_networkErrorCallback);
-        
+
         /**
          * Deregisters the network error callback
          */
         void deregisterNetworkErrorCallback();
-        
+
         /**
          * Set to true to enable logging packets to std::out
          */
         void enableLogging(bool shouldEnable);
 
-		/**
+        /**
          * Send an empty message to the server, which essentially polls the
          * server for any new events to send to this client.
          */
-		void heartbeat( );
+        void heartbeat();
 
-		/**
+        /**
          * Sends a service request message to the server. This will most likely be placed
          * in a queue...
          *
          * @param in_serviceMessage
          */
-		void sendRequest(ServerCall * in_serviceMessage);
+        void sendRequest(ServerCall * in_serviceMessage);
 
-		/**
+        /**
          * Clears any pending messages from communication library.
          */
-		void resetCommunication( );
+        void resetCommunication();
 
         /**
          * Shuts the brainCloud client down.
@@ -290,38 +257,36 @@ namespace BrainCloud {
         //  Getter methods
         // ---------------------------------------------------------------------
 
-        /** @name Getter methods */
-        //@{
-
         /**
          * Returns the sessionId or empty string if no session present.
          *
          * @returns The sessionId or empty string if no session present.
          */
-        const char * getSessionId( ) const;
+        const char * getSessionId() const;
 
-		BrainCloudPlayerStatistics * getPlayerStatisticsService() { return _playerStatisticsService; }
-		BrainCloudGlobalStatistics * getGlobalStatisticsService() { return _globalStatisticsService; }
-		BrainCloudIdentity * getIdentityService() { return _identityService; }
-		BrainCloudProduct * getProductService() { return _productService; }
-		BrainCloudEntity * getEntityService()  { return _entityService; }
-		BrainCloudGlobalEntity * getGlobalEntityService()  { return _globalEntityService; }
-		BrainCloudMatchmaking * getMatchmakingService()  { return _matchmakingService; }
-		BrainCloudOneWayMatch * getOneWayMatchService() { return _oneWayMatchService; }
-		BrainCloudPlaybackStream * getPlaybackStreamService() { return _playbackStreamService; }
-		BrainCloudAsyncMatch * getAsyncMatchService() { return _asyncMatchService; }
-		BrainCloudScript * getScriptService()  { return _scriptService; }
-		BrainCloudPlayerState * getPlayerStateService() { return _playerStateService; }
-		BrainCloudFriend * getFriendService() { return _friendService; }
-		BrainCloudEvent * getEventService() { return _eventService; }
-		BrainCloudSocialLeaderboard * getSocialLeaderboardService() { return _socialLeaderboardService; }
-		BrainCloudGamification * getGamificationService() { return _gamificationService; }
-		BrainCloudTime * getTimeService() { return _timeService; }
-		BrainCloudAuthentication * getAuthenticationService() { return _authenticationService; }
-		BrainCloudTwitter * getTwitterService() { return _twitterService; }
-		BrainCloudPushNotification * getPushNotificationService() { return _pushNotificationService; }
-		BrainCloudPlayerStatisticsEvent * getPlayerStatisticsEventService() { return _playerStatisticsEventService; }
-		BrainCloudSteam * getSteamService() { return _steamService; }
+        /* Service getter methods */
+        BrainCloudPlayerStatistics * getPlayerStatisticsService() { return _playerStatisticsService; }
+        BrainCloudGlobalStatistics * getGlobalStatisticsService() { return _globalStatisticsService; }
+        BrainCloudIdentity * getIdentityService() { return _identityService; }
+        BrainCloudProduct * getProductService() { return _productService; }
+        BrainCloudEntity * getEntityService()  { return _entityService; }
+        BrainCloudGlobalEntity * getGlobalEntityService()  { return _globalEntityService; }
+        BrainCloudMatchmaking * getMatchmakingService()  { return _matchmakingService; }
+        BrainCloudOneWayMatch * getOneWayMatchService() { return _oneWayMatchService; }
+        BrainCloudPlaybackStream * getPlaybackStreamService() { return _playbackStreamService; }
+        BrainCloudAsyncMatch * getAsyncMatchService() { return _asyncMatchService; }
+        BrainCloudScript * getScriptService()  { return _scriptService; }
+        BrainCloudPlayerState * getPlayerStateService() { return _playerStateService; }
+        BrainCloudFriend * getFriendService() { return _friendService; }
+        BrainCloudEvent * getEventService() { return _eventService; }
+        BrainCloudSocialLeaderboard * getSocialLeaderboardService() { return _socialLeaderboardService; }
+        BrainCloudGamification * getGamificationService() { return _gamificationService; }
+        BrainCloudTime * getTimeService() { return _timeService; }
+        BrainCloudAuthentication * getAuthenticationService() { return _authenticationService; }
+        BrainCloudTwitter * getTwitterService() { return _twitterService; }
+        BrainCloudPushNotification * getPushNotificationService() { return _pushNotificationService; }
+        BrainCloudPlayerStatisticsEvent * getPlayerStatisticsEventService() { return _playerStatisticsEventService; }
+        BrainCloudSteam * getSteamService() { return _steamService; }
         BrainCloudGlobalApp * getGlobalAppService() { return _globalAppService; }
         BrainCloudS3Handling * getS3HandlingService() { return _s3HandlingService; }
         BrainCloudRedemptionCode * getRedemptionCodeService() { return _redemptionCodeService; }
@@ -329,22 +294,22 @@ namespace BrainCloud {
         BrainCloudProfanity * getProfanityService() { return _profanityService; }
         BrainCloudFile * getFileService() { return _fileService; }
 
-		const std::string & getGameId() const
+        const std::string & getGameId() const
         {
-            if (_brainCloudComms != NULL)
-            {
+            if (_brainCloudComms != NULL) {
                 return _brainCloudComms->getGameId();
             }
-			static std::string noGameId;
-			return noGameId;
+            static std::string noGameId;
+            return noGameId;
         }
-		const std::string & getReleasePlatform() const { return _releasePlatform; };
-		const std::string & getGameVersion() const { return _gameVersion; };
-		const std::string & getBrainCloudClientVersion() const { return s_brainCloudClientVersion; };
 
-		const std::string& getCountryCode() const { return _countryCode; }
-		const std::string& getLanguageCode() const { return _languageCode; }
-		float getTimezoneOffset() { return _timezoneOffset;  }
+        const std::string & getReleasePlatform() const { return _releasePlatform; };
+        const std::string & getGameVersion() const { return _gameVersion; };
+        const std::string & getBrainCloudClientVersion() const { return s_brainCloudClientVersion; };
+
+        const std::string& getCountryCode() const { return _countryCode; }
+        const std::string& getLanguageCode() const { return _languageCode; }
+        float getTimezoneOffset() { return _timezoneOffset; }
 
 #ifdef __ANDROID__
         // we provide setters for Android as these values need to come from
@@ -354,68 +319,40 @@ namespace BrainCloud {
         void setTimezoneOffset(float timezoneOffset) { _timezoneOffset = timezoneOffset; }
 #endif
 
-        //@}
-
-
         // ---------------------------------------------------------------------
         //  Setter methods
         // ---------------------------------------------------------------------
 
-        /** @name Setter methods */
-        //@{
-
         /**
-         * Set the credentials for communication after authentication has
-         * occured.
-         * NOTE: AUTHENTICATE() is currently broken, so you won't be calling
-         * this yet - just use setUserId() for now.
+         * Deprecated - Use Initialize instead - Removal after June 21 2016
          *
-         * @param in_jsonAuthenticationResponse - should be the document that was
-         *                                 returned to the server callback on
-         *                                 the authenticate call.
-         * @return true if user is authenticated, false otherwise
-         */
-		bool setCredentials( const Json::Value& in_jsonAuthenticationResponse );
-
-        /**
-         * Set the credentials for communication after authentication has
-         * occured.
-         * NOTE: AUTHENTICATE() is currently broken, so you won't be calling
-         * this yet - just use setUserId() for now.
-         *
-         * @param authenticationResponse - should be the document that was
-         *                                 returned to the server callback on
-         *                                 the authenticate call.
-         * @return true if user is authenticated, false otherwise
-         */
-		//bool    setCredentials( std::string * jsonAuthenticationResponse );
-
-        /**
          * Set the url of the server to communicate with.
-         * Currently this should be:  http://metagamedev.elasticbeanstalk.com/dispatcher
+         * Currently this should be:  https://sharedprod.braincloudservers.com/dispatcherv2
          *
-         * @param in_serverUrl - the server event callback handler
+         * @param in_serverUrl - the brainCloud server URL
          */
-        void setServerUrl( const char * in_serverUrl);
+        DEPRECATED void setServerUrl(const char * in_serverUrl);
 
         /**
+         * Deprecated - Removal after June 21 2016
+         *
          * Used for setting authentication session info - Not currently used,
          * and you probably won't need to call this directly (but we're keeping
          * it public just in case...)
-
-		 *@param in_id - the session id
+         *
+         * @param in_id - the session id
          */
-        void setSessionId( const char * in_id);
+        DEPRECATED void setSessionId(const char * in_id);
 
-		/**
-		 * Deprecated - Removal after May 10 2016
+        /**
+         * Deprecated - Removal after May 10 2016
          *
          * set an interval in ms for which the BrainCloud will contact the server
-		 * and receive any pending events
-		 *
-		 * @param in_intervalInMilliseconds The time between heartbeats in milliseconds
-		 */
-		DEPRECATED void	setHeartbeatInterval(int in_intervalInMilliseconds);
+         * and receive any pending events
+         *
+         * @param in_intervalInMilliseconds The time between heartbeats in milliseconds
+         */
+        DEPRECATED void	setHeartbeatInterval(int in_intervalInMilliseconds);
 
         /**
          * Returns the list of packet timeouts.
@@ -520,7 +457,7 @@ namespace BrainCloud {
          * @param in_bytesPerSec The low transfer rate threshold in bytes/sec
          */
         void setUploadLowTransferRateThreshold(int in_bytesPerSec);
-        
+
         /**
          * Enables the message caching upon network error, which is disabled by default.
          * Once enabled, if a client side network error is encountered
@@ -549,54 +486,50 @@ namespace BrainCloud {
          * @param in_enabled True if message should be cached on timeout
          */
         void enableNetworkErrorMessageCaching(bool in_enabled);
-        
+
         /** Attempts to resend any cached messages. If no messages are in the cache,
          * this method does nothing.
          */
         void retryCachedMessages();
-        
-        /** 
+
+        /**
          * Flushes the cached messages to resume api call processing. This will dump
          * all of the cached messages in the queue.
-         * 
+         *
          * @param in_sendApiErrorCallbacks If set to true API error callbacks will
          * be called for every cached message with statusCode CLIENT_NETWORK_ERROR
          * and reasonCode CLIENT_NETWORK_ERROR_TIMEOUT.
          */
         void flushCachedMessages(bool in_sendApiErrorCallbacks);
 
-        //@}
-
-
     protected:
+        BrainCloudClient();
 
-        BrainCloudClient( );
-
-        static BrainCloudClient *   _instance;
+        static BrainCloudClient * _instance;
 
         IBrainCloudComms * _brainCloudComms;
-		BrainCloudPlayerStatistics * _playerStatisticsService;
-		BrainCloudGlobalStatistics * _globalStatisticsService;
-		BrainCloudIdentity * _identityService;
-		BrainCloudProduct * _productService;
-		BrainCloudEntity * _entityService;
-		BrainCloudGlobalEntity * _globalEntityService;
-		BrainCloudMatchmaking * _matchmakingService;
-		BrainCloudOneWayMatch * _oneWayMatchService;
-		BrainCloudPlaybackStream * _playbackStreamService;
-		BrainCloudScript * _scriptService;
-		BrainCloudPlayerState * _playerStateService;
-		BrainCloudFriend * _friendService;
+        BrainCloudPlayerStatistics * _playerStatisticsService;
+        BrainCloudGlobalStatistics * _globalStatisticsService;
+        BrainCloudIdentity * _identityService;
+        BrainCloudProduct * _productService;
+        BrainCloudEntity * _entityService;
+        BrainCloudGlobalEntity * _globalEntityService;
+        BrainCloudMatchmaking * _matchmakingService;
+        BrainCloudOneWayMatch * _oneWayMatchService;
+        BrainCloudPlaybackStream * _playbackStreamService;
+        BrainCloudScript * _scriptService;
+        BrainCloudPlayerState * _playerStateService;
+        BrainCloudFriend * _friendService;
         BrainCloudEvent * _eventService;
         BrainCloudAsyncMatch * _asyncMatchService;
-		BrainCloudSocialLeaderboard * _socialLeaderboardService;
-		BrainCloudGamification * _gamificationService;
-		BrainCloudTime * _timeService;
-		BrainCloudAuthentication * _authenticationService;
-		BrainCloudTwitter * _twitterService;
-		BrainCloudPushNotification * _pushNotificationService;
-		BrainCloudPlayerStatisticsEvent * _playerStatisticsEventService;
-		BrainCloudSteam * _steamService;
+        BrainCloudSocialLeaderboard * _socialLeaderboardService;
+        BrainCloudGamification * _gamificationService;
+        BrainCloudTime * _timeService;
+        BrainCloudAuthentication * _authenticationService;
+        BrainCloudTwitter * _twitterService;
+        BrainCloudPushNotification * _pushNotificationService;
+        BrainCloudPlayerStatisticsEvent * _playerStatisticsEventService;
+        BrainCloudSteam * _steamService;
         BrainCloudGlobalApp * _globalAppService;
         BrainCloudS3Handling * _s3HandlingService;
         BrainCloudRedemptionCode * _redemptionCodeService;
@@ -604,25 +537,16 @@ namespace BrainCloud {
         BrainCloudProfanity * _profanityService;
         BrainCloudFile * _fileService;
 
-		static std::string s_brainCloudClientVersion;
+        static std::string s_brainCloudClientVersion;
 
-		std::string _releasePlatform;
-		std::string _gameVersion;
+        std::string _releasePlatform;
+        std::string _gameVersion;
 
-		std::string _countryCode;
-		std::string _languageCode;
-		float _timezoneOffset;
+        std::string _countryCode;
+        std::string _languageCode;
+        float _timezoneOffset;
 
-    public:
-		static Json::Value jsonStringToValue(const std::string& in_jsonString);
-		static Json::Value jsonStringToValue(const char * in_jsonString);
-		static std::string jsonValueToString(const Json::Value& in_jsonValue);
-
-	private:
-		void setupOSLocaleData();
+    private:
+        void setupOSLocaleData();
     };  // end class
-
 }  // end namespace
-
-
-#endif  // _BRAINCLOUDCLIENT_H_

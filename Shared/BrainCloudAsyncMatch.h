@@ -1,3 +1,4 @@
+// Copyright 2016 bitHeads, Inc. All Rights Reserved.
 
 #pragma once
 
@@ -9,9 +10,10 @@ namespace BrainCloud {
     class IServerCallback;
     class BrainCloudClient;
     
-    class BrainCloudAsyncMatch {
-    
+    class BrainCloudAsyncMatch {    
     public:
+        BrainCloudAsyncMatch(BrainCloudClient* in_client);
+
         /**
          * Creates an instance of an asynchronous match.
          *
@@ -503,5 +505,7 @@ namespace BrainCloud {
             const char * in_nextPlayer,
             const char * in_jsonSummary,
             IServerCallback * in_callback);
+
+        BrainCloudClient * m_client;
     };
 }

@@ -6,8 +6,7 @@
 //
 //
 
-#ifndef BrainCloud_Platform_h
-#define BrainCloud_Platform_h
+#pragma once
 
 #include <string>
 
@@ -35,14 +34,32 @@ namespace BrainCloud
         static const Platform & Tizen;
         static const Platform & Roku;
         static const Platform & Unknown;
-        
+
         const std::string & toString() const;
         static const Platform & fromString(const std::string & in_platform);
-        
+
     private:
         Platform(const std::string & in_platform);
         std::string m_value;
     };
-}
 
-#endif
+    inline bool operator== (const Platform& a, const Platform& b) {
+        return a.toString() == b.toString();
+    }
+
+    inline bool operator== (const Platform& a, const std::string& s) {
+        return a.toString() == s;
+    }
+
+    inline bool operator== (const std::string& s, const Platform& a) {
+        return a.toString() == s;
+    }
+
+    inline bool operator== (const Platform& a, const char * s) {
+        return a.toString() == s;
+    }
+
+    inline bool operator== (const char * s, const Platform& a) {
+        return a.toString() == s;
+    }
+}

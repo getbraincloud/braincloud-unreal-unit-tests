@@ -1,30 +1,30 @@
+// Copyright 2016 bitHeads, Inc. All Rights Reserved.
+
 #pragma once
 
 #include <string>
 
-#include "IServerCallback.h"
-#include "ServiceName.h"
-#include "ServiceOperation.h"
-#include "OperationParam.h"
+namespace BrainCloud
+{
+    class IServerCallback;
+    class BrainCloudClient;
 
-namespace BrainCloud {
+    class BrainCloudIdentity
+    {
+    public:
+        BrainCloudIdentity(BrainCloudClient* in_client);
 
-	class BrainCloudIdentity
-	{
-	public:
-		BrainCloudIdentity();
-
-		/**
+        /**
          * Attach the user's Facebook credentials to the current profile.
          *
-		 * Service Name - Identity
-	     * Service Operation - Attach
-	   	 *
+         * Service Name - Identity
+         * Service Operation - Attach
+         *
          * @param in_facebookId The facebook id of the user
-		 * @param in_authenticationToken The validated token from the Facebook SDK
-		 *   (that will be further validated when sent to the bC service)
-		 * @param in_callback The method to be invoked when the server response is received
-		 *
+         * @param in_authenticationToken The validated token from the Facebook SDK
+         *   (that will be further validated when sent to the bC service)
+         * @param in_callback The method to be invoked when the server response is received
+         *
          * Errors to watch for:  SWITCHING_PROFILES - this means that the Facebook identity you provided
          * already points to a different profile.  You will likely want to offer the player the
          * choice to *SWITCH* to that profile, or *MERGE* the profiles.
@@ -33,46 +33,46 @@ namespace BrainCloud {
          */
         void attachFacebookIdentity(const char * in_facebookId, const char * in_authenticationToken, IServerCallback * in_callback = NULL);
 
-		/**
+        /**
          * Merge the profile associated with the provided Facebook credentials with the
          * current profile.
          *
-		 * Service Name - Identity
-	     * Service Operation - Merge
-	   	 *
+         * Service Name - Identity
+         * Service Operation - Merge
+         *
          * @param in_facebookId The facebook id of the user
-		 * @param in_authenticationToken The validated token from the Facebook SDK
-		 *   (that will be further validated when sent to the bC service)
-		 * @param in_callback The method to be invoked when the server response is received
-		 *
-		 */
+         * @param in_authenticationToken The validated token from the Facebook SDK
+         *   (that will be further validated when sent to the bC service)
+         * @param in_callback The method to be invoked when the server response is received
+         *
+         */
         void mergeFacebookIdentity(const char * in_facebookId, const char * in_authenticationToken, IServerCallback * in_callback = NULL);
 
-		/**
-		 * Detach the Facebook identity from this profile.
-		 *
-		 * Service Name - Identity
-		 * Service Operation - Detach
-		 *
-		 * @param in_facebookId The facebook id of the user
-		 * @param in_continueAnon Proceed even if the profile will revert to anonymous?
-		 * @param in_callback The method to be invoked when the server response is received
-		 *
-		 * Watch for DOWNGRADING_TO_ANONYMOUS_ERROR - occurs if you set in_continueAnon to false, and
-		 * disconnecting this identity would result in the profile being anonymous (which means that
-		 * the profile wouldn't be retrievable if the user loses their device)
-		 */
+        /**
+         * Detach the Facebook identity from this profile.
+         *
+         * Service Name - Identity
+         * Service Operation - Detach
+         *
+         * @param in_facebookId The facebook id of the user
+         * @param in_continueAnon Proceed even if the profile will revert to anonymous?
+         * @param in_callback The method to be invoked when the server response is received
+         *
+         * Watch for DOWNGRADING_TO_ANONYMOUS_ERROR - occurs if you set in_continueAnon to false, and
+         * disconnecting this identity would result in the profile being anonymous (which means that
+         * the profile wouldn't be retrievable if the user loses their device)
+         */
         void detachFacebookIdentity(const char * in_facebookId, bool in_continueAnon, IServerCallback * in_callback = NULL);
 
-		/**
+        /**
          * Attach a Game Center identity to the current profile.
          *
-		 * Service Name - Identity
-	     * Service Operation - Attach
-	   	 *
+         * Service Name - Identity
+         * Service Operation - Attach
+         *
          * @param in_gameCenterId The player's game center id  (use the playerID property from the local GKPlayer object)
          * @param in_callback The method to be invoked when the server response is received
-		 *
+         *
          * Errors to watch for:  SWITCHING_PROFILES - this means that the Game Center identity you provided
          * already points to a different profile.  You will likely want to offer the player the
          * choice to *SWITCH* to that profile, or *MERGE* the profiles.
@@ -80,45 +80,45 @@ namespace BrainCloud {
          * To switch profiles, call ClearSavedProfileID() and call this method again.
          *
          */
-		void attachGameCenterIdentity(const char * in_gameCenterId, IServerCallback * in_callback = NULL);
+        void attachGameCenterIdentity(const char * in_gameCenterId, IServerCallback * in_callback = NULL);
 
-		/**
+        /**
          * Merge the profile associated with the specified Game Center identity with the current profile.
          *
-		 * Service Name - Identity
-	     * Service Operation - Merge
-	   	 *
+         * Service Name - Identity
+         * Service Operation - Merge
+         *
          * @param in_gameCenterId The player's game center id  (use the playerID property from the local GKPlayer object)
          * @param in_callback The method to be invoked when the server response is received
          */
         void mergeGameCenterIdentity(const char * in_gameCenterId, IServerCallback * in_callback = NULL);
 
-		/**
+        /**
          * Detach the Game Center identity from the current profile.
          *
-		 * Service Name - Identity
-		 * Service Operation - Detach
-		 *
+         * Service Name - Identity
+         * Service Operation - Detach
+         *
          * @param in_gameCenterId The player's game center id  (use the playerID property from the local GKPlayer object)
          * @param in_continueAnon Proceed even if the profile will revert to anonymous?
          * @param in_callback The method to be invoked when the server response is received
-		 *
-		 * Watch for DOWNGRADING_TO_ANONYMOUS_ERROR - occurs if you set in_continueAnon to false, and
+         *
+         * Watch for DOWNGRADING_TO_ANONYMOUS_ERROR - occurs if you set in_continueAnon to false, and
          * disconnecting this identity would result in the profile being anonymous (which means that
          * the profile wouldn't be retrievable if the user loses their device)
          */
         void detachGameCenterIdentity(const char * in_gameCenterId, bool in_continueAnon, IServerCallback * in_callback = NULL);
 
-		/**
+        /**
          * Attach a Email and Password identity to the current profile.
          *
-		 * Service Name - Identity
-	     * Service Operation - Attach
-	   	 *
+         * Service Name - Identity
+         * Service Operation - Attach
+         *
          * @param in_email The player's e-mail address
          * @param in_password The player's password
          * @param in_callback The method to be invoked when the server response is received
-		 *
+         *
          * Errors to watch for:  SWITCHING_PROFILES - this means that the email address you provided
          * already points to a different profile.  You will likely want to offer the player the
          * choice to *SWITCH* to that profile, or *MERGE* the profiles.
@@ -127,45 +127,45 @@ namespace BrainCloud {
          */
         void attachEmailIdentity(const char * in_email, const char * in_password, IServerCallback * in_callback = NULL);
 
-		/**
+        /**
          * Merge the profile associated with the provided e=mail with the current profile.
          *
-		 * Service Name - Identity
-	     * Service Operation - Merge
-	   	 *
+         * Service Name - Identity
+         * Service Operation - Merge
+         *
          * @param in_email The player's e-mail address
          * @param in_password The player's password
          * @param in_callback The method to be invoked when the server response is received
-		 *
+         *
          */
         void mergeEmailIdentity(const char * in_email, const char * in_password, IServerCallback * in_callback = NULL);
 
-		/**
+        /**
          * Detach the e-mail identity from the current profile
          *
-		 * Service Name - Identity
-		 * Service Operation - Detach
-		 *
+         * Service Name - Identity
+         * Service Operation - Detach
+         *
          * @param in_email The player's e-mail address
          * @param in_continueAnon Proceed even if the profile will revert to anonymous?
          * @param in_callback The method to be invoked when the server response is received
-		 *
-		 * Watch for DOWNGRADING_TO_ANONYMOUS_ERROR - occurs if you set in_continueAnon to false, and
+         *
+         * Watch for DOWNGRADING_TO_ANONYMOUS_ERROR - occurs if you set in_continueAnon to false, and
          * disconnecting this identity would result in the profile being anonymous (which means that
          * the profile wouldn't be retrievable if the user loses their device)
          */
         void detachEmailIdentity(const char * in_email, bool in_continueAnon, IServerCallback * in_callback = NULL);
 
-		/**
+        /**
          * Attach a Universal (userid + password) identity to the current profile.
          *
-		 * Service Name - Identity
-	     * Service Operation - Attach
-	   	 *
+         * Service Name - Identity
+         * Service Operation - Attach
+         *
          * @param in_userId The player's userid
          * @param in_password The player's password
          * @param in_callback The method to be invoked when the server response is received
-		 *
+         *
          * Errors to watch for:  SWITCHING_PROFILES - this means that the email address you provided
          * already points to a different profile.  You will likely want to offer the player the
          * choice to *SWITCH* to that profile, or *MERGE* the profiles.
@@ -174,40 +174,40 @@ namespace BrainCloud {
          */
         void attachUniversalIdentity(const char * in_userId, const char * in_password, IServerCallback * in_callback = NULL);
 
-		/**
+        /**
          * Merge the profile associated with the provided userId with the current profile.
          *
-		 * Service Name - Identity
-	     * Service Operation - Merge
-	   	 *
+         * Service Name - Identity
+         * Service Operation - Merge
+         *
          * @param in_userId The player's userid
          * @param in_password The player's password
          * @param in_callback The method to be invoked when the server response is received
          */
         void mergeUniversalIdentity(const char * in_userId, const char * in_password, IServerCallback * in_callback = NULL);
 
-		/**
+        /**
          * Detach the universal identity from the current profile
          *
-		 * Service Name - Identity
-		 * Service Operation - Detach
-		 *
+         * Service Name - Identity
+         * Service Operation - Detach
+         *
          * @param in_userId The player's userid
          * @param in_continueAnon Proceed even if the profile will revert to anonymous?
          * @param in_callback The method to be invoked when the server response is received
-		 *
-		 * Watch for DOWNGRADING_TO_ANONYMOUS_ERROR - occurs if you set in_continueAnon to false, and
+         *
+         * Watch for DOWNGRADING_TO_ANONYMOUS_ERROR - occurs if you set in_continueAnon to false, and
          * disconnecting this identity would result in the profile being anonymous (which means that
          * the profile wouldn't be retrievable if the user loses their device)
          */
         void detachUniversalIdentity(const char * in_userId, bool in_continueAnon, IServerCallback * in_callback = NULL);
 
-		/**
+        /**
          * Attach a Steam (userid + steamsessionticket) identity to the current profile.
          *
-		 * Service Name - Identity
-	     * Service Operation - Attach
-	   	 *
+         * Service Name - Identity
+         * Service Operation - Attach
+         *
          * @param in_steamId String representation of 64 bit steam id
          * @param in_sessionTicket The player's session ticket (hex encoded)
          * @param in_callback The method to be invoked when the server response is received
@@ -218,27 +218,27 @@ namespace BrainCloud {
          *
          * To switch profiles, call ClearSavedProfileID() and then call AuthenticateSteam().
          */
-		void attachSteamIdentity(const char * in_steamId, const char * in_sessionTicket, IServerCallback * in_callback = NULL);
+        void attachSteamIdentity(const char * in_steamId, const char * in_sessionTicket, IServerCallback * in_callback = NULL);
 
         /**
          * Merge the profile associated with the provided steam userid with the current profile.
          *
-		 * Service Name - Identity
-	     * Service Operation - Merge
-	   	 *
+         * Service Name - Identity
+         * Service Operation - Merge
+         *
          * @param in_steamId String representation of 64 bit steam id
          * @param in_sessionTicket The player's session ticket (hex encoded)
          * @param in_callback The method to be invoked when the server response is received
          *
          */
-		void mergeSteamIdentity(const char * in_steamId, const char * in_sessionTicket, IServerCallback * in_callback = NULL);
+        void mergeSteamIdentity(const char * in_steamId, const char * in_sessionTicket, IServerCallback * in_callback = NULL);
 
         /**
          * Detach the steam identity from the current profile
          *
-		 * Service Name - Identity
-	     * Service Operation - Detach
-	   	 *
+         * Service Name - Identity
+         * Service Operation - Detach
+         *
          * @param in_steamId String representation of 64 bit steam id
          * @param in_continueAnon Proceed even if the profile will revert to anonymous?
          * @param in_callback The method to be invoked when the server response is received
@@ -247,7 +247,7 @@ namespace BrainCloud {
          * disconnecting this identity would result in the profile being anonymous (which means that
          * the profile wouldn't be retrievable if the user loses their device)
          */
-		void detachSteamIdentity(const char * in_steamId, bool in_continueAnon, IServerCallback * in_callback = NULL);
+        void detachSteamIdentity(const char * in_steamId, bool in_continueAnon, IServerCallback * in_callback = NULL);
 
         /**
          * Attach the user's Google credentials to the current profile.
@@ -505,11 +505,13 @@ namespace BrainCloud {
          */
         void getChildProfiles(bool in_includeSummaryData, IServerCallback * in_callback = NULL);
 
-	private:
+    private:
+        BrainCloudClient * m_client;
+
         void switchToChildProfile(const char * in_childProfileId, const char * in_childGameId, bool in_forceCreate, bool in_forceSingleton, IServerCallback * in_callback = NULL);
 
-		void attachIdentity(const char * in_externalId, const char * in_authenticationToken, const char * in_authenticationType, IServerCallback * in_callback = NULL);
-		void mergeIdentity(const char * in_externalId, const char * in_authenticationToken, const char * in_authenticationType, IServerCallback * in_callback = NULL);
-		void detachIdentity(const char * in_externalId, const char * in_authenticationType, bool in_continueAnon, IServerCallback * in_callback = NULL);
-	};
+        void attachIdentity(const char * in_externalId, const char * in_authenticationToken, const char * in_authenticationType, IServerCallback * in_callback = NULL);
+        void mergeIdentity(const char * in_externalId, const char * in_authenticationToken, const char * in_authenticationType, IServerCallback * in_callback = NULL);
+        void detachIdentity(const char * in_externalId, const char * in_authenticationType, bool in_continueAnon, IServerCallback * in_callback = NULL);
+    };
 }

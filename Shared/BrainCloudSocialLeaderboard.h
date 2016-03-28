@@ -1,47 +1,46 @@
+// Copyright 2016 bitHeads, Inc. All Rights Reserved.
+
 #pragma once
 
 #include <string>
 #include <vector>
-
-#include "IServerCallback.h"
-#include "ServiceName.h"
-#include "ServiceOperation.h"
-#include "OperationParam.h"
 #include "BrainCloudTypes.h"
 
-namespace BrainCloud {
-	
-	typedef enum {
-		HIGH_VALUE,
-		CUMULATIVE,
+namespace BrainCloud
+{
+    enum SocialLeaderboardType {
+        HIGH_VALUE,
+        CUMULATIVE,
         LAST_VALUE,
         LOW_VALUE
-	} SocialLeaderboardType;
-	
-	typedef enum
-	{
-		NEVER,
-		DAILY,
-		WEEKLY,
-		MONTHLY,
-		YEARLY
-	} RotationType;
-    
-    typedef enum
-    {
-        HIGHEST_RANKED
-    } FetchType;
-	
-	typedef enum
-	{
-		HIGH_TO_LOW,
-		LOW_TO_HIGH
-	} SortOrder;
+    };
 
-	class BrainCloudSocialLeaderboard
-	{
-	public:
-		/**
+    enum RotationType {
+        NEVER,
+        DAILY,
+        WEEKLY,
+        MONTHLY,
+        YEARLY
+    };
+
+    enum FetchType {
+        HIGHEST_RANKED
+    };
+
+    enum SortOrder {
+        HIGH_TO_LOW,
+        LOW_TO_HIGH
+    };
+
+    class IServerCallback;
+    class BrainCloudClient;
+
+    class BrainCloudSocialLeaderboard
+    {
+    public:
+        BrainCloudSocialLeaderboard(BrainCloudClient* in_client);
+
+        /**
          * Method returns the social leaderboard. A player's social leaderboard is
          * comprised of players who are recognized as being your friend.
          * For now, this applies solely to Facebook connected players who are
@@ -100,13 +99,8 @@ namespace BrainCloud {
          * }
          *
          */
-        void getSocialLeaderboard( const char * in_leaderboardId, bool in_replaceName, IServerCallback * in_callback = NULL);
-        
-        /**
-         * @deprecated 2.17 - use getSocialLeaderboard
-         */
-		void getLeaderboard( const char * in_leaderboardId, bool in_replaceName, IServerCallback * in_callback = NULL);
-        
+        void getSocialLeaderboard(const char * in_leaderboardId, bool in_replaceName, IServerCallback * in_callback = NULL);
+
         /**
          * Reads multiple social leaderboards.
          *
@@ -175,69 +169,12 @@ namespace BrainCloud {
          *  }
          */
         void getMultiSocialLeaderboard(const std::vector<std::string> & in_leaderboardIds, int in_leaderboardResultCount, bool in_replaceName, IServerCallback * in_callback = NULL);
-        
-		/**
-         * Method returns the global leaderboard. 
-         * 
-         * Leaderboards entries contain the player's score and optionally, some user-defined 
-         * data associated with the score. 
-         * 
-         * Note: If no leaderboard records exist then this method will return an empty list. 
-         *               
-		 * Service Name - SocialLeaderboard
-	     * Service Operation - GetGlobalLeaderboard
-	   	 *
-         * @param in_leaderboardId The id of the leaderboard to retrieve
-         * @param in_fetchType The type of scores to return.
-         * @param in_maxResults The maximum number of scores returned. 		 
-         * @param in_callback The method to be invoked when the server response is received
-         * 
-         * @returns JSON string representing the entries in the leaderboard.
-         * Note that the friend summary data is returned for each record
-         * in the leaderboard.
-         *
-         * {
-         *  "status": 200,
-         *  "data": {
-         *   "leaderboardId": "abc",
-         *   "social_leaderboard": [
-         *    {
-         *     "playerId": "8c86f306-73ea-4536-9c92-aba086064d2c",
-         *     "score": 10,
-         *     "data": {
-         *      "nickname": "batman"
-         *     },
-         *     "createdAt": 1433863814394,
-         *     "updatedAt": 1433863814394,
-         *     "index": 0,
-         *     "rank": 1,
-         *     "name": "",
-         *     "summaryFriendData": {
-         *      "xp": 12,
-         *      "favColour": "red"
-         *     }
-         *    },
-         *    {
-         *     "playerId": "ab21c0af-9d3e-4a81-b3c8-ddc1fb77d9a1",
-         *     "score": 8,
-         *     "data": {
-         *      "nickname": "robin"
-         *     },
-         *     "createdAt": 1433864253221,
-         *     "updatedAt": 1433864253221,
-         *     "index": 1,
-         *     "rank": 2,
-         *     "name": "",
-         *     "summaryFriendData": null
-         *    }
-         *   ],
-         *   "timeBeforeReset": 48136284,
-         *   "server_time": 1433864263716
-         *  }
-         * }
+
+        /**
+         * Removal on June 21 2016
          */
-		void getGlobalLeaderboard( const char * in_leaderboardId, FetchType in_fetchType, int in_maxResults, IServerCallback * in_callback = NULL);
-		
+        DEPRECATED void getGlobalLeaderboard(const char * in_leaderboardId, FetchType in_fetchType, int in_maxResults, IServerCallback * in_callback = NULL);
+
         /**
          * Method returns a page of global leaderboard results.
          *
@@ -301,8 +238,8 @@ namespace BrainCloud {
          *   "moreAfter": false
          *  }
          * }
-		 */
-		void getGlobalLeaderboardPage(const char * in_leaderboardId, SortOrder in_sortOrder, int in_startIndex, int in_endIndex, bool in_includeLeaderboardSize, IServerCallback * in_callback = NULL);
+         */
+        void getGlobalLeaderboardPage(const char * in_leaderboardId, SortOrder in_sortOrder, int in_startIndex, int in_endIndex, bool in_includeLeaderboardSize, IServerCallback * in_callback = NULL);
 
         /**
          * Method returns a page of global leaderboard results.
@@ -325,7 +262,7 @@ namespace BrainCloud {
          * include the 'timeBeforeReset' parameter.
          */
         void getGlobalLeaderboardPageByVersion(const char * in_leaderboardId, SortOrder in_sortOrder, int in_startIndex, int in_endIndex, bool in_includeLeaderboardSize, int in_versionId, IServerCallback * in_callback = NULL);
-        
+
         /**
          * Method returns a view of global leaderboard results that centers on the current player.
          *
@@ -388,7 +325,7 @@ namespace BrainCloud {
          *  }
          * }
          */
-		void getGlobalLeaderboardView(const char * in_leaderboardId, SortOrder in_sortOrder, int in_beforeCount, int in_afterCount, bool in_includeLeaderboardSize, IServerCallback * in_callback = NULL);
+        void getGlobalLeaderboardView(const char * in_leaderboardId, SortOrder in_sortOrder, int in_beforeCount, int in_afterCount, bool in_includeLeaderboardSize, IServerCallback * in_callback = NULL);
 
         /**
          * Method returns a view of global leaderboard results that centers on the current player.
@@ -411,7 +348,7 @@ namespace BrainCloud {
          * include the 'timeBeforeReset' parameter.
          */
         void getGlobalLeaderboardViewByVersion(const char * in_leaderboardId, SortOrder in_sortOrder, int in_beforeCount, int in_afterCount, bool in_includeLeaderboardSize, int in_versionId, IServerCallback * in_callback = NULL);
-        
+
         /** Gets the global leaderboard versions.
          *
          * Service Name - SocialLeaderboard
@@ -445,8 +382,8 @@ namespace BrainCloud {
          * }
          */
         void getGlobalLeaderboardVersions(const char * in_leaderboardId, IServerCallback * in_callback = NULL);
-        
-		/**
+
+        /**
          * Post the players score to the given social leaderboard.
          * You can optionally send a user-defined json string of data
          * with the posted score. This string could include information
@@ -462,23 +399,23 @@ namespace BrainCloud {
          * @param in_callback The method to be invoked when the server response is received
          *
          * @return The JSON returned in the callback is as follows:
-		 * {
-		 *   "status": 200,
-		 *   "data": null
-		 * }
-		 */
-		void postScoreToLeaderboard( const char * in_leaderboardId, int64_t in_score, const std::string& in_jsonOtherData, IServerCallback * in_callback = NULL);
-		
-		/**
+         * {
+         *   "status": 200,
+         *   "data": null
+         * }
+         */
+        void postScoreToLeaderboard(const char * in_leaderboardId, int64_t in_score, const std::string& in_jsonOtherData, IServerCallback * in_callback = NULL);
+
+        /**
          * Post the players score to the given social leaderboard.
          * Pass leaderboard config data to dynamically create if necessary.
          * You can optionally send a user-defined json string of data
          * with the posted score. This string could include information
          * relevant to the posted score.
          *
-		 * Service Name - SocialLeaderboard
-	     * Service Operation - PostScoreDynamic
-	   	 *
+         * Service Name - SocialLeaderboard
+         * Service Operation - PostScoreDynamic
+         *
          * @param in_leaderboardId The leaderboard to post to
          * @param in_score The score to post
          * @param in_data Optional user-defined data to post with the score
@@ -494,9 +431,9 @@ namespace BrainCloud {
          *   "data": null
          * }
          */
-		void postScoreToDynamicLeaderboard ( const char * in_leaderboardId, int64_t in_score, const std::string& in_jsonData, SocialLeaderboardType in_leaderboardType, RotationType in_rotationType, const struct tm* in_rotationReset, int in_retainedCount, IServerCallback * in_callback = NULL);
-		
-		/**
+        void postScoreToDynamicLeaderboard(const char * in_leaderboardId, int64_t in_score, const std::string& in_jsonData, SocialLeaderboardType in_leaderboardType, RotationType in_rotationType, const struct tm* in_rotationReset, int in_retainedCount, IServerCallback * in_callback = NULL);
+
+        /**
          * Reset the player's score for the given social leaderboard id.
          *
          * @param in_leaderboardId The leaderboard to post to
@@ -508,9 +445,9 @@ namespace BrainCloud {
          *   "data": null
          * }
          */
-        void resetLeaderboardScore( const char * in_leaderBoardName, IServerCallback * in_callback = NULL);
-		
-		/**
+        void resetLeaderboardScore(const char * in_leaderBoardName, IServerCallback * in_callback = NULL);
+
+        /**
          * If a social leaderboard has been configured to reset periodically, each period
          * can be considered to be a tournament. When the leaderboard resets, the tournament
          * has ended and participants can be ranked based on their final scores.
@@ -538,9 +475,9 @@ namespace BrainCloud {
          *   }
          * }
          */
-		void getCompletedLeaderboardTournament(const char * in_leaderboardId, bool in_replaceName, IServerCallback * in_callback = NULL);
-		
-		/**
+        void getCompletedLeaderboardTournament(const char * in_leaderboardId, bool in_replaceName, IServerCallback * in_callback = NULL);
+
+        /**
          * This method triggers a reward (via a player statistics event)
          * to the currently logged in player for ranking at the
          * completion of a tournament.
@@ -557,21 +494,22 @@ namespace BrainCloud {
          *   }
          * }
          */
-		void triggerSocialLeaderboardTournamentReward(const char * in_leaderboardId, const char * in_eventName, uint64_t in_eventMultiplier, IServerCallback * in_callback = NULL);
-		
-		/**
-		 * Method to retrieve the player's completed tournaments for the game.
-		 * Arguments:
-		 * 	leaderboardId: Name of the leaderboard
-		 *  replaceName: True to replace the player's name with "You"; false otherwise.
-		 * 	callback: client-side callback for the results
-		 */
-		void playerTournamentReward( const char * in_eventName, uint64_t in_multiplier, IServerCallback * in_callback = NULL);
-		
-	private:
-		std::string leaderboardTypeToString(SocialLeaderboardType type);
-		std::string leaderboardRotationTypeToString(RotationType type);
-        std::string sortOrderToString(SortOrder in_sortOrder);
+        void triggerSocialLeaderboardTournamentReward(const char * in_leaderboardId, const char * in_eventName, uint64_t in_eventMultiplier, IServerCallback * in_callback = NULL);
 
-	};
+        /**
+         * Method to retrieve the player's completed tournaments for the game.
+         * Arguments:
+         * 	leaderboardId: Name of the leaderboard
+         *  replaceName: True to replace the player's name with "You"; false otherwise.
+         * 	callback: client-side callback for the results
+         */
+        void playerTournamentReward(const char * in_eventName, uint64_t in_multiplier, IServerCallback * in_callback = NULL);
+
+    private:
+        BrainCloudClient * m_client;
+
+        std::string leaderboardTypeToString(SocialLeaderboardType type);
+        std::string leaderboardRotationTypeToString(RotationType type);
+        std::string sortOrderToString(SortOrder in_sortOrder);
+    };
 }

@@ -1,19 +1,19 @@
+// Copyright 2016 bitHeads, Inc. All Rights Reserved.
+
 #pragma once
 
-#include <string>
-
-#include "IServerCallback.h"
-#include "ServiceName.h"
-#include "ServiceOperation.h"
-#include "OperationParam.h"
-#include "BrainCloudTypes.h"
+#include <stddef.h>
 
 namespace BrainCloud {
-    
+
+    class IServerCallback;
+    class BrainCloudClient;
+
     class BrainCloudDataStream
     {
     public:
-        
+        BrainCloudDataStream(BrainCloudClient* in_client);
+
         /**
          * Creates custom data stream page event
          *
@@ -27,10 +27,10 @@ namespace BrainCloud {
          *   null
          *  }
          * }
-         * 
+         *
          */
         void customPageEvent(const char * in_eventName, const char * in_jsonEventProperties, IServerCallback * in_callback = NULL);
-        
+
         /**
          * Creates custom data stream screen event
          *
@@ -44,10 +44,10 @@ namespace BrainCloud {
          *   null
          *  }
          * }
-         * 
+         *
          */
         void customScreenEvent(const char * in_eventName, const char * in_jsonEventProperties, IServerCallback * in_callback = NULL);
-        
+
         /**
          * Creates custom data stream track event
          *
@@ -61,9 +61,11 @@ namespace BrainCloud {
          *   null
          *  }
          * }
-         * 
+         *
          */
         void customTrackEvent(const char * in_eventName, const char * in_jsonEventProperties, IServerCallback * in_callback = NULL);
-        
+
+    private:
+        BrainCloudClient * m_client;
     };
 }

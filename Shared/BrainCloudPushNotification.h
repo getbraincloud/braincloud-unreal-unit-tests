@@ -1,19 +1,21 @@
+// Copyright 2016 bitHeads, Inc. All Rights Reserved.
+
 #pragma once
 
 #include <string>
-
-#include "IServerCallback.h"
-#include "ServiceName.h"
-#include "ServiceOperation.h"
-#include "OperationParam.h"
 #include "BrainCloudTypes.h"
+
 #include "Platform.h"
 
-namespace BrainCloud {
+namespace BrainCloud
+{
+    class IServerCallback;
+    class BrainCloudClient;
 
     class BrainCloudPushNotification
     {
-        public:
+    public:
+        BrainCloudPushNotification(BrainCloudClient* in_client);
 
         /**
          * Deregisters all device tokens currently registered to the player.
@@ -27,7 +29,7 @@ namespace BrainCloud {
          * }
          */
         void deregisterAllPushNotificationDeviceTokens(IServerCallback * in_callback = NULL);
-        
+
         /**
          * Deregisters the given device token from the server to disable this device
          * from receiving push notifications.
@@ -43,7 +45,7 @@ namespace BrainCloud {
          * }
          */
         void deregisterPushNotificationDeviceToken(const Platform & in_platform, const char * in_token, IServerCallback * in_callback = NULL);
-        
+
         /**
          * Registers the given device token with the server to enable this device
          * to receive push notifications.
@@ -59,24 +61,12 @@ namespace BrainCloud {
          *   "data":null
          * }
          */
-        void registerPushNotificationDeviceToken( const Platform & in_platform, const char * in_deviceToken, IServerCallback * in_callback = NULL );
+        void registerPushNotificationDeviceToken(const Platform & in_platform, const char * in_deviceToken, IServerCallback * in_callback = NULL);
 
         /**
-         * Registers the given device token with the server to enable this device
-         * to receive push notifications.
-         *
-         * @param deviceType The type of device (see DEVICE_TYPE_* constants)
-         * @param deviceToken The platform-dependant device token needed for push notifications.
-         *  On IOS, this is obtained using the application:didRegisterForRemoteNotificationsWithDeviceToken callback
-         * @param callback The method to be invoked when the server response is received
-         *
-         * @return JSON describing the new value of the statistics and any rewards that were triggered:
-         * {
-         *   "status":200,
-         *   "data":null
-         * }
+         * Deprecated - Use method with Platform object paramater instead - Removal on June 21 2016
          */
-        void registerPushNotificationDeviceToken( const char * in_deviceType, const char * in_deviceToken, IServerCallback * in_callback = NULL );
+        DEPRECATED void registerPushNotificationDeviceToken(const char * in_deviceType, const char * in_deviceToken, IServerCallback * in_callback = NULL);
 
         /**
          * Sends a simple push notification based on the passed in message.
@@ -92,7 +82,7 @@ namespace BrainCloud {
          *   "data":null
          * }
          */
-        void sendSimplePushNotification(const char * in_toPlayerId, const char * in_message, IServerCallback * in_callback = NULL );
+        void sendSimplePushNotification(const char * in_toPlayerId, const char * in_message, IServerCallback * in_callback = NULL);
 
         /**
          * Sends a notification to a user based on a brainCloud portal configured notification template.
@@ -108,7 +98,7 @@ namespace BrainCloud {
          *   "data":null
          * }
          */
-        void sendRichPushNotification(const char * in_toPlayerId, int32_t in_notificationTemplateId, IServerCallback * in_callback = NULL );
+        void sendRichPushNotification(const char * in_toPlayerId, int32_t in_notificationTemplateId, IServerCallback * in_callback = NULL);
 
         /**
          * Sends a notification to a user based on a brainCloud portal configured notification template.
@@ -127,9 +117,10 @@ namespace BrainCloud {
          *   "data":null
          * }
          */
-        void sendRichPushNotificationWithParams(const char * in_toPlayerId, int32_t in_notificationTemplateId, const char * in_substitutionJson, IServerCallback * in_callback = NULL );
+        void sendRichPushNotificationWithParams(const char * in_toPlayerId, int32_t in_notificationTemplateId, const char * in_substitutionJson, IServerCallback * in_callback = NULL);
 
     private:
-        void sendRichPushNotification(const char * in_toPlayerId, int32_t in_notificationTemplateId, const char * in_substitutionJson, IServerCallback * in_callback = NULL );
+        BrainCloudClient * m_client;
+        void sendRichPushNotification(const char * in_toPlayerId, int32_t in_notificationTemplateId, const char * in_substitutionJson, IServerCallback * in_callback = NULL);
     };
 }

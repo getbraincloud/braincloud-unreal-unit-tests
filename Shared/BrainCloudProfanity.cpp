@@ -1,16 +1,27 @@
+// Copyright 2016 bitHeads, Inc. All Rights Reserved.
+
 #include "BrainCloudProfanity.h"
+
 #include "BrainCloudClient.h"
+#include "IServerCallback.h"
+#include "ServerCall.h"
+#include "ServiceName.h"
+#include "ServiceOperation.h"
+#include "OperationParam.h"
+#include "json/json.h"
+
 #include "StringUtil.h"
 
+namespace BrainCloud
+{
+    BrainCloudProfanity::BrainCloudProfanity(BrainCloudClient* in_client) : m_client(in_client) { }
 
-namespace BrainCloud {
-    
     void BrainCloudProfanity::profanityCheck(const char * in_text,
-                                             const char * in_languages,
-                                             bool in_flagEmail,
-                                             bool in_flagPhone,
-                                             bool in_flagUrls,
-                                             IServerCallback * in_callback)
+        const char * in_languages,
+        bool in_flagEmail,
+        bool in_flagPhone,
+        bool in_flagUrls,
+        IServerCallback * in_callback)
     {
         Json::Value message;
         message[OperationParam::ProfanityText.getValue()] = in_text;
@@ -21,19 +32,18 @@ namespace BrainCloud {
         message[OperationParam::ProfanityFlagEmail.getValue()] = in_flagEmail;
         message[OperationParam::ProfanityFlagPhone.getValue()] = in_flagPhone;
         message[OperationParam::ProfanityFlagUrls.getValue()] = in_flagUrls;
-        
+
         ServerCall * sc = new ServerCall(ServiceName::Profanity, ServiceOperation::ProfanityCheck, message, in_callback);
-        BrainCloudClient::getInstance()->getBrainCloudComms()->addToQueue( sc );
+        m_client->getBrainCloudComms()->addToQueue(sc);
     }
-    
-    
+
     void BrainCloudProfanity::profanityReplaceText(const char * in_text,
-                                                   const char * in_replaceSymbol,
-                                                   const char * in_languages,
-                                                   bool in_flagEmail,
-                                                   bool in_flagPhone,
-                                                   bool in_flagUrls,
-                                                   IServerCallback * in_callback)
+        const char * in_replaceSymbol,
+        const char * in_languages,
+        bool in_flagEmail,
+        bool in_flagPhone,
+        bool in_flagUrls,
+        IServerCallback * in_callback)
     {
         Json::Value message;
         message[OperationParam::ProfanityText.getValue()] = in_text;
@@ -45,18 +55,17 @@ namespace BrainCloud {
         message[OperationParam::ProfanityFlagEmail.getValue()] = in_flagEmail;
         message[OperationParam::ProfanityFlagPhone.getValue()] = in_flagPhone;
         message[OperationParam::ProfanityFlagUrls.getValue()] = in_flagUrls;
-        
+
         ServerCall * sc = new ServerCall(ServiceName::Profanity, ServiceOperation::ProfanityReplaceText, message, in_callback);
-        BrainCloudClient::getInstance()->getBrainCloudComms()->addToQueue( sc );
+        m_client->getBrainCloudComms()->addToQueue(sc);
     }
-    
-    
+
     void BrainCloudProfanity::profanityIdentifyBadWords(const char * in_text,
-                                                        const char * in_languages,
-                                                        bool in_flagEmail,
-                                                        bool in_flagPhone,
-                                                        bool in_flagUrls,
-                                                        IServerCallback * in_callback)
+        const char * in_languages,
+        bool in_flagEmail,
+        bool in_flagPhone,
+        bool in_flagUrls,
+        IServerCallback * in_callback)
     {
         Json::Value message;
         message[OperationParam::ProfanityText.getValue()] = in_text;
@@ -67,9 +76,8 @@ namespace BrainCloud {
         message[OperationParam::ProfanityFlagEmail.getValue()] = in_flagEmail;
         message[OperationParam::ProfanityFlagPhone.getValue()] = in_flagPhone;
         message[OperationParam::ProfanityFlagUrls.getValue()] = in_flagUrls;
-        
+
         ServerCall * sc = new ServerCall(ServiceName::Profanity, ServiceOperation::ProfanityIdenitfyBadWords, message, in_callback);
-        BrainCloudClient::getInstance()->getBrainCloudComms()->addToQueue( sc );
+        m_client->getBrainCloudComms()->addToQueue(sc);
     }
-    
 };
