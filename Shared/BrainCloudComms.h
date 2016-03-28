@@ -21,7 +21,6 @@
 #include "IBrainCloudComms.h"
 #include "IServerCallback.h"
 #include "ServerCall.h"
-#include "BrainCloudClient.h"
 
 #include "HTTP/URLLoader.h"
 #include "HTTP/URLRequest.h"
@@ -31,11 +30,13 @@
 
 namespace BrainCloud
 {
+    class BrainCloudClient;
+
 	class BrainCloudComms : public IBrainCloudComms
     {
         
 	public:
-		BrainCloudComms( );
+		BrainCloudComms(BrainCloudClient* in_client);
 		virtual ~BrainCloudComms( );
 
         // from IBrainCloudComms

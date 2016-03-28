@@ -19,8 +19,9 @@ namespace BrainCloud {
     // Public methods
     ////////////////////////////////////////////////////////
 	
-    IBrainCloudComms::IBrainCloudComms()
-        : _packetId(0)
+    IBrainCloudComms::IBrainCloudComms(BrainCloudClient* in_client)
+        : _client(in_client)
+        , _packetId(0)
         , _expectedPacketId(NO_PACKET_EXPECTED)
         , _retryCount(0)
         , _packetSendTimeMillis(0)
@@ -177,7 +178,7 @@ namespace BrainCloud {
             std::string sessionId = in_jsonAuthenticationResponse["data"].get("sessionId", "").asString();
             std::string profileId = in_jsonAuthenticationResponse["data"].get("profileId", "").asString();
             setSessionId(sessionId.c_str());
-            BrainCloudClient::getInstance()->getAuthenticationService()->setProfileId(profileId.c_str());
+            _client->getAuthenticationService()->setProfileId(profileId.c_str());
         }
     }
     
@@ -210,7 +211,7 @@ namespace BrainCloud {
         {
             _isAuthenticated = false;
             _sessionId.clear();
-            BrainCloudClient::getInstance()->getAuthenticationService()->clearSavedProfileId();
+            _client->getAuthenticationService()->clearSavedProfileId();
         }
         else if (servercall->getService() == ServiceName::File
                  && (servercall->getOperation() == ServiceOperation::PrepareUserUpload))

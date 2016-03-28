@@ -27,8 +27,9 @@
 
 namespace BrainCloud
 {
-    BrainCloudComms::BrainCloudComms()
-        : _loader(NULL)
+    BrainCloudComms::BrainCloudComms(BrainCloudClient* in_client)
+        : IBrainCloudComms(in_client)
+        , _loader(NULL)
         , _request(NULL)
         , _retryTimeMillis(RETRY_TIME_NOT_RETRYING)
     {

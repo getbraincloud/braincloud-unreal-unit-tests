@@ -77,9 +77,9 @@ namespace BrainCloud {
         //  pthread_win32_process_attach_np();
         //#endif
 #ifdef USE_NEW_COMMS
-        _brainCloudComms = new BrainCloudComms2();
+        _brainCloudComms = new BrainCloudComms2(this);
 #else
-        _brainCloudComms = new BrainCloudComms();
+        _brainCloudComms = new BrainCloudComms(this);
 #endif
     }
 

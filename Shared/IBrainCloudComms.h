@@ -52,6 +52,8 @@ namespace BrainCloud {
         FAILED = 3,
         COMPLETE = 4,
     };
+
+    class BrainCloudClient;
     
     // although named as an interface, this is actually an abstract class
 	class IBrainCloudComms
@@ -59,7 +61,7 @@ namespace BrainCloud {
 	public:
         
         // pure virtual methods
-        IBrainCloudComms();
+        IBrainCloudComms(BrainCloudClient* in_client);
         virtual ~IBrainCloudComms();
         
 
@@ -127,6 +129,7 @@ namespace BrainCloud {
                                             std::string & out_jsonErrorResponse);
         
     protected:
+        BrainCloudClient* _client;
 
         int64_t _packetId;
         int64_t _expectedPacketId; // the next packetId we're expecting or -1 if nothing is in transit
