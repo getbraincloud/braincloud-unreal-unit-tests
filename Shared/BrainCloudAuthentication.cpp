@@ -85,6 +85,11 @@ namespace BrainCloud {
         authenticate(in_userid, buffer.c_str(), OperationParam::AuthenticateServiceAuthenticateAuthTwitter.getValue().c_str(), NULL, in_forceCreate, in_callback);
     }
 
+    void BrainCloudAuthentication::authenticateParse(const char * in_userid, const char * in_token, bool in_forceCreate, IServerCallback * in_callback)
+    {
+        authenticate(in_userid, in_token, OperationParam::AuthenticateServiceAuthenticateAuthParse.getValue().c_str(), NULL, in_forceCreate, in_callback);
+    }
+
     void BrainCloudAuthentication::authenticateExternal(
         const char * in_userid,
         const char * in_token,

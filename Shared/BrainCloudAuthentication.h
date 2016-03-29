@@ -124,7 +124,7 @@ namespace BrainCloud
          * @param in_callback The method to be invoked when the server response is received
          *
          */
-        void authenticateUniversal(const char * in_userid, const char * in_password, bool in_forceCreate, IServerCallback * in_callback = NULL);
+        void authenticateUniversal(const char * in_userId, const char * in_password, bool in_forceCreate, IServerCallback * in_callback = NULL);
 
         /*
          * Authenticate the user using a steam userid and session ticket (without any validation on the userid).
@@ -132,7 +132,7 @@ namespace BrainCloud
          * Service Name - Authenticate
          * Service Operation - Authenticate
          *
-         * @param in_userid  String representation of 64 bit steam id
+         * @param in_userId  String representation of 64 bit steam id
          * @param in_sessionticket  The session ticket of the user (hex encoded)
          * @param in_forceCreate Should a new profile be created for this user if the account does not exist?
          * @param in_callback The method to be invoked when the server response is received
@@ -140,7 +140,7 @@ namespace BrainCloud
          * @returns   performs the in_success callback on success, in_failure callback on failure
          *
          */
-        void authenticateSteam(const char * in_userid, const char * in_sessionticket, bool in_forceCreate, IServerCallback * in_callback = NULL);
+        void authenticateSteam(const char * in_userId, const char * in_sessionticket, bool in_forceCreate, IServerCallback * in_callback = NULL);
 
         /*
         * Authenticate the user using a google userid(email address) and google authentication token.
@@ -148,7 +148,7 @@ namespace BrainCloud
         * Service Name - Authenticate
         * Service Operation - Authenticate
         *
-        * @param in_userid  String representation of google+ userid (email)
+        * @param in_userId  String representation of google+ userid (email)
         * @param in_token  The authentication token derived via the google apis.
         * @param in_forceCreate Should a new profile be created for this user if the account does not exist?
         * @param in_callback The method to be invoked when the server response is received
@@ -156,7 +156,7 @@ namespace BrainCloud
         * @returns   performs the in_success callback on success, in_failure callback on failure
         *
         */
-        void authenticateGoogle(const char * in_userid, const char * in_token, bool in_forceCreate, IServerCallback * in_callback = NULL);
+        void authenticateGoogle(const char * in_userId, const char * in_token, bool in_forceCreate, IServerCallback * in_callback = NULL);
 
         /*
          * Authenticate the user using a Twitter userid, authentication token, and secret from Twitter.
@@ -164,7 +164,7 @@ namespace BrainCloud
          * Service Name - Authenticate
          * Service Operation - Authenticate
          *
-         * @param in_userid  String representation of Twitter userid
+         * @param in_userId  String representation of Twitter userid
          * @param in_token  The authentication token derived via the Twitter apis.
          * @param in_secret  The secret given when attempting to link with Twitter
          * @param in_forceCreate Should a new profile be created for this user if the account does not exist?
@@ -173,7 +173,23 @@ namespace BrainCloud
          * @returns   performs the in_success callback on success, in_failure callback on failure
          *
          */
-        void authenticateTwitter(const char * in_userid, const char * in_token, const char * in_secret, bool in_forceCreate, IServerCallback * in_callback = NULL);
+        void authenticateTwitter(const char * in_userId, const char * in_token, const char * in_secret, bool in_forceCreate, IServerCallback * in_callback = NULL);
+
+        /*
+        * Authenticate the user using a Pase userid and authentication token
+        *
+        * Service Name - Authenticate
+        * Service Operation - Authenticate
+        *
+        * @param in_userId String representation of Parse userid
+        * @param in_token The authentication token
+        * @param in_forceCreate Should a new profile be created for this user if the account does not exist?
+        * @param in_callback The method to be invoked when the server response is received
+        *
+        * @returns   performs the in_success callback on success, in_failure callback on failure
+        *
+        */
+        void authenticateParse(const char * in_userId, const char * in_token, bool in_forceCreate, IServerCallback * in_callback = NULL);
 
         /**
          * Authenticate the user via cloud code (which in turn validates the supplied credentials against an external system).
@@ -182,14 +198,14 @@ namespace BrainCloud
          * Service Name - Authenticate
          * Server Operation - Authenticate
          *
-         * @param in_userid The user id
+         * @param in_userId The user id
          * @param in_token The user token (password etc)
          * @param in_externalAuthName The name of the cloud script to call for external authentication
          * @param in_force Should a new profile be created for this user if the account does not exist?
          *
          * @returns   performs the in_success callback on success, in_failure callback on failure
          */
-        void authenticateExternal(const char * in_userid, const char * in_token, const char * in_externalAuthName, bool in_forceCreate, IServerCallback * in_callback = NULL);
+        void authenticateExternal(const char * in_userId, const char * in_token, const char * in_externalAuthName, bool in_forceCreate, IServerCallback * in_callback = NULL);
 
         /**
          * Reset Email password - Sends a password reset email to the specified address
