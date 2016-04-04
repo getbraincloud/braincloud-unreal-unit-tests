@@ -350,6 +350,56 @@ namespace BrainCloud
         void detachTwitterIdentity(const char * in_twitterId, bool in_continueAnon, IServerCallback * in_callback = NULL);
 
         /**
+        * Attach the user's Parse credentials to the current profile.
+        *
+        * Service Name - Identity
+        * Service Operation - Attach
+        *
+        * @param in_parseId The Parse id of the user
+        * @param in_authenticationToken The validated token from Parse
+        *   (that will be further validated when sent to the bC service)
+        * @param in_callback The method to be invoked when the server response is received
+        *
+        * Errors to watch for:  SWITCHING_PROFILES - this means that the Google identity you provided
+        * already points to a different profile.  You will likely want to offer the player the
+        * choice to *SWITCH* to that profile, or *MERGE* the profiles.
+        *
+        * To switch profiles, call ClearSavedProfileID() and call AuthenticateParse().
+        */
+        void attachParseIdentity(const char * in_parseId, const char * in_authenticationToken, IServerCallback * in_callback = NULL);
+
+        /**
+        * Merge the profile associated with the provided Parse credentials with the
+        * current profile.
+        *
+        * Service Name - Identity
+        * Service Operation - Merge
+        *
+        * @param in_parseId The Parse id of the user
+        * @param in_authenticationToken The validated token from Parse
+        *   (that will be further validated when sent to the bC service)
+        * @param in_callback The method to be invoked when the server response is received
+        *
+        */
+        void mergeParseIdentity(const char * in_parseId, const char * in_authenticationToken, IServerCallback * in_callback = NULL);
+
+        /*
+        * Detach the Google identity from this profile.
+        *
+        * Service Name - Identity
+        * Service Operation - Detach
+        *
+        * @param in_parseId The Parse id of the user
+        * @param in_continueAnon Proceed even if the profile will revert to anonymous?
+        * @param in_callback The method to be invoked when the server response is received
+        *
+        * Watch for DOWNGRADING_TO_ANONYMOUS_ERROR - occurs if you set in_continueAnon to false, and
+        * disconnecting this identity would result in the profile being anonymous (which means that
+        * the profile wouldn't be retrievable if the user loses their device)
+        */
+        void detachParseIdentity(const char * in_parseId, bool in_continueAnon, IServerCallback * in_callback = NULL);
+
+        /**
          * Switch to a Child Profile
          *
          * Service Name - Identity

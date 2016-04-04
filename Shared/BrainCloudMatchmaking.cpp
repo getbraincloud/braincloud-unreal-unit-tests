@@ -147,4 +147,10 @@ namespace BrainCloud
         ServerCall * sc = new ServerCall(ServiceName::MatchMaking, ServiceOperation::EnableMatchMaking, Json::nullValue, in_callback);
         m_client->sendRequest(sc);
     }
+
+    void BrainCloudMatchmaking::disableMatchMaking(IServerCallback * in_callback)
+    {
+        ServerCall * sc = new ServerCall(ServiceName::MatchMaking, ServiceOperation::DisableMatchMaking, Json::nullValue, in_callback);
+        m_client->sendRequest(sc);
+    }
 }

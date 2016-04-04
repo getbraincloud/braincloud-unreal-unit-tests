@@ -168,6 +168,7 @@ namespace BrainCloud {
 		static const ServiceOperation CancelMatch;
 		static const ServiceOperation CompleteMatch;
 		static const ServiceOperation EnableMatchMaking;
+        static const ServiceOperation DisableMatchMaking;
 
 		static const ServiceOperation StartStream;
 		static const ServiceOperation ReadStream;

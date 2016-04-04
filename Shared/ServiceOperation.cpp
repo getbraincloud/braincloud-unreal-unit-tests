@@ -162,6 +162,7 @@ namespace BrainCloud
 	const ServiceOperation ServiceOperation::CancelMatch = ServiceOperation("CANCEL_MATCH");
 	const ServiceOperation ServiceOperation::CompleteMatch = ServiceOperation("COMPLETE_MATCH");
 	const ServiceOperation ServiceOperation::EnableMatchMaking = ServiceOperation("ENABLE_FOR_MATCH");
+    const ServiceOperation ServiceOperation::DisableMatchMaking = ServiceOperation("DISABLE_FOR_MATCH");
 
 	const ServiceOperation ServiceOperation::StartStream = ServiceOperation("START_STREAM");
 	const ServiceOperation ServiceOperation::ReadStream = ServiceOperation("READ_STREAM");

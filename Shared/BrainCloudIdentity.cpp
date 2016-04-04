@@ -127,6 +127,21 @@ namespace BrainCloud
         detachIdentity(in_twitterId, OperationParam::AuthenticateServiceAuthenticateAuthTwitter.getValue().c_str(), in_continueAnon, in_callback);
     }
 
+    void BrainCloudIdentity::attachParseIdentity(const char * in_parseId, const char * in_authenticationToken, IServerCallback * in_callback)
+    {
+        attachIdentity(in_parseId, in_authenticationToken, OperationParam::AuthenticateServiceAuthenticateAuthParse.getValue().c_str(), in_callback);
+    }
+
+    void BrainCloudIdentity::mergeParseIdentity(const char * in_parseId, const char * in_authenticationToken, IServerCallback * in_callback)
+    {
+        mergeIdentity(in_parseId, in_authenticationToken, OperationParam::AuthenticateServiceAuthenticateAuthParse.getValue().c_str(), in_callback);
+    }
+
+    void BrainCloudIdentity::detachParseIdentity(const char * in_parseId, bool in_continueAnon, IServerCallback * in_callback)
+    {
+        detachIdentity(in_parseId, OperationParam::AuthenticateServiceAuthenticateAuthParse.getValue().c_str(), in_continueAnon, in_callback);
+    }
+
     void BrainCloudIdentity::switchToChildProfile(const char * in_childProfileId, const char * in_childGameId, bool in_forceCreate, IServerCallback * in_callback)
     {
         switchToChildProfile(in_childProfileId, in_childGameId, in_forceCreate, false, in_callback);

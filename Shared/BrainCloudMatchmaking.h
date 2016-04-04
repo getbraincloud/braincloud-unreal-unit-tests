@@ -342,6 +342,22 @@ namespace BrainCloud
          */
         void enableMatchMaking(IServerCallback * in_callback = NULL);
 
+        /**
+        * Disables Match Making for the Player
+        *
+        * Service Name - MatchMaking
+        * Service Operation - EnableMatchMaking
+        *
+        * @param in_callback The method to be invoked when the server response is received
+        *
+        * @return The JSON returned in the callback is as follows:
+        * {
+        *   "status": 200,
+        *   "data": null
+        * }
+        */
+        void disableMatchMaking(IServerCallback * in_callback = NULL);
+
     private:
         BrainCloudClient * m_client;
     };
