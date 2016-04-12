@@ -82,11 +82,7 @@ namespace BrainCloud
          *
          * @param in_gameCenterId The player's game center id  (use the playerID property from the local GKPlayer object)
          * @param in_forceCreate Should a new profile be created for this user if the account does not exist?
-         * @param in_success The method to call in event of successful login
-         * @param in_failure The method to call in the event of an error during authentication
-         *
-         * @returns   performs the in_success callback on success, in_failure callback on failure
-         *
+         * @param in_callback The method to be invoked when the server response is received
          */
         void authenticateGameCenter(const char * in_gameCenterId, bool in_forceCreate, IServerCallback * in_callback = NULL);
 
@@ -122,7 +118,6 @@ namespace BrainCloud
          * @param in_password  The password of the user
          * @param forceCreate Should a new profile be created for this user if the account does not exist?
          * @param in_callback The method to be invoked when the server response is received
-         *
          */
         void authenticateUniversal(const char * in_userId, const char * in_password, bool in_forceCreate, IServerCallback * in_callback = NULL);
 
@@ -136,9 +131,6 @@ namespace BrainCloud
          * @param in_sessionticket  The session ticket of the user (hex encoded)
          * @param in_forceCreate Should a new profile be created for this user if the account does not exist?
          * @param in_callback The method to be invoked when the server response is received
-         *
-         * @returns   performs the in_success callback on success, in_failure callback on failure
-         *
          */
         void authenticateSteam(const char * in_userId, const char * in_sessionticket, bool in_forceCreate, IServerCallback * in_callback = NULL);
 
@@ -152,9 +144,6 @@ namespace BrainCloud
         * @param in_token  The authentication token derived via the google apis.
         * @param in_forceCreate Should a new profile be created for this user if the account does not exist?
         * @param in_callback The method to be invoked when the server response is received
-        *
-        * @returns   performs the in_success callback on success, in_failure callback on failure
-        *
         */
         void authenticateGoogle(const char * in_userId, const char * in_token, bool in_forceCreate, IServerCallback * in_callback = NULL);
 
@@ -169,9 +158,6 @@ namespace BrainCloud
          * @param in_secret  The secret given when attempting to link with Twitter
          * @param in_forceCreate Should a new profile be created for this user if the account does not exist?
          * @param in_callback The method to be invoked when the server response is received
-         *
-         * @returns   performs the in_success callback on success, in_failure callback on failure
-         *
          */
         void authenticateTwitter(const char * in_userId, const char * in_token, const char * in_secret, bool in_forceCreate, IServerCallback * in_callback = NULL);
 
@@ -185,9 +171,6 @@ namespace BrainCloud
         * @param in_token The authentication token
         * @param in_forceCreate Should a new profile be created for this user if the account does not exist?
         * @param in_callback The method to be invoked when the server response is received
-        *
-        * @returns   performs the in_success callback on success, in_failure callback on failure
-        *
         */
         void authenticateParse(const char * in_userId, const char * in_token, bool in_forceCreate, IServerCallback * in_callback = NULL);
 
@@ -202,8 +185,7 @@ namespace BrainCloud
          * @param in_token The user token (password etc)
          * @param in_externalAuthName The name of the cloud script to call for external authentication
          * @param in_force Should a new profile be created for this user if the account does not exist?
-         *
-         * @returns   performs the in_success callback on success, in_failure callback on failure
+         * @param in_callback The method to be invoked when the server response is received
          */
         void authenticateExternal(const char * in_userId, const char * in_token, const char * in_externalAuthName, bool in_forceCreate, IServerCallback * in_callback = NULL);
 

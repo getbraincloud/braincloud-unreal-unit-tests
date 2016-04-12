@@ -54,8 +54,8 @@ namespace BrainCloud
         *   }
         * }
         */
-        void createEntity(std::string& in_entityType, int64_t in_timeToLive, std::string& in_jsonEntityAcl,
-            std::string& in_jsonEntityData, IServerCallback * in_callback = NULL);
+        void createEntity(const std::string& in_entityType, int64_t in_timeToLive, const std::string& in_jsonEntityAcl,
+            const std::string& in_jsonEntityData, IServerCallback * in_callback = NULL);
 
         /**
         * Method creates a new entity on the server with an indexed id.
@@ -97,8 +97,8 @@ namespace BrainCloud
         *   }
         * }
         */
-        void createEntityWithIndexedId(std::string& in_entityType, std::string& in_indexedId, int64_t in_timeToLive,
-            std::string& in_jsonEntityAcl, std::string& in_jsonEntityData, IServerCallback * in_callback = NULL);
+        void createEntityWithIndexedId(const std::string& in_entityType, const std::string& in_indexedId, int64_t in_timeToLive,
+            const std::string& in_jsonEntityAcl, const std::string& in_jsonEntityData, IServerCallback * in_callback = NULL);
 
         /**
         * Method updates an existing entity on the server.
@@ -138,7 +138,7 @@ namespace BrainCloud
         *   }
         * }
         */
-        void updateEntity(std::string& in_entityId, int64_t in_version, std::string& in_jsonEntityData, IServerCallback * in_callback = NULL);
+        void updateEntity(const std::string& in_entityId, int64_t in_version, const std::string& in_jsonEntityData, IServerCallback * in_callback = NULL);
 
         /**
         * Method updates an existing entity's Acl on the server.
@@ -178,7 +178,7 @@ namespace BrainCloud
         *   }
         * }
         */
-        void updateEntityAcl(std::string& in_entityId, int64_t in_version, std::string& in_jsonEntityAcl, IServerCallback * in_callback = NULL);
+        void updateEntityAcl(const std::string& in_entityId, int64_t in_version, const std::string& in_jsonEntityAcl, IServerCallback * in_callback = NULL);
 
         /**
         * Method updates an existing entity's time to live on the server.
@@ -218,7 +218,7 @@ namespace BrainCloud
         *   }
         * }
         */
-        void updateEntityTimeToLive(std::string& in_entityId, int64_t in_version, int64_t in_timeToLive, IServerCallback * in_callback = NULL);
+        void updateEntityTimeToLive(const std::string& in_entityId, int64_t in_version, int64_t in_timeToLive, IServerCallback * in_callback = NULL);
 
         /**
         * Method deletes an existing entity on the server.
@@ -238,7 +238,7 @@ namespace BrainCloud
         *   }
         * }
         */
-        void deleteEntity(std::string& in_entityId, int64_t in_version, IServerCallback * in_callback = NULL);
+        void deleteEntity(const std::string& in_entityId, int64_t in_version, IServerCallback * in_callback = NULL);
 
         /**
         * Method reads an existing entity from the server.
@@ -276,7 +276,7 @@ namespace BrainCloud
         *   }
         * }
         */
-        void readEntity(std::string& in_entityId, IServerCallback * in_callback = NULL);
+        void readEntity(const std::string& in_entityId, IServerCallback * in_callback = NULL);
 
         /**
         * Method gets list of entities from the server base on type and/or where clause
@@ -339,7 +339,7 @@ namespace BrainCloud
         *   }
         * }
         */
-        void getList(std::string& in_where, std::string& in_orderBy, int64_t in_maxReturn, IServerCallback * in_callback = NULL);
+        void getList(const std::string& in_where, const std::string& in_orderBy, int64_t in_maxReturn, IServerCallback * in_callback = NULL);
 
         /**
         * Method gets list of entities from the server base on indexed id
@@ -401,7 +401,7 @@ namespace BrainCloud
         *   }
         * }
         */
-        void getListByIndexedId(std::string& in_entityIndexedId, int64_t in_maxReturn, IServerCallback * in_callback = NULL);
+        void getListByIndexedId(const std::string& in_entityIndexedId, int64_t in_maxReturn, IServerCallback * in_callback = NULL);
 
         /**
         * Method gets a count of entities based on the where clause
@@ -421,7 +421,7 @@ namespace BrainCloud
         *   }
         * }
         */
-        void getListCount(std::string& in_where, IServerCallback * in_callback = NULL);
+        void getListCount(const std::string& in_where, IServerCallback * in_callback = NULL);
 
         /**
          * Method uses a paging system to iterate through Global Entities

@@ -23,7 +23,7 @@ namespace BrainCloud {
          * Service Operation - Create
          *
          * @param in_entityType The entity type as defined by the user
-         * @param in_jsonEntityData	The entity's data as a json string
+         * @param in_jsonEntityData The entity's data as a json string
          * @param in_jsonEntityAcl The entity's access control list as json. A null acl implies default
          * permissions which make the entity readable/writeable by only the player.
          * @param in_callback The method to be invoked when the server response is received
@@ -45,7 +45,7 @@ namespace BrainCloud {
          *
          * @param in_entityId The id of the entity to update
          * @param in_entityType The entity type as defined by the user
-         * @param in_jsonEntityData	The entity's data as a json string.
+         * @param in_jsonEntityData The entity's data as a json string.
          * @param in_jsonEntityAcl The entity's access control list as json. A null acl implies default
          * permissions which make the entity readable/writeable by only the player.
          * @param in_version Current version of the entity. If the version of the
@@ -75,7 +75,7 @@ namespace BrainCloud {
         * Service Operation - UpdateSingleton
         *
         * @param in_entityType The entity type as defined by the user
-        * @param in_jsonEntityData	The entity's data as a json string.
+        * @param in_jsonEntityData  The entity's data as a json string.
         * permissions which make the entity readable/writeable by only the player.
         * @param in_jsonEntityAcl The entity's access control list as json. A null acl implies default
         * permissions which make the entity readable/writeable by only the player.
@@ -288,7 +288,7 @@ namespace BrainCloud {
          * @param in_entityId The id of the entity to update
          * @param in_targetPlayerId The id of the player who owns the shared entity
          * @param in_entityType The entity type as defined by the user
-         * @param in_jsonEntityData	The entity's data as a json string.
+         * @param in_jsonEntityData The entity's data as a json string.
          * @param in_callback The method to be invoked when the server response is received
          *
          * @return The JSON returned in the callback is as follows:
@@ -304,6 +304,73 @@ namespace BrainCloud {
             const std::string& in_jsonEntityData,
             int64_t in_version,
             IServerCallback * in_callback = NULL);
+
+        /**
+        * Method gets list of entities from the server base on type and/or where clause
+        *
+        * Service Name - Entity
+        * Service Operation - GET_LIST
+        *
+        * @param in_whereJson Mongo style query string
+        * @param in_orderByJson Sort order
+        * @param in_maxReturn The maximum number of entities to return
+        * @param in_callback The callback object
+        *
+        * @return The JSON returned in the callback is as follows:
+        * {
+        *     "status": 200,
+        *     "data": {
+        *         "entities": [{
+        *             "entityId": "113db68a-48ad-4fc9-9f44-5fd36fc6445f",
+        *             "entityType": "person",
+        *             "version": 1,
+        *             "data": {
+        *                 "name": "john",
+        *                 "age": 30
+        *             },
+        *             "acl": {
+        *                 "other": 0
+        *             },
+        *             "createdAt": 1395943044322,
+        *             "updatedAt": 1395943044322
+        *         }, {
+        *             "entityId": "hfd6368a-48ad-4fc9-9f44-5fd36fc6445f",
+        *             "entityType": "person",
+        *             "version": 3,
+        *             "data": {
+        *                 "name": "jane",
+        *                 "age": 22
+        *             },
+        *             "acl": {
+        *                 "other": 0
+        *             },
+        *             "createdAt": 1395943044322,
+        *             "updatedAt": 1395943044322
+        *         }]
+        *     }
+        * }
+        */
+        void getList(const std::string& in_whereJson, const std::string& in_orderByJson, int64_t in_maxReturn, IServerCallback * in_callback = NULL);
+
+        /**
+        * Method gets a count of entities based on the where clause
+        *
+        * Service Name - Entity
+        * Service Operation - GET_LIST_COUNT
+        *
+        * @param in_whereJson Mongo style query string
+        * @param in_callback The callback object
+        *
+        * @return The JSON returned in the callback is as follows:
+        * {
+        *   "status":200,
+        *   "data":
+        *   {
+        *      "entityListCount" : 5
+        *   }
+        * }
+        */
+        void getListCount(const std::string& in_whereJson, IServerCallback * in_callback = NULL);
 
         /**
          * Method uses a paging system to iterate through user entities

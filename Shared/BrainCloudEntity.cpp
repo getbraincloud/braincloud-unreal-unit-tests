@@ -138,6 +138,33 @@ namespace BrainCloud
         m_client->sendRequest(sc);
     }
 
+    void BrainCloudEntity::getList(const std::string& in_whereJson, const std::string& in_orderByJson, int64_t in_maxReturn, IServerCallback * in_callback)
+    {
+        Json::Value message;
+
+        if (StringUtil::IsOptionalParameterValid(in_whereJson)) {
+            message[OperationParam::GlobalEntityServiceWhere.getValue()] = JsonUtil::jsonStringToValue(in_whereJson);
+        }
+
+        if (StringUtil::IsOptionalParameterValid(in_orderByJson)) {
+            message[OperationParam::GlobalEntityServiceOrderBy.getValue()] = JsonUtil::jsonStringToValue(in_orderByJson);
+        }
+
+        message[OperationParam::GlobalEntityServiceMaxReturn.getValue()] = (Json::Int64) in_maxReturn;
+
+        ServerCall * sc = new ServerCall(ServiceName::Entity, ServiceOperation::GetList, message, in_callback);
+        m_client->sendRequest(sc);
+    }
+
+    void BrainCloudEntity::getListCount(const std::string& in_whereJson, IServerCallback * in_callback)
+    {
+        Json::Value message;
+        message[OperationParam::GlobalEntityServiceWhere.getValue()] = JsonUtil::jsonStringToValue(in_whereJson);
+
+        ServerCall * sc = new ServerCall(ServiceName::Entity, ServiceOperation::GetListCount, message, in_callback);
+        m_client->sendRequest(sc);
+    }
+
     void BrainCloudEntity::getPage(const char * in_context, IServerCallback * in_callback)
     {
         Json::Value message;
