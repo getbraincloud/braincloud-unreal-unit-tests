@@ -44,5 +44,6 @@ Pod::Spec.new do |s|
   # ――― Project Linking ―――――――――――――――――――――――――――――――――――――――――――――――――――――――――― #
 
   s.libraries              = 'c++', 'z'
+  s.osx.framework          = 'LDAP'
 
 end
