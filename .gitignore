@@ -55,4 +55,5 @@ solutions/**/AppPackages
 cmake_*
 **/__pycache__
 autobuild/artifacts
+autobuild/tmp
 *.swp
