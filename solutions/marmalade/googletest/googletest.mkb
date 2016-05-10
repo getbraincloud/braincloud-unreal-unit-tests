@@ -1,0 +1,22 @@
+option lib
+
+subproject googletest-source
+
+includepaths
+{
+	"."
+    "src"
+	"include"
+}
+
+files
+{
+}
+
+options 
+{ 
+	#arm-cpu=6
+	#arm-fpu=vfp
+	optimise-speed
+	enable-exceptions
+}

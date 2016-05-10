@@ -1,0 +1,15 @@
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+
+  <Import Project="$([MSBuild]::GetDirectoryNameOfFileAbove($(MSBuildThisFileDirectory), build.root))\Build\Common.Build.settings" />
+
+  <ItemGroup>
+      <ProjectFile Include="BingRequest$(DevToolsVersion)\BingRequest$(DevToolsVersion).vcxproj"/>
+  </ItemGroup>
+
+  <ItemGroup Condition="'$(Platform)' != 'ARM' and '$(RunCodeAnalysis)'!='true'">
+    <ProjectFile Include="BingRequest$(DevToolsVersion).xp\BingRequest$(DevToolsVersion).xp.vcxproj"/>
+  </ItemGroup>
+
+  <Import Project="$(TargetsPath)\Common.Build.Traversal.targets" />
+
+</Project>

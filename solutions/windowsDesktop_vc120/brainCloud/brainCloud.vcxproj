@@ -1,0 +1,310 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="14.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="..\packages\cpprestsdk.2.0.1\build\native\cpprestsdk.props" Condition="Exists('..\packages\cpprestsdk.2.0.1\build\native\cpprestsdk.props')" />
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectGuid>{CDCA39C7-E839-4EF5-BB25-5C586B7C975B}</ProjectGuid>
+    <RootNamespace>GameClientLib</RootNamespace>
+    <Keyword>Win32Proj</Keyword>
+    <WindowsTargetPlatformVersion>8.1</WindowsTargetPlatformVersion>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v120</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <WindowsAppContainer>false</WindowsAppContainer>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v120</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <WindowsAppContainer>false</WindowsAppContainer>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v120</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <WindowsAppContainer>false</WindowsAppContainer>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v120</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <WindowsAppContainer>false</WindowsAppContainer>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup>
+    <_ProjectFileVersion>12.0.21005.1</_ProjectFileVersion>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <OutDir>$(ProjectDir)Output\$(Platform)\$(Configuration)\</OutDir>
+    <IntDir>$(ProjectDir)Intermediate\$(Platform)\$(Configuration)\</IntDir>
+    <TargetName>$(ProjectName)</TargetName>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <OutDir>$(ProjectDir)Output\$(Platform)\$(Configuration)\</OutDir>
+    <IntDir>$(ProjectDir)Intermediate\$(Platform)\$(Configuration)\</IntDir>
+    <TargetName>$(ProjectName)</TargetName>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <OutDir>$(ProjectDir)Output\$(Platform)\$(Configuration)\</OutDir>
+    <IntDir>$(ProjectDir)Intermediate\$(Platform)\$(Configuration)\</IntDir>
+    <TargetName>$(ProjectName)</TargetName>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <OutDir>$(ProjectDir)Output\$(Platform)\$(Configuration)\</OutDir>
+    <IntDir>$(ProjectDir)Intermediate\$(Platform)\$(Configuration)\</IntDir>
+    <TargetName>$(ProjectName)</TargetName>
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <ClCompile>
+      <Optimization>Disabled</Optimization>
+      <AdditionalIncludeDirectories>..\..\..\include;..\..\..\lib\win32\cpprestsdk-static\Release\include;..\..\..\lib\jsoncpp-1.0.0;</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>WIN32;PTW32_STATIC_LIB;USE_NEW_COMMS;_LIB;_NO_ASYNCRTIMP;_WIN32;USE_NEW_COMMS;_DEBUG;_LIB;_NO_ASYNCRTIMP;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MinimalRebuild>true</MinimalRebuild>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+      <PrecompiledHeader />
+      <WarningLevel>Level3</WarningLevel>
+      <DebugInformationFormat>EditAndContinue</DebugInformationFormat>
+      <ProgramDataBaseFileName>$(OutDir)$(TargetName)_vc$(PlatformToolsetVersion).pdb</ProgramDataBaseFileName>
+      <CompileAsWinRT>false</CompileAsWinRT>
+    </ClCompile>
+    <Lib>
+      <AdditionalDependencies>cpprest120d_2_0.lib;winhttp.lib;bcrypt.lib;crypt32.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>..\..\..\lib\win32\cpprestsdk-static\Binaries\Win32\Debug;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <OutputFile>$(OutDir)$(TargetName)$(TargetExt)</OutputFile>
+      <TargetMachine>MachineX86</TargetMachine>
+    </Lib>
+    <Link>
+      <AdditionalLibraryDirectories>..\..\..\lib\win32\cpprestsdk-static\Binaries\Win32\Debug;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>cpprest120d_2_0.lib;winhttp.lib;bcrypt.lib;crypt32.lib;%(AdditionalDependencies)</AdditionalDependencies>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <ClCompile>
+      <Optimization>Disabled</Optimization>
+      <AdditionalIncludeDirectories>..\..\..\include;..\..\..\lib\win32\cpprestsdk-static\Release\include;..\..\..\lib\jsoncpp-1.0.0;</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>WIN32;PTW32_STATIC_LIB;USE_NEW_COMMS;_LIB;_NO_ASYNCRTIMP;_WIN32;USE_NEW_COMMS;_DEBUG;_LIB;_NO_ASYNCRTIMP;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+      <PrecompiledHeader>
+      </PrecompiledHeader>
+      <WarningLevel>Level3</WarningLevel>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <ProgramDataBaseFileName>$(OutDir)$(TargetName)_vc$(PlatformToolsetVersion).pdb</ProgramDataBaseFileName>
+      <CompileAsWinRT>false</CompileAsWinRT>
+    </ClCompile>
+    <Lib>
+      <AdditionalDependencies>cpprest120d_2_0.lib;winhttp.lib;bcrypt.lib;crypt32.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>..\..\..\lib\win32\cpprestsdk-static\Binaries\x64\Debug;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <OutputFile>$(OutDir)$(TargetName)$(TargetExt)</OutputFile>
+    </Lib>
+    <Link>
+      <AdditionalLibraryDirectories>..\..\..\lib\win32\cpprestsdk-static\Binaries\Win32\Debug;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>cpprest120d_2_0.lib;winhttp.lib;bcrypt.lib;crypt32.lib;%(AdditionalDependencies)</AdditionalDependencies>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <ClCompile>
+      <Optimization>MaxSpeed</Optimization>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <AdditionalIncludeDirectories>..\..\..\include;..\..\..\lib\win32\cpprestsdk-static\Release\include;..\..\..\lib\jsoncpp-1.0.0</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>WIN32;PTW32_STATIC_LIB;USE_NEW_COMMS;_LIB;_NO_ASYNCRTIMP;PTW32_STATIC_LIB;USE_NEW_COMMS;NDEBUG;_LIB;_NO_ASYNCRTIMP;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <PrecompiledHeader />
+      <WarningLevel>Level3</WarningLevel>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <ProgramDataBaseFileName>$(OutDir)$(TargetName)_vc$(PlatformToolsetVersion).pdb</ProgramDataBaseFileName>
+    </ClCompile>
+    <Lib>
+      <AdditionalDependencies>cpprest120_2_0.lib;winhttp.lib;bcrypt.lib;crypt32.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>..\..\..\lib\win32\cpprestsdk-static\Binaries\Win32\Release;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <TargetMachine>MachineX86</TargetMachine>
+    </Lib>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <ClCompile>
+      <Optimization>MaxSpeed</Optimization>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <AdditionalIncludeDirectories>..\..\..\include;..\..\..\lib\win32\cpprestsdk-static\Release\include;..\..\..\lib\jsoncpp-1.0.0</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>WIN32;PTW32_STATIC_LIB;USE_NEW_COMMS;_LIB;_NO_ASYNCRTIMP;PTW32_STATIC_LIB;USE_NEW_COMMS;NDEBUG;_LIB;_NO_ASYNCRTIMP;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <PrecompiledHeader>
+      </PrecompiledHeader>
+      <WarningLevel>Level3</WarningLevel>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <ProgramDataBaseFileName>$(OutDir)$(TargetName)_vc$(PlatformToolsetVersion).pdb</ProgramDataBaseFileName>
+    </ClCompile>
+    <Lib>
+      <AdditionalDependencies>cpprest120_2_0.lib;winhttp.lib;bcrypt.lib;crypt32.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>..\..\..\lib\win32\cpprestsdk-static\Binaries\x64\Release;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+    </Lib>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <Text Include="ReadMe.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\..\..\include\braincloud\AuthenticationType.h" />
+    <ClInclude Include="..\..\..\include\braincloud\BrainCloudAsyncMatch.h" />
+    <ClInclude Include="..\..\..\include\braincloud\BrainCloudAuthentication.h" />
+    <ClInclude Include="..\..\..\include\braincloud\BrainCloudClient.h" />
+    <ClInclude Include="..\..\..\include\braincloud\BrainCloudDataStream.h" />
+    <ClInclude Include="..\..\..\include\braincloud\BrainCloudEntity.h" />
+    <ClInclude Include="..\..\..\include\braincloud\BrainCloudEvent.h" />
+    <ClInclude Include="..\..\..\include\braincloud\BrainCloudFile.h" />
+    <ClInclude Include="..\..\..\include\braincloud\BrainCloudFriend.h" />
+    <ClInclude Include="..\..\..\include\braincloud\BrainCloudGamification.h" />
+    <ClInclude Include="..\..\..\include\braincloud\BrainCloudGlobalApp.h" />
+    <ClInclude Include="..\..\..\include\braincloud\BrainCloudGlobalEntity.h" />
+    <ClInclude Include="..\..\..\include\braincloud\BrainCloudGlobalStatistics.h" />
+    <ClInclude Include="..\..\..\include\braincloud\BrainCloudIdentity.h" />
+    <ClInclude Include="..\..\..\include\braincloud\BrainCloudMatchmaking.h" />
+    <ClInclude Include="..\..\..\include\braincloud\BrainCloudOneWayMatch.h" />
+    <ClInclude Include="..\..\..\include\braincloud\BrainCloudPlaybackStream.h" />
+    <ClInclude Include="..\..\..\include\braincloud\BrainCloudPlayerState.h" />
+    <ClInclude Include="..\..\..\include\braincloud\BrainCloudPlayerStatistics.h" />
+    <ClInclude Include="..\..\..\include\braincloud\BrainCloudPlayerStatisticsEvent.h" />
+    <ClInclude Include="..\..\..\include\braincloud\BrainCloudProduct.h" />
+    <ClInclude Include="..\..\..\include\braincloud\BrainCloudProfanity.h" />
+    <ClInclude Include="..\..\..\include\braincloud\BrainCloudPushNotification.h" />
+    <ClInclude Include="..\..\..\include\braincloud\BrainCloudRedemptionCode.h" />
+    <ClInclude Include="..\..\..\include\braincloud\BrainCloudS3Handling.h" />
+    <ClInclude Include="..\..\..\include\braincloud\BrainCloudScript.h" />
+    <ClInclude Include="..\..\..\include\braincloud\BrainCloudSocialLeaderboard.h" />
+    <ClInclude Include="..\..\..\include\braincloud\BrainCloudSteam.h" />
+    <ClInclude Include="..\..\..\include\braincloud\BrainCloudTime.h" />
+    <ClInclude Include="..\..\..\include\braincloud\BrainCloudTwitter.h" />
+    <ClInclude Include="..\..\..\include\braincloud\BrainCloudTypes.h" />
+    <ClInclude Include="..\..\..\include\braincloud\BrainCloudWrapper.h" />
+    <ClInclude Include="..\..\..\include\braincloud\FriendPlatform.h" />
+    <ClInclude Include="..\..\..\include\braincloud\http_codes.h" />
+    <ClInclude Include="..\..\..\include\braincloud\IEventCallback.h" />
+    <ClInclude Include="..\..\..\include\braincloud\IFileUploadCallback.h" />
+    <ClInclude Include="..\..\..\include\braincloud\IGlobalErrorCallback.h" />
+    <ClInclude Include="..\..\..\include\braincloud\INetworkErrorCallback.h" />
+    <ClInclude Include="..\..\..\include\braincloud\internal\GUID.h" />
+    <ClInclude Include="..\..\..\include\braincloud\internal\IBrainCloudComms.h" />
+    <ClInclude Include="..\..\..\include\braincloud\internal\IFileUploader.h" />
+    <ClInclude Include="..\..\..\include\braincloud\internal\JsonUtil.h" />
+    <ClInclude Include="..\..\..\include\braincloud\internal\md5x.h" />
+    <ClInclude Include="..\..\..\include\braincloud\internal\SaveDataHelper.h" />
+    <ClInclude Include="..\..\..\include\braincloud\internal\StringUtil.h" />
+    <ClInclude Include="..\..\..\include\braincloud\internal\TimeUtil.h" />
+    <ClInclude Include="..\..\..\include\braincloud\internal\URLLoader.h" />
+    <ClInclude Include="..\..\..\include\braincloud\internal\URLLoaderClient.h" />
+    <ClInclude Include="..\..\..\include\braincloud\internal\URLRequest.h" />
+    <ClInclude Include="..\..\..\include\braincloud\internal\URLRequestHeader.h" />
+    <ClInclude Include="..\..\..\include\braincloud\internal\URLRequestMethod.h" />
+    <ClInclude Include="..\..\..\include\braincloud\internal\URLResponse.h" />
+    <ClInclude Include="..\..\..\include\braincloud\internal\win\BrainCloudComms2.h" />
+    <ClInclude Include="..\..\..\include\braincloud\internal\win\CppRestFileUploader.h" />
+    <ClInclude Include="..\..\..\include\braincloud\internal\win\MD5.h" />
+    <ClInclude Include="..\..\..\include\braincloud\IRewardCallback.h" />
+    <ClInclude Include="..\..\..\include\braincloud\IServerCallback.h" />
+    <ClInclude Include="..\..\..\include\braincloud\OperationParam.h" />
+    <ClInclude Include="..\..\..\include\braincloud\Platform.h" />
+    <ClInclude Include="..\..\..\include\braincloud\reason_codes.h" />
+    <ClInclude Include="..\..\..\include\braincloud\ServerCall.h" />
+    <ClInclude Include="..\..\..\include\braincloud\ServiceName.h" />
+    <ClInclude Include="..\..\..\include\braincloud\ServiceOperation.h" />
+    <ClInclude Include="..\..\..\lib\jsoncpp-1.0.0\json\json.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\..\..\lib\jsoncpp-1.0.0\jsoncpp.cpp" />
+    <ClCompile Include="..\..\..\src\AuthenticationType.cpp" />
+    <ClCompile Include="..\..\..\src\BrainCloudAsyncMatch.cpp" />
+    <ClCompile Include="..\..\..\src\BrainCloudAuthentication.cpp" />
+    <ClCompile Include="..\..\..\src\BrainCloudClient.cpp" />
+    <ClCompile Include="..\..\..\src\BrainCloudDataStream.cpp" />
+    <ClCompile Include="..\..\..\src\BrainCloudEntity.cpp" />
+    <ClCompile Include="..\..\..\src\BrainCloudEvent.cpp" />
+    <ClCompile Include="..\..\..\src\BrainCloudFile.cpp" />
+    <ClCompile Include="..\..\..\src\BrainCloudFriend.cpp" />
+    <ClCompile Include="..\..\..\src\BrainCloudGamification.cpp" />
+    <ClCompile Include="..\..\..\src\BrainCloudGlobalApp.cpp" />
+    <ClCompile Include="..\..\..\src\BrainCloudGlobalEntity.cpp" />
+    <ClCompile Include="..\..\..\src\BrainCloudGlobalStatistics.cpp" />
+    <ClCompile Include="..\..\..\src\BrainCloudIdentity.cpp" />
+    <ClCompile Include="..\..\..\src\BrainCloudMatchmaking.cpp" />
+    <ClCompile Include="..\..\..\src\BrainCloudOneWayMatch.cpp" />
+    <ClCompile Include="..\..\..\src\BrainCloudPlaybackStream.cpp" />
+    <ClCompile Include="..\..\..\src\BrainCloudPlayerState.cpp" />
+    <ClCompile Include="..\..\..\src\BrainCloudPlayerStatistics.cpp" />
+    <ClCompile Include="..\..\..\src\BrainCloudPlayerStatisticsEvent.cpp" />
+    <ClCompile Include="..\..\..\src\BrainCloudProduct.cpp" />
+    <ClCompile Include="..\..\..\src\BrainCloudProfanity.cpp" />
+    <ClCompile Include="..\..\..\src\BrainCloudPushNotification.cpp" />
+    <ClCompile Include="..\..\..\src\BrainCloudRedemptionCode.cpp" />
+    <ClCompile Include="..\..\..\src\BrainCloudS3Handling.cpp" />
+    <ClCompile Include="..\..\..\src\BrainCloudScript.cpp" />
+    <ClCompile Include="..\..\..\src\BrainCloudSocialLeaderboard.cpp" />
+    <ClCompile Include="..\..\..\src\BrainCloudSteam.cpp" />
+    <ClCompile Include="..\..\..\src\BrainCloudTime.cpp" />
+    <ClCompile Include="..\..\..\src\BrainCloudTwitter.cpp" />
+    <ClCompile Include="..\..\..\src\BrainCloudWrapper.cpp" />
+    <ClCompile Include="..\..\..\src\FriendPlatform.cpp" />
+    <ClCompile Include="..\..\..\src\GUID.cpp" />
+    <ClCompile Include="..\..\..\src\IBrainCloudComms.cpp" />
+    <ClCompile Include="..\..\..\src\JsonUtil.cpp" />
+    <ClCompile Include="..\..\..\src\md5x.c" />
+    <ClCompile Include="..\..\..\src\OperationParam.cpp" />
+    <ClCompile Include="..\..\..\src\Platform.cpp" />
+    <ClCompile Include="..\..\..\src\SaveDataHelper.cpp" />
+    <ClCompile Include="..\..\..\src\ServerCall.cpp" />
+    <ClCompile Include="..\..\..\src\ServiceName.cpp" />
+    <ClCompile Include="..\..\..\src\ServiceOperation.cpp" />
+    <ClCompile Include="..\..\..\src\StringUtil.cpp" />
+    <ClCompile Include="..\..\..\src\TimeUtil.cpp" />
+    <ClCompile Include="..\..\..\src\URLLoader.cpp" />
+    <ClCompile Include="..\..\..\src\URLLoaderClient.cpp" />
+    <ClCompile Include="..\..\..\src\URLRequest.cpp" />
+    <ClCompile Include="..\..\..\src\URLRequestHeader.cpp" />
+    <ClCompile Include="..\..\..\src\URLRequestMethod.cpp" />
+    <ClCompile Include="..\..\..\src\URLResponse.cpp" />
+    <ClCompile Include="..\..\..\src\win\BrainCloudComms2.cpp" />
+    <ClCompile Include="..\..\..\src\win\CppRestFileUploader.cpp" />
+    <ClCompile Include="..\..\..\src\win\MD5.cpp" />
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+    <Import Project="..\packages\cpprestsdk.2.0.1\build\native\cpprestsdk.targets" Condition="Exists('..\packages\cpprestsdk.2.0.1\build\native\cpprestsdk.targets')" />
+  </ImportGroup>
+</Project>

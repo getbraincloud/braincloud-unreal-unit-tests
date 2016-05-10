@@ -20,3 +20,39 @@ DerivedData
 
 # CocoaPods
 Pods/
+
+# solutions files
+
+## android
+solutions/android/obj
+
+## marmalade
+solutions/marmalade/build*
+solutions/marmalade/data/app.config.txt
+solutions/marmalade/data/development.icf
+solutions/marmalade/data/ident.free
+solutions/marmalade/data-ram
+solutions/marmalade/googletest/build*
+solutions/marmalade/googletest/lib*
+solutions/marmalade/lib
+
+## nuget
+solutions/**/*.nupkg
+
+## windows
+solutions/**/Generated Files
+solutions/**/Intermediate
+solutions/**/Output
+solutions/**/ipch
+solutions/**/packages
+solutions/**/*.db
+solutions/**/*.opendb
+solutions/**/*.suo
+solutions/**/bin
+solutions/**/AppPackages
+
+# various build artifacts
+cmake_*
+**/__pycache__
+autobuild/artifacts
+*.swp

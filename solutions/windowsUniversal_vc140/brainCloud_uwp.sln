@@ -1,0 +1,54 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 14
+VisualStudioVersion = 14.0.25123.0
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "brainCloud", "brainCloud\brainCloud.vcxproj", "{0D0F5941-CEE0-419D-874E-789E1F95518B}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "TestApp", "TestApp\TestApp.vcxproj", "{4511460C-1864-440D-8E2E-0CDA12219D6D}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|ARM = Debug|ARM
+		Debug|x64 = Debug|x64
+		Debug|x86 = Debug|x86
+		Release|ARM = Release|ARM
+		Release|x64 = Release|x64
+		Release|x86 = Release|x86
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{0D0F5941-CEE0-419D-874E-789E1F95518B}.Debug|ARM.ActiveCfg = Debug|ARM
+		{0D0F5941-CEE0-419D-874E-789E1F95518B}.Debug|ARM.Build.0 = Debug|ARM
+		{0D0F5941-CEE0-419D-874E-789E1F95518B}.Debug|x64.ActiveCfg = Debug|x64
+		{0D0F5941-CEE0-419D-874E-789E1F95518B}.Debug|x64.Build.0 = Debug|x64
+		{0D0F5941-CEE0-419D-874E-789E1F95518B}.Debug|x86.ActiveCfg = Debug|Win32
+		{0D0F5941-CEE0-419D-874E-789E1F95518B}.Debug|x86.Build.0 = Debug|Win32
+		{0D0F5941-CEE0-419D-874E-789E1F95518B}.Release|ARM.ActiveCfg = Release|ARM
+		{0D0F5941-CEE0-419D-874E-789E1F95518B}.Release|ARM.Build.0 = Release|ARM
+		{0D0F5941-CEE0-419D-874E-789E1F95518B}.Release|x64.ActiveCfg = Release|x64
+		{0D0F5941-CEE0-419D-874E-789E1F95518B}.Release|x64.Build.0 = Release|x64
+		{0D0F5941-CEE0-419D-874E-789E1F95518B}.Release|x86.ActiveCfg = Release|Win32
+		{0D0F5941-CEE0-419D-874E-789E1F95518B}.Release|x86.Build.0 = Release|Win32
+		{4511460C-1864-440D-8E2E-0CDA12219D6D}.Debug|ARM.ActiveCfg = Debug|ARM
+		{4511460C-1864-440D-8E2E-0CDA12219D6D}.Debug|ARM.Build.0 = Debug|ARM
+		{4511460C-1864-440D-8E2E-0CDA12219D6D}.Debug|ARM.Deploy.0 = Debug|ARM
+		{4511460C-1864-440D-8E2E-0CDA12219D6D}.Debug|x64.ActiveCfg = Debug|x64
+		{4511460C-1864-440D-8E2E-0CDA12219D6D}.Debug|x64.Build.0 = Debug|x64
+		{4511460C-1864-440D-8E2E-0CDA12219D6D}.Debug|x64.Deploy.0 = Debug|x64
+		{4511460C-1864-440D-8E2E-0CDA12219D6D}.Debug|x86.ActiveCfg = Debug|Win32
+		{4511460C-1864-440D-8E2E-0CDA12219D6D}.Debug|x86.Build.0 = Debug|Win32
+		{4511460C-1864-440D-8E2E-0CDA12219D6D}.Debug|x86.Deploy.0 = Debug|Win32
+		{4511460C-1864-440D-8E2E-0CDA12219D6D}.Release|ARM.ActiveCfg = Release|ARM
+		{4511460C-1864-440D-8E2E-0CDA12219D6D}.Release|ARM.Build.0 = Release|ARM
+		{4511460C-1864-440D-8E2E-0CDA12219D6D}.Release|ARM.Deploy.0 = Release|ARM
+		{4511460C-1864-440D-8E2E-0CDA12219D6D}.Release|x64.ActiveCfg = Release|x64
+		{4511460C-1864-440D-8E2E-0CDA12219D6D}.Release|x64.Build.0 = Release|x64
+		{4511460C-1864-440D-8E2E-0CDA12219D6D}.Release|x64.Deploy.0 = Release|x64
+		{4511460C-1864-440D-8E2E-0CDA12219D6D}.Release|x86.ActiveCfg = Release|Win32
+		{4511460C-1864-440D-8E2E-0CDA12219D6D}.Release|x86.Build.0 = Release|Win32
+		{4511460C-1864-440D-8E2E-0CDA12219D6D}.Release|x86.Deploy.0 = Release|Win32
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

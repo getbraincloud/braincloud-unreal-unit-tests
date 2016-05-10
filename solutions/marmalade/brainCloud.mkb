@@ -1,0 +1,173 @@
+option lib
+subproject brainCloud
+
+defines
+{
+    IW_HTTP_SSL
+}
+
+packages
+{
+    iwhttp
+    jsoncpp
+}
+
+subprojects
+{
+    iwhttp
+    jsoncpp
+}
+
+frameworks
+{
+    "CoreFoundation"
+    "Foundation"
+    "SystemConfiguration"
+}
+
+option
+{
+  #  cxx11
+}
+
+includepath
+{
+    ../../include
+}
+
+files
+{
+    (../../include/braincloud)
+    AuthenticationType.h
+    BrainCloudAsyncMatch.h
+    BrainCloudAuthentication.h
+    BrainCloudClient.h
+    BrainCloudDataStream.h
+    BrainCloudEntity.h
+    BrainCloudEvent.h
+    BrainCloudFile.h
+    BrainCloudFriend.h
+    BrainCloudGamification.h
+    BrainCloudGlobalApp.h
+    BrainCloudGlobalEntity.h
+    BrainCloudGlobalStatistics.h
+    BrainCloudIdentity.h
+    BrainCloudMatchmaking.h
+    BrainCloudOneWayMatch.h
+    BrainCloudPlaybackStream.h
+    BrainCloudPlayerState.h
+    BrainCloudPlayerStatistics.h
+    BrainCloudPlayerStatisticsEvent.h
+    BrainCloudProduct.h
+    BrainCloudProfanity.h
+    BrainCloudPushNotification.h
+    BrainCloudRedemptionCode.h
+    BrainCloudS3Handling.h
+    BrainCloudScript.h
+    BrainCloudSocialLeaderboard.h
+    BrainCloudSteam.h
+    BrainCloudTime.h
+    BrainCloudTwitter.h
+    BrainCloudTypes.h
+    BrainCloudWrapper.h
+    FriendPlatform.h
+    IEventCallback.h
+    IFileUploadCallback.h
+    IGlobalErrorCallback.h
+    INetworkErrorCallback.h
+    IRewardCallback.h
+    IServerCallback.h
+    OperationParam.h
+    Platform.h
+    ServerCall.h
+    ServiceName.h
+    ServiceOperation.h
+    http_codes.h
+    reason_codes.h
+
+    (../../include/braincloud/internal)
+    BrainCloudComms.h
+    GUID.h
+    IBrainCloudComms.h
+    IFileUploader.h
+    JsonUtil.h
+    SaveDataHelper.h
+    StringUtil.h
+    TimeUtil.h
+    Timer.h
+    TimerCallback.h
+    URLLoader.h
+    URLLoaderClient.h
+    URLRequest.h
+    URLRequestHeader.h
+    URLRequestMethod.h
+    URLResponse.h
+    md5x.h
+
+    (../../include/braincloud/internal/marmalade)
+    IwHttpLoader.h
+
+    (../../include/braincloud/internal/win)
+    MD5.h
+
+    (../../src)
+    AuthenticationType.cpp
+    BrainCloudAsyncMatch.cpp
+    BrainCloudAuthentication.cpp
+    BrainCloudClient.cpp
+    BrainCloudComms.cpp
+    BrainCloudDataStream.cpp
+    BrainCloudEntity.cpp
+    BrainCloudEvent.cpp
+    BrainCloudFile.cpp
+    BrainCloudFriend.cpp
+    BrainCloudGamification.cpp
+    BrainCloudGlobalApp.cpp
+    BrainCloudGlobalEntity.cpp
+    BrainCloudGlobalStatistics.cpp
+    BrainCloudIdentity.cpp
+    BrainCloudMatchmaking.cpp
+    BrainCloudOneWayMatch.cpp
+    BrainCloudPlaybackStream.cpp
+    BrainCloudPlayerState.cpp
+    BrainCloudPlayerStatistics.cpp
+    BrainCloudPlayerStatisticsEvent.cpp
+    BrainCloudProduct.cpp
+    BrainCloudProfanity.cpp
+    BrainCloudPushNotification.cpp
+    BrainCloudRedemptionCode.cpp
+    BrainCloudS3Handling.cpp
+    BrainCloudScript.cpp
+    BrainCloudSocialLeaderboard.cpp
+    BrainCloudSteam.cpp
+    BrainCloudTime.cpp
+    BrainCloudTwitter.cpp
+    BrainCloudWrapper.cpp
+    FriendPlatform.cpp
+    GUID.cpp
+    IBrainCloudComms.cpp
+    JsonUtil.cpp
+    OperationParam.cpp
+    Platform.cpp
+    SaveDataHelper.cpp
+    ServerCall.cpp
+    ServiceName.cpp
+    ServiceOperation.cpp
+    StringUtil.cpp
+    TimeUtil.cpp
+    Timer.cpp
+    TimerCallback.cpp
+    URLLoader.cpp
+    URLLoaderClient.cpp
+    URLRequest.cpp
+    URLRequestHeader.cpp
+    URLRequestMethod.cpp
+    URLResponse.cpp
+    md5x.c
+
+    (../../src/marmalade)
+    IwHttpLoader.cpp
+
+    (../../src/win)
+    MD5.cpp
+}

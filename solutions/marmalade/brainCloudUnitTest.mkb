@@ -1,0 +1,98 @@
+#!/usr/bin/env mkb
+
+defines
+{
+    IW_HTTP_SSL
+}
+
+packages
+{
+}
+
+subprojects
+{
+    brainCloud
+    googletest
+}
+
+frameworks
+{
+}
+
+option
+{
+  #  cxx11
+}
+
+includepath
+{
+    ../../tests/src
+    ../../tests/gtest-1.7.0/include
+}
+
+files
+{
+    (../../tests/src)
+    TestBCAsyncMatch.cpp
+    TestBCAsyncMatch.h
+    TestBCAuth.cpp
+    TestBCAuth.h
+    TestBCComms.cpp
+    TestBCComms.h
+    TestBCDataStream.cpp
+    TestBCDataStream.h
+    TestBCEntity.cpp
+    TestBCEntity.h
+    TestBCEvent.cpp
+    TestBCEvent.h
+    TestBCFile.cpp
+    TestBCFile.h
+    TestBCFriend.cpp
+    TestBCFriend.h
+    TestBCGamification.cpp
+    TestBCGamification.h
+    TestBCGlobalApp.cpp
+    TestBCGlobalApp.h
+    TestBCGlobalEntity.cpp
+    TestBCGlobalEntity.h
+    TestBCGlobalStatistics.cpp
+    TestBCGlobalStatistics.h
+    TestBCIdentity.cpp
+    TestBCIdentity.h
+    TestBCMatchMaking.cpp
+    TestBCMatchMaking.h
+    TestBCOneWayMatch.cpp
+    TestBCOneWayMatch.h
+    TestBCPlaybackStream.cpp
+    TestBCPlaybackStream.h
+    TestBCPlayerState.cpp
+    TestBCPlayerState.h
+    TestBCPlayerStatistics.cpp
+    TestBCPlayerStatistics.h
+    TestBCPlayerStatisticsEvent.cpp
+    TestBCPlayerStatisticsEvent.h
+    TestBCProduct.cpp
+    TestBCProduct.h
+    TestBCProfanity.cpp
+    TestBCProfanity.h
+    TestBCPushNotifications.cpp
+    TestBCPushNotifications.h
+    TestBCRedemptionCode.cpp
+    TestBCRedemptionCode.h
+    TestBCS3Handling.cpp
+    TestBCS3Handling.h
+    TestBCScript.cpp
+    TestBCScript.h
+    TestBCSocialLeaderboard.cpp
+    TestBCSocialLeaderboard.h
+    TestBCTime.cpp
+    TestBCTime.h
+    TestBCWrapper.cpp
+    TestBCWrapper.h
+    TestFixtureBase.cpp
+    TestFixtureBase.h
+    TestResult.cpp
+    TestResult.h
+    TestUser.cpp
+    TestUser.h
+}

@@ -1,0 +1,77 @@
+includepath
+{
+    h
+}
+
+library
+{
+    ".,brainCloud"
+}
+
+defines
+{
+    IW_HTTP_SSL
+}
+
+packages
+{
+    iwhttp
+    jsoncpp
+}
+
+subprojects
+{
+    iwhttp
+    jsoncpp
+}
+
+files
+{
+    (h)
+    AuthenticationType.h
+    BrainCloudAsyncMatch.h
+    BrainCloudAuthentication.h
+    BrainCloudClient.h
+    BrainCloudDataStream.h
+    BrainCloudEntity.h
+    BrainCloudEvent.h
+    BrainCloudFile.h
+    BrainCloudFriend.h
+    BrainCloudGamification.h
+    BrainCloudGlobalApp.h
+    BrainCloudGlobalEntity.h
+    BrainCloudGlobalStatistics.h
+    BrainCloudIdentity.h
+    BrainCloudMatchmaking.h
+    BrainCloudOneWayMatch.h
+    BrainCloudPlaybackStream.h
+    BrainCloudPlayerState.h
+    BrainCloudPlayerStatistics.h
+    BrainCloudPlayerStatisticsEvent.h
+    BrainCloudProduct.h
+    BrainCloudProfanity.h
+    BrainCloudPushNotification.h
+    BrainCloudRedemptionCode.h
+    BrainCloudS3Handling.h
+    BrainCloudScript.h
+    BrainCloudSocialLeaderboard.h
+    BrainCloudSteam.h
+    BrainCloudTime.h
+    BrainCloudTwitter.h
+    BrainCloudTypes.h
+    BrainCloudWrapper.h
+    FriendPlatform.h
+    IEventCallback.h
+    IFileUploadCallback.h
+    IGlobalErrorCallback.h
+    INetworkErrorCallback.h
+    IRewardCallback.h
+    IServerCallback.h
+    OperationParam.h
+    Platform.h
+    ServerCall.h
+    ServiceName.h
+    ServiceOperation.h
+    http_codes.h
+    reason_codes.h
+}

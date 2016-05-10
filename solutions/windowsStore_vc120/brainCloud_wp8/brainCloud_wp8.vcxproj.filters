@@ -1,0 +1,399 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="include">
+      <UniqueIdentifier>{ac84c705-f199-4ba3-8bf5-017bb6ef48c8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="include\braincloud">
+      <UniqueIdentifier>{09520141-1861-4b09-8da6-5a9d57e45ca5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="include\braincloud\internal">
+      <UniqueIdentifier>{a52aacda-e832-4e51-a635-6d144a649c16}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="include\braincloud\internal\win">
+      <UniqueIdentifier>{653abfdb-47a2-437c-9bdb-7afc50427098}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src">
+      <UniqueIdentifier>{4abc4b02-cfbb-4b56-93bd-b6510cf1708f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\win">
+      <UniqueIdentifier>{6a3a0935-454d-492e-8a35-ae8c26d27bed}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="lib">
+      <UniqueIdentifier>{59d594fd-d768-4812-b147-9bc83b2a7428}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="lib\jsoncpp">
+      <UniqueIdentifier>{edebc2ab-ecc2-4d8a-8324-4fc77504e67e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="lib\jsoncpp\json">
+      <UniqueIdentifier>{09ed6b70-b02a-4d54-8c7f-485399b5cc18}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\..\..\include\braincloud\AuthenticationType.h">
+      <Filter>include\braincloud</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\braincloud\BrainCloudAsyncMatch.h">
+      <Filter>include\braincloud</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\braincloud\BrainCloudAuthentication.h">
+      <Filter>include\braincloud</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\braincloud\BrainCloudClient.h">
+      <Filter>include\braincloud</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\braincloud\BrainCloudDataStream.h">
+      <Filter>include\braincloud</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\braincloud\BrainCloudEntity.h">
+      <Filter>include\braincloud</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\braincloud\BrainCloudEvent.h">
+      <Filter>include\braincloud</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\braincloud\BrainCloudFile.h">
+      <Filter>include\braincloud</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\braincloud\BrainCloudFriend.h">
+      <Filter>include\braincloud</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\braincloud\BrainCloudGamification.h">
+      <Filter>include\braincloud</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\braincloud\BrainCloudGlobalApp.h">
+      <Filter>include\braincloud</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\braincloud\BrainCloudGlobalEntity.h">
+      <Filter>include\braincloud</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\braincloud\BrainCloudGlobalStatistics.h">
+      <Filter>include\braincloud</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\braincloud\BrainCloudIdentity.h">
+      <Filter>include\braincloud</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\braincloud\BrainCloudMatchmaking.h">
+      <Filter>include\braincloud</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\braincloud\BrainCloudOneWayMatch.h">
+      <Filter>include\braincloud</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\braincloud\BrainCloudPlaybackStream.h">
+      <Filter>include\braincloud</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\braincloud\BrainCloudPlayerState.h">
+      <Filter>include\braincloud</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\braincloud\BrainCloudPlayerStatistics.h">
+      <Filter>include\braincloud</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\braincloud\BrainCloudPlayerStatisticsEvent.h">
+      <Filter>include\braincloud</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\braincloud\BrainCloudProduct.h">
+      <Filter>include\braincloud</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\braincloud\BrainCloudProfanity.h">
+      <Filter>include\braincloud</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\braincloud\BrainCloudPushNotification.h">
+      <Filter>include\braincloud</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\braincloud\BrainCloudRedemptionCode.h">
+      <Filter>include\braincloud</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\braincloud\BrainCloudS3Handling.h">
+      <Filter>include\braincloud</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\braincloud\BrainCloudScript.h">
+      <Filter>include\braincloud</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\braincloud\BrainCloudSocialLeaderboard.h">
+      <Filter>include\braincloud</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\braincloud\BrainCloudSteam.h">
+      <Filter>include\braincloud</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\braincloud\BrainCloudTime.h">
+      <Filter>include\braincloud</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\braincloud\BrainCloudTwitter.h">
+      <Filter>include\braincloud</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\braincloud\BrainCloudTypes.h">
+      <Filter>include\braincloud</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\braincloud\BrainCloudWrapper.h">
+      <Filter>include\braincloud</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\braincloud\FriendPlatform.h">
+      <Filter>include\braincloud</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\braincloud\http_codes.h">
+      <Filter>include\braincloud</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\braincloud\IEventCallback.h">
+      <Filter>include\braincloud</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\braincloud\IFileUploadCallback.h">
+      <Filter>include\braincloud</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\braincloud\IGlobalErrorCallback.h">
+      <Filter>include\braincloud</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\braincloud\INetworkErrorCallback.h">
+      <Filter>include\braincloud</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\braincloud\IRewardCallback.h">
+      <Filter>include\braincloud</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\braincloud\IServerCallback.h">
+      <Filter>include\braincloud</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\braincloud\OperationParam.h">
+      <Filter>include\braincloud</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\braincloud\Platform.h">
+      <Filter>include\braincloud</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\braincloud\reason_codes.h">
+      <Filter>include\braincloud</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\braincloud\ServerCall.h">
+      <Filter>include\braincloud</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\braincloud\ServiceName.h">
+      <Filter>include\braincloud</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\braincloud\ServiceOperation.h">
+      <Filter>include\braincloud</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\braincloud\internal\GUID.h">
+      <Filter>include\braincloud\internal</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\braincloud\internal\IBrainCloudComms.h">
+      <Filter>include\braincloud\internal</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\braincloud\internal\IFileUploader.h">
+      <Filter>include\braincloud\internal</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\braincloud\internal\JsonUtil.h">
+      <Filter>include\braincloud\internal</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\braincloud\internal\SaveDataHelper.h">
+      <Filter>include\braincloud\internal</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\braincloud\internal\StringUtil.h">
+      <Filter>include\braincloud\internal</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\braincloud\internal\Timer.h">
+      <Filter>include\braincloud\internal</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\braincloud\internal\TimerCallback.h">
+      <Filter>include\braincloud\internal</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\braincloud\internal\TimeUtil.h">
+      <Filter>include\braincloud\internal</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\braincloud\internal\URLLoader.h">
+      <Filter>include\braincloud\internal</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\braincloud\internal\URLLoaderClient.h">
+      <Filter>include\braincloud\internal</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\braincloud\internal\URLRequest.h">
+      <Filter>include\braincloud\internal</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\braincloud\internal\URLRequestHeader.h">
+      <Filter>include\braincloud\internal</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\braincloud\internal\URLRequestMethod.h">
+      <Filter>include\braincloud\internal</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\braincloud\internal\URLResponse.h">
+      <Filter>include\braincloud\internal</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\braincloud\internal\win\BrainCloudComms2.h">
+      <Filter>include\braincloud\internal\win</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\braincloud\internal\win\CppRestFileUploader.h">
+      <Filter>include\braincloud\internal\win</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\braincloud\internal\win\MD5.h">
+      <Filter>include\braincloud\internal\win</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\lib\jsoncpp-1.0.0\json\json.h">
+      <Filter>lib\jsoncpp\json</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\lib\jsoncpp-1.0.0\json\json-forwards.h">
+      <Filter>lib\jsoncpp\json</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\..\..\src\AuthenticationType.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\BrainCloudAsyncMatch.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\BrainCloudAuthentication.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\BrainCloudClient.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\BrainCloudDataStream.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\BrainCloudEntity.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\BrainCloudEvent.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\BrainCloudFile.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\BrainCloudFriend.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\BrainCloudGamification.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\BrainCloudGlobalApp.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\BrainCloudGlobalEntity.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\BrainCloudGlobalStatistics.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\BrainCloudIdentity.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\BrainCloudMatchmaking.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\BrainCloudOneWayMatch.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\BrainCloudPlaybackStream.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\BrainCloudPlayerState.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\BrainCloudPlayerStatistics.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\BrainCloudPlayerStatisticsEvent.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\BrainCloudProduct.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\BrainCloudProfanity.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\BrainCloudPushNotification.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\BrainCloudRedemptionCode.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\BrainCloudS3Handling.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\BrainCloudScript.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\BrainCloudSocialLeaderboard.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\BrainCloudSteam.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\BrainCloudTime.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\BrainCloudTwitter.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\BrainCloudWrapper.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\FriendPlatform.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\GUID.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\IBrainCloudComms.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\JsonUtil.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\OperationParam.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\Platform.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\SaveDataHelper.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\ServerCall.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\ServiceName.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\ServiceOperation.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\StringUtil.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\Timer.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\TimerCallback.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\TimeUtil.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\URLLoader.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\URLLoaderClient.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\URLRequest.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\URLRequestHeader.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\URLRequestMethod.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\URLResponse.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\win\BrainCloudComms2.cpp">
+      <Filter>src\win</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\win\CppRestFileUploader.cpp">
+      <Filter>src\win</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\win\MD5.cpp">
+      <Filter>src\win</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\lib\jsoncpp-1.0.0\jsoncpp.cpp">
+      <Filter>lib\jsoncpp</Filter>
+    </ClCompile>
+  </ItemGroup>
+</Project>

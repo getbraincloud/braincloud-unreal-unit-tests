@@ -1,0 +1,46 @@
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 14
+VisualStudioVersion = 14.0.25123.0
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{20AB8FF5-71A4-4449-8D07-09D33ADD1B07}"
+	ProjectSection(SolutionItems) = preProject
+		GameClient.vsmdi = GameClient.vsmdi
+		LocalTestRun.testrunconfig = LocalTestRun.testrunconfig
+	EndProjectSection
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "brainCloud", "brainCloud\brainCloud.vcxproj", "{CDCA39C7-E839-4EF5-BB25-5C586B7C975B}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "TestApp", "TestApp\TestApp.vcxproj", "{17D8CA73-114F-43C4-8BB5-B8072BD08ECA}"
+	ProjectSection(ProjectDependencies) = postProject
+		{CDCA39C7-E839-4EF5-BB25-5C586B7C975B} = {CDCA39C7-E839-4EF5-BB25-5C586B7C975B}
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Win32 = Debug|Win32
+		Debug|x64 = Debug|x64
+		Release|Win32 = Release|Win32
+		Release|x64 = Release|x64
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{CDCA39C7-E839-4EF5-BB25-5C586B7C975B}.Debug|Win32.ActiveCfg = Debug|Win32
+		{CDCA39C7-E839-4EF5-BB25-5C586B7C975B}.Debug|Win32.Build.0 = Debug|Win32
+		{CDCA39C7-E839-4EF5-BB25-5C586B7C975B}.Debug|x64.ActiveCfg = Debug|x64
+		{CDCA39C7-E839-4EF5-BB25-5C586B7C975B}.Debug|x64.Build.0 = Debug|x64
+		{CDCA39C7-E839-4EF5-BB25-5C586B7C975B}.Release|Win32.ActiveCfg = Release|Win32
+		{CDCA39C7-E839-4EF5-BB25-5C586B7C975B}.Release|Win32.Build.0 = Release|Win32
+		{CDCA39C7-E839-4EF5-BB25-5C586B7C975B}.Release|x64.ActiveCfg = Release|x64
+		{CDCA39C7-E839-4EF5-BB25-5C586B7C975B}.Release|x64.Build.0 = Release|x64
+		{17D8CA73-114F-43C4-8BB5-B8072BD08ECA}.Debug|Win32.ActiveCfg = Debug|Win32
+		{17D8CA73-114F-43C4-8BB5-B8072BD08ECA}.Debug|Win32.Build.0 = Debug|Win32
+		{17D8CA73-114F-43C4-8BB5-B8072BD08ECA}.Debug|x64.ActiveCfg = Debug|x64
+		{17D8CA73-114F-43C4-8BB5-B8072BD08ECA}.Debug|x64.Build.0 = Debug|x64
+		{17D8CA73-114F-43C4-8BB5-B8072BD08ECA}.Release|Win32.ActiveCfg = Release|Win32
+		{17D8CA73-114F-43C4-8BB5-B8072BD08ECA}.Release|Win32.Build.0 = Release|Win32
+		{17D8CA73-114F-43C4-8BB5-B8072BD08ECA}.Release|x64.ActiveCfg = Release|x64
+		{17D8CA73-114F-43C4-8BB5-B8072BD08ECA}.Release|x64.Build.0 = Release|x64
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

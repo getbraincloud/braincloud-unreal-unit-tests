@@ -1,0 +1,55 @@
+defines
+{
+	GTEST_USE_OWN_TR1_TUPLE = 1
+	GTEST_HAS_POSIX_RE = 0
+	GTEST_HAS_SEH = 0
+}
+
+includepaths
+{
+    "src"
+	"include"
+}
+
+files
+{
+    ("src")
+	gtest.cpp
+	gtest_main.cpp
+	gtest-all.cpp
+	gtest-death-test.cpp
+	gtest-filepath.cpp
+	gtest-internal-inl.h
+	gtest-port.cpp
+	gtest-printers.cpp
+	gtest-test-part.cpp
+	gtest-typed-test.cpp
+	
+	("include/gtest")
+	gtest.h
+	gtest_pred_impl.h
+	gtest_prod.h
+	gtest-death-test.h
+	gtest-message.h
+	gtest-param-test.h
+	gtest-printers.h
+	gtest-spi.h
+	gtest-test-part.h
+	gtest-typed-test.h
+	
+	("include/gtest/internal")
+	[internal]
+	gtest-death-test-internal.h
+	gtest-filepath.h
+	gtest-internal.h
+	gtest-linked_ptr.h
+	gtest-param-util.h
+	gtest-param-util-generated.h
+	gtest-port.h
+	gtest-string.h
+	gtest-tuple.h
+	gtest-type-util.h
+
+	(docs)
+	googletest.defines.txt
+}

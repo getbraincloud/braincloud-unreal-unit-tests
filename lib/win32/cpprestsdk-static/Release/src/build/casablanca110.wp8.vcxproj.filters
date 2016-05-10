@@ -1,0 +1,16 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <WinRTProject>true</WinRTProject>
+  </PropertyGroup>
+  <ItemGroup>
+    <ClCompile Include="$(CasablancaSrcDir)\pplx\pplx.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="$(CasablancaSrcDir)\pplx\windows\pplxwin.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <Import Project="filterdefs.props" />
+  <Import Project="sources.proj" />
+</Project>
