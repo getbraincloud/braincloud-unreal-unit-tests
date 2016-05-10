@@ -37,7 +37,8 @@ def buildProject(in_projectPath, in_targets, in_configuration, in_switches=None,
 
 	cmd = []
 	cmd.append(msbuildPath)
-
+	cmd.append("/m")
+	
 	if not in_switches is None:
 		cmd.extend(in_switches)
 
