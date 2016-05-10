@@ -41,18 +41,10 @@ cp artifacts/linux_debug/*.a artifacts/brainCloud/libs/debug
 cp artifacts/linux_release/*.a artifacts/brainCloud/libs/release
 
 mkdir -p artifacts/brainCloud/thirdparty
-#mkdir -p artifacts/brainCloud/thirdparty/curl/include
-#cp -r "$ANDROID_FOLDER/cocos-curl/include/curl" artifacts/brainCloud/thirdparty/curl/include
 cp -r ../lib/jsoncpp-1.0.0 artifacts/brainCloud/thirdparty
 
 mkdir artifacts/brainCloud/include
 cp -r ../include/* artifacts/brainCloud/include
-
-#cp -r "$ANDROID_FOLDER/cocos-curl/include/curl" artifacts/brainCloud/thirdparty/curl/include
-
-mkdir artifacts/brainCloud/src
-#cp -r ../BrainCloudWrapper/* artifacts/brainCloud/src
-#rm -f artifacts/brainCloud/src/*Android*
 
 cp docs/README.TXT artifacts/brainCloud
 
