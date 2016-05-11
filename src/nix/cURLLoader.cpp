@@ -1,7 +1,8 @@
-//
-//  URLLoader.cpp
-//  GameClientLib
-//
+#ifdef __APPLE__
+#include <TargetConditionals.h>
+#endif 
+
+#if (TARGET_OS_WATCH != 1) // necessary as cocoapods doesn't allow per platform source files
 
 
 #if ( defined(GAMECLIENT_DEBUGLEVEL)  &&  GAMECLIENT_DEBUGLEVEL > 0 )
@@ -240,7 +241,7 @@ void * cURLLoader::loadThread( void * urlLoader )
     return NULL;
 }
 
-
+/*
 static void dump(const char *text, FILE *stream, unsigned char *ptr, size_t size)
 {
     size_t i;
@@ -253,7 +254,7 @@ static void dump(const char *text, FILE *stream, unsigned char *ptr, size_t size
     for(i=0; i<size; i+= width) {
         fprintf(stream, "%4.4lx: ", (long)i);
         
-        /* show hex to the left */
+        // show hex to the left
         for(c = 0; c < width; c++) {
             if(i+c < size)
                 fprintf(stream, "%02x ", ptr[i+c]);
@@ -261,24 +262,25 @@ static void dump(const char *text, FILE *stream, unsigned char *ptr, size_t size
                 fputs("   ", stream);
         }
         
-        /* show data on the right */
+        // show data on the right
         for(c = 0; (c < width) && (i+c < size); c++)
             fputc((ptr[i+c]>=0x20) && (ptr[i+c]<0x80)?ptr[i+c]:'.', stream);
         
-        fputc('\n', stream); /* newline */
+        fputc('\n', stream); // newline
     }
 }
+*/
 
-
+/*
 static int my_trace(CURL *handle, curl_infotype type, char *data, size_t size, void *userp)
 {
     const char *text;
-    (void)handle; /* prevent compiler warning */
+    (void)handle; // prevent compiler warning
     
     switch (type) {
         case CURLINFO_TEXT:
             fprintf(stderr, "== Info: %s", data);
-        default: /* in case a new one is introduced to shock us */
+        default: // in case a new one is introduced to shock us
             return 0;
             
         case CURLINFO_HEADER_OUT:
@@ -304,6 +306,7 @@ static int my_trace(CURL *handle, curl_infotype type, char *data, size_t size, v
     dump(text, stderr, (unsigned char *)data, size);
     return 0;
 }
+*/
 
 curl_socket_t cURLLoader::openSocket(void *data, curlsocktype purpose, struct curl_sockaddr *addr)
 {
@@ -487,3 +490,5 @@ void cURLLoader::loadThreadCurl( cURLLoader * loader )
     }
     loader->_threadRunning = false;
 }
+
+#endif

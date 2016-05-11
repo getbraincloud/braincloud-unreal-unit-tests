@@ -17,7 +17,7 @@ Pod::Spec.new do |s|
   s.ios.deployment_target  = "7.0"
   s.osx.deployment_target  = "10.9"
   s.tvos.deployment_target = "9.0"
-  #s.watchos.deployment_target = "2.0"
+  s.watchos.deployment_target = "2.0"
 
   # ―――  Spec License  ――――――――――――――――――――――――――――――――――――――――――――――――――――――――――― #
 
@@ -34,7 +34,6 @@ Pod::Spec.new do |s|
 
   # ――― Source Code ―――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――― #
 
-#  s.header_dir              = "braincloud"
   s.header_mappings_dir     = "include"
   s.public_header_files     = "include/braincloud/**/*.h"
   s.source_files            = "src/*.{c,cpp}", "src/mac/*.{c,cpp,mm}", "src/nix/*.{c,cpp}", "include/braincloud/*.h", "include/braincloud/internal/*.h", "include/braincloud/internal/mac/*.h", "include/braincloud/internal/nix/*.h"
@@ -43,8 +42,9 @@ Pod::Spec.new do |s|
 
   s.libraries               = 'c++', 'z'
   s.osx.framework           = 'LDAP'
-  s.dependency              'BrainCloudCurl'
-  s.dependency              'BrainCloudJsonCpp'
-  s.dependency              'SSKeychain'
-
+  s.dependency                'SSKeychain'
+  s.dependency                'BrainCloudJsonCpp'
+  s.ios.dependency            'BrainCloudCurl'
+  s.osx.dependency            'BrainCloudCurl'
+  s.tvos.dependency           'BrainCloudCurl'
 end
