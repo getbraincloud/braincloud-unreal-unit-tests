@@ -40,7 +40,7 @@ void SaveDataHelper::initialize(const char * companyName, const char * gameName)
 void SaveDataHelper::saveData(const char * key, const char * data)
 {
 #if defined(WINDOWS) || defined(WIN32)
-#ifdef WINAPI_FAMILY
+#if defined WINAPI_FAMILY && (WINAPI_FAMILY != WINAPI_FAMILY_DESKTOP_APP)
 	std::string skey = key;
 	std::string sdata = data;
 	std::wstring wskey;
@@ -93,7 +93,7 @@ std::string SaveDataHelper::readData(const char * key)
     std::string sdata;
 
 #if defined(WINDOWS) || defined(WIN32)
-#ifdef WINAPI_FAMILY
+#if defined WINAPI_FAMILY && (WINAPI_FAMILY != WINAPI_FAMILY_DESKTOP_APP)
 	std::string skey = key;
 	std::wstring wskey;
 	for (auto c : skey) {
@@ -140,7 +140,7 @@ std::string SaveDataHelper::readData(const char * key)
 void SaveDataHelper::deleteData(const char * key)
 {
 #if defined(WINDOWS) || defined(WIN32)
-#ifdef WINAPI_FAMILY
+#if defined WINAPI_FAMILY && (WINAPI_FAMILY != WINAPI_FAMILY_DESKTOP_APP)
 	std::string skey = key;
 	std::wstring wskey;
 	for (auto c : skey) {
