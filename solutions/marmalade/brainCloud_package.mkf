@@ -41,6 +41,7 @@ files
     BrainCloudGlobalApp.h
     BrainCloudGlobalEntity.h
     BrainCloudGlobalStatistics.h
+    BrainCloudGroup.h
     BrainCloudIdentity.h
     BrainCloudMatchmaking.h
     BrainCloudOneWayMatch.h

@@ -57,6 +57,8 @@ files
     TestBCGlobalEntity.h
     TestBCGlobalStatistics.cpp
     TestBCGlobalStatistics.h
+    TestBCGroup.cpp
+    TestBCGroup.h
     TestBCIdentity.cpp
     TestBCIdentity.h
     TestBCMatchMaking.cpp

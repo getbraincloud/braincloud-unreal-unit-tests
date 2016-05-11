@@ -182,6 +182,7 @@
     <Text Include="ReadMe.txt" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="..\..\..\..\..\..\..\..\p4\projMetagame\Development\Client\Unreal\BCSubsystem\Plugins\BCClient\Source\BCClientPlugin\Public\BrainCloudGroup.h" />
     <ClInclude Include="..\..\..\include\braincloud\AuthenticationType.h" />
     <ClInclude Include="..\..\..\include\braincloud\BrainCloudAsyncMatch.h" />
     <ClInclude Include="..\..\..\include\braincloud\BrainCloudAuthentication.h" />
@@ -262,6 +263,7 @@
     <ClCompile Include="..\..\..\src\BrainCloudGlobalApp.cpp" />
     <ClCompile Include="..\..\..\src\BrainCloudGlobalEntity.cpp" />
     <ClCompile Include="..\..\..\src\BrainCloudGlobalStatistics.cpp" />
+    <ClCompile Include="..\..\..\src\BrainCloudGroup.cpp" />
     <ClCompile Include="..\..\..\src\BrainCloudIdentity.cpp" />
     <ClCompile Include="..\..\..\src\BrainCloudMatchmaking.cpp" />
     <ClCompile Include="..\..\..\src\BrainCloudOneWayMatch.cpp" />

@@ -228,6 +228,9 @@
     <ClInclude Include="..\..\..\lib\jsoncpp-1.0.0\json\json-forwards.h">
       <Filter>lib\jsoncpp\json</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\..\include\braincloud\BrainCloudGroup.h">
+      <Filter>include\braincloud</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\..\src\AuthenticationType.cpp">
@@ -394,6 +397,9 @@
     </ClCompile>
     <ClCompile Include="..\..\..\lib\jsoncpp-1.0.0\jsoncpp.cpp">
       <Filter>lib\jsoncpp</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\BrainCloudGroup.cpp">
+      <Filter>src</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

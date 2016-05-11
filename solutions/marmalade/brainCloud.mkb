@@ -51,6 +51,7 @@ files
     BrainCloudGlobalApp.h
     BrainCloudGlobalEntity.h
     BrainCloudGlobalStatistics.h
+    BrainCloudGroup.h
     BrainCloudIdentity.h
     BrainCloudMatchmaking.h
     BrainCloudOneWayMatch.h
@@ -125,6 +126,7 @@ files
     BrainCloudGlobalApp.cpp
     BrainCloudGlobalEntity.cpp
     BrainCloudGlobalStatistics.cpp
+    BrainCloudGroup.cpp
     BrainCloudIdentity.cpp
     BrainCloudMatchmaking.cpp
     BrainCloudOneWayMatch.cpp

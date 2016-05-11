@@ -218,6 +218,9 @@
     <ClInclude Include="..\..\..\include\braincloud\internal\win\MD5.h">
       <Filter>include\braincloud\internal\win</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\..\include\braincloud\BrainCloudGroup.h">
+      <Filter>include\braincloud</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\..\lib\jsoncpp-1.0.0\jsoncpp.cpp">
@@ -378,6 +381,9 @@
     </ClCompile>
     <ClCompile Include="..\..\..\src\win\MD5.cpp">
       <Filter>src\win</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\BrainCloudGroup.cpp">
+      <Filter>src</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
