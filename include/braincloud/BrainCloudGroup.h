@@ -287,6 +287,7 @@ namespace BrainCloud
 		*
 		* @param in_groupId ID of the group.
 		* @param in_jsonData Partial data map with incremental values.
+		* @param in_returnData Should the group data be returned in the response?
 		* @param in_callback The method to be invoked when the server response is received
 		* @param in_returnData Should the group data be returned in the response?
 		*
