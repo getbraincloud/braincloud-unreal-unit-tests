@@ -76,6 +76,7 @@ include/braincloud/BrainCloudGamification.h
 include/braincloud/BrainCloudGlobalApp.h
 include/braincloud/BrainCloudGlobalEntity.h
 include/braincloud/BrainCloudGlobalStatistics.h
+include/braincloud/BrainCloudGroup.h
 include/braincloud/BrainCloudIdentity.h
 include/braincloud/BrainCloudMatchmaking.h
 include/braincloud/BrainCloudOneWayMatch.h
@@ -142,6 +143,7 @@ src/BrainCloudGamification.cpp
 src/BrainCloudGlobalApp.cpp
 src/BrainCloudGlobalEntity.cpp
 src/BrainCloudGlobalStatistics.cpp
+src/BrainCloudGroup.cpp
 src/BrainCloudIdentity.cpp
 src/BrainCloudMatchmaking.cpp
 src/BrainCloudOneWayMatch.cpp
