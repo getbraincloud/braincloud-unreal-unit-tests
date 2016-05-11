@@ -54,7 +54,7 @@ function build_app()
   then
     failed xcodebuild
   fi
-  mv "$output_folder_ios/libBrainCloudClient-iOS.a" "tmp/libBrainCloud_ios.a"
+  mv "$output_folder_ios/libBrainCloud-iOS.a" "tmp/libBrainCloud_ios.a"
 
   output_folder_ios_sim="`xcodebuild -project $project_dir -scheme "BrainCloudSDK-iOS" ARCHS=x86_64 -sdk "iphonesimulator" -showBuildSettings | grep " BUILT_PRODUCTS_DIR" |cut -d "=" -f 2 | tr -d " "`"
   xcodebuild -verbose -project $project_dir -scheme "BrainCloudSDK-iOS" ARCHS="i386 x86_64" -sdk "iphonesimulator" -configuration "$build_config" clean build 
@@ -62,26 +62,43 @@ function build_app()
   then
     failed xcodebuild
   fi
-  mv "$output_folder_ios_sim/libBrainCloudClient-iOS.a" "tmp/libBrainCloud_iossim.a"
+  mv "$output_folder_ios_sim/libBrainCloud-iOS.a" "tmp/libBrainCloud_iossim.a"
 
 
   # tvos arm/sim
-  output_folder_tvos="`xcodebuild -project $project_dir -scheme "BrainCloudSDK-tvOS" ENABLE_BITCODE=YES -sdk "appletvos" -showBuildSettings | grep " BUILT_PRODUCTS_DIR" |cut -d "=" -f 2 | tr -d " "`"
+  output_folder_tvos="`xcodebuild -project $project_dir -scheme "BrainCloudSDK-tvOS" -sdk "appletvos" -showBuildSettings | grep " BUILT_PRODUCTS_DIR" |cut -d "=" -f 2 | tr -d " "`"
   xcodebuild -verbose -project $project_dir -scheme "BrainCloudSDK-tvOS" -sdk "appletvos" -configuration "$build_config" clean build 
   if [ $? -ne 0 ]
   then
     failed xcodebuild
   fi
-  mv "$output_folder_tvos/libBrainCloudClient-tvOS.a" "tmp/libBrainCloud_tvos.a"
+  mv "$output_folder_tvos/libBrainCloud-tvOS.a" "tmp/libBrainCloud_tvos.a"
 
-  output_folder_tvos_sim="`xcodebuild -project $project_dir -scheme "BrainCloudSDK-tvOS" ARCHS=x86_64 ENABLE_BITCODE=YES -sdk "appletvsimulator" -showBuildSettings | grep " BUILT_PRODUCTS_DIR" |cut -d "=" -f 2 | tr -d " "`"
+  output_folder_tvos_sim="`xcodebuild -project $project_dir -scheme "BrainCloudSDK-tvOS" ARCHS=x86_64 -sdk "appletvsimulator" -showBuildSettings | grep " BUILT_PRODUCTS_DIR" |cut -d "=" -f 2 | tr -d " "`"
   xcodebuild -verbose -project $project_dir -scheme "BrainCloudSDK-tvOS" ARCHS=x86_64 -sdk "appletvsimulator" -configuration "$build_config" clean build 
   if [ $? -ne 0 ]
   then
     failed xcodebuild
   fi
-  mv "$output_folder_tvos_sim/libBrainCloudClient-tvOS.a" "tmp/libBrainCloud_tvossim.a"
+  mv "$output_folder_tvos_sim/libBrainCloud-tvOS.a" "tmp/libBrainCloud_tvossim.a"
 
+
+  # watchos arm/sim
+  output_folder_watchos="`xcodebuild -project $project_dir -scheme "BrainCloudSDK-watchOS" -sdk "watchos" -showBuildSettings | grep " BUILT_PRODUCTS_DIR" |cut -d "=" -f 2 | tr -d " "`"
+  xcodebuild -verbose -project $project_dir -scheme "BrainCloudSDK-watchOS" -sdk "watchos" -configuration "$build_config" clean build 
+  if [ $? -ne 0 ]
+  then
+    failed xcodebuild
+  fi
+  mv "$output_folder_watchos/libBrainCloud-watchOS.a" "tmp/libBrainCloud_watchos.a"
+
+  output_folder_watchos_sim="`xcodebuild -project $project_dir -scheme "BrainCloudSDK-watchOS" ARCHS=i386 -sdk "watchsimulator" -showBuildSettings | grep " BUILT_PRODUCTS_DIR" |cut -d "=" -f 2 | tr -d " "`"
+  xcodebuild -verbose -project $project_dir -scheme "BrainCloudSDK-watchOS" ARCHS=i386 -sdk "watchsimulator" -configuration "$build_config" clean build 
+  if [ $? -ne 0 ]
+  then
+    failed xcodebuild
+  fi
+  mv "$output_folder_watchos_sim/libBrainCloud-watchOS.a" "tmp/libBrainCloud_watchossim.a"
 
   # mac osx
   output_folder_osx="`xcodebuild -project $project_dir -scheme "BrainCloudSDK-OSX" -sdk "macosx" -showBuildSettings | grep " BUILT_PRODUCTS_DIR" |cut -d "=" -f 2 | tr -d " "`"
@@ -101,7 +118,8 @@ function build_app()
   # create fat binaries
   lipo -create "tmp/libBrainCloud_ios.a" "tmp/libBrainCloud_iossim.a" -output brainCloud/libs/brainCloudClient_ios.a
   lipo -create "tmp/libBrainCloud_tvos.a" "tmp/libBrainCloud_tvossim.a" -output brainCloud/libs/brainCloudClient_tvos.a
-  cp "$output_folder_osx/libBrainCloudClient-OSX.a" brainCloud/libs/brainCloudClient_osx.a
+  lipo -create "tmp/libBrainCloud_watchos.a" "tmp/libBrainCloud_watchossim.a" -output brainCloud/libs/brainCloudClient_watchos.a
+  cp "$output_folder_osx/libBrainCloud-OSX.a" brainCloud/libs/brainCloudClient_osx.a
 
   cp ../include/braincloud/*.h brainCloud/include/braincloud
 

@@ -1,3 +1,10 @@
+#ifdef __APPLE__
+#include <TargetConditionals.h>
+#endif
+
+#if (TARGET_OS_WATCH != 1) // necessary as cocoapods doesn't allow per platform source files
+
+
 #include "braincloud/internal/nix/cURLFileUploader.h"
 
 #if defined(__APPLE__) && !defined(HG_PLATFORM_BB)
@@ -98,7 +105,7 @@ namespace BrainCloud
         _fileUploadId = in_fileUploadId;
         _fileName = in_fileName;
         _uploadUrl = in_uploadUrl;
-        _fileLength = in_fileSize;
+        _fileLength = static_cast<long>(in_fileSize);
         
         int rc = 0;
         rc = pthread_attr_init(&_threadAttributes);
@@ -220,8 +227,8 @@ namespace BrainCloud
     void cURLFileUploader::setProgress(curl_off_t ultotal, curl_off_t ulnow)
     {
         pthread_mutex_lock(&_lock);
-        _uploadTotalBytes = ultotal;
-        _uploadTransferredBytes = ulnow;
+        _uploadTotalBytes = static_cast<long>(ultotal);
+        _uploadTransferredBytes = static_cast<long>(ulnow);
         pthread_mutex_unlock(&_lock);
     }
     
@@ -242,7 +249,7 @@ namespace BrainCloud
     int cURLFileUploader::curlProgressCallback(void *data, double dltotal, double dlnow, double ultotal, double ulnow)
     {
         cURLFileUploader * fileUploader = reinterpret_cast<cURLFileUploader*>(data);
-        fileUploader->setProgress((curl_off_t) ultotal, (curl_off_t) ulnow);
+        fileUploader->setProgress(static_cast<curl_off_t>(ultotal), static_cast<curl_off_t>(ulnow));
         
         if (fileUploader->_shouldCancelUpload)
         {
@@ -521,3 +528,5 @@ namespace BrainCloud
         fileUploader->_threadRunning = false;
     }
 }
+
+#endif
