@@ -16,20 +16,20 @@ TestBCGroup::TestBCGroup() :
 
 TEST_F(TestBCGroup, AcceptGroupInvitation)
 {
-	Authenticate(Users::UserA);
+	Authenticate(UserA);
 	CreateGroup();
 
 	TestResult tr;
 	m_bc->getGroupService()->inviteGroupMember(
 		_groupId.c_str(),
-		GetUser(Users::UserB)->m_profileId,
+		GetUser(UserB)->m_profileId,
 		eGroupMember::ADMIN,
 		"",
 		&tr);
 	tr.run(m_bc);
 
 	Logout();
-	Authenticate(Users::UserB);
+	Authenticate(UserB);
 
 	m_bc->getGroupService()->acceptGroupInvitation(
 		_groupId.c_str(),
@@ -42,13 +42,13 @@ TEST_F(TestBCGroup, AcceptGroupInvitation)
 
 TEST_F(TestBCGroup, AddGroupMember)
 {
-	Authenticate(Users::UserA);
+	Authenticate(UserA);
 	CreateGroup();
 
 	TestResult tr;
 	m_bc->getGroupService()->addGroupMember(
 		_groupId.c_str(),
-		GetUser(Users::UserB)->m_profileId,
+		GetUser(UserB)->m_profileId,
 		eGroupMember::ADMIN,
 		"",
 		&tr);
@@ -60,7 +60,7 @@ TEST_F(TestBCGroup, AddGroupMember)
 TEST_F(TestBCGroup, ApproveGroupJoinRequest)
 {
 	CreateGroupAsUserA();
-	Authenticate(Users::UserB);
+	Authenticate(UserB);
 
 	TestResult tr;
 	m_bc->getGroupService()->joinGroup(
@@ -69,11 +69,11 @@ TEST_F(TestBCGroup, ApproveGroupJoinRequest)
 	tr.run(m_bc);
 
 	Logout();
-	Authenticate(Users::UserA);
+	Authenticate(UserA);
 
 	m_bc->getGroupService()->approveGroupJoinRequest(
 		_groupId.c_str(),
-		GetUser(Users::UserB)->m_profileId,
+		GetUser(UserB)->m_profileId,
 		eGroupMember::MEMBER,
 		"",
 		&tr);
@@ -84,13 +84,13 @@ TEST_F(TestBCGroup, ApproveGroupJoinRequest)
 
 TEST_F(TestBCGroup, CancelGroupInvitation)
 {
-	Authenticate(Users::UserA);
+	Authenticate(UserA);
 	CreateGroup();
 
 	TestResult tr;
 	m_bc->getGroupService()->inviteGroupMember(
 		_groupId.c_str(),
-		GetUser(Users::UserB)->m_profileId,
+		GetUser(UserB)->m_profileId,
 		eGroupMember::ADMIN,
 		"",
 		&tr);
@@ -98,7 +98,7 @@ TEST_F(TestBCGroup, CancelGroupInvitation)
 
 	m_bc->getGroupService()->cancelGroupInvitation(
 		_groupId.c_str(),
-		GetUser(Users::UserB)->m_profileId,
+		GetUser(UserB)->m_profileId,
 		&tr);
 	tr.run(m_bc);
 
@@ -107,7 +107,7 @@ TEST_F(TestBCGroup, CancelGroupInvitation)
 
 TEST_F(TestBCGroup, CreateGroup)
 {
-	Authenticate(Users::UserA);
+	Authenticate(UserA);
 	CreateGroup();
 	DeleteGroup();
 	Logout();
@@ -115,7 +115,7 @@ TEST_F(TestBCGroup, CreateGroup)
 
 TEST_F(TestBCGroup, CreateGroupEntity)
 {
-	Authenticate(Users::UserA);
+	Authenticate(UserA);
 	CreateGroup();
 	CreateGroupEntity();
 	DeleteGroup();
@@ -124,7 +124,7 @@ TEST_F(TestBCGroup, CreateGroupEntity)
 
 TEST_F(TestBCGroup, DeleteGroup)
 {
-	Authenticate(Users::UserA);
+	Authenticate(UserA);
 	CreateGroup();
 	DeleteGroup();
 	Logout();
@@ -133,7 +133,7 @@ TEST_F(TestBCGroup, DeleteGroup)
 
 TEST_F(TestBCGroup, DeleteGroupEntity)
 {
-	Authenticate(Users::UserA);
+	Authenticate(UserA);
 	CreateGroup();
 	std::string entityId = CreateGroupEntity();
 
@@ -151,7 +151,7 @@ TEST_F(TestBCGroup, DeleteGroupEntity)
 
 TEST_F(TestBCGroup, GetMyGroups)
 {
-	Authenticate(Users::UserA);
+	Authenticate(UserA);
 	CreateGroup();
 
 	TestResult tr;
@@ -165,7 +165,7 @@ TEST_F(TestBCGroup, GetMyGroups)
 
 TEST_F(TestBCGroup, IncrementGroupData)
 {
-	Authenticate(Users::UserA);
+	Authenticate(UserA);
 	CreateGroup();
 
 	TestResult tr;
@@ -182,7 +182,7 @@ TEST_F(TestBCGroup, IncrementGroupData)
 
 TEST_F(TestBCGroup, IncrementGroupEntityData)
 {
-	Authenticate(Users::UserA);
+	Authenticate(UserA);
 	CreateGroup();
 	std::string id = CreateGroupEntity();
 
@@ -201,13 +201,13 @@ TEST_F(TestBCGroup, IncrementGroupEntityData)
 
 TEST_F(TestBCGroup, InviteGroupMember)
 {
-	Authenticate(Users::UserA);
+	Authenticate(UserA);
 	CreateGroup();
 
 	TestResult tr;
 	m_bc->getGroupService()->inviteGroupMember(
 		_groupId.c_str(),
-		GetUser(Users::UserB)->m_profileId,
+		GetUser(UserB)->m_profileId,
 		eGroupMember::MEMBER,
 		"",
 		&tr);
@@ -220,7 +220,7 @@ TEST_F(TestBCGroup, InviteGroupMember)
 TEST_F(TestBCGroup, JoinGroup)
 {
 	CreateGroupAsUserA();
-	Authenticate(Users::UserB);
+	Authenticate(UserB);
 
 	TestResult tr;
 	m_bc->getGroupService()->joinGroup(
@@ -234,7 +234,7 @@ TEST_F(TestBCGroup, JoinGroup)
 
 TEST_F(TestBCGroup, LeaveGroup)
 {
-	Authenticate(Users::UserA);
+	Authenticate(UserA);
 	CreateGroup();
 
 	TestResult tr;
@@ -253,7 +253,7 @@ TEST_F(TestBCGroup, LeaveGroup)
 
 TEST_F(TestBCGroup, ListGroupsPage)
 {
-	Authenticate(Users::UserA);
+	Authenticate(UserA);
 
 	std::string context = CreateContext(10, 1, "groupType", _groupType);
 
@@ -268,7 +268,7 @@ TEST_F(TestBCGroup, ListGroupsPage)
 
 TEST_F(TestBCGroup, ListGroupsPageByOffset)
 {
-	Authenticate(Users::UserA);
+	Authenticate(UserA);
 
 	std::string context = CreateContext(10, 1, "groupType", _groupType);
 
@@ -291,12 +291,12 @@ TEST_F(TestBCGroup, ListGroupsPageByOffset)
 
 TEST_F(TestBCGroup, ListGroupsWithMember)
 {
-	Authenticate(Users::UserA);
+	Authenticate(UserA);
 	//CreateGroup();
 
 	TestResult tr;
 	m_bc->getGroupService()->listGroupsWithMember(
-		GetUser(Users::UserA)->m_profileId,
+		GetUser(UserA)->m_profileId,
 		&tr);
 	tr.run(m_bc);
 
@@ -305,7 +305,7 @@ TEST_F(TestBCGroup, ListGroupsWithMember)
 
 TEST_F(TestBCGroup, ReadGroup)
 {
-	Authenticate(Users::UserA);
+	Authenticate(UserA);
 	CreateGroup();
 
 	TestResult tr;
@@ -320,7 +320,7 @@ TEST_F(TestBCGroup, ReadGroup)
 
 TEST_F(TestBCGroup, ReadGroupEntitiesPage)
 {
-	Authenticate(Users::UserA);
+	Authenticate(UserA);
 
 	std::string context = CreateContext(10, 1, "entityType", _entityType);
 
@@ -335,7 +335,7 @@ TEST_F(TestBCGroup, ReadGroupEntitiesPage)
 
 TEST_F(TestBCGroup, ReadGroupEntitiesPageByOffset)
 {
-	Authenticate(Users::UserA);
+	Authenticate(UserA);
 
 	std::string context = CreateContext(10, 1, "entityType", _entityType);
 
@@ -358,7 +358,7 @@ TEST_F(TestBCGroup, ReadGroupEntitiesPageByOffset)
 
 TEST_F(TestBCGroup, ReadGroupEntity)
 {
-	Authenticate(Users::UserA);
+	Authenticate(UserA);
 	CreateGroup();
 	std::string id = CreateGroupEntity();
 
@@ -375,7 +375,7 @@ TEST_F(TestBCGroup, ReadGroupEntity)
 
 TEST_F(TestBCGroup, ReadGroupMembers)
 {
-	Authenticate(Users::UserA);
+	Authenticate(UserA);
 	CreateGroup();
 
 	TestResult tr;
@@ -390,20 +390,20 @@ TEST_F(TestBCGroup, ReadGroupMembers)
 
 TEST_F(TestBCGroup, RejectGroupInvitation)
 {
-	Authenticate(Users::UserA);
+	Authenticate(UserA);
 	CreateGroup();
 
 	TestResult tr;
 	m_bc->getGroupService()->inviteGroupMember(
 		_groupId.c_str(),
-		GetUser(Users::UserB)->m_profileId,
+		GetUser(UserB)->m_profileId,
 		eGroupMember::ADMIN,
 		"",
 		&tr);
 	tr.run(m_bc);
 
 	Logout();
-	Authenticate(Users::UserB);
+	Authenticate(UserB);
 
 	m_bc->getGroupService()->rejectGroupInvitation(
 		_groupId.c_str(),
@@ -417,7 +417,7 @@ TEST_F(TestBCGroup, RejectGroupInvitation)
 TEST_F(TestBCGroup, RejectGroupJoinRequest)
 {
 	CreateGroupAsUserA();
-	Authenticate(Users::UserB);
+	Authenticate(UserB);
 
 	TestResult tr;
 	m_bc->getGroupService()->joinGroup(
@@ -426,11 +426,11 @@ TEST_F(TestBCGroup, RejectGroupJoinRequest)
 	tr.run(m_bc);
 
 	Logout();
-	Authenticate(Users::UserA);
+	Authenticate(UserA);
 
 	m_bc->getGroupService()->rejectGroupJoinRequest(
 		_groupId.c_str(),
-		GetUser(Users::UserB)->m_profileId,
+		GetUser(UserB)->m_profileId,
 		&tr);
 	tr.run(m_bc);
 
@@ -440,7 +440,7 @@ TEST_F(TestBCGroup, RejectGroupJoinRequest)
 TEST_F(TestBCGroup, RemoveGroupMember)
 {
 	CreateGroupAsUserA(true);
-	Authenticate(Users::UserB);
+	Authenticate(UserB);
 
 	TestResult tr;
 	m_bc->getGroupService()->joinGroup(
@@ -449,11 +449,11 @@ TEST_F(TestBCGroup, RemoveGroupMember)
 	tr.run(m_bc);
 
 	Logout();
-	Authenticate(Users::UserA);
+	Authenticate(UserA);
 
 	m_bc->getGroupService()->removeGroupMember(
 		_groupId.c_str(),
-		GetUser(Users::UserB)->m_profileId,
+		GetUser(UserB)->m_profileId,
 		&tr);
 	tr.run(m_bc);
 
@@ -462,7 +462,7 @@ TEST_F(TestBCGroup, RemoveGroupMember)
 
 TEST_F(TestBCGroup, UpdateGroupData)
 {
-	Authenticate(Users::UserA);
+	Authenticate(UserA);
 	CreateGroup();
 
 	TestResult tr;
@@ -479,7 +479,7 @@ TEST_F(TestBCGroup, UpdateGroupData)
 
 TEST_F(TestBCGroup, UpdateGroupEntity)
 {
-	Authenticate(Users::UserA);
+	Authenticate(UserA);
 	CreateGroup();
 	std::string id = CreateGroupEntity();
 
@@ -498,13 +498,13 @@ TEST_F(TestBCGroup, UpdateGroupEntity)
 
 TEST_F(TestBCGroup, UpdateGroupMember)
 {
-	Authenticate(Users::UserA);
+	Authenticate(UserA);
 	CreateGroup();
 
 	TestResult tr;
 	m_bc->getGroupService()->updateGroupMember(
 		_groupId.c_str(),
-		GetUser(Users::UserA)->m_profileId,
+		GetUser(UserA)->m_profileId,
 		eGroupMember::UNKNOWN,
 		"",
 		&tr);
@@ -516,7 +516,7 @@ TEST_F(TestBCGroup, UpdateGroupMember)
 
 TEST_F(TestBCGroup, UpdateGroupName)
 {
-	Authenticate(Users::UserA);
+	Authenticate(UserA);
 	CreateGroup();
 
 	TestResult tr;
@@ -536,14 +536,14 @@ TEST_F(TestBCGroup, UpdateGroupName)
 
 void TestBCGroup::CreateGroupAsUserA(bool isOpen)
 {
-	Authenticate(Users::UserA);
+	Authenticate(UserA);
 	CreateGroup(isOpen);
 	Logout();
 }
 
 void TestBCGroup::DeleteGroupAsUserA()
 {
-	Authenticate(Users::UserA);
+	Authenticate(UserA);
 	DeleteGroup();
 	Logout();
 }
