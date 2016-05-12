@@ -279,6 +279,20 @@ namespace BrainCloud {
 		void getSharedEntitiesForPlayerId(const char * in_playerId, IServerCallback * in_callback = NULL);
 
 		/**
+		* Method gets list of shared entities for the specified player based on type and/or where clause
+		*
+		* Service Name - Entity
+		* Service Operation - READ_SHARED_ENTITIES_LIST
+		*
+		* @param in_playerId The player ID to retrieve shared entities for
+		* @param in_whereJson Mongo style query
+		* @param in_orderByJson Sort order
+		* @param in_maxReturn The maximum number of entities to return
+		* @param in_callback The method to be invoked when the server response is received
+		*/
+		void getSharedEntitiesListForPlayerId(const char * in_playerId, std::string in_whereJson, std::string in_orderByJson, int32_t in_maxReturn, IServerCallback * in_callback = NULL);
+
+		/**
 		 * Method updates a shared entity owned by another player. This operation results in the entity
 		 * data being completely replaced by the passed in JSON string.
 		 *

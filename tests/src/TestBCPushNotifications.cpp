@@ -7,50 +7,89 @@ using namespace BrainCloud;
 
 TEST_F(TestBCPushNotifications, DeregisterPushNotificationDeviceToken)
 {
-    TestResult tr;
-    m_bc->getPushNotificationService()->registerPushNotificationDeviceToken(Platform::iOS, "GARBAGE_TOKEN", &tr);
-    tr.run(m_bc);
-    
-    tr.reset();
-    m_bc->getPushNotificationService()->deregisterPushNotificationDeviceToken(Platform::iOS, "GARBAGE_TOKEN", &tr);
-    tr.run(m_bc);
+	TestResult tr;
+	m_bc->getPushNotificationService()->registerPushNotificationDeviceToken(Platform::iOS, "GARBAGE_TOKEN", &tr);
+	tr.run(m_bc);
+
+	tr.reset();
+	m_bc->getPushNotificationService()->deregisterPushNotificationDeviceToken(Platform::iOS, "GARBAGE_TOKEN", &tr);
+	tr.run(m_bc);
 }
 
 TEST_F(TestBCPushNotifications, DeregisterAllPushNotificationDeviceTokens)
 {
-    TestResult tr;
-    m_bc->getPushNotificationService()->deregisterAllPushNotificationDeviceTokens(&tr);
-    tr.run(m_bc);
+	TestResult tr;
+	m_bc->getPushNotificationService()->deregisterAllPushNotificationDeviceTokens(&tr);
+	tr.run(m_bc);
 }
 
 TEST_F(TestBCPushNotifications, RegisterPushNotificationDeviceToken)
 {
-    TestResult tr;
-    m_bc->getPushNotificationService()->registerPushNotificationDeviceToken(Platform::iOS, "GARBAGE_TOKEN", &tr);
-    tr.run(m_bc);
+	TestResult tr;
+	m_bc->getPushNotificationService()->registerPushNotificationDeviceToken(Platform::iOS, "GARBAGE_TOKEN", &tr);
+	tr.run(m_bc);
 }
 
 TEST_F(TestBCPushNotifications, SendSimplePushNotification)
 {
-    TestResult tr;
-    m_bc->getPushNotificationService()->sendSimplePushNotification(GetUser(UserA)->m_profileId, "GARBAGE_TOKEN", &tr);
-    tr.run(m_bc);
+	TestResult tr;
+	m_bc->getPushNotificationService()->sendSimplePushNotification(GetUser(UserA)->m_profileId, "GARBAGE_TOKEN", &tr);
+	tr.run(m_bc);
 }
 
-TEST_F(TestBCPushNotifications, sendSimplePushNotification)
+TEST_F(TestBCPushNotifications, SendRichPushNotification)
 {
-    TestResult tr;
-    m_bc->getPushNotificationService()->sendRichPushNotification(GetUser(UserA)->m_profileId, 1, &tr);
-    tr.run(m_bc);
+	TestResult tr;
+	m_bc->getPushNotificationService()->sendRichPushNotification(GetUser(UserA)->m_profileId, 1, &tr);
+	tr.run(m_bc);
 }
 
 TEST_F(TestBCPushNotifications, RunParentScript)
 {
-    TestResult tr;
-    Json::FastWriter fw;
-    Json::Value scriptData;
-    scriptData["1"] = GetUser(UserA)->m_id;
+	TestResult tr;
+	Json::FastWriter fw;
+	Json::Value scriptData;
+	scriptData["1"] = GetUser(UserA)->m_id;
 
-    m_bc->getPushNotificationService()->sendRichPushNotificationWithParams(GetUser(UserA)->m_profileId, 1, fw.write(scriptData).c_str(), &tr);
-    tr.run(m_bc);
+	m_bc->getPushNotificationService()->sendRichPushNotificationWithParams(GetUser(UserA)->m_profileId, 1, fw.write(scriptData).c_str(), &tr);
+	tr.run(m_bc);
+}
+
+TEST_F(TestBCPushNotifications, SendTemplatedPushNotificationToGroup)
+{
+	TestResult tr;
+	m_bc->getGroupService()->createGroup("testGroup", "test", false, "", "", "", "", &tr);
+	tr.run(m_bc);
+
+	std::string groupId = tr.m_response["data"]["groupId"].asString();
+
+	Json::FastWriter fw;
+	Json::Value scriptData;
+	scriptData["1"] = GetUser(UserA)->m_id;
+
+	m_bc->getPushNotificationService()->sendTemplatedPushNotificationToGroup(groupId.c_str(), 1, fw.write(scriptData), &tr);
+	tr.run(m_bc);
+
+	m_bc->getGroupService()->deleteGroup(groupId.c_str(), -1, &tr);
+	tr.run(m_bc);
+}
+
+TEST_F(TestBCPushNotifications, SendNormalizedPushNotificationToGroup)
+{
+	TestResult tr;
+	m_bc->getGroupService()->createGroup("testGroup", "test", false, "", "", "", "", &tr);
+	tr.run(m_bc);
+
+	std::string groupId = tr.m_response["data"]["groupId"].asString();
+
+	Json::FastWriter fw;
+	Json::Value scriptData;
+	scriptData["body"] = "asdf";
+	scriptData["title"] = "asdf";
+
+	m_bc->getPushNotificationService()->sendNormalizedPushNotificationToGroup(groupId.c_str(), fw.write(scriptData), "", &tr);
+	tr.run(m_bc);
+
+	m_bc->getGroupService()->deleteGroup(groupId.c_str(), -1, &tr);
+	tr.run(m_bc);
 }

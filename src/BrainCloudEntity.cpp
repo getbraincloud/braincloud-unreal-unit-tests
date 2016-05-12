@@ -119,6 +119,23 @@ namespace BrainCloud
 		m_client->sendRequest(sc);
 	}
 
+	void BrainCloudEntity::getSharedEntitiesListForPlayerId(const char * in_playerId, std::string in_whereJson, std::string in_orderByJson, int32_t in_maxReturn, IServerCallback * in_callback)
+	{
+		Json::Value message;
+
+		message[OperationParam::EntityServiceTargetPlayerId.getValue()] = in_playerId;
+		if (StringUtil::IsOptionalParameterValid(in_whereJson)) {
+			message[OperationParam::GlobalEntityServiceWhere.getValue()] = JsonUtil::jsonStringToValue(in_whereJson);
+		}
+		if (StringUtil::IsOptionalParameterValid(in_orderByJson)) {
+			message[OperationParam::GlobalEntityServiceOrderBy.getValue()] = JsonUtil::jsonStringToValue(in_orderByJson);
+		}
+		message[OperationParam::GlobalEntityServiceMaxReturn.getValue()] = (Json::Int64) in_maxReturn;
+
+		ServerCall * sc = new ServerCall(ServiceName::Entity, ServiceOperation::ReadSharedEntitesList, message, in_callback);
+		m_client->sendRequest(sc);
+	}
+
 	void BrainCloudEntity::updateSharedEntity(
 		const char * in_entityId,
 		const char * in_targetPlayerId,

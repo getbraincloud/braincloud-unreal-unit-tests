@@ -29,6 +29,8 @@ namespace BrainCloud
 	const ServiceOperation ServiceOperation::Register = ServiceOperation("REGISTER");
 	const ServiceOperation ServiceOperation::SendSimple = ServiceOperation("SEND_SIMPLE");
 	const ServiceOperation ServiceOperation::SendRich = ServiceOperation("SEND_RICH");
+	const ServiceOperation ServiceOperation::SendTemplatedToGroup = ServiceOperation("SEND_TEMPLATED_TO_GROUP");
+	const ServiceOperation ServiceOperation::SendNormalizedToGroup = ServiceOperation("SEND_NORMALIZED_TO_GROUP");
 
 	const ServiceOperation ServiceOperation::Trigger = ServiceOperation("TRIGGER");
 	const ServiceOperation ServiceOperation::TriggerMultiple = ServiceOperation("TRIGGER_MULTIPLE");
@@ -181,6 +183,7 @@ namespace BrainCloud
 	const ServiceOperation ServiceOperation::ConfirmGooglePlayPurchase = ServiceOperation("CONFIRM_GOOGLEPLAY_PURCHASE");
 	const ServiceOperation ServiceOperation::EligiblePromotions = ServiceOperation("ELIGIBLE_PROMOTIONS");
 
+	const ServiceOperation ServiceOperation::ReadSharedEntitesList = ServiceOperation("READ_SHARED_ENTITIES_LIST");
 	const ServiceOperation ServiceOperation::GetList = ServiceOperation("GET_LIST");
 	const ServiceOperation ServiceOperation::GetListByIndexedId = ServiceOperation("GET_LIST_BY_INDEXED_ID");
 	const ServiceOperation ServiceOperation::GetListCount = ServiceOperation("GET_LIST_COUNT");

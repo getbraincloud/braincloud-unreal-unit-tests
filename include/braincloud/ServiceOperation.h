@@ -34,6 +34,8 @@ namespace BrainCloud {
 		static const ServiceOperation Register;
 		static const ServiceOperation SendSimple;
 		static const ServiceOperation SendRich;
+		static const ServiceOperation SendTemplatedToGroup;
+		static const ServiceOperation SendNormalizedToGroup;
 
 		static const ServiceOperation Trigger;
 		static const ServiceOperation TriggerMultiple;
@@ -187,6 +189,7 @@ namespace BrainCloud {
 		static const ServiceOperation ConfirmGooglePlayPurchase;
 		static const ServiceOperation EligiblePromotions;
 
+		static const ServiceOperation ReadSharedEntitesList;
 		static const ServiceOperation GetList;
 		static const ServiceOperation GetListByIndexedId;
 		static const ServiceOperation GetListCount;

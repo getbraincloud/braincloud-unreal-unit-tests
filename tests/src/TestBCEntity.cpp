@@ -160,6 +160,23 @@ TEST_F(TestBCEntity, GetList)
 	DeleteAllDefaultEntities();
 }
 
+TEST_F(TestBCEntity, GetSharedEntitiesListForPlayerId)
+{
+	GenerateDefaultEntites(2);
+	TestResult tr;
+
+	Json::FastWriter fw;
+	Json::Value whereJson;
+	whereJson["entityType"] = m_entityType;
+
+	m_bc->getEntityService()->getSharedEntitiesListForPlayerId(
+		GetUser(UserA)->m_profileId,
+		fw.write(whereJson), "", 100, &tr);
+	tr.run(m_bc);
+
+	DeleteAllDefaultEntities();
+}
+
 TEST_F(TestBCEntity, GetListCount)
 {
 	GenerateDefaultEntites(2);

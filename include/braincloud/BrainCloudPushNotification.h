@@ -119,6 +119,29 @@ namespace BrainCloud
          */
         void sendRichPushNotificationWithParams(const char * in_toPlayerId, int32_t in_notificationTemplateId, const char * in_substitutionJson, IServerCallback * in_callback = NULL);
 
+		/**
+		* Sends a notification to a "group" of user based on a brainCloud portal configured notification template.
+		* Includes JSON defining the substitution params to use with the template.
+		* See the Portal documentation for more info.
+		*
+		* @param in_groupId Target group
+		* @param in_notificationTemplateId Template to use
+		* @param in_substitutionsJson Map of substitution positions to strings
+		* @param in_callback The method to be invoked when the server response is received
+		*/
+		void sendTemplatedPushNotificationToGroup(const char * in_groupId, int32_t in_notificationTemplateId, std::string in_substitutionsJson, IServerCallback * in_callback = NULL);
+
+		/**
+		* Sends a notification to a "group" of user consisting of alert content and custom data.
+		* See the Portal documentation for more info.
+		*
+		* @param in_groupId Target group
+		* @param in_alertContentJson Body and title of alert
+		* @param in_customDataJson Optional custom data
+		* @param in_callback The method to be invoked when the server response is received
+		*/
+		void sendNormalizedPushNotificationToGroup(const char * in_groupId, std::string in_alertContentJson, std::string in_customDataJson, IServerCallback * in_callback = NULL);
+
     private:
         BrainCloudClient * m_client;
         void sendRichPushNotification(const char * in_toPlayerId, int32_t in_notificationTemplateId, const char * in_substitutionJson, IServerCallback * in_callback = NULL);
