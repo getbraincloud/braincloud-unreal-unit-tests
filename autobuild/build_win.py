@@ -189,7 +189,7 @@ def buildWinStore(artifacts, version, rebuild):
 	binPath = projectPath + os.sep + "solutions" + os.sep + "windowsStore_vc120" + os.sep + "bin" 
 
 	# zip up build directly from source files	
-	with zipfile.ZipFile(artifacts + os.sep + "brainCloudClient_WinStore_" + version + ".zip", "w", compression=zipfile.ZIP_DEFLATED) as myzip:
+	with zipfile.ZipFile(artifacts + os.sep + "brainCloudClient_WindowsStore_" + version + ".zip", "w", compression=zipfile.ZIP_DEFLATED) as myzip:
 		util.zipdir(rootPath + os.sep + "include" + os.sep, myzip, "include")
 
 		util.zipdir(binPath, myzip, "lib")
