@@ -27,7 +27,7 @@ subprojects
 
 files
 {
-    (h)
+    (h/braincloud)
     AuthenticationType.h
     BrainCloudAsyncMatch.h
     BrainCloudAuthentication.h
