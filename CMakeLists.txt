@@ -199,9 +199,13 @@ if (${CMAKE_SYSTEM_NAME} MATCHES "Darwin")
 	target_link_libraries(brainCloud ${BC_CURL_LIB} ${BC_SSL_LIB} ${BC_GAMEKIT_LIB} ${BC_COREFOUNDATION_LIB} ${BC_FOUNDATION_LIB} ${BC_SYSCONFIG_LIB})
 	
 elseif (${CMAKE_SYSTEM_NAME} MATCHES "Linux")
-	find_library(BC_CURL_LIB curl)
-	find_library(BC_SSL_LIB ssl)
-	target_link_libraries(brainCloud ${BC_CURL_LIB} ${BC_SSL_LIB})
+	set(CMAKE_LIBRARY_PATH ${CMAKE_LIBRARY_PATH}
+              /usr/local/lib
+              /usr/local/ssl/lib)
+	find_library(BC_CURL_LIB curl libcurl.a)
+	find_library(BC_SSL_LIB ssl libssl.a)
+	find_library(BC_CRYPTO_LIB crypto libcrypto.a)
+	target_link_libraries(brainCloud ${BC_CURL_LIB} ${BC_SSL_LIB} ${BC_CRYPTO_LIB})
 	
 elseif (${CMAKE_SYSTEM_NAME} MATCHES "Windows")
 	include_directories("${BC_DIR}/lib/win32/pthread-w32-2-8-0/Pre-built.2/include")
