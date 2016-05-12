@@ -76,6 +76,7 @@ namespace BrainCloud {
 		static const ServiceOperation RewardTournament;
 		static const ServiceOperation PostScore;
 		static const ServiceOperation PostScoreDynamic;
+		static const ServiceOperation GetGroupSocialLeaderboard;
 
 		static const ServiceOperation InitThirdParty;
 		static const ServiceOperation PostThirdPartyLeaderboardScore;
@@ -191,6 +192,8 @@ namespace BrainCloud {
 		static const ServiceOperation GetListCount;
 		static const ServiceOperation GetPage;
 		static const ServiceOperation GetPageOffset;
+		static const ServiceOperation IncrementUserEntityData;
+		static const ServiceOperation IncrementGlobalEntityData;
 
 		static const ServiceOperation GetAttributes;
 		static const ServiceOperation UpdateAttributes;

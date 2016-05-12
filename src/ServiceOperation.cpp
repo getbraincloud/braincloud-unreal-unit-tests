@@ -71,6 +71,7 @@ namespace BrainCloud
 	const ServiceOperation ServiceOperation::RewardTournament = ServiceOperation("REWARD_TOURNAMENT");
 	const ServiceOperation ServiceOperation::PostScore = ServiceOperation("POST_SCORE");
 	const ServiceOperation ServiceOperation::PostScoreDynamic = ServiceOperation("POST_SCORE_DYNAMIC");
+	const ServiceOperation ServiceOperation::GetGroupSocialLeaderboard = ServiceOperation("GET_GROUP_SOCIAL_LEADERBOARD");
 
 	const ServiceOperation ServiceOperation::InitThirdParty = ServiceOperation("initThirdParty");
 	const ServiceOperation ServiceOperation::PostThirdPartyLeaderboardScore = ServiceOperation("postThirdPartyLeaderboardScore");
@@ -185,6 +186,8 @@ namespace BrainCloud
 	const ServiceOperation ServiceOperation::GetListCount = ServiceOperation("GET_LIST_COUNT");
 	const ServiceOperation ServiceOperation::GetPage = ServiceOperation("GET_PAGE");
 	const ServiceOperation ServiceOperation::GetPageOffset = ServiceOperation("GET_PAGE_BY_OFFSET");
+	const ServiceOperation ServiceOperation::IncrementUserEntityData = ServiceOperation("INCREMENT_USER_ENTITY_DATA");
+	const ServiceOperation ServiceOperation::IncrementGlobalEntityData = ServiceOperation("INCREMENT_GLOBAL_ENTITY_DATA");
 
 	const ServiceOperation ServiceOperation::GetAttributes = ServiceOperation("GET_ATTRIBUTES");
 	const ServiceOperation ServiceOperation::UpdateAttributes = ServiceOperation("UPDATE_ATTRIBUTES");

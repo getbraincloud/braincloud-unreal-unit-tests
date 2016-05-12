@@ -92,6 +92,7 @@ namespace BrainCloud {
 		static const OperationParam EntityServiceFriendData;
 		static const OperationParam EntityServiceTargetPlayerId;
 		static const OperationParam EntityServiceUpdateOps;
+		static const OperationParam EntityServiceReturnData;
 
 		// Global Entity Service - Params
 		static const OperationParam GlobalEntityServiceEntityId;
@@ -106,6 +107,7 @@ namespace BrainCloud {
 		static const OperationParam GlobalEntityServiceOrderBy;
 		static const OperationParam GlobalEntityServiceContext;
 		static const OperationParam GlobalEntityServicePageOffset;
+		static const OperationParam GlobalEntityServiceReturnData;
 
 		// Event Service - Send Params
 		static const OperationParam EventServiceSendToId;

@@ -84,6 +84,7 @@ namespace BrainCloud
 	const OperationParam OperationParam::EntityServiceFriendData = OperationParam("friendData");
 	const OperationParam OperationParam::EntityServiceTargetPlayerId = OperationParam("targetPlayerId");
 	const OperationParam OperationParam::EntityServiceUpdateOps = OperationParam("updateOps");
+	const OperationParam OperationParam::EntityServiceReturnData = OperationParam("returnData");
 
 	// Global Entity Service - Params
 	const OperationParam OperationParam::GlobalEntityServiceEntityId = OperationParam("entityId");
@@ -98,6 +99,7 @@ namespace BrainCloud
 	const OperationParam OperationParam::GlobalEntityServiceOrderBy = OperationParam("orderBy");
 	const OperationParam OperationParam::GlobalEntityServiceContext = OperationParam("context");
 	const OperationParam OperationParam::GlobalEntityServicePageOffset = OperationParam("pageOffset");
+	const OperationParam OperationParam::GlobalEntityServiceReturnData = OperationParam("returnData");
 
 	// Event Service - Send Params
 	const OperationParam OperationParam::EventServiceSendToId = OperationParam("toId");

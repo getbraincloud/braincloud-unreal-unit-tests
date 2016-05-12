@@ -505,6 +505,15 @@ namespace BrainCloud
          */
         void playerTournamentReward(const char * in_eventName, uint64_t in_multiplier, IServerCallback * in_callback = NULL);
 
+		/**
+		* Retrieve the social leaderboard for a group.
+		*
+		* @param in_leaderboardId The leaderboard to retreive
+		* @param in_groupId The ID of the group
+		* @param in_callback The method to be invoked when the server response is received
+		*/
+		void getGroupSocialLeaderboard(const char * in_leaderboardId, const char * in_groupId, IServerCallback * in_callback = NULL);
+
     private:
         BrainCloudClient * m_client;
 
