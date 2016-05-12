@@ -508,6 +508,9 @@ namespace BrainCloud
 		/**
 		* Retrieve the social leaderboard for a group.
 		*
+		* Service Name - leaderboard
+		* Service Operation - GET_GROUP_SOCIAL_LEADERBOARD
+		*
 		* @param in_leaderboardId The leaderboard to retreive
 		* @param in_groupId The ID of the group
 		* @param in_callback The method to be invoked when the server response is received

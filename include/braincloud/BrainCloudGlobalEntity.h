@@ -531,7 +531,7 @@ namespace BrainCloud
 		*
 		* @param in_entityId The id of the entity to update
 		* @param in_jsonData The entity's data object
-		# @param in_returnData Should the entity be returned in the response?
+		* @param in_returnData Should the entity be returned in the response?
 		* @param in_callback The callback object
 		*/
 		void incrementGlobalEntityData(const char * in_entityId, std::string in_jsonData, bool in_returnData, IServerCallback * in_callback = NULL);
