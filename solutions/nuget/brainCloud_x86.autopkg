@@ -24,7 +24,7 @@ nuget {
 
 	// the nuspec file metadata
 	nuspec {
-		id = brainCloudCppSdk-win32;
+		id = brainCloudCppSdk-x86;
 		version : 2.23.0;
 		title: "brainCloud C++ SDK";
 		authors: {bitHeads inc.};
