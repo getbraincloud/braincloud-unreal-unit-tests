@@ -81,8 +81,14 @@ nuget {
 		
 		("Win32", "Release,Debug") => {
 			[${0},${1}] {
-				lib +=		{ ..\windowsUniversal_vc140\brainCloud\Output\${0}\${1}\brainCloud.lib };
-				symbols +=	{ ..\windowsUniversal_vc140\brainCloud\Intermediate\${0}\${1}\brainCloud.pdb };
+				lib += {
+					// #output { package: redist; }
+					..\windowsUniversal_vc140\brainCloud\Output\${0}\${1}\brainCloud.lib
+				};
+				symbols += {
+					#output { package: symbols; }
+					..\windowsUniversal_vc140\brainCloud\Intermediate\${0}\${1}\brainCloud.pdb
+				};
 			};
 		};
 	 };
