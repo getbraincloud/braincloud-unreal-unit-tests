@@ -11,9 +11,9 @@
 
 namespace BrainCloud {
 
-	class ServiceName;
-	class ServiceOperation;
-	class OperationParam;
+    class ServiceName;
+    class ServiceOperation;
+    class OperationParam;
 
     /**
      * Pure virtual class providing a means for waking up the client when a
@@ -39,7 +39,7 @@ namespace BrainCloud {
          * @param jsonData - returned data from the server
          */
         virtual void serverCallback( ServiceName serviceName, ServiceOperation serviceOperation, std::string const & jsonData) = 0;
-		
+        
         /**
          * Errors are returned back to the layer which is interfacing with the
          * BrainCloud library through the serverError() callback.
@@ -47,14 +47,14 @@ namespace BrainCloud {
          * A server error might indicate a failure of the client to communicate
          * with the server after N retries.
          *
-		 * @param serviceName The service name being called
-		 * @param serviceOperation The service operation being called
+         * @param serviceName The service name being called
+         * @param serviceOperation The service operation being called
          * @param statusCode The error status return code (400, 403, 500, etc)
          * @param reasonCode The brainCloud reason code (see reason codes on apidocs site)
          * @param jsonError The error json string
          */
         virtual void serverError( ServiceName serviceName, ServiceOperation serviceOperation, int statusCode, int reasonCode, const std::string & jsonError) = 0;
-		
+        
         /**
          * Warnings are returned back to the layer which is interfacing with the
          * BrainCloud library through the serverWarning() callback.
@@ -71,8 +71,8 @@ namespace BrainCloud {
          * slow down or pause gameplay because the game state might be lost if
          * the server cannot be reached, or some other action.
          *
-		 * @param serviceName The service name being called
-		 * @param serviceOperation The service operation being called
+         * @param serviceName The service name being called
+         * @param serviceOperation The service operation being called
          * @param statusCode The error status return code (400, 403, 500, etc)
          * @param reasonCode The brainCloud reason code (see reason codes on apidocs site)
          * @param numRetries The number of retries of this message
@@ -81,7 +81,7 @@ namespace BrainCloud {
          * @deprecated This callback will be removed in the future
          */
         virtual void serverWarning( ServiceName serviceName, ServiceOperation serviceOperation, int statusCode, int reasonCode, int numRetries, const std::string & statusMessage) = 0;
-		
+        
     protected:
 
     private:

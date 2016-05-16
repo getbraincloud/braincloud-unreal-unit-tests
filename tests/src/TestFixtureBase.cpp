@@ -11,11 +11,19 @@ using namespace std;
 
 #define ID_FILE_NAME "ids.txt"
 
+std::string TestFixtureBase::m_serverUrl = "";
+std::string TestFixtureBase::m_appId = "";
+std::string TestFixtureBase::m_secret = "";
+std::string TestFixtureBase::m_version = "";
+std::string TestFixtureBase::m_parentLevelName = "";
+std::string TestFixtureBase::m_childAppId = "";
+
 bool TestFixtureBase::m_init = false;
 bool TestFixtureBase::m_initUsers = false;
 std::vector<TestUser*> TestFixtureBase::m_testUsers;
 
 const char* TestFixtureBase::Users_names[3] = { "UserA", "UserB", "UserC" };
+
 
 
 void TestFixtureBase::SetUp()

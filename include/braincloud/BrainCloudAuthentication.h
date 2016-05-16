@@ -198,11 +198,6 @@ namespace BrainCloud
          *
          * @param in_externalId The email address to send the reset email to.
          * @param in_callback The method to be invoked when the server response is received
-         * @return The JSON returned in the callback is as follows:
-         * {
-         *   "status": 200,
-         *   "data": {}
-         * }
          *
          * Note the follow error reason codes:
          *

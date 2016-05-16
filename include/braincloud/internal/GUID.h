@@ -5,14 +5,14 @@
 
 namespace BrainCloud
 {
-	class GUID
-	{
-	public:
-		static std::string generateGUID();
+    class GUID
+    {
+    public:
+        static std::string generateGUID();
 
-	private:
-		GUID(){};
-	};
+    private:
+        GUID(){};
+    };
 }
 
 #endif 

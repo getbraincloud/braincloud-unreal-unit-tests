@@ -22,27 +22,27 @@ namespace BrainCloud {
 
     class IFileUploader;
 
-	struct BrainCloudCallbackEvent
-	{
-		IServerCallback* callback;
-		ServiceName m_service;
-		ServiceOperation m_operation;
-		bool m_error;
-		unsigned short m_retryCount;
-		int m_statusCode;
+    struct BrainCloudCallbackEvent
+    {
+        IServerCallback* callback;
+        ServiceName m_service;
+        ServiceOperation m_operation;
+        bool m_error;
+        unsigned short m_retryCount;
+        int m_statusCode;
         int m_reasonCode;
-		std::string m_data;
+        std::string m_data;
 
         BrainCloudCallbackEvent()
             : m_service(ServiceName::None)
-		    , m_operation(ServiceOperation::None)
-		    , m_error(false)
+            , m_operation(ServiceOperation::None)
+            , m_error(false)
             , m_retryCount(0)
             , m_statusCode(0)
             , m_reasonCode(0)
         {
         }
-	};
+    };
     
     enum UploadStatus
     {
@@ -56,22 +56,22 @@ namespace BrainCloud {
     class BrainCloudClient;
     
     // although named as an interface, this is actually an abstract class
-	class IBrainCloudComms
-	{
-	public:
+    class IBrainCloudComms
+    {
+    public:
         
         // pure virtual methods
         IBrainCloudComms(BrainCloudClient* in_client);
         virtual ~IBrainCloudComms();
         
 
-		virtual void initialize(const char * serverURL, const char * gameId, const char * secretKey) = 0;
-		virtual void addToQueue(ServerCall *) = 0;
+        virtual void initialize(const char * serverURL, const char * gameId, const char * secretKey) = 0;
+        virtual void addToQueue(ServerCall *) = 0;
 
         virtual void sendHeartbeat() = 0;
-		virtual void resetCommunication() = 0;
+        virtual void resetCommunication() = 0;
         virtual void shutdown() = 0;
-		virtual void runCallbacks() = 0;
+        virtual void runCallbacks() = 0;
 
         virtual void registerEventCallback(IEventCallback *in_eventCallback) = 0;
         virtual void deregisterEventCallback() = 0;
@@ -99,16 +99,16 @@ namespace BrainCloud {
         
         // implemented methods
         void enableLogging(bool shouldEnable);
-		bool isInitialized();
+        bool isInitialized();
         bool isAuthenticated();
         
-		void setHeartbeatInterval(int milliseconds);
+        void setHeartbeatInterval(int milliseconds);
         void setImmediateRetryOnError(bool value);
         const std::string& getGameId() const;
-		void clearSessionId();
-		const std::string& getSessionId() const;
-		void setSessionId(const char *);
-		void setServerUrl(const char *);
+        void clearSessionId();
+        const std::string& getSessionId() const;
+        void setSessionId(const char *);
+        void setServerUrl(const char *);
         
         const std::vector<int> & getPacketTimeouts();
         void setPacketTimeouts(const std::vector<int> & in_packetTimeouts);
@@ -135,7 +135,7 @@ namespace BrainCloud {
         int64_t _expectedPacketId; // the next packetId we're expecting or -1 if nothing is in transit
         int _retryCount;
         int64_t _packetSendTimeMillis;
-		bool _isInitialized;
+        bool _isInitialized;
         bool _isAuthenticated;
         int _heartbeatInterval;
         bool _immediateRetryOnError;
@@ -178,6 +178,6 @@ namespace BrainCloud {
         
         virtual void startFileUpload(const Json::Value & in_jsonPrepareUploadResponse) = 0;
         void runCallbacksFileUpload();
-	};
+    };
 
 };

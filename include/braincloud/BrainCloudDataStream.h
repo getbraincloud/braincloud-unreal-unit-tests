@@ -19,15 +19,6 @@ namespace BrainCloud {
          *
          * @param eventName Name of event
          * @param eventProperties Properties of event
-         * @return json as follows
-         *
-         * {
-         * "status": 200,
-         * "data": {
-         *   null
-         *  }
-         * }
-         *
          */
         void customPageEvent(const char * in_eventName, const char * in_jsonEventProperties, IServerCallback * in_callback = NULL);
 
@@ -36,15 +27,6 @@ namespace BrainCloud {
          *
          * @param eventName Name of event
          * @param eventProperties Properties of event
-         * @return json as follows
-         *
-         * {
-         * "status": 200,
-         * "data": {
-         *   null
-         *  }
-         * }
-         *
          */
         void customScreenEvent(const char * in_eventName, const char * in_jsonEventProperties, IServerCallback * in_callback = NULL);
 
@@ -53,15 +35,6 @@ namespace BrainCloud {
          *
          * @param eventName Name of event
          * @param eventProperties Properties of event
-         * @return json as follows
-         *
-         * {
-         * "status": 200,
-         * "data": {
-         *   null
-         *  }
-         * }
-         *
          */
         void customTrackEvent(const char * in_eventName, const char * in_jsonEventProperties, IServerCallback * in_callback = NULL);
 

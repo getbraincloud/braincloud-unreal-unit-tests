@@ -23,8 +23,8 @@ public:
     bool        authenticate( ) const       { return _authenticate; }
     bool        cacheResponse( ) const      { return _cacheResponse; }
     bool        followRedirects( ) const    { return _followRedirects; }
-	const std::string & getContentType( ) const     { return _contentType; }
-	const std::string & getData( ) const            { return _data; }
+    const std::string & getContentType( ) const     { return _contentType; }
+    const std::string & getData( ) const            { return _data; }
     const std::vector<URLRequestHeader> & getHeaders( ) const
                                             { return _requestHeaders; }
     int         getIdleTimeout( ) const     { return _idleTimeout; }

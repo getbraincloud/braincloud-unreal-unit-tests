@@ -31,60 +31,6 @@ namespace BrainCloud
          * @see BrainCloudPlayerStatistics
          *
          * @param in_callback The method to be invoked when the server response is received
-         *
-         * @return The JSON returned in the callback is as follows:
-         * {
-         *   "status": 200,
-         *   "data": {
-         *   "experiencePoints": 25,
-         *   "achievementsGranted": [
-         *     "ach01"
-         *    ],
-         *    "currencyAwarded": {
-         *      "gems": {
-         *        "purchased": 0,
-         *        "balance": 10,
-         *        "consumed": 0,
-         *        "awarded": 10
-         *      },
-         *      "gold": {
-         *        "purchased": 0,
-         *        "balance": 2000,
-         *        "consumed": 0,
-         *        "awarded": 2000
-         *      }
-         *    },
-         *    "totalPlayerStatistics": {
-         *      "minions": 100,
-         *      "wood": 55,
-         *      "iron": 5
-         *    },
-         *    "experienceLevel": 2,
-         *    "experienceLevelsAwarded": [
-         *      2
-         *    ],
-         *    "playerStatisticsAwarded": {
-         *      "minions": 100,
-         *      "wood": 5,
-         *      "iron": 5
-         *    },
-         *    "experiencePointsAwarded": 15,
-         *    "currency": {
-         *      "gems": {
-         *        "purchased": 0,
-         *        "balance": 20,
-         *        "consumed": 0,
-         *        "awarded": 20
-         *      },
-         *      "gold": {
-         *        "purchased": 0,
-         *        "balance": 3000,
-         *        "consumed": 0,
-         *        "awarded": 3000
-         *      }
-         *    }
-         *  }
-         * }
          */
         void triggerPlayerStatisticsEvent(const char * in_eventName, int32_t in_eventMultiplier, IServerCallback * in_callback = NULL);
 

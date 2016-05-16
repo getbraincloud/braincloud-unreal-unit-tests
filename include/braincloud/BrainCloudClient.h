@@ -129,17 +129,17 @@ namespace BrainCloud
          * @param in_eventCallback A function which takes a json string as it's only parameter.
          * The json format looks like the following:
          * {
-         *	 "events": [{
-         *	    "fromPlayerId": "178ed06a-d575-4591-8970-e23a5d35f9df",
-         *	    "eventId": 3967,
-         *	    "createdAt": 1441742105908,
-         *	    "gameId": "123",
-         *	    "toPlayerId": "178ed06a-d575-4591-8970-e23a5d35f9df",
-         *	    "eventType": "test",
-         *	    "eventData": {"testData": 117}
-         *	  }],
-         *	  ]
-         *	}
+         *   "events": [{
+         *      "fromPlayerId": "178ed06a-d575-4591-8970-e23a5d35f9df",
+         *      "eventId": 3967,
+         *      "createdAt": 1441742105908,
+         *      "gameId": "123",
+         *      "toPlayerId": "178ed06a-d575-4591-8970-e23a5d35f9df",
+         *      "eventType": "test",
+         *      "eventData": {"testData": 117}
+         *    }],
+         *    ]
+         *  }
          */
         void registerEventCallback(IEventCallback *in_eventCallback);
 
@@ -294,7 +294,7 @@ namespace BrainCloud
         BrainCloudDataStream * getDataStreamService() { return _dataStreamService; }
         BrainCloudProfanity * getProfanityService() { return _profanityService; }
         BrainCloudFile * getFileService() { return _fileService; }
-		BrainCloudGroup * getGroupService() { return _groupService; }
+        BrainCloudGroup * getGroupService() { return _groupService; }
 
         const std::string & getGameId() const
         {
@@ -354,7 +354,7 @@ namespace BrainCloud
          *
          * @param in_intervalInMilliseconds The time between heartbeats in milliseconds
          */
-        DEPRECATED void	setHeartbeatInterval(int in_intervalInMilliseconds);
+        DEPRECATED void setHeartbeatInterval(int in_intervalInMilliseconds);
 
         /**
          * Returns the list of packet timeouts.
@@ -538,7 +538,7 @@ namespace BrainCloud
         BrainCloudDataStream * _dataStreamService;
         BrainCloudProfanity * _profanityService;
         BrainCloudFile * _fileService;
-		BrainCloudGroup * _groupService;
+        BrainCloudGroup * _groupService;
 
         static std::string s_brainCloudClientVersion;
 

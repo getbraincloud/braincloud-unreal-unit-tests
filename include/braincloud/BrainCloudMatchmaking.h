@@ -22,20 +22,6 @@ namespace BrainCloud
          * Service Operation - Read
          *
          * @param in_callback The method to be invoked when the server response is received
-         *
-         * @return The JSON returned in the callback is as follows:
-         * {
-         *     "status": 200,
-         *     "data": {
-         *         "lastMatch": 0,
-         *         "matchAttackExpiry": 0,
-         *         "matchEnabled": false,
-         *         "sharedAPIToken": null,
-         *         "shieldExpiry": 0,
-         *         "playerRating": 100,
-         *         "matchesPlayed": 0
-         *     }
-         * }
          */
         void read(IServerCallback * in_callback = NULL);
 
@@ -47,12 +33,6 @@ namespace BrainCloud
          *
          * @param in_playerRating The new player rating.
          * @param in_callback The method to be invoked when the server response is received
-         *
-         * @return The JSON returned in the callback is as follows:
-         * {
-         *   "status": 200,
-         *   "data": null
-         * }
          */
         void setPlayerRating(int32_t in_playerRating, IServerCallback * in_callback = NULL);
 
@@ -63,12 +43,6 @@ namespace BrainCloud
          * Service Operation - ResetPlayerRating
          *
          * @param in_callback The method to be invoked when the server response is received
-         *
-         * @return The JSON returned in the callback is as follows:
-         * {
-         *   "status": 200,
-         *   "data": null
-         * }
          */
         void resetPlayerRating(IServerCallback * in_callback = NULL);
 
@@ -80,12 +54,6 @@ namespace BrainCloud
          *
          * @param in_increment The increment amount
          * @param in_callback The method to be invoked when the server response is received
-         *
-         * @return The JSON returned in the callback is as follows:
-         * {
-         *   "status": 200,
-         *   "data": null
-         * }
          */
         void incrementPlayerRating(int32_t in_increment, IServerCallback * in_callback = NULL);
 
@@ -97,12 +65,6 @@ namespace BrainCloud
          *
          * @param in_decrement The decrement amount
          * @param in_callback The method to be invoked when the server response is received
-         *
-         * @return The JSON returned in the callback is as follows:
-         * {
-         *   "status": 200,
-         *   "data": null
-         * }
          */
         void decrementPlayerRating(int32_t in_decrement, IServerCallback * in_callback = NULL);
 
@@ -113,12 +75,6 @@ namespace BrainCloud
          * Service Operation - ShieldOn
          *
          * @param in_callback The method to be invoked when the server response is received
-         *
-         * @return The JSON returned in the callback is as follows:
-         * {
-         *   "status": 200,
-         *   "data": null
-         * }
          */
         void turnShieldOn(IServerCallback * in_callback = NULL);
 
@@ -130,12 +86,6 @@ namespace BrainCloud
          *
          * @param in_minutes Number of minutes to turn the shield on for
          * @param in_callback The method to be invoked when the server response is received
-         *
-         * @return The JSON returned in the callback is as follows:
-         * {
-         *   "status": 200,
-         *   "data": null
-         * }
          */
         void turnShieldOnFor(int32_t in_minutes, IServerCallback * in_callback = NULL);
 
@@ -146,12 +96,6 @@ namespace BrainCloud
          * Service Operation - ShieldOff
          *
          * @param in_callback The method to be invoked when the server response is received
-         *
-         * @return The JSON returned in the callback is as follows:
-         * {
-         *   "status": 200,
-         *   "data": null
-         * }
          */
         void turnShieldOff(IServerCallback * in_callback = NULL);
 
@@ -165,14 +109,6 @@ namespace BrainCloud
          *
          * @param in_playerId The player id or use null to retrieve for the current player
          * @param in_callback The method to be invoked when the server response is received
-         *
-         * @return The JSON returned in the callback is as follows:
-         * {
-         *   "status": 200,
-         *   "data": {
-         *     "shieldExpiry": 1433259734956
-         *   }
-         * }
          */
         void getShieldExpiry(const char * in_playerId, IServerCallback * in_callback = NULL);
 
@@ -185,29 +121,6 @@ namespace BrainCloud
          * @param in_rangeDelta The range delta
          * @param in_numMatches The maximum number of matches to return
          * @param in_callback The method to be invoked when the server response is received
-         *
-         * @return The JSON returned in the callback is as follows:
-         * {
-         *   "status": 200,
-         *   "data": {
-         *     "matchesFound" : [
-         *       {
-         *         "playerId" : "9073dff7-0df6-437e-9be6-39cd704dcoj4",
-         *         "playerName" : "Jane Smith",
-         *         "playerRating" : 25,
-         *         "pictureUrl" : "",
-         *         "summaryFriendData" : null
-         *       },
-         *       {
-         *         "playerId" : "9073dff7-0df6-437e-9be6-39cd704dcoj4",
-         *         "playerName" : "John Smith",
-         *         "playerRating" : 30,
-         *         "pictureUrl" : "",
-         *         "summaryFriendData" : null
-         *       }
-         *     ]
-         *   }
-         * }
          */
         void findPlayers(int32_t in_rangeDelta, int32_t in_numMatches, IServerCallback * in_callback = NULL);
 
@@ -221,29 +134,6 @@ namespace BrainCloud
          * @param in_numMatches The maximum number of matches to return
          * @param in_jsonAttributes Attributes match criteria
          * @param in_callback The method to be invoked when the server response is received
-         *
-         * @return The JSON returned in the callback is as follows:
-         * {
-         *   "status": 200,
-         *   "data": {
-         *     "matchesFound" : [
-         *       {
-         *         "playerId" : "9073dff7-0df6-437e-9be6-39cd704dcoj4",
-         *         "playerName" : "Jane Smith",
-         *         "playerRating" : 25,
-         *         "pictureUrl" : "",
-         *         "summaryFriendData" : null
-         *       },
-         *       {
-         *         "playerId" : "9073dff7-0df6-437e-9be6-39cd704dcoj4",
-         *         "playerName" : "John Smith",
-         *         "playerRating" : 30,
-         *         "pictureUrl" : "",
-         *         "summaryFriendData" : null
-         *       }
-         *     ]
-         *   }
-         * }
          */
         void findPlayersWithAttributes(int32_t in_rangeDelta, int32_t in_numMatches, std::string in_jsonAttributes, IServerCallback * in_callback = NULL);
 
@@ -257,29 +147,6 @@ namespace BrainCloud
          * @param in_numMatches The maximum number of matches to return
          * @param in_jsonExtraParms Parameters to pass to the CloudCode filter script
          * @param in_callback The method to be invoked when the server response is received
-         *
-         * @return The JSON returned in the callback is as follows:
-         * {
-         *   "status": 200,
-         *   "data": {
-         *     "matchesFound" : [
-         *       {
-         *         "playerId" : "9073dff7-0df6-437e-9be6-39cd704dcoj4",
-         *         "playerName" : "Jane Smith",
-         *         "playerRating" : 25,
-         *         "pictureUrl" : "",
-         *         "summaryFriendData" : null
-         *       },
-         *       {
-         *         "playerId" : "9073dff7-0df6-437e-9be6-39cd704dcoj4",
-         *         "playerName" : "John Smith",
-         *         "playerRating" : 30,
-         *         "pictureUrl" : "",
-         *         "summaryFriendData" : null
-         *       }
-         *     ]
-         *   }
-         * }
          */
         void findPlayersUsingFilter(int32_t in_rangeDelta, int32_t in_numMatches, std::string in_jsonExtraParms, IServerCallback * in_callback = NULL);
 
@@ -295,29 +162,6 @@ namespace BrainCloud
         * @param in_jsonAttributes Attributes match criteria
         * @param in_jsonExtraParms Parameters to pass to the CloudCode filter script
         * @param in_callback The method to be invoked when the server response is received
-        *
-        * @return The JSON returned in the callback is as follows:
-        * {
-        *   "status": 200,
-        *   "data": {
-        *     "matchesFound" : [
-        *       {
-        *         "playerId" : "9073dff7-0df6-437e-9be6-39cd704dcoj4",
-        *         "playerName" : "Jane Smith",
-        *         "playerRating" : 25,
-        *         "pictureUrl" : "",
-        *         "summaryFriendData" : null
-        *       },
-        *       {
-        *         "playerId" : "9073dff7-0df6-437e-9be6-39cd704dcoj4",
-        *         "playerName" : "John Smith",
-        *         "playerRating" : 30,
-        *         "pictureUrl" : "",
-        *         "summaryFriendData" : null
-        *       }
-        *     ]
-        *   }
-        * }
         */
         void findPlayersWithAttributesUsingFilter(
             int32_t in_rangeDelta,
@@ -333,12 +177,6 @@ namespace BrainCloud
          * Service Operation - EnableMatchMaking
          *
          * @param in_callback The method to be invoked when the server response is received
-         *
-         * @return The JSON returned in the callback is as follows:
-         * {
-         *   "status": 200,
-         *   "data": null
-         * }
          */
         void enableMatchMaking(IServerCallback * in_callback = NULL);
 
@@ -349,12 +187,6 @@ namespace BrainCloud
         * Service Operation - EnableMatchMaking
         *
         * @param in_callback The method to be invoked when the server response is received
-        *
-        * @return The JSON returned in the callback is as follows:
-        * {
-        *   "status": 200,
-        *   "data": null
-        * }
         */
         void disableMatchMaking(IServerCallback * in_callback = NULL);
 

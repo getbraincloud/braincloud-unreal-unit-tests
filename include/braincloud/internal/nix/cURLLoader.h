@@ -42,17 +42,17 @@ public:
     virtual void    load( URLRequest const * r )        { if ( r != NULL ) load(*r); }
     virtual bool    isDone();
 
-	/*
-	 Time in milliseconds that you allow the libcurl transfer operation to take.
-	 Normally, name lookups can take a considerable time and limiting operations to less than a few minutes
-	 risk aborting perfectly normal operations. This option will cause curl to use the SIGALRM to enable time-outing
-	 system calls.
-	 
-	 If libcurl is built to use the standard system name resolver,
-	 that portion of the transfer will still use full-second resolution for timeouts with a minimum timeout
-	 allowed of one second. (Added in 7.16.2)
-	 */
-	virtual void setTimeout(int milliseconds) { _timeoutInterval = milliseconds; }
+    /*
+     Time in milliseconds that you allow the libcurl transfer operation to take.
+     Normally, name lookups can take a considerable time and limiting operations to less than a few minutes
+     risk aborting perfectly normal operations. This option will cause curl to use the SIGALRM to enable time-outing
+     system calls.
+     
+     If libcurl is built to use the standard system name resolver,
+     that portion of the transfer will still use full-second resolution for timeouts with a minimum timeout
+     allowed of one second. (Added in 7.16.2)
+     */
+    virtual void setTimeout(int milliseconds) { _timeoutInterval = milliseconds; }
 
 protected:
 
@@ -67,11 +67,11 @@ private:
     static size_t   writeHeader( char *, size_t, size_t, void * );
 
     static bool     _initialized;
-	static long     _timeoutInterval;
-    	
+    static long     _timeoutInterval;
+        
     pthread_attr_t  _threadAttributes;
     pthread_t       _threadId;
-	
+    
     bool            _threadRunning;
 
 #ifndef WIN32

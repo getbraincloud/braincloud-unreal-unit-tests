@@ -23,102 +23,6 @@ namespace BrainCloud {
          * Service Operation - Read
          *
          * @param in_callback Method to be invoked when the server response is received.
-         *
-         * @return The JSON returned in the callback is as follows:
-         *
-         * {
-         *  "status": 200,
-         *  "data": {
-         *   "milestones": [
-         *    {
-         *     "id": "milestone02",
-         *     "category": "general",
-         *     "title": "Level 2 milestone",
-         *     "status": "SATISFIED",
-         *     "description": "Awarded when you get to level 2",
-         *     "gameId": "10068",
-         *     "rewards": {
-         *      "currency": {
-         *       "gold": 1000
-         *      }
-         *     },
-         *     "extraData": null,
-         *     "questId": null,
-         *     "milestoneId": "milestone02"
-         *    },
-         *    {
-         *     "id": "milestone01",
-         *     "thresholds": {
-         *      "playerStatistics": {
-         *       "experiencePoints": 0
-         *      }
-         *     },
-         *     "category": "general",
-         *     "title": "Level 1 milestone",
-         *     "status": "SATISFIED",
-         *     "description": "Awarded when you get to player level 1",
-         *     "gameId": "10068",
-         *     "rewards": {
-         *      "currency": {
-         *       "gems": 10
-         *      }
-         *     },
-         *     "extraData": null,
-         *     "questId": null,
-         *     "milestoneId": "milestone01"
-         *    }
-         *   ],
-         *   "achievements": [
-         *    {
-         *     "fbEnabled": true,
-         *     "imageUrl": null,
-         *     "status": "NOT_AWARDED",
-         *     "gameId": "10068",
-         *     "steamEnabled": false,
-         *     "extraData": null,
-         *     "achievementId": "ach01",
-         *     "invisibleUntilEarned": false,
-         *     "steamAchievementId": "",
-         *     "id": "ach01",
-         *     "appleEnabled": false,
-         *     "title": "Finish Tutorial",
-         *     "fbGamePoints": 10,
-         *     "description": "Achievement awarded when you finish the tutorial",
-         *     "appleAchievementId": ""
-         *    },
-         *    {
-         *     "fbEnabled": true,
-         *     "imageUrl": null,
-         *     "status": "NOT_AWARDED",
-         *     "gameId": "10068",
-         *     "steamEnabled": false,
-         *     "extraData": null,
-         *     "achievementId": "ach02",
-         *     "invisibleUntilEarned": false,
-         *     "steamAchievementId": "",
-         *     "id": "ach02",
-         *     "appleEnabled": false,
-         *     "title": "Level up",
-         *     "fbGamePoints": 10,
-         *     "description": "Awarded when you level up for the first time!",
-         *     "appleAchievementId": ""
-         *    }
-         *   ],
-         *   "quests": [],
-         *   "xp": {
-         *    "xpCapped": false,
-         *    "experiencePoints": 0,
-         *    "xpLevel": {
-         *     "gameId": "10068",
-         *     "level": 0,
-         *     "statusTitle": "Lesser",
-         *     "experience": 0,
-         *     "fbAction": ""
-         *    },
-         *    "experienceLevel": 0
-         *   }
-         *  }
-         * }
          */
         void readAllGamification(bool in_includeMetaData = false, IServerCallback * in_callback = NULL);
 
@@ -129,57 +33,6 @@ namespace BrainCloud {
          * Service Operation - ReadMilestones
          *
          * @param in_callback Method to be invoked when the server response is received.
-         *
-         * @return The JSON returned in the callback is as follows:
-         * {
-         *   "status": 200,
-         *   "data": {
-         *     "milestones": [
-         *       {
-         *         "gameId": "com.bitheads.unityexample",
-         *         "milestoneId": "milestone01",
-         *         "playerStatistics": {
-         *           "experiencePoints": null,
-         *           "experienceLevel": null,
-         *           "empty": true,
-         *           "statistics": {}
-         *         },
-         *         "globalStatistics": {
-         *           "statistics": {},
-         *           "empty": true
-         *         },
-         *         "playerStatisticsUnlockThresholds": {
-         *           "experiencePoints": null,
-         *           "experienceLevel": null,
-         *           "empty": true,
-         *           "statistics": {}
-         *         },
-         *         "globalStatisticsUnlockThresholds": {
-         *           "statistics": {},
-         *           "empty": true
-         *         },
-         *         "reward": {
-         *           "experiencePoints": null,
-         *           "playerStatistics": null,
-         *           "currencies": {
-         *             "gems": 10
-         *           },
-         *           "globalGameStatistics": null,
-         *           "achievement": null
-         *         },
-         *         "title": "Level 1 milestone",
-         *         "extraData": null,
-         *         "description": "Awarded when you get to player level 1",
-         *         "category": "general",
-         *         "key": {
-         *           "gameId": "com.bitheads.unityexample",
-         *           "milestoneId": "milestone01",
-         *           "primaryKey": true
-         *         }
-         *       }
-         *     ]
-         *   }
-         * }
          */
         void readMilestones(bool in_includeMetaData = false, IServerCallback * in_callback = NULL);
 
@@ -190,47 +43,6 @@ namespace BrainCloud {
          * Service Operation - ReadAchievements
          *
          * @param in_callback Method to be invoked when the server response is received.
-         *
-         * @return The JSON returned in the callback is as follows:
-         * {
-         *   "status": 200,
-         *   "data": {
-         *     "achievements": [
-         *       {
-         *         "gameId": "com.bitheads.unityexample",
-         *         "achievementId": "ach01",
-         *         "facebookUrl": "http://someurl.com",
-         *         "title": "Finish Tutorial",
-         *         "imageUrl": "http://someurl.com",
-         *         "facebookGamePoints": 10,
-         *         "extraData": null,
-         *         "invisibleUntilEarned": null,
-         *         "description": "Achievement awarded when you finish the tutorial",
-         *         "key": {
-         *           "gameId": "com.bitheads.unityexample",
-         *           "achievementId": "ach01",
-         *           "primaryKey": true
-         *         }
-         *       },
-         *       {
-         *         "gameId": "com.bitheads.unityexample",
-         *         "achievementId": "ach02",
-         *         "facebookUrl": "http://someurl.com",
-         *         "title": "Level up",
-         *         "imageUrl": "http://someurl.com",
-         *         "facebookGamePoints": 10,
-         *         "extraData": null,
-         *         "invisibleUntilEarned": null,
-         *         "description": "Awarded when you level up for the first time.",
-         *         "key": {
-         *           "gameId": "com.bitheads.unityexample",
-         *           "achievementId": "ach02",
-         *           "primaryKey": true
-         *         }
-         *       }
-         *     ]
-         *   }
-         * }
          */
         void readAchievements(bool in_includeMetaData = false, IServerCallback * in_callback = NULL);
 
@@ -242,32 +54,6 @@ namespace BrainCloud {
          * Service Operation - ReadXpLevels
          *
          * @param in_callback Method to be invoked when the server response is received.
-         *
-         * @return The JSON returned in the callback is as follows:
-         * {
-         *  "status": 200,
-         *  "data": {
-         *   "xp_levels": [
-         *    {
-         *     "level": 1,
-         *     "statusTitle": "Peon",
-         *     "experience": 0,
-         *     "fbAction": ""
-         *    },
-         *    {
-         *     "level": 2,
-         *     "statusTitle": "Small Fry",
-         *     "experience": 1000,
-         *     "fbAction": "",
-         *     "reward": {
-         *      "currency": {
-         *       "gold": 500
-         *      }
-         *     }
-         *    }
-         *   ]
-         *  }
-         * }
          */
         void readXpLevelsMetaData(IServerCallback * in_callback = NULL);
 
@@ -278,14 +64,6 @@ namespace BrainCloud {
         * Service Operation - ReadAchievedAchievements
         *
         * @param in_callback Method to be invoked when the server response is received.
-        *
-        * @return The JSON returned in the callback is as follows:
-        *  {
-        *   "status": 200,
-        *   "data": {
-        *     "achievements": []
-        *   }
-        * }
         */
         void readAchievedAchievements(bool in_includeMetaData = false, IServerCallback * in_callback = NULL);
 
@@ -296,14 +74,6 @@ namespace BrainCloud {
          * Service Operation - ReadCompleteMilestones
          *
          * @param in_callback Method to be invoked when the server response is received.
-         *
-         * @return The JSON returned in the callback is as follows:
-         * {
-         *   "status": 200,
-         *   "data": {
-         *     "milestones": []
-         *   }
-         * }
          */
         void readCompletedMilestones(bool in_includeMetaData = false, IServerCallback * in_callback = NULL);
 
@@ -314,14 +84,6 @@ namespace BrainCloud {
          * Service Operation - ReadInProgressMilestones
          *
          * @param in_callback Method to be invoked when the server response is received.
-         *
-         * @return The JSON returned in the callback is as follows:
-         *  {
-         *   "status": 200,
-         *   "data": {
-         *     "milestones": []
-         *   }
-         * }
          */
         void readInProgressMilestones(bool in_includeMetaData = false, IServerCallback * in_callback = NULL);
 
@@ -333,14 +95,6 @@ namespace BrainCloud {
         *
         * @param in_category The milestone category
         * @param in_callback Method to be invoked when the server response is received.
-        *
-        * @return The JSON returned in the callback is as follows:
-        * {
-        *   "status":200,
-        *   "data":{
-        *     "milestones": []
-        *   }
-        * }
         */
         void readMilestonesByCategory(const char * in_category, bool in_includeMetaData = false, IServerCallback * in_callback = NULL);
 
@@ -352,12 +106,6 @@ namespace BrainCloud {
         *
         * @param in_achievementIds Collection of achievement ids to award
         * @param in_callback Method to be invoked when the server response is received.
-        *
-        * @return The JSON returned in the callback is as follows:
-        * {
-        *   "status":200,
-        *   "data":null
-        * }
         */
         void awardAchievements(const std::vector<std::string> & in_achievements, IServerCallback * in_callback = NULL);
 
@@ -369,12 +117,6 @@ namespace BrainCloud {
         *
         * @param in_milestoneIds Collection of milestones to reset
         * @param in_callback Method to be invoked when the server response is received.
-        *
-        * @return The JSON returned in the callback is as follows.
-        * {
-        *   "status":200,
-        *   "data":null
-        * }
         */
         void resetMilestones(const std::vector<std::string> & in_milestoneIds, IServerCallback * in_callback = NULL);
 
@@ -385,20 +127,6 @@ namespace BrainCloud {
          * Service Operation - ReadQuests
          *
          * @param in_callback Method to be invoked when the server response is received.
-         *
-         * @return The JSON returned in the callback is as follows:
-         * {
-         *   "status":200,
-         *   "data":null
-         * }
-         *
-         *
-         *  {
-         *   "status": 200,
-         *   "data": {
-         *     "quests": []
-         *   }
-         * }
          */
         void readQuests(bool in_includeMetaData = false, IServerCallback * callback = NULL);
 
@@ -409,14 +137,6 @@ namespace BrainCloud {
          * Service Operation - ReadCompletedQuests
          *
          * @param in_callback Method to be invoked when the server response is received.
-         *
-         * @return The JSON returned in the callback is as follows:
-         *  {
-         *   "status": 200,
-         *   "data": {
-         *     "quests": []
-         *   }
-         * }
          */
         void readCompletedQuests(bool in_includeMetaData = false, IServerCallback * callback = NULL);
 
@@ -427,14 +147,6 @@ namespace BrainCloud {
          * Service Operation - ReadInProgressQuests
          *
          * @param in_callback Method to be invoked when the server response is received.
-         *
-         * @return The JSON returned in the callback is as follows:
-         *  {
-         *   "status": 200,
-         *   "data": {
-         *     "quests": []
-         *   }
-         * }
          */
         void readInProgressQuests(bool in_includeMetaData = false, IServerCallback * callback = NULL);
 
@@ -445,14 +157,6 @@ namespace BrainCloud {
          * Service Operation - ReadNotStartedQuests
          *
          * @param in_callback Method to be invoked when the server response is received.
-         *
-         * @return The JSON returned in the callback is as follows:
-         *  {
-         *   "status": 200,
-         *   "data": {
-         *     "quests": []
-         *   }
-         * }
          */
         void readNotStartedQuests(bool in_includeMetaData = false, IServerCallback * callback = NULL);
 
@@ -463,14 +167,6 @@ namespace BrainCloud {
          * Service Operation - ReadQuestsWithStatus
          *
          * @param in_callback Method to be invoked when the server response is received.
-         *
-         * @return The JSON returned in the callback is as follows:
-         *  {
-         *   "status": 200,
-         *   "data": {
-         *     "quests": []
-         *   }
-         * }
          */
         void readQuestsWithStatus(bool in_includeMetaData = false, IServerCallback * callback = NULL);
 
@@ -481,14 +177,6 @@ namespace BrainCloud {
          * Service Operation - ReadQuestsWithBasicPercentage
          *
          * @param in_callback Method to be invoked when the server response is received.
-         *
-         * @return The JSON returned in the callback is as follows:
-         *  {
-         *   "status": 200,
-         *   "data": {
-         *     "quests": []
-         *   }
-         * }
          */
         void readQuestsWithBasicPercentage(bool in_includeMetaData = false, IServerCallback * callback = NULL);
 
@@ -499,14 +187,6 @@ namespace BrainCloud {
          * Service Operation - ReadQuestsWithComplexPercentage
          *
          * @param in_callback Method to be invoked when the server response is received.
-         *
-         * @return The JSON returned in the callback is as follows:
-         *  {
-         *   "status": 200,
-         *   "data": {
-         *     "quests": []
-         *   }
-         * }
          */
         void readQuestsWithComplexPercentage(bool in_includeMetaData = false, IServerCallback * callback = NULL);
 
@@ -518,14 +198,6 @@ namespace BrainCloud {
          *
          * @param in_category The quest category
          * @param in_callback Method to be invoked when the server response is received.
-         *
-         * @return The JSON returned in the callback is as follows:
-         * {
-         *   "status":200,
-         *   "data": {
-         *     "quests": []
-         *   }
-         * }
          */
         void readQuestsByCategory(const char * category, bool in_includeMetaData = false, IServerCallback * callback = NULL);
 

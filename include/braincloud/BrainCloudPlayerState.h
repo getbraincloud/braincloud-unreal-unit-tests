@@ -26,42 +26,6 @@ namespace BrainCloud
          * Service Operation - Read
          *
          * @param in_callback The method to be invoked when the server response is received
-         *
-         * @return The JSON returned in the callback is as follows:
-         * {
-         *   "status": 200,
-         *   "data": {
-         *     "vcPurchased": null,
-         *     "id": "210ee817-d555-40c3-b109-c24a84c84dc7",
-         *     "experiencePoints": 10,
-         *     "sent_events": [],
-         *     "vcClaimed": null,
-         *     "server_time": 1395950294285,
-         *     "experienceLevel": 1,
-         *     "incoming_events": [],
-         *     "currency": {
-         *       "gems": {
-         *         "purchased": 0,
-         *         "balance": 0,
-         *         "consumed": 0,
-         *         "awarded": 0
-         *       },
-         *       "gold": {
-         *         "purchased": 0,
-         *         "balance": 0,
-         *         "consumed": 0,
-         *         "awarded": 0
-         *       }
-         *     },
-         *     "statistics": {
-         *       "minions": 0,
-         *       "wood": 50,
-         *       "pantelons": 3,
-         *       "iron": 0
-         *     },
-         *     "abTestingId": 60
-         *   }
-         * }
          */
         void readPlayerState(IServerCallback * in_callback, const char* in_entityTypeFilter = NULL);
 
@@ -75,12 +39,6 @@ namespace BrainCloud
          * Service Operation - FullReset
          *
          * @param in_callback The method to be invoked when the server response is received
-         *
-         * @return The JSON returned in the callback is as follows:
-         * {
-         *   "status":200,
-         *   "data":null
-         * }
          */
         void deletePlayer(IServerCallback * in_callback = NULL);
 
@@ -95,12 +53,6 @@ namespace BrainCloud
          * Service Operation - DataReset
          *
          * @param in_callback The method to be invoked when the server response is received
-         *
-         * @return The JSON returned in the callback is as follows:
-         * {
-         *   "status":200,
-         *   "data":null
-         * }
          */
         void resetPlayerState(IServerCallback * in_callback = NULL);
 
@@ -111,12 +63,6 @@ namespace BrainCloud
          * Service Operation - Logout
          *
          * @param in_callback The method to be invoked when the server response is received
-         *
-         * @return The JSON returned in the callback is as follows:
-         * {
-         *   "status":200,
-         *   "data":null
-         * }
          */
         void logout(IServerCallback * in_callback = NULL);
 
@@ -128,15 +74,6 @@ namespace BrainCloud
         *
         * @param in_playerName The name of the player
         * @param in_callback The method to be invoked when the server response is received
-        *
-        * @return The JSON returned in the callback is as follows:
-        * {
-        *   "status":200,
-        *   "data":
-        *   {
-        *     "playerName": "someName"
-        *   }
-        * }
         */
         void updatePlayerName(const char * in_playerName, IServerCallback * in_callback = NULL);
 
@@ -159,12 +96,6 @@ namespace BrainCloud
          *   "highScore":45123
          * }
          * @param in_callback Method to be invoked when the server response is received.
-         *
-         * @return The JSON returned in the callback is as follows:
-         * {
-         *   "status":200,
-         *   "data":null
-         * }
          */
         void updateSummaryFriendData(const char * in_jsonSummaryData, IServerCallback * in_callback = NULL);
 
@@ -175,17 +106,6 @@ namespace BrainCloud
         * Service Operation - GetAttributes
         *
         * @param in_callback The method to be invoked when the server response is received
-        *
-        * @return The JSON returned in the callback is as follows:
-        * {
-        *   "status": 200,
-        *   "data": {
-        *     "attributes": {
-        *          "key1": "value1",
-        *          "key2": "value2"
-        *     }
-        *   }
-        * }
         */
         void getAttributes(IServerCallback * in_callback = NULL);
 
@@ -198,11 +118,6 @@ namespace BrainCloud
         * @param in_jsonAttributes Single layer json string that is a set of key-value pairs
         * @param in_wipeExisting Whether to wipe existing attributes prior to update.
         * @param in_callback The method to be invoked when the server response is received
-        *
-        * @return The JSON returned in the callback is as follows:
-        * {
-        *   "status": 200,
-        * }
         */
         void updateAttributes(const std::string& in_jsonAttributes, bool in_wipeExisting, IServerCallback * in_callback = NULL);
 
@@ -214,11 +129,6 @@ namespace BrainCloud
         *
         * @param in_attributeNames Collection of attribute names.
         * @param in_callback The method to be invoked when the server response is received
-        *
-        * @return The JSON returned in the callback is as follows:
-        * {
-        *   "status": 200,
-        * }
         */
         void removeAttributes(const std::vector<std::string> & in_attributeNames, IServerCallback * in_callback = NULL);
 
@@ -230,14 +140,6 @@ namespace BrainCloud
          *
          * @param in_pictureUrl URL to apply
          * @param in_callback The method to be invoked when the server response is received
-         *
-         * @return The JSON returned in the callback is as follows:
-         * {
-         *     "status": 200,
-         *     "data": {
-         *         "playerPictureUrl": "https://some.domain.com/mypicture.jpg"
-         *      }
-         * }
          */
         void updatePlayerPictureUrl(const char * in_pictureUrl, IServerCallback * in_callback = NULL);
 
@@ -250,14 +152,6 @@ namespace BrainCloud
          *
          * @param in_contactEmail Updated email
          * @param in_callback The method to be invoked when the server response is received
-         *
-         * @return The JSON returned in the callback is as follows:
-         * {
-         *     "status": 200,
-         *     "data": {
-         *         "contactEmail": "someName@somedomain.com"
-         *     }
-         * }
          */
         void updateContactEmail(const char * in_contactEmail, IServerCallback * in_callback = NULL);
 

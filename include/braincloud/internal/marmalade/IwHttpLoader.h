@@ -24,39 +24,39 @@ class CIwHTTP;
 namespace BrainCloud
 {
 
-	class IwHttpLoader : virtual public URLLoader
-	{
-	public:
-		IwHttpLoader();
-		virtual ~IwHttpLoader();
+    class IwHttpLoader : virtual public URLLoader
+    {
+    public:
+        IwHttpLoader();
+        virtual ~IwHttpLoader();
 
-		virtual void    close();
-		virtual void    load(URLRequest const &);
-		virtual void    load(URLRequest const * r) { if (r != NULL) load(*r); }
-		virtual bool    isDone();
-		virtual void	setTimeout(int milliseconds) { _timeoutMillis = milliseconds; }
+        virtual void    close();
+        virtual void    load(URLRequest const &);
+        virtual void    load(URLRequest const * r) { if (r != NULL) load(*r); }
+        virtual bool    isDone();
+        virtual void    setTimeout(int milliseconds) { _timeoutMillis = milliseconds; }
 
-	private:
-		enum eIwHttpLoaderState
-		{
-			StatusNone = 0,
-			StatusHttpSendingRequest,
-			StatusHttpReadingResponse,
-			StatusCanceled, // this number or higher, isDone() returns true
-			StatusCompleteFailed,
-			StatusCompleteSuccess
-		};
+    private:
+        enum eIwHttpLoaderState
+        {
+            StatusNone = 0,
+            StatusHttpSendingRequest,
+            StatusHttpReadingResponse,
+            StatusCanceled, // this number or higher, isDone() returns true
+            StatusCompleteFailed,
+            StatusCompleteSuccess
+        };
 
-		static int32_t	statusCallback(void *systemData, void *userData);
-		static int32_t	readCallback(void *systemData, void *userData);
+        static int32_t  statusCallback(void *systemData, void *userData);
+        static int32_t  readCallback(void *systemData, void *userData);
 
-		void			setNetworkErrorResponse();
+        void            setNetworkErrorResponse();
 
-		eIwHttpLoaderState	_state;
-		CIwHTTP				*_iwhttp;
-		int					_timeoutMillis;
-		char				_readBuffer[2048];
-	};
+        eIwHttpLoaderState  _state;
+        CIwHTTP             *_iwhttp;
+        int                 _timeoutMillis;
+        char                _readBuffer[2048];
+    };
 
 }
 #endif  // _IWHTTPLOADER_H_
