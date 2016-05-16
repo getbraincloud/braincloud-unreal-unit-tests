@@ -1,0 +1,11 @@
+configurations {
+    Platform { 
+        key : "Platform";
+        choices : { ARM };
+        ARM.aliases : { arm, woa };
+    };
+    Configuration { 
+        key : "Configuration";
+        choices : { Release, Debug };
+    };
+};

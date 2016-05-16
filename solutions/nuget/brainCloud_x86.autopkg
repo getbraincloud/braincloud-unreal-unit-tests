@@ -1,0 +1,108 @@
+//
+// This file is used as input to the CoApp autopackage 
+// PowerShell scripts to build a NuGet package.
+// Note that you will have to download + install the scripts from:
+// http://coapp.org/tutorials/installation.html
+//
+// And then because it won't work, you have to enable
+// remotely signed ps scripts using Admin PowerShell:
+// http://stackoverflow.com/questions/4037939/powershell-says-execution-of-scripts-is-disabled-on-this-system
+//
+// And then finally restart PowerShell as normal user and run: 
+//
+// autopackage brainCloud.autopkg
+//
+// Which should create the NuGet package. More details on
+// the format of this file can be found here:
+// http://coapp.org/reference/autopackage-ref.html#Files
+//
+// Notes on publishing the NuGet package are here:
+// https://docs.nuget.org/create/creating-and-publishing-a-package
+//
+
+nuget {
+
+	// the nuspec file metadata
+	nuspec {
+		id = brainCloudCppSdk-x86;
+		version : 2.23.0;
+		title: "brainCloud C++ SDK";
+		authors: {bitHeads inc.};
+		owners: {bitHeads inc.};
+		licenseUrl: "http://getbraincloud.com";
+		projectUrl: "http://getbraincloud.com";
+		iconUrl: "http://getbraincloud.com/apidocs/wp-content/uploads/brainCloud.png";
+		requireLicenseAcceptance:false;
+		summary: "brainCloud Client SDK for Windows Universal Apps.";
+		description: "A C++ native library for connecting Windows 10 Universal Apps to the brainCloud back-end. Currently supports Visual Studio 2015.";
+		releaseNotes: "Release of brainCloud 2.23.0";
+		copyright: "Copyright 2016";
+		tags: { braincloud, native };
+	};
+	
+	dependencies {
+		// we rely on casablanca cpprestsdk nuget package
+		packages : {
+			cpprestsdk/2.8.0
+		};
+	};
+
+	// the files that go into the content folders
+	// (inserted into the nuspec file)
+	files {
+		nestedInclude1: { 
+			#destination = ${d_include}braincloud;
+			"..\..\include\braincloud\*.h"
+		};
+		
+		nestedInclude2 += { 
+			#destination = ${d_include}braincloud\internal;
+			"..\..\include\braincloud\internal\*.h"
+		};
+		
+		nestedInclude3: { 
+			#destination = ${d_include}braincloud\internal\win;
+			"..\..\include\braincloud\internal\win\*.h"
+		};
+		
+		nestedIncludeJson: {
+			#destination = ${d_include}json;
+			"..\..\lib\jsoncpp-1.0.0\json\json.h"
+		};
+	   
+		source:  { 
+			"..\..\src\*.cpp",
+			"..\..\src\win\*.cpp"
+		};
+
+		docs: { 
+			// none available
+		};
+		
+		("Win32", "Release,Debug") => {
+			[${0},${1}] {
+				lib += {
+					// #output { package: redist; }
+					..\windowsUniversal_vc140\brainCloud\Output\${0}\${1}\brainCloud.lib
+				};
+				symbols += {
+					#output { package: symbols; }
+					..\windowsUniversal_vc140\brainCloud\Intermediate\${0}\${1}\brainCloud.pdb
+				};
+			};
+		};
+	 };
+
+	// the VC++ .props file that gets generated and inserted into the ${d_content} folder
+	props { 
+		// we're going to generate a number of properties anyway. 
+		// so even if the packager doesn't specify the props object 
+		// we're going to make this file.
+	};
+
+	// the VC++ .targets file that gets generated and inserted into the ${d_content} folder
+	targets {
+		// every configuration needs to reference the include directories.
+		// Defines += SOME_FLAG;
+	};
+}
