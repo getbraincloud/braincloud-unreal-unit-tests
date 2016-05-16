@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<package>
+  <metadata>
+    <id>brainCloudCppSdk-arm.symbols</id>
+    <version>2.23.0</version>
+    <authors>bitHeads inc.</authors>
+    <owners>bitHeads inc.</owners>
+    <licenseUrl>http://getbraincloud.com</licenseUrl>
+    <projectUrl>http://getbraincloud.com</projectUrl>
+    <iconUrl>http://getbraincloud.com/apidocs/wp-content/uploads/brainCloud.png</iconUrl>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <description>Symbols for package 'brainCloudCppSdk-arm'. This package should not likely be installed. 
+(This is not the package you are looking for).</description>
+    <releaseNotes>Release of brainCloud 2.23.0</releaseNotes>
+    <copyright>Copyright 2016</copyright>
+    <title>brainCloud C++ SDK Symbols</title>
+    <summary>Symbols for for package 'brainCloudCppSdk-arm'</summary>
+    <tags>braincloud  native nativepackage</tags>
+  </metadata>
+  <files>
+    <file src="default-propertiesui.xml" target="build\native\default-propertiesui.xml" />
+    <file src="brainCloudCppSdk-arm.symbols.targets" target="build\native\brainCloudCppSdk-arm.symbols.targets" />
+    <file src="configurations.autopkg" target="build\configurations.autopkg" />
+    <file src="publisher-info.txt" target="build\publisher-info.txt" />
+    <file src="..\..\..\src\*.cpp" target="src\native" />
+    <file src="..\..\..\src\win\*.cpp" target="src\native" />
+    <file src="..\..\..\solutions\windowsUniversal_vc140\brainCloud\Intermediate\ARM\Release\brainCloud.pdb" target="build\native\bin\ARM\Release\brainCloud.pdb" />
+    <file src="..\..\..\solutions\windowsUniversal_vc140\brainCloud\Intermediate\ARM\Debug\brainCloud.pdb" target="build\native\bin\ARM\Debug\brainCloud.pdb" />
+  </files>
+</package>

@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<package>
+  <metadata>
+    <id>brainCloudCppSdk-x64</id>
+    <version>2.23.0</version>
+    <authors>bitHeads inc.</authors>
+    <owners>bitHeads inc.</owners>
+    <licenseUrl>http://getbraincloud.com</licenseUrl>
+    <projectUrl>http://getbraincloud.com</projectUrl>
+    <iconUrl>http://getbraincloud.com/apidocs/wp-content/uploads/brainCloud.png</iconUrl>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <description>A C++ native library for connecting Windows 10 Universal Apps to the brainCloud back-end. Currently supports Visual Studio 2015.</description>
+    <releaseNotes>Release of brainCloud 2.23.0</releaseNotes>
+    <copyright>Copyright 2016</copyright>
+    <title>brainCloud C++ SDK</title>
+    <summary>brainCloud Client SDK for Windows Universal Apps.</summary>
+    <tags>braincloud  native nativepackage</tags>
+    <dependencies>
+      <dependency id="cpprestsdk" version="2.8.0" />
+    </dependencies>
+  </metadata>
+  <files>
+    <file src="default-propertiesui.xml" target="build\native\default-propertiesui.xml" />
+    <file src="brainCloudCppSdk-x64.targets" target="build\native\brainCloudCppSdk-x64.targets" />
+    <file src="configurations.autopkg" target="build\configurations.autopkg" />
+    <file src="publisher-info.txt" target="build\publisher-info.txt" />
+    <file src="..\..\..\include\braincloud\*.h" target="build\native\include\braincloud" />
+    <file src="..\..\..\include\braincloud\internal\*.h" target="build\native\include\braincloud\internal" />
+    <file src="..\..\..\include\braincloud\internal\win\*.h" target="build\native\include\braincloud\internal\win" />
+    <file src="..\..\..\lib\jsoncpp-1.0.0\json\json.h" target="build\native\include\json\json.h" />
+    <file src="..\..\..\solutions\windowsUniversal_vc140\brainCloud\Output\x64\Release\brainCloud.lib" target="build\native\lib\x64\Release\brainCloud.lib" />
+    <file src="..\..\..\solutions\windowsUniversal_vc140\brainCloud\Output\x64\Debug\brainCloud.lib" target="build\native\lib\x64\Debug\brainCloud.lib" />
+  </files>
+</package>

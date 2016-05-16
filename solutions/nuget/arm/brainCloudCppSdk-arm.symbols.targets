@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003" InitialTargets="brainCloudCppSdk-arm_symbols_init">
+  <PropertyGroup Label="Default initializers for properties">
+    <Linkage-brainCloudCppSdk-arm_symbols Condition="'$(Linkage-brainCloudCppSdk-arm_symbols)' == ''">static</Linkage-brainCloudCppSdk-arm_symbols>
+    <CallingConvention-brainCloudCppSdk-arm_symbols Condition="'$(CallingConvention-brainCloudCppSdk-arm_symbols)' == ''">cdecl</CallingConvention-brainCloudCppSdk-arm_symbols>
+  </PropertyGroup>
+  <ItemGroup>
+    <PropertyPageSchema Include="$(MSBuildThisFileDirectory)\default-propertiesui.xml" />
+  </ItemGroup>
+  <UsingTask TaskName="brainCloudCppSdk-arm_symbols_Contains" AssemblyFile="$(MSBuildToolsPath)\Microsoft.Build.Tasks.v4.0.dll" TaskFactory="CodeTaskFactory">
+    <ParameterGroup>
+      <Text Output="false" ParameterType="System.String" />
+      <Library Output="false" Required="true" ParameterType="System.String" />
+      <Value Output="false" Required="true" ParameterType="System.String" />
+      <Result Output="true" ParameterType="System.String" />
+    </ParameterGroup>
+    <Task>
+      <Code>Result = ((Text ?? "").Split(';').Contains(Library) ) ? Value : String.Empty;</Code>
+    </Task>
+  </UsingTask>
+  <Target Name="brainCloudCppSdk-arm_symbols_init">
+    <brainCloudCppSdk-arm_symbols_Contains Text="Linkage-dynamic" Library="brainCloudCppSdk-arm_symbols" Value="dynamic" Condition="'$(Linkage-brainCloudCppSdk-arm_symbols)'==''">
+      <Output TaskParameter="Result" PropertyName="Linkage-brainCloudCppSdk-arm_symbols" />
+    </brainCloudCppSdk-arm_symbols_Contains>
+    <brainCloudCppSdk-arm_symbols_Contains Text="Linkage-static" Library="brainCloudCppSdk-arm_symbols" Value="static" Condition="'$(Linkage-brainCloudCppSdk-arm_symbols)'==''">
+      <Output TaskParameter="Result" PropertyName="Linkage-brainCloudCppSdk-arm_symbols" />
+    </brainCloudCppSdk-arm_symbols_Contains>
+    <brainCloudCppSdk-arm_symbols_Contains Text="Linkage-ltcg" Library="brainCloudCppSdk-arm_symbols" Value="ltcg" Condition="'$(Linkage-brainCloudCppSdk-arm_symbols)'==''">
+      <Output TaskParameter="Result" PropertyName="Linkage-brainCloudCppSdk-arm_symbols" />
+    </brainCloudCppSdk-arm_symbols_Contains>
+    <brainCloudCppSdk-arm_symbols_Contains Text="Linkage-sxs" Library="brainCloudCppSdk-arm_symbols" Value="sxs" Condition="'$(Linkage-brainCloudCppSdk-arm_symbols)'==''">
+      <Output TaskParameter="Result" PropertyName="Linkage-brainCloudCppSdk-arm_symbols" />
+    </brainCloudCppSdk-arm_symbols_Contains>
+    <brainCloudCppSdk-arm_symbols_Contains Text="CallingConvention-cdecl" Library="brainCloudCppSdk-arm_symbols" Value="cdecl" Condition="'$(CallingConvention-brainCloudCppSdk-arm_symbols)'==''">
+      <Output TaskParameter="Result" PropertyName="CallingConvention-brainCloudCppSdk-arm_symbols" />
+    </brainCloudCppSdk-arm_symbols_Contains>
+    <brainCloudCppSdk-arm_symbols_Contains Text="CallingConvention-stdcall" Library="brainCloudCppSdk-arm_symbols" Value="stdcall" Condition="'$(CallingConvention-brainCloudCppSdk-arm_symbols)'==''">
+      <Output TaskParameter="Result" PropertyName="CallingConvention-brainCloudCppSdk-arm_symbols" />
+    </brainCloudCppSdk-arm_symbols_Contains>
+    <brainCloudCppSdk-arm_symbols_Contains Text="CallingConvention-fastcall" Library="brainCloudCppSdk-arm_symbols" Value="fastcall" Condition="'$(CallingConvention-brainCloudCppSdk-arm_symbols)'==''">
+      <Output TaskParameter="Result" PropertyName="CallingConvention-brainCloudCppSdk-arm_symbols" />
+    </brainCloudCppSdk-arm_symbols_Contains>
+    <brainCloudCppSdk-arm_symbols_Contains Text="CallingConvention-thiscall" Library="brainCloudCppSdk-arm_symbols" Value="thiscall" Condition="'$(CallingConvention-brainCloudCppSdk-arm_symbols)'==''">
+      <Output TaskParameter="Result" PropertyName="CallingConvention-brainCloudCppSdk-arm_symbols" />
+    </brainCloudCppSdk-arm_symbols_Contains>
+    <brainCloudCppSdk-arm_symbols_Contains Text="CallingConvention-clrcall" Library="brainCloudCppSdk-arm_symbols" Value="clrcall" Condition="'$(CallingConvention-brainCloudCppSdk-arm_symbols)'==''">
+      <Output TaskParameter="Result" PropertyName="CallingConvention-brainCloudCppSdk-arm_symbols" />
+    </brainCloudCppSdk-arm_symbols_Contains>
+  </Target>
+</Project>

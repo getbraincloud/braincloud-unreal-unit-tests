@@ -1,0 +1,11 @@
+configurations {
+    Platform { 
+        key : "Platform";
+        choices : { x64 };
+        x64.aliases : { x64, amd64, em64t, intel64, x86-64, x86_64 };
+    };
+    Configuration { 
+        key : "Configuration";
+        choices : { Release, Debug };
+    };
+};
