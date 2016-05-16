@@ -14,12 +14,12 @@
 extern "C" {
 
 #if !defined(WIN32) && !defined(WINAPI_FAMILY)
-	#ifdef HG_PLATFORM_BB
-		#include <errno.h>
-		#include <sys/time.h>
-	#else
-		#include <sys/time.h>
-	#endif
+    #ifdef HG_PLATFORM_BB
+        #include <errno.h>
+        #include <sys/time.h>
+    #else
+        #include <sys/time.h>
+    #endif
     #include <unistd.h>
 #else
 
@@ -97,8 +97,8 @@ namespace BrainCloud
         auto sleep = std::chrono::milliseconds(millis);
         std::this_thread::sleep_for(sleep);
 #elif defined(WP8)
-		// sadly Sleep n/a on windows phone 8.0
-		WaitForSingleObjectEx(GetCurrentThread(), millis, TRUE);
+        // sadly Sleep n/a on windows phone 8.0
+        WaitForSingleObjectEx(GetCurrentThread(), millis, TRUE);
 #elif defined (WIN32) || defined(WINAPI_FAMILY)
         Sleep(millis);
 #else

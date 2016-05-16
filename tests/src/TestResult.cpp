@@ -43,13 +43,13 @@ void TestResult::reset()
 void TestResult::sleep(int millis)
 {
 #if __cplusplus >= 201103L
-	auto sleep = std::chrono::milliseconds(millis);
-	std::this_thread::sleep_for(sleep);
+    auto sleep = std::chrono::milliseconds(millis);
+    std::this_thread::sleep_for(sleep);
 #else
 #ifdef WIN32
-	Sleep(millis);
+    Sleep(millis);
 #else
-	usleep(millis * 1000);
+    usleep(millis * 1000);
 #endif
 #endif
 }
@@ -61,7 +61,7 @@ void TestResult::sleepAndUpdate(BrainCloudClient * in_bc)
     while(!m_done && maxWaitMs > 0)
     {
         in_bc->runCallbacks();
-		sleep(sleepSliceMs);
+        sleep(sleepSliceMs);
         maxWaitMs -= sleepSliceMs;
     }
 }
@@ -147,7 +147,7 @@ void TestResult::serverCallback( ServiceName serviceName, ServiceOperation servi
     m_response.clear();
     reader.parse(jsonData, m_response);
 
-	m_result = true;
+    m_result = true;
     --m_apiCountExpected;
     if (m_apiCountExpected <= 0)
     {
@@ -161,7 +161,7 @@ void TestResult::serverError( ServiceName serviceName, ServiceOperation serviceO
     m_reasonCode = reasonCode;
     m_statusMessage = statusMessage;
 
-	m_result = false;
+    m_result = false;
     --m_apiCountExpected;
     if (m_apiCountExpected <= 0)
     {

@@ -12,7 +12,7 @@ protected:
         return true;
     }
 
-	void AuthEmailPassword();
+    void AuthEmailPassword();
 };
 
 #endif

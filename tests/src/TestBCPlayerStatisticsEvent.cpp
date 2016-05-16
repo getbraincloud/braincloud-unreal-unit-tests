@@ -57,8 +57,8 @@ TEST_F(TestBCPlayerStatisticsEvent, RewardHandlerTriggerStatisticsEvents)
     m_bc->getPlayerStatisticsEventService()->triggerPlayerStatisticsEvents(fw.write(eventArray).c_str(), &tr);
     tr.run(m_bc, true);
     
-	// sleep a bit... to let threaded comms trigger the reward callback
-	TestResult::sleep(1000);
+    // sleep a bit... to let threaded comms trigger the reward callback
+    TestResult::sleep(1000);
     m_bc->deregisterRewardCallback();
 
     ASSERT_EQ(m_rewardCallbackHitCount, 1);
@@ -93,8 +93,8 @@ TEST_F(TestBCPlayerStatisticsEvent, RewardHandlerMultipleApiCallsInBundle)
     m_bc->getPlayerStatisticsEventService()->triggerPlayerStatisticsEvents(fw.write(eventArray).c_str(), &tr);
     tr.runExpectCount(m_bc, 2, true);
     
-	// sleep a bit... to let threaded comms trigger the reward callback
-	TestResult::sleep(1000);
+    // sleep a bit... to let threaded comms trigger the reward callback
+    TestResult::sleep(1000);
     m_bc->deregisterRewardCallback();
 
     ASSERT_EQ(m_rewardCallbackHitCount, 2);
@@ -108,5 +108,5 @@ void TestBCPlayerStatisticsEvent::rewardCallback(std::string const & jsonData)
     Json::StyledWriter writer;
     printf("rewardCallback returned JSON...\n%s", writer.write(root).c_str());
     
-	m_rewardCallbackHitCount += root["apiRewards"].size();
+    m_rewardCallbackHitCount += root["apiRewards"].size();
 }

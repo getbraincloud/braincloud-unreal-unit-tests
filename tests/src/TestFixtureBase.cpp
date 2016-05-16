@@ -108,17 +108,17 @@ void TestFixtureBase::LoadIds()
     if (fp == NULL)
     {
         // new tactic - hardcode the bloody thing!!!
-		printf("ERROR: Failed to load ids.txt file!\n");
-		
-		exit(1);
-		/* hardcode the parameters below if necessary
+        printf("ERROR: Failed to load ids.txt file!\n");
+        
+        exit(1);
+        /* hardcode the parameters below if necessary
         m_serverUrl = "";
         m_appId = "";
         m_secret = "";
         m_version = "";
         m_childAppId = "";
         m_parentLevelName = "";
-		*/
+        */
     }
     else
     {

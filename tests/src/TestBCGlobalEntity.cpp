@@ -150,21 +150,21 @@ TEST_F(TestBCGlobalEntity, GetPageOffset)
 
 TEST_F(TestBCGlobalEntity, IncremenGlobalEntityData)
 {
-	TestResult tr;
-	Json::Value entityData;
-	entityData["test"] = 1233;
+    TestResult tr;
+    Json::Value entityData;
+    entityData["test"] = 1233;
 
-	std::string entityId;
+    std::string entityId;
 
-	Json::FastWriter fw;
-	m_bc->getGlobalEntityService()->createEntity(m_entityType, -1, m_entityAclJson, fw.write(entityData), &tr);
-	if (tr.run(m_bc)) entityId = tr.m_response["data"]["entityId"].asString();
+    Json::FastWriter fw;
+    m_bc->getGlobalEntityService()->createEntity(m_entityType, -1, m_entityAclJson, fw.write(entityData), &tr);
+    if (tr.run(m_bc)) entityId = tr.m_response["data"]["entityId"].asString();
 
-	m_bc->getGlobalEntityService()->incrementGlobalEntityData(entityId.c_str(), fw.write(entityData), true, &tr);
-	tr.run(m_bc);
+    m_bc->getGlobalEntityService()->incrementGlobalEntityData(entityId.c_str(), fw.write(entityData), true, &tr);
+    tr.run(m_bc);
 
-	m_bc->getGlobalEntityService()->deleteEntity(entityId, -1, &tr);
-	tr.run(m_bc);
+    m_bc->getGlobalEntityService()->deleteEntity(entityId, -1, &tr);
+    tr.run(m_bc);
 }
 
 void TestBCGlobalEntity::CreateDefaultGlobalEntity(std::string indexedId)

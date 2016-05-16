@@ -721,18 +721,18 @@ namespace BrainCloud
         _statusMessageCache = "No session";
     }
 
-	void BrainCloudComms2::cancelUpload(const char * in_fileUploadId)
-	{
+    void BrainCloudComms2::cancelUpload(const char * in_fileUploadId)
+    {
         std::unique_lock<std::recursive_mutex> lock(_uploaderMutex);
         tFileUploadsIterator it = _fileUploads.find(in_fileUploadId);
         if (it != _fileUploads.end())
         {
             it->second->cancelUpload();
         }
-	}
+    }
 
-	double BrainCloudComms2::getUploadProgress(const char * in_fileUploadId)
-	{
+    double BrainCloudComms2::getUploadProgress(const char * in_fileUploadId)
+    {
         double progress = 0;
         std::unique_lock<std::recursive_mutex> lock(_uploaderMutex);
         tFileUploadsIterator it = _fileUploads.find(in_fileUploadId);
@@ -748,8 +748,8 @@ namespace BrainCloud
         return progress;
     }
 
-	int64_t BrainCloudComms2::getUploadTotalBytesToTransfer(const char * in_fileUploadId)
-	{
+    int64_t BrainCloudComms2::getUploadTotalBytesToTransfer(const char * in_fileUploadId)
+    {
         int64_t totalBytesToTransfer = 0;
         std::unique_lock<std::recursive_mutex> lock(_uploaderMutex);
         tFileUploadsIterator it = _fileUploads.find(in_fileUploadId);
@@ -765,8 +765,8 @@ namespace BrainCloud
         return totalBytesToTransfer;
     }
 
-	int64_t BrainCloudComms2::getUploadBytesTransferred(const char * in_fileUploadId)
-	{
+    int64_t BrainCloudComms2::getUploadBytesTransferred(const char * in_fileUploadId)
+    {
         int64_t bytesToTransfer = 0;
         std::unique_lock<std::recursive_mutex> lock(_uploaderMutex);
         tFileUploadsIterator it = _fileUploads.find(in_fileUploadId);
@@ -782,19 +782,19 @@ namespace BrainCloud
         return bytesToTransfer;
     }
 
-	void BrainCloudComms2::startFileUpload(const Json::Value & in_jsonPrepareUploadResponse)
-	{
-		std::string fileUploadId = in_jsonPrepareUploadResponse["data"]["fileDetails"]["uploadId"].asString();
-		if (fileUploadId.length() <= 0)
-		{
-			return;
-		}
+    void BrainCloudComms2::startFileUpload(const Json::Value & in_jsonPrepareUploadResponse)
+    {
+        std::string fileUploadId = in_jsonPrepareUploadResponse["data"]["fileDetails"]["uploadId"].asString();
+        if (fileUploadId.length() <= 0)
+        {
+            return;
+        }
 
-		std::string localPath = in_jsonPrepareUploadResponse["data"]["fileDetails"]["localPath"].asString();
-		if (localPath.length() <= 0)
-		{
-			return;
-		}
+        std::string localPath = in_jsonPrepareUploadResponse["data"]["fileDetails"]["localPath"].asString();
+        if (localPath.length() <= 0)
+        {
+            return;
+        }
 
         int64_t fileSize = in_jsonPrepareUploadResponse["data"]["fileDetails"]["fileSize"].asInt64();
         if (fileSize == 0)
@@ -804,13 +804,13 @@ namespace BrainCloud
 
         std::unique_lock<std::recursive_mutex> lock(_uploaderMutex);
 
-		// TODO: throttle file uploads to max #
+        // TODO: throttle file uploads to max #
 
-		if (_fileUploads.find(fileUploadId) != _fileUploads.end())
-		{
-			// that can't be right....
-			return;
-		}
+        if (_fileUploads.find(fileUploadId) != _fileUploads.end())
+        {
+            // that can't be right....
+            return;
+        }
 
         CppRestFileUploader *uploader = new CppRestFileUploader();
         uploader->enableLogging(_loggingEnabled);
@@ -818,11 +818,11 @@ namespace BrainCloud
         uploader->setUploadLowTransferRateTimeout(_uploadLowTransferRateTimeoutSecs);
         _fileUploads[fileUploadId] = uploader;
         if (!uploader->uploadFile(_sessionId, fileUploadId, localPath, fileSize, _uploadUrl))
-		{
-			_fileUploads.erase(_fileUploads.find(fileUploadId));
-			delete uploader;
-		}
-	}
+        {
+            _fileUploads.erase(_fileUploads.find(fileUploadId));
+            delete uploader;
+        }
+    }
 };
 
 #endif //__ANDROID__

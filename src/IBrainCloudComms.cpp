@@ -15,17 +15,17 @@
 
 namespace BrainCloud {
 
-	////////////////////////////////////////////////////////
+    ////////////////////////////////////////////////////////
     // Public methods
     ////////////////////////////////////////////////////////
-	
+    
     IBrainCloudComms::IBrainCloudComms(BrainCloudClient* in_client)
         : _client(in_client)
         , _packetId(0)
         , _expectedPacketId(NO_PACKET_EXPECTED)
         , _retryCount(0)
         , _packetSendTimeMillis(0)
-		, _isInitialized(false)
+        , _isInitialized(false)
         , _isAuthenticated(false)
         , _heartbeatInterval(0)
         , _immediateRetryOnError(false)
@@ -58,10 +58,10 @@ namespace BrainCloud {
         _loggingEnabled = shouldEnable;
     }
     
-	bool IBrainCloudComms::isInitialized()
-	{
-		return _isInitialized;
-	}
+    bool IBrainCloudComms::isInitialized()
+    {
+        return _isInitialized;
+    }
 
     bool IBrainCloudComms::isAuthenticated()
     {
@@ -99,7 +99,7 @@ namespace BrainCloud {
         _sessionId.append( sessionId );
     }
     
-   	void IBrainCloudComms::setServerUrl( const char * serverUrl )
+    void IBrainCloudComms::setServerUrl( const char * serverUrl )
     {
         _serverUrl.clear();
         _serverUrl.append( serverUrl );
@@ -186,10 +186,10 @@ namespace BrainCloud {
     {
         //This is a hook to perform processing on any messages that come in, before they are sent to the calling application.
 
-		if (servercall->getService() == ServiceName::AuthenticateV2 && servercall->getOperation() == ServiceOperation::Authenticate)
-		{
+        if (servercall->getService() == ServiceName::AuthenticateV2 && servercall->getOperation() == ServiceOperation::Authenticate)
+        {
             _isAuthenticated = true;
-			setCredentials(response);
+            setCredentials(response);
             
             // pick up the timeout interval from the auth call
             if (_heartbeatInterval == 0)
@@ -204,8 +204,8 @@ namespace BrainCloud {
                     }
                 }
             }
-		}
-		else if (servercall->getService() == ServiceName::PlayerState
+        }
+        else if (servercall->getService() == ServiceName::PlayerState
                  && (servercall->getOperation() == ServiceOperation::FullReset
                      || servercall->getOperation() == ServiceOperation::Logout))
         {

@@ -211,17 +211,17 @@ namespace BrainCloud
         m_client->getBrainCloudComms()->addToQueue(sc);
     }
 
-	void BrainCloudSocialLeaderboard::getGroupSocialLeaderboard(const char * in_leaderboardId, const char * in_groupId, IServerCallback * in_callback)
-	{
-		Json::Value message;
-		message[OperationParam::SocialLeaderboardServiceLeaderboardId.getValue()] = in_leaderboardId;
-		message[OperationParam::GroupId.getValue()] = in_groupId;
+    void BrainCloudSocialLeaderboard::getGroupSocialLeaderboard(const char * in_leaderboardId, const char * in_groupId, IServerCallback * in_callback)
+    {
+        Json::Value message;
+        message[OperationParam::SocialLeaderboardServiceLeaderboardId.getValue()] = in_leaderboardId;
+        message[OperationParam::GroupId.getValue()] = in_groupId;
 
-		ServerCall * sc = new ServerCall(ServiceName::SocialLeaderboard, ServiceOperation::GetGroupSocialLeaderboard, message, in_callback);
-		m_client->getBrainCloudComms()->addToQueue(sc);
-	}
+        ServerCall * sc = new ServerCall(ServiceName::SocialLeaderboard, ServiceOperation::GetGroupSocialLeaderboard, message, in_callback);
+        m_client->getBrainCloudComms()->addToQueue(sc);
+    }
 
-	std::string BrainCloudSocialLeaderboard::leaderboardTypeToString(SocialLeaderboardType type)
+    std::string BrainCloudSocialLeaderboard::leaderboardTypeToString(SocialLeaderboardType type)
     {
         std::string typeString = "HIGH_VALUE";
 

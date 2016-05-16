@@ -40,8 +40,8 @@ public:
     
     virtual void networkError();
     
-	// utility to sleep for x millis
-	static void sleep(int millis);
+    // utility to sleep for x millis
+    static void sleep(int millis);
     void setMaxWaitSecs(int secs);
 
 private:
