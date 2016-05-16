@@ -109,7 +109,7 @@ void TestFixtureBase::LoadIds()
     {
         // new tactic - hardcode the bloody thing!!!
         printf("ERROR: Failed to load ids.txt file!\n");
-        
+
         exit(1);
         /* hardcode the parameters below if necessary
         m_serverUrl = "";
@@ -159,6 +159,13 @@ void TestFixtureBase::LoadIds()
             }
         }
         fclose(fp);
+
+        printf("\nURL - %s", m_serverUrl.c_str());
+        printf("\nApp ID - %s", m_appId.c_str());
+        printf("\nSecret - %s", m_secret.c_str());
+        printf("\nVersion - %s", m_version.c_str());
+        printf("\nChild App ID - %s", m_childAppId.c_str());
+        printf("\nParent Level Name - %s\n", m_parentLevelName.c_str());
     }
 }
 
