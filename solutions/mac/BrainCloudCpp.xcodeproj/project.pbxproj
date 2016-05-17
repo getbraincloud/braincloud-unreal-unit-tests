@@ -526,7 +526,7 @@
 		DF932C551CD9231B0085137C /* src */ = {
 			isa = PBXGroup;
 			children = (
-				249F589C1CE3B6E2009D03E4 /* BrainCloudGroup.cpp */,
+				DF932DA41CD9296E0085137C /* md5x.c */,
 				DF932C561CD9231B0085137C /* AuthenticationType.cpp */,
 				DF932C571CD9231B0085137C /* BrainCloudAsyncMatch.cpp */,
 				DF932C581CD9231B0085137C /* BrainCloudAuthentication.cpp */,
@@ -541,6 +541,7 @@
 				DF932C611CD9231B0085137C /* BrainCloudGlobalApp.cpp */,
 				DF932C621CD9231B0085137C /* BrainCloudGlobalEntity.cpp */,
 				DF932C631CD9231B0085137C /* BrainCloudGlobalStatistics.cpp */,
+				249F589C1CE3B6E2009D03E4 /* BrainCloudGroup.cpp */,
 				DF932C641CD9231B0085137C /* BrainCloudIdentity.cpp */,
 				DF932C651CD9231B0085137C /* BrainCloudMatchmaking.cpp */,
 				DF932C661CD9231B0085137C /* BrainCloudOneWayMatch.cpp */,
@@ -562,9 +563,6 @@
 				DF932C761CD9231B0085137C /* GUID.cpp */,
 				DF932C771CD9231B0085137C /* IBrainCloudComms.cpp */,
 				DF932C781CD9231B0085137C /* JsonUtil.cpp */,
-				DF932C791CD9231B0085137C /* mac */,
-				DF932DA41CD9296E0085137C /* md5x.c */,
-				DF932C7F1CD9231B0085137C /* nix */,
 				DF932C821CD9231B0085137C /* OperationParam.cpp */,
 				DF932C831CD9231B0085137C /* Platform.cpp */,
 				DF932C841CD9231B0085137C /* ServerCall.cpp */,
@@ -580,6 +578,8 @@
 				DF932C8E1CD9231B0085137C /* URLRequestHeader.cpp */,
 				DF932C8F1CD9231B0085137C /* URLRequestMethod.cpp */,
 				DF932C901CD9231B0085137C /* URLResponse.cpp */,
+				DF932C791CD9231B0085137C /* mac */,
+				DF932C7F1CD9231B0085137C /* nix */,
 			);
 			name = src;
 			path = ../../src;
