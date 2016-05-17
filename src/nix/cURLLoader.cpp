@@ -11,8 +11,8 @@
 #include <cctype>
 
 #ifdef HG_PLATFORM_BB
-	#include <stdio.h>
-	#include <ctype.h>
+    #include <stdio.h>
+    #include <ctype.h>
 #endif
 
 #include "curl/curl.h"
@@ -354,7 +354,7 @@ void cURLLoader::loadThreadCurl( cURLLoader * loader )
             headerLine.append(h[i].getValue());
             headers = curl_slist_append(headers, headerLine.c_str());
         }  // end for
-		
+        
 
         // Content Type (special header)
         std::string contentType = "Content-Type: ";
@@ -381,20 +381,20 @@ void cURLLoader::loadThreadCurl( cURLLoader * loader )
         // Set up the object to store the response headers.
         curl_easy_setopt(curl, CURLOPT_WRITEHEADER, loader);
         curl_easy_setopt(curl, CURLOPT_HEADERFUNCTION, writeHeader);
-		
-		curl_easy_setopt(curl, CURLOPT_SSL_VERIFYPEER, (long)0);
-		curl_easy_setopt(curl, CURLOPT_SSL_VERIFYHOST, (long)0);
+        
+        curl_easy_setopt(curl, CURLOPT_SSL_VERIFYPEER, (long)0);
+        curl_easy_setopt(curl, CURLOPT_SSL_VERIFYHOST, (long)0);
         
         //curl_easy_setopt(curl, CURLOPT_DEBUGFUNCTION, my_trace);
-		//curl_easy_setopt(curl, CURLOPT_VERBOSE, (long)1);
-		
-		// Only set timeout if it's not 0.
-		if (_timeoutInterval)
-		{
-			curl_easy_setopt(curl, CURLOPT_NOSIGNAL, (long)1);
-			curl_easy_setopt(curl, CURLOPT_TIMEOUT_MS, _timeoutInterval);
-		}
-		
+        //curl_easy_setopt(curl, CURLOPT_VERBOSE, (long)1);
+        
+        // Only set timeout if it's not 0.
+        if (_timeoutInterval)
+        {
+            curl_easy_setopt(curl, CURLOPT_NOSIGNAL, (long)1);
+            curl_easy_setopt(curl, CURLOPT_TIMEOUT_MS, _timeoutInterval);
+        }
+        
         // Determine the type of request being made.
         if ( loader->getRequest().getMethod() == URLRequestMethod::GET )
         {
@@ -450,7 +450,7 @@ void cURLLoader::loadThreadCurl( cURLLoader * loader )
             loader->_urlResponse.setStatusCode(HTTP_CLIENT_NETWORK_ERROR);
             loader->_urlResponse.setReasonPhrase(curlError);
         }
-		else if (rc == CURLE_OK)
+        else if (rc == CURLE_OK)
         {
             long statusCode;
             curl_easy_getinfo(curl, CURLINFO_RESPONSE_CODE, &statusCode);
@@ -460,7 +460,7 @@ void cURLLoader::loadThreadCurl( cURLLoader * loader )
         {
             loader->_urlResponse.setStatusCode(HTTP_CLIENT_NETWORK_ERROR/*408*/);
             loader->_urlResponse.setReasonPhrase("Operation timed out");
-		}
+        }
         else
         {
             loader->_urlResponse.setStatusCode(HTTP_CLIENT_NETWORK_ERROR);

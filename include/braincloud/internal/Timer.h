@@ -38,7 +38,7 @@ public:
     void    pause( )    { setState(TIMER_PAUSED); }
     void    resume( )   { setState(TIMER_RUNNING); }
     void    stop( );    // Destroys Timer object
-	virtual ~Timer( );
+    virtual ~Timer( );
     
     static int64_t getCurrentTimeMillis();
 protected:

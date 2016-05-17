@@ -35,7 +35,7 @@ void TestResult::reset()
     m_statusCode = 0;
     m_reasonCode = 0;
     m_statusMessage.clear();
-    
+
     m_networkErrorCount = 0;
     m_globalErrorCount = 0;
 }
@@ -43,13 +43,13 @@ void TestResult::reset()
 void TestResult::sleep(int millis)
 {
 #if __cplusplus >= 201103L
-	auto sleep = std::chrono::milliseconds(millis);
-	std::this_thread::sleep_for(sleep);
+    auto sleep = std::chrono::milliseconds(millis);
+    std::this_thread::sleep_for(sleep);
 #else
 #ifdef WIN32
-	Sleep(millis);
+    Sleep(millis);
 #else
-	usleep(millis * 1000);
+    usleep(millis * 1000);
 #endif
 #endif
 }
@@ -57,11 +57,11 @@ void TestResult::sleep(int millis)
 void TestResult::sleepAndUpdate(BrainCloudClient * in_bc)
 {
     long maxWaitMs = m_maxWaitMillis > 0 ? m_maxWaitMillis : MAX_WAIT_SECS * 1000;
-    long sleepSliceMs = 250;
-    while(!m_done && maxWaitMs > 0)
+    long sleepSliceMs = 50;
+    while (!m_done && maxWaitMs > 0)
     {
         in_bc->runCallbacks();
-		sleep(sleepSliceMs);
+        sleep(sleepSliceMs);
         maxWaitMs -= sleepSliceMs;
     }
 }
@@ -76,7 +76,7 @@ bool TestResult::runExpectCount(BrainCloudClient * in_bc, int in_apiCountExpecte
     reset(); //reset before run
     m_apiCountExpected = in_apiCountExpected;
     sleepAndUpdate(in_bc);
-    
+
     if (!m_done)
     {
         // we timed out so try to reset the comms and throw the error
@@ -97,7 +97,7 @@ bool TestResult::runExpectCount(BrainCloudClient * in_bc, int in_apiCountExpecte
             if (!in_noAssert) EXPECT_EQ("", m_statusMessage);
         }
     }
-    
+
     return m_result;
 }
 
@@ -140,14 +140,14 @@ bool TestResult::runExpectFail(BrainCloudClient * in_bc, int expectedStatus, int
     return ret;
 }
 
-void TestResult::serverCallback( ServiceName serviceName, ServiceOperation serviceOperation, std::string const & jsonData)
+void TestResult::serverCallback(ServiceName serviceName, ServiceOperation serviceOperation, std::string const & jsonData)
 {
     Json::Value value;
     Json::Reader reader;
     m_response.clear();
     reader.parse(jsonData, m_response);
 
-	m_result = true;
+    m_result = true;
     --m_apiCountExpected;
     if (m_apiCountExpected <= 0)
     {
@@ -155,13 +155,13 @@ void TestResult::serverCallback( ServiceName serviceName, ServiceOperation servi
     }
 }
 
-void TestResult::serverError( ServiceName serviceName, ServiceOperation serviceOperation, int statusCode, int reasonCode, const std::string & statusMessage)
+void TestResult::serverError(ServiceName serviceName, ServiceOperation serviceOperation, int statusCode, int reasonCode, const std::string & statusMessage)
 {
     m_statusCode = statusCode;
     m_reasonCode = reasonCode;
     m_statusMessage = statusMessage;
 
-	m_result = false;
+    m_result = false;
     --m_apiCountExpected;
     if (m_apiCountExpected <= 0)
     {
@@ -169,11 +169,11 @@ void TestResult::serverError( ServiceName serviceName, ServiceOperation serviceO
     }
 }
 
-void TestResult::serverWarning( ServiceName serviceName, ServiceOperation serviceOperation, int statusCode, int reasonCode, int numRetries, const std::string & statusMessage)
+void TestResult::serverWarning(ServiceName serviceName, ServiceOperation serviceOperation, int statusCode, int reasonCode, int numRetries, const std::string & statusMessage)
 {
 }
 
-void TestResult::globalError( ServiceName serviceName, ServiceOperation serviceOperation, int statusCode, int reasonCode, const std::string & jsonError)
+void TestResult::globalError(ServiceName serviceName, ServiceOperation serviceOperation, int statusCode, int reasonCode, const std::string & jsonError)
 {
     m_statusCode = statusCode;
     m_reasonCode = reasonCode;
@@ -193,7 +193,7 @@ void TestResult::networkError()
     m_statusCode = HTTP_CLIENT_NETWORK_ERROR;
     m_reasonCode = CLIENT_NETWORK_ERROR_TIMEOUT;
     m_statusMessage = "Network Error";
-    
+
     m_result = false;
     --m_apiCountExpected;
     if (m_apiCountExpected <= 0)

@@ -21,12 +21,6 @@ namespace BrainCloud
          * Deregisters all device tokens currently registered to the player.
          *
          * @param in_callback The method to be invoked when the server response is received
-         *
-         * @return JSON as follows:
-         * {
-         *   "status":200,
-         *   "data":null
-         * }
          */
         void deregisterAllPushNotificationDeviceTokens(IServerCallback * in_callback = NULL);
 
@@ -37,12 +31,6 @@ namespace BrainCloud
          * @param in_device The device platform being deregistered.
          * @param in_token The platform-dependant device token needed for push notifications.
          * @param in_callback The method to be invoked when the server response is received
-         *
-         * @return JSON as follows:
-         * {
-         *   "status":200,
-         *   "data":null
-         * }
          */
         void deregisterPushNotificationDeviceToken(const Platform & in_platform, const char * in_token, IServerCallback * in_callback = NULL);
 
@@ -54,12 +42,6 @@ namespace BrainCloud
          * @param in_deviceToken The platform-dependant device token needed for push notifications.
          *  On IOS, this is obtained using the application:didRegisterForRemoteNotificationsWithDeviceToken callback
          * @param in_callback The method to be invoked when the server response is received
-         *
-         * @return JSON describing the new value of the statistics and any rewards that were triggered:
-         * {
-         *   "status":200,
-         *   "data":null
-         * }
          */
         void registerPushNotificationDeviceToken(const Platform & in_platform, const char * in_deviceToken, IServerCallback * in_callback = NULL);
 
@@ -75,12 +57,6 @@ namespace BrainCloud
          * @param in_toPlayerId The braincloud playerId of the user to receive the notification
          * @param in_message Text of the push notification
          * @param in_callback The method to be invoked when the server response is received
-         *
-         * @return JSON describing the result
-         * {
-         *   "status":200,
-         *   "data":null
-         * }
          */
         void sendSimplePushNotification(const char * in_toPlayerId, const char * in_message, IServerCallback * in_callback = NULL);
 
@@ -91,12 +67,6 @@ namespace BrainCloud
          * @param in_toPlayerId The braincloud playerId of the user to receive the notification
          * @param in_notificationTemplateId Id of the notification template
          * @param in_callback The method to be invoked when the server response is received
-         *
-         * @return JSON describing the result
-         * {
-         *   "status":200,
-         *   "data":null
-         * }
          */
         void sendRichPushNotification(const char * in_toPlayerId, int32_t in_notificationTemplateId, IServerCallback * in_callback = NULL);
 
@@ -110,37 +80,31 @@ namespace BrainCloud
          * @param in_notificationTemplateId Id of the notification template
          * @param in_substitutionJson JSON defining the substitution params to use with the template
          * @param in_callback The method to be invoked when the server response is received
-         *
-         * @return JSON describing the result
-         * {
-         *   "status":200,
-         *   "data":null
-         * }
          */
         void sendRichPushNotificationWithParams(const char * in_toPlayerId, int32_t in_notificationTemplateId, const char * in_substitutionJson, IServerCallback * in_callback = NULL);
 
-		/**
-		* Sends a notification to a "group" of user based on a brainCloud portal configured notification template.
-		* Includes JSON defining the substitution params to use with the template.
-		* See the Portal documentation for more info.
-		*
-		* @param in_groupId Target group
-		* @param in_notificationTemplateId Template to use
-		* @param in_substitutionsJson Map of substitution positions to strings
-		* @param in_callback The method to be invoked when the server response is received
-		*/
-		void sendTemplatedPushNotificationToGroup(const char * in_groupId, int32_t in_notificationTemplateId, std::string in_substitutionsJson, IServerCallback * in_callback = NULL);
+        /**
+        * Sends a notification to a "group" of user based on a brainCloud portal configured notification template.
+        * Includes JSON defining the substitution params to use with the template.
+        * See the Portal documentation for more info.
+        *
+        * @param in_groupId Target group
+        * @param in_notificationTemplateId Template to use
+        * @param in_substitutionsJson Map of substitution positions to strings
+        * @param in_callback The method to be invoked when the server response is received
+        */
+        void sendTemplatedPushNotificationToGroup(const char * in_groupId, int32_t in_notificationTemplateId, std::string in_substitutionsJson, IServerCallback * in_callback = NULL);
 
-		/**
-		* Sends a notification to a "group" of user consisting of alert content and custom data.
-		* See the Portal documentation for more info.
-		*
-		* @param in_groupId Target group
-		* @param in_alertContentJson Body and title of alert
-		* @param in_customDataJson Optional custom data
-		* @param in_callback The method to be invoked when the server response is received
-		*/
-		void sendNormalizedPushNotificationToGroup(const char * in_groupId, std::string in_alertContentJson, std::string in_customDataJson, IServerCallback * in_callback = NULL);
+        /**
+        * Sends a notification to a "group" of user consisting of alert content and custom data.
+        * See the Portal documentation for more info.
+        *
+        * @param in_groupId Target group
+        * @param in_alertContentJson Body and title of alert
+        * @param in_customDataJson Optional custom data
+        * @param in_callback The method to be invoked when the server response is received
+        */
+        void sendNormalizedPushNotificationToGroup(const char * in_groupId, std::string in_alertContentJson, std::string in_customDataJson, IServerCallback * in_callback = NULL);
 
     private:
         BrainCloudClient * m_client;

@@ -15,7 +15,7 @@ TEST_F(TestBCEvent, Send)
     EXPECT_TRUE(m_didCallback);
     
     DeleteIncomingMessage();
-	m_bc->deregisterEventCallback();
+    m_bc->deregisterEventCallback();
 }
 
 TEST_F(TestBCEvent, DeleteIncoming)

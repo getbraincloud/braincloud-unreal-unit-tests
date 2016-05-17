@@ -18,12 +18,12 @@
 
 std::string BrainCloud::GUID::generateGUID()
 {
-	unsigned char buffer[16] = { 0 };
+    unsigned char buffer[16] = { 0 };
 
 #if defined(WINAPI_FAMILY) || defined(WIN32)
-	UUID guid;
-	CoCreateGuid(&guid);
-	memcpy(buffer, &guid, 16);
+    UUID guid;
+    CoCreateGuid(&guid);
+    memcpy(buffer, &guid, 16);
 #else
     // preston: for Android we should use crossguid lib to get the right thing...
     // just not sure how to get the JNIEnv pointer right now...
@@ -34,28 +34,28 @@ std::string BrainCloud::GUID::generateGUID()
     }
 #endif
 
-	std::stringstream ss;
-	ss << std::hex << std::setw(2) << std::setfill('0') << (int)buffer[3];
-	ss << std::hex << std::setw(2) << std::setfill('0') << (int)buffer[2];
-	ss << std::hex << std::setw(2) << std::setfill('0') << (int)buffer[1];
-	ss << std::hex << std::setw(2) << std::setfill('0') << (int)buffer[0];
-	ss << "-";
-	ss << std::hex << std::setw(2) << std::setfill('0') << (int)buffer[5];
-	ss << std::hex << std::setw(2) << std::setfill('0') << (int)buffer[4];
-	ss << "-";
-	ss << std::hex << std::setw(2) << std::setfill('0') << (int)buffer[7];
-	ss << std::hex << std::setw(2) << std::setfill('0') << (int)buffer[6];
-	ss << "-";
-	ss << std::hex << std::setw(2) << std::setfill('0') << (int)buffer[8];
-	ss << std::hex << std::setw(2) << std::setfill('0') << (int)buffer[9];
-	ss << "-";
-	ss << std::hex << std::setw(2) << std::setfill('0') << (int)buffer[10];
-	ss << std::hex << std::setw(2) << std::setfill('0') << (int)buffer[11];
-	ss << std::hex << std::setw(2) << std::setfill('0') << (int)buffer[12];
-	ss << std::hex << std::setw(2) << std::setfill('0') << (int)buffer[13];
-	ss << std::hex << std::setw(2) << std::setfill('0') << (int)buffer[14];
-	ss << std::hex << std::setw(2) << std::setfill('0') << (int)buffer[15];
+    std::stringstream ss;
+    ss << std::hex << std::setw(2) << std::setfill('0') << (int)buffer[3];
+    ss << std::hex << std::setw(2) << std::setfill('0') << (int)buffer[2];
+    ss << std::hex << std::setw(2) << std::setfill('0') << (int)buffer[1];
+    ss << std::hex << std::setw(2) << std::setfill('0') << (int)buffer[0];
+    ss << "-";
+    ss << std::hex << std::setw(2) << std::setfill('0') << (int)buffer[5];
+    ss << std::hex << std::setw(2) << std::setfill('0') << (int)buffer[4];
+    ss << "-";
+    ss << std::hex << std::setw(2) << std::setfill('0') << (int)buffer[7];
+    ss << std::hex << std::setw(2) << std::setfill('0') << (int)buffer[6];
+    ss << "-";
+    ss << std::hex << std::setw(2) << std::setfill('0') << (int)buffer[8];
+    ss << std::hex << std::setw(2) << std::setfill('0') << (int)buffer[9];
+    ss << "-";
+    ss << std::hex << std::setw(2) << std::setfill('0') << (int)buffer[10];
+    ss << std::hex << std::setw(2) << std::setfill('0') << (int)buffer[11];
+    ss << std::hex << std::setw(2) << std::setfill('0') << (int)buffer[12];
+    ss << std::hex << std::setw(2) << std::setfill('0') << (int)buffer[13];
+    ss << std::hex << std::setw(2) << std::setfill('0') << (int)buffer[14];
+    ss << std::hex << std::setw(2) << std::setfill('0') << (int)buffer[15];
 
-	return ss.str();
+    return ss.str();
 }
 

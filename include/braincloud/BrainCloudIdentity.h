@@ -411,44 +411,6 @@ namespace BrainCloud
          * @param in_childGameId The appId of the child game to switch to
          * @param in_forceCreate Should a new profile be created if it does not exist?
          * @param in_callback The method to be invoked when the server response is received
-         *
-         * @return The JSON returned in the callback is as follows:
-         * {
-         *     "status": 200,
-         *     "data": {
-         *         "vcPurchased": 0,
-         *         "experiencePoints": 0,
-         *         "xpCapped": false,
-         *         "playerName": "TestUser",
-         *         "vcClaimed": 0,
-         *         "rewards": {
-         *             "rewardDetails": {},
-         *             "rewards": {},
-         *             "currency": {
-         *                 "credits": {
-         *                     "purchased": 0,
-         *                     "balance": 0,
-         *                     "consumed": 0,
-         *                     "awarded": 0
-         *                 },
-         *                 "gold": {
-         *                     "purchased": 0,
-         *                     "balance": 0,
-         *                     "consumed": 0,
-         *                     "awarded": 0
-         *                 }
-         *             }
-         *         },
-         *         "loginCount": 1,
-         *         "server_time": 1441901094386,
-         *         "experienceLevel": 0,
-         *         "currency": {},
-         *         "statistics": {},
-         *         "id": "a17b347b-695b-431f-b1e7-5f783a562310",
-         *         "profileId": "a17t347b-692b-43ef-b1e7-5f783a566310",
-         *         "newUser": false
-         *     }
-         * }
          */
         void switchToChildProfile(const char * in_childProfileId, const char * in_childGameId, bool in_forceCreate, IServerCallback * in_callback = NULL);
 
@@ -462,44 +424,6 @@ namespace BrainCloud
          * @param in_childGameId The App ID of the child game to switch to
          * @param in_forceCreate Should a new profile be created if it does not exist?
          * @param in_callback The method to be invoked when the server response is received
-         *
-         * @return The JSON returned in the callback is as follows:
-         * {
-         *     "status": 200,
-         *     "data": {
-         *         "vcPurchased": 0,
-         *         "experiencePoints": 0,
-         *         "xpCapped": false,
-         *         "playerName": "TestUser",
-         *         "vcClaimed": 0,
-         *         "rewards": {
-         *             "rewardDetails": {},
-         *             "rewards": {},
-         *             "currency": {
-         *                 "credits": {
-         *                     "purchased": 0,
-         *                     "balance": 0,
-         *                     "consumed": 0,
-         *                     "awarded": 0
-         *                 },
-         *                 "gold": {
-         *                     "purchased": 0,
-         *                     "balance": 0,
-         *                     "consumed": 0,
-         *                     "awarded": 0
-         *                 }
-         *             }
-         *         },
-         *         "loginCount": 1,
-         *         "server_time": 1441901094386,
-         *         "experienceLevel": 0,
-         *         "currency": {},
-         *         "statistics": {},
-         *         "id": "a17b347b-695b-431f-b1e7-5f783a562310",
-         *         "profileId": "a17t347b-692b-43ef-b1e7-5f783a566310",
-         *         "newUser": false
-         *     }
-         * }
          */
         void switchToSingletonChildProfile(const char * in_childGameId, bool in_forceCreate, IServerCallback * in_callback = NULL);
 
@@ -512,15 +436,6 @@ namespace BrainCloud
          * @param in_parentLevelName The level of the parent to switch to
          * If null and forceCreate is true a new profile will be created
          * @param in_callback The method to be invoked when the server response is received
-         *
-         * @return The JSON returned in the callback is as follows:
-         * {
-         *     "status": 200,
-         *     "data": {
-         *         "profileId": "1d1h32aa-4c41-404f-bc18-29b3fg5wab8a",
-         *         "gameId": "123456"
-         *     }
-         * }
          */
         void switchToParentProfile(const char * in_parentLevelName, IServerCallback * in_callback = NULL);
 
@@ -532,27 +447,6 @@ namespace BrainCloud
          *
          * @param in_includeSummaryData Whether to return the summary friend data along with this call
          * @param in_callback The method to be invoked when the server response is received
-         *
-         * @return The JSON returned in the callback is as follows:
-         * {
-         *     "status": 200,
-         *     "data": {
-         *         "children": [
-         *             {
-         *                 "appId": "123456",
-         *                 "profileId": "b7h32751-befd-4a89-b6da-cd55hs3b2a86",
-         *                 "profileName": "Child1",
-         *                 "summaryFriendData": null
-         *             },
-         *             {
-         *                 "appId": "123457",
-         *                 "profileId": "a17b3432-195b-45hf-b1e7-5f78g3462310",
-         *                 "profileName": "Child2",
-         *                 "summaryFriendData": null
-         *             }
-         *         ]
-         *     }
-         * }
          */
         void getChildProfiles(bool in_includeSummaryData, IServerCallback * in_callback = NULL);
 

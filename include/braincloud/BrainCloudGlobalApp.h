@@ -21,20 +21,6 @@ namespace BrainCloud
          * Service Operation - ReadProperties
          *
          * @param in_callback The method to be invoked when the server response is received
-         *
-         * @return JSON describing the global properties:
-         * {
-         *   "status":200,
-         *   "data":{
-         *     {
-         *		 "pName": {
-         *		  "name": "pName",
-         *		  "description": "pValue",
-         *		  "value": "pDescription"
-         *		 }
-         *		}
-         *   }
-         * }
          */
         void readProperties(IServerCallback * in_callback = NULL);
 

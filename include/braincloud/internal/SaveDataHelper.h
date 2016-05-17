@@ -6,20 +6,20 @@
 class SaveDataHelper
 {
 public:
-	static SaveDataHelper * getInstance();
-	
-	void initialize(const char * companyName, const char * gameName);
+    static SaveDataHelper * getInstance();
+    
+    void initialize(const char * companyName, const char * gameName);
 
-	void saveData(const char * key, const char * data);
-	std::string readData(const char * key);
-	void deleteData(const char * key);
+    void saveData(const char * key, const char * data);
+    std::string readData(const char * key);
+    void deleteData(const char * key);
 
 private:
-	SaveDataHelper();
-	
-	std::string m_savePath;
-	
-	static SaveDataHelper * m_instance;
+    SaveDataHelper();
+    
+    std::string m_savePath;
+    
+    static SaveDataHelper * m_instance;
 };
 
 #endif

@@ -35,8 +35,13 @@ namespace BrainCloud {
 
     void BrainCloudAuthentication::generateNewAnonymousId()
     {
-        _anonymousId = generateGUID();
+        _anonymousId = BrainCloud::GUID::generateGUID();
     }
+
+	std::string BrainCloudAuthentication::generateAnonymousId()
+	{
+		return BrainCloud::GUID::generateGUID();
+	}
 
     void BrainCloudAuthentication::clearSavedProfileId()
     {

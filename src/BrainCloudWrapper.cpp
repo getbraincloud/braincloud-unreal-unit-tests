@@ -61,7 +61,7 @@ namespace BrainCloud {
         // create an anonymous ID if necessary
         if ((!anonymousId.empty() && profileId.empty()) || anonymousId.empty())
         {
-            anonymousId = m_BCClient->getAuthenticationService()->generateGUID();
+            anonymousId = m_BCClient->getAuthenticationService()->generateAnonymousId();
             profileId = "";
             setStoredAnonymousId(anonymousId.c_str());
             setStoredProfileId(profileId.c_str());

@@ -98,25 +98,25 @@ namespace BrainCloud
                 delete _loader;
                 _loader = NULL;
             }
-			else
-			{
+            else
+            {
 #if defined(IW_SDK)
-				// iwhttp doesn't have a timeout mechanism so we have to monitor ourselves
-				// and cancel the request if it goes over the retry timeout
-				int64_t currentTimeMillis = TimeUtil::getCurrentTimeMillis();
-				int64_t retryTimeout = (int64_t)(getRetryTimeoutMillis(_retryCount));
-				if (currentTimeMillis >= _packetSendTimeMillis + retryTimeout)
-				{
-					if (_loggingEnabled)
-					{
-						std::cout << "#BCC Cancelling packet " << _expectedPacketId << " as we've exceeded timeout " << retryTimeout << std::endl;
-					}
+                // iwhttp doesn't have a timeout mechanism so we have to monitor ourselves
+                // and cancel the request if it goes over the retry timeout
+                int64_t currentTimeMillis = TimeUtil::getCurrentTimeMillis();
+                int64_t retryTimeout = (int64_t)(getRetryTimeoutMillis(_retryCount));
+                if (currentTimeMillis >= _packetSendTimeMillis + retryTimeout)
+                {
+                    if (_loggingEnabled)
+                    {
+                        std::cout << "#BCC Cancelling packet " << _expectedPacketId << " as we've exceeded timeout " << retryTimeout << std::endl;
+                    }
 
-					// cancel the request and let the next tick handle it
-					_loader->close();
-				}
+                    // cancel the request and let the next tick handle it
+                    _loader->close();
+                }
 #endif
-			}
+            }
         }
         else
         {
@@ -132,10 +132,10 @@ namespace BrainCloud
                 if (_retryTimeMillis <= currentTimeMillis)
                 {
                     _expectedPacketId = _packetId - 1;
-					if (_loggingEnabled)
-					{
-						std::cout << "#BCC Resending packetId(" << _expectedPacketId << ") retry(" << _retryCount << ")" << std::endl;
-					}
+                    if (_loggingEnabled)
+                    {
+                        std::cout << "#BCC Resending packetId(" << _expectedPacketId << ") retry(" << _retryCount << ")" << std::endl;
+                    }
 
                     startHttpRequest();
                 }
@@ -756,7 +756,7 @@ namespace BrainCloud
             
             int64_t currentTime = TimeUtil::getCurrentTimeMillis();
             int64_t delta = currentTime - _packetSendTimeMillis;
-			int64_t sleepTime = (int64_t) (getRetryTimeoutMillis(_retryCount));
+            int64_t sleepTime = (int64_t) (getRetryTimeoutMillis(_retryCount));
             
             // still more time to spend sleeping
             if (delta > 0 && sleepTime > delta)
@@ -922,8 +922,8 @@ namespace BrainCloud
                 
                 //encode the string in an md5 format
                 const int DIGEST_LENGTH = 16;
-                md5_state_t		state;
-                md5_byte_t 		digest[DIGEST_LENGTH];
+                md5_state_t     state;
+                md5_byte_t      digest[DIGEST_LENGTH];
                 
                 md5_init(&state);
                 md5_append(&state, (const md5_byte_t *) dataString.c_str(), (int) dataString.length());
@@ -1074,7 +1074,7 @@ namespace BrainCloud
         }
      
 #if defined (IW_SDK)
-		std::cerr << "#BCC File upload operations not supported in Marmalade" << std::endl;
+        std::cerr << "#BCC File upload operations not supported in Marmalade" << std::endl;
 #elif (TARGET_OS_WATCH == 1)
         std::cerr << "#BCC File upload operations not supported in watchOS" << std::endl;
 #else

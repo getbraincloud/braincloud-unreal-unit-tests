@@ -23,21 +23,6 @@ namespace BrainCloud
          * Service Operation - Read
          *
          * @param in_callback Method to be invoked when the server response is received.
-         *
-         * @return JSON describing the global statistics:
-         * {
-         *   "status":200,
-         *   "data":{
-         *     "statisticsExceptions":{
-         *     },
-         *     "statistics":{
-         *       "Level02_TimesBeaten":11,
-         *       "Level01_TimesBeaten":1,
-         *       "GameLogins":376,
-         *       "PlayersWhoLikePirateClothing":12
-         *     }
-         *   }
-         * }
          */
         void readAllGlobalStats(IServerCallback * in_callback = NULL);
 
@@ -53,19 +38,6 @@ namespace BrainCloud
          *   "Level02_TimesBeaten"
          * ]
          * @param in_callback Method to be invoked when the server response is received.
-         *
-         * @return JSON with the subset of global statistics:
-         * {
-         *   "status":200,
-         *   "data":{
-         *     "statisticsExceptions":{
-         *     },
-         *     "statistics":{
-         *       "Level02_TimesBeaten":11,
-         *       "Level01_TimesBeaten":1
-         *     }
-         *   }
-         * }
          */
         void readGlobalStatsSubset(const std::vector<std::string> & in_statistics, IServerCallback * in_callback = NULL);
 
@@ -77,14 +49,6 @@ namespace BrainCloud
          *
          * @param in_category The global statistics category
          * @param in_callback Method to be invoked when the server response is received.
-         *
-         * @return The JSON returned in the callback is as follows:
-         * {
-         *   "status":200,
-         *   "data":{
-         *     "gameStatistics": []
-         *   }
-         * }
          */
         void readGlobalStatsForCategory(const char * in_category, IServerCallback * in_callback = NULL);
 
@@ -109,18 +73,6 @@ namespace BrainCloud
          * which increments stat1 by 9 up to a limit of 30.
          *
          * @param in_callback Method to be invoked when the server response is received.
-         *
-         * @return JSON describing the new value of the statistics incremented (similar to ReadAll):
-         * {
-         *   "status":200,
-         *   "data":{
-         *     "statisticsExceptions":{
-         *     },
-         *     "statistics":{
-         *       "Level02_TimesBeaten":11,
-         *     }
-         *   }
-         * }
          */
         void incrementGlobalGameStat(const std::string& in_jsonData, IServerCallback * in_callback = NULL);
 

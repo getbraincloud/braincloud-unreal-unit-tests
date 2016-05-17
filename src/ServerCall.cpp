@@ -27,7 +27,7 @@ namespace BrainCloud {
      */
     ServerCall::ServerCall( ServiceName serviceName, ServiceOperation serviceOperation, const Json::Value & data, IServerCallback * callback )
         : _operation(serviceOperation), _service(serviceName), _callback(callback), _data(data)
-	{
+    {
 
     }
 
@@ -35,7 +35,7 @@ namespace BrainCloud {
      * Destructor
      */
     ServerCall::~ServerCall( ) 
-	{
+    {
     }
 
     //////////////////////////////////////////////////////
@@ -47,12 +47,12 @@ namespace BrainCloud {
      *
      * @return Json::Value
      */
-	const Json::Value * ServerCall::getPayload( )
-	{
-		_payload["service"] = _service.getValue();
-		_payload["operation"] = _operation.getValue();
-		_payload["data"] = _data;
-		return &_payload;
+    const Json::Value * ServerCall::getPayload( )
+    {
+        _payload["service"] = _service.getValue();
+        _payload["operation"] = _operation.getValue();
+        _payload["data"] = _data;
+        return &_payload;
     }
 
     //////////////////////////////////////////////////////

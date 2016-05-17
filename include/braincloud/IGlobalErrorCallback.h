@@ -10,9 +10,9 @@
 
 namespace BrainCloud
 {
-	class ServiceName;
-	class ServiceOperation;
-	class OperationParam;
+    class ServiceName;
+    class ServiceOperation;
+    class OperationParam;
 
     class IGlobalErrorCallback
     {
@@ -24,8 +24,8 @@ namespace BrainCloud
          * A server error might indicate a failure of the client to communicate
          * with the server after N retries.
          *
-		 * @param serviceName The service name being called
-		 * @param serviceOperation The service operation being called
+         * @param serviceName The service name being called
+         * @param serviceOperation The service operation being called
          * @param statusCode The error status return code (400, 403, 500, etc)
          * @param reasonCode The brainCloud reason code (see reason codes on apidocs site)
          * @param jsonError The error json string

@@ -189,7 +189,7 @@ namespace BrainCloud
         }
 
         FILE * fp = NULL;
-		fopen_s(&fp, _fileName.c_str(), "rb");
+        fopen_s(&fp, _fileName.c_str(), "rb");
         if (fp == NULL)
         {
             if (_loggingEnabled)

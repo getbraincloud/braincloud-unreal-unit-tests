@@ -27,15 +27,6 @@ namespace BrainCloud
          * @param in_flagUrls Optional processing of urls
          * @param in_callback The method to be invoked when the server response is received
          *
-         * @return The JSON returned is as follows:
-         * {
-         *     "status" : 200,
-         *     "data" :
-         *     {
-         *          "foundCount": "1"
-         *     }
-         * }
-         *
          * Significant error codes:
          *
          * 40421 - WebPurify not configured
@@ -65,16 +56,6 @@ namespace BrainCloud
          * @param in_flagUrls Optional processing of urls
          * @param in_callback The method to be invoked when the server response is received
          *
-         * @return The JSON returned is as follows:
-         * {
-         *     "status" : 200,
-         *     "data" :
-         *     {
-         *          "foundCount": "2",
-         *          "replaceString: "****** hello ****"
-         *     }
-         * }
-         *
          * Significant error codes:
          *
          * 40421 - WebPurify not configured
@@ -103,16 +84,6 @@ namespace BrainCloud
          * @param in_flagPhone Optional processing of phone numbers
          * @param in_flagUrls Optional processing of urls
          * @param in_callback The method to be invoked when the server response is received
-         *
-         * @return The JSON returned is as follows:
-         * {
-         *     "status" : 200,
-         *     "data" :
-         *     {
-         *          "foundCount": "2",
-         *          "foundList" : [ "bubby", "poop" ]
-         *     }
-         * }
          *
          * Significant error codes:
          *

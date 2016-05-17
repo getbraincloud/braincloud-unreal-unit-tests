@@ -20,13 +20,12 @@ public:
 protected:
     BrainCloudClient * m_bc;
 
-    std::string m_serverUrl;
-    std::string m_appId;
-    std::string m_secret;
-    std::string m_version;
-
-    std::string m_parentLevelName;
-    std::string m_childAppId;
+    static std::string m_serverUrl;
+    static std::string m_appId;
+    static std::string m_secret;
+    static std::string m_version;
+    static std::string m_parentLevelName;
+    static std::string m_childAppId;
 
     virtual void SetUp();
     virtual void TearDown();
