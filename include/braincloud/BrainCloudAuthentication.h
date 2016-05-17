@@ -3,7 +3,7 @@
 #pragma once
 
 #include <string>
-#include "braincloud\BrainCloudTypes.h"
+#include "braincloud/BrainCloudTypes.h"
 
 namespace BrainCloud
 {
