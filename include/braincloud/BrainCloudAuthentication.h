@@ -27,20 +27,17 @@ namespace BrainCloud
          */
         void initialize(const char * in_profileId, const char * in_anonymousId);
 
+		/**
+		* Used to create the anonymous installation id for the brainCloud profile.
+		* @returns A unique Anonymous ID
+		*/
+		std::string generateAnonymousId();
+
 		/* DEPRECATED - Use generateAnonymousId() instead - Removal after August 17 2016*/
 		DEPRECATED std::string generateGUID();
 
 		/* DEPRECATED - Use generateAnonymousId() instead - Removal after August 17 2016*/
 		DEPRECATED void generateNewAnonymousId();
-
-		/**
-		* Generates a GUID for use as an anonymous installation id for brainCloud.  This method is provided as a convenience to the
-		* client application - but clients can override this id with a scheme of their own if they'd like (as long as the scheme in place
-		* generates unique ids per client device).
-		*
-		* @returns the id
-		*/
-		std::string generateAnonymousId();
 
         /**
          * Used to clear the saved profile id - to use in cases when the user is
