@@ -197,7 +197,7 @@ namespace BrainCloud {
                 if (response["data"] != Json::nullValue && response["data"]["playerSessionExpiry"] != Json::nullValue)
                 {
                     int sessionTimeout = response["data"]["playerSessionExpiry"].asInt();
-                    sessionTimeout = (int) sessionTimeout * 0.85;
+                    sessionTimeout = (int)(sessionTimeout * 0.85);
                     if (sessionTimeout > 30) // minimum 30 secs
                     {
                         _heartbeatInterval = sessionTimeout * 1000;

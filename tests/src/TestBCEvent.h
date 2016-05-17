@@ -18,7 +18,7 @@ protected:
     void SendDefaultMessage(bool recordLocal);
     void DeleteIncomingMessage();
     
-    unsigned long m_eventId;
+    uint64_t m_eventId;
     std::string m_eventDataKey;
     const char * m_eventType;
     

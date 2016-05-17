@@ -3,6 +3,7 @@
 #pragma once
 
 #include <string>
+#include "braincloud\BrainCloudTypes.h"
 
 namespace BrainCloud
 {
@@ -18,7 +19,7 @@ namespace BrainCloud
         BrainCloudAuthentication(BrainCloudClient* in_client);
 
         /**
-         * Initialize - initializes the identity service with the saved
+         * Initialize - initializes the identity service with a saved
          * anonymous installation id and most recently used profile id
          *
          * @param in_anonymousId  The anonymous installation id that was generated for this device
@@ -26,20 +27,20 @@ namespace BrainCloud
          */
         void initialize(const char * in_profileId, const char * in_anonymousId);
 
-        /**
-         * Generates a GUID for use as an anonymous installation id for brainCloud.  This method is provided as a convenience to the
-         * client application - but clients can override this id with a scheme of their own if they'd like (as long as the scheme in place
-         * generates unique ids per client device).
-         *
-         * @returns the id
-         */
-        std::string generateGUID();
+		/* DEPRECATED - Use generateAnonymousId() instead - Removal after August 17 2016*/
+		DEPRECATED std::string generateGUID();
 
-        /**
-         * Used to create the anonymous installation id for the brainCloud profile.
-         * Normally only called once when the application starts for the first time.
-         */
-        void generateNewAnonymousId();
+		/* DEPRECATED - Use generateAnonymousId() instead - Removal after August 17 2016*/
+		DEPRECATED void generateNewAnonymousId();
+
+		/**
+		* Generates a GUID for use as an anonymous installation id for brainCloud.  This method is provided as a convenience to the
+		* client application - but clients can override this id with a scheme of their own if they'd like (as long as the scheme in place
+		* generates unique ids per client device).
+		*
+		* @returns the id
+		*/
+		std::string generateAnonymousId();
 
         /**
          * Used to clear the saved profile id - to use in cases when the user is
