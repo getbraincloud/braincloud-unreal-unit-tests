@@ -47,3 +47,10 @@ TEST_F(TestBCIdentity, GetIdentities)
 	m_bc->getIdentityService()->getIdentities(&tr);
 	tr.run(m_bc);
 }
+
+TEST_F(TestBCIdentity, GetExpiredIdentities)
+{
+	TestResult tr;
+	m_bc->getIdentityService()->getExpiredIdentities(&tr);
+	tr.run(m_bc);
+}

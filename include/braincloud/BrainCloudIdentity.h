@@ -460,6 +460,16 @@ namespace BrainCloud
 		*/
 		void getIdentities(IServerCallback * in_callback = NULL);
 
+		/**
+		* Retrieve list of expired identities
+		*
+		* Service Name - identity
+		* Service Operation - GET_EXPIRED_IDENTITIES
+		*
+		* @param in_callback The method to be invoked when the server response is received
+		*/
+		void getExpiredIdentities(IServerCallback * in_callback = NULL);
+
 	private:
 		BrainCloudClient * m_client;
 

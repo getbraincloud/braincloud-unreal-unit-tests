@@ -174,8 +174,14 @@ namespace BrainCloud
 	void BrainCloudIdentity::getIdentities(IServerCallback * in_callback)
 	{
 		Json::Value message = Json::nullValue;
-
 		ServerCall * sc = new ServerCall(ServiceName::Identity, ServiceOperation::GetIdentities, message, in_callback);
+		m_client->sendRequest(sc);
+	}
+
+	void BrainCloudIdentity::getExpiredIdentities(IServerCallback * in_callback)
+	{
+		Json::Value message = Json::nullValue;
+		ServerCall * sc = new ServerCall(ServiceName::Identity, ServiceOperation::GetExpiredIdentities, message, in_callback);
 		m_client->sendRequest(sc);
 	}
 

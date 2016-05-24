@@ -18,6 +18,7 @@ namespace BrainCloud {
 		static const ServiceOperation SwitchToParentProfile;
 		static const ServiceOperation GetChildProfiles;
 		static const ServiceOperation GetIdentities;
+		static const ServiceOperation GetExpiredIdentities;
 
 		static const ServiceOperation Create;
 		static const ServiceOperation CreateWithIndexedId;
