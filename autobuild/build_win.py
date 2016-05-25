@@ -97,7 +97,7 @@ def buildWinDesktop(artifacts, version, rebuild):
 		
 		util.zipdir(rootPath + os.sep + "include" + os.sep, myzip, "include")
 		util.zipdir(rootPath + os.sep + "lib" + os.sep + "jsoncpp-1.0.0", myzip, "thirdparty" + os.sep + "jsoncpp-1.0.0")
-		util.zipdir(rootPath + os.sep + "lib" + os.sep + "win32" + os.sep + "cpprestsdk-static" + os.sep + "Binaries", myzip, "thirdparty" + os.sep + "casablanca" + os.sep + "lib")
+		#util.zipdir(rootPath + os.sep + "lib" + os.sep + "win32" + os.sep + "cpprestsdk-static" + os.sep + "Binaries", myzip, "thirdparty" + os.sep + "casablanca" + os.sep + "lib")
 		util.zipdir(rootPath + os.sep + "lib" + os.sep + "win32" + os.sep + "cpprestsdk-static" + os.sep + "Release" + os.sep + "include", myzip, "thirdparty" + os.sep + "casablanca" + os.sep + "include")
 
 		myzip.write("artifacts" + os.sep + "README.TXT")
@@ -194,7 +194,7 @@ def buildWinStore(artifacts, version, rebuild):
 
 		util.zipdir(binPath, myzip, "lib")
 		util.zipdir(rootPath + os.sep + "lib" + os.sep + "jsoncpp-1.0.0", myzip, "thirdparty" + os.sep + "jsoncpp-1.0.0")
-		util.zipdir(rootPath + os.sep + "lib" + os.sep + "win32" + os.sep + "cpprestsdk-static" + os.sep + "Binaries", myzip, "thirdparty" + os.sep + "casablanca" + os.sep + "lib")
+		#util.zipdir(rootPath + os.sep + "lib" + os.sep + "win32" + os.sep + "cpprestsdk-static" + os.sep + "Binaries", myzip, "thirdparty" + os.sep + "casablanca" + os.sep + "lib")
 		util.zipdir(rootPath + os.sep + "lib" + os.sep + "win32" + os.sep + "cpprestsdk-static" + os.sep + "Release" + os.sep + "include", myzip, "thirdparty" + os.sep + "casablanca" + os.sep + "include")
 
 		myzip.write("docs/README.TXT", "README.TXT")
