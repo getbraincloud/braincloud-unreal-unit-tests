@@ -1,3 +1,5 @@
+#if !defined(__APPLE__)
+
 #include "braincloud/internal/GUID.h"
 #include <iomanip>
 #include <sstream>
@@ -58,4 +60,6 @@ std::string BrainCloud::GUID::generateGUID()
 
     return ss.str();
 }
+
+#endif // !defined(__APPLE__)
 
