@@ -476,9 +476,9 @@ namespace BrainCloud
 		* Service Name - identity
 		* Service Operation - REFRESH_IDENTITY
 		*
-		* @param externalId User ID
-		* @param authenticationToken Password or client side token
-		* @param authenticationType Type of authentication
+		* @param in_externalId User ID
+		* @param in_authenticationToken Password or client side token
+		* @param in_authenticationType Type of authentication
 		* @param in_callback The method to be invoked when the server response is received
 		*/
 		void refreshIdentity(const char * in_externalId, const char * in_authenticationToken, AuthenticationType in_authenticationType, IServerCallback * in_callback = NULL);
