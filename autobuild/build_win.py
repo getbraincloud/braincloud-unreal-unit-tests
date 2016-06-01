@@ -20,7 +20,7 @@ def cleanArtifacts(in_artifactsPath):
 	return
 
 def createVersionNumber():
-    output = os.getenv("P4_CHANGELIST", "dev")
+    output = os.getenv("BUILD_NUMBER", "dev")
     return output
 
 def stampReadme(in_platform, in_version):
@@ -78,7 +78,7 @@ def buildWinDesktop(artifacts, version, rebuild):
 	print("Zipping library")
 
 	rootPath = os.path.abspath("..")
-	binPath = projectPath + os.sep + "solutions" + os.sep + "windowsDesktop_vc120" + os.sep + "brainCloud" + os.sep + "Output"
+	binPath = projectPath + os.sep + "solutions" + os.sep + "windowsDesktop_vc120" + os.sep + "bin"
 
 	# zip up build directly from source files	
 	with zipfile.ZipFile(artifacts + os.sep + "brainCloudClient_WindowsDesktop_" + version + ".zip", "w", compression=zipfile.ZIP_DEFLATED) as myzip:
@@ -97,10 +97,9 @@ def buildWinDesktop(artifacts, version, rebuild):
 		
 		util.zipdir(rootPath + os.sep + "include" + os.sep, myzip, "include")
 		util.zipdir(rootPath + os.sep + "lib" + os.sep + "jsoncpp-1.0.0", myzip, "thirdparty" + os.sep + "jsoncpp-1.0.0")
-		util.zipdir(rootPath + os.sep + "lib" + os.sep + "win32" + os.sep + "cpprestsdk-static" + os.sep + "Binaries", myzip, "thirdparty" + os.sep + "casablanca" + os.sep + "lib")
 		util.zipdir(rootPath + os.sep + "lib" + os.sep + "win32" + os.sep + "cpprestsdk-static" + os.sep + "Release" + os.sep + "include", myzip, "thirdparty" + os.sep + "casablanca" + os.sep + "include")
 
-		myzip.write("artifacts" + os.sep + "README.TXT")
+		myzip.write("artifacts" + os.sep + "README.TXT", "README.TXT")
 	return
 
 
@@ -194,7 +193,6 @@ def buildWinStore(artifacts, version, rebuild):
 
 		util.zipdir(binPath, myzip, "lib")
 		util.zipdir(rootPath + os.sep + "lib" + os.sep + "jsoncpp-1.0.0", myzip, "thirdparty" + os.sep + "jsoncpp-1.0.0")
-		util.zipdir(rootPath + os.sep + "lib" + os.sep + "win32" + os.sep + "cpprestsdk-static" + os.sep + "Binaries", myzip, "thirdparty" + os.sep + "casablanca" + os.sep + "lib")
 		util.zipdir(rootPath + os.sep + "lib" + os.sep + "win32" + os.sep + "cpprestsdk-static" + os.sep + "Release" + os.sep + "include", myzip, "thirdparty" + os.sep + "casablanca" + os.sep + "include")
 
 		myzip.write("docs/README.TXT", "README.TXT")
@@ -290,7 +288,7 @@ def buildWinUwp(artifacts, version, rebuild):
 		util.zipdir(rootPath + os.sep + "include" + os.sep, myzip, "include")
 		util.zipdir(rootPath + os.sep + "lib" + os.sep + "jsoncpp-1.0.0", myzip, "thirdparty" + os.sep + "jsoncpp-1.0.0")
 		
-		myzip.write("artifacts" + os.sep + "README.TXT")
+		myzip.write("artifacts" + os.sep + "README.TXT", "README.TXT")
 	return
 	
 	
