@@ -185,6 +185,17 @@ namespace BrainCloud
 		m_client->sendRequest(sc);
 	}
 
+	void BrainCloudIdentity::refreshIdentity(const char * in_externalId, const char * in_authenticationToken, AuthenticationType in_authenticationType, IServerCallback * in_callback)
+	{
+		Json::Value message;
+		message[OperationParam::IdentityServiceExternalId.getValue()] = in_externalId;
+		message[OperationParam::AuthenticateServiceAuthenticateAuthenticationToken.getValue()] = in_authenticationToken;
+		message[OperationParam::IdentityServiceAuthenticationType.getValue()] = in_authenticationType.toString();
+
+		ServerCall * sc = new ServerCall(ServiceName::Identity, ServiceOperation::RefreshIdentity, message, in_callback);
+		m_client->sendRequest(sc);
+	}
+
 	// Private methods
 
 	void BrainCloudIdentity::switchToChildProfile(const char * in_childProfileId, const char * in_childGameId, bool in_forceCreate, bool in_forceSingleton, IServerCallback * in_callback)
