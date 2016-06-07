@@ -125,8 +125,6 @@ function build_app()
 
   # copy in the thirdparty dependencies
   cp -r ../lib/jsoncpp-1.0.0 brainCloud/thirdparty
-  cp -r ../lib/mac/curl brainCloud/thirdparty
-  cp -r ../lib/mac/openssl brainCloud/thirdparty
 
   cp docs/README.TXT brainCloud
 
