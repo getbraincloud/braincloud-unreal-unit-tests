@@ -1,320 +1,247 @@
+//
+//  nsFileUploader.m
+//  BrainCloudCpp
+//
+//  Created by Preston Jennings on 2016-06-03.
+//  Copyright © 2016 BitHeads Inc. All rights reserved.
+//
 #ifdef __APPLE__
+//#if (TARGET_OS_WATCH != 1) // necessary as cocoapods doesn't allow per platform source files
+
+#import <Foundation/Foundation.h>
 #include <TargetConditionals.h>
-#endif
-
-#if (TARGET_OS_WATCH != 1) // necessary as cocoapods doesn't allow per platform source files
-
-
-#include "braincloud/internal/nix/cURLFileUploader.h"
-
-#if defined(__APPLE__) && !defined(HG_PLATFORM_BB)
-#include "TargetConditionals.h"
-#endif
-
-#ifdef HG_PLATFORM_BB
-#include <stdio.h>
-#include <ctype.h>
-#endif
-
+#include "braincloud/internal/mac/nsFileUploader.h"
+/*
 #include <cctype>
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
 #include <iostream>
 #include <sstream>
+*/
+/*
 #include "braincloud/http_codes.h"
 #include "braincloud/reason_codes.h"
 #include "braincloud/internal/IBrainCloudComms.h"
 
+@interface ObjcFileUploader() {
+    
+    //eFileUploaderStatus     _status;
+    int             _uploadLowTransferRateTimeoutSecs;
+    int             _uploadLowTransferRateThresholdBytesPerSec;
+    
+    NSString *      _sessionId;
+    NSString *      _fileUploadId;
+    long            _fileLength;
+    NSString *      _fileName;
+ //   NSString *      _uploadUrl;
+    
+    int             _httpStatus;
+    int             _errorReasonCode;
+    NSString *      _httpInternalResponse;
+    NSString *      _httpJsonResponse;
+    
+    bool            _shouldCancelUpload;
+    long            _uploadTotalBytes;
+    long            _uploadTransferredBytes;
+}
+@end
+
+
+@implementation ObjcFileUploader
+
+- (void)connection:(NSURLConnection *)connection
+didReceiveResponse:(NSURLResponse *)response
+{
+    
+}
+
+- (void)connection:(NSURLConnection *)connection
+    didReceiveData:(NSData *)data
+{
+    
+}
+
+- (void)connection:(NSURLConnection *)connection
+   didSendBodyData:(NSInteger)bytesWritten
+ totalBytesWritten:(NSInteger)totalBytesWritten
+totalBytesExpectedToWrite:(NSInteger)totalBytesExpectedToWrite
+{
+    
+}
+
+- (void)connectionDidFinishLoading:(NSURLConnection *)connection
+{
+    
+    
+}
+
+
+- (NSCachedURLResponse *)connection:(NSURLConnection *)connection
+                  willCacheResponse:(NSCachedURLResponse *)cachedResponse
+{
+    // never cache upload response
+    return nil;
+}
+
+- (void)uploadFileWithSessionId:(NSString*)sessionId
+                   fileUploadId:(NSString*)fileUploadId
+                       fileName:(NSString*)fileName
+                       fileSize:(NSInteger)fileSize
+                      uploadUrl:(NSString*)uploadUrl
+{
+    _sessionId = sessionId;
+    _fileUploadId = fileUploadId;
+    _fileName = fileName;
+    //_fileSize = fileSize;
+//    _uploadUrl = uploadUrl;
+    
+    // do it
+    
+    NSMutableURLRequest *request = [[NSMutableURLRequest alloc] init];
+    [request setURL:[NSURL URLWithString:uploadUrl]];
+    [request setHTTPMethod:@"PUT"];
+    */
+    /*
+     add some header info now
+     we always need a boundary when we post a file
+     also we need to set the content type
+     
+     You might want to generate a random boundary.. this is just the same
+     as my output from wireshark on a valid html post
+     */
+/*
+    NSString *boundary = [NSString stringWithString:@"---------------------------14737809831466499882746641449"];
+    NSString *contentType = [NSString stringWithFormat:@"multipart/form-data; boundary=%@",boundary];
+    [request addValue:contentType forHTTPHeaderField: @"Content-Type"];
+    
+    //  now lets create the body of the post
+
+    NSMutableData *body = [NSMutableData data];
+    [body appendData:[[NSString stringWithFormat:@"rn--%@rn",boundary] dataUsingEncoding:NSUTF8StringEncoding]];
+    [body appendData:[[NSString stringWithString:@"Content-Disposition: form-data; name="userfile"; filename="ipodfile.jpg"rn"] dataUsingEncoding:NSUTF8StringEncoding]];
+    [body appendData:[[NSString stringWithString:@"Content-Type: application/octet-streamrnrn"] dataUsingEncoding:NSUTF8StringEncoding]];
+    [body appendData:[NSData dataWithData:imageData]];
+    [body appendData:[[NSString stringWithFormat:@"rn--%@--rn",boundary] dataUsingEncoding:NSUTF8StringEncoding]];
+    // setting the body of the post to the reqeust
+    [request setHTTPBody:body];
+    
+    // now lets make the connection to the web
+    NSData *returnData = [NSURLConnection sendSynchronousRequest:request returningResponse:nil error:nil];
+    NSString *returnString = [[NSString alloc] initWithData:returnData encoding:NSUTF8StringEncoding];
+    
+    NSLog(returnString);
+}
+
+@end
+
+
 namespace BrainCloud
 {
-    bool cURLFileUploader::_loggingEnabled = false;
+    bool NSFileUploader::_loggingEnabled = false;
     
-    cURLFileUploader::cURLFileUploader()
-    : _status(UPLOAD_STATUS_NONE)
-    , _curl(NULL)
-    , _uploadLowTransferRateTimeoutSecs(0)
-    , _uploadLowTransferRateThresholdBytesPerSec(0)
-    , _fileLength(0)
-    , _httpStatus(0)
-    , _errorReasonCode(0)
-    , _threadRunning(false)
-    , _shouldCancelUpload(false)
+    NSFileUploader::NSFileUploader()
     {
-        memset(&_threadId, 0, sizeof(pthread_t));
-        memset(&_threadAttributes, 0, sizeof(_threadAttributes));
-        memset(&_lock, 0, sizeof(_lock));
-        
-        int rc = 0;
-        rc = pthread_mutex_init(&_lock, NULL);
-        if (rc != 0)
-        {
-            if (_loggingEnabled)
-            {
-                std::cout << "#BCC Couldn't create mutex, returned " << rc << std::endl;
-            }
-        }
+        _uploader = [[ObjcFileUploader alloc] init];
     }
     
-    
-    cURLFileUploader::~cURLFileUploader()
+    NSFileUploader::~NSFileUploader()
     {
-        close();
-        pthread_mutex_destroy(&_lock);
     }
-    
-    
-    void cURLFileUploader::close()
-    {
-        if ( _threadRunning )
-        {
-            pthread_attr_destroy(&_threadAttributes);
-            /*
-             if (_threadId != 0)
-             {
-             pthread_join(_threadId, NULL);
-             }
-             */
-            _threadRunning = false;
-        }
-    }
-    
-    
-    bool cURLFileUploader::uploadFile(std::string & in_sessionId,
+    */
+    /*
+    bool NSFileUploader::uploadFile(std::string & in_sessionId,
                                       std::string & in_fileUploadId,
                                       std::string & in_fileName,
                                       int64_t in_fileSize,
                                       std::string & in_uploadUrl)
     {
-        /* don't need to initialize as the other curlloader
-         class will handle this for us (and is guaranteed to
-         be called first
-         if ( ! _initialized )
-         {
-         curl_global_init(CURL_GLOBAL_ALL);
-         _initialized = true;
-         }
-         */
-        
-        
-        // load is sometimes called while prev thread is processing
-        // so make sure to cleanup beforehand...
-        close();
-        
         _sessionId = in_sessionId;
         _fileUploadId = in_fileUploadId;
         _fileName = in_fileName;
         _uploadUrl = in_uploadUrl;
         _fileLength = static_cast<long>(in_fileSize);
-        
-        int rc = 0;
-        rc = pthread_attr_init(&_threadAttributes);
-        if (rc != 0)
-        {
-            if (_loggingEnabled)
-            {
-                std::cout << "#BCC Couldn't initialize pthread attributes for file upload, returned " << rc << std::endl;
-            }
-            return false;
-        }
-        
-        rc = pthread_attr_setdetachstate(&_threadAttributes, PTHREAD_CREATE_DETACHED);
-        if (rc != 0)
-        {
-            if (_loggingEnabled)
-            {
-                std::cout << "#BCC Couldn't set detach state on pthread, returned " << rc << std::endl;
-            }
-            pthread_attr_destroy(&_threadAttributes);
-            return false;
-        }
+       
         
         _threadRunning = true;
         _status = UPLOAD_STATUS_PENDING;
-        rc = pthread_create(&_threadId, &_threadAttributes, &run, this);
-        if (rc != 0)
-        {
-            if (_loggingEnabled)
-            {
-                std::cout << "#BCC Failed to create pthread, returned " << rc << std::endl;
-            }
-            close();
-            return false;
-        }
         
         return true;
     }
     
-    void cURLFileUploader::setUploadLowTransferRateTimeout(int in_timeoutSecs)
+    void NSFileUploader::setUploadLowTransferRateTimeout(int in_timeoutSecs)
     {
         _uploadLowTransferRateTimeoutSecs = in_timeoutSecs;
     }
     
-    void cURLFileUploader::setUploadLowTransferRateThreshold(int in_bytesPerSec)
+    void NSFileUploader::setUploadLowTransferRateThreshold(int in_bytesPerSec)
     {
         _uploadLowTransferRateThresholdBytesPerSec = in_bytesPerSec;
     }
     
-    void * cURLFileUploader::run(void * fileUploader)
-    {
-        if (fileUploader != NULL)
-        {
-            cURLFileUploader * theFileUploader = reinterpret_cast<cURLFileUploader *>(fileUploader);
-            uploadFileFromThread(theFileUploader);
-        }
-        
-        return NULL;
-    }
-    
-    void cURLFileUploader::enableLogging(bool in_loggingEnabled)
+    void NSFileUploader::enableLogging(bool in_loggingEnabled)
     {
         _loggingEnabled = in_loggingEnabled;
     }
     
-    IFileUploader::eFileUploaderStatus cURLFileUploader::getStatus()
+    IFileUploader::eFileUploaderStatus NSFileUploader::getStatus()
     {
-        eFileUploaderStatus status;
-        pthread_mutex_lock(&_lock);
-        status = _status;
-        pthread_mutex_unlock(&_lock);
-        return status;
+        return _status;
     }
     
-    bool cURLFileUploader::isThreadRunning()
+    bool NSFileUploader::isThreadRunning()
     {
         return _threadRunning;
     }
     
-    void cURLFileUploader::cancelUpload()
+    void NSFileUploader::cancelUpload()
     {
-        pthread_mutex_lock(&_lock);
-        if (_curl != NULL)
-        {
-            _shouldCancelUpload = true;
-        }
-        pthread_mutex_unlock(&_lock);
+        _shouldCancelUpload = true;
     }
     
-    int64_t cURLFileUploader::getBytesTransferred()
+    int64_t NSFileUploader::getBytesTransferred()
     {
-        int64_t bytesTransferred = 0;
-        pthread_mutex_lock(&_lock);
-        if (_curl != NULL)
-        {
-            bytesTransferred = _uploadTransferredBytes;
-        }
-        pthread_mutex_unlock(&_lock);
-        return bytesTransferred;
+        return _uploadTransferredBytes;
     }
     
-    int64_t cURLFileUploader::getTotalBytesToTransfer()
+    int64_t NSFileUploader::getTotalBytesToTransfer()
     {
         return _fileLength;
     }
     
-    double cURLFileUploader::getProgress()
+    double NSFileUploader::getProgress()
     {
-        double result = 0;
-        pthread_mutex_lock(&_lock);
-        if (_curl != NULL && _uploadTotalBytes > 0)
-        {
-            result = _uploadTransferredBytes / (double) _uploadTotalBytes;
-        }
-        pthread_mutex_unlock(&_lock);
-        return result;
+        return _uploadTransferredBytes / (double) _uploadTotalBytes;
     }
     
-    void cURLFileUploader::setProgress(curl_off_t ultotal, curl_off_t ulnow)
+    void NSFileUploader::setStatus(eFileUploaderStatus in_status)
     {
-        pthread_mutex_lock(&_lock);
-        _uploadTotalBytes = static_cast<long>(ultotal);
-        _uploadTransferredBytes = static_cast<long>(ulnow);
-        pthread_mutex_unlock(&_lock);
-    }
-    
-    // curl ver 7.32 (aug 2013) support xferinfo cb
-    int cURLFileUploader::curlXferInfoCallback(void *data, curl_off_t dltotal, curl_off_t dlnow, curl_off_t ultotal, curl_off_t ulnow)
-    {
-        cURLFileUploader * fileUploader = reinterpret_cast<cURLFileUploader*>(data);
-        fileUploader->setProgress(ultotal, ulnow);
-        
-        if (fileUploader->_shouldCancelUpload)
-        {
-            return 1; // causes CURLE_ABORTED_BY_CALLBACK to be returned from perform
-        }
-        return CURLE_OK;
-    }
-    
-    // previous curl versions use this function
-    int cURLFileUploader::curlProgressCallback(void *data, double dltotal, double dlnow, double ultotal, double ulnow)
-    {
-        cURLFileUploader * fileUploader = reinterpret_cast<cURLFileUploader*>(data);
-        fileUploader->setProgress(static_cast<curl_off_t>(ultotal), static_cast<curl_off_t>(ulnow));
-        
-        if (fileUploader->_shouldCancelUpload)
-        {
-            return 1; // causes CURLE_ABORTED_BY_CALLBACK to be returned from perform
-        }
-        return CURLE_OK;
-    }
-
-    
-    size_t cURLFileUploader::curlWriteCallback(char *ptr, size_t size, size_t nmemb, void *userdata)
-    {
-        cURLFileUploader * fileUploader = reinterpret_cast<cURLFileUploader*>(userdata);
-        size_t writeSize = size * nmemb;
-        char * buf = new char[writeSize + sizeof(char)];
-        memcpy(buf, ptr, writeSize);
-        buf[writeSize] = '\0';
-        fileUploader->_httpInternalResponse.append(buf);
-        return writeSize;
-    }
-    
-    void cURLFileUploader::setStatus(eFileUploaderStatus in_status)
-    {
-        pthread_mutex_lock(&_lock);
         _status = in_status;
-        pthread_mutex_unlock(&_lock);
     }
     
     // these are only safe to call when thread running is false
-    const std::string & cURLFileUploader::getHttpResponse()
+    const std::string & NSFileUploader::getHttpResponse()
     {
         return _httpJsonResponse;
     }
     
     // these are only safe to call when thread running is false
-    int cURLFileUploader::getHttpStatus()
+    int NSFileUploader::getHttpStatus()
     {
         return _httpStatus;
     }
     
     // these are only safe to call when thread running is false
-    int cURLFileUploader::getErrorReasonCode()
+    int NSFileUploader::getErrorReasonCode()
     {
         return _errorReasonCode;
     }
-    
-    /*
-    int debug_callback(CURL *handle,
-                       curl_infotype type,
-                       char *data,
-                       size_t size,
-                       void *userptr)
-    {
-        if (type == CURLINFO_HEADER_IN
-            || type == CURLINFO_HEADER_OUT)
-        {
-            printf("--%s", data);
-        }
-    }
-     */
+   */
     
     /**
      * Use libCurl to upload the file
      *
      * @param loader - pointer to the object which is loading the web page
-     */
     void cURLFileUploader::uploadFileFromThread(cURLFileUploader * fileUploader)
     {
         FILE *fp = NULL;
@@ -378,9 +305,9 @@ namespace BrainCloud
         // if set, configure the overall transfer timeout
         //if (fileUploader->_uploadOverallTimeoutSecs > 0)
         //{
-       //     curl_easy_setopt(curl, CURLOPT_NOSIGNAL, (long)1);
+        //     curl_easy_setopt(curl, CURLOPT_NOSIGNAL, (long)1);
         //    curl_easy_setopt(curl, CURLOPT_TIMEOUT_MS, fileUploader->_uploadOverallTimeoutSecs * 1000);
-       // }
+        // }
         
         if (useMultipart)
         {
@@ -527,6 +454,7 @@ namespace BrainCloud
         }
         fileUploader->_threadRunning = false;
     }
-}
+     */
+//}
 
 #endif

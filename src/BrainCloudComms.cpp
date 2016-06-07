@@ -20,8 +20,12 @@
 
 #if defined (IW_SDK)
 #include "braincloud/internal/marmalade/IwHttpLoader.h"
-#elif (TARGET_OS_WATCH == 1)
+//#elif (TARGET_OS_WATCH == 1)
+#elif (__APPLE__)
 #include "braincloud/internal/mac/nsURLLoader.h"
+  #if (TARGET_OS_WATCH == 0)
+    #include "braincloud/internal/nix/cURLFileUploader.h"
+  #endif
 #else
 #include "braincloud/internal/nix/cURLLoader.h"
 #include "braincloud/internal/nix/cURLFileUploader.h"
@@ -963,7 +967,8 @@ namespace BrainCloud
     {
 #if defined (IW_SDK)
         _loader = new IwHttpLoader();
-#elif (TARGET_OS_WATCH == 1)
+//#elif (TARGET_OS_WATCH == 1)
+#elif (__APPLE__)
         _loader = new nsURLLoader();
 #else
         _loader = new cURLLoader();

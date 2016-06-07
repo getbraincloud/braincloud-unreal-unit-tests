@@ -121,7 +121,7 @@ function build_app()
   lipo -create "tmp/libBrainCloud_watchos.a" "tmp/libBrainCloud_watchossim.a" -output brainCloud/libs/brainCloudClient_watchos.a
   cp "$output_folder_osx/libBrainCloud-OSX.a" brainCloud/libs/brainCloudClient_osx.a
 
-  cp ../include/braincloud/*.h brainCloud/include/braincloud
+  cp -r ../include/braincloud brainCloud/include
 
   # copy in the thirdparty dependencies
   cp -r ../lib/jsoncpp-1.0.0 brainCloud/thirdparty

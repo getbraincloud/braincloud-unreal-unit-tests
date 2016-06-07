@@ -75,6 +75,10 @@
 		DF22307E1CE38BE6003A7D8D /* cURLFileUploader.cpp in Sources */ = {isa = PBXBuildFile; fileRef = DF932C801CD9231B0085137C /* cURLFileUploader.cpp */; };
 		DF2230CE1CE3953E003A7D8D /* cURLFileUploader.cpp in Sources */ = {isa = PBXBuildFile; fileRef = DF932C801CD9231B0085137C /* cURLFileUploader.cpp */; };
 		DF2230CF1CE39540003A7D8D /* cURLLoader.cpp in Sources */ = {isa = PBXBuildFile; fileRef = DF932C811CD9231B0085137C /* cURLLoader.cpp */; };
+		DF83CB761D01F56B00F1A565 /* nsFileUploader.mm in Sources */ = {isa = PBXBuildFile; fileRef = DF83CB751D01F56B00F1A565 /* nsFileUploader.mm */; };
+		DF83CB771D01F56B00F1A565 /* nsFileUploader.mm in Sources */ = {isa = PBXBuildFile; fileRef = DF83CB751D01F56B00F1A565 /* nsFileUploader.mm */; };
+		DF83CB781D01F56B00F1A565 /* nsFileUploader.mm in Sources */ = {isa = PBXBuildFile; fileRef = DF83CB751D01F56B00F1A565 /* nsFileUploader.mm */; };
+		DF83CB791D01F56B00F1A565 /* nsFileUploader.mm in Sources */ = {isa = PBXBuildFile; fileRef = DF83CB751D01F56B00F1A565 /* nsFileUploader.mm */; };
 		DF8E92851CEDE8FF002C2387 /* BrainCloudGroup.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 249F589C1CE3B6E2009D03E4 /* BrainCloudGroup.cpp */; };
 		DF8E92861CEDE8FF002C2387 /* BrainCloudGroup.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 249F589C1CE3B6E2009D03E4 /* BrainCloudGroup.cpp */; };
 		DF8E92871CEDE8FF002C2387 /* BrainCloudGroup.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 249F589C1CE3B6E2009D03E4 /* BrainCloudGroup.cpp */; };
@@ -303,6 +307,7 @@
 		DF22302D1CE27DAA003A7D8D /* SSKeychainQuery.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SSKeychainQuery.h; sourceTree = "<group>"; };
 		DF22302E1CE27DAA003A7D8D /* SSKeychainQuery.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SSKeychainQuery.m; sourceTree = "<group>"; };
 		DF22307C1CE38B06003A7D8D /* libBrainCloud-watchOS.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libBrainCloud-watchOS.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		DF83CB751D01F56B00F1A565 /* nsFileUploader.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = nsFileUploader.mm; sourceTree = "<group>"; };
 		DF932C561CD9231B0085137C /* AuthenticationType.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = AuthenticationType.cpp; sourceTree = "<group>"; };
 		DF932C571CD9231B0085137C /* BrainCloudAsyncMatch.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = BrainCloudAsyncMatch.cpp; sourceTree = "<group>"; };
 		DF932C581CD9231B0085137C /* BrainCloudAuthentication.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = BrainCloudAuthentication.cpp; sourceTree = "<group>"; };
@@ -600,6 +605,7 @@
 			isa = PBXGroup;
 			children = (
 				DF932C7A1CD9231B0085137C /* GUID.mm */,
+				DF83CB751D01F56B00F1A565 /* nsFileUploader.mm */,
 				DF932C7B1CD9231B0085137C /* nsURLLoader.mm */,
 				DFEC5DDA1CE2690F0091952A /* SaveDataHelper.mm */,
 			);
@@ -1003,6 +1009,7 @@
 				DF932CC81CD9231B0085137C /* TimerCallback.cpp in Sources */,
 				DF932CB81CD9231B0085137C /* GUID.cpp in Sources */,
 				DF9D06B91CEDE70E0011F98A /* BrainCloudWrapper.cpp in Sources */,
+				DF83CB761D01F56B00F1A565 /* nsFileUploader.mm in Sources */,
 				DF932CC61CD9231B0085137C /* StringUtil.cpp in Sources */,
 				DF932CAC1CD9231B0085137C /* BrainCloudPlayerStatisticsEvent.cpp in Sources */,
 				DF932CA81CD9231B0085137C /* BrainCloudOneWayMatch.cpp in Sources */,
@@ -1071,6 +1078,7 @@
 				DF932DDA1CD92AAB0085137C /* BrainCloudMatchmaking.cpp in Sources */,
 				DF932DE31CD92AAB0085137C /* BrainCloudRedemptionCode.cpp in Sources */,
 				DF932E1E1CD92AB60085137C /* StringUtil.cpp in Sources */,
+				DF83CB781D01F56B00F1A565 /* nsFileUploader.mm in Sources */,
 				DF8E92881CEDE934002C2387 /* SaveDataHelper.mm in Sources */,
 				DF932E231CD92AB60085137C /* URLLoaderClient.cpp in Sources */,
 				DF932DE01CD92AAB0085137C /* BrainCloudProduct.cpp in Sources */,
@@ -1139,6 +1147,7 @@
 				DF932E0A1CD92AB50085137C /* ServiceOperation.cpp in Sources */,
 				DF932DB71CD92AAB0085137C /* BrainCloudMatchmaking.cpp in Sources */,
 				DF932DC01CD92AAB0085137C /* BrainCloudRedemptionCode.cpp in Sources */,
+				DF83CB771D01F56B00F1A565 /* nsFileUploader.mm in Sources */,
 				DF8E92891CEDE934002C2387 /* SaveDataHelper.mm in Sources */,
 				DF932E0B1CD92AB50085137C /* StringUtil.cpp in Sources */,
 				DF932E101CD92AB50085137C /* URLLoaderClient.cpp in Sources */,
@@ -1207,6 +1216,7 @@
 				DF2230511CE38B06003A7D8D /* StringUtil.cpp in Sources */,
 				DF2230521CE38B06003A7D8D /* BrainCloudPlayerStatisticsEvent.cpp in Sources */,
 				DF2230531CE38B06003A7D8D /* BrainCloudOneWayMatch.cpp in Sources */,
+				DF83CB791D01F56B00F1A565 /* nsFileUploader.mm in Sources */,
 				DF2230541CE38B06003A7D8D /* SSKeychain.m in Sources */,
 				DF2230551CE38B06003A7D8D /* URLLoaderClient.cpp in Sources */,
 				DF2230571CE38B06003A7D8D /* BrainCloudTime.cpp in Sources */,
