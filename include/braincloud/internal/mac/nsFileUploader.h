@@ -5,9 +5,27 @@
 #include <string>
 #include "braincloud/internal/IFileUploader.h"
 
-/*
-@interface ObjcFileUploader : NSObject<NSURLConnectionDataDelegate>
+
+#if defined (__OBJC__)
+#import <Foundation/Foundation.h>
+@interface ObjcFileUploader : NSObject
+
+@property (nonatomic, strong) NSURLSessionTask* task;
+@property (nonatomic, strong) NSString* httpResponse;
+@property (nonatomic, readonly) BOOL cancelled;
+@property (nonatomic, readonly) NSInteger httpStatus;
+@property (nonatomic, readonly) NSInteger errorReasonCode;
+@property (nonatomic) NSInteger uploadLowTransferRateTimeout;
+
+- (BOOL) isThreadRunning;
+- (void) cancelUpload;
+- (NSInteger) getBytesTransferred;
+- (NSInteger) getTotalBytesToTransfer;
 @end
+#else
+class ObjcFileUploader;
+#endif
+
 
 namespace BrainCloud
 {
@@ -42,10 +60,12 @@ namespace BrainCloud
         
     private:
         static bool             _loggingEnabled;
-        ObjcFileUploader *      _uploader;
+        ObjcFileUploader *              _uploader;
+        
+        // to cache the http response as "getHttpResponse" fn uses a reference
+        std::string             _httpResponse;
     };
     
 }
-*/
 #endif
 #endif

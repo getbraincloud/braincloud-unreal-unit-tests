@@ -5,83 +5,71 @@
 //  Created by Preston Jennings on 2016-06-03.
 //  Copyright © 2016 BitHeads Inc. All rights reserved.
 //
+
+// The meat of this class was found on stack overflow:
+// http://stackoverflow.com/questions/24250475/post-multipart-form-data-with-objective-c
+
 #ifdef __APPLE__
-//#if (TARGET_OS_WATCH != 1) // necessary as cocoapods doesn't allow per platform source files
 
 #import <Foundation/Foundation.h>
 #include <TargetConditionals.h>
 #include "braincloud/internal/mac/nsFileUploader.h"
-/*
-#include <cctype>
-#include <stdio.h>
-#include <stdlib.h>
-#include <string.h>
-#include <iostream>
-#include <sstream>
-*/
-/*
 #include "braincloud/http_codes.h"
 #include "braincloud/reason_codes.h"
 #include "braincloud/internal/IBrainCloudComms.h"
 
-@interface ObjcFileUploader() {
-    
-    //eFileUploaderStatus     _status;
-    int             _uploadLowTransferRateTimeoutSecs;
-    int             _uploadLowTransferRateThresholdBytesPerSec;
-    
-    NSString *      _sessionId;
-    NSString *      _fileUploadId;
-    long            _fileLength;
-    NSString *      _fileName;
- //   NSString *      _uploadUrl;
-    
-    int             _httpStatus;
-    int             _errorReasonCode;
-    NSString *      _httpInternalResponse;
-    NSString *      _httpJsonResponse;
-    
-    bool            _shouldCancelUpload;
-    long            _uploadTotalBytes;
-    long            _uploadTransferredBytes;
-}
-@end
-
 
 @implementation ObjcFileUploader
 
-- (void)connection:(NSURLConnection *)connection
-didReceiveResponse:(NSURLResponse *)response
+- (id) init
 {
-    
+    if ((self = [super init]))
+    {
+        _cancelled = false;
+        _httpStatus = 0;
+        _errorReasonCode = 0;
+        _uploadLowTransferRateTimeout = 0;
+    }
+    return self;
 }
 
-- (void)connection:(NSURLConnection *)connection
-    didReceiveData:(NSData *)data
+- (NSString *)generateBoundaryString
 {
-    
+    return [NSString stringWithFormat:@"Boundary-%@", [[NSUUID UUID] UUIDString]];
 }
 
-- (void)connection:(NSURLConnection *)connection
-   didSendBodyData:(NSInteger)bytesWritten
- totalBytesWritten:(NSInteger)totalBytesWritten
-totalBytesExpectedToWrite:(NSInteger)totalBytesExpectedToWrite
+- (NSData *)createBodyWithBoundary:(NSString *)boundary
+                        parameters:(NSDictionary *)parameters
+                             paths:(NSArray *)paths
+                         fieldName:(NSString *)fieldName
 {
+    NSMutableData *httpBody = [NSMutableData data];
     
-}
-
-- (void)connectionDidFinishLoading:(NSURLConnection *)connection
-{
+    // add params (all params are strings)
     
+    [parameters enumerateKeysAndObjectsUsingBlock:^(NSString *parameterKey, NSString *parameterValue, BOOL *stop) {
+        [httpBody appendData:[[NSString stringWithFormat:@"--%@\r\n", boundary] dataUsingEncoding:NSUTF8StringEncoding]];
+        [httpBody appendData:[[NSString stringWithFormat:@"Content-Disposition: form-data; name=\"%@\"\r\n\r\n", parameterKey] dataUsingEncoding:NSUTF8StringEncoding]];
+        [httpBody appendData:[[NSString stringWithFormat:@"%@\r\n", parameterValue] dataUsingEncoding:NSUTF8StringEncoding]];
+    }];
     
-}
-
-
-- (NSCachedURLResponse *)connection:(NSURLConnection *)connection
-                  willCacheResponse:(NSCachedURLResponse *)cachedResponse
-{
-    // never cache upload response
-    return nil;
+    // add data
+    
+    for (NSString *path in paths) {
+        NSString *filename  = [path lastPathComponent];
+        NSData   *data      = [NSData dataWithContentsOfFile:path];
+        NSString *mimetype  = @"application/octet-stream"; // deviation from original source to always assume generic type
+        
+        [httpBody appendData:[[NSString stringWithFormat:@"--%@\r\n", boundary] dataUsingEncoding:NSUTF8StringEncoding]];
+        [httpBody appendData:[[NSString stringWithFormat:@"Content-Disposition: form-data; name=\"%@\"; filename=\"%@\"\r\n", fieldName, filename] dataUsingEncoding:NSUTF8StringEncoding]];
+        [httpBody appendData:[[NSString stringWithFormat:@"Content-Type: %@\r\n\r\n", mimetype] dataUsingEncoding:NSUTF8StringEncoding]];
+        [httpBody appendData:data];
+        [httpBody appendData:[@"\r\n" dataUsingEncoding:NSUTF8StringEncoding]];
+    }
+    
+    [httpBody appendData:[[NSString stringWithFormat:@"--%@--\r\n", boundary] dataUsingEncoding:NSUTF8StringEncoding]];
+    
+    return httpBody;
 }
 
 - (void)uploadFileWithSessionId:(NSString*)sessionId
@@ -90,49 +78,112 @@ totalBytesExpectedToWrite:(NSInteger)totalBytesExpectedToWrite
                        fileSize:(NSInteger)fileSize
                       uploadUrl:(NSString*)uploadUrl
 {
-    _sessionId = sessionId;
-    _fileUploadId = fileUploadId;
-    _fileName = fileName;
-    //_fileSize = fileSize;
-//    _uploadUrl = uploadUrl;
+    NSURL *url = [NSURL URLWithString:uploadUrl];
     
-    // do it
+    NSDictionary *params = @{@"sessionId"   : sessionId,
+                             @"uploadId"    : fileUploadId,
+                             @"fileSize"    : [@(fileSize) stringValue]};
     
-    NSMutableURLRequest *request = [[NSMutableURLRequest alloc] init];
-    [request setURL:[NSURL URLWithString:uploadUrl]];
-    [request setHTTPMethod:@"PUT"];
-    */
-    /*
-     add some header info now
-     we always need a boundary when we post a file
-     also we need to set the content type
-     
-     You might want to generate a random boundary.. this is just the same
-     as my output from wireshark on a valid html post
-     */
-/*
-    NSString *boundary = [NSString stringWithString:@"---------------------------14737809831466499882746641449"];
-    NSString *contentType = [NSString stringWithFormat:@"multipart/form-data; boundary=%@",boundary];
-    [request addValue:contentType forHTTPHeaderField: @"Content-Type"];
+    NSString *boundary = [self generateBoundaryString];
     
-    //  now lets create the body of the post
-
-    NSMutableData *body = [NSMutableData data];
-    [body appendData:[[NSString stringWithFormat:@"rn--%@rn",boundary] dataUsingEncoding:NSUTF8StringEncoding]];
-    [body appendData:[[NSString stringWithString:@"Content-Disposition: form-data; name="userfile"; filename="ipodfile.jpg"rn"] dataUsingEncoding:NSUTF8StringEncoding]];
-    [body appendData:[[NSString stringWithString:@"Content-Type: application/octet-streamrnrn"] dataUsingEncoding:NSUTF8StringEncoding]];
-    [body appendData:[NSData dataWithData:imageData]];
-    [body appendData:[[NSString stringWithFormat:@"rn--%@--rn",boundary] dataUsingEncoding:NSUTF8StringEncoding]];
-    // setting the body of the post to the reqeust
-    [request setHTTPBody:body];
+    // configure the request
+    NSMutableURLRequest *request = [[NSMutableURLRequest alloc] initWithURL:url];
+    [request setHTTPMethod:@"POST"];
     
-    // now lets make the connection to the web
-    NSData *returnData = [NSURLConnection sendSynchronousRequest:request returningResponse:nil error:nil];
-    NSString *returnString = [[NSString alloc] initWithData:returnData encoding:NSUTF8StringEncoding];
+    // set content type
+    NSString *contentType = [NSString stringWithFormat:@"multipart/form-data; boundary=%@", boundary];
+    [request setValue:contentType forHTTPHeaderField: @"Content-Type"];
     
-    NSLog(returnString);
+    // create body
+    NSData *httpBody = [self createBodyWithBoundary:boundary parameters:params paths:@[fileName] fieldName:@"uploadFile"];
+    
+    request.HTTPBody = httpBody;
+    
+    
+    NSURLSessionConfiguration *sessionConfig = [NSURLSessionConfiguration ephemeralSessionConfiguration];
+    if (_uploadLowTransferRateTimeout > 0)
+    {
+        // timeout waiting for next bit of data
+        sessionConfig.timeoutIntervalForRequest = _uploadLowTransferRateTimeout;
+        
+        // overall timeout
+        //sessionConfig.timeoutIntervalForResource = 60.0;
+    }
+    NSURLSession * session = [NSURLSession sessionWithConfiguration:sessionConfig];
+    
+    NSURLSessionTask *task = [session dataTaskWithRequest:request completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
+        if (error) {
+            NSLog(@"error = %@", error);
+            _httpStatus = HTTP_CLIENT_NETWORK_ERROR;
+            _errorReasonCode = _cancelled ? CLIENT_UPLOAD_FILE_CANCELLED : CLIENT_UPLOAD_FILE_UNKNOWN;
+            return;
+        }
+        
+        _httpResponse = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
+        NSHTTPURLResponse * urlResponse = (NSHTTPURLResponse*) response;
+        if (urlResponse != nil)
+        {
+            _httpStatus = urlResponse.statusCode;
+        }
+        
+        Json::Value root;
+        Json::Reader reader;
+        std::string strHttpResponse = [_httpResponse cStringUsingEncoding:NSUTF8StringEncoding];
+        if (reader.parse(strHttpResponse, root))
+        {
+            _errorReasonCode = root["reason_code"].asInt();
+        }
+        else
+        {
+            std::string strHttpJsonResponse;
+            _errorReasonCode = CLIENT_UPLOAD_FILE_UNKNOWN;
+            BrainCloud::IBrainCloudComms::createJsonErrorResponse(static_cast<int>(_httpStatus),
+                                                      static_cast<int>(_errorReasonCode),
+                                                      strHttpResponse,
+                                                      strHttpJsonResponse);
+            _httpResponse = [NSString stringWithCString:strHttpJsonResponse.c_str() encoding:NSUTF8StringEncoding];
+        }
+    }];
+    self.task = task;
+    [task resume];
 }
 
+- (BOOL) isThreadRunning
+{
+    if (self.task == nil)
+    {
+        return false;
+    }
+    return !(self.task.state == NSURLSessionTaskStateCompleted);
+}
+
+- (void) cancelUpload
+{
+    if (self.task != nil)
+    {
+        [self.task cancel];
+        _cancelled = YES;
+    }
+}
+
+- (NSInteger) getBytesTransferred
+{
+    if (self.task == nil)
+    {
+        return 0;
+    }
+    
+    return static_cast<NSInteger>([self.task countOfBytesSent]);
+}
+
+- (NSInteger) getTotalBytesToTransfer
+{
+    if (self.task == nil)
+    {
+        return 0;
+    }
+    return static_cast<NSInteger>([self.task countOfBytesExpectedToSend]);
+}
 @end
 
 
@@ -147,36 +198,33 @@ namespace BrainCloud
     
     NSFileUploader::~NSFileUploader()
     {
+        _uploader = nil;
     }
-    */
-    /*
+    
     bool NSFileUploader::uploadFile(std::string & in_sessionId,
                                       std::string & in_fileUploadId,
                                       std::string & in_fileName,
                                       int64_t in_fileSize,
                                       std::string & in_uploadUrl)
     {
-        _sessionId = in_sessionId;
-        _fileUploadId = in_fileUploadId;
-        _fileName = in_fileName;
-        _uploadUrl = in_uploadUrl;
-        _fileLength = static_cast<long>(in_fileSize);
-       
+        NSString * sessionId = [NSString stringWithCString:in_sessionId.c_str() encoding:NSUTF8StringEncoding];
+        NSString * fileUploadId = [NSString stringWithCString:in_fileUploadId.c_str() encoding:NSUTF8StringEncoding];
+        NSString * fileName = [NSString stringWithCString:in_fileName.c_str() encoding:NSUTF8StringEncoding];
+        NSInteger fileSize = static_cast<NSInteger> (in_fileSize);
+        NSString * uploadUrl = [NSString stringWithCString:in_uploadUrl.c_str() encoding:NSUTF8StringEncoding];
         
-        _threadRunning = true;
-        _status = UPLOAD_STATUS_PENDING;
-        
+        [_uploader uploadFileWithSessionId:sessionId fileUploadId:fileUploadId fileName:fileName fileSize:fileSize uploadUrl:uploadUrl];
         return true;
     }
     
     void NSFileUploader::setUploadLowTransferRateTimeout(int in_timeoutSecs)
     {
-        _uploadLowTransferRateTimeoutSecs = in_timeoutSecs;
+        _uploader.uploadLowTransferRateTimeout = in_timeoutSecs;
     }
     
     void NSFileUploader::setUploadLowTransferRateThreshold(int in_bytesPerSec)
     {
-        _uploadLowTransferRateThresholdBytesPerSec = in_bytesPerSec;
+        // does nothing
     }
     
     void NSFileUploader::enableLogging(bool in_loggingEnabled)
@@ -186,275 +234,70 @@ namespace BrainCloud
     
     IFileUploader::eFileUploaderStatus NSFileUploader::getStatus()
     {
-        return _status;
+        if (_uploader.task == nil)
+        {
+            return UPLOAD_STATUS_NONE;
+        }
+        
+        if (_uploader.task.state == NSURLSessionTaskStateSuspended)
+        {
+            return UPLOAD_STATUS_PENDING;
+        }
+        else if (_uploader.task.state == NSURLSessionTaskStateCompleted)
+        {
+            return (_uploader.httpStatus == HTTP_OK) ? UPLOAD_STATUS_COMPLETE_SUCCESS : UPLOAD_STATUS_COMPLETE_FAILED;
+        }
+        
+        return UPLOAD_STATUS_UPLOADING;
     }
     
     bool NSFileUploader::isThreadRunning()
     {
-        return _threadRunning;
+        return [_uploader isThreadRunning];
     }
     
     void NSFileUploader::cancelUpload()
     {
-        _shouldCancelUpload = true;
+        [_uploader cancelUpload];
     }
     
     int64_t NSFileUploader::getBytesTransferred()
     {
-        return _uploadTransferredBytes;
+        return [_uploader getBytesTransferred];
     }
     
     int64_t NSFileUploader::getTotalBytesToTransfer()
     {
-        return _fileLength;
+        return [_uploader getTotalBytesToTransfer];
     }
     
     double NSFileUploader::getProgress()
     {
-        return _uploadTransferredBytes / (double) _uploadTotalBytes;
-    }
-    
-    void NSFileUploader::setStatus(eFileUploaderStatus in_status)
-    {
-        _status = in_status;
+        return getBytesTransferred() / (double) getTotalBytesToTransfer();
     }
     
     // these are only safe to call when thread running is false
     const std::string & NSFileUploader::getHttpResponse()
     {
-        return _httpJsonResponse;
+        NSString * nsHttpResponse = [_uploader httpResponse];
+        if (nsHttpResponse != nil)
+        {
+            _httpResponse = [nsHttpResponse cStringUsingEncoding:NSUTF8StringEncoding];
+        }
+        return _httpResponse;
     }
     
     // these are only safe to call when thread running is false
     int NSFileUploader::getHttpStatus()
     {
-        return _httpStatus;
+        return static_cast<int>([_uploader httpStatus]);
     }
     
     // these are only safe to call when thread running is false
     int NSFileUploader::getErrorReasonCode()
     {
-        return _errorReasonCode;
+        return static_cast<int>([_uploader errorReasonCode]);
     }
-   */
-    
-    /**
-     * Use libCurl to upload the file
-     *
-     * @param loader - pointer to the object which is loading the web page
-    void cURLFileUploader::uploadFileFromThread(cURLFileUploader * fileUploader)
-    {
-        FILE *fp = NULL;
-        struct curl_slist *slist = NULL;
-        struct curl_httppost *formpost = NULL;
-        struct curl_httppost *lastptr = NULL;
-        
-        bool useMultipart = true;
-        if (!useMultipart)
-        {
-            fp = fopen(fileUploader->_fileName.c_str(), "rb");
-            if (fp == NULL)
-            {
-                fileUploader->setStatus(UPLOAD_STATUS_COMPLETE_FAILED);
-                fileUploader->_threadRunning = false;
-                return;
-            }
-        }
-        
-        CURL * curl = curl_easy_init();
-        if (curl == NULL)
-        {
-            fileUploader->setStatus(UPLOAD_STATUS_COMPLETE_FAILED);
-            fileUploader->_threadRunning = false;
-            return;
-        }
-        
-        fileUploader->setStatus(UPLOAD_STATUS_UPLOADING);
-        
-        CURLcode rc = CURLE_OK;
-        char curlError[CURL_ERROR_SIZE];
-        //curl_easy_setopt(curl, CURLOPT_VERBOSE, _loggingEnabled ? 1L : 0L);
-        //curl_easy_setopt(curl, CURLOPT_DEBUGFUNCTION, debug_callback);
-        
-#if defined(CURLOPT_XFERINFODATA)
-        curl_easy_setopt(curl, CURLOPT_XFERINFOFUNCTION, curlXferInfoCallback);
-        curl_easy_setopt(curl, CURLOPT_XFERINFODATA, fileUploader);
-#else
-        curl_easy_setopt(curl, CURLOPT_PROGRESSFUNCTION, curlProgressCallback);
-        curl_easy_setopt(curl, CURLOPT_PROGRESSDATA, fileUploader);
-#endif
-        
-        curl_easy_setopt(curl, CURLOPT_NOPROGRESS, 0);
-        curl_easy_setopt(curl, CURLOPT_ERRORBUFFER, curlError);
-        
-        curl_easy_setopt(curl, CURLOPT_WRITEDATA, fileUploader);
-        curl_easy_setopt(curl, CURLOPT_WRITEFUNCTION, curlWriteCallback);
-        
-        // TODO: preston - this is present in the curl loader as well
-        // We should definitely be doing a more valid SSL check!
-        curl_easy_setopt(curl, CURLOPT_SSL_VERIFYPEER, (long)0);
-        curl_easy_setopt(curl, CURLOPT_SSL_VERIFYHOST, (long)0);
-        
-        // if set, configure low transfer rate timeout
-        if (fileUploader->_uploadLowTransferRateTimeoutSecs > 0)
-        {
-            curl_easy_setopt(curl, CURLOPT_LOW_SPEED_LIMIT, fileUploader->_uploadLowTransferRateThresholdBytesPerSec);
-            curl_easy_setopt(curl, CURLOPT_LOW_SPEED_TIME, fileUploader->_uploadLowTransferRateTimeoutSecs);
-        }
-        
-        // if set, configure the overall transfer timeout
-        //if (fileUploader->_uploadOverallTimeoutSecs > 0)
-        //{
-        //     curl_easy_setopt(curl, CURLOPT_NOSIGNAL, (long)1);
-        //    curl_easy_setopt(curl, CURLOPT_TIMEOUT_MS, fileUploader->_uploadOverallTimeoutSecs * 1000);
-        // }
-        
-        if (useMultipart)
-        {
-            std::string uploadUrl = fileUploader->_uploadUrl;
-            curl_easy_setopt(curl, CURLOPT_URL, uploadUrl.c_str());
-            
-            curl_formadd(&formpost,
-                         &lastptr,
-                         CURLFORM_COPYNAME, "sessionId",
-                         CURLFORM_COPYCONTENTS, fileUploader->_sessionId.c_str(),
-                         CURLFORM_END);
-            
-            curl_formadd(&formpost,
-                         &lastptr,
-                         CURLFORM_COPYNAME, "uploadId",
-                         CURLFORM_COPYCONTENTS, fileUploader->_fileUploadId.c_str(),
-                         CURLFORM_END);
-            
-            std::stringstream ss;
-            ss << fileUploader->_fileLength;
-            std::string fileSize = ss.str();
-            curl_formadd(&formpost,
-                         &lastptr,
-                         CURLFORM_COPYNAME, "fileSize",
-                         CURLFORM_COPYCONTENTS, fileSize.c_str(),
-                         CURLFORM_END);
-            
-            curl_formadd(&formpost,
-                         &lastptr,
-                         CURLFORM_COPYNAME, "uploadFile",
-                         CURLFORM_FILE, fileUploader->_fileName.c_str(),
-                         CURLFORM_END);
-            
-            curl_easy_setopt(curl, CURLOPT_HTTPPOST, formpost);
-        }
-        else
-        {
-            std::string uploadUrl = fileUploader->_uploadUrl;
-            uploadUrl.append("?sessionId=");
-            uploadUrl.append(fileUploader->_sessionId);
-            uploadUrl.append("&uploadId=");
-            uploadUrl.append(fileUploader->_fileUploadId);
-            curl_easy_setopt(curl, CURLOPT_URL, uploadUrl.c_str());
-            curl_easy_setopt(curl, CURLOPT_UPLOAD, 1L);
-            
-            // NOTE: on windows if you use libcurl dll you need to set a READFUNCTION too.
-            // We currently use a static lib so we're ok
-            curl_easy_setopt(curl, CURLOPT_READDATA, fp);
-            curl_easy_setopt(curl, CURLOPT_INFILESIZE_LARGE, (curl_off_t) fileUploader->_fileLength);
-            
-            slist = curl_slist_append(slist, "Content-Type: application/octet-stream");
-            std::stringstream ss;
-            ss << "Content-Length: " << fileUploader->_fileLength;
-            std::string contentLength = ss.str();
-            slist = curl_slist_append(slist, contentLength.c_str());
-            curl_easy_setopt(curl, CURLOPT_HTTPHEADER, slist);
-        }
-        
-        fileUploader->_curl = curl;
-        
-        rc = curl_easy_perform(curl);
-        if (rc == CURLE_OK)
-        {
-            curl_easy_getinfo(curl, CURLINFO_RESPONSE_CODE, &fileUploader->_httpStatus);
-            
-            if (fileUploader->_httpStatus == HTTP_OK)
-            {
-                fileUploader->_httpJsonResponse = fileUploader->_httpInternalResponse;
-            }
-            else
-            {
-                // if there's an error, attempt to parse the response into json, otherwise fake it
-                Json::Value root;
-                Json::Reader reader;
-                if (reader.parse(fileUploader->_httpInternalResponse, root))
-                {
-                    fileUploader->_errorReasonCode = root["reason_code"].asInt();
-                    fileUploader->_httpJsonResponse = fileUploader->_httpInternalResponse;
-                }
-                else
-                {
-                    fileUploader->_errorReasonCode = CLIENT_UPLOAD_FILE_UNKNOWN;
-                    IBrainCloudComms::createJsonErrorResponse(fileUploader->_httpStatus,
-                                                              fileUploader->_errorReasonCode,
-                                                              fileUploader->_httpInternalResponse,
-                                                              fileUploader->_httpJsonResponse);
-                }
-            }
-        }
-        else
-        {
-            fileUploader->_httpStatus = HTTP_CLIENT_NETWORK_ERROR;
-            fileUploader->_errorReasonCode = 0;
-            std::string statusMessage;
-            if (rc == CURLE_OPERATION_TIMEDOUT)
-            {
-                statusMessage = "Upload timed out";
-                fileUploader->_errorReasonCode = CLIENT_UPLOAD_FILE_TIMED_OUT;
-            }
-            else if (rc == CURLE_ABORTED_BY_CALLBACK)
-            {
-                statusMessage = "Upload cancelled by user";
-                fileUploader->_errorReasonCode = CLIENT_UPLOAD_FILE_CANCELLED;
-            }
-            else
-            {
-                statusMessage = curlError;
-                fileUploader->_errorReasonCode = CLIENT_UPLOAD_FILE_UNKNOWN;
-            }
-            IBrainCloudComms::createJsonErrorResponse(fileUploader->_httpStatus,
-                                                      fileUploader->_errorReasonCode,
-                                                      statusMessage,
-                                                      fileUploader->_httpJsonResponse);
-        }
-        
-        if (useMultipart)
-        {
-            curl_formfree(formpost);
-        }
-        else
-        {
-            curl_slist_free_all(slist);
-        }
-        
-        curl_easy_cleanup(curl);
-        
-        if (fileUploader->_httpStatus == HTTP_OK)
-        {
-            fileUploader->setStatus(UPLOAD_STATUS_COMPLETE_SUCCESS);
-        }
-        else
-        {
-            fileUploader->setStatus(UPLOAD_STATUS_COMPLETE_FAILED);
-        }
-        
-        if (_loggingEnabled)
-        {
-            Json::Reader reader;
-            Json::StyledWriter writer;
-            Json::Value root;
-            reader.parse(fileUploader->_httpJsonResponse, root);
-            std::string jsonOutput = writer.write(root);
-            std::cout << "#BCC UPLOADER_INCOMING " << jsonOutput << std::endl;
-        }
-        fileUploader->_threadRunning = false;
-    }
-     */
-//}
+}
 
 #endif

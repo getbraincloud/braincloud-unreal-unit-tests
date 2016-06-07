@@ -20,12 +20,9 @@
 
 #if defined (IW_SDK)
 #include "braincloud/internal/marmalade/IwHttpLoader.h"
-//#elif (TARGET_OS_WATCH == 1)
 #elif (__APPLE__)
 #include "braincloud/internal/mac/nsURLLoader.h"
-  #if (TARGET_OS_WATCH == 0)
-    #include "braincloud/internal/nix/cURLFileUploader.h"
-  #endif
+#include "braincloud/internal/mac/nsFileUploader.h"
 #else
 #include "braincloud/internal/nix/cURLLoader.h"
 #include "braincloud/internal/nix/cURLFileUploader.h"
@@ -1080,10 +1077,12 @@ namespace BrainCloud
      
 #if defined (IW_SDK)
         std::cerr << "#BCC File upload operations not supported in Marmalade" << std::endl;
-#elif (TARGET_OS_WATCH == 1)
-        std::cerr << "#BCC File upload operations not supported in watchOS" << std::endl;
 #else
+    #if defined (__APPLE__)
+        NSFileUploader *uploader = new NSFileUploader();
+    #else
         cURLFileUploader *uploader = new cURLFileUploader();
+    #endif
         uploader->enableLogging(_loggingEnabled);
         uploader->setUploadLowTransferRateThreshold(_uploadLowTransferRateThresholdBytesPerSec);
         uploader->setUploadLowTransferRateTimeout(_uploadLowTransferRateTimeoutSecs);

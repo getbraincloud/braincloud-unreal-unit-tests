@@ -10,7 +10,7 @@ Pod::Spec.new do |s|
   # ―――  Spec Metadata  ―――――――――――――――――――――――――――――――――――――――――――――――――――――――――― #
 
   s.name     = "BrainCloudCpp"
-  s.version  = "2.24.1"
+  s.version  = "2.25.0"
   s.summary  = "The C++ client library for brainCloud"
   s.homepage = "http://getbraincloud.com/"
 
@@ -36,7 +36,7 @@ Pod::Spec.new do |s|
 
   s.header_mappings_dir     = "include"
   s.public_header_files     = "include/braincloud/**/*.h"
-  s.source_files            = "src/*.{c,cpp}", "src/mac/*.{c,cpp,mm}", "src/nix/*.{c,cpp}", "include/braincloud/*.h", "include/braincloud/internal/*.h", "include/braincloud/internal/mac/*.h", "include/braincloud/internal/nix/*.h"
+  s.source_files            = "src/*.{c,cpp}", "src/mac/*.{c,cpp,mm}", "include/braincloud/*.h", "include/braincloud/internal/*.h", "include/braincloud/internal/mac/*.h"
 
   # ――― Project Linking ―――――――――――――――――――――――――――――――――――――――――――――――――――――――――― #
 
@@ -44,7 +44,4 @@ Pod::Spec.new do |s|
   s.osx.framework           = 'LDAP'
   s.dependency                'SSKeychain'
   s.dependency                'BrainCloudJsonCpp'
-  s.ios.dependency            'BrainCloudCurl'
-  s.osx.dependency            'BrainCloudCurl'
-  s.tvos.dependency           'BrainCloudCurl'
 end
