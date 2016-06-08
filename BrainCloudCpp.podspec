@@ -38,6 +38,9 @@ Pod::Spec.new do |s|
   s.preserve_paths          = "include/*", "include/**/*"
   s.public_header_files     = "include/braincloud/*.h", "include/braincloud/**/*.h"
   s.source_files            = "src/*.{c,cpp}", "src/mac/*.{c,cpp,mm}", "include/braincloud/*.h", "include/braincloud/internal/*.h", "include/braincloud/internal/mac/*.h"
+  s.xcconfig = {
+    'USER_HEADER_SEARCH_PATHS' => '"${PODS_ROOT}/BrainCloudCpp/include"'
+  }
 
   # ――― Project Linking ―――――――――――――――――――――――――――――――――――――――――――――――――――――――――― #
 
