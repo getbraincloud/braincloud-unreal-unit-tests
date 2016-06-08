@@ -41,7 +41,7 @@ Pod::Spec.new do |s|
 
   # hack for use_frameworks!
   s.xcconfig = {
-    'USER_HEADER_SEARCH_PATHS' => '"${PODS_ROOT}/BrainCloudCpp/include"'
+    'USER_HEADER_SEARCH_PATHS' => '"${PODS_ROOT}/BrainCloudCpp/include" "${PODS_ROOT}/BrainCloudCpp-iOS/include" "${PODS_ROOT}/BrainCloudCpp-OSX/include" "${PODS_ROOT}/BrainCloudCpp-tvOS/include" "${PODS_ROOT}/BrainCloudCpp-watchOS/include"'
   }
 
   # ――― Project Linking ―――――――――――――――――――――――――――――――――――――――――――――――――――――――――― #
