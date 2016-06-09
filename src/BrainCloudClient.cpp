@@ -437,19 +437,33 @@ namespace BrainCloud {
 		_countryCode = cbuf;
 
 #elif defined(__APPLE__)
-		char charBuf[16];
-		CFLocaleRef locale = CFLocaleCopyCurrent();
-		CFStringRef langCode = (CFStringRef)CFLocaleGetValue(locale, kCFLocaleLanguageCode);
-		CFStringGetCString(langCode, charBuf, 16, kCFStringEncodingUTF8);
-		_languageCode = std::string(charBuf);
-		CFStringRef countryCode = (CFStringRef)CFLocaleGetValue(locale, kCFLocaleCountryCode);
-		CFStringGetCString(countryCode, charBuf, 16, kCFStringEncodingUTF8);
-		_countryCode = std::string(charBuf);
-		CFTimeZoneRef tz = CFTimeZoneCopySystem();
-		CFTimeInterval utcOffset = CFTimeZoneGetSecondsFromGMT(tz, CFAbsoluteTimeGetCurrent());
-		_timezoneOffset = utcOffset / 3600.0f;
-		CFRelease(locale);
-		CFRelease(tz);
+        char charBuf[16];
+        charBuf[0] = '\0';
+        
+        CFLocaleRef locale = CFLocaleCopyCurrent();
+        if (locale != nil)
+        {
+            CFStringRef langCode = (CFStringRef)CFLocaleGetValue(locale, kCFLocaleLanguageCode);
+            if (langCode != nil)
+            {
+                CFStringGetCString(langCode, charBuf, 16, kCFStringEncodingUTF8);
+                _languageCode = std::string(charBuf);
+            }
+            CFStringRef countryCode = (CFStringRef)CFLocaleGetValue(locale, kCFLocaleCountryCode);
+            if (countryCode != nil)
+            {
+                CFStringGetCString(countryCode, charBuf, 16, kCFStringEncodingUTF8);
+                _countryCode = std::string(charBuf);
+            }
+            CFTimeZoneRef tz = CFTimeZoneCopySystem();
+            if (tz != nil)
+            {
+                CFTimeInterval utcOffset = CFTimeZoneGetSecondsFromGMT(tz, CFAbsoluteTimeGetCurrent());
+                _timezoneOffset = utcOffset / 3600.0f;
+                CFRelease(tz);
+            }
+            CFRelease(locale);
+        }
 
 #elif defined (__ANDROID__)
 		// do NOT set countryCode etc here as the android
