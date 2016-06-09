@@ -177,7 +177,7 @@ namespace BrainCloud
         pthread_mutex_lock(&_lock);
         status = _status;
         pthread_mutex_unlock(&_lock);
-        return _status;
+        return status;
     }
     
     bool cURLFileUploader::isThreadRunning()
