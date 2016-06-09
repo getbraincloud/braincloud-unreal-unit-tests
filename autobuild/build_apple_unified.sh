@@ -127,6 +127,11 @@ function build_app()
   cp -r ../lib/jsoncpp-1.0.0 brainCloud/thirdparty
 
   cp docs/README.TXT brainCloud
+  pushd brainCloud
+  sed -i xxx "s/Platform: xxx/Platform: Apple C++/g" README.TXT
+  sed -i xxx "s/Version: x.x.x/Version: ${build_version}/g" README.TXT
+  rm -f README.TXTxxx
+  popd
 
   zip -r $artifacts_dir/brainCloudClient_${library_os}_${build_version}.zip brainCloud
 
