@@ -48,9 +48,8 @@ cp -r ../include/* artifacts/brainCloud/include
 
 cp docs/README.TXT artifacts/brainCloud
 pushd artifacts/brainCloud
-sed -i xxx "s/Platform: xxx/Platform: Linux C++/g" README.TXT
-sed -i xxx "s/Version: x.x.x/Version: ${build_version}/g" README.TXT
-rm -f README.TXTxxx
+sed -i "s/Platform: xxx/Platform: Linux C++/g" README.TXT
+sed -i "s/Version: x.x.x/Version: ${build_version}/g" README.TXT
 popd
 
 pushd artifacts
