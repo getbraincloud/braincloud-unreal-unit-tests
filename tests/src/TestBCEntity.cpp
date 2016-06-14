@@ -323,6 +323,44 @@ void TestBCEntity::DeleteAllDefaultEntities()
 }
 
 
+/*
+ TEST_F(TestBCTime, LargePacket)
+ {
+ TestResult tr;
+ 
+ std::vector<int> hugeTimeout;
+ hugeTimeout.push_back(180);
+ m_bc->setPacketTimeouts(hugeTimeout);
+ 
+ Json::Value entityData;
+ int mbs = 1;
+ for (int i = 0; i < mbs; ++i)
+ {
+ std::ostringstream oss;
+ oss << i;
+ std::string key = oss.str();
+ oss.clear();
+ for (int j = 0; j < (1024/8)*1024; ++j)
+ {
+ oss << "01234567";
+ }
+ std::string data = oss.str();
+ entityData[key] = data;
+ }
+ Json::FastWriter fw;
+ m_bc->getEntityService()->createEntity("largepacket", fw.write(entityData), "", &tr);
+ if (tr.run(m_bc))
+ {
+ // m_entityId = tr.m_response["data"]["entityId"].asString();
+ // ASSERT_NE("", m_entityId);
+ }
+ 
+ m_bc->setPacketTimeoutsToDefault();
+ }
+ */
+
+
+
 
 
 
