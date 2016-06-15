@@ -1,5 +1,5 @@
 //
-//  watchOSURLLoader.cpp
+//  nsURLLoader.mm
 //  BrainCloudCpp
 //
 //  Created by Mario Couture on 2016-04-27.
@@ -7,9 +7,6 @@
 //
 
 
-#if ( defined(GAMECLIENT_DEBUGLEVEL)  &&  GAMECLIENT_DEBUGLEVEL > 0 )
-#   include <iostream>
-#endif
 #include <cctype>
 
 #ifdef HG_PLATFORM_BB
@@ -45,10 +42,6 @@ long nsURLLoader::_timeoutInterval = 0;
 
 -(void) start
 {
-    
-#if ( defined(GAMECLIENT_DEBUGLEVEL)  &&  GAMECLIENT_DEBUGLEVEL > 0 )    
-//    NSLog(@"%s with a request url: %s",__PRETTY_FUNCTION__,_urlLoader->getRequest().getUrl().c_str());
-#endif
     //Creates a session with the specified session configuration, delegate, and operation queue. a nil queue autmatically create one.
     _session = [NSURLSession sessionWithConfiguration:[NSURLSessionConfiguration defaultSessionConfiguration]
                                              delegate:self
@@ -131,7 +124,6 @@ long nsURLLoader::_timeoutInterval = 0;
             [request setHTTPBody:[NSData dataWithBytes:_urlLoader->getRequest().getData().c_str()
                                                 length:_urlLoader->getRequest().getData().length()]];
             
-            //            rc = curl_easy_perform(curl);
             NSURLSessionDataTask* task = [_session dataTaskWithRequest:request];
             [task resume];
         }
@@ -160,9 +152,6 @@ long nsURLLoader::_timeoutInterval = 0;
     if ([response isKindOfClass:[NSHTTPURLResponse class]]) {
         NSHTTPURLResponse * httpResponse = (NSHTTPURLResponse * ) response;
         for (NSString* key in httpResponse.allHeaderFields.allKeys) {
-#if ( defined(GAMECLIENT_DEBUGLEVEL)  &&  GAMECLIENT_DEBUGLEVEL > 0 )
-//            NSLog(@"NSURLSessionDataTask  headers: %@\t%@",key,httpResponse.allHeaderFields[key]);
-#endif
             std::string h([key cStringUsingEncoding:NSUTF8StringEncoding]);
             URLRequestHeader header(h);
             std::string v([httpResponse.allHeaderFields[key] cStringUsingEncoding:NSUTF8StringEncoding]);
@@ -181,9 +170,6 @@ long nsURLLoader::_timeoutInterval = 0;
         return;
     };
 
-#if ( defined(GAMECLIENT_DEBUGLEVEL)  &&  GAMECLIENT_DEBUGLEVEL > 0 )
-//    NSLog(@"NSURLSessionDataTask received data of length: %d",data.length);
-#endif
     if (_urlLoader != NULL) {
         // Append the data to the buffer
         [data enumerateByteRangesUsingBlock:^(const void * _Nonnull bytes, NSRange byteRange, BOOL * _Nonnull stop) {
@@ -195,15 +181,8 @@ long nsURLLoader::_timeoutInterval = 0;
 //Asks the delegate whether the data (or upload) task should store the response in the cache.
 -(void)URLSession:(NSURLSession *)session dataTask:(NSURLSessionDataTask *)dataTask willCacheResponse:(NSCachedURLResponse *)proposedResponse completionHandler:(void (^)(NSCachedURLResponse * _Nullable))completionHandler
 {
-
-#if ( defined(GAMECLIENT_DEBUGLEVEL)  &&  GAMECLIENT_DEBUGLEVEL > 0 )
-//    NSLog(@"NSURLSessionDataTask completed, asking for cache policy.");
-#endif
     // Pass nil to refuse caching.
     completionHandler(nil);
-    if (_urlLoader != nil) {
-        _urlLoader->setThreadRunning(false);
-    }
 }
 
 // Tells the delegate that the task finished transferring data.
@@ -212,9 +191,7 @@ long nsURLLoader::_timeoutInterval = 0;
     if (_urlLoader == nil) {
         return;
     }
-#if ( defined(GAMECLIENT_DEBUGLEVEL)  &&  GAMECLIENT_DEBUGLEVEL > 0 )
-//    NSLog(@"NSURLSessionDataTask completed with error?");
-#endif
+    
     if (error) {
         // Here additional error could be trapped, but to keep parity with cURLLoader only these where added.
         if (error.code == NSURLErrorTimedOut) {
