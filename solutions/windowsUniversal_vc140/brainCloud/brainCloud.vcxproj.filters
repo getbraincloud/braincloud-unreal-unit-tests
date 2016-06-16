@@ -182,9 +182,6 @@
     <ClInclude Include="..\..\..\include\braincloud\internal\StringUtil.h">
       <Filter>include\braincloud\internal</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\include\braincloud\internal\Timer.h">
-      <Filter>include\braincloud\internal</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\..\include\braincloud\internal\TimerCallback.h">
       <Filter>include\braincloud\internal</Filter>
     </ClInclude>
@@ -344,9 +341,6 @@
       <Filter>src</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\src\StringUtil.cpp">
-      <Filter>src</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\src\Timer.cpp">
       <Filter>src</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\src\TimerCallback.cpp">
