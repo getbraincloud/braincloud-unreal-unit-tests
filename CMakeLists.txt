@@ -123,7 +123,6 @@ include/braincloud/internal/JsonUtil.h
 include/braincloud/internal/SaveDataHelper.h
 include/braincloud/internal/StringUtil.h
 include/braincloud/internal/TimeUtil.h
-include/braincloud/internal/Timer.h
 include/braincloud/internal/TimerCallback.h
 include/braincloud/internal/URLLoader.h
 include/braincloud/internal/URLLoaderClient.h
@@ -178,7 +177,6 @@ src/ServiceName.cpp
 src/ServiceOperation.cpp
 src/StringUtil.cpp
 src/TimeUtil.cpp
-src/Timer.cpp
 src/TimerCallback.cpp
 src/URLLoader.cpp
 src/URLLoaderClient.cpp
