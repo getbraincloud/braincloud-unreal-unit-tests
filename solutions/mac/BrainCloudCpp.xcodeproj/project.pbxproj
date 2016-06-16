@@ -69,7 +69,6 @@
 		DF22306F1CE38B06003A7D8D /* IBrainCloudComms.cpp in Sources */ = {isa = PBXBuildFile; fileRef = DF932C771CD9231B0085137C /* IBrainCloudComms.cpp */; };
 		DF2230701CE38B06003A7D8D /* BrainCloudFile.cpp in Sources */ = {isa = PBXBuildFile; fileRef = DF932C5E1CD9231B0085137C /* BrainCloudFile.cpp */; };
 		DF2230711CE38B06003A7D8D /* SSKeychainQuery.m in Sources */ = {isa = PBXBuildFile; fileRef = DF22302E1CE27DAA003A7D8D /* SSKeychainQuery.m */; };
-		DF2230721CE38B06003A7D8D /* Timer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = DF932C881CD9231B0085137C /* Timer.cpp */; };
 		DF2230731CE38B06003A7D8D /* SaveDataHelper.mm in Sources */ = {isa = PBXBuildFile; fileRef = DFEC5DDA1CE2690F0091952A /* SaveDataHelper.mm */; };
 		DF83CB761D01F56B00F1A565 /* nsFileUploader.mm in Sources */ = {isa = PBXBuildFile; fileRef = DF83CB751D01F56B00F1A565 /* nsFileUploader.mm */; };
 		DF83CB771D01F56B00F1A565 /* nsFileUploader.mm in Sources */ = {isa = PBXBuildFile; fileRef = DF83CB751D01F56B00F1A565 /* nsFileUploader.mm */; };
@@ -123,7 +122,6 @@
 		DF932CC41CD9231B0085137C /* ServiceName.cpp in Sources */ = {isa = PBXBuildFile; fileRef = DF932C851CD9231B0085137C /* ServiceName.cpp */; };
 		DF932CC51CD9231B0085137C /* ServiceOperation.cpp in Sources */ = {isa = PBXBuildFile; fileRef = DF932C861CD9231B0085137C /* ServiceOperation.cpp */; };
 		DF932CC61CD9231B0085137C /* StringUtil.cpp in Sources */ = {isa = PBXBuildFile; fileRef = DF932C871CD9231B0085137C /* StringUtil.cpp */; };
-		DF932CC71CD9231B0085137C /* Timer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = DF932C881CD9231B0085137C /* Timer.cpp */; };
 		DF932CC81CD9231B0085137C /* TimerCallback.cpp in Sources */ = {isa = PBXBuildFile; fileRef = DF932C891CD9231B0085137C /* TimerCallback.cpp */; };
 		DF932CC91CD9231B0085137C /* TimeUtil.cpp in Sources */ = {isa = PBXBuildFile; fileRef = DF932C8A1CD9231B0085137C /* TimeUtil.cpp */; };
 		DF932CCA1CD9231B0085137C /* URLLoader.cpp in Sources */ = {isa = PBXBuildFile; fileRef = DF932C8B1CD9231B0085137C /* URLLoader.cpp */; };
@@ -213,7 +211,6 @@
 		DF932E091CD92AB50085137C /* ServiceName.cpp in Sources */ = {isa = PBXBuildFile; fileRef = DF932C851CD9231B0085137C /* ServiceName.cpp */; };
 		DF932E0A1CD92AB50085137C /* ServiceOperation.cpp in Sources */ = {isa = PBXBuildFile; fileRef = DF932C861CD9231B0085137C /* ServiceOperation.cpp */; };
 		DF932E0B1CD92AB50085137C /* StringUtil.cpp in Sources */ = {isa = PBXBuildFile; fileRef = DF932C871CD9231B0085137C /* StringUtil.cpp */; };
-		DF932E0C1CD92AB50085137C /* Timer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = DF932C881CD9231B0085137C /* Timer.cpp */; };
 		DF932E0D1CD92AB50085137C /* TimerCallback.cpp in Sources */ = {isa = PBXBuildFile; fileRef = DF932C891CD9231B0085137C /* TimerCallback.cpp */; };
 		DF932E0E1CD92AB50085137C /* TimeUtil.cpp in Sources */ = {isa = PBXBuildFile; fileRef = DF932C8A1CD9231B0085137C /* TimeUtil.cpp */; };
 		DF932E0F1CD92AB50085137C /* URLLoader.cpp in Sources */ = {isa = PBXBuildFile; fileRef = DF932C8B1CD9231B0085137C /* URLLoader.cpp */; };
@@ -230,7 +227,6 @@
 		DF932E1C1CD92AB60085137C /* ServiceName.cpp in Sources */ = {isa = PBXBuildFile; fileRef = DF932C851CD9231B0085137C /* ServiceName.cpp */; };
 		DF932E1D1CD92AB60085137C /* ServiceOperation.cpp in Sources */ = {isa = PBXBuildFile; fileRef = DF932C861CD9231B0085137C /* ServiceOperation.cpp */; };
 		DF932E1E1CD92AB60085137C /* StringUtil.cpp in Sources */ = {isa = PBXBuildFile; fileRef = DF932C871CD9231B0085137C /* StringUtil.cpp */; };
-		DF932E1F1CD92AB60085137C /* Timer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = DF932C881CD9231B0085137C /* Timer.cpp */; };
 		DF932E201CD92AB60085137C /* TimerCallback.cpp in Sources */ = {isa = PBXBuildFile; fileRef = DF932C891CD9231B0085137C /* TimerCallback.cpp */; };
 		DF932E211CD92AB60085137C /* TimeUtil.cpp in Sources */ = {isa = PBXBuildFile; fileRef = DF932C8A1CD9231B0085137C /* TimeUtil.cpp */; };
 		DF932E221CD92AB60085137C /* URLLoader.cpp in Sources */ = {isa = PBXBuildFile; fileRef = DF932C8B1CD9231B0085137C /* URLLoader.cpp */; };
@@ -334,7 +330,6 @@
 		DF932C851CD9231B0085137C /* ServiceName.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ServiceName.cpp; sourceTree = "<group>"; };
 		DF932C861CD9231B0085137C /* ServiceOperation.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ServiceOperation.cpp; sourceTree = "<group>"; };
 		DF932C871CD9231B0085137C /* StringUtil.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = StringUtil.cpp; sourceTree = "<group>"; };
-		DF932C881CD9231B0085137C /* Timer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Timer.cpp; sourceTree = "<group>"; };
 		DF932C891CD9231B0085137C /* TimerCallback.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = TimerCallback.cpp; sourceTree = "<group>"; };
 		DF932C8A1CD9231B0085137C /* TimeUtil.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = TimeUtil.cpp; sourceTree = "<group>"; };
 		DF932C8B1CD9231B0085137C /* URLLoader.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = URLLoader.cpp; sourceTree = "<group>"; };
@@ -465,7 +460,6 @@
 				DF932C851CD9231B0085137C /* ServiceName.cpp */,
 				DF932C861CD9231B0085137C /* ServiceOperation.cpp */,
 				DF932C871CD9231B0085137C /* StringUtil.cpp */,
-				DF932C881CD9231B0085137C /* Timer.cpp */,
 				DF932C891CD9231B0085137C /* TimerCallback.cpp */,
 				DF932C8A1CD9231B0085137C /* TimeUtil.cpp */,
 				DF932C8B1CD9231B0085137C /* URLLoader.cpp */,
@@ -719,7 +713,6 @@
 				DF932CB91CD9231B0085137C /* IBrainCloudComms.cpp in Sources */,
 				DF932CA01CD9231B0085137C /* BrainCloudFile.cpp in Sources */,
 				DF2230301CE27DAA003A7D8D /* SSKeychainQuery.m in Sources */,
-				DF932CC71CD9231B0085137C /* Timer.cpp in Sources */,
 				DFEC5DDB1CE2690F0091952A /* SaveDataHelper.mm in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -761,7 +754,6 @@
 				DF932DE51CD92AAB0085137C /* BrainCloudScript.cpp in Sources */,
 				DF932DEC1CD92AAB0085137C /* IBrainCloudComms.cpp in Sources */,
 				DF932E1C1CD92AB60085137C /* ServiceName.cpp in Sources */,
-				DF932E1F1CD92AB60085137C /* Timer.cpp in Sources */,
 				DF932DA71CD9296E0085137C /* md5x.c in Sources */,
 				DF932E221CD92AB60085137C /* URLLoader.cpp in Sources */,
 				DF932E161CD92AB60085137C /* nsURLLoader.mm in Sources */,
@@ -828,7 +820,6 @@
 				DF932DC21CD92AAB0085137C /* BrainCloudScript.cpp in Sources */,
 				DF932DC91CD92AAB0085137C /* IBrainCloudComms.cpp in Sources */,
 				DF932E091CD92AB50085137C /* ServiceName.cpp in Sources */,
-				DF932E0C1CD92AB50085137C /* Timer.cpp in Sources */,
 				DF932DB41CD92AAB0085137C /* BrainCloudGlobalEntity.cpp in Sources */,
 				DF932E0F1CD92AB50085137C /* URLLoader.cpp in Sources */,
 				DF932E031CD92AB50085137C /* md5x.c in Sources */,
@@ -920,7 +911,6 @@
 				DF22306F1CE38B06003A7D8D /* IBrainCloudComms.cpp in Sources */,
 				DF2230701CE38B06003A7D8D /* BrainCloudFile.cpp in Sources */,
 				DF2230711CE38B06003A7D8D /* SSKeychainQuery.m in Sources */,
-				DF2230721CE38B06003A7D8D /* Timer.cpp in Sources */,
 				DF2230731CE38B06003A7D8D /* SaveDataHelper.mm in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
