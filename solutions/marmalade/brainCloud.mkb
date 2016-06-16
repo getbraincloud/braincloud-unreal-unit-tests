@@ -95,7 +95,6 @@ files
     SaveDataHelper.h
     StringUtil.h
     TimeUtil.h
-    Timer.h
     TimerCallback.h
     URLLoader.h
     URLLoaderClient.h
@@ -157,7 +156,6 @@ files
     ServiceOperation.cpp
     StringUtil.cpp
     TimeUtil.cpp
-    Timer.cpp
     TimerCallback.cpp
     URLLoader.cpp
     URLLoaderClient.cpp

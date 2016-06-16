@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <Project DefaultTargets="Build" ToolsVersion="12.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup Label="ProjectConfigurations">
     <ProjectConfiguration Include="Debug|ARM">
@@ -72,7 +72,6 @@
     <ClInclude Include="..\..\..\include\braincloud\internal\JsonUtil.h" />
     <ClInclude Include="..\..\..\include\braincloud\internal\SaveDataHelper.h" />
     <ClInclude Include="..\..\..\include\braincloud\internal\StringUtil.h" />
-    <ClInclude Include="..\..\..\include\braincloud\internal\Timer.h" />
     <ClInclude Include="..\..\..\include\braincloud\internal\TimerCallback.h" />
     <ClInclude Include="..\..\..\include\braincloud\internal\TimeUtil.h" />
     <ClInclude Include="..\..\..\include\braincloud\internal\URLLoader.h" />
@@ -140,7 +139,6 @@
     <ClCompile Include="..\..\..\src\ServiceName.cpp" />
     <ClCompile Include="..\..\..\src\ServiceOperation.cpp" />
     <ClCompile Include="..\..\..\src\StringUtil.cpp" />
-    <ClCompile Include="..\..\..\src\Timer.cpp" />
     <ClCompile Include="..\..\..\src\TimerCallback.cpp" />
     <ClCompile Include="..\..\..\src\TimeUtil.cpp" />
     <ClCompile Include="..\..\..\src\URLLoader.cpp" />
