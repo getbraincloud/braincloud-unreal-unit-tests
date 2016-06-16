@@ -25,7 +25,7 @@ nuget {
 	// the nuspec file metadata
 	nuspec {
 		id = brainCloudCppSdk-x64;
-		version : 2.24.0;
+		version : 2.25.0;
 		title: "brainCloud C++ SDK";
 		authors: {bitHeads inc.};
 		owners: {bitHeads inc.};
@@ -35,7 +35,7 @@ nuget {
 		requireLicenseAcceptance:false;
 		summary: "brainCloud Client SDK for Windows Universal Apps.";
 		description: "A C++ native library for connecting Windows 10 Universal Apps to the brainCloud back-end. Currently supports Visual Studio 2015.";
-		releaseNotes: "Release of brainCloud 2.24.0";
+		releaseNotes: "Release of brainCloud 2.25.0";
 		copyright: "Copyright 2016";
 		tags: { braincloud, native };
 	};
