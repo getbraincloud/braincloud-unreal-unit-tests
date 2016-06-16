@@ -43,8 +43,14 @@ mkdir brainCloud\thirdparty\curl-7.44.0
 mkdir brainCloud\thirdparty\curl-7.44.0\include
 xcopy /s /i /y ..\..\lib\win32\curl-7.44.0\include brainCloud\thirdparty\curl-7.44.0\include
 
-cd artifacts
+copy /y ..\docs\README.txt brainCloud
+cd brainCloud
+powershell -Command "(Get-Content README.txt) | ForEach-Object { $_ -replace \"Platform: xxx\", \"Platform: C++ (VC %vc_version%)\" } | Set-Content README.txt"
+powershell -Command "(Get-Content README.txt) | ForEach-Object { $_ -replace \"Version: x.x.x\", \"Version: %build_version%\" } | Set-Content README.txt"
+cd ..
+
 "C:\Program Files (x86)\7-Zip\7z.exe" a "brainCloudClient_Win32_VC%vc_version%_C++_%build_version%.zip" brainCloud
+del /f brainCloud\README.txt 
 
 goto eof
 
