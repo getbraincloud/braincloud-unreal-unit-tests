@@ -81,7 +81,7 @@ def buildWinDesktop(artifacts, version, rebuild):
 	binPath = projectPath + os.sep + "solutions" + os.sep + "windowsDesktop_vc120" + os.sep + "bin"
 
 	# zip up build directly from source files	
-	with zipfile.ZipFile(artifacts + os.sep + "brainCloudClient_WindowsDesktop_" + version + ".zip", "w", compression=zipfile.ZIP_DEFLATED) as myzip:
+	with zipfile.ZipFile("artifacts" + os.sep + "brainCloudClient_WindowsDesktop_" + version + ".zip", "w", compression=zipfile.ZIP_DEFLATED) as myzip:
 		
 		for fname in glob.iglob(binPath + os.sep + "Win32" + os.sep + "Release" + os.sep + "*.*"):
 			myzip.write(fname, "lib" + os.sep + "win32" + os.sep + "release" + os.sep + os.path.basename(fname))
@@ -188,15 +188,14 @@ def buildWinStore(artifacts, version, rebuild):
 	binPath = projectPath + os.sep + "solutions" + os.sep + "windowsStore_vc120" + os.sep + "bin" 
 
 	# zip up build directly from source files	
-	with zipfile.ZipFile(artifacts + os.sep + "brainCloudClient_WindowsStore_" + version + ".zip", "w", compression=zipfile.ZIP_DEFLATED) as myzip:
+	with zipfile.ZipFile("artifacts" + os.sep + "brainCloudClient_WindowsStore_" + version + ".zip", "w", compression=zipfile.ZIP_DEFLATED) as myzip:
 		util.zipdir(rootPath + os.sep + "include" + os.sep, myzip, "include")
 
 		util.zipdir(binPath, myzip, "lib")
 		util.zipdir(rootPath + os.sep + "lib" + os.sep + "jsoncpp-1.0.0", myzip, "thirdparty" + os.sep + "jsoncpp-1.0.0")
 		util.zipdir(rootPath + os.sep + "lib" + os.sep + "win32" + os.sep + "cpprestsdk-static" + os.sep + "Release" + os.sep + "include", myzip, "thirdparty" + os.sep + "casablanca" + os.sep + "include")
 
-		myzip.write("docs/README.TXT", "README.TXT")
-
+		myzip.write("artifacts" + os.sep + "README.TXT", "README.TXT")
 	return
 
 
@@ -265,7 +264,7 @@ def buildWinUwp(artifacts, version, rebuild):
 	binPath = projectPath + os.sep + "solutions" + os.sep + "windowsUniversal_vc140" + os.sep + "brainCloud" + os.sep + "Output"
 
 	# zip up build directly from source files	
-	with zipfile.ZipFile(artifacts + os.sep + "brainCloudClient_WindowsUniversal_" + version + ".zip", "w", compression=zipfile.ZIP_DEFLATED) as myzip:
+	with zipfile.ZipFile("artifacts" + os.sep + "brainCloudClient_WindowsUniversal_" + version + ".zip", "w", compression=zipfile.ZIP_DEFLATED) as myzip:
 		
 		for fname in glob.iglob(binPath + os.sep + "ARM" + os.sep + "Release" + os.sep + "*.*"):
 			myzip.write(fname, "lib" + os.sep + "ARM" + os.sep + "release" + os.sep + os.path.basename(fname))
