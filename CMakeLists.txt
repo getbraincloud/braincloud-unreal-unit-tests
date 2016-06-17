@@ -208,12 +208,13 @@ elseif (${CMAKE_SYSTEM_NAME} MATCHES "Linux")
 	target_link_libraries(brainCloud ${BC_CURL_LIB} ${BC_SSL_LIB} ${BC_CRYPTO_LIB})
 	
 elseif (${CMAKE_SYSTEM_NAME} MATCHES "Windows")
-	include_directories("${BC_DIR}/lib/win32/pthread-w32-2-8-0/Pre-built.2/include")
-	
-	add_definitions(-DWIN32 -D_LIB -DPTW32_STATIC_LIB)
-	find_library(BC_PTHREADW32_LIB pthreadVCE2 "${BC_DIR}/lib/win32/pthread-w32-2-8-0/Pre-built.2/lib")
 
 	if (${NO_CPPREST_SDK})
+		include_directories("${BC_DIR}/lib/win32/pthread-w32-2-8-0/Pre-built.2/include")
+		
+		add_definitions(-DWIN32 -D_LIB -DPTW32_STATIC_LIB)
+		find_library(BC_PTHREADW32_LIB pthreadVCE2 "${BC_DIR}/lib/win32/pthread-w32-2-8-0/Pre-built.2/lib")
+	
 		add_definitions(-DCURL_STATICLIB)
 		include_directories("${BC_DIR}/lib/win32/curl-7.44.0/include")	
 		find_library(BC_CURL_LIB_RELEASE libcurl_a.lib "${BC_DIR}/lib/win32/curl-7.44.0/lib")
@@ -221,12 +222,14 @@ elseif (${CMAKE_SYSTEM_NAME} MATCHES "Windows")
 		target_link_libraries(brainCloud general ${BC_PTHREADW32_LIB} optimized ${BC_CURL_LIB_RELEASE} debug ${BC_CURL_LIB_DEBUG})
 
 	else()
-
-		# we manually copy in a static lib version of casablanca to get this working. Note the lib is not included in the git repo
-		include_directories("${BC_DIR}/lib/win32/casablanca-staticlib/Release/include")
+	
+		# TODO: the cpprestsdk-static is *not* built by the CMake project.
+		# You will need to manually load up the project and build the various libs
+		
+		include_directories("${BC_DIR}/lib/win32/cpprestsdk-static/Release/include")
 		add_definitions(-D_NO_ASYNCRTIMP -DUSE_NEW_COMMS)
-		find_library(BC_CPPREST_RELEASE_LIB cpprest120_2_6.lib "${BC_DIR}/lib/win32/casablanca-staticlib/Binaries/Win32/Release")
-		find_library(BC_CPPREST_DEBUG_LIB cpprest140d_2_6.lib "${BC_DIR}/lib/win32/casablanca-staticlib/Binaries/Win32/Debug")
+		find_library(BC_CPPREST_RELEASE_LIB cpprest120_2_0.lib "${BC_DIR}/lib/win32/cpprestsdk-static/Binaries/Win32/Release")
+		find_library(BC_CPPREST_DEBUG_LIB cpprest120d_2_0.lib "${BC_DIR}/lib/win32/cpprestsdk-static/Binaries/Win32/Debug")
 
 		# additional libs required by cpprestsdk
 		set (WIN_PLATFORM_DIR "C:/Program Files (x86)/Windows Kits/8.1/Lib/winv6.3/um/x86")
@@ -234,7 +237,7 @@ elseif (${CMAKE_SYSTEM_NAME} MATCHES "Windows")
 		find_library(BC_BCRYPT_LIB bcrypt.lib ${WIN_PLATFORM_DIR})
 		find_library(BC_CRYPT32_LIB crypt32.lib ${WIN_PLATFORM_DIR})
 
-		target_link_libraries(brainCloud general ${BC_PTHREADW32_LIB} ${BC_WINHTTP_LIB} ${BC_BCRYPT_LIB} ${BC_CRYPT32_LIB} debug ${BC_CPPREST_DEBUG_LIB} optimized ${BC_CPPREST_RELEASE_LIB})
+		target_link_libraries(brainCloud general ${BC_WINHTTP_LIB} ${BC_BCRYPT_LIB} ${BC_CRYPT32_LIB} debug ${BC_CPPREST_DEBUG_LIB} optimized ${BC_CPPREST_RELEASE_LIB})
 
 	endif()
 
