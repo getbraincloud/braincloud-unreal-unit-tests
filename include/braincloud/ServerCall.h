@@ -29,12 +29,14 @@ namespace BrainCloud {
 
         virtual ~ServerCall( );
 
-        IServerCallback *    getCallback( ) const              { return( _callback ); }
+        IServerCallback *    getCallback( ) const               { return( _callback ); }
         const Json::Value *  getPayload( );
-        ServiceOperation          getOperation( ) const             { return( _operation ); }
-        ServiceName          getService( ) const               { return( _service ); }
-        std::string          getPostPayload( ) const           { return( _postPayload ); }
-        void                 setPostPayload( std::string val ) { _postPayload = val; }
+        ServiceOperation     getOperation( ) const              { return( _operation ); }
+        ServiceName          getService( ) const                { return( _service ); }
+        std::string          getPostPayload( ) const            { return( _postPayload ); }
+        void                 setPostPayload( std::string val )  { _postPayload = val; }
+        bool                 isEndOfBundleMarker() const        { return _isEndOfBundleMarker; }
+        void                 setEndOfBundleMarker(bool value)   { _isEndOfBundleMarker = value; }
 
     protected:
 
@@ -45,6 +47,7 @@ namespace BrainCloud {
         ServiceOperation                    _operation;
         ServiceName                         _service;
         Json::Value                         _payload;
+        bool                                _isEndOfBundleMarker;
 
         // Only used for non-bundled posts... 
         std::string                         _postPayload;

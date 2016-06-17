@@ -276,6 +276,13 @@ namespace BrainCloud {
         }
     }
     
+    void IBrainCloudComms::insertEndOfMessageBundleMarker()
+    {
+        ServerCall *sc = new ServerCall();
+        sc->setEndOfBundleMarker(true);
+        addToQueue(sc);
+    }
+    
     void IBrainCloudComms::createJsonErrorResponse(int in_statusCode,
                                                    int in_reasonCode,
                                                    const std::string & in_statusMessage,

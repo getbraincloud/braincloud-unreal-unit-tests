@@ -414,6 +414,11 @@ namespace BrainCloud {
 	{
 		_brainCloudComms->flushCachedMessages(in_sendApiErrorCallbacks);
 	}
+    
+    void BrainCloudClient::insertEndOfMessageBundleMarker()
+    {
+        _brainCloudComms->insertEndOfMessageBundleMarker();
+    }
 
 	////////////////////////////////////////////////////
 	// Private Methods

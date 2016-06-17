@@ -503,6 +503,22 @@ namespace BrainCloud
          * and reasonCode CLIENT_NETWORK_ERROR_TIMEOUT.
          */
         void flushCachedMessages(bool in_sendApiErrorCallbacks);
+        
+        /**
+         * Inserts a marker which will tell the brainCloud comms layer
+         * to close the message bundle off at this point. Any messages queued
+         * before this method was called will likely be bundled together in
+         * the next send to the server.
+         *
+         * To ensure that only a single message is sent to the server you would
+         * do something like this:
+         *
+         * InsertEndOfMessageBundleMarker()
+         * SomeApiCall()
+         * InsertEndOfMessageBundleMarker()
+         *
+         */
+        void insertEndOfMessageBundleMarker();
 
     protected:
         BrainCloudClient();
