@@ -1,5 +1,3 @@
-#include "..\include\braincloud\BrainCloudGroup.h"
-#include "..\include\braincloud\BrainCloudGroup.h"
 // Copyright 2016 bitHeads, Inc. All Rights Reserved.
 
 #include "braincloud/BrainCloudGroup.h"

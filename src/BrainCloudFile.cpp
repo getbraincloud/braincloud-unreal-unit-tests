@@ -1,4 +1,3 @@
-#include "..\include\braincloud\BrainCloudFile.h"
 // Copyright 2016 bitHeads, Inc. All Rights Reserved.
 
 #include "braincloud/BrainCloudFile.h"
