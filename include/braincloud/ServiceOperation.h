@@ -82,6 +82,7 @@ namespace BrainCloud {
 		static const ServiceOperation PostScore;
 		static const ServiceOperation PostScoreDynamic;
 		static const ServiceOperation GetGroupSocialLeaderboard;
+		static const ServiceOperation GetSummaryDataForProfileId;
 
 		static const ServiceOperation InitThirdParty;
 		static const ServiceOperation PostThirdPartyLeaderboardScore;
@@ -199,6 +200,7 @@ namespace BrainCloud {
 		static const ServiceOperation GetPage;
 		static const ServiceOperation GetPageOffset;
 		static const ServiceOperation IncrementUserEntityData;
+		static const ServiceOperation IncrementSharedUserEntityData;
 		static const ServiceOperation IncrementGlobalEntityData;
 
 		static const ServiceOperation GetAttributes;
@@ -214,6 +216,7 @@ namespace BrainCloud {
 
 		static const ServiceOperation ScheduleCloudScript;
 		static const ServiceOperation RunParentScript;
+		static const ServiceOperation CancelScheduledScript;
 
 		static const ServiceOperation RedeemCode;
 		static const ServiceOperation GetRedeemedCodes;
@@ -231,11 +234,13 @@ namespace BrainCloud {
 		static const ServiceOperation PrepareUserUpload;
 		static const ServiceOperation ListUserFiles;
 		static const ServiceOperation DeleteUserFiles;
+		static const ServiceOperation GetCdnUrl;
 
 		//group
 		static const ServiceOperation AcceptGroupInvitation;
 		static const ServiceOperation AddGroupMember;
 		static const ServiceOperation ApproveGroupJoinRequest;
+		static const ServiceOperation AutoJoinGroup;
 		static const ServiceOperation CancelGroupInvitation;
 		static const ServiceOperation CreateGroup;
 		static const ServiceOperation CreateGroupEntity;
@@ -252,6 +257,7 @@ namespace BrainCloud {
 		static const ServiceOperation ListGroupsPageByOffset;
 		static const ServiceOperation ListGroupsWithMember;
 		static const ServiceOperation ReadGroup;
+		static const ServiceOperation ReadGroupData;
 		static const ServiceOperation ReadGroupEntitiesPage;
 		static const ServiceOperation ReadGroupEntitiesPageByOffset;
 		static const ServiceOperation ReadGroupEntity;

@@ -160,7 +160,7 @@ TEST_F(TestBCGlobalEntity, IncremenGlobalEntityData)
     m_bc->getGlobalEntityService()->createEntity(m_entityType, -1, m_entityAclJson, fw.write(entityData), &tr);
     if (tr.run(m_bc)) entityId = tr.m_response["data"]["entityId"].asString();
 
-    m_bc->getGlobalEntityService()->incrementGlobalEntityData(entityId.c_str(), fw.write(entityData), true, &tr);
+    m_bc->getGlobalEntityService()->incrementGlobalEntityData(entityId.c_str(), fw.write(entityData), &tr);
     tr.run(m_bc);
 
     m_bc->getGlobalEntityService()->deleteEntity(entityId, -1, &tr);

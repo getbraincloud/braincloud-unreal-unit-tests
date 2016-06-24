@@ -38,6 +38,14 @@ namespace BrainCloud
          */
         void getFileList(const char * in_category, IServerCallback * in_callback = NULL);
 
+		/**
+		* Returns the CDN url for a file
+		*
+		* @param in_fileId ID of file
+		* @param in_callback The method to be invoked when the server response is received
+		*/
+		void getCDNUrl(const char * in_fileId, IServerCallback * in_callback = NULL);
+
     private:
         BrainCloudClient * m_client;
     };

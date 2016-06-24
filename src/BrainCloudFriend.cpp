@@ -1,3 +1,4 @@
+#include "..\include\braincloud\BrainCloudFriend.h"
 // Copyright 2016 bitHeads, Inc. All Rights Reserved.
 
 #include "braincloud/BrainCloudFriend.h"
@@ -87,6 +88,15 @@ namespace BrainCloud
         ServerCall * sc = new ServerCall(ServiceName::Friend, ServiceOperation::ReadFriendsPlayerState, message, in_callback);
         m_client->getBrainCloudComms()->addToQueue(sc);
     }
+
+	void BrainCloudFriend::getSummaryDataForProfileId(const char * in_profileId, IServerCallback * in_callback)
+	{
+		Json::Value message;
+		message[OperationParam::FriendServiceProfileId.getValue()] = in_profileId;
+
+		ServerCall * sc = new ServerCall(ServiceName::Friend, ServiceOperation::GetSummaryDataForProfileId, message, in_callback);
+		m_client->getBrainCloudComms()->addToQueue(sc);
+	}
 
     void BrainCloudFriend::findPlayerByName(const char * in_searchText, int32_t in_maxResults, IServerCallback * in_callback)
     {

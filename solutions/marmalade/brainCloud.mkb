@@ -68,7 +68,6 @@ files
     BrainCloudSocialLeaderboard.h
     BrainCloudSteam.h
     BrainCloudTime.h
-    BrainCloudTwitter.h
     BrainCloudTypes.h
     BrainCloudWrapper.h
     FriendPlatform.h
@@ -142,7 +141,6 @@ files
     BrainCloudSocialLeaderboard.cpp
     BrainCloudSteam.cpp
     BrainCloudTime.cpp
-    BrainCloudTwitter.cpp
     BrainCloudWrapper.cpp
     FriendPlatform.cpp
     GUID.cpp

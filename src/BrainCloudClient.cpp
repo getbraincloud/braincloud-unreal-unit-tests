@@ -74,7 +74,6 @@ namespace BrainCloud {
 		_socialLeaderboardService(new BrainCloudSocialLeaderboard(this)),
 		_steamService(new BrainCloudSteam(this)),
 		_timeService(new BrainCloudTime(this)),
-		_twitterService(new BrainCloudTwitter(this)),
 		_releasePlatform(""),
 		_gameVersion(""),
 		_timezoneOffset(0.0)
@@ -414,11 +413,11 @@ namespace BrainCloud {
 	{
 		_brainCloudComms->flushCachedMessages(in_sendApiErrorCallbacks);
 	}
-    
-    void BrainCloudClient::insertEndOfMessageBundleMarker()
-    {
-        _brainCloudComms->insertEndOfMessageBundleMarker();
-    }
+
+	void BrainCloudClient::insertEndOfMessageBundleMarker()
+	{
+		_brainCloudComms->insertEndOfMessageBundleMarker();
+	}
 
 	////////////////////////////////////////////////////
 	// Private Methods
@@ -442,33 +441,33 @@ namespace BrainCloud {
 		_countryCode = cbuf;
 
 #elif defined(__APPLE__)
-        char charBuf[16];
-        charBuf[0] = '\0';
-        
-        CFLocaleRef locale = CFLocaleCopyCurrent();
-        if (locale != nil)
-        {
-            CFStringRef langCode = (CFStringRef)CFLocaleGetValue(locale, kCFLocaleLanguageCode);
-            if (langCode != nil)
-            {
-                CFStringGetCString(langCode, charBuf, 16, kCFStringEncodingUTF8);
-                _languageCode = std::string(charBuf);
-            }
-            CFStringRef countryCode = (CFStringRef)CFLocaleGetValue(locale, kCFLocaleCountryCode);
-            if (countryCode != nil)
-            {
-                CFStringGetCString(countryCode, charBuf, 16, kCFStringEncodingUTF8);
-                _countryCode = std::string(charBuf);
-            }
-            CFTimeZoneRef tz = CFTimeZoneCopySystem();
-            if (tz != nil)
-            {
-                CFTimeInterval utcOffset = CFTimeZoneGetSecondsFromGMT(tz, CFAbsoluteTimeGetCurrent());
-                _timezoneOffset = utcOffset / 3600.0f;
-                CFRelease(tz);
-            }
-            CFRelease(locale);
-        }
+		char charBuf[16];
+		charBuf[0] = '\0';
+
+		CFLocaleRef locale = CFLocaleCopyCurrent();
+		if (locale != nil)
+		{
+			CFStringRef langCode = (CFStringRef)CFLocaleGetValue(locale, kCFLocaleLanguageCode);
+			if (langCode != nil)
+			{
+				CFStringGetCString(langCode, charBuf, 16, kCFStringEncodingUTF8);
+				_languageCode = std::string(charBuf);
+			}
+			CFStringRef countryCode = (CFStringRef)CFLocaleGetValue(locale, kCFLocaleCountryCode);
+			if (countryCode != nil)
+			{
+				CFStringGetCString(countryCode, charBuf, 16, kCFStringEncodingUTF8);
+				_countryCode = std::string(charBuf);
+			}
+			CFTimeZoneRef tz = CFTimeZoneCopySystem();
+			if (tz != nil)
+			{
+				CFTimeInterval utcOffset = CFTimeZoneGetSecondsFromGMT(tz, CFAbsoluteTimeGetCurrent());
+				_timezoneOffset = utcOffset / 3600.0f;
+				CFRelease(tz);
+			}
+			CFRelease(locale);
+		}
 
 #elif defined (__ANDROID__)
 		// do NOT set countryCode etc here as the android

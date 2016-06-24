@@ -116,9 +116,6 @@
     <ClInclude Include="..\..\..\include\braincloud\BrainCloudTime.h">
       <Filter>include\braincloud</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\include\braincloud\BrainCloudTwitter.h">
-      <Filter>include\braincloud</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\..\include\braincloud\BrainCloudTypes.h">
       <Filter>include\braincloud</Filter>
     </ClInclude>
@@ -308,9 +305,6 @@
       <Filter>src</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\src\BrainCloudTime.cpp">
-      <Filter>src</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\src\BrainCloudTwitter.cpp">
       <Filter>src</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\src\FriendPlatform.cpp">

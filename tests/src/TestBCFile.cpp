@@ -212,6 +212,25 @@ TEST_F(TestBCFile, DeleteUserFile)
     tr.run(m_bc);
 }
 
+TEST_F(TestBCFile, GetCDNUrl)
+{
+	std::string uploadId;
+	if (!simpleUpload(19, "", "uploadsimplefile.txt", uploadId))
+	{
+		return;
+	}
+
+	ASSERT_EQ(_completedUploadDetails.size(), 1);
+	ASSERT_EQ(_failedUploadDetails.size(), 0);
+
+	TestResult tr;
+	m_bc->getFileService()->getCDNUrl("", "uploadsimplefile.txt", &tr);
+	tr.run(m_bc);
+
+	m_bc->getFileService()->deleteUserFile("", "uploadsimplefile.txt", &tr);
+	tr.run(m_bc);
+}
+
 // this test requires use of a bandwidth limiter
 // so it's normally commented out
 /*

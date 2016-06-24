@@ -1,3 +1,4 @@
+#include "..\include\braincloud\BrainCloudFile.h"
 // Copyright 2016 bitHeads, Inc. All Rights Reserved.
 
 #include "braincloud/BrainCloudFile.h"
@@ -107,7 +108,18 @@ namespace BrainCloud
         m_client->getBrainCloudComms()->addToQueue(sc);
     }
 
-    void BrainCloudFile::cancelUpload(const char * in_uploadFileId)
+	void BrainCloudFile::getCDNUrl(const char * in_cloudPath, const char * in_cloudFileName, IServerCallback * in_callback)
+	{
+		Json::Value message;
+
+		message[OperationParam::UploadCloudPath.getValue()] = in_cloudPath;
+		message[OperationParam::UploadCloudFilename.getValue()] = in_cloudFileName;
+
+		ServerCall * sc = new ServerCall(ServiceName::File, ServiceOperation::GetCdnUrl, message, in_callback);
+		m_client->getBrainCloudComms()->addToQueue(sc);
+	}
+
+	void BrainCloudFile::cancelUpload(const char * in_uploadFileId)
     {
         m_client->getBrainCloudComms()->cancelUpload(in_uploadFileId);
     }
