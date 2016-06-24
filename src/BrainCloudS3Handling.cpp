@@ -1,4 +1,3 @@
-#include "..\include\braincloud\BrainCloudS3Handling.h"
 // Copyright 2016 bitHeads, Inc. All Rights Reserved.
 
 #include "braincloud/BrainCloudS3Handling.h"
