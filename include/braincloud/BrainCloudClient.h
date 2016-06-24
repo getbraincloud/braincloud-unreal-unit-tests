@@ -83,13 +83,7 @@ namespace BrainCloud
 		 * @return BrainCloudClient * - pointer to the singleton BrainCloudClient object
 		 */
 		static BrainCloudClient * getInstance();
-
-		/**
-		* @deprecated - use initialize(const char * in_serverURL, const char * in_secretKey, const char * in_gameId, const char * in_gameVersion)
-		* as appId and region are not used. Removal after June 21 2016
-		*/
-		DEPRECATED void initialize(const char * in_serverURL, const char * in_secretKey, const char * in_gameId, const char * in_gameVersion, const char * in_appId, const char * in_region);
-
+		
 		/**
 		 * Method initializes the BrainCloudClient.
 		 *
@@ -324,35 +318,13 @@ namespace BrainCloud
 		// ---------------------------------------------------------------------
 
 		/**
-		 * Deprecated - Use Initialize instead - Removal after June 21 2016
-		 *
-		 * Set the url of the server to communicate with.
-		 * Currently this should be:  https://sharedprod.braincloudservers.com/dispatcherv2
-		 *
-		 * @param in_serverUrl - the brainCloud server URL
-		 */
-		DEPRECATED void setServerUrl(const char * in_serverUrl);
-
-		/**
-		 * Deprecated - Removal after June 21 2016
-		 *
-		 * Used for setting authentication session info - Not currently used,
-		 * and you probably won't need to call this directly (but we're keeping
-		 * it public just in case...)
-		 *
-		 * @param in_id - the session id
-		 */
-		DEPRECATED void setSessionId(const char * in_id);
-
-		/**
-		 * Deprecated - Removal after May 10 2016
-		 *
-		 * set an interval in ms for which the BrainCloud will contact the server
-		 * and receive any pending events
-		 *
-		 * @param in_intervalInMilliseconds The time between heartbeats in milliseconds
-		 */
-		DEPRECATED void setHeartbeatInterval(int in_intervalInMilliseconds);
+		* THIH METHOD IS FOR DEBUGGING USE ONLY
+		* Hearbeat interval is automatically set based on the session timeout setting
+		* in the brainCloud portal.
+		*
+		* @param intervalInMilliseconds The time between heartbeats in milliseconds
+		*/
+		void setHeartbeatInterval(int in_intervalInMilliseconds);
 
 		/**
 		 * Returns the list of packet timeouts.

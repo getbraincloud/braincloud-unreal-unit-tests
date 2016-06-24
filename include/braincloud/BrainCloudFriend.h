@@ -66,12 +66,7 @@ namespace BrainCloud
         * @param in_callback Method to be invoked when the server response is received.
         */
         void readFriendsEntities(const char* in_entityType, IServerCallback * in_callback = NULL);
-
-        /**
-        * Use listFriends method instead - removal after June 21 2016
-        */
-        DEPRECATED void readFriendsWithApplication(bool in_includeSummaryData = false, IServerCallback * in_callback = NULL);
-
+		
         /**
          * Read a friend's player state.
          *

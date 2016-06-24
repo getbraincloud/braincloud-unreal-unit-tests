@@ -96,11 +96,6 @@ namespace BrainCloud {
 		return(_brainCloudComms->getSessionId().c_str());
 	}
 
-	void BrainCloudClient::initialize(const char * in_serverURL, const char * in_secretKey, const char * in_gameId, const char * in_gameVersion, const char * in_appId, const char * in_region)
-	{
-		initialize(in_serverURL, in_secretKey, in_gameId, in_gameVersion);
-	}
-
 	void BrainCloudClient::initialize(const char * in_serverURL, const char * in_secretKey, const char * in_gameId, const char * in_gameVersion)
 	{
 		if (_brainCloudComms)
@@ -318,26 +313,6 @@ namespace BrainCloud {
 			_instance = new BrainCloudClient();
 		}
 		return _instance;
-	}
-
-	/**
-	 * The full url to the server side communication handler...
-	 *
-	 * @param serverUrl String URI
-	 */
-	void BrainCloudClient::setServerUrl(const char * in_serverUrl)
-	{
-		_brainCloudComms->setServerUrl(in_serverUrl);
-	}
-
-	/**
-	 * The session id for server communications...
-	 *
-	 * @param id Session identifier
-	 */
-	void BrainCloudClient::setSessionId(const char * in_id)
-	{
-		_brainCloudComms->setSessionId(in_id);
 	}
 
 	void BrainCloudClient::setHeartbeatInterval(int in_intervalInMilliseconds) {

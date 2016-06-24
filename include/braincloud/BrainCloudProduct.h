@@ -107,10 +107,6 @@ namespace BrainCloud
          */
         void getSalesInventoryByCategory(const char * in_platform, const char * in_userCurrency, const char * in_category, IServerCallback * in_callback = NULL);
 
-
-        // deprecated - use verifyItunesReceipt as method has been renamed
-        void cashInItunesReceipt(const std::string& in_base64EncReceiptData, IServerCallback * in_callback, bool in_useSandbox);
-
         /**
          * Method verifies an iTunes receipt and awards the items related to this receipt.
          *

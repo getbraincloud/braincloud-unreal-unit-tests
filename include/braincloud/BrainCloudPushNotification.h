@@ -44,12 +44,7 @@ namespace BrainCloud
          * @param in_callback The method to be invoked when the server response is received
          */
         void registerPushNotificationDeviceToken(const Platform & in_platform, const char * in_deviceToken, IServerCallback * in_callback = NULL);
-
-        /**
-         * Deprecated - Use method with Platform object paramater instead - Removal on June 21 2016
-         */
-        DEPRECATED void registerPushNotificationDeviceToken(const char * in_deviceType, const char * in_deviceToken, IServerCallback * in_callback = NULL);
-
+		
         /**
          * Sends a simple push notification based on the passed in message.
          * NOTE: It is possible to send a push notification to oneself.

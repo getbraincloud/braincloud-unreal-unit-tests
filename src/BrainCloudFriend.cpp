@@ -70,15 +70,6 @@ namespace BrainCloud
         m_client->getBrainCloudComms()->addToQueue(sc);
     }
 
-    void BrainCloudFriend::readFriendsWithApplication(bool in_includeSummaryData, IServerCallback * in_callback)
-    {
-        Json::Value message;
-        message[OperationParam::FriendServiceIncludeSummaryData.getValue()] = in_includeSummaryData;
-
-        ServerCall * sc = new ServerCall(ServiceName::Friend, ServiceOperation::ReadFriendsWithApplication, message, in_callback);
-        m_client->getBrainCloudComms()->addToQueue(sc);
-    }
-
     void BrainCloudFriend::readFriendPlayerState(const char * in_friendId, IServerCallback * in_callback)
     {
         Json::Value message;

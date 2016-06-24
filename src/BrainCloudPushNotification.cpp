@@ -45,12 +45,6 @@ namespace BrainCloud
         m_client->getBrainCloudComms()->addToQueue(sc);
     }
 
-    void BrainCloudPushNotification::registerPushNotificationDeviceToken(const char * in_type, const char * in_token, IServerCallback * in_callback)
-    {
-        const Platform & platform = Platform::fromString(in_type);
-        registerPushNotificationDeviceToken(platform, in_token, in_callback);
-    }
-
     void BrainCloudPushNotification::sendSimplePushNotification(const char * in_toPlayerId, const char * in_message, IServerCallback * in_callback)
     {
         Json::Value message;
