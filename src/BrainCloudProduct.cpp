@@ -72,11 +72,6 @@ namespace BrainCloud
         m_client->sendRequest(sc);
     }
 
-    void BrainCloudProduct::cashInItunesReceipt(const std::string& in_base64EncReceiptData, IServerCallback * in_callback, bool in_useSandbox)
-    {
-        verifyItunesReceipt(in_base64EncReceiptData, in_callback);
-    }
-
     void BrainCloudProduct::verifyItunesReceipt(const std::string& in_base64EncReceiptData, IServerCallback * in_callback)
     {
         Json::Value message;

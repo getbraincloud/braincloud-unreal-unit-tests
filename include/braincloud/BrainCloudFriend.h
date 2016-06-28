@@ -66,22 +66,28 @@ namespace BrainCloud
         * @param in_callback Method to be invoked when the server response is received.
         */
         void readFriendsEntities(const char* in_entityType, IServerCallback * in_callback = NULL);
-
-        /**
-        * Use listFriends method instead - removal after June 21 2016
-        */
-        DEPRECATED void readFriendsWithApplication(bool in_includeSummaryData = false, IServerCallback * in_callback = NULL);
-
+		
         /**
          * Read a friend's player state.
          *
-         * Service Name - PlayerState
+         * Service Name - Friend
          * Service Operation - ReadFriendsPlayerState
          *
          * @param in_friendId Target friend
          * @param in_callback Method to be invoked when the server response is received.
          */
         void readFriendPlayerState(const char * in_friendId, IServerCallback * in_callback = NULL);
+
+		/**
+		* Returns player state of a particular user.
+		*
+		* Service Name - Friend
+		* Service Operation - GET_SUMMARY_DATA_FOR_PROFILE_ID
+		*
+		* @param in_profileId Profile Id of player to retrieve player state for.
+		* @param in_callback Method to be invoked when the server response is received.
+		*/
+		void getSummaryDataForProfileId(const char * in_profileId, IServerCallback * in_callback = NULL);
 
         /**
          * Finds a list of players matching the search text by performing a substring

@@ -41,6 +41,13 @@ TEST_F(TestBCFriend, FindPlayerByUniversalId)
     tr.run(m_bc);
 }
 
+TEST_F(TestBCFriend, GetSummaryDataForProfileId)
+{
+	TestResult tr;
+	m_bc->getFriendService()->getSummaryDataForProfileId(GetUser(UserA)->m_profileId, &tr);
+	tr.run(m_bc);
+}
+
 TEST_F(TestBCFriend, AddFriends)
 {
     AddFriends();
@@ -74,4 +81,6 @@ void TestBCFriend::AddFriends()
     m_bc->getFriendService()->addFriends(profiles, &tr);
     tr.run(m_bc);
 }
+
+
 

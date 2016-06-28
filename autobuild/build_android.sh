@@ -43,6 +43,11 @@ mkdir artifacts/brainCloud/javasrc
 cp -r ../solutions/android/java/ artifacts/brainCloud/javasrc
 
 cp docs/README.TXT artifacts/brainCloud
+pushd artifacts/brainCloud
+sed -i xxx "s/Platform: xxx/Platform: Android C++/g" README.TXT
+sed -i xxx "s/Version: x.x.x/Version: ${build_version}/g" README.TXT
+rm -f README.TXTxxx
+popd
 
 pushd artifacts
 zip -r "brainCloudClient_Android_C++_${build_version}.zip" brainCloud

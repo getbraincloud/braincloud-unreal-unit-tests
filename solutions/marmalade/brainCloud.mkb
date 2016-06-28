@@ -68,7 +68,6 @@ files
     BrainCloudSocialLeaderboard.h
     BrainCloudSteam.h
     BrainCloudTime.h
-    BrainCloudTwitter.h
     BrainCloudTypes.h
     BrainCloudWrapper.h
     FriendPlatform.h
@@ -95,7 +94,6 @@ files
     SaveDataHelper.h
     StringUtil.h
     TimeUtil.h
-    Timer.h
     TimerCallback.h
     URLLoader.h
     URLLoaderClient.h
@@ -143,7 +141,6 @@ files
     BrainCloudSocialLeaderboard.cpp
     BrainCloudSteam.cpp
     BrainCloudTime.cpp
-    BrainCloudTwitter.cpp
     BrainCloudWrapper.cpp
     FriendPlatform.cpp
     GUID.cpp
@@ -157,7 +154,6 @@ files
     ServiceOperation.cpp
     StringUtil.cpp
     TimeUtil.cpp
-    Timer.cpp
     TimerCallback.cpp
     URLLoader.cpp
     URLLoaderClient.cpp

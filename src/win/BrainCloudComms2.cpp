@@ -220,10 +220,24 @@ namespace BrainCloud
             }
         }
 
-        while (!_messageQueue.empty() && !_tearDownThread)
+		while (!_messageQueue.empty() && !_tearDownThread && _messageQueue.size() < MAX_BUNDLE_SIZE)
         {
             std::shared_ptr<ServerCall> message = _messageQueue.front();
-            _messageQueue.pop_front();
+			_messageQueue.pop_front();
+
+			if (message->isEndOfBundleMarker())
+			{
+				// if the first message is marker, just throw it away
+				if (_messageQueue.empty())
+				{
+					continue;
+				}
+				else // cut off the bundle at the marker and toss marker away
+				{
+					break;
+				}
+			}
+
             _inProgressQueue.push_back(message);
         }
 #ifdef VERBOSE

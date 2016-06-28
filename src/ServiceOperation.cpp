@@ -77,6 +77,7 @@ namespace BrainCloud
 	const ServiceOperation ServiceOperation::PostScore = ServiceOperation("POST_SCORE");
 	const ServiceOperation ServiceOperation::PostScoreDynamic = ServiceOperation("POST_SCORE_DYNAMIC");
 	const ServiceOperation ServiceOperation::GetGroupSocialLeaderboard = ServiceOperation("GET_GROUP_SOCIAL_LEADERBOARD");
+	const ServiceOperation ServiceOperation::GetSummaryDataForProfileId = ServiceOperation("GET_SUMMARY_DATA_FOR_PROFILE_ID");
 
 	const ServiceOperation ServiceOperation::InitThirdParty = ServiceOperation("initThirdParty");
 	const ServiceOperation ServiceOperation::PostThirdPartyLeaderboardScore = ServiceOperation("postThirdPartyLeaderboardScore");
@@ -193,6 +194,7 @@ namespace BrainCloud
 	const ServiceOperation ServiceOperation::GetPage = ServiceOperation("GET_PAGE");
 	const ServiceOperation ServiceOperation::GetPageOffset = ServiceOperation("GET_PAGE_BY_OFFSET");
 	const ServiceOperation ServiceOperation::IncrementUserEntityData = ServiceOperation("INCREMENT_USER_ENTITY_DATA");
+	const ServiceOperation ServiceOperation::IncrementSharedUserEntityData = ServiceOperation("INCREMENT_SHARED_USER_ENTITY_DATA");
 	const ServiceOperation ServiceOperation::IncrementGlobalEntityData = ServiceOperation("INCREMENT_GLOBAL_ENTITY_DATA");
 
 	const ServiceOperation ServiceOperation::GetAttributes = ServiceOperation("GET_ATTRIBUTES");
@@ -208,6 +210,7 @@ namespace BrainCloud
 
 	const ServiceOperation ServiceOperation::ScheduleCloudScript = ServiceOperation("SCHEDULE_CLOUD_SCRIPT");
 	const ServiceOperation ServiceOperation::RunParentScript = ServiceOperation("RUN_PARENT_SCRIPT");
+	const ServiceOperation ServiceOperation::CancelScheduledScript = ServiceOperation("CANCEL_SCHEDULED_SCRIPT");
 
 	const ServiceOperation ServiceOperation::RedeemCode = ServiceOperation("REDEEM_CODE");
 	const ServiceOperation ServiceOperation::GetRedeemedCodes = ServiceOperation("GET_REDEEMED_CODES");
@@ -225,11 +228,13 @@ namespace BrainCloud
 	const ServiceOperation ServiceOperation::PrepareUserUpload = ServiceOperation("PREPARE_USER_UPLOAD");
 	const ServiceOperation ServiceOperation::ListUserFiles = ServiceOperation("LIST_USER_FILES");
 	const ServiceOperation ServiceOperation::DeleteUserFiles = ServiceOperation("DELETE_USER_FILES");
+	const ServiceOperation ServiceOperation::GetCdnUrl = ServiceOperation("GET_CDN_URL");
 
 	// group
 	const ServiceOperation ServiceOperation::AcceptGroupInvitation = ServiceOperation("ACCEPT_GROUP_INVITATION");
 	const ServiceOperation ServiceOperation::AddGroupMember = ServiceOperation("ADD_GROUP_MEMBER");
 	const ServiceOperation ServiceOperation::ApproveGroupJoinRequest = ServiceOperation("APPROVE_GROUP_JOIN_REQUEST");
+	const ServiceOperation ServiceOperation::AutoJoinGroup = ServiceOperation("AUTO_JOIN_GROUP");
 	const ServiceOperation ServiceOperation::CancelGroupInvitation = ServiceOperation("CANCEL_GROUP_INVITATION");
 	const ServiceOperation ServiceOperation::CreateGroup = ServiceOperation("CREATE_GROUP");
 	const ServiceOperation ServiceOperation::CreateGroupEntity = ServiceOperation("CREATE_GROUP_ENTITY");
@@ -246,6 +251,7 @@ namespace BrainCloud
 	const ServiceOperation ServiceOperation::ListGroupsPageByOffset = ServiceOperation("LIST_GROUPS_PAGE_BY_OFFSET");
 	const ServiceOperation ServiceOperation::ListGroupsWithMember = ServiceOperation("LIST_GROUPS_WITH_MEMBER");
 	const ServiceOperation ServiceOperation::ReadGroup = ServiceOperation("READ_GROUP");
+	const ServiceOperation ServiceOperation::ReadGroupData = ServiceOperation("READ_GROUP_DATA");
 	const ServiceOperation ServiceOperation::ReadGroupEntitiesPage = ServiceOperation("READ_GROUP_ENTITIES_PAGE");
 	const ServiceOperation ServiceOperation::ReadGroupEntitiesPageByOffset = ServiceOperation("READ_GROUP_ENTITIES_PAGE_BY_OFFSET");
 	const ServiceOperation ServiceOperation::ReadGroupEntity = ServiceOperation("READ_GROUP_ENTITY");

@@ -79,6 +79,15 @@ namespace BrainCloud
          */
         void deleteUserFiles(const char * in_cloudPath, bool in_recurse, IServerCallback * in_callback = NULL);
 
+		/**
+		* Returns the CDN url for a file object
+		*
+		* @param in_cloudPath File path
+		* @param in_cloudFileName File name
+		* @param in_callback The method to be invoked when the server response is received
+		*/
+		void getCDNUrl(const char * in_cloudPath, const char * in_cloudFileName, IServerCallback * in_callback = NULL);
+
         /**
          * Method cancels an upload. If an IFileUploadCallback has been registered with the BrainCloudClient class,
          * the fileUploadFailed callback method will be called once the upload has been canceled.

@@ -16,9 +16,10 @@ namespace BrainCloud {
     //////////////////////////////////////////////////////
 
     ServerCall::ServerCall()
-    : _service(ServiceName::None)
-    , _operation(ServiceOperation::None)
-    , _callback(NULL)
+        : _callback(NULL)
+        , _operation(ServiceOperation::None)
+        , _service(ServiceName::None)
+        , _isEndOfBundleMarker(false)
     {
     }
     
@@ -26,7 +27,11 @@ namespace BrainCloud {
      * Constructor
      */
     ServerCall::ServerCall( ServiceName serviceName, ServiceOperation serviceOperation, const Json::Value & data, IServerCallback * callback )
-        : _operation(serviceOperation), _service(serviceName), _callback(callback), _data(data)
+        : _callback(callback)
+        , _data(data)
+        , _operation(serviceOperation)
+        , _service(serviceName)
+        , _isEndOfBundleMarker(false)
     {
 
     }

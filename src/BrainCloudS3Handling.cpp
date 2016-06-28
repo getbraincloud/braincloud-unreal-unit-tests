@@ -44,4 +44,13 @@ namespace BrainCloud
         ServerCall * sc = new ServerCall(ServiceName::S3Handling, ServiceOperation::GetFileList, message, in_callback);
         m_client->getBrainCloudComms()->addToQueue(sc);
     }
+
+	void BrainCloudS3Handling::getCDNUrl(const char * in_fileId, IServerCallback * in_callback)
+	{
+		Json::Value message;
+		message[OperationParam::S3HandlingServiceFileId.getValue()] = in_fileId;
+
+		ServerCall * sc = new ServerCall(ServiceName::S3Handling, ServiceOperation::GetCdnUrl, message, in_callback);
+		m_client->getBrainCloudComms()->addToQueue(sc);
+	}
 }

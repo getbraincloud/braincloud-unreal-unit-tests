@@ -854,6 +854,23 @@ namespace BrainCloud
         while (!_queue.empty() && _inProgress.size() < MAX_BUNDLE_SIZE)
         {
             ServerCall * call = _queue.front();
+            if (call->isEndOfBundleMarker())
+            {
+                _queue.erase(_queue.begin());
+                delete call;
+                call = NULL;
+                
+                // if the first message is marker, just throw it away
+                if (_inProgress.size() == 0)
+                {
+                    continue;
+                }
+                else // cut off the bundle at the marker and toss marker away
+                {
+                    break;
+                }
+            }
+            
             if (call->getService() == ServiceName::HeartBeat
                 && call->getOperation() == ServiceOperation::Read)
             {

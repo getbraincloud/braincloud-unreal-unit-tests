@@ -180,7 +180,6 @@
     <ClInclude Include="..\..\..\include\braincloud\BrainCloudSocialLeaderboard.h" />
     <ClInclude Include="..\..\..\include\braincloud\BrainCloudSteam.h" />
     <ClInclude Include="..\..\..\include\braincloud\BrainCloudTime.h" />
-    <ClInclude Include="..\..\..\include\braincloud\BrainCloudTwitter.h" />
     <ClInclude Include="..\..\..\include\braincloud\BrainCloudTypes.h" />
     <ClInclude Include="..\..\..\include\braincloud\BrainCloudWrapper.h" />
     <ClInclude Include="..\..\..\include\braincloud\FriendPlatform.h" />
@@ -195,7 +194,6 @@
     <ClInclude Include="..\..\..\include\braincloud\internal\JsonUtil.h" />
     <ClInclude Include="..\..\..\include\braincloud\internal\SaveDataHelper.h" />
     <ClInclude Include="..\..\..\include\braincloud\internal\StringUtil.h" />
-    <ClInclude Include="..\..\..\include\braincloud\internal\Timer.h" />
     <ClInclude Include="..\..\..\include\braincloud\internal\TimerCallback.h" />
     <ClInclude Include="..\..\..\include\braincloud\internal\TimeUtil.h" />
     <ClInclude Include="..\..\..\include\braincloud\internal\URLLoader.h" />
@@ -250,7 +248,6 @@
     <ClCompile Include="..\..\..\src\BrainCloudSocialLeaderboard.cpp" />
     <ClCompile Include="..\..\..\src\BrainCloudSteam.cpp" />
     <ClCompile Include="..\..\..\src\BrainCloudTime.cpp" />
-    <ClCompile Include="..\..\..\src\BrainCloudTwitter.cpp" />
     <ClCompile Include="..\..\..\src\BrainCloudWrapper.cpp" />
     <ClCompile Include="..\..\..\src\FriendPlatform.cpp" />
     <ClCompile Include="..\..\..\src\GUID.cpp" />
@@ -263,7 +260,6 @@
     <ClCompile Include="..\..\..\src\ServiceName.cpp" />
     <ClCompile Include="..\..\..\src\ServiceOperation.cpp" />
     <ClCompile Include="..\..\..\src\StringUtil.cpp" />
-    <ClCompile Include="..\..\..\src\Timer.cpp" />
     <ClCompile Include="..\..\..\src\TimerCallback.cpp" />
     <ClCompile Include="..\..\..\src\TimeUtil.cpp" />
     <ClCompile Include="..\..\..\src\URLLoader.cpp" />

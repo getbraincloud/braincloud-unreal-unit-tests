@@ -40,7 +40,7 @@ namespace BrainCloud {
 
 	// Define all static member variables.
 	BrainCloudClient * BrainCloudClient::_instance = NULL;
-	std::string BrainCloudClient::s_brainCloudClientVersion = "2.24.3";
+	std::string BrainCloudClient::s_brainCloudClientVersion = "2.25.0";
 
 	/**
 	 * Constructor
@@ -74,7 +74,6 @@ namespace BrainCloud {
 		_socialLeaderboardService(new BrainCloudSocialLeaderboard(this)),
 		_steamService(new BrainCloudSteam(this)),
 		_timeService(new BrainCloudTime(this)),
-		_twitterService(new BrainCloudTwitter(this)),
 		_releasePlatform(""),
 		_gameVersion(""),
 		_timezoneOffset(0.0)
@@ -95,11 +94,6 @@ namespace BrainCloud {
 
 	const char * BrainCloudClient::getSessionId() const {
 		return(_brainCloudComms->getSessionId().c_str());
-	}
-
-	void BrainCloudClient::initialize(const char * in_serverURL, const char * in_secretKey, const char * in_gameId, const char * in_gameVersion, const char * in_appId, const char * in_region)
-	{
-		initialize(in_serverURL, in_secretKey, in_gameId, in_gameVersion);
 	}
 
 	void BrainCloudClient::initialize(const char * in_serverURL, const char * in_secretKey, const char * in_gameId, const char * in_gameVersion)
@@ -321,26 +315,6 @@ namespace BrainCloud {
 		return _instance;
 	}
 
-	/**
-	 * The full url to the server side communication handler...
-	 *
-	 * @param serverUrl String URI
-	 */
-	void BrainCloudClient::setServerUrl(const char * in_serverUrl)
-	{
-		_brainCloudComms->setServerUrl(in_serverUrl);
-	}
-
-	/**
-	 * The session id for server communications...
-	 *
-	 * @param id Session identifier
-	 */
-	void BrainCloudClient::setSessionId(const char * in_id)
-	{
-		_brainCloudComms->setSessionId(in_id);
-	}
-
 	void BrainCloudClient::setHeartbeatInterval(int in_intervalInMilliseconds) {
 		_brainCloudComms->setHeartbeatInterval(in_intervalInMilliseconds);
 	}
@@ -415,6 +389,11 @@ namespace BrainCloud {
 		_brainCloudComms->flushCachedMessages(in_sendApiErrorCallbacks);
 	}
 
+	void BrainCloudClient::insertEndOfMessageBundleMarker()
+	{
+		_brainCloudComms->insertEndOfMessageBundleMarker();
+	}
+
 	////////////////////////////////////////////////////
 	// Private Methods
 	////////////////////////////////////////////////////
@@ -438,18 +417,32 @@ namespace BrainCloud {
 
 #elif defined(__APPLE__)
 		char charBuf[16];
+		charBuf[0] = '\0';
+
 		CFLocaleRef locale = CFLocaleCopyCurrent();
-		CFStringRef langCode = (CFStringRef)CFLocaleGetValue(locale, kCFLocaleLanguageCode);
-		CFStringGetCString(langCode, charBuf, 16, kCFStringEncodingUTF8);
-		_languageCode = std::string(charBuf);
-		CFStringRef countryCode = (CFStringRef)CFLocaleGetValue(locale, kCFLocaleCountryCode);
-		CFStringGetCString(countryCode, charBuf, 16, kCFStringEncodingUTF8);
-		_countryCode = std::string(charBuf);
-		CFTimeZoneRef tz = CFTimeZoneCopySystem();
-		CFTimeInterval utcOffset = CFTimeZoneGetSecondsFromGMT(tz, CFAbsoluteTimeGetCurrent());
-		_timezoneOffset = utcOffset / 3600.0f;
-		CFRelease(locale);
-		CFRelease(tz);
+		if (locale != nil)
+		{
+			CFStringRef langCode = (CFStringRef)CFLocaleGetValue(locale, kCFLocaleLanguageCode);
+			if (langCode != nil)
+			{
+				CFStringGetCString(langCode, charBuf, 16, kCFStringEncodingUTF8);
+				_languageCode = std::string(charBuf);
+			}
+			CFStringRef countryCode = (CFStringRef)CFLocaleGetValue(locale, kCFLocaleCountryCode);
+			if (countryCode != nil)
+			{
+				CFStringGetCString(countryCode, charBuf, 16, kCFStringEncodingUTF8);
+				_countryCode = std::string(charBuf);
+			}
+			CFTimeZoneRef tz = CFTimeZoneCopySystem();
+			if (tz != nil)
+			{
+				CFTimeInterval utcOffset = CFTimeZoneGetSecondsFromGMT(tz, CFAbsoluteTimeGetCurrent());
+				_timezoneOffset = utcOffset / 3600.0f;
+				CFRelease(tz);
+			}
+			CFRelease(locale);
+		}
 
 #elif defined (__ANDROID__)
 		// do NOT set countryCode etc here as the android

@@ -117,9 +117,6 @@
     <ClInclude Include="..\..\..\include\braincloud\BrainCloudTime.h">
       <Filter>include\braincloud</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\include\braincloud\BrainCloudTwitter.h">
-      <Filter>include\braincloud</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\..\include\braincloud\BrainCloudTypes.h">
       <Filter>include\braincloud</Filter>
     </ClInclude>
@@ -184,9 +181,6 @@
       <Filter>include\braincloud\internal</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\include\braincloud\internal\StringUtil.h">
-      <Filter>include\braincloud\internal</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\include\braincloud\internal\Timer.h">
       <Filter>include\braincloud\internal</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\include\braincloud\internal\TimerCallback.h">
@@ -320,9 +314,6 @@
     <ClCompile Include="..\..\..\src\BrainCloudTime.cpp">
       <Filter>src</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\src\BrainCloudTwitter.cpp">
-      <Filter>src</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\..\src\BrainCloudWrapper.cpp">
       <Filter>src</Filter>
     </ClCompile>
@@ -357,9 +348,6 @@
       <Filter>src</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\src\StringUtil.cpp">
-      <Filter>src</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\src\Timer.cpp">
       <Filter>src</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\src\TimerCallback.cpp">

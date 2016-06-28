@@ -30,3 +30,15 @@ TEST_F(TestBCS3Handling, GetFileList)
     tr.run(m_bc);
 }
 
+TEST_F(TestBCS3Handling, GetCDNUrl)
+{
+	TestResult tr;
+	m_bc->getS3HandlingService()->getFileList(m_category, &tr);
+	tr.run(m_bc);
+
+	std::string fileId = tr.m_response["data"]["fileDetails"][0]["fileId"].asString();
+
+	m_bc->getS3HandlingService()->getCDNUrl(fileId.c_str(), &tr);
+	tr.run(m_bc);
+}
+

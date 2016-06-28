@@ -70,15 +70,6 @@ namespace BrainCloud
         m_client->getBrainCloudComms()->addToQueue(sc);
     }
 
-    void BrainCloudFriend::readFriendsWithApplication(bool in_includeSummaryData, IServerCallback * in_callback)
-    {
-        Json::Value message;
-        message[OperationParam::FriendServiceIncludeSummaryData.getValue()] = in_includeSummaryData;
-
-        ServerCall * sc = new ServerCall(ServiceName::Friend, ServiceOperation::ReadFriendsWithApplication, message, in_callback);
-        m_client->getBrainCloudComms()->addToQueue(sc);
-    }
-
     void BrainCloudFriend::readFriendPlayerState(const char * in_friendId, IServerCallback * in_callback)
     {
         Json::Value message;
@@ -87,6 +78,15 @@ namespace BrainCloud
         ServerCall * sc = new ServerCall(ServiceName::Friend, ServiceOperation::ReadFriendsPlayerState, message, in_callback);
         m_client->getBrainCloudComms()->addToQueue(sc);
     }
+
+	void BrainCloudFriend::getSummaryDataForProfileId(const char * in_profileId, IServerCallback * in_callback)
+	{
+		Json::Value message;
+		message[OperationParam::FriendServiceProfileId.getValue()] = in_profileId;
+
+		ServerCall * sc = new ServerCall(ServiceName::Friend, ServiceOperation::GetSummaryDataForProfileId, message, in_callback);
+		m_client->getBrainCloudComms()->addToQueue(sc);
+	}
 
     void BrainCloudFriend::findPlayerByName(const char * in_searchText, int32_t in_maxResults, IServerCallback * in_callback)
     {

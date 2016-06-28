@@ -123,6 +123,8 @@ namespace BrainCloud {
         int getUploadLowTransferRateThreshold();
         void setUploadLowTransferRateThreshold(int in_bytesPerSec);
         
+        void insertEndOfMessageBundleMarker();
+        
         static void createJsonErrorResponse(int in_statusCode,
                                             int in_reasonCode,
                                             const std::string & in_statusMessage,

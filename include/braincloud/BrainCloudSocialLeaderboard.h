@@ -75,11 +75,6 @@ namespace BrainCloud
         void getMultiSocialLeaderboard(const std::vector<std::string> & in_leaderboardIds, int in_leaderboardResultCount, bool in_replaceName, IServerCallback * in_callback = NULL);
 
         /**
-         * Removal on June 21 2016
-         */
-        DEPRECATED void getGlobalLeaderboard(const char * in_leaderboardId, FetchType in_fetchType, int in_maxResults, IServerCallback * in_callback = NULL);
-
-        /**
          * Method returns a page of global leaderboard results.
          *
          * Leaderboards entries contain the player's score and optionally, some user-defined

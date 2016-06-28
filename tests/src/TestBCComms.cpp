@@ -274,6 +274,26 @@ TEST_F(TestBCComms, MessageCache)
 }
 
 
+TEST_F(TestBCComms, MessageBundleMarker)
+{
+    TestResult tr;
+    m_bc->initialize(m_serverUrl.c_str(), m_secret.c_str(), m_appId.c_str(), m_version.c_str());
+    
+    m_bc->getAuthenticationService()->authenticateUniversal(GetUser(UserA)->m_id, GetUser(UserA)->m_password, true, &tr);
+    m_bc->insertEndOfMessageBundleMarker();
+    
+    m_bc->getPlayerStatisticsService()->readAllPlayerStats(&tr);
+    m_bc->insertEndOfMessageBundleMarker();
+    
+    m_bc->getPlayerStatisticsService()->readAllPlayerStats(&tr);
+    m_bc->getPlayerStatisticsService()->readAllPlayerStats(&tr);
+    m_bc->insertEndOfMessageBundleMarker();
+    
+    tr.run(m_bc);
+    tr.run(m_bc);
+    tr.run(m_bc);
+}
+
 void TestBCComms::sleepForMillis(int millis)
 {
 #if __cplusplus >= 201103L
