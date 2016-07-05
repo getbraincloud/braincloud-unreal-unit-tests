@@ -1,7 +1,7 @@
 #include "braincloud/internal/SaveDataHelper.h"
 
-#import "SSKeychain.h"
-#import "SSKeychainQuery.h"
+#import "SSKeychain/SSKeychain.h"
+#import "SSKeychain/SSKeychainQuery.h"
 
 SaveDataHelper * SaveDataHelper::m_instance = NULL;
 
@@ -39,8 +39,17 @@ void SaveDataHelper::saveData(const char * key, const char * data)
 	NSString * serviceString = [NSString stringWithUTF8String:m_savePath.c_str()];
 	NSString * keyString = [NSString stringWithUTF8String:key];
 	NSString * dataString = [NSString stringWithUTF8String:data];
-	
-	[SSKeychain setPassword:dataString forService:serviceString account:keyString];
+
+    [SSKeychain deletePasswordForService:serviceString account:keyString];
+
+    if (dataString.length == 0)
+    {
+        [[NSUserDefaults standardUserDefaults] removeObjectForKey:keyString];
+    }
+    else
+    {
+        [[NSUserDefaults standardUserDefaults] setValue:dataString forKeyPath:keyString];
+    }
 }
 
 std::string SaveDataHelper::readData(const char * key)
@@ -56,7 +65,11 @@ std::string SaveDataHelper::readData(const char * key)
 	std::string data = "";
 	
 	if (dataString != nil)
-		data = [dataString UTF8String];
+    {
+        [[NSUserDefaults standardUserDefaults] setValue:dataString forKeyPath:keyString];
+        [SSKeychain deletePasswordForService:serviceString account:keyString];
+        data = [dataString UTF8String];
+    }
 	
 	return data;
 }
@@ -70,4 +83,5 @@ void SaveDataHelper::deleteData(const char * key)
 	NSString * keyString = [NSString stringWithUTF8String:key];
 	
 	[SSKeychain deletePasswordForService:serviceString account:keyString];
+    [[NSUserDefaults standardUserDefaults] removeObjectForKey:keyString];
 }
