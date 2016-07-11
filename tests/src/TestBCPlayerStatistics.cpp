@@ -69,3 +69,12 @@ TEST_F(TestBCPlayerStatistics, SetExperiencePoints)
     tr.run(m_bc);
 }
 
+TEST_F(TestBCPlayerStatistics, ProcessStatistics)
+{
+	TestResult tr;
+	Json::FastWriter fw;
+	Json::Value stats;
+	stats[m_stat1] = "RESET";
+	m_bc->getPlayerStatisticsService()->processStatistics(fw.write(stats).c_str(), &tr);
+	tr.run(m_bc);
+}

@@ -45,3 +45,15 @@ TEST_F(TestBCGlobalStatistics, ReadGlobalStatsForCategory)
     m_bc->getGlobalStatisticsService()->readGlobalStatsForCategory("Test", &tr);
     tr.run(m_bc);
 }
+
+TEST_F(TestBCGlobalStatistics, ProcessStatistics)
+{
+	TestResult tr;
+	Json::FastWriter fw;
+	Json::Value serverData;
+	serverData[m_statName] = "RESET";
+	std::string serverDataStr = fw.write(serverData);
+
+	m_bc->getGlobalStatisticsService()->processStatistics(serverDataStr, &tr);
+	tr.run(m_bc);
+}

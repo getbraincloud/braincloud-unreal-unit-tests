@@ -72,6 +72,16 @@ TEST_F(TestBCFriend, RemoveFriends)
     tr.run(m_bc);
 }
 
+TEST_F(TestBCFriend, GetPlayersOnlineStatus)
+{
+	TestResult tr;
+	std::vector<std::string> profiles;
+	profiles.push_back(GetUser(UserB)->m_profileId);
+
+	m_bc->getFriendService()->getPlayersOnlineStatus(profiles, &tr);
+	tr.run(m_bc);
+}
+
 void TestBCFriend::AddFriends()
 {
     TestResult tr;

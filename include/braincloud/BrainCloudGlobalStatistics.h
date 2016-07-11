@@ -76,6 +76,24 @@ namespace BrainCloud
          */
         void incrementGlobalGameStat(const std::string& in_jsonData, IServerCallback * in_callback = NULL);
 
+		/**
+		* Apply statistics grammar to a partial set of statistics.
+		*
+		* Service Name - GlobalStatistics
+		* Service Operation - PROCESS_STATISTICS
+		*
+		* @param in_jsonData The JSON format is as follows:
+		* {
+		*     "DEAD_CATS": "RESET",
+		*     "LIVES_LEFT": "SET#9",
+		*     "MICE_KILLED": "INC#2",
+		*     "DOG_SCARE_BONUS_POINTS": "INC#10",
+		*     "TREES_CLIMBED": 1
+		* }
+		* @param in_callback Method to be invoked when the server response is received.
+		*/
+		void processStatistics(const std::string& in_jsonData, IServerCallback * in_callback = NULL);
+
     private:
         BrainCloudClient * m_client;
     };

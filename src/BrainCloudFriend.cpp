@@ -127,4 +127,14 @@ namespace BrainCloud
         ServerCall * sc = new ServerCall(ServiceName::Friend, ServiceOperation::RemoveFriends, message, in_callback);
         m_client->getBrainCloudComms()->addToQueue(sc);
     }
+
+	void BrainCloudFriend::getPlayersOnlineStatus(const std::vector<std::string>& in_profileIds, IServerCallback * in_callback)
+	{
+		Json::Value message;
+		Json::Value profileArray = JsonUtil::stringVectorToJson(in_profileIds);
+		message[OperationParam::FriendServiceProfileIds.getValue()] = profileArray;
+
+		ServerCall * sc = new ServerCall(ServiceName::Friend, ServiceOperation::GetPlayersOnlineStatus, message, in_callback);
+		m_client->getBrainCloudComms()->addToQueue(sc);
+	}
 }

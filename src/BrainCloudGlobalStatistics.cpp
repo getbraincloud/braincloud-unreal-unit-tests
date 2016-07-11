@@ -49,4 +49,13 @@ namespace BrainCloud
         ServerCall * sc = new ServerCall(ServiceName::GlobalGameStatistics, ServiceOperation::UpdateIncrement, message, in_callback);
         m_client->sendRequest(sc);
     }
+
+	void BrainCloudGlobalStatistics::processStatistics(const std::string & in_jsonData, IServerCallback * in_callback)
+	{
+		Json::Value message;
+		message[OperationParam::PlayerStatisticsServiceStats.getValue()] = JsonUtil::jsonStringToValue(in_jsonData);
+
+		ServerCall * sc = new ServerCall(ServiceName::GlobalGameStatistics, ServiceOperation::ProcessStatistics, message, in_callback);
+		m_client->sendRequest(sc);
+	}
 }
