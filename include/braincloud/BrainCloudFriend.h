@@ -140,12 +140,12 @@ namespace BrainCloud
 		void removeFriends(const std::vector<std::string>& in_profileIds, IServerCallback * in_callback = NULL);
 
 		/**
-		* Get players online status
+		* Get users online status
 		*
 		* Service Name - Friend
 		* Service Operation - GET_USERS_ONLINE_STATUS
 		*
-		* @param in_profileIds Collection of player IDs.
+		* @param in_profileIds Collection of profile IDs.
 		* @param in_callback Method to be invoked when the server response is received.
 		*/
 		void getUsersOnlineStatus(const std::vector<std::string>& in_profileIds, IServerCallback * in_callback = NULL);
