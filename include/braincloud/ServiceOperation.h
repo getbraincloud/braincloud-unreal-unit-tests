@@ -70,7 +70,7 @@ namespace BrainCloud {
 		static const ServiceOperation ListFriends;
 		static const ServiceOperation AddFriends;
 		static const ServiceOperation RemoveFriends;
-		static const ServiceOperation GetPlayersOnlineStatus;
+		static const ServiceOperation GetUsersOnlineStatus;
 		static const ServiceOperation FindPlayerByUniversalId;
 		static const ServiceOperation GetSocialLeaderboard;
 		static const ServiceOperation GetMultiSocialLeaderboard;

@@ -143,12 +143,12 @@ namespace BrainCloud
 		* Get players online status
 		*
 		* Service Name - Friend
-		* Service Operation - GET_PLAYERS_ONLINE_STATUS
+		* Service Operation - GET_USERS_ONLINE_STATUS
 		*
 		* @param in_profileIds Collection of player IDs.
 		* @param in_callback Method to be invoked when the server response is received.
 		*/
-		void getPlayersOnlineStatus(const std::vector<std::string>& in_profileIds, IServerCallback * in_callback = NULL);
+		void getUsersOnlineStatus(const std::vector<std::string>& in_profileIds, IServerCallback * in_callback = NULL);
 
 	private:
 		BrainCloudClient * m_client;
