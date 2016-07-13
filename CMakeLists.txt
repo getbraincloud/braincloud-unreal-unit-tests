@@ -46,19 +46,17 @@ endif()
 # other platform specific srcs/includes
 if (${CMAKE_SYSTEM_NAME} MATCHES "Darwin")
     list(APPEND OS_SPECIFIC_INCS "include/braincloud/internal/mac/nsFileUploader.h")
-	list(APPEND OS_SPECIFIC_INCS "include/braincloud/internal/mac/nsURLLoader.h")
-	list(APPEND OS_SPECIFIC_SRCS "src/mac/GUID.mm")
+    list(APPEND OS_SPECIFIC_INCS "include/braincloud/internal/mac/nsURLLoader.h")
+    list(APPEND OS_SPECIFIC_SRCS "src/mac/GUID.mm")
     list(APPEND OS_SPECIFIC_SRCS "src/mac/nsFileUploader.mm")
-	list(APPEND OS_SPECIFIC_SRCS "src/mac/nsURLLoader.mm")
+    list(APPEND OS_SPECIFIC_SRCS "src/mac/nsURLLoader.mm")
+    list(APPEND OS_SPECIFIC_SRCS "src/mac/SaveDataHelper.mm")
+		include_directories("${BC_DIR}/lib/mac/sskeychain")
+    list(APPEND OS_SPECIFIC_SRCS "lib/mac/sskeychain/SSKeychain/SSKeychain.m")
+    list(APPEND OS_SPECIFIC_SRCS "lib/mac/sskeychain/SSKeychain/SSKeychainQuery.m")
+else()
+    list(APPEND OS_SPECIFIC_SRCS "src/SaveDataHelper.cpp")
 
-elseif (${CMAKE_SYSTEM_NAME} MATCHES "Linux")
-	
-elseif (${CMAKE_SYSTEM_NAME} MATCHES "Windows")
-
-elseif (${CMAKE_SYSTEM_NAME} MATCHES "WindowsPhone")
-	
-elseif (${CMAKE_SYSTEM_NAME} MATCHES "WindowsStore")
-	
 endif()
 
 include_directories("${BC_DIR}/include")
@@ -169,7 +167,6 @@ src/IBrainCloudComms.cpp
 src/JsonUtil.cpp
 src/OperationParam.cpp
 src/Platform.cpp
-src/SaveDataHelper.cpp
 src/ServerCall.cpp
 src/ServiceName.cpp
 src/ServiceOperation.cpp
@@ -195,7 +192,7 @@ if (${CMAKE_SYSTEM_NAME} MATCHES "Darwin")
 	find_library(BC_FOUNDATION_LIB Foundation)
 	find_library(BC_SYSCONFIG_LIB SystemConfiguration)
 	target_link_libraries(brainCloud ${BC_GAMEKIT_LIB} ${BC_COREFOUNDATION_LIB} ${BC_FOUNDATION_LIB} ${BC_SYSCONFIG_LIB})
-	
+
 elseif (${CMAKE_SYSTEM_NAME} MATCHES "Linux")
 	set(CMAKE_LIBRARY_PATH ${CMAKE_LIBRARY_PATH}
               /usr/local/lib
@@ -204,26 +201,26 @@ elseif (${CMAKE_SYSTEM_NAME} MATCHES "Linux")
 	find_library(BC_SSL_LIB ssl libssl.a)
 	find_library(BC_CRYPTO_LIB crypto libcrypto.a)
 	target_link_libraries(brainCloud ${BC_CURL_LIB} ${BC_SSL_LIB} ${BC_CRYPTO_LIB})
-	
+
 elseif (${CMAKE_SYSTEM_NAME} MATCHES "Windows")
 
 	if (${NO_CPPREST_SDK})
 		include_directories("${BC_DIR}/lib/win32/pthread-w32-2-8-0/Pre-built.2/include")
-		
+
 		add_definitions(-DWIN32 -D_LIB -DPTW32_STATIC_LIB)
 		find_library(BC_PTHREADW32_LIB pthreadVCE2 "${BC_DIR}/lib/win32/pthread-w32-2-8-0/Pre-built.2/lib")
-	
+
 		add_definitions(-DCURL_STATICLIB)
-		include_directories("${BC_DIR}/lib/win32/curl-7.44.0/include")	
+		include_directories("${BC_DIR}/lib/win32/curl-7.44.0/include")
 		find_library(BC_CURL_LIB_RELEASE libcurl_a.lib "${BC_DIR}/lib/win32/curl-7.44.0/lib")
 		find_library(BC_CURL_LIB_DEBUG libcurl_a_debug.lib "${BC_DIR}/lib/win32/curl-7.44.0/lib")
 		target_link_libraries(brainCloud general ${BC_PTHREADW32_LIB} optimized ${BC_CURL_LIB_RELEASE} debug ${BC_CURL_LIB_DEBUG})
 
 	else()
-	
+
 		# TODO: the cpprestsdk-static is *not* built by the CMake project.
 		# You will need to manually load up the project and build the various libs
-		
+
 		include_directories("${BC_DIR}/lib/win32/cpprestsdk-static/Release/include")
 		add_definitions(-D_NO_ASYNCRTIMP -DUSE_NEW_COMMS)
 		find_library(BC_CPPREST_RELEASE_LIB cpprest120_2_0.lib "${BC_DIR}/lib/win32/cpprestsdk-static/Binaries/Win32/Release")

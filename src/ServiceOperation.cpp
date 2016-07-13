@@ -65,6 +65,7 @@ namespace BrainCloud
 	const ServiceOperation ServiceOperation::ListFriends = ServiceOperation("LIST_FRIENDS");
 	const ServiceOperation ServiceOperation::AddFriends = ServiceOperation("ADD_FRIENDS");
 	const ServiceOperation ServiceOperation::RemoveFriends = ServiceOperation("REMOVE_FRIENDS");
+	const ServiceOperation ServiceOperation::GetUsersOnlineStatus = ServiceOperation("GET_USERS_ONLINE_STATUS");
 	const ServiceOperation ServiceOperation::FindPlayerByUniversalId = ServiceOperation("FIND_PLAYER_BY_UNIVERSAL_ID");
 	const ServiceOperation ServiceOperation::GetSocialLeaderboard = ServiceOperation("GET_SOCIAL_LEADERBOARD");
 	const ServiceOperation ServiceOperation::GetMultiSocialLeaderboard = ServiceOperation("GET_MULTI_SOCIAL_LEADERBOARD");
@@ -106,6 +107,7 @@ namespace BrainCloud
 	const ServiceOperation ServiceOperation::DeleteIncoming = ServiceOperation("DELETE_INCOMING");
 	const ServiceOperation ServiceOperation::GetEvents = ServiceOperation("GET_EVENTS");
 
+	const ServiceOperation ServiceOperation::ProcessStatistics = ServiceOperation("PROCESS_STATISTICS");
 	const ServiceOperation ServiceOperation::UpdateIncrement = ServiceOperation("UPDATE_INCREMENT");
 	const ServiceOperation ServiceOperation::ReadNextXplevel = ServiceOperation("READ_NEXT_XPLEVEL");
 	const ServiceOperation ServiceOperation::ReadXpLevels = ServiceOperation("READ_XP_LEVELS");
