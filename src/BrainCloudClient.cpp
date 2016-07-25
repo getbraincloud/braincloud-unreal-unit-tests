@@ -19,7 +19,7 @@
 
 #if defined(IW_SDK)
 #include <s3e.h>
-#endif 
+#endif
 
 #if defined(WINAPI_FAMILY)
 #include <Windows.h>
@@ -40,7 +40,7 @@ namespace BrainCloud {
 
 	// Define all static member variables.
 	BrainCloudClient * BrainCloudClient::_instance = NULL;
-	std::string BrainCloudClient::s_brainCloudClientVersion = "2.26.0";
+	std::string BrainCloudClient::s_brainCloudClientVersion = "3.0.0";
 
 	/**
 	 * Constructor
@@ -147,7 +147,7 @@ namespace BrainCloud {
 		_releasePlatform = OperationParam::ReleasePlatformBlackberry.getValue();
 #elif defined(__linux__)
 		_releasePlatform = OperationParam::ReleasePlatformLinux.getValue();
-#elif defined(IW_SDK)       
+#elif defined(IW_SDK)
 		//int deviceClass = s3eDeviceGetInt(S3E_DEVICE_CLASS);
 		int deviceOs = s3eDeviceGetInt(S3E_DEVICE_OS);
 		switch (deviceOs)
@@ -448,7 +448,7 @@ namespace BrainCloud {
 		// do NOT set countryCode etc here as the android
 		// java layer is responsible for setting it.
 #elif defined (IW_SDK)
-		//[read, string] Return the current device locale as a language-country code pair using the 
+		//[read, string] Return the current device locale as a language-country code pair using the
 		// ISO 639 and ISO 3166 formats respectively. For example, if the device is set to English (UK)
 		// it will return "en_GB". If the device does not support providing a locale, it will return the empty string.
 		std::string locale = s3eDeviceGetString(S3E_DEVICE_LOCALE);
