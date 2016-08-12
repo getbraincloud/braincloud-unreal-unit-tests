@@ -206,6 +206,7 @@ namespace BrainCloud {
 		static const OperationParam SocialLeaderboardServiceIncludeLeaderboardSize;
 		static const OperationParam SocialLeaderboardServiceVersionId;
 		static const OperationParam SocialLeaderboardServiceLeaderboardResultCount;
+		static const OperationParam ProfileIds;
 
 		// Product service
 		static const OperationParam ProductServiceVCId;

@@ -39,6 +39,8 @@ namespace BrainCloud {
 		static const ServiceOperation SendRich;
 		static const ServiceOperation SendTemplatedToGroup;
 		static const ServiceOperation SendNormalizedToGroup;
+		static const ServiceOperation SendNormalized;
+		static const ServiceOperation SendNormalizedBatch;
 
 		static const ServiceOperation Trigger;
 		static const ServiceOperation TriggerMultiple;
@@ -84,6 +86,7 @@ namespace BrainCloud {
 		static const ServiceOperation PostScoreDynamic;
 		static const ServiceOperation GetGroupSocialLeaderboard;
 		static const ServiceOperation GetSummaryDataForProfileId;
+		static const ServiceOperation GetPlayersSocialLeaderboard;
 
 		static const ServiceOperation InitThirdParty;
 		static const ServiceOperation PostThirdPartyLeaderboardScore;

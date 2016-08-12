@@ -198,6 +198,7 @@ namespace BrainCloud
 	const OperationParam OperationParam::SocialLeaderboardServiceIncludeLeaderboardSize = OperationParam("includeLeaderboardSize");
 	const OperationParam OperationParam::SocialLeaderboardServiceVersionId = OperationParam("versionId");
 	const OperationParam OperationParam::SocialLeaderboardServiceLeaderboardResultCount = OperationParam("leaderboardResultCount");
+	const OperationParam OperationParam::ProfileIds = OperationParam("profileIds");
 
 
 	// Product service

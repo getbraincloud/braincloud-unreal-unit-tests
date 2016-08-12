@@ -199,6 +199,16 @@ namespace BrainCloud
 		m_client->getBrainCloudComms()->addToQueue(sc);
 	}
 
+	void BrainCloudSocialLeaderboard::getPlayersSocialLeaderboard(const char * in_leaderboardId, std::vector<std::string> in_profileIds, IServerCallback * in_callback)
+	{
+		Json::Value message;
+		message[OperationParam::SocialLeaderboardServiceLeaderboardId.getValue()] = in_leaderboardId;
+		message[OperationParam::ProfileIds.getValue()] = JsonUtil::stringVectorToJson(in_profileIds);
+
+		ServerCall * sc = new ServerCall(ServiceName::SocialLeaderboard, ServiceOperation::GetPlayersSocialLeaderboard, message, in_callback);
+		m_client->getBrainCloudComms()->addToQueue(sc);
+	}
+
 	std::string BrainCloudSocialLeaderboard::leaderboardTypeToString(SocialLeaderboardType type)
 	{
 		std::string typeString = "HIGH_VALUE";

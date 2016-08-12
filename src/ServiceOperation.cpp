@@ -34,6 +34,8 @@ namespace BrainCloud
 	const ServiceOperation ServiceOperation::SendRich = ServiceOperation("SEND_RICH");
 	const ServiceOperation ServiceOperation::SendTemplatedToGroup = ServiceOperation("SEND_TEMPLATED_TO_GROUP");
 	const ServiceOperation ServiceOperation::SendNormalizedToGroup = ServiceOperation("SEND_NORMALIZED_TO_GROUP");
+	const ServiceOperation ServiceOperation::SendNormalized = ServiceOperation("SEND_NORMALIZED");
+	const ServiceOperation ServiceOperation::SendNormalizedBatch = ServiceOperation("SEND_NORMALIZED_BATCH");
 
 	const ServiceOperation ServiceOperation::Trigger = ServiceOperation("TRIGGER");
 	const ServiceOperation ServiceOperation::TriggerMultiple = ServiceOperation("TRIGGER_MULTIPLE");
@@ -79,6 +81,7 @@ namespace BrainCloud
 	const ServiceOperation ServiceOperation::PostScoreDynamic = ServiceOperation("POST_SCORE_DYNAMIC");
 	const ServiceOperation ServiceOperation::GetGroupSocialLeaderboard = ServiceOperation("GET_GROUP_SOCIAL_LEADERBOARD");
 	const ServiceOperation ServiceOperation::GetSummaryDataForProfileId = ServiceOperation("GET_SUMMARY_DATA_FOR_PROFILE_ID");
+	const ServiceOperation ServiceOperation::GetPlayersSocialLeaderboard = ServiceOperation("GET_PLAYERS_SOCIAL_LEADERBOARD");
 
 	const ServiceOperation ServiceOperation::InitThirdParty = ServiceOperation("initThirdParty");
 	const ServiceOperation ServiceOperation::PostThirdPartyLeaderboardScore = ServiceOperation("postThirdPartyLeaderboardScore");

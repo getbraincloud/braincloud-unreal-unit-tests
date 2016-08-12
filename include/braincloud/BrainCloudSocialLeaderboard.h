@@ -260,6 +260,18 @@ namespace BrainCloud
         */
         void getGroupSocialLeaderboard(const char * in_leaderboardId, const char * in_groupId, IServerCallback * in_callback = NULL);
 
+		/**
+		* Retrieve the social leaderboard for a list of players.
+		*
+		* Service Name - leaderboard
+		* Service Operation - GET_PLAYERS_SOCIAL_LEADERBOARD
+		*
+		* @param in_leaderboardId The leaderboard to retrieve
+		* @param in_profileIds The IDs of the players
+		* @param in_callback The method to be invoked when the server response is received
+		*/
+		void getPlayersSocialLeaderboard(const char * in_leaderboardId, std::vector<std::string> in_profileIds, IServerCallback * in_callback = NULL);
+
     private:
         BrainCloudClient * m_client;
 
