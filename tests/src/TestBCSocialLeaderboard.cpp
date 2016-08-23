@@ -8,6 +8,9 @@
 
 using namespace BrainCloud;
 
+#define SSTR( x ) static_cast< std::ostringstream & >( \
+        ( std::ostringstream() << std::dec << x ) ).str()
+
 #define LB_ID "testLeaderboard"
 #define SOCIAL_LB_ID "testSocialLeaderboard"
 #define DYNAMIC_LB_ID "testDynamicLeaderboard"
@@ -161,17 +164,22 @@ TEST_F(TestBCSocialLeaderboard, GetPlayersSocialLeaderboard)
 
 void TestBCSocialLeaderboard::PostScoreToDynamic()
 {
+	srand(time(NULL));
+
     TestResult tr;
     Json::FastWriter fw;
     Json::Value jsonData;
     jsonData["testKey"] = "TestValue";
+
     time_t t = time(0);
     struct tm * time = localtime(&t);
-
     time->tm_mday += 1;
     mktime(time);
 
-    m_bc->getSocialLeaderboardService()->postScoreToDynamicLeaderboard(DYNAMIC_LB_ID, 100, fw.write(jsonData), HIGH_VALUE, WEEKLY, time, 2, &tr);
+	std::string name = DYNAMIC_LB_ID;
+	name += SSTR(rand());
+
+    m_bc->getSocialLeaderboardService()->postScoreToDynamicLeaderboard(name.c_str(), 100, fw.write(jsonData), HIGH_VALUE, WEEKLY, time, 2, &tr);
     tr.run(m_bc);
 }
 
