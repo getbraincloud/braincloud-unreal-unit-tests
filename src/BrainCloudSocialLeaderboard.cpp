@@ -148,7 +148,7 @@ namespace BrainCloud
 		{
 			time_t timestamp = mktime(in_rotationReset);
 			int64_t time = (int64_t)timestamp * 1000;
-			message[OperationParam::SocialLeaderboardServiceRotationResetTime.getValue()] = time;
+			message[OperationParam::SocialLeaderboardServiceRotationResetTime.getValue()] = (Json::UInt64)time;
 		}
 		message[OperationParam::SocialLeaderboardServiceRetainedCount.getValue()] = in_retainedCount;
 
