@@ -187,6 +187,7 @@ namespace BrainCloud
 	const OperationParam OperationParam::SocialLeaderboardServiceLeaderboardType = OperationParam("leaderboardType");
 	const OperationParam OperationParam::SocialLeaderboardServiceRotationType = OperationParam("rotationType");
 	const OperationParam OperationParam::SocialLeaderboardServiceRotationReset = OperationParam("rotationReset");
+	const OperationParam OperationParam::SocialLeaderboardServiceRotationResetTime = OperationParam("rotationResetTime");
 	const OperationParam OperationParam::SocialLeaderboardServiceRetainedCount = OperationParam("retainedCount");
 	const OperationParam OperationParam::SocialLeaderboardServiceFetchType = OperationParam("fetchType");
 	const OperationParam OperationParam::SocialLeaderboardServiceSortOrder = OperationParam("sort");

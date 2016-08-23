@@ -90,20 +90,34 @@ namespace BrainCloud
 		void getSummaryDataForProfileId(const char * in_profileId, IServerCallback * in_callback = NULL);
 
 		/**
-		 * Finds a list of players matching the search text by performing a substring
-		 * search of all player names.
-		 * If the number of results exceeds maxResults the message
-		 * "Too many results to return." is received and no players are returned
-		 *
-		 * Service Name - Friend
-		 * Service Operation - FindPlayerByName
-		 *
-		 * @param in_searchText The substring to search for. Minimum length of 3 characters.
-		 * @param in_maxResults  Maximum number of results to return. If there are more the message
-		 *                       "Too many results to return." is sent back instead of the players.
-		 * @param in_callback Method to be invoked when the server response is received.
-		 */
-		void findPlayerByName(const char * in_searchText, int32_t in_maxResults, IServerCallback * in_callback = NULL);
+		* @deprecated Use findUsersByExactName & findUsersBySubstrName instead - removal after Nov 22 2016
+		*/
+		DEPRECATED void findPlayerByName(const char * in_searchText, int32_t in_maxResults, IServerCallback * in_callback = NULL);
+
+		/**
+		* Finds a list of players matching the search text by performing an exact match search
+		*
+		* Service Name - friend
+		* Service Operation - FIND_USERS_BY_EXACT_NAME
+		*
+		* @param searchText The string to search for.
+		* @param maxResults  Maximum number of results to return.
+		* @param callback Method to be invoked when the server response is received.
+		*/
+		void findUsersByExactName(const char * in_searchText, int32_t in_maxResults, IServerCallback * in_callback = NULL);
+
+		/**
+		* Finds a list of players matching the search text by performing a substring
+		* search of all player names.
+		*
+		* Service Name - friend
+		* Service Operation - FIND_USERS_BY_SUBSTR_NAME
+		*
+		* @param searchText The substring to search for. Minimum length of 3 characters.
+		* @param maxResults  Maximum number of results to return. If there are more the message
+		* @param callback Method to be invoked when the server response is received.
+		*/
+		void findUsersBySubstrName(const char * in_searchText, int32_t in_maxResults, IServerCallback * in_callback = NULL);
 
 		/**
 		 * Retrieves a list of player and friend platform information for all friends of the current player.

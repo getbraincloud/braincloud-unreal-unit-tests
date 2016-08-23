@@ -195,6 +195,7 @@ namespace BrainCloud {
 		static const OperationParam SocialLeaderboardServiceLeaderboardType;
 		static const OperationParam SocialLeaderboardServiceRotationType;
 		static const OperationParam SocialLeaderboardServiceRotationReset;
+		static const OperationParam SocialLeaderboardServiceRotationResetTime;
 		static const OperationParam SocialLeaderboardServiceRetainedCount;
 		static const OperationParam SocialLeaderboardServiceFetchType;
 		static const OperationParam SocialLeaderboardServiceMaxResults;
