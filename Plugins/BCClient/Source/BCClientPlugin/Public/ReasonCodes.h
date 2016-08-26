@@ -1,0 +1,200 @@
+// Copyright 2016 bitHeads, Inc. All Rights Reserved.
+
+#pragma once
+
+class BCCLIENTPLUGIN_API ReasonCode
+{
+public:
+    // Error codes
+    static const int32 NO_REASON_CODE = 0;
+
+    static const int32 INVALID_NOTIFICATION = 20200;
+
+    static const int32 INVALID_REQUEST = 40001;
+
+    // 402
+    static const int32 SWITCHING_FACEBOOK_MEMORY = 40201;
+    static const int32 MERGING_MEMORY = 40202;
+    static const int32 RESETING_MEMORY = 40203;
+    static const int32 MOVING_ANONYMOUS_MEMORY = 40204;
+    static const int32 LOGIN_SECURITY_ERROR = 40205;
+    static const int32 MISSING_IDENTITY_ERROR = 40206;
+    static const int32 SWITCHING_PROFILES = 40207;
+    static const int32 MISSING_PROFILE_ERROR = 40208;
+
+    static const int32 SECURITY_ERROR = 40209;
+
+    static const int32 DOWNGRADING_TO_ANONYMOUS_ERROR = 40210;
+    static const int32 DUPLICATE_IDENTITY_TYPE = 40211;
+    static const int32 MERGE_PROFILES = 40212;
+    static const int32 INVALID_PROPERTY_NAME = 40213;
+    static const int32 EMAIL_NOT_VALIDATED = 40214;
+
+
+    // Forbidden (403)... 
+    static const int32 UNABLE_TO_GET_FRIENDS_FROM_FACEBOOK = 40300;
+    static const int32 BAD_SIGNATURE = 40301;
+    static const int32 UNABLE_TO_VALIDATE_PLAYER = 40302;
+    static const int32 PLAYER_SESSION_EXPIRED = 40303;
+    static const int32 NO_SESSION = 40304;
+    static const int32 PLAYER_SESSION_MISMATCH = 40305;
+    static const int32 OPERATION_REQUIRES_A_SESSION = 40306;
+    static const int32 TOKEN_DOES_NOT_MATCH_USER = 40307;
+    static const int32 EVENT_CAN_ONLY_SEND_TO_FRIEND_OR_SELF = 40309;
+    static const int32 NOT_FRIENDS = 40310;
+    static const int32 VC_BALANCE_CANNOT_BE_SPECIFIED = 40311;
+    static const int32 VC_LIMIT_EXCEEDED = 40312;
+    static const int32 UNABLE_TO_GET_MY_DATA_FROM_FACEBOOK = 40313;
+    static const int32 INVALID_AUTHENTICATION_TYPE = 40315;
+    static const int32 INVALID_GAME_ID = 40316;
+
+
+    // This product and receipt have already been claimed
+    static const int32 APPLE_TRANS_ID_ALREADY_CLAIMED = 40317;
+    // @deprecated - use APPLE_TRANS_ID_ALREADY_CLAIMED
+    static const int32 ITUNES_PURCHASE_ALREADY_CLAIMED = APPLE_TRANS_ID_ALREADY_CLAIMED;
+
+    // 400 Bad version
+    static const int32 CLIENT_VERSION_NOT_SUPPORTED = 40318;
+    static const int32 BRAINCLOUD_VERSION_NOT_SUPPORTED = 40319;
+    static const int32 PLATFORM_NOT_SUPPORTED = 40320;
+
+    static const int32 INVALID_PLAYER_STATISTICS_EVENT_NAME = 40321;
+
+    // Game Version No Longer Supported
+    static const int32 GAME_VERSION_NOT_SUPPORTED = 40322;
+    // @deprecated - use GAME_VERSION_NOT_SUPPORTED
+    static const int32 APP_VERSION_NO_LONGER_SUPPORTED = GAME_VERSION_NOT_SUPPORTED;
+
+    static const int32 BAD_REFERENCE_DATA = 40324;
+    static const int32 MISSING_OAUTH_TOKEN = 40325;
+    static const int32 MISSING_OAUTH_VERIFIER = 40326;
+    static const int32 MISSING_OAUTH_TOKEN_SECRET = 40327;
+    static const int32 MISSING_TWEET = 40328;
+    static const int32 FACEBOOK_PAYMENT_ID_ALREADY_PROCESSED = 40329;
+    static const int32 DISABLED_GAME = 40330;
+    static const int32 MATCH_MAKING_DISABLED = 40331;
+    static const int32 UPDATE_FAILED = 40332;
+    static const int32 INVALID_OPERATION = 40333;   // invalid operation for API call
+    static const int32 MATCH_RANGE_ERROR = 40334;
+    static const int32 PLAYER_IN_MATCH = 40335;
+    static const int32 MATCH_PLAYER_SHIELDED = 40336;
+    static const int32 MATCH_PLAYER_MISSING = 40337;
+    static const int32 MATCH_PLAYER_LOGGED_IN = 40338;
+    static const int32 INVALID_ITEM_ID = 40339;
+    static const int32 MISSING_PRICE = 40340;
+    static const int32 MISSING_USER_INFO = 40341;
+    static const int32 MISSING_STEAM_RESPONSE = 40342;
+    static const int32 MISSING_STEAM_TRANSACTION = 40343;
+    static const int32 ENTITY_VERSION_MISMATCH = 40344;
+    static const int32 MISSING_RECORD = 40345;
+    static const int32 INSUFFICIENT_PERMISSIONS = 40346;
+    static const int32 MISSING_IN_QUERY = 40347;
+    static const int32 RECORD_EXPIRED = 40348;
+    static const int32 INVALID_WHERE = 40349;
+    static const int32 S3_ERROR = 40350;
+    static const int32 INVALID_ATTRIBUTES = 40351;
+    static const int32 IMPORT_MISSING_GAME_DATA = 40352;
+    static const int32 IMPORT_SCHEMA_VERSION_TOO_OLD = 40353;
+    static const int32 IMPORT_SCHEMA_VERSION_INVALID = 40355;
+    static const int32 PLAYER_SESSION_LOGGED_OUT = 40356;
+    static const int32 API_HOOK_SCRIPT_ERROR = 40357;
+    static const int32 MISSING_REQUIRED_PARAMETER = 40358;
+    static const int32 INVALID_PARAMETER_TYPE = 40359;
+    static const int32 INVALID_IDENTITY_TYPE = 40360;
+    static const int32 EMAIL_SEND_ERROR = 40361;
+    static const int32 CHILD_ENTITY_PARTIAL_UPDATE_INVALID_DATA = 40362;
+    static const int32 MISSING_SCRIPT = 40363;
+    static const int32 SCRIPT_SECURITY_ERROR = 40364;
+    static const int32 SERVER_SESSION_EXPIRED = 40365;
+    static const int32 STREAM_DOES_NOT_EXIT = 40366;
+    static const int32 STREAM_ACCESS_ERROR = 40367;
+    static const int32 STREAM_COMPLETE = 40368;
+    static const int32 INVALID_STATISTIC_NAME = 40369;
+    static const int32 INVALID_HTTP_REQUEST = 40370;
+    static const int32 GAME_LIMIT_REACHED = 40371;
+    static const int32 GAME_RUNSTATE_DISABLED = 40372;
+    static const int32 INVALID_COMPANY_ID = 40373;
+    static const int32 INVALID_PLAYER_ID = 40374;
+    static const int32 INVALID_TEMPLATE_ID = 40375;
+    static const int32 MINIMUM_SEARCH_INPUT = 40376;
+    static const int32 MISSING_GAME_PARENT = 40377;
+    static const int32 GAME_PARENT_MISMATCH = 40378;
+    static const int32 CHILD_PLAYER_MISSING = 40379;
+    static const int32 MISSING_PLAYER_PARENT = 40380;
+    static const int32 PLAYER_PARENT_MISMATCH = 40381;
+    static const int32 MISSING_PLAYER_ID = 40382;
+    static const int32 DECODE_CONTEXT = 40383;
+    static const int32 INVALID_QUERY_CONTEXT = 40384;
+    static const int32 GROUP_MEMBER_NOT_FOUND = 40385;
+    static const int32 INVALID_SORT = 40386;
+    static const int32 GAME_NOT_FOUND = 40387;
+    static const int32 GAMES_NOT_IN_SAME_COMPANY = 40388;
+    static const int32 IMPORT_NO_PARENT_ASSIGNED = 40389;
+    static const int32 IMPORT_PARENT_CURRENCIES_MISMATCH = 40390;
+    static const int32 INVALID_SUBSTITUION_ENTRY = 40391;
+    static const int32 INVALID_TEMPLATE_STRING = 40392;
+    static const int32 TEMPLATE_SUBSTITUTION_ERROR = 40393;
+    static const int32 INVALID_OPPONENTS = 40394;
+    static const int32 REDEMPTION_CODE_NOT_FOUND = 40395;
+    static const int32 REDEMPTION_CODE_VERSION_MISMATCH = 40396;
+    static const int32 REDEMPTION_CODE_ACTIVE = 40397;
+    static const int32 REDEMPTION_CODE_NOT_ACTIVE = 40398;
+    static const int32 REDEMPTION_CODE_TYPE_NOT_FOUND = 40399;
+    static const int32 REDEMPTION_CODE_INVALID = 40400;
+    static const int32 REDEMPTION_CODE_REDEEMED = 40401;
+    static const int32 REDEMPTION_CODE_REDEEMED_BY_SELF = 40402;
+    static const int32 REDEMPTION_CODE_REDEEMED_BY_OTHER = 40403;
+    static const int32 SCRIPT_EMPTY = 40404;
+    static const int32 ITUNES_COMMUNICATION_ERROR = 40405;
+    static const int32 ITUNES_NO_RESPONSE = 40406;
+    static const int32 ITUNES_RESPONSE_NOT_OK = 40407;
+    static const int32 JSON_PARSING_ERROR = 40408;
+    static const int32 ITUNES_NULL_RESPONSE = 40409;
+    static const int32 ITUNES_RESPONSE_WITH_NULL_STATUS = 40410;
+    static const int32 ITUNES_STATUS_BAD_JSON_RECEIPT = 40411;
+    static const int32 ITUNES_STATUS_BAD_RECEIPT = 40412;
+    static const int32 ITUNES_STATUS_RECEIPT_NOT_AUTHENTICATED = 40413;
+    static const int32 ITUNES_STATUS_BAD_SHARED_SECRET = 40414;
+    static const int32 ITUNES_STATUS_RECEIPT_SERVER_UNAVAILABLE = 40415;
+    static const int32 ITUNES_RECEIPT_MISSING_ITUNES_PRODUCT_ID = 40416;
+    static const int32 PRODUCT_NOT_FOUND_FOR_ITUNES_PRODUCT_ID = 40417;
+    static const int32 DATA_STREAM_EVENTS_NOT_ENABLED = 40418;
+    static const int32 INVALID_DEVICE_TOKEN = 40419;
+    static const int32 ERROR_DELETING_DEVICE_TOKEN = 40420;
+    static const int32 WEBPURIFY_NOT_CONFIGURED = 40421;
+    static const int32 WEBPURIFY_EXCEPTION = 40422;
+    static const int32 WEBPURIFY_FAILURE = 40423;
+    static const int32 WEBPURIFY_NOT_ENABLED = 40424;
+    static const int32 NAME_CONTAINS_PROFANITY = 40425;
+    static const int32 NULL_SESSION = 40426;
+    static const int32 PURCHASE_ALREADY_VERIFIED = 40427;
+    static const int32 GOOGLE_IAP_NOT_CONFIGURED = 40428;
+    static const int32 UPLOAD_FILE_TOO_LARGE = 40429;
+    static const int32 FILE_ALREADY_EXISTS = 40430;
+    static const int32 CLOUD_STORAGE_SERVICE_ERROR = 40431;
+    static const int32 FILE_DOES_NOT_EXIST = 40432;
+    static const int32 UPLOAD_ID_MISSING = 40433;
+    static const int32 UPLOAD_JOB_MISSING = 40434;
+    static const int32 UPLOAD_JOB_EXPIRED = 40435;
+    static const int32 UPLOADER_EXCEPTION = 40436;
+    static const int32 UPLOADER_FILESIZE_MISMATCH = 40437;
+
+    static const int32 NO_TWITTER_CONSUMER_KEY = 500001;
+    static const int32 NO_TWITTER_CONSUMER_SECRET = 500002;
+    static const int32 INVALID_CONFIGURATION = 500003;
+    static const int32 ERROR_GETTING_REQUEST_TOKEN = 500004;
+    static const int32 ERROR_GETTING_ACCESS_TOKEN = 500005;
+
+    static const int32 FACEBOOK_ERROR = 500010;
+    static const int32 FACEBOOK_SECRET_MISMATCH = 500011;
+    static const int32 FACEBOOK_AUTHENTICATION_ERROR = 500012;
+    static const int32 FACEBOOK_APPLICATION_TOKEN_REQUEST_ERROR = 500013;
+    static const int32 FACEBOOK_BAD_APPLICATION_TOKEN_SIGNATURE = 500014;
+
+    // Client defined value for a timeout detected client-side.
+    static const int32 CLIENT_NETWORK_ERROR_TIMEOUT = 90001;
+    static const int32 CLIENT_UPLOAD_FILE_CANCELLED = 90100;
+    static const int32 CLIENT_UPLOAD_FILE_TIMED_OUT = 90101;
+    static const int32 CLIENT_UPLOAD_FILE_UNKNOWN = 90102;
+};

@@ -1,0 +1,34 @@
+{
+	"FileVersion": 3,
+	"Version": 14,
+	"VersionName": "3.0.0",
+	"FriendlyName": "brainCloud",
+	"Description": "brainCloud is a ready-made back-end platform for the development of feature-rich mobile+social games. For more information, go to getbraincloud.com.",
+	"Category": "Network",
+	"CreatedBy": "bitHeads Inc.",
+	"CreatedByURL": "http://getbraincloud.com",
+	"DocsURL": "http://getbraincloud.com/apidocs/",
+	"MarketplaceURL": "",
+	"SupportURL": "http://getbraincloud.com/apidocs/support/",
+	"Modules": [
+		{
+			"Name": "BCClientPlugin",
+			"Type": "Runtime",
+			"LoadingPhase": "PreDefault"
+		},
+		{
+			"Name": "BCBlueprintSupport",
+			"Type": "Editor",
+			"LoadingPhase": "PreDefault"
+		},
+		{
+			"Name": "OnlineSubsystemBrainCloud",
+			"Type": "Runtime",
+			"LoadingPhase": "PreDefault"
+		}
+	],
+	"EnabledByDefault": false,
+	"CanContainContent": false,
+	"IsBetaVersion": false,
+	"Installed": false
+}

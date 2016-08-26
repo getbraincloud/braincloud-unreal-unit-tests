@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<BuildReceipt xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <Properties>
+    <Property Name="TargetName" Value="BCSubsystemEditor" />
+    <Property Name="Platform" Value="Win64" />
+    <Property Name="Configuration" Value="Development" />
+    <Property Name="Precompile" Value="False" />
+  </Properties>
+  <BuildProducts>
+    <BuildProduct Path="$(ProjectDir)\Plugins\BCClient\Binaries\Win64\UE4Editor-BCClientPlugin.dll" Type="DynamicLibrary" />
+    <BuildProduct Path="$(ProjectDir)\Plugins\BCClient\Binaries\Win64\UE4Editor-BCClientPlugin.pdb" Type="SymbolFile" />
+    <BuildProduct Path="$(ProjectDir)\Plugins\BCClient\Intermediate\Build\Win64\UE4Editor\Development\UE4Editor-BCClientPlugin.lib" Type="ImportLibrary" />
+    <BuildProduct Path="$(ProjectDir)\Plugins\BCClient\Binaries\Win64\UE4Editor-BCBlueprintSupport.dll" Type="DynamicLibrary" />
+    <BuildProduct Path="$(ProjectDir)\Plugins\BCClient\Binaries\Win64\UE4Editor-BCBlueprintSupport.pdb" Type="SymbolFile" />
+    <BuildProduct Path="$(ProjectDir)\Plugins\BCClient\Intermediate\Build\Win64\UE4Editor\Development\UE4Editor-BCBlueprintSupport.lib" Type="ImportLibrary" />
+    <BuildProduct Path="$(ProjectDir)\Plugins\BCClient\Binaries\Win64\UE4Editor-OnlineSubsystemBrainCloud.dll" Type="DynamicLibrary" />
+    <BuildProduct Path="$(ProjectDir)\Plugins\BCClient\Binaries\Win64\UE4Editor-OnlineSubsystemBrainCloud.pdb" Type="SymbolFile" />
+    <BuildProduct Path="$(ProjectDir)\Plugins\BCClient\Intermediate\Build\Win64\UE4Editor\Development\UE4Editor-OnlineSubsystemBrainCloud.lib" Type="ImportLibrary" />
+    <BuildProduct Path="$(ProjectDir)\Plugins\VaRestPlugin\Binaries\Win64\UE4Editor-VaRestPlugin.dll" Type="DynamicLibrary" />
+    <BuildProduct Path="$(ProjectDir)\Plugins\VaRestPlugin\Binaries\Win64\UE4Editor-VaRestPlugin.pdb" Type="SymbolFile" />
+    <BuildProduct Path="$(ProjectDir)\Plugins\VaRestPlugin\Intermediate\Build\Win64\UE4Editor\Development\UE4Editor-VaRestPlugin.lib" Type="ImportLibrary" />
+    <BuildProduct Path="$(ProjectDir)\Binaries\Win64\UE4Editor-BCSubsystem.dll" Type="DynamicLibrary" />
+    <BuildProduct Path="$(ProjectDir)\Binaries\Win64\UE4Editor-BCSubsystem.pdb" Type="SymbolFile" />
+    <BuildProduct Path="$(ProjectDir)\Intermediate\Build\Win64\UE4Editor\Development\UE4Editor-BCSubsystem.lib" Type="ImportLibrary" />
+  </BuildProducts>
+  <RuntimeDependencies />
+  <AdditionalProperties />
+  <bRequireDependenciesToExist>true</bRequireDependenciesToExist>
+</BuildReceipt>

@@ -1,0 +1,76 @@
+// Copyright 2016 bitHeads, Inc. All Rights Reserved.
+
+#include "BCClientPluginPrivatePCH.h"
+#include "BrainCloudPlaybackStream.h"
+
+#include "BrainCloudClient.h"
+#include "ServerCall.h"
+#include "JsonUtil.h"
+
+BrainCloudPlaybackStream::BrainCloudPlaybackStream(BrainCloudClient* client) : _client(client) {};
+
+void BrainCloudPlaybackStream::startStream(const FString& targetPlayerId, bool includeSharedData, IServerCallback * callback)
+{
+    TSharedRef<FJsonObject> message = MakeShareable(new FJsonObject());
+    message->SetStringField(OperationParam::PlaybackStreamServiceTargetPlayerId.getValue(), targetPlayerId);
+    message->SetBoolField(OperationParam::PlaybackStreamServiceIncludeSharedData.getValue(), includeSharedData);
+
+    ServerCall * sc = new ServerCall(ServiceName::PlaybackStream, ServiceOperation::StartStream, message, callback);
+    _client->sendRequest(sc);
+}
+
+void BrainCloudPlaybackStream::readStream(const FString& playbackStreamId, IServerCallback * callback)
+{
+    TSharedRef<FJsonObject> message = MakeShareable(new FJsonObject());
+    message->SetStringField(OperationParam::PlaybackStreamServicePlaybackStreamId.getValue(), playbackStreamId);
+
+    ServerCall * sc = new ServerCall(ServiceName::PlaybackStream, ServiceOperation::ReadStream, message, callback);
+    _client->sendRequest(sc);
+}
+
+void BrainCloudPlaybackStream::endStream(const FString& playbackStreamId, IServerCallback * callback)
+{
+    TSharedRef<FJsonObject> message = MakeShareable(new FJsonObject());
+    message->SetStringField(OperationParam::PlaybackStreamServicePlaybackStreamId.getValue(), playbackStreamId);
+
+    ServerCall * sc = new ServerCall(ServiceName::PlaybackStream, ServiceOperation::EndStream, message, callback);
+    _client->sendRequest(sc);
+}
+
+void BrainCloudPlaybackStream::deleteStream(const FString& playbackStreamId, IServerCallback * callback)
+{
+    TSharedRef<FJsonObject> message = MakeShareable(new FJsonObject());
+    message->SetStringField(OperationParam::PlaybackStreamServicePlaybackStreamId.getValue(), playbackStreamId);
+
+    ServerCall * sc = new ServerCall(ServiceName::PlaybackStream, ServiceOperation::DeleteStream, message, callback);
+    _client->sendRequest(sc);
+}
+
+void BrainCloudPlaybackStream::addEvent(const FString& playbackStreamId, const FString& jsonEventData, const FString& jsonSummary, IServerCallback * callback)
+{
+    TSharedRef<FJsonObject> message = MakeShareable(new FJsonObject());
+    message->SetStringField(OperationParam::PlaybackStreamServicePlaybackStreamId.getValue(), playbackStreamId);
+    message->SetObjectField(OperationParam::PlaybackStreamServiceEventData.getValue(), JsonUtil::jsonStringToValue(jsonEventData));
+    message->SetObjectField(OperationParam::PlaybackStreamServiceSummary.getValue(), JsonUtil::jsonStringToValue(jsonSummary));
+
+    ServerCall * sc = new ServerCall(ServiceName::PlaybackStream, ServiceOperation::AddEvent, message, callback);
+    _client->sendRequest(sc);
+}
+
+void BrainCloudPlaybackStream::getStreamSummariesForInitiatingPlayer(const FString& initiatingPlayerId, IServerCallback * callback)
+{
+    TSharedRef<FJsonObject> message = MakeShareable(new FJsonObject());
+    message->SetStringField(OperationParam::PlaybackStreamServiceInitiatingPlayerId.getValue(), initiatingPlayerId);
+
+    ServerCall * sc = new ServerCall(ServiceName::PlaybackStream, ServiceOperation::GetStreamSummariesForInitiatingPlayer, message, callback);
+    _client->sendRequest(sc);
+}
+
+void BrainCloudPlaybackStream::getStreamSummariesForTargetPlayer(const FString& targetPlayerId, IServerCallback * callback)
+{
+    TSharedRef<FJsonObject> message = MakeShareable(new FJsonObject());
+    message->SetStringField(OperationParam::PlaybackStreamServiceTargetPlayerId.getValue(), targetPlayerId);
+
+    ServerCall * sc = new ServerCall(ServiceName::PlaybackStream, ServiceOperation::GetStreamSummariesForTargetPlayer, message, callback);
+    _client->sendRequest(sc);
+}
