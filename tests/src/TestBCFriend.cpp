@@ -34,6 +34,20 @@ TEST_F(TestBCFriend, FindPlayerByName)
     tr.run(m_bc);
 }
 
+TEST_F(TestBCFriend, FindUsersByExactName)
+{
+	TestResult tr;
+	m_bc->getFriendService()->findUsersByExactName("test", 10, &tr);
+	tr.run(m_bc);
+}
+
+TEST_F(TestBCFriend, FindUsersBySubstrName)
+{
+	TestResult tr;
+	m_bc->getFriendService()->findUsersBySubstrName("test", 10, &tr);
+	tr.run(m_bc);
+}
+
 TEST_F(TestBCFriend, FindPlayerByUniversalId)
 {
     TestResult tr;

@@ -98,6 +98,26 @@ namespace BrainCloud
 		m_client->getBrainCloudComms()->addToQueue(sc);
 	}
 
+	void BrainCloudFriend::findUsersByExactName(const char * in_searchText, int32_t in_maxResults, IServerCallback * in_callback)
+	{
+		Json::Value message;
+		message[OperationParam::FriendServiceSearchText.getValue()] = in_searchText;
+		message[OperationParam::FriendServiceMaxResults.getValue()] = in_maxResults;
+
+		ServerCall * sc = new ServerCall(ServiceName::Friend, ServiceOperation::FindUsersByExactName, message, in_callback);
+		m_client->getBrainCloudComms()->addToQueue(sc);
+	}
+
+	void BrainCloudFriend::findUsersBySubstrName(const char * in_searchText, int32_t in_maxResults, IServerCallback * in_callback)
+	{
+		Json::Value message;
+		message[OperationParam::FriendServiceSearchText.getValue()] = in_searchText;
+		message[OperationParam::FriendServiceMaxResults.getValue()] = in_maxResults;
+
+		ServerCall * sc = new ServerCall(ServiceName::Friend, ServiceOperation::FindUsersBySubstrName, message, in_callback);
+		m_client->getBrainCloudComms()->addToQueue(sc);
+	}
+
 	void BrainCloudFriend::listFriends(const FriendPlatform& in_friendPlatform, bool in_includeSummaryData, IServerCallback * in_callback)
 	{
 		Json::Value message;

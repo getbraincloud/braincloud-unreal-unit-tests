@@ -3,6 +3,7 @@
 #pragma once
 
 #include <string>
+#include <vector>
 #include "braincloud/BrainCloudTypes.h"
 
 #include "braincloud/Platform.h"
@@ -100,6 +101,26 @@ namespace BrainCloud
         * @param in_callback The method to be invoked when the server response is received
         */
         void sendNormalizedPushNotificationToGroup(const char * in_groupId, std::string in_alertContentJson, std::string in_customDataJson, IServerCallback * in_callback = NULL);
+
+		/**
+		* Sends a notification to a user consisting of alert content and custom data.
+		*
+		* @param in_toPlayerId The playerId of the user to receive the notification
+		* @param in_alertContent Body and title of alert
+		* @param in_customData Optional custom data
+		* @param in_callback The method to be invoked when the server response is received
+		*/
+		void sendNormalizedPushNotification(const char * in_toPlayerId, std::string in_alertContentJson, std::string in_customDataJson, IServerCallback * in_callback = NULL);
+
+		/**
+		* Sends a notification to multiple users consisting of alert content and custom data.
+		*
+		* @param in_profileIds Collection of profile IDs to send the notification to
+		* @param in_alertContent Body and title of alert
+		* @param in_customData Optional custom data
+		* @param in_callback The method to be invoked when the server response is received
+		*/
+		void sendNormalizedPushNotificationBatch(std::vector<std::string> in_profileIds, std::string in_alertContentJson, std::string in_customDataJson, IServerCallback * in_callback = NULL);
 
     private:
         BrainCloudClient * m_client;

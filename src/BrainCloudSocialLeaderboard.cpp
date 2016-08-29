@@ -126,7 +126,15 @@ namespace BrainCloud
 		m_client->getBrainCloudComms()->addToQueue(sc);
 	}
 
-	void BrainCloudSocialLeaderboard::postScoreToDynamicLeaderboard(const char * in_leaderboardId, int64_t in_score, const std::string& in_jsonData, SocialLeaderboardType in_leaderboardType, RotationType in_rotationType, const struct tm* in_rotationReset, int in_retainedCount, IServerCallback * in_callback)
+	void BrainCloudSocialLeaderboard::postScoreToDynamicLeaderboard(
+		const char * in_leaderboardId, 
+		int64_t in_score, 
+		const std::string& in_jsonData, 
+		SocialLeaderboardType in_leaderboardType, 
+		RotationType in_rotationType, 
+		struct tm* in_rotationReset, 
+		int in_retainedCount, 
+		IServerCallback * in_callback)
 	{
 		Json::Value message;
 		message[OperationParam::SocialLeaderboardServiceLeaderboardId.getValue()] = in_leaderboardId;
@@ -138,11 +146,10 @@ namespace BrainCloud
 
 		if (in_rotationReset != NULL)
 		{
-			char buf[80];
-			strftime(buf, 80, "%d-%m-%Y %H:%M", in_rotationReset);
-			message[OperationParam::SocialLeaderboardServiceRotationReset.getValue()] = buf;
+			time_t timestamp = mktime(in_rotationReset);
+			int64_t time = (int64_t)timestamp * 1000;
+			message[OperationParam::SocialLeaderboardServiceRotationResetTime.getValue()] = (Json::UInt64)time;
 		}
-
 		message[OperationParam::SocialLeaderboardServiceRetainedCount.getValue()] = in_retainedCount;
 
 		ServerCall * sc = new ServerCall(ServiceName::SocialLeaderboard, ServiceOperation::PostScoreDynamic, message, in_callback);
@@ -196,6 +203,16 @@ namespace BrainCloud
 		message[OperationParam::GroupId.getValue()] = in_groupId;
 
 		ServerCall * sc = new ServerCall(ServiceName::SocialLeaderboard, ServiceOperation::GetGroupSocialLeaderboard, message, in_callback);
+		m_client->getBrainCloudComms()->addToQueue(sc);
+	}
+
+	void BrainCloudSocialLeaderboard::getPlayersSocialLeaderboard(const char * in_leaderboardId, std::vector<std::string> in_profileIds, IServerCallback * in_callback)
+	{
+		Json::Value message;
+		message[OperationParam::SocialLeaderboardServiceLeaderboardId.getValue()] = in_leaderboardId;
+		message[OperationParam::ProfileIds.getValue()] = JsonUtil::stringVectorToJson(in_profileIds);
+
+		ServerCall * sc = new ServerCall(ServiceName::SocialLeaderboard, ServiceOperation::GetPlayersSocialLeaderboard, message, in_callback);
 		m_client->getBrainCloudComms()->addToQueue(sc);
 	}
 

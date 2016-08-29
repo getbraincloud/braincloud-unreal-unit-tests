@@ -93,3 +93,33 @@ TEST_F(TestBCPushNotifications, SendNormalizedPushNotificationToGroup)
     m_bc->getGroupService()->deleteGroup(groupId.c_str(), -1, &tr);
     tr.run(m_bc);
 }
+
+TEST_F(TestBCPushNotifications, SendNormalizedPushNotification)
+{
+	TestResult tr;
+
+	Json::FastWriter fw;
+	Json::Value data;
+	data["body"] = "asdf";
+	data["title"] = "asdf";
+
+	m_bc->getPushNotificationService()->sendNormalizedPushNotification(GetUser(UserA)->m_profileId, fw.write(data), "", &tr);
+	tr.run(m_bc);
+}
+
+TEST_F(TestBCPushNotifications, SendNormalizedPushNotificationBatch)
+{
+	TestResult tr;
+
+	std::vector<std::string> profileIds;
+	profileIds.push_back(GetUser(UserA)->m_profileId);
+	profileIds.push_back(GetUser(UserB)->m_profileId);
+
+	Json::FastWriter fw;
+	Json::Value data;
+	data["body"] = "asdf";
+	data["title"] = "asdf";
+
+	m_bc->getPushNotificationService()->sendNormalizedPushNotificationBatch(profileIds, fw.write(data), "", &tr);
+	tr.run(m_bc);
+}

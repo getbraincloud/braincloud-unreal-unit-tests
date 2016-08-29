@@ -34,6 +34,8 @@ namespace BrainCloud
 	const ServiceOperation ServiceOperation::SendRich = ServiceOperation("SEND_RICH");
 	const ServiceOperation ServiceOperation::SendTemplatedToGroup = ServiceOperation("SEND_TEMPLATED_TO_GROUP");
 	const ServiceOperation ServiceOperation::SendNormalizedToGroup = ServiceOperation("SEND_NORMALIZED_TO_GROUP");
+	const ServiceOperation ServiceOperation::SendNormalized = ServiceOperation("SEND_NORMALIZED");
+	const ServiceOperation ServiceOperation::SendNormalizedBatch = ServiceOperation("SEND_NORMALIZED_BATCH");
 
 	const ServiceOperation ServiceOperation::Trigger = ServiceOperation("TRIGGER");
 	const ServiceOperation ServiceOperation::TriggerMultiple = ServiceOperation("TRIGGER_MULTIPLE");
@@ -62,6 +64,8 @@ namespace BrainCloud
 	const ServiceOperation ServiceOperation::ReadFriends = ServiceOperation("READ_FRIENDS");
 	const ServiceOperation ServiceOperation::ReadFriendsPlayerState = ServiceOperation("READ_FRIEND_PLAYER_STATE");
 	const ServiceOperation ServiceOperation::FindPlayerByName = ServiceOperation("FIND_PLAYER_BY_NAME");
+	const ServiceOperation ServiceOperation::FindUsersByExactName = ServiceOperation("FIND_USERS_BY_EXACT_NAME");
+	const ServiceOperation ServiceOperation::FindUsersBySubstrName = ServiceOperation("FIND_USERS_BY_SUBSTR_NAME");
 	const ServiceOperation ServiceOperation::ListFriends = ServiceOperation("LIST_FRIENDS");
 	const ServiceOperation ServiceOperation::AddFriends = ServiceOperation("ADD_FRIENDS");
 	const ServiceOperation ServiceOperation::RemoveFriends = ServiceOperation("REMOVE_FRIENDS");
@@ -79,6 +83,7 @@ namespace BrainCloud
 	const ServiceOperation ServiceOperation::PostScoreDynamic = ServiceOperation("POST_SCORE_DYNAMIC");
 	const ServiceOperation ServiceOperation::GetGroupSocialLeaderboard = ServiceOperation("GET_GROUP_SOCIAL_LEADERBOARD");
 	const ServiceOperation ServiceOperation::GetSummaryDataForProfileId = ServiceOperation("GET_SUMMARY_DATA_FOR_PROFILE_ID");
+	const ServiceOperation ServiceOperation::GetPlayersSocialLeaderboard = ServiceOperation("GET_PLAYERS_SOCIAL_LEADERBOARD");
 
 	const ServiceOperation ServiceOperation::InitThirdParty = ServiceOperation("initThirdParty");
 	const ServiceOperation ServiceOperation::PostThirdPartyLeaderboardScore = ServiceOperation("postThirdPartyLeaderboardScore");

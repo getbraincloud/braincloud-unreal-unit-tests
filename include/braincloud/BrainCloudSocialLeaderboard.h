@@ -46,7 +46,7 @@ namespace BrainCloud
          * For now, this applies solely to Facebook connected players who are
          * friends with the logged in player (who also must be Facebook connected).
          * In the future this will expand to other identification means (such as
-         * Game Centre, Google circles etc).
+         * Game Center, Google circles etc).
          *
          * Leaderboards entries contain the player's score and optionally, some user-defined
          * data associated with the score. The currently logged in player will also
@@ -96,7 +96,7 @@ namespace BrainCloud
 
         /**
          * Method returns a page of global leaderboard results.
-         * By using a non-current version id, the user can retrieve a historial leaderboard.
+         * By using a non-current version id, the user can retrieve a historical leaderboard.
          * See GetGlobalLeaderboardVersions method to retrieve the version id.
          *
          * Service Name - SocialLeaderboard
@@ -132,7 +132,7 @@ namespace BrainCloud
 
         /**
          * Method returns a view of global leaderboard results that centers on the current player.
-         * By using a non-current version id, the user can retrieve a historial leaderboard.
+         * By using a non-current version id, the user can retrieve a historical leaderboard.
          * See GetGlobalLeaderboardVersions method to retrieve the version id.
          *
          * Service Name - SocialLeaderboard
@@ -194,7 +194,14 @@ namespace BrainCloud
          * @param in_retainedCount How many rotations to keep
          * @param in_callback The method to be invoked when the server response is received
          */
-        void postScoreToDynamicLeaderboard(const char * in_leaderboardId, int64_t in_score, const std::string& in_jsonData, SocialLeaderboardType in_leaderboardType, RotationType in_rotationType, const struct tm* in_rotationReset, int in_retainedCount, IServerCallback * in_callback = NULL);
+        void postScoreToDynamicLeaderboard(
+			const char * in_leaderboardId, 
+			int64_t in_score, 
+			const std::string& in_jsonData, 
+			SocialLeaderboardType in_leaderboardType, 
+			RotationType in_rotationType, struct tm* in_rotationReset, 
+			int in_retainedCount, 
+			IServerCallback * in_callback = NULL);
 
         /**
          * Reset the player's score for the given social leaderboard id.
@@ -254,11 +261,23 @@ namespace BrainCloud
         * Service Name - leaderboard
         * Service Operation - GET_GROUP_SOCIAL_LEADERBOARD
         *
-        * @param in_leaderboardId The leaderboard to retreive
+        * @param in_leaderboardId The leaderboard to retrieve
         * @param in_groupId The ID of the group
         * @param in_callback The method to be invoked when the server response is received
         */
         void getGroupSocialLeaderboard(const char * in_leaderboardId, const char * in_groupId, IServerCallback * in_callback = NULL);
+
+		/**
+		* Retrieve the social leaderboard for a list of players.
+		*
+		* Service Name - leaderboard
+		* Service Operation - GET_PLAYERS_SOCIAL_LEADERBOARD
+		*
+		* @param in_leaderboardId The leaderboard to retrieve
+		* @param in_profileIds The IDs of the players
+		* @param in_callback The method to be invoked when the server response is received
+		*/
+		void getPlayersSocialLeaderboard(const char * in_leaderboardId, std::vector<std::string> in_profileIds, IServerCallback * in_callback = NULL);
 
     private:
         BrainCloudClient * m_client;
