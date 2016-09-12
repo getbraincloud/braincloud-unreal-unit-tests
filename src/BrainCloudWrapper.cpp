@@ -173,6 +173,11 @@ namespace BrainCloud {
         m_BCClient->getAuthenticationService()->authenticateUniversal(in_userid, in_password, in_forceCreate, this);
     }
 
+	void BrainCloudWrapper::reconnect(IServerCallback * in_callback)
+	{
+		authenticateAnonymous(in_callback);
+	}
+
     void BrainCloudWrapper::runCallbacks()
     {
         m_BCClient->runCallbacks();
