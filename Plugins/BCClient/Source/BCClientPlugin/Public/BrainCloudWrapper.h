@@ -180,6 +180,14 @@ public:
      */
     void authenticateUniversal(FString userid, FString password, bool forceCreate, IServerCallback * callback = nullptr);
 
+	/*
+	* Re-authenticates the user with brainCloud
+	* 
+	* @param callback The method to be invoked when the server response is received
+	*
+	*/
+	void reconnect(IServerCallback * callback = nullptr);
+
     /**
      * Run callbacks, to be called once per frame from your main thread
      */

@@ -137,6 +137,11 @@ void BrainCloudWrapper::authenticateUniversal(FString userid, FString password, 
     _client->getAuthenticationService()->authenticateUniversal(userid, password, forceCreate, this);
 }
 
+void BrainCloudWrapper::reconnect(IServerCallback * callback)
+{
+	authenticateAnonymous(callback);
+}
+
 void BrainCloudWrapper::runCallbacks()
 {
     _client->runCallbacks();
