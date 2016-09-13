@@ -186,6 +186,14 @@ namespace BrainCloud {
          */
         void authenticateUniversal(const char * in_userid, const char * in_password, bool in_forceCreate, IServerCallback * in_callback = NULL);
 
+		/**
+		* Re-authenticates the user with brainCloud
+		*
+		* @param in_callback The method to be invoked when the server response is received
+		*
+		*/
+		void reconnect(IServerCallback * in_callback = NULL);
+
         /**
          * Run callbacks, to be called once per frame from your main thread
          */
