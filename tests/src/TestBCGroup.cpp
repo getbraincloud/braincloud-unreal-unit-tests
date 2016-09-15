@@ -351,8 +351,9 @@ TEST_F(TestBCGroup, ReadGroupData)
 TEST_F(TestBCGroup, ReadGroupEntitiesPage)
 {
 	Authenticate(UserA);
+	CreateGroup();
 
-	std::string context = CreateContext(10, 1, "entityType", _entityType);
+	std::string context = CreateContext(10, 1, "groupId", _groupId);
 
 	TestResult tr;
 	m_bc->getGroupService()->readGroupEntitiesPage(
@@ -360,6 +361,7 @@ TEST_F(TestBCGroup, ReadGroupEntitiesPage)
 		&tr);
 	tr.run(m_bc);
 
+	DeleteGroup();
 	Logout();
 }
 
