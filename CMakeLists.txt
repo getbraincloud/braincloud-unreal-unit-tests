@@ -80,6 +80,7 @@ include/braincloud/BrainCloudGlobalEntity.h
 include/braincloud/BrainCloudGlobalStatistics.h
 include/braincloud/BrainCloudGroup.h
 include/braincloud/BrainCloudIdentity.h
+include/braincloud/BrainCloudMail.h
 include/braincloud/BrainCloudMatchmaking.h
 include/braincloud/BrainCloudOneWayMatch.h
 include/braincloud/BrainCloudPlaybackStream.h
@@ -145,6 +146,7 @@ src/BrainCloudGlobalEntity.cpp
 src/BrainCloudGlobalStatistics.cpp
 src/BrainCloudGroup.cpp
 src/BrainCloudIdentity.cpp
+src/BrainCloudMail.cpp
 src/BrainCloudMatchmaking.cpp
 src/BrainCloudOneWayMatch.cpp
 src/BrainCloudPlaybackStream.cpp

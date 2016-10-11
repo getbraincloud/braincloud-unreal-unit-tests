@@ -18,24 +18,21 @@ namespace BrainCloud {
     BrainCloudAuthentication::BrainCloudAuthentication(BrainCloudClient* in_client) :
         m_client(in_client),
         _anonymousId(""),
-        _profileId("") 
+        _profileId("") ,
+		_clientLib("cpp")
     {
     }
+
+	void BrainCloudAuthentication::setClientLib(const char * lib)
+	{
+		if (_clientLib == "obj-c" || _clientLib == "cpp")
+			_clientLib = lib;
+	}
 
     void BrainCloudAuthentication::initialize(const char * in_profileId, const char * in_anonymousId)
     {
         _profileId = in_profileId;
         _anonymousId = in_anonymousId;
-    }
-
-    std::string BrainCloudAuthentication::generateGUID()
-    {
-        return BrainCloud::GUID::generateGUID();
-    }
-
-    void BrainCloudAuthentication::generateNewAnonymousId()
-    {
-        _anonymousId = BrainCloud::GUID::generateGUID();
     }
 
 	std::string BrainCloudAuthentication::generateAnonymousId()
@@ -144,6 +141,7 @@ namespace BrainCloud {
         message[OperationParam::AuthenticateServiceAuthenticateCountryCode.getValue()] = m_client->getCountryCode().c_str();
         message[OperationParam::AuthenticateServiceAuthenticateLanguageCode.getValue()] = m_client->getLanguageCode().c_str();
         message[OperationParam::AuthenticateServiceAuthenticateTimeZoneOffset.getValue()] = m_client->getTimezoneOffset();
+		message["clientLib"] = _clientLib;
 
         ServerCall * sc = new ServerCall(ServiceName::AuthenticateV2, ServiceOperation::Authenticate, message, in_callback);
         m_client->sendRequest(sc);

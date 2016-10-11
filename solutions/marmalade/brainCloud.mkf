@@ -43,6 +43,7 @@ files
     BrainCloudGlobalStatistics.h
     BrainCloudGroup.h
     BrainCloudIdentity.h
+    BrainCloudMail.h
     BrainCloudMatchmaking.h
     BrainCloudOneWayMatch.h
     BrainCloudPlaybackStream.h

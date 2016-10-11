@@ -49,6 +49,7 @@
 #include "braincloud/BrainCloudProfanity.h"
 #include "braincloud/BrainCloudFile.h"
 #include "braincloud/BrainCloudGroup.h"
+#include "braincloud/BrainCloudMail.h"
 
 namespace Json {
 	class Value;
@@ -287,6 +288,7 @@ namespace BrainCloud
 		BrainCloudProfanity * getProfanityService() { return _profanityService; }
 		BrainCloudFile * getFileService() { return _fileService; }
 		BrainCloudGroup * getGroupService() { return _groupService; }
+		BrainCloudMail * getMailService() { return _mailService; }
 
 		const std::string & getGameId() const
 		{
@@ -539,6 +541,7 @@ namespace BrainCloud
 		BrainCloudProfanity * _profanityService;
 		BrainCloudFile * _fileService;
 		BrainCloudGroup * _groupService;
+		BrainCloudMail * _mailService;
 
 		static std::string s_brainCloudClientVersion;
 

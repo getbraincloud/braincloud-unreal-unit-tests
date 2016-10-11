@@ -32,7 +32,7 @@
 #include "gtest/gtest.h"
 
 GTEST_API_ int main(int argc, char **argv) {     
-    //testing::FLAGS_gtest_filter = "TestBCPlayerState.*"; //uncomment this line to run specific tests
+    //testing::FLAGS_gtest_filter = "TestBCMail.*"; //uncomment this line to run specific tests
     
     printf("Running main() from gtest_main.cc\n");
     testing::InitGoogleTest(&argc, argv);

@@ -232,7 +232,7 @@ namespace BrainCloud {
 
 		// data bundle creation Params
 		static const OperationParam ServiceMessagePacketId;
-		static const OperationParam ServiceMessageProfileId;
+		static const OperationParam ProfileId;
 		static const OperationParam ServiceMessageSessionId;
 		static const OperationParam ServiceMessageMessages;
 
@@ -340,6 +340,11 @@ namespace BrainCloud {
 		static const OperationParam GroupPageOffset;
 		static const OperationParam GroupAutoJoinStrategy;
 		static const OperationParam GroupWhere;
+
+		//mail
+		static const OperationParam Subject;
+		static const OperationParam Body;
+		static const OperationParam ServiceParams;
 
 		/*
 		 OfflineMatchServicePlayerId                        = new OperationParam("playerId");

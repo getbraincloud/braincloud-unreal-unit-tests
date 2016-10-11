@@ -51,7 +51,6 @@ TEST_F(TestBCSocialLeaderboard, GetGlobalLeaderboardVersions)
     tr.run(m_bc);
 }
 
-
 TEST_F(TestBCSocialLeaderboard, GetGlobalLeaderboardPageHigh)
 {
     TestResult tr;
@@ -159,6 +158,14 @@ TEST_F(TestBCSocialLeaderboard, GetPlayersSocialLeaderboard)
 	profileIds.push_back(GetUser(UserB)->m_profileId);
 
 	m_bc->getSocialLeaderboardService()->getPlayersSocialLeaderboard(SOCIAL_LB_ID, profileIds, &tr);
+	tr.run(m_bc);
+}
+
+TEST_F(TestBCSocialLeaderboard, ListAllLeaderboards)
+{
+	TestResult tr;
+
+	m_bc->getSocialLeaderboardService()->listAllLeaderboards(&tr);
 	tr.run(m_bc);
 }
 

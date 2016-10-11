@@ -25,6 +25,7 @@ namespace BrainCloud
     const ServiceName ServiceName::Time = ServiceName("time");
 
     const ServiceName ServiceName::SocialLeaderboard = ServiceName("socialLeaderboard");
+	const ServiceName ServiceName::Leaderboard = ServiceName("leaderboard");
     const ServiceName ServiceName::Event = ServiceName("event");
     const ServiceName ServiceName::Product = ServiceName("product");
     const ServiceName ServiceName::PlayerStatistics = ServiceName("playerStatistics");
@@ -44,6 +45,7 @@ namespace BrainCloud
     const ServiceName ServiceName::Profanity = ServiceName("profanity");
     const ServiceName ServiceName::File = ServiceName("file");
     const ServiceName ServiceName::Group = ServiceName("group");
+	const ServiceName ServiceName::Mail = ServiceName("mail");
 
     ServiceName::ServiceName(const char * value)
     {

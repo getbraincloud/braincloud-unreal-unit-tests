@@ -61,6 +61,8 @@ files
     TestBCGroup.h
     TestBCIdentity.cpp
     TestBCIdentity.h
+    TestBCMail.cpp
+    TestBCMail.h
     TestBCMatchMaking.cpp
     TestBCMatchMaking.h
     TestBCOneWayMatch.cpp

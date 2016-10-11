@@ -89,6 +89,7 @@ namespace BrainCloud {
 		static const ServiceOperation GetGroupSocialLeaderboard;
 		static const ServiceOperation GetSummaryDataForProfileId;
 		static const ServiceOperation GetPlayersSocialLeaderboard;
+		static const ServiceOperation ListAllLeaderboards;
 
 		static const ServiceOperation InitThirdParty;
 		static const ServiceOperation PostThirdPartyLeaderboardScore;
@@ -276,6 +277,11 @@ namespace BrainCloud {
 		static const ServiceOperation UpdateGroupEntity;
 		static const ServiceOperation UpdateGroupMember;
 		static const ServiceOperation UpdateGroupName;
+
+		//mail
+		static const ServiceOperation SendBasicEmail;
+		static const ServiceOperation SendAdvancedEmail;
+
 
 		std::string getValue() const { return _value; }
 
