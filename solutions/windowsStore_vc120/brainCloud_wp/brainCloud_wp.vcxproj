@@ -165,6 +165,7 @@
     <ClInclude Include="..\..\..\include\braincloud\BrainCloudGlobalStatistics.h" />
     <ClInclude Include="..\..\..\include\braincloud\BrainCloudGroup.h" />
     <ClInclude Include="..\..\..\include\braincloud\BrainCloudIdentity.h" />
+    <ClInclude Include="..\..\..\include\braincloud\BrainCloudMail.h" />
     <ClInclude Include="..\..\..\include\braincloud\BrainCloudMatchmaking.h" />
     <ClInclude Include="..\..\..\include\braincloud\BrainCloudOneWayMatch.h" />
     <ClInclude Include="..\..\..\include\braincloud\BrainCloudPlaybackStream.h" />
@@ -233,6 +234,7 @@
     <ClCompile Include="..\..\..\src\BrainCloudGlobalStatistics.cpp" />
     <ClCompile Include="..\..\..\src\BrainCloudGroup.cpp" />
     <ClCompile Include="..\..\..\src\BrainCloudIdentity.cpp" />
+    <ClCompile Include="..\..\..\src\BrainCloudMail.cpp" />
     <ClCompile Include="..\..\..\src\BrainCloudMatchmaking.cpp" />
     <ClCompile Include="..\..\..\src\BrainCloudOneWayMatch.cpp" />
     <ClCompile Include="..\..\..\src\BrainCloudPlaybackStream.cpp" />

@@ -81,6 +81,9 @@
     <ClInclude Include="..\..\..\include\braincloud\BrainCloudIdentity.h">
       <Filter>include\braincloud</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\..\include\braincloud\BrainCloudMail.h">
+      <Filter>include\braincloud</Filter>
+    </ClInclude>
     <ClInclude Include="..\..\..\include\braincloud\BrainCloudMatchmaking.h">
       <Filter>include\braincloud</Filter>
     </ClInclude>
@@ -273,6 +276,9 @@
       <Filter>src</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\src\BrainCloudIdentity.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\BrainCloudMail.cpp">
       <Filter>src</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\src\BrainCloudMatchmaking.cpp">
