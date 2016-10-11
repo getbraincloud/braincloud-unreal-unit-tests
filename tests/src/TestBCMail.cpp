@@ -27,6 +27,8 @@ TEST_F(TestBCMail, SendAdvancedEmail)
 	data["subject"] = "Test Subject";
 	data["body"] = "Test body";
 
-	m_bc->getMailService()->sendAdvancedEmail(GetUser(UserB)->m_profileId, fw.write(data), &tr);
+	std::string dataStr = fw.write(data);
+
+	m_bc->getMailService()->sendAdvancedEmail(GetUser(UserB)->m_profileId, dataStr, &tr);
 	tr.run(m_bc);
 }
