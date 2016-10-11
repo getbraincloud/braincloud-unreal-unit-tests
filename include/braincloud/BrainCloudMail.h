@@ -37,10 +37,10 @@ namespace BrainCloud
 		 *
 		 * @param in_profileId The user to send the email to
 		 * @param in_jsonServiceParams Parameters to send to the email service. See the documentation for
-         *	a full list. http://getbraincloud.com/apidocs/apiref/#capi-mail
+		 *	a full list. http://getbraincloud.com/apidocs/apiref/#capi-mail
 		 * @param in_callback The method to be invoked when the server response is received
 		 */
-		void sendAdvancedEmail(const char * in_profileId, std::string & in_jsonServiceParams, IServerCallback * in_callback = NULL);
+		void sendAdvancedEmail(const char * in_profileId, const std::string & in_jsonServiceParams, IServerCallback * in_callback = NULL);
 
 	private:
 		BrainCloudClient * m_client;

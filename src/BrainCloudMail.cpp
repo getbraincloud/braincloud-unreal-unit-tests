@@ -28,7 +28,7 @@ namespace BrainCloud
 		m_client->sendRequest(sc);
 	}
 
-	void BrainCloudMail::sendAdvancedEmail(const char * in_profileId, std::string & in_jsonServiceParams, IServerCallback * in_callback)
+	void BrainCloudMail::sendAdvancedEmail(const char * in_profileId, const std::string & in_jsonServiceParams, IServerCallback * in_callback)
 	{
 		Json::Value message;
 		message[OperationParam::ProfileId.getValue()] = in_profileId;
