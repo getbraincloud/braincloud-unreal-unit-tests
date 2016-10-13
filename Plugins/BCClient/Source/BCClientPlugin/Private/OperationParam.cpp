@@ -340,6 +340,11 @@ OperationParam::OperationParam(const FString& operation)
 	const OperationParam OperationParam::GroupAutoJoinStrategy = OperationParam(TEXT("autoJoinStrategy"));
 	const OperationParam OperationParam::GroupWhere = OperationParam(TEXT("where"));
 
+	const OperationParam OperationParam::ProfileId = OperationParam(TEXT("profileId"));
+	const OperationParam OperationParam::Subject = OperationParam(TEXT("subject"));
+	const OperationParam OperationParam::Body = OperationParam(TEXT("body"));
+	const OperationParam OperationParam::ServiceParams = OperationParam(TEXT("serviceParams"));
+
 bool OperationParam::operator== (const OperationParam& s) const
 {
     return _value == s.getValue();

@@ -113,6 +113,13 @@ UBCLeaderboardProxy* UBCLeaderboardProxy::GetPlayersSocialLeaderboard(const FStr
 	return Proxy;
 }
 
+UBCLeaderboardProxy* UBCLeaderboardProxy::ListAllLeaderboards()
+{
+	UBCLeaderboardProxy* Proxy = NewObject<UBCLeaderboardProxy>();
+	BrainCloudClient::getInstance()->getLeaderboardService()->listAllLeaderboards(Proxy);
+	return Proxy;
+}
+
 void UBCLeaderboardProxy::serverCallback(ServiceName serviceName, ServiceOperation serviceOperation, const FString& jsonData)
 {
     FBC_ReturnData returnData = FBC_ReturnData(serviceName.getValue(), serviceOperation.getValue(), 200, 0);

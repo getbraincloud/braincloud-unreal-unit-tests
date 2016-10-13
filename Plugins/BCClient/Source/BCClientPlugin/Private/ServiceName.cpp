@@ -29,6 +29,7 @@ const ServiceName ServiceName::Friend = ServiceName("friend");
 const ServiceName ServiceName::Time = ServiceName("time");
 
 const ServiceName ServiceName::SocialLeaderboard = ServiceName("socialLeaderboard");
+const ServiceName ServiceName::Leaderboard = ServiceName("leaderboard");
 const ServiceName ServiceName::Event = ServiceName("event");
 const ServiceName ServiceName::Product = ServiceName("product");
 const ServiceName ServiceName::PlayerStatistics = ServiceName("playerStatistics");
@@ -48,6 +49,7 @@ const ServiceName ServiceName::DataStream = ServiceName("dataStream");
 const ServiceName ServiceName::Profanity = ServiceName("profanity");
 const ServiceName ServiceName::File = ServiceName("file");
 const ServiceName ServiceName::Group = ServiceName("group");
+const ServiceName ServiceName::Mail = ServiceName("mail");
 
 bool ServiceName::operator== (const ServiceName& s) const
 {

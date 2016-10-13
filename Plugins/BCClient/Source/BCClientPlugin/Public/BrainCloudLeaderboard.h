@@ -269,6 +269,16 @@ public:
 	*/
 	void getPlayersSocialLeaderboard(const FString& leaderboardId, const TArray<FString> profileIds, IServerCallback * callback = nullptr);
 
+	/**
+	* Retrieve a list of all leaderboards
+	*
+	* Service Name - leaderboard
+	* Service Operation - LIST_ALL_LEADERBOARDS
+	*
+	* @param callback The method to be invoked when the server response is received
+	*/
+	void listAllLeaderboards(IServerCallback * callback = nullptr);
+
 private:
 	BrainCloudClient* _client = nullptr;
 

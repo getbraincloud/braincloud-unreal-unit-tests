@@ -88,6 +88,7 @@ public:
 	static const ServiceOperation GetGroupSocialLeaderboard;
 	static const ServiceOperation GetSummaryDataForProfileId;
 	static const ServiceOperation GetPlayersSocialLeaderboard;
+	static const ServiceOperation ListAllLeaderboards;
 
 	static const ServiceOperation InitThirdParty;
 	static const ServiceOperation PostThirdPartyLeaderboardScore;
@@ -274,6 +275,10 @@ public:
 	static const ServiceOperation UpdateGroupEntity;
 	static const ServiceOperation UpdateGroupMember;
 	static const ServiceOperation UpdateGroupName;
+
+	//mail
+	static const ServiceOperation SendBasicEmail;
+	static const ServiceOperation SendAdvancedEmail;
 
 	FString getValue() const { return _value; }
 

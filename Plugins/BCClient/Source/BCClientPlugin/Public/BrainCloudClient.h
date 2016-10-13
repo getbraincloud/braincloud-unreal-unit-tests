@@ -29,6 +29,7 @@
 #include "BrainCloudProfanity.h"
 #include "BrainCloudFile.h"
 #include "BrainCloudGroup.h"
+#include "BrainCloudMail.h"
 
 class BrainCloudComms;
 class ServerCall;
@@ -220,6 +221,7 @@ public:
 	BrainCloudProfanity * getProfanityService();
 	BrainCloudFile * getFileService();
 	BrainCloudGroup * getGroupService();
+	BrainCloudMail * getMailService();
 
 	const FString & getGameId() { return _gameId; };
 	const FString & getReleasePlatform() { return _releasePlatform; };
@@ -451,6 +453,7 @@ protected:
 	BrainCloudProfanity * _profanityService = nullptr;
 	BrainCloudFile * _fileService = nullptr;
 	BrainCloudGroup * _groupService = nullptr;
+	BrainCloudMail * _mailService = nullptr;
 
 	static FString s_brainCloudClientVersion;
 

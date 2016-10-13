@@ -17,7 +17,7 @@
 // Define all static member variables.
 BrainCloudClient * BrainCloudClient::_instance = nullptr;
 
-FString BrainCloudClient::s_brainCloudClientVersion = TEXT("3.0.0");
+FString BrainCloudClient::s_brainCloudClientVersion = TEXT("3.1.0");
 
 ////////////////////////////////////////////////////
 // (De)Constructors
@@ -497,6 +497,15 @@ BrainCloudGroup * BrainCloudClient::getGroupService()
 		_groupService = new BrainCloudGroup(this);
 	}
 	return _groupService;
+}
+
+BrainCloudMail * BrainCloudClient::getMailService()
+{
+	if (_mailService == nullptr)
+	{
+		_mailService = new BrainCloudMail(this);
+	}
+	return _mailService;
 }
 
 ////////////////////////////////////////////////////

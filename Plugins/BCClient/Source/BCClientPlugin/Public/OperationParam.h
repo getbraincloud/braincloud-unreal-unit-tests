@@ -339,6 +339,12 @@ public:
 	static const OperationParam GroupAutoJoinStrategy;
 	static const OperationParam GroupWhere;
 
+	//mail
+	static const OperationParam ProfileId;
+	static const OperationParam Subject;
+	static const OperationParam Body;
+	static const OperationParam ServiceParams;
+
 	FString getValue() const { return _value; }
 
 	bool operator== (const OperationParam& s) const;

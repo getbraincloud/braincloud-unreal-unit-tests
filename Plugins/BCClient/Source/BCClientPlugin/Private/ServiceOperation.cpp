@@ -91,6 +91,7 @@ const ServiceOperation ServiceOperation::PostScoreDynamic = ServiceOperation(TEX
 const ServiceOperation ServiceOperation::GetGroupSocialLeaderboard = ServiceOperation(TEXT("GET_GROUP_SOCIAL_LEADERBOARD"));
 const ServiceOperation ServiceOperation::GetSummaryDataForProfileId = ServiceOperation(TEXT("GET_SUMMARY_DATA_FOR_PROFILE_ID"));
 const ServiceOperation ServiceOperation::GetPlayersSocialLeaderboard = ServiceOperation(TEXT("GET_PLAYERS_SOCIAL_LEADERBOARD"));
+const ServiceOperation ServiceOperation::ListAllLeaderboards = ServiceOperation(TEXT("LIST_ALL_LEADERBOARDS"));
 
 const ServiceOperation ServiceOperation::InitThirdParty = ServiceOperation(TEXT("initThirdParty"));
 const ServiceOperation ServiceOperation::PostThirdPartyLeaderboardScore = ServiceOperation(TEXT("postThirdPartyLeaderboardScore"));
@@ -276,6 +277,10 @@ const ServiceOperation ServiceOperation::UpdateGroupData = ServiceOperation(TEXT
 const ServiceOperation ServiceOperation::UpdateGroupEntity = ServiceOperation(TEXT("UPDATE_GROUP_ENTITY_DATA"));
 const ServiceOperation ServiceOperation::UpdateGroupMember = ServiceOperation(TEXT("UPDATE_GROUP_MEMBER"));
 const ServiceOperation ServiceOperation::UpdateGroupName = ServiceOperation(TEXT("UPDATE_GROUP_NAME"));
+
+//mail
+const ServiceOperation ServiceOperation::SendBasicEmail = ServiceOperation(TEXT("SEND_BASIC_EMAIL"));
+const ServiceOperation ServiceOperation::SendAdvancedEmail = ServiceOperation(TEXT("SEND_ADVANCED_EMAIL"));
 
 bool ServiceOperation::operator== (const ServiceOperation& s) const
 {

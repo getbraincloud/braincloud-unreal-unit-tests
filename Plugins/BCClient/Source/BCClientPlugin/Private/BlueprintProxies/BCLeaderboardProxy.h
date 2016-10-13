@@ -231,6 +231,16 @@ public:
 	UFUNCTION(BlueprintCallable, meta = (BlueprintInternalUseOnly = "true"), Category = "BrainCloud|Leaderboard")
 		static UBCLeaderboardProxy* GetPlayersSocialLeaderboard(const FString& leaderboardId, const TArray<FString> profileIds);
 
+
+	/**
+	* Retrieve a list of all leaderboards
+	*
+	* Service Name - leaderboard
+	* Service Operation - LIST_ALL_LEADERBOARDS
+	*/
+	UFUNCTION(BlueprintCallable, meta = (BlueprintInternalUseOnly = "true"), Category = "BrainCloud|Leaderboard")
+		static UBCLeaderboardProxy* ListAllLeaderboards();
+
     //Response delegates
     UPROPERTY(BlueprintAssignable)
         FBrainCloudCallbackDelegate OnSuccess;

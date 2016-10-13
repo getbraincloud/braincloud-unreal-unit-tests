@@ -133,6 +133,7 @@ void BrainCloudAuthentication::authenticate(
 	message->SetStringField(OperationParam::AuthenticateServiceAuthenticateReleasePlatform.getValue(), brainCloudClientRef->getReleasePlatform());
 	message->SetStringField(OperationParam::AuthenticateServiceAuthenticateGameVersion.getValue(), brainCloudClientRef->getGameVersion());
 	message->SetStringField(OperationParam::AuthenticateServiceAuthenticateBrainCloudVersion.getValue(), brainCloudClientRef->getBrainCloudClientVersion());
+	message->SetStringField(TEXT("clientLib"), TEXT("ue4"));
 
 	if (OperationParam::isOptionalParamValid(externalAuthName))
 	{
