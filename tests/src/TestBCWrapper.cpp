@@ -106,5 +106,25 @@ TEST_F(TestBCWrapper, VerifyAlwaysAllowProfileFalse)
     Logout();
 }
 
+TEST_F(TestBCWrapper, Reconnect)
+{
+	BrainCloud::BrainCloudWrapper::getInstance()->initialize(m_serverUrl.c_str(), m_secret.c_str(), m_appId.c_str(), m_version.c_str(), "wrapper", "unittest");
+
+	std::string email = GetUser(UserA)->m_email;
+	email.append("_wrapper");
+
+	TestResult tr;
+	BrainCloud::BrainCloudWrapper::getInstance()->authenticateEmailPassword(email.c_str(), GetUser(UserA)->m_password, true, &tr);
+	tr.run(m_bc);
+
+	BrainCloud::BrainCloudWrapper::getBC()->getPlayerStateService()->logout(&tr);
+	tr.run(m_bc);
+
+	BrainCloud::BrainCloudWrapper::getInstance()->reconnect(&tr);
+	tr.run(m_bc);
+
+	Logout();
+}
+
 #endif
 

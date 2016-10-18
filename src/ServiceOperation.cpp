@@ -84,6 +84,7 @@ namespace BrainCloud
 	const ServiceOperation ServiceOperation::GetGroupSocialLeaderboard = ServiceOperation("GET_GROUP_SOCIAL_LEADERBOARD");
 	const ServiceOperation ServiceOperation::GetSummaryDataForProfileId = ServiceOperation("GET_SUMMARY_DATA_FOR_PROFILE_ID");
 	const ServiceOperation ServiceOperation::GetPlayersSocialLeaderboard = ServiceOperation("GET_PLAYERS_SOCIAL_LEADERBOARD");
+	const ServiceOperation ServiceOperation::ListAllLeaderboards = ServiceOperation("LIST_ALL_LEADERBOARDS");
 
 	const ServiceOperation ServiceOperation::InitThirdParty = ServiceOperation("initThirdParty");
 	const ServiceOperation ServiceOperation::PostThirdPartyLeaderboardScore = ServiceOperation("postThirdPartyLeaderboardScore");
@@ -270,6 +271,10 @@ namespace BrainCloud
 	const ServiceOperation ServiceOperation::UpdateGroupEntity = ServiceOperation("UPDATE_GROUP_ENTITY_DATA");
 	const ServiceOperation ServiceOperation::UpdateGroupMember = ServiceOperation("UPDATE_GROUP_MEMBER");
 	const ServiceOperation ServiceOperation::UpdateGroupName = ServiceOperation("UPDATE_GROUP_NAME");
+
+	//mail
+	const ServiceOperation ServiceOperation::SendBasicEmail = ServiceOperation("SEND_BASIC_EMAIL");
+	const ServiceOperation ServiceOperation::SendAdvancedEmail = ServiceOperation("SEND_ADVANCED_EMAIL");
 
 	ServiceOperation::ServiceOperation(const char * value)
 	{

@@ -23,8 +23,10 @@ namespace BrainCloud
 		Json::Value message;
 		message[OperationParam::ScriptServiceRunScriptName.getValue()] = in_scriptName;
 
-		Json::Value jsonData = JsonUtil::jsonStringToValue(in_jsonScriptData);
-		message[OperationParam::ScriptServiceRunScriptData.getValue()] = jsonData;
+		if (StringUtil::IsOptionalParameterValid(in_jsonScriptData)) {
+			Json::Value jsonData = JsonUtil::jsonStringToValue(in_jsonScriptData);
+			message[OperationParam::ScriptServiceRunScriptData.getValue()] = jsonData;
+		}
 
 		ServerCall * sc = new ServerCall(ServiceName::Script, ServiceOperation::Run, message, in_callback);
 		m_client->sendRequest(sc);

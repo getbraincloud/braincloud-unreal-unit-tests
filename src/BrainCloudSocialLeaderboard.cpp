@@ -216,6 +216,12 @@ namespace BrainCloud
 		m_client->getBrainCloudComms()->addToQueue(sc);
 	}
 
+	void BrainCloudSocialLeaderboard::listAllLeaderboards(IServerCallback * in_callback)
+	{		
+		ServerCall * sc = new ServerCall(ServiceName::Leaderboard, ServiceOperation::ListAllLeaderboards, Json::nullValue, in_callback);
+		m_client->getBrainCloudComms()->addToQueue(sc);
+	}
+
 	std::string BrainCloudSocialLeaderboard::leaderboardTypeToString(SocialLeaderboardType type)
 	{
 		std::string typeString = "HIGH_VALUE";

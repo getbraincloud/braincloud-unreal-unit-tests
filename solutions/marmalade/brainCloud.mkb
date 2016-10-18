@@ -53,6 +53,7 @@ files
     BrainCloudGlobalStatistics.h
     BrainCloudGroup.h
     BrainCloudIdentity.h
+    BrainCloudMail.h
     BrainCloudMatchmaking.h
     BrainCloudOneWayMatch.h
     BrainCloudPlaybackStream.h
@@ -126,6 +127,7 @@ files
     BrainCloudGlobalStatistics.cpp
     BrainCloudGroup.cpp
     BrainCloudIdentity.cpp
+    BrainCloudMail.cpp
     BrainCloudMatchmaking.cpp
     BrainCloudOneWayMatch.cpp
     BrainCloudPlaybackStream.cpp

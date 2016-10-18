@@ -40,7 +40,7 @@ namespace BrainCloud {
 
 	// Define all static member variables.
 	BrainCloudClient * BrainCloudClient::_instance = NULL;
-	std::string BrainCloudClient::s_brainCloudClientVersion = "3.0.0";
+	std::string BrainCloudClient::s_brainCloudClientVersion = "3.1.0";
 
 	/**
 	 * Constructor
@@ -59,6 +59,7 @@ namespace BrainCloud {
 		_globalStatisticsService(new BrainCloudGlobalStatistics(this)),
 		_groupService(new BrainCloudGroup(this)),
 		_identityService(new BrainCloudIdentity(this)),
+		_mailService(new BrainCloudMail(this)),
 		_matchmakingService(new BrainCloudMatchmaking(this)),
 		_oneWayMatchService(new BrainCloudOneWayMatch(this)),
 		_playbackStreamService(new BrainCloudPlaybackStream(this)),

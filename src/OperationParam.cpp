@@ -225,7 +225,7 @@ namespace BrainCloud
 
 	// data bundle creation parms
 	const OperationParam OperationParam::ServiceMessagePacketId = OperationParam("packetId");
-	const OperationParam OperationParam::ServiceMessageProfileId = OperationParam("profileId");
+	const OperationParam OperationParam::ProfileId = OperationParam("profileId");
 	const OperationParam OperationParam::ServiceMessageSessionId = OperationParam("sessionId");
 	const OperationParam OperationParam::ServiceMessageMessages = OperationParam("messages");
 
@@ -334,6 +334,11 @@ namespace BrainCloud
 	const OperationParam OperationParam::GroupPageOffset = OperationParam("pageOffset");
 	const OperationParam OperationParam::GroupAutoJoinStrategy = OperationParam("autoJoinStrategy");
 	const OperationParam OperationParam::GroupWhere = OperationParam("where");
+
+	//mail
+	const OperationParam OperationParam::Subject = OperationParam("subject");
+	const OperationParam OperationParam::Body = OperationParam("body");
+	const OperationParam OperationParam::ServiceParams = OperationParam("serviceParams");
 
 
 	OperationParam::OperationParam(const char * value)

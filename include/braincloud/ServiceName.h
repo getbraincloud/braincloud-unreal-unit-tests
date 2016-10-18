@@ -30,6 +30,7 @@ namespace BrainCloud {
         static const ServiceName Time;
 
         static const ServiceName SocialLeaderboard;
+		static const ServiceName Leaderboard;
         static const ServiceName Event;
         static const ServiceName Product;
         static const ServiceName PlayerStatistics;
@@ -49,6 +50,7 @@ namespace BrainCloud {
         static const ServiceName Profanity;
         static const ServiceName File;
         static const ServiceName Group;
+		static const ServiceName Mail;
 
 
         std::string getValue() const { return _value; }
