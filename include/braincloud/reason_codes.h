@@ -25,6 +25,9 @@ static const int DUPLICATE_IDENTITY_TYPE = 40211;
 static const int MERGE_PROFILES = 40212;
 static const int INVALID_PROPERTY_NAME = 40213;
 static const int EMAIL_NOT_VALIDATED = 40214;
+static const int DATABASE_ERROR = 40215;
+static const int PROPERTY_NOT_OVERRIDEABLE = 40216;
+static const int UNKNOWN_AUTH_ERROR = 40217;
 
 
 // Forbidden (403)... 
