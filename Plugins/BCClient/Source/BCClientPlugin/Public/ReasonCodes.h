@@ -29,6 +29,9 @@ public:
     static const int32 MERGE_PROFILES = 40212;
     static const int32 INVALID_PROPERTY_NAME = 40213;
     static const int32 EMAIL_NOT_VALIDATED = 40214;
+    static const int32 DATABASE_ERROR = 40215;
+    static const int32 PROPERTY_NOT_OVERRIDEABLE = 40216;
+    static const int32 UNKNOWN_AUTH_ERROR = 40217;
 
 
     // Forbidden (403)... 
