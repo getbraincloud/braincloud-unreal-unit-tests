@@ -15,6 +15,7 @@ namespace BrainCloud
 	const ServiceOperation ServiceOperation::GetIdentities = ServiceOperation("GET_IDENTITIES");
 	const ServiceOperation ServiceOperation::GetExpiredIdentities = ServiceOperation("GET_EXPIRED_IDENTITIES");
 	const ServiceOperation ServiceOperation::RefreshIdentity = ServiceOperation("REFRESH_IDENTITY");
+	const ServiceOperation ServiceOperation::AttachParentWithIdentity = ServiceOperation("ATTACH_PARENT_WITH_IDENTITY");
 
 	const ServiceOperation ServiceOperation::Create = ServiceOperation("CREATE");
 	const ServiceOperation ServiceOperation::CreateWithIndexedId = ServiceOperation("CREATE_WITH_INDEXED_ID");

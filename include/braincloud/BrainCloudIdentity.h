@@ -483,6 +483,24 @@ namespace BrainCloud
 		*/
 		void refreshIdentity(const char * in_externalId, const char * in_authenticationToken, AuthenticationType in_authenticationType, IServerCallback * in_callback = NULL);
 
+		/**
+		 * Attach a new identity to a parent app
+		 *
+		 * Service Name - identity
+		 * Service Operation - ATTACH_PARENT_WITH_IDENTITY
+		 *
+		 * @param externalId The users id for the new credentials
+		 * @param authenticationToken The password/token
+		 * @param authenticationType Type of identity
+		 * @param forceCreate Should a new profile be created if it does not exist?
+		 * @param externalAuthName Optional - if attaching an external identity
+		 * @param successCallback The success callback
+		 * @param errorCallback The failure callback.
+		 * @param cbObject The user object sent to the callback
+		 */
+		void attachParentWithIdentity(const char * in_externalId, const char * in_authenticationToken, AuthenticationType in_authenticationType,
+			bool in_forceCreate, const char * in_externalAuthName, IServerCallback * in_callback = NULL);
+
 	private:
 		BrainCloudClient * m_client;
 

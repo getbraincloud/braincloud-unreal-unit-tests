@@ -196,6 +196,20 @@ namespace BrainCloud
 		m_client->sendRequest(sc);
 	}
 
+	void BrainCloudIdentity::attachParentWithIdentity(const char * in_externalId, const char * in_authenticationToken, AuthenticationType in_authenticationType, bool in_forceCreate, const char * in_externalAuthName, IServerCallback * in_callback)
+	{
+		Json::Value data;
+		data[OperationParam::AuthenticateServiceAuthenticateAuthenticationToken.getValue()] = in_authenticationToken;
+		data[OperationParam::IdentityServiceAuthenticationType.getValue()] = in_authenticationType.toString();
+		data[OperationParam::IdentityServiceExternalId.getValue()] = in_externalId;
+		data[OperationParam::AuthenticateServiceAuthenticateForceCreate.getValue()] = in_forceCreate;
+
+		data[OperationParam::AuthenticateServiceAuthenticateExternalAuthName.getValue()] = in_externalAuthName;
+
+		ServerCall * sc = new ServerCall(ServiceName::Identity, ServiceOperation::AttachParentWithIdentity, data, in_callback);
+		m_client->sendRequest(sc);
+	}
+
 	// Private methods
 
 	void BrainCloudIdentity::switchToChildProfile(const char * in_childProfileId, const char * in_childGameId, bool in_forceCreate, bool in_forceSingleton, IServerCallback * in_callback)
