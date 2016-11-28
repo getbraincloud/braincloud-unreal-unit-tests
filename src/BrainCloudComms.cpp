@@ -853,23 +853,31 @@ namespace BrainCloud
 		// reorder the queue if it has an authenticate message, since the server relies
 		// upon the auth being the first message in the queue, if it doens't
 		// and a message previous to it requires a session id, all items will be rejected
-		ServerCall * call = NULL;
+		bool bFoundAuthCallInCurrentMarker = false;
 		if (_queue.size() > 1)
 		{
+			ServerCall * call = NULL;
+
 			// loop over all the queue, if we find an auth call, stop remove it
 			// and insert to the front of the queue
 			std::vector<ServerCall*>::iterator it = _queue.begin();
 			for (; it != _queue.end(); ++it)
 			{
 				call = (*it);
-				if (call->getOperation() == ServiceOperation::Authenticate
-					|| call->getOperation() == ServiceOperation::ResetEmailPassword)
+				// break if end of bundle marker
+				if (call->isEndOfBundleMarker())
 				{
 					break;
 				}
-			}
 
-			if (it != _queue.end())
+				if (call->getOperation() == ServiceOperation::Authenticate
+					|| call->getOperation() == ServiceOperation::ResetEmailPassword)
+				{
+					bFoundAuthCallInCurrentMarker = true;
+					break;
+				}
+			}
+			if (bFoundAuthCallInCurrentMarker && it != _queue.end())
 			{
 				_queue.erase(it);
 				_queue.insert(_queue.begin(), call);
@@ -885,7 +893,6 @@ namespace BrainCloud
 				_queue.erase(_queue.begin());
 				delete call;
 				call = NULL;
-
 				// if the first message is marker, just throw it away
 				if (_inProgress.size() == 0)
 				{
@@ -896,7 +903,6 @@ namespace BrainCloud
 					break;
 				}
 			}
-
 			if (call->getService() == ServiceName::HeartBeat
 				&& call->getOperation() == ServiceOperation::Read)
 			{
@@ -907,16 +913,18 @@ namespace BrainCloud
 					continue;
 				}
 			}
-
 			messages.append(*(call->getPayload()));
 			_inProgress.push_back(call);
 			_queue.erase(_queue.begin());
-
 			if (call->getOperation() == ServiceOperation::Authenticate
 				|| call->getOperation() == ServiceOperation::ResetEmailPassword)
 			{
 				authenticating = true;
 			}
+
+			// break, right away so that theres only ONE message with authenticate
+			if (bFoundAuthCallInCurrentMarker)
+				break;
 		}
 
 		pthread_mutex_unlock(&_queueMutex);
@@ -1137,7 +1145,7 @@ namespace BrainCloud
 		}
 #endif
 		pthread_mutex_unlock(&_mutex);
-		}
-
-
 	}
+
+
+		}
