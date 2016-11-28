@@ -2,7 +2,7 @@
 #include <time.h>
 #include "TestFixtureBase.h"
 #include "TestResult.h"
-#include "braincloud\AuthenticationType.h"
+#include "braincloud/AuthenticationType.h"
 
 #ifdef _WIN32
 #define getcwd _getcwd // stupid MSFT "deprecation" warning
