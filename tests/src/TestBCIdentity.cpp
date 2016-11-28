@@ -24,7 +24,18 @@ TEST_F(TestBCIdentity, SwitchToSingletonChildProfile)
 {
 	TestResult tr;
 	m_bc->getIdentityService()->switchToSingletonChildProfile(m_childAppId.c_str(), true, &tr);
-	tr.run(m_bc);
+	
+	if(tr.run(m_bc))
+		detachParent();
+}
+
+TEST_F(TestBCIdentity, DetachParent)
+{
+	TestResult tr;
+	m_bc->getIdentityService()->switchToSingletonChildProfile(m_childAppId.c_str(), true, &tr);
+
+	if (tr.run(m_bc))
+		detachParent();
 }
 
 TEST_F(TestBCIdentity, SwitchToParentProfile)
@@ -65,4 +76,44 @@ TEST_F(TestBCIdentity, RefreshIdentity)
 		AuthenticationType::Universal,
 		&tr);
 	tr.runExpectFail(m_bc, 400, 40464);
+}
+
+TEST_F(TestBCIdentity, AttachPeerProfile)
+{
+	TestResult tr;
+	m_bc->getIdentityService()->attachPeerProfile(GetUser(UserA)->m_id, GetUser(UserA)->m_password, AuthenticationType::Universal, true, NULL, m_peerName.c_str(), &tr);
+	
+	if (tr.run(m_bc)) 
+		detachPeer();
+}
+
+TEST_F(TestBCIdentity, GetPeerProfiles)
+{
+	TestResult tr;
+	m_bc->getIdentityService()->getPeerProfiles(&tr);
+	tr.run(m_bc);
+}
+
+TEST_F(TestBCIdentity, DetachPeer)
+{
+	TestResult tr;
+	m_bc->getIdentityService()->attachPeerProfile(GetUser(UserA)->m_id, GetUser(UserA)->m_password, AuthenticationType::Universal, true, NULL, m_peerName.c_str(), &tr);
+
+	if (tr.run(m_bc))
+		detachPeer();
+}
+
+
+void TestBCIdentity::detachPeer()
+{
+	TestResult tr;
+	m_bc->getIdentityService()->detachPeer(m_peerName.c_str(), &tr);
+	tr.run(m_bc);
+}
+
+void TestBCIdentity::detachParent()
+{
+	TestResult tr;
+	m_bc->getIdentityService()->detachParent(&tr);
+	tr.run(m_bc);
 }

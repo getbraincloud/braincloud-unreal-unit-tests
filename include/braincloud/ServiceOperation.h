@@ -21,6 +21,10 @@ namespace BrainCloud {
 		static const ServiceOperation GetExpiredIdentities;
 		static const ServiceOperation RefreshIdentity;
 		static const ServiceOperation AttachParentWithIdentity;
+		static const ServiceOperation AttachPeerProfile;
+		static const ServiceOperation DetachPeer;
+		static const ServiceOperation GetPeerProfiles;
+		static const ServiceOperation DetachParent;
 
 		static const ServiceOperation Create;
 		static const ServiceOperation CreateWithIndexedId;
@@ -91,6 +95,7 @@ namespace BrainCloud {
 		static const ServiceOperation GetSummaryDataForProfileId;
 		static const ServiceOperation GetPlayersSocialLeaderboard;
 		static const ServiceOperation ListAllLeaderboards;
+		static const ServiceOperation GetGlobalLeaderboardEntryCount;
 
 		static const ServiceOperation InitThirdParty;
 		static const ServiceOperation PostThirdPartyLeaderboardScore;

@@ -17,6 +17,7 @@ std::string TestFixtureBase::m_secret = "";
 std::string TestFixtureBase::m_version = "";
 std::string TestFixtureBase::m_parentLevelName = "";
 std::string TestFixtureBase::m_childAppId = "";
+std::string TestFixtureBase::m_peerName = "";
 
 bool TestFixtureBase::m_init = false;
 bool TestFixtureBase::m_initUsers = false;
@@ -157,6 +158,10 @@ void TestFixtureBase::LoadIds()
             {
                 m_parentLevelName = line.substr(line.find("parentLevelName") + sizeof("parentLevelName"), line.length() - 1);
             }
+			else if (line.find("peerName") != string::npos)
+			{
+				m_peerName = line.substr(line.find("peerName") + sizeof("peerName"), line.length() - 1);
+			}
         }
         fclose(fp);
 
@@ -166,6 +171,7 @@ void TestFixtureBase::LoadIds()
         printf("\nVersion - %s", m_version.c_str());
         printf("\nChild App ID - %s", m_childAppId.c_str());
         printf("\nParent Level Name - %s\n", m_parentLevelName.c_str());
+		printf("\nPeer Name - %s\n", m_peerName.c_str());
     }
 }
 

@@ -27,13 +27,6 @@ TEST_F(TestBCFriend, GetExternalIdForProfileId)
     tr.run(m_bc);
 }
 
-TEST_F(TestBCFriend, FindPlayerByName)
-{
-    TestResult tr;
-    m_bc->getFriendService()->findPlayerByName("test", 10, &tr);
-    tr.run(m_bc);
-}
-
 TEST_F(TestBCFriend, FindUsersByExactName)
 {
 	TestResult tr;

@@ -16,6 +16,10 @@ namespace BrainCloud
 	const ServiceOperation ServiceOperation::GetExpiredIdentities = ServiceOperation("GET_EXPIRED_IDENTITIES");
 	const ServiceOperation ServiceOperation::RefreshIdentity = ServiceOperation("REFRESH_IDENTITY");
 	const ServiceOperation ServiceOperation::AttachParentWithIdentity = ServiceOperation("ATTACH_PARENT_WITH_IDENTITY");
+	const ServiceOperation ServiceOperation::AttachPeerProfile = ServiceOperation("ATTACH_PEER_PROFILE");
+	const ServiceOperation ServiceOperation::DetachPeer = ServiceOperation("DETACH_PEER");
+	const ServiceOperation ServiceOperation::GetPeerProfiles = ServiceOperation("GET_PEER_PROFILES");
+	const ServiceOperation ServiceOperation::DetachParent = ServiceOperation("DETACH_PARENT");
 
 	const ServiceOperation ServiceOperation::Create = ServiceOperation("CREATE");
 	const ServiceOperation ServiceOperation::CreateWithIndexedId = ServiceOperation("CREATE_WITH_INDEXED_ID");
@@ -86,6 +90,7 @@ namespace BrainCloud
 	const ServiceOperation ServiceOperation::GetSummaryDataForProfileId = ServiceOperation("GET_SUMMARY_DATA_FOR_PROFILE_ID");
 	const ServiceOperation ServiceOperation::GetPlayersSocialLeaderboard = ServiceOperation("GET_PLAYERS_SOCIAL_LEADERBOARD");
 	const ServiceOperation ServiceOperation::ListAllLeaderboards = ServiceOperation("LIST_ALL_LEADERBOARDS");
+	const ServiceOperation ServiceOperation::GetGlobalLeaderboardEntryCount = ServiceOperation("GET_GLOBAL_LEADERBOARD_ENTRY_COUNT");
 
 	const ServiceOperation ServiceOperation::InitThirdParty = ServiceOperation("initThirdParty");
 	const ServiceOperation ServiceOperation::PostThirdPartyLeaderboardScore = ServiceOperation("postThirdPartyLeaderboardScore");

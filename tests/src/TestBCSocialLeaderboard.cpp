@@ -87,14 +87,6 @@ TEST_F(TestBCSocialLeaderboard, ResetScore)
     tr.run(m_bc);
 }
 
-TEST_F(TestBCSocialLeaderboard, GetCompletedTournament)
-{
-    TestResult tr;
-
-    m_bc->getSocialLeaderboardService()->getCompletedLeaderboardTournament(SOCIAL_LB_ID, true, &tr);
-    tr.run(m_bc);
-}
-
 TEST_F(TestBCSocialLeaderboard, GetGlobalPageByVersion)
 {
     TestResult tr;
@@ -108,13 +100,6 @@ TEST_F(TestBCSocialLeaderboard, GetGlobalViewByVersion)
     TestResult tr;
 
     m_bc->getSocialLeaderboardService()->getGlobalLeaderboardViewByVersion(LB_ID, HIGH_TO_LOW, 0, 10, true, 0, &tr);
-    tr.run(m_bc);
-}
-
-TEST_F(TestBCSocialLeaderboard, TriggerSocialTournamentReward)
-{
-    TestResult tr;
-    m_bc->getSocialLeaderboardService()->triggerSocialLeaderboardTournamentReward(SOCIAL_LB_ID, REWARD_EVENT_ID, 5, &tr);
     tr.run(m_bc);
 }
 
@@ -166,6 +151,22 @@ TEST_F(TestBCSocialLeaderboard, ListAllLeaderboards)
 	TestResult tr;
 
 	m_bc->getSocialLeaderboardService()->listAllLeaderboards(&tr);
+	tr.run(m_bc);
+}
+
+TEST_F(TestBCSocialLeaderboard, GetGlobalLeaderboardEntryCount)
+{
+	TestResult tr;
+
+	m_bc->getSocialLeaderboardService()->getGlobalLeaderboardEntryCount(LB_ID, &tr);
+	tr.run(m_bc);
+}
+
+TEST_F(TestBCSocialLeaderboard, GetGlobalLeaderboardEntryCountByVersion)
+{
+	TestResult tr;
+
+	m_bc->getSocialLeaderboardService()->getGlobalLeaderboardEntryCountByVersion(LB_ID, 1, &tr);
 	tr.run(m_bc);
 }
 

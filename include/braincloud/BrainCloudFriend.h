@@ -90,11 +90,6 @@ namespace BrainCloud
 		void getSummaryDataForProfileId(const char * in_profileId, IServerCallback * in_callback = NULL);
 
 		/**
-		* @deprecated Use findUsersByExactName & findUsersBySubstrName instead - removal after Nov 22 2016
-		*/
-		DEPRECATED void findPlayerByName(const char * in_searchText, int32_t in_maxResults, IServerCallback * in_callback = NULL);
-
-		/**
 		* Finds a list of players matching the search text by performing an exact match search
 		*
 		* Service Name - friend

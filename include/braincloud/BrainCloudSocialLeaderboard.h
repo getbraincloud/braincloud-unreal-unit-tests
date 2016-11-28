@@ -112,6 +112,11 @@ namespace BrainCloud
          */
         void getGlobalLeaderboardPageByVersion(const char * in_leaderboardId, SortOrder in_sortOrder, int in_startIndex, int in_endIndex, bool in_includeLeaderboardSize, int in_versionId, IServerCallback * in_callback = NULL);
 
+		/**
+		* @deprecated Use method without in_includeLeaderboardSize param - removal after March 22 2016
+		*/
+		DEPRECATED void getGlobalLeaderboardView(const char * in_leaderboardId, SortOrder in_sortOrder, int in_beforeCount, int in_afterCount, bool in_includeLeaderboardSize, IServerCallback * in_callback = NULL);
+
         /**
          * Method returns a view of global leaderboard results that centers on the current player.
          *
@@ -125,10 +130,14 @@ namespace BrainCloud
          * @param in_sort Sort key Sort order of page.
          * @param in_beforeCount The count of number of players before the current player to include.
          * @param in_afterCount The count of number of players after the current player to include.
-         * @param in_includeLeaderboardSize Whether to return the leaderboard size
          * @param in_callback The method to be invoked when the server response is received
          */
-        void getGlobalLeaderboardView(const char * in_leaderboardId, SortOrder in_sortOrder, int in_beforeCount, int in_afterCount, bool in_includeLeaderboardSize, IServerCallback * in_callback = NULL);
+        void getGlobalLeaderboardView(const char * in_leaderboardId, SortOrder in_sortOrder, int in_beforeCount, int in_afterCount, IServerCallback * in_callback = NULL);
+
+		/**
+		* @deprecated Use method without in_includeLeaderboardSize param - removal after March 22 2016
+		*/
+		DEPRECATED void getGlobalLeaderboardViewByVersion(const char * in_leaderboardId, SortOrder in_sortOrder, int in_beforeCount, int in_afterCount, bool in_includeLeaderboardSize, int in_versionId, IServerCallback * in_callback = NULL);
 
         /**
          * Method returns a view of global leaderboard results that centers on the current player.
@@ -142,11 +151,10 @@ namespace BrainCloud
          * @param in_sort Sort key Sort order of page.
          * @param in_beforeCount The count of number of players before the current player to include.
          * @param in_afterCount The count of number of players after the current player to include.
-         * @param in_includeLeaderboardSize Whether to return the leaderboard size
          * @param in_versionId The historical version to retrieve.
          * @param in_callback The method to be invoked when the server response is received
          */
-        void getGlobalLeaderboardViewByVersion(const char * in_leaderboardId, SortOrder in_sortOrder, int in_beforeCount, int in_afterCount, bool in_includeLeaderboardSize, int in_versionId, IServerCallback * in_callback = NULL);
+        void getGlobalLeaderboardViewByVersion(const char * in_leaderboardId, SortOrder in_sortOrder, int in_beforeCount, int in_afterCount, int in_versionId, IServerCallback * in_callback = NULL);
 
         /** Gets the global leaderboard versions.
          *
@@ -212,41 +220,6 @@ namespace BrainCloud
         void resetLeaderboardScore(const char * in_leaderBoardName, IServerCallback * in_callback = NULL);
 
         /**
-         * If a social leaderboard has been configured to reset periodically, each period
-         * can be considered to be a tournament. When the leaderboard resets, the tournament
-         * has ended and participants can be ranked based on their final scores.
-         *
-         * This API method will return the sorted leaderboard including:
-         * the player
-         * the game's pacers
-         * all friends who participated in the tournament
-         *
-         * This API method will return the leaderboard results for a particular
-         * tournament only once. If the method is called twice, the second call
-         * will yield an empty result.
-         *
-         * Note that if the leaderboard has not been configured to reset, the concept of a
-         * tournament does not apply.
-         *
-         * @param in_leaderboardId The id of the leaderboard
-         * @param in_replaceName True if the player's name should be replaced with "You"
-         * @param in_callback The method to be invoked when the server response is received
-         */
-        void getCompletedLeaderboardTournament(const char * in_leaderboardId, bool in_replaceName, IServerCallback * in_callback = NULL);
-
-        /**
-         * This method triggers a reward (via a player statistics event)
-         * to the currently logged in player for ranking at the
-         * completion of a tournament.
-         *
-         * @param in_leaderboardId The id of the leaderboard
-         * @param in_eventName The player statistics event name to trigger
-         * @param in_eventMultiplier The multiplier to associate with the event
-         * @param in_callback The method to be invoked when the server response is received
-         */
-        void triggerSocialLeaderboardTournamentReward(const char * in_leaderboardId, const char * in_eventName, uint64_t in_eventMultiplier, IServerCallback * in_callback = NULL);
-
-        /**
          * Method to retrieve the player's completed tournaments for the game.
          * Arguments:
          *  leaderboardId: Name of the leaderboard
@@ -288,6 +261,29 @@ namespace BrainCloud
 		 * @param in_callback The method to be invoked when the server response is received
 		 */
 		void listAllLeaderboards(IServerCallback * in_callback = NULL);
+
+		/**
+		 * Gets the number of entries in a global leaderboard
+		 *
+		 * Service Name - leaderboard
+		 * Service Operation - GET_GLOBAL_LEADERBOARD_ENTRY_COUNT
+		 *
+		 * @param in_leaderboardId The leaderboard ID
+		 * @param in_callback The method to be invoked when the server response is received
+		 */
+		void getGlobalLeaderboardEntryCount(const char * in_leaderboardId, IServerCallback * in_callback = NULL);
+
+		/**
+		* Gets the number of entries in a global leaderboard
+		*
+		* Service Name - leaderboard
+		* Service Operation - GET_GLOBAL_LEADERBOARD_ENTRY_COUNT
+		*
+		* @param in_leaderboardId The leaderboard ID
+		* @param in_versionId The version of the leaderboard
+		* @param in_callback The method to be invoked when the server response is received
+		*/
+		void getGlobalLeaderboardEntryCountByVersion(const char * in_leaderboardId, int32_t in_versionId, IServerCallback * in_callback = NULL);
 
     private:
         BrainCloudClient * m_client;

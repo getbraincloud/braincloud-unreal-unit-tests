@@ -29,40 +29,20 @@ namespace BrainCloud
          */
         void getCurrency(const char* in_currencyType, IServerCallback * in_callback = NULL);
 
-        /**
-         * Award player the passed-in amount of currency. Returns
-         * JSON representing the new currency values.
-         *
-         * Service Name - Product
-         * Service Operation - AwardVC
-         *
-         * @param in_currencyType The currency type to award
-         * @param in_amount The amount of currency to award
-         * @param in_callback The method to be invoked when the server response is received
-         */
-        void awardCurrency(const char* in_currencyType, int32_t in_amount, IServerCallback * in_callback = NULL);
+		/**
+		* @deprecated Method is now available in Cloud Code only for security - removal after March 22 2016
+		*/
+		DEPRECATED void awardCurrency(const char* in_currencyType, int32_t in_amount, IServerCallback * in_callback = NULL);
 
-        /**
-         * Consume the passed-in amount of currency from the player.
-         *
-         * Service Name - Product
-         * Service Operation - ConsumePlayerVC
-         *
-         * @param in_currencyType The currency type to consume.
-         * @param in_amount The amount of currency to consume.
-         * @param in_callback The method to be invoked when the server response is received
-         */
-        void consumeCurrency(const char* in_currencyType, int32_t in_amount, IServerCallback * in_callback = NULL);
+		/**
+		* @deprecated Method is now available in Cloud Code only for security - removal after March 22 2016
+		*/
+		DEPRECATED void consumeCurrency(const char* in_currencyType, int32_t in_amount, IServerCallback * in_callback = NULL);
 
-        /**
-         * Resets the player's currency back to zero.
-         *
-         * Service Name - Product
-         * Service Operation - ResetPlayerVC
-         *
-         * @param in_callback The method to be invoked when the server response is received
-         */
-        void resetCurrency(IServerCallback * in_callback = NULL);
+		/**
+		* @deprecated Method is now available in Cloud Code only for security - removal after March 22 2016
+		*/
+		DEPRECATED void resetCurrency(IServerCallback * in_callback = NULL);
 
         /**
          * Method gets the active sales inventory for the passed-in platform and
@@ -182,56 +162,6 @@ namespace BrainCloud
          * @param in_callback The method to be invoked when the server response is received
          */
         void getEligiblePromotions(IServerCallback * in_callback = NULL);
-
-        /**
-         * Awards currency in a parent app.
-         *
-         * Service Name - Product
-         * Service Operation - AWARD_PARENT_VC
-         *
-         * @param in_currencyType The ID of the parent currency
-         * @param in_amount The amount of currency to award
-         * @param in_parentLevel The level of the parent containing the currency
-         * @param in_callback The method to be invoked when the server response is received
-         */
-        void awardParentCurrency(const char* in_currencyType, int32_t in_amount, const char * in_parentLevel, IServerCallback * in_callback = NULL);
-
-        /**
-         * Consumes currency in a parent app.
-         *
-         * Service Name - Product
-         * Service Operation - CONSUME_PARENT_VC
-         *
-         * @param in_currencyType The ID of the parent currency
-         * @param in_amount The amount of currency to consume
-         * @param in_parentLevel The level of the parent containing the currency
-         * @param in_callback The method to be invoked when the server response is received
-         */
-        void consumeParentCurrency(const char* in_currencyType, int32_t in_amount, const char * in_parentLevel, IServerCallback * in_callback = NULL);
-
-        /**
-         * Gets information on a single currency in a parent app
-         * or all currency types if a null type is passed in.
-         *
-         * Service Name - Product
-         * Service Operation - GET_PARENT_VC
-         *
-         * @param in_currencyType The ID of the parent currency or null to get all currencies
-         * @param in_parentLevel The level of the parent containing the currency
-         * @param in_callback The method to be invoked when the server response is received
-         */
-        void getParentCurrency(const char* in_currencyType, const char * in_parentLevel, IServerCallback * in_callback = NULL);
-
-        /**
-         * Resets all currencies in a parent app.
-         *
-         * Service Name - Product
-         * Service Operation - RESET_PARENT_VC
-         *
-         * @param in_parentLevel The level of the parent containing the currencies
-         * @param in_callback The method to be invoked when the server response is received
-         */
-        void resetParentCurrency(const char * in_parentLevel, IServerCallback * in_callback = NULL);
 
     private:
         BrainCloudClient * m_client;

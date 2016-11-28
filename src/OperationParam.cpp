@@ -63,6 +63,7 @@ namespace BrainCloud
 	const OperationParam OperationParam::IdentityServiceExternalId = OperationParam("externalId");
 	const OperationParam OperationParam::IdentityServiceAuthenticationType = OperationParam("authenticationType");
 	const OperationParam OperationParam::IdentityServiceConfirmAnonymous = OperationParam("confirmAnonymous");
+	const OperationParam OperationParam::Peer = OperationParam("peer");
 
 	// Async Match Service - Async Match Params
 	const OperationParam OperationParam::AsyncMatchServicePlayers = OperationParam("players");

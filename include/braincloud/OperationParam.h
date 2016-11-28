@@ -71,6 +71,7 @@ namespace BrainCloud {
 		static const OperationParam IdentityServiceExternalId;
 		static const OperationParam IdentityServiceAuthenticationType;
 		static const OperationParam IdentityServiceConfirmAnonymous;
+		static const OperationParam Peer;
 
 		// Async Match Service - Async Match Params
 		static const OperationParam AsyncMatchServicePlayers;
