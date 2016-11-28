@@ -128,6 +128,8 @@ namespace BrainCloud
 	const ServiceOperation ServiceOperation::ReadForCategory = ServiceOperation("READ_FOR_CATEGORY");
 
 	const ServiceOperation ServiceOperation::Run = ServiceOperation("RUN");
+	const ServiceOperation ServiceOperation::RunPeerScript = ServiceOperation("RUN_PEER_SCRIPT");
+	const ServiceOperation ServiceOperation::RunPeerScriptAsync = ServiceOperation("RUN_PEER_SCRIPT_ASYNC");
 	const ServiceOperation ServiceOperation::Tweet = ServiceOperation("TWEET");
 
 	const ServiceOperation ServiceOperation::AwardAchievements = ServiceOperation("AWARD_ACHIEVEMENTS");

@@ -78,6 +78,31 @@ namespace BrainCloud
 		*/
 		void cancelScheduledScript(const char * in_jobId, IServerCallback * in_callback = NULL);
 
+		/**
+		* Runs a script from the context of a peer
+		*
+		* Service Name - Script
+		* Service Operation - RUN_PEER_SCRIPT
+		*
+		* @param in_scriptName The name of the script to be run
+		* @param in_jsonScriptData Data to be sent to the script in json format
+		* @param in_callback The method to be invoked when the server response is received
+		*/
+		void runPeerScript(const char * in_scriptName, const std::string & in_jsonScriptData, const char * in_peer, IServerCallback * in_callback = NULL);
+
+		/**
+		* Runs a script asynchronously from the context of a peer
+		* This method does not wait for the script to complete before returning
+		*
+		* Service Name - Script
+		* Service Operation - RUN_PEER_SCRIPT_ASYNC
+		*
+		* @param in_scriptName The name of the script to be run
+		* @param in_jsonScriptData Data to be sent to the script in json format
+		* @param in_callback The method to be invoked when the server response is received
+		*/
+		void runPeerScriptAsync(const char * in_scriptName, const std::string & in_jsonScriptData, const char * in_peer, IServerCallback * in_callback = NULL);
+
 	private:
 		BrainCloudClient * m_client;
 	};

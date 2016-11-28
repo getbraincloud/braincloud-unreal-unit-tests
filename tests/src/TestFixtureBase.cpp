@@ -2,6 +2,7 @@
 #include <time.h>
 #include "TestFixtureBase.h"
 #include "TestResult.h"
+#include "braincloud\AuthenticationType.h"
 
 #ifdef _WIN32
 #define getcwd _getcwd // stupid MSFT "deprecation" warning
@@ -202,6 +203,20 @@ bool TestFixtureBase::GoToParentProfile()
     TestResult tr;
     m_bc->getIdentityService()->switchToParentProfile(m_parentLevelName.c_str(), &tr);
     return tr.run(m_bc);
+}
+
+bool TestFixtureBase::AttachPeer(Users user, AuthenticationType authType)
+{
+	TestResult tr;
+	m_bc->getIdentityService()->attachPeerProfile(GetUser(user)->m_id, GetUser(user)->m_password, authType, true, NULL, m_peerName.c_str(), &tr);
+	return tr.run(m_bc);
+}
+
+bool TestFixtureBase::DetachPeer()
+{
+	TestResult tr;
+	m_bc->getIdentityService()->detachPeer(m_peerName.c_str(), &tr);
+	return tr.run(m_bc);
 }
 
 void TestFixtureBase::Logout()

@@ -1,5 +1,6 @@
 #include "gtest/gtest.h"
 #include "braincloud/BrainCloudClient.h"
+#include "braincloud/AuthenticationType.h"
 #include "TestResult.h"
 #include "TestBCScript.h"
 #include <time.h>
@@ -71,4 +72,36 @@ TEST_F(TestBCScript, CancelScheduledScript)
 
 	m_bc->getScriptService()->cancelScheduledScript(jobId.c_str(), &tr);
 	tr.run(m_bc);
+}
+
+TEST_F(TestBCScript, RunPeerScript)
+{
+	if (AttachPeer(UserA, AuthenticationType::Universal))
+	{
+		TestResult tr;
+		Json::FastWriter fw;
+		Json::Value scriptData;
+		scriptData["testParam1"] = 1;
+
+		m_bc->getScriptService()->runPeerScript(m_peerScriptName, fw.write(scriptData), m_peerName.c_str(), &tr);
+		tr.run(m_bc);
+
+		DetachPeer();
+	}
+}
+
+TEST_F(TestBCScript, RunPeerScriptAsync)
+{
+	if (AttachPeer(UserA, AuthenticationType::Universal))
+	{
+		TestResult tr;
+		Json::FastWriter fw;
+		Json::Value scriptData;
+		scriptData["testParam1"] = 1;
+
+		m_bc->getScriptService()->runPeerScriptAsync(m_peerScriptName, fw.write(scriptData), m_peerName.c_str(), &tr);
+		tr.run(m_bc);
+
+		DetachPeer();
+	}
 }

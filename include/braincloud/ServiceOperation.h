@@ -134,6 +134,8 @@ namespace BrainCloud {
 		static const ServiceOperation SetXpPoints;
 
 		static const ServiceOperation Run;
+		static const ServiceOperation RunPeerScript;
+		static const ServiceOperation RunPeerScriptAsync;
 		static const ServiceOperation Tweet;
 
 		static const ServiceOperation AwardAchievements;

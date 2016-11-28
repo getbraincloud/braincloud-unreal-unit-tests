@@ -38,6 +38,8 @@ protected:
 
     bool GoToChildProfile();
     bool GoToParentProfile();
+	bool AttachPeer(Users user, AuthenticationType authType);
+	bool DetachPeer();
     void Logout();
 
 private:
