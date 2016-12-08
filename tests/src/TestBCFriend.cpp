@@ -13,7 +13,7 @@
 
 using namespace BrainCloud;
 
-TEST_F(TestBCFriend, GetFriendProfileInfo)
+TEST_F(TestBCFriend, GetFriendProfileInfoForExternalId)
 {
     TestResult tr;
     m_bc->getFriendService()->getFriendProfileInfoForExternalId("12345", "Facebook", &tr);
