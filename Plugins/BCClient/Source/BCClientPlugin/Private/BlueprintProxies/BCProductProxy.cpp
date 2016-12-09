@@ -95,34 +95,6 @@ UBCProductProxy* UBCProductProxy::GetEligiblePromotions()
     return Proxy;
 }
 
-UBCProductProxy* UBCProductProxy::AwardParentCurrency(const FString& in_currencyType, int32 in_amount, const FString& in_parentLevel)
-{
-    UBCProductProxy* Proxy = NewObject<UBCProductProxy>();
-    BrainCloudClient::getInstance()->getProductService()->awardParentCurrency(in_currencyType, in_amount, in_parentLevel, Proxy);
-    return Proxy;
-}
-
-UBCProductProxy* UBCProductProxy::ConsumeParentCurrency(const FString& in_currencyType, int32 in_amount, const FString& in_parentLevel)
-{
-    UBCProductProxy* Proxy = NewObject<UBCProductProxy>();
-    BrainCloudClient::getInstance()->getProductService()->consumeParentCurrency(in_currencyType, in_amount, in_parentLevel, Proxy);
-    return Proxy;
-}
-
-UBCProductProxy* UBCProductProxy::GetParentCurrency(const FString& in_currencyType, const FString& in_parentLevel)
-{
-    UBCProductProxy* Proxy = NewObject<UBCProductProxy>();
-    BrainCloudClient::getInstance()->getProductService()->getParentCurrency(in_currencyType, in_parentLevel, Proxy);
-    return Proxy;
-}
-
-UBCProductProxy* UBCProductProxy::ResetParentCurrency(const FString& in_parentLevel)
-{
-    UBCProductProxy* Proxy = NewObject<UBCProductProxy>();
-    BrainCloudClient::getInstance()->getProductService()->resetParentCurrency(in_parentLevel, Proxy);
-    return Proxy;
-}
-
 //callbacks
 void UBCProductProxy::serverCallback(ServiceName serviceName, ServiceOperation serviceOperation, const FString& jsonData)
 {

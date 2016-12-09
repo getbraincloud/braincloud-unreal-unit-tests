@@ -24,37 +24,22 @@ public:
      */
     void getCurrency(const FString& currencyType, IServerCallback* callback);
 
-    /**
-     * Award player the passed-in amount of currency. Returns
-     * JSON representing the new currency values.
-     *
-     * Service Name - Product
-     * Service Operation - AwardVC
-     *
-     * @param callback The method to be invoked when the server response is received
-     */
+	/**
+	* @deprecated Method is now available in Cloud Code only for security - removal after March 22 2016
+	*/
+	DEPRECATED("3.2.0", "Method is now available in Cloud Code only for security - removal after March 22 2016")
     void awardCurrency(const FString& currencyType, int32 amount, IServerCallback* callback);
 
-    /**
-     * Consume the passed-in amount of currency from the player.
-     *
-     * Service Name - Product
-     * Service Operation - ConsumePlayerVC
-     *
-     * @param currencyType The currency type to consume.
-     * @param amount The amount of currency to consume.
-     * @param callback The method to be invoked when the server response is received
-     */
+	/**
+	* @deprecated Method is now available in Cloud Code only for security - removal after March 22 2016
+	*/
+	DEPRECATED("3.2.0", "Method is now available in Cloud Code only for security - removal after March 22 2016")
     void consumeCurrency(const FString& currencyType, int32 amount, IServerCallback* callback);
 
-    /**
-     * Resets the player's currency back to zero.
-     *
-     * Service Name - Product
-     * Service Operation - ResetPlayerVC
-     *
-     * @param callback The method to be invoked when the server response is received
-     */
+	/**
+	* @deprecated Method is now available in Cloud Code only for security - removal after March 22 2016
+	*/
+	DEPRECATED("3.2.0", "Method is now available in Cloud Code only for security - removal after March 22 2016")
     void resetCurrency(IServerCallback* callback);
 
     /**
@@ -168,56 +153,6 @@ public:
     * @param callback The method to be invoked when the server response is received
     */
     void getEligiblePromotions(IServerCallback* callback);
-
-    /**
-    * Awards currency in a parent app.
-    *
-    * Service Name - Product
-    * Service Operation - AWARD_PARENT_VC
-    *
-    * @param currencyType The ID of the parent currency
-    * @param amount The amount of currency to award
-    * @param parentLevel The level of the parent containing the currency
-    * @param callback The method to be invoked when the server response is received
-    */
-    void awardParentCurrency(const FString& currencyType, int32 amount, const FString& parentLevel, IServerCallback * callback);
-
-    /**
-    * Consumes currency in a parent app.
-    *
-    * Service Name - Product
-    * Service Operation - CONSUME_PARENT_VC
-    *
-    * @param currencyType The ID of the parent currency
-    * @param amount The amount of currency to consume
-    * @param parentLevel The level of the parent containing the currency
-    * @param callback The method to be invoked when the server response is received
-    */
-    void consumeParentCurrency(const FString& currencyType, int32 amount, const FString& parentLevel, IServerCallback * callback);
-
-    /**
-    * Gets information on a single currency in a parent app
-    * or all currency types if a null type is passed in.
-    *
-    * Service Name - Product
-    * Service Operation - GET_PARENT_VC
-    *
-    * @param currencyType The ID of the parent currency or null to get all currencies
-    * @param parentLevel The level of the parent containing the currency
-    * @param callback The method to be invoked when the server response is received
-    */
-    void getParentCurrency(const FString& currencyType, const FString& parentLevel, IServerCallback * callback);
-
-    /**
-    * Resets all currencies in a parent app.
-    *
-    * Service Name - Product
-    * Service Operation - RESET_PARENT_VC
-    *
-    * @param parentLevel The level of the parent containing the currencies
-    * @param callback The method to be invoked when the server response is received
-    */
-    void resetParentCurrency(const FString& parentLevel, IServerCallback * callback);
 
 private:
     BrainCloudClient* _client = nullptr;

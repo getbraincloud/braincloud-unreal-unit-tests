@@ -12,5 +12,11 @@
 				"Engine"
 			]
 		}
+	],
+	"Plugins": [
+		{
+			"Name": "BCClient",
+			"Enabled": true
+		}
 	]
 }

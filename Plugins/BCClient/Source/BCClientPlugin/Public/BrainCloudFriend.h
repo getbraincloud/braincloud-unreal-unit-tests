@@ -83,12 +83,6 @@ public:
 	void getSummaryDataForProfileId(const FString& profileId, IServerCallback * callback = nullptr);
 
 	/**
-	* @deprecated Use findUsersByExactName & findUsersBySubstrName instead - removal after Nov 22 2016
-	*/
-	DEPRECATED("3.0.0", "Use findUsersByExactName & findUsersBySubstrName instead - removal after Nov 22 2016")
-		void findPlayerByName(const FString& searchText, int32 maxResults, IServerCallback * callback = nullptr);
-
-	/**
 	* Finds a list of players matching the search text by performing an exact match search
 	*
 	* Service Name - friend

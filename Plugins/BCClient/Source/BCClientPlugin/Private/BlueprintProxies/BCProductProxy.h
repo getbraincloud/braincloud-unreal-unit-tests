@@ -27,34 +27,24 @@ public:
     UFUNCTION(BlueprintCallable, meta = (BlueprintInternalUseOnly = "true"), Category = "BrainCloud|Product")
         static UBCProductProxy* GetCurrency(const FString& currencyType);
 
-    /**
-    * Award player the passed-in amount of currency. Returns
-    * JSON representing the new currency values.
-    *
-    * Service Name - Product
-    * Service Operation - AwardVC
-    */
+	/**
+	* @deprecated Method is now available in Cloud Code only for security - removal after March 22 2016
+	*/
+	DEPRECATED("3.2.0", "Method is now available in Cloud Code only for security - removal after March 22 2016")
     UFUNCTION(BlueprintCallable, meta = (BlueprintInternalUseOnly = "true"), Category = "BrainCloud|Product")
         static UBCProductProxy* AwardCurrency(const FString& currencyType, int32 amount);
 
-    /**
-    * Consume the passed-in amount of currency from the player.
-    *
-    * Service Name - Product
-    * Service Operation - ConsumePlayerVC
-    *
-    * Param - currencyType The currency type to consume.
-    * Param - amount The amount of currency to consume.
-    */
+	/**
+	* @deprecated Method is now available in Cloud Code only for security - removal after March 22 2016
+	*/
+	DEPRECATED("3.2.0", "Method is now available in Cloud Code only for security - removal after March 22 2016")
     UFUNCTION(BlueprintCallable, meta = (BlueprintInternalUseOnly = "true"), Category = "BrainCloud|Product")
         static UBCProductProxy* ConsumeCurrency(const FString& currencyType, int32 amount);
 
-    /**
-    * Resets the player's currency back to zero.
-    *
-    * Service Name - Product
-    * Service Operation - ResetPlayerVC
-    */
+	/**
+	* @deprecated Method is now available in Cloud Code only for security - removal after March 22 2016
+	*/
+	DEPRECATED("3.2.0", "Method is now available in Cloud Code only for security - removal after March 22 2016")
     UFUNCTION(BlueprintCallable, meta = (BlueprintInternalUseOnly = "true"), Category = "BrainCloud|Product")
         static UBCProductProxy* ResetCurrency();
 
@@ -168,57 +158,6 @@ public:
     */
     UFUNCTION(BlueprintCallable, meta = (BlueprintInternalUseOnly = "true"), Category = "BrainCloud|Product")
         static UBCProductProxy* GetEligiblePromotions();
-
-    /**
-    * Awards currency in a parent app.
-    *
-    * Service Name - Product
-    * Service Operation - AWARD_PARENT_VC
-    *
-    * Param - currencyType The ID of the parent currency
-    * Param - amount The amount of currency to award
-    * Param - parentLevel The level of the parent containing the currency
-    */
-    UFUNCTION(BlueprintCallable, meta = (BlueprintInternalUseOnly = "true"), Category = "BrainCloud|Product")
-        static UBCProductProxy* AwardParentCurrency(const FString& in_currencyType, int32 in_amount, const FString& in_parentLevel);
-
-    /**
-    * Consumes currency in a parent app.
-    *
-    * Service Name - Product
-    * Service Operation - CONSUME_PARENT_VC
-    *
-    * Param - currencyType The ID of the parent currency
-    * Param - amount The amount of currency to consume
-    * Param - parentLevel The level of the parent containing the currency
-    */
-    UFUNCTION(BlueprintCallable, meta = (BlueprintInternalUseOnly = "true"), Category = "BrainCloud|Product")
-        static UBCProductProxy* ConsumeParentCurrency(const FString& in_currencyType, int32 in_amount, const FString& in_parentLevel);
-
-    /**
-    * Gets information on a single currency in a parent app
-    * or all currency types if a null type is passed in.
-    *
-    * Service Name - Product
-    * Service Operation - GET_PARENT_VC
-    *
-    * Param - currencyType The ID of the parent currency or null to get all currencies
-    * Param - parentLevel The level of the parent containing the currency
-    */
-    UFUNCTION(BlueprintCallable, meta = (BlueprintInternalUseOnly = "true"), Category = "BrainCloud|Product")
-        static UBCProductProxy* GetParentCurrency(const FString& in_currencyType, const FString& in_parentLevel);
-
-
-    /**
-    * Resets all currencies in a parent app.
-    *
-    * Service Name - Product
-    * Service Operation - RESET_PARENT_VC
-    *
-    * Param - parentLevel The level of the parent containing the currencies
-    */
-    UFUNCTION(BlueprintCallable, meta = (BlueprintInternalUseOnly = "true"), Category = "BrainCloud|Product")
-        static UBCProductProxy* ResetParentCurrency(const FString& in_parentLevel);
 
     //Response delegates
     UPROPERTY(BlueprintAssignable)

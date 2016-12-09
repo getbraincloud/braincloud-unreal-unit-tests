@@ -81,13 +81,6 @@ public:
 		static UBCFriendProxy* ReadFriendPlayerState(const FString& friendId);
 
 	/**
-	* @deprecated Use findUsersByExactName & findUsersBySubstrName instead - removal after Nov 22 2016
-	*/
-	UFUNCTION(BlueprintCallable, meta = (BlueprintInternalUseOnly = "true", DeprecatedFunction,
-		DeprecationMessage = "Use findUsersByExactName & findUsersBySubstrName instead - removal after Nov 22 2016"), Category = "BrainCloud|Friend")
-		static UBCFriendProxy* FindPlayerByName(const FString& searchText, int32 maxResults);
-
-	/**
 	* Finds a list of players matching the search text by performing an exact match search
 	*
 	* Service Name - friend

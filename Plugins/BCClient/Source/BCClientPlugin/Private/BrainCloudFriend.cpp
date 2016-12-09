@@ -76,16 +76,6 @@ void BrainCloudFriend::readFriendPlayerState(const FString& friendId, IServerCal
 	_client->sendRequest(sc);
 }
 
-void BrainCloudFriend::findPlayerByName(const FString& searchText, int32 maxResults, IServerCallback * callback)
-{
-	TSharedRef<FJsonObject> message = MakeShareable(new FJsonObject());
-	message->SetStringField(OperationParam::FriendServiceSearchText.getValue(), searchText);
-	message->SetNumberField(OperationParam::FriendServiceMaxResults.getValue(), maxResults);
-
-	ServerCall * sc = new ServerCall(ServiceName::Friend, ServiceOperation::FindPlayerByName, message, callback);
-	_client->sendRequest(sc);
-}
-
 void BrainCloudFriend::findUsersByExactName(const FString& searchText, int32 maxResults, IServerCallback * callback)
 {
 	TSharedRef<FJsonObject> message = MakeShareable(new FJsonObject());
