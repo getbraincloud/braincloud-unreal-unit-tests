@@ -99,10 +99,9 @@ public:
     * Param - sort Sort key Sort order of page.
     * Param - beforeCount The count of number of players before the current player to include.
     * Param - afterCount The count of number of players after the current player to include.
-    * Param - includeLeaderboardSize Whether to return the leaderboard size
     */
     UFUNCTION(BlueprintCallable, meta = (BlueprintInternalUseOnly = "true"), Category = "BrainCloud|Leaderboard")
-        static UBCLeaderboardProxy* GetGlobalLeaderboardView(FString leaderboardId, ESortOrder sortOrder, int32 beforeCount, int32 afterCount, bool includeLeaderboardSize);
+        static UBCLeaderboardProxy* GetGlobalLeaderboardView(FString leaderboardId, ESortOrder sortOrder, int32 beforeCount, int32 afterCount);
 
     /**
     * Method returns a view of global leaderboard results that centers on the current player.
@@ -116,11 +115,18 @@ public:
     * Param - sort Sort key Sort order of page.
     * Param - beforeCount The count of number of players before the current player to include.
     * Param - afterCount The count of number of players after the current player to include.
-    * Param - includeLeaderboardSize Whether to return the leaderboard size
     * Param - versionId The historical version to retrieve.
     */
     UFUNCTION(BlueprintCallable, meta = (BlueprintInternalUseOnly = "true"), Category = "BrainCloud|Leaderboard")
-        static UBCLeaderboardProxy* GetGlobalLeaderboardViewByVersion(FString leaderboardId, ESortOrder sortOrder, int32 beforeCount, int32 afterCount, bool includeLeaderboardSize, int32 versionId);
+        static UBCLeaderboardProxy* GetGlobalLeaderboardViewByVersion(FString leaderboardId, ESortOrder sortOrder, int32 beforeCount, int32 afterCount, int32 versionId);
+	
+	/**
+	* Gets the number of entries in a global leaderboard
+	*
+	* Param - leaderboardId The id of the leaderboard to retrieve.
+	*/
+	UFUNCTION(BlueprintCallable, meta = (BlueprintInternalUseOnly = "true"), Category = "BrainCloud|Leaderboard")
+		static UBCLeaderboardProxy* GetGlobalLeaderboardEntryCount(FString leaderboardId);
 
     /** Gets the global leaderboard versions.
     *
@@ -180,40 +186,6 @@ public:
         static UBCLeaderboardProxy* ResetLeaderboardScore(FString leaderBoardName);
 
     /**
-    * If a social leaderboard has been configured to reset periodically, each period
-    * can be considered to be a tournament. When the leaderboard resets, the tournament
-    * has ended and participants can be ranked based on their final scores.
-    *
-    * This API method will return the sorted leaderboard including:
-    * the player
-    * the game's pacers
-    * all friends who participated in the tournament
-    *
-    * This API method will return the leaderboard results for a particular
-    * tournament only once. If the method is called twice, the second call
-    * will yield an empty result.
-    *
-    * Note that if the leaderboard has not been configured to reset, the concept of a
-    * tournament does not apply.
-    *
-    * Param - leaderboardId The id of the leaderboard
-    * Param - replaceName True if the player's name should be replaced with "You"
-    */
-    UFUNCTION(BlueprintCallable, meta = (BlueprintInternalUseOnly = "true"), Category = "BrainCloud|Leaderboard")
-        static UBCLeaderboardProxy* GetCompletedLeaderboardTournament(FString leaderboardId, bool replaceName);
-
-    /**
-    * This method triggers a reward (via a player statistics event)
-    * to the currently logged in player for ranking at the
-    * completion of a tournament.
-    *
-    * Param - eventName The player statistics event name to trigger
-    * Param - eventMultiplier The multiplier to associate with the event
-    */
-    UFUNCTION(BlueprintCallable, meta = (BlueprintInternalUseOnly = "true"), Category = "BrainCloud|Leaderboard")
-        static UBCLeaderboardProxy* TriggerSocialLeaderboardTournamentReward(FString leaderboardId, FString eventName, int32 eventMultiplier);
-
-    /**
     * Retrieve the social leaderboard for a group.
     *
     * Param - leaderboardId The leaderboard to retrieve
@@ -231,7 +203,6 @@ public:
 	UFUNCTION(BlueprintCallable, meta = (BlueprintInternalUseOnly = "true"), Category = "BrainCloud|Leaderboard")
 		static UBCLeaderboardProxy* GetPlayersSocialLeaderboard(const FString& leaderboardId, const TArray<FString> profileIds);
 
-
 	/**
 	* Retrieve a list of all leaderboards
 	*
@@ -240,6 +211,7 @@ public:
 	*/
 	UFUNCTION(BlueprintCallable, meta = (BlueprintInternalUseOnly = "true"), Category = "BrainCloud|Leaderboard")
 		static UBCLeaderboardProxy* ListAllLeaderboards();
+
 
     //Response delegates
     UPROPERTY(BlueprintAssignable)

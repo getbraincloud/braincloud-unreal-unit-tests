@@ -18,6 +18,11 @@ public:
 	static const ServiceOperation GetIdentities;
 	static const ServiceOperation GetExpiredIdentities;
 	static const ServiceOperation RefreshIdentity;
+	static const ServiceOperation AttachParentWithIdentity;
+	static const ServiceOperation DetachParent;
+	static const ServiceOperation AttachPeerProfile;
+	static const ServiceOperation DetachPeer;
+	static const ServiceOperation GetPeerProfiles;
 
 	static const ServiceOperation Create;
 	static const ServiceOperation CreateWithIndexedId;
@@ -89,6 +94,7 @@ public:
 	static const ServiceOperation GetSummaryDataForProfileId;
 	static const ServiceOperation GetPlayersSocialLeaderboard;
 	static const ServiceOperation ListAllLeaderboards;
+	static const ServiceOperation GetGlobalLeaderboardEntryCount;
 
 	static const ServiceOperation InitThirdParty;
 	static const ServiceOperation PostThirdPartyLeaderboardScore;
@@ -223,6 +229,8 @@ public:
 	static const ServiceOperation ScheduleCloudScript;
 	static const ServiceOperation RunParentScript;
 	static const ServiceOperation CancelScheduledScript;
+	static const ServiceOperation RunPeerScript;
+	static const ServiceOperation RunPeerScriptAsync;
 
 	static const ServiceOperation RedeemCode;
 	static const ServiceOperation GetRedeemedCodes;

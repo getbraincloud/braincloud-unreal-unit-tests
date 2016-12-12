@@ -228,6 +228,45 @@ UBCIdentityProxy* UBCIdentityProxy::RefreshIdentity(const FString& externalId, c
 	return Proxy;
 }
 
+UBCIdentityProxy * UBCIdentityProxy::AttachParentWithIdentity(const FString & externalId, const FString & authenticationToken, EBCAuthType authenticationType, 
+	bool forceCreate, const FString & externalAuthName)
+{
+	UBCIdentityProxy* Proxy = NewObject<UBCIdentityProxy>();
+	BrainCloudClient::getInstance()->getIdentityService()->attachParentWithIdentity(externalId, authenticationToken, authenticationType, 
+		forceCreate, externalAuthName, Proxy);
+	return Proxy;
+}
+
+UBCIdentityProxy * UBCIdentityProxy::DetachParent()
+{
+	UBCIdentityProxy* Proxy = NewObject<UBCIdentityProxy>();
+	BrainCloudClient::getInstance()->getIdentityService()->detachParent(Proxy);
+	return Proxy;
+}
+
+UBCIdentityProxy * UBCIdentityProxy::AttachPeerProfile(const FString & externalId, const FString & authenticationToken, EBCAuthType authenticationType, 
+	bool forceCreate, const FString & externalAuthName, const FString & peer)
+{
+	UBCIdentityProxy* Proxy = NewObject<UBCIdentityProxy>();
+	BrainCloudClient::getInstance()->getIdentityService()->attachPeerProfile(externalId, authenticationToken, authenticationType,
+		forceCreate, externalAuthName, peer, Proxy);
+	return Proxy;
+}
+
+UBCIdentityProxy*  UBCIdentityProxy::DetachPeer(const FString& peer)
+{
+	UBCIdentityProxy* Proxy = NewObject<UBCIdentityProxy>();
+	BrainCloudClient::getInstance()->getIdentityService()->detachPeer(peer, Proxy);
+	return Proxy;
+}
+
+UBCIdentityProxy*  UBCIdentityProxy::GetPeerProfiles()
+{
+	UBCIdentityProxy* Proxy = NewObject<UBCIdentityProxy>();
+	BrainCloudClient::getInstance()->getIdentityService()->getPeerProfiles(Proxy);
+	return Proxy;
+}
+
 //callbacks
 void UBCIdentityProxy::serverCallback(ServiceName serviceName, ServiceOperation serviceOperation, const FString& jsonData)
 {

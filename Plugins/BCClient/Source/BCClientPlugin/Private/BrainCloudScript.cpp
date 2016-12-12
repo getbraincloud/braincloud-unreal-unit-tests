@@ -70,3 +70,29 @@ void BrainCloudScript::cancelScheduledScript(const FString& jobId, IServerCallba
 	ServerCall * sc = new ServerCall(ServiceName::Script, ServiceOperation::CancelScheduledScript, message, callback);
 	_client->sendRequest(sc);
 }
+
+void BrainCloudScript::runPeerScript(const FString & scriptName, const FString & jsonScriptData, const FString & peer, IServerCallback * callback)
+{
+	TSharedRef<FJsonObject> message = MakeShareable(new FJsonObject());
+	message->SetStringField(OperationParam::ScriptServiceRunScriptName.getValue(), scriptName);
+	message->SetStringField(OperationParam::Peer.getValue(), peer);
+	if (OperationParam::isOptionalParamValid(jsonScriptData)) {
+		message->SetObjectField(OperationParam::ScriptServiceRunScriptData.getValue(), JsonUtil::jsonStringToValue(jsonScriptData));
+	}
+
+	ServerCall * sc = new ServerCall(ServiceName::Script, ServiceOperation::RunPeerScript, message, callback);
+	_client->sendRequest(sc);
+}
+
+void BrainCloudScript::runPeerScriptAsync(const FString & scriptName, const FString & jsonScriptData, const FString & peer, IServerCallback * callback)
+{
+	TSharedRef<FJsonObject> message = MakeShareable(new FJsonObject());
+	message->SetStringField(OperationParam::ScriptServiceRunScriptName.getValue(), scriptName);
+	message->SetStringField(OperationParam::Peer.getValue(), peer);
+	if (OperationParam::isOptionalParamValid(jsonScriptData)) {
+		message->SetObjectField(OperationParam::ScriptServiceRunScriptData.getValue(), JsonUtil::jsonStringToValue(jsonScriptData));
+	}
+
+	ServerCall * sc = new ServerCall(ServiceName::Script, ServiceOperation::RunPeerScriptAsync, message, callback);
+	_client->sendRequest(sc);
+}

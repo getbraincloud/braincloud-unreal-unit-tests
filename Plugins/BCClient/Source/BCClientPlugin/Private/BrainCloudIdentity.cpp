@@ -186,6 +186,63 @@ void BrainCloudIdentity::refreshIdentity(const FString& externalId, const FStrin
 	_client->sendRequest(sc);
 }
 
+void BrainCloudIdentity::attachParentWithIdentity(const FString & externalId, const FString & authenticationToken, EBCAuthType authenticationType, bool forceCreate,
+	const FString & externalAuthName, IServerCallback * callback)
+{
+	TSharedRef<FJsonObject> message = MakeShareable(new FJsonObject());
+	message->SetStringField(OperationParam::IdentityServiceExternalId.getValue(), externalId);
+	message->SetStringField(OperationParam::AuthenticateServiceAuthenticateAuthenticationToken.getValue(), authenticationToken);
+	message->SetStringField(OperationParam::IdentityServiceAuthenticationType.getValue(), BCAuthType::EnumToString(authenticationType));
+	message->SetBoolField(OperationParam::AuthenticateServiceAuthenticateForceCreate.getValue(), forceCreate);
+
+	if (OperationParam::isOptionalParamValid(externalAuthName)) {
+		message->SetStringField(OperationParam::AuthenticateServiceAuthenticateExternalAuthName.getValue(), externalAuthName);
+	}
+
+	ServerCall * sc = new ServerCall(ServiceName::Identity, ServiceOperation::AttachParentWithIdentity, message, callback);
+	_client->sendRequest(sc);
+}
+
+void BrainCloudIdentity::detachParent(IServerCallback * callback)
+{
+	TSharedRef<FJsonObject> message = MakeShareable(new FJsonObject());
+	ServerCall * sc = new ServerCall(ServiceName::Identity, ServiceOperation::DetachParent, message, callback);
+	_client->sendRequest(sc);
+}
+
+void BrainCloudIdentity::attachPeerProfile(const FString & externalId, const FString & authenticationToken, EBCAuthType authenticationType, bool forceCreate,
+	const FString & externalAuthName, const FString & peer, IServerCallback * callback)
+{
+	TSharedRef<FJsonObject> message = MakeShareable(new FJsonObject());
+	message->SetStringField(OperationParam::IdentityServiceExternalId.getValue(), externalId);
+	message->SetStringField(OperationParam::AuthenticateServiceAuthenticateAuthenticationToken.getValue(), authenticationToken);
+	message->SetStringField(OperationParam::IdentityServiceAuthenticationType.getValue(), BCAuthType::EnumToString(authenticationType));
+	message->SetBoolField(OperationParam::AuthenticateServiceAuthenticateForceCreate.getValue(), forceCreate);
+	message->SetStringField(OperationParam::Peer.getValue(), peer);
+
+	if (OperationParam::isOptionalParamValid(externalAuthName)) {
+		message->SetStringField(OperationParam::AuthenticateServiceAuthenticateExternalAuthName.getValue(), externalAuthName);
+	}
+
+	ServerCall * sc = new ServerCall(ServiceName::Identity, ServiceOperation::AttachPeerProfile, message, callback);
+	_client->sendRequest(sc);
+}
+
+void BrainCloudIdentity::detachPeer(const FString & peer, IServerCallback * callback)
+{
+	TSharedRef<FJsonObject> message = MakeShareable(new FJsonObject());
+	message->SetStringField(OperationParam::Peer.getValue(), peer);
+
+	ServerCall * sc = new ServerCall(ServiceName::Identity, ServiceOperation::DetachPeer, message, callback);
+	_client->sendRequest(sc);
+}
+
+void BrainCloudIdentity::getPeerProfiles(IServerCallback * callback)
+{
+	TSharedRef<FJsonObject> message = MakeShareable(new FJsonObject());
+	ServerCall * sc = new ServerCall(ServiceName::Identity, ServiceOperation::GetPeerProfiles, message, callback);
+	_client->sendRequest(sc);
+}
 
 //Private
 void BrainCloudIdentity::attachIdentity(const FString& externalId, const FString& authenticationToken, EBCAuthType authenticationType, IServerCallback * callback)

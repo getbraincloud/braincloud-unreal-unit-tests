@@ -21,6 +21,11 @@ const ServiceOperation ServiceOperation::GetChildProfiles = ServiceOperation(TEX
 const ServiceOperation ServiceOperation::GetIdentities = ServiceOperation(TEXT("GET_IDENTITIES"));
 const ServiceOperation ServiceOperation::GetExpiredIdentities = ServiceOperation(TEXT("GET_EXPIRED_IDENTITIES"));
 const ServiceOperation ServiceOperation::RefreshIdentity = ServiceOperation(TEXT("REFRESH_IDENTITY"));
+const ServiceOperation ServiceOperation::AttachParentWithIdentity = ServiceOperation(TEXT("ATTACH_PARENT_WITH_IDENTITY"));
+const ServiceOperation ServiceOperation::DetachParent = ServiceOperation(TEXT("DETACH_PARENT"));
+const ServiceOperation ServiceOperation::AttachPeerProfile = ServiceOperation(TEXT("ATTACH_PEER_PROFILE"));
+const ServiceOperation ServiceOperation::DetachPeer = ServiceOperation(TEXT("DETACH_PEER"));
+const ServiceOperation ServiceOperation::GetPeerProfiles = ServiceOperation(TEXT("GET_PEER_PROFILES"));
 
 const ServiceOperation ServiceOperation::Create = ServiceOperation(TEXT("CREATE"));
 const ServiceOperation ServiceOperation::CreateWithIndexedId = ServiceOperation(TEXT("CREATE_WITH_INDEXED_ID"));
@@ -92,6 +97,7 @@ const ServiceOperation ServiceOperation::GetGroupSocialLeaderboard = ServiceOper
 const ServiceOperation ServiceOperation::GetSummaryDataForProfileId = ServiceOperation(TEXT("GET_SUMMARY_DATA_FOR_PROFILE_ID"));
 const ServiceOperation ServiceOperation::GetPlayersSocialLeaderboard = ServiceOperation(TEXT("GET_PLAYERS_SOCIAL_LEADERBOARD"));
 const ServiceOperation ServiceOperation::ListAllLeaderboards = ServiceOperation(TEXT("LIST_ALL_LEADERBOARDS"));
+const ServiceOperation ServiceOperation::GetGlobalLeaderboardEntryCount = ServiceOperation(TEXT("GET_GLOBAL_LEADERBOARD_ENTRY_COUNT"));
 
 const ServiceOperation ServiceOperation::InitThirdParty = ServiceOperation(TEXT("initThirdParty"));
 const ServiceOperation ServiceOperation::PostThirdPartyLeaderboardScore = ServiceOperation(TEXT("postThirdPartyLeaderboardScore"));
@@ -225,6 +231,8 @@ const ServiceOperation ServiceOperation::GetFileList = ServiceOperation(TEXT("GE
 const ServiceOperation ServiceOperation::ScheduleCloudScript = ServiceOperation(TEXT("SCHEDULE_CLOUD_SCRIPT"));
 const ServiceOperation ServiceOperation::RunParentScript = ServiceOperation(TEXT("RUN_PARENT_SCRIPT"));
 const ServiceOperation ServiceOperation::CancelScheduledScript = ServiceOperation(TEXT("CANCEL_SCHEDULED_SCRIPT"));
+const ServiceOperation ServiceOperation::RunPeerScript = ServiceOperation(TEXT("RUN_PEER_SCRIPT"));
+const ServiceOperation ServiceOperation::RunPeerScriptAsync = ServiceOperation(TEXT("RUN_PEER_SCRIPT_ASYNC"));
 
 const ServiceOperation ServiceOperation::RedeemCode = ServiceOperation(TEXT("REDEEM_CODE"));
 const ServiceOperation ServiceOperation::GetRedeemedCodes = ServiceOperation(TEXT("GET_REDEEMED_CODES"));

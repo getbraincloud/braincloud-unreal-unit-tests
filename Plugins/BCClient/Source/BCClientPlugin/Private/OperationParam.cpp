@@ -64,6 +64,7 @@ OperationParam::OperationParam(const FString& operation)
 	const OperationParam OperationParam::AuthenticateServiceAuthenticateLanguageCode = OperationParam(TEXT("languageCode"));
 	const OperationParam OperationParam::AuthenticateServiceAuthenticateTimeZoneOffset = OperationParam(TEXT("timeZoneOffset"));
 	const OperationParam OperationParam::AuthenticateServiceAuthenticateAuthTwitter = OperationParam(TEXT("Twitter"));
+	const OperationParam OperationParam::Peer = OperationParam(TEXT("peer"));
 
 	// Authenticate Service - Authenticate Params
 	const OperationParam OperationParam::IdentityServiceExternalId = OperationParam(TEXT("externalId"));

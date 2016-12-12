@@ -26,6 +26,9 @@ struct FBrainCloudInitParams
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "brainCloud Init Params")
 		FString ParentLevelName = "";
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "brainCloud Init Params")
+		FString PeerName = "";
 };
 
 UCLASS(MinimalAPI)

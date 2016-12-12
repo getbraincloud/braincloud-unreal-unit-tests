@@ -43,7 +43,7 @@ public:
 	 * For now, this applies solely to Facebook connected players who are
 	 * friends with the logged in player (who also must be Facebook connected).
 	 * In the future this will expand to other identification means (such as
-	 * Game Centre, Google circles etc).
+	 * Game Center, Google circles etc).
 	 *
 	 * Leaderboards entries contain the player's score and optionally, some user-defined
 	 * data associated with the score. The currently logged in player will also
@@ -109,6 +109,20 @@ public:
 	*/
 	void getGlobalLeaderboardPageByVersion(const FString& leaderboardId, ESortOrder sortOrder, int32 startIndex, int32 endIndex, bool includeLeaderboardSize, int32 versionId, IServerCallback * callback = nullptr);
 
+
+	/**
+	* @deprecated Use method without includeLeaderboardSize parameter - removal after March 22 2016
+	*/
+	DEPRECATED("3.2.0", "Use method without includeLeaderboardSize parameter - removal after March 22 2016")
+		void getGlobalLeaderboardView(const FString& leaderboardId, ESortOrder sortOrder, int32 beforeCount, int32 afterCount, bool includeLeaderboardSize, IServerCallback * callback = nullptr);
+
+	/**
+	* @deprecated Use method without includeLeaderboardSize parameter - removal after March 22 2016
+	*/
+	DEPRECATED("3.2.0", "Use method without includeLeaderboardSize parameter - removal after March 22 2016")
+	void getGlobalLeaderboardViewByVersion(const FString& leaderboardId, ESortOrder sortOrder, int32 beforeCount, int32 afterCount,
+		bool includeLeaderboardSize, int32 versionId, IServerCallback * callback = nullptr);
+
 	/**
 	* Method returns a view of global leaderboard results that centers on the current player.
 	*
@@ -122,10 +136,9 @@ public:
 	* @param sort Sort key Sort order of page.
 	* @param beforeCount The count of number of players before the current player to include.
 	* @param afterCount The count of number of players after the current player to include.
-	* @param includeLeaderboardSize Whether to return the leaderboard size
 	* @param callback The method to be invoked when the server response is received
 	*/
-	void getGlobalLeaderboardView(const FString& leaderboardId, ESortOrder sortOrder, int32 beforeCount, int32 afterCount, bool includeLeaderboardSize, IServerCallback * callback = nullptr);
+	void getGlobalLeaderboardView(const FString& leaderboardId, ESortOrder sortOrder, int32 beforeCount, int32 afterCount, IServerCallback * callback = nullptr);
 
 	/**
 	* Method returns a view of global leaderboard results that centers on the current player.
@@ -139,11 +152,22 @@ public:
 	* @param sort Sort key Sort order of page.
 	* @param beforeCount The count of number of players before the current player to include.
 	* @param afterCount The count of number of players after the current player to include.
-	* @param includeLeaderboardSize Whether to return the leaderboard size
 	* @param versionId The historical version to retrieve.
 	* @param callback The method to be invoked when the server response is received
 	*/
-	void getGlobalLeaderboardViewByVersion(const FString& leaderboardId, ESortOrder sortOrder, int32 beforeCount, int32 afterCount, bool includeLeaderboardSize, int32 versionId, IServerCallback * callback = nullptr);
+	void getGlobalLeaderboardViewByVersion(const FString& leaderboardId, ESortOrder sortOrder, int32 beforeCount, int32 afterCount, 
+		int32 versionId, IServerCallback * callback = nullptr);
+
+	/**
+	* Gets the number of entries in a global leaderboard
+	*
+	* Service Name - leaderboard
+	* Service Operation - GET_GLOBAL_LEADERBOARD_ENTRY_COUNT
+	*
+	* @param leaderboardId The leaderboard ID
+	* @param callback The method to be invoked when the server response is received
+	*/
+	void getGlobalLeaderboardEntryCount(const FString& leaderboardId, IServerCallback * callback = nullptr);
 
 	/** Gets the global leaderboard versions.
 	*
@@ -201,40 +225,6 @@ public:
 	 * @param callback The method to be invoked when the server response is received
 	 */
 	void resetLeaderboardScore(const FString& leaderBoardName, IServerCallback * callback = nullptr);
-
-	/**
-	 * If a social leaderboard has been configured to reset periodically, each period
-	 * can be considered to be a tournament. When the leaderboard resets, the tournament
-	 * has ended and participants can be ranked based on their final scores.
-	 *
-	 * This API method will return the sorted leaderboard including:
-	 * the player
-	 * the game's pacers
-	 * all friends who participated in the tournament
-	 *
-	 * This API method will return the leaderboard results for a particular
-	 * tournament only once. If the method is called twice, the second call
-	 * will yield an empty result.
-	 *
-	 * Note that if the leaderboard has not been configured to reset, the concept of a
-	 * tournament does not apply.
-	 *
-	 * @param leaderboardId The id of the leaderboard
-	 * @param replaceName True if the player's name should be replaced with "You"
-	 * @param callback The method to be invoked when the server response is received
-	 */
-	void getCompletedLeaderboardTournament(const FString& leaderboardId, bool replaceName, IServerCallback * callback = nullptr);
-
-	/**
-	 * This method triggers a reward (via a player statistics event)
-	 * to the currently logged in player for ranking at the
-	 * completion of a tournament.
-	 *
-	 * @param eventName The player statistics event name to trigger
-	 * @param eventMultiplier The multiplier to associate with the event
-	 * @param callback The method to be invoked when the server response is received
-	 */
-	void triggerSocialLeaderboardTournamentReward(const FString& leaderboardId, const FString& eventName, uint64 eventMultiplier, IServerCallback * callback = nullptr);
 
 	/**
 	 * Method to retrieve the player's completed tournaments for the game.

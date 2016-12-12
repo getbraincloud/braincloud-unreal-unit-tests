@@ -475,6 +475,70 @@ public:
 	UFUNCTION(BlueprintCallable, meta = (BlueprintInternalUseOnly = "true"), Category = "BrainCloud|Identity")
 		static UBCIdentityProxy* RefreshIdentity(const FString& externalId, const FString& authenticationToken, EBCAuthType authenticationType);
 
+	/**
+	* Attach a new identity to a parent app
+	*
+	* Service Name - identity
+	* Service Operation - ATTACH_PARENT_WITH_IDENTITY
+	*
+	* Param - externalId The users id for the new credentials
+	* Param - authenticationToken The password/token
+	* Param - authenticationType Type of identity
+	* Param - forceCreate Should a new profile be created if it does not exist?
+	* Param - externalAuthName Optional - if attaching an external identity
+	*/
+	UFUNCTION(BlueprintCallable, meta = (BlueprintInternalUseOnly = "true"), Category = "BrainCloud|Identity")
+	static UBCIdentityProxy*  AttachParentWithIdentity(const FString& externalId, const FString& authenticationToken, EBCAuthType authenticationType,
+		bool forceCreate, const FString& externalAuthName);
+
+	/**
+	* Detaches parent from this player's profile
+	*
+	* Service Name - identity
+	* Service Operation - DETACH_PARENT
+	*
+	*/
+	UFUNCTION(BlueprintCallable, meta = (BlueprintInternalUseOnly = "true"), Category = "BrainCloud|Identity")
+	static UBCIdentityProxy*  DetachParent();
+
+	/**
+	* Attaches a peer identity to this player's profile
+	*
+	* Service Name - identity
+	* Service Operation - ATTACH_PEER_PROFILE
+	*
+	* Param - externalId The users id for the new credentials
+	* Param - authenticationToken The password/token
+	* Param - authenticationType Type of identity
+	* Param - forceCreate Should a new profile be created if it does not exist?
+	* Param - externalAuthName Optional - if attaching an external identity
+	* Param - peer Name of the peer to connect to
+	*/
+	UFUNCTION(BlueprintCallable, meta = (BlueprintInternalUseOnly = "true"), Category = "BrainCloud|Identity")
+	static UBCIdentityProxy*  AttachPeerProfile(const FString& externalId, const FString& authenticationToken, EBCAuthType authenticationType,
+		bool forceCreate, const FString& externalAuthName, const FString& peer);
+
+	/**
+	* Detaches a peer identity from this player's profile
+	*
+	* Service Name - identity
+	* Service Operation - DETACH_PEER
+	*
+	* Param - peer Name of the peer to connect to
+	*/
+	UFUNCTION(BlueprintCallable, meta = (BlueprintInternalUseOnly = "true"), Category = "BrainCloud|Identity")
+	static UBCIdentityProxy*  DetachPeer(const FString& peer);
+
+	/**
+	* Returns a list of peer profiles attached to this user
+	*
+	* Service Name - identity
+	* Service Operation - GET_PEER_PROFILES
+	*
+	*/
+	UFUNCTION(BlueprintCallable, meta = (BlueprintInternalUseOnly = "true"), Category = "BrainCloud|Identity")
+	static UBCIdentityProxy*  GetPeerProfiles();
+
 	//Response delegates
 	UPROPERTY(BlueprintAssignable)
 		FBrainCloudCallbackDelegate OnSuccess;

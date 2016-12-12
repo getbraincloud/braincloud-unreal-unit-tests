@@ -477,6 +477,70 @@ public:
 	*/
 	void refreshIdentity(const FString& externalId, const FString& authenticationToken, EBCAuthType authenticationType, IServerCallback * callback = nullptr);
 
+	/**
+	* Attach a new identity to a parent app
+	*
+	* Service Name - identity
+	* Service Operation - ATTACH_PARENT_WITH_IDENTITY
+	*
+	* @param externalId The users id for the new credentials
+	* @param authenticationToken The password/token
+	* @param authenticationType Type of identity
+	* @param forceCreate Should a new profile be created if it does not exist?
+	* @param externalAuthName Optional - if attaching an external identity
+	* @param callback The method to be invoked when the server response is received
+	*/
+	void attachParentWithIdentity(const FString& externalId, const FString& authenticationToken, EBCAuthType authenticationType,
+		bool forceCreate, const FString& externalAuthName, IServerCallback* callback = nullptr);
+
+	/**
+	* Detaches parent from this player's profile
+	*
+	* Service Name - identity
+	* Service Operation - DETACH_PARENT
+	*
+	* @param callback The method to be invoked when the server response is received
+	*/
+	void detachParent(IServerCallback* callback);
+
+	/**
+	* Attaches a peer identity to this player's profile
+	*
+	* Service Name - identity
+	* Service Operation - ATTACH_PEER_PROFILE
+	*
+	* @param externalId The users id for the new credentials
+	* @param authenticationToken The password/token
+	* @param authenticationType Type of identity
+	* @param forceCreate Should a new profile be created if it does not exist?
+	* @param externalAuthName Optional - if attaching an external identity
+	* @param peer Name of the peer to connect to
+	* @param callback The method to be invoked when the server response is received
+	*/
+	void attachPeerProfile(const FString& externalId, const FString& authenticationToken, EBCAuthType authenticationType,
+		bool forceCreate, const FString& externalAuthName, const FString& peer, IServerCallback* callback);
+
+	/**
+	* Detaches a peer identity from this player's profile
+	*
+	* Service Name - identity
+	* Service Operation - DETACH_PEER
+	*
+	* @param peer Name of the peer to connect to
+	* @param callback The method to be invoked when the server response is received
+	*/
+	void detachPeer(const FString& peer, IServerCallback* callback);
+
+	/**
+	* Returns a list of peer profiles attached to this user
+	*
+	* Service Name - identity
+	* Service Operation - GET_PEER_PROFILES
+	*
+	* @param callback The method to be invoked when the server response is received
+	*/
+	void getPeerProfiles(IServerCallback* callback);
+
 private:
 	BrainCloudClient* _client = nullptr;
 

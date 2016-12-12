@@ -76,6 +76,33 @@ public:
 	*/
 	void cancelScheduledScript(const FString& jobId, IServerCallback * callback = nullptr);
 
+	/**
+	* Runs a script from the context of a peer
+	*
+	* Service Name - Script
+	* Service Operation - RUN_PEER_SCRIPT
+	*
+	* @param scriptName The name of the script to be run
+	* @param jsonScriptData Data to be sent to the script in json format
+	* @param peer Peer the script belongs to
+	* @param callback The method to be invoked when the server response is received
+	*/
+	void runPeerScript(const FString& scriptName, const FString& jsonScriptData, const FString& peer, IServerCallback * callback = nullptr);
+
+	/**
+	* Runs a script asynchronously from the context of a peer
+	* This method does not wait for the script to complete before returning
+	*
+	* Service Name - Script
+	* Service Operation - RUN_PEER_SCRIPT_ASYNC
+	*
+	* @param scriptName The name of the script to be run
+	* @param jsonScriptData Data to be sent to the script in json format
+	* @param peer Peer the script belongs to
+	* @param callback The method to be invoked when the server response is received
+	*/
+	void runPeerScriptAsync(const FString& scriptName, const FString& jsonScriptData, const FString& peer, IServerCallback * callback = nullptr);
+
 private:
     BrainCloudClient* _client = nullptr;
 };

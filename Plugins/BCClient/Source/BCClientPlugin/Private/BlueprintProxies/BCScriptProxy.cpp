@@ -46,6 +46,20 @@ UBCScriptProxy* UBCScriptProxy::CancelScheduledScript(const FString& jobId)
 	return Proxy;
 }
 
+UBCScriptProxy * UBCScriptProxy::RunPeerScript(const FString & scriptName, const FString & jsonScriptData, const FString & peer)
+{
+	UBCScriptProxy* Proxy = NewObject<UBCScriptProxy>();
+	BrainCloudClient::getInstance()->getScriptService()->runPeerScript(scriptName, jsonScriptData, peer, Proxy);
+	return Proxy;
+}
+
+UBCScriptProxy * UBCScriptProxy::RunPeerScriptAsync(const FString & scriptName, const FString & jsonScriptData, const FString & peer)
+{
+	UBCScriptProxy* Proxy = NewObject<UBCScriptProxy>();
+	BrainCloudClient::getInstance()->getScriptService()->runPeerScriptAsync(scriptName, jsonScriptData, peer, Proxy);
+	return Proxy;
+}
+
 //callbacks
 void UBCScriptProxy::serverCallback(ServiceName serviceName, ServiceOperation serviceOperation, const FString& jsonData)
 {

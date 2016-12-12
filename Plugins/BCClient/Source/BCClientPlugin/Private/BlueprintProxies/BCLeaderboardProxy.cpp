@@ -42,18 +42,25 @@ UBCLeaderboardProxy* UBCLeaderboardProxy::GetGlobalLeaderboardPageByVersion(FStr
     return Proxy;
 }
 
-UBCLeaderboardProxy* UBCLeaderboardProxy::GetGlobalLeaderboardView(FString leaderboardId, ESortOrder sortOrder, int32 beforeCount, int32 afterCount, bool includeLeaderboardSize)
+UBCLeaderboardProxy* UBCLeaderboardProxy::GetGlobalLeaderboardView(FString leaderboardId, ESortOrder sortOrder, int32 beforeCount, int32 afterCount)
 {
     UBCLeaderboardProxy* Proxy = NewObject<UBCLeaderboardProxy>();
-    BrainCloudClient::getInstance()->getLeaderboardService()->getGlobalLeaderboardView(leaderboardId, sortOrder, beforeCount, afterCount, includeLeaderboardSize, Proxy);
+    BrainCloudClient::getInstance()->getLeaderboardService()->getGlobalLeaderboardView(leaderboardId, sortOrder, beforeCount, afterCount, Proxy);
     return Proxy;
 }
 
-UBCLeaderboardProxy* UBCLeaderboardProxy::GetGlobalLeaderboardViewByVersion(FString leaderboardId, ESortOrder sortOrder, int32 beforeCount, int32 afterCount, bool includeLeaderboardSize, int32 versionId)
+UBCLeaderboardProxy* UBCLeaderboardProxy::GetGlobalLeaderboardViewByVersion(FString leaderboardId, ESortOrder sortOrder, int32 beforeCount, int32 afterCount, int32 versionId)
 {
     UBCLeaderboardProxy* Proxy = NewObject<UBCLeaderboardProxy>();
-    BrainCloudClient::getInstance()->getLeaderboardService()->getGlobalLeaderboardViewByVersion(leaderboardId, sortOrder, beforeCount, afterCount, includeLeaderboardSize, versionId, Proxy);
+    BrainCloudClient::getInstance()->getLeaderboardService()->getGlobalLeaderboardViewByVersion(leaderboardId, sortOrder, beforeCount, afterCount, versionId, Proxy);
     return Proxy;
+}
+
+UBCLeaderboardProxy* UBCLeaderboardProxy::GetGlobalLeaderboardEntryCount(FString leaderboardId)
+{
+	UBCLeaderboardProxy* Proxy = NewObject<UBCLeaderboardProxy>();
+	BrainCloudClient::getInstance()->getLeaderboardService()->getGlobalLeaderboardEntryCount(leaderboardId, Proxy);
+	return Proxy;
 }
 
 UBCLeaderboardProxy* UBCLeaderboardProxy::GetGlobalLeaderboardVersions(FString leaderboardId)
@@ -82,20 +89,6 @@ UBCLeaderboardProxy* UBCLeaderboardProxy::ResetLeaderboardScore(FString leaderBo
 {
     UBCLeaderboardProxy* Proxy = NewObject<UBCLeaderboardProxy>();
     BrainCloudClient::getInstance()->getLeaderboardService()->resetLeaderboardScore(leaderBoardName, Proxy);
-    return Proxy;
-}
-
-UBCLeaderboardProxy* UBCLeaderboardProxy::GetCompletedLeaderboardTournament(FString leaderboardId, bool replaceName)
-{
-    UBCLeaderboardProxy* Proxy = NewObject<UBCLeaderboardProxy>();
-    BrainCloudClient::getInstance()->getLeaderboardService()->getCompletedLeaderboardTournament(leaderboardId, replaceName, Proxy);
-    return Proxy;
-}
-
-UBCLeaderboardProxy* UBCLeaderboardProxy::TriggerSocialLeaderboardTournamentReward(FString leaderboardId, FString eventName, int32 eventMultiplier)
-{
-    UBCLeaderboardProxy* Proxy = NewObject<UBCLeaderboardProxy>();
-    BrainCloudClient::getInstance()->getLeaderboardService()->triggerSocialLeaderboardTournamentReward(leaderboardId, eventName, eventMultiplier, Proxy);
     return Proxy;
 }
 

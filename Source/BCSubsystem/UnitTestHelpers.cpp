@@ -60,6 +60,11 @@ FBrainCloudInitParams UUnitTestHelpers::InitializeFromFile()
 				line.Split(TEXT("="), nullptr, &params.ParentLevelName);
 				params.ParentLevelName.TrimTrailing();
 			}
+			else if (line.StartsWith("peerName"))
+			{
+				line.Split(TEXT("="), nullptr, &params.PeerName);
+				params.PeerName.TrimTrailing();
+			}
 		}
 	}
 	else UE_LOG(LogTemp, Error, TEXT("Could not find ids.txt file at %s"), *filePath);
