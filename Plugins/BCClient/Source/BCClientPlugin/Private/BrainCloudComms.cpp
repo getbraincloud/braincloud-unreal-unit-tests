@@ -76,9 +76,30 @@ BrainCloudComms::PacketRef BrainCloudComms::BuildPacket()
 	PacketRef packet = MakeShareable(new TArray<TSharedRef<ServerCall>>());
 
 	_queueMutex.Lock();
+		
+	auto nextNode = _messageQueue.GetTail();
+	while (nextNode != nullptr) {
+		TSharedRef<ServerCall> message = nextNode->GetValue();
+
+		if (message->getOperation() == ServiceOperation::Authenticate)
+		{
+			message->setIsEndOfBundle(true);
+			_messageQueue.RemoveNode(nextNode);
+			_messageQueue.AddTail(message);
+			break;
+		}
+
+		if (message->getIsEndOfBundle() == true)
+		{
+			break;
+		}
+
+		nextNode = nextNode->GetPrevNode();
+	}
+
 	while (_messageQueue.Num() != 0)
 	{
-		TDoubleLinkedList<TSharedRef<ServerCall>>::TDoubleLinkedListNode *tailNode = _messageQueue.GetTail();
+		auto tailNode = _messageQueue.GetTail();
 		TSharedRef<ServerCall> message = tailNode->GetValue();
 		_messageQueue.RemoveNode(tailNode);
 		packet->Add(message);
