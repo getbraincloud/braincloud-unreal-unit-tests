@@ -46,6 +46,7 @@ namespace BrainCloud
     const ServiceName ServiceName::File = ServiceName("file");
     const ServiceName ServiceName::Group = ServiceName("group");
 	const ServiceName ServiceName::Mail = ServiceName("mail");
+	const ServiceName ServiceName::Tournament = ServiceName("tournament");
 
     ServiceName::ServiceName(const char * value)
     {

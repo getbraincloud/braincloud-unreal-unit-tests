@@ -228,6 +228,9 @@
     <ClInclude Include="..\..\..\include\braincloud\BrainCloudMail.h">
       <Filter>include\braincloud</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\..\include\braincloud\BrainCloudTournament.h">
+      <Filter>include\braincloud</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\..\src\AuthenticationType.cpp">
@@ -393,6 +396,9 @@
       <Filter>src</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\src\BrainCloudMail.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\BrainCloudTournament.cpp">
       <Filter>src</Filter>
     </ClCompile>
   </ItemGroup>

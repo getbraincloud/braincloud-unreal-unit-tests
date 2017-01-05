@@ -280,6 +280,15 @@ namespace BrainCloud
 	const ServiceOperation ServiceOperation::UpdateGroupMember = ServiceOperation("UPDATE_GROUP_MEMBER");
 	const ServiceOperation ServiceOperation::UpdateGroupName = ServiceOperation("UPDATE_GROUP_NAME");
 
+	//tournament
+	const ServiceOperation ServiceOperation::GetTournamentStatus =  ServiceOperation("GET_TOURNAMENT_STATUS");
+	const ServiceOperation ServiceOperation::JoinTournament =  ServiceOperation("JOIN_TOURNAMENT");
+	const ServiceOperation ServiceOperation::LeaveTournament =  ServiceOperation("LEAVE_TOURNAMENT");
+	const ServiceOperation ServiceOperation::PostTournamentScore =  ServiceOperation("POST_TOURNAMENT_SCORE");
+	const ServiceOperation ServiceOperation::ViewCurrentReward =  ServiceOperation("VIEW_CURRENT_REWARD");
+	const ServiceOperation ServiceOperation::ViewReward =  ServiceOperation("VIEW_REWARD");
+	const ServiceOperation ServiceOperation::ClaimTournamentReward =  ServiceOperation("CLAIM_TOURNAMENT_REWARD");
+
 	//mail
 	const ServiceOperation ServiceOperation::SendBasicEmail = ServiceOperation("SEND_BASIC_EMAIL");
 	const ServiceOperation ServiceOperation::SendAdvancedEmail = ServiceOperation("SEND_ADVANCED_EMAIL");

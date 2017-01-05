@@ -231,7 +231,7 @@
     <ClInclude Include="..\..\..\lib\jsoncpp-1.0.0\json\json.h">
       <Filter>lib\jsoncpp-1.0.0\json</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\..\..\..\..\..\p4\projMetagame\Development\Client\Unreal\BCSubsystem\Plugins\BCClient\Source\BCClientPlugin\Public\BrainCloudGroup.h">
+    <ClInclude Include="..\..\..\include\braincloud\BrainCloudTournament.h">
       <Filter>include\braincloud</Filter>
     </ClInclude>
   </ItemGroup>
@@ -399,6 +399,9 @@
       <Filter>lib\jsoncpp-1.0.0</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\src\BrainCloudGroup.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\BrainCloudTournament.cpp">
       <Filter>src</Filter>
     </ClCompile>
   </ItemGroup>

@@ -75,6 +75,7 @@ namespace BrainCloud {
 		_socialLeaderboardService(new BrainCloudSocialLeaderboard(this)),
 		_steamService(new BrainCloudSteam(this)),
 		_timeService(new BrainCloudTime(this)),
+		_tournamentService(new BrainCloudTournament(this)),
 		_releasePlatform(""),
 		_gameVersion(""),
 		_timezoneOffset(0.0)

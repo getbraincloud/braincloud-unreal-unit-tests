@@ -198,6 +198,7 @@ namespace BrainCloud {
 		static const OperationParam SocialLeaderboardServiceRotationReset;
 		static const OperationParam SocialLeaderboardServiceRotationResetTime;
 		static const OperationParam SocialLeaderboardServiceRetainedCount;
+		static const OperationParam NumDaysToRotate;
 		static const OperationParam SocialLeaderboardServiceFetchType;
 		static const OperationParam SocialLeaderboardServiceMaxResults;
 		static const OperationParam SocialLeaderboardServiceSortOrder;
@@ -346,6 +347,15 @@ namespace BrainCloud {
 		static const OperationParam Subject;
 		static const OperationParam Body;
 		static const OperationParam ServiceParams;
+
+
+		static const OperationParam LeaderboardId;
+		static const OperationParam VersionId;
+		static const OperationParam TournamentCode;
+		static const OperationParam InitialScore;
+		static const OperationParam Score;
+		static const OperationParam RoundStartedEpoch;
+		static const OperationParam Data;
 
 		/*
 		 OfflineMatchServicePlayerId                        = new OperationParam("playerId");

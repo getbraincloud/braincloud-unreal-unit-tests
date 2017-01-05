@@ -190,6 +190,7 @@ namespace BrainCloud
 	const OperationParam OperationParam::SocialLeaderboardServiceRotationReset = OperationParam("rotationReset");
 	const OperationParam OperationParam::SocialLeaderboardServiceRotationResetTime = OperationParam("rotationResetTime");
 	const OperationParam OperationParam::SocialLeaderboardServiceRetainedCount = OperationParam("retainedCount");
+	const OperationParam OperationParam::NumDaysToRotate = OperationParam("numDaysToRotate");
 	const OperationParam OperationParam::SocialLeaderboardServiceFetchType = OperationParam("fetchType");
 	const OperationParam OperationParam::SocialLeaderboardServiceSortOrder = OperationParam("sort");
 	const OperationParam OperationParam::SocialLeaderboardServiceMaxResults = OperationParam("maxResults");
@@ -341,6 +342,13 @@ namespace BrainCloud
 	const OperationParam OperationParam::Body = OperationParam("body");
 	const OperationParam OperationParam::ServiceParams = OperationParam("serviceParams");
 
+	const OperationParam OperationParam::LeaderboardId = OperationParam("leaderboardId");
+	const OperationParam OperationParam::VersionId = OperationParam("versionId");
+	const OperationParam OperationParam::TournamentCode = OperationParam("tournamentCode");
+	const OperationParam OperationParam::InitialScore = OperationParam("initialScore");
+	const OperationParam OperationParam::Score = OperationParam("score");
+	const OperationParam OperationParam::RoundStartedEpoch = OperationParam("roundStartedEpoch");
+	const OperationParam OperationParam::Data = OperationParam("data");
 
 	OperationParam::OperationParam(const char * value)
 	{

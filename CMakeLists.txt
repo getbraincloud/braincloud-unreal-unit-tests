@@ -96,6 +96,7 @@ include/braincloud/BrainCloudScript.h
 include/braincloud/BrainCloudSocialLeaderboard.h
 include/braincloud/BrainCloudSteam.h
 include/braincloud/BrainCloudTime.h
+include/braincloud/BrainCloudTournament.h
 include/braincloud/BrainCloudTypes.h
 include/braincloud/BrainCloudWrapper.h
 include/braincloud/FriendPlatform.h
@@ -162,6 +163,7 @@ src/BrainCloudScript.cpp
 src/BrainCloudSocialLeaderboard.cpp
 src/BrainCloudSteam.cpp
 src/BrainCloudTime.cpp
+src/BrainCloudTournament.cpp
 src/BrainCloudWrapper.cpp
 src/FriendPlatform.cpp
 src/GUID.cpp

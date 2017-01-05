@@ -51,6 +51,7 @@ namespace BrainCloud {
         static const ServiceName File;
         static const ServiceName Group;
 		static const ServiceName Mail;
+		static const ServiceName Tournament;
 
 
         std::string getValue() const { return _value; }
