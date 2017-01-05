@@ -49,7 +49,7 @@ TEST_F(TestBCTournament, PostTournamentScore)
 
 	TestResult tr;
 	time_t t = time(0);
-	struct tm * time = localtime(&t);
+	struct tm * time = gmtime(&t);
 
 	m_bc->getTournamentService()->postTournamentScore(_leaderboardId, 200, "", time, &tr);
 	tr.run(m_bc);
