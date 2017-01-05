@@ -73,6 +73,18 @@ namespace BrainCloud
          * @param in_callback The method to be invoked when the server response is received
          */
         void getMultiSocialLeaderboard(const std::vector<std::string> & in_leaderboardIds, int in_leaderboardResultCount, bool in_replaceName, IServerCallback * in_callback = NULL);
+		
+
+		/**
+		* @deprecated Use method without in_includeLeaderboardSize param - removal after March 22 2016
+		*/
+		DEPRECATED void getGlobalLeaderboardPage(
+			const char * in_leaderboardId,
+			SortOrder in_sortOrder,
+			int in_startIndex,
+			int in_endIndex,
+			bool in_includeLeaderboardSize,
+			IServerCallback * in_callback = NULL);
 
         /**
          * Method returns a page of global leaderboard results.
@@ -89,10 +101,27 @@ namespace BrainCloud
          * @param in_sort Sort key Sort order of page.
          * @param in_startIndex The index at which to start the page.
          * @param in_endIndex The index at which to end the page.
-         * @param in_includeLeaderboardSize Whether to return the leaderboard size
          * @param in_callback The method to be invoked when the server response is received
          */
-        void getGlobalLeaderboardPage(const char * in_leaderboardId, SortOrder in_sortOrder, int in_startIndex, int in_endIndex, bool in_includeLeaderboardSize, IServerCallback * in_callback = NULL);
+        void getGlobalLeaderboardPage(
+			const char * in_leaderboardId,
+			SortOrder in_sortOrder, 
+			int in_startIndex,
+			int in_endIndex,
+			IServerCallback * in_callback = NULL);
+		
+
+		/**
+		* @deprecated Use method without in_includeLeaderboardSize param - removal after March 22 2016
+		*/
+		DEPRECATED void getGlobalLeaderboardPageByVersion(
+			const char * in_leaderboardId,
+			SortOrder in_sortOrder,
+			int in_startIndex,
+			int in_endIndex,
+			bool in_includeLeaderboardSize,
+			int in_versionId,
+			IServerCallback * in_callback = NULL);
 
         /**
          * Method returns a page of global leaderboard results.
@@ -106,11 +135,16 @@ namespace BrainCloud
          * @param in_sort Sort key Sort order of page.
          * @param in_startIndex The index at which to start the page.
          * @param in_endIndex The index at which to end the page.
-         * @param in_includeLeaderboardSize Whether to return the leaderboard size
          * @param in_versionId The historical version to retrieve.
          * @param in_callback The method to be invoked when the server response is received
          */
-        void getGlobalLeaderboardPageByVersion(const char * in_leaderboardId, SortOrder in_sortOrder, int in_startIndex, int in_endIndex, bool in_includeLeaderboardSize, int in_versionId, IServerCallback * in_callback = NULL);
+        void getGlobalLeaderboardPageByVersion(
+			const char * in_leaderboardId, 
+			SortOrder in_sortOrder, 
+			int in_startIndex, 
+			int in_endIndex, 
+			int in_versionId, 
+			IServerCallback * in_callback = NULL);
 
 		/**
 		* @deprecated Use method without in_includeLeaderboardSize param - removal after March 22 2016
@@ -209,6 +243,35 @@ namespace BrainCloud
 			SocialLeaderboardType in_leaderboardType, 
 			RotationType in_rotationType, struct tm* in_rotationReset, 
 			int in_retainedCount, 
+			IServerCallback * in_callback = NULL);
+
+		/**
+		* Post the players score to the given social leaderboard.
+		* Pass leaderboard config data to dynamically create if necessary.
+		* You can optionally send a user-defined json string of data
+		* with the posted score. This string could include information
+		* relevant to the posted score.
+		*
+		* Service Name - SocialLeaderboard
+		* Service Operation - PostScoreDynamic
+		*
+		* @param in_leaderboardId The leaderboard to post to
+		* @param in_score The score to post
+		* @param in_data Optional user-defined data to post with the score
+		* @param in_leaderboardType leaderboard type
+		* @param in_rotationReset Date to start rotation calculations
+		* @param in_retainedCount How many rotations to keep
+		* @param in_numDaysToRotate How many days between each rotation
+		* @param in_callback The method to be invoked when the server response is received
+		*/
+		void postScoreToDynamicLeaderboardDays(
+			const char * in_leaderboardId,
+			int64_t in_score,
+			const std::string& in_jsonData,
+			SocialLeaderboardType in_leaderboardType,
+			struct tm* in_rotationReset,
+			int32_t in_retainedCount,
+			int32_t in_numDaysToRotate,
 			IServerCallback * in_callback = NULL);
 
         /**

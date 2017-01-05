@@ -54,28 +54,28 @@ TEST_F(TestBCSocialLeaderboard, GetGlobalLeaderboardVersions)
 TEST_F(TestBCSocialLeaderboard, GetGlobalLeaderboardPageHigh)
 {
     TestResult tr;
-    m_bc->getSocialLeaderboardService()->getGlobalLeaderboardPage(LB_ID, HIGH_TO_LOW, 0, 10, true, &tr);
+    m_bc->getSocialLeaderboardService()->getGlobalLeaderboardPage(LB_ID, HIGH_TO_LOW, 0, 10, &tr);
     tr.run(m_bc);
 }
 
 TEST_F(TestBCSocialLeaderboard, GetGlobalLeaderboardPageLow)
 {
     TestResult tr;
-    m_bc->getSocialLeaderboardService()->getGlobalLeaderboardPage(LB_ID, LOW_TO_HIGH, 0, 10, true, &tr);
+    m_bc->getSocialLeaderboardService()->getGlobalLeaderboardPage(LB_ID, LOW_TO_HIGH, 0, 10, &tr);
     tr.run(m_bc);
 }
 
 TEST_F(TestBCSocialLeaderboard, GetGlobalLeaderboardViewHigh)
 {
     TestResult tr;
-    m_bc->getSocialLeaderboardService()->getGlobalLeaderboardView(LB_ID, HIGH_TO_LOW, 4, 5, true, &tr);
+    m_bc->getSocialLeaderboardService()->getGlobalLeaderboardView(LB_ID, HIGH_TO_LOW, 4, 5, &tr);
     tr.run(m_bc);
 }
 
 TEST_F(TestBCSocialLeaderboard, GetGlobalLeaderboardViewLow)
 {
     TestResult tr;
-    m_bc->getSocialLeaderboardService()->getGlobalLeaderboardView(LB_ID, LOW_TO_HIGH, 4, 5, true, &tr);
+    m_bc->getSocialLeaderboardService()->getGlobalLeaderboardView(LB_ID, LOW_TO_HIGH, 4, 5, &tr);
     tr.run(m_bc);
 }
 
@@ -91,7 +91,7 @@ TEST_F(TestBCSocialLeaderboard, GetGlobalPageByVersion)
 {
     TestResult tr;
 
-    m_bc->getSocialLeaderboardService()->getGlobalLeaderboardPageByVersion(LB_ID, HIGH_TO_LOW, 0, 10, true, 0, &tr);
+    m_bc->getSocialLeaderboardService()->getGlobalLeaderboardPageByVersion(LB_ID, HIGH_TO_LOW, 0, 10, 0, &tr);
     tr.run(m_bc);
 }
 
@@ -99,7 +99,7 @@ TEST_F(TestBCSocialLeaderboard, GetGlobalViewByVersion)
 {
     TestResult tr;
 
-    m_bc->getSocialLeaderboardService()->getGlobalLeaderboardViewByVersion(LB_ID, HIGH_TO_LOW, 0, 10, true, 0, &tr);
+    m_bc->getSocialLeaderboardService()->getGlobalLeaderboardViewByVersion(LB_ID, HIGH_TO_LOW, 0, 10, 0, &tr);
     tr.run(m_bc);
 }
 
@@ -117,6 +117,17 @@ TEST_F(TestBCSocialLeaderboard, PostScoreToDynamicNullRotationTime)
 
     m_bc->getSocialLeaderboardService()->postScoreToDynamicLeaderboard(DYNAMIC_LB_ID, 100, fw.write(jsonData), HIGH_VALUE, NEVER, NULL, 2, &tr);
     tr.run(m_bc);
+}
+
+TEST_F(TestBCSocialLeaderboard, PostScoreToDynamicDays)
+{
+	TestResult tr;
+	Json::FastWriter fw;
+	Json::Value jsonData;
+	jsonData["testKey"] = "TestValue";
+
+	m_bc->getSocialLeaderboardService()->postScoreToDynamicLeaderboardDays("TestDynamicDaysCpp", 100, fw.write(jsonData), HIGH_VALUE, NULL, 2, 3, &tr);
+	tr.run(m_bc);
 }
 
 TEST_F(TestBCSocialLeaderboard, GetGroupSocialLeaderboard)

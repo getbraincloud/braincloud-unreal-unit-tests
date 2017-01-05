@@ -57,6 +57,21 @@ namespace BrainCloud
 		m_client->getBrainCloudComms()->addToQueue(sc);
 	}
 
+	void BrainCloudSocialLeaderboard::getGlobalLeaderboardPage(const char * in_leaderboardId, SortOrder in_sortOrder, int in_startIndex,
+		int in_endIndex, IServerCallback * in_callback)
+	{
+		std::string sortOrder = sortOrderToString(in_sortOrder);
+
+		Json::Value message;
+		message[OperationParam::SocialLeaderboardServiceLeaderboardId.getValue()] = in_leaderboardId;
+		message[OperationParam::SocialLeaderboardServiceSortOrder.getValue()] = sortOrder;
+		message[OperationParam::SocialLeaderboardServiceStartIndex.getValue()] = in_startIndex;
+		message[OperationParam::SocialLeaderboardServiceEndIndex.getValue()] = in_endIndex;
+
+		ServerCall * sc = new ServerCall(ServiceName::SocialLeaderboard, ServiceOperation::GetGlobalLeaderboardPage, message, in_callback);
+		m_client->getBrainCloudComms()->addToQueue(sc);
+	}
+
 	void BrainCloudSocialLeaderboard::getGlobalLeaderboardPageByVersion(const char * in_leaderboardId, SortOrder in_sortOrder, int in_startIndex, int in_endIndex, bool in_includeLeaderboardSize, int in_versionId, IServerCallback * in_callback)
 	{
 		std::string sortOrder = sortOrderToString(in_sortOrder);
@@ -67,6 +82,21 @@ namespace BrainCloud
 		message[OperationParam::SocialLeaderboardServiceStartIndex.getValue()] = in_startIndex;
 		message[OperationParam::SocialLeaderboardServiceEndIndex.getValue()] = in_endIndex;
 		message[OperationParam::SocialLeaderboardServiceIncludeLeaderboardSize.getValue()] = in_includeLeaderboardSize;
+		message[OperationParam::SocialLeaderboardServiceVersionId.getValue()] = in_versionId;
+
+		ServerCall * sc = new ServerCall(ServiceName::SocialLeaderboard, ServiceOperation::GetGlobalLeaderboardPage, message, in_callback);
+		m_client->getBrainCloudComms()->addToQueue(sc);
+	}
+
+	void BrainCloudSocialLeaderboard::getGlobalLeaderboardPageByVersion(const char * in_leaderboardId, SortOrder in_sortOrder, int in_startIndex, int in_endIndex, int in_versionId, IServerCallback * in_callback)
+	{
+		std::string sortOrder = sortOrderToString(in_sortOrder);
+
+		Json::Value message;
+		message[OperationParam::SocialLeaderboardServiceLeaderboardId.getValue()] = in_leaderboardId;
+		message[OperationParam::SocialLeaderboardServiceSortOrder.getValue()] = sortOrder;
+		message[OperationParam::SocialLeaderboardServiceStartIndex.getValue()] = in_startIndex;
+		message[OperationParam::SocialLeaderboardServiceEndIndex.getValue()] = in_endIndex;
 		message[OperationParam::SocialLeaderboardServiceVersionId.getValue()] = in_versionId;
 
 		ServerCall * sc = new ServerCall(ServiceName::SocialLeaderboard, ServiceOperation::GetGlobalLeaderboardPage, message, in_callback);
@@ -155,6 +185,38 @@ namespace BrainCloud
 
 		message[OperationParam::SocialLeaderboardServiceLeaderboardType.getValue()] = leaderboardTypeToString(in_leaderboardType).c_str();
 		message[OperationParam::SocialLeaderboardServiceRotationType.getValue()] = leaderboardRotationTypeToString(in_rotationType).c_str();
+
+		if (in_rotationReset != NULL)
+		{
+			time_t timestamp = mktime(in_rotationReset);
+			int64_t time = (int64_t)timestamp * 1000;
+			message[OperationParam::SocialLeaderboardServiceRotationResetTime.getValue()] = (Json::UInt64)time;
+		}
+		message[OperationParam::SocialLeaderboardServiceRetainedCount.getValue()] = in_retainedCount;
+
+		ServerCall * sc = new ServerCall(ServiceName::SocialLeaderboard, ServiceOperation::PostScoreDynamic, message, in_callback);
+		m_client->getBrainCloudComms()->addToQueue(sc);
+	}
+
+
+	void BrainCloudSocialLeaderboard::postScoreToDynamicLeaderboardDays(
+		const char * in_leaderboardId,
+		int64_t in_score,
+		const std::string& in_jsonData,
+		SocialLeaderboardType in_leaderboardType,
+		struct tm* in_rotationReset,
+		int32_t in_retainedCount,
+		int32_t in_numDaysToRotate,
+		IServerCallback * in_callback)
+	{
+		Json::Value message;
+		message[OperationParam::SocialLeaderboardServiceLeaderboardId.getValue()] = in_leaderboardId;
+		message[OperationParam::SocialLeaderboardServiceScore.getValue()] = (Json::Int64) in_score;
+		message[OperationParam::SocialLeaderboardServiceData.getValue()] = JsonUtil::jsonStringToValue(in_jsonData);
+
+		message[OperationParam::SocialLeaderboardServiceLeaderboardType.getValue()] = leaderboardTypeToString(in_leaderboardType).c_str();
+		message[OperationParam::SocialLeaderboardServiceRotationType.getValue()] = "DAYS";
+		message[OperationParam::NumDaysToRotate.getValue()] = in_numDaysToRotate;
 
 		if (in_rotationReset != NULL)
 		{
