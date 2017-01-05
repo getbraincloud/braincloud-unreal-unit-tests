@@ -8,7 +8,7 @@
 TEST_F(TestBCComms, BadUrl)
 {
     TestResult tr;
-    m_bc->initialize("https://internal-failunittest.braincloudservers.com", "", "123", "1.0.0");
+    m_bc->initialize("https://internal-failunittest.braincloudservers.com", "123", "123", "1.0.0");
     // pj - don't use test user as auth will fail due to bogus initialize above
     m_bc->getAuthenticationService()->authenticateUniversal("abc", "123", true, &tr);
     tr.runExpectFail(m_bc, HTTP_CLIENT_NETWORK_ERROR, CLIENT_NETWORK_ERROR_TIMEOUT);
@@ -19,7 +19,7 @@ TEST_F(TestBCComms, BadUrl)
 TEST_F(TestBCComms, BadEndPoint)
 {
     TestResult tr;
-    m_bc->initialize("https://internal.braincloudservers.com/failunittest", "", "123", "1.0.0");
+    m_bc->initialize("https://internal.braincloudservers.com/failunittest", "123", "123", "1.0.0");
     // pj - don't use test user as auth will fail due to bogus initialize above
     m_bc->getAuthenticationService()->authenticateUniversal("abc", "123", true, &tr);
     tr.runExpectFail(m_bc, HTTP_CLIENT_NETWORK_ERROR, CLIENT_NETWORK_ERROR_TIMEOUT);

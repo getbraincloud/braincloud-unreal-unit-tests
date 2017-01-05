@@ -33,6 +33,8 @@
 #include "braincloud/internal/BrainCloudComms.h"
 #endif
 
+#include <iostream>
+
 #include "braincloud/internal/URLRequestMethod.h"
 #include "braincloud/internal/JsonUtil.h"
 
@@ -100,6 +102,22 @@ namespace BrainCloud {
 
 	void BrainCloudClient::initialize(const char * in_serverURL, const char * in_secretKey, const char * in_gameId, const char * in_gameVersion)
 	{
+		std::string error = "";
+		if (in_serverURL == NULL || strlen(in_serverURL) <= 0)
+			error = "serverURL was null or empty";
+		else if (in_secretKey == NULL || strlen(in_secretKey) <= 0)
+			error = "secretKey was null or empty";
+		else if (in_gameId == NULL || strlen(in_gameId) <= 0)
+			error = "gameId was null or empty";
+		else if (in_gameVersion == NULL || strlen(in_gameVersion) <= 0)
+			error = "gameVersion was null or empty";
+
+		if (error.length() > 0)
+		{
+			std::cout << error;
+			return;
+		}
+
 		if (_brainCloudComms)
 		{
 			// automatically upgrade any older clients using "dispatcher" url
