@@ -2,7 +2,7 @@
 #include "braincloud/BrainCloudClient.h"
 #include "TestResult.h"
 #include "TestBCTournament.h"
-#include "brainCloud/reason_codes.h"
+#include "braincloud/reason_codes.h"
 
 using namespace BrainCloud;
 
