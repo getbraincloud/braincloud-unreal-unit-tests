@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		249F589D1CE3B6E2009D03E4 /* BrainCloudGroup.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 249F589C1CE3B6E2009D03E4 /* BrainCloudGroup.cpp */; };
+		24CB44D61E1EE13E005B1B56 /* BrainCloudMail.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 24CB44D41E1EE13E005B1B56 /* BrainCloudMail.cpp */; };
+		24CB44D71E1EE13E005B1B56 /* BrainCloudTournament.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 24CB44D51E1EE13E005B1B56 /* BrainCloudTournament.cpp */; };
 		DF22302F1CE27DAA003A7D8D /* SSKeychain.m in Sources */ = {isa = PBXBuildFile; fileRef = DF22302B1CE27DAA003A7D8D /* SSKeychain.m */; };
 		DF2230301CE27DAA003A7D8D /* SSKeychainQuery.m in Sources */ = {isa = PBXBuildFile; fileRef = DF22302E1CE27DAA003A7D8D /* SSKeychainQuery.m */; };
 		DF2230311CE27DED003A7D8D /* SSKeychain.m in Sources */ = {isa = PBXBuildFile; fileRef = DF22302B1CE27DAA003A7D8D /* SSKeychain.m */; };
@@ -273,6 +275,8 @@
 
 /* Begin PBXFileReference section */
 		249F589C1CE3B6E2009D03E4 /* BrainCloudGroup.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = BrainCloudGroup.cpp; sourceTree = "<group>"; };
+		24CB44D41E1EE13E005B1B56 /* BrainCloudMail.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = BrainCloudMail.cpp; sourceTree = "<group>"; };
+		24CB44D51E1EE13E005B1B56 /* BrainCloudTournament.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = BrainCloudTournament.cpp; sourceTree = "<group>"; };
 		D84A700E1C73704D00291D06 /* libBrainCloud-iOS.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libBrainCloud-iOS.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		D84A701B1C73706900291D06 /* libBrainCloud-tvOS.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libBrainCloud-tvOS.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		D84A70281C73707C00291D06 /* libBrainCloud-OSX.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libBrainCloud-OSX.a"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -410,6 +414,8 @@
 		DF932C551CD9231B0085137C /* src */ = {
 			isa = PBXGroup;
 			children = (
+				24CB44D41E1EE13E005B1B56 /* BrainCloudMail.cpp */,
+				24CB44D51E1EE13E005B1B56 /* BrainCloudTournament.cpp */,
 				DF932C561CD9231B0085137C /* AuthenticationType.cpp */,
 				DF932C571CD9231B0085137C /* BrainCloudAsyncMatch.cpp */,
 				DF932C581CD9231B0085137C /* BrainCloudAuthentication.cpp */,
@@ -655,6 +661,7 @@
 				DF932CCF1CD9231B0085137C /* URLResponse.cpp in Sources */,
 				DF932CA11CD9231B0085137C /* BrainCloudFriend.cpp in Sources */,
 				DF932CAA1CD9231B0085137C /* BrainCloudPlayerState.cpp in Sources */,
+				24CB44D61E1EE13E005B1B56 /* BrainCloudMail.cpp in Sources */,
 				DF932CBA1CD9231B0085137C /* JsonUtil.cpp in Sources */,
 				DF932CB31CD9231B0085137C /* BrainCloudSocialLeaderboard.cpp in Sources */,
 				DF932CA21CD9231B0085137C /* BrainCloudGamification.cpp in Sources */,
@@ -677,6 +684,7 @@
 				DF83CB761D01F56B00F1A565 /* nsFileUploader.mm in Sources */,
 				DF932CC61CD9231B0085137C /* StringUtil.cpp in Sources */,
 				DF932CAC1CD9231B0085137C /* BrainCloudPlayerStatisticsEvent.cpp in Sources */,
+				24CB44D71E1EE13E005B1B56 /* BrainCloudTournament.cpp in Sources */,
 				DF932CA81CD9231B0085137C /* BrainCloudOneWayMatch.cpp in Sources */,
 				DF22302F1CE27DAA003A7D8D /* SSKeychain.m in Sources */,
 				DF932CCB1CD9231B0085137C /* URLLoaderClient.cpp in Sources */,
@@ -950,7 +958,7 @@
 					../../include,
 					../../lib/mac/sskeychain,
 				);
-				MACOSX_DEPLOYMENT_TARGET = 10.11;
+				MACOSX_DEPLOYMENT_TARGET = 10.12;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = macosx;
@@ -995,7 +1003,7 @@
 					../../include,
 					../../lib/mac/sskeychain,
 				);
-				MACOSX_DEPLOYMENT_TARGET = 10.11;
+				MACOSX_DEPLOYMENT_TARGET = 10.12;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = macosx;
 				VERSIONING_SYSTEM = "apple-generic";
