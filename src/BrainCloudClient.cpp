@@ -114,7 +114,7 @@ namespace BrainCloud {
 
 		if (error.length() > 0)
 		{
-			std::cout << error;
+			std::cout << "ERROR | Failed to initialize brainCloud - " << error;
 			return;
 		}
 
