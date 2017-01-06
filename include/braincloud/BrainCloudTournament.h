@@ -73,7 +73,7 @@ namespace BrainCloud
 		 * @param in_leaderboardId The leaderboard for the tournament
 		 * @param in_score The score to post
 		 * @param in_jsonData Optional data attached to the leaderboard entry
-		 * @param in_roundStartedTime Time the user started the match resulting in the score being posted.
+		 * @param in_roundStartedTime Time the user started the match resulting in the score being posted in UTC.
 		 * @param in_callback The method to be invoked when the server response is received
 		 */
 		void postTournamentScore(const char* in_leaderboardId, int32_t in_score, const std::string& in_jsonData, const struct tm* in_roundStartedTime, IServerCallback * in_callback = NULL);
