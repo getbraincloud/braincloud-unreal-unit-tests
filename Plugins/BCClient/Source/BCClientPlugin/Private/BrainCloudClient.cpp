@@ -62,11 +62,28 @@ BrainCloudClient * BrainCloudClient::getInstance()
 	return _instance;
 }
 
-void BrainCloudClient::initialize(const FString& serverUrl,
+void BrainCloudClient::initialize(
+	const FString& serverUrl,
 	const FString& secretKey,
 	const FString& gameId,
 	const FString& gameVersion)
 {
+	FString error = "";
+	if (serverUrl.IsEmpty())
+		error = "serverURL was null or empty";
+	else if (secretKey.IsEmpty())
+		error = "secretKey was null or empty";
+	else if (gameId.IsEmpty())
+		error = "gameId was null or empty";
+	else if (gameVersion.IsEmpty())
+		error = "gameVersion was null or empty";
+
+	if (!error.IsEmpty())
+	{
+		UE_LOG(LogTemp, Error, TEXT("ERROR | Failed to initialize brainCloud - %s"), *error);
+		return;
+	}
+
 	if (!_brainCloudComms) _brainCloudComms = new BrainCloudComms(this);
 
 	_brainCloudComms->Initialize(serverUrl, secretKey, gameId);
