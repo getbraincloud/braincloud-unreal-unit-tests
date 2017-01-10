@@ -14,6 +14,11 @@
 #include "braincloud/internal/JsonUtil.h"
 #include <time.h>
 
+#ifdef WIN32
+#define timegm _mkgmtime
+#endif
+
+
 namespace BrainCloud
 {
 	BrainCloudScript::BrainCloudScript(BrainCloudClient* in_client) : m_client(in_client) { }
@@ -43,7 +48,7 @@ namespace BrainCloud
 		}
 
 		struct tm timeInfo = *in_startDateInUTC;
-		message[OperationParam::ScriptServiceStartDateUTC.getValue()] = Json::Int64(mktime(&timeInfo) * 1000);
+		message[OperationParam::ScriptServiceStartDateUTC.getValue()] = Json::Int64(timegm(&timeInfo) * 1000);
 
 		ServerCall * sc = new ServerCall(ServiceName::Script, ServiceOperation::ScheduleCloudScript, message, in_callback);
 		m_client->sendRequest(sc);
