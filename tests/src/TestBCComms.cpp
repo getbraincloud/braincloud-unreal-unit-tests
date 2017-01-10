@@ -233,7 +233,7 @@ TEST_F(TestBCComms, 202IsErrorFlag)
 TEST_F(TestBCComms, MessageCache)
 {
     TestResult tr;
-    m_bc->initialize("https://internal.braincloudservers.com/failunittest", "", "123", "1.0.0");
+    m_bc->initialize("https://internal.braincloudservers.com/failunittest", "abc", "123", "1.0.0");
     m_bc->registerGlobalErrorCallback(&tr);
     m_bc->registerNetworkErrorCallback(&tr);
     m_bc->enableNetworkErrorMessageCaching(true);
