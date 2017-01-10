@@ -207,6 +207,7 @@ public:
 	static const OperationParam LeaderboardServiceVersionId;
 	static const OperationParam LeaderboardServiceLeaderboardResultCount;
 	static const OperationParam ProfileIds;
+	static const OperationParam NumDaysToRotate;
 
 	// Product service
 	static const OperationParam ProductServiceVCId;

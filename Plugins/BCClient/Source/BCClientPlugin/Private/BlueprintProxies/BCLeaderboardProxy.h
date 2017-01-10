@@ -63,10 +63,9 @@ public:
     * Param - sort Sort key Sort order of page.
     * Param - startIndex The index at which to start the page.
     * Param - endIndex The index at which to end the page.
-    * Param - includeLeaderboardSize Whether to return the leaderboard size
     */
     UFUNCTION(BlueprintCallable, meta = (BlueprintInternalUseOnly = "true"), Category = "BrainCloud|Leaderboard")
-        static UBCLeaderboardProxy* GetGlobalLeaderboardPage(FString leaderboardId, ESortOrder sortOrder, int32 startIndex, int32 endIndex, bool includeLeaderboardSize);
+        static UBCLeaderboardProxy* GetGlobalLeaderboardPage(FString leaderboardId, ESortOrder sortOrder, int32 startIndex, int32 endIndex);
 
     /**
     * Method returns a page of global leaderboard results.
@@ -80,11 +79,10 @@ public:
     * Param - sort Sort key Sort order of page.
     * Param - startIndex The index at which to start the page.
     * Param - endIndex The index at which to end the page.
-    * Param - includeLeaderboardSize Whether to return the leaderboard size
     * Param - versionId The historical version to retrieve.
     */
     UFUNCTION(BlueprintCallable, meta = (BlueprintInternalUseOnly = "true"), Category = "BrainCloud|Leaderboard")
-        static UBCLeaderboardProxy* GetGlobalLeaderboardPageByVersion(FString leaderboardId, ESortOrder sortOrder, int32 startIndex, int32 endIndex, bool includeLeaderboardSize, int32 versionId);
+        static UBCLeaderboardProxy* GetGlobalLeaderboardPageByVersion(FString leaderboardId, ESortOrder sortOrder, int32 startIndex, int32 endIndex, int32 versionId);
 
     /**
     * Method returns a view of global leaderboard results that centers on the current player.
@@ -176,6 +174,29 @@ public:
     UFUNCTION(BlueprintCallable, meta = (BlueprintInternalUseOnly = "true"), Category = "BrainCloud|Leaderboard")
         static UBCLeaderboardProxy* PostScoreToDynamicLeaderboard(FString leaderboardId, int32 score, FString jsonData,
             ESocialLeaderboardType leaderboardType, ERotationType rotationType, FDateTime rotationStart, int32 retainedCount);
+
+	/**
+	* Post the players score to the given social leaderboard.
+	* Pass leaderboard config data to dynamically create if necessary.
+	* You can optionally send a user-defined json string of data
+	* with the posted score. This string could include information
+	* relevant to the posted score.
+	*
+	* Service Name - SocialLeaderboard
+	* Service Operation - PostScoreDynamic
+	*
+	* Param - leaderboardId The leaderboard to post to
+	* Param - score The score to post
+	* Param - data Optional user-defined data to post with the score
+	* Param - leaderboardType leaderboard type
+	* Param - rotationType Type of rotation
+	* Param - rotationStart Date to start rotation calculations (Date is converted to "dd-mm-yyyy hh:mm" format)
+	* Param - retainedCount How many rotations to keep
+	* Param - numDaysToRotate How many days between each rotation
+	*/
+	UFUNCTION(BlueprintCallable, meta = (BlueprintInternalUseOnly = "true"), Category = "BrainCloud|Leaderboard")
+		static UBCLeaderboardProxy* PostScoreToDynamicLeaderboardDays(FString leaderboardId, int32 score, FString jsonData,
+			ESocialLeaderboardType leaderboardType, FDateTime rotationStart, int32 retainedCount, int32 numDaysToRotate);
 
     /**
     * Reset the player's score for the given social leaderboard id.

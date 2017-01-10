@@ -72,6 +72,18 @@ public:
 	void getMultiSocialLeaderboard(const TArray<FString>& leaderboardIds, int32 leaderboardResultCount, bool replaceName, IServerCallback * callback = nullptr);
 
 	/**
+	* @deprecated Use method without includeLeaderboardSize parameter - removal after March 22 2016
+	*/
+	DEPRECATED("3.2.0", "Use method without includeLeaderboardSize parameter - removal after March 22 2016")
+	void getGlobalLeaderboardPage(const FString& leaderboardId, ESortOrder sortOrder, int32 startIndex, int32 endIndex, bool includeLeaderboardSize, IServerCallback * callback = nullptr);
+
+	/**
+	* @deprecated Use method without includeLeaderboardSize parameter - removal after March 22 2016
+	*/
+	DEPRECATED("3.2.0", "Use method without includeLeaderboardSize parameter - removal after March 22 2016")
+	void getGlobalLeaderboardPageByVersion(const FString& leaderboardId, ESortOrder sortOrder, int32 startIndex, int32 endIndex, bool includeLeaderboardSize, int32 versionId, IServerCallback * callback = nullptr);
+
+	/**
 	* Method returns a page of global leaderboard results.
 	*
 	* Leaderboards entries contain the player's score and optionally, some user-defined
@@ -86,10 +98,9 @@ public:
 	* @param sort Sort key Sort order of page.
 	* @param startIndex The index at which to start the page.
 	* @param endIndex The index at which to end the page.
-	* @param includeLeaderboardSize Whether to return the leaderboard size
 	* @param callback The method to be invoked when the server response is received
 	*/
-	void getGlobalLeaderboardPage(const FString& leaderboardId, ESortOrder sortOrder, int32 startIndex, int32 endIndex, bool includeLeaderboardSize, IServerCallback * callback = nullptr);
+	void getGlobalLeaderboardPage(const FString& leaderboardId, ESortOrder sortOrder, int32 startIndex, int32 endIndex, IServerCallback * callback = nullptr);
 
 	/**
 	* Method returns a page of global leaderboard results.
@@ -103,11 +114,10 @@ public:
 	* @param sort Sort key Sort order of page.
 	* @param startIndex The index at which to start the page.
 	* @param endIndex The index at which to end the page.
-	* @param includeLeaderboardSize Whether to return the leaderboard size
 	* @param versionId The historical version to retrieve.
 	* @param callback The method to be invoked when the server response is received
 	*/
-	void getGlobalLeaderboardPageByVersion(const FString& leaderboardId, ESortOrder sortOrder, int32 startIndex, int32 endIndex, bool includeLeaderboardSize, int32 versionId, IServerCallback * callback = nullptr);
+	void getGlobalLeaderboardPageByVersion(const FString& leaderboardId, ESortOrder sortOrder, int32 startIndex, int32 endIndex, int32 versionId, IServerCallback * callback = nullptr);
 
 
 	/**
@@ -217,6 +227,28 @@ public:
 	 */
 	void postScoreToDynamicLeaderboard(const FString& leaderboardId, int32 score, const FString& jsonData,
 		ESocialLeaderboardType leaderboardType, ERotationType rotationType, const FDateTime& rotationStart, int32 retainedCount, IServerCallback * callback = nullptr);
+
+	/**
+	* Post the players score to the given social leaderboard.
+	* Pass leaderboard config data to dynamically create if necessary.
+	* You can optionally send a user-defined json string of data
+	* with the posted score. This string could include information
+	* relevant to the posted score.
+	*
+	* Service Name - SocialLeaderboard
+	* Service Operation - PostScoreDynamic
+	*
+	* @param leaderboardId The leaderboard to post to
+	* @param score The score to post
+	* @param data Optional user-defined data to post with the score
+	* @param leaderboardType leaderboard type
+	* @param rotationStart Date to start rotation calculations (Date is converted to "dd-mm-yyyy" format)
+	* @param retainedCount How many rotations to keep
+	* @param numDaysToRotate How many days between each rotation
+	* @param callback The method to be invoked when the server response is received
+	*/
+	void postScoreToDynamicLeaderboardDays(const FString& leaderboardId, int32 score, const FString& jsonData,
+		ESocialLeaderboardType leaderboardType, const FDateTime& rotationStart, int32 retainedCount, int32 numDaysToRotate, IServerCallback * callback = nullptr);
 
 	/**
 	 * Reset the player's score for the given social leaderboard id.

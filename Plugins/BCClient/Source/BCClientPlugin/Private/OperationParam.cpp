@@ -207,6 +207,7 @@ OperationParam::OperationParam(const FString& operation)
 	const OperationParam OperationParam::LeaderboardServiceVersionId = OperationParam(TEXT("versionId"));
 	const OperationParam OperationParam::LeaderboardServiceLeaderboardResultCount = OperationParam(TEXT("leaderboardResultCount"));
 	const OperationParam OperationParam::ProfileIds = OperationParam("profileIds");
+	const OperationParam OperationParam::NumDaysToRotate = OperationParam(TEXT("numDaysToRotate"));
 
 	// Product service
 	const OperationParam OperationParam::ProductServiceVCId = OperationParam(TEXT("vc_id"));
