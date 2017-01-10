@@ -14,10 +14,10 @@
 #include "braincloud/internal/JsonUtil.h"
 #include <time.h>
 
-#ifdef WIN32
+//for windows
+#if defined(WIN32) || defined(WINAPI_FAMILY) 
 #define timegm _mkgmtime
 #endif
-
 
 namespace BrainCloud
 {

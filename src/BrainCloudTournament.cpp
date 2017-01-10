@@ -14,7 +14,7 @@
 #include <time.h>
 
 //for windows
-#ifdef WIN32
+#if defined(WIN32) || defined(WINAPI_FAMILY) 
 #define timegm _mkgmtime
 #endif
 
