@@ -347,6 +347,14 @@ public:
 	static const OperationParam Body;
 	static const OperationParam ServiceParams;
 
+	static const OperationParam LeaderboardId;
+	static const OperationParam VersionId;
+	static const OperationParam TournamentCode;
+	static const OperationParam InitialScore;
+	static const OperationParam Score;
+	static const OperationParam RoundStartedEpoch;
+	static const OperationParam Data;
+
 	FString getValue() const { return _value; }
 
 	bool operator== (const OperationParam& s) const;

@@ -30,6 +30,7 @@
 #include "BrainCloudFile.h"
 #include "BrainCloudGroup.h"
 #include "BrainCloudMail.h"
+#include "BrainCloudTournament.h"
 
 class BrainCloudComms;
 class ServerCall;
@@ -222,6 +223,7 @@ public:
 	BrainCloudFile * getFileService();
 	BrainCloudGroup * getGroupService();
 	BrainCloudMail * getMailService();
+	BrainCloudTournament * getTournamentService();
 
 	const FString & getGameId() { return _gameId; };
 	const FString & getReleasePlatform() { return _releasePlatform; };
@@ -454,6 +456,7 @@ protected:
 	BrainCloudFile * _fileService = nullptr;
 	BrainCloudGroup * _groupService = nullptr;
 	BrainCloudMail * _mailService = nullptr;
+	BrainCloudTournament * _tournamentService = nullptr;
 
 	static FString s_brainCloudClientVersion;
 

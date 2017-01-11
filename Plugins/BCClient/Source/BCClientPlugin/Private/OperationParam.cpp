@@ -347,6 +347,14 @@ OperationParam::OperationParam(const FString& operation)
 	const OperationParam OperationParam::Body = OperationParam(TEXT("body"));
 	const OperationParam OperationParam::ServiceParams = OperationParam(TEXT("serviceParams"));
 
+	const OperationParam OperationParam::LeaderboardId = OperationParam(TEXT("leaderboardId"));
+	const OperationParam OperationParam::VersionId = OperationParam(TEXT("versionId"));
+	const OperationParam OperationParam::TournamentCode = OperationParam(TEXT("tournamentCode"));
+	const OperationParam OperationParam::InitialScore = OperationParam(TEXT("initialScore"));
+	const OperationParam OperationParam::Score = OperationParam(TEXT("score"));
+	const OperationParam OperationParam::RoundStartedEpoch = OperationParam(TEXT("roundStartedEpoch"));
+	const OperationParam OperationParam::Data = OperationParam(TEXT("data"));
+
 bool OperationParam::operator== (const OperationParam& s) const
 {
     return _value == s.getValue();

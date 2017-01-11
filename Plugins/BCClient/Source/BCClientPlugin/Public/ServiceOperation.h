@@ -288,6 +288,15 @@ public:
 	static const ServiceOperation SendBasicEmail;
 	static const ServiceOperation SendAdvancedEmail;
 
+	//tournament
+	static const ServiceOperation GetTournamentStatus;
+	static const ServiceOperation JoinTournament;
+	static const ServiceOperation LeaveTournament;
+	static const ServiceOperation PostTournamentScore;
+	static const ServiceOperation ViewCurrentReward;
+	static const ServiceOperation ViewReward;
+	static const ServiceOperation ClaimTournamentReward;
+
 	FString getValue() const { return _value; }
 
 	bool operator== (const ServiceOperation& s) const;

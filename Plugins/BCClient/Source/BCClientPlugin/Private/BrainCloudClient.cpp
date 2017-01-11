@@ -525,6 +525,15 @@ BrainCloudMail * BrainCloudClient::getMailService()
 	return _mailService;
 }
 
+BrainCloudTournament * BrainCloudClient::getTournamentService()
+{
+	if (_tournamentService == nullptr)
+	{
+		_tournamentService = new BrainCloudTournament(this);
+	}
+	return _tournamentService;
+}
+
 ////////////////////////////////////////////////////
 // Private Methods
 ////////////////////////////////////////////////////
