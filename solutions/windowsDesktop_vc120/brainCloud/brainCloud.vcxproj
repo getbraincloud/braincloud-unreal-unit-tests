@@ -228,6 +228,7 @@
     <ClInclude Include="..\..\..\include\braincloud\internal\md5x.h" />
     <ClInclude Include="..\..\..\include\braincloud\internal\SaveDataHelper.h" />
     <ClInclude Include="..\..\..\include\braincloud\internal\StringUtil.h" />
+    <ClInclude Include="..\..\..\include\braincloud\internal\timegm.h" />
     <ClInclude Include="..\..\..\include\braincloud\internal\TimeUtil.h" />
     <ClInclude Include="..\..\..\include\braincloud\internal\URLLoader.h" />
     <ClInclude Include="..\..\..\include\braincloud\internal\URLLoaderClient.h" />

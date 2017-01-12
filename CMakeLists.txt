@@ -130,6 +130,7 @@ include/braincloud/internal/URLRequestHeader.h
 include/braincloud/internal/URLRequestMethod.h
 include/braincloud/internal/URLResponse.h
 include/braincloud/internal/md5x.h
+include/braincloud/internal/timegm.h
 
 # source files
 src/AuthenticationType.cpp

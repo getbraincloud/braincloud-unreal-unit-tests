@@ -12,11 +12,7 @@
 #include "braincloud/internal/StringUtil.h"
 #include "braincloud/internal/JsonUtil.h"
 #include <time.h>
-
-//for windows
-#if defined(WIN32) || defined(WINAPI_FAMILY) 
-#define timegm _mkgmtime
-#endif
+#include "braincloud/internal/timegm.h"
 
 namespace BrainCloud
 {
@@ -73,7 +69,7 @@ namespace BrainCloud
 		message[OperationParam::Score.getValue()] = in_score;
 
 		struct tm timeInfo = *in_roundStartedTime;
-		message[OperationParam::RoundStartedEpoch.getValue()] = Json::Int64(timegm(&timeInfo) * 1000);
+		message[OperationParam::RoundStartedEpoch.getValue()] = Json::Int64(internal_timegm(&timeInfo) * 1000);
 
 		if (StringUtil::IsOptionalParameterValid(in_jsonData))
 			message[OperationParam::Data.getValue()] = JsonUtil::jsonStringToValue(in_jsonData);
