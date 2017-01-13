@@ -114,6 +114,7 @@ namespace BrainCloud
 	const OperationParam OperationParam::EventServiceUpdateEventDataFromId = OperationParam("fromId");
 	const OperationParam OperationParam::EventServiceUpdateEventDataEventId = OperationParam("eventId");
 	const OperationParam OperationParam::EventServiceUpdateEventDataData = OperationParam("eventData");
+	const OperationParam OperationParam::EvId = OperationParam("evId");
 
 	// Event Service - Delete Incoming Params
 	const OperationParam OperationParam::EventServiceDeleteIncomingEventId = OperationParam("eventId");
