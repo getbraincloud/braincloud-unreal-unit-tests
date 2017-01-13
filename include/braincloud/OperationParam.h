@@ -109,6 +109,7 @@ namespace BrainCloud {
 		static const OperationParam GlobalEntityServiceOrderBy;
 		static const OperationParam GlobalEntityServiceContext;
 		static const OperationParam GlobalEntityServicePageOffset;
+		static const OperationParam OwnerId;
 
 		// Event Service - Send Params
 		static const OperationParam EventServiceSendToId;

@@ -60,6 +60,8 @@ namespace BrainCloud
 	const ServiceOperation ServiceOperation::UpdateSummary = ServiceOperation("UPDATE_SUMMARY");
 	const ServiceOperation ServiceOperation::UpdateSetMinimum = ServiceOperation("UPDATE_SET_MINIMUM");
 	const ServiceOperation ServiceOperation::UpdateIncrementToMaximum = ServiceOperation("UPDATE_INCREMENT_TO_MAXIMUM");
+	const ServiceOperation ServiceOperation::UpdateEntityOwnerAndAcl = ServiceOperation("UPDATE_ENTITY_OWNER_AND_ACL");
+	const ServiceOperation ServiceOperation::MakeSystemEntity = ServiceOperation("MAKE_SYSTEM_ENTITY");
 
 	const ServiceOperation ServiceOperation::GetFriendProfileInfoForExternalId = ServiceOperation("GET_FRIEND_PROFILE_INFO_FOR_EXTERNAL_ID");
 	const ServiceOperation ServiceOperation::GetExternalIdForProfileId = ServiceOperation("GET_EXTERNAL_ID_FOR_PROFILE_ID");
@@ -281,13 +283,13 @@ namespace BrainCloud
 	const ServiceOperation ServiceOperation::UpdateGroupName = ServiceOperation("UPDATE_GROUP_NAME");
 
 	//tournament
-	const ServiceOperation ServiceOperation::GetTournamentStatus =  ServiceOperation("GET_TOURNAMENT_STATUS");
-	const ServiceOperation ServiceOperation::JoinTournament =  ServiceOperation("JOIN_TOURNAMENT");
-	const ServiceOperation ServiceOperation::LeaveTournament =  ServiceOperation("LEAVE_TOURNAMENT");
-	const ServiceOperation ServiceOperation::PostTournamentScore =  ServiceOperation("POST_TOURNAMENT_SCORE");
-	const ServiceOperation ServiceOperation::ViewCurrentReward =  ServiceOperation("VIEW_CURRENT_REWARD");
-	const ServiceOperation ServiceOperation::ViewReward =  ServiceOperation("VIEW_REWARD");
-	const ServiceOperation ServiceOperation::ClaimTournamentReward =  ServiceOperation("CLAIM_TOURNAMENT_REWARD");
+	const ServiceOperation ServiceOperation::GetTournamentStatus = ServiceOperation("GET_TOURNAMENT_STATUS");
+	const ServiceOperation ServiceOperation::JoinTournament = ServiceOperation("JOIN_TOURNAMENT");
+	const ServiceOperation ServiceOperation::LeaveTournament = ServiceOperation("LEAVE_TOURNAMENT");
+	const ServiceOperation ServiceOperation::PostTournamentScore = ServiceOperation("POST_TOURNAMENT_SCORE");
+	const ServiceOperation ServiceOperation::ViewCurrentReward = ServiceOperation("VIEW_CURRENT_REWARD");
+	const ServiceOperation ServiceOperation::ViewReward = ServiceOperation("VIEW_REWARD");
+	const ServiceOperation ServiceOperation::ClaimTournamentReward = ServiceOperation("CLAIM_TOURNAMENT_REWARD");
 
 	//mail
 	const ServiceOperation ServiceOperation::SendBasicEmail = ServiceOperation("SEND_BASIC_EMAIL");

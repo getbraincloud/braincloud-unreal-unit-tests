@@ -172,4 +172,27 @@ namespace BrainCloud
 		ServerCall * sc = new ServerCall(ServiceName::GlobalEntity, ServiceOperation::IncrementGlobalEntityData, message, in_callback);
 		m_client->sendRequest(sc);
 	}
+
+	void BrainCloudGlobalEntity::updateEntityOwnerAndAcl(const char * in_entityId, int64_t in_version, const char * in_ownerId, const std::string & in_jsonEntityAcl, IServerCallback * in_callback)
+	{
+		Json::Value message;
+		message[OperationParam::GlobalEntityServiceEntityId.getValue()] = in_entityId;
+		message[OperationParam::GlobalEntityServiceVersion.getValue()] = (Json::Int64) in_version;
+		message[OperationParam::OwnerId.getValue()] = in_ownerId;
+		message[OperationParam::GlobalEntityServiceAcl.getValue()] = JsonUtil::jsonStringToValue(in_jsonEntityAcl);
+
+		ServerCall * sc = new ServerCall(ServiceName::GlobalEntity, ServiceOperation::UpdateEntityOwnerAndAcl, message, in_callback);
+		m_client->sendRequest(sc);
+	}
+
+	void BrainCloudGlobalEntity::makeSystemEntity(const char * in_entityId, int64_t in_version, const std::string & in_jsonEntityAcl, IServerCallback * in_callback)
+	{
+		Json::Value message;
+		message[OperationParam::GlobalEntityServiceEntityId.getValue()] = in_entityId;
+		message[OperationParam::GlobalEntityServiceVersion.getValue()] = (Json::Int64) in_version;
+		message[OperationParam::GlobalEntityServiceAcl.getValue()] = JsonUtil::jsonStringToValue(in_jsonEntityAcl);
+
+		ServerCall * sc = new ServerCall(ServiceName::GlobalEntity, ServiceOperation::MakeSystemEntity, message, in_callback);
+		m_client->sendRequest(sc);
+	}
 }

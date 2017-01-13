@@ -101,6 +101,7 @@ namespace BrainCloud
 	const OperationParam OperationParam::GlobalEntityServiceOrderBy = OperationParam("orderBy");
 	const OperationParam OperationParam::GlobalEntityServiceContext = OperationParam("context");
 	const OperationParam OperationParam::GlobalEntityServicePageOffset = OperationParam("pageOffset");
+	const OperationParam OperationParam::OwnerId = OperationParam("ownerId");
 
 	// Event Service - Send Params
 	const OperationParam OperationParam::EventServiceSendToId = OperationParam("toId");
