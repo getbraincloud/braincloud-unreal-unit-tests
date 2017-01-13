@@ -220,7 +220,7 @@ namespace BrainCloud
             }
         }
 
-		while (!_messageQueue.empty() && !_tearDownThread && _messageQueue.size() < MAX_BUNDLE_SIZE)
+		while (!_messageQueue.empty() && !_tearDownThread && _messageQueue.size() < _maxBundleSize)
         {
             std::shared_ptr<ServerCall> message = _messageQueue.front();
 			_messageQueue.pop_front();

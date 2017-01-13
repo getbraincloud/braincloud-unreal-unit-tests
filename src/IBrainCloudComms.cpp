@@ -45,6 +45,7 @@ namespace BrainCloud {
 		, _uploadOverallTimeoutSecs(0)
 		, _statusCodeCache(0)
 		, _reasonCodeCache(0)
+		, _maxBundleSize(10)
 	{
 		setPacketTimeoutsToDefault();
 	}
@@ -193,17 +194,25 @@ namespace BrainCloud {
 			_isAuthenticated = true;
 			setCredentials(response);
 
-			// pick up the timeout interval from the auth call
-			if (_heartbeatInterval == 0)
+			if (response["data"] != Json::nullValue)
 			{
-				if (response["data"] != Json::nullValue && response["data"]["playerSessionExpiry"] != Json::nullValue)
+				// pick up the timeout interval from the auth call
+				if (_heartbeatInterval == 0)
 				{
-					int sessionTimeout = response["data"]["playerSessionExpiry"].asInt();
-					sessionTimeout = (int)(sessionTimeout * 0.85);
-					if (sessionTimeout > 30) // minimum 30 secs
+					if (response["data"]["playerSessionExpiry"] != Json::nullValue)
 					{
-						_heartbeatInterval = sessionTimeout * 1000;
+						int sessionTimeout = response["data"]["playerSessionExpiry"].asInt();
+						sessionTimeout = (int)(sessionTimeout * 0.85);
+						if (sessionTimeout > 30) // minimum 30 secs
+						{
+							_heartbeatInterval = sessionTimeout * 1000;
+						}
 					}
+				}
+
+				if (response["data"]["maxBundleMsgs"] != Json::nullValue)
+				{
+					_maxBundleSize = response["data"]["maxBundleMsgs"].asInt();
 				}
 			}
 		}

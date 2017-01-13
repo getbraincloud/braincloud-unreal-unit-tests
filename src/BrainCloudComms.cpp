@@ -885,7 +885,7 @@ namespace BrainCloud
 		}
 
 		// We want to cap the number of messages in each bundle.
-		while (!_queue.empty() && _inProgress.size() < MAX_BUNDLE_SIZE)
+		while (!_queue.empty() && _inProgress.size() < _maxBundleSize)
 		{
 			ServerCall * call = _queue.front();
 			if (call->isEndOfBundleMarker())
@@ -1148,4 +1148,4 @@ namespace BrainCloud
 	}
 
 
-		}
+}
