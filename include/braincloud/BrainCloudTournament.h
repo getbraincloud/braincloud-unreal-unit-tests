@@ -53,7 +53,7 @@ namespace BrainCloud
          *						  Usually 0, unless leaderboard is LOW_VALUE
 		 * @param in_callback The method to be invoked when the server response is received
 		 */
-		void joinTournament(const char* in_leaderboardId, const char* in_tournamentCode, int32_t in_initialScore, IServerCallback * in_callback = NULL);
+		void joinTournament(const char* in_leaderboardId, const char* in_tournamentCode, int64_t in_initialScore, IServerCallback * in_callback = NULL);
 
 		/**
 		 * Removes player's score from tournament leaderboard
@@ -105,7 +105,7 @@ namespace BrainCloud
 			SortOrder in_sort,
 			int32_t in_beforeCount,
 			int32_t in_afterCount,
-			int32_t in_initialScore,
+			int64_t in_initialScore,
 			IServerCallback * in_callback = NULL);
 
 		/**

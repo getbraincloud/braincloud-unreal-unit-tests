@@ -42,12 +42,12 @@ namespace BrainCloud
 		m_client->sendRequest(sc);
 	}
 
-	void BrainCloudTournament::joinTournament(const char * in_leaderboardId, const char * in_tournamentCode, int32_t in_initialScore, IServerCallback * in_callback)
+	void BrainCloudTournament::joinTournament(const char * in_leaderboardId, const char * in_tournamentCode, int64_t in_initialScore, IServerCallback * in_callback)
 	{
 		Json::Value message;
 		message[OperationParam::LeaderboardId.getValue()] = in_leaderboardId;
 		message[OperationParam::TournamentCode.getValue()] = in_tournamentCode;
-		message[OperationParam::InitialScore.getValue()] = in_initialScore;
+		message[OperationParam::InitialScore.getValue()] = (Json::Int64) in_initialScore;
 
 		ServerCall * sc = new ServerCall(ServiceName::Tournament, ServiceOperation::JoinTournament, message, in_callback);
 		m_client->sendRequest(sc);
@@ -86,7 +86,7 @@ namespace BrainCloud
 		SortOrder in_sort,
 		int32_t in_beforeCount,
 		int32_t in_afterCount,
-		int32_t in_initialScore,
+		int64_t in_initialScore,
 		IServerCallback * in_callback)
 	{
 		Json::Value message;
@@ -102,7 +102,7 @@ namespace BrainCloud
 		message[OperationParam::SocialLeaderboardServiceSortOrder.getValue()] = BrainCloudSocialLeaderboard::sortOrderToString(in_sort);
 		message[OperationParam::SocialLeaderboardServiceBeforeCount.getValue()] = in_beforeCount;
 		message[OperationParam::SocialLeaderboardServiceAfterCount.getValue()] = in_afterCount;
-		message[OperationParam::InitialScore.getValue()] = in_initialScore;
+		message[OperationParam::InitialScore.getValue()] = (Json::Int64) in_initialScore;
 
 		ServerCall * sc = new ServerCall(ServiceName::Tournament, ServiceOperation::PostTournamentScoreWithResults, message, in_callback);
 		m_client->sendRequest(sc);
