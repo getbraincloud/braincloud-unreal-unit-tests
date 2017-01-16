@@ -66,7 +66,7 @@ namespace BrainCloud
 	{
 		Json::Value message;
 		message[OperationParam::LeaderboardId.getValue()] = in_leaderboardId;
-		message[OperationParam::Score.getValue()] = in_score;
+		message[OperationParam::Score.getValue()] = (Json::Int64) in_score;
 
 		struct tm timeInfo = *in_roundStartedTime;
 		message[OperationParam::RoundStartedEpoch.getValue()] = Json::Int64(internal_timegm(&timeInfo) * 1000);
@@ -91,7 +91,7 @@ namespace BrainCloud
 	{
 		Json::Value message;
 		message[OperationParam::LeaderboardId.getValue()] = in_leaderboardId;
-		message[OperationParam::Score.getValue()] = in_score;
+		message[OperationParam::Score.getValue()] = (Json::Int64) in_score;
 
 		struct tm timeInfo = *in_roundStartedTime;
 		message[OperationParam::RoundStartedEpoch.getValue()] = Json::Int64(internal_timegm(&timeInfo) * 1000);
