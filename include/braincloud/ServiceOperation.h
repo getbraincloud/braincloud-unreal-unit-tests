@@ -301,6 +301,7 @@ namespace BrainCloud {
 		static const ServiceOperation JoinTournament;
 		static const ServiceOperation LeaveTournament;
 		static const ServiceOperation PostTournamentScore;
+		static const ServiceOperation PostTournamentScoreWithResults;
 		static const ServiceOperation ViewCurrentReward;
 		static const ServiceOperation ViewReward;
 		static const ServiceOperation ClaimTournamentReward;

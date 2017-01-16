@@ -383,11 +383,11 @@ namespace BrainCloud
 		*/
 		void getPlayerScoresFromLeaderboards(const std::vector<std::string> & in_leaderboardIds, IServerCallback * in_callback = NULL);
 
+		static std::string leaderboardTypeToString(SocialLeaderboardType type);
+		static std::string leaderboardRotationTypeToString(RotationType type);
+		static std::string sortOrderToString(SortOrder in_sortOrder);
+
 	private:
 		BrainCloudClient * m_client;
-
-		std::string leaderboardTypeToString(SocialLeaderboardType type);
-		std::string leaderboardRotationTypeToString(RotationType type);
-		std::string sortOrderToString(SortOrder in_sortOrder);
 	};
 }

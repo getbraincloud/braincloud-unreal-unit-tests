@@ -290,6 +290,7 @@ namespace BrainCloud
 	const ServiceOperation ServiceOperation::JoinTournament = ServiceOperation("JOIN_TOURNAMENT");
 	const ServiceOperation ServiceOperation::LeaveTournament = ServiceOperation("LEAVE_TOURNAMENT");
 	const ServiceOperation ServiceOperation::PostTournamentScore = ServiceOperation("POST_TOURNAMENT_SCORE");
+	const ServiceOperation ServiceOperation::PostTournamentScoreWithResults = ServiceOperation("POST_TOURNAMENT_SCORE_WITH_RESULTS");
 	const ServiceOperation ServiceOperation::ViewCurrentReward = ServiceOperation("VIEW_CURRENT_REWARD");
 	const ServiceOperation ServiceOperation::ViewReward = ServiceOperation("VIEW_REWARD");
 	const ServiceOperation ServiceOperation::ClaimTournamentReward = ServiceOperation("CLAIM_TOURNAMENT_REWARD");

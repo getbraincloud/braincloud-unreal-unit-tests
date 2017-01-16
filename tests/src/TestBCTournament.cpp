@@ -3,6 +3,7 @@
 #include "TestResult.h"
 #include "TestBCTournament.h"
 #include "braincloud/reason_codes.h"
+#include "braincloud/BrainCloudSocialLeaderboard.h"
 
 using namespace BrainCloud;
 
@@ -52,6 +53,20 @@ TEST_F(TestBCTournament, PostTournamentScore)
 	struct tm * time = gmtime(&t);
 
 	m_bc->getTournamentService()->postTournamentScore(_leaderboardId, 200, "", time, &tr);
+	tr.run(m_bc);
+
+	LeaveTournament();
+}
+
+TEST_F(TestBCTournament, PostTournamentScoreWithResults)
+{
+	int32_t version = JoinTournament();
+
+	TestResult tr;
+	time_t t = time(0);
+	struct tm * time = gmtime(&t);
+
+	m_bc->getTournamentService()->postTournamentScoreWithResults(_leaderboardId, 200, "", time, SortOrder::HIGH_TO_LOW, 10, 10, 0, &tr);
 	tr.run(m_bc);
 
 	LeaveTournament();
