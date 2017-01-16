@@ -24,7 +24,6 @@ namespace BrainCloud
     const ServiceName ServiceName::Friend = ServiceName("friend");
     const ServiceName ServiceName::Time = ServiceName("time");
 
-    const ServiceName ServiceName::SocialLeaderboard = ServiceName("socialLeaderboard");
 	const ServiceName ServiceName::Leaderboard = ServiceName("leaderboard");
     const ServiceName ServiceName::Event = ServiceName("event");
     const ServiceName ServiceName::Product = ServiceName("product");

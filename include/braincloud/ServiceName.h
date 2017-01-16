@@ -29,7 +29,6 @@ namespace BrainCloud {
         static const ServiceName Friend;
         static const ServiceName Time;
 
-        static const ServiceName SocialLeaderboard;
 		static const ServiceName Leaderboard;
         static const ServiceName Event;
         static const ServiceName Product;

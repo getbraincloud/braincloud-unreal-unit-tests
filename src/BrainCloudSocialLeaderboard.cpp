@@ -23,7 +23,7 @@ namespace BrainCloud
 		message[OperationParam::SocialLeaderboardServiceLeaderboardId.getValue()] = in_leaderboardId;
 		message[OperationParam::SocialLeaderboardServiceReplaceName.getValue()] = in_replaceName;
 
-		ServerCall * sc = new ServerCall(ServiceName::SocialLeaderboard, ServiceOperation::GetSocialLeaderboard, message, in_callback);
+		ServerCall * sc = new ServerCall(ServiceName::Leaderboard, ServiceOperation::GetSocialLeaderboard, message, in_callback);
 		m_client->getBrainCloudComms()->addToQueue(sc);
 	}
 
@@ -37,7 +37,7 @@ namespace BrainCloud
 		message[OperationParam::SocialLeaderboardServiceLeaderboardResultCount.getValue()] = in_leaderboardResultCount;
 		message[OperationParam::SocialLeaderboardServiceReplaceName.getValue()] = in_replaceName;
 
-		ServerCall * sc = new ServerCall(ServiceName::SocialLeaderboard, ServiceOperation::GetMultiSocialLeaderboard, message, in_callback);
+		ServerCall * sc = new ServerCall(ServiceName::Leaderboard, ServiceOperation::GetMultiSocialLeaderboard, message, in_callback);
 		m_client->getBrainCloudComms()->addToQueue(sc);
 	}
 
@@ -53,7 +53,7 @@ namespace BrainCloud
 		message[OperationParam::SocialLeaderboardServiceEndIndex.getValue()] = in_endIndex;
 		message[OperationParam::SocialLeaderboardServiceIncludeLeaderboardSize.getValue()] = in_includeLeaderboardSize;
 
-		ServerCall * sc = new ServerCall(ServiceName::SocialLeaderboard, ServiceOperation::GetGlobalLeaderboardPage, message, in_callback);
+		ServerCall * sc = new ServerCall(ServiceName::Leaderboard, ServiceOperation::GetGlobalLeaderboardPage, message, in_callback);
 		m_client->getBrainCloudComms()->addToQueue(sc);
 	}
 
@@ -68,7 +68,7 @@ namespace BrainCloud
 		message[OperationParam::SocialLeaderboardServiceStartIndex.getValue()] = in_startIndex;
 		message[OperationParam::SocialLeaderboardServiceEndIndex.getValue()] = in_endIndex;
 
-		ServerCall * sc = new ServerCall(ServiceName::SocialLeaderboard, ServiceOperation::GetGlobalLeaderboardPage, message, in_callback);
+		ServerCall * sc = new ServerCall(ServiceName::Leaderboard, ServiceOperation::GetGlobalLeaderboardPage, message, in_callback);
 		m_client->getBrainCloudComms()->addToQueue(sc);
 	}
 
@@ -84,7 +84,7 @@ namespace BrainCloud
 		message[OperationParam::SocialLeaderboardServiceIncludeLeaderboardSize.getValue()] = in_includeLeaderboardSize;
 		message[OperationParam::SocialLeaderboardServiceVersionId.getValue()] = in_versionId;
 
-		ServerCall * sc = new ServerCall(ServiceName::SocialLeaderboard, ServiceOperation::GetGlobalLeaderboardPage, message, in_callback);
+		ServerCall * sc = new ServerCall(ServiceName::Leaderboard, ServiceOperation::GetGlobalLeaderboardPage, message, in_callback);
 		m_client->getBrainCloudComms()->addToQueue(sc);
 	}
 
@@ -99,7 +99,7 @@ namespace BrainCloud
 		message[OperationParam::SocialLeaderboardServiceEndIndex.getValue()] = in_endIndex;
 		message[OperationParam::SocialLeaderboardServiceVersionId.getValue()] = in_versionId;
 
-		ServerCall * sc = new ServerCall(ServiceName::SocialLeaderboard, ServiceOperation::GetGlobalLeaderboardPage, message, in_callback);
+		ServerCall * sc = new ServerCall(ServiceName::Leaderboard, ServiceOperation::GetGlobalLeaderboardPage, message, in_callback);
 		m_client->getBrainCloudComms()->addToQueue(sc);
 	}
 
@@ -122,7 +122,7 @@ namespace BrainCloud
 		message[OperationParam::SocialLeaderboardServiceIncludeLeaderboardSize.getValue()] = in_includeLeaderboardSize;
 		if(in_versionId != -1) message[OperationParam::SocialLeaderboardServiceVersionId.getValue()] = in_versionId;
 
-		ServerCall * sc = new ServerCall(ServiceName::SocialLeaderboard, ServiceOperation::GetGlobalLeaderboardView, message, in_callback);
+		ServerCall * sc = new ServerCall(ServiceName::Leaderboard, ServiceOperation::GetGlobalLeaderboardView, message, in_callback);
 		m_client->getBrainCloudComms()->addToQueue(sc);
 	}
 
@@ -144,7 +144,7 @@ namespace BrainCloud
 		message[OperationParam::SocialLeaderboardServiceAfterCount.getValue()] = in_afterCount;
 		if (in_versionId != -1) message[OperationParam::SocialLeaderboardServiceVersionId.getValue()] = in_versionId;
 
-		ServerCall * sc = new ServerCall(ServiceName::SocialLeaderboard, ServiceOperation::GetGlobalLeaderboardView, message, in_callback);
+		ServerCall * sc = new ServerCall(ServiceName::Leaderboard, ServiceOperation::GetGlobalLeaderboardView, message, in_callback);
 		m_client->getBrainCloudComms()->addToQueue(sc);
 	}
 
@@ -153,7 +153,7 @@ namespace BrainCloud
 		Json::Value message;
 		message[OperationParam::SocialLeaderboardServiceLeaderboardId.getValue()] = in_leaderboardId;
 
-		ServerCall * sc = new ServerCall(ServiceName::SocialLeaderboard, ServiceOperation::GetGlobalLeaderboardVersions, message, in_callback);
+		ServerCall * sc = new ServerCall(ServiceName::Leaderboard, ServiceOperation::GetGlobalLeaderboardVersions, message, in_callback);
 		m_client->getBrainCloudComms()->addToQueue(sc);
 	}
 
@@ -164,7 +164,7 @@ namespace BrainCloud
 		message[OperationParam::SocialLeaderboardServiceScore.getValue()] = (Json::Int64) in_score;
 		message[OperationParam::SocialLeaderboardServiceData.getValue()] = JsonUtil::jsonStringToValue(in_jsonOtherData);
 
-		ServerCall * sc = new ServerCall(ServiceName::SocialLeaderboard, ServiceOperation::PostScore, message, in_callback);
+		ServerCall * sc = new ServerCall(ServiceName::Leaderboard, ServiceOperation::PostScore, message, in_callback);
 		m_client->getBrainCloudComms()->addToQueue(sc);
 	}
 
@@ -194,7 +194,7 @@ namespace BrainCloud
 		}
 		message[OperationParam::SocialLeaderboardServiceRetainedCount.getValue()] = in_retainedCount;
 
-		ServerCall * sc = new ServerCall(ServiceName::SocialLeaderboard, ServiceOperation::PostScoreDynamic, message, in_callback);
+		ServerCall * sc = new ServerCall(ServiceName::Leaderboard, ServiceOperation::PostScoreDynamic, message, in_callback);
 		m_client->getBrainCloudComms()->addToQueue(sc);
 	}
 
@@ -226,7 +226,7 @@ namespace BrainCloud
 		}
 		message[OperationParam::SocialLeaderboardServiceRetainedCount.getValue()] = in_retainedCount;
 
-		ServerCall * sc = new ServerCall(ServiceName::SocialLeaderboard, ServiceOperation::PostScoreDynamic, message, in_callback);
+		ServerCall * sc = new ServerCall(ServiceName::Leaderboard, ServiceOperation::PostScoreDynamic, message, in_callback);
 		m_client->getBrainCloudComms()->addToQueue(sc);
 	}
 
@@ -235,7 +235,7 @@ namespace BrainCloud
 		Json::Value message;
 		message[OperationParam::SocialLeaderboardServiceLeaderboardId.getValue()] = in_leaderboardId;
 
-		ServerCall * sc = new ServerCall(ServiceName::SocialLeaderboard, ServiceOperation::Reset, message, in_callback);
+		ServerCall * sc = new ServerCall(ServiceName::Leaderboard, ServiceOperation::Reset, message, in_callback);
 		m_client->getBrainCloudComms()->addToQueue(sc);
 	}
 
@@ -245,7 +245,7 @@ namespace BrainCloud
 		message[OperationParam::SocialLeaderboardServiceEventName.getValue()] = in_eventName;
 		message[OperationParam::SocialLeaderboardServiceEventMultiplier.getValue()] = (Json::UInt64) in_multiplier;
 
-		ServerCall * sc = new ServerCall(ServiceName::SocialLeaderboard, ServiceOperation::RewardTournament, message, in_callback);
+		ServerCall * sc = new ServerCall(ServiceName::Leaderboard, ServiceOperation::RewardTournament, message, in_callback);
 		m_client->getBrainCloudComms()->addToQueue(sc);
 	}
 
@@ -255,7 +255,7 @@ namespace BrainCloud
 		message[OperationParam::SocialLeaderboardServiceLeaderboardId.getValue()] = in_leaderboardId;
 		message[OperationParam::GroupId.getValue()] = in_groupId;
 
-		ServerCall * sc = new ServerCall(ServiceName::SocialLeaderboard, ServiceOperation::GetGroupSocialLeaderboard, message, in_callback);
+		ServerCall * sc = new ServerCall(ServiceName::Leaderboard, ServiceOperation::GetGroupSocialLeaderboard, message, in_callback);
 		m_client->getBrainCloudComms()->addToQueue(sc);
 	}
 
@@ -265,7 +265,7 @@ namespace BrainCloud
 		message[OperationParam::SocialLeaderboardServiceLeaderboardId.getValue()] = in_leaderboardId;
 		message[OperationParam::ProfileIds.getValue()] = JsonUtil::stringVectorToJson(in_profileIds);
 
-		ServerCall * sc = new ServerCall(ServiceName::SocialLeaderboard, ServiceOperation::GetPlayersSocialLeaderboard, message, in_callback);
+		ServerCall * sc = new ServerCall(ServiceName::Leaderboard, ServiceOperation::GetPlayersSocialLeaderboard, message, in_callback);
 		m_client->getBrainCloudComms()->addToQueue(sc);
 	}
 
@@ -286,7 +286,7 @@ namespace BrainCloud
 		message[OperationParam::SocialLeaderboardServiceLeaderboardId.getValue()] = in_leaderboardId;
 		if(in_versionId != -1) message[OperationParam::SocialLeaderboardServiceVersionId.getValue()] = in_versionId;
 
-		ServerCall * sc = new ServerCall(ServiceName::SocialLeaderboard, ServiceOperation::GetGlobalLeaderboardEntryCount, message, in_callback);
+		ServerCall * sc = new ServerCall(ServiceName::Leaderboard, ServiceOperation::GetGlobalLeaderboardEntryCount, message, in_callback);
 		m_client->getBrainCloudComms()->addToQueue(sc);
 	}
 
