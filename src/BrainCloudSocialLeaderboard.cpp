@@ -120,7 +120,7 @@ namespace BrainCloud
 		message[OperationParam::SocialLeaderboardServiceBeforeCount.getValue()] = in_beforeCount;
 		message[OperationParam::SocialLeaderboardServiceAfterCount.getValue()] = in_afterCount;
 		message[OperationParam::SocialLeaderboardServiceIncludeLeaderboardSize.getValue()] = in_includeLeaderboardSize;
-		if(in_versionId != -1) message[OperationParam::SocialLeaderboardServiceVersionId.getValue()] = in_versionId;
+		if (in_versionId != -1) message[OperationParam::SocialLeaderboardServiceVersionId.getValue()] = in_versionId;
 
 		ServerCall * sc = new ServerCall(ServiceName::Leaderboard, ServiceOperation::GetGlobalLeaderboardView, message, in_callback);
 		m_client->getBrainCloudComms()->addToQueue(sc);
@@ -169,13 +169,13 @@ namespace BrainCloud
 	}
 
 	void BrainCloudSocialLeaderboard::postScoreToDynamicLeaderboard(
-		const char * in_leaderboardId, 
-		int64_t in_score, 
-		const std::string& in_jsonData, 
-		SocialLeaderboardType in_leaderboardType, 
-		RotationType in_rotationType, 
-		struct tm* in_rotationReset, 
-		int in_retainedCount, 
+		const char * in_leaderboardId,
+		int64_t in_score,
+		const std::string& in_jsonData,
+		SocialLeaderboardType in_leaderboardType,
+		RotationType in_rotationType,
+		struct tm* in_rotationReset,
+		int in_retainedCount,
 		IServerCallback * in_callback)
 	{
 		Json::Value message;
@@ -230,6 +230,16 @@ namespace BrainCloud
 		m_client->getBrainCloudComms()->addToQueue(sc);
 	}
 
+	void BrainCloudSocialLeaderboard::removePlayerScore(const char * in_leaderboardId, int32_t in_versionId, IServerCallback * in_callback)
+	{
+		Json::Value message;
+		message[OperationParam::SocialLeaderboardServiceLeaderboardId.getValue()] = in_leaderboardId;
+		if (in_versionId != -1) message[OperationParam::SocialLeaderboardServiceVersionId.getValue()] = in_versionId;
+
+		ServerCall * sc = new ServerCall(ServiceName::Leaderboard, ServiceOperation::RemovePlayerScore, message, in_callback);
+		m_client->getBrainCloudComms()->addToQueue(sc);
+	}
+
 	void BrainCloudSocialLeaderboard::resetLeaderboardScore(const char * in_leaderboardId, IServerCallback * in_callback)
 	{
 		Json::Value message;
@@ -270,7 +280,7 @@ namespace BrainCloud
 	}
 
 	void BrainCloudSocialLeaderboard::listAllLeaderboards(IServerCallback * in_callback)
-	{		
+	{
 		ServerCall * sc = new ServerCall(ServiceName::Leaderboard, ServiceOperation::ListAllLeaderboards, Json::nullValue, in_callback);
 		m_client->getBrainCloudComms()->addToQueue(sc);
 	}
@@ -284,9 +294,28 @@ namespace BrainCloud
 	{
 		Json::Value message;
 		message[OperationParam::SocialLeaderboardServiceLeaderboardId.getValue()] = in_leaderboardId;
-		if(in_versionId != -1) message[OperationParam::SocialLeaderboardServiceVersionId.getValue()] = in_versionId;
+		if (in_versionId != -1) message[OperationParam::SocialLeaderboardServiceVersionId.getValue()] = in_versionId;
 
 		ServerCall * sc = new ServerCall(ServiceName::Leaderboard, ServiceOperation::GetGlobalLeaderboardEntryCount, message, in_callback);
+		m_client->getBrainCloudComms()->addToQueue(sc);
+	}
+
+	void BrainCloudSocialLeaderboard::getPlayerScore(const char * in_leaderboardId, int32_t in_versionId, IServerCallback * in_callback)
+	{
+		Json::Value message;
+		message[OperationParam::SocialLeaderboardServiceLeaderboardId.getValue()] = in_leaderboardId;
+		if (in_versionId != -1) message[OperationParam::SocialLeaderboardServiceVersionId.getValue()] = in_versionId;
+
+		ServerCall * sc = new ServerCall(ServiceName::Leaderboard, ServiceOperation::GetPlayerScore, message, in_callback);
+		m_client->getBrainCloudComms()->addToQueue(sc);
+	}
+
+	void BrainCloudSocialLeaderboard::getPlayerScoresFromLeaderboards(const std::vector<std::string> & in_leaderboardIds, IServerCallback * in_callback)
+	{
+		Json::Value message;
+		message[OperationParam::SocialLeaderboardServiceLeaderboardIds.getValue()] = JsonUtil::stringVectorToJson(in_leaderboardIds);
+
+		ServerCall * sc = new ServerCall(ServiceName::Leaderboard, ServiceOperation::GetPlayerScoresFromLeaderboards, message, in_callback);
 		m_client->getBrainCloudComms()->addToQueue(sc);
 	}
 

@@ -181,6 +181,38 @@ TEST_F(TestBCSocialLeaderboard, GetGlobalLeaderboardEntryCountByVersion)
 	tr.run(m_bc);
 }
 
+TEST_F(TestBCSocialLeaderboard, RemoveScore)
+{
+	PostScoreToNonDynamic();
+
+	TestResult tr;
+	m_bc->getSocialLeaderboardService()->removePlayerScore(LB_ID, -1, &tr);
+	tr.run(m_bc);
+}
+
+TEST_F(TestBCSocialLeaderboard, GetPlayerScore)
+{
+	PostScoreToNonDynamic();
+
+	TestResult tr;
+	m_bc->getSocialLeaderboardService()->getPlayerScore(LB_ID, -1, &tr);
+	tr.run(m_bc);
+}
+
+TEST_F(TestBCSocialLeaderboard, GetPlayerScoresFromLeaderboards)
+{
+	// post a few scores first so we have some data
+	PostScoreToNonDynamic();
+	PostScoreToDynamic();
+
+	TestResult tr;
+	std::vector<std::string> lbIds;
+	lbIds.push_back(LB_ID);
+	lbIds.push_back(DYNAMIC_LB_ID);
+	m_bc->getSocialLeaderboardService()->getPlayerScoresFromLeaderboards(lbIds, &tr);
+	tr.run(m_bc);
+}
+
 void TestBCSocialLeaderboard::PostScoreToDynamic()
 {
 	srand(time(NULL));
