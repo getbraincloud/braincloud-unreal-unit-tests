@@ -66,7 +66,7 @@ TEST_F(TestBCTournament, PostTournamentScoreWithResults)
 	time_t t = time(0);
 	struct tm * time = gmtime(&t);
 
-	m_bc->getTournamentService()->postTournamentScoreWithResults(_leaderboardId, 200, "", time, SortOrder::HIGH_TO_LOW, 10, 10, 0, &tr);
+	m_bc->getTournamentService()->postTournamentScoreWithResults(_leaderboardId, 200, "", time, HIGH_TO_LOW, 10, 10, 0, &tr);
 	tr.run(m_bc);
 
 	LeaveTournament();
