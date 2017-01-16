@@ -4,6 +4,7 @@
 #include "TestBCTournament.h"
 #include "braincloud/reason_codes.h"
 #include "braincloud/BrainCloudSocialLeaderboard.h"
+#include <time.h>
 
 using namespace BrainCloud;
 
