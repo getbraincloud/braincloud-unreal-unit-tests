@@ -69,7 +69,7 @@ namespace BrainCloud
 		message[OperationParam::Score.getValue()] = (Json::Int64) in_score;
 
 		struct tm timeInfo = *in_roundStartedTime;
-		message[OperationParam::RoundStartedEpoch.getValue()] = Json::Int64(internal_timegm(&timeInfo) * 1000);
+		message[OperationParam::RoundStartedEpoch.getValue()] = (Json::Int64) ((int64_t)internal_timegm(&timeInfo)) * 1000;
 
 		if (StringUtil::IsOptionalParameterValid(in_jsonData))
 			message[OperationParam::Data.getValue()] = JsonUtil::jsonStringToValue(in_jsonData);
@@ -94,7 +94,7 @@ namespace BrainCloud
 		message[OperationParam::Score.getValue()] = (Json::Int64) in_score;
 
 		struct tm timeInfo = *in_roundStartedTime;
-		message[OperationParam::RoundStartedEpoch.getValue()] = Json::Int64(internal_timegm(&timeInfo) * 1000);
+		message[OperationParam::RoundStartedEpoch.getValue()] = (Json::Int64) ((int64_t)internal_timegm(&timeInfo)) * 1000;
 
 		if (StringUtil::IsOptionalParameterValid(in_jsonData))
 			message[OperationParam::Data.getValue()] = JsonUtil::jsonStringToValue(in_jsonData);
