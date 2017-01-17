@@ -3,10 +3,9 @@
 #include "braincloud/AuthenticationType.h"
 #include "TestResult.h"
 #include "TestBCScript.h"
-#include <time.h>
+#include <ctime>
 
 using namespace BrainCloud;
-
 
 TEST_F(TestBCScript, RunScript)
 {

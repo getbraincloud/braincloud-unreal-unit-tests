@@ -15,7 +15,7 @@
 #ifndef BOOST_CHRONO_IO_TIME_POINT_IO_H
 #define BOOST_CHRONO_IO_TIME_POINT_IO_H
 
-#include <time.h>
+#include <ctime>
 #include "../BrainCloudTypes.h"
 
 static int32_t is_leap(int32_t year) {
