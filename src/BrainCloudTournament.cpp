@@ -125,7 +125,7 @@ namespace BrainCloud
 		if (in_versionId > 0)
 			message[OperationParam::VersionId.getValue()] = in_versionId;
 
-		ServerCall * sc = new ServerCall(ServiceName::Tournament, ServiceOperation::ViewCurrentReward, message, in_callback);
+		ServerCall * sc = new ServerCall(ServiceName::Tournament, ServiceOperation::ViewReward, message, in_callback);
 		m_client->sendRequest(sc);
 	}
 }

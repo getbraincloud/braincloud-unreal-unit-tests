@@ -90,7 +90,7 @@ TEST_F(TestBCTournament, ViewReward)
 
 	TestResult tr;
 	m_bc->getTournamentService()->viewReward(_leaderboardId, -1, &tr);
-	tr.run(m_bc);
+	tr.runExpectFail(m_bc, 400, PLAYER_NOT_ENROLLED_IN_TOURNAMENT);
 
 	LeaveTournament();
 }
