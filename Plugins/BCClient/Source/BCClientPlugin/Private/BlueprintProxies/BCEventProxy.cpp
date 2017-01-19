@@ -11,38 +11,31 @@ UBCEventProxy::UBCEventProxy(const FObjectInitializer& ObjectInitializer)
 {
 }
 
-UBCEventProxy* UBCEventProxy::SendEvent(FString toPlayerId, FString eventType, FString jsonEventData, bool recordLocally)
+UBCEventProxy* UBCEventProxy::SendEvent(const FString& toPlayerId, const FString& eventType, const FString& jsonEventData)
 {
     UBCEventProxy* Proxy = NewObject<UBCEventProxy>();
-    BrainCloudClient::getInstance()->getEventService()->sendEvent(toPlayerId, eventType, jsonEventData, recordLocally, Proxy);
+    BrainCloudClient::getInstance()->getEventService()->sendEvent(toPlayerId, eventType, jsonEventData, Proxy);
     return Proxy;
 }
 
-UBCEventProxy* UBCEventProxy::UpdateIncomingEventData(FString fromPlayerId, int32 eventId, FString jsonEventData)
+UBCEventProxy* UBCEventProxy::UpdateIncomingEventData(const FString& eventId, const FString& jsonEventData)
 {
     UBCEventProxy* Proxy = NewObject<UBCEventProxy>();
-    BrainCloudClient::getInstance()->getEventService()->updateIncomingEventData(fromPlayerId, eventId, jsonEventData, Proxy);
+    BrainCloudClient::getInstance()->getEventService()->updateIncomingEventData(eventId, jsonEventData, Proxy);
     return Proxy;
 }
 
-UBCEventProxy* UBCEventProxy::DeleteIncomingEvent(FString fromPlayerId, int32 eventId)
+UBCEventProxy* UBCEventProxy::DeleteIncomingEvent(const FString& eventId)
 {
     UBCEventProxy* Proxy = NewObject<UBCEventProxy>();
-    BrainCloudClient::getInstance()->getEventService()->deleteIncomingEvent(fromPlayerId, eventId, Proxy);
+    BrainCloudClient::getInstance()->getEventService()->deleteIncomingEvent(eventId, Proxy);
     return Proxy;
 }
 
-UBCEventProxy* UBCEventProxy::DeleteSentEvent(FString toPlayerId, int32 eventId)
+UBCEventProxy* UBCEventProxy::GetEvents()
 {
     UBCEventProxy* Proxy = NewObject<UBCEventProxy>();
-    BrainCloudClient::getInstance()->getEventService()->deleteSentEvent(toPlayerId, eventId, Proxy);
-    return Proxy;
-}
-
-UBCEventProxy* UBCEventProxy::GetEvents(bool includeIncomingEvents, bool includeSentEvents)
-{
-    UBCEventProxy* Proxy = NewObject<UBCEventProxy>();
-    BrainCloudClient::getInstance()->getEventService()->getEvents(includeIncomingEvents, includeSentEvents, Proxy);
+    BrainCloudClient::getInstance()->getEventService()->getEvents(Proxy);
     return Proxy;
 }
 

@@ -119,6 +119,7 @@ OperationParam::OperationParam(const FString& operation)
 	const OperationParam OperationParam::EventServiceUpdateEventDataFromId = OperationParam(TEXT("fromId"));
 	const OperationParam OperationParam::EventServiceUpdateEventDataEventId = OperationParam(TEXT("eventId"));
 	const OperationParam OperationParam::EventServiceUpdateEventDataData = OperationParam(TEXT("eventData"));
+	const OperationParam OperationParam::EvId = OperationParam(TEXT("evId"));
 
 	// Event Service - Delete Incoming Params
 	const OperationParam OperationParam::EventServiceDeleteIncomingEventId = OperationParam(TEXT("eventId"));

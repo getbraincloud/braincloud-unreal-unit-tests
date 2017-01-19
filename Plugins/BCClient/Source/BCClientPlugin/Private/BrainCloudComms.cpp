@@ -76,7 +76,7 @@ BrainCloudComms::PacketRef BrainCloudComms::BuildPacket()
 	PacketRef packet = MakeShareable(new TArray<TSharedRef<ServerCall>>());
 
 	_queueMutex.Lock();
-		
+
 	auto nextNode = _messageQueue.GetTail();
 	while (nextNode != nullptr) {
 		TSharedRef<ServerCall> message = nextNode->GetValue();

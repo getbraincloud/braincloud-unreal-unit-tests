@@ -119,6 +119,7 @@ public:
 	static const OperationParam EventServiceUpdateEventDataFromId;
 	static const OperationParam EventServiceUpdateEventDataEventId;
 	static const OperationParam EventServiceUpdateEventDataData;
+	static const OperationParam EvId;
 
 	// Event Service - Delete Incoming Params
 	static const OperationParam EventServiceDeleteIncomingEventId;

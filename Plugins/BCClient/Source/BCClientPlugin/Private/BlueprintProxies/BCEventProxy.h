@@ -30,11 +30,10 @@ public:
     * Param - toPlayerId The id of the player who is being sent the event
     * Param - eventType The user-defined type of the event.
     * Param - jsonEventData The user-defined data for this event encoded in JSON.
-    * Param - recordLocally If true, a copy of this event will be saved in the
     * user's sent events mailbox.
     */
     UFUNCTION(BlueprintCallable, meta = (BlueprintInternalUseOnly = "true"), Category = "BrainCloud|Event")
-        static UBCEventProxy* SendEvent(FString toPlayerId, FString eventType, FString jsonEventData, bool recordLocally);
+        static UBCEventProxy* SendEvent(const FString& toPlayerId, const FString& eventType, const FString& jsonEventData);
 
     /**
     * Updates an event in the player's incoming event mailbox.
@@ -42,12 +41,11 @@ public:
     * Service Name - Event
     * Service Operation - UpdateEventData
     *
-    * Param - fromPlayerId The id of the player who sent the event
     * Param - eventId The event id
     * Param - jsonEventData The user-defined data for this event encoded in JSON.
     */
     UFUNCTION(BlueprintCallable, meta = (BlueprintInternalUseOnly = "true"), Category = "BrainCloud|Event")
-        static UBCEventProxy* UpdateIncomingEventData(FString fromPlayerId, int32 eventId, FString jsonEventData);
+        static UBCEventProxy* UpdateIncomingEventData(const FString& eventId, const FString& jsonEventData);
 
     /**
     * Delete an event out of the player's incoming mailbox.
@@ -55,26 +53,10 @@ public:
     * Service Name - Event
     * Service Operation - DeleteIncoming
     *
-    * Param - fromPlayerId The id of the player who sent the event
     * Param - eventId The event id
     */
     UFUNCTION(BlueprintCallable, meta = (BlueprintInternalUseOnly = "true"), Category = "BrainCloud|Event")
-        static UBCEventProxy* DeleteIncomingEvent(FString fromPlayerId, int32 eventId);
-
-    /**
-    * Delete an event from the player's sent mailbox.
-    *
-    * Note that only events sent with the "recordLocally" flag
-    * set to true will be added to a player's sent mailbox.
-    *
-    * Service Name - Event
-    * Service Operation - DeleteSent
-    *
-    * Param - toPlayerId The id of the player who is being sent the even
-    * Param - eventId The event id
-    */
-    UFUNCTION(BlueprintCallable, meta = (BlueprintInternalUseOnly = "true"), Category = "BrainCloud|Event")
-        static UBCEventProxy* DeleteSentEvent(FString toPlayerId, int32 eventId);
+        static UBCEventProxy* DeleteIncomingEvent(const FString& eventId);
 
     /**
     * Get the events currently queued for the player.
@@ -86,7 +68,7 @@ public:
     * Param - includeSentEvents Get events sent from the player
     */
     UFUNCTION(BlueprintCallable, meta = (BlueprintInternalUseOnly = "true"), Category = "BrainCloud|Event")
-        static UBCEventProxy* GetEvents(bool includeIncomingEvents, bool includeSentEvents);
+        static UBCEventProxy* GetEvents();
 
     //Response delegates
     UPROPERTY(BlueprintAssignable)
