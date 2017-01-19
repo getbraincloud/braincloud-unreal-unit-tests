@@ -97,7 +97,7 @@ BrainCloudComms::PacketRef BrainCloudComms::BuildPacket()
 		nextNode = nextNode->GetPrevNode();
 	}
 
-	while (_messageQueue.Num() != 0)
+	while (_messageQueue.Num() != 0 && packet->Num() < _maxBundleMessages)
 	{
 		auto tailNode = _messageQueue.GetTail();
 		TSharedRef<ServerCall> message = tailNode->GetValue();
@@ -655,6 +655,8 @@ void BrainCloudComms::FilterIncomingMessages(TSharedRef<ServerCall> servercall, 
 				_heartbeatInterval = sessionTimeout > 30 ? sessionTimeout : 30;
 				_heartbeatInterval *= 1000; //to ms
 			}
+
+			_maxBundleMessages = data->GetNumberField(TEXT("maxBundleMsgs"));
 
 			//set player name
 			FString name = data->GetStringField(TEXT("playerName"));

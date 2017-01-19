@@ -141,6 +141,7 @@ private:
     float _idleTime = 0.0;
     int32 _retryCount = 0;
     TArray<int32> _packetTimeouts;
+	int32 _maxBundleMessages = 10;
     int32 _authenticationTimeout = 15000;
     bool _useOldStatusMessage = false;
     bool _errorCallbackOn202 = true;
