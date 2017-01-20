@@ -64,6 +64,8 @@ public:
 	static const ServiceOperation UpdateSetMinimum;
 	static const ServiceOperation UpdateIncrementToMaximum;
 	static const ServiceOperation ProcessStatistics;
+	static const ServiceOperation UpdateEntityOwnerAndAcl;
+	static const ServiceOperation MakeSystemEntity;
 
 	static const ServiceOperation GetFriendProfileInfoForExternalId;
 	static const ServiceOperation GetExternalIdForProfileId;
@@ -95,6 +97,9 @@ public:
 	static const ServiceOperation GetPlayersSocialLeaderboard;
 	static const ServiceOperation ListAllLeaderboards;
 	static const ServiceOperation GetGlobalLeaderboardEntryCount;
+	static const ServiceOperation RemovePlayerScore;
+	static const ServiceOperation GetPlayerScore;
+	static const ServiceOperation GetPlayerScoresFromLeaderboards;
 
 	static const ServiceOperation InitThirdParty;
 	static const ServiceOperation PostThirdPartyLeaderboardScore;

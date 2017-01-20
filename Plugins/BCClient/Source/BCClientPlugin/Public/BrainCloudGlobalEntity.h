@@ -180,6 +180,33 @@ public:
 	*/
 	void incrementGlobalEntityData(const FString& entityId, const FString& jsonData, IServerCallback * callback = nullptr);
 
+	/**
+	* Method updates an existing entity's Owner and ACL on the server.
+	*
+	* Service Name - globalEntity
+	* Service Operation - UPDATE_ENTITY_OWNER_AND_ACL
+	*
+	* @param entityId The entity ID
+	* @param version The version of the entity to update
+	* @param ownerId The owner ID
+	* @param jsonEntityAcl The entity's access control list as JSON.
+	* @param callback The callback object
+	*/
+	void updateEntityOwnerAndAcl(const FString& entityId, int32 version, const FString& ownerId, IAcl* jsonEntityAcl, IServerCallback* callback);
+
+	/**
+	* Method clears the owner id of an existing entity and sets the ACL on the server.
+	*
+	* Service Name - globalEntity
+	* Service Operation - MAKE_SYSTEM_ENTITY
+	*
+	* @param entityId The entity ID
+	* @param version The version of the entity to update
+	* @param jsonEntityAcl The entity's access control list as JSON.
+	* @param callback The callback object
+	*/
+	void makeSystemEntity(const FString& entityId, int32 version, IAcl* jsonEntityAcl, IServerCallback* callback);
+
 private:
 	BrainCloudClient* _client = nullptr;
 };

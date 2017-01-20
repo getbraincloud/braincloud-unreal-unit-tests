@@ -93,6 +93,13 @@ UBCLeaderboardProxy* UBCLeaderboardProxy::PostScoreToDynamicLeaderboardDays(FStr
 	return Proxy;
 }
 
+UBCLeaderboardProxy* UBCLeaderboardProxy::RemovePlayerScore(const FString& leaderboardId, int32 versionId)
+{
+	UBCLeaderboardProxy* Proxy = NewObject<UBCLeaderboardProxy>();
+	BrainCloudClient::getInstance()->getLeaderboardService()->removePlayerScore(leaderboardId, versionId, Proxy);
+	return Proxy;
+}
+
 UBCLeaderboardProxy* UBCLeaderboardProxy::ResetLeaderboardScore(FString leaderBoardName)
 {
 	UBCLeaderboardProxy* Proxy = NewObject<UBCLeaderboardProxy>();
@@ -118,6 +125,20 @@ UBCLeaderboardProxy* UBCLeaderboardProxy::ListAllLeaderboards()
 {
 	UBCLeaderboardProxy* Proxy = NewObject<UBCLeaderboardProxy>();
 	BrainCloudClient::getInstance()->getLeaderboardService()->listAllLeaderboards(Proxy);
+	return Proxy;
+}
+
+UBCLeaderboardProxy* UBCLeaderboardProxy::GetPlayerScore(const FString& leaderboardId, int32 versionId)
+{
+	UBCLeaderboardProxy* Proxy = NewObject<UBCLeaderboardProxy>();
+	BrainCloudClient::getInstance()->getLeaderboardService()->getPlayerScore(leaderboardId, versionId, Proxy);
+	return Proxy;
+}
+
+UBCLeaderboardProxy* UBCLeaderboardProxy::GetPlayerScoresFromLeaderboards(const TArray<FString> leaderboardIds)
+{
+	UBCLeaderboardProxy* Proxy = NewObject<UBCLeaderboardProxy>();
+	BrainCloudClient::getInstance()->getLeaderboardService()->getPlayerScoresFromLeaderboards(leaderboardIds, Proxy);
 	return Proxy;
 }
 

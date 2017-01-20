@@ -107,6 +107,7 @@ OperationParam::OperationParam(const FString& operation)
 	const OperationParam OperationParam::GlobalEntityServiceOrderBy = OperationParam(TEXT("orderBy"));
 	const OperationParam OperationParam::GlobalEntityServiceContext = OperationParam(TEXT("context"));
 	const OperationParam OperationParam::GlobalEntityServicePageOffset = OperationParam(TEXT("pageOffset"));
+	const OperationParam OperationParam::OwnerId = OperationParam(TEXT("ownerId"));
 
 	// Event Service - Send Params
 	const OperationParam OperationParam::EventServiceSendToId = OperationParam(TEXT("toId"));

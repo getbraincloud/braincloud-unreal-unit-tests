@@ -182,6 +182,16 @@ void BrainCloudLeaderboard::postScoreToDynamicLeaderboardDays(const FString& lea
 	_client->sendRequest(sc);
 }
 
+void BrainCloudLeaderboard::removePlayerScore(const FString & leaderboardId, int32 versionId, IServerCallback * callback)
+{
+	TSharedRef<FJsonObject> message = MakeShareable(new FJsonObject());
+	message->SetStringField(OperationParam::LeaderboardServiceLeaderboardId.getValue(), leaderboardId);
+	message->SetNumberField(OperationParam::ProfileIds.getValue(), versionId);
+
+	ServerCall * sc = new ServerCall(ServiceName::Leaderboard, ServiceOperation::RemovePlayerScore, message, callback);
+	_client->sendRequest(sc);
+}
+
 void BrainCloudLeaderboard::resetLeaderboardScore(const FString& leaderboardId, IServerCallback * callback)
 {
 	TSharedRef<FJsonObject> message = MakeShareable(new FJsonObject());
@@ -225,6 +235,25 @@ void BrainCloudLeaderboard::listAllLeaderboards(IServerCallback * callback)
 {
 	TSharedRef<FJsonObject> message = MakeShareable(new FJsonObject());
 	ServerCall * sc = new ServerCall(ServiceName::Leaderboard, ServiceOperation::ListAllLeaderboards, message, callback);
+	_client->sendRequest(sc);
+}
+
+void BrainCloudLeaderboard::getPlayerScore(const FString & leaderboardId, int32 versionId, IServerCallback * callback)
+{
+	TSharedRef<FJsonObject> message = MakeShareable(new FJsonObject());
+	message->SetStringField(OperationParam::LeaderboardServiceLeaderboardId.getValue(), leaderboardId);
+	message->SetNumberField(OperationParam::ProfileIds.getValue(), versionId);
+
+	ServerCall * sc = new ServerCall(ServiceName::Leaderboard, ServiceOperation::GetPlayerScore, message, callback);
+	_client->sendRequest(sc);
+}
+
+void BrainCloudLeaderboard::getPlayerScoresFromLeaderboards(const TArray<FString> leaderboardIds, IServerCallback * callback)
+{
+	TSharedRef<FJsonObject> message = MakeShareable(new FJsonObject());
+	message->SetArrayField(OperationParam::LeaderboardServiceLeaderboardIds.getValue(), JsonUtil::arrayToJsonArray(leaderboardIds));
+
+	ServerCall * sc = new ServerCall(ServiceName::Leaderboard, ServiceOperation::GetPlayerScoresFromLeaderboards, message, callback);
 	_client->sendRequest(sc);
 }
 

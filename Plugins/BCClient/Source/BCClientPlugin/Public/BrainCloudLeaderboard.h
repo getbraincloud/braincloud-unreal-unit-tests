@@ -75,13 +75,13 @@ public:
 	* @deprecated Use method without includeLeaderboardSize parameter - removal after March 22 2016
 	*/
 	DEPRECATED("3.2.0", "Use method without includeLeaderboardSize parameter - removal after March 22 2016")
-	void getGlobalLeaderboardPage(const FString& leaderboardId, ESortOrder sortOrder, int32 startIndex, int32 endIndex, bool includeLeaderboardSize, IServerCallback * callback = nullptr);
+		void getGlobalLeaderboardPage(const FString& leaderboardId, ESortOrder sortOrder, int32 startIndex, int32 endIndex, bool includeLeaderboardSize, IServerCallback * callback = nullptr);
 
 	/**
 	* @deprecated Use method without includeLeaderboardSize parameter - removal after March 22 2016
 	*/
 	DEPRECATED("3.2.0", "Use method without includeLeaderboardSize parameter - removal after March 22 2016")
-	void getGlobalLeaderboardPageByVersion(const FString& leaderboardId, ESortOrder sortOrder, int32 startIndex, int32 endIndex, bool includeLeaderboardSize, int32 versionId, IServerCallback * callback = nullptr);
+		void getGlobalLeaderboardPageByVersion(const FString& leaderboardId, ESortOrder sortOrder, int32 startIndex, int32 endIndex, bool includeLeaderboardSize, int32 versionId, IServerCallback * callback = nullptr);
 
 	/**
 	* Method returns a page of global leaderboard results.
@@ -130,8 +130,8 @@ public:
 	* @deprecated Use method without includeLeaderboardSize parameter - removal after March 22 2016
 	*/
 	DEPRECATED("3.2.0", "Use method without includeLeaderboardSize parameter - removal after March 22 2016")
-	void getGlobalLeaderboardViewByVersion(const FString& leaderboardId, ESortOrder sortOrder, int32 beforeCount, int32 afterCount,
-		bool includeLeaderboardSize, int32 versionId, IServerCallback * callback = nullptr);
+		void getGlobalLeaderboardViewByVersion(const FString& leaderboardId, ESortOrder sortOrder, int32 beforeCount, int32 afterCount,
+			bool includeLeaderboardSize, int32 versionId, IServerCallback * callback = nullptr);
 
 	/**
 	* Method returns a view of global leaderboard results that centers on the current player.
@@ -165,7 +165,7 @@ public:
 	* @param versionId The historical version to retrieve.
 	* @param callback The method to be invoked when the server response is received
 	*/
-	void getGlobalLeaderboardViewByVersion(const FString& leaderboardId, ESortOrder sortOrder, int32 beforeCount, int32 afterCount, 
+	void getGlobalLeaderboardViewByVersion(const FString& leaderboardId, ESortOrder sortOrder, int32 beforeCount, int32 afterCount,
 		int32 versionId, IServerCallback * callback = nullptr);
 
 	/**
@@ -251,12 +251,22 @@ public:
 		ESocialLeaderboardType leaderboardType, const FDateTime& rotationStart, int32 retainedCount, int32 numDaysToRotate, IServerCallback * callback = nullptr);
 
 	/**
-	 * Reset the player's score for the given social leaderboard id.
-	 *
-	 * @param leaderboardId The leaderboard to post to
-	 * @param callback The method to be invoked when the server response is received
-	 */
-	void resetLeaderboardScore(const FString& leaderBoardName, IServerCallback * callback = nullptr);
+	* Removes a player's score from the leaderboard
+	*
+	* Service Name - leaderboard
+	* Service Operation - REMOVE_PLAYER_SCORE
+	*
+	* @param leaderboardId The leaderboard ID
+	* @param versionId The version of the leaderboard
+	* @param callback The method to be invoked when the server response is received
+	*/
+	void removePlayerScore(const FString& leaderboardId, int32 versionId, IServerCallback * callback = nullptr);
+
+	/**
+	* @deprecated Use RemovePlayerScore instead - Removal after March 22 2016
+	*/
+	DEPRECATED("3.2.0", "Use RemovePlayerScore instead - Removal after March 22 2016")
+		void resetLeaderboardScore(const FString& leaderBoardName, IServerCallback * callback = nullptr);
 
 	/**
 	 * Method to retrieve the player's completed tournaments for the game.
@@ -300,6 +310,29 @@ public:
 	* @param callback The method to be invoked when the server response is received
 	*/
 	void listAllLeaderboards(IServerCallback * callback = nullptr);
+
+	/**
+	* Gets a player's score from a leaderboard
+	*
+	* Service Name - leaderboard
+	* Service Operation - GET_PLAYER_SCORE
+	*
+	* @param leaderboardId The leaderboard ID
+	* @param versionId The version of the leaderboard. Use -1 for current.
+	* @param callback The method to be invoked when the server response is received
+	*/
+	void getPlayerScore(const FString& leaderboardId, int32 versionId, IServerCallback * callback = nullptr);
+
+	/**
+	* Gets a player's score from multiple leaderboards
+	*
+	* Service Name - leaderboard
+	* Service Operation - GET_PLAYER_SCORES_FROM_LEADERBOARDS
+	*
+	* @param leaderboardIds A collection of leaderboardIds to retrieve scores from
+	* @param callback The method to be invoked when the server response is received
+	*/
+	void getPlayerScoresFromLeaderboards(const TArray<FString> leaderboardIds, IServerCallback * callback = nullptr);
 
 private:
 	BrainCloudClient* _client = nullptr;
