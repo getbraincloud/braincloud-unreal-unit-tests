@@ -79,14 +79,6 @@ TEST_F(TestBCSocialLeaderboard, GetGlobalLeaderboardViewLow)
     tr.run(m_bc);
 }
 
-TEST_F(TestBCSocialLeaderboard, ResetScore)
-{
-    TestResult tr;
-
-    m_bc->getSocialLeaderboardService()->resetLeaderboardScore(LB_ID, &tr);
-    tr.run(m_bc);
-}
-
 TEST_F(TestBCSocialLeaderboard, GetGlobalPageByVersion)
 {
     TestResult tr;

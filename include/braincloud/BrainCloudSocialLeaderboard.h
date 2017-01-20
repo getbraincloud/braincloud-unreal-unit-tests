@@ -285,14 +285,11 @@ namespace BrainCloud
 		* @param in_callback The method to be invoked when the server response is received
 		*/
 		void removePlayerScore(const char * in_leaderboardId, int32_t in_versionId, IServerCallback * in_callback = NULL);
-
+			
 		/**
-		 * Reset the player's score for the given social leaderboard id.
-		 *
-		 * @param in_leaderboardId The leaderboard to post to
-		 * @param in_callback The method to be invoked when the server response is received
-		 */
-		void resetLeaderboardScore(const char * in_leaderBoardName, IServerCallback * in_callback = NULL);
+		* @deprecated Use removePlayerScore instead - removal after March 22 2016
+		*/
+		DEPRECATED void resetLeaderboardScore(const char * in_leaderBoardName, IServerCallback * in_callback = NULL);
 
 		/**
 		 * Method to retrieve the player's completed tournaments for the game.
