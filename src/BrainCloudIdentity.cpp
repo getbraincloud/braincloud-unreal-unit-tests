@@ -196,8 +196,8 @@ namespace BrainCloud
 		m_client->sendRequest(sc);
 	}
 
-	void BrainCloudIdentity::attachParentWithIdentity(const char * in_externalId, const char * in_authenticationToken, AuthenticationType in_authenticationType, 
-		bool in_forceCreate, const char * in_externalAuthName, IServerCallback * in_callback)
+	void BrainCloudIdentity::attachParentWithIdentity(const char * in_externalId, const char * in_authenticationToken, AuthenticationType in_authenticationType,
+		const char * in_externalAuthName, bool in_forceCreate, IServerCallback * in_callback)
 	{
 		Json::Value data;
 		data[OperationParam::AuthenticateServiceAuthenticateAuthenticationToken.getValue()] = in_authenticationToken;
@@ -205,7 +205,7 @@ namespace BrainCloud
 		data[OperationParam::IdentityServiceExternalId.getValue()] = in_externalId;
 		data[OperationParam::AuthenticateServiceAuthenticateForceCreate.getValue()] = in_forceCreate;
 
-		if(StringUtil::IsOptionalParameterValid(in_externalAuthName))
+		if (StringUtil::IsOptionalParameterValid(in_externalAuthName))
 			data[OperationParam::AuthenticateServiceAuthenticateExternalAuthName.getValue()] = in_externalAuthName;
 
 		ServerCall * sc = new ServerCall(ServiceName::Identity, ServiceOperation::AttachParentWithIdentity, data, in_callback);
@@ -219,8 +219,8 @@ namespace BrainCloud
 		m_client->sendRequest(sc);
 	}
 
-	void BrainCloudIdentity::attachPeerProfile(const char * in_externalId, const char * in_authenticationToken, AuthenticationType in_authenticationType, bool in_forceCreate, 
-		const char * in_externalAuthName, const char * in_peer, IServerCallback * in_callback)
+	void BrainCloudIdentity::attachPeerProfile(const char * in_peer, const char * in_externalId, const char * in_authenticationToken, AuthenticationType in_authenticationType,
+		const char * in_externalAuthName, bool in_forceCreate, IServerCallback * in_callback)
 	{
 		Json::Value data;
 		data[OperationParam::AuthenticateServiceAuthenticateAuthenticationToken.getValue()] = in_authenticationToken;

@@ -24,8 +24,8 @@ TEST_F(TestBCIdentity, SwitchToSingletonChildProfile)
 {
 	TestResult tr;
 	m_bc->getIdentityService()->switchToSingletonChildProfile(m_childAppId.c_str(), true, &tr);
-	
-	if(tr.run(m_bc))
+
+	if (tr.run(m_bc))
 		detachParent();
 }
 
@@ -45,12 +45,12 @@ TEST_F(TestBCIdentity, AttachParentWithIdentity)
 
 	TestResult tr;
 	m_bc->getIdentityService()->attachParentWithIdentity(GetUser(
-		UserA)->m_id, 
-		GetUser(UserA)->m_password, 
+		UserA)->m_id,
+		GetUser(UserA)->m_password,
 		AuthenticationType::Universal,
+		NULL,
 		true,
-		NULL, 
-		&tr);	
+		&tr);
 	tr.run(m_bc);
 }
 
@@ -97,8 +97,8 @@ TEST_F(TestBCIdentity, RefreshIdentity)
 TEST_F(TestBCIdentity, AttachPeerProfile)
 {
 	TestResult tr;
-	m_bc->getIdentityService()->attachPeerProfile(GetUser(UserA)->m_id, GetUser(UserA)->m_password, AuthenticationType::Universal, true, NULL, m_peerName.c_str(), &tr);
-	
+	m_bc->getIdentityService()->attachPeerProfile(m_peerName.c_str(), GetUser(UserA)->m_id, GetUser(UserA)->m_password, AuthenticationType::Universal, NULL, true, &tr);
+
 	if (tr.run(m_bc))
 		DetachPeer();
 }

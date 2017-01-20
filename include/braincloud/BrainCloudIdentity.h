@@ -492,14 +492,14 @@ namespace BrainCloud
 		 * @param externalId The users id for the new credentials
 		 * @param authenticationToken The password/token
 		 * @param authenticationType Type of identity
-		 * @param forceCreate Should a new profile be created if it does not exist?
 		 * @param externalAuthName Optional - if attaching an external identity
+		 * @param forceCreate Should a new profile be created if it does not exist?
 		 * @param successCallback The success callback
 		 * @param errorCallback The failure callback.
 		 * @param cbObject The user object sent to the callback
 		 */
 		void attachParentWithIdentity(const char * in_externalId, const char * in_authenticationToken, AuthenticationType in_authenticationType,
-			bool in_forceCreate, const char * in_externalAuthName, IServerCallback * in_callback = NULL);
+			const char * in_externalAuthName, bool in_forceCreate, IServerCallback * in_callback = NULL);
 
 		/**
 		 * Detaches parent from this player's profile
@@ -519,18 +519,18 @@ namespace BrainCloud
 		 * Service Name - identity
 		 * Service Operation - ATTACH_PEER_PROFILE
 		 *
+		 * @param peer Name of the peer to connect to
 		 * @param externalId The users id for the new credentials
 		 * @param authenticationToken The password/token
 		 * @param authenticationType Type of identity
-		 * @param forceCreate Should a new profile be created if it does not exist?
 		 * @param externalAuthName Optional - if attaching an external identity
-		 * @param peer Name of the peer to connect to
+		 * @param forceCreate Should a new profile be created if it does not exist?
 		 * @param successCallback The success callback
 		 * @param errorCallback The failure callback.
 		 * @param cbObject The user object sent to the callback
 		 */
-		void attachPeerProfile(const char * in_externalId, const char * in_authenticationToken, AuthenticationType in_authenticationType,
-			bool in_forceCreate, const char * in_externalAuthName, const char * in_peer, IServerCallback * in_callback = NULL);
+		void attachPeerProfile(const char * in_peer, const char * in_externalId, const char * in_authenticationToken, AuthenticationType in_authenticationType,
+			const char * in_externalAuthName, bool in_forceCreate, IServerCallback * in_callback = NULL);
 
 		/**
 		 * Detaches a peer identity from this player's profile
