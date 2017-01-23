@@ -186,8 +186,8 @@ void BrainCloudIdentity::refreshIdentity(const FString& externalId, const FStrin
 	_client->sendRequest(sc);
 }
 
-void BrainCloudIdentity::attachParentWithIdentity(const FString & externalId, const FString & authenticationToken, EBCAuthType authenticationType, bool forceCreate,
-	const FString & externalAuthName, IServerCallback * callback)
+void BrainCloudIdentity::attachParentWithIdentity(const FString & externalId, const FString & authenticationToken, EBCAuthType authenticationType, 
+	const FString & externalAuthName, bool forceCreate, IServerCallback * callback)
 {
 	TSharedRef<FJsonObject> message = MakeShareable(new FJsonObject());
 	message->SetStringField(OperationParam::IdentityServiceExternalId.getValue(), externalId);
@@ -210,15 +210,15 @@ void BrainCloudIdentity::detachParent(IServerCallback * callback)
 	_client->sendRequest(sc);
 }
 
-void BrainCloudIdentity::attachPeerProfile(const FString & externalId, const FString & authenticationToken, EBCAuthType authenticationType, bool forceCreate,
-	const FString & externalAuthName, const FString & peer, IServerCallback * callback)
+void BrainCloudIdentity::attachPeerProfile(const FString & peer, const FString & externalId, const FString & authenticationToken, EBCAuthType authenticationType, 
+	const FString & externalAuthName, bool forceCreate,  IServerCallback * callback)
 {
 	TSharedRef<FJsonObject> message = MakeShareable(new FJsonObject());
+	message->SetStringField(OperationParam::Peer.getValue(), peer);
 	message->SetStringField(OperationParam::IdentityServiceExternalId.getValue(), externalId);
 	message->SetStringField(OperationParam::AuthenticateServiceAuthenticateAuthenticationToken.getValue(), authenticationToken);
 	message->SetStringField(OperationParam::IdentityServiceAuthenticationType.getValue(), BCAuthType::EnumToString(authenticationType));
 	message->SetBoolField(OperationParam::AuthenticateServiceAuthenticateForceCreate.getValue(), forceCreate);
-	message->SetStringField(OperationParam::Peer.getValue(), peer);
 
 	if (OperationParam::isOptionalParamValid(externalAuthName)) {
 		message->SetStringField(OperationParam::AuthenticateServiceAuthenticateExternalAuthName.getValue(), externalAuthName);
