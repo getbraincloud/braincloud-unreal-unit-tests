@@ -140,6 +140,7 @@ namespace BrainCloud
 	const OperationParam OperationParam::FriendServiceMaxResults = OperationParam("maxResults");
 	const OperationParam OperationParam::FriendServiceFriendPlatform = OperationParam("friendPlatform");
 	const OperationParam OperationParam::FriendServiceProfileIds = OperationParam("profileIds");
+	const OperationParam OperationParam::ExternalAuthType = OperationParam("externalAuthType");
 
 	//Achievements Event Data Params
 	const OperationParam OperationParam::GamificationServiceAchievementsName = OperationParam("achievements");

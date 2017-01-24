@@ -64,6 +64,8 @@ namespace BrainCloud
 	const ServiceOperation ServiceOperation::MakeSystemEntity = ServiceOperation("MAKE_SYSTEM_ENTITY");
 
 	const ServiceOperation ServiceOperation::GetFriendProfileInfoForExternalId = ServiceOperation("GET_FRIEND_PROFILE_INFO_FOR_EXTERNAL_ID");
+	const ServiceOperation ServiceOperation::GetProfileInfoForCredential = ServiceOperation("GET_PROFILE_INFO_FOR_CREDENTIAL");
+	const ServiceOperation ServiceOperation::GetProfileInfoForExternalAuthId = ServiceOperation("GET_PROFILE_INFO_FOR_EXTERNAL_AUTH_ID");
 	const ServiceOperation ServiceOperation::GetExternalIdForProfileId = ServiceOperation("GET_EXTERNAL_ID_FOR_PROFILE_ID");
 	const ServiceOperation ServiceOperation::ReadFriendEntity = ServiceOperation("READ_FRIEND_ENTITY");
 	const ServiceOperation ServiceOperation::ReadFriendsEntities = ServiceOperation("READ_FRIENDS_ENTITIES");

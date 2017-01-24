@@ -5,6 +5,7 @@
 #include "TestResult.h"
 #include "json/json.h"
 #include "braincloud/FriendPlatform.h"
+#include "braincloud/AuthenticationType.h"
 
 #include "TestBCFriend.h"
 
@@ -13,18 +14,25 @@
 
 using namespace BrainCloud;
 
-TEST_F(TestBCFriend, GetFriendProfileInfoForExternalId)
+TEST_F(TestBCFriend, GetProfileInfoForCredential)
 {
-    TestResult tr;
-    m_bc->getFriendService()->getFriendProfileInfoForExternalId("12345", "Facebook", &tr);
-    tr.run(m_bc);
+	TestResult tr;
+	m_bc->getFriendService()->getProfileInfoForCredential(GetUser(UserA)->m_id, AuthenticationType::Universal, &tr);
+	tr.run(m_bc);
+}
+
+TEST_F(TestBCFriend, GetProfileInfoForExternalAuthId)
+{
+	TestResult tr;
+	m_bc->getFriendService()->getProfileInfoForExternalAuthId(GetUser(UserA)->m_id, "failType", &tr);
+	tr.runExpectFail(m_bc, 400, INVALID_CREDENTIAL);
 }
 
 TEST_F(TestBCFriend, GetExternalIdForProfileId)
 {
-    TestResult tr;
-    m_bc->getFriendService()->getExternalIdForProfileId(GetUser(UserA)->m_profileId, "Facebook", &tr);
-    tr.run(m_bc);
+	TestResult tr;
+	m_bc->getFriendService()->getExternalIdForProfileId(GetUser(UserA)->m_profileId, "Facebook", &tr);
+	tr.run(m_bc);
 }
 
 TEST_F(TestBCFriend, FindUsersByExactName)
@@ -43,9 +51,9 @@ TEST_F(TestBCFriend, FindUsersBySubstrName)
 
 TEST_F(TestBCFriend, FindPlayerByUniversalId)
 {
-    TestResult tr;
-    m_bc->getFriendService()->findPlayerByUniversalId("search", 10, &tr);
-    tr.run(m_bc);
+	TestResult tr;
+	m_bc->getFriendService()->findPlayerByUniversalId("search", 10, &tr);
+	tr.run(m_bc);
 }
 
 TEST_F(TestBCFriend, GetSummaryDataForProfileId)
@@ -57,26 +65,26 @@ TEST_F(TestBCFriend, GetSummaryDataForProfileId)
 
 TEST_F(TestBCFriend, AddFriends)
 {
-    AddFriends();
+	AddFriends();
 }
 
 TEST_F(TestBCFriend, ListFriends)
 {
-    TestResult tr;
-    m_bc->getFriendService()->listFriends(FriendPlatform::All, true, &tr);
-    tr.run(m_bc);
+	TestResult tr;
+	m_bc->getFriendService()->listFriends(FriendPlatform::All, true, &tr);
+	tr.run(m_bc);
 }
 
 TEST_F(TestBCFriend, RemoveFriends)
 {
-    AddFriends();
+	AddFriends();
 
-    TestResult tr;
-    std::vector<std::string> profiles;
-    profiles.push_back(GetUser(UserB)->m_profileId);
+	TestResult tr;
+	std::vector<std::string> profiles;
+	profiles.push_back(GetUser(UserB)->m_profileId);
 
-    m_bc->getFriendService()->removeFriends(profiles, &tr);
-    tr.run(m_bc);
+	m_bc->getFriendService()->removeFriends(profiles, &tr);
+	tr.run(m_bc);
 }
 
 TEST_F(TestBCFriend, GetUsersOnlineStatus)
@@ -91,12 +99,12 @@ TEST_F(TestBCFriend, GetUsersOnlineStatus)
 
 void TestBCFriend::AddFriends()
 {
-    TestResult tr;
-    std::vector<std::string> profiles;
-    profiles.push_back(GetUser(UserB)->m_profileId);
+	TestResult tr;
+	std::vector<std::string> profiles;
+	profiles.push_back(GetUser(UserB)->m_profileId);
 
-    m_bc->getFriendService()->addFriends(profiles, &tr);
-    tr.run(m_bc);
+	m_bc->getFriendService()->addFriends(profiles, &tr);
+	tr.run(m_bc);
 }
 
 

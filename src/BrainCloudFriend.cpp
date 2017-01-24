@@ -13,6 +13,7 @@
 #include "braincloud/internal/StringUtil.h"
 #include "braincloud/internal/JsonUtil.h"
 #include "braincloud/FriendPlatform.h"
+#include "braincloud/AuthenticationType.h"
 
 namespace BrainCloud
 {
@@ -35,6 +36,26 @@ namespace BrainCloud
 		message[OperationParam::FriendServiceAuthenticationType.getValue()] = in_authenticationType;
 
 		ServerCall * sc = new ServerCall(ServiceName::Friend, ServiceOperation::GetFriendProfileInfoForExternalId, message, in_callback);
+		m_client->getBrainCloudComms()->addToQueue(sc);
+	}
+
+	void BrainCloudFriend::getProfileInfoForCredential(const char * in_externalId, AuthenticationType in_authenticationType, IServerCallback * in_callback)
+	{
+		Json::Value message;
+		message[OperationParam::FriendServiceExternalId.getValue()] = in_externalId;
+		message[OperationParam::FriendServiceAuthenticationType.getValue()] = in_authenticationType.toString();
+
+		ServerCall * sc = new ServerCall(ServiceName::Friend, ServiceOperation::GetProfileInfoForCredential, message, in_callback);
+		m_client->getBrainCloudComms()->addToQueue(sc);
+	}
+
+	void BrainCloudFriend::getProfileInfoForExternalAuthId(const char * in_externalId, const char * in_externalAuthType, IServerCallback * in_callback)
+	{
+		Json::Value message;
+		message[OperationParam::FriendServiceExternalId.getValue()] = in_externalId;
+		message[OperationParam::ExternalAuthType.getValue()] = in_externalAuthType;
+
+		ServerCall * sc = new ServerCall(ServiceName::Friend, ServiceOperation::GetProfileInfoForExternalAuthId, message, in_callback);
 		m_client->getBrainCloudComms()->addToQueue(sc);
 	}
 
