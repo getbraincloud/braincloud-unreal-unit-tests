@@ -2,6 +2,8 @@
 
 #pragma once
 
+#include "BCAuthType.h"
+
 class BrainCloudClient;
 class IServerCallback;
 
@@ -19,21 +21,41 @@ public:
 	BrainCloudFriend(BrainCloudClient* client);
 
 	/**
+	* @deprecated Use getProfileInfoForCredential instead - removal after March 22 2017
+	*/
+	DEPRECATED("3.2.0", "Use getProfileInfoForCredential instead - removal after March 22 2017")
+		void getFriendProfileInfoForExternalId(const FString& externalId, const FString& authenticationType, IServerCallback * callback = nullptr);
+
+	/**
 	* Retrieves profile information for the specified user.
 	*
-	* Service Name - Friend
-	* Service Operation - GetFriendProfileInfoForExternalId
+	* Service Name - friend
+	* Service Operation - GET_PROFILE_INFO_FOR_CREDENTIAL
 	*
-	* @param externalId The friend's external id e.g. Facebook id
-	* @param authenticationType The authentication type of the friend id e.g. Facebook
+	* @param externalId The users's external ID
+	* @param authenticationType The authentication type of the user ID
+	* @param callback Method to be invoked when the server response is received.
 	*/
-	void getFriendProfileInfoForExternalId(const FString& externalId, const FString& authenticationType, IServerCallback * callback = nullptr);
+	void getProfileInfoForCredential(const FString& externalId, EBCAuthType authenticationType, IServerCallback * callback = nullptr);
+
+	/**
+	* Retrieves profile information for the specified external auth user.
+	*
+	* Service Name - friend
+	* Service Operation - GET_PROFILE_INFO_FOR_EXTERNAL_AUTH_ID
+	*
+	* @param externalId External ID of the user to find
+	* @param externalAuthType The external authentication type used for this users's external ID
+	* @param callback Method to be invoked when the server response is received.
+	*/
+	void getProfileInfoForExternalAuthId(const FString& externalId, const FString& externalAuthType, IServerCallback * callback = nullptr);
 
 	/**
 	* Retrieves the external ID for the specified user profile ID on the specified social platform.
 	*
 	* @param profileId Profile (player) ID.
 	* @param authenticationType Associated authentication type.
+	* @param callback Method to be invoked when the server response is received.
 	*/
 	void getExternalIdForProfileId(const FString& profileId, const FString& authenticationType, IServerCallback * callback = nullptr);
 

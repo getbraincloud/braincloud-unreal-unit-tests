@@ -146,6 +146,7 @@ public:
 	static const OperationParam FriendServiceMaxResults;
 	static const OperationParam FriendServiceFriendPlatform;
 	static const OperationParam FriendServiceProfileIds;
+	static const OperationParam ExternalAuthType;
 
 	//Achievements Event Data Params
 	static const OperationParam GamificationServiceAchievementsName;

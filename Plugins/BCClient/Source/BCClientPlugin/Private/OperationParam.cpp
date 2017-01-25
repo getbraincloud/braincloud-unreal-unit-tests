@@ -146,6 +146,7 @@ OperationParam::OperationParam(const FString& operation)
 	const OperationParam OperationParam::FriendServiceMaxResults = OperationParam(TEXT("maxResults"));
 	const OperationParam OperationParam::FriendServiceFriendPlatform = OperationParam(TEXT("friendPlatform"));
 	const OperationParam OperationParam::FriendServiceProfileIds = OperationParam(TEXT("profileIds"));
+	const OperationParam OperationParam::ExternalAuthType = OperationParam(TEXT("externalAuthType"));
 
 	//Achievements Event Data Params
 	const OperationParam OperationParam::GamificationServiceAchievementsName = OperationParam(TEXT("achievements"));

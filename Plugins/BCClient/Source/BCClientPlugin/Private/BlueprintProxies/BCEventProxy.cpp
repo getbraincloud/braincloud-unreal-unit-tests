@@ -18,17 +18,17 @@ UBCEventProxy* UBCEventProxy::SendEvent(const FString& toPlayerId, const FString
     return Proxy;
 }
 
-UBCEventProxy* UBCEventProxy::UpdateIncomingEventData(const FString& eventId, const FString& jsonEventData)
+UBCEventProxy* UBCEventProxy::UpdateIncomingEventData(const FString& evId, const FString& jsonEventData)
 {
     UBCEventProxy* Proxy = NewObject<UBCEventProxy>();
-    BrainCloudClient::getInstance()->getEventService()->updateIncomingEventData(eventId, jsonEventData, Proxy);
+    BrainCloudClient::getInstance()->getEventService()->updateIncomingEventData(evId, jsonEventData, Proxy);
     return Proxy;
 }
 
-UBCEventProxy* UBCEventProxy::DeleteIncomingEvent(const FString& eventId)
+UBCEventProxy* UBCEventProxy::DeleteIncomingEvent(const FString& evId)
 {
     UBCEventProxy* Proxy = NewObject<UBCEventProxy>();
-    BrainCloudClient::getInstance()->getEventService()->deleteIncomingEvent(eventId, Proxy);
+    BrainCloudClient::getInstance()->getEventService()->deleteIncomingEvent(evId, Proxy);
     return Proxy;
 }
 

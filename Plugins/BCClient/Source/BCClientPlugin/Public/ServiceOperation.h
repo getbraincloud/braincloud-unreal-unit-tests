@@ -68,6 +68,8 @@ public:
 	static const ServiceOperation MakeSystemEntity;
 
 	static const ServiceOperation GetFriendProfileInfoForExternalId;
+	static const ServiceOperation GetProfileInfoForCredential;
+	static const ServiceOperation GetProfileInfoForExternalAuthId;
 	static const ServiceOperation GetExternalIdForProfileId;
 	static const ServiceOperation ReadFriendEntity;
 	static const ServiceOperation ReadFriendsEntities;

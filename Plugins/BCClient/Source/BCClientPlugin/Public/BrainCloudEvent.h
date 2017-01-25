@@ -36,11 +36,11 @@ public:
 	 * Service Name - Event
 	 * Service Operation - UpdateEventData
 	 *
-	 * @param eventId The event id
+	 * @param evId The event id
 	 * @param jsonEventData The user-defined data for this event encoded in JSON.
 	 * @param callback The method to be invoked when the server response is received
 	 */
-	void updateIncomingEventData(const FString& eventId, const FString& jsonEventData, IServerCallback* callback);
+	void updateIncomingEventData(const FString& evId, const FString& jsonEventData, IServerCallback* callback);
 
 	/**
 	 * Delete an event out of the player's incoming mailbox.
@@ -48,10 +48,10 @@ public:
 	 * Service Name - Event
 	 * Service Operation - DeleteIncoming
 	 *
-	 * @param eventId The event id
+	 * @param evId The event id
 	 * @param callback The method to be invoked when the server response is received
 	 */
-	void deleteIncomingEvent(const FString& eventId, IServerCallback* callback);
+	void deleteIncomingEvent(const FString& evId, IServerCallback* callback);
 
 	/**
 	* Get the events currently queued for the player.

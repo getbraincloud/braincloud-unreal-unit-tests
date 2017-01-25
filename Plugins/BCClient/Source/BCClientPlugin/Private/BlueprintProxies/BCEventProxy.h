@@ -41,11 +41,11 @@ public:
     * Service Name - Event
     * Service Operation - UpdateEventData
     *
-    * Param - eventId The event id
+    * Param - evId The event id
     * Param - jsonEventData The user-defined data for this event encoded in JSON.
     */
     UFUNCTION(BlueprintCallable, meta = (BlueprintInternalUseOnly = "true"), Category = "BrainCloud|Event")
-        static UBCEventProxy* UpdateIncomingEventData(const FString& eventId, const FString& jsonEventData);
+        static UBCEventProxy* UpdateIncomingEventData(const FString& evId, const FString& jsonEventData);
 
     /**
     * Delete an event out of the player's incoming mailbox.
@@ -53,10 +53,10 @@ public:
     * Service Name - Event
     * Service Operation - DeleteIncoming
     *
-    * Param - eventId The event id
+    * Param - evId The event id
     */
     UFUNCTION(BlueprintCallable, meta = (BlueprintInternalUseOnly = "true"), Category = "BrainCloud|Event")
-        static UBCEventProxy* DeleteIncomingEvent(const FString& eventId);
+        static UBCEventProxy* DeleteIncomingEvent(const FString& evId);
 
     /**
     * Get the events currently queued for the player.
