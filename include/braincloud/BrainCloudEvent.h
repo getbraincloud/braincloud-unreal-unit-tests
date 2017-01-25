@@ -41,11 +41,11 @@ namespace BrainCloud
 		 * Service Name - event
 		 * Service Operation - UPDATE_EVENT_DATA
 		 *
-		 * @param in_eventId The event id
+		 * @param in_evId The event id
 		 * @param in_jsonEventData The user-defined data for this event encoded in JSON.
 		 * @param in_callback The method to be invoked when the server response is received
 		 */
-		void updateIncomingEventData(const char * in_eventId, const std::string& in_jsonEventData, IServerCallback * in_callback = NULL);
+		void updateIncomingEventData(const char * in_evId, const std::string& in_jsonEventData, IServerCallback * in_callback = NULL);
 
 		/**
 		 * Delete an event out of the player's incoming mailbox.
@@ -53,10 +53,10 @@ namespace BrainCloud
 		 * Service Name - event
 		 * Service Operation - DELETE_INCOMING
 		 *
-		 * @param in_eventId The event id
+		 * @param in_evId The event id
 		 * @param in_callback The method to be invoked when the server response is received
 		 */
-		void deleteIncomingEvent(const char * in_eventId, IServerCallback * in_callback = NULL);
+		void deleteIncomingEvent(const char * in_evId, IServerCallback * in_callback = NULL);
 
 		/**
 		 * Get the events currently queued for the player.
