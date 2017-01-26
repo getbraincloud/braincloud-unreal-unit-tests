@@ -154,7 +154,9 @@ TEST_F(TestBCFile, ListUserFiles)
 TEST_F(TestBCFile, UploadMultipleFiles)
 {
     std::string localPath = "uploadsimplefile.txt";
-    createFile(localPath.c_str(), 3*1024*1024);
+    createFile(localPath.c_str(), 2*1024*1024);
+
+	m_bc->registerFileUploadCallback(this);
     
     std::vector<std::string> uploadIds;
     int numTransfers = 3;
@@ -170,8 +172,7 @@ TEST_F(TestBCFile, UploadMultipleFiles)
         uploadIds.push_back(uploadId);
     }
     
-    m_bc->registerFileUploadCallback(this);
-    int timeoutMs = 60000;
+    int timeoutMs = 120000;
     while (_completedUploadDetails.size() + _failedUploadDetails.size() < numTransfers && timeoutMs > 0)
     {
         m_bc->runCallbacks();

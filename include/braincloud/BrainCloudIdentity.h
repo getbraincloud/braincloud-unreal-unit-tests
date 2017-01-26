@@ -483,6 +483,80 @@ namespace BrainCloud
 		*/
 		void refreshIdentity(const char * in_externalId, const char * in_authenticationToken, AuthenticationType in_authenticationType, IServerCallback * in_callback = NULL);
 
+		/**
+		 * Attach a new identity to a parent app
+		 *
+		 * Service Name - identity
+		 * Service Operation - ATTACH_PARENT_WITH_IDENTITY
+		 *
+		 * @param externalId The users id for the new credentials
+		 * @param authenticationToken The password/token
+		 * @param authenticationType Type of identity
+		 * @param externalAuthName Optional - if attaching an external identity
+		 * @param forceCreate Should a new profile be created if it does not exist?
+		 * @param successCallback The success callback
+		 * @param errorCallback The failure callback.
+		 * @param cbObject The user object sent to the callback
+		 */
+		void attachParentWithIdentity(const char * in_externalId, const char * in_authenticationToken, AuthenticationType in_authenticationType,
+			const char * in_externalAuthName, bool in_forceCreate, IServerCallback * in_callback = NULL);
+
+		/**
+		 * Detaches parent from this player's profile
+		 *
+		 * Service Name - identity
+		 * Service Operation - DETACH_PARENT
+		 *
+		 * @param successCallback The success callback
+		 * @param errorCallback The failure callback.
+		 * @param cbObject The user object sent to the callback
+		 */
+		void detachParent(IServerCallback * in_callback = NULL);
+
+		/**
+		 * Attaches a peer identity to this player's profile
+		 *
+		 * Service Name - identity
+		 * Service Operation - ATTACH_PEER_PROFILE
+		 *
+		 * @param peer Name of the peer to connect to
+		 * @param externalId The users id for the new credentials
+		 * @param authenticationToken The password/token
+		 * @param authenticationType Type of identity
+		 * @param externalAuthName Optional - if attaching an external identity
+		 * @param forceCreate Should a new profile be created if it does not exist?
+		 * @param successCallback The success callback
+		 * @param errorCallback The failure callback.
+		 * @param cbObject The user object sent to the callback
+		 */
+		void attachPeerProfile(const char * in_peer, const char * in_externalId, const char * in_authenticationToken, AuthenticationType in_authenticationType,
+			const char * in_externalAuthName, bool in_forceCreate, IServerCallback * in_callback = NULL);
+
+		/**
+		 * Detaches a peer identity from this player's profile
+		 *
+		 * Service Name - identity
+		 * Service Operation - DETACH_PEER
+		 *
+		 * @param peer Name of the peer to connect to
+		 * @param successCallback The success callback
+		 * @param errorCallback The failure callback.
+		 * @param cbObject The user object sent to the callback
+		 */
+		void detachPeer(const char * in_peer, IServerCallback * in_callback = NULL);
+
+		/**
+		 * Returns a list of peer profiles attached to this user
+		 *
+		 * Service Name - identity
+		 * Service Operation - GET_PEER_PROFILES
+		 *
+		 * @param successCallback The success callback
+		 * @param errorCallback The failure callback.
+		 * @param cbObject The user object sent to the callback
+		 */
+		void getPeerProfiles(IServerCallback * in_callback = NULL);
+
 	private:
 		BrainCloudClient * m_client;
 

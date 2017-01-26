@@ -10,7 +10,7 @@ Pod::Spec.new do |s|
   # ―――  Spec Metadata  ―――――――――――――――――――――――――――――――――――――――――――――――――――――――――― #
 
   s.name     = "BrainCloudCpp"
-  s.version  = "3.1.0"
+  s.version  = "3.2.0"
   s.summary  = "The C++ client library for brainCloud"
   s.homepage = "http://getbraincloud.com/"
 
@@ -25,7 +25,7 @@ Pod::Spec.new do |s|
 
   # ――― Author Metadata  ――――――――――――――――――――――――――――――――――――――――――――――――――――――――― #
 
-  s.authors                = {"Preston Jennings" => "prestonj@bitheads.com"}
+  s.authors                = {"Brad Hill" => "bradleyh@bitheads.com"}
   s.social_media_url       = "https://twitter.com/braincloudbaas"
 
   # ――― Source Location ―――――――――――――――――――――――――――――――――――――――――――――――――――――――――― #
@@ -36,7 +36,7 @@ Pod::Spec.new do |s|
 
   s.header_mappings_dir     = "include"
   s.preserve_paths          = "include/*", "include/**/*"
-  s.public_header_files     = "include/braincloud/*.h", "include/braincloud/internal/*.h", "include/braincloud/mac/*.h"
+  s.public_header_files     = "include/braincloud/*.h", "include/braincloud/internal/*.h", "include/braincloud/internal/mac/*.h"
   s.source_files            = "src/*.{c,cpp}", "src/mac/*.{c,cpp,mm}", "include/braincloud/*.h", "include/braincloud/internal/*.h", "include/braincloud/internal/mac/*.h"
 
   # hack for use_frameworks!

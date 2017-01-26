@@ -196,6 +196,62 @@ namespace BrainCloud
 		m_client->sendRequest(sc);
 	}
 
+	void BrainCloudIdentity::attachParentWithIdentity(const char * in_externalId, const char * in_authenticationToken, AuthenticationType in_authenticationType,
+		const char * in_externalAuthName, bool in_forceCreate, IServerCallback * in_callback)
+	{
+		Json::Value data;
+		data[OperationParam::AuthenticateServiceAuthenticateAuthenticationToken.getValue()] = in_authenticationToken;
+		data[OperationParam::IdentityServiceAuthenticationType.getValue()] = in_authenticationType.toString();
+		data[OperationParam::IdentityServiceExternalId.getValue()] = in_externalId;
+		data[OperationParam::AuthenticateServiceAuthenticateForceCreate.getValue()] = in_forceCreate;
+
+		if (StringUtil::IsOptionalParameterValid(in_externalAuthName))
+			data[OperationParam::AuthenticateServiceAuthenticateExternalAuthName.getValue()] = in_externalAuthName;
+
+		ServerCall * sc = new ServerCall(ServiceName::Identity, ServiceOperation::AttachParentWithIdentity, data, in_callback);
+		m_client->sendRequest(sc);
+	}
+
+	void BrainCloudIdentity::detachParent(IServerCallback * in_callback)
+	{
+		Json::Value data = Json::nullValue;
+		ServerCall * sc = new ServerCall(ServiceName::Identity, ServiceOperation::DetachParent, data, in_callback);
+		m_client->sendRequest(sc);
+	}
+
+	void BrainCloudIdentity::attachPeerProfile(const char * in_peer, const char * in_externalId, const char * in_authenticationToken, AuthenticationType in_authenticationType,
+		const char * in_externalAuthName, bool in_forceCreate, IServerCallback * in_callback)
+	{
+		Json::Value data;
+		data[OperationParam::AuthenticateServiceAuthenticateAuthenticationToken.getValue()] = in_authenticationToken;
+		data[OperationParam::IdentityServiceAuthenticationType.getValue()] = in_authenticationType.toString();
+		data[OperationParam::IdentityServiceExternalId.getValue()] = in_externalId;
+		data[OperationParam::AuthenticateServiceAuthenticateForceCreate.getValue()] = in_forceCreate;
+		data[OperationParam::Peer.getValue()] = in_peer;
+
+		if (StringUtil::IsOptionalParameterValid(in_externalAuthName))
+			data[OperationParam::AuthenticateServiceAuthenticateExternalAuthName.getValue()] = in_externalAuthName;
+
+		ServerCall * sc = new ServerCall(ServiceName::Identity, ServiceOperation::AttachPeerProfile, data, in_callback);
+		m_client->sendRequest(sc);
+	}
+
+	void BrainCloudIdentity::detachPeer(const char * in_peer, IServerCallback * in_callback)
+	{
+		Json::Value data;
+		data[OperationParam::Peer.getValue()] = in_peer;
+
+		ServerCall * sc = new ServerCall(ServiceName::Identity, ServiceOperation::DetachPeer, data, in_callback);
+		m_client->sendRequest(sc);
+	}
+
+	void BrainCloudIdentity::getPeerProfiles(IServerCallback * in_callback)
+	{
+		Json::Value data = Json::nullValue;
+		ServerCall * sc = new ServerCall(ServiceName::Identity, ServiceOperation::GetPeerProfiles, data, in_callback);
+		m_client->sendRequest(sc);
+	}
+
 	// Private methods
 
 	void BrainCloudIdentity::switchToChildProfile(const char * in_childProfileId, const char * in_childGameId, bool in_forceCreate, bool in_forceSingleton, IServerCallback * in_callback)

@@ -63,6 +63,7 @@ namespace BrainCloud
 	const OperationParam OperationParam::IdentityServiceExternalId = OperationParam("externalId");
 	const OperationParam OperationParam::IdentityServiceAuthenticationType = OperationParam("authenticationType");
 	const OperationParam OperationParam::IdentityServiceConfirmAnonymous = OperationParam("confirmAnonymous");
+	const OperationParam OperationParam::Peer = OperationParam("peer");
 
 	// Async Match Service - Async Match Params
 	const OperationParam OperationParam::AsyncMatchServicePlayers = OperationParam("players");
@@ -100,6 +101,7 @@ namespace BrainCloud
 	const OperationParam OperationParam::GlobalEntityServiceOrderBy = OperationParam("orderBy");
 	const OperationParam OperationParam::GlobalEntityServiceContext = OperationParam("context");
 	const OperationParam OperationParam::GlobalEntityServicePageOffset = OperationParam("pageOffset");
+	const OperationParam OperationParam::OwnerId = OperationParam("ownerId");
 
 	// Event Service - Send Params
 	const OperationParam OperationParam::EventServiceSendToId = OperationParam("toId");
@@ -112,6 +114,7 @@ namespace BrainCloud
 	const OperationParam OperationParam::EventServiceUpdateEventDataFromId = OperationParam("fromId");
 	const OperationParam OperationParam::EventServiceUpdateEventDataEventId = OperationParam("eventId");
 	const OperationParam OperationParam::EventServiceUpdateEventDataData = OperationParam("eventData");
+	const OperationParam OperationParam::EvId = OperationParam("evId");
 
 	// Event Service - Delete Incoming Params
 	const OperationParam OperationParam::EventServiceDeleteIncomingEventId = OperationParam("eventId");
@@ -137,6 +140,7 @@ namespace BrainCloud
 	const OperationParam OperationParam::FriendServiceMaxResults = OperationParam("maxResults");
 	const OperationParam OperationParam::FriendServiceFriendPlatform = OperationParam("friendPlatform");
 	const OperationParam OperationParam::FriendServiceProfileIds = OperationParam("profileIds");
+	const OperationParam OperationParam::ExternalAuthType = OperationParam("externalAuthType");
 
 	//Achievements Event Data Params
 	const OperationParam OperationParam::GamificationServiceAchievementsName = OperationParam("achievements");
@@ -189,6 +193,7 @@ namespace BrainCloud
 	const OperationParam OperationParam::SocialLeaderboardServiceRotationReset = OperationParam("rotationReset");
 	const OperationParam OperationParam::SocialLeaderboardServiceRotationResetTime = OperationParam("rotationResetTime");
 	const OperationParam OperationParam::SocialLeaderboardServiceRetainedCount = OperationParam("retainedCount");
+	const OperationParam OperationParam::NumDaysToRotate = OperationParam("numDaysToRotate");
 	const OperationParam OperationParam::SocialLeaderboardServiceFetchType = OperationParam("fetchType");
 	const OperationParam OperationParam::SocialLeaderboardServiceSortOrder = OperationParam("sort");
 	const OperationParam OperationParam::SocialLeaderboardServiceMaxResults = OperationParam("maxResults");
@@ -340,6 +345,13 @@ namespace BrainCloud
 	const OperationParam OperationParam::Body = OperationParam("body");
 	const OperationParam OperationParam::ServiceParams = OperationParam("serviceParams");
 
+	const OperationParam OperationParam::LeaderboardId = OperationParam("leaderboardId");
+	const OperationParam OperationParam::VersionId = OperationParam("versionId");
+	const OperationParam OperationParam::TournamentCode = OperationParam("tournamentCode");
+	const OperationParam OperationParam::InitialScore = OperationParam("initialScore");
+	const OperationParam OperationParam::Score = OperationParam("score");
+	const OperationParam OperationParam::RoundStartedEpoch = OperationParam("roundStartedEpoch");
+	const OperationParam OperationParam::Data = OperationParam("data");
 
 	OperationParam::OperationParam(const char * value)
 	{

@@ -14,6 +14,10 @@ public:
     TestBCIdentity()
     {
     }
+
+protected:
+	void detachPeer();
+	void detachParent();
 };
 
 #endif

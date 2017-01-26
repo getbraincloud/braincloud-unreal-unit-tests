@@ -15,6 +15,11 @@ namespace BrainCloud
 	const ServiceOperation ServiceOperation::GetIdentities = ServiceOperation("GET_IDENTITIES");
 	const ServiceOperation ServiceOperation::GetExpiredIdentities = ServiceOperation("GET_EXPIRED_IDENTITIES");
 	const ServiceOperation ServiceOperation::RefreshIdentity = ServiceOperation("REFRESH_IDENTITY");
+	const ServiceOperation ServiceOperation::AttachParentWithIdentity = ServiceOperation("ATTACH_PARENT_WITH_IDENTITY");
+	const ServiceOperation ServiceOperation::AttachPeerProfile = ServiceOperation("ATTACH_PEER_PROFILE");
+	const ServiceOperation ServiceOperation::DetachPeer = ServiceOperation("DETACH_PEER");
+	const ServiceOperation ServiceOperation::GetPeerProfiles = ServiceOperation("GET_PEER_PROFILES");
+	const ServiceOperation ServiceOperation::DetachParent = ServiceOperation("DETACH_PARENT");
 
 	const ServiceOperation ServiceOperation::Create = ServiceOperation("CREATE");
 	const ServiceOperation ServiceOperation::CreateWithIndexedId = ServiceOperation("CREATE_WITH_INDEXED_ID");
@@ -55,8 +60,12 @@ namespace BrainCloud
 	const ServiceOperation ServiceOperation::UpdateSummary = ServiceOperation("UPDATE_SUMMARY");
 	const ServiceOperation ServiceOperation::UpdateSetMinimum = ServiceOperation("UPDATE_SET_MINIMUM");
 	const ServiceOperation ServiceOperation::UpdateIncrementToMaximum = ServiceOperation("UPDATE_INCREMENT_TO_MAXIMUM");
+	const ServiceOperation ServiceOperation::UpdateEntityOwnerAndAcl = ServiceOperation("UPDATE_ENTITY_OWNER_AND_ACL");
+	const ServiceOperation ServiceOperation::MakeSystemEntity = ServiceOperation("MAKE_SYSTEM_ENTITY");
 
 	const ServiceOperation ServiceOperation::GetFriendProfileInfoForExternalId = ServiceOperation("GET_FRIEND_PROFILE_INFO_FOR_EXTERNAL_ID");
+	const ServiceOperation ServiceOperation::GetProfileInfoForCredential = ServiceOperation("GET_PROFILE_INFO_FOR_CREDENTIAL");
+	const ServiceOperation ServiceOperation::GetProfileInfoForExternalAuthId = ServiceOperation("GET_PROFILE_INFO_FOR_EXTERNAL_AUTH_ID");
 	const ServiceOperation ServiceOperation::GetExternalIdForProfileId = ServiceOperation("GET_EXTERNAL_ID_FOR_PROFILE_ID");
 	const ServiceOperation ServiceOperation::ReadFriendEntity = ServiceOperation("READ_FRIEND_ENTITY");
 	const ServiceOperation ServiceOperation::ReadFriendsEntities = ServiceOperation("READ_FRIENDS_ENTITIES");
@@ -85,6 +94,10 @@ namespace BrainCloud
 	const ServiceOperation ServiceOperation::GetSummaryDataForProfileId = ServiceOperation("GET_SUMMARY_DATA_FOR_PROFILE_ID");
 	const ServiceOperation ServiceOperation::GetPlayersSocialLeaderboard = ServiceOperation("GET_PLAYERS_SOCIAL_LEADERBOARD");
 	const ServiceOperation ServiceOperation::ListAllLeaderboards = ServiceOperation("LIST_ALL_LEADERBOARDS");
+	const ServiceOperation ServiceOperation::GetGlobalLeaderboardEntryCount = ServiceOperation("GET_GLOBAL_LEADERBOARD_ENTRY_COUNT");
+	const ServiceOperation ServiceOperation::RemovePlayerScore = ServiceOperation("REMOVE_PLAYER_SCORE");
+	const ServiceOperation ServiceOperation::GetPlayerScore = ServiceOperation("GET_PLAYER_SCORE");
+	const ServiceOperation ServiceOperation::GetPlayerScoresFromLeaderboards = ServiceOperation("GET_PLAYER_SCORES_FROM_LEADERBOARDS");
 
 	const ServiceOperation ServiceOperation::InitThirdParty = ServiceOperation("initThirdParty");
 	const ServiceOperation ServiceOperation::PostThirdPartyLeaderboardScore = ServiceOperation("postThirdPartyLeaderboardScore");
@@ -122,6 +135,8 @@ namespace BrainCloud
 	const ServiceOperation ServiceOperation::ReadForCategory = ServiceOperation("READ_FOR_CATEGORY");
 
 	const ServiceOperation ServiceOperation::Run = ServiceOperation("RUN");
+	const ServiceOperation ServiceOperation::RunPeerScript = ServiceOperation("RUN_PEER_SCRIPT");
+	const ServiceOperation ServiceOperation::RunPeerScriptAsync = ServiceOperation("RUN_PEER_SCRIPT_ASYNC");
 	const ServiceOperation ServiceOperation::Tweet = ServiceOperation("TWEET");
 
 	const ServiceOperation ServiceOperation::AwardAchievements = ServiceOperation("AWARD_ACHIEVEMENTS");
@@ -271,6 +286,16 @@ namespace BrainCloud
 	const ServiceOperation ServiceOperation::UpdateGroupEntity = ServiceOperation("UPDATE_GROUP_ENTITY_DATA");
 	const ServiceOperation ServiceOperation::UpdateGroupMember = ServiceOperation("UPDATE_GROUP_MEMBER");
 	const ServiceOperation ServiceOperation::UpdateGroupName = ServiceOperation("UPDATE_GROUP_NAME");
+
+	//tournament
+	const ServiceOperation ServiceOperation::GetTournamentStatus = ServiceOperation("GET_TOURNAMENT_STATUS");
+	const ServiceOperation ServiceOperation::JoinTournament = ServiceOperation("JOIN_TOURNAMENT");
+	const ServiceOperation ServiceOperation::LeaveTournament = ServiceOperation("LEAVE_TOURNAMENT");
+	const ServiceOperation ServiceOperation::PostTournamentScore = ServiceOperation("POST_TOURNAMENT_SCORE");
+	const ServiceOperation ServiceOperation::PostTournamentScoreWithResults = ServiceOperation("POST_TOURNAMENT_SCORE_WITH_RESULTS");
+	const ServiceOperation ServiceOperation::ViewCurrentReward = ServiceOperation("VIEW_CURRENT_REWARD");
+	const ServiceOperation ServiceOperation::ViewReward = ServiceOperation("VIEW_REWARD");
+	const ServiceOperation ServiceOperation::ClaimTournamentReward = ServiceOperation("CLAIM_TOURNAMENT_REWARD");
 
 	//mail
 	const ServiceOperation ServiceOperation::SendBasicEmail = ServiceOperation("SEND_BASIC_EMAIL");

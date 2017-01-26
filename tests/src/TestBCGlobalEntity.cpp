@@ -167,6 +167,24 @@ TEST_F(TestBCGlobalEntity, IncremenGlobalEntityData)
     tr.run(m_bc);
 }
 
+TEST_F(TestBCGlobalEntity, UpdateEntityOwnerAndAcl)
+{
+	CreateDefaultGlobalEntity(m_indexedId);
+
+	TestResult tr;
+	m_bc->getGlobalEntityService()->updateEntityOwnerAndAcl(m_entityId.c_str(), -1, GetUser(UserB)->m_profileId, m_entityAclJson, &tr);
+	tr.run(m_bc);
+}
+
+TEST_F(TestBCGlobalEntity, MakeSystemEntity)
+{
+	CreateDefaultGlobalEntity(m_indexedId);
+
+	TestResult tr;
+	m_bc->getGlobalEntityService()->makeSystemEntity(m_entityId.c_str(), -1, m_entityAclJson, &tr);
+	tr.run(m_bc);
+}
+
 void TestBCGlobalEntity::CreateDefaultGlobalEntity(std::string indexedId)
 {
     TestResult tr;

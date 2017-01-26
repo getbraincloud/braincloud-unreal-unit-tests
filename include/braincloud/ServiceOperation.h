@@ -20,6 +20,11 @@ namespace BrainCloud {
 		static const ServiceOperation GetIdentities;
 		static const ServiceOperation GetExpiredIdentities;
 		static const ServiceOperation RefreshIdentity;
+		static const ServiceOperation AttachParentWithIdentity;
+		static const ServiceOperation AttachPeerProfile;
+		static const ServiceOperation DetachPeer;
+		static const ServiceOperation GetPeerProfiles;
+		static const ServiceOperation DetachParent;
 
 		static const ServiceOperation Create;
 		static const ServiceOperation CreateWithIndexedId;
@@ -60,8 +65,12 @@ namespace BrainCloud {
 		static const ServiceOperation UpdateSummary;
 		static const ServiceOperation UpdateSetMinimum;
 		static const ServiceOperation UpdateIncrementToMaximum;
+		static const ServiceOperation UpdateEntityOwnerAndAcl;
+		static const ServiceOperation MakeSystemEntity;
 
 		static const ServiceOperation GetFriendProfileInfoForExternalId;
+		static const ServiceOperation GetProfileInfoForCredential;
+		static const ServiceOperation GetProfileInfoForExternalAuthId;
 		static const ServiceOperation GetExternalIdForProfileId;
 		static const ServiceOperation ReadFriendEntity;
 		static const ServiceOperation ReadFriendsEntities;
@@ -90,6 +99,10 @@ namespace BrainCloud {
 		static const ServiceOperation GetSummaryDataForProfileId;
 		static const ServiceOperation GetPlayersSocialLeaderboard;
 		static const ServiceOperation ListAllLeaderboards;
+		static const ServiceOperation GetGlobalLeaderboardEntryCount;
+		static const ServiceOperation RemovePlayerScore;
+		static const ServiceOperation GetPlayerScore;
+		static const ServiceOperation GetPlayerScoresFromLeaderboards;
 
 		static const ServiceOperation InitThirdParty;
 		static const ServiceOperation PostThirdPartyLeaderboardScore;
@@ -128,6 +141,8 @@ namespace BrainCloud {
 		static const ServiceOperation SetXpPoints;
 
 		static const ServiceOperation Run;
+		static const ServiceOperation RunPeerScript;
+		static const ServiceOperation RunPeerScriptAsync;
 		static const ServiceOperation Tweet;
 
 		static const ServiceOperation AwardAchievements;
@@ -281,6 +296,17 @@ namespace BrainCloud {
 		//mail
 		static const ServiceOperation SendBasicEmail;
 		static const ServiceOperation SendAdvancedEmail;
+
+
+		//tournament
+		static const ServiceOperation GetTournamentStatus;
+		static const ServiceOperation JoinTournament;
+		static const ServiceOperation LeaveTournament;
+		static const ServiceOperation PostTournamentScore;
+		static const ServiceOperation PostTournamentScoreWithResults;
+		static const ServiceOperation ViewCurrentReward;
+		static const ServiceOperation ViewReward;
+		static const ServiceOperation ClaimTournamentReward;
 
 
 		std::string getValue() const { return _value; }

@@ -26,6 +26,7 @@ protected:
     static std::string m_version;
     static std::string m_parentLevelName;
     static std::string m_childAppId;
+	static std::string m_peerName;
 
     virtual void SetUp();
     virtual void TearDown();
@@ -37,6 +38,8 @@ protected:
 
     bool GoToChildProfile();
     bool GoToParentProfile();
+	bool AttachPeer(Users user, AuthenticationType authType);
+	bool DetachPeer();
     void Logout();
 
 private:

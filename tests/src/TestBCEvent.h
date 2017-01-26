@@ -16,10 +16,10 @@ public:
     void eventCallback(std::string const & jsonData);
     
 protected:
-    void SendDefaultMessage(bool recordLocal);
+    void SendDefaultMessage();
     void DeleteIncomingMessage();
     
-    uint64_t m_eventId;
+	std::string m_eventId;
     std::string m_eventDataKey;
     const char * m_eventType;
     

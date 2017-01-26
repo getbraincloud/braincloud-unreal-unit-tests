@@ -71,6 +71,7 @@ namespace BrainCloud {
 		static const OperationParam IdentityServiceExternalId;
 		static const OperationParam IdentityServiceAuthenticationType;
 		static const OperationParam IdentityServiceConfirmAnonymous;
+		static const OperationParam Peer;
 
 		// Async Match Service - Async Match Params
 		static const OperationParam AsyncMatchServicePlayers;
@@ -108,6 +109,7 @@ namespace BrainCloud {
 		static const OperationParam GlobalEntityServiceOrderBy;
 		static const OperationParam GlobalEntityServiceContext;
 		static const OperationParam GlobalEntityServicePageOffset;
+		static const OperationParam OwnerId;
 
 		// Event Service - Send Params
 		static const OperationParam EventServiceSendToId;
@@ -120,6 +122,7 @@ namespace BrainCloud {
 		static const OperationParam EventServiceUpdateEventDataFromId;
 		static const OperationParam EventServiceUpdateEventDataEventId;
 		static const OperationParam EventServiceUpdateEventDataData;
+		static const OperationParam EvId;
 
 		// Event Service - Delete Incoming Params
 		static const OperationParam EventServiceDeleteIncomingEventId;
@@ -145,6 +148,7 @@ namespace BrainCloud {
 		static const OperationParam FriendServiceMaxResults;
 		static const OperationParam FriendServiceFriendPlatform;
 		static const OperationParam FriendServiceProfileIds;
+		static const OperationParam ExternalAuthType;
 
 		//Achievements Event Data Params
 		static const OperationParam GamificationServiceAchievementsName;
@@ -197,6 +201,7 @@ namespace BrainCloud {
 		static const OperationParam SocialLeaderboardServiceRotationReset;
 		static const OperationParam SocialLeaderboardServiceRotationResetTime;
 		static const OperationParam SocialLeaderboardServiceRetainedCount;
+		static const OperationParam NumDaysToRotate;
 		static const OperationParam SocialLeaderboardServiceFetchType;
 		static const OperationParam SocialLeaderboardServiceMaxResults;
 		static const OperationParam SocialLeaderboardServiceSortOrder;
@@ -345,6 +350,15 @@ namespace BrainCloud {
 		static const OperationParam Subject;
 		static const OperationParam Body;
 		static const OperationParam ServiceParams;
+
+
+		static const OperationParam LeaderboardId;
+		static const OperationParam VersionId;
+		static const OperationParam TournamentCode;
+		static const OperationParam InitialScore;
+		static const OperationParam Score;
+		static const OperationParam RoundStartedEpoch;
+		static const OperationParam Data;
 
 		/*
 		 OfflineMatchServicePlayerId                        = new OperationParam("playerId");

@@ -38,6 +38,7 @@
 #include "braincloud/BrainCloudSocialLeaderboard.h"
 #include "braincloud/BrainCloudGamification.h"
 #include "braincloud/BrainCloudTime.h"
+#include "braincloud/BrainCloudTournament.h"
 #include "braincloud/BrainCloudAuthentication.h"
 #include "braincloud/BrainCloudPushNotification.h"
 #include "braincloud/BrainCloudPlayerStatisticsEvent.h"
@@ -277,6 +278,7 @@ namespace BrainCloud
 		BrainCloudSocialLeaderboard * getSocialLeaderboardService() { return _socialLeaderboardService; }
 		BrainCloudGamification * getGamificationService() { return _gamificationService; }
 		BrainCloudTime * getTimeService() { return _timeService; }
+		BrainCloudTournament * getTournamentService() { return _tournamentService; }
 		BrainCloudAuthentication * getAuthenticationService() { return _authenticationService; }
 		BrainCloudPushNotification * getPushNotificationService() { return _pushNotificationService; }
 		BrainCloudPlayerStatisticsEvent * getPlayerStatisticsEventService() { return _playerStatisticsEventService; }
@@ -530,6 +532,7 @@ namespace BrainCloud
 		BrainCloudSocialLeaderboard * _socialLeaderboardService;
 		BrainCloudGamification * _gamificationService;
 		BrainCloudTime * _timeService;
+		BrainCloudTournament * _tournamentService;
 		BrainCloudAuthentication * _authenticationService;
 		BrainCloudPushNotification * _pushNotificationService;
 		BrainCloudPlayerStatisticsEvent * _playerStatisticsEventService;

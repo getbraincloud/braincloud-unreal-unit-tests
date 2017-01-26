@@ -54,44 +54,28 @@ TEST_F(TestBCSocialLeaderboard, GetGlobalLeaderboardVersions)
 TEST_F(TestBCSocialLeaderboard, GetGlobalLeaderboardPageHigh)
 {
     TestResult tr;
-    m_bc->getSocialLeaderboardService()->getGlobalLeaderboardPage(LB_ID, HIGH_TO_LOW, 0, 10, true, &tr);
+    m_bc->getSocialLeaderboardService()->getGlobalLeaderboardPage(LB_ID, HIGH_TO_LOW, 0, 10, &tr);
     tr.run(m_bc);
 }
 
 TEST_F(TestBCSocialLeaderboard, GetGlobalLeaderboardPageLow)
 {
     TestResult tr;
-    m_bc->getSocialLeaderboardService()->getGlobalLeaderboardPage(LB_ID, LOW_TO_HIGH, 0, 10, true, &tr);
+    m_bc->getSocialLeaderboardService()->getGlobalLeaderboardPage(LB_ID, LOW_TO_HIGH, 0, 10, &tr);
     tr.run(m_bc);
 }
 
 TEST_F(TestBCSocialLeaderboard, GetGlobalLeaderboardViewHigh)
 {
     TestResult tr;
-    m_bc->getSocialLeaderboardService()->getGlobalLeaderboardView(LB_ID, HIGH_TO_LOW, 4, 5, true, &tr);
+    m_bc->getSocialLeaderboardService()->getGlobalLeaderboardView(LB_ID, HIGH_TO_LOW, 4, 5, &tr);
     tr.run(m_bc);
 }
 
 TEST_F(TestBCSocialLeaderboard, GetGlobalLeaderboardViewLow)
 {
     TestResult tr;
-    m_bc->getSocialLeaderboardService()->getGlobalLeaderboardView(LB_ID, LOW_TO_HIGH, 4, 5, true, &tr);
-    tr.run(m_bc);
-}
-
-TEST_F(TestBCSocialLeaderboard, ResetScore)
-{
-    TestResult tr;
-
-    m_bc->getSocialLeaderboardService()->resetLeaderboardScore(LB_ID, &tr);
-    tr.run(m_bc);
-}
-
-TEST_F(TestBCSocialLeaderboard, GetCompletedTournament)
-{
-    TestResult tr;
-
-    m_bc->getSocialLeaderboardService()->getCompletedLeaderboardTournament(SOCIAL_LB_ID, true, &tr);
+    m_bc->getSocialLeaderboardService()->getGlobalLeaderboardView(LB_ID, LOW_TO_HIGH, 4, 5, &tr);
     tr.run(m_bc);
 }
 
@@ -99,7 +83,7 @@ TEST_F(TestBCSocialLeaderboard, GetGlobalPageByVersion)
 {
     TestResult tr;
 
-    m_bc->getSocialLeaderboardService()->getGlobalLeaderboardPageByVersion(LB_ID, HIGH_TO_LOW, 0, 10, true, 0, &tr);
+    m_bc->getSocialLeaderboardService()->getGlobalLeaderboardPageByVersion(LB_ID, HIGH_TO_LOW, 0, 10, 0, &tr);
     tr.run(m_bc);
 }
 
@@ -107,14 +91,7 @@ TEST_F(TestBCSocialLeaderboard, GetGlobalViewByVersion)
 {
     TestResult tr;
 
-    m_bc->getSocialLeaderboardService()->getGlobalLeaderboardViewByVersion(LB_ID, HIGH_TO_LOW, 0, 10, true, 0, &tr);
-    tr.run(m_bc);
-}
-
-TEST_F(TestBCSocialLeaderboard, TriggerSocialTournamentReward)
-{
-    TestResult tr;
-    m_bc->getSocialLeaderboardService()->triggerSocialLeaderboardTournamentReward(SOCIAL_LB_ID, REWARD_EVENT_ID, 5, &tr);
+    m_bc->getSocialLeaderboardService()->getGlobalLeaderboardViewByVersion(LB_ID, HIGH_TO_LOW, 0, 10, 0, &tr);
     tr.run(m_bc);
 }
 
@@ -132,6 +109,17 @@ TEST_F(TestBCSocialLeaderboard, PostScoreToDynamicNullRotationTime)
 
     m_bc->getSocialLeaderboardService()->postScoreToDynamicLeaderboard(DYNAMIC_LB_ID, 100, fw.write(jsonData), HIGH_VALUE, NEVER, NULL, 2, &tr);
     tr.run(m_bc);
+}
+
+TEST_F(TestBCSocialLeaderboard, PostScoreToDynamicDays)
+{
+	TestResult tr;
+	Json::FastWriter fw;
+	Json::Value jsonData;
+	jsonData["testKey"] = "TestValue";
+
+	m_bc->getSocialLeaderboardService()->postScoreToDynamicLeaderboardDays("TestDynamicDaysCpp", 100, fw.write(jsonData), HIGH_VALUE, NULL, 2, 3, &tr);
+	tr.run(m_bc);
 }
 
 TEST_F(TestBCSocialLeaderboard, GetGroupSocialLeaderboard)
@@ -166,6 +154,54 @@ TEST_F(TestBCSocialLeaderboard, ListAllLeaderboards)
 	TestResult tr;
 
 	m_bc->getSocialLeaderboardService()->listAllLeaderboards(&tr);
+	tr.run(m_bc);
+}
+
+TEST_F(TestBCSocialLeaderboard, GetGlobalLeaderboardEntryCount)
+{
+	TestResult tr;
+
+	m_bc->getSocialLeaderboardService()->getGlobalLeaderboardEntryCount(LB_ID, &tr);
+	tr.run(m_bc);
+}
+
+TEST_F(TestBCSocialLeaderboard, GetGlobalLeaderboardEntryCountByVersion)
+{
+	TestResult tr;
+
+	m_bc->getSocialLeaderboardService()->getGlobalLeaderboardEntryCountByVersion(LB_ID, 1, &tr);
+	tr.run(m_bc);
+}
+
+TEST_F(TestBCSocialLeaderboard, RemoveScore)
+{
+	PostScoreToNonDynamic();
+
+	TestResult tr;
+	m_bc->getSocialLeaderboardService()->removePlayerScore(LB_ID, -1, &tr);
+	tr.run(m_bc);
+}
+
+TEST_F(TestBCSocialLeaderboard, GetPlayerScore)
+{
+	PostScoreToNonDynamic();
+
+	TestResult tr;
+	m_bc->getSocialLeaderboardService()->getPlayerScore(LB_ID, -1, &tr);
+	tr.run(m_bc);
+}
+
+TEST_F(TestBCSocialLeaderboard, GetPlayerScoresFromLeaderboards)
+{
+	// post a few scores first so we have some data
+	PostScoreToNonDynamic();
+	PostScoreToDynamic();
+
+	TestResult tr;
+	std::vector<std::string> lbIds;
+	lbIds.push_back(LB_ID);
+	lbIds.push_back(DYNAMIC_LB_ID);
+	m_bc->getSocialLeaderboardService()->getPlayerScoresFromLeaderboards(lbIds, &tr);
 	tr.run(m_bc);
 }
 

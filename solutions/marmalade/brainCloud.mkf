@@ -59,6 +59,7 @@ files
     BrainCloudSocialLeaderboard.h
     BrainCloudSteam.h
     BrainCloudTime.h
+    BrainCloudTournament.h
     BrainCloudTypes.h
     BrainCloudWrapper.h
     FriendPlatform.h

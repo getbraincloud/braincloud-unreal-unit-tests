@@ -91,6 +91,8 @@ files
     TestBCSocialLeaderboard.h
     TestBCTime.cpp
     TestBCTime.h
+    TestBCTournament.cpp
+    TestBCTournament.h
     TestBCWrapper.cpp
     TestBCWrapper.h
     TestFixtureBase.cpp

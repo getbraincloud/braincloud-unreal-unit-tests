@@ -184,6 +184,33 @@ namespace BrainCloud
 		*/
 		void incrementGlobalEntityData(const char * in_entityId, std::string in_jsonData, IServerCallback * in_callback = NULL);
 
+		/**
+		* Method updates an existing entity's Owner and ACL on the server.
+		*
+		* Service Name - globalEntity
+		* Service Operation - UPDATE_ENTITY_OWNER_AND_ACL
+		*
+		* @param in_entityId The entity ID
+		* @param in_version The version of the entity to update
+		* @param in_ownerId The owner ID
+		* @param in_jsonEntityAcl The entity's access control list as JSON.
+		* @param in_callback The callback object
+		*/
+		void updateEntityOwnerAndAcl(const char * in_entityId, int64_t in_version, const char * in_ownerId, const std::string& in_jsonEntityAcl, IServerCallback * in_callback = NULL);
+
+		/**
+		* Method clears the owner id of an existing entity and sets the ACL on the server.
+		*
+		* Service Name - globalEntity
+		* Service Operation - MAKE_SYSTEM_ENTITY
+		*
+		* @param in_entityId The entity ID
+		* @param in_version The version of the entity to update
+		* @param in_jsonEntityAcl The entity's access control list as JSON.
+		* @param in_callback The callback object
+		*/
+		void makeSystemEntity(const char * in_entityId, int64_t in_version, const std::string& in_jsonEntityAcl, IServerCallback * in_callback = NULL);
+
 	private:
 		BrainCloudClient * m_client;
 	};

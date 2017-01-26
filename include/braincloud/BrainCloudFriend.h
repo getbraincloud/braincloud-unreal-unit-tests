@@ -11,6 +11,7 @@ namespace BrainCloud
 	class IServerCallback;
 	class BrainCloudClient;
 	class FriendPlatform;
+	class AuthenticationType;
 
 	class BrainCloudFriend
 	{
@@ -26,15 +27,33 @@ namespace BrainCloud
 		void findPlayerByUniversalId(const char * in_searchText, int32_t in_maxResults, IServerCallback * in_callback = NULL);
 
 		/**
-		 * Retrieves profile information for the specified user.
-		 *
-		 * Service Name - Friend
-		 * Service Operation - GetFriendProfileInfoForExternalId
-		 *
-		 * @param in_externalId The friend's external id e.g. Facebook id
-		 * @param in_authenticationType The authentication type of the friend id e.g. Facebook
-		 */
-		void getFriendProfileInfoForExternalId(const char *in_externalId, const char *in_authenticationType, IServerCallback * in_callback = NULL);
+		* @deprecated Use getProfileInfoForCredential instead - removal after March 22 2017
+		*/
+		DEPRECATED void getFriendProfileInfoForExternalId(const char *in_externalId, const char *in_authenticationType, IServerCallback * in_callback = NULL);
+
+		/**
+		* Retrieves profile information for the specified user.
+		*
+		* Service Name - friend
+		* Service Operation - GET_PROFILE_INFO_FOR_CREDENTIAL
+		*
+		* @param in_externalId The users's external ID
+		* @param in_authenticationType The authentication type of the user ID
+		* @param in_callback Method to be invoked when the server response is received.
+		*/
+		void getProfileInfoForCredential(const char * in_externalId, AuthenticationType in_authenticationType, IServerCallback * in_callback = NULL);
+
+		/**
+		* Retrieves profile information for the specified external auth user.
+		*
+		* Service Name - friend
+		* Service Operation - GET_PROFILE_INFO_FOR_EXTERNAL_AUTH_ID
+		*
+		* @param in_externalId External ID of the friend to find
+		* @param in_externalAuthType The external authentication type used for this friend's external ID
+		* @param in_callback Method to be invoked when the server response is received.
+		*/
+		void getProfileInfoForExternalAuthId(const char * in_externalId, const char * in_externalAuthType, IServerCallback * in_callback = NULL);
 
 		/**
 		 * Retrieves the external ID for the specified user profile ID on the specified social platform.
@@ -88,11 +107,6 @@ namespace BrainCloud
 		* @param in_callback Method to be invoked when the server response is received.
 		*/
 		void getSummaryDataForProfileId(const char * in_profileId, IServerCallback * in_callback = NULL);
-
-		/**
-		* @deprecated Use findUsersByExactName & findUsersBySubstrName instead - removal after Nov 22 2016
-		*/
-		DEPRECATED void findPlayerByName(const char * in_searchText, int32_t in_maxResults, IServerCallback * in_callback = NULL);
 
 		/**
 		* Finds a list of players matching the search text by performing an exact match search

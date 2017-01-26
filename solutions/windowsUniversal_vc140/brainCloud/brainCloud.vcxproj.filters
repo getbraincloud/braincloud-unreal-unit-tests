@@ -218,6 +218,12 @@
     <ClInclude Include="..\..\..\include\braincloud\BrainCloudMail.h">
       <Filter>include\braincloud</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\..\include\braincloud\BrainCloudTournament.h">
+      <Filter>include\braincloud</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\braincloud\internal\timegm.h">
+      <Filter>include\braincloud\internal</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\..\lib\jsoncpp-1.0.0\jsoncpp.cpp">
@@ -377,6 +383,9 @@
       <Filter>src</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\src\BrainCloudMail.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\BrainCloudTournament.cpp">
       <Filter>src</Filter>
     </ClCompile>
   </ItemGroup>

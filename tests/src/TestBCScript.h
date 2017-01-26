@@ -14,9 +14,11 @@ public:
     TestBCScript()
     {
         m_scriptName = "testScript";
+		m_peerScriptName = "TestPeerScriptPublic";
     }
 protected:
     const char* m_scriptName;
+	const char* m_peerScriptName;
 };
 
 #endif

@@ -13,6 +13,7 @@
 #include "braincloud/internal/StringUtil.h"
 #include "braincloud/internal/JsonUtil.h"
 #include <time.h>
+#include "braincloud/internal/timegm.h"
 
 namespace BrainCloud
 {
@@ -32,7 +33,7 @@ namespace BrainCloud
 		m_client->sendRequest(sc);
 	}
 
-	void BrainCloudScript::scheduleRunScriptUTC(const char * in_scriptName, const char * in_jsonScriptData, const struct tm* in_startDateInUTC, IServerCallback * in_callback)
+	void BrainCloudScript::scheduleRunScriptUTC(const char * in_scriptName, const char * in_jsonScriptData, const tm* in_startDateInUTC, IServerCallback * in_callback)
 	{
 		Json::Value message;
 		message[OperationParam::ScriptServiceRunScriptName.getValue()] = in_scriptName;
@@ -43,7 +44,7 @@ namespace BrainCloud
 		}
 
 		struct tm timeInfo = *in_startDateInUTC;
-		message[OperationParam::ScriptServiceStartDateUTC.getValue()] = Json::Int64(mktime(&timeInfo) * 1000);
+		message[OperationParam::ScriptServiceStartDateUTC.getValue()] = (Json::Int64) ((int64_t)internal_timegm(&timeInfo)) * 1000;
 
 		ServerCall * sc = new ServerCall(ServiceName::Script, ServiceOperation::ScheduleCloudScript, message, in_callback);
 		m_client->sendRequest(sc);
@@ -87,6 +88,36 @@ namespace BrainCloud
 		message[OperationParam::ScriptServiceJobId.getValue()] = in_jobId;
 
 		ServerCall * sc = new ServerCall(ServiceName::Script, ServiceOperation::CancelScheduledScript, message, in_callback);
+		m_client->sendRequest(sc);
+	}
+
+	void BrainCloudScript::runPeerScript(const char * in_scriptName, const std::string & in_jsonScriptData, const char * in_peer, IServerCallback * in_callback)
+	{
+		Json::Value message;
+		message[OperationParam::ScriptServiceRunScriptName.getValue()] = in_scriptName;
+		message[OperationParam::Peer.getValue()] = in_peer;
+
+		if (StringUtil::IsOptionalParameterValid(in_jsonScriptData)) {
+			Json::Value jsonData = JsonUtil::jsonStringToValue(in_jsonScriptData);
+			message[OperationParam::ScriptServiceRunScriptData.getValue()] = jsonData;
+		}
+
+		ServerCall * sc = new ServerCall(ServiceName::Script, ServiceOperation::RunPeerScript, message, in_callback);
+		m_client->sendRequest(sc);
+	}
+
+	void BrainCloudScript::runPeerScriptAsync(const char * in_scriptName, const std::string & in_jsonScriptData, const char * in_peer, IServerCallback * in_callback)
+	{
+		Json::Value message;
+		message[OperationParam::ScriptServiceRunScriptName.getValue()] = in_scriptName;
+		message[OperationParam::Peer.getValue()] = in_peer;
+
+		if (StringUtil::IsOptionalParameterValid(in_jsonScriptData)) {
+			Json::Value jsonData = JsonUtil::jsonStringToValue(in_jsonScriptData);
+			message[OperationParam::ScriptServiceRunScriptData.getValue()] = jsonData;
+		}
+
+		ServerCall * sc = new ServerCall(ServiceName::Script, ServiceOperation::RunPeerScriptAsync, message, in_callback);
 		m_client->sendRequest(sc);
 	}
 }
