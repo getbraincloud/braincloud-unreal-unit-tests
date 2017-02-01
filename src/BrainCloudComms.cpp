@@ -402,6 +402,7 @@ namespace BrainCloud
 			if (!error)
 			{
 				filterIncomingMessages(serverCall, messages[i]);
+				resetKillSwitch();
 			}
 			else
 			{
@@ -426,6 +427,8 @@ namespace BrainCloud
 						_sessionId.clear();
 					}
 				}
+
+				updateKillSwitch(serverCall->getService().getValue(), serverCall->getOperation().getValue(), statusCode);
 			}
 
 			IServerCallback* callback = serverCall->getCallback();
@@ -785,12 +788,40 @@ namespace BrainCloud
 		}
 	}
 
+	void BrainCloudComms::updateKillSwitch(const std::string & service, const std::string & operation, int32_t statusCode)
+	{
+		if (statusCode == 900) return;
+
+		if (_killSwitchService.length() == 0)
+		{
+			_killSwitchService = service;
+			_killSwitchOperation = operation;
+			_killSwitchErrorCount++;
+		}
+		else if (service == _killSwitchService && operation == _killSwitchOperation)
+			_killSwitchErrorCount++;
+
+		if (!_killSwitchEngaged && _killSwitchErrorCount >= _killSwitchThreshold)
+		{
+			_killSwitchEngaged = true;
+
+			if (_loggingEnabled)
+				std::cout << "Client disabled due to repeated errors from a single API call: " << service << " | " << operation << std::endl;
+		}
+	}
+
+	void BrainCloudComms::resetKillSwitch()
+	{
+		_killSwitchErrorCount = 0;
+		_killSwitchService = "";
+		_killSwitchOperation = "";
+	}
 
 	/**
 	 * Creates a fake response to stop packets being sent to the server
 	 * without a valid session.
 	 */
-	void BrainCloudComms::handleNoAuth()
+	void BrainCloudComms::fakeErrorResponse(int32_t statusCode, int32_t reasonCode, const std::string & statusMessage)
 	{
 		size_t numMessages = _inProgress.size();
 		Json::Value errorRoot;
@@ -800,9 +831,9 @@ namespace BrainCloud
 		{
 			Json::Value msg;
 
-			msg["status"] = _statusCodeCache;
-			msg["reason_code"] = _reasonCodeCache;
-			msg["status_message"] = _statusMessageCache;
+			msg["status"] = statusCode;
+			msg["reason_code"] = reasonCode;
+			msg["status_message"] = statusMessage;
 			msg["severity"] = "ERROR";
 
 			messages.append(msg);
@@ -952,10 +983,16 @@ namespace BrainCloud
 				std::cout << "#BCC OUTGOING " << dataString << std::endl;
 			}
 
+			if (_killSwitchEngaged)
+			{
+				fakeErrorResponse(900, CLIENT_DISABLED, "Client has been disabled due to repeated errors from a single API call");
+				return;
+			}
+
 			// handle session errors locally
 			if (!_isAuthenticated && !authenticating)
 			{
-				handleNoAuth();
+				fakeErrorResponse(_statusCodeCache, _reasonCodeCache, _statusMessageCache);
 				return;
 			}
 

@@ -146,10 +146,11 @@ namespace BrainCloud {
 		bool _oldStyleStatusMessageErrorCallback;
 		bool _cacheMessagesOnNetworkError;
 		bool _errorCallbackOn202;
+		int _killSwitchThreshold;
 
-		/// This flag is set when _cacheMessagesOnNetworkError is true
-		/// and a network error occurs. It is reset when a call is made
-		/// to either retryCachedMessages or flushCachedMessages
+		// This flag is set when _cacheMessagesOnNetworkError is true
+		// and a network error occurs. It is reset when a call is made
+		// to either retryCachedMessages or flushCachedMessages
 		bool _blockingQueue;
 
 		IEventCallback *_eventCallback;
@@ -174,6 +175,11 @@ namespace BrainCloud {
 		int32_t _statusCodeCache;
 		int32_t _reasonCodeCache;
 		std::string _statusMessageCache;
+
+		bool _killSwitchEngaged;
+		int32_t _killSwitchErrorCount;
+		std::string _killSwitchService;
+		std::string _killSwitchOperation;
 
 		void setCredentials(const Json::Value& in_jsonAuthenticationResponse);
 		void filterIncomingMessages(const ServerCall* servercall, const Json::Value& response);

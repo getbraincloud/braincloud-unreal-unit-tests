@@ -110,7 +110,10 @@ namespace BrainCloud
         void startHttpRequest();
         
         void resetErrorCache();
-        void handleNoAuth();
+        void fakeErrorResponse(int32_t statusCode, int32_t reasonCode, const std::string & statusMessage);
+		
+		void updateKillSwitch(const std::string & service, const std::string & operation, int32_t statusCode);
+		void resetKillSwitch();
     };
 
 };

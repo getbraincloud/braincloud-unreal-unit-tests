@@ -294,6 +294,29 @@ TEST_F(TestBCComms, MessageBundleMarker)
 	tr.run(m_bc);
 }
 
+//TEST_F(TestBCComms, KillSwitch)
+//{
+//	TestResult tr;
+//	m_bc->initialize(m_serverUrl.c_str(), m_secret.c_str(), m_appId.c_str(), m_version.c_str());
+//
+//	m_bc->getAuthenticationService()->authenticateUniversal(GetUser(UserA)->m_id, GetUser(UserA)->m_password, true, &tr);
+//	tr.run(m_bc);
+//
+//	for (int i = 0; i < 12; ++i)
+//	{
+//		m_bc->getEntityService()->updateEntity(
+//			"FAIL",
+//			"FAIL",
+//			"{ \"test\": 1 }",
+//			"{ \"test\": 1 }",
+//			-1, &tr);
+//		tr.run(m_bc, true);
+//	}
+//
+//	m_bc->getTimeService()->readServerTime(&tr);
+//	tr.runExpectFail(m_bc, 900, CLIENT_DISABLED);
+//}
+
 void TestBCComms::sleepForMillis(int millis)
 {
 #if __cplusplus >= 201103L
