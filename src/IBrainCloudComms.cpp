@@ -46,6 +46,9 @@ namespace BrainCloud {
 		, _statusCodeCache(0)
 		, _reasonCodeCache(0)
 		, _maxBundleSize(10)
+		, _killSwitchThreshold(11)
+		, _killSwitchEngaged(false)
+		, _killSwitchErrorCount(0)
 	{
 		setPacketTimeoutsToDefault();
 	}
@@ -213,6 +216,11 @@ namespace BrainCloud {
 				if (response["data"]["maxBundleMsgs"] != Json::nullValue)
 				{
 					_maxBundleSize = response["data"]["maxBundleMsgs"].asInt();
+				}
+
+				if (response["data"]["maxKillCount"] != Json::nullValue)
+				{
+					_killSwitchThreshold = response["data"]["maxKillCount"].asInt();
 				}
 			}
 		}

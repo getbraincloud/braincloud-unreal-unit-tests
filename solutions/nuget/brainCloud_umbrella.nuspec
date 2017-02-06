@@ -2,7 +2,7 @@
 <package >
   <metadata>
     <id>brainCloudCppSdk</id>
-    <version>3.2.0</version>
+    <version>3.2.1</version>
     <title>brainCloud C++ SDK</title>
     <summary>brainCloud C++ SDK for Windows Universal Apps</summary>
     <description>A C++ native library for connecting Windows 10 Universal Apps to the brainCloud back-end. Currently supports Visual Studio 2015.</description>
