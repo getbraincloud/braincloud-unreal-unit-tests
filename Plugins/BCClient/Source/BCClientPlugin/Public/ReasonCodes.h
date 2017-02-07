@@ -295,4 +295,5 @@ public:
     static const int32 CLIENT_UPLOAD_FILE_CANCELLED = 90100;
     static const int32 CLIENT_UPLOAD_FILE_TIMED_OUT = 90101;
     static const int32 CLIENT_UPLOAD_FILE_UNKNOWN = 90102;
+	static const int32 CLIENT_DISABLED = 90200;
 };

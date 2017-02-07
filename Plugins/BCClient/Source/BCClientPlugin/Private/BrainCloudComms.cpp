@@ -222,13 +222,20 @@ void BrainCloudComms::CreateAndSendNextRequestBundle()
 		_queueMutex.Unlock();
 	}
 
-	if (isAuth || _isAuthenticated)
+	if (!_killSwitchEngaged)
 	{
-		_activeRequest = SendPacket(BuildPacket());
+		if (isAuth || _isAuthenticated)
+		{
+			_activeRequest = SendPacket(BuildPacket());
+		}
+		else
+		{
+			FakeErrorResponse(_statusCodeCache, _reasonCodeCache, _statusMessageCache);
+		}
 	}
 	else
 	{
-		HandleNoAuth();
+		FakeErrorResponse(900, ReasonCode::CLIENT_DISABLED, "Client disabled due to repeated errors from a single API call");
 	}
 
 	_retryCount = 0;
@@ -470,14 +477,14 @@ TSharedPtr<BCFileUploader> BrainCloudComms::FindFileUploader(const FString& uplo
 	return nullptr;
 }
 
-void BrainCloudComms::HandleNoAuth()
+void BrainCloudComms::FakeErrorResponse(uint32 statusCode, uint32 reasonCode, const FString statusMessage)
 {
 	PacketRef requestPacket = BuildPacket();
 	FString sendString = GetDataString(requestPacket, _packetId);
 	if (_isLoggingEnabled) UE_LOG(LogBrainCloudComms, Log, TEXT("Sending request:%s\n"), *sendString);
 
 	_currentPacket = requestPacket;
-	ReportError(requestPacket, _statusCodeCache, _reasonCodeCache, _statusMessageCache);
+	ReportError(requestPacket, statusCode, reasonCode, statusMessage);
 }
 
 void BrainCloudComms::ReportResults(PacketRef requestPacket, TSharedRef<FJsonObject> responsePacket)
@@ -499,6 +506,7 @@ void BrainCloudComms::ReportResults(PacketRef requestPacket, TSharedRef<FJsonObj
 
 		if (statusCode == HttpCode::OK || (!_errorCallbackOn202 && statusCode == 202))
 		{
+			ResetKillSwitch();
 			FilterIncomingMessages(sc, respObj.ToSharedRef());
 			if (callback != nullptr) callback->serverCallback(sc->getService(), sc->getOperation(), *jsonRespStr);
 		}
@@ -534,6 +542,8 @@ void BrainCloudComms::ReportResults(PacketRef requestPacket, TSharedRef<FJsonObj
 				callback->serverError(sc->getService(), sc->getOperation(), statusCode, reasonCode, *errorString);
 			if (_globalErrorCallback != nullptr)
 				_globalErrorCallback->globalError(sc->getService(), sc->getOperation(), statusCode, reasonCode, *errorString);
+			
+			UpdateKillSwitch(sc->getService().getValue(), sc->getOperation().getValue(), statusCode);
 		}
 
 		if (_rewardCallback && (statusCode == HttpCode::OK || (!_errorCallbackOn202 && statusCode == 202)))
@@ -658,6 +668,9 @@ void BrainCloudComms::FilterIncomingMessages(TSharedRef<ServerCall> servercall, 
 
 			_maxBundleMessages = data->GetNumberField(TEXT("maxBundleMsgs"));
 
+			if(data->HasField("maxKillCount"))
+				_killSwitchThreshold = data->GetNumberField(TEXT("maxKillCount"));
+
 			//set player name
 			FString name = data->GetStringField(TEXT("playerName"));
 			_client->getPlayerStateService()->setPlayerName(name);
@@ -722,6 +735,34 @@ void BrainCloudComms::ResetErrorCache()
 	_statusCodeCache = HttpCode::FORBIDDEN;
 	_reasonCodeCache = ReasonCode::NO_SESSION;
 	_statusMessageCache = TEXT("No session");
+}
+
+void BrainCloudComms::UpdateKillSwitch(const FString& service, const FString& operation, int32 statusCode)
+{
+	if (statusCode == 900) return;
+
+	if (_killSwitchService.IsEmpty())
+	{
+		_killSwitchService = service;
+		_killSwitchOperation = operation;
+		_killSwitchErrorCount++;
+	}
+	else if (service == _killSwitchService && operation == _killSwitchOperation)
+		_killSwitchErrorCount++;
+
+	if (!_killSwitchEngaged && _killSwitchErrorCount >= _killSwitchThreshold)
+	{
+		_killSwitchEngaged = true;
+		if (_isLoggingEnabled) 
+			UE_LOG(LogBrainCloudComms, Error, TEXT("Client disabled due to repeated errors from a single API call: %s | %s"), *service, *operation);
+	}
+}
+
+void BrainCloudComms::ResetKillSwitch()
+{
+	_killSwitchErrorCount = 0;
+	_killSwitchService = "";
+	_killSwitchOperation = "";
 }
 
 void BrainCloudComms::Heartbeat()

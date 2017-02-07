@@ -106,7 +106,11 @@ private:
 	void ReportResults(PacketRef requestPacket, TSharedRef<FJsonObject> jsonPacket);
 
 	void ResetErrorCache();
-	void HandleNoAuth();
+	void FakeErrorResponse(uint32 statusCode, uint32 reasonCode, const FString statusMessage);
+
+	//kill switch
+	void UpdateKillSwitch(const FString& service, const FString& operation, int32 statusCode);
+	void ResetKillSwitch();
 
 	void UpdateUploads();
 	TSharedPtr<BCFileUploader> FindFileUploader(const FString& uploadId);
@@ -167,4 +171,11 @@ private:
 	//caching
 	bool _cacheMessagesOnNetworkError = false;
 	bool _blockingQueue = false;
+
+	//For kill switch
+	int32 _killSwitchThreshold = 11;
+	bool _killSwitchEngaged = false;
+	int32 _killSwitchErrorCount = 0;
+	FString _killSwitchService;
+	FString _killSwitchOperation;
 };
