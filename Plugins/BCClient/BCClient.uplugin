@@ -1,7 +1,7 @@
 {
 	"FileVersion": 3,
-	"Version": 17,
-	"VersionName": "3.2.1",
+	"Version": 18,
+	"VersionName": "3.2.2",
 	"FriendlyName": "brainCloud",
 	"Description": "brainCloud is a ready-made back-end platform for the development of feature-rich mobile+social games. For more information, go to getbraincloud.com.",
 	"Category": "Network",

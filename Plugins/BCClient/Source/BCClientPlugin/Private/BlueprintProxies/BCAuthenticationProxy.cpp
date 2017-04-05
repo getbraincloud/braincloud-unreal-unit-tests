@@ -29,70 +29,70 @@ void UBCAuthenticationProxy::ClearSavedProfileId()
 UBCAuthenticationProxy* UBCAuthenticationProxy::AuthenticateAnonymous(bool forceCreate)
 {
     UBCAuthenticationProxy* Proxy = NewObject<UBCAuthenticationProxy>();
-    BrainCloudClient::getInstance()->getAuthenticationService()->authenticateAnonymous(true, Proxy);
+    BrainCloudClient::getInstance()->getAuthenticationService()->authenticateAnonymous(forceCreate, Proxy);
     return Proxy;
 }
 
 UBCAuthenticationProxy* UBCAuthenticationProxy::AuthenticateFacebook(FString facebookId, FString password, bool forceCreate)
 {
     UBCAuthenticationProxy* Proxy = NewObject<UBCAuthenticationProxy>();
-    BrainCloudClient::getInstance()->getAuthenticationService()->authenticateFacebook(facebookId, password, true, Proxy);
+    BrainCloudClient::getInstance()->getAuthenticationService()->authenticateFacebook(facebookId, password, forceCreate, Proxy);
     return Proxy;
 }
 
 UBCAuthenticationProxy* UBCAuthenticationProxy::AuthenticateGameCenter(FString gameCenterId, bool forceCreate)
 {
     UBCAuthenticationProxy* Proxy = NewObject<UBCAuthenticationProxy>();
-    BrainCloudClient::getInstance()->getAuthenticationService()->authenticateGameCenter(gameCenterId, true, Proxy);
+    BrainCloudClient::getInstance()->getAuthenticationService()->authenticateGameCenter(gameCenterId, forceCreate, Proxy);
     return Proxy;
 }
 
 UBCAuthenticationProxy* UBCAuthenticationProxy::AuthenticateEmailPassword(FString email, FString password, bool forceCreate)
 {
     UBCAuthenticationProxy* Proxy = NewObject<UBCAuthenticationProxy>();
-    BrainCloudClient::getInstance()->getAuthenticationService()->authenticateEmailPassword(email, password, true, Proxy);
+    BrainCloudClient::getInstance()->getAuthenticationService()->authenticateEmailPassword(email, password, forceCreate, Proxy);
     return Proxy;
 }
 
 UBCAuthenticationProxy* UBCAuthenticationProxy::AuthenticateUniversal(FString userId, FString password, bool forceCreate)
 {
     UBCAuthenticationProxy* Proxy = NewObject<UBCAuthenticationProxy>();
-    BrainCloudClient::getInstance()->getAuthenticationService()->authenticateUniversal(userId, password, true, Proxy);
+    BrainCloudClient::getInstance()->getAuthenticationService()->authenticateUniversal(userId, password, forceCreate, Proxy);
     return Proxy;
 }
 
 UBCAuthenticationProxy* UBCAuthenticationProxy::AuthenticateSteam(FString steamId, FString sessionTicket, bool forceCreate)
 {
     UBCAuthenticationProxy* Proxy = NewObject<UBCAuthenticationProxy>();
-    BrainCloudClient::getInstance()->getAuthenticationService()->authenticateSteam(steamId, sessionTicket, true, Proxy);
+    BrainCloudClient::getInstance()->getAuthenticationService()->authenticateSteam(steamId, sessionTicket, forceCreate, Proxy);
     return Proxy;
 }
 
 UBCAuthenticationProxy* UBCAuthenticationProxy::AuthenticateGoogle(FString googleId, FString token, bool forceCreate)
 {
     UBCAuthenticationProxy* Proxy = NewObject<UBCAuthenticationProxy>();
-    BrainCloudClient::getInstance()->getAuthenticationService()->authenticateGoogle(googleId, token, true, Proxy);
+    BrainCloudClient::getInstance()->getAuthenticationService()->authenticateGoogle(googleId, token, forceCreate, Proxy);
     return Proxy;
 }
 
 UBCAuthenticationProxy* UBCAuthenticationProxy::AuthenticateTwitter(FString twitterId, FString token, FString secret, bool forceCreate)
 {
     UBCAuthenticationProxy* Proxy = NewObject<UBCAuthenticationProxy>();
-    BrainCloudClient::getInstance()->getAuthenticationService()->authenticateTwitter(twitterId, token, secret, true, Proxy);
+    BrainCloudClient::getInstance()->getAuthenticationService()->authenticateTwitter(twitterId, token, secret, forceCreate, Proxy);
     return Proxy;
 }
 
 UBCAuthenticationProxy* UBCAuthenticationProxy::AuthenticateParse(FString parseId, FString token, bool forceCreate)
 {
     UBCAuthenticationProxy* Proxy = NewObject<UBCAuthenticationProxy>();
-    BrainCloudClient::getInstance()->getAuthenticationService()->authenticateParse(parseId, token, true, Proxy);
+    BrainCloudClient::getInstance()->getAuthenticationService()->authenticateParse(parseId, token, forceCreate, Proxy);
     return Proxy;
 }
 
 UBCAuthenticationProxy* UBCAuthenticationProxy::AuthenticateExternal(FString userId, FString token, FString externalAuthName, bool forceCreate)
 {
     UBCAuthenticationProxy* Proxy = NewObject<UBCAuthenticationProxy>();
-    BrainCloudClient::getInstance()->getAuthenticationService()->authenticateExternal(userId, token, externalAuthName, true, Proxy);
+    BrainCloudClient::getInstance()->getAuthenticationService()->authenticateExternal(userId, token, externalAuthName, forceCreate, Proxy);
     return Proxy;
 }
 
