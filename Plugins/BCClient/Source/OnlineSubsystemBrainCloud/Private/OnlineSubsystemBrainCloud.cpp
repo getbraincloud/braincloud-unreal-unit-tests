@@ -16,160 +16,160 @@
 
 IOnlineSessionPtr FOnlineSubsystemBrainCloud::GetSessionInterface() const
 {
-    return nullptr;
+	return nullptr;
 }
 
 IOnlineFriendsPtr FOnlineSubsystemBrainCloud::GetFriendsInterface() const
 {
-    return nullptr;
+	return nullptr;
 }
 
 IOnlinePartyPtr FOnlineSubsystemBrainCloud::GetPartyInterface() const
 {
-    return nullptr;
+	return nullptr;
 }
 
 IOnlineGroupsPtr FOnlineSubsystemBrainCloud::GetGroupsInterface() const
 {
-    return nullptr;
+	return nullptr;
 }
 
 IOnlineSharedCloudPtr FOnlineSubsystemBrainCloud::GetSharedCloudInterface() const
 {
-    return nullptr;
+	return nullptr;
 }
 
 IOnlineUserCloudPtr FOnlineSubsystemBrainCloud::GetUserCloudInterface() const
 {
-    return nullptr;
+	return nullptr;
 }
 
 IOnlineEntitlementsPtr FOnlineSubsystemBrainCloud::GetEntitlementsInterface() const
 {
-    return nullptr;
+	return nullptr;
 };
 
 IOnlineLeaderboardsPtr FOnlineSubsystemBrainCloud::GetLeaderboardsInterface() const
 {
-    return LeaderboardsInterface;
+	return LeaderboardsInterface;
 }
 
 IOnlineVoicePtr FOnlineSubsystemBrainCloud::GetVoiceInterface() const
 {
-    return nullptr;
+	return nullptr;
 }
 
 IOnlineExternalUIPtr FOnlineSubsystemBrainCloud::GetExternalUIInterface() const
 {
-    return nullptr;
+	return nullptr;
 }
 
 IOnlineTimePtr FOnlineSubsystemBrainCloud::GetTimeInterface() const
 {
-    return TimeInterface;
+	return TimeInterface;
 }
 
 IOnlineIdentityPtr FOnlineSubsystemBrainCloud::GetIdentityInterface() const
 {
-    return IdentityInterface;
+	return IdentityInterface;
 }
 
 IOnlineTitleFilePtr FOnlineSubsystemBrainCloud::GetTitleFileInterface() const
 {
-    return TitleFileInterface;
+	return TitleFileInterface;
 }
 
 IOnlineStorePtr FOnlineSubsystemBrainCloud::GetStoreInterface() const
 {
-    return nullptr;
+	return nullptr;
 }
 
 #if ENGINE_MINOR_VERSION >= 11
 IOnlineStoreV2Ptr FOnlineSubsystemBrainCloud::GetStoreV2Interface() const
 {
-    return nullptr;
+	return nullptr;
 }
 
 IOnlinePurchasePtr FOnlineSubsystemBrainCloud::GetPurchaseInterface() const
 {
-    return nullptr;
+	return nullptr;
 }
 #endif
 
 IOnlineEventsPtr FOnlineSubsystemBrainCloud::GetEventsInterface() const
 {
-    return nullptr;
+	return nullptr;
 }
 
 IOnlineAchievementsPtr FOnlineSubsystemBrainCloud::GetAchievementsInterface() const
 {
-    return AchievementsInterface;
+	return AchievementsInterface;
 }
 
 IOnlineSharingPtr FOnlineSubsystemBrainCloud::GetSharingInterface() const
 {
-    return nullptr;
+	return nullptr;
 }
 
 IOnlineUserPtr FOnlineSubsystemBrainCloud::GetUserInterface() const
 {
-    return nullptr;
+	return nullptr;
 }
 
 IOnlineMessagePtr FOnlineSubsystemBrainCloud::GetMessageInterface() const
 {
-    return MessageInterface;
+	return MessageInterface;
 }
 
 IOnlinePresencePtr FOnlineSubsystemBrainCloud::GetPresenceInterface() const
 {
-    return nullptr;
+	return nullptr;
 }
 
 IOnlineChatPtr FOnlineSubsystemBrainCloud::GetChatInterface() const
 {
-    return nullptr;
+	return nullptr;
 }
 
 IOnlineTurnBasedPtr FOnlineSubsystemBrainCloud::GetTurnBasedInterface() const
 {
-    return nullptr;
+	return nullptr;
 }
 
 bool FOnlineSubsystemBrainCloud::Tick(float DeltaTime)
 {
-    if (!FOnlineSubsystemImpl::Tick(DeltaTime))
-    {
-        return false;
-    }
+	if (!FOnlineSubsystemImpl::Tick(DeltaTime))
+	{
+		return false;
+	}
 
-    BrainCloudClient::getInstance()->runCallbacks();
+	BrainCloudClient::getInstance()->runCallbacks();
 
-    CleanupCallbackObjects();
+	CleanupCallbackObjects();
 
-    return true;
+	return true;
 }
 
 bool FOnlineSubsystemBrainCloud::Init()
 {
-    UE_LOG_ONLINE(Display, TEXT("FOnlineSubsystemBrainCloud::Init()"));
-    const bool bBrainCloudInit = true;
+	UE_LOG_ONLINE(Display, TEXT("FOnlineSubsystemBrainCloud::Init()"));
+	const bool bBrainCloudInit = true;
 
-    _configPath = FPaths::SourceConfigDir();
-    _configPath += TEXT("BrainCloudConfig.ini");
+	_configPath = FPaths::SourceConfigDir();
+	_configPath += TEXT("BrainCloudConfig.ini");
 
-    if (FPaths::FileExists(_configPath))
-    {
-        FConfigSection* Configs = GConfig->GetSectionPrivate(TEXT("BrainCloud.Client"), false, true, _configPath);
-        if (Configs)
-        {
+	if (FPaths::FileExists(_configPath))
+	{
+		FConfigSection* Configs = GConfig->GetSectionPrivate(TEXT("BrainCloud.Client"), false, true, _configPath);
+		if (Configs)
+		{
 #if ENGINE_MINOR_VERSION >= 12
-            FString test = Configs->Find(TEXT("ServerURL"))->GetValue();
-            BrainCloudClient::getInstance()->initialize(
-                Configs->Find(TEXT("ServerURL"))->GetValue(),
-                Configs->Find(TEXT("Secret"))->GetValue(),
-                Configs->Find(TEXT("AppID"))->GetValue(),
-                Configs->Find(TEXT("Version"))->GetValue());
+			FString test = Configs->Find(TEXT("ServerURL"))->GetValue();
+			BrainCloudClient::getInstance()->initialize(
+				Configs->Find(TEXT("ServerURL"))->GetValue(),
+				Configs->Find(TEXT("Secret"))->GetValue(),
+				Configs->Find(TEXT("AppID"))->GetValue(),
+				Configs->Find(TEXT("Version"))->GetValue());
 #else
 			FString test = *Configs->Find(TEXT("ServerURL"));
 			BrainCloudClient::getInstance()->initialize(
@@ -178,39 +178,41 @@ bool FOnlineSubsystemBrainCloud::Init()
 				*Configs->Find(TEXT("AppID")),
 				*Configs->Find(TEXT("Version")));
 #endif
-        }
-        else
-        {
-            UE_LOG_ONLINE(Warning, TEXT("Could not find BrainCloud.Client in BrainCloudConfig.ini"));
-        }
-    }
-    else
-    {
-        UE_LOG_ONLINE(Warning, TEXT("Could not find BrainCloudConfig.ini, must Initialize manually!"));
-    }
+		}
+		else
+		{
+			UE_LOG_ONLINE(Warning, TEXT("Could not find BrainCloud.Client in BrainCloudConfig.ini"));
+		}
+	}
+	else
+	{
+		UE_LOG_ONLINE(Warning, TEXT("Could not find BrainCloudConfig.ini, must Initialize manually!"));
+	}
 
-    if (bBrainCloudInit)
-    {
-        AchievementsInterface = MakeShareable(new FOnlineAchievementsBrainCloud(this));
-        IdentityInterface = MakeShareable(new FOnlineIdentityBrainCloud(this));
-        LeaderboardsInterface = MakeShareable(new FOnlineLeaderboardsBrainCloud(this));
-        TimeInterface = MakeShareable(new FOnlineTimeBrainCloud(this));
-        MessageInterface = MakeShareable(new FOnlineMessageBrainCloud(this));
-        TitleFileInterface = MakeShareable(new FOnlineTitleFileBrainCloud(this));
+	if (bBrainCloudInit)
+	{
+		AchievementsInterface = MakeShareable(new FOnlineAchievementsBrainCloud(this));
+		IdentityInterface = MakeShareable(new FOnlineIdentityBrainCloud(this));
+		LeaderboardsInterface = MakeShareable(new FOnlineLeaderboardsBrainCloud(this));
+		TimeInterface = MakeShareable(new FOnlineTimeBrainCloud(this));
+		MessageInterface = MakeShareable(new FOnlineMessageBrainCloud(this));
+		TitleFileInterface = MakeShareable(new FOnlineTitleFileBrainCloud(this));
 
-        _clientPtr = BrainCloudClient::getInstance();
-    }
-    else
-    {
-        Shutdown();
-    }
+		_clientPtr = BrainCloudClient::getInstance();
+	}
+	else
+	{
+		Shutdown();
+	}
 
-    return bBrainCloudInit;
+	return bBrainCloudInit;
 }
 
 bool FOnlineSubsystemBrainCloud::Shutdown()
 {
-    UE_LOG_ONLINE(Display, TEXT("FOnlineSubsystemBrainCloud::Shutdown()"));
+	UE_LOG_ONLINE(Display, TEXT("FOnlineSubsystemBrainCloud::Shutdown()"));
+
+	FOnlineSubsystemImpl::Shutdown();
 
 #define DESTRUCT_INTERFACE(Interface) \
     if (Interface.IsValid()) \
@@ -219,70 +221,70 @@ bool FOnlineSubsystemBrainCloud::Shutdown()
         Interface = nullptr; \
                         }
 
-    // Destruct the interfaces
-    DESTRUCT_INTERFACE(IdentityInterface);
-    DESTRUCT_INTERFACE(AchievementsInterface);
-    DESTRUCT_INTERFACE(LeaderboardsInterface);
-    DESTRUCT_INTERFACE(MessageInterface);
-    DESTRUCT_INTERFACE(TimeInterface);
-    DESTRUCT_INTERFACE(TitleFileInterface);
+	// Destruct the interfaces
+	DESTRUCT_INTERFACE(IdentityInterface);
+	DESTRUCT_INTERFACE(AchievementsInterface);
+	DESTRUCT_INTERFACE(LeaderboardsInterface);
+	DESTRUCT_INTERFACE(MessageInterface);
+	DESTRUCT_INTERFACE(TimeInterface);
+	DESTRUCT_INTERFACE(TitleFileInterface);
 
 #undef DESTRUCT_INTERFACE
 
-    return true;
+	return true;
 }
 
 FString FOnlineSubsystemBrainCloud::GetAppId() const
 {
-    return TEXT("");
+	return TEXT("");
 }
 
 bool FOnlineSubsystemBrainCloud::Exec(UWorld* InWorld, const TCHAR* Cmd, FOutputDevice& Ar)
 {
-    return false;
+	return false;
 }
 
 bool FOnlineSubsystemBrainCloud::IsEnabled()
 {
-    return true;
+	return true;
 }
 
 BrainCloudClient* FOnlineSubsystemBrainCloud::GetClient()
 {
-    return _clientPtr;
+	return _clientPtr;
 }
 
 TSharedPtr<FJsonObject> FOnlineSubsystemBrainCloud::GetJsonData(const FString & jsonString)
 {
-    TSharedRef<TJsonReader<>> reader = TJsonReaderFactory<>::Create(jsonString);
-    TSharedPtr<FJsonObject> jsonValue = MakeShareable(new FJsonObject());
-    FJsonSerializer::Deserialize(reader, jsonValue);
-    TSharedPtr<FJsonObject> data = jsonValue->GetObjectField("data");
-    return data;
+	TSharedRef<TJsonReader<>> reader = TJsonReaderFactory<>::Create(jsonString);
+	TSharedPtr<FJsonObject> jsonValue = MakeShareable(new FJsonObject());
+	FJsonSerializer::Deserialize(reader, jsonValue);
+	TSharedPtr<FJsonObject> data = jsonValue->GetObjectField("data");
+	return data;
 }
 
 void FOnlineSubsystemBrainCloud::RegisterCallbackObject(AssignableServerCallback* callback)
 {
-    _activeCallbacks.Add(callback);
+	_activeCallbacks.Add(callback);
 }
 
 void FOnlineSubsystemBrainCloud::CleanupCallbackObjects()
 {
-    if (_activeCallbacks.Num() <= 0) return;
+	if (_activeCallbacks.Num() <= 0) return;
 
-    for (int32 i = _activeCallbacks.Num() - 1; i >= 0; i--)
-    {
-        if (_activeCallbacks[i] == nullptr)
-        {
-            _activeCallbacks.RemoveAt(i);
-            continue;
-        }
+	for (int32 i = _activeCallbacks.Num() - 1; i >= 0; i--)
+	{
+		if (_activeCallbacks[i] == nullptr)
+		{
+			_activeCallbacks.RemoveAt(i);
+			continue;
+		}
 
-        if (_activeCallbacks[i]->IsComplete())
-        {
-            delete(_activeCallbacks[i]);
-            _activeCallbacks[i] = nullptr;
-            _activeCallbacks.RemoveAt(i);
-        }
-    }
+		if (_activeCallbacks[i]->IsComplete())
+		{
+			delete(_activeCallbacks[i]);
+			_activeCallbacks[i] = nullptr;
+			_activeCallbacks.RemoveAt(i);
+		}
+	}
 }
