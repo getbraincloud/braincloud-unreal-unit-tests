@@ -29,21 +29,6 @@ namespace BrainCloud
          */
         void getCurrency(const char* in_currencyType, IServerCallback * in_callback = NULL);
 
-		/**
-		* @deprecated Method is now available in Cloud Code only for security - removal after March 22 2016
-		*/
-		DEPRECATED void awardCurrency(const char* in_currencyType, int32_t in_amount, IServerCallback * in_callback = NULL);
-
-		/**
-		* @deprecated Method is now available in Cloud Code only for security - removal after March 22 2016
-		*/
-		DEPRECATED void consumeCurrency(const char* in_currencyType, int32_t in_amount, IServerCallback * in_callback = NULL);
-
-		/**
-		* @deprecated Method is now available in Cloud Code only for security - removal after March 22 2016
-		*/
-		DEPRECATED void resetCurrency(IServerCallback * in_callback = NULL);
-
         /**
          * Method gets the active sales inventory for the passed-in platform and
          * currency type.

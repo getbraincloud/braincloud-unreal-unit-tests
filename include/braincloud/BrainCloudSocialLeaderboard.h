@@ -75,17 +75,7 @@ namespace BrainCloud
 		void getMultiSocialLeaderboard(const std::vector<std::string> & in_leaderboardIds, int in_leaderboardResultCount, bool in_replaceName, IServerCallback * in_callback = NULL);
 
 
-		/**
-		* @deprecated Use method without in_includeLeaderboardSize param - removal after March 22 2016
-		*/
-		DEPRECATED void getGlobalLeaderboardPage(
-			const char * in_leaderboardId,
-			SortOrder in_sortOrder,
-			int in_startIndex,
-			int in_endIndex,
-			bool in_includeLeaderboardSize,
-			IServerCallback * in_callback = NULL);
-
+	
 		/**
 		 * Method returns a page of global leaderboard results.
 		 *
@@ -112,18 +102,6 @@ namespace BrainCloud
 
 
 		/**
-		* @deprecated Use method without in_includeLeaderboardSize param - removal after March 22 2016
-		*/
-		DEPRECATED void getGlobalLeaderboardPageByVersion(
-			const char * in_leaderboardId,
-			SortOrder in_sortOrder,
-			int in_startIndex,
-			int in_endIndex,
-			bool in_includeLeaderboardSize,
-			int in_versionId,
-			IServerCallback * in_callback = NULL);
-
-		/**
 		 * Method returns a page of global leaderboard results.
 		 * By using a non-current version id, the user can retrieve a historical leaderboard.
 		 * See GetGlobalLeaderboardVersions method to retrieve the version id.
@@ -146,11 +124,7 @@ namespace BrainCloud
 			int in_versionId,
 			IServerCallback * in_callback = NULL);
 
-		/**
-		* @deprecated Use method without in_includeLeaderboardSize param - removal after March 22 2016
-		*/
-		DEPRECATED void getGlobalLeaderboardView(const char * in_leaderboardId, SortOrder in_sortOrder, int in_beforeCount, int in_afterCount, bool in_includeLeaderboardSize, IServerCallback * in_callback = NULL);
-
+	
 		/**
 		 * Method returns a view of global leaderboard results that centers on the current player.
 		 *
@@ -167,11 +141,6 @@ namespace BrainCloud
 		 * @param in_callback The method to be invoked when the server response is received
 		 */
 		void getGlobalLeaderboardView(const char * in_leaderboardId, SortOrder in_sortOrder, int in_beforeCount, int in_afterCount, IServerCallback * in_callback = NULL);
-
-		/**
-		* @deprecated Use method without in_includeLeaderboardSize param - removal after March 22 2016
-		*/
-		DEPRECATED void getGlobalLeaderboardViewByVersion(const char * in_leaderboardId, SortOrder in_sortOrder, int in_beforeCount, int in_afterCount, bool in_includeLeaderboardSize, int in_versionId, IServerCallback * in_callback = NULL);
 
 		/**
 		 * Method returns a view of global leaderboard results that centers on the current player.
@@ -285,12 +254,7 @@ namespace BrainCloud
 		* @param in_callback The method to be invoked when the server response is received
 		*/
 		void removePlayerScore(const char * in_leaderboardId, int32_t in_versionId, IServerCallback * in_callback = NULL);
-			
-		/**
-		* @deprecated Use removePlayerScore instead - removal after March 22 2016
-		*/
-		DEPRECATED void resetLeaderboardScore(const char * in_leaderBoardName, IServerCallback * in_callback = NULL);
-
+		
 		/**
 		 * Method to retrieve the player's completed tournaments for the game.
 		 * Arguments:

@@ -29,15 +29,6 @@ namespace BrainCloud
 		m_client->getBrainCloudComms()->addToQueue(sc);
 	}
 
-	void BrainCloudFriend::getFriendProfileInfoForExternalId(const char *in_externalId, const char *in_authenticationType, IServerCallback * in_callback)
-	{
-		Json::Value message;
-		message[OperationParam::FriendServiceExternalId.getValue()] = in_externalId;
-		message[OperationParam::FriendServiceAuthenticationType.getValue()] = in_authenticationType;
-
-		ServerCall * sc = new ServerCall(ServiceName::Friend, ServiceOperation::GetFriendProfileInfoForExternalId, message, in_callback);
-		m_client->getBrainCloudComms()->addToQueue(sc);
-	}
 
 	void BrainCloudFriend::getProfileInfoForCredential(const char * in_externalId, AuthenticationType in_authenticationType, IServerCallback * in_callback)
 	{
