@@ -30,7 +30,7 @@ bool FOnlineLeaderboardsBrainCloud::ReadLeaderboards(const TArray< TSharedRef<co
     lbcb->OnSuccessDelegate.AddRaw(this, &FOnlineLeaderboardsBrainCloud::readLeaderboardSuccess);
     lbcb->OnFailDelegate.AddRaw(this, &FOnlineLeaderboardsBrainCloud::readLeaderboardFail);
 
-    BrainCloudClient::getInstance()->getLeaderboardService()->getGlobalLeaderboardView(ReadObject->LeaderboardName.ToString(), ESortOrder::HIGH_TO_LOW, 9, 10, false, lbcb);
+    BrainCloudClient::getInstance()->getLeaderboardService()->getGlobalLeaderboardView(ReadObject->LeaderboardName.ToString(), ESortOrder::HIGH_TO_LOW, 9, 10, lbcb);
 
     return true;
 }

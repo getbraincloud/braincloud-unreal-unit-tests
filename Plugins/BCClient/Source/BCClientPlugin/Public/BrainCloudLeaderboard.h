@@ -71,19 +71,7 @@ public:
 	*/
 	void getMultiSocialLeaderboard(const TArray<FString>& leaderboardIds, int32 leaderboardResultCount, bool replaceName, IServerCallback * callback = nullptr);
 
-	/**
-	* @deprecated Use method without includeLeaderboardSize parameter - removal after March 22 2016
-	*/
-	DEPRECATED("3.2.0", "Use method without includeLeaderboardSize parameter - removal after March 22 2016")
-		void getGlobalLeaderboardPage(const FString& leaderboardId, ESortOrder sortOrder, int32 startIndex, int32 endIndex, bool includeLeaderboardSize, IServerCallback * callback = nullptr);
-
-	/**
-	* @deprecated Use method without includeLeaderboardSize parameter - removal after March 22 2016
-	*/
-	DEPRECATED("3.2.0", "Use method without includeLeaderboardSize parameter - removal after March 22 2016")
-		void getGlobalLeaderboardPageByVersion(const FString& leaderboardId, ESortOrder sortOrder, int32 startIndex, int32 endIndex, bool includeLeaderboardSize, int32 versionId, IServerCallback * callback = nullptr);
-
-	/**
+    /**
 	* Method returns a page of global leaderboard results.
 	*
 	* Leaderboards entries contain the player's score and optionally, some user-defined
@@ -118,20 +106,6 @@ public:
 	* @param callback The method to be invoked when the server response is received
 	*/
 	void getGlobalLeaderboardPageByVersion(const FString& leaderboardId, ESortOrder sortOrder, int32 startIndex, int32 endIndex, int32 versionId, IServerCallback * callback = nullptr);
-
-
-	/**
-	* @deprecated Use method without includeLeaderboardSize parameter - removal after March 22 2016
-	*/
-	DEPRECATED("3.2.0", "Use method without includeLeaderboardSize parameter - removal after March 22 2016")
-		void getGlobalLeaderboardView(const FString& leaderboardId, ESortOrder sortOrder, int32 beforeCount, int32 afterCount, bool includeLeaderboardSize, IServerCallback * callback = nullptr);
-
-	/**
-	* @deprecated Use method without includeLeaderboardSize parameter - removal after March 22 2016
-	*/
-	DEPRECATED("3.2.0", "Use method without includeLeaderboardSize parameter - removal after March 22 2016")
-		void getGlobalLeaderboardViewByVersion(const FString& leaderboardId, ESortOrder sortOrder, int32 beforeCount, int32 afterCount,
-			bool includeLeaderboardSize, int32 versionId, IServerCallback * callback = nullptr);
 
 	/**
 	* Method returns a view of global leaderboard results that centers on the current player.
@@ -261,12 +235,6 @@ public:
 	* @param callback The method to be invoked when the server response is received
 	*/
 	void removePlayerScore(const FString& leaderboardId, int32 versionId, IServerCallback * callback = nullptr);
-
-	/**
-	* @deprecated Use RemovePlayerScore instead - Removal after March 22 2016
-	*/
-	DEPRECATED("3.2.0", "Use RemovePlayerScore instead - Removal after March 22 2016")
-		void resetLeaderboardScore(const FString& leaderBoardName, IServerCallback * callback = nullptr);
 
 	/**
 	 * Method to retrieve the player's completed tournaments for the game.

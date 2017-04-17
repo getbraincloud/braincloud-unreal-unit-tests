@@ -63,36 +63,6 @@ public:
 	*/
 	void getEvents(IServerCallback * callback);
 
-	/**
-	* @deprecated Use method with new signature - removal after March 22 2016
-	*/
-	DEPRECATED("3.2.0", "Use method with new signature - removal after March 22 2016")
-		void sendEvent(const FString& toPlayerId, const FString& eventType, const FString& jsonEventData, bool recordLocally, IServerCallback* callback);
-
-	/**
-	* @deprecated Use method with new signature - removal after March 22 2016
-	*/
-	DEPRECATED("3.2.0", "Use method with new signature - removal after March 22 2016")
-		void updateIncomingEventData(const FString& fromPlayerId, uint64 eventId, const FString& jsonEventData, IServerCallback* callback);
-
-	/**
-	* @deprecated Use method with new signature - removal after March 22 2016
-	*/
-	DEPRECATED("3.2.0", "Use method with new signature - removal after March 22 2016")
-		void deleteIncomingEvent(const FString& fromPlayerId, uint64 eventId, IServerCallback* callback);
-
-	/**
-	* @deprecated Use method with new signature - removal after March 22 2016
-	*/
-	DEPRECATED("3.2.0", "Removal after March 22 2016")
-		void deleteSentEvent(const FString& toPlayerId, uint64 eventId, IServerCallback* callback);
-
-	/**
-	* @deprecated Use method with new signature - removal after March 22 2016
-	*/
-	DEPRECATED("3.2.0", "Use method with new signature - removal after March 22 2016")
-		void getEvents(bool includeIncomingEvents, bool includeSentEvents, IServerCallback * callback);
-
 private:
 	BrainCloudClient* _client = nullptr;
 };

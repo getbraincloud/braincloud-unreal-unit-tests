@@ -210,16 +210,7 @@ public:
 	UFUNCTION(BlueprintCallable, meta = (BlueprintInternalUseOnly = "true"), Category = "BrainCloud|Leaderboard")
 		static UBCLeaderboardProxy* RemovePlayerScore(const FString& leaderboardId, int32 versionId);
 
-	/**
-	* Reset the player's score for the given social leaderboard id.
-	*
-	* Param - leaderboardId The leaderboard to post to
-	*/
-	UFUNCTION(BlueprintCallable, meta = (DeprecatedFunction, DeprecationMessage = "Use RemovePlayerScore instead - Removal after March 22 2016",
-		BlueprintInternalUseOnly = "true"), Category = "BrainCloud|Leaderboard")
-		static UBCLeaderboardProxy* ResetLeaderboardScore(FString leaderBoardName);
-
-	/**
+    /**
 	* Retrieve the social leaderboard for a group.
 	*
 	* Param - leaderboardId The leaderboard to retrieve

@@ -27,16 +27,16 @@ BrainCloudWrapper * BrainCloudWrapper::getInstance()
     return _instance;
 }
 
-void BrainCloudWrapper::initialize(FString url, FString secretKey, FString gameId, FString gameVersion)
+void BrainCloudWrapper::initialize(FString url, FString secretKey, FString appId, FString version)
 {
-    // save the game info in case we need to reauthenticate
+    // save the game app in case we need to reauthenticate
     _lastUrl = url;
     _lastSecretKey = secretKey;
-    _lastGameId = gameId;
-    _lastGameVersion = gameVersion;
+    _lastGameId = appId;
+    _lastGameVersion = version;
 
-    // initialize the client with our game info
-    _client->initialize(url, secretKey, gameId, gameVersion);
+    // initialize the client with our app info
+    _client->initialize(url, secretKey, appId, version);
 
     loadData();
 }
