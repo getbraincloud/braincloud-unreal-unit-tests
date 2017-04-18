@@ -33,18 +33,6 @@ public:
 	void getProfileInfoForCredential(const FString& externalId, EBCAuthType authenticationType, IServerCallback * callback = nullptr);
 
 	/**
-	* Retrieves profile information for the specified external auth user.
-	*
-	* Service Name - friend
-	* Service Operation - GET_PROFILE_INFO_FOR_EXTERNAL_AUTH_ID
-	*
-	* @param externalId External ID of the user to find
-	* @param externalAuthType The external authentication type used for this users's external ID
-	* @param callback Method to be invoked when the server response is received.
-	*/
-	void getProfileInfoForExternalAuthId(const FString& externalId, const FString& externalAuthType, IServerCallback * callback = nullptr);
-
-	/**
 	* Retrieves the external ID for the specified user profile ID on the specified social platform.
 	*
 	* @param profileId Profile (player) ID.
