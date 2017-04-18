@@ -56,7 +56,6 @@ void AEventCallbackTest::serverCallback(ServiceName serviceName, ServiceOperatio
             BrainCloudClient::getInstance()->getAuthenticationService()->getProfileId(),
             "test",
             "{ \"RoundsWon\" : 0 }",
-            false,
             nullptr);
         BrainCloudClient::getInstance()->getPlayerStatisticsEventService()->triggerPlayerStatisticsEvent("test", 1, nullptr);
     }

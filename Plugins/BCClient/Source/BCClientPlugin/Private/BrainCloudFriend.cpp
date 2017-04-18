@@ -14,16 +14,6 @@ BrainCloudFriend::BrainCloudFriend(BrainCloudClient* client) : _client(client)
 	_platformStrings.Add(EFriendPlatform::FACEBOOK, TEXT("Facebook"));
 };
 
-void BrainCloudFriend::getFriendProfileInfoForExternalId(const FString& externalId, const FString& authenticationType, IServerCallback * callback)
-{
-	TSharedRef<FJsonObject> message = MakeShareable(new FJsonObject());
-
-	message->SetStringField(OperationParam::FriendServiceExternalId.getValue(), externalId);
-	message->SetStringField(OperationParam::FriendServiceAuthenticationType.getValue(), authenticationType);
-
-	ServerCall * sc = new ServerCall(ServiceName::Friend, ServiceOperation::GetFriendProfileInfoForExternalId, message, callback);
-	_client->sendRequest(sc);
-}
 
 void BrainCloudFriend::getProfileInfoForCredential(const FString& externalId, EBCAuthType authenticationType, IServerCallback * callback)
 {

@@ -21,12 +21,6 @@ public:
 	BrainCloudFriend(BrainCloudClient* client);
 
 	/**
-	* @deprecated Use getProfileInfoForCredential instead - removal after March 22 2017
-	*/
-	DEPRECATED("3.2.0", "Use getProfileInfoForCredential instead - removal after March 22 2017")
-		void getFriendProfileInfoForExternalId(const FString& externalId, const FString& authenticationType, IServerCallback * callback = nullptr);
-
-	/**
 	* Retrieves profile information for the specified user.
 	*
 	* Service Name - friend

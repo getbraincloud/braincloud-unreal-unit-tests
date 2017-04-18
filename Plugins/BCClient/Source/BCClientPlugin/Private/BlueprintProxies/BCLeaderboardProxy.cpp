@@ -100,13 +100,6 @@ UBCLeaderboardProxy* UBCLeaderboardProxy::RemovePlayerScore(const FString& leade
 	return Proxy;
 }
 
-UBCLeaderboardProxy* UBCLeaderboardProxy::ResetLeaderboardScore(FString leaderBoardName)
-{
-	UBCLeaderboardProxy* Proxy = NewObject<UBCLeaderboardProxy>();
-	BrainCloudClient::getInstance()->getLeaderboardService()->resetLeaderboardScore(leaderBoardName, Proxy);
-	return Proxy;
-}
-
 UBCLeaderboardProxy* UBCLeaderboardProxy::GetGroupSocialLeaderboard(const FString& leaderboardId, const FString& groupId)
 {
 	UBCLeaderboardProxy* Proxy = NewObject<UBCLeaderboardProxy>();

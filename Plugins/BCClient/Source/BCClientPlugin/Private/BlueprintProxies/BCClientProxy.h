@@ -16,15 +16,15 @@ public:
 	* Method initializes the BrainCloudClient.
 	*
 	* @param serverURL The url to the brainCloud server
-	* @param secretKey The secret key for your game
-	* @param gameId The game id
-	* @param gameVersion The game version
+	* @param secretKey The secret key for your app
+	* @param appId The app's id
+	* @param version The app's version
 	*/
 	UFUNCTION(BlueprintCallable, Category = "BrainCloud|Client")
 		static void Initialize(const FString& serverUrl = "https://sharedprod.braincloudservers.com/dispatcherv2",
 			const FString& secretKey = "",
-			const FString& gameId = "",
-			const FString& gameVersion = "1.0.0");
+			const FString& appId = "",
+			const FString& version = "1.0.0");
 
 	/**
 	* Initialize - initializes the identity service with the saved
