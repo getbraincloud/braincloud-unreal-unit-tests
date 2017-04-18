@@ -26,6 +26,17 @@ void BrainCloudFriend::getProfileInfoForCredential(const FString& externalId, EB
 	_client->sendRequest(sc);
 }
 
+void BrainCloudFriend::getProfileInfoForExternalAuthId(const FString& externalId, const FString& externalAuthType, IServerCallback * callback)
+{
+	TSharedRef<FJsonObject> message = MakeShareable(new FJsonObject());
+
+	message->SetStringField(OperationParam::FriendServiceExternalId.getValue(), externalId);
+	message->SetStringField(OperationParam::ExternalAuthType.getValue(), externalAuthType);
+
+	ServerCall * sc = new ServerCall(ServiceName::Friend, ServiceOperation::GetProfileInfoForExternalAuthId, message, callback);
+	_client->sendRequest(sc);
+}
+
 void BrainCloudFriend::getExternalIdForProfileId(const FString& profileId, const FString& authenticationType, IServerCallback * callback)
 {
 	TSharedRef<FJsonObject> message = MakeShareable(new FJsonObject());

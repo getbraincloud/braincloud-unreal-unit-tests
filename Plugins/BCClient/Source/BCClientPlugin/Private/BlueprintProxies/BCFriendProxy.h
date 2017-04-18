@@ -28,6 +28,18 @@ public:
 		static UBCFriendProxy* GetProfileInfoForCredential(const FString& externalId, EBCAuthType authenticationType);
 
 	/**
+	* Retrieves profile information for the specified external auth user.
+	*
+	* Service Name - friend
+	* Service Operation - GET_PROFILE_INFO_FOR_EXTERNAL_AUTH_ID
+	*
+	* Param - externalId External ID of the user to find
+	* Param - externalAuthType The external authentication type used for this users's external ID
+	*/
+	UFUNCTION(BlueprintCallable, meta = (BlueprintInternalUseOnly = "true"), Category = "BrainCloud|Friend")
+		static UBCFriendProxy* GetProfileInfoForExternalAuthId(const FString& externalId, const FString& externalAuthType);
+
+	/**
 	* Retrieves the external ID for the specified user profile ID on the specified social platform.
 	*
 	* Param - profileId Profile (player) ID.
