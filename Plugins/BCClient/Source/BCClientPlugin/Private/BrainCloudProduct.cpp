@@ -20,32 +20,6 @@ void BrainCloudProduct::getCurrency(const FString& currencyType, IServerCallback
     _client->sendRequest(sc);
 }
 
-void BrainCloudProduct::awardCurrency(const FString& currencyType, int32 amount, IServerCallback * callback)
-{
-    TSharedRef<FJsonObject> message = MakeShareable(new FJsonObject());
-    message->SetStringField(OperationParam::ProductServiceVCId.getValue(), currencyType);
-    message->SetNumberField(OperationParam::ProductServiceVCAmount.getValue(), amount);
-
-    ServerCall * sc = new ServerCall(ServiceName::Product, ServiceOperation::AwardVC, message, callback);
-    _client->sendRequest(sc);
-}
-
-void BrainCloudProduct::consumeCurrency(const FString& currencyType, int32 amount, IServerCallback * callback)
-{
-    TSharedRef<FJsonObject> message = MakeShareable(new FJsonObject());
-    message->SetStringField(OperationParam::ProductServiceVCId.getValue(), currencyType);
-    message->SetNumberField(OperationParam::ProductServiceVCAmount.getValue(), amount);
-    ServerCall * sc = new ServerCall(ServiceName::Product, ServiceOperation::ConsumeVC, message, callback);
-    _client->sendRequest(sc);
-}
-
-void BrainCloudProduct::resetCurrency(IServerCallback * callback)
-{
-    TSharedRef<FJsonObject> message = MakeShareable(new FJsonObject());
-    ServerCall * sc = new ServerCall(ServiceName::Product, ServiceOperation::ResetPlayerVC, message, callback);
-    _client->sendRequest(sc);
-}
-
 void BrainCloudProduct::getSalesInventory(const FString& platform, const FString& userCurrency, IServerCallback * callback)
 {
     getSalesInventoryByCategory(platform, userCurrency, "", callback);

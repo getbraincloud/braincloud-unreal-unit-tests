@@ -16,13 +16,6 @@ public:
 	UBCFriendProxy(const FObjectInitializer& ObjectInitializer);
 
 	/**
-	* Deprecated  Use getProfileInfoForCredential instead - removal after March 22 2017
-	*/
-	UFUNCTION(BlueprintCallable, meta = (DeprecatedFunction, DeprecationMessage = "Use GetProfileInfoForCredential instead - removal after March 22 2017", 
-		BlueprintInternalUseOnly = "true"), Category = "BrainCloud|Friend")
-		static UBCFriendProxy* GetFriendProfileInfoForExternalId(const FString& externalId, const FString& authenticationType);
-
-	/**
 	* Retrieves profile information for the specified user.
 	*
 	* Service Name - friend

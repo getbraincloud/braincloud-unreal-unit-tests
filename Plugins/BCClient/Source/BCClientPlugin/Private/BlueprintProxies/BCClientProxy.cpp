@@ -13,10 +13,10 @@ UBCClientProxy::UBCClientProxy(const FObjectInitializer& ObjectInitializer)
 
 void UBCClientProxy::Initialize(const FString& serverUrl,
 	const FString& secretKey,
-	const FString& gameId,
-	const FString& gameVersion)
+	const FString& appId,
+	const FString& version)
 {
-	BrainCloudClient::getInstance()->initialize(serverUrl, secretKey, gameId, gameVersion);
+	BrainCloudClient::getInstance()->initialize(serverUrl, secretKey, appId, version);
 }
 
 void UBCClientProxy::InitializeIdentity(const FString& profileId, const FString& anonymousId)

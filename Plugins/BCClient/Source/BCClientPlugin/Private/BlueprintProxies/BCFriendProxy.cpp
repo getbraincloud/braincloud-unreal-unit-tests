@@ -11,13 +11,6 @@ UBCFriendProxy::UBCFriendProxy(const FObjectInitializer& ObjectInitializer)
 {
 }
 
-UBCFriendProxy* UBCFriendProxy::GetFriendProfileInfoForExternalId(const FString& externalId, const FString& authenticationType)
-{
-	UBCFriendProxy* Proxy = NewObject<UBCFriendProxy>();
-	BrainCloudClient::getInstance()->getFriendService()->getFriendProfileInfoForExternalId(externalId, authenticationType, Proxy);
-	return Proxy;
-}
-
 UBCFriendProxy* UBCFriendProxy::GetProfileInfoForCredential(const FString& externalId, EBCAuthType authenticationType)
 {
 	UBCFriendProxy* Proxy = NewObject<UBCFriendProxy>();

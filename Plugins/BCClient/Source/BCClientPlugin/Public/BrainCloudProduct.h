@@ -24,24 +24,6 @@ public:
      */
     void getCurrency(const FString& currencyType, IServerCallback* callback);
 
-	/**
-	* @deprecated Method is now available in Cloud Code only for security - removal after March 22 2016
-	*/
-	DEPRECATED("3.2.0", "Method is now available in Cloud Code only for security - removal after March 22 2016")
-    void awardCurrency(const FString& currencyType, int32 amount, IServerCallback* callback);
-
-	/**
-	* @deprecated Method is now available in Cloud Code only for security - removal after March 22 2016
-	*/
-	DEPRECATED("3.2.0", "Method is now available in Cloud Code only for security - removal after March 22 2016")
-    void consumeCurrency(const FString& currencyType, int32 amount, IServerCallback* callback);
-
-	/**
-	* @deprecated Method is now available in Cloud Code only for security - removal after March 22 2016
-	*/
-	DEPRECATED("3.2.0", "Method is now available in Cloud Code only for security - removal after March 22 2016")
-    void resetCurrency(IServerCallback* callback);
-
     /**
     * Method gets the active sales inventory for the passed-in platform and
     * currency type.

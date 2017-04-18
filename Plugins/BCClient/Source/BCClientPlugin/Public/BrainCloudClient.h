@@ -58,14 +58,14 @@ public:
 	* Method initializes the BrainCloudClient.
 	*
 	* @param serverURL The url to the brainCloud server
-	* @param secretKey The secret key for your game
-	* @param gameId The game id
-	* @param gameVersion The game version
+	* @param secretKey The secret key for your app
+	* @param appId The apps' id
+	* @param version The app's version
 	*/
 	void initialize(const FString& serverUrl,
 		const FString& secretKey,
-		const FString& gameId,
-		const FString& gameVersion);
+		const FString& appId,
+		const FString& version);
 
 	/**
 	* Initialize - initializes the identity service with the saved

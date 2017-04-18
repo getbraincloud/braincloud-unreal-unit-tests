@@ -30,11 +30,11 @@ public:
      * Method initializes the BrainCloudClient.
      *
      * @param serverURL The url to the brainCloud server
-     * @param secretKey The secret key for your game
-     * @param gameId The game id
-     * @param gameVersion The game version
+     * @param secretKey The secret key for your app
+     * @param appId The app's id
+     * @param version The app's version
      */
-    void initialize(FString serverUrl, FString secretKey, FString gameId, FString gameVersion);
+    void initialize(FString serverUrl, FString secretKey, FString appId, FString version);
 
     /**
      * Authenticate a user anonymously with brainCloud - used for apps that don't want to bother

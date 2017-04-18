@@ -27,26 +27,6 @@ public:
     UFUNCTION(BlueprintCallable, meta = (BlueprintInternalUseOnly = "true"), Category = "BrainCloud|Product")
         static UBCProductProxy* GetCurrency(const FString& currencyType);
 
-	/**
-	* @deprecated Method is now available in Cloud Code only for security - removal after March 22 2016
-	*/
-	DEPRECATED("3.2.0", "Method is now available in Cloud Code only for security - removal after March 22 2016")
-    UFUNCTION(BlueprintCallable, meta = (BlueprintInternalUseOnly = "true"), Category = "BrainCloud|Product")
-        static UBCProductProxy* AwardCurrency(const FString& currencyType, int32 amount);
-
-	/**
-	* @deprecated Method is now available in Cloud Code only for security - removal after March 22 2016
-	*/
-	DEPRECATED("3.2.0", "Method is now available in Cloud Code only for security - removal after March 22 2016")
-    UFUNCTION(BlueprintCallable, meta = (BlueprintInternalUseOnly = "true"), Category = "BrainCloud|Product")
-        static UBCProductProxy* ConsumeCurrency(const FString& currencyType, int32 amount);
-
-	/**
-	* @deprecated Method is now available in Cloud Code only for security - removal after March 22 2016
-	*/
-	DEPRECATED("3.2.0", "Method is now available in Cloud Code only for security - removal after March 22 2016")
-    UFUNCTION(BlueprintCallable, meta = (BlueprintInternalUseOnly = "true"), Category = "BrainCloud|Product")
-        static UBCProductProxy* ResetCurrency();
 
     /**
     * Method gets the active sales inventory for the passed-in platform and
