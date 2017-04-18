@@ -42,7 +42,7 @@ namespace BrainCloud {
 
 	// Define all static member variables.
 	BrainCloudClient * BrainCloudClient::_instance = NULL;
-	std::string BrainCloudClient::s_brainCloudClientVersion = "3.2.1";
+	std::string BrainCloudClient::s_brainCloudClientVersion = "3.4.0";
 
 	/**
 	 * Constructor
@@ -79,7 +79,7 @@ namespace BrainCloud {
 		_timeService(new BrainCloudTime(this)),
 		_tournamentService(new BrainCloudTournament(this)),
 		_releasePlatform(""),
-		_gameVersion(""),
+		_version(""),
 		_timezoneOffset(0.0)
 	{
 		//#ifdef PTW32_STATIC_LIB
@@ -100,16 +100,16 @@ namespace BrainCloud {
 		return(_brainCloudComms->getSessionId().c_str());
 	}
 
-	void BrainCloudClient::initialize(const char * in_serverURL, const char * in_secretKey, const char * in_gameId, const char * in_gameVersion)
+	void BrainCloudClient::initialize(const char * in_serverURL, const char * in_secretKey, const char * in_appId, const char * in_version)
 	{
 		std::string error = "";
 		if (in_serverURL == NULL || strlen(in_serverURL) <= 0)
 			error = "serverURL was null or empty";
 		else if (in_secretKey == NULL || strlen(in_secretKey) <= 0)
 			error = "secretKey was null or empty";
-		else if (in_gameId == NULL || strlen(in_gameId) <= 0)
+		else if (in_appId == NULL || strlen(in_appId) <= 0)
 			error = "gameId was null or empty";
-		else if (in_gameVersion == NULL || strlen(in_gameVersion) <= 0)
+		else if (in_version == NULL || strlen(in_version) <= 0)
 			error = "gameVersion was null or empty";
 
 		if (error.length() > 0)
@@ -135,7 +135,7 @@ namespace BrainCloud {
 					urlToUse = url.c_str();
 				}
 			}
-			_brainCloudComms->initialize(urlToUse, in_gameId, in_secretKey);
+			_brainCloudComms->initialize(urlToUse, in_appId, in_secretKey);
 		}
 
 		setupOSLocaleData();
@@ -214,7 +214,7 @@ namespace BrainCloud {
 #error "Unknown platform!"
 #endif
 
-		_gameVersion = in_gameVersion;
+		_version = in_version;
 	}
 
 	void BrainCloudClient::initializeIdentity(const char * in_profileId, const char * in_anonymousId)

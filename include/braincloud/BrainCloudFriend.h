@@ -27,11 +27,6 @@ namespace BrainCloud
 		void findPlayerByUniversalId(const char * in_searchText, int32_t in_maxResults, IServerCallback * in_callback = NULL);
 
 		/**
-		* @deprecated Use getProfileInfoForCredential instead - removal after March 22 2017
-		*/
-		DEPRECATED void getFriendProfileInfoForExternalId(const char *in_externalId, const char *in_authenticationType, IServerCallback * in_callback = NULL);
-
-		/**
 		* Retrieves profile information for the specified user.
 		*
 		* Service Name - friend

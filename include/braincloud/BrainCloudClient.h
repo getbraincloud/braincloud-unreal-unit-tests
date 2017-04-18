@@ -92,10 +92,10 @@ namespace BrainCloud
 		 * @param in_serverURL The url to the brainCloud server
 		 *     Currently this should be:  https://sharedprod.braincloudservers.com/dispatcherv2
 		 * @param in_secretKey The secret key for your game
-		 * @param in_gameId The game id
-		 * @param in_gameVersion The game version
+		 * @param in_appId The app id
+		 * @param in_version The version
 		 */
-		void initialize(const char * in_serverURL, const char * in_secretKey, const char * in_gameId, const char * in_gameVersion);
+		void initialize(const char * in_serverURL, const char * in_secretKey, const char * in_appId, const char * in_version);
 
 		/**
 		* Initialize - initializes the identity service with the saved
@@ -302,7 +302,7 @@ namespace BrainCloud
 		}
 
 		const std::string & getReleasePlatform() const { return _releasePlatform; };
-		const std::string & getGameVersion() const { return _gameVersion; };
+		const std::string & getGameVersion() const { return _version; };
 		const std::string & getBrainCloudClientVersion() const { return s_brainCloudClientVersion; };
 
 		const std::string& getCountryCode() const { return _countryCode; }
@@ -549,7 +549,7 @@ namespace BrainCloud
 		static std::string s_brainCloudClientVersion;
 
 		std::string _releasePlatform;
-		std::string _gameVersion;
+		std::string _version;
 
 		std::string _countryCode;
 		std::string _languageCode;

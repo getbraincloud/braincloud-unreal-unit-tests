@@ -42,22 +42,6 @@ namespace BrainCloud
 	}
 
 	void BrainCloudSocialLeaderboard::getGlobalLeaderboardPage(const char * in_leaderboardId, SortOrder in_sortOrder, int in_startIndex,
-		int in_endIndex, bool in_includeLeaderboardSize, IServerCallback * in_callback)
-	{
-		std::string sortOrder = sortOrderToString(in_sortOrder);
-
-		Json::Value message;
-		message[OperationParam::SocialLeaderboardServiceLeaderboardId.getValue()] = in_leaderboardId;
-		message[OperationParam::SocialLeaderboardServiceSortOrder.getValue()] = sortOrder;
-		message[OperationParam::SocialLeaderboardServiceStartIndex.getValue()] = in_startIndex;
-		message[OperationParam::SocialLeaderboardServiceEndIndex.getValue()] = in_endIndex;
-		message[OperationParam::SocialLeaderboardServiceIncludeLeaderboardSize.getValue()] = in_includeLeaderboardSize;
-
-		ServerCall * sc = new ServerCall(ServiceName::Leaderboard, ServiceOperation::GetGlobalLeaderboardPage, message, in_callback);
-		m_client->getBrainCloudComms()->addToQueue(sc);
-	}
-
-	void BrainCloudSocialLeaderboard::getGlobalLeaderboardPage(const char * in_leaderboardId, SortOrder in_sortOrder, int in_startIndex,
 		int in_endIndex, IServerCallback * in_callback)
 	{
 		std::string sortOrder = sortOrderToString(in_sortOrder);
@@ -67,22 +51,6 @@ namespace BrainCloud
 		message[OperationParam::SocialLeaderboardServiceSortOrder.getValue()] = sortOrder;
 		message[OperationParam::SocialLeaderboardServiceStartIndex.getValue()] = in_startIndex;
 		message[OperationParam::SocialLeaderboardServiceEndIndex.getValue()] = in_endIndex;
-
-		ServerCall * sc = new ServerCall(ServiceName::Leaderboard, ServiceOperation::GetGlobalLeaderboardPage, message, in_callback);
-		m_client->getBrainCloudComms()->addToQueue(sc);
-	}
-
-	void BrainCloudSocialLeaderboard::getGlobalLeaderboardPageByVersion(const char * in_leaderboardId, SortOrder in_sortOrder, int in_startIndex, int in_endIndex, bool in_includeLeaderboardSize, int in_versionId, IServerCallback * in_callback)
-	{
-		std::string sortOrder = sortOrderToString(in_sortOrder);
-
-		Json::Value message;
-		message[OperationParam::SocialLeaderboardServiceLeaderboardId.getValue()] = in_leaderboardId;
-		message[OperationParam::SocialLeaderboardServiceSortOrder.getValue()] = sortOrder;
-		message[OperationParam::SocialLeaderboardServiceStartIndex.getValue()] = in_startIndex;
-		message[OperationParam::SocialLeaderboardServiceEndIndex.getValue()] = in_endIndex;
-		message[OperationParam::SocialLeaderboardServiceIncludeLeaderboardSize.getValue()] = in_includeLeaderboardSize;
-		message[OperationParam::SocialLeaderboardServiceVersionId.getValue()] = in_versionId;
 
 		ServerCall * sc = new ServerCall(ServiceName::Leaderboard, ServiceOperation::GetGlobalLeaderboardPage, message, in_callback);
 		m_client->getBrainCloudComms()->addToQueue(sc);
@@ -100,29 +68,6 @@ namespace BrainCloud
 		message[OperationParam::SocialLeaderboardServiceVersionId.getValue()] = in_versionId;
 
 		ServerCall * sc = new ServerCall(ServiceName::Leaderboard, ServiceOperation::GetGlobalLeaderboardPage, message, in_callback);
-		m_client->getBrainCloudComms()->addToQueue(sc);
-	}
-
-	void BrainCloudSocialLeaderboard::getGlobalLeaderboardView(const char * in_leaderboardId, SortOrder in_sortOrder, int in_beforeCount,
-		int in_afterCount, bool in_includeLeaderboardSize, IServerCallback * in_callback)
-	{
-		getGlobalLeaderboardViewByVersion(in_leaderboardId, in_sortOrder, in_beforeCount, in_afterCount, -1, in_callback);
-	}
-
-	void BrainCloudSocialLeaderboard::getGlobalLeaderboardViewByVersion(const char * in_leaderboardId, SortOrder in_sortOrder, int in_beforeCount,
-		int in_afterCount, bool in_includeLeaderboardSize, int in_versionId, IServerCallback * in_callback)
-	{
-		std::string sortOrder = sortOrderToString(in_sortOrder);
-
-		Json::Value message;
-		message[OperationParam::SocialLeaderboardServiceLeaderboardId.getValue()] = in_leaderboardId;
-		message[OperationParam::SocialLeaderboardServiceSortOrder.getValue()] = sortOrder;
-		message[OperationParam::SocialLeaderboardServiceBeforeCount.getValue()] = in_beforeCount;
-		message[OperationParam::SocialLeaderboardServiceAfterCount.getValue()] = in_afterCount;
-		message[OperationParam::SocialLeaderboardServiceIncludeLeaderboardSize.getValue()] = in_includeLeaderboardSize;
-		if (in_versionId != -1) message[OperationParam::SocialLeaderboardServiceVersionId.getValue()] = in_versionId;
-
-		ServerCall * sc = new ServerCall(ServiceName::Leaderboard, ServiceOperation::GetGlobalLeaderboardView, message, in_callback);
 		m_client->getBrainCloudComms()->addToQueue(sc);
 	}
 
@@ -237,15 +182,6 @@ namespace BrainCloud
 		if (in_versionId != -1) message[OperationParam::SocialLeaderboardServiceVersionId.getValue()] = in_versionId;
 
 		ServerCall * sc = new ServerCall(ServiceName::Leaderboard, ServiceOperation::RemovePlayerScore, message, in_callback);
-		m_client->getBrainCloudComms()->addToQueue(sc);
-	}
-
-	void BrainCloudSocialLeaderboard::resetLeaderboardScore(const char * in_leaderboardId, IServerCallback * in_callback)
-	{
-		Json::Value message;
-		message[OperationParam::SocialLeaderboardServiceLeaderboardId.getValue()] = in_leaderboardId;
-
-		ServerCall * sc = new ServerCall(ServiceName::Leaderboard, ServiceOperation::Reset, message, in_callback);
 		m_client->getBrainCloudComms()->addToQueue(sc);
 	}
 
