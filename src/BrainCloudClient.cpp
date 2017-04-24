@@ -108,9 +108,9 @@ namespace BrainCloud {
 		else if (in_secretKey == NULL || strlen(in_secretKey) <= 0)
 			error = "secretKey was null or empty";
 		else if (in_appId == NULL || strlen(in_appId) <= 0)
-			error = "gameId was null or empty";
+			error = "appId was null or empty";
 		else if (in_version == NULL || strlen(in_version) <= 0)
-			error = "gameVersion was null or empty";
+			error = "version was null or empty";
 
 		if (error.length() > 0)
 		{

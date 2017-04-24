@@ -36,20 +36,20 @@ namespace BrainCloud {
     }
 
 
-    void BrainCloudWrapper::initialize(const char * url, const char * secretKey, const char * gameId, const char * gameVersion, const char * companyName, const char * gameName)
+    void BrainCloudWrapper::initialize(const char * url, const char * secretKey, const char * appId, const char * version, const char * companyName, const char * appName)
     {
-        // save the game info in case we need to reauthenticate
+        // save the app info in case we need to reauthenticate
         m_lastUrl = url;
         m_lastSecretKey = secretKey;
-        m_lastGameId = gameId;
-        m_lastGameVersion = gameVersion;
+        m_lastGameId = appId;
+        m_lastGameVersion = version;
 
-        // initialize the client with our game info
-        m_BCClient->initialize(url, secretKey, gameId, gameVersion);
+        // initialize the client with our app info
+        m_BCClient->initialize(url, secretKey, appId, version);
 
-        // inialize the save data helper with our company and game name
+        // inialize the save data helper with our company and app name
         // if this is not called the profile ids will not be saved
-        SaveDataHelper::getInstance()->initialize(companyName, gameName);
+        SaveDataHelper::getInstance()->initialize(companyName, appName);
     }
 
     void BrainCloudWrapper::initializeIdentity(bool in_isAnonymousAuth)
@@ -80,8 +80,8 @@ namespace BrainCloud {
 
     void BrainCloudWrapper::reauthenticate()
     {
-        // send our saved game info to brainCloud
-        // company and game name can be NULL since they are already set
+        // send our saved app info to brainCloud
+        // company and app name can be NULL since they are already set
         initialize(m_lastUrl.c_str(), m_lastSecretKey.c_str(), m_lastGameId.c_str(), m_lastGameVersion.c_str(), NULL, NULL);
 
         std::string authType = getStoredAuthenticationType();

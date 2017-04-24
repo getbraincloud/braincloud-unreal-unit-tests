@@ -32,15 +32,15 @@ namespace BrainCloud {
          * Method initializes the BrainCloudClient.
          *
          * @param in_serverURL The url to the brainCloud server
-         * @param in_secretKey The secret key for your game
-         * @param in_gameId The game id
-         * @param in_version The game version
+         * @param in_secretKey The secret key for your app
+         * @param in_gameId The app id
+         * @param in_version The app version
          * @param in_companyName The company name used in the keychain for storing anonymous and profile ids.
          * You are free to pick anything you want.
-         * @param in_gameName The game name used in teh keychain for storing anonymous and profile ids.
+         * @param in_appName The app name used in the keychain for storing anonymous and profile ids.
          * You are free to pick anything you want.
          */
-        void initialize(const char * in_serverUrl, const char * in_secretKey, const char * in_gameId, const char * in_version, const char * in_companyName, const char * in_gameName);
+        void initialize(const char * in_serverUrl, const char * in_secretKey, const char * in_appId, const char * in_version, const char * in_companyName, const char * in_appName);
 
         /**
          * Authenticate a user anonymously with brainCloud - used for apps that don't want to bother

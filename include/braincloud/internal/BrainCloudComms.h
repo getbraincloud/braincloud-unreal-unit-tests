@@ -40,20 +40,20 @@ namespace BrainCloud
 
     class BrainCloudComms : public IBrainCloudComms
     {
-        
+
     public:
         BrainCloudComms(BrainCloudClient* in_client);
         virtual ~BrainCloudComms( );
 
         // from IBrainCloudComms
-        virtual void initialize(const char * serverURL, const char * gameId, const char * secretKey);
-        
+        virtual void initialize(const char * serverURL, const char * appId, const char * secretKey);
+
         virtual void addToQueue( ServerCall * );
-        
+
         virtual void enableNetworkErrorMessageCaching(bool in_enabled);
         virtual void retryCachedMessages();
         virtual void flushCachedMessages(bool in_sendApiErrorCallbacks);
-        
+
         virtual void sendHeartbeat();
         virtual void resetCommunication();
         virtual void shutdown();
@@ -68,7 +68,7 @@ namespace BrainCloud
         virtual void deregisterGlobalErrorCallback();
         virtual void registerNetworkErrorCallback(INetworkErrorCallback * in_networkErrorCallback);
         virtual void deregisterNetworkErrorCallback();
-        
+
         virtual void cancelUpload(const char * in_fileUploadId);
         virtual double getUploadProgress(const char * in_fileUploadId);
         virtual int64_t getUploadTotalBytesToTransfer(const char * in_fileUploadId);
@@ -76,25 +76,25 @@ namespace BrainCloud
 
         // returns true if packet requires a retry
         bool handleResult( URLResponse const & );
-        
+
     protected:
         virtual void startFileUpload(const Json::Value & in_jsonPrepareUploadResponse);
-        
+
     private:
         URLLoader * _loader;
         URLRequest  * _request;
-        
+
         std::vector<ServerCall*> _queue;
         std::queue<BrainCloudCallbackEvent *>  _apiCallbackQueue;
         std::list<std::string> _eventCallbackQueue;
         std::list<std::string> _rewardCallbackQueue;
         std::list<URLResponse> _responses;
         std::vector<ServerCall*> _inProgress;
-        
+
         pthread_mutex_t _loaderMutex;
         pthread_mutex_t _queueMutex;
         pthread_mutex_t _mutex;
-        
+
         int64_t _retryTimeMillis;
 
         void handleResponseBundle(Json::Value & root);
@@ -104,14 +104,14 @@ namespace BrainCloud
         bool shouldRetryPacket();
         long getRetryTimeoutMillis(int retry);
         int getMaxSendAttempts();
-        
+
         void resend();
         void createAndSendBundle();
         void startHttpRequest();
-        
+
         void resetErrorCache();
         void fakeErrorResponse(int32_t statusCode, int32_t reasonCode, const std::string & statusMessage);
-		
+
 		void updateKillSwitch(const std::string & service, const std::string & operation, int32_t statusCode);
 		void resetKillSwitch();
     };

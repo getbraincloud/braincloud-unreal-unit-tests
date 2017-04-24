@@ -12,7 +12,7 @@ SaveDataHelper * SaveDataHelper::m_instance = NULL;
 SaveDataHelper::SaveDataHelper()
 : m_savePath("")
 {
-    
+
 }
 
 SaveDataHelper * SaveDataHelper::getInstance()
@@ -21,17 +21,17 @@ SaveDataHelper * SaveDataHelper::getInstance()
     {
         m_instance = new SaveDataHelper();
     }
-    
+
     return m_instance;
 }
 
-void SaveDataHelper::initialize(const char * companyName, const char * gameName)
+void SaveDataHelper::initialize(const char * companyName, const char * appName)
 {
 #if defined(WINDOWS) || defined(WIN32)
-    if (companyName != NULL && gameName != NULL)
+    if (companyName != NULL && appName != NULL)
     {
         std::string companyNameStr = companyName;
-        std::string gameNameStr = gameName;
+        std::string gameNameStr = appName;
         m_savePath = std::string("Software\\" + companyNameStr + "\\" + gameNameStr + "\\");
     }
 #endif
@@ -54,7 +54,7 @@ void SaveDataHelper::saveData(const char * key, const char * data)
     Windows::Storage::ApplicationDataContainer^ localSettings = Windows::Storage::ApplicationData::Current->LocalSettings;
     auto values = localSettings->Values;
     values->Insert(
-        ref new Platform::String(wskey.c_str()), 
+        ref new Platform::String(wskey.c_str()),
         dynamic_cast<Windows::Foundation::PropertyValue^>(Windows::Foundation::PropertyValue::CreateString(ref new Platform::String(wsdata.c_str()))));
 #else
     if (m_savePath.empty())

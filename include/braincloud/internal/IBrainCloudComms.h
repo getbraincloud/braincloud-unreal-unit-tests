@@ -64,7 +64,7 @@ namespace BrainCloud {
 		virtual ~IBrainCloudComms();
 
 
-		virtual void initialize(const char * serverURL, const char * gameId, const char * secretKey) = 0;
+		virtual void initialize(const char * serverURL, const char * appId, const char * secretKey) = 0;
 		virtual void addToQueue(ServerCall *) = 0;
 
 		virtual void sendHeartbeat() = 0;

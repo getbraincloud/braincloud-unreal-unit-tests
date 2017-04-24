@@ -408,11 +408,11 @@ namespace BrainCloud
 		 *
 		 * @param in_childProfileId The profileId of the child profile to switch to
 		 * If null and forceCreate is true a new profile will be created
-		 * @param in_childGameId The appId of the child game to switch to
+		 * @param in_childAppId The appId of the child app to switch to
 		 * @param in_forceCreate Should a new profile be created if it does not exist?
 		 * @param in_callback The method to be invoked when the server response is received
 		 */
-		void switchToChildProfile(const char * in_childProfileId, const char * in_childGameId, bool in_forceCreate, IServerCallback * in_callback = NULL);
+		void switchToChildProfile(const char * in_childProfileId, const char * in_childAppId, bool in_forceCreate, IServerCallback * in_callback = NULL);
 
 		/**
 		 * Switches to a child profile of an app when only one profile exists
@@ -421,11 +421,11 @@ namespace BrainCloud
 		 * Service Name - identity
 		 * Service Operation - SWITCH_TO_CHILD_PROFILE
 		 *
-		 * @param in_childGameId The App ID of the child game to switch to
+		 * @param in_childAppId The App ID of the child app to switch to
 		 * @param in_forceCreate Should a new profile be created if it does not exist?
 		 * @param in_callback The method to be invoked when the server response is received
 		 */
-		void switchToSingletonChildProfile(const char * in_childGameId, bool in_forceCreate, IServerCallback * in_callback = NULL);
+		void switchToSingletonChildProfile(const char * in_childAppId, bool in_forceCreate, IServerCallback * in_callback = NULL);
 
 		/**
 		 * Switch to a Parent Profile
@@ -560,7 +560,7 @@ namespace BrainCloud
 	private:
 		BrainCloudClient * m_client;
 
-		void switchToChildProfile(const char * in_childProfileId, const char * in_childGameId, bool in_forceCreate, bool in_forceSingleton, IServerCallback * in_callback = NULL);
+		void switchToChildProfile(const char * in_childProfileId, const char * in_childAppId, bool in_forceCreate, bool in_forceSingleton, IServerCallback * in_callback = NULL);
 
 		void attachIdentity(const char * in_externalId, const char * in_authenticationToken, AuthenticationType in_authenticationType, IServerCallback * in_callback = NULL);
 		void mergeIdentity(const char * in_externalId, const char * in_authenticationToken, AuthenticationType in_authenticationType, IServerCallback * in_callback = NULL);
