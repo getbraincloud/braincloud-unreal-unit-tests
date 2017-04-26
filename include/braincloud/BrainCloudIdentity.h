@@ -408,7 +408,7 @@ namespace BrainCloud
 		 *
 		 * @param in_childProfileId The profileId of the child profile to switch to
 		 * If null and forceCreate is true a new profile will be created
-		 * @param in_childAppId The appId of the child game to switch to
+		 * @param in_childAppId The appId of the child app to switch to
 		 * @param in_forceCreate Should a new profile be created if it does not exist?
 		 * @param in_callback The method to be invoked when the server response is received
 		 */
