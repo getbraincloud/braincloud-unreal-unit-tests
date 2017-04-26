@@ -292,13 +292,26 @@ namespace BrainCloud
 		BrainCloudGroup * getGroupService() { return _groupService; }
 		BrainCloudMail * getMailService() { return _mailService; }
 
+		/**
+		* @deprecated Use getAppId() instead - Removal after September 1 2017
+		*/
+		DEPRECATED
 		const std::string & getGameId() const
 		{
 			if (_brainCloudComms != NULL) {
-				return _brainCloudComms->getGameId();
+				return _brainCloudComms->getAppId();
 			}
-			static std::string noGameId;
-			return noGameId;
+			static std::string noAppId;
+			return noAppId;
+		}
+
+		const std::string & getAppId() const
+		{
+			if (_brainCloudComms != NULL) {
+				return _brainCloudComms->getAppId();
+			}
+			static std::string noAppId;
+			return noAppId;
 		}
 
 		const std::string & getReleasePlatform() const { return _releasePlatform; };

@@ -19,7 +19,7 @@ namespace BrainCloud
         BrainCloudPushNotification(BrainCloudClient* in_client);
 
         /**
-         * Deregisters all device tokens currently registered to the player.
+         * Deregisters all device tokens currently registered to the user.
          *
          * @param in_callback The method to be invoked when the server response is received
          */
@@ -30,7 +30,7 @@ namespace BrainCloud
          * from receiving push notifications.
          *
          * @param in_device The device platform being deregistered.
-         * @param in_token The platform-dependant device token needed for push notifications.
+         * @param in_token The platform-dependent device token needed for push notifications.
          * @param in_callback The method to be invoked when the server response is received
          */
         void deregisterPushNotificationDeviceToken(const Platform & in_platform, const char * in_token, IServerCallback * in_callback = NULL);
@@ -40,7 +40,7 @@ namespace BrainCloud
          * to receive push notifications.
          *
          * @param in_platform The device platform
-         * @param in_deviceToken The platform-dependant device token needed for push notifications.
+         * @param in_deviceToken The platform-dependent device token needed for push notifications.
          *  On IOS, this is obtained using the application:didRegisterForRemoteNotificationsWithDeviceToken callback
          * @param in_callback The method to be invoked when the server response is received
          */
@@ -50,21 +50,21 @@ namespace BrainCloud
          * Sends a simple push notification based on the passed in message.
          * NOTE: It is possible to send a push notification to oneself.
          *
-         * @param in_toPlayerId The braincloud playerId of the user to receive the notification
+         * @param in_toProfileId The braincloud profileId of the user to receive the notification
          * @param in_message Text of the push notification
          * @param in_callback The method to be invoked when the server response is received
          */
-        void sendSimplePushNotification(const char * in_toPlayerId, const char * in_message, IServerCallback * in_callback = NULL);
+        void sendSimplePushNotification(const char * in_toProfileId, const char * in_message, IServerCallback * in_callback = NULL);
 
         /**
          * Sends a notification to a user based on a brainCloud portal configured notification template.
          * NOTE: It is possible to send a push notification to oneself.
          *
-         * @param in_toPlayerId The braincloud playerId of the user to receive the notification
+         * @param in_toProfileId The braincloud profileId of the user to receive the notification
          * @param in_notificationTemplateId Id of the notification template
          * @param in_callback The method to be invoked when the server response is received
          */
-        void sendRichPushNotification(const char * in_toPlayerId, int32_t in_notificationTemplateId, IServerCallback * in_callback = NULL);
+        void sendRichPushNotification(const char * in_toProfileId, int32_t in_notificationTemplateId, IServerCallback * in_callback = NULL);
 
         /**
          * Sends a notification to a user based on a brainCloud portal configured notification template.
@@ -72,12 +72,12 @@ namespace BrainCloud
          * See the Portal documentation for more info.
          * NOTE: It is possible to send a push notification to oneself.
          *
-         * @param in_toPlayerId The braincloud playerId of the user to receive the notification
+         * @param in_toProfileId The braincloud profileId of the user to receive the notification
          * @param in_notificationTemplateId Id of the notification template
          * @param in_substitutionJson JSON defining the substitution params to use with the template
          * @param in_callback The method to be invoked when the server response is received
          */
-        void sendRichPushNotificationWithParams(const char * in_toPlayerId, int32_t in_notificationTemplateId, const char * in_substitutionJson, IServerCallback * in_callback = NULL);
+        void sendRichPushNotificationWithParams(const char * in_toProfileId, int32_t in_notificationTemplateId, const char * in_substitutionJson, IServerCallback * in_callback = NULL);
 
         /**
         * Sends a notification to a "group" of user based on a brainCloud portal configured notification template.
@@ -105,12 +105,12 @@ namespace BrainCloud
 		/**
 		* Sends a notification to a user consisting of alert content and custom data.
 		*
-		* @param in_toPlayerId The playerId of the user to receive the notification
+		* @param in_toProfileId The profileId of the user to receive the notification
 		* @param in_alertContent Body and title of alert
 		* @param in_customData Optional custom data
 		* @param in_callback The method to be invoked when the server response is received
 		*/
-		void sendNormalizedPushNotification(const char * in_toPlayerId, std::string in_alertContentJson, std::string in_customDataJson, IServerCallback * in_callback = NULL);
+		void sendNormalizedPushNotification(const char * in_toProfileId, std::string in_alertContentJson, std::string in_customDataJson, IServerCallback * in_callback = NULL);
 
 		/**
 		* Sends a notification to multiple users consisting of alert content and custom data.
@@ -124,6 +124,6 @@ namespace BrainCloud
 
     private:
         BrainCloudClient * m_client;
-        void sendRichPushNotification(const char * in_toPlayerId, int32_t in_notificationTemplateId, const char * in_substitutionJson, IServerCallback * in_callback = NULL);
+        void sendRichPushNotification(const char * in_toProifleId, int32_t in_notificationTemplateId, const char * in_substitutionJson, IServerCallback * in_callback = NULL);
     };
 }

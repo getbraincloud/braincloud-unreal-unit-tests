@@ -64,7 +64,7 @@ namespace BrainCloud {
 		virtual ~IBrainCloudComms();
 
 
-		virtual void initialize(const char * serverURL, const char * gameId, const char * secretKey) = 0;
+		virtual void initialize(const char * serverURL, const char * appId, const char * secretKey) = 0;
 		virtual void addToQueue(ServerCall *) = 0;
 
 		virtual void sendHeartbeat() = 0;
@@ -103,7 +103,13 @@ namespace BrainCloud {
 
 		void setHeartbeatInterval(int milliseconds);
 		void setImmediateRetryOnError(bool value);
+
+		/**
+		* @deprecated Use getAppId() instead - Removal after September 1 2017
+		*/
+		DEPRECATED
 		const std::string& getGameId() const;
+		const std::string& getAppId() const;
 		void clearSessionId();
 		const std::string& getSessionId() const;
 		void setSessionId(const char *);
@@ -159,7 +165,7 @@ namespace BrainCloud {
 		IRewardCallback *_rewardCallback;
 		INetworkErrorCallback *_networkErrorCallback;
 
-		std::string _gameId;
+		std::string _appId;
 		std::string _sessionId;
 		std::string _serverUrl;
 		std::string _uploadUrl;

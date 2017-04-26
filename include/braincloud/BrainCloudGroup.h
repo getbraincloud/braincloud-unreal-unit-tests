@@ -106,7 +106,7 @@ namespace BrainCloud
 		* @param in_groupType Name of the type of group.
 		* @param in_isOpenGroup true if group is open; false if closed.
 		* @param in_acl The group's access control list. A null ACL implies default.
-		* @param in_jsonOwnerAttributes Attributes for the group owner (current player).
+		* @param in_jsonOwnerAttributes Attributes for the group owner (current user).
 		* @param in_jsonDefaultMemberAttributes Default attributes for group members.
 		* @param in_jsonData Custom application data.
 		* @param in_callback The method to be invoked when the server response is received
@@ -168,7 +168,7 @@ namespace BrainCloud
 		void deleteGroupEntity(const char* in_groupId, const char* in_entityId, int32_t in_version, IServerCallback* in_callback = NULL);
 
 		/**
-		* Read information on groups to which the current player belongs.
+		* Read information on groups to which the current user belongs.
 		*
 		* Service Name - group
 		* Service Operation - GET_MY_GROUPS
@@ -227,7 +227,7 @@ namespace BrainCloud
 		void joinGroup(const char* in_groupId, IServerCallback* in_callback = NULL);
 
 		/**
-		* Leave a group in which the player is a member.
+		* Leave a group in which the user is a member.
 		*
 		* Service Name - group
 		* Service Operation - LEAVE_GROUP
@@ -261,7 +261,7 @@ namespace BrainCloud
 		void listGroupsPageByOffset(const char* in_encodedContext, int32_t in_pageOffset, IServerCallback* in_callback = NULL);
 
 		/**
-		* Read information on groups to which the specified player belongs.  Access is subject to restrictions.
+		* Read information on groups to which the specified user belongs.  Access is subject to restrictions.
 		*
 		* Service Name - group
 		* Service Operation - LIST_GROUPS_WITH_MEMBER

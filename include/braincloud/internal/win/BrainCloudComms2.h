@@ -18,7 +18,7 @@ namespace BrainCloud {
     public:
         BrainCloudComms2(BrainCloudClient* in_client);
         virtual ~BrainCloudComms2();
-        virtual void initialize(const char * serverURL, const char * gameId, const char * secretKey);
+        virtual void initialize(const char * serverURL, const char * appId, const char * secretKey);
         virtual void registerEventCallback(IEventCallback * in_eventCallback);
         virtual void deregisterEventCallback();
         virtual void registerFileUploadCallback(IFileUploadCallback *in_fileUploadCallback);

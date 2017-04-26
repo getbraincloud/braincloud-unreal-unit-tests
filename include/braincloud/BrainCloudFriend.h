@@ -19,12 +19,18 @@ namespace BrainCloud
 		BrainCloudFriend(BrainCloudClient* in_client);
 
 		/**
+		* @deprecated Use findUserByUniversalId() instead - Removal after September 1 2017
+		*/
+		DEPRECATED
+		void findPlayerByUniversalId(const char * in_searchText, int32_t in_maxResults, IServerCallback * in_callback = NULL);
+
+		/**
 		 * Retrieves profile information for the partial matches of the specified text.
 		 *
 		 * @param in_searchText Universal ID text on which to search.
 		 * @param in_maxResults Maximum number of results to return.
 		 */
-		void findPlayerByUniversalId(const char * in_searchText, int32_t in_maxResults, IServerCallback * in_callback = NULL);
+		void findUserByUniversalId(const char * in_searchText, int32_t in_maxResults, IServerCallback * in_callback = NULL);
 
 		/**
 		* Retrieves profile information for the specified user.
@@ -53,7 +59,7 @@ namespace BrainCloud
 		/**
 		 * Retrieves the external ID for the specified user profile ID on the specified social platform.
 		 *
-		 * @param in_profileId Profile (player) ID.
+		 * @param in_profileId Profile (user) ID.
 		 * @param in_authenticationType Associated authentication type.
 		 */
 		void getExternalIdForProfileId(const char * in_profileId, const char * in_authenticationType, IServerCallback * in_callback = NULL);
@@ -82,7 +88,13 @@ namespace BrainCloud
 		void readFriendsEntities(const char* in_entityType, IServerCallback * in_callback = NULL);
 
 		/**
-		 * Read a friend's player state.
+		* @deprecated Use readFriendUserState() instead - Removal after September 1 2017
+		*/
+		DEPRECATED
+		void readFriendUserState(const char * in_friendId, IServerCallback * in_callback = NULL);
+		
+		/**
+		 * Read a friend's user state.
 		 *
 		 * Service Name - Friend
 		 * Service Operation - ReadFriendsPlayerState
@@ -90,21 +102,21 @@ namespace BrainCloud
 		 * @param in_friendId Target friend
 		 * @param in_callback Method to be invoked when the server response is received.
 		 */
-		void readFriendPlayerState(const char * in_friendId, IServerCallback * in_callback = NULL);
+		void readFriendUserState(const char * in_friendId, IServerCallback * in_callback = NULL);
 
 		/**
-		* Returns player state of a particular user.
+		* Returns user state of a particular user.
 		*
 		* Service Name - Friend
 		* Service Operation - GET_SUMMARY_DATA_FOR_PROFILE_ID
 		*
-		* @param in_profileId Profile Id of player to retrieve player state for.
+		* @param in_profileId Profile Id of user to retrieve user state for.
 		* @param in_callback Method to be invoked when the server response is received.
 		*/
 		void getSummaryDataForProfileId(const char * in_profileId, IServerCallback * in_callback = NULL);
 
 		/**
-		* Finds a list of players matching the search text by performing an exact match search
+		* Finds a list of users matching the search text by performing an exact match search
 		*
 		* Service Name - friend
 		* Service Operation - FIND_USERS_BY_EXACT_NAME
@@ -116,8 +128,8 @@ namespace BrainCloud
 		void findUsersByExactName(const char * in_searchText, int32_t in_maxResults, IServerCallback * in_callback = NULL);
 
 		/**
-		* Finds a list of players matching the search text by performing a substring
-		* search of all player names.
+		* Finds a list of users matching the search text by performing a substring
+		* search of all user names.
 		*
 		* Service Name - friend
 		* Service Operation - FIND_USERS_BY_SUBSTR_NAME
@@ -129,7 +141,7 @@ namespace BrainCloud
 		void findUsersBySubstrName(const char * in_searchText, int32_t in_maxResults, IServerCallback * in_callback = NULL);
 
 		/**
-		 * Retrieves a list of player and friend platform information for all friends of the current player.
+		 * Retrieves a list of user and friend platform information for all friends of the current user.
 		 *
 		 * Service Name - Friend
 		 * Service Operation - LIST_FRIENDS
@@ -141,23 +153,23 @@ namespace BrainCloud
 		void listFriends(const FriendPlatform& in_friendPlatform, bool in_includeSummaryData, IServerCallback * in_callback = NULL);
 
 		/**
-		 * Links the current player and the specified players as brainCloud friends.
+		 * Links the current user and the specified users as brainCloud friends.
 		 *
 		 * Service Name - Friend
 		 * Service Operation - ADD_FRIENDS
 		 *
-		 * @param in_profileIds Collection of player IDs.
+		 * @param in_profileIds Collection of profile IDs.
 		 * @param in_callback Method to be invoked when the server response is received.
 		 */
 		void addFriends(const std::vector<std::string>& in_profileIds, IServerCallback * in_callback = NULL);
 
 		/**
-		* Unlinks the current player and the specified players as brainCloud friends.
+		* Unlinks the current user and the specified users as brainCloud friends.
 		*
 		* Service Name - Friend
 		* Service Operation - REMOVE_FRIENDS
 		*
-		* @param in_profileIds Collection of player IDs.
+		* @param in_profileIds Collection of profile IDs.
 		* @param in_callback Method to be invoked when the server response is received.
 		*/
 		void removeFriends(const std::vector<std::string>& in_profileIds, IServerCallback * in_callback = NULL);
