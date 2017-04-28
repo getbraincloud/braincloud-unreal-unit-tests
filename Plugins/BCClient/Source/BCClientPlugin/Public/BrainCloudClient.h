@@ -225,9 +225,9 @@ public:
 	BrainCloudMail * getMailService();
 	BrainCloudTournament * getTournamentService();
 
-	const FString & getGameId() { return _gameId; };
+	const FString & getGameId() { return _appId; };
 	const FString & getReleasePlatform() { return _releasePlatform; };
-	const FString & getGameVersion() { return _gameVersion; };
+	const FString & getGameVersion() { return _version; };
 	const FString & getBrainCloudClientVersion() { return s_brainCloudClientVersion; };
 
 	const FString & getCountryCode() { return _country; }
@@ -460,9 +460,9 @@ protected:
 
 	static FString s_brainCloudClientVersion;
 
-	FString _gameId = "";
+	FString _appId = "";
 	FString _releasePlatform = "";
-	FString _gameVersion = "";
+	FString _version = "";
 	FString _country = "";
 	FString _language = "";
 	float _timezoneOffset = 0.0f;

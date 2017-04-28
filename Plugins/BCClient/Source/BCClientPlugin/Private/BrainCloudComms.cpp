@@ -28,12 +28,12 @@ BrainCloudComms::~BrainCloudComms()
 {
 }
 
-void BrainCloudComms::Initialize(const FString& serverURL, const FString& secretKey, const FString& gameId)
+void BrainCloudComms::Initialize(const FString& serverURL, const FString& secretKey, const FString& appId)
 {
 	_isInitialized = true;
 	_serverUrl = serverURL;
 	_secretKey = secretKey;
-	_gameId = gameId;
+	_appId = appId;
 
 	_uploadUrl = _serverUrl;
 	_uploadUrl.RemoveFromEnd(TEXT("/dispatcherv2"));

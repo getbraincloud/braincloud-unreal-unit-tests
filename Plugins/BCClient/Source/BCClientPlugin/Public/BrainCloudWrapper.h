@@ -276,8 +276,8 @@ protected:
 
     FString _lastUrl;
     FString _lastSecretKey;
-    FString _lastGameId;
-    FString _lastGameVersion;
+    FString _lastAppId;
+    FString _lastVersion;
 
     bool _alwaysAllowProfileSwitch = true;
 

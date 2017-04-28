@@ -179,17 +179,17 @@ UBCIdentityProxy* UBCIdentityProxy::DetachParseIdentity(const FString& parseId, 
 	return Proxy;
 }
 
-UBCIdentityProxy* UBCIdentityProxy::SwitchToChildProfile(const FString& childProfileId, const FString& childGameId, bool forceCreate)
+UBCIdentityProxy* UBCIdentityProxy::SwitchToChildProfile(const FString& childProfileId, const FString& childAppId, bool forceCreate)
 {
 	UBCIdentityProxy* Proxy = NewObject<UBCIdentityProxy>();
-	BrainCloudClient::getInstance()->getIdentityService()->switchToChildProfile(childProfileId, childGameId, forceCreate, Proxy);
+	BrainCloudClient::getInstance()->getIdentityService()->switchToChildProfile(childProfileId, childAppId, forceCreate, Proxy);
 	return Proxy;
 }
 
-UBCIdentityProxy* UBCIdentityProxy::SwitchToSingletonChildProfile(const FString& childGameId, bool forceCreate)
+UBCIdentityProxy* UBCIdentityProxy::SwitchToSingletonChildProfile(const FString& childAppId, bool forceCreate)
 {
 	UBCIdentityProxy* Proxy = NewObject<UBCIdentityProxy>();
-	BrainCloudClient::getInstance()->getIdentityService()->switchToSingletonChildProfile(childGameId, forceCreate, Proxy);
+	BrainCloudClient::getInstance()->getIdentityService()->switchToSingletonChildProfile(childAppId, forceCreate, Proxy);
 	return Proxy;
 }
 

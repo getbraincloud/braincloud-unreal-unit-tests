@@ -26,7 +26,7 @@ public:
 	*   (that will be further validated when sent to the bC service)
 	*
 	* Errors to watch for:  SWITCHING_PROFILES - this means that the Facebook identity you provided
-	* already points to a different profile.  You will likely want to offer the player the
+	* already points to a different profile.  You will likely want to offer the user the
 	* choice to *SWITCH* to that profile, or *MERGE* the profiles.
 	*
 	* To switch profiles, call ClearSavedProfileID() and call AuthenticateFacebook().
@@ -73,7 +73,7 @@ public:
 	* Param - gameCenterId The player's game center id  (use the playerID property from the local GKPlayer object)
 	*
 	* Errors to watch for:  SWITCHING_PROFILES - this means that the Facebook identity you provided
-	* already points to a different profile.  You will likely want to offer the player the
+	* already points to a different profile.  You will likely want to offer the user the
 	* choice to *SWITCH* to that profile, or *MERGE* the profiles.
 	*
 	* To switch profiles, call ClearSavedProfileID() and call this method again.
@@ -119,7 +119,7 @@ public:
 	* Param - password The player's password
 	*
 	* Errors to watch for:  SWITCHING_PROFILES - this means that the email address you provided
-	* already points to a different profile.  You will likely want to offer the player the
+	* already points to a different profile.  You will likely want to offer the user the
 	* choice to *SWITCH* to that profile, or *MERGE* the profiles.
 	*
 	* To switch profiles, call ClearSavedProfileID() and then call AuthenticateEmailPassword().
@@ -133,8 +133,8 @@ public:
 	* Service Name - identity
 	* Service Operation - Merge
 	*
-	* Param - email The player's e-mail address
-	* Param - password The player's password
+	* Param - email The user's e-mail address
+	* Param - password The user's password
 	*/
 	UFUNCTION(BlueprintCallable, meta = (BlueprintInternalUseOnly = "true"), Category = "BrainCloud|Identity")
 		static UBCIdentityProxy* MergeEmailIdentity(const FString& email, const FString& password);
@@ -145,7 +145,7 @@ public:
 	* Service Name - identity
 	* Service Operation - Detach
 	*
-	* Param - email The player's e-mail address
+	* Param - email The user's e-mail address
 	* Param - continueAnon Proceed even if the profile will revert to anonymous?
 	*
 	* Watch for DOWNGRADING_TO_ANONYMOUS_ERROR - occurs if you set in_continueAnon to false, and
@@ -161,11 +161,11 @@ public:
 	* Service Name - identity
 	* Service Operation - Attach
 	*
-	* Param - userId The player's userId
-	* Param - password The player's password
+	* Param - userId The user's userId
+	* Param - password The user's password
 	*
 	* Errors to watch for:  SWITCHING_PROFILES - this means that the email address you provided
-	* already points to a different profile.  You will likely want to offer the player the
+	* already points to a different profile.  You will likely want to offer the user the
 	* choice to *SWITCH* to that profile, or *MERGE* the profiles.
 	*
 	* To switch profiles, call ClearSavedProfileID() and then call AuthenticateEmailPassword().
@@ -179,8 +179,8 @@ public:
 	* Service Name - identity
 	* Service Operation - Merge
 	*
-	* Param - userId The player's userId
-	* Param - password The player's password
+	* Param - userId The user's userId
+	* Param - password The user's password
 	*/
 	UFUNCTION(BlueprintCallable, meta = (BlueprintInternalUseOnly = "true"), Category = "BrainCloud|Identity")
 		static UBCIdentityProxy* MergeUniversalIdentity(const FString& userId, const FString& password);
@@ -191,7 +191,7 @@ public:
 	* Service Name - identity
 	* Service Operation - Detach
 	*
-	* Param - userId The player's userId
+	* Param - userId The user's userId
 	* Param - continueAnon Proceed even if the profile will revert to anonymous?
 	*
 	* Watch for DOWNGRADING_TO_ANONYMOUS_ERROR - occurs if you set in_continueAnon to false, and
@@ -208,10 +208,10 @@ public:
 	* Service Operation - Attach
 	*
 	* Param - steamId String representation of 64 bit steam id
-	* Param - sessionTicket The player's session ticket (hex encoded)
+	* Param - sessionTicket The user's session ticket (hex encoded)
 	*
 	* Errors to watch for:  SWITCHING_PROFILES - this means that the email address you provided
-	* already points to a different profile.  You will likely want to offer the player the
+	* already points to a different profile.  You will likely want to offer the user the
 	* choice to *SWITCH* to that profile, or *MERGE* the profiles.
 	*
 	* To switch profiles, call ClearSavedProfileID() and then call AuthenticateSteam().
@@ -226,7 +226,7 @@ public:
 	* Service Operation - Merge
 	*
 	* Param - steamId String representation of 64 bit steam id
-	* Param - sessionTicket The player's session ticket (hex encoded)
+	* Param - sessionTicket The user's session ticket (hex encoded)
 	*/
 	UFUNCTION(BlueprintCallable, meta = (BlueprintInternalUseOnly = "true"), Category = "BrainCloud|Identity")
 		static UBCIdentityProxy* MergeSteamIdentity(const FString& steamId, const FString& sessionTicket);
@@ -258,7 +258,7 @@ public:
 	*   (that will be further validated when sent to the bC service)
 	*
 	* Errors to watch for:  SWITCHING_PROFILES - this means that the Google identity you provided
-	* already points to a different profile.  You will likely want to offer the player the
+	* already points to a different profile.  You will likely want to offer the user the
 	* choice to *SWITCH* to that profile, or *MERGE* the profiles.
 	*
 	* To switch profiles, call ClearSavedProfileID() and call AuthenticateGoogle().
@@ -307,7 +307,7 @@ public:
 	* Param - secret The secret given when attempting to link with Twitter
 	*
 	* Errors to watch for:  SWITCHING_PROFILES - this means that the Twitter identity you provided
-	* already points to a different profile.  You will likely want to offer the player the
+	* already points to a different profile.  You will likely want to offer the user the
 	* choice to *SWITCH* to that profile, or *MERGE* the profiles.
 	*
 	* To switch profiles, call ClearSavedProfileID() and call AuthenticateTwitter().
@@ -356,7 +356,7 @@ public:
 	*   (that will be further validated when sent to the bC service)
 	*
 	* Errors to watch for:  SWITCHING_PROFILES - this means that the Parse identity you provided
-	* already points to a different profile.  You will likely want to offer the player the
+	* already points to a different profile.  You will likely want to offer the user the
 	* choice to *SWITCH* to that profile, or *MERGE* the profiles.
 	*
 	* To switch profiles, call ClearSavedProfileID() and call AuthenticateParse().
@@ -402,11 +402,11 @@ public:
 	*
 	* Param - childProfileId The profileId of the child profile to switch to
 	* If null and forceCreate is true a new profile will be created
-	* Param - childGameId The appId of the child game to switch to
+	* Param - childAppId The appId of the child app to switch to
 	* Param - forceCreate Should a new profile be created if it does not exist?
 	*/
 	UFUNCTION(BlueprintCallable, meta = (BlueprintInternalUseOnly = "true"), Category = "BrainCloud|Identity")
-		static UBCIdentityProxy* SwitchToChildProfile(const FString& childProfileId, const FString& childGameId, bool forceCreate);
+		static UBCIdentityProxy* SwitchToChildProfile(const FString& childProfileId, const FString& childAppId, bool forceCreate);
 
 	/**
 	* Switches to a child profile of an app when only one profile exists
@@ -415,11 +415,11 @@ public:
 	* Service Name - identity
 	* Service Operation - SWITCH_TO_CHILD_PROFILE
 	*
-	* Param - childGameId The App ID of the child game to switch to
+	* Param - childAppId The App ID of the child app to switch to
 	* Param - forceCreate Should a new profile be created if it does not exist?
 	*/
 	UFUNCTION(BlueprintCallable, meta = (BlueprintInternalUseOnly = "true"), Category = "BrainCloud|Identity")
-		static UBCIdentityProxy* SwitchToSingletonChildProfile(const FString& childGameId, bool forceCreate);
+		static UBCIdentityProxy* SwitchToSingletonChildProfile(const FString& childAppId, bool forceCreate);
 
 	/**
 	* Switch to a Parent Profile
@@ -463,7 +463,7 @@ public:
 		static UBCIdentityProxy* GetExpiredIdentities();
 
 	/**
-	* Refreshes an identity for this player
+	* Refreshes an identity for this user
 	*
 	* Service Name - identity
 	* Service Operation - REFRESH_IDENTITY
@@ -492,7 +492,7 @@ public:
 			EBCAuthType authenticationType, const FString& externalAuthName, bool forceCreate);
 
 	/**
-	* Detaches parent from this player's profile
+	* Detaches parent from this user's profile
 	*
 	* Service Name - identity
 	* Service Operation - DETACH_PARENT
@@ -502,7 +502,7 @@ public:
 		static UBCIdentityProxy*  DetachParent();
 
 	/**
-	* Attaches a peer identity to this player's profile
+	* Attaches a peer identity to this user's profile
 	*
 	* Service Name - identity
 	* Service Operation - ATTACH_PEER_PROFILE
@@ -519,7 +519,7 @@ public:
 			const FString& externalAuthName, bool forceCreate);
 
 	/**
-	* Detaches a peer identity from this player's profile
+	* Detaches a peer identity from this user's profile
 	*
 	* Service Name - identity
 	* Service Operation - DETACH_PEER

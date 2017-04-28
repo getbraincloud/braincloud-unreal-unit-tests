@@ -89,8 +89,8 @@ void BrainCloudClient::initialize(
 	_brainCloudComms->Initialize(serverUrl, secretKey, appId);
 	determineReleasePlatform();
 
-	_gameId = appId;
-	_gameVersion = version;
+	_appId = appId;
+	_version = version;
 
 	if (_language.IsEmpty()) _language = FInternationalization::Get().GetCurrentCulture()->GetTwoLetterISOLanguageName();
 	if (_country.IsEmpty()) _country = FInternationalization::Get().GetCurrentCulture()->GetRegion();
