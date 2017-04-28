@@ -38,9 +38,12 @@ public:
     static const int32 UNABLE_TO_GET_FRIENDS_FROM_FACEBOOK = 40300;
     static const int32 BAD_SIGNATURE = 40301;
     static const int32 UNABLE_TO_VALIDATE_PLAYER = 40302;
+	static const int32 UNABLE_TO_VALIDATE_USER = UNABLE_TO_VALIDATE_PLAYER;
     static const int32 PLAYER_SESSION_EXPIRED = 40303;
+	static const int32 USER_SESSION_EXPIRED = PLAYER_SESSION_EXPIRED;
     static const int32 NO_SESSION = 40304;
     static const int32 PLAYER_SESSION_MISMATCH = 40305;
+	static const int32 USER_SESSION_MISMATCH = PLAYER_SESSION_MISMATCH;
     static const int32 OPERATION_REQUIRES_A_SESSION = 40306;
     static const int32 TOKEN_DOES_NOT_MATCH_USER = 40307;
     static const int32 EVENT_CAN_ONLY_SEND_TO_FRIEND_OR_SELF = 40309;
@@ -49,7 +52,8 @@ public:
     static const int32 VC_LIMIT_EXCEEDED = 40312;
     static const int32 UNABLE_TO_GET_MY_DATA_FROM_FACEBOOK = 40313;
     static const int32 INVALID_AUTHENTICATION_TYPE = 40315;
-    static const int32 INVALID_GAME_ID = 40316;
+	static const int32 INVALID_GAME_ID = 40316;
+	static const int32 INVALID_APP_ID = INVALID_GAME_ID;
 
 
     // This product and receipt have already been claimed
@@ -63,10 +67,12 @@ public:
     static const int32 PLATFORM_NOT_SUPPORTED = 40320;
 
     static const int32 INVALID_PLAYER_STATISTICS_EVENT_NAME = 40321;
+	static const int32 INVALID_USER_STATISTICS_EVENT_NAME = INVALID_PLAYER_STATISTICS_EVENT_NAME;
 
-    // Game Version No Longer Supported
+    // App Version No Longer Supported
     static const int32 GAME_VERSION_NOT_SUPPORTED = 40322;
-    // @deprecated - use GAME_VERSION_NOT_SUPPORTED
+	static const int32 APP_VERSION_NOT_SUPPORTED = GAME_VERSION_NOT_SUPPORTED;
+	// @deprecated - use APP_VERSION_NOT_SUPPORTED
     static const int32 APP_VERSION_NO_LONGER_SUPPORTED = GAME_VERSION_NOT_SUPPORTED;
 
     static const int32 BAD_REFERENCE_DATA = 40324;
@@ -76,6 +82,7 @@ public:
     static const int32 MISSING_TWEET = 40328;
     static const int32 FACEBOOK_PAYMENT_ID_ALREADY_PROCESSED = 40329;
     static const int32 DISABLED_GAME = 40330;
+	static const int32 DISABLED_APP = DISABLED_GAME;
     static const int32 MATCH_MAKING_DISABLED = 40331;
     static const int32 UPDATE_FAILED = 40332;
     static const int32 INVALID_OPERATION = 40333;   // invalid operation for API call
@@ -98,9 +105,11 @@ public:
     static const int32 S3_ERROR = 40350;
     static const int32 INVALID_ATTRIBUTES = 40351;
     static const int32 IMPORT_MISSING_GAME_DATA = 40352;
+	static const int32 IMPORT_MISSING_APP_DATA = IMPORT_MISSING_GAME_DATA;
     static const int32 IMPORT_SCHEMA_VERSION_TOO_OLD = 40353;
     static const int32 IMPORT_SCHEMA_VERSION_INVALID = 40355;
     static const int32 PLAYER_SESSION_LOGGED_OUT = 40356;
+	static const int32 USER_SESSION_LOGGED_OUT = PLAYER_SESSION_LOGGED_OUT;
     static const int32 API_HOOK_SCRIPT_ERROR = 40357;
     static const int32 MISSING_REQUIRED_PARAMETER = 40358;
     static const int32 INVALID_PARAMETER_TYPE = 40359;
@@ -116,23 +125,34 @@ public:
     static const int32 INVALID_STATISTIC_NAME = 40369;
     static const int32 INVALID_HTTP_REQUEST = 40370;
     static const int32 GAME_LIMIT_REACHED = 40371;
+	static const int32 APP_LIMIT_REACHED = GAME_LIMIT_REACHED;
     static const int32 GAME_RUNSTATE_DISABLED = 40372;
+	static const int32 APP_RUNSTATE_DISABLED = GAME_RUNSTATE_DISABLED;
     static const int32 INVALID_COMPANY_ID = 40373;
     static const int32 INVALID_PLAYER_ID = 40374;
+	static const int32 INVALID_USER_ID = INVALID_PLAYER_ID;
     static const int32 INVALID_TEMPLATE_ID = 40375;
     static const int32 MINIMUM_SEARCH_INPUT = 40376;
     static const int32 MISSING_GAME_PARENT = 40377;
-    static const int32 GAME_PARENT_MISMATCH = 40378;
+	static const int32 MISSING_APP_PARENT = MISSING_GAME_PARENT;
+    static const int32 GAME_PARENT_MISMATCH = 40378
+	static const int32 APP_PARENT_MISMATCH = GAME_PARENT_MISMATCH;
     static const int32 CHILD_PLAYER_MISSING = 40379;
+	static const int32 CHILD_USER_MISSING = CHILD_PLAYER_MISSING;
     static const int32 MISSING_PLAYER_PARENT = 40380;
+	static const int32 MISSING_USER_PARENT = MISSING_PLAYER_PARENT;
     static const int32 PLAYER_PARENT_MISMATCH = 40381;
+	static const int32 USER_PARENT_MISMATCH = PLAYER_PARENT_MISMATCH;
     static const int32 MISSING_PLAYER_ID = 40382;
+	static const int32 MISSING_USER_ID = MISSING_PLAYER_ID;
     static const int32 DECODE_CONTEXT = 40383;
     static const int32 INVALID_QUERY_CONTEXT = 40384;
     static const int32 GROUP_MEMBER_NOT_FOUND = 40385;
     static const int32 INVALID_SORT = 40386;
     static const int32 GAME_NOT_FOUND = 40387;
+	static const int32 APP_NOT_FOUND = GAME_NOT_FOUND;
     static const int32 GAMES_NOT_IN_SAME_COMPANY = 40388;
+	static const int32 APPS_NOT_IN_SAME_COMPANY = GAMES_NOT_IN_SAME_COMPANY;
     static const int32 IMPORT_NO_PARENT_ASSIGNED = 40389;
     static const int32 IMPORT_PARENT_CURRENCIES_MISMATCH = 40390;
     static const int32 INVALID_SUBSTITUION_ENTRY = 40391;
