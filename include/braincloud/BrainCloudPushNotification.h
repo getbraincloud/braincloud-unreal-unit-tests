@@ -103,6 +103,50 @@ namespace BrainCloud
         void sendNormalizedPushNotificationToGroup(const char * in_groupId, std::string in_alertContentJson, std::string in_customDataJson, IServerCallback * in_callback = NULL);
 
 		/**
+		* Schedules a normalized push notification to a user
+	    *
+		* @param in_toProfileId The profileId of the user to receive the notification
+		* @param in_alertContentJson Body and title of alert
+		* @param in_customDataJson Optional custom data
+		* @param in_startTime Start time of sending the push notification
+		* @param in_callback The method to be invoked when the server response is received
+		*/
+		void scheduleNormalizedPushNotificationUTC(const char * in_toProfileId, std::string in_alertContentJson, std::string in_customDataJson, int32_t in_startTime, IServerCallback * in_callback = NULL);
+
+		/**
+		* Schedules a normalized push notification to a user
+		*
+		* @param in_toProfileId The profileId of the user to receive the notification
+		* @param in_alertContentJson Body and title of alert
+		* @param in_customDataJson Optional custom data
+		* @param in_minutesFromNow Minutes from now to send the push notification
+		* @param in_callback The method to be invoked when the server response is received
+		*/
+		void scheduleNormalizedPushNotificationMinutes(const char * in_toProfileId, std::string in_alertContentJson, std::string in_customDataJson, int32_t in_minutesFromNow, IServerCallback * in_callback = NULL);
+
+		/**
+		* Schedules a rich push notification to a user
+		*
+		* @param in_toProfileId The profileId of the user to receive the notification
+		* @param in_notificationTemplateId Body and title of alert
+		* @param in_substitutionsJson Map of substitution positions to strings
+		* @param in_startTime Start time of sending the push notification
+		* @param in_callback The method to be invoked when the server response is received
+		*/
+		void scheduleRichPushNotificationUTC(const char * in_toProfileId, std::string in_notificationTemplateId, std::string in_substitutionsJson, int32_t in_startTime, IServerCallback * in_callback = NULL);
+
+		/**
+		* Schedules a rich push notification to a user
+		*
+		* @param in_toProfileId The profileId of the user to receive the notification
+		* @param in_notificationTemplateId Body and title of alert
+		* @param in_substitutionsJson Map of substitution positions to strings
+		* @param in_minutesFromNow Minutes from now to send the push notification
+		* @param in_callback The method to be invoked when the server response is received
+		*/
+		void scheduleRichPushNotificationMinutes(const char * in_toProfileId, std::string in_notificationTemplateId, std::string in_substitutionsJson, int32_t in_minutesFromNow, IServerCallback * in_callback = NULL);
+
+		/**
 		* Sends a notification to a user consisting of alert content and custom data.
 		*
 		* @param in_toProfileId The profileId of the user to receive the notification
