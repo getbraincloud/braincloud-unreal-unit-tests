@@ -46,6 +46,8 @@ namespace BrainCloud {
 		static const ServiceOperation SendNormalizedToGroup;
 		static const ServiceOperation SendNormalized;
 		static const ServiceOperation SendNormalizedBatch;
+		static const ServiceOperation ScheduleRichNotification;
+		static const ServiceOperation ScheduleNormalizedNotification;
 
 		static const ServiceOperation Trigger;
 		static const ServiceOperation TriggerMultiple;
