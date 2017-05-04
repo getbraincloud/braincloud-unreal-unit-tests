@@ -15,7 +15,6 @@ public:
 	static const OperationParam PushNotificationSendParamSubstitution;
 	static const OperationParam AlertContent;
 	static const OperationParam CustomData;
-	static const OperationParam AlertContent;
 	static const OperationParam StartTimeUTC;
 	static const OperationParam MinutesFromNow;
 

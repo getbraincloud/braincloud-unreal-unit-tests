@@ -100,40 +100,6 @@ public:
     UFUNCTION(BlueprintCallable, meta = (BlueprintInternalUseOnly = "true"), Category = "BrainCloud|Push Notification")
         static UBCPushNotificationProxy* SendNormalizedPushNotificationToGroup(const FString& toPlayerId, const FString& alertContentJson, const FString& customDataJson);
 
-
-	/**
-	* Schedules a normalized push notification to a user
-	*
-	* Param - profileId The profileId of the user to receive the notification
-	* Param - alertContentJson Body and title of alert
-	* Param - customDataJson Optional custom data
-	* Param - startTime Start time of sending the push notification
-	*/
-	UFUNCTION(BlueprintCallable, meta = (BlueprintInternalUseOnly = "true"), Category = "BrainCloud|Push Notification")
-		static UBCPushNotificationProxy* SendNormalizedPushNotificationToGroup(const FString& toPlayerId, const FString& alertContentJson, const FString& customDataJson);
-
-	/**
-	* Schedules a normalized push notification to a user
-	*
-	* Param - profileId The profileId of the user to receive the notification
-	* Param - alertContentJson Body and title of alert
-	* Param - customDataJson Optional custom data
-	* Param - startTime Start time of sending the push notification
-	*/
-	UFUNCTION(BlueprintCallable, meta = (BlueprintInternalUseOnly = "true"), Category = "BrainCloud|Push Notification")
-		static UBCPushNotificationProxy* SendNormalizedPushNotificationToGroup(const FString& toPlayerId, const FString& alertContentJson, const FString& customDataJson);
-
-	/**
-	* Schedules a normalized push notification to a user
-	*
-	* Param - profileId The profileId of the user to receive the notification
-	* Param - alertContentJson Body and title of alert
-	* Param - customDataJson Optional custom data
-	* Param - startTime Start time of sending the push notification
-	*/
-	UFUNCTION(BlueprintCallable, meta = (BlueprintInternalUseOnly = "true"), Category = "BrainCloud|Push Notification")
-		static UBCPushNotificationProxy* SendNormalizedPushNotificationToGroup(const FString& toPlayerId, const FString& alertContentJson, const FString& customDataJson);
-
 	/**
 	* Schedules a normalized push notification to a user
 	*

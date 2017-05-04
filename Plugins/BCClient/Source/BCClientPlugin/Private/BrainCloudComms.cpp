@@ -185,7 +185,7 @@ FString BrainCloudComms::GetDataString(PacketRef packet, uint64 packetId)
 	TSharedRef<FJsonObject> jsonDataObject = MakeShareable(new FJsonObject());
 	jsonDataObject->SetArrayField(TEXT("messages"), messages);
 	jsonDataObject->SetStringField(TEXT("sessionId"), _sessionId);
-	jsonDataObject->SetStringField(TEXT("gameId"), _gameId);
+	jsonDataObject->SetStringField(TEXT("gameId"), _appId);
 	jsonDataObject->SetNumberField(TEXT("packetId"), packetId);
 
 	FJsonSerializer::Serialize(jsonDataObject, writer);

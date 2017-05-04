@@ -135,7 +135,7 @@ public:
     static const int32 MINIMUM_SEARCH_INPUT = 40376;
     static const int32 MISSING_GAME_PARENT = 40377;
 	static const int32 MISSING_APP_PARENT = MISSING_GAME_PARENT;
-    static const int32 GAME_PARENT_MISMATCH = 40378
+	static const int32 GAME_PARENT_MISMATCH = 40378;
 	static const int32 APP_PARENT_MISMATCH = GAME_PARENT_MISMATCH;
     static const int32 CHILD_PLAYER_MISSING = 40379;
 	static const int32 CHILD_USER_MISSING = CHILD_PLAYER_MISSING;

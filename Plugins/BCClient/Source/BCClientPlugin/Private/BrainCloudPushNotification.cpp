@@ -102,7 +102,7 @@ void BrainCloudPushNotification::sendNormalizedPushNotificationToGroup(const FSt
     _client->sendRequest(sc);
 }
 
-void BrainCloudPushNotification::scheduleNormalizedPushNotificationUTC(const FString& profileId, FString& alertContentJson, const FString& customDataJson, int32 startTime, IServerCallback * callback)
+void BrainCloudPushNotification::scheduleNormalizedPushNotificationUTC(const FString& profileId, const FString& alertContentJson, const FString& customDataJson, const int32 startTime, IServerCallback * callback)
 {
 	TSharedRef<FJsonObject> message = MakeShareable(new FJsonObject());
 	message->SetStringField(OperationParam::PushNotificationSendParamProfileId.getValue(), profileId);
@@ -120,7 +120,7 @@ void BrainCloudPushNotification::scheduleNormalizedPushNotificationUTC(const FSt
 	_client->sendRequest(sc);
 }
 
-void BrainCloudPushNotification::scheduleNormalizedPushNotificationMinutes(const FString& profileId, FString& alertContentJson, const FString& customDataJson, int32 minutesFromNow, IServerCallback * callback)
+void BrainCloudPushNotification::scheduleNormalizedPushNotificationMinutes(const FString& profileId, const FString& alertContentJson, const FString& customDataJson, const int32 minutesFromNow, IServerCallback * callback)
 {
 	TSharedRef<FJsonObject> message = MakeShareable(new FJsonObject());
 	message->SetStringField(OperationParam::PushNotificationSendParamProfileId.getValue(), profileId);
@@ -137,7 +137,7 @@ void BrainCloudPushNotification::scheduleNormalizedPushNotificationMinutes(const
 	_client->sendRequest(sc);
 }
 
-void BrainCloudPushNotification::scheduleRichPushNotificationUTC(const FString& profileId, int32 notificationTemplateId, FString& substitutionJson, int32 startTime, IServerCallback * callback)
+void BrainCloudPushNotification::scheduleRichPushNotificationUTC(const FString& profileId, const int32 notificationTemplateId, const FString& substitutionJson, const int32 startTime, IServerCallback * callback)
 {
 	TSharedRef<FJsonObject> message = MakeShareable(new FJsonObject());
 	message->SetStringField(OperationParam::PushNotificationSendParamProfileId.getValue(), profileId);
@@ -154,7 +154,7 @@ void BrainCloudPushNotification::scheduleRichPushNotificationUTC(const FString& 
 	_client->sendRequest(sc);
 }
 
-void BrainCloudPushNotification::scheduleRichPushNotificationMinutes(const FString& profileId, int32 notificationTemplateId, FString& substitutionJson, int32 minutesFromNow, IServerCallback * callback)
+void BrainCloudPushNotification::scheduleRichPushNotificationMinutes(const FString& profileId, const int32 notificationTemplateId, const FString& substitutionJson, const int32 minutesFromNow, IServerCallback * callback)
 {
 	TSharedRef<FJsonObject> message = MakeShareable(new FJsonObject());
 	message->SetStringField(OperationParam::PushNotificationSendParamProfileId.getValue(), profileId);

@@ -115,7 +115,7 @@ public:
 	* @param startTime Start time of sending the push notification
 	* @param callback The method to be invoked when the server response is received
 	*/
-	void scheduleNormalizedPushNotificationUTC(const FString& profileId, FString& alertContentJson, const FString& customDataJson, int32 startTime, IServerCallback * callback);
+	void scheduleNormalizedPushNotificationUTC(const FString& profileId, const FString& alertContentJson, const FString& customDataJson, const int32 startTime, IServerCallback * callback);
 
 	/**
 	* Schedules a normalized push notification to a user
@@ -126,7 +126,7 @@ public:
 	* @param minutesFromNow Minutes from now to send the push notification
 	* @param callback The method to be invoked when the server response is received
 	*/
-	void scheduleNormalizedPushNotificationMinutes(const FString& profileId, FString& alertContentJson, const FString& customDataJson, int32 minutesFromNow, IServerCallback * callback);
+	void scheduleNormalizedPushNotificationMinutes(const FString& profileId, const FString& alertContentJson, const FString& customDataJson, const int32 minutesFromNow, IServerCallback * callback);
 
 	/**
 	* Schedules a rich push notification to a user
@@ -137,7 +137,7 @@ public:
 	* @param startTime Start time of sending the push notification
 	* @param callback The method to be invoked when the server response is received
 	*/
-	void scheduleRichPushNotificationUTC(const FString& profileId, int32 notificationTemplateId, FString& substitutionJson, int32 startTime, IServerCallback * callback);
+	void scheduleRichPushNotificationUTC(const FString& profileId, const int32 notificationTemplateId, FString& substitutionJson, const int32 startTime, IServerCallback * callback);
 
 	/**
 	* Schedules a rich push notification to a user
@@ -148,7 +148,7 @@ public:
 	* @param minutesFromNow Minutes from now to send the push notification
 	* @param callback The method to be invoked when the server response is received
 	*/
-	void scheduleRichPushNotificationMinutes(const FString& profileId, int32 notificationTemplateId, FString& substitutionJson, int32 minutesFromNow, IServerCallback * callback);
+	void scheduleRichPushNotificationMinutes(const FString& profileId, const int32 notificationTemplateId, const FString& substitutionJson, const int32 minutesFromNow, IServerCallback * callback);
 	
 	/**
 	* Sends a notification to a user consisting of alert content and custom data.
