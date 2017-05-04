@@ -315,7 +315,16 @@ namespace BrainCloud
 		}
 
 		const std::string & getReleasePlatform() const { return _releasePlatform; };
-		const std::string & getGameVersion() const { return _version; };
+
+		/**
+		* @deprecated Use getAppVersion() instead - Removal after September 1 2017
+		*/
+		const std::string & getGameVersion() const { return _appVersion; }
+		
+		DEPRECATED
+		const std::string & getAppVersion() const { return _appVersion; };
+		
+
 		const std::string & getBrainCloudClientVersion() const { return s_brainCloudClientVersion; };
 
 		const std::string& getCountryCode() const { return _countryCode; }
@@ -562,7 +571,7 @@ namespace BrainCloud
 		static std::string s_brainCloudClientVersion;
 
 		std::string _releasePlatform;
-		std::string _version;
+		std::string _appVersion;
 
 		std::string _countryCode;
 		std::string _languageCode;

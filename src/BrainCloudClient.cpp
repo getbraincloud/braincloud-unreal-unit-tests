@@ -100,7 +100,7 @@ namespace BrainCloud {
 		return(_brainCloudComms->getSessionId().c_str());
 	}
 
-	void BrainCloudClient::initialize(const char * in_serverURL, const char * in_secretKey, const char * in_appId, const char * in_version)
+	void BrainCloudClient::initialize(const char * in_serverURL, const char * in_secretKey, const char * in_appId, const char * in_appVersion)
 	{
 		std::string error = "";
 		if (in_serverURL == NULL || strlen(in_serverURL) <= 0)
@@ -109,8 +109,8 @@ namespace BrainCloud {
 			error = "secretKey was null or empty";
 		else if (in_appId == NULL || strlen(in_appId) <= 0)
 			error = "appId was null or empty";
-		else if (in_version == NULL || strlen(in_version) <= 0)
-			error = "version was null or empty";
+		else if (in_appVersion == NULL || strlen(in_appVersion) <= 0)
+			error = "appVersion was null or empty";
 
 		if (error.length() > 0)
 		{
@@ -214,7 +214,7 @@ namespace BrainCloud {
 #error "Unknown platform!"
 #endif
 
-		_version = in_version;
+		_version = in_appVersion;
 	}
 
 	void BrainCloudClient::initializeIdentity(const char * in_profileId, const char * in_anonymousId)

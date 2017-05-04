@@ -131,7 +131,7 @@ namespace BrainCloud {
         message[OperationParam::AuthenticateServiceAuthenticateAnonymousId.getValue()] = _anonymousId;
         message[OperationParam::AuthenticateServiceAuthenticateGameId.getValue()] = m_client->getAppId().c_str();
         message[OperationParam::AuthenticateServiceAuthenticateReleasePlatform.getValue()] = m_client->getReleasePlatform().c_str();
-        message[OperationParam::AuthenticateServiceAuthenticateGameVersion.getValue()] = m_client->getGameVersion().c_str();
+        message[OperationParam::AuthenticateServiceAuthenticateGameVersion.getValue()] = m_client->getAppVersion().c_str();
         message[OperationParam::AuthenticateServiceAuthenticateBrainCloudVersion.getValue()] = m_client->getBrainCloudClientVersion().c_str();
         if (StringUtil::IsOptionalParameterValid(in_externalAuthName))
         {
