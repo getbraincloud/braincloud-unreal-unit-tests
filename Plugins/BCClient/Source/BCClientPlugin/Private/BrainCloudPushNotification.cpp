@@ -102,15 +102,15 @@ void BrainCloudPushNotification::sendNormalizedPushNotificationToGroup(const FSt
     _client->sendRequest(sc);
 }
 
-void BrainCloudPushNotification::scheduleNormalizedPushNotificationUTC(const FString& profileId, FString& alertContentJson, const FString& substitutionJson, int32 startTime, IServerCallback * callback)
+void BrainCloudPushNotification::scheduleNormalizedPushNotificationUTC(const FString& profileId, FString& alertContentJson, const FString& customDataJson, int32 startTime, IServerCallback * callback)
 {
 	TSharedRef<FJsonObject> message = MakeShareable(new FJsonObject());
 	message->SetStringField(OperationParam::PushNotificationSendParamProfileId.getValue(), profileId);
 	message->SetObjectField(OperationParam::AlertContent.getValue(), JsonUtil::jsonStringToValue(alertContentJson));
 
-	if (OperationParam::isOptionalParamValid(substitutionJson))
+	if (OperationParam::isOptionalParamValid(customDataJson))
 	{
-		message->SetObjectField(OperationParam::PushNotificationSendParamSubstitution.getValue(), JsonUtil::jsonStringToValue(substitutionJson));
+		message->SetObjectField(OperationParam::CustomData.getValue(), JsonUtil::jsonStringToValue(customDataJson));
 	}
 
 	message->SetNumberField(OperationParam::StartTimeUTC.getValue(), startTime);
@@ -120,18 +120,18 @@ void BrainCloudPushNotification::scheduleNormalizedPushNotificationUTC(const FSt
 	_client->sendRequest(sc);
 }
 
-void BrainCloudPushNotification::scheduleNormalizedPushNotificationMinutes(const FString& profileId, FString& alertContentJson, const FString& substitutionJson, int32 minutesFromNow, IServerCallback * callback)
+void BrainCloudPushNotification::scheduleNormalizedPushNotificationMinutes(const FString& profileId, FString& alertContentJson, const FString& customDataJson, int32 minutesFromNow, IServerCallback * callback)
 {
 	TSharedRef<FJsonObject> message = MakeShareable(new FJsonObject());
 	message->SetStringField(OperationParam::PushNotificationSendParamProfileId.getValue(), profileId);
 	message->SetObjectField(OperationParam::AlertContent.getValue(), JsonUtil::jsonStringToValue(alertContentJson));
 
-	if (OperationParam::isOptionalParamValid(substitutionJson))
+	if (OperationParam::isOptionalParamValid(customDataJson))
 	{
-		message->SetObjectField(OperationParam::PushNotificationSendParamSubstitution.getValue(), JsonUtil::jsonStringToValue(substitutionJson));
+		message->SetObjectField(OperationParam::CustomData.getValue(), JsonUtil::jsonStringToValue(customDataJson));
 	}
 
-	message->SetNumberField(OperationParam::StartTimeUTC.getValue(), minutesFromNow);
+	message->SetNumberField(OperationParam::MinutesFromNow.getValue(), minutesFromNow);
 
 	ServerCall * sc = new ServerCall(ServiceName::PushNotification, ServiceOperation::ScheduleNormalizedNotifcation, message, callback);
 	_client->sendRequest(sc);

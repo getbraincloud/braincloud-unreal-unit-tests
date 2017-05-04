@@ -100,6 +100,84 @@ public:
     UFUNCTION(BlueprintCallable, meta = (BlueprintInternalUseOnly = "true"), Category = "BrainCloud|Push Notification")
         static UBCPushNotificationProxy* SendNormalizedPushNotificationToGroup(const FString& toPlayerId, const FString& alertContentJson, const FString& customDataJson);
 
+
+	/**
+	* Schedules a normalized push notification to a user
+	*
+	* Param - profileId The profileId of the user to receive the notification
+	* Param - alertContentJson Body and title of alert
+	* Param - customDataJson Optional custom data
+	* Param - startTime Start time of sending the push notification
+	*/
+	UFUNCTION(BlueprintCallable, meta = (BlueprintInternalUseOnly = "true"), Category = "BrainCloud|Push Notification")
+		static UBCPushNotificationProxy* SendNormalizedPushNotificationToGroup(const FString& toPlayerId, const FString& alertContentJson, const FString& customDataJson);
+
+	/**
+	* Schedules a normalized push notification to a user
+	*
+	* Param - profileId The profileId of the user to receive the notification
+	* Param - alertContentJson Body and title of alert
+	* Param - customDataJson Optional custom data
+	* Param - startTime Start time of sending the push notification
+	*/
+	UFUNCTION(BlueprintCallable, meta = (BlueprintInternalUseOnly = "true"), Category = "BrainCloud|Push Notification")
+		static UBCPushNotificationProxy* SendNormalizedPushNotificationToGroup(const FString& toPlayerId, const FString& alertContentJson, const FString& customDataJson);
+
+	/**
+	* Schedules a normalized push notification to a user
+	*
+	* Param - profileId The profileId of the user to receive the notification
+	* Param - alertContentJson Body and title of alert
+	* Param - customDataJson Optional custom data
+	* Param - startTime Start time of sending the push notification
+	*/
+	UFUNCTION(BlueprintCallable, meta = (BlueprintInternalUseOnly = "true"), Category = "BrainCloud|Push Notification")
+		static UBCPushNotificationProxy* SendNormalizedPushNotificationToGroup(const FString& toPlayerId, const FString& alertContentJson, const FString& customDataJson);
+
+	/**
+	* Schedules a normalized push notification to a user
+	*
+	* Param - profileId The profileId of the user to receive the notification
+	* Param - alertContentJson Body and title of alert
+	* Param - customDataJson Optional custom data
+	* Param - startTime Start time of sending the push notification
+	*/
+	UFUNCTION(BlueprintCallable, meta = (BlueprintInternalUseOnly = "true"), Category = "BrainCloud|Push Notification")
+		static UBCPushNotificationProxy* ScheduleNormalizedPushNotificationUTC(const FString& profileId, FString& alertContentJson, const FString& customDataJson, int32 startTime);
+
+	/**
+	* Schedules a normalized push notification to a user
+	*
+	* Param - profileId The profileId of the user to receive the notification
+	* Param - alertContentJson Body and title of alert
+	* Param - customDataJson Optional custom data
+	* Param - minutesFromNow Minutes from now to send the push notification
+	*/
+	UFUNCTION(BlueprintCallable, meta = (BlueprintInternalUseOnly = "true"), Category = "BrainCloud|Push Notification")
+		static UBCPushNotificationProxy* ScheduleNormalizedPushNotificationMinutes(const FString& profileId, FString& alertContentJson, const FString& customDataJson, int32 minutesFromNow);
+
+	/**
+	* Schedules a rich push notification to a user
+	*
+	* Param - profileId The profileId of the user to receive the notification
+	* Param - notificationTemplateId Body and title of alert
+	* Param - substitutionJson Map of substitution positions to strings
+	* Param - startTime Start time of sending the push notification
+	*/
+	UFUNCTION(BlueprintCallable, meta = (BlueprintInternalUseOnly = "true"), Category = "BrainCloud|Push Notification")
+		static UBCPushNotificationProxy* ScheduleRichPushNotificationUTC(const FString& profileId, int32 notificationTemplateId, const FString& substitutionJson, int32 startTime);
+
+	/**
+	* Schedules a rich push notification to a user
+	*
+	* Param - profileId The profileId of the user to receive the notification
+	* Param - notificationTemplateId Body and title of alert
+	* Param - substitutionJson Map of substitution positions to strings
+	* Param - minutesFromNow Minutes from now to send the push notification
+	*/
+	UFUNCTION(BlueprintCallable, meta = (BlueprintInternalUseOnly = "true"), Category = "BrainCloud|Push Notification")
+		static UBCPushNotificationProxy* ScheduleRichPushNotificationMinutes(const FString& profileId, int32 notificationTemplateId, FString& substitutionJson, int32 minutesFromNow);
+
 	/**
 	* Sends a notification to a user consisting of alert content and custom data.
 	*
