@@ -79,7 +79,7 @@ namespace BrainCloud {
 		_timeService(new BrainCloudTime(this)),
 		_tournamentService(new BrainCloudTournament(this)),
 		_releasePlatform(""),
-		_version(""),
+		_appVersion(""),
 		_timezoneOffset(0.0)
 	{
 		//#ifdef PTW32_STATIC_LIB
@@ -214,7 +214,7 @@ namespace BrainCloud {
 #error "Unknown platform!"
 #endif
 
-		_version = in_appVersion;
+		_appVersion = in_appVersion;
 	}
 
 	void BrainCloudClient::initializeIdentity(const char * in_profileId, const char * in_anonymousId)
