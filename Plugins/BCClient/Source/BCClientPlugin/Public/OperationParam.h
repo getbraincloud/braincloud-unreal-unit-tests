@@ -9,11 +9,15 @@ public:
 
 	//Push Notification Service - Send Params
 	static const OperationParam PushNotificationSendParamToPlayerId;
+	static const OperationParam PushNotificationSendParamProfileId;
 	static const OperationParam PushNotificationSendParamNotificationTemplateId;
 	static const OperationParam PushNotificationSendParamMessage;
 	static const OperationParam PushNotificationSendParamSubstitution;
 	static const OperationParam AlertContent;
 	static const OperationParam CustomData;
+	static const OperationParam AlertContent;
+	static const OperationParam StartTimeUTC;
+	static const OperationParam MinutesFromNow;
 
 	//Push Notification Service - Register Params
 	static const OperationParam PushNotificationRegisterParamDeviceType;
