@@ -137,7 +137,7 @@ public:
 	* @param startTime Start time of sending the push notification
 	* @param callback The method to be invoked when the server response is received
 	*/
-	void scheduleRichPushNotificationUTC(const FString& profileId, const int32 notificationTemplateId, FString& substitutionJson, const int32 startTime, IServerCallback * callback);
+	void scheduleRichPushNotificationUTC(const FString& profileId, const int32 notificationTemplateId, const FString& substitutionJson, const int32 startTime, IServerCallback * callback);
 
 	/**
 	* Schedules a rich push notification to a user
