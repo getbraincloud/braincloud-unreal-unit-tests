@@ -11,7 +11,7 @@ namespace BrainCloud
     class BrainCloudClient;
 
     /**
-     * This class is used to directly update the player's statistics registered on the server.
+     * This class is used to directly update the user's statistics registered on the server.
      *  However the preferred mechanism is to use "PlayerStatisticsEvents" via the
      *  BrainCloud.triggerPlayerStatisticsEvent() method. Using that method allows achivements,
      *  experience, and other award to be triggered in a manner set up on the server.
@@ -22,17 +22,30 @@ namespace BrainCloud
         BrainCloudPlayerStatistics(BrainCloudClient* in_client);
 
         /**
-         * Read all available player statistics.
+		* @deprecated Use readAllUserStats() instead - Removal after September 1 2017
+		*/
+        DEPRECATED
+        void readAllPlayerStats(IServerCallback * in_callback = NULL);
+
+
+        /**
+         * Read all available user statistics.
          *
          * Service Name - PlayerStatistics
          * Service Operation - Read
          *
          * @param in_callback The method to be invoked when the server response is received
          */
-        void readAllPlayerStats(IServerCallback * in_callback = NULL);
+        void readAllUserStats(IServerCallback *in_callback = NULL);
 
         /**
-         * Reads a subset of player statistics as defined by the input collection.
+		* @deprecated Use readUserStatsSubset() instead - Removal after September 1 2017
+		*/
+        DEPRECATED
+        void readPlayerStatsSubset(const std::vector<std::string> &in_statistics, IServerCallback *in_callback = NULL);
+
+        /**
+         * Reads a subset of user statistics as defined by the input collection.
          *
          * Service Name - PlayerStatistics
          * Service Operation - ReadSubset
@@ -41,35 +54,54 @@ namespace BrainCloud
          * ex. [ "pantaloons", "minions" ]
          * @param in_callback The method to be invoked when the server response is received
          */
-        void readPlayerStatsSubset(const std::vector<std::string> & in_statistics, IServerCallback * in_callback = NULL);
+        void readUserStatsSubset(const std::vector<std::string> &in_statistics, IServerCallback *in_callback = NULL);
 
         /**
-         * Method retrieves the player statistics for the given category.
+		* @deprecated Use readUserStatsForCategory() instead - Removal after September 1 2017
+		*/
+        DEPRECATED
+        void readPlayerStatsForCategory(const char * in_category, IServerCallback * in_callback = NULL);
+
+
+        /**
+         * Method retrieves the user statistics for the given category.
          *
          * Service Name - PlayerStatistics
          * Service Operation - READ_FOR_CATEGORY
          *
-         * @param in_category The player statistics category
+         * @param in_category The user statistics category
          * @param in_callback Method to be invoked when the server response is received.
          */
-        void readPlayerStatsForCategory(const char * in_category, IServerCallback * in_callback = NULL);
+        void readUserStatsForCategory(const char *in_category, IServerCallback *in_callback = NULL);
 
         /**
-         * Reset all of the statistics for this player back to their initial value.
+		* @deprecated Use resetAllUserStats() instead - Removal after September 1 2017
+		*/
+        DEPRECATED
+        void resetAllPlayerStats(IServerCallback * in_callback = NULL);
+
+        /**
+         * Reset all of the statistics for this user back to their initial value.
          *
          * Service Name - PlayerStatistics
          * Service Operation - Reset
          *
          * @param in_callback The method to be invoked when the server response is received
          */
-        void resetAllPlayerStats(IServerCallback * in_callback = NULL);
+        void resetAllUserStats(IServerCallback *in_callback = NULL);
 
         /**
-         * Atomically increment (or decrement) player statistics.
-         * Any rewards that are triggered from player statistic increments
-         * will be considered. Player statistics are defined through the brainCloud portal.
+		* @deprecated Use incrementUserStats() instead - Removal after September 1 2017
+		*/
+        DEPRECATED
+        void incrementPlayerStats(const std::string& in_jsonData, IServerCallback * in_callback = NULL);
+
+        /**
+         * Atomically increment (or decrement) user statistics.
+         * Any rewards that are triggered from user statistic increments
+         * will be considered. User statistics are defined through the brainCloud portal.
          * Note also that the "xpCapped" property is returned (true/false depending on whether
-         * the xp cap is turned on and whether the player has hit it).
+         * the xp cap is turned on and whether the user has hit it).
          *
          * Service Name - PlayerStatistics
          * Service Operation - Update
@@ -89,10 +121,10 @@ namespace BrainCloud
          *
          * @param in_callback The method to be invoked when the server response is received
          */
-        void incrementPlayerStats(const std::string& in_jsonData, IServerCallback * in_callback = NULL);
+        void incrementUserStats(const std::string &in_jsonData, IServerCallback *in_callback = NULL);
 
         /**
-         * Returns JSON representing the next experience level for the player.
+         * Returns JSON representing the next experience level for the user.
          *
          * Service Name - PlayerStatistics
          * Service Operation - ReadNextXpLevel
@@ -102,26 +134,26 @@ namespace BrainCloud
         void getNextExperienceLevel(IServerCallback* in_callback);
 
         /**
-         * Increments the player's experience. If the player goes up a level,
+         * Increments the user's experience. If the user goes up a level,
          * the new level details will be returned along with a list of rewards.
          *
          * Service Name - PlayerStatistics
          * Service Operation - UpdateIncrement
          *
-         * @param in_xpValue The amount to increase the player's experience by
+         * @param in_xpValue The amount to increase the user's experience by
          * @param in_callback The method to be invoked when the server response is received
          */
         void incrementExperiencePoints(int in_xpValue, IServerCallback* in_callback);
 
         /**
-         * Sets the player's experience to an absolute value. Note that this
-         * is simply a set and will not reward the player if their level changes
+         * Sets the user's experience to an absolute value. Note that this
+         * is simply a set and will not reward the user if their level changes
          * as a result.
          *
          * Service Name - PlayerStatistics
          * Service Operation - SetXpPoints
          *
-         * @param in_xpValue The amount to set the the player's experience to
+         * @param in_xpValue The amount to set the the user's experience to
          * @param in_callback The method to be invoked when the server response is received
          */
         void setExperiencePoints(int xpValue, IServerCallback* in_callback);

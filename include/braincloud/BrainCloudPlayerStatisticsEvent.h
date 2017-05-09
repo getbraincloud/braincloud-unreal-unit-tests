@@ -15,9 +15,17 @@ namespace BrainCloud
     public:
         BrainCloudPlayerStatisticsEvent(BrainCloudClient* in_client);
 
+
         /**
-         * Trigger an event server side that will increase the players statistics.
-         * This may cause one or more awards to be sent back to the player -
+		* @deprecated Use triggerStatsEvent() instead - Removal after September 1 2017
+		*/
+        DEPRECATED
+        void triggerPlayerStatisticsEvent(const char * in_eventName, int32_t in_eventMultiplier, IServerCallback * in_callback = NULL);
+
+
+        /**
+         * Trigger an event server side that will increase the user's statistics.
+         * This may cause one or more awards to be sent back to the user -
          * could be achievements, experience, etc. Achievements will be sent by this
          * client library to the appropriate awards service (Apple Game Center, etc).
          *
@@ -32,7 +40,15 @@ namespace BrainCloud
          *
          * @param in_callback The method to be invoked when the server response is received
          */
-        void triggerPlayerStatisticsEvent(const char * in_eventName, int32_t in_eventMultiplier, IServerCallback * in_callback = NULL);
+        void triggerStatsEvent(const char *in_eventName, int32_t in_eventMultiplier,
+                               IServerCallback *in_callback = NULL);
+
+
+        /**
+		* @deprecated Use triggerStatsEvents() instead - Removal after September 1 2017
+		*/
+        DEPRECATED
+        void triggerPlayerStatisticsEvents(const std::string& in_jsonData, IServerCallback * in_callback = NULL);
 
         /**
          * See documentation for TriggerPlayerStatisticsEvent for more
@@ -53,7 +69,7 @@ namespace BrainCloud
          *     }
          *   ]
          */
-        void triggerPlayerStatisticsEvents(const std::string& in_jsonData, IServerCallback * in_callback = NULL);
+        void triggerStatsEvents(const std::string &in_jsonData, IServerCallback *in_callback = NULL);
 
     private:
         BrainCloudClient * m_client;

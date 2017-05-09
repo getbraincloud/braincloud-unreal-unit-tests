@@ -10,7 +10,7 @@ TEST_F(TestBCPlayerState, DeletePlayer)
 {
     Authenticate();
     TestResult tr;
-    m_bc->getPlayerStateService()->deletePlayer(&tr);
+    m_bc->getPlayerStateService()->deleteUser(&tr);
     tr.run(m_bc);
     
     // after having deleted a player, the cached profile id will be incorrect
@@ -41,7 +41,7 @@ TEST_F(TestBCPlayerState, ReadPlayerState)
 {
     Authenticate();
     TestResult tr;
-    m_bc->getPlayerStateService()->readPlayerState(&tr);
+    m_bc->getPlayerStateService()->readUserState(&tr);
     tr.run(m_bc);
     Logout();
 }
@@ -64,7 +64,7 @@ TEST_F(TestBCPlayerState, ResetPlayerState)
 {
     Authenticate();
     TestResult tr;
-    m_bc->getPlayerStateService()->resetPlayerState(&tr);
+    m_bc->getPlayerStateService()->resetUserState(&tr);
     tr.run(m_bc);
     Logout();
 }
@@ -86,7 +86,7 @@ TEST_F(TestBCPlayerState, UpdatePlayerName)
 {
     Authenticate();
     TestResult tr;
-    m_bc->getPlayerStateService()->updatePlayerName(GetUser(UserA)->m_id, &tr);
+    m_bc->getPlayerStateService()->updateUserName(GetUser(UserA)->m_id, &tr);
     tr.run(m_bc);
     Logout();
 }
@@ -103,7 +103,7 @@ TEST_F(TestBCPlayerState, UpdatePlayerPictureUrl)
 {
     Authenticate();
     TestResult tr;
-    m_bc->getPlayerStateService()->updatePlayerPictureUrl("https://some.domain.com/mypicture.jpg", &tr);
+    m_bc->getPlayerStateService()->updateUserPictureUrl("https://some.domain.com/mypicture.jpg", &tr);
     tr.run(m_bc);
 }
 

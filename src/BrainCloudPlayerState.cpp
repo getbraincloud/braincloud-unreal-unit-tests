@@ -16,7 +16,7 @@ namespace BrainCloud
 {
     BrainCloudPlayerState::BrainCloudPlayerState(BrainCloudClient* in_client) : m_client(in_client) { }
 
-    void BrainCloudPlayerState::readPlayerState(IServerCallback * in_callback, const char * in_entityTypeFilter)
+    void BrainCloudPlayerState::readPlayerState(IServerCallback *in_callback, const char *in_entityTypeFilter)
     {
         Json::Value data = Json::nullValue;
         if (in_entityTypeFilter != NULL)
@@ -28,7 +28,19 @@ namespace BrainCloud
         m_client->getBrainCloudComms()->addToQueue(sc);
     }
 
-    void BrainCloudPlayerState::deletePlayer(IServerCallback * in_callback)
+    void BrainCloudPlayerState::readUserState(IServerCallback *in_callback, const char *in_entityTypeFilter)
+    {
+        Json::Value data = Json::nullValue;
+        if (in_entityTypeFilter != NULL)
+        {
+            data[OperationParam::PlayerStateServiceReadEntitySubtype.getValue()] = in_entityTypeFilter;
+        }
+
+        ServerCall * sc = new ServerCall(ServiceName::PlayerState, ServiceOperation::Read, data, in_callback);
+        m_client->getBrainCloudComms()->addToQueue(sc);
+    }
+
+    void BrainCloudPlayerState::deletePlayer(IServerCallback *in_callback)
     {
         Json::Value data = Json::nullValue;
 
@@ -36,7 +48,23 @@ namespace BrainCloud
         m_client->getBrainCloudComms()->addToQueue(sc);
     }
 
-    void BrainCloudPlayerState::resetPlayerState(IServerCallback * in_callback)
+    void BrainCloudPlayerState::deleteUser(IServerCallback *in_callback)
+    {
+        Json::Value data = Json::nullValue;
+
+        ServerCall * sc = new ServerCall(ServiceName::PlayerState, ServiceOperation::FullReset, data, in_callback);
+        m_client->getBrainCloudComms()->addToQueue(sc);
+    }
+
+    void BrainCloudPlayerState::resetPlayerState(IServerCallback *in_callback)
+    {
+        Json::Value data = Json::nullValue;
+
+        ServerCall * sc = new ServerCall(ServiceName::PlayerState, ServiceOperation::DataReset, data, in_callback);
+        m_client->getBrainCloudComms()->addToQueue(sc);
+    }
+
+    void BrainCloudPlayerState::resetUserState(IServerCallback *in_callback)
     {
         Json::Value data = Json::nullValue;
 
@@ -52,12 +80,24 @@ namespace BrainCloud
         m_client->getBrainCloudComms()->addToQueue(sc);
     }
 
-    void BrainCloudPlayerState::updatePlayerName(const char * in_name, IServerCallback * in_callback)
+    void BrainCloudPlayerState::updatePlayerName(const char *in_userName, IServerCallback *in_callback)
     {
         Json::Value data = Json::nullValue;
-        if (in_name != NULL)
+        if (in_userName != NULL)
         {
-            data[OperationParam::PlayerStateServiceUpdateNameData.getValue()] = in_name;
+            data[OperationParam::PlayerStateServiceUpdateNameData.getValue()] = in_userName;
+        }
+
+        ServerCall * sc = new ServerCall(ServiceName::PlayerState, ServiceOperation::UpdateName, data, in_callback);
+        m_client->getBrainCloudComms()->addToQueue(sc);
+    }
+
+    void BrainCloudPlayerState::updateUserName(const char *in_userName, IServerCallback *in_callback)
+    {
+        Json::Value data = Json::nullValue;
+        if (in_userName != NULL)
+        {
+            data[OperationParam::PlayerStateServiceUpdateNameData.getValue()] = in_userName;
         }
 
         ServerCall * sc = new ServerCall(ServiceName::PlayerState, ServiceOperation::UpdateName, data, in_callback);
@@ -100,7 +140,16 @@ namespace BrainCloud
         m_client->getBrainCloudComms()->addToQueue(sc);
     }
 
-    void BrainCloudPlayerState::updatePlayerPictureUrl(const char * in_pictureUrl, IServerCallback * in_callback)
+    void BrainCloudPlayerState::updatePlayerPictureUrl(const char *in_pictureUrl, IServerCallback *in_callback)
+    {
+        Json::Value data;
+        data[OperationParam::PlayerStateServicePictureUrl.getValue()] = in_pictureUrl;
+
+        ServerCall * sc = new ServerCall(ServiceName::PlayerState, ServiceOperation::UpdatePlayerPicture, data, in_callback);
+        m_client->getBrainCloudComms()->addToQueue(sc);
+    }
+
+    void BrainCloudPlayerState::updateUserPictureUrl(const char *in_pictureUrl, IServerCallback *in_callback)
     {
         Json::Value data;
         data[OperationParam::PlayerStateServicePictureUrl.getValue()] = in_pictureUrl;
