@@ -277,7 +277,7 @@ protected:
     FString _lastUrl;
     FString _lastSecretKey;
     FString _lastAppId;
-    FString _lastVersion;
+    FString _lastAppVersion;
 
     bool _alwaysAllowProfileSwitch = true;
 

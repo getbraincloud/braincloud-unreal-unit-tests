@@ -27,16 +27,16 @@ BrainCloudWrapper * BrainCloudWrapper::getInstance()
     return _instance;
 }
 
-void BrainCloudWrapper::initialize(FString url, FString secretKey, FString appId, FString version)
+void BrainCloudWrapper::initialize(FString url, FString secretKey, FString appId, FString appVersion)
 {
     // save the game app in case we need to reauthenticate
     _lastUrl = url;
     _lastSecretKey = secretKey;
     _lastAppId = appId;
-    _lastVersion = version;
+    _lastAppVersion = appVersion;
 
     // initialize the client with our app info
-    _client->initialize(url, secretKey, appId, version);
+    _client->initialize(url, secretKey, appId, appVersion);
 
     loadData();
 }
@@ -65,7 +65,7 @@ void BrainCloudWrapper::reauthenticate()
 {
     // send our saved game info to brainCloud
     // company and game name can be nullptr since they are already set
-    initialize(_lastUrl, _lastSecretKey, _lastAppId, _lastVersion);
+    initialize(_lastUrl, _lastSecretKey, _lastAppId, _lastAppVersion);
 
     if (_authenticationType == OperationParam::AuthenticateServiceAuthenticateAuthAnonymous.getValue())
     {

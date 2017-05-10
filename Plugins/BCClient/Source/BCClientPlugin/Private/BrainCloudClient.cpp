@@ -66,7 +66,7 @@ void BrainCloudClient::initialize(
 	const FString& serverUrl,
 	const FString& secretKey,
 	const FString& appId,
-	const FString& version)
+	const FString& appVersion)
 {
 	FString error = "";
 	if (serverUrl.IsEmpty())
@@ -75,8 +75,8 @@ void BrainCloudClient::initialize(
 		error = "secretKey was null or empty";
 	else if (appId.IsEmpty())
 		error = "appId was null or empty";
-	else if (version.IsEmpty())
-		error = "version was null or empty";
+	else if (appVersion.IsEmpty())
+		error = "appVersion was null or empty";
 
 	if (!error.IsEmpty())
 	{
@@ -90,7 +90,7 @@ void BrainCloudClient::initialize(
 	determineReleasePlatform();
 
 	_appId = appId;
-	_version = version;
+	_appVersion = appVersion;
 
 	if (_language.IsEmpty()) _language = FInternationalization::Get().GetCurrentCulture()->GetTwoLetterISOLanguageName();
 	if (_country.IsEmpty()) _country = FInternationalization::Get().GetCurrentCulture()->GetRegion();

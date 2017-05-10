@@ -56,7 +56,7 @@ UBCFriendProxy* UBCFriendProxy::ReadFriendsEntities(const FString& entityType)
 UBCFriendProxy* UBCFriendProxy::ReadFriendPlayerState(const FString& friendId)
 {
 	UBCFriendProxy* Proxy = NewObject<UBCFriendProxy>();
-	BrainCloudClient::getInstance()->getFriendService()->readFriendPlayerState(friendId, Proxy);
+	BrainCloudClient::getInstance()->getFriendService()->readFriendUserState(friendId, Proxy);
 	return Proxy;
 }
 
@@ -77,7 +77,7 @@ UBCFriendProxy* UBCFriendProxy::FindUsersBySubstrName(const FString& searchText,
 UBCFriendProxy * UBCFriendProxy::FindPlayerByUniversalId(const FString & searchText, int32 maxResults)
 {
 	UBCFriendProxy* Proxy = NewObject<UBCFriendProxy>();
-	BrainCloudClient::getInstance()->getFriendService()->findPlayerByUniversalId(searchText, maxResults, Proxy);
+	BrainCloudClient::getInstance()->getFriendService()->findUserByUniversalId(searchText, maxResults, Proxy);
 	return Proxy;
 }
 

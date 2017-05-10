@@ -10,9 +10,14 @@ class BCCLIENTPLUGIN_API BrainCloudPlayerStatisticsEvent
 public:
     BrainCloudPlayerStatisticsEvent(BrainCloudClient* client);
 
+	/**
+	* @deprecated Use triggerStatsEvent instead - removal after September 1 2017
+	*/
+	void triggerPlayerStatisticsEvent(const FString& eventName, int32 eventMultiplier, IServerCallback* callback);
+
     /**
-     * Trigger an event server side that will increase the players statistics.
-     * This may cause one or more awards to be sent back to the player -
+     * Trigger an event server side that will increase the users statistics.
+     * This may cause one or more awards to be sent back to the user -
      * could be achievements, experience, etc. Achievements will be sent by this
      * client library to the appropriate awards service (Apple Game Center, etc).
      *
@@ -27,7 +32,12 @@ public:
      *
      * @param callback The method to be invoked when the server response is received
      */
-    void triggerPlayerStatisticsEvent(const FString& eventName, int32 eventMultiplier, IServerCallback* callback);
+    void triggerStatsEvent(const FString& eventName, int32 eventMultiplier, IServerCallback* callback);
+
+	/**
+	* @deprecated Use triggerStatsEvents instead - removal after September 1 2017
+	*/
+	void triggerPlayerStatisticsEvents(const FString& jsonData, IServerCallback* callback);
 
     /**
      * See documentation for TriggerPlayerStatisticsEvent for more
@@ -48,7 +58,7 @@ public:
      *     }
      *   ]
      */
-    void triggerPlayerStatisticsEvents(const FString& jsonData, IServerCallback* callback);
+    void triggerStatsEvents(const FString& jsonData, IServerCallback* callback);
 
 private:
     BrainCloudClient* _client = nullptr;

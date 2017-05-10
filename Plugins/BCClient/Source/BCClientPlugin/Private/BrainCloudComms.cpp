@@ -673,7 +673,7 @@ void BrainCloudComms::FilterIncomingMessages(TSharedRef<ServerCall> servercall, 
 
 			//set player name
 			FString name = data->GetStringField(TEXT("playerName"));
-			_client->getPlayerStateService()->setPlayerName(name);
+			_client->getPlayerStateService()->setUserName(name);
 		}
 	}
 	else if (service == ServiceName::PlayerState &&
@@ -683,14 +683,14 @@ void BrainCloudComms::FilterIncomingMessages(TSharedRef<ServerCall> servercall, 
 		_sessionId = TEXT("");
 		ResetErrorCache();
 		_client->getAuthenticationService()->clearSavedProfileId();
-		_client->getPlayerStateService()->setPlayerName(TEXT(""));
+		_client->getPlayerStateService()->setUserName(TEXT(""));
 	}
 	else if (service == ServiceName::PlayerState && operation == ServiceOperation::UpdateName)
 	{
 		if (response->GetObjectField(TEXT("data")).IsValid())
 		{
 			FString name = response->GetObjectField(TEXT("data"))->GetStringField(TEXT("playerName"));
-			_client->getPlayerStateService()->setPlayerName(name);
+			_client->getPlayerStateService()->setUserName(name);
 		}
 	}
 	else if (service == ServiceName::File && operation == ServiceOperation::PrepareUserUpload)

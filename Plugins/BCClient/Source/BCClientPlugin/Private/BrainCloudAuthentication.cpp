@@ -105,7 +105,7 @@ void BrainCloudAuthentication::resetEmailPassword(const FString& email, IServerC
 
 	TSharedRef<FJsonObject> message = MakeShareable(new FJsonObject());
 	message->SetStringField(OperationParam::AuthenticateServiceAuthenticateExternalId.getValue(), email);
-	message->SetStringField(OperationParam::AuthenticateServiceAuthenticateGameId.getValue(), brainCloudClientRef->getGameId());
+	message->SetStringField(OperationParam::AuthenticateServiceAuthenticateGameId.getValue(), brainCloudClientRef->getAppId());
 
 	ServerCall * sc = new ServerCall(ServiceName::AuthenticateV2, ServiceOperation::ResetEmailPassword, message, callback);
 	brainCloudClientRef->sendRequest(sc);
@@ -129,9 +129,9 @@ void BrainCloudAuthentication::authenticate(
 
 	message->SetStringField(OperationParam::AuthenticateServiceAuthenticateProfileId.getValue(), _profileId);
 	message->SetStringField(OperationParam::AuthenticateServiceAuthenticateAnonymousId.getValue(), _anonymousId);
-	message->SetStringField(OperationParam::AuthenticateServiceAuthenticateGameId.getValue(), brainCloudClientRef->getGameId());
+	message->SetStringField(OperationParam::AuthenticateServiceAuthenticateGameId.getValue(), brainCloudClientRef->getAppId());
 	message->SetStringField(OperationParam::AuthenticateServiceAuthenticateReleasePlatform.getValue(), brainCloudClientRef->getReleasePlatform());
-	message->SetStringField(OperationParam::AuthenticateServiceAuthenticateGameVersion.getValue(), brainCloudClientRef->getGameVersion());
+	message->SetStringField(OperationParam::AuthenticateServiceAuthenticateGameVersion.getValue(), brainCloudClientRef->getAppVersion());
 	message->SetStringField(OperationParam::AuthenticateServiceAuthenticateBrainCloudVersion.getValue(), brainCloudClientRef->getBrainCloudClientVersion());
 	message->SetStringField(TEXT("clientLib"), TEXT("ue4"));
 

@@ -59,13 +59,13 @@ public:
 	*
 	* @param serverURL The url to the brainCloud server
 	* @param secretKey The secret key for your app
-	* @param appId The apps' id
-	* @param version The app's version
+	* @param appId The app's id
+	* @param appVersion The app's version
 	*/
 	void initialize(const FString& serverUrl,
 		const FString& secretKey,
 		const FString& appId,
-		const FString& version);
+		const FString& appVersion);
 
 	/**
 	* Initialize - initializes the identity service with the saved
@@ -225,9 +225,18 @@ public:
 	BrainCloudMail * getMailService();
 	BrainCloudTournament * getTournamentService();
 
+	/**
+	* @deprecated Use getAppId instead - removal after September 1 2017
+	*/
 	const FString & getGameId() { return _appId; };
+	const FString & getAppId() { return _appId; };
 	const FString & getReleasePlatform() { return _releasePlatform; };
-	const FString & getGameVersion() { return _version; };
+
+	/**
+	* @deprecated Use getAppVersion instead - removal after September 1 2017
+	*/
+	const FString & getGameVersion() { return _appVersion; }
+	const FString & getAppVersion() { return _appVersion; };
 	const FString & getBrainCloudClientVersion() { return s_brainCloudClientVersion; };
 
 	const FString & getCountryCode() { return _country; }
@@ -462,7 +471,7 @@ protected:
 
 	FString _appId = "";
 	FString _releasePlatform = "";
-	FString _version = "";
+	FString _appVersion = "";
 	FString _country = "";
 	FString _language = "";
 	float _timezoneOffset = 0.0f;
