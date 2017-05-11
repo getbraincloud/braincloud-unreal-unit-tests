@@ -91,10 +91,10 @@ public:
     * Service Name - playerState
     * Service Operation - UPDATE_NAME
     *
-    * Param - playerName The name of the player
+    * Param - userName The name of the user
     */
     UFUNCTION(BlueprintCallable, meta = (BlueprintInternalUseOnly = "true"), Category = "BrainCloud|Player State")
-        static UBCPlayerStateProxy* UpdateUserName(FString playerName);
+        static UBCPlayerStateProxy* UpdateUserName(FString userName);
 
     /**
     * Updates the "friend summary data" associated with the logged in player.

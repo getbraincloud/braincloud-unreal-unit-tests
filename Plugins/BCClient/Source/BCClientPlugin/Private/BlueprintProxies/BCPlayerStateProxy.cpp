@@ -67,10 +67,10 @@ UBCPlayerStateProxy* UBCPlayerStateProxy::UpdatePlayerName(FString playerName)
 	return Proxy;
 }
 
-UBCPlayerStateProxy* UBCPlayerStateProxy::UpdateUserName(FString playerName)
+UBCPlayerStateProxy* UBCPlayerStateProxy::UpdateUserName(FString userName)
 {
     UBCPlayerStateProxy* Proxy = NewObject<UBCPlayerStateProxy>();
-    BrainCloudClient::getInstance()->getPlayerStateService()->updateUserName(playerName, Proxy);
+    BrainCloudClient::getInstance()->getPlayerStateService()->updateUserName(userName, Proxy);
     return Proxy;
 }
 
