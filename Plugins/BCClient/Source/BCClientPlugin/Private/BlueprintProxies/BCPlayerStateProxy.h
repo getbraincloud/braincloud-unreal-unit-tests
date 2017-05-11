@@ -14,22 +14,34 @@ class UBCPlayerStateProxy : public UBCBlueprintCallProxyBase, public IServerCall
 public:
     UBCPlayerStateProxy(const FObjectInitializer& ObjectInitializer);
 
+	/**
+	* @deprecated Use findUserByUniversalId instead - removal after September 1 2017
+	*/
+	UFUNCTION(BlueprintCallable, meta = (BlueprintInternalUseOnly = "true"), Category = "BrainCloud|Player State")
+		static UBCPlayerStateProxy* ReadPlayerState();
+
     /**
-    * Read the state of the currently logged in player.
+    * Read the state of the currently logged in user.
     * This method returns a JSON object describing most of the
-    * player's data: entities, statistics, level, currency.
+    * user's data: entities, statistics, level, currency.
     * Apps will typically call this method after authenticating to get an
-    * up-to-date view of the player's data.
+    * up-to-date view of the user's data.
     *
     * Service Name - PlayerState
     * Service Operation - Read
     */
     UFUNCTION(BlueprintCallable, meta = (BlueprintInternalUseOnly = "true"), Category = "BrainCloud|Player State")
-        static UBCPlayerStateProxy* ReadPlayerState();
+        static UBCPlayerStateProxy* ReadUserState();
+
+	/**
+	* @deprecated Use DeleteUser instead - removal after September 1 2017
+	*/
+	UFUNCTION(BlueprintCallable, meta = (BlueprintInternalUseOnly = "true"), Category = "BrainCloud|Player State")
+		static UBCPlayerStateProxy* DeletePlayer();
 
     /**
-    * Completely deletes the player record and all data fully owned
-    * by the player. After calling this method, the player will need
+    * Completely deletes the user record and all data fully owned
+    * by the user. After calling this method, the user will need
     * to re-authenticate and create a new profile.
     * This is mostly used for debugging/qa.
     *
@@ -37,23 +49,29 @@ public:
     * Service Operation - FullReset
     */
     UFUNCTION(BlueprintCallable, meta = (BlueprintInternalUseOnly = "true"), Category = "BrainCloud|Player State")
-        static UBCPlayerStateProxy* DeletePlayer();
+        static UBCPlayerStateProxy* DeleteUser();
+
+	/**
+	* @deprecated Use ResetUserState instead - removal after September 1 2017
+	*/
+	UFUNCTION(BlueprintCallable, meta = (BlueprintInternalUseOnly = "true"), Category = "BrainCloud|Player State")
+		static UBCPlayerStateProxy* ResetPlayerState();
 
     /**
-    * This method will delete *most* data for the currently logged in player.
+    * This method will delete *most* data for the currently logged in user.
     * Data which is not deleted includes: currency, credentials, and
-    * purchase transactions. ResetPlayer is different from DeletePlayer in that
-    * the player record will continue to exist after the reset (so the user
+    * purchase transactions. ResetUser is different from DeleteUser in that
+    * the user record will continue to exist after the reset (so the user
     * does not need to re-authenticate).
     *
     * Service Name - PlayerState
     * Service Operation - DataReset
     */
     UFUNCTION(BlueprintCallable, meta = (BlueprintInternalUseOnly = "true"), Category = "BrainCloud|Player State")
-        static UBCPlayerStateProxy* ResetPlayerState();
+        static UBCPlayerStateProxy* ResetUserState();
 
     /**
-    * Logs player out of server.
+    * Logs user out of server.
     *
     * Service Name - PlayerState
     * Service Operation - Logout
@@ -61,8 +79,14 @@ public:
     UFUNCTION(BlueprintCallable, meta = (BlueprintInternalUseOnly = "true"), Category = "BrainCloud|Player State")
         static UBCPlayerStateProxy* Logout();
 
+	/**
+	* @deprecated Use UpdateUserName instead - removal after September 1 2017
+	*/
+	UFUNCTION(BlueprintCallable, meta = (BlueprintInternalUseOnly = "true"), Category = "BrainCloud|Player State")
+		static UBCPlayerStateProxy* UpdatePlayerName(FString playerName);
+
     /**
-    * Sets the players name.
+    * Sets the user's name.
     *
     * Service Name - playerState
     * Service Operation - UPDATE_NAME
@@ -70,14 +94,14 @@ public:
     * Param - playerName The name of the player
     */
     UFUNCTION(BlueprintCallable, meta = (BlueprintInternalUseOnly = "true"), Category = "BrainCloud|Player State")
-        static UBCPlayerStateProxy* UpdatePlayerName(FString playerName);
+        static UBCPlayerStateProxy* UpdateUserName(FString playerName);
 
     /**
     * Updates the "friend summary data" associated with the logged in player.
     * Some operations will return this summary data. For instance the social
-    * leaderboards will return the player's score in the leaderboard along
+    * leaderboards will return the user's score in the leaderboard along
     * with the friend summary data. Generally this data is used to provide
-    * a quick overview of the player without requiring a separate API call
+    * a quick overview of the user without requiring a separate API call
     * to read their public stats or entity data.
     *
     * Service Name - PlayerState
@@ -95,7 +119,7 @@ public:
         static UBCPlayerStateProxy* UpdateSummaryFriendData(const FString& jsonSummaryData);
 
     /**
-    * Retrieve the player attributes.
+    * Retrieve the user's attributes.
     *
     * Service Name - PlayerState
     * Service Operation - GetAttributes
@@ -104,7 +128,7 @@ public:
         static UBCPlayerStateProxy* GetAttributes();
 
     /**
-    * Update player attributes.
+    * Update user's attributes.
     *
     * Service Name - PlayerState
     * Service Operation - UpdateAttributes
@@ -116,7 +140,7 @@ public:
         static UBCPlayerStateProxy* UpdateAttributes(FString jsonAttributes, bool wipeExisting);
 
     /**
-    * Remove player attributes.
+    * Remove user's attributes.
     *
     * Service Name - PlayerState
     * Service Operation - RemoveAttributes
@@ -126,8 +150,14 @@ public:
     UFUNCTION(BlueprintCallable, meta = (BlueprintInternalUseOnly = "true"), Category = "BrainCloud|Player State")
         static UBCPlayerStateProxy* RemoveAttributes(const TArray<FString>& attributeNames);
 
+	/**
+	* @deprecated Use UpdateUserPictureUrl instead - removal after September 1 2017
+	*/
+	UFUNCTION(BlueprintCallable, meta = (BlueprintInternalUseOnly = "true"), Category = "BrainCloud|Player State")
+		static UBCPlayerStateProxy* UpdatePlayerPictureUrl(const FString& pictureUrl);
+
     /**
-    * Update Player picture URL.
+    * Update user picture URL.
     *
     * Service Name - PlayerState
     * Service Operation - UPDATE_PICTURE_URL
@@ -135,10 +165,10 @@ public:
     * Param - pictureUrl URL to apply
     */
     UFUNCTION(BlueprintCallable, meta = (BlueprintInternalUseOnly = "true"), Category = "BrainCloud|Player State")
-        static UBCPlayerStateProxy* UpdatePlayerPictureUrl(const FString& pictureUrl);
+        static UBCPlayerStateProxy* UpdateUserPictureUrl(const FString& pictureUrl);
 
     /**
-    * Update the player's contact email.
+    * Update the user's contact email.
     * Note this is unrelated to email authentication.
     *
     * Service Name - PlayerState

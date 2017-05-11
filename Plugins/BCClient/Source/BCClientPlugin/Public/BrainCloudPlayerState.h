@@ -58,7 +58,7 @@ public:
     /**
      * This method will delete *most* data for the currently logged in user.
      * Data which is not deleted includes: currency, credentials, and
-     * purchase transactions. ResetPlayer is different from DeletePlayer in that
+     * purchase transactions. ResetPlayer is different from DeleteUser in that
      * the user record will continue to exist after the reset (so the user
      * does not need to re-authenticate).
      *

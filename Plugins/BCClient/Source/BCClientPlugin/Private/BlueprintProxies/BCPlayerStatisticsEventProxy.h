@@ -14,9 +14,15 @@ class UBCPlayerStatisticsEventProxy : public UBCBlueprintCallProxyBase, public I
 public:
     UBCPlayerStatisticsEventProxy(const FObjectInitializer& ObjectInitializer);
 
+	/**
+	* @deprecated Use TriggerStatsEvent instead - removal after September 1 2017
+	*/
+	UFUNCTION(BlueprintCallable, meta = (BlueprintInternalUseOnly = "true"), Category = "BrainCloud|Player Statistics Event")
+		static UBCPlayerStatisticsEventProxy* TriggerPlayerStatisticsEvent(FString eventName, int32 eventMultiplier);
+
     /**
-    * Trigger an event server side that will increase the players statistics.
-    * This may cause one or more awards to be sent back to the player -
+    * Trigger an event server side that will increase the users statistics.
+    * This may cause one or more awards to be sent back to the user -
     * could be achievements, experience, etc. Achievements will be sent by this
     * client library to the appropriate awards service (Apple Game Center, etc).
     *
@@ -30,10 +36,16 @@ public:
     * @see BrainCloudPlayerStatistics
     */
     UFUNCTION(BlueprintCallable, meta = (BlueprintInternalUseOnly = "true"), Category = "BrainCloud|Player Statistics Event")
-        static UBCPlayerStatisticsEventProxy* TriggerPlayerStatisticsEvent(FString eventName, int32 eventMultiplier);
+        static UBCPlayerStatisticsEventProxy* TriggerStatsEvent(FString eventName, int32 eventMultiplier);
+
+	/**
+	* @deprecated Use TriggerStatsEvents instead - removal after September 1 2017
+	*/
+	UFUNCTION(BlueprintCallable, meta = (BlueprintInternalUseOnly = "true"), Category = "BrainCloud|Player Statistics Event")
+		static UBCPlayerStatisticsEventProxy* TriggerPlayerStatisticsEvents(FString jsonData);
 
     /**
-    * See documentation for TriggerPlayerStatisticsEvent for more
+    * See documentation for TriggerStatsEvent for more
     * documentation.
     *
     * Service Name - PlayerStatisticsEvent
@@ -52,7 +64,7 @@ public:
     *   ]
     */
     UFUNCTION(BlueprintCallable, meta = (BlueprintInternalUseOnly = "true"), Category = "BrainCloud|Player Statistics Event")
-        static UBCPlayerStatisticsEventProxy* TriggerPlayerStatisticsEvents(FString jsonData);
+        static UBCPlayerStatisticsEventProxy* TriggerStatsEvents(FString jsonData);
 
     //Response delegates
     UPROPERTY(BlueprintAssignable)

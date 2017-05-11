@@ -65,7 +65,7 @@ public:
 	* Method retrieves the user statistics for the given category.
 	*
 	* Service Name - PlayerStatistics
-	* Service Operation - ReadPlayerStatisticsByCategory
+	* Service Operation - ReadUserStatisticsByCategory
 	*
 	* @param category The user statistics category
 	* @param callback Method to be invoked when the server response is received.

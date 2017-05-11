@@ -81,6 +81,13 @@ UBCFriendProxy * UBCFriendProxy::FindPlayerByUniversalId(const FString & searchT
 	return Proxy;
 }
 
+UBCFriendProxy * UBCFriendProxy::FindUserByUniversalId(const FString & searchText, int32 maxResults)
+{
+	UBCFriendProxy* Proxy = NewObject<UBCFriendProxy>();
+	BrainCloudClient::getInstance()->getFriendService()->findUserByUniversalId(searchText, maxResults, Proxy);
+	return Proxy;
+}
+
 UBCFriendProxy * UBCFriendProxy::ListFriends(EFriendPlatform friendPlatform, bool includeSummaryData)
 {
 	UBCFriendProxy* Proxy = NewObject<UBCFriendProxy>();

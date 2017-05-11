@@ -40,7 +40,7 @@ public:
 	void triggerPlayerStatisticsEvents(const FString& jsonData, IServerCallback* callback);
 
     /**
-     * See documentation for TriggerPlayerStatisticsEvent for more
+     * See documentation for TriggerStatsEvent for more
      * documentation.
      *
      * Service Name - PlayerStatisticsEvent
