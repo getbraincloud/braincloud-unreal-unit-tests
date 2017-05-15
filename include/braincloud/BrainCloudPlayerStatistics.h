@@ -4,6 +4,7 @@
 
 #include <string>
 #include <vector>
+#include "braincloud/BrainCloudTypes.h"
 
 namespace BrainCloud
 {
