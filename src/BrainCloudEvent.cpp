@@ -16,10 +16,10 @@ namespace BrainCloud
 {
 	BrainCloudEvent::BrainCloudEvent(BrainCloudClient* in_client) : m_client(in_client) { }
 
-	void BrainCloudEvent::sendEvent(const char * in_toPlayerId, const char * in_eventType, const std::string& in_jsonEventData, IServerCallback * in_callback)
+	void BrainCloudEvent::sendEvent(const char * in_toProfileId, const char * in_eventType, const std::string& in_jsonEventData, IServerCallback * in_callback)
 	{
 		Json::Value message;
-		message[OperationParam::EventServiceSendToId.getValue()] = in_toPlayerId;
+		message[OperationParam::EventServiceSendToId.getValue()] = in_toProfileId;
 		message[OperationParam::EventServiceSendEventType.getValue()] = in_eventType;
 		message[OperationParam::EventServiceSendEventData.getValue()] = JsonUtil::jsonStringToValue(in_jsonEventData);
 

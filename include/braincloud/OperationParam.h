@@ -16,6 +16,8 @@ namespace BrainCloud {
 		static const OperationParam PushNotificationSendParamSubstitution;
 		static const OperationParam AlertContent;
 		static const OperationParam CustomData;
+		static const OperationParam StartDateUTC;
+		static const OperationParam MinutesFromNow;
 
 		//Push Notification Service - Register Params
 		static const OperationParam PushNotificationRegisterParamDeviceType;

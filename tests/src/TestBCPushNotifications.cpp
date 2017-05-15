@@ -94,6 +94,66 @@ TEST_F(TestBCPushNotifications, SendNormalizedPushNotificationToGroup)
     tr.run(m_bc);
 }
 
+TEST_F(TestBCPushNotifications, ScheduleNormalizedPushNotificationUTC)
+{
+    TestResult tr;
+
+    Json::FastWriter fw;
+    Json::Value data;
+    data["body"] = "content of message";
+    data["title"] = "message title";
+
+    int32_t startTime = 0;
+
+    m_bc->getPushNotificationService()->scheduleNormalizedPushNotificationUTC(GetUser(UserA)->m_profileId, fw.write(data), "", startTime, &tr);
+    tr.run(m_bc);
+}
+
+TEST_F(TestBCPushNotifications, ScheduleNormalizedPushNotificationMinutes)
+{
+    TestResult tr;
+
+    Json::FastWriter fw;
+    Json::Value data;
+    data["body"] = "content of message";
+    data["title"] = "message title";
+
+    int32_t minutesFromNow = 0;
+
+    m_bc->getPushNotificationService()->scheduleNormalizedPushNotificationMinutes(GetUser(UserA)->m_profileId, fw.write(data), "", minutesFromNow, &tr);
+    tr.run(m_bc);
+}
+
+TEST_F(TestBCPushNotifications, ScheduleRichPushNotificationUTC)
+{
+    TestResult tr;
+
+    Json::FastWriter fw;
+    Json::Value data;
+    data["body"] = "content of message";
+    data["title"] = "message title";
+
+    int32_t startTime = 0;
+
+    m_bc->getPushNotificationService()->scheduleRichPushNotificationUTC(GetUser(UserA)->m_profileId, fw.write(data), "", startTime, &tr);
+    tr.run(m_bc);
+}
+
+TEST_F(TestBCPushNotifications, ScheduleRichPushNotificationMinutes)
+{
+    TestResult tr;
+
+    Json::FastWriter fw;
+    Json::Value data;
+    data["body"] = "content of message";
+    data["title"] = "message title";
+
+    int32_t minutesFromNow = 0;
+
+    m_bc->getPushNotificationService()->scheduleRichPushNotificationMinutes(GetUser(UserA)->m_profileId, fw.write(data), "", minutesFromNow, &tr);
+    tr.run(m_bc);
+}
+
 TEST_F(TestBCPushNotifications, SendNormalizedPushNotification)
 {
 	TestResult tr;

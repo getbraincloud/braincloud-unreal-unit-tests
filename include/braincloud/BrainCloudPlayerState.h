@@ -15,23 +15,37 @@ namespace BrainCloud
     public:
         BrainCloudPlayerState(BrainCloudClient* in_client);
 
+
         /**
-         * Read the state of the currently logged in player.
+		* @deprecated Use readUserState() instead - Removal after September 1 2017
+		*/
+        DEPRECATED
+        void readPlayerState(IServerCallback * in_callback, const char* in_entityTypeFilter = NULL);
+
+
+        /**
+         * Read the state of the currently logged in user.
          * This method returns a JSON object describing most of the
-         * player's data: entities, statistics, level, currency.
+         * user's data: entities, statistics, level, currency.
          * Apps will typically call this method after authenticating to get an
-         * up-to-date view of the player's data.
+         * up-to-date view of the user's data.
          *
          * Service Name - PlayerState
          * Service Operation - Read
          *
          * @param in_callback The method to be invoked when the server response is received
          */
-        void readPlayerState(IServerCallback * in_callback, const char* in_entityTypeFilter = NULL);
+        void readUserState(IServerCallback *in_callback, const char *in_entityTypeFilter = NULL);
 
         /**
-         * Completely deletes the player record and all data fully owned
-         * by the player. After calling this method, the player will need
+		* @deprecated Use deleteUser() instead - Removal after September 1 2017
+		*/
+        DEPRECATED
+        void deletePlayer(IServerCallback *in_callback = NULL);
+
+        /**
+         * Completely deletes the user record and all data fully owned
+         * by the user. After calling this method, the user will need
          * to re-authenticate and create a new profile.
          * This is mostly used for debugging/qa.
          *
@@ -40,13 +54,19 @@ namespace BrainCloud
          *
          * @param in_callback The method to be invoked when the server response is received
          */
-        void deletePlayer(IServerCallback * in_callback = NULL);
+        void deleteUser(IServerCallback *in_callback = NULL);
 
         /**
-         * This method will delete *most* data for the currently logged in player.
+		* @deprecated Use resetUserState() instead - Removal after September 1 2017
+		*/
+        DEPRECATED
+        void resetPlayerState(IServerCallback * in_callback = NULL);
+
+        /**
+         * This method will delete *most* data for the currently logged in user.
          * Data which is not deleted includes: currency, credentials, and
-         * purchase transactions. ResetPlayer is different from DeletePlayer in that
-         * the player record will continue to exist after the reset (so the user
+         * purchase transactions. ResetUser is different from DeleteUser in that
+         * the user record will continue to exist after the reset (so the user
          * does not need to re-authenticate).
          *
          * Service Name - PlayerState
@@ -54,10 +74,10 @@ namespace BrainCloud
          *
          * @param in_callback The method to be invoked when the server response is received
          */
-        void resetPlayerState(IServerCallback * in_callback = NULL);
+        void resetUserState(IServerCallback *in_callback = NULL);
 
         /**
-         * Logs player out of server.
+         * Logs user out of server.
          *
          * Service Name - PlayerState
          * Service Operation - Logout
@@ -67,18 +87,24 @@ namespace BrainCloud
         void logout(IServerCallback * in_callback = NULL);
 
         /**
-        * Sets the players name.
+		* @deprecated Use updateUserName() instead - Removal after September 1 2017
+		*/
+        DEPRECATED
+        void updatePlayerName(const char * in_userName, IServerCallback * in_callback = NULL);
+
+        /**
+        * Sets the user's name.
         *
         * Service Name - playerState
         * Service Operation - UPDATE_NAME
         *
-        * @param in_playerName The name of the player
+        * @param in_userName The name of the user
         * @param in_callback The method to be invoked when the server response is received
         */
-        void updatePlayerName(const char * in_playerName, IServerCallback * in_callback = NULL);
+        void updateUserName(const char *in_userName, IServerCallback *in_callback = NULL);
 
         /**
-         * Updates the "friend summary data" associated with the logged in player.
+         * Updates the "friend summary data" associated with the logged in user.
          * Some operations will return this summary data. For instance the social
          * leaderboards will return the player's score in the leaderboard along
          * with the friend summary data. Generally this data is used to provide
@@ -100,7 +126,7 @@ namespace BrainCloud
         void updateSummaryFriendData(const char * in_jsonSummaryData, IServerCallback * in_callback = NULL);
 
         /**
-        * Retrieve the player attributes.
+        * Retrieve the user's attributes.
         *
         * Service Name - PlayerState
         * Service Operation - GetAttributes
@@ -110,7 +136,7 @@ namespace BrainCloud
         void getAttributes(IServerCallback * in_callback = NULL);
 
         /**
-        * Update player attributes.
+        * Update user's attributes.
         *
         * Service Name - PlayerState
         * Service Operation - UpdateAttributes
@@ -122,7 +148,7 @@ namespace BrainCloud
         void updateAttributes(const std::string& in_jsonAttributes, bool in_wipeExisting, IServerCallback * in_callback = NULL);
 
         /**
-        * Remove player attributes.
+        * Remove user's attributes.
         *
         * Service Name - PlayerState
         * Service Operation - RemoveAttributes
@@ -133,7 +159,13 @@ namespace BrainCloud
         void removeAttributes(const std::vector<std::string> & in_attributeNames, IServerCallback * in_callback = NULL);
 
         /**
-         * Update Player picture URL.
+		* @deprecated Use updateUserPictureUrl() instead - Removal after September 1 2017
+		*/
+        DEPRECATED
+        void updatePlayerPictureUrl(const char * in_pictureUrl, IServerCallback * in_callback = NULL);
+
+        /**
+         * Update User picture URL.
          *
          * Service Name - PlayerState
          * Service Operation - UPDATE_PICTURE_URL
@@ -141,10 +173,10 @@ namespace BrainCloud
          * @param in_pictureUrl URL to apply
          * @param in_callback The method to be invoked when the server response is received
          */
-        void updatePlayerPictureUrl(const char * in_pictureUrl, IServerCallback * in_callback = NULL);
+        void updateUserPictureUrl(const char *in_pictureUrl, IServerCallback *in_callback = NULL);
 
         /**
-         * Update the player's contact email.
+         * Update the user's contact email.
          * Note this is unrelated to email authentication.
          *
          * Service Name - PlayerState

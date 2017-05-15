@@ -84,7 +84,12 @@ namespace BrainCloud {
 
 	const std::string& IBrainCloudComms::getGameId() const
 	{
-		return _gameId;
+		return _appId;
+	}
+
+	const std::string& IBrainCloudComms::getAppId() const
+	{
+		return _appId;
 	}
 
 	void IBrainCloudComms::clearSessionId()

@@ -41,6 +41,8 @@ namespace BrainCloud
 	const ServiceOperation ServiceOperation::SendNormalizedToGroup = ServiceOperation("SEND_NORMALIZED_TO_GROUP");
 	const ServiceOperation ServiceOperation::SendNormalized = ServiceOperation("SEND_NORMALIZED");
 	const ServiceOperation ServiceOperation::SendNormalizedBatch = ServiceOperation("SEND_NORMALIZED_BATCH");
+	const ServiceOperation ServiceOperation::ScheduleRichNotification = ServiceOperation("SCHEDULE_RICH_NOTIFICATION");
+	const ServiceOperation ServiceOperation::ScheduleNormalizedNotification = ServiceOperation("SCHEDULE_NORMALIZED_NOTIFICATION");
 
 	const ServiceOperation ServiceOperation::Trigger = ServiceOperation("TRIGGER");
 	const ServiceOperation ServiceOperation::TriggerMultiple = ServiceOperation("TRIGGER_MULTIPLE");

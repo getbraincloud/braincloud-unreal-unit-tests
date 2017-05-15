@@ -107,7 +107,7 @@ namespace BrainCloud {
     {
         Json::Value message;
         message[OperationParam::AuthenticateServiceAuthenticateExternalId.getValue()] = in_externalId;
-        message[OperationParam::AuthenticateServiceAuthenticateGameId.getValue()] = m_client->getGameId().c_str();
+        message[OperationParam::AuthenticateServiceAuthenticateGameId.getValue()] = m_client->getAppId().c_str();
 
         ServerCall * sc = new ServerCall(ServiceName::AuthenticateV2, ServiceOperation::ResetEmailPassword, message, in_callback);
         m_client->sendRequest(sc);
@@ -129,9 +129,9 @@ namespace BrainCloud {
 
         message[OperationParam::AuthenticateServiceAuthenticateProfileId.getValue()] = _profileId;
         message[OperationParam::AuthenticateServiceAuthenticateAnonymousId.getValue()] = _anonymousId;
-        message[OperationParam::AuthenticateServiceAuthenticateGameId.getValue()] = m_client->getGameId().c_str();
+        message[OperationParam::AuthenticateServiceAuthenticateGameId.getValue()] = m_client->getAppId().c_str();
         message[OperationParam::AuthenticateServiceAuthenticateReleasePlatform.getValue()] = m_client->getReleasePlatform().c_str();
-        message[OperationParam::AuthenticateServiceAuthenticateGameVersion.getValue()] = m_client->getGameVersion().c_str();
+        message[OperationParam::AuthenticateServiceAuthenticateGameVersion.getValue()] = m_client->getAppVersion().c_str();
         message[OperationParam::AuthenticateServiceAuthenticateBrainCloudVersion.getValue()] = m_client->getBrainCloudClientVersion().c_str();
         if (StringUtil::IsOptionalParameterValid(in_externalAuthName))
         {

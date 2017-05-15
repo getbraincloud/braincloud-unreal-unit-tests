@@ -8,7 +8,7 @@ using namespace BrainCloud;
 TEST_F(TestBCPlayerStatistics, ReadAllPlayerStats)
 {
     TestResult tr;
-    m_bc->getPlayerStatisticsService()->readAllPlayerStats(&tr);
+    m_bc->getPlayerStatisticsService()->readAllUserStats(&tr);
     tr.run(m_bc);
 }
 
@@ -19,15 +19,15 @@ TEST_F(TestBCPlayerStatistics, ReadPlayerStatsSubset)
     std::vector<std::string> stats;
     stats.push_back(m_stat1);
     stats.push_back(m_stat2);
-    
-    m_bc->getPlayerStatisticsService()->readPlayerStatsSubset(stats, &tr);
+
+    m_bc->getPlayerStatisticsService()->readUserStatsSubset(stats, &tr);
     tr.run(m_bc);
 }
 
 TEST_F(TestBCPlayerStatistics, ReadGlobalStatsForCategory)
 {
     TestResult tr;
-    m_bc->getPlayerStatisticsService()->readPlayerStatsForCategory("Test", &tr);
+    m_bc->getPlayerStatisticsService()->readUserStatsForCategory("Test", &tr);
     tr.run(m_bc);
 }
 
@@ -37,14 +37,14 @@ TEST_F(TestBCPlayerStatistics, IncrementPlayerStats)
     Json::FastWriter fw;
     Json::Value stats;
     stats[m_stat1] = "RESET";
-    m_bc->getPlayerStatisticsService()->incrementPlayerStats(fw.write(stats).c_str(), &tr);
+    m_bc->getPlayerStatisticsService()->incrementUserStats(fw.write(stats).c_str(), &tr);
     tr.run(m_bc);
 }
 
 TEST_F(TestBCPlayerStatistics, ResetAllPlayerStats)
 {
     TestResult tr;
-    m_bc->getPlayerStatisticsService()->resetAllPlayerStats(&tr);
+    m_bc->getPlayerStatisticsService()->resetAllUserStats(&tr);
     tr.run(m_bc);
 }
 

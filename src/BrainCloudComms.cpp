@@ -59,7 +59,7 @@ namespace BrainCloud
 	// Public methods
 	////////////////////////////////////////////////////////
 
-	void BrainCloudComms::initialize(const char * serverURL, const char * gameId, const char * secretKey)
+	void BrainCloudComms::initialize(const char * serverURL, const char * appId, const char * secretKey)
 	{
 		_serverUrl = serverURL;
 		_uploadUrl = serverURL;
@@ -69,7 +69,7 @@ namespace BrainCloud
 			_uploadUrl = _uploadUrl.substr(0, index);
 		}
 		_uploadUrl += "/uploader";
-		_gameId = gameId;
+		_gameId = appId;
 		_secretKey = secretKey;
 		_isInitialized = true;
 	}

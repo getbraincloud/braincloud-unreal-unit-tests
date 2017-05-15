@@ -27,7 +27,7 @@ namespace BrainCloud
 		 * @param in_callback The method to be invoked when the server response is received
 		 *
 		 * Errors to watch for:  SWITCHING_PROFILES - this means that the Facebook identity you provided
-		 * already points to a different profile.  You will likely want to offer the player the
+		 * already points to a different profile.  You will likely want to offer the user the
 		 * choice to *SWITCH* to that profile, or *MERGE* the profiles.
 		 *
 		 * To switch profiles, call ClearSavedProfileID() and call AuthenticateFacebook().
@@ -116,12 +116,12 @@ namespace BrainCloud
 		 * Service Name - identity
 		 * Service Operation - Attach
 		 *
-		 * @param in_email The player's e-mail address
-		 * @param in_password The player's password
+		 * @param in_email The user's e-mail address
+		 * @param in_password The user's password
 		 * @param in_callback The method to be invoked when the server response is received
 		 *
 		 * Errors to watch for:  SWITCHING_PROFILES - this means that the email address you provided
-		 * already points to a different profile.  You will likely want to offer the player the
+		 * already points to a different profile.  You will likely want to offer the user the
 		 * choice to *SWITCH* to that profile, or *MERGE* the profiles.
 		 *
 		 * To switch profiles, call ClearSavedProfileID() and then call AuthenticateEmailPassword().
@@ -134,8 +134,8 @@ namespace BrainCloud
 		 * Service Name - identity
 		 * Service Operation - Merge
 		 *
-		 * @param in_email The player's e-mail address
-		 * @param in_password The player's password
+		 * @param in_email The user's e-mail address
+		 * @param in_password The user's password
 		 * @param in_callback The method to be invoked when the server response is received
 		 *
 		 */
@@ -147,7 +147,7 @@ namespace BrainCloud
 		 * Service Name - identity
 		 * Service Operation - Detach
 		 *
-		 * @param in_email The player's e-mail address
+		 * @param in_email The user's e-mail address
 		 * @param in_continueAnon Proceed even if the profile will revert to anonymous?
 		 * @param in_callback The method to be invoked when the server response is received
 		 *
@@ -163,12 +163,12 @@ namespace BrainCloud
 		 * Service Name - identity
 		 * Service Operation - Attach
 		 *
-		 * @param in_userId The player's userid
-		 * @param in_password The player's password
+		 * @param in_userId The user's userid
+		 * @param in_password The user's password
 		 * @param in_callback The method to be invoked when the server response is received
 		 *
 		 * Errors to watch for:  SWITCHING_PROFILES - this means that the email address you provided
-		 * already points to a different profile.  You will likely want to offer the player the
+		 * already points to a different profile.  You will likely want to offer the user the
 		 * choice to *SWITCH* to that profile, or *MERGE* the profiles.
 		 *
 		 * To switch profiles, call ClearSavedProfileID() and then call AuthenticateEmailPassword().
@@ -181,8 +181,8 @@ namespace BrainCloud
 		 * Service Name - identity
 		 * Service Operation - Merge
 		 *
-		 * @param in_userId The player's userid
-		 * @param in_password The player's password
+		 * @param in_userId The user's userid
+		 * @param in_password The user's password
 		 * @param in_callback The method to be invoked when the server response is received
 		 */
 		void mergeUniversalIdentity(const char * in_userId, const char * in_password, IServerCallback * in_callback = NULL);
@@ -193,7 +193,7 @@ namespace BrainCloud
 		 * Service Name - identity
 		 * Service Operation - Detach
 		 *
-		 * @param in_userId The player's userid
+		 * @param in_userId The user's userid
 		 * @param in_continueAnon Proceed even if the profile will revert to anonymous?
 		 * @param in_callback The method to be invoked when the server response is received
 		 *
@@ -210,11 +210,11 @@ namespace BrainCloud
 		 * Service Operation - Attach
 		 *
 		 * @param in_steamId String representation of 64 bit steam id
-		 * @param in_sessionTicket The player's session ticket (hex encoded)
+		 * @param in_sessionTicket The user's session ticket (hex encoded)
 		 * @param in_callback The method to be invoked when the server response is received
 		 *
 		 * Errors to watch for:  SWITCHING_PROFILES - this means that the email address you provided
-		 * already points to a different profile.  You will likely want to offer the player the
+		 * already points to a different profile.  You will likely want to offer the user the
 		 * choice to *SWITCH* to that profile, or *MERGE* the profiles.
 		 *
 		 * To switch profiles, call ClearSavedProfileID() and then call AuthenticateSteam().
@@ -228,7 +228,7 @@ namespace BrainCloud
 		 * Service Operation - Merge
 		 *
 		 * @param in_steamId String representation of 64 bit steam id
-		 * @param in_sessionTicket The player's session ticket (hex encoded)
+		 * @param in_sessionTicket The user's session ticket (hex encoded)
 		 * @param in_callback The method to be invoked when the server response is received
 		 *
 		 */
@@ -262,7 +262,7 @@ namespace BrainCloud
 		 * @param in_callback The method to be invoked when the server response is received
 		 *
 		 * Errors to watch for:  SWITCHING_PROFILES - this means that the Google identity you provided
-		 * already points to a different profile.  You will likely want to offer the player the
+		 * already points to a different profile.  You will likely want to offer the user the
 		 * choice to *SWITCH* to that profile, or *MERGE* the profiles.
 		 *
 		 * To switch profiles, call ClearSavedProfileID() and call AuthenticateGoogle().
@@ -307,12 +307,12 @@ namespace BrainCloud
 		 * Service Operation - Attach
 		 *
 		 * @param in_twitterId The Twitter id of the user
-		 * @param in_authenticationToken The authentication token derrived from the twitter APIs
+		 * @param in_authenticationToken The authentication token derived from the twitter APIs
 		 * @param in_secret The secret given when attempting to link with Twitter
 		 * @param in_callback The method to be invoked when the server response is received
 		 *
 		 * Errors to watch for:  SWITCHING_PROFILES - this means that the Twitter identity you provided
-		 * already points to a different profile.  You will likely want to offer the player the
+		 * already points to a different profile.  You will likely want to offer the user the
 		 * choice to *SWITCH* to that profile, or *MERGE* the profiles.
 		 *
 		 * To switch profiles, call ClearSavedProfileID() and call AuthenticateTwitter().
@@ -327,7 +327,7 @@ namespace BrainCloud
 		 * Service Operation - Merge
 		 *
 		 * @param in_twitterId The Twitter id of the user
-		 * @param in_authenticationToken The authentication token derrived from the twitter APIs
+		 * @param in_authenticationToken The authentication token derived from the twitter APIs
 		 * @param in_secret The secret given when attempting to link with Twitter
 		 * @param in_callback The method to be invoked when the server response is received
 		 *
@@ -362,7 +362,7 @@ namespace BrainCloud
 		* @param in_callback The method to be invoked when the server response is received
 		*
 		* Errors to watch for:  SWITCHING_PROFILES - this means that the Google identity you provided
-		* already points to a different profile.  You will likely want to offer the player the
+		* already points to a different profile.  You will likely want to offer the user the
 		* choice to *SWITCH* to that profile, or *MERGE* the profiles.
 		*
 		* To switch profiles, call ClearSavedProfileID() and call AuthenticateParse().
@@ -408,11 +408,11 @@ namespace BrainCloud
 		 *
 		 * @param in_childProfileId The profileId of the child profile to switch to
 		 * If null and forceCreate is true a new profile will be created
-		 * @param in_childGameId The appId of the child game to switch to
+		 * @param in_childAppId The appId of the child app to switch to
 		 * @param in_forceCreate Should a new profile be created if it does not exist?
 		 * @param in_callback The method to be invoked when the server response is received
 		 */
-		void switchToChildProfile(const char * in_childProfileId, const char * in_childGameId, bool in_forceCreate, IServerCallback * in_callback = NULL);
+		void switchToChildProfile(const char * in_childProfileId, const char * in_childAppId, bool in_forceCreate, IServerCallback * in_callback = NULL);
 
 		/**
 		 * Switches to a child profile of an app when only one profile exists
@@ -421,11 +421,11 @@ namespace BrainCloud
 		 * Service Name - identity
 		 * Service Operation - SWITCH_TO_CHILD_PROFILE
 		 *
-		 * @param in_childGameId The App ID of the child game to switch to
+		 * @param in_childAppId The App ID of the child app to switch to
 		 * @param in_forceCreate Should a new profile be created if it does not exist?
 		 * @param in_callback The method to be invoked when the server response is received
 		 */
-		void switchToSingletonChildProfile(const char * in_childGameId, bool in_forceCreate, IServerCallback * in_callback = NULL);
+		void switchToSingletonChildProfile(const char * in_childAppId, bool in_forceCreate, IServerCallback * in_callback = NULL);
 
 		/**
 		 * Switch to a Parent Profile
@@ -471,7 +471,7 @@ namespace BrainCloud
 		void getExpiredIdentities(IServerCallback * in_callback = NULL);
 
 		/**
-		* Refreshes an identity for this player
+		* Refreshes an identity for this user
 		*
 		* Service Name - identity
 		* Service Operation - REFRESH_IDENTITY
@@ -502,7 +502,7 @@ namespace BrainCloud
 			const char * in_externalAuthName, bool in_forceCreate, IServerCallback * in_callback = NULL);
 
 		/**
-		 * Detaches parent from this player's profile
+		 * Detaches parent from this user's profile
 		 *
 		 * Service Name - identity
 		 * Service Operation - DETACH_PARENT
@@ -514,7 +514,7 @@ namespace BrainCloud
 		void detachParent(IServerCallback * in_callback = NULL);
 
 		/**
-		 * Attaches a peer identity to this player's profile
+		 * Attaches a peer identity to this user's profile
 		 *
 		 * Service Name - identity
 		 * Service Operation - ATTACH_PEER_PROFILE
@@ -533,7 +533,7 @@ namespace BrainCloud
 			const char * in_externalAuthName, bool in_forceCreate, IServerCallback * in_callback = NULL);
 
 		/**
-		 * Detaches a peer identity from this player's profile
+		 * Detaches a peer identity from this user's profile
 		 *
 		 * Service Name - identity
 		 * Service Operation - DETACH_PEER
@@ -560,7 +560,7 @@ namespace BrainCloud
 	private:
 		BrainCloudClient * m_client;
 
-		void switchToChildProfile(const char * in_childProfileId, const char * in_childGameId, bool in_forceCreate, bool in_forceSingleton, IServerCallback * in_callback = NULL);
+		void switchToChildProfile(const char * in_childProfileId, const char * in_childAppId, bool in_forceCreate, bool in_forceSingleton, IServerCallback * in_callback = NULL);
 
 		void attachIdentity(const char * in_externalId, const char * in_authenticationToken, AuthenticationType in_authenticationType, IServerCallback * in_callback = NULL);
 		void mergeIdentity(const char * in_externalId, const char * in_authenticationToken, AuthenticationType in_authenticationType, IServerCallback * in_callback = NULL);

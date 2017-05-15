@@ -8,7 +8,7 @@ using namespace BrainCloud;
 TEST_F(TestBCPlayerStatisticsEvent, TriggerPlayerStatisticsEvent)
 {
     TestResult tr;
-    m_bc->getPlayerStatisticsEventService()->triggerPlayerStatisticsEvent(m_eventId01, 10, &tr);
+    m_bc->getPlayerStatisticsEventService()->triggerStatsEvent(m_eventId01, 10, &tr);
     tr.run(m_bc);
 }
 
@@ -27,8 +27,8 @@ TEST_F(TestBCPlayerStatisticsEvent, TriggerPlayerStatisticsEvents)
     event["eventName"] = m_eventId02;
     event["eventMultiplier"] = 10;
     eventArray.append(event);
-          
-    m_bc->getPlayerStatisticsEventService()->triggerPlayerStatisticsEvents(fw.write(eventArray).c_str(), &tr);
+
+    m_bc->getPlayerStatisticsEventService()->triggerStatsEvents(fw.write(eventArray).c_str(), &tr);
     tr.run(m_bc);
 }
 
@@ -39,8 +39,8 @@ TEST_F(TestBCPlayerStatisticsEvent, RewardHandlerTriggerStatisticsEvents)
     TestResult tr;
     Json::FastWriter fw;
     Json::Value eventArray(Json::arrayValue);
-    
-    m_bc->getPlayerStateService()->resetPlayerState(&tr);
+
+    m_bc->getPlayerStateService()->resetUserState(&tr);
     tr.run(m_bc);
     
     Json::Value event;
@@ -54,7 +54,7 @@ TEST_F(TestBCPlayerStatisticsEvent, RewardHandlerTriggerStatisticsEvents)
     eventArray.append(event);
     
     m_bc->registerRewardCallback(this);
-    m_bc->getPlayerStatisticsEventService()->triggerPlayerStatisticsEvents(fw.write(eventArray).c_str(), &tr);
+    m_bc->getPlayerStatisticsEventService()->triggerStatsEvents(fw.write(eventArray).c_str(), &tr);
     tr.run(m_bc, true);
     
     // sleep a bit... to let threaded comms trigger the reward callback
@@ -72,8 +72,8 @@ TEST_F(TestBCPlayerStatisticsEvent, RewardHandlerMultipleApiCallsInBundle)
     TestResult tr;
     Json::FastWriter fw;
     Json::Value eventArray(Json::arrayValue);
-    
-    m_bc->getPlayerStateService()->resetPlayerState(&tr);
+
+    m_bc->getPlayerStateService()->resetUserState(&tr);
     tr.run(m_bc);
     
     Json::Value event;
@@ -82,15 +82,15 @@ TEST_F(TestBCPlayerStatisticsEvent, RewardHandlerMultipleApiCallsInBundle)
     eventArray.append(event);
     
     m_bc->registerRewardCallback(this);
-    m_bc->getPlayerStatisticsEventService()->triggerPlayerStatisticsEvents(fw.write(eventArray).c_str(), &tr);
+    m_bc->getPlayerStatisticsEventService()->triggerStatsEvents(fw.write(eventArray).c_str(), &tr);
     
     eventArray.clear();
     event.clear();
     event["eventName"] = "incQuest2Stat";
     event["eventMultiplier"] = 1;
     eventArray.append(event);
-    
-    m_bc->getPlayerStatisticsEventService()->triggerPlayerStatisticsEvents(fw.write(eventArray).c_str(), &tr);
+
+    m_bc->getPlayerStatisticsEventService()->triggerStatsEvents(fw.write(eventArray).c_str(), &tr);
     tr.runExpectCount(m_bc, 2, true);
     
     // sleep a bit... to let threaded comms trigger the reward callback

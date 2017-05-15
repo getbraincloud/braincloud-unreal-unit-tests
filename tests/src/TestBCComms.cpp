@@ -282,11 +282,11 @@ TEST_F(TestBCComms, MessageBundleMarker)
 	m_bc->getAuthenticationService()->authenticateUniversal(GetUser(UserA)->m_id, GetUser(UserA)->m_password, true, &tr);
 	m_bc->insertEndOfMessageBundleMarker();
 
-	m_bc->getPlayerStatisticsService()->readAllPlayerStats(&tr);
+    m_bc->getPlayerStatisticsService()->readAllUserStats(&tr);
 	m_bc->insertEndOfMessageBundleMarker();
 
-	m_bc->getPlayerStatisticsService()->readAllPlayerStats(&tr);
-	m_bc->getPlayerStatisticsService()->readAllPlayerStats(&tr);
+    m_bc->getPlayerStatisticsService()->readAllUserStats(&tr);
+    m_bc->getPlayerStatisticsService()->readAllUserStats(&tr);
 	m_bc->insertEndOfMessageBundleMarker();
 
 	tr.run(m_bc);

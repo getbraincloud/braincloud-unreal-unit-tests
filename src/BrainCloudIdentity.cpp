@@ -143,14 +143,14 @@ namespace BrainCloud
 		detachIdentity(in_parseId, AuthenticationType::Parse, in_continueAnon, in_callback);
 	}
 
-	void BrainCloudIdentity::switchToChildProfile(const char * in_childProfileId, const char * in_childGameId, bool in_forceCreate, IServerCallback * in_callback)
+	void BrainCloudIdentity::switchToChildProfile(const char * in_childProfileId, const char * in_childAppId, bool in_forceCreate, IServerCallback * in_callback)
 	{
-		switchToChildProfile(in_childProfileId, in_childGameId, in_forceCreate, false, in_callback);
+		switchToChildProfile(in_childProfileId, in_childAppId, in_forceCreate, false, in_callback);
 	}
 
-	void BrainCloudIdentity::switchToSingletonChildProfile(const char * in_childGameId, bool in_forceCreate, IServerCallback * in_callback)
+	void BrainCloudIdentity::switchToSingletonChildProfile(const char * in_childAppId, bool in_forceCreate, IServerCallback * in_callback)
 	{
-		switchToChildProfile(NULL, in_childGameId, in_forceCreate, true, in_callback);
+		switchToChildProfile(NULL, in_childAppId, in_forceCreate, true, in_callback);
 	}
 
 	void BrainCloudIdentity::switchToParentProfile(const char * in_parentLevelName, IServerCallback * in_callback)
@@ -254,7 +254,7 @@ namespace BrainCloud
 
 	// Private methods
 
-	void BrainCloudIdentity::switchToChildProfile(const char * in_childProfileId, const char * in_childGameId, bool in_forceCreate, bool in_forceSingleton, IServerCallback * in_callback)
+	void BrainCloudIdentity::switchToChildProfile(const char * in_childProfileId, const char * in_childAppId, bool in_forceCreate, bool in_forceSingleton, IServerCallback * in_callback)
 	{
 		BrainCloudClient * brainCloudClientRef = m_client;
 		Json::Value message;
@@ -263,7 +263,7 @@ namespace BrainCloud
 			message[OperationParam::AuthenticateServiceAuthenticateProfileId.getValue()] = in_childProfileId;
 		}
 
-		message[OperationParam::AuthenticateServiceAuthenticateGameId.getValue()] = in_childGameId;
+		message[OperationParam::AuthenticateServiceAuthenticateGameId.getValue()] = in_childAppId;
 		message[OperationParam::AuthenticateServiceAuthenticateForceCreate.getValue()] = in_forceCreate;
 		message[OperationParam::IdentityServiceForceSingleton.getValue()] = in_forceSingleton;
 

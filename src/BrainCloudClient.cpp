@@ -79,7 +79,7 @@ namespace BrainCloud {
 		_timeService(new BrainCloudTime(this)),
 		_tournamentService(new BrainCloudTournament(this)),
 		_releasePlatform(""),
-		_version(""),
+		_appVersion(""),
 		_timezoneOffset(0.0)
 	{
 		//#ifdef PTW32_STATIC_LIB
@@ -100,7 +100,7 @@ namespace BrainCloud {
 		return(_brainCloudComms->getSessionId().c_str());
 	}
 
-	void BrainCloudClient::initialize(const char * in_serverURL, const char * in_secretKey, const char * in_appId, const char * in_version)
+	void BrainCloudClient::initialize(const char * in_serverURL, const char * in_secretKey, const char * in_appId, const char * in_appVersion)
 	{
 		std::string error = "";
 		if (in_serverURL == NULL || strlen(in_serverURL) <= 0)
@@ -108,9 +108,9 @@ namespace BrainCloud {
 		else if (in_secretKey == NULL || strlen(in_secretKey) <= 0)
 			error = "secretKey was null or empty";
 		else if (in_appId == NULL || strlen(in_appId) <= 0)
-			error = "gameId was null or empty";
-		else if (in_version == NULL || strlen(in_version) <= 0)
-			error = "gameVersion was null or empty";
+			error = "appId was null or empty";
+		else if (in_appVersion == NULL || strlen(in_appVersion) <= 0)
+			error = "appVersion was null or empty";
 
 		if (error.length() > 0)
 		{
@@ -214,7 +214,7 @@ namespace BrainCloud {
 #error "Unknown platform!"
 #endif
 
-		_version = in_version;
+		_appVersion = in_appVersion;
 	}
 
 	void BrainCloudClient::initializeIdentity(const char * in_profileId, const char * in_anonymousId)

@@ -38,7 +38,7 @@ namespace BrainCloud
     {
     }
 
-    void BrainCloudComms2::initialize(const char * serverURL, const char * gameId, const char * secretKey)
+    void BrainCloudComms2::initialize(const char * serverURL, const char * appId, const char * secretKey)
     {
 #ifdef VERBOSE
         std::cout << "Entering initialize(), initialized:" << _isInitialized << std::endl;
@@ -59,7 +59,7 @@ namespace BrainCloud
                 _uploadUrl = _uploadUrl.substr(0, index);
             }
             _uploadUrl += "/uploader";
-            _gameId = gameId;
+            _appId = appId;
             _secretKey = secretKey;
 
             _processQueue = std::thread(&BrainCloudComms2::processQueue, this);
@@ -478,7 +478,7 @@ namespace BrainCloud
         _expectedPacketId = _packetId++;
         Json::Value allMessages;
         allMessages["messages"] = messages;
-        allMessages["gameId"] = _gameId;
+        allMessages["gameId"] = _appId;
         allMessages["sessionId"] = _sessionId;
         allMessages["packetId"] = _expectedPacketId;
 
