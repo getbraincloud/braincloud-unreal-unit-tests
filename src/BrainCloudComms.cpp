@@ -69,7 +69,7 @@ namespace BrainCloud
 			_uploadUrl = _uploadUrl.substr(0, index);
 		}
 		_uploadUrl += "/uploader";
-		_gameId = appId;
+		_appId = appId;
 		_secretKey = secretKey;
 		_isInitialized = true;
 	}
@@ -970,7 +970,7 @@ namespace BrainCloud
 
 			Json::Value allMessages;
 			allMessages["messages"] = messages;
-			allMessages["gameId"] = _gameId;
+			allMessages["gameId"] = _appId;
 			allMessages["sessionId"] = _sessionId;
 			allMessages["packetId"] = (Json::Int64) _expectedPacketId;
 
