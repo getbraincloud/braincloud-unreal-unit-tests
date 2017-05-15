@@ -33,7 +33,7 @@ namespace BrainCloud {
          *
          * @param in_serverURL The url to the brainCloud server
          * @param in_secretKey The secret key for your app
-         * @param in_gameId The app id
+         * @param in_appId The app id
          * @param in_version The app version
          * @param in_companyName The company name used in the keychain for storing anonymous and profile ids.
          * You are free to pick anything you want.
