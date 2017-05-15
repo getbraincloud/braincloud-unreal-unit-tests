@@ -91,7 +91,7 @@ namespace BrainCloud
 		* @deprecated Use readFriendUserState() instead - Removal after September 1 2017
 		*/
 		DEPRECATED
-		void readFriendUserState(const char * in_friendId, IServerCallback * in_callback = NULL);
+		void readFriendPlayerState(const char * in_friendId, IServerCallback * in_callback = NULL);
 		
 		/**
 		 * Read a friend's user state.

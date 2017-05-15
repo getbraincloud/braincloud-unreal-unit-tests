@@ -319,9 +319,9 @@ namespace BrainCloud
 		/**
 		* @deprecated Use getAppVersion() instead - Removal after September 1 2017
 		*/
-		const std::string & getGameVersion() const { return _appVersion; }
-		
 		DEPRECATED
+		const std::string & getGameVersion() const { return _appVersion; }
+
 		const std::string & getAppVersion() const { return _appVersion; };
 		
 
