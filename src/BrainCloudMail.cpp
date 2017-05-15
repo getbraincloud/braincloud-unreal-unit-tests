@@ -39,4 +39,16 @@ namespace BrainCloud
 		ServerCall * sc = new ServerCall(ServiceName::Mail, ServiceOperation::SendAdvancedEmail, message, in_callback);
 		m_client->sendRequest(sc);
 	}
+
+	void BrainCloudMail::sendAdvancedEmailByAddress(const char * in_emailAddress, const std::string & in_jsonServiceParams, IServerCallback * in_callback)
+	{
+		Json::Value message;
+		message[OperationParam::EmailAddress.getValue()] = in_emailAddress;
+
+		Json::Value jsonData = JsonUtil::jsonStringToValue(in_jsonServiceParams);
+		message[OperationParam::ServiceParams.getValue()] = jsonData;
+
+		ServerCall * sc = new ServerCall(ServiceName::Mail, ServiceOperation::SendAdvancedEmailByAddress, message, in_callback);
+		m_client->sendRequest(sc);
+	}
 }
