@@ -98,7 +98,7 @@ void UBCClientProxy::SetUploadLowTransferRateThreshold(int32 bytesPerSec)
 //Getters
 const FString & UBCClientProxy::GetGameId()
 {
-	return BrainCloudClient::getInstance()->getGameId();
+	return BrainCloudClient::getInstance()->getAppId();
 }
 
 const FString & UBCClientProxy::GetReleasePlatform()
@@ -108,7 +108,7 @@ const FString & UBCClientProxy::GetReleasePlatform()
 
 const FString & UBCClientProxy::GetGameVersion()
 {
-	return BrainCloudClient::getInstance()->getGameVersion();
+	return BrainCloudClient::getInstance()->getAppVersion();
 }
 
 const FString & UBCClientProxy::GetBrainCloudClientVersion()

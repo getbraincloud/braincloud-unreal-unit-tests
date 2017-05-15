@@ -124,7 +124,7 @@ public:
     * Param - entityId The ID of the entity that will be retrieved
     */
     UFUNCTION(BlueprintCallable, meta = (BlueprintInternalUseOnly = "true"), Category = "BrainCloud|Entity")
-        static UBCEntityProxy* GetSharedEntityForPlayerId(const FString& playerId, const FString& entityId);
+        static UBCEntityProxy* GetSharedEntityForPlayerId(const FString& profileId, const FString& entityId);
 
     /**
     * Method returns all shared entities for the given player id.
@@ -137,7 +137,7 @@ public:
     * Param - playerId The player id to retrieve shared entities for
     */
     UFUNCTION(BlueprintCallable, meta = (BlueprintInternalUseOnly = "true"), Category = "BrainCloud|Entity")
-        static UBCEntityProxy* GetSharedEntitiesForPlayerId(const FString& playerId);
+        static UBCEntityProxy* GetSharedEntitiesForPlayerId(const FString& profileId);
 
     /**
     * Method updates a shared entity owned by another player. This operation results in the entity
@@ -152,7 +152,7 @@ public:
     * Param - jsonEntityData    The entity's data as a json string.
     */
     UFUNCTION(BlueprintCallable, meta = (BlueprintInternalUseOnly = "true"), Category = "BrainCloud|Entity")
-        static UBCEntityProxy* UpdateSharedEntity(const FString& entityId, const FString& targetPlayerId, const FString& entityType, const FString& jsonEntityData);
+        static UBCEntityProxy* UpdateSharedEntity(const FString& entityId, const FString& targetProfileId, const FString& entityType, const FString& jsonEntityData);
 
     /**
     * Method gets list of entities from the server base on type and/or where clause
@@ -229,7 +229,7 @@ public:
 	* Param - jsonData The entity's data object
 	*/
 	UFUNCTION(BlueprintCallable, meta = (BlueprintInternalUseOnly = "true"), Category = "BrainCloud|Entity")
-		static UBCEntityProxy* IncrementSharedUserEntityData(const FString& entityId, const FString& targetPlayerId, const FString& jsonData);
+		static UBCEntityProxy* IncrementSharedUserEntityData(const FString& entityId, const FString& targetProfileId, const FString& jsonData);
 
     /**
     * Method gets list of shared entities for the specified player based on type and/or where clause
@@ -243,7 +243,7 @@ public:
     * @param maxReturn The maximum number of entities to return
     */
     UFUNCTION(BlueprintCallable, meta = (BlueprintInternalUseOnly = "true"), Category = "BrainCloud|Entity")
-        static UBCEntityProxy* GetSharedEntitiesListForPlayerId(const FString& playerId, const FString& whereJson, const FString& orderByJson, int32 maxReturn);
+        static UBCEntityProxy* GetSharedEntitiesListForPlayerId(const FString& profileId, const FString& whereJson, const FString& orderByJson, int32 maxReturn);
 
     //Response delegates
     UPROPERTY(BlueprintAssignable)

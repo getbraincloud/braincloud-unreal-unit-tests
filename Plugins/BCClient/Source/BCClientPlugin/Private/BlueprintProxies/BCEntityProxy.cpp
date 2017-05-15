@@ -67,24 +67,24 @@ UBCEntityProxy* UBCEntityProxy::GetEntitiesByType(const FString& entityType)
     return Proxy;
 }
 
-UBCEntityProxy* UBCEntityProxy::GetSharedEntityForPlayerId(const FString& playerId, const FString& entityId)
+UBCEntityProxy* UBCEntityProxy::GetSharedEntityForPlayerId(const FString& profileId, const FString& entityId)
 {
     UBCEntityProxy* Proxy = NewObject<UBCEntityProxy>();
-    BrainCloudClient::getInstance()->getEntityService()->getSharedEntityForPlayerId(playerId, entityId, Proxy);
+    BrainCloudClient::getInstance()->getEntityService()->getSharedEntityForProfileId(profileId, entityId, Proxy);
     return Proxy;
 }
 
-UBCEntityProxy* UBCEntityProxy::GetSharedEntitiesForPlayerId(const FString& playerId)
+UBCEntityProxy* UBCEntityProxy::GetSharedEntitiesForPlayerId(const FString& profileId)
 {
     UBCEntityProxy* Proxy = NewObject<UBCEntityProxy>();
-    BrainCloudClient::getInstance()->getEntityService()->getSharedEntitiesForPlayerId(playerId, Proxy);
+    BrainCloudClient::getInstance()->getEntityService()->getSharedEntitiesForProfileId(profileId, Proxy);
     return Proxy;
 }
 
-UBCEntityProxy* UBCEntityProxy::UpdateSharedEntity(const FString& entityId, const FString& targetPlayerId, const FString& entityType, const FString& jsonEntityData)
+UBCEntityProxy* UBCEntityProxy::UpdateSharedEntity(const FString& entityId, const FString& targetProfileId, const FString& entityType, const FString& jsonEntityData)
 {
     UBCEntityProxy* Proxy = NewObject<UBCEntityProxy>();
-    BrainCloudClient::getInstance()->getEntityService()->updateSharedEntity(entityId, targetPlayerId, entityType, jsonEntityData, Proxy);
+    BrainCloudClient::getInstance()->getEntityService()->updateSharedEntity(entityId, targetProfileId, entityType, jsonEntityData, Proxy);
     return Proxy;
 }
 
@@ -123,17 +123,17 @@ UBCEntityProxy * UBCEntityProxy::IncrementUserEntityData(const FString & entityI
     return Proxy;
 }
 
-UBCEntityProxy * UBCEntityProxy::IncrementSharedUserEntityData(const FString & entityId, const FString & targetPlayerId, const FString & jsonData)
+UBCEntityProxy * UBCEntityProxy::IncrementSharedUserEntityData(const FString & entityId, const FString & targetProfileId, const FString & jsonData)
 {
 	UBCEntityProxy* Proxy = NewObject<UBCEntityProxy>();
-	BrainCloudClient::getInstance()->getEntityService()->incrementSharedUserEntityData(entityId, targetPlayerId, jsonData, Proxy);
+	BrainCloudClient::getInstance()->getEntityService()->incrementSharedUserEntityData(entityId, targetProfileId, jsonData, Proxy);
 	return Proxy;
 }
 
-UBCEntityProxy* UBCEntityProxy::GetSharedEntitiesListForPlayerId(const FString& playerId, const FString& whereJson, const FString& orderByJson, int32 maxReturn)
+UBCEntityProxy* UBCEntityProxy::GetSharedEntitiesListForPlayerId(const FString& profileId, const FString& whereJson, const FString& orderByJson, int32 maxReturn)
 {
     UBCEntityProxy* Proxy = NewObject<UBCEntityProxy>();
-    BrainCloudClient::getInstance()->getEntityService()->getSharedEntitiesListForPlayerId(playerId, whereJson, orderByJson, maxReturn, Proxy);
+    BrainCloudClient::getInstance()->getEntityService()->getSharedEntitiesListForProfileId(profileId, whereJson, orderByJson, maxReturn, Proxy);
     return Proxy;
 }
 

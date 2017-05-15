@@ -20,7 +20,7 @@ public:
 	BrainCloudComms(BrainCloudClient* client);
 	~BrainCloudComms();
 
-	void Initialize(const FString& serverURL, const FString& secretKey, const FString& gameId);
+	void Initialize(const FString& serverURL, const FString& secretKey, const FString& appId);
 	void EnableLogging(bool shouldEnable) { _isLoggingEnabled = shouldEnable; };
 
 	void AddToQueue(ServerCall *);
@@ -130,7 +130,7 @@ private:
 
 	FString _serverUrl;
 	FString _secretKey;
-	FString _gameId;
+	FString _appId;
 	FString _uploadUrl;
 
 	IEventCallback * _eventCallback = nullptr;

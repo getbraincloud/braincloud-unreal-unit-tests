@@ -10,11 +10,14 @@ OperationParam::OperationParam(const FString& operation)
 
 	//Push Notification Service - Send Params
 	const OperationParam OperationParam::PushNotificationSendParamToPlayerId = OperationParam(TEXT("toPlayerId"));
+	const OperationParam OperationParam::PushNotificationSendParamProfileId = OperationParam(TEXT("profileId"));
 	const OperationParam OperationParam::PushNotificationSendParamMessage = OperationParam(TEXT("message"));
 	const OperationParam OperationParam::PushNotificationSendParamNotificationTemplateId = OperationParam(TEXT("notificationTemplateId"));
 	const OperationParam OperationParam::PushNotificationSendParamSubstitution = OperationParam(TEXT("substitutions"));
 	const OperationParam OperationParam::AlertContent = OperationParam(TEXT("alertContent"));
 	const OperationParam OperationParam::CustomData = OperationParam(TEXT("customData"));
+	const OperationParam OperationParam::StartTimeUTC = OperationParam(TEXT("startDateUTC"));
+	const OperationParam OperationParam::MinutesFromNow = OperationParam(TEXT("minutesFromNow"));
 
 	//Push Notification Service - Register Params
 	const OperationParam OperationParam::PushNotificationRegisterParamDeviceType = OperationParam(TEXT("deviceType"));

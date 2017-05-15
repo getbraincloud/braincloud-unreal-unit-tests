@@ -47,7 +47,7 @@ public:
 	/**
 	* Retrieves the external ID for the specified user profile ID on the specified social platform.
 	*
-	* @param profileId Profile (player) ID.
+	* @param profileId User's Profile ID.
 	* @param authenticationType Associated authentication type.
 	* @param callback Method to be invoked when the server response is received.
 	*/
@@ -77,7 +77,12 @@ public:
 	void readFriendsEntities(const FString& entityType, IServerCallback * callback = nullptr);
 
 	/**
-	* Read a friend's player state.
+	* @deprecated Use readFriendUserState instead - removal after September 1 2017
+	*/
+	void readFriendPlayerState(const FString& friendId, IServerCallback * callback = nullptr);
+	
+	/**
+	* Read a friend's user state.
 	*
 	* Service Name - PlayerState
 	* Service Operation - ReadFriendsPlayerState
@@ -85,21 +90,21 @@ public:
 	* @param friendId Target friend
 	* @param callback Method to be invoked when the server response is received.
 	*/
-	void readFriendPlayerState(const FString& friendId, IServerCallback * callback = nullptr);
+	void readFriendUserState(const FString& friendId, IServerCallback * callback = nullptr);
 
 	/**
-	* Returns player state of a particular user.
+	* Returns user state of a particular user.
 	*
 	* Service Name - Friend
 	* Service Operation - GET_SUMMARY_DATA_FOR_PROFILE_ID
 	*
-	* @param profileId Profile Id of player to retrieve player state for.
+	* @param profileId Profile Id of user to retrieve user state for.
 	* @param callback Method to be invoked when the server response is received.
 	*/
 	void getSummaryDataForProfileId(const FString& profileId, IServerCallback * callback = nullptr);
 
 	/**
-	* Finds a list of players matching the search text by performing an exact match search
+	* Finds a list of users matching the search text by performing an exact match search
 	*
 	* Service Name - friend
 	* Service Operation - FIND_USERS_BY_EXACT_NAME
@@ -111,8 +116,8 @@ public:
 	void findUsersByExactName(const FString& searchText, int32 maxResults, IServerCallback * callback = nullptr);
 
 	/**
-	* Finds a list of players matching the search text by performing a substring
-	* search of all player names.
+	* Finds a list of users matching the search text by performing a substring
+	* search of all user names.
 	*
 	* Service Name - friend
 	* Service Operation - FIND_USERS_BY_SUBSTR_NAME
@@ -124,6 +129,11 @@ public:
 	void findUsersBySubstrName(const FString& searchText, int32 maxResults, IServerCallback * callback = nullptr);
 
 	/**
+	* @deprecated Use findUserByUniversalId instead - removal after September 1 2017
+	*/
+	void findPlayerByUniversalId(const FString& searchText, int32 maxResults, IServerCallback * callback = nullptr);
+
+	/**
 	* Retrieves profile information for the partial matches of the specified text.
 	*
 	* Service Name - Friend
@@ -132,10 +142,10 @@ public:
 	* @param searchText Universal ID text on which to search.
 	* @param maxResults Maximum number of results to return.
 	*/
-	void findPlayerByUniversalId(const FString& searchText, int32 maxResults, IServerCallback * callback = nullptr);
+	void findUserByUniversalId(const FString& searchText, int32 maxResults, IServerCallback * callback = nullptr);
 
 	/**
-	* Retrieves a list of player and friend platform information for all friends of the current player.
+	* Retrieves a list of user and friend platform information for all friends of the current user.
 	*
 	* Service Name - Friend
 	* Service Operation - LIST_FRIENDS
@@ -147,23 +157,23 @@ public:
 	void listFriends(EFriendPlatform friendPlatform, bool includeSummaryData, IServerCallback * callback = nullptr);
 
 	/**
-	* Links the current player and the specified players as brainCloud friends.
+	* Links the current user and the specified users as brainCloud friends.
 	*
 	* Service Name - Friend
 	* Service Operation - ADD_FRIENDS
 	*
-	* @param profileIds Collection of player IDs.
+	* @param profileIds Collection of profile IDs.
 	* @param callback Method to be invoked when the server response is received.
 	*/
 	void addFriends(const TArray<FString>& profileIds, IServerCallback * callback = nullptr);
 
 	/**
-	* Unlinks the current player and the specified players as brainCloud friends.
+	* Unlinks the current user and the specified users as brainCloud friends.
 	*
 	* Service Name - Friend
 	* Service Operation - REMOVE_FRIENDS
 	*
-	* @param profileIds Collection of player IDs.
+	* @param profileIds Collection of profile IDs.
 	* @param callback Method to be invoked when the server response is received.
 	*/
 	void removeFriends(const TArray<FString>& profileIds, IServerCallback * callback = nullptr);
