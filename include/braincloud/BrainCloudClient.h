@@ -93,9 +93,9 @@ namespace BrainCloud
 		 *     Currently this should be:  https://sharedprod.braincloudservers.com/dispatcherv2
 		 * @param in_secretKey The secret key for your game
 		 * @param in_appId The app id
-		 * @param in_version The version
+		 * @param in_appVersion The version
 		 */
-		void initialize(const char * in_serverURL, const char * in_secretKey, const char * in_appId, const char * in_version);
+		void initialize(const char * in_serverURL, const char * in_secretKey, const char * in_appId, const char * in_appVersion);
 
 		/**
 		* Initialize - initializes the identity service with the saved
