@@ -349,6 +349,7 @@ OperationParam::OperationParam(const FString& operation)
 	const OperationParam OperationParam::GroupWhere = OperationParam(TEXT("where"));
 
 	const OperationParam OperationParam::ProfileId = OperationParam(TEXT("profileId"));
+	const OperationParam OperationParam::EmailAddress = OperationParam(TEXT("emailAddress"));
 	const OperationParam OperationParam::Subject = OperationParam(TEXT("subject"));
 	const OperationParam OperationParam::Body = OperationParam(TEXT("body"));
 	const OperationParam OperationParam::ServiceParams = OperationParam(TEXT("serviceParams"));

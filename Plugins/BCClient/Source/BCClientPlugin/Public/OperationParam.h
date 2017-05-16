@@ -349,6 +349,7 @@ public:
 
 	//mail
 	static const OperationParam ProfileId;
+	static const OperationParam EmailAddress;
 	static const OperationParam Subject;
 	static const OperationParam Body;
 	static const OperationParam ServiceParams;
