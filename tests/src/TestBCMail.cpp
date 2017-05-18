@@ -33,7 +33,7 @@ TEST_F(TestBCMail, SendAdvancedEmail)
 	tr.run(m_bc);
 }
 
-TEST_F(TestBCMail, SendAdvancedEmailByAddres)
+TEST_F(TestBCMail, SendAdvancedEmailByAddress)
 {
 	TestResult tr;
 	Json::FastWriter fw;

@@ -126,11 +126,11 @@ namespace BrainCloud
 		m_client->getBrainCloudComms()->addToQueue(sc);
 	}
 
-	void BrainCloudPushNotification::scheduleRichPushNotificationUTC(const char * in_toProfileId, std::string in_notificationTemplateId, std::string in_substitutionsJson, int32_t in_startTime, IServerCallback * in_callback)
+	void BrainCloudPushNotification::scheduleRichPushNotificationUTC(const char * in_toProfileId, int32_t in_notificationTemplateId, std::string in_substitutionsJson, int32_t in_startTime, IServerCallback * in_callback)
 	{
 		Json::Value message;
 		message[OperationParam::ProfileId.getValue()] = in_toProfileId;
-		message[OperationParam::PushNotificationSendParamNotificationTemplateId.getValue()] = JsonUtil::jsonStringToValue(in_notificationTemplateId);
+		message[OperationParam::PushNotificationSendParamNotificationTemplateId.getValue()] = in_notificationTemplateId;
 
 		if (StringUtil::IsOptionalParameterValid(in_substitutionsJson)) {
 			message[OperationParam::PushNotificationSendParamSubstitution.getValue()] = JsonUtil::jsonStringToValue(in_substitutionsJson);
@@ -142,11 +142,11 @@ namespace BrainCloud
 		m_client->getBrainCloudComms()->addToQueue(sc);
 	}
 
-	void BrainCloudPushNotification::scheduleRichPushNotificationMinutes(const char * in_toProfileId, std::string in_notificationTemplateId, std::string in_substitutionsJson, int32_t in_minutesFromNow, IServerCallback * in_callback)
+	void BrainCloudPushNotification::scheduleRichPushNotificationMinutes(const char * in_toProfileId, int32_t in_notificationTemplateId, std::string in_substitutionsJson, int32_t in_minutesFromNow, IServerCallback * in_callback)
 	{
 		Json::Value message;
 		message[OperationParam::ProfileId.getValue()] = in_toProfileId;
-		message[OperationParam::PushNotificationSendParamNotificationTemplateId.getValue()] = JsonUtil::jsonStringToValue(in_notificationTemplateId);
+		message[OperationParam::PushNotificationSendParamNotificationTemplateId.getValue()] = in_notificationTemplateId;
 
 		if (StringUtil::IsOptionalParameterValid(in_substitutionsJson)) {
 			message[OperationParam::PushNotificationSendParamSubstitution.getValue()] = JsonUtil::jsonStringToValue(in_substitutionsJson);

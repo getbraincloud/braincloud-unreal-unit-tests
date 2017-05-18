@@ -133,7 +133,7 @@ namespace BrainCloud
 		* @param in_startTime Start time of sending the push notification
 		* @param in_callback The method to be invoked when the server response is received
 		*/
-		void scheduleRichPushNotificationUTC(const char * in_toProfileId, std::string in_notificationTemplateId, std::string in_substitutionsJson, int32_t in_startTime, IServerCallback * in_callback = NULL);
+		void scheduleRichPushNotificationUTC(const char * in_toProfileId, int32_t in_notificationTemplateId, std::string in_substitutionsJson, int32_t in_startTime, IServerCallback * in_callback = NULL);
 
 		/**
 		* Schedules a rich push notification to a user
@@ -144,7 +144,7 @@ namespace BrainCloud
 		* @param in_minutesFromNow Minutes from now to send the push notification
 		* @param in_callback The method to be invoked when the server response is received
 		*/
-		void scheduleRichPushNotificationMinutes(const char * in_toProfileId, std::string in_notificationTemplateId, std::string in_substitutionsJson, int32_t in_minutesFromNow, IServerCallback * in_callback = NULL);
+		void scheduleRichPushNotificationMinutes(const char * in_toProfileId, int32_t in_notificationTemplateId, std::string in_substitutionsJson, int32_t in_minutesFromNow, IServerCallback * in_callback = NULL);
 
 		/**
 		* Sends a notification to a user consisting of alert content and custom data.
