@@ -343,6 +343,7 @@ namespace BrainCloud
 	const OperationParam OperationParam::GroupWhere = OperationParam("where");
 
 	//mail
+	const OperationParam OperationParam::EmailAddress = OperationParam("emailAddress");
 	const OperationParam OperationParam::Subject = OperationParam("subject");
 	const OperationParam OperationParam::Body = OperationParam("body");
 	const OperationParam OperationParam::ServiceParams = OperationParam("serviceParams");

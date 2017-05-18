@@ -349,6 +349,7 @@ namespace BrainCloud {
 		static const OperationParam GroupWhere;
 
 		//mail
+		static const OperationParam EmailAddress;
 		static const OperationParam Subject;
 		static const OperationParam Body;
 		static const OperationParam ServiceParams;

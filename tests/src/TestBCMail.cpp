@@ -32,3 +32,18 @@ TEST_F(TestBCMail, SendAdvancedEmail)
 	m_bc->getMailService()->sendAdvancedEmail(GetUser(UserB)->m_profileId, dataStr, &tr);
 	tr.run(m_bc);
 }
+
+TEST_F(TestBCMail, SendAdvancedEmailByAddres)
+{
+	TestResult tr;
+	Json::FastWriter fw;
+
+	Json::Value data;
+	data["subject"] = "Test Subject";
+	data["body"] = "Test body";
+
+	std::string dataStr = fw.write(data);
+
+	m_bc->getMailService()->sendAdvancedEmailByAddress(GetUser(UserB)->m_email, dataStr, &tr);
+	tr.run(m_bc);
+}
