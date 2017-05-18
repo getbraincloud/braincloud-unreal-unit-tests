@@ -298,6 +298,7 @@ const ServiceOperation ServiceOperation::UpdateGroupName = ServiceOperation(TEXT
 //mail
 const ServiceOperation ServiceOperation::SendBasicEmail = ServiceOperation(TEXT("SEND_BASIC_EMAIL"));
 const ServiceOperation ServiceOperation::SendAdvancedEmail = ServiceOperation(TEXT("SEND_ADVANCED_EMAIL"));
+const ServiceOperation ServiceOperation::SendAdvancedEmailByAddress = ServiceOperation(TEXT("SEND_ADVANCED_EMAIL_BY_EMAIL"));
 
 //tournament
 const ServiceOperation ServiceOperation::GetTournamentStatus = ServiceOperation(TEXT("GET_TOURNAMENT_STATUS"));

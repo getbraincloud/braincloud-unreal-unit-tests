@@ -296,6 +296,7 @@ public:
 	//mail
 	static const ServiceOperation SendBasicEmail;
 	static const ServiceOperation SendAdvancedEmail;
+	static const ServiceOperation SendAdvancedEmailByAddress;
 
 	//tournament
 	static const ServiceOperation GetTournamentStatus;
