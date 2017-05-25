@@ -241,8 +241,9 @@ nsURLLoader::nsURLLoader()
 
 nsURLLoader::~nsURLLoader( )
 {
-    close();
-    
+    // Regardless of _threadRunning stop any URLSession and release it.
+    [_sessionDelegate stop];
+    _sessionDelegate = nil;
 }
 
 /**
