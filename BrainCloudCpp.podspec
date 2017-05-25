@@ -10,7 +10,7 @@ Pod::Spec.new do |s|
   # ―――  Spec Metadata  ―――――――――――――――――――――――――――――――――――――――――――――――――――――――――― #
 
   s.name     = "BrainCloudCpp"
-  s.version  = "3.4.0"
+  s.version  = "3.4.1"
   s.summary  = "The C++ client library for brainCloud"
   s.homepage = "http://getbraincloud.com/"
 
@@ -25,7 +25,7 @@ Pod::Spec.new do |s|
 
   # ――― Author Metadata  ――――――――――――――――――――――――――――――――――――――――――――――――――――――――― #
 
-  s.authors                = {"Brad Hill" => "bradleyh@bitheads.com"}
+  s.authors                = {"Jonathan McCaaffrey" => "jonathanm@bitheads.com"}
   s.social_media_url       = "https://twitter.com/braincloudbaas"
 
   # ――― Source Location ―――――――――――――――――――――――――――――――――――――――――――――――――――――――――― #
