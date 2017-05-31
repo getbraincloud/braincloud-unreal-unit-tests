@@ -15,7 +15,7 @@ public:
     UBCPlayerStatisticsEventProxy(const FObjectInitializer& ObjectInitializer);
 
 	/**
-	* @deprecated Use TriggerStatsEvent instead - removal after September 1 2017
+	* @deprecated Use TriggerStatsEvent instead
 	*/
 	UFUNCTION(BlueprintCallable, meta = (BlueprintInternalUseOnly = "true"), Category = "BrainCloud|Player Statistics Event")
 		static UBCPlayerStatisticsEventProxy* TriggerPlayerStatisticsEvent(FString eventName, int32 eventMultiplier);
@@ -39,7 +39,7 @@ public:
         static UBCPlayerStatisticsEventProxy* TriggerStatsEvent(FString eventName, int32 eventMultiplier);
 
 	/**
-	* @deprecated Use TriggerStatsEvents instead - removal after September 1 2017
+	* @deprecated Use TriggerStatsEvents instead
 	*/
 	UFUNCTION(BlueprintCallable, meta = (BlueprintInternalUseOnly = "true"), Category = "BrainCloud|Player Statistics Event")
 		static UBCPlayerStatisticsEventProxy* TriggerPlayerStatisticsEvents(FString jsonData);

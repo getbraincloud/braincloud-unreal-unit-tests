@@ -83,7 +83,7 @@ public:
 		static UBCFriendProxy* ReadFriendsEntities(const FString& entityType);
 
 	/**
-	* @deprecated Use readAllUserStats instead - removal after September 1 2017
+	* @deprecated Use readAllUserStats instead
 	*/
 
 
@@ -124,7 +124,7 @@ public:
 		static UBCFriendProxy* FindUsersBySubstrName(const FString& searchText, int32 maxResults);
 
 	/**
-	* @deprecated Use FindUserByUniversalId instead - removal after September 1 2017
+	* @deprecated Use FindUserByUniversalId instead
 	*/
 	UFUNCTION(BlueprintCallable, meta = (BlueprintInternalUseOnly = "true"), Category = "BrainCloud|Friend")
 		static UBCFriendProxy* FindPlayerByUniversalId(const FString& searchText, int32 maxResults);

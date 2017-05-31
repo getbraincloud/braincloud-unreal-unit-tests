@@ -15,7 +15,7 @@ public:
     UBCPlayerStateProxy(const FObjectInitializer& ObjectInitializer);
 
 	/**
-	* @deprecated Use findUserByUniversalId instead - removal after September 1 2017
+	* @deprecated Use findUserByUniversalId instead
 	*/
 	UFUNCTION(BlueprintCallable, meta = (BlueprintInternalUseOnly = "true"), Category = "BrainCloud|Player State")
 		static UBCPlayerStateProxy* ReadPlayerState();
@@ -34,7 +34,7 @@ public:
         static UBCPlayerStateProxy* ReadUserState();
 
 	/**
-	* @deprecated Use DeleteUser instead - removal after September 1 2017
+	* @deprecated Use DeleteUser instead
 	*/
 	UFUNCTION(BlueprintCallable, meta = (BlueprintInternalUseOnly = "true"), Category = "BrainCloud|Player State")
 		static UBCPlayerStateProxy* DeletePlayer();
@@ -52,7 +52,7 @@ public:
         static UBCPlayerStateProxy* DeleteUser();
 
 	/**
-	* @deprecated Use ResetUserState instead - removal after September 1 2017
+	* @deprecated Use ResetUserState instead
 	*/
 	UFUNCTION(BlueprintCallable, meta = (BlueprintInternalUseOnly = "true"), Category = "BrainCloud|Player State")
 		static UBCPlayerStateProxy* ResetPlayerState();
@@ -80,7 +80,7 @@ public:
         static UBCPlayerStateProxy* Logout();
 
 	/**
-	* @deprecated Use UpdateUserName instead - removal after September 1 2017
+	* @deprecated Use UpdateUserName instead
 	*/
 	UFUNCTION(BlueprintCallable, meta = (BlueprintInternalUseOnly = "true"), Category = "BrainCloud|Player State")
 		static UBCPlayerStateProxy* UpdatePlayerName(FString playerName);
@@ -151,7 +151,7 @@ public:
         static UBCPlayerStateProxy* RemoveAttributes(const TArray<FString>& attributeNames);
 
 	/**
-	* @deprecated Use UpdateUserPictureUrl instead - removal after September 1 2017
+	* @deprecated Use UpdateUserPictureUrl instead
 	*/
 	UFUNCTION(BlueprintCallable, meta = (BlueprintInternalUseOnly = "true"), Category = "BrainCloud|Player State")
 		static UBCPlayerStateProxy* UpdatePlayerPictureUrl(const FString& pictureUrl);
