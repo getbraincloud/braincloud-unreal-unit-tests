@@ -271,6 +271,7 @@ namespace BrainCloud
 
 	const OperationParam OperationParam::PlaybackStreamServicePlaybackStreamId = OperationParam("playbackStreamId");
 	const OperationParam OperationParam::PlaybackStreamServiceTargetPlayerId = OperationParam("targetPlayerId");
+	const OperationParam OperationParam::PlaybackMaxNumberOfStreams = OperationParam("maxNumStreams");
 	const OperationParam OperationParam::PlaybackStreamServiceInitiatingPlayerId = OperationParam("initiatingPlayerId");
 	const OperationParam OperationParam::PlaybackStreamServiceIncludeSharedData = OperationParam("includeSharedData");
 	const OperationParam OperationParam::PlaybackStreamServiceEventData = OperationParam("eventData");

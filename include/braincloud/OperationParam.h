@@ -277,6 +277,7 @@ namespace BrainCloud {
 
 		static const OperationParam PlaybackStreamServicePlaybackStreamId;
 		static const OperationParam PlaybackStreamServiceTargetPlayerId;
+		static const OperationParam PlaybackMaxNumberOfStreams;
 		static const OperationParam PlaybackStreamServiceInitiatingPlayerId;
 		static const OperationParam PlaybackStreamServiceIncludeSharedData;
 		static const OperationParam PlaybackStreamServiceEventData;

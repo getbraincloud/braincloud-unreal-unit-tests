@@ -203,6 +203,8 @@ namespace BrainCloud
 	const ServiceOperation ServiceOperation::AddEvent = ServiceOperation("ADD_EVENT");
 	const ServiceOperation ServiceOperation::GetStreamSummariesForInitiatingPlayer = ServiceOperation("GET_STREAM_SUMMARIES_FOR_INITIATING_PLAYER");
 	const ServiceOperation ServiceOperation::GetStreamSummariesForTargetPlayer = ServiceOperation("GET_STREAM_SUMMARIES_FOR_TARGET_PLAYER");
+	const ServiceOperation ServiceOperation::GetRecentStreamsForInitiatingPlayer = ServiceOperation("GET_RECENT_STREAMS_FOR_INITIATING_PLAYER");
+	const ServiceOperation ServiceOperation::GetRecentStreamsForTargetPlayer = ServiceOperation("GET_RECENT_STREAMS_FOR_TARGET_PLAYER");
 
 	const ServiceOperation ServiceOperation::GetUserInfo = ServiceOperation("GET_USER_INFO");
 

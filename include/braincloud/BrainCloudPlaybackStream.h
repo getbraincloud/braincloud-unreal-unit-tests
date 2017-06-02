@@ -95,6 +95,30 @@ namespace BrainCloud
         */
         void getStreamSummariesForTargetPlayer(const char * in_targetPlayerId, IServerCallback * in_callback = NULL);
 
+        /**
+        * Gets recent stream summaries for initiating player
+        *
+        * Service Name - PlaybackStream
+        * Service Operation - GetRecentStreamsForInitiatingPlayer
+        *
+        * @param targetPlayerId The player that started the stream
+        * @param maxNumStreams The max number of streams to query
+        * @param callback The callback.
+        */
+        void getRecentStreamsForInitiatingPlayer(const char * in_initiatingPlayerId, int in_maxNumStreams, IServerCallback * in_callback = NULL);
+
+        /**
+        * Gets recent stream summaries for target player
+        *
+        * Service Name - PlaybackStream
+        * Service Operation - GetRecentStreamsForTargetPlayer
+        *
+        * @param targetPlayerId The player that was target of the stream
+        * @param maxNumStreams The max number of streams to query
+        * @param callback The callback.
+        */
+        void getRecentStreamsForTargetPlayer(const char * in_targetPlayerId, int in_maxNumStreams, IServerCallback * in_callback = NULL);
+
     private:
         BrainCloudClient * m_client;
     };

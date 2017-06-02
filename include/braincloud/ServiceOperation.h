@@ -209,6 +209,8 @@ namespace BrainCloud {
 		static const ServiceOperation AddEvent;
 		static const ServiceOperation GetStreamSummariesForInitiatingPlayer;
 		static const ServiceOperation GetStreamSummariesForTargetPlayer;
+		static const ServiceOperation GetRecentStreamsForInitiatingPlayer;
+		static const ServiceOperation GetRecentStreamsForTargetPlayer;
 
 		static const ServiceOperation GetUserInfo;
 

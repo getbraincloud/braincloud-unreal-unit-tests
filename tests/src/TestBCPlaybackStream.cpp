@@ -55,6 +55,26 @@ TEST_F(TestBCPlaybackStream, GetStreamSummariesForInitiatingPlayer)
     EndStream();
 }
 
+TEST_F(TestBCPlaybackStream, GetRecentStreamsForTargetPlayer)
+{
+    StartStream();
+    TestResult tr;
+    int maxNumStreams = 10;
+    m_bc->getPlaybackStreamService()->getRecentStreamsForTargetPlayer(GetUser(UserB)->m_profileId, maxNumStreams, &tr);
+    tr.run(m_bc);
+    EndStream();
+}
+
+TEST_F(TestBCPlaybackStream, GetRecentStreamsForInitiatingPlayer)
+{
+    StartStream();
+    TestResult tr;
+    int maxNumStreams = 10;
+    m_bc->getPlaybackStreamService()->getRecentStreamsForInitiatingPlayer(GetUser(UserA)->m_profileId, maxNumStreams, &tr);
+    tr.run(m_bc);
+    EndStream();
+}
+
 TEST_F(TestBCPlaybackStream, ReadStream)
 {
     StartStream();

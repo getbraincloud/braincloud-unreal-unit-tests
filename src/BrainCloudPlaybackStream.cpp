@@ -81,4 +81,24 @@ namespace BrainCloud
         ServerCall * sc = new ServerCall(ServiceName::PlaybackStream, ServiceOperation::GetStreamSummariesForTargetPlayer, message, in_callback);
         m_client->sendRequest(sc);
     }
+
+    void BrainCloudPlaybackStream::getRecentStreamsForInitiatingPlayer(const char * in_initiatingPlayerId, int in_maxNumStreams, IServerCallback * in_callback)
+    {
+        Json::Value message;
+        message[OperationParam::PlaybackStreamServiceInitiatingPlayerId.getValue()] = in_initiatingPlayerId;
+        message[OperationParam::PlaybackMaxNumberOfStreams.getValue()] = in_maxNumStreams;
+
+        ServerCall * sc = new ServerCall(ServiceName::PlaybackStream, ServiceOperation::GetRecentStreamsForInitiatingPlayer, message, in_callback);
+        m_client->sendRequest(sc);
+    }
+
+    void BrainCloudPlaybackStream::getRecentStreamsForTargetPlayer(const char * in_targetPlayerId, int in_maxNumStreams, IServerCallback * in_callback)
+    {
+        Json::Value message;
+        message[OperationParam::PlaybackStreamServiceTargetPlayerId.getValue()] = in_targetPlayerId;
+        message[OperationParam::PlaybackMaxNumberOfStreams.getValue()] = in_maxNumStreams;
+
+        ServerCall * sc = new ServerCall(ServiceName::PlaybackStream, ServiceOperation::GetRecentStreamsForTargetPlayer, message, in_callback);
+        m_client->sendRequest(sc);
+    }
 }
