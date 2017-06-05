@@ -278,6 +278,7 @@ OperationParam::OperationParam(const FString& operation)
 	const OperationParam OperationParam::PlaybackStreamServicePlaybackStreamId = OperationParam(TEXT("playbackStreamId"));
 	const OperationParam OperationParam::PlaybackStreamServiceTargetPlayerId = OperationParam(TEXT("targetPlayerId"));
 	const OperationParam OperationParam::PlaybackStreamServiceInitiatingPlayerId = OperationParam(TEXT("initiatingPlayerId"));
+	const OperationParam OperationParam::PlaybackStreamServiceMaxNumberOfStreams = OperationParam(TEXT("maxNumStreams"));
 	const OperationParam OperationParam::PlaybackStreamServiceIncludeSharedData = OperationParam(TEXT("includeSharedData"));
 	const OperationParam OperationParam::PlaybackStreamServiceEventData = OperationParam(TEXT("eventData"));
 	const OperationParam OperationParam::PlaybackStreamServiceSummary = OperationParam(TEXT("summary"));
