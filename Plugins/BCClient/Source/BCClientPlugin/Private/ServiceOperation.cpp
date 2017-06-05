@@ -207,6 +207,8 @@ const ServiceOperation ServiceOperation::DeleteStream = ServiceOperation(TEXT("D
 const ServiceOperation ServiceOperation::AddEvent = ServiceOperation(TEXT("ADD_EVENT"));
 const ServiceOperation ServiceOperation::GetStreamSummariesForInitiatingPlayer = ServiceOperation(TEXT("GET_STREAM_SUMMARIES_FOR_INITIATING_PLAYER"));
 const ServiceOperation ServiceOperation::GetStreamSummariesForTargetPlayer = ServiceOperation(TEXT("GET_STREAM_SUMMARIES_FOR_TARGET_PLAYER"));
+const ServiceOperation ServiceOperation::GetRecentStreamsForInitiatingPlayer = ServiceOperation(TEXT("GET_RECENT_STREAMS_FOR_INITIATING_PLAYER"));
+const ServiceOperation ServiceOperation::GetRecentStreamsForTargetPlayer = ServiceOperation(TEXT("GET_RECENT_STREAMS_FOR_TARGET_PLAYER"));
 
 const ServiceOperation ServiceOperation::GetUserInfo = ServiceOperation(TEXT("GET_USER_INFO"));
 

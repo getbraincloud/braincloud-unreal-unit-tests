@@ -277,6 +277,7 @@ public:
 	static const OperationParam PlaybackStreamServicePlaybackStreamId;
 	static const OperationParam PlaybackStreamServiceTargetPlayerId;
 	static const OperationParam PlaybackStreamServiceInitiatingPlayerId;
+	static const OperationParam PlaybackStreamServiceMaxNumberOfStreams;
 	static const OperationParam PlaybackStreamServiceIncludeSharedData;
 	static const OperationParam PlaybackStreamServiceEventData;
 	static const OperationParam PlaybackStreamServiceSummary;

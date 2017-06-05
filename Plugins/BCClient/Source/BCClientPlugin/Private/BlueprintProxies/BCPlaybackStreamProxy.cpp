@@ -61,6 +61,20 @@ UBCPlaybackStreamProxy* UBCPlaybackStreamProxy::GetStreamSummariesForTargetPlaye
     return Proxy;
 }
 
+UBCPlaybackStreamProxy* UBCPlaybackStreamProxy::GetRecentStreamsForInitiatingPlayer(const FString& targetPlayerId, int32 maxNumStreams)
+{
+	UBCPlaybackStreamProxy* Proxy = NewObject<UBCPlaybackStreamProxy>();
+	BrainCloudClient::getInstance()->getPlaybackStreamService()->getRecentStreamsForInitiatingPlayer(targetPlayerId, maxNumStreams, Proxy);
+	return Proxy;
+}
+
+UBCPlaybackStreamProxy* UBCPlaybackStreamProxy::GetRecentStreamsForTargetPlayer(const FString& targetPlayerId, int32 maxNumStreams)
+{
+	UBCPlaybackStreamProxy* Proxy = NewObject<UBCPlaybackStreamProxy>();
+	BrainCloudClient::getInstance()->getPlaybackStreamService()->getRecentStreamsForTargetPlayer(targetPlayerId, maxNumStreams, Proxy);
+	return Proxy;
+}
+
 //callbacks
 void UBCPlaybackStreamProxy::serverCallback(ServiceName serviceName, ServiceOperation serviceOperation, const FString& jsonData)
 {
