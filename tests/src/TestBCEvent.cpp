@@ -39,6 +39,17 @@ TEST_F(TestBCEvent, UpdateIncoming)
 	DeleteIncomingMessage();
 }
 
+TEST_F(TestBCEvent, GetEvents)
+{
+	SendDefaultMessage();
+
+	TestResult tr;
+	m_bc->getEventService()->getEvents(true, true, &tr);
+	tr.run(m_bc);
+
+	DeleteIncomingMessage();
+}
+
 void TestBCEvent::SendDefaultMessage()
 {
 	TestResult tr;

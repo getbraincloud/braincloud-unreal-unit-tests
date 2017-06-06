@@ -68,6 +68,32 @@ namespace BrainCloud
 		 */
 		void getEvents(IServerCallback * in_callback = NULL);
 
+		/**
+		 * @deprecated Use method with new signature
+		 */
+		DEPRECATED void sendEvent(const char * in_toPlayerId, const char * in_eventType, const std::string& in_jsonEventData, bool in_recordLocally, IServerCallback * in_callback = NULL);
+			
+		/**
+		 * @deprecated Use method with new signature
+		 */
+		DEPRECATED void updateIncomingEventData(const char * in_fromPlayerId, uint64_t in_eventId, const std::string& in_jsonEventData, IServerCallback * in_callback = NULL);
+			
+		/**
+		 * @deprecated Use method with new signature
+		 */
+		DEPRECATED void deleteIncomingEvent(const char * in_fromPlayerId, uint64_t in_eventId, IServerCallback * in_callback = NULL);
+			
+		/**
+		 * @deprecated Use method with new signature
+		 */
+		DEPRECATED void deleteSentEvent(const char * in_toPlayerId, uint64_t in_eventId, IServerCallback * in_callback = NULL);
+			
+		/**
+		 * @deprecated Use method with new signature
+		 */
+		DEPRECATED void getEvents(bool in_includeIncomingEvents, bool in_includeSentEvents, IServerCallback * in_callback = NULL);
+
+
 	private:
 		BrainCloudClient * m_client;
 	};
