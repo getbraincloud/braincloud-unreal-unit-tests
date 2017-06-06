@@ -30,6 +30,24 @@ namespace BrainCloud
         void getCurrency(const char* in_currencyType, IServerCallback * in_callback = NULL);
 
         /**
+         * @deprecated Method is recommended to be used in Cloud Code only for security
+         * If you need to use it client side, enable 'Allow Currency Calls from Client' on the brainCloud dashboard
+         */
+        DEPRECATED void awardCurrency(const char* in_currencyType, int32_t in_amount, IServerCallback * in_callback = NULL);
+             
+        /**
+         * @deprecated Method is recommended to be used in Cloud Code only for security
+         * If you need to use it client side, enable 'Allow Currency Calls from Client' on the brainCloud dashboard
+         */
+        DEPRECATED void consumeCurrency(const char* in_currencyType, int32_t in_amount, IServerCallback * in_callback = NULL);
+             
+        /**
+         * @deprecated Method is recommended to be used in Cloud Code only for security
+         * If you need to use it client side, enable 'Allow Currency Calls from Client' on the brainCloud dashboard
+         */
+		DEPRECATED void resetCurrency(IServerCallback * in_callback = NULL);
+
+        /**
          * Method gets the active sales inventory for the passed-in platform and
          * currency type.
          *

@@ -27,6 +27,32 @@ namespace BrainCloud
         m_client->sendRequest(sc);
     }
 
+    void BrainCloudProduct::awardCurrency(const char* in_currencyType, int32_t in_amount, IServerCallback * in_callback)
+    {
+        Json::Value message;
+        message[OperationParam::ProductServiceVCId.getValue()] = in_currencyType;
+        message[OperationParam::ProductServiceVCAmount.getValue()] = (Json::Int)in_amount;
+
+        ServerCall * sc = new ServerCall(ServiceName::Product, ServiceOperation::AwardVC, message, in_callback);
+        m_client->sendRequest(sc);
+    }
+
+    void BrainCloudProduct::consumeCurrency(const char* in_currencyType, int32_t in_amount, IServerCallback * in_callback)
+    {
+        Json::Value message;
+        message[OperationParam::ProductServiceVCId.getValue()] = in_currencyType;
+        message[OperationParam::ProductServiceVCAmount.getValue()] = (Json::Int)in_amount;
+        ServerCall * sc = new ServerCall(ServiceName::Product, ServiceOperation::ConsumeVC, message, in_callback);
+        m_client->sendRequest(sc);
+    }
+
+    void BrainCloudProduct::resetCurrency(IServerCallback * in_callback)
+    {
+        Json::Value message = Json::nullValue;
+        ServerCall * sc = new ServerCall(ServiceName::Product, ServiceOperation::ResetPlayerVC, message, in_callback);
+        m_client->sendRequest(sc);
+    }
+
     void BrainCloudProduct::getSalesInventory(const char * in_platform, const char * in_userCurrency, IServerCallback * in_callback)
     {
         getSalesInventoryByCategory(in_platform, in_userCurrency, NULL, in_callback);
