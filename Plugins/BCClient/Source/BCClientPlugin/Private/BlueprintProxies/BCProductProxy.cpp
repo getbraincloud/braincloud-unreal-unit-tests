@@ -18,6 +18,27 @@ UBCProductProxy* UBCProductProxy::GetCurrency(const FString& currencyType)
     return Proxy;
 }
 
+UBCProductProxy* UBCProductProxy::AwardCurrency(const FString& currencyType, int32 amount)
+{
+	UBCProductProxy* Proxy = NewObject<UBCProductProxy>();
+	BrainCloudClient::getInstance()->getProductService()->awardCurrency(currencyType, amount, Proxy);
+	return Proxy;
+}
+
+UBCProductProxy* UBCProductProxy::ConsumeCurrency(const FString& currencyType, int32 amount)
+{
+	UBCProductProxy* Proxy = NewObject<UBCProductProxy>();
+	BrainCloudClient::getInstance()->getProductService()->consumeCurrency(currencyType, amount, Proxy);
+	return Proxy;
+}
+
+UBCProductProxy* UBCProductProxy::ResetCurrency()
+{
+	UBCProductProxy* Proxy = NewObject<UBCProductProxy>();
+	BrainCloudClient::getInstance()->getProductService()->resetCurrency(Proxy);
+	return Proxy;
+}
+
 UBCProductProxy* UBCProductProxy::GetSalesInventory(const FString& platform, const FString& userCurrency)
 {
     UBCProductProxy* Proxy = NewObject<UBCProductProxy>();
