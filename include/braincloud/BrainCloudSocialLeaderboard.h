@@ -250,7 +250,7 @@ namespace BrainCloud
 		* Service Operation - REMOVE_PLAYER_SCORE
 		*
 		* @param in_leaderboardId The leaderboard ID
-		* @param in_versionId The version of the leaderboard
+		* @param in_versionId The version of the leaderboard. Use -1 to specifiy the currently active leaderboard version
 		* @param in_callback The method to be invoked when the server response is received
 		*/
 		void removePlayerScore(const char * in_leaderboardId, int32_t in_versionId, IServerCallback * in_callback = NULL);
