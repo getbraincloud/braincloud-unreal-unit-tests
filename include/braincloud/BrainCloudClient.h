@@ -126,7 +126,7 @@ namespace BrainCloud
   		 * authentication calls, in event the user needs to restart the app
   		 * in rapid succession.
   		 *
-  		 * @param sessionId A recently returned session Id
+  		 * @param in_sessionId A recently returned session Id
   		 */
 		void restoreRecentSession(const char * in_sessionId);
 
