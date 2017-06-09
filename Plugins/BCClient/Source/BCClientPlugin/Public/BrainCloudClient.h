@@ -81,6 +81,20 @@ public:
 	*/
 	void runCallbacks();
 
+
+	/**
+	* The brainCloud client considers itself reauthenticated
+	* with the given session
+	*
+	* Warning: ensure the user is within your session expiry (set on the dashboard)
+	* before using this call. This optional method exists to reduce
+	* authentication calls, in event the user needs to restart the app
+	* in rapid succession.
+	*
+	* @param sessionId A recently returned session Id
+	*/
+	void restoreRecentSession(const FString& sessionId);
+
 	/**
 	* Sets a callback handler for any out of band event messages that come from
 	* brainCloud.

@@ -106,6 +106,20 @@ void BrainCloudClient::runCallbacks()
 	if (_brainCloudComms) _brainCloudComms->RunCallbacks();
 }
 
+void BrainCloudClient::restoreRecentSession(const FString& sessionId) 
+{
+	if (sessionId == "")
+	{
+		// Cannot use a blank session Id. Authenticate once,
+		// and save that session for short-term use
+		return;
+	}
+
+	_brainCloudComms->SetSessionId(sessionId);
+	_brainCloudComms->SetAuthenticated();
+}
+
+
 void BrainCloudClient::registerEventCallback(IEventCallback *eventCallback)
 {
 	_brainCloudComms->RegisterEventCallback(eventCallback);

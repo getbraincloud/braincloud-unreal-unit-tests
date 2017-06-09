@@ -14,7 +14,8 @@ public:
     virtual void initialize(const FString& serverURL, const FString& secretKey, const FString& gameId) = 0;
     virtual void enableLogging(bool shouldEnable) = 0;
     virtual bool isAuthenticated() = 0;
-    virtual bool isInitialized() = 0;
+	virtual void setAuthenticated() = 0;
+	virtual bool isInitialized() = 0;
 
     virtual void addToQueue(ServerCall *) = 0;
 
