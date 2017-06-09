@@ -953,7 +953,7 @@ namespace BrainCloud
 				authenticating = true;
 			}
 
-			// break, right away so that theres only ONE message with authenticate
+			// break, right away so that there is only ONE message with authenticate
 			if (bFoundAuthCallInCurrentMarker)
 				break;
 		}

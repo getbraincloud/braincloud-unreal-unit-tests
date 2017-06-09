@@ -72,6 +72,11 @@ namespace BrainCloud {
 		return _isAuthenticated;
 	}
 
+	void IBrainCloudComms::setAuthenticated()
+	{
+		_isAuthenticated = true;
+	}
+
 	void IBrainCloudComms::setHeartbeatInterval(int milliseconds)
 	{
 		_heartbeatInterval = milliseconds;

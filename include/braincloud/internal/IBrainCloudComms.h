@@ -100,6 +100,7 @@ namespace BrainCloud {
 		void enableLogging(bool shouldEnable);
 		bool isInitialized();
 		bool isAuthenticated();
+		void setAuthenticated();
 
 		void setHeartbeatInterval(int milliseconds);
 		void setImmediateRetryOnError(bool value);
