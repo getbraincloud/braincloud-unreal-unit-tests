@@ -10,11 +10,14 @@ OperationParam::OperationParam(const FString& operation)
 
 	//Push Notification Service - Send Params
 	const OperationParam OperationParam::PushNotificationSendParamToPlayerId = OperationParam(TEXT("toPlayerId"));
+	const OperationParam OperationParam::PushNotificationSendParamProfileId = OperationParam(TEXT("profileId"));
 	const OperationParam OperationParam::PushNotificationSendParamMessage = OperationParam(TEXT("message"));
 	const OperationParam OperationParam::PushNotificationSendParamNotificationTemplateId = OperationParam(TEXT("notificationTemplateId"));
 	const OperationParam OperationParam::PushNotificationSendParamSubstitution = OperationParam(TEXT("substitutions"));
 	const OperationParam OperationParam::AlertContent = OperationParam(TEXT("alertContent"));
 	const OperationParam OperationParam::CustomData = OperationParam(TEXT("customData"));
+	const OperationParam OperationParam::StartTimeUTC = OperationParam(TEXT("startDateUTC"));
+	const OperationParam OperationParam::MinutesFromNow = OperationParam(TEXT("minutesFromNow"));
 
 	//Push Notification Service - Register Params
 	const OperationParam OperationParam::PushNotificationRegisterParamDeviceType = OperationParam(TEXT("deviceType"));
@@ -275,6 +278,7 @@ OperationParam::OperationParam(const FString& operation)
 	const OperationParam OperationParam::PlaybackStreamServicePlaybackStreamId = OperationParam(TEXT("playbackStreamId"));
 	const OperationParam OperationParam::PlaybackStreamServiceTargetPlayerId = OperationParam(TEXT("targetPlayerId"));
 	const OperationParam OperationParam::PlaybackStreamServiceInitiatingPlayerId = OperationParam(TEXT("initiatingPlayerId"));
+	const OperationParam OperationParam::PlaybackStreamServiceMaxNumberOfStreams = OperationParam(TEXT("maxNumStreams"));
 	const OperationParam OperationParam::PlaybackStreamServiceIncludeSharedData = OperationParam(TEXT("includeSharedData"));
 	const OperationParam OperationParam::PlaybackStreamServiceEventData = OperationParam(TEXT("eventData"));
 	const OperationParam OperationParam::PlaybackStreamServiceSummary = OperationParam(TEXT("summary"));
@@ -346,6 +350,7 @@ OperationParam::OperationParam(const FString& operation)
 	const OperationParam OperationParam::GroupWhere = OperationParam(TEXT("where"));
 
 	const OperationParam OperationParam::ProfileId = OperationParam(TEXT("profileId"));
+	const OperationParam OperationParam::EmailAddress = OperationParam(TEXT("emailAddress"));
 	const OperationParam OperationParam::Subject = OperationParam(TEXT("subject"));
 	const OperationParam OperationParam::Body = OperationParam(TEXT("body"));
 	const OperationParam OperationParam::ServiceParams = OperationParam(TEXT("serviceParams"));

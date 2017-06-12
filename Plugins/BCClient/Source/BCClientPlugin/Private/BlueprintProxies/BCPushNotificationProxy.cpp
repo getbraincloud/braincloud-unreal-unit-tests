@@ -68,6 +68,34 @@ UBCPushNotificationProxy* UBCPushNotificationProxy::SendNormalizedPushNotificati
     return Proxy;
 }
 
+UBCPushNotificationProxy* UBCPushNotificationProxy::ScheduleNormalizedPushNotificationUTC(const FString& profileId, const FString& alertContentJson, const FString& substitutionJson, const int32 startTime)
+{
+	UBCPushNotificationProxy* Proxy = NewObject<UBCPushNotificationProxy>();
+	BrainCloudClient::getInstance()->getPushNotificationService()->scheduleNormalizedPushNotificationUTC(profileId, alertContentJson, substitutionJson, startTime, Proxy);
+	return Proxy;
+}
+
+UBCPushNotificationProxy* UBCPushNotificationProxy::ScheduleNormalizedPushNotificationMinutes(const FString& profileId, const FString& alertContentJson, const FString& substitutionJson, const int32 startTime)
+{
+	UBCPushNotificationProxy* Proxy = NewObject<UBCPushNotificationProxy>();
+	BrainCloudClient::getInstance()->getPushNotificationService()->scheduleNormalizedPushNotificationMinutes(profileId, alertContentJson, substitutionJson, startTime, Proxy);
+	return Proxy;
+}
+
+UBCPushNotificationProxy* UBCPushNotificationProxy::ScheduleRichPushNotificationUTC(const FString& profileId, const int32 notificationTemplateId, const FString& substitutionJson, const int32 startTime)
+{
+	UBCPushNotificationProxy* Proxy = NewObject<UBCPushNotificationProxy>();
+	BrainCloudClient::getInstance()->getPushNotificationService()->scheduleRichPushNotificationUTC(profileId, notificationTemplateId, substitutionJson, startTime, Proxy);
+	return Proxy;
+}
+
+UBCPushNotificationProxy* UBCPushNotificationProxy::ScheduleRichPushNotificationMinutes(const FString& profileId, const int32 notificationTemplateId, const FString& substitutionJson, const int32 minutesFromNow)
+{
+	UBCPushNotificationProxy* Proxy = NewObject<UBCPushNotificationProxy>();
+	BrainCloudClient::getInstance()->getPushNotificationService()->scheduleRichPushNotificationMinutes(profileId, notificationTemplateId, substitutionJson, minutesFromNow, Proxy);
+	return Proxy;
+}
+
 UBCPushNotificationProxy* UBCPushNotificationProxy::SendNormalizedPushNotification(const FString& toPlayerId, const FString& alertContentJson, const FString& customDataJson)
 {
 	UBCPushNotificationProxy* Proxy = NewObject<UBCPushNotificationProxy>();

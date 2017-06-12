@@ -29,3 +29,13 @@ void BrainCloudMail::sendAdvancedEmail(const FString& profileId, const FString& 
 	ServerCall * sc = new ServerCall(ServiceName::Mail, ServiceOperation::SendAdvancedEmail, message, callback);
 	_client->sendRequest(sc);
 }
+
+void BrainCloudMail::sendAdvancedEmailByAddress(const FString& emailAddress, const FString& jsonServiceParams, IServerCallback * callback)
+{
+	TSharedRef<FJsonObject> message = MakeShareable(new FJsonObject());
+	message->SetStringField(OperationParam::EmailAddress.getValue(), emailAddress);
+	message->SetObjectField(OperationParam::ServiceParams.getValue(), JsonUtil::jsonStringToValue(jsonServiceParams));
+
+	ServerCall * sc = new ServerCall(ServiceName::Mail, ServiceOperation::SendAdvancedEmail, message, callback);
+	_client->sendRequest(sc);
+}

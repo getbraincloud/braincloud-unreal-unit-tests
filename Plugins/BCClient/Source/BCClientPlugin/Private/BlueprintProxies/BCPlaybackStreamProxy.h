@@ -94,6 +94,33 @@ public:
     UFUNCTION(BlueprintCallable, meta = (BlueprintInternalUseOnly = "true"), Category = "BrainCloud|Playback Stream")
         static UBCPlaybackStreamProxy* GetStreamSummariesForTargetPlayer(const FString& targetPlayerId);
 
+	/**
+	* Gets recent stream summaries for initiating player
+	*
+	* Service Name - PlaybackStream
+	* Service Operation - GetRecentStreamsForInitiatingPlayer
+	*
+	* Param - initiatingPlayerId The player that started the stream
+	* Param - maxNumStreams The max number of streams to query
+	* Param - callback The callback.
+	*/
+	UFUNCTION(BlueprintCallable, meta = (BlueprintInternalUseOnly = "true"), Category = "BrainCloud|Playback Stream")
+		static UBCPlaybackStreamProxy* GetRecentStreamsForInitiatingPlayer(const FString& initiatingPlayerId, int32 maxNumStreams);
+
+	/**
+	* Gets recent stream summaries for target player
+	*
+	* Service Name - PlaybackStream
+	* Service Operation - GetRecentStreamsForTargetPlayer
+	*
+	* Param - targetPlayerId The player that was target of the stream
+	* Param - maxNumStreams The max number of streams to query
+	* Param - callback The callback.
+	*/
+	UFUNCTION(BlueprintCallable, meta = (BlueprintInternalUseOnly = "true"), Category = "BrainCloud|Playback Stream")
+		static UBCPlaybackStreamProxy* GetRecentStreamsForTargetPlayer(const FString& targetPlayerId, int32 maxNumStreams);
+
+
     //Response delegates
     UPROPERTY(BlueprintAssignable)
         FBrainCloudCallbackDelegate OnSuccess;

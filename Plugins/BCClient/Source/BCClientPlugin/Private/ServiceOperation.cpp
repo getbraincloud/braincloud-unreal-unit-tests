@@ -47,6 +47,8 @@ const ServiceOperation ServiceOperation::SendTemplatedToGroup = ServiceOperation
 const ServiceOperation ServiceOperation::SendNormalizedToGroup = ServiceOperation(TEXT("SEND_NORMALIZED_TO_GROUP"));
 const ServiceOperation ServiceOperation::SendNormalized = ServiceOperation(TEXT("SEND_NORMALIZED"));
 const ServiceOperation ServiceOperation::SendNormalizedBatch = ServiceOperation(TEXT("SEND_NORMALIZED_BATCH"));
+const ServiceOperation ServiceOperation::ScheduleNormalizedNotifcation = ServiceOperation(TEXT("SCHEDULE_NORMALIZED_NOTIFICATION"));
+const ServiceOperation ServiceOperation::ScheduledRichNotifcation = ServiceOperation(TEXT("SCHEDULE_RICH_NOTIFICATION"));
 
 const ServiceOperation ServiceOperation::Trigger = ServiceOperation(TEXT("TRIGGER"));
 const ServiceOperation ServiceOperation::TriggerMultiple = ServiceOperation(TEXT("TRIGGER_MULTIPLE"));
@@ -205,6 +207,8 @@ const ServiceOperation ServiceOperation::DeleteStream = ServiceOperation(TEXT("D
 const ServiceOperation ServiceOperation::AddEvent = ServiceOperation(TEXT("ADD_EVENT"));
 const ServiceOperation ServiceOperation::GetStreamSummariesForInitiatingPlayer = ServiceOperation(TEXT("GET_STREAM_SUMMARIES_FOR_INITIATING_PLAYER"));
 const ServiceOperation ServiceOperation::GetStreamSummariesForTargetPlayer = ServiceOperation(TEXT("GET_STREAM_SUMMARIES_FOR_TARGET_PLAYER"));
+const ServiceOperation ServiceOperation::GetRecentStreamsForInitiatingPlayer = ServiceOperation(TEXT("GET_RECENT_STREAMS_FOR_INITIATING_PLAYER"));
+const ServiceOperation ServiceOperation::GetRecentStreamsForTargetPlayer = ServiceOperation(TEXT("GET_RECENT_STREAMS_FOR_TARGET_PLAYER"));
 
 const ServiceOperation ServiceOperation::GetUserInfo = ServiceOperation(TEXT("GET_USER_INFO"));
 
@@ -296,6 +300,7 @@ const ServiceOperation ServiceOperation::UpdateGroupName = ServiceOperation(TEXT
 //mail
 const ServiceOperation ServiceOperation::SendBasicEmail = ServiceOperation(TEXT("SEND_BASIC_EMAIL"));
 const ServiceOperation ServiceOperation::SendAdvancedEmail = ServiceOperation(TEXT("SEND_ADVANCED_EMAIL"));
+const ServiceOperation ServiceOperation::SendAdvancedEmailByAddress = ServiceOperation(TEXT("SEND_ADVANCED_EMAIL_BY_EMAIL"));
 
 //tournament
 const ServiceOperation ServiceOperation::GetTournamentStatus = ServiceOperation(TEXT("GET_TOURNAMENT_STATUS"));

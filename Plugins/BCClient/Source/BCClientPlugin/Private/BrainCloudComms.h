@@ -20,7 +20,7 @@ public:
 	BrainCloudComms(BrainCloudClient* client);
 	~BrainCloudComms();
 
-	void Initialize(const FString& serverURL, const FString& secretKey, const FString& gameId);
+	void Initialize(const FString& serverURL, const FString& secretKey, const FString& appId);
 	void EnableLogging(bool shouldEnable) { _isLoggingEnabled = shouldEnable; };
 
 	void AddToQueue(ServerCall *);
@@ -67,6 +67,7 @@ public:
 
 	//Setters
 	void SetServerUrl(const FString& serverUrl) { _serverUrl = serverUrl; }
+	void SetSessionId(const FString& sessionId) { _sessionId = sessionId; }
 	void SetHeartbeatInterval(int32 heartbeatInterval) { _heartbeatInterval = heartbeatInterval; }
 	void SetPacketTimeouts(const TArray<int32> & packetTimeouts) { _packetTimeouts = packetTimeouts; }
 	void SetPacketTimeoutsToDefault();
@@ -76,6 +77,7 @@ public:
 	void SetUploadLowTransferRateTimeout(int32 timeoutSecs) { _uploadLowTransferRateTimeout = timeoutSecs; }
 	void SetUploadLowTransferRateThreshold(int32 bytesPerSec) { _uploadLowTransferRateThreshold = bytesPerSec; }
 	void SetUploadOverallTimeout(int32 seconds) { _uploadOverallTimeout = seconds; }
+	void SetAuthenticated() { _isAuthenticated = true; }
 
 	//File upload
 	void CancelUpload(const FString& fileUploadId);
@@ -130,7 +132,7 @@ private:
 
 	FString _serverUrl;
 	FString _secretKey;
-	FString _gameId;
+	FString _appId;
 	FString _uploadUrl;
 
 	IEventCallback * _eventCallback = nullptr;

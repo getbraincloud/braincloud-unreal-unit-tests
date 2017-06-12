@@ -90,6 +90,31 @@ public:
     */
     void getStreamSummariesForTargetPlayer(const FString& targetPlayerId, IServerCallback * callback);
 
+
+	/**
+	 * Gets recent stream summaries for initiating player
+	 *
+	 * Service Name - PlaybackStream
+	 * Service Operation - GetRecentStreamsForInitiatingPlayer
+	 *
+	 * @param initiatingPlayerId The player that started the stream
+	 * @param maxNumStreams The max number of streams to query
+	 * @param callback The callback.
+	 */
+	void getRecentStreamsForInitiatingPlayer(const FString& initiatingPlayerId, int32 maxNumStreams, IServerCallback * callback);
+
+	/**
+	 * Gets recent stream summaries for target player
+	 *
+	 * Service Name - PlaybackStream
+	 * Service Operation - GetRecentStreamsForTargetPlayer
+	 *
+	 * @param targetPlayerId The player that was target of the stream
+	 * @param maxNumStreams The max number of streams to query
+	 * @param callback The callback.
+	 */
+	void getRecentStreamsForTargetPlayer(const FString& targetPlayerId, int32 maxNumStreams, IServerCallback * callback);
+
 private:
     BrainCloudClient* _client = nullptr;
 };

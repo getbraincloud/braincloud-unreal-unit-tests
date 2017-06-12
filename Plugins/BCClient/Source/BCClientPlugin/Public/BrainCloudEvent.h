@@ -17,7 +17,7 @@ public:
 	 * in the sending player's "sent" event mailbox.
 	 *
 	 * Note that the list of sent and incoming events for a player is returned
-	 * in the "ReadPlayerState" call (in the BrainCloudPlayer module).
+	 * in the "ReadUserState" call (in the BrainCloudPlayer module).
 	 *
 	 * Service Name - Event
 	 * Service Operation - Send

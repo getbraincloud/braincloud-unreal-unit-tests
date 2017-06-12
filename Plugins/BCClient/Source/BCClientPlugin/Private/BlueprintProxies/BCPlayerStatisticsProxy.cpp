@@ -13,36 +13,71 @@ UBCPlayerStatisticsProxy::UBCPlayerStatisticsProxy(const FObjectInitializer& Obj
 
 UBCPlayerStatisticsProxy* UBCPlayerStatisticsProxy::ReadAllPlayerStats()
 {
+	UBCPlayerStatisticsProxy* Proxy = NewObject<UBCPlayerStatisticsProxy>();
+	BrainCloudClient::getInstance()->getPlayerStatisticsService()->readAllUserStats(Proxy);
+	return Proxy;
+}
+
+UBCPlayerStatisticsProxy* UBCPlayerStatisticsProxy::ReadAllUserStats()
+{
     UBCPlayerStatisticsProxy* Proxy = NewObject<UBCPlayerStatisticsProxy>();
-    BrainCloudClient::getInstance()->getPlayerStatisticsService()->readAllPlayerStats(Proxy);
+    BrainCloudClient::getInstance()->getPlayerStatisticsService()->readAllUserStats(Proxy);
     return Proxy;
 }
 
 UBCPlayerStatisticsProxy* UBCPlayerStatisticsProxy::ReadPlayerStatsSubset(const TArray<FString>& playerStats)
 {
+	UBCPlayerStatisticsProxy* Proxy = NewObject<UBCPlayerStatisticsProxy>();
+	BrainCloudClient::getInstance()->getPlayerStatisticsService()->readUserStatsSubset(playerStats, Proxy);
+	return Proxy;
+}
+
+UBCPlayerStatisticsProxy* UBCPlayerStatisticsProxy::ReadUserStatsSubset(const TArray<FString>& playerStats)
+{
     UBCPlayerStatisticsProxy* Proxy = NewObject<UBCPlayerStatisticsProxy>();
-    BrainCloudClient::getInstance()->getPlayerStatisticsService()->readPlayerStatsSubset(playerStats, Proxy);
+    BrainCloudClient::getInstance()->getPlayerStatisticsService()->readUserStatsSubset(playerStats, Proxy);
     return Proxy;
 }
 
 UBCPlayerStatisticsProxy* UBCPlayerStatisticsProxy::ReadPlayerStatisticsByCategory(FString category)
 {
+	UBCPlayerStatisticsProxy* Proxy = NewObject<UBCPlayerStatisticsProxy>();
+	BrainCloudClient::getInstance()->getPlayerStatisticsService()->readUserStatisticsByCategory(category, Proxy);
+	return Proxy;
+}
+
+UBCPlayerStatisticsProxy* UBCPlayerStatisticsProxy::ReadUserStatisticsByCategory(FString category)
+{
     UBCPlayerStatisticsProxy* Proxy = NewObject<UBCPlayerStatisticsProxy>();
-    BrainCloudClient::getInstance()->getPlayerStatisticsService()->readPlayerStatisticsByCategory(category, Proxy);
+    BrainCloudClient::getInstance()->getPlayerStatisticsService()->readUserStatisticsByCategory(category, Proxy);
     return Proxy;
 }
 
 UBCPlayerStatisticsProxy* UBCPlayerStatisticsProxy::ResetAllPlayerStats()
 {
+	UBCPlayerStatisticsProxy* Proxy = NewObject<UBCPlayerStatisticsProxy>();
+	BrainCloudClient::getInstance()->getPlayerStatisticsService()->resetAllUserStats(Proxy);
+	return Proxy;
+}
+
+UBCPlayerStatisticsProxy* UBCPlayerStatisticsProxy::ResetAllUserStats()
+{
     UBCPlayerStatisticsProxy* Proxy = NewObject<UBCPlayerStatisticsProxy>();
-    BrainCloudClient::getInstance()->getPlayerStatisticsService()->resetAllPlayerStats(Proxy);
+    BrainCloudClient::getInstance()->getPlayerStatisticsService()->resetAllUserStats(Proxy);
     return Proxy;
 }
 
 UBCPlayerStatisticsProxy* UBCPlayerStatisticsProxy::IncrementPlayerStats(FString jsonData)
 {
+	UBCPlayerStatisticsProxy* Proxy = NewObject<UBCPlayerStatisticsProxy>();
+	BrainCloudClient::getInstance()->getPlayerStatisticsService()->incrementUserStats(jsonData, Proxy);
+	return Proxy;
+}
+
+UBCPlayerStatisticsProxy* UBCPlayerStatisticsProxy::IncrementUserStats(FString jsonData)
+{
     UBCPlayerStatisticsProxy* Proxy = NewObject<UBCPlayerStatisticsProxy>();
-    BrainCloudClient::getInstance()->getPlayerStatisticsService()->incrementPlayerStats(jsonData, Proxy);
+    BrainCloudClient::getInstance()->getPlayerStatisticsService()->incrementUserStats(jsonData, Proxy);
     return Proxy;
 }
 

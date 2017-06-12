@@ -44,6 +44,8 @@ public:
 	static const ServiceOperation SendNormalizedToGroup;
 	static const ServiceOperation SendNormalized;
 	static const ServiceOperation SendNormalizedBatch;
+	static const ServiceOperation ScheduleNormalizedNotifcation;
+	static const ServiceOperation ScheduledRichNotifcation;
 
 	static const ServiceOperation Trigger;
 	static const ServiceOperation TriggerMultiple;
@@ -203,6 +205,8 @@ public:
 	static const ServiceOperation AddEvent;
 	static const ServiceOperation GetStreamSummariesForInitiatingPlayer;
 	static const ServiceOperation GetStreamSummariesForTargetPlayer;
+	static const ServiceOperation GetRecentStreamsForInitiatingPlayer;
+	static const ServiceOperation GetRecentStreamsForTargetPlayer;
 
 	static const ServiceOperation GetUserInfo;
 
@@ -294,6 +298,7 @@ public:
 	//mail
 	static const ServiceOperation SendBasicEmail;
 	static const ServiceOperation SendAdvancedEmail;
+	static const ServiceOperation SendAdvancedEmailByAddress;
 
 	//tournament
 	static const ServiceOperation GetTournamentStatus;

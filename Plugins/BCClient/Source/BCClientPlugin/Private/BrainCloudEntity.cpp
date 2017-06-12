@@ -88,30 +88,51 @@ void BrainCloudEntity::deleteSingleton(const FString& entityType, IServerCallbac
     _client->sendRequest(sc);
 }
 
-void BrainCloudEntity::getSharedEntityForPlayerId(const FString & playerId, const FString & entityId, IServerCallback * callback)
+
+void BrainCloudEntity::getSharedEntityForPlayerId(const FString &profileId, const FString &entityId, IServerCallback *callback)
 {
     TSharedRef<FJsonObject> message = MakeShareable(new FJsonObject());
-    message->SetStringField(OperationParam::EntityServiceTargetPlayerId.getValue(), playerId);
+    message->SetStringField(OperationParam::EntityServiceTargetPlayerId.getValue(), profileId);
     message->SetStringField(OperationParam::EntityServiceEntityId.getValue(), entityId);
 
     ServerCall * sc = new ServerCall(ServiceName::Entity, ServiceOperation::ReadSharedEntity, message, callback);
     _client->sendRequest(sc);
 }
 
-void BrainCloudEntity::getSharedEntitiesForPlayerId(const FString& playerId, IServerCallback* callback)
+void BrainCloudEntity::getSharedEntityForProfileId(const FString &profileId, const FString &entityId, IServerCallback *callback)
 {
     TSharedRef<FJsonObject> message = MakeShareable(new FJsonObject());
-    message->SetStringField(OperationParam::EntityServiceTargetPlayerId.getValue(), playerId);
+    message->SetStringField(OperationParam::EntityServiceTargetPlayerId.getValue(), profileId);
+    message->SetStringField(OperationParam::EntityServiceEntityId.getValue(), entityId);
+
+    ServerCall * sc = new ServerCall(ServiceName::Entity, ServiceOperation::ReadSharedEntity, message, callback);
+    _client->sendRequest(sc);
+}
+
+void BrainCloudEntity::getSharedEntitiesForPlayerId(const FString &profileId, IServerCallback *callback)
+{
+    TSharedRef<FJsonObject> message = MakeShareable(new FJsonObject());
+    message->SetStringField(OperationParam::EntityServiceTargetPlayerId.getValue(), profileId);
 
     ServerCall * sc = new ServerCall(ServiceName::Entity, ServiceOperation::ReadShared, message, callback);
     _client->sendRequest(sc);
 }
 
-void BrainCloudEntity::getSharedEntitiesListForPlayerId(const FString& playerId, const FString& whereJson, const FString& orderByJson, int32 maxReturn, IServerCallback * callback)
+
+void BrainCloudEntity::getSharedEntitiesForProfileId(const FString &profileId, IServerCallback *callback)
+{
+    TSharedRef<FJsonObject> message = MakeShareable(new FJsonObject());
+    message->SetStringField(OperationParam::EntityServiceTargetPlayerId.getValue(), profileId);
+
+    ServerCall * sc = new ServerCall(ServiceName::Entity, ServiceOperation::ReadShared, message, callback);
+    _client->sendRequest(sc);
+}
+
+void BrainCloudEntity::getSharedEntitiesListForPlayerId(const FString &profileId, const FString &whereJson, const FString &orderByJson, int32 maxReturn, IServerCallback *callback)
 {
     TSharedRef<FJsonObject> message = MakeShareable(new FJsonObject());
 
-    message->SetStringField(OperationParam::EntityServiceTargetPlayerId.getValue(), playerId);
+    message->SetStringField(OperationParam::EntityServiceTargetPlayerId.getValue(), profileId);
     if (OperationParam::isOptionalParamValid(whereJson))
         message->SetObjectField(OperationParam::GlobalEntityServiceWhere.getValue(), JsonUtil::jsonStringToValue(whereJson));
 
@@ -124,11 +145,29 @@ void BrainCloudEntity::getSharedEntitiesListForPlayerId(const FString& playerId,
     _client->sendRequest(sc);
 }
 
-void BrainCloudEntity::updateSharedEntity(const FString& entityId, const FString& targetPlayerId, const FString& entityType, const FString& jsonEntityData, IServerCallback* callback)
+
+void BrainCloudEntity::getSharedEntitiesListForProfileId(const FString &profileId, const FString &whereJson, const FString &orderByJson, int32 maxReturn, IServerCallback *callback)
+{
+    TSharedRef<FJsonObject> message = MakeShareable(new FJsonObject());
+
+    message->SetStringField(OperationParam::EntityServiceTargetPlayerId.getValue(), profileId);
+    if (OperationParam::isOptionalParamValid(whereJson))
+        message->SetObjectField(OperationParam::GlobalEntityServiceWhere.getValue(), JsonUtil::jsonStringToValue(whereJson));
+
+    if (OperationParam::isOptionalParamValid(orderByJson))
+        message->SetObjectField(OperationParam::GlobalEntityServiceOrderBy.getValue(), JsonUtil::jsonStringToValue(orderByJson));
+
+    message->SetNumberField(OperationParam::GlobalEntityServiceMaxReturn.getValue(), maxReturn);
+
+    ServerCall * sc = new ServerCall(ServiceName::Entity, ServiceOperation::ReadSharedEntitesList, message, callback);
+    _client->sendRequest(sc);
+}
+
+void BrainCloudEntity::updateSharedEntity(const FString& entityId, const FString& targetProfileId, const FString& entityType, const FString& jsonEntityData, IServerCallback* callback)
 {
     TSharedRef<FJsonObject> message = MakeShareable(new FJsonObject());
     message->SetStringField(OperationParam::EntityServiceEntityId.getValue(), entityId);
-    message->SetStringField(OperationParam::EntityServiceTargetPlayerId.getValue(), targetPlayerId);
+    message->SetStringField(OperationParam::EntityServiceTargetPlayerId.getValue(), targetProfileId);
     message->SetStringField(OperationParam::EntityServiceEntityType.getValue(), entityType);
     message->SetObjectField(OperationParam::EntityServiceData.getValue(), JsonUtil::jsonStringToValue(jsonEntityData));
 
@@ -190,11 +229,11 @@ void BrainCloudEntity::incrementUserEntityData(const FString& entityId, const FS
     _client->sendRequest(sc);
 }
 
-void BrainCloudEntity::incrementSharedUserEntityData(const FString& entityId, const FString& targetPlayerId, const FString& jsonData, IServerCallback * callback)
+void BrainCloudEntity::incrementSharedUserEntityData(const FString& entityId, const FString& targetProfileId, const FString& jsonData, IServerCallback * callback)
 {
 	TSharedRef<FJsonObject> message = MakeShareable(new FJsonObject());
 	message->SetStringField(OperationParam::EntityServiceEntityId.getValue(), entityId);
-	message->SetStringField(OperationParam::EntityServiceTargetPlayerId.getValue(), targetPlayerId);
+	message->SetStringField(OperationParam::EntityServiceTargetPlayerId.getValue(), targetProfileId);
 	message->SetObjectField(OperationParam::EntityServiceData.getValue(), JsonUtil::jsonStringToValue(jsonData));
 
 	ServerCall * sc = new ServerCall(ServiceName::Entity, ServiceOperation::IncrementSharedUserEntityData, message, callback);
