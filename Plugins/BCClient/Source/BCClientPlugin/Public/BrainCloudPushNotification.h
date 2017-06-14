@@ -106,6 +106,65 @@ public:
     */
     void sendNormalizedPushNotificationToGroup(const FString& groupId, const FString& alertContentJson, const FString& customDataJson, IServerCallback * callback = nullptr);
 
+
+	/**
+	* Schedules a normalized push notification to a user
+	*
+	* @param profileId The profileId of the user to receive the notification
+	* @param fcmContent Valid Fcm data content
+	* @param iosContent Valid ios data content
+	* @param facebookContent Facebook template string
+	* @param startTime Start time of sending the push notification
+	* @param callback The method to be invoked when the server response is received
+	*/
+	void scheduleRawPushNotificationUTC(const FString& profileId, const FString& fcmContent, const FString& iosContent, const FString& facebookContent, int32 startTime, IServerCallback * callback = NULL);
+
+	/**
+	* Schedules a normalized push notification to a user
+	*
+	* @param profileId The profileId of the user to receive the notification
+	* @param fcmContent Valid Fcm data content
+	* @param iosContent Valid ios data content
+	* @param facebookContent Facebook template string
+	* @param minutesFromNow Minutes from now to send the push notification
+	* @param callback The method to be invoked when the server response is received
+	*/
+	void scheduleRawPushNotificationMinutes(const FString& profileId, const FString& fcmContent, const FString& iosContent, const FString& facebookContent, int32 minutesFromNow, IServerCallback * callback = NULL);
+
+	/**
+	* Sends a raw push notification to a target user.
+	*
+	* @param toProfileId The profileId of the user to receive the notification
+	* @param fcmContent Valid Fcm data content
+	* @param iosContent Valid ios data content
+	* @param facebookContent Facebook template string
+	* @param callback The method to be invoked when the server response is received
+	*/
+	void sendRawPushNotification(const FString& profileId, const FString& fcmContent, const FString& iosContent, const FString& facebookContent, IServerCallback * callback = NULL);
+
+	/**
+	* Sends a raw push notification to a target list of users.
+	*
+	* @param profileIds Collection of profile IDs to send the notification to
+	* @param fcmContent Valid Fcm data content
+	* @param iosContent Valid ios data content
+	* @param facebookContent Facebook template string
+	* @param callback The method to be invoked when the server response is received
+	*/
+	void sendRawPushNotificationBatch(const TArray<FString> profileIds, const FString& fcmContent, const FString& iosContent, const FString& facebookContent, IServerCallback * callback = NULL);
+
+	/**
+	* Sends a raw push notification to a target group.
+	*
+	* @param groupId Target group
+	* @param fcmContent Valid Fcm data content
+	* @param iosContent Valid ios data content
+	* @param facebookContent Facebook template stringn
+	* @param callback The method to be invoked when the server response is received
+	*/
+	void sendRawPushNotificationToGroup(const FString& groupId, const FString& fcmContent, const FString& iosContent, const FString& facebookContent, IServerCallback * callback = NULL);
+
+
 	/**
 	* Schedules a normalized push notification to a user
 	*

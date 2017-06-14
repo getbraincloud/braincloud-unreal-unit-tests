@@ -102,6 +102,119 @@ void BrainCloudPushNotification::sendNormalizedPushNotificationToGroup(const FSt
     _client->sendRequest(sc);
 }
 
+void BrainCloudPushNotification::scheduleRawPushNotificationUTC(const FString& profileId, const FString& fcmContent, const FString& iosContent, const FString& facebookContent, int32 startTime, IServerCallback * callback)
+{
+	TSharedRef<FJsonObject> message = MakeShareable(new FJsonObject());
+	message->SetStringField(OperationParam::GroupId.getValue(), profileId);
+	message->SetObjectField(OperationParam::AlertContent.getValue(), JsonUtil::jsonStringToValue(fcmContent));
+
+	Json::Value message;
+	message[OperationParam::ProfileId.getValue()] = in_profileId;
+
+	if (StringUtil::IsOptionalParameterValid(in_fcmContent)) {
+		message[OperationParam::FcmContent.getValue()] = JsonUtil::jsonStringToValue(in_fcmContent);
+	}
+
+	if (StringUtil::IsOptionalParameterValid(in_iosContent)) {
+		message[OperationParam::IosContent.getValue()] = JsonUtil::jsonStringToValue(in_iosContent);
+	}
+
+	if (StringUtil::IsOptionalParameterValid(in_facebookContent)) {
+		message[OperationParam::FacebookContent.getValue()] = JsonUtil::jsonStringToValue(in_facebookContent);
+	}
+
+	message[OperationParam::StartDateUTC.getValue()] = in_startTime;
+
+	ServerCall * sc = new ServerCall(ServiceName::PushNotification, ServiceOperation::ScheduleRawNotification, message, in_callback);
+	m_client->getBrainCloudComms()->addToQueue(sc);
+}
+
+void BrainCloudPushNotification::scheduleRawPushNotificationMinutes(const FString& profileId, const FString& fcmContent, const FString& iosContent, const FString& facebookContent, int32 minutesFromNow, IServerCallback * callback)
+{
+	Json::Value message;
+	message[OperationParam::ProfileId.getValue()] = in_profileId;
+
+	if (StringUtil::IsOptionalParameterValid(in_fcmContent)) {
+		message[OperationParam::FcmContent.getValue()] = JsonUtil::jsonStringToValue(in_fcmContent);
+	}
+
+	if (StringUtil::IsOptionalParameterValid(in_iosContent)) {
+		message[OperationParam::IosContent.getValue()] = JsonUtil::jsonStringToValue(in_iosContent);
+	}
+
+	if (StringUtil::IsOptionalParameterValid(in_facebookContent)) {
+		message[OperationParam::FacebookContent.getValue()] = JsonUtil::jsonStringToValue(in_facebookContent);
+	}
+
+	message[OperationParam::MinutesFromNow.getValue()] = in_minutesFromNow;
+
+	ServerCall * sc = new ServerCall(ServiceName::PushNotification, ServiceOperation::ScheduleRawNotification, message, in_callback);
+	m_client->getBrainCloudComms()->addToQueue(sc);
+}
+
+void BrainCloudPushNotification::sendRawPushNotification(const FString& profileId, const FString& fcmContent, const FString& iosContent, const FString& facebookContent, IServerCallback * callback)
+{
+	Json::Value message;
+	message[OperationParam::ProfileId.getValue()] = in_profileId;
+
+	if (StringUtil::IsOptionalParameterValid(in_fcmContent)) {
+		message[OperationParam::FcmContent.getValue()] = JsonUtil::jsonStringToValue(in_fcmContent);
+	}
+
+	if (StringUtil::IsOptionalParameterValid(in_iosContent)) {
+		message[OperationParam::IosContent.getValue()] = JsonUtil::jsonStringToValue(in_iosContent);
+	}
+
+	if (StringUtil::IsOptionalParameterValid(in_facebookContent)) {
+		message[OperationParam::FacebookContent.getValue()] = JsonUtil::jsonStringToValue(in_facebookContent);
+	}
+
+	ServerCall * sc = new ServerCall(ServiceName::PushNotification, ServiceOperation::SendRaw, message, in_callback);
+	m_client->getBrainCloudComms()->addToQueue(sc);
+}
+
+void BrainCloudPushNotification::sendRawPushNotificationBatch(const TArray<FString> profileIds, const FString& fcmContent, const FString& iosContent, const FString& facebookContent, IServerCallback * callback)
+{
+	Json::Value message;
+	message[OperationParam::ProfileId.getValue()] = JsonUtil::stringVectorToJson(in_profileIds);
+
+	if (StringUtil::IsOptionalParameterValid(in_fcmContent)) {
+		message[OperationParam::FcmContent.getValue()] = JsonUtil::jsonStringToValue(in_fcmContent);
+	}
+
+	if (StringUtil::IsOptionalParameterValid(in_iosContent)) {
+		message[OperationParam::IosContent.getValue()] = JsonUtil::jsonStringToValue(in_iosContent);
+	}
+
+	if (StringUtil::IsOptionalParameterValid(in_facebookContent)) {
+		message[OperationParam::FacebookContent.getValue()] = JsonUtil::jsonStringToValue(in_facebookContent);
+	}
+
+	ServerCall * sc = new ServerCall(ServiceName::PushNotification, ServiceOperation::SendRawBatch, message, in_callback);
+	m_client->getBrainCloudComms()->addToQueue(sc);
+}
+
+void BrainCloudPushNotification::sendRawPushNotificationToGroup(const FString& groupId, const FString& fcmContent, const FString& iosContent, const FString& facebookContent, IServerCallback * callback)
+{
+	Json::Value message;
+	message[OperationParam::GroupId.getValue()] = in_groupId;
+
+	if (StringUtil::IsOptionalParameterValid(in_fcmContent)) {
+		message[OperationParam::FcmContent.getValue()] = JsonUtil::jsonStringToValue(in_fcmContent);
+	}
+
+	if (StringUtil::IsOptionalParameterValid(in_iosContent)) {
+		message[OperationParam::IosContent.getValue()] = JsonUtil::jsonStringToValue(in_iosContent);
+	}
+
+	if (StringUtil::IsOptionalParameterValid(in_facebookContent)) {
+		message[OperationParam::FacebookContent.getValue()] = JsonUtil::jsonStringToValue(in_facebookContent);
+	}
+
+	ServerCall * sc = new ServerCall(ServiceName::PushNotification, ServiceOperation::SendRawBatch, message, in_callback);
+	m_client->getBrainCloudComms()->addToQueue(sc);
+}
+
 void BrainCloudPushNotification::scheduleNormalizedPushNotificationUTC(const FString& profileId, const FString& alertContentJson, const FString& customDataJson, const int32 startTime, IServerCallback * callback)
 {
 	TSharedRef<FJsonObject> message = MakeShareable(new FJsonObject());

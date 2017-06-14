@@ -17,6 +17,9 @@ public:
 	static const OperationParam CustomData;
 	static const OperationParam StartTimeUTC;
 	static const OperationParam MinutesFromNow;
+	static const OperationParam FcmContent;
+	static const OperationParam IosContent;
+	static const OperationParam FacebookContent;
 
 	//Push Notification Service - Register Params
 	static const OperationParam PushNotificationRegisterParamDeviceType;
