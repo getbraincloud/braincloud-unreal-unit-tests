@@ -94,53 +94,71 @@ TEST_F(TestBCPushNotifications, SendNormalizedPushNotificationToGroup)
     tr.run(m_bc);
 }
 
-TEST_F(TestBCPushNotifications, ScheduleNormalizedPushNotificationUTC)
+TEST_F(TestBCPushNotifications, ScheduleRawPushNotificationUTC)
 {
     TestResult tr;
 
-    Json::FastWriter fw;
-    Json::Value data;
-    data["body"] = "content of message";
-    data["title"] = "message title";
+    std::string fcmContent =  "{ \"notification\": { \"body\": \"content of message\", \"title\": \"message title\" }, \"data\": { \"customfield1\": \"customValue1\", \"customfield2\": \"customValue2\" }, \"priority\": \"normal\" }";
+    std::string iosContent = "{ \"aps\": { \"alert\": { \"body\": \"content of message\", \"title\": \"message title\" }, \"badge\": 0, \"sound\": \"gggg\" } }";
+    std::string facebookContent = "{\"template\": \"content of message\"}";
 
     int32_t startTime = 0;
 
-    m_bc->getPushNotificationService()->scheduleNormalizedPushNotificationUTC(GetUser(UserA)->m_profileId, fw.write(data), "", startTime, &tr);
+    m_bc->getPushNotificationService()->scheduleRawPushNotificationUTC(GetUser(UserA)->m_profileId, fcmContent, iosContent, facebookContent, startTime, &tr);
     tr.run(m_bc);
 }
 
-TEST_F(TestBCPushNotifications, ScheduleNormalizedPushNotificationMinutes)
+TEST_F(TestBCPushNotifications, ScheduleRawPushNotificationMinutes)
 {
     TestResult tr;
 
-    Json::FastWriter fw;
-    Json::Value data;
-    data["body"] = "content of message";
-    data["title"] = "message title";
+    std::string fcmContent =  "{ \"notification\": { \"body\": \"content of message\", \"title\": \"message title\" }, \"data\": { \"customfield1\": \"customValue1\", \"customfield2\": \"customValue2\" }, \"priority\": \"normal\" }";
+    std::string iosContent = "{ \"aps\": { \"alert\": { \"body\": \"content of message\", \"title\": \"message title\" }, \"badge\": 0, \"sound\": \"gggg\" } }";
+    std::string facebookContent = "{\"template\": \"content of message\"}";
 
     int32_t minutesFromNow = 0;
 
-    m_bc->getPushNotificationService()->scheduleNormalizedPushNotificationMinutes(GetUser(UserA)->m_profileId, fw.write(data), "", minutesFromNow, &tr);
+    m_bc->getPushNotificationService()->scheduleRawPushNotificationMinutes(GetUser(UserA)->m_profileId, fcmContent, iosContent, facebookContent, minutesFromNow, &tr);
     tr.run(m_bc);
 }
 
-TEST_F(TestBCPushNotifications, ScheduleRichPushNotificationUTC)
+TEST_F(TestBCPushNotifications, SendRawPushNotification)
 {
     TestResult tr;
 
-    int32_t startTime = 0;
+    std::string fcmContent =  "{ \"notification\": { \"body\": \"content of message\", \"title\": \"message title\" }, \"data\": { \"customfield1\": \"customValue1\", \"customfield2\": \"customValue2\" }, \"priority\": \"normal\" }";
+    std::string iosContent = "{ \"aps\": { \"alert\": { \"body\": \"content of message\", \"title\": \"message title\" }, \"badge\": 0, \"sound\": \"gggg\" } }";
+    std::string facebookContent = "{\"template\": \"content of message\"}";
 
-    m_bc->getPushNotificationService()->scheduleRichPushNotificationUTC(GetUser(UserA)->m_profileId, 1, "", startTime, &tr);
+    m_bc->getPushNotificationService()->sendRawPushNotification(GetUser(UserA)->m_profileId, fcmContent, iosContent, facebookContent, &tr);
     tr.run(m_bc);
 }
 
-TEST_F(TestBCPushNotifications, ScheduleRichPushNotificationMinutes)
+TEST_F(TestBCPushNotifications, SendRawPushNotificationBatch)
 {
     TestResult tr;
 
-    int32_t minutesFromNow = 0;
+    std::vector<std::string> profileIds;
+    profileIds.push_back(GetUser(UserA)->m_profileId);
+    profileIds.push_back(GetUser(UserB)->m_profileId);
 
-    m_bc->getPushNotificationService()->scheduleRichPushNotificationMinutes(GetUser(UserA)->m_profileId, 1, "", minutesFromNow, &tr);
+    std::string fcmContent =  "{ \"notification\": { \"body\": \"content of message\", \"title\": \"message title\" }, \"data\": { \"customfield1\": \"customValue1\", \"customfield2\": \"customValue2\" }, \"priority\": \"normal\" }";
+    std::string iosContent = "{ \"aps\": { \"alert\": { \"body\": \"content of message\", \"title\": \"message title\" }, \"badge\": 0, \"sound\": \"gggg\" } }";
+    std::string facebookContent = "{\"template\": \"content of message\"}";
+
+    m_bc->getPushNotificationService()->sendRawPushNotificationBatch(profileIds, fcmContent, iosContent, facebookContent, &tr);
+    tr.run(m_bc);
+}
+
+TEST_F(TestBCPushNotifications, SendRawPushNotificationToGroup)
+{
+    TestResult tr;
+
+    std::string fcmContent =  "{ \"notification\": { \"body\": \"content of message\", \"title\": \"message title\" }, \"data\": { \"customfield1\": \"customValue1\", \"customfield2\": \"customValue2\" }, \"priority\": \"normal\" }";
+    std::string iosContent = "{ \"aps\": { \"alert\": { \"body\": \"content of message\", \"title\": \"message title\" }, \"badge\": 0, \"sound\": \"gggg\" } }";
+    std::string facebookContent = "{\"template\": \"content of message\"}";
+
+    m_bc->getPushNotificationService()->sendRawPushNotificationToGroup(GetUser(UserA)->m_profileId, fcmContent, iosContent, facebookContent, &tr);
     tr.run(m_bc);
 }
 

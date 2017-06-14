@@ -11,6 +11,9 @@ namespace BrainCloud
 	const OperationParam OperationParam::CustomData = OperationParam("customData");
 	const OperationParam OperationParam::StartDateUTC = OperationParam("startDateUTC");
 	const OperationParam OperationParam::MinutesFromNow = OperationParam("minutesFromNow");
+	const OperationParam OperationParam::FcmContent = OperationParam("fcmContent");
+	const OperationParam OperationParam::IosContent = OperationParam("iosContent");
+	const OperationParam OperationParam::FacebookContent = OperationParam("facebookContent");
 
 	//Push Notification Service - Register Params
 	const OperationParam OperationParam::PushNotificationRegisterParamDeviceType = OperationParam("deviceType");

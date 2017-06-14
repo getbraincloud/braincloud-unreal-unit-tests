@@ -103,6 +103,63 @@ namespace BrainCloud
         void sendNormalizedPushNotificationToGroup(const char * in_groupId, std::string in_alertContentJson, std::string in_customDataJson, IServerCallback * in_callback = NULL);
 
 		/**
+     	* Schedules a normalized push notification to a user
+     	*
+     	* @param in_profileId The profileId of the user to receive the notification
+     	* @param in_fcmContent Valid Fcm data content
+     	* @param in_iosContent Valid ios data content
+     	* @param in_facebookContent Facebook template string
+     	* @param in_startTime Start time of sending the push notification
+     	* @param in_callback The method to be invoked when the server response is received
+     	*/
+		void scheduleRawPushNotificationUTC(const char * in_profileId, std::string in_fcmContent, std::string in_iosContent, std::string in_facebookContent, int32_t in_startTime, IServerCallback * in_callback = NULL);
+
+		/**
+     	* Schedules a normalized push notification to a user
+     	*
+     	* @param in_profileId The profileId of the user to receive the notification
+     	* @param in_fcmContent Valid Fcm data content
+     	* @param in_iosContent Valid ios data content
+     	* @param in_facebookContent Facebook template string
+     	* @param minutesFromNow Minutes from now to send the push notification
+		* @param callback The method to be invoked when the server response is received
+     	*/
+		void scheduleRawPushNotificationMinutes(const char * in_profileId, std::string in_fcmContent, std::string in_iosContent, std::string in_facebookContent, int32_t in_minutesFromNow, IServerCallback * in_callback = NULL);
+
+		/**
+     	* Sends a raw push notification to a target user.
+     	*
+     	* @param toProfileId The profileId of the user to receive the notification
+ 		* @param fcmContent Valid Fcm data content
+ 		* @param iosContent Valid ios data content
+ 		* @param facebookContent Facebook template string
+ 		* @param callback The method to be invoked when the server response is received
+     	*/
+		void sendRawPushNotification(const char * in_profileId, std::string in_fcmContent, std::string in_iosContent, std::string in_facebookContent, IServerCallback * in_callback = NULL);
+
+		/**
+     	* Sends a raw push notification to a target list of users.
+     	*
+     	* @param in_profileIds Collection of profile IDs to send the notification to
+     	* @param in_fcmContent Valid Fcm data content
+     	* @param in_iosContent Valid ios data content
+     	* @param in_facebookContent Facebook template string
+     	* @param in_callback The method to be invoked when the server response is received
+     	*/
+		void sendRawPushNotificationBatch(std::vector<std::string> in_profileIds, std::string in_fcmContent, std::string in_iosContent, std::string in_facebookContent, IServerCallback * in_callback = NULL);
+
+		/**
+     	* Sends a raw push notification to a target group.
+     	*
+     	* @param in_groupId Target group
+     	* @param in_fcmContent Valid Fcm data content
+     	* @param in_iosContent Valid ios data content
+     	* @param in_facebookContent Facebook template stringn
+     	* @param in_callback The method to be invoked when the server response is received
+     	*/
+		void sendRawPushNotificationToGroup(const char * in_groupId, std::string in_fcmContent, std::string in_iosContent, std::string in_facebookContent, IServerCallback * in_callback = NULL);
+
+		/**
 		* Schedules a normalized push notification to a user
 	    *
 		* @param in_toProfileId The profileId of the user to receive the notification
