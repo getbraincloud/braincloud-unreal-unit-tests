@@ -199,7 +199,7 @@ namespace BrainCloud
 			message[OperationParam::FacebookContent.getValue()] = JsonUtil::jsonStringToValue(in_facebookContent);
 		}
 
-		ServerCall * sc = new ServerCall(ServiceName::PushNotification, ServiceOperation::SendRawBatch, message, in_callback);
+		ServerCall * sc = new ServerCall(ServiceName::PushNotification, ServiceOperation::SendRawToGroup, message, in_callback);
 		m_client->getBrainCloudComms()->addToQueue(sc);
 	}
 
