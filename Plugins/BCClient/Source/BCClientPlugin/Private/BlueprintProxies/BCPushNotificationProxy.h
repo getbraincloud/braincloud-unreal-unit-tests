@@ -104,6 +104,68 @@ public:
 	* Schedules a normalized push notification to a user
 	*
 	* Param - profileId The profileId of the user to receive the notification
+	* Param - fcmContent Valid Fcm data content
+	* Param - iosContent Valid ios data content
+	* Param - facebookContent Facebook template string
+	* Param - startTime Start time of sending the push notification
+	* Param - callback The method to be invoked when the server response is received
+	*/
+	UFUNCTION(BlueprintCallable, meta = (BlueprintInternalUseOnly = "true"), Category = "BrainCloud|Push Notification")
+		static UBCPushNotificationProxy* ScheduleRawPushNotificationUTC(const FString& profileId, const FString& fcmContent, const FString& iosContent, const FString& facebookContent, int32 startTime);
+
+	/**
+	* Schedules a normalized push notification to a user
+	*
+	* Param - profileId The profileId of the user to receive the notification
+	* Param - fcmContent Valid Fcm data content
+	* Param - iosContent Valid ios data content
+	* Param - facebookContent Facebook template string
+	* Param - minutesFromNow Minutes from now to send the push notification
+	* Param - callback The method to be invoked when the server response is received
+	*/
+	UFUNCTION(BlueprintCallable, meta = (BlueprintInternalUseOnly = "true"), Category = "BrainCloud|Push Notification")
+		static UBCPushNotificationProxy* ScheduleRawPushNotificationMinutes(const FString& profileId, const FString& fcmContent, const FString& iosContent, const FString& facebookContent, int32 minutesFromNow);
+
+	/**
+	* Sends a raw push notification to a target user.
+	*
+	* Param - toProfileId The profileId of the user to receive the notification
+	* Param - fcmContent Valid Fcm data content
+	* Param - iosContent Valid ios data content
+	* Param - facebookContent Facebook template string
+	* Param - callback The method to be invoked when the server response is received
+	*/
+	UFUNCTION(BlueprintCallable, meta = (BlueprintInternalUseOnly = "true"), Category = "BrainCloud|Push Notification")
+		static UBCPushNotificationProxy* SendRawPushNotification(const FString& profileId, const FString& fcmContent, const FString& iosContent, const FString& facebookContent);
+
+	/**
+	* Sends a raw push notification to a target list of users.
+	*
+	* Param - profileIds Collection of profile IDs to send the notification to
+	* Param - fcmContent Valid Fcm data content
+	* Param - iosContent Valid ios data content
+	* Param - facebookContent Facebook template string
+	* Param - callback The method to be invoked when the server response is received
+	*/
+	UFUNCTION(BlueprintCallable, meta = (BlueprintInternalUseOnly = "true"), Category = "BrainCloud|Push Notification")
+		static UBCPushNotificationProxy* SendRawPushNotificationBatch(const TArray<FString> profileIds, const FString& fcmContent, const FString& iosContent, const FString& facebookContent);
+
+	/**
+	* Sends a raw push notification to a target group.
+	*
+	* Param - groupId Target group
+	* Param - fcmContent Valid Fcm data content
+	* Param - iosContent Valid ios data content
+	* Param - facebookContent Facebook template stringn
+	* Param - callback The method to be invoked when the server response is received
+	*/
+	UFUNCTION(BlueprintCallable, meta = (BlueprintInternalUseOnly = "true"), Category = "BrainCloud|Push Notification")
+		static UBCPushNotificationProxy* SendRawPushNotificationToGroup(const FString& groupId, const FString& fcmContent, const FString& iosContent, const FString& facebookContent);
+
+	/**
+	* Schedules a normalized push notification to a user
+	*
+	* Param - profileId The profileId of the user to receive the notification
 	* Param - alertContentJson Body and title of alert
 	* Param - customDataJson Optional custom data
 	* Param - startTime Start time of sending the push notification

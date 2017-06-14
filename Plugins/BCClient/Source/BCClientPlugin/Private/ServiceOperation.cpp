@@ -49,6 +49,7 @@ const ServiceOperation ServiceOperation::SendNormalized = ServiceOperation(TEXT(
 const ServiceOperation ServiceOperation::SendNormalizedBatch = ServiceOperation(TEXT("SEND_NORMALIZED_BATCH"));
 const ServiceOperation ServiceOperation::ScheduleNormalizedNotifcation = ServiceOperation(TEXT("SCHEDULE_NORMALIZED_NOTIFICATION"));
 const ServiceOperation ServiceOperation::ScheduledRichNotifcation = ServiceOperation(TEXT("SCHEDULE_RICH_NOTIFICATION"));
+const ServiceOperation ServiceOperation::ScheduledRawNotifcation = ServiceOperation(TEXT("SCHEDULE_RAW_NOTIFICATION"));
 
 const ServiceOperation ServiceOperation::Trigger = ServiceOperation(TEXT("TRIGGER"));
 const ServiceOperation ServiceOperation::TriggerMultiple = ServiceOperation(TEXT("TRIGGER_MULTIPLE"));

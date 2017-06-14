@@ -46,6 +46,7 @@ public:
 	static const ServiceOperation SendNormalizedBatch;
 	static const ServiceOperation ScheduleNormalizedNotifcation;
 	static const ServiceOperation ScheduledRichNotifcation;
+	static const ServiceOperation ScheduledRawNotifcation;
 
 	static const ServiceOperation Trigger;
 	static const ServiceOperation TriggerMultiple;

@@ -18,6 +18,10 @@ OperationParam::OperationParam(const FString& operation)
 	const OperationParam OperationParam::CustomData = OperationParam(TEXT("customData"));
 	const OperationParam OperationParam::StartTimeUTC = OperationParam(TEXT("startDateUTC"));
 	const OperationParam OperationParam::MinutesFromNow = OperationParam(TEXT("minutesFromNow"));
+	const OperationParam OperationParam::FcmContent = OperationParam(TEXT("fcmContent"));
+	const OperationParam OperationParam::IosContent = OperationParam(TEXT("iosContent"));
+	const OperationParam OperationParam::FacebookContent = OperationParam(TEXT("facebookContent"));
+
 
 	//Push Notification Service - Register Params
 	const OperationParam OperationParam::PushNotificationRegisterParamDeviceType = OperationParam(TEXT("deviceType"));
