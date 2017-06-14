@@ -40,6 +40,9 @@ public:
 	static const ServiceOperation Register;
 	static const ServiceOperation SendSimple;
 	static const ServiceOperation SendRich;
+	static const ServiceOperation SendRaw;
+	static const ServiceOperation SendRawBatch;
+	static const ServiceOperation SendRawToGroup;
 	static const ServiceOperation SendTemplatedToGroup;
 	static const ServiceOperation SendNormalizedToGroup;
 	static const ServiceOperation SendNormalized;

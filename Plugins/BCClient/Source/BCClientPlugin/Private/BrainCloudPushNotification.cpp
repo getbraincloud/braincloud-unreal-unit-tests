@@ -174,7 +174,7 @@ void BrainCloudPushNotification::sendRawPushNotification(const FString& profileI
 		message->SetObjectField(OperationParam::FacebookContent.getValue(), JsonUtil::jsonStringToValue(facebookContent));
 	}
 
-	ServerCall * sc = new ServerCall(ServiceName::PushNotification, ServiceOperation::ScheduledRawNotifcation, message, callback);
+	ServerCall * sc = new ServerCall(ServiceName::PushNotification, ServiceOperation::SendRaw, message, callback);
 	_client->sendRequest(sc);
 }
 
@@ -198,7 +198,7 @@ void BrainCloudPushNotification::sendRawPushNotificationBatch(const TArray<FStri
 		message->SetObjectField(OperationParam::FacebookContent.getValue(), JsonUtil::jsonStringToValue(facebookContent));
 	}
 
-	ServerCall * sc = new ServerCall(ServiceName::PushNotification, ServiceOperation::ScheduledRawNotifcation, message, callback);
+	ServerCall * sc = new ServerCall(ServiceName::PushNotification, ServiceOperation::SendRawBatch, message, callback);
 	_client->sendRequest(sc);
 }
 
@@ -222,7 +222,7 @@ void BrainCloudPushNotification::sendRawPushNotificationToGroup(const FString& g
 		message->SetObjectField(OperationParam::FacebookContent.getValue(), JsonUtil::jsonStringToValue(facebookContent));
 	}
 
-	ServerCall * sc = new ServerCall(ServiceName::PushNotification, ServiceOperation::ScheduledRawNotifcation, message, callback);
+	ServerCall * sc = new ServerCall(ServiceName::PushNotification, ServiceOperation::SendRawToGroup, message, callback);
 	_client->sendRequest(sc);
 }
 
