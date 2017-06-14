@@ -157,7 +157,7 @@ void BrainCloudPushNotification::scheduleRawPushNotificationMinutes(const FStrin
 void BrainCloudPushNotification::sendRawPushNotification(const FString& profileId, const FString& fcmContent, const FString& iosContent, const FString& facebookContent, IServerCallback * callback)
 {
 	TSharedRef<FJsonObject> message = MakeShareable(new FJsonObject());
-	message->SetStringField(OperationParam::ProfileId.getValue(), profileId);
+	message->SetStringField(OperationParam::PushNotificationSendParamToPlayerId.getValue(), profileId);
 
 	if (OperationParam::isOptionalParamValid(fcmContent))
 	{
