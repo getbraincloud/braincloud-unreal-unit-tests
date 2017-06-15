@@ -94,6 +94,36 @@ TEST_F(TestBCPushNotifications, SendNormalizedPushNotificationToGroup)
     tr.run(m_bc);
 }
 
+TEST_F(TestBCPushNotifications, ScheduleRichPushNotificationUTC)
+{
+    TestResult tr;
+
+    Json::FastWriter fw;
+    Json::Value data;
+    data["body"] = "asdf";
+    data["title"] = "asdf";
+
+    int32_t startTime = 0;
+
+    m_bc->getPushNotificationService()->scheduleRichPushNotificationUTC(GetUser(UserA)->m_profileId, 1, fw.write(data), startTime, &tr);
+    tr.run(m_bc);
+}
+
+TEST_F(TestBCPushNotifications, ScheduleRichPushNotificationMinutes)
+{
+    TestResult tr;
+
+    Json::FastWriter fw;
+    Json::Value data;
+    data["body"] = "asdf";
+    data["title"] = "asdf";
+
+    int32_t minutesFromNow = 0;
+
+    m_bc->getPushNotificationService()->scheduleRichPushNotificationMinutes(GetUser(UserA)->m_profileId, 1, fw.write(data), minutesFromNow, &tr);
+    tr.run(m_bc);
+}
+
 TEST_F(TestBCPushNotifications, ScheduleRawPushNotificationUTC)
 {
     TestResult tr;
@@ -163,7 +193,7 @@ TEST_F(TestBCPushNotifications, SendRawPushNotificationToGroup)
     std::string iosContent = "{ \"aps\": { \"alert\": { \"body\": \"content of message\", \"title\": \"message title\" }, \"badge\": 0, \"sound\": \"gggg\" } }";
     std::string facebookContent = "{\"template\": \"content of message\"}";
 
-    m_bc->getPushNotificationService()->sendRawPushNotificationToGroup(groupId, fcmContent, iosContent, facebookContent, &tr);
+    m_bc->getPushNotificationService()->sendRawPushNotificationToGroup(groupId.c_str(), fcmContent, iosContent, facebookContent, &tr);
     tr.run(m_bc);
 
     m_bc->getGroupService()->deleteGroup(groupId.c_str(), -1, &tr);
