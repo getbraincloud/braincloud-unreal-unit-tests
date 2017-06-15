@@ -73,23 +73,13 @@ public:
         static UBCPlaybackStreamProxy* AddEvent(const FString& playbackStreamId, const FString& jsonEventData, const FString& jsonSummary);
 
     /**
-    * Gets stream summaries for initiating player
-    *
-    * Service Name - PlaybackStream
-    * Service Operation - GetStreamSummariesForInitiatingPlayer
-    *
-    * Param - initiatingPlayerId The player that started the stream
+    * @deprecated Use GetRecentStreamsForInitiatingPlayer instead - removal after September 1 2017
     */
     UFUNCTION(BlueprintCallable, meta = (BlueprintInternalUseOnly = "true"), Category = "BrainCloud|Playback Stream")
         static UBCPlaybackStreamProxy* GetStreamSummariesForInitiatingPlayer(const FString& targetPlayerId);
 
     /**
-    * Gets stream summaries for target player
-    *
-    * Service Name - PlaybackStream
-    * Service Operation - GetStreamSummariesForTargetPlayer
-    *
-    * Param - targetPlayerId The player that started the stream
+    * @deprecated Use GetRecentStreamsForTargetPlayer instead - removal after September 1 2017
     */
     UFUNCTION(BlueprintCallable, meta = (BlueprintInternalUseOnly = "true"), Category = "BrainCloud|Playback Stream")
         static UBCPlaybackStreamProxy* GetStreamSummariesForTargetPlayer(const FString& targetPlayerId);
