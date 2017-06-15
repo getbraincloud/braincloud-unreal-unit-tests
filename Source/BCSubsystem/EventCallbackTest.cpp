@@ -57,7 +57,7 @@ void AEventCallbackTest::serverCallback(ServiceName serviceName, ServiceOperatio
             "test",
             "{ \"RoundsWon\" : 0 }",
             nullptr);
-        BrainCloudClient::getInstance()->getPlayerStatisticsEventService()->triggerPlayerStatisticsEvent("test", 1, nullptr);
+        BrainCloudClient::getInstance()->getPlayerStatisticsEventService()->triggerStatsEvent("test", 1, nullptr);
     }
 }
 

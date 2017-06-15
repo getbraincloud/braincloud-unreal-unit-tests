@@ -176,12 +176,12 @@ ELoginStatus::Type FOnlineIdentityBrainCloud::GetLoginStatus(const FUniqueNetId&
 
 FString FOnlineIdentityBrainCloud::GetPlayerNickname(int32 LocalUserNum) const
 {
-    return BrainCloudClient::getInstance()->getPlayerStateService()->getPlayerName();
+    return BrainCloudClient::getInstance()->getPlayerStateService()->getUserName();
 }
 
 FString FOnlineIdentityBrainCloud::GetPlayerNickname(const FUniqueNetId& UserId) const
 {
-    return BrainCloudClient::getInstance()->getPlayerStateService()->getPlayerName();
+    return BrainCloudClient::getInstance()->getPlayerStateService()->getUserName();
 }
 
 FString FOnlineIdentityBrainCloud::GetAuthToken(int32 LocalUserNum) const

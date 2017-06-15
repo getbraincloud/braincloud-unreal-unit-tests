@@ -59,13 +59,13 @@ public:
 	*
 	* @param serverURL The url to the brainCloud server
 	* @param secretKey The secret key for your app
-	* @param appId The apps' id
-	* @param version The app's version
+	* @param appId The app's id
+	* @param appVersion The app's version
 	*/
 	void initialize(const FString& serverUrl,
 		const FString& secretKey,
 		const FString& appId,
-		const FString& version);
+		const FString& appVersion);
 
 	/**
 	* Initialize - initializes the identity service with the saved
@@ -80,6 +80,20 @@ public:
 	* Run callbacks, to be called once per frame from your main thread
 	*/
 	void runCallbacks();
+
+
+	/**
+	* The brainCloud client considers itself reauthenticated
+	* with the given session
+	*
+	* Warning: ensure the user is within your session expiry (set on the dashboard)
+	* before using this call. This optional method exists to reduce
+	* authentication calls, in event the user needs to restart the app
+	* in rapid succession.
+	*
+	* @param sessionId A recently returned session Id
+	*/
+	void restoreRecentSession(const FString& sessionId);
 
 	/**
 	* Sets a callback handler for any out of band event messages that come from
@@ -225,9 +239,18 @@ public:
 	BrainCloudMail * getMailService();
 	BrainCloudTournament * getTournamentService();
 
-	const FString & getGameId() { return _gameId; };
+	/**
+	* @deprecated Use getAppId instead - removal after September 1 2017
+	*/
+	const FString & getGameId() { return _appId; };
+	const FString & getAppId() { return _appId; };
 	const FString & getReleasePlatform() { return _releasePlatform; };
-	const FString & getGameVersion() { return _gameVersion; };
+
+	/**
+	* @deprecated Use getAppVersion instead - removal after September 1 2017
+	*/
+	const FString & getGameVersion() { return _appVersion; }
+	const FString & getAppVersion() { return _appVersion; };
 	const FString & getBrainCloudClientVersion() { return s_brainCloudClientVersion; };
 
 	const FString & getCountryCode() { return _country; }
@@ -460,9 +483,9 @@ protected:
 
 	static FString s_brainCloudClientVersion;
 
-	FString _gameId = "";
+	FString _appId = "";
 	FString _releasePlatform = "";
-	FString _gameVersion = "";
+	FString _appVersion = "";
 	FString _country = "";
 	FString _language = "";
 	float _timezoneOffset = 0.0f;

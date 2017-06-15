@@ -69,26 +69,39 @@ public:
     void addEvent(const FString& playbackStreamId, const FString& jsonEventData, const FString& jsonSummary, IServerCallback * callback);
 
     /**
-    * Gets stream summaries for initiating player
-    *
-    * Service Name - PlaybackStream
-    * Service Operation - GetStreamSummariesForInitiatingPlayer
-    *
-    * @param initiatingPlayerId The player that started the stream
-    * @param callback The method to be invoked when the server response is received
+    * @deprecated Use getRecentStreamsForInitiatingPlayer instead - removal after September 1 2017
     */
     void getStreamSummariesForInitiatingPlayer(const FString& initiatingPlayerId, IServerCallback * callback);
 
     /**
-    * Gets stream summaries for target player
-    *
-    * Service Name - PlaybackStream
-    * Service Operation - GetStreamSummariesForTargetPlayer
-    *
-    * @param targetPlayerId The player that started the stream
-    * @param callback The method to be invoked when the server response is received
+    * @deprecated Use getRecentStreamsForTargetPlayer instead - removal after September 1 2017
     */
     void getStreamSummariesForTargetPlayer(const FString& targetPlayerId, IServerCallback * callback);
+
+
+	/**
+	 * Gets recent stream summaries for initiating player
+	 *
+	 * Service Name - PlaybackStream
+	 * Service Operation - GetRecentStreamsForInitiatingPlayer
+	 *
+	 * @param initiatingPlayerId The player that started the stream
+	 * @param maxNumStreams The max number of streams to query
+	 * @param callback The callback.
+	 */
+	void getRecentStreamsForInitiatingPlayer(const FString& initiatingPlayerId, int32 maxNumStreams, IServerCallback * callback);
+
+	/**
+	 * Gets recent stream summaries for target player
+	 *
+	 * Service Name - PlaybackStream
+	 * Service Operation - GetRecentStreamsForTargetPlayer
+	 *
+	 * @param targetPlayerId The player that was target of the stream
+	 * @param maxNumStreams The max number of streams to query
+	 * @param callback The callback.
+	 */
+	void getRecentStreamsForTargetPlayer(const FString& targetPlayerId, int32 maxNumStreams, IServerCallback * callback);
 
 private:
     BrainCloudClient* _client = nullptr;

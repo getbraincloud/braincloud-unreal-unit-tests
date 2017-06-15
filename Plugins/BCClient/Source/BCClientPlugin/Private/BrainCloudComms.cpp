@@ -28,12 +28,12 @@ BrainCloudComms::~BrainCloudComms()
 {
 }
 
-void BrainCloudComms::Initialize(const FString& serverURL, const FString& secretKey, const FString& gameId)
+void BrainCloudComms::Initialize(const FString& serverURL, const FString& secretKey, const FString& appId)
 {
 	_isInitialized = true;
 	_serverUrl = serverURL;
 	_secretKey = secretKey;
-	_gameId = gameId;
+	_appId = appId;
 
 	_uploadUrl = _serverUrl;
 	_uploadUrl.RemoveFromEnd(TEXT("/dispatcherv2"));
@@ -185,7 +185,7 @@ FString BrainCloudComms::GetDataString(PacketRef packet, uint64 packetId)
 	TSharedRef<FJsonObject> jsonDataObject = MakeShareable(new FJsonObject());
 	jsonDataObject->SetArrayField(TEXT("messages"), messages);
 	jsonDataObject->SetStringField(TEXT("sessionId"), _sessionId);
-	jsonDataObject->SetStringField(TEXT("gameId"), _gameId);
+	jsonDataObject->SetStringField(TEXT("gameId"), _appId);
 	jsonDataObject->SetNumberField(TEXT("packetId"), packetId);
 
 	FJsonSerializer::Serialize(jsonDataObject, writer);
@@ -673,7 +673,7 @@ void BrainCloudComms::FilterIncomingMessages(TSharedRef<ServerCall> servercall, 
 
 			//set player name
 			FString name = data->GetStringField(TEXT("playerName"));
-			_client->getPlayerStateService()->setPlayerName(name);
+			_client->getPlayerStateService()->setUserName(name);
 		}
 	}
 	else if (service == ServiceName::PlayerState &&
@@ -683,14 +683,14 @@ void BrainCloudComms::FilterIncomingMessages(TSharedRef<ServerCall> servercall, 
 		_sessionId = TEXT("");
 		ResetErrorCache();
 		_client->getAuthenticationService()->clearSavedProfileId();
-		_client->getPlayerStateService()->setPlayerName(TEXT(""));
+		_client->getPlayerStateService()->setUserName(TEXT(""));
 	}
 	else if (service == ServiceName::PlayerState && operation == ServiceOperation::UpdateName)
 	{
 		if (response->GetObjectField(TEXT("data")).IsValid())
 		{
 			FString name = response->GetObjectField(TEXT("data"))->GetStringField(TEXT("playerName"));
-			_client->getPlayerStateService()->setPlayerName(name);
+			_client->getPlayerStateService()->setUserName(name);
 		}
 	}
 	else if (service == ServiceName::File && operation == ServiceOperation::PrepareUserUpload)

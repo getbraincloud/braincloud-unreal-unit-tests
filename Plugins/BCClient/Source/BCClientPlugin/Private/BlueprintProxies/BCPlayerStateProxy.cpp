@@ -13,22 +13,43 @@ UBCPlayerStateProxy::UBCPlayerStateProxy(const FObjectInitializer& ObjectInitial
 
 UBCPlayerStateProxy* UBCPlayerStateProxy::ReadPlayerState()
 {
+	UBCPlayerStateProxy* Proxy = NewObject<UBCPlayerStateProxy>();
+	BrainCloudClient::getInstance()->getPlayerStateService()->readUserState(Proxy);
+	return Proxy;
+}
+
+UBCPlayerStateProxy* UBCPlayerStateProxy::ReadUserState()
+{
     UBCPlayerStateProxy* Proxy = NewObject<UBCPlayerStateProxy>();
-    BrainCloudClient::getInstance()->getPlayerStateService()->readPlayerState(Proxy);
+    BrainCloudClient::getInstance()->getPlayerStateService()->readUserState(Proxy);
     return Proxy;
 }
 
 UBCPlayerStateProxy* UBCPlayerStateProxy::DeletePlayer()
 {
+	UBCPlayerStateProxy* Proxy = NewObject<UBCPlayerStateProxy>();
+	BrainCloudClient::getInstance()->getPlayerStateService()->deleteUser(Proxy);
+	return Proxy;
+}
+
+UBCPlayerStateProxy* UBCPlayerStateProxy::DeleteUser()
+{
     UBCPlayerStateProxy* Proxy = NewObject<UBCPlayerStateProxy>();
-    BrainCloudClient::getInstance()->getPlayerStateService()->deletePlayer(Proxy);
+    BrainCloudClient::getInstance()->getPlayerStateService()->deleteUser(Proxy);
     return Proxy;
 }
 
 UBCPlayerStateProxy* UBCPlayerStateProxy::ResetPlayerState()
 {
+	UBCPlayerStateProxy* Proxy = NewObject<UBCPlayerStateProxy>();
+	BrainCloudClient::getInstance()->getPlayerStateService()->resetUserState(Proxy);
+	return Proxy;
+}
+
+UBCPlayerStateProxy* UBCPlayerStateProxy::ResetUserState()
+{
     UBCPlayerStateProxy* Proxy = NewObject<UBCPlayerStateProxy>();
-    BrainCloudClient::getInstance()->getPlayerStateService()->resetPlayerState(Proxy);
+    BrainCloudClient::getInstance()->getPlayerStateService()->resetUserState(Proxy);
     return Proxy;
 }
 
@@ -41,8 +62,15 @@ UBCPlayerStateProxy* UBCPlayerStateProxy::Logout()
 
 UBCPlayerStateProxy* UBCPlayerStateProxy::UpdatePlayerName(FString playerName)
 {
+	UBCPlayerStateProxy* Proxy = NewObject<UBCPlayerStateProxy>();
+	BrainCloudClient::getInstance()->getPlayerStateService()->updateUserName(playerName, Proxy);
+	return Proxy;
+}
+
+UBCPlayerStateProxy* UBCPlayerStateProxy::UpdateUserName(FString userName)
+{
     UBCPlayerStateProxy* Proxy = NewObject<UBCPlayerStateProxy>();
-    BrainCloudClient::getInstance()->getPlayerStateService()->updatePlayerName(playerName, Proxy);
+    BrainCloudClient::getInstance()->getPlayerStateService()->updateUserName(userName, Proxy);
     return Proxy;
 }
 
@@ -76,8 +104,15 @@ UBCPlayerStateProxy* UBCPlayerStateProxy::RemoveAttributes(const TArray<FString>
 
 UBCPlayerStateProxy* UBCPlayerStateProxy::UpdatePlayerPictureUrl(const FString& pictureUrl)
 {
+	UBCPlayerStateProxy* Proxy = NewObject<UBCPlayerStateProxy>();
+	BrainCloudClient::getInstance()->getPlayerStateService()->updateUserPictureUrl(pictureUrl, Proxy);
+	return Proxy;
+}
+
+UBCPlayerStateProxy* UBCPlayerStateProxy::UpdateUserPictureUrl(const FString& pictureUrl)
+{
     UBCPlayerStateProxy* Proxy = NewObject<UBCPlayerStateProxy>();
-    BrainCloudClient::getInstance()->getPlayerStateService()->updatePlayerPictureUrl(pictureUrl, Proxy);
+    BrainCloudClient::getInstance()->getPlayerStateService()->updateUserPictureUrl(pictureUrl, Proxy);
     return Proxy;
 }
 

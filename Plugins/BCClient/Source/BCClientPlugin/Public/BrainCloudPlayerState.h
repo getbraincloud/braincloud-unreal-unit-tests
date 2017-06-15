@@ -13,23 +13,33 @@ class BCCLIENTPLUGIN_API BrainCloudPlayerState
 public:
     BrainCloudPlayerState(BrainCloudClient* client);
 
+	/**
+	* @deprecated Use readUserState instead - removal after September 1 2017
+	*/
+	void readPlayerState(IServerCallback * callback, const FString& entityTypeFilter = TEXT(""));
+
     /**
-     * Read the state of the currently logged in player.
+     * Read the state of the currently logged in user.
      * This method returns a JSON object describing most of the
-     * player's data: entities, statistics, level, currency.
+     * user's data: entities, statistics, level, currency.
      * Apps will typically call this method after authenticating to get an
-     * up-to-date view of the player's data.
+     * up-to-date view of the user's data.
      *
      * Service Name - PlayerState
      * Service Operation - Read
      *
      * @param callback The method to be invoked when the server response is received
      */
-    void readPlayerState(IServerCallback * callback, const FString& entityTypeFilter = TEXT(""));
+    void readUserState(IServerCallback * callback, const FString& entityTypeFilter = TEXT(""));
+
+	/**
+	* @deprecated Use deleteUser instead - removal after September 1 2017
+	*/
+	void deletePlayer(IServerCallback * callback);
 
     /**
-     * Completely deletes the player record and all data fully owned
-     * by the player. After calling this method, the player will need
+     * Completely deletes the user record and all data fully owned
+     * by the user. After calling this method, the user will need
      * to re-authenticate and create a new profile.
      * This is mostly used for debugging/qa.
      *
@@ -38,13 +48,18 @@ public:
      *
      * @param callback The method to be invoked when the server response is received
      */
-    void deletePlayer(IServerCallback * callback);
+    void deleteUser(IServerCallback * callback);
+
+	/**
+	* @deprecated Use resetUserState instead - removal after September 1 2017
+	*/
+	void resetPlayerState(IServerCallback * callback);
 
     /**
-     * This method will delete *most* data for the currently logged in player.
+     * This method will delete *most* data for the currently logged in user.
      * Data which is not deleted includes: currency, credentials, and
-     * purchase transactions. ResetPlayer is different from DeletePlayer in that
-     * the player record will continue to exist after the reset (so the user
+     * purchase transactions. ResetPlayer is different from DeleteUser in that
+     * the user record will continue to exist after the reset (so the user
      * does not need to re-authenticate).
      *
      * Service Name - PlayerState
@@ -52,10 +67,10 @@ public:
      *
      * @param callback The method to be invoked when the server response is received
      */
-    void resetPlayerState(IServerCallback * callback);
+    void resetUserState(IServerCallback * callback);
 
     /**
-     * Logs player out of server.
+     * Logs user out of server.
      *
      * Service Name - PlayerState
      * Service Operation - Logout
@@ -64,23 +79,28 @@ public:
      */
     void logout(IServerCallback * callback);
 
+	/**
+	* @deprecated Use updateUserName instead - removal after September 1 2017
+	*/
+	void updatePlayerName(const FString& userName, IServerCallback * callback);
+
     /**
-    * Sets the players name.
+    * Sets the user's name.
     *
     * Service Name - playerState
     * Service Operation - UPDATE_NAME
     *
-    * @param playerName The name of the player
+    * @param userName The name of the user
     * @param callback The method to be invoked when the server response is received
     */
-    void updatePlayerName(const FString& playerName, IServerCallback * callback);
+    void updateUserName(const FString& userName, IServerCallback * callback);
 
     /**
-    * Updates the "friend summary data" associated with the logged in player.
+    * Updates the "friend summary data" associated with the logged in user.
     * Some operations will return this summary data. For instance the social
-    * leaderboards will return the player's score in the leaderboard along
+    * leaderboards will return the user's score in the leaderboard along
     * with the friend summary data. Generally this data is used to provide
-    * a quick overview of the player without requiring a separate API call
+    * a quick overview of the user without requiring a separate API call
     * to read their public stats or entity data.
     *
     * Service Name - PlayerState
@@ -98,7 +118,7 @@ public:
     void updateSummaryFriendData(const FString& jsonSummaryData, IServerCallback * callback);
 
     /**
-    * Retrieve the player attributes.
+    * Retrieve the user's attributes.
     *
     * Service Name - PlayerState
     * Service Operation - GetAttributes
@@ -108,7 +128,7 @@ public:
     void getAttributes(IServerCallback * callback);
 
     /**
-    * Update player attributes.
+    * Update user's attributes.
     *
     * Service Name - PlayerState
     * Service Operation - UpdateAttributes
@@ -120,7 +140,7 @@ public:
     void updateAttributes(const FString& jsonAttributes, bool wipeExisting, IServerCallback * callback);
 
     /**
-    * Remove player attributes.
+    * Remove user's attributes.
     *
     * Service Name - PlayerState
     * Service Operation - RemoveAttributes
@@ -130,8 +150,13 @@ public:
     */
     void removeAttributes(const TArray<FString>& attributeNames, IServerCallback * callback);
 
+	/**
+	* @deprecated Use updateUserPictureUrl instead - removal after September 1 2017
+	*/
+	void updatePlayerPictureUrl(const FString& pictureUrl, IServerCallback * callback);
+
     /**
-    * Update Player picture URL.
+    * Update user's picture URL.
     *
     * Service Name - PlayerState
     * Service Operation - UPDATE_PICTURE_URL
@@ -139,10 +164,10 @@ public:
     * @param pictureUrl URL to apply
     * @param callback The method to be invoked when the server response is received
     */
-    void updatePlayerPictureUrl(const FString& pictureUrl, IServerCallback * callback);
+    void updateUserPictureUrl(const FString& pictureUrl, IServerCallback * callback);
 
     /**
-    * Update the player's contact email.
+    * Update the user's contact email.
     * Note this is unrelated to email authentication.
     *
     * Service Name - PlayerState
@@ -153,16 +178,21 @@ public:
     */
     void updateContactEmail(const FString& contactEmail, IServerCallback * callback);
 
+	/**
+	* @deprecated Use getUserName instead - removal after September 1 2017
+	*/
+	const FString& getPlayerName();
+
     /**
-    * Gets a cached value of the currently authenticated player's name
-    * @returns The cached currently authenticated player's name
+    * Gets a cached value of the currently authenticated user's name
+    * @returns The cached currently authenticated user's name
     */
-    const FString& getPlayerName();
+    const FString& getUserName();
 
 protected:
-    void setPlayerName(const FString& name);
+    void setUserName(const FString& name);
 
 private:
     BrainCloudClient* _client = nullptr;
-    FString _playerName = "";
+    FString _userName = "";
 };

@@ -25,6 +25,13 @@ UBCMailProxy* UBCMailProxy::SendAdvancedEmail(const FString& profileId, const FS
 	return Proxy;
 }
 
+UBCMailProxy* UBCMailProxy::SendAdvancedEmailByAddress(const FString& emailAddress, const FString& jsonServiceParams)
+{
+	UBCMailProxy* Proxy = NewObject<UBCMailProxy>();
+	BrainCloudClient::getInstance()->getMailService()->sendAdvancedEmailByAddress(emailAddress, jsonServiceParams, Proxy);
+	return Proxy;
+}
+
 //callbacks
 void UBCMailProxy::serverCallback(ServiceName serviceName, ServiceOperation serviceOperation, const FString& jsonData)
 {

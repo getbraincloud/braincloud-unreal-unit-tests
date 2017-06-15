@@ -9,11 +9,17 @@ public:
 
 	//Push Notification Service - Send Params
 	static const OperationParam PushNotificationSendParamToPlayerId;
+	static const OperationParam PushNotificationSendParamProfileId;
 	static const OperationParam PushNotificationSendParamNotificationTemplateId;
 	static const OperationParam PushNotificationSendParamMessage;
 	static const OperationParam PushNotificationSendParamSubstitution;
 	static const OperationParam AlertContent;
 	static const OperationParam CustomData;
+	static const OperationParam StartTimeUTC;
+	static const OperationParam MinutesFromNow;
+	static const OperationParam FcmContent;
+	static const OperationParam IosContent;
+	static const OperationParam FacebookContent;
 
 	//Push Notification Service - Register Params
 	static const OperationParam PushNotificationRegisterParamDeviceType;
@@ -274,6 +280,7 @@ public:
 	static const OperationParam PlaybackStreamServicePlaybackStreamId;
 	static const OperationParam PlaybackStreamServiceTargetPlayerId;
 	static const OperationParam PlaybackStreamServiceInitiatingPlayerId;
+	static const OperationParam PlaybackStreamServiceMaxNumberOfStreams;
 	static const OperationParam PlaybackStreamServiceIncludeSharedData;
 	static const OperationParam PlaybackStreamServiceEventData;
 	static const OperationParam PlaybackStreamServiceSummary;
@@ -346,6 +353,7 @@ public:
 
 	//mail
 	static const OperationParam ProfileId;
+	static const OperationParam EmailAddress;
 	static const OperationParam Subject;
 	static const OperationParam Body;
 	static const OperationParam ServiceParams;

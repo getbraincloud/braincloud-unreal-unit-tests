@@ -13,15 +13,29 @@ UBCPlayerStatisticsEventProxy::UBCPlayerStatisticsEventProxy(const FObjectInitia
 
 UBCPlayerStatisticsEventProxy* UBCPlayerStatisticsEventProxy::TriggerPlayerStatisticsEvent(FString eventName, int32 eventMultiplier)
 {
+	UBCPlayerStatisticsEventProxy* Proxy = NewObject<UBCPlayerStatisticsEventProxy>();
+	BrainCloudClient::getInstance()->getPlayerStatisticsEventService()->triggerStatsEvent(eventName, eventMultiplier, Proxy);
+	return Proxy;
+}
+
+UBCPlayerStatisticsEventProxy* UBCPlayerStatisticsEventProxy::TriggerStatsEvent(FString eventName, int32 eventMultiplier)
+{
     UBCPlayerStatisticsEventProxy* Proxy = NewObject<UBCPlayerStatisticsEventProxy>();
-    BrainCloudClient::getInstance()->getPlayerStatisticsEventService()->triggerPlayerStatisticsEvent(eventName, eventMultiplier, Proxy);
+    BrainCloudClient::getInstance()->getPlayerStatisticsEventService()->triggerStatsEvent(eventName, eventMultiplier, Proxy);
     return Proxy;
 }
 
 UBCPlayerStatisticsEventProxy* UBCPlayerStatisticsEventProxy::TriggerPlayerStatisticsEvents(FString jsonData)
 {
+	UBCPlayerStatisticsEventProxy* Proxy = NewObject<UBCPlayerStatisticsEventProxy>();
+	BrainCloudClient::getInstance()->getPlayerStatisticsEventService()->triggerStatsEvents(jsonData, Proxy);
+	return Proxy;
+}
+
+UBCPlayerStatisticsEventProxy* UBCPlayerStatisticsEventProxy::TriggerStatsEvents(FString jsonData)
+{
     UBCPlayerStatisticsEventProxy* Proxy = NewObject<UBCPlayerStatisticsEventProxy>();
-    BrainCloudClient::getInstance()->getPlayerStatisticsEventService()->triggerPlayerStatisticsEvents(jsonData, Proxy);
+    BrainCloudClient::getInstance()->getPlayerStatisticsEventService()->triggerStatsEvents(jsonData, Proxy);
     return Proxy;
 }
 

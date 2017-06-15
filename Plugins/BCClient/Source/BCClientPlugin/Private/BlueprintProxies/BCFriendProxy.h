@@ -42,19 +42,19 @@ public:
 	/**
 	* Retrieves the external ID for the specified user profile ID on the specified social platform.
 	*
-	* Param - profileId Profile (player) ID.
+	* Param - profileId Profile ID.
 	* Param - authenticationType Associated authentication type.
 	*/
 	UFUNCTION(BlueprintCallable, meta = (BlueprintInternalUseOnly = "true"), Category = "BrainCloud|Friend")
 		static UBCFriendProxy* GetExternalIdForProfileId(const FString& profileId, const FString& authenticationType);
 
 	/**
-	* Returns player state of a particular user.
+	* Returns user state of a particular user.
 	*
 	* Service Name - Friend
 	* Service Operation - GET_SUMMARY_DATA_FOR_PROFILE_ID
 	*
-	* Param - profileId Profile Id of player to retrieve player state for.
+	* Param - profileId Profile Id of user to retrieve user state for.
 	*/
 	UFUNCTION(BlueprintCallable, meta = (BlueprintInternalUseOnly = "true"), Category = "BrainCloud|Friend")
 		static UBCFriendProxy* GetSummaryDataForProfileId(const FString& profileId);
@@ -83,7 +83,12 @@ public:
 		static UBCFriendProxy* ReadFriendsEntities(const FString& entityType);
 
 	/**
-	* Read a friend's player state.
+	* @deprecated Use readAllUserStats instead
+	*/
+
+
+	/**
+	* Read a friend's user state.
 	*
 	* Service Name - PlayerState
 	* Service Operation - ReadFriendsPlayerState
@@ -94,7 +99,7 @@ public:
 		static UBCFriendProxy* ReadFriendPlayerState(const FString& friendId);
 
 	/**
-	* Finds a list of players matching the search text by performing an exact match search
+	* Finds a list of users matching the search text by performing an exact match search
 	*
 	* Service Name - friend
 	* Service Operation - FIND_USERS_BY_EXACT_NAME
@@ -106,8 +111,8 @@ public:
 		static UBCFriendProxy* FindUsersByExactName(const FString& searchText, int32 maxResults);
 
 	/**
-	* Finds a list of players matching the search text by performing a substring
-	* search of all player names.
+	* Finds a list of users matching the search text by performing a substring
+	* search of all user names.
 	*
 	* Service Name - friend
 	* Service Operation - FIND_USERS_BY_SUBSTR_NAME
@@ -119,6 +124,12 @@ public:
 		static UBCFriendProxy* FindUsersBySubstrName(const FString& searchText, int32 maxResults);
 
 	/**
+	* @deprecated Use FindUserByUniversalId instead
+	*/
+	UFUNCTION(BlueprintCallable, meta = (BlueprintInternalUseOnly = "true"), Category = "BrainCloud|Friend")
+		static UBCFriendProxy* FindPlayerByUniversalId(const FString& searchText, int32 maxResults);
+
+	/**
 	* Retrieves profile information for the partial matches of the specified text.
 	*
 	* Service Name - Friend
@@ -126,13 +137,13 @@ public:
 	*
 	* Param - searchText Universal ID text on which to search.
 	* Param - maxResults Maximum number of results to return. If there are more the message
-	*                    "Too many results to return." is sent back instead of the players.
+	*                    "Too many results to return." is sent back instead of the users.
 	*/
 	UFUNCTION(BlueprintCallable, meta = (BlueprintInternalUseOnly = "true"), Category = "BrainCloud|Friend")
-		static UBCFriendProxy* FindPlayerByUniversalId(const FString& searchText, int32 maxResults);
+		static UBCFriendProxy* FindUserByUniversalId(const FString& searchText, int32 maxResults);
 
 	/**
-	* Retrieves a list of player and friend platform information for all friends of the current player.
+	* Retrieves a list of user and friend platform information for all friends of the current user.
 	*
 	* Service Name - Friend
 	* Service Operation - LIST_FRIENDS
@@ -144,23 +155,23 @@ public:
 		static UBCFriendProxy* ListFriends(EFriendPlatform friendPlatform, bool includeSummaryData);
 
 	/**
-	* Links the current player and the specified players as brainCloud friends.
+	* Links the current user and the specified users as brainCloud friends.
 	*
 	* Service Name - Friend
 	* Service Operation - ADD_FRIENDS
 	*
-	* Param - profileIds Collection of player IDs.
+	* Param - profileIds Collection of profile IDs.
 	*/
 	UFUNCTION(BlueprintCallable, meta = (BlueprintInternalUseOnly = "true"), Category = "BrainCloud|Friend")
 		static UBCFriendProxy* AddFriends(const TArray<FString>& profileIds);
 
 	/**
-	* Unlinks the current player and the specified players as brainCloud friends.
+	* Unlinks the current user and the specified users as brainCloud friends.
 	*
 	* Service Name - Friend
 	* Service Operation - REMOVE_FRIENDS
 	*
-	* Param - profileIds Collection of player IDs.
+	* Param - profileIds Collection of profile IDs.
 	*/
 	UFUNCTION(BlueprintCallable, meta = (BlueprintInternalUseOnly = "true"), Category = "BrainCloud|Friend")
 		static UBCFriendProxy* RemoveFriends(const TArray<FString>& profileIds);

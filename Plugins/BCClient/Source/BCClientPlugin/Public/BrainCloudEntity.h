@@ -107,6 +107,12 @@ public:
      */
     void getEntitiesByType(const FString& entityType, IServerCallback* callback);
 
+
+    /**
+    * @deprecated Use getSharedEntityForProfileId instead - removal after September 1 2017
+    */
+    void getSharedEntityForPlayerId(const FString &profileId, const FString &entityId, IServerCallback *callback = nullptr);
+
     /**
     * Method returns a shared entity for the given player and entity ID.
     * An entity is shared if its ACL allows for the currently logged
@@ -115,11 +121,16 @@ public:
     * Service Name - Entity
     * Service Operation - READ_SHARED_ENTITY
     *
-    * @param playerId The the profile ID of the player who owns the entity
+    * @param profileId The the profile ID of the player who owns the entity
     * @param entityId The ID of the entity that will be retrieved
     * @param callback The method to be invoked when the server response is received
     */
-    void getSharedEntityForPlayerId(const FString& playerId, const FString& entityId, IServerCallback * callback = nullptr);
+    void getSharedEntityForProfileId(const FString &profileId, const FString &entityId, IServerCallback *callback = nullptr);
+
+    /**
+    * @deprecated Use getSharedEntitiesForProfileId instead - removal after September 1 2017
+    */
+    void getSharedEntitiesForPlayerId(const FString& profileId, IServerCallback* callback);
 
     /**
      * Method returns all shared entities for the given player id.
@@ -129,10 +140,18 @@ public:
      * Service Name - Entity
      * Service Operation - ReadShared
      *
-     * @param playerId The player id to retrieve shared entities for
+     * @param profileId The player id to retrieve shared entities for
      * @param callback The method to be invoked when the server response is received
      */
-    void getSharedEntitiesForPlayerId(const FString& playerId, IServerCallback* callback);
+    void getSharedEntitiesForProfileId(const FString &profileId, IServerCallback *callback);
+
+
+
+    /**
+    * @deprecated Use getSharedEntitiesListForProfileId instead - removal after September 1 2017
+    */
+    void getSharedEntitiesListForPlayerId(const FString& profileId, const FString& whereJson, const FString& orderByJson, int32 maxReturn, IServerCallback * callback = nullptr);
+
 
     /**
     * Method gets list of shared entities for the specified player based on type and/or where clause
@@ -140,13 +159,13 @@ public:
     * Service Name - Entity
     * Service Operation - READ_SHARED_ENTITIES_LIST
     *
-    * @param playerId The player ID to retrieve shared entities for
+    * @param profileId The player ID to retrieve shared entities for
     * @param whereJson Mongo style query
     * @param orderByJson Sort order
     * @param maxReturn The maximum number of entities to return
     * @param callback The method to be invoked when the server response is received
     */
-    void getSharedEntitiesListForPlayerId(const FString& playerId, const FString& whereJson, const FString& orderByJson, int32 maxReturn, IServerCallback * callback = nullptr);
+    void getSharedEntitiesListForProfileId(const FString &profileId, const FString &whereJson, const FString &orderByJson, int32 maxReturn, IServerCallback *callback = nullptr);
 
     /**
      * Method updates a shared entity owned by another player. This operation results in the entity
@@ -156,12 +175,12 @@ public:
      * Service Operation - UpdateShared
      *
      * @param entityId The id of the entity to update
-     * @param targetPlayerId The id of the player who owns the shared entity
+     * @param targetProfileId The id of the player who owns the shared entity
      * @param entityType The entity type as defined by the user
      * @param jsonEntityData    The entity's data as a json string.
      * @param callback The method to be invoked when the server response is received
      */
-    void updateSharedEntity(const FString& entityId, const FString& targetPlayerId, const FString& entityType, const FString& jsonEntityData, IServerCallback* callback);
+    void updateSharedEntity(const FString& entityId, const FString& targetProfileId, const FString& entityType, const FString& jsonEntityData, IServerCallback* callback);
 
     /**
     * Method gets list of entities from the server base on type and/or where clause
@@ -235,12 +254,12 @@ public:
 	* Service Operation - INCREMENT_SHARED_USER_ENTITY_DATA
 	*
 	* @param entityId The id of the entity to update
-	* @param targetPlayerId Profile ID of the entity owner
+	* @param targetProfileId Profile ID of the entity owner
 	* @param jsonData The entity's data object
 	* @param returnData Should the entity be returned in the response?
 	* @param callback The callback object
 	*/
-	void incrementSharedUserEntityData(const FString& entityId, const FString& targetPlayerId, const FString& jsonData, IServerCallback * callback = nullptr);
+	void incrementSharedUserEntityData(const FString& entityId, const FString& targetProfileId, const FString& jsonData, IServerCallback * callback = nullptr);
 
 private:
     BrainCloudClient* _client = nullptr;
