@@ -69,24 +69,12 @@ public:
     void addEvent(const FString& playbackStreamId, const FString& jsonEventData, const FString& jsonSummary, IServerCallback * callback);
 
     /**
-    * Gets stream summaries for initiating player
-    *
-    * Service Name - PlaybackStream
-    * Service Operation - GetStreamSummariesForInitiatingPlayer
-    *
-    * @param initiatingPlayerId The player that started the stream
-    * @param callback The method to be invoked when the server response is received
+    * @deprecated Use getRecentStreamsForInitiatingPlayer instead - removal after September 1 2017
     */
     void getStreamSummariesForInitiatingPlayer(const FString& initiatingPlayerId, IServerCallback * callback);
 
     /**
-    * Gets stream summaries for target player
-    *
-    * Service Name - PlaybackStream
-    * Service Operation - GetStreamSummariesForTargetPlayer
-    *
-    * @param targetPlayerId The player that started the stream
-    * @param callback The method to be invoked when the server response is received
+    * @deprecated Use getRecentStreamsForTargetPlayer instead - removal after September 1 2017
     */
     void getStreamSummariesForTargetPlayer(const FString& targetPlayerId, IServerCallback * callback);
 
