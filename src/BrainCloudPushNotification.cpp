@@ -143,7 +143,7 @@ namespace BrainCloud
 	void BrainCloudPushNotification::sendRawPushNotification(const char * in_profileId, std::string in_fcmContent, std::string in_iosContent, std::string in_facebookContent, IServerCallback * in_callback)
 	{
 		Json::Value message;
-		message[OperationParam::ProfileId.getValue()] = in_profileId;
+		message[OperationParam::PushNotificationSendParamToPlayerId.getValue()] = in_profileId;
 
 		if (StringUtil::IsOptionalParameterValid(in_fcmContent)) {
 			message[OperationParam::FcmContent.getValue()] = JsonUtil::jsonStringToValue(in_fcmContent);
@@ -164,7 +164,7 @@ namespace BrainCloud
 	void BrainCloudPushNotification::sendRawPushNotificationBatch(std::vector<std::string> in_profileIds, std::string in_fcmContent, std::string in_iosContent, std::string in_facebookContent, IServerCallback * in_callback)
 	{
 		Json::Value message;
-		message[OperationParam::ProfileId.getValue()] = JsonUtil::stringVectorToJson(in_profileIds);
+		message[OperationParam::ProfileIds.getValue()] = JsonUtil::stringVectorToJson(in_profileIds);
 
 		if (StringUtil::IsOptionalParameterValid(in_fcmContent)) {
 			message[OperationParam::FcmContent.getValue()] = JsonUtil::jsonStringToValue(in_fcmContent);

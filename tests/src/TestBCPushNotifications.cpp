@@ -153,12 +153,20 @@ TEST_F(TestBCPushNotifications, SendRawPushNotificationBatch)
 TEST_F(TestBCPushNotifications, SendRawPushNotificationToGroup)
 {
     TestResult tr;
+    m_bc->getGroupService()->createGroup("testGroup", "test", false, "", "", "", "", &tr);
+    tr.run(m_bc);
+
+    std::string groupId = tr.m_response["data"]["groupId"].asString();
+
 
     std::string fcmContent =  "{ \"notification\": { \"body\": \"content of message\", \"title\": \"message title\" }, \"data\": { \"customfield1\": \"customValue1\", \"customfield2\": \"customValue2\" }, \"priority\": \"normal\" }";
     std::string iosContent = "{ \"aps\": { \"alert\": { \"body\": \"content of message\", \"title\": \"message title\" }, \"badge\": 0, \"sound\": \"gggg\" } }";
     std::string facebookContent = "{\"template\": \"content of message\"}";
 
-    m_bc->getPushNotificationService()->sendRawPushNotificationToGroup(GetUser(UserA)->m_profileId, fcmContent, iosContent, facebookContent, &tr);
+    m_bc->getPushNotificationService()->sendRawPushNotificationToGroup(groupId, fcmContent, iosContent, facebookContent, &tr);
+    tr.run(m_bc);
+
+    m_bc->getGroupService()->deleteGroup(groupId.c_str(), -1, &tr);
     tr.run(m_bc);
 }
 
