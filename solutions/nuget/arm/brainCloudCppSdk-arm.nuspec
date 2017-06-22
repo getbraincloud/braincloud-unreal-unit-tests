@@ -2,7 +2,7 @@
 <package>
   <metadata>
     <id>brainCloudCppSdk-arm</id>
-    <version>3.5.0</version>
+    <version>3.5.2</version>
     <authors>bitHeads inc.</authors>
     <owners>bitHeads inc.</owners>
     <licenseUrl>http://getbraincloud.com</licenseUrl>
@@ -10,7 +10,7 @@
     <iconUrl>http://getbraincloud.com/apidocs/wp-content/uploads/brainCloud.png</iconUrl>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <description>A C++ native library for connecting Windows 10 Universal Apps to the brainCloud back-end. Currently supports Visual Studio 2015.</description>
-    <releaseNotes>Release of brainCloud 3.5.0</releaseNotes>
+    <releaseNotes>Release of brainCloud 3.5.2</releaseNotes>
     <copyright>Copyright 2017</copyright>
     <title>brainCloud C++ SDK ARM</title>
     <summary>brainCloud Client SDK for Windows Universal Apps.</summary>

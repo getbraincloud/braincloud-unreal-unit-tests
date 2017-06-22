@@ -2,7 +2,7 @@
 <package>
   <metadata>
     <id>brainCloudCppSdk-x64.symbols</id>
-    <version>3.5.0</version>
+    <version>3.5.2</version>
     <authors>bitHeads inc.</authors>
     <owners>bitHeads inc.</owners>
     <licenseUrl>http://getbraincloud.com</licenseUrl>
@@ -11,7 +11,7 @@
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <description>Symbols for package 'brainCloudCppSdk-x64'. This package should not likely be installed.
 (This is not the package you are looking for).</description>
-    <releaseNotes>Release of brainCloud 3.5.0</releaseNotes>
+    <releaseNotes>Release of brainCloud 3.5.2</releaseNotes>
     <copyright>Copyright 2017</copyright>
     <title>brainCloud C++ SDK x64 Symbols</title>
     <summary>Symbols for for package 'brainCloudCppSdk-x64'</summary>
