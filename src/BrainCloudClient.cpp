@@ -227,17 +227,6 @@ namespace BrainCloud {
 		_brainCloudComms->runCallbacks();
 	}
 
-    void  BrainCloudClient::restoreRecentSession(const char * in_sessionId) {
-        if (in_sessionId == "") {
-            // Cannot use a blank session Id. Authenticate once,
-            // and save that session for short-term use
-            return;
-        }
-
-        _brainCloudComms->setSessionId(in_sessionId);
-        _brainCloudComms->setAuthenticated();
-    };
-
 	void BrainCloudClient::registerEventCallback(IEventCallback *in_eventCallback)
 	{
 		_brainCloudComms->registerEventCallback(in_eventCallback);
