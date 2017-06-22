@@ -26,7 +26,7 @@ public:
     * BC - a brainCloud profile id
     * FB - a Facebook id
     *
-    * An exmaple of this string would be:
+    * An example of this string would be:
     * [
     *     {
     *         "platform": "BC",

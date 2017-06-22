@@ -43,15 +43,9 @@ public:
 		static void RunCallbacks();
 
 	/**
-	* The brainCloud client considers itself reauthenticated
-	* with the given session
+	* @deprecated This method has been implemented improperly,
 	*
-	* Warning: ensure the user is within your session expiry (set on the dashboard)
-	* before using this call. This optional method exists to reduce
-	* authentication calls, in event the user needs to restart the app
-	* in rapid succession.
-	*
-	* Param - sessionId A recently returned session Id
+	* Remove BluePrints using it.
 	*/
 	UFUNCTION(BlueprintCallable, Category = "BrainCloud|Client")
 		static void RestoreRecentSession(const FString& sessionId);

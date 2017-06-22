@@ -17,7 +17,7 @@
 // Define all static member variables.
 BrainCloudClient * BrainCloudClient::_instance = nullptr;
 
-FString BrainCloudClient::s_brainCloudClientVersion = TEXT("3.5.0");
+FString BrainCloudClient::s_brainCloudClientVersion = TEXT("3.5.2");
 
 ////////////////////////////////////////////////////
 // (De)Constructors
@@ -105,20 +105,6 @@ void BrainCloudClient::runCallbacks()
 {
 	if (_brainCloudComms) _brainCloudComms->RunCallbacks();
 }
-
-void BrainCloudClient::restoreRecentSession(const FString& sessionId) 
-{
-	if (sessionId == "")
-	{
-		// Cannot use a blank session Id. Authenticate once,
-		// and save that session for short-term use
-		return;
-	}
-
-	_brainCloudComms->SetSessionId(sessionId);
-	_brainCloudComms->SetAuthenticated();
-}
-
 
 void BrainCloudClient::registerEventCallback(IEventCallback *eventCallback)
 {

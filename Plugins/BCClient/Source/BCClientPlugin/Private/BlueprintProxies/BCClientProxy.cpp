@@ -31,7 +31,7 @@ void UBCClientProxy::RunCallbacks()
 
 void UBCClientProxy::RestoreRecentSession(const FString& sessionId)
 {
-	BrainCloudClient::getInstance()->restoreRecentSession(sessionId);
+	// Remove this function
 }
 
 void UBCClientProxy::EnableLogging(bool shouldEnable)
