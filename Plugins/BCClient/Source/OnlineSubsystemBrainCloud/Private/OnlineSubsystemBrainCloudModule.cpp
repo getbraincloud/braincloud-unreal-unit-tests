@@ -18,7 +18,7 @@ public:
 
     virtual IOnlineSubsystemPtr CreateSubsystem(FName InstanceName)
     {
-        FOnlineSubsystemBrainCloudPtr OnlineSub = MakeShareable(new FOnlineSubsystemBrainCloud(InstanceName));
+        FOnlineSubsystemBrainCloudPtr OnlineSub = MakeShareable(new FOnlineSubsystemBrainCloud("BCSubsystem", InstanceName));
         if (OnlineSub->IsEnabled())
         {
             if (!OnlineSub->Init())
