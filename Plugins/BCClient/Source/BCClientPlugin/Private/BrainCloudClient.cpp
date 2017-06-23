@@ -17,7 +17,7 @@
 // Define all static member variables.
 BrainCloudClient * BrainCloudClient::_instance = nullptr;
 
-FString BrainCloudClient::s_brainCloudClientVersion = TEXT("3.5.2");
+FString BrainCloudClient::s_brainCloudClientVersion = TEXT("3.5.3");
 
 ////////////////////////////////////////////////////
 // (De)Constructors
