@@ -6,6 +6,7 @@
 #include "OnlineSubsystemImpl.h"
 #include "OnlineSubsystemBrainCloudPackage.h"
 #include "Runtime/Launch/Resources/Version.h"
+#include "Json.h"
 
 /** Forward declarations of all interface classes */
 typedef TSharedPtr<class FOnlineLeaderboardsBrainCloud, ESPMode::ThreadSafe> FOnlineLeaderboardsBrainCloudPtr;
@@ -101,8 +102,8 @@ public:
 PACKAGE_SCOPE:
 
     /** Only the factory makes instances */
-    FOnlineSubsystemBrainCloud(FName InInstanceName) :
-        FOnlineSubsystemImpl(InInstanceName)
+    FOnlineSubsystemBrainCloud(FName InSubsystemName, FName InInstanceName) :
+        FOnlineSubsystemImpl(InSubsystemName, InInstanceName)
     {}
 
     FOnlineSubsystemBrainCloud() {}

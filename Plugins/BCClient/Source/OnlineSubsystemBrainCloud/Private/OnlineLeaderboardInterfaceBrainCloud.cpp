@@ -42,6 +42,20 @@ bool FOnlineLeaderboardsBrainCloud::ReadLeaderboardsForFriends(int32 LocalUserNu
     return false;
 }
 
+bool FOnlineLeaderboardsBrainCloud::ReadLeaderboardsAroundRank(int32 Rank, uint32 Range, FOnlineLeaderboardReadRef& ReadObject)
+{
+	UE_LOG(LogOnline, Warning, TEXT("ReadLeaderboardsAroundRank is not supported"));
+	TriggerOnLeaderboardReadCompleteDelegates(false);
+	return false;
+}
+
+bool FOnlineLeaderboardsBrainCloud::ReadLeaderboardsAroundUser(TSharedRef<const FUniqueNetId> Player, uint32 Range, FOnlineLeaderboardReadRef& ReadObject)
+{
+	UE_LOG(LogOnline, Warning, TEXT("ReadLeaderboardsAroundUser is not supported"));
+	TriggerOnLeaderboardReadCompleteDelegates(false);
+	return false;
+}
+
 void FOnlineLeaderboardsBrainCloud::FreeStats(FOnlineLeaderboardRead& ReadObject)
 {
     UE_LOG(LogOnline, Warning, TEXT("FreeStats is unsupported"));

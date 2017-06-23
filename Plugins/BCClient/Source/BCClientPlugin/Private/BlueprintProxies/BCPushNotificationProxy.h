@@ -98,7 +98,7 @@ public:
     * Param - customDataJson Optional custom data
     */
     UFUNCTION(BlueprintCallable, meta = (BlueprintInternalUseOnly = "true"), Category = "BrainCloud|Push Notification")
-        static UBCPushNotificationProxy* SendNormalizedPushNotificationToGroup(const FString& toPlayerId, const FString& alertContentJson, const FString& customDataJson);
+        static UBCPushNotificationProxy* SendNormalizedPushNotificationToGroup(const FString& groupId, const FString& alertContentJson, const FString& customDataJson);
 
 	/**
 	* Schedules a normalized push notification to a user
