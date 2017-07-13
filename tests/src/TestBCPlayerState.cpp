@@ -82,15 +82,6 @@ TEST_F(TestBCPlayerState, UpdateAttributes)
     Logout();
 }
 
-TEST_F(TestBCPlayerState, UpdatePlayerNameWithEmoji)
-{
-    Authenticate();
-    TestResult tr;
-    m_bc->getPlayerStateService()->updateUserName("\uD83D\uDE0A \uD83D\uDE0A \uD83D\uDE0A", &tr);
-    tr.run(m_bc);
-    Logout();
-}
-
 TEST_F(TestBCPlayerState, UpdatePlayerName)
 {
     Authenticate();
