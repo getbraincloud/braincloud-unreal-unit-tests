@@ -144,6 +144,8 @@ TSharedRef<IHttpRequest> BrainCloudComms::SendPacket(PacketRef packet)
 		httpRequest->SetHeader(TEXT("X-SIG"), secretHeader);
 	}
 
+	httpRequest->SetHeader(TEXT("X-APPID"), _appId);
+
 	httpRequest->ProcessRequest();
 	_requestSentTime = FPlatformTime::Seconds();
 	return httpRequest;
@@ -161,6 +163,7 @@ void BrainCloudComms::ResendActivePacket()
 
 	httpRequest->SetContent(_activeRequest->GetContent());
 	httpRequest->SetHeader(TEXT("X-SIG"), _activeRequest->GetHeader(TEXT("X-SIG")));
+	httpRequest->SetHeader(TEXT("X-APPID"), _activeRequest->GetHeader(TEXT("X-APPID")));
 
 	httpRequest->ProcessRequest();
 	_activeRequest = httpRequest;
