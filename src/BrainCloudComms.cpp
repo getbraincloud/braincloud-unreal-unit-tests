@@ -1029,6 +1029,7 @@ namespace BrainCloud
 				std::string sig((const char*)buf, DIGEST_LENGTH * 2);
 				std::transform(sig.begin(), sig.end(), sig.begin(), toupper);
 				request->addHeader(URLRequestHeader("X-SIG", sig));
+				request->addHeader(URLRequestHeader("X-APPID", _appId));
 			}
 
 			// Store the currently active HTTP Request in the object.
