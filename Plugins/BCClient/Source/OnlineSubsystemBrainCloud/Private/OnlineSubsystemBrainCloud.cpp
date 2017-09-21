@@ -244,6 +244,11 @@ bool FOnlineSubsystemBrainCloud::Exec(UWorld* InWorld, const TCHAR* Cmd, FOutput
 	return false;
 }
 
+FText FOnlineSubsystemBrainCloud::GetOnlineServiceName() const
+{
+	return NSLOCTEXT("brainCloud", "brainCloud", "brainCloud");
+}
+
 bool FOnlineSubsystemBrainCloud::IsEnabled()
 {
 	return true;
