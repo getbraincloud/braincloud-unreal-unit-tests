@@ -227,6 +227,8 @@ namespace BrainCloud
 	const ServiceOperation ServiceOperation::IncrementUserEntityData = ServiceOperation("INCREMENT_USER_ENTITY_DATA");
 	const ServiceOperation ServiceOperation::IncrementSharedUserEntityData = ServiceOperation("INCREMENT_SHARED_USER_ENTITY_DATA");
 	const ServiceOperation ServiceOperation::IncrementGlobalEntityData = ServiceOperation("INCREMENT_GLOBAL_ENTITY_DATA");
+	const ServiceOperation ServiceOperation::GetRandomEntitiesMatching = ServiceOperation("GET_RANDOM_ENTITIES_MATCHING");
+
 
 	const ServiceOperation ServiceOperation::GetAttributes = ServiceOperation("GET_ATTRIBUTES");
 	const ServiceOperation ServiceOperation::UpdateAttributes = ServiceOperation("UPDATE_ATTRIBUTES");

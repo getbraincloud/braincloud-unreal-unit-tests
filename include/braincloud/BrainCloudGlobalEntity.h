@@ -185,6 +185,18 @@ namespace BrainCloud
 		void incrementGlobalEntityData(const char * in_entityId, std::string in_jsonData, IServerCallback * in_callback = NULL);
 
 		/**
+    	* Gets a list of up to randomCount randomly selected entities from the server based on the where condition and specified maximum return count.
+    	*
+    	* Service Name - globalEntity
+    	* Service Operation - GET_RANDOM_ENTITIES_MATCHING
+    	*
+    	* @param in_where Mongo style query string
+    	* @param in_maxReturn The maximum number of entities to return
+    	* @param in_callback The callback object
+    	*/
+		void getRandomEntitiesMatching(const std::string& in_where, int64_t in_maxReturn, IServerCallback * in_callback);
+
+		/**
 		* Method updates an existing entity's Owner and ACL on the server.
 		*
 		* Service Name - globalEntity

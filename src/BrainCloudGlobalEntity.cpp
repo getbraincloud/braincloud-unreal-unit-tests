@@ -173,6 +173,20 @@ namespace BrainCloud
 		m_client->sendRequest(sc);
 	}
 
+	void BrainCloudGlobalEntity::getRandomEntitiesMatching(const std::string& in_where, int64_t in_maxReturn, IServerCallback * in_callback)
+	{
+		Json::Value message;
+
+		if (StringUtil::IsOptionalParameterValid(in_where)) {
+			message[OperationParam::GlobalEntityServiceWhere.getValue()] = JsonUtil::jsonStringToValue(in_where);
+		}
+
+		message[OperationParam::GlobalEntityServiceMaxReturn.getValue()] = (Json::Int64) in_maxReturn;
+
+		ServerCall * sc = new ServerCall(ServiceName::GlobalEntity, ServiceOperation::GetRandomEntitiesMatching, message, in_callback);
+		m_client->sendRequest(sc);
+	}
+
 	void BrainCloudGlobalEntity::updateEntityOwnerAndAcl(const char * in_entityId, int64_t in_version, const char * in_ownerId, const std::string & in_jsonEntityAcl, IServerCallback * in_callback)
 	{
 		Json::Value message;

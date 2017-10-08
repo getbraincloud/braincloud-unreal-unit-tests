@@ -167,6 +167,21 @@ TEST_F(TestBCGlobalEntity, IncremenGlobalEntityData)
     tr.run(m_bc);
 }
 
+
+TEST_F(TestBCGlobalEntity, GetRandomEntitiesMatching)
+{
+    CreateDefaultGlobalEntity();
+    TestResult tr;
+
+    Json::FastWriter fw;
+    Json::Value searchType;
+    searchType["entityType"] = m_entityType;
+    std::string searchTypeStr = fw.write(searchType);
+
+    m_bc->getGlobalEntityService()->getRandomEntitiesMatching(searchTypeStr, 100, &tr);
+    tr.run(m_bc);
+}
+
 TEST_F(TestBCGlobalEntity, UpdateEntityOwnerAndAcl)
 {
 	CreateDefaultGlobalEntity(m_indexedId);
