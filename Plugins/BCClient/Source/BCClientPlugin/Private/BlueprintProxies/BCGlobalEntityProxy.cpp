@@ -102,6 +102,13 @@ UBCGlobalEntityProxy * UBCGlobalEntityProxy::IncrementGlobalEntityData(const FSt
 	return Proxy;
 }
 
+UBCGlobalEntityProxy * UBCGlobalEntityProxy::GetRandomEntitiesMatching(const FString& where, int32 maxReturn)
+{
+	UBCGlobalEntityProxy* Proxy = NewObject<UBCGlobalEntityProxy>();
+	BrainCloudClient::getInstance()->getGlobalEntityService()->getRandomEntitiesMatching(where, maxReturn, Proxy);
+	return Proxy;
+}
+
 UBCGlobalEntityProxy* UBCGlobalEntityProxy::UpdateEntityOwnerAndAcl(const FString& entityId, int32 version, const FString& ownerId, UBrainCloudACL* entityAcl)
 {
 	UBCGlobalEntityProxy* Proxy = NewObject<UBCGlobalEntityProxy>();

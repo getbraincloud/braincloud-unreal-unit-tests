@@ -181,6 +181,18 @@ public:
 	void incrementGlobalEntityData(const FString& entityId, const FString& jsonData, IServerCallback * callback = nullptr);
 
 	/**
+	* Gets a list of up to randomCount randomly selected entities from the server based on the where condition and specified maximum return count.
+	*
+	* Service Name - globalEntity
+	* Service Operation - GET_RANDOM_ENTITIES_MATCHING
+	*
+	* @param where Mongo style query string.
+	* @param maxReturn The maximum number of entities to return.
+	* @param callback The callback object
+	*/
+	void getRandomEntitiesMatching(const FString& where, int32 maxReturn, IServerCallback * callback = nullptr);
+
+	/**
 	* Method updates an existing entity's Owner and ACL on the server.
 	*
 	* Service Name - globalEntity

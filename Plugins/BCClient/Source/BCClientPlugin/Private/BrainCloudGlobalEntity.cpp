@@ -153,6 +153,16 @@ void BrainCloudGlobalEntity::incrementGlobalEntityData(const FString& entityId, 
     _client->sendRequest(sc);
 }
 
+void BrainCloudGlobalEntity::getRandomEntitiesMatching(const FString& where, int32 maxReturn, IServerCallback * callback)
+{
+	TSharedRef<FJsonObject> message = MakeShareable(new FJsonObject());
+	message->SetObjectField(OperationParam::GlobalEntityServiceWhere.getValue(), JsonUtil::jsonStringToValue(where));
+	message->SetNumberField(OperationParam::GlobalEntityServiceMaxReturn.getValue(), maxReturn);
+
+	ServerCall * sc = new ServerCall(ServiceName::GlobalEntity, ServiceOperation::GetRandomEntitiesMatching, message, callback);
+	_client->sendRequest(sc);
+}
+
 void BrainCloudGlobalEntity::updateEntityOwnerAndAcl(const FString & entityId, int32 version, const FString & ownerId, IAcl * jsonEntityAcl, IServerCallback * callback)
 {
 	TSharedRef<FJsonObject> message = MakeShareable(new FJsonObject());

@@ -231,6 +231,7 @@ const ServiceOperation ServiceOperation::GetPageOffset = ServiceOperation(TEXT("
 const ServiceOperation ServiceOperation::IncrementUserEntityData = ServiceOperation(TEXT("INCREMENT_USER_ENTITY_DATA"));
 const ServiceOperation ServiceOperation::IncrementSharedUserEntityData = ServiceOperation(TEXT("INCREMENT_SHARED_USER_ENTITY_DATA"));
 const ServiceOperation ServiceOperation::IncrementGlobalEntityData = ServiceOperation(TEXT("INCREMENT_GLOBAL_ENTITY_DATA"));
+const ServiceOperation ServiceOperation::GetRandomEntitiesMatching = ServiceOperation(TEXT("GET_RANDOM_ENTITIES_MATCHING"));
 
 const ServiceOperation ServiceOperation::GetAttributes = ServiceOperation(TEXT("GET_ATTRIBUTES"));
 const ServiceOperation ServiceOperation::UpdateAttributes = ServiceOperation(TEXT("UPDATE_ATTRIBUTES"));

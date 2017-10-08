@@ -183,6 +183,18 @@ public:
 		static UBCGlobalEntityProxy* IncrementGlobalEntityData(const FString& entityId, const FString& jsonData);
 
 	/**
+	* Gets a list of up to randomCount randomly selected entities from the server based on the where condition and specified maximum return count.
+	*
+	* Service Name - globalEntity
+	* Service Operation - GET_RANDOM_ENTITIES_MATCHING
+	*
+	* Param - where Mongo style query string
+	* Param - maxReturn The maximum number of entities to return
+	*/
+	UFUNCTION(BlueprintCallable, meta = (BlueprintInternalUseOnly = "true"), Category = "BrainCloud|Global Entity")
+		static UBCGlobalEntityProxy* GetRandomEntitiesMatching(const FString& whereQuery, int32 maxReturn);
+
+	/**
 	* Method updates an existing entity's Owner and ACL on the server.
 	*
 	* Service Name - globalEntity
