@@ -15,9 +15,9 @@
     <copyright>Copyright 2017</copyright>
     <tags>brainCloud c++ baas cloud backend</tags>
     <dependencies>
-      <dependency id="brainCloudCppSdk-arm" version="3.5.2" />
-      <dependency id="brainCloudCppSdk-x86" version="3.5.2" />
-      <dependency id="brainCloudCppSdk-x64" version="3.5.2" />
+      <dependency id="brainCloudCppSdk-arm" version="3.6.0" />
+      <dependency id="brainCloudCppSdk-x86" version="3.6.0" />
+      <dependency id="brainCloudCppSdk-x64" version="3.6.0" />
     </dependencies>
   </metadata>
 </package>
