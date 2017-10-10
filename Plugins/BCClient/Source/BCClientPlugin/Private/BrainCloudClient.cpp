@@ -15,6 +15,7 @@
 #include "BCPlatform.h"
 
 // Define all static member variables.
+
 BrainCloudClient * BrainCloudClient::_instance = nullptr;
 
 FString BrainCloudClient::s_brainCloudClientVersion = TEXT("3.5.3");
@@ -38,7 +39,6 @@ BrainCloudClient::BrainCloudClient()
 BrainCloudClient::~BrainCloudClient()
 {
 	_instance = nullptr;
-
 	if (_brainCloudComms != nullptr)
 	{
 		delete _brainCloudComms;

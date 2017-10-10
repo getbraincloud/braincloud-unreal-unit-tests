@@ -190,6 +190,10 @@ public:
 	// URL processing
 
 public:
+	/** Setting request URL */
+	UFUNCTION(BlueprintCallable, Category = "VaRest|Request")
+	void SetURL(const FString& Url = TEXT("http://alyamkin.com"));
+
 	/** Open URL with current setup */
 	UFUNCTION(BlueprintCallable, Category = "VaRest|Request")
 	virtual void ProcessURL(const FString& Url = TEXT("http://alyamkin.com"));
@@ -197,6 +201,10 @@ public:
 	/** Open URL in latent mode */
 	UFUNCTION(BlueprintCallable, Category = "VaRest|Request", meta = (Latent, LatentInfo = "LatentInfo", HidePin = "WorldContextObject", DefaultToSelf = "WorldContextObject"))
 	virtual void ApplyURL(const FString& Url, UVaRestJsonObject *&Result, UObject* WorldContextObject, struct FLatentActionInfo LatentInfo);
+
+	/** Check URL and execute process request */
+	UFUNCTION(BlueprintCallable, Category = "VaRest|Request")
+	virtual void ExecuteProcessRequest();
 
 protected:
 	/** Apply current internal setup to request and process it */
@@ -255,7 +263,7 @@ protected:
 	// Data
 
 public:
-	/** Request response stored as a string */
+	/** Request response stored as a string (Attn.! For invalid responses only, empty for valid one - use json response object instead */
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "VaRest|Response")
 	FString ResponseContent;
 

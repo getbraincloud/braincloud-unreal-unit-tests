@@ -53,6 +53,7 @@ void BrainCloudComms::AddToQueue(ServerCall *serverCall)
 	if (!_isInitialized) UE_LOG(LogBrainCloudComms, Error, TEXT("Attempted to send request but client is not initialized!"));
 
 	TSharedRef<ServerCall> sc = MakeShareable(serverCall);
+
 	_queueMutex.Lock();
 	_messageQueue.AddHead(sc);
 	_queueMutex.Unlock();
@@ -495,7 +496,7 @@ void BrainCloudComms::ReportResults(PacketRef requestPacket, TSharedRef<FJsonObj
 	TArray<TSharedPtr<FJsonValue>> responses = responsePacket->GetArrayField(TEXT("responses"));
 
 	TArray<TSharedPtr<FJsonValue>> apiRewards;
-
+	UObject* tempCallback = nullptr;
 	for (int32 i = 0; i < responses.Num(); i++)
 	{
 		TSharedRef<ServerCall> sc = (*requestPacket)[i];

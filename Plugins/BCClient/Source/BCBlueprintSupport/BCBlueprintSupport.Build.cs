@@ -10,7 +10,7 @@ public class BCBlueprintSupport : ModuleRules
         get { return ModuleDirectory; }
     }
 
-    public BCBlueprintSupport(TargetInfo Target)
+    public BCBlueprintSupport(ReadOnlyTargetRules Target) : base(Target)
     {
         MinFilesUsingPrecompiledHeaderOverride = 1;
         bFasterWithoutUnity = true;

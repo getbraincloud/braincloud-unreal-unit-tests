@@ -8,6 +8,18 @@ UCLASS(MinimalAPI)
 class UBCBlueprintCallProxyBase : public UObject
 {
     GENERATED_BODY()
+
+public:
+
+	UBCBlueprintCallProxyBase(const FObjectInitializer& ObjectInitializer)
+	{
+		this->AddToRoot();
+	}
+
+	virtual void BeginDestroy() override
+	{
+		Super::BeginDestroy();
+	}
 };
 
 USTRUCT(BlueprintType, Category = "BrainCloud")

@@ -6,6 +6,7 @@
   "Description": "brainCloud is a ready-made back-end platform for the development of feature-rich mobile+social games. For more information, go to getbraincloud.com.",
   "Category": "Network",
   "CreatedBy": "bitHeads Inc.",
+  "EngineVersion": "4.17.0",
   "CreatedByURL": "http://getbraincloud.com",
   "DocsURL": "http://getbraincloud.com/apidocs/",
   "MarketplaceURL": "",
@@ -25,6 +26,16 @@
       "Name": "OnlineSubsystemBrainCloud",
       "Type": "Runtime",
       "LoadingPhase": "PreDefault"
+    }
+  ],
+  "Plugins": [
+    {
+      "Name": "OnlineSubsystem",
+      "Enabled": true
+    },
+    {
+      "Name": "OnlineSubsystemUtils",
+      "Enabled": true
     }
   ],
   "EnabledByDefault": false,

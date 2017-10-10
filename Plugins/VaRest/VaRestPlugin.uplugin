@@ -18,9 +18,9 @@
 			"Type" : "Runtime",
 			"LoadingPhase": "PreDefault"
 		},
-    {
-      "Name": "VaRestEditorPlugin",
-      "Type": "Developer"
-    }
+		{
+			"Name": "VaRestEditorPlugin",
+			"Type": "Developer"
+		}
 	]
 }

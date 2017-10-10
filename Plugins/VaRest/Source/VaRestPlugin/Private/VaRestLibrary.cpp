@@ -70,7 +70,11 @@ TMap<UVaRestRequestJSON*, FVaRestCallResponse> UVaRestLibrary::RequestMap;
 
 void UVaRestLibrary::CallURL(UObject* WorldContextObject, const FString& URL, ERequestVerb Verb, ERequestContentType ContentType, UVaRestJsonObject* VaRestJson, const FVaRestCallDelegate& Callback)
 {
+#if ENGINE_MINOR_VERSION >= 17
+	UWorld* World = GEngine->GetWorldFromContextObjectChecked(WorldContextObject);
+#else
 	UWorld* World = GEngine->GetWorldFromContextObject(WorldContextObject);
+#endif
 	if (World == nullptr)
 	{
 		UE_LOG(LogVaRest, Error, TEXT("UVaRestLibrary: Wrong world context"))

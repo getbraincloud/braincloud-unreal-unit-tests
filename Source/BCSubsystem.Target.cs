@@ -5,21 +5,9 @@ using System.Collections.Generic;
 
 public class BCSubsystemTarget : TargetRules
 {
-	public BCSubsystemTarget(TargetInfo Target)
-	{
+    public BCSubsystemTarget(TargetInfo Target) : base(Target)
+    {
 		Type = TargetType.Game;
-	}
-
-	//
-	// TargetRules interface.
-	//
-
-	public override void SetupBinaries(
-		TargetInfo Target,
-		ref List<UEBuildBinaryConfiguration> OutBuildBinaryConfigurations,
-		ref List<string> OutExtraModuleNames
-		)
-	{
-		OutExtraModuleNames.AddRange( new string[] { "BCSubsystem" } );
-	}
+        ExtraModuleNames.AddRange(new string[] { "BCSubsystem" });
+    }
 }
