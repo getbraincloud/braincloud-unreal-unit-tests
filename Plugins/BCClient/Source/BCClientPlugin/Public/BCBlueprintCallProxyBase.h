@@ -15,11 +15,6 @@ public:
 	{
 		this->AddToRoot();
 	}
-
-	virtual void BeginDestroy() override
-	{
-		Super::BeginDestroy();
-	}
 };
 
 USTRUCT(BlueprintType, Category = "BrainCloud")
