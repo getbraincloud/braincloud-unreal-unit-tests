@@ -10,7 +10,11 @@ public class OnlineSubsystemBrainCloud : ModuleRules
         get { return ModuleDirectory; }
     }
 
+#if WITH_FORWARDED_MODULE_RULES_CTOR
     public OnlineSubsystemBrainCloud(ReadOnlyTargetRules Target) : base(Target)
+#else
+    public OnlineSubsystemBrainCloud(TargetInfo Target)
+#endif
     {
         Definitions.Add("ONLINESUBSYSTEMBRAINCLOUD_PACKAGE=1");
 

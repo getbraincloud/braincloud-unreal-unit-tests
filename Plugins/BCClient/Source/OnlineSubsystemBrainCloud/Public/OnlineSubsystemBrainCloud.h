@@ -105,9 +105,15 @@ public:
 PACKAGE_SCOPE:
 
     /** Only the factory makes instances */
+#if ENGINE_MINOR_VERSION >= 16
     FOnlineSubsystemBrainCloud(FName InSubsystemName, FName InInstanceName) :
         FOnlineSubsystemImpl(InSubsystemName, InInstanceName)
     {}
+#else
+	FOnlineSubsystemBrainCloud(FName InSubsystemName, FName InInstanceName) :
+		FOnlineSubsystemImpl(InInstanceName)
+	{}
+#endif
 
     FOnlineSubsystemBrainCloud() {}
 

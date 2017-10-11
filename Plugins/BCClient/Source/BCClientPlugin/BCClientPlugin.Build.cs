@@ -3,6 +3,7 @@
 using System.IO;
 using UnrealBuildTool;
 
+
 public class BCClientPlugin : ModuleRules
 {
     private string ModulePath
@@ -10,7 +11,11 @@ public class BCClientPlugin : ModuleRules
         get { return ModuleDirectory; }
     }
 
+#if WITH_FORWARDED_MODULE_RULES_CTOR
     public BCClientPlugin(ReadOnlyTargetRules Target) : base(Target)
+#else
+    public BCClientPlugin(TargetInfo Target)
+#endif
     {
         PrivateIncludePaths.AddRange(
             new string[] {

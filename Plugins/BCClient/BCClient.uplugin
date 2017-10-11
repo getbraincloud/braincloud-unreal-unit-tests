@@ -10,7 +10,7 @@
 	"DocsURL": "http://getbraincloud.com/apidocs/",
 	"MarketplaceURL": "",
 	"SupportURL": "http://getbraincloud.com/apidocs/support/",
-	"EngineVersion": "4.17.0",
+	"EngineVersion": "4.17.2",
 	"EnabledByDefault": false,
 	"CanContainContent": false,
 	"IsBetaVersion": false,

@@ -42,6 +42,7 @@ bool FOnlineLeaderboardsBrainCloud::ReadLeaderboardsForFriends(int32 LocalUserNu
     return false;
 }
 
+#if ENGINE_MINOR_VERSION >= 16
 bool FOnlineLeaderboardsBrainCloud::ReadLeaderboardsAroundRank(int32 Rank, uint32 Range, FOnlineLeaderboardReadRef& ReadObject)
 {
 	UE_LOG(LogOnline, Warning, TEXT("ReadLeaderboardsAroundRank is not supported"));
@@ -55,6 +56,7 @@ bool FOnlineLeaderboardsBrainCloud::ReadLeaderboardsAroundUser(TSharedRef<const 
 	TriggerOnLeaderboardReadCompleteDelegates(false);
 	return false;
 }
+#endif
 
 void FOnlineLeaderboardsBrainCloud::FreeStats(FOnlineLeaderboardRead& ReadObject)
 {
