@@ -5,21 +5,9 @@ using System.Collections.Generic;
 
 public class BCSubsystemEditorTarget : TargetRules
 {
-	public BCSubsystemEditorTarget(TargetInfo Target)
-	{
+    public BCSubsystemEditorTarget(TargetInfo Target) : base(Target)
+    {
 		Type = TargetType.Editor;
-	}
-
-	//
-	// TargetRules interface.
-	//
-
-	public override void SetupBinaries(
-		TargetInfo Target,
-		ref List<UEBuildBinaryConfiguration> OutBuildBinaryConfigurations,
-		ref List<string> OutExtraModuleNames
-		)
-	{
-		OutExtraModuleNames.AddRange( new string[] { "BCSubsystem" } );
-	}
+        ExtraModuleNames.AddRange(new string[] { "BCSubsystem" });
+    }
 }

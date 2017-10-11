@@ -4,8 +4,8 @@ using UnrealBuildTool;
 
 public class BCSubsystem : ModuleRules
 {
-	public BCSubsystem(TargetInfo Target)
-	{
+    public BCSubsystem(ReadOnlyTargetRules Target) : base(Target)
+    {
 		PublicDependencyModuleNames.AddRange(new string[] { "Core", "CoreUObject", "Engine", "InputCore", "BCClientPlugin", "OnlineSubsystem", "OnlineSubsystemUtils", "Sockets" });
 
         PrivateDependencyModuleNames.AddRange(new string[] { "Json", "OnlineSubsystem" });

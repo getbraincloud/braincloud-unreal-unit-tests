@@ -10,7 +10,7 @@ public class OnlineSubsystemBrainCloud : ModuleRules
         get { return ModuleDirectory; }
     }
 
-    public OnlineSubsystemBrainCloud(TargetInfo Target)
+    public OnlineSubsystemBrainCloud(ReadOnlyTargetRules Target) : base(Target)
     {
         Definitions.Add("ONLINESUBSYSTEMBRAINCLOUD_PACKAGE=1");
 

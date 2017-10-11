@@ -10,7 +10,7 @@ public class BCClientPlugin : ModuleRules
         get { return ModuleDirectory; }
     }
 
-    public BCClientPlugin(TargetInfo Target)
+    public BCClientPlugin(ReadOnlyTargetRules Target) : base(Target)
     {
         PrivateIncludePaths.AddRange(
             new string[] {

@@ -37,11 +37,13 @@ void UBCOneWayMatchProxy::serverCallback(ServiceName serviceName, ServiceOperati
 {
     FBC_ReturnData returnData = FBC_ReturnData(serviceName.getValue(), serviceOperation.getValue(), 200, 0);
     OnSuccess.Broadcast(jsonData, returnData);
+	ConditionalBeginDestroy();
 }
 
 void UBCOneWayMatchProxy::serverError(ServiceName serviceName, ServiceOperation serviceOperation, int32 statusCode, int32 reasonCode, const FString& jsonError)
 {
     FBC_ReturnData returnData = FBC_ReturnData(serviceName.getValue(), serviceOperation.getValue(), statusCode, reasonCode);
     OnFailure.Broadcast(jsonError, returnData);
+	ConditionalBeginDestroy();
 }
 
