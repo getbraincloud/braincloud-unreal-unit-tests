@@ -18,7 +18,7 @@
 
 BrainCloudClient * BrainCloudClient::_instance = nullptr;
 
-FString BrainCloudClient::s_brainCloudClientVersion = TEXT("3.6.0");
+FString BrainCloudClient::s_brainCloudClientVersion = TEXT("3.6.1");
 
 ////////////////////////////////////////////////////
 // (De)Constructors
