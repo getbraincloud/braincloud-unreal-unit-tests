@@ -22,7 +22,16 @@ namespace BrainCloud {
         , m_lastGameVersion("")
         , m_alwaysAllowProfileSwitch(true)
     {
-        m_BCClient = BrainCloud::BrainCloudClient::getInstance();
+        m_BCClient = getBCClient();
+    }
+
+    BrainCloudWrapper::~BrainCloudWrapper() {
+        if (this != m_instance) {
+            if(m_BCClient != nullptr) {
+                delete m_BCClient;
+                m_BCClient = nullptr;
+            }
+        }
     }
 
     BrainCloudWrapper * BrainCloudWrapper::getInstance()

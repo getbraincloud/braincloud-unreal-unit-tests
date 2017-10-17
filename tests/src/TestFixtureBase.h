@@ -3,6 +3,7 @@
 
 #include <stdlib.h>
 #include <vector>
+#include <braincloud/BrainCloudWrapper.h>
 #include "gtest/gtest.h"
 #include "braincloud/BrainCloudClient.h"
 #include "TestResult.h"
@@ -18,6 +19,10 @@ public:
     TestFixtureBase() {}
 
 protected:
+
+	BrainCloudWrapper * m_bcWrapper;
+
+
     BrainCloudClient * m_bc;
 
     static std::string m_serverUrl;

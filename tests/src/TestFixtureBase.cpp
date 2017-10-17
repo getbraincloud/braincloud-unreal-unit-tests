@@ -30,7 +30,12 @@ const char* TestFixtureBase::Users_names[3] = { "UserA", "UserB", "UserC" };
 
 void TestFixtureBase::SetUp()
 {
-	m_bc = BrainCloudClient::getInstance();
+	m_bcWrapper = new BrainCloudWrapper();
+
+	m_bc = m_bcWrapper->getBCClient();
+
+
+	//m_bc = BrainCloudClient::getInstance();
 	LoadIds();
 	m_bc->initialize(m_serverUrl.c_str(), m_secret.c_str(), m_appId.c_str(), m_version.c_str());
 
@@ -64,6 +69,8 @@ void TestFixtureBase::TearDown()
 	m_bc->deregisterRewardCallback();
 
 	m_bc->enableLogging(true);
+
+	delete m_bcWrapper;
 }
 
 bool TestFixtureBase::ShouldSkipAuthenticate()
@@ -90,7 +97,7 @@ void TestFixtureBase::Init()
 	printf("Creating test users");
 	for (int i = 0; i < USERS_MAX; i++)
 	{
-		m_testUsers.push_back(new TestUser(Users_names[i], rand() % 100000000));
+		m_testUsers.push_back(new TestUser(Users_names[i], rand() % 100000000, m_bc));
 		printf("..%i", i + 1);
 	}
 	printf("..completed\n\n");

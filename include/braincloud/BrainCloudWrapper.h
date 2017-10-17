@@ -29,6 +29,14 @@ namespace BrainCloud {
         static BrainCloudWrapper* getInstance();
 
         /**
+         * Instantiate a copy of the brainCloud warapper. Don't use getInstance if creating your own copy.
+         */
+        BrainCloudWrapper();
+
+        ~BrainCloudWrapper();
+
+
+        /**
          * Method initializes the BrainCloudClient.
          *
          * @param in_serverURL The url to the brainCloud server
@@ -203,13 +211,21 @@ namespace BrainCloud {
          * Returns a singleton instance of the BrainCloudClient.
          * @return A singleton instance of the BrainCloudClient.
          */
-        static BrainCloud::BrainCloudClient* getBC() { return getInstance()->m_BCClient; }
+        static BrainCloud::BrainCloudClient* getBC() { return getInstance()->getBCClient(); }
 
         /**
          * Returns a singleton instance of the BrainCloudClient.
          * @return A singleton instance of the BrainCloudClient.
          */
-        BrainCloud::BrainCloudClient* getBCClient() { return m_BCClient; }
+        BrainCloud::BrainCloudClient* getBCClient() {
+            if(this == m_instance) {
+                return BrainCloudClient::getInstance();
+            } else if(m_BCClient == nullptr) {
+                m_BCClient = new BrainCloudClient();
+            }
+
+            return m_BCClient;
+        }
 
         /**
          * Returns the stored profile id
@@ -271,7 +287,6 @@ namespace BrainCloud {
             int statusCode, int reasonCode, int retry, const std::string & message);
 
     protected:
-        BrainCloudWrapper();
 
         static BrainCloudWrapper* m_instance;
         static std::string AUTHENTICATION_ANONYMOUS;

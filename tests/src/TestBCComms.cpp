@@ -343,7 +343,7 @@ void TestBCComms::sleepForMillisAndRunCallbacks(int millis)
 		usleep(slice * 1000);
 #endif
 		millis -= slice;
-		BrainCloud::BrainCloudClient::getInstance()->runCallbacks();
+		m_bc->runCallbacks();
 	}
 }
 

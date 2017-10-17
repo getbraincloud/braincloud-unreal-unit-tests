@@ -4,7 +4,7 @@ TEST_F(TestBCAuth, AaaRunFirst)
 {
     // test that should be run before all others
 #if defined (USE_IMMEDIATE_RETRY)
-    BrainCloudClient::getInstance()->setImmediateRetryOnError(true);
+    m_bc->setImmediateRetryOnError(true);
 #else
     BrainCloudClient::getInstance()->setImmediateRetryOnError(false);
 #endif

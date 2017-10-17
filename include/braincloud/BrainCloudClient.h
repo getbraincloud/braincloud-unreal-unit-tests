@@ -85,7 +85,14 @@ namespace BrainCloud
 		 * @return BrainCloudClient * - pointer to the singleton BrainCloudClient object
 		 */
 		static BrainCloudClient * getInstance();
-		
+
+		/**
+		 * BrainCloudClient can be instantiated as a single object. Do not use getInstance() when
+		 * creating your own brainCloud object.
+		 */
+		BrainCloudClient();
+
+
 		/**
 		 * Method initializes the BrainCloudClient.
 		 *
@@ -532,8 +539,6 @@ namespace BrainCloud
 		void overrideLanguageCode(const char * in_languageCode) { _languageCode = in_languageCode; }
 
 	protected:
-		BrainCloudClient();
-
 		static BrainCloudClient * _instance;
 
 		IBrainCloudComms * _brainCloudComms;
