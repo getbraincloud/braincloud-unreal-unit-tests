@@ -22,10 +22,15 @@ namespace BrainCloud {
     {
     public:
 
+        BrainCloud::BrainCloudClient* client;
+
         /**
          * Method returns a singleton instance of the BrainCloudWrapper.
          * @return A singleton instance of the BrainCloudWrapper.
-         */
+         *
+		 * @deprecated Use of the *singleton* has been deprecated. We recommend that you create your own *variable* to hold an instance of the brainCloudWrapper. Explanation here: http://getbraincloud.com/blog
+		 */
+        DEPRECATED
         static BrainCloudWrapper* getInstance();
 
         /**
@@ -47,8 +52,9 @@ namespace BrainCloud {
          * You are free to pick anything you want.
          * @param in_appName The app name used in the keychain for storing anonymous and profile ids.
          * You are free to pick anything you want.
+         * @param in_wrapperName A value used to differentiate saved wrapper data
          */
-        void initialize(const char * in_serverUrl, const char * in_secretKey, const char * in_appId, const char * in_version, const char * in_companyName, const char * in_appName);
+        void initialize(const char * in_serverUrl, const char * in_secretKey, const char * in_appId, const char * in_version, const char * in_companyName, const char * in_appName, const char * in_wrapperName);
 
         /**
          * Authenticate a user anonymously with brainCloud - used for apps that don't want to bother
@@ -210,7 +216,10 @@ namespace BrainCloud {
         /**
          * Returns a singleton instance of the BrainCloudClient.
          * @return A singleton instance of the BrainCloudClient.
-         */
+         *
+		 * @deprecated Use of the *singleton* has been deprecated. We recommend that you create your own *variable* to hold an instance of the brainCloudWrapper. Explanation here: http://getbraincloud.com/blog
+		 */
+        DEPRECATED
         static BrainCloud::BrainCloudClient* getBC() { return getInstance()->getBCClient(); }
 
         /**
@@ -218,13 +227,7 @@ namespace BrainCloud {
          * @return A singleton instance of the BrainCloudClient.
          */
         BrainCloud::BrainCloudClient* getBCClient() {
-            if(this == m_instance) {
-                return BrainCloudClient::getInstance();
-            } else if(m_BCClient == nullptr) {
-                m_BCClient = new BrainCloudClient();
-            }
-
-            return m_BCClient;
+            return client;
         }
 
         /**
@@ -291,14 +294,13 @@ namespace BrainCloud {
         static BrainCloudWrapper* m_instance;
         static std::string AUTHENTICATION_ANONYMOUS;
 
-        BrainCloud::BrainCloudClient* m_BCClient;
-
         IServerCallback* m_authenticateCallback;
 
         std::string m_lastUrl;
         std::string m_lastSecretKey;
         std::string m_lastGameId;
         std::string m_lastGameVersion;
+        std::string m_wrapperName;
 
         bool m_alwaysAllowProfileSwitch;
 

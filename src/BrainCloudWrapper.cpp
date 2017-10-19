@@ -14,51 +14,61 @@ namespace BrainCloud {
 
 
     BrainCloudWrapper::BrainCloudWrapper()
-        : m_BCClient(NULL)
+        : client(NULL)
         , m_authenticateCallback(NULL)
         , m_lastUrl("")
         , m_lastSecretKey("")
         , m_lastGameId("")
         , m_lastGameVersion("")
+        , m_wrapperName("")
         , m_alwaysAllowProfileSwitch(true)
     {
-        m_BCClient = getBCClient();
     }
 
     BrainCloudWrapper::~BrainCloudWrapper() {
         if (this != m_instance) {
-            if(m_BCClient != nullptr) {
-                delete m_BCClient;
-                m_BCClient = nullptr;
+            if(client != nullptr) {
+                delete client;
+                client = nullptr;
             }
         }
     }
 
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wdeprecated-declarations"
     BrainCloudWrapper * BrainCloudWrapper::getInstance()
     {
-        if (m_instance == NULL)
+        if (m_instance == nullptr)
         {
             m_instance = new BrainCloudWrapper();
+
+            m_instance->client = BrainCloudClient::getInstance();
         }
 
         return m_instance;
     }
+#pragma clang diagnostic pop
 
 
-    void BrainCloudWrapper::initialize(const char * url, const char * secretKey, const char * appId, const char * version, const char * companyName, const char * appName)
+    void BrainCloudWrapper::initialize(const char * url, const char * secretKey, const char * appId, const char * version, const char * companyName, const char * appName, const char * wrapperName = "")
     {
+        if(client == nullptr) {
+            client = new BrainCloudClient();
+        }
+
         // save the app info in case we need to reauthenticate
+        m_wrapperName = wrapperName;
         m_lastUrl = url;
         m_lastSecretKey = secretKey;
         m_lastGameId = appId;
         m_lastGameVersion = version;
 
         // initialize the client with our app info
-        m_BCClient->initialize(url, secretKey, appId, version);
+        client->initialize(url, secretKey, appId, version);
 
         // inialize the save data helper with our company and app name
         // if this is not called the profile ids will not be saved
-        SaveDataHelper::getInstance()->initialize(companyName, appName);
+        SaveDataHelper::getInstance()->initialize(companyName, appName, wrapperName);
     }
 
     void BrainCloudWrapper::initializeIdentity(bool in_isAnonymousAuth)
@@ -70,7 +80,7 @@ namespace BrainCloud {
         // create an anonymous ID if necessary
         if ((!anonymousId.empty() && profileId.empty()) || anonymousId.empty())
         {
-            anonymousId = m_BCClient->getAuthenticationService()->generateAnonymousId();
+            anonymousId = client->getAuthenticationService()->generateAnonymousId();
             profileId = "";
             setStoredAnonymousId(anonymousId.c_str());
             setStoredProfileId(profileId.c_str());
@@ -84,14 +94,14 @@ namespace BrainCloud {
         setStoredAuthenticationType(in_isAnonymousAuth ? AUTHENTICATION_ANONYMOUS.c_str() : "");
 
         // send our IDs to brainCloud
-        m_BCClient->initializeIdentity(profileIdToAuthenticateWith.c_str(), anonymousId.c_str());
+        client->initializeIdentity(profileIdToAuthenticateWith.c_str(), anonymousId.c_str());
     }
 
     void BrainCloudWrapper::reauthenticate()
     {
         // send our saved app info to brainCloud
         // company and app name can be NULL since they are already set
-        initialize(m_lastUrl.c_str(), m_lastSecretKey.c_str(), m_lastGameId.c_str(), m_lastGameVersion.c_str(), NULL, NULL);
+        initialize(m_lastUrl.c_str(), m_lastSecretKey.c_str(), m_lastGameId.c_str(), m_lastGameVersion.c_str(), NULL, NULL, m_wrapperName.c_str());
 
         std::string authType = getStoredAuthenticationType();
         if (authType == AUTHENTICATION_ANONYMOUS)
@@ -107,7 +117,7 @@ namespace BrainCloud {
 
         initializeIdentity(true);
 
-        m_BCClient->getAuthenticationService()->authenticateAnonymous(true, this);
+        client->getAuthenticationService()->authenticateAnonymous(true, this);
     }
 
     void BrainCloudWrapper::authenticateEmailPassword(const char * in_email, const char * in_password, bool in_forceCreate, IServerCallback * in_callback)
@@ -116,7 +126,7 @@ namespace BrainCloud {
 
         initializeIdentity();
 
-        m_BCClient->getAuthenticationService()->authenticateEmailPassword(in_email, in_password, in_forceCreate, this);
+        client->getAuthenticationService()->authenticateEmailPassword(in_email, in_password, in_forceCreate, this);
     }
 
     void BrainCloudWrapper::authenticateExternal(const char * in_userid, const char * in_token, const char * in_externalAuthName, bool in_forceCreate, IServerCallback * in_callback)
@@ -125,7 +135,7 @@ namespace BrainCloud {
 
         initializeIdentity();
 
-        m_BCClient->getAuthenticationService()->authenticateExternal(in_userid, in_token, in_externalAuthName, in_forceCreate, this);
+        client->getAuthenticationService()->authenticateExternal(in_userid, in_token, in_externalAuthName, in_forceCreate, this);
     }
 
     void BrainCloudWrapper::authenticateFacebook(const char * in_fbUserId, const char * in_fbAuthToken, bool in_forceCreate, IServerCallback * in_callback)
@@ -134,7 +144,7 @@ namespace BrainCloud {
 
         initializeIdentity();
 
-        m_BCClient->getAuthenticationService()->authenticateFacebook(in_fbUserId, in_fbAuthToken, in_forceCreate, this);
+        client->getAuthenticationService()->authenticateFacebook(in_fbUserId, in_fbAuthToken, in_forceCreate, this);
     }
 
     void BrainCloudWrapper::authenticateGameCenter(const char * in_gameCenterId, bool in_forceCreate, IServerCallback * in_callback)
@@ -143,7 +153,7 @@ namespace BrainCloud {
 
         initializeIdentity();
 
-        m_BCClient->getAuthenticationService()->authenticateGameCenter(in_gameCenterId, in_forceCreate, this);
+        client->getAuthenticationService()->authenticateGameCenter(in_gameCenterId, in_forceCreate, this);
     }
 
     void BrainCloudWrapper::authenticateGoogle(const char * in_userid, const char * in_token, bool in_forceCreate, IServerCallback * in_callback)
@@ -152,7 +162,7 @@ namespace BrainCloud {
 
         initializeIdentity();
 
-        m_BCClient->getAuthenticationService()->authenticateGoogle(in_userid, in_token, in_forceCreate, this);
+        client->getAuthenticationService()->authenticateGoogle(in_userid, in_token, in_forceCreate, this);
     }
 
     void BrainCloudWrapper::authenticateSteam(const char * in_userid, const char * in_sessionticket, bool in_forceCreate, IServerCallback * in_callback)
@@ -161,7 +171,7 @@ namespace BrainCloud {
 
         initializeIdentity();
 
-        m_BCClient->getAuthenticationService()->authenticateSteam(in_userid, in_sessionticket, in_forceCreate, this);
+        client->getAuthenticationService()->authenticateSteam(in_userid, in_sessionticket, in_forceCreate, this);
     }
 
     void BrainCloudWrapper::authenticateTwitter(const char * in_userid, const char * in_token, const char * in_secret, bool in_forceCreate, IServerCallback * in_callback)
@@ -170,7 +180,7 @@ namespace BrainCloud {
 
         initializeIdentity();
 
-        m_BCClient->getAuthenticationService()->authenticateTwitter(in_userid, in_token, in_secret, in_forceCreate, this);
+        client->getAuthenticationService()->authenticateTwitter(in_userid, in_token, in_secret, in_forceCreate, this);
     }
 
     void BrainCloudWrapper::authenticateUniversal(const char * in_userid, const char * in_password, bool in_forceCreate, IServerCallback * in_callback)
@@ -179,7 +189,7 @@ namespace BrainCloud {
 
         initializeIdentity();
 
-        m_BCClient->getAuthenticationService()->authenticateUniversal(in_userid, in_password, in_forceCreate, this);
+        client->getAuthenticationService()->authenticateUniversal(in_userid, in_password, in_forceCreate, this);
     }
 
 	void BrainCloudWrapper::reconnect(IServerCallback * in_callback)
@@ -189,7 +199,7 @@ namespace BrainCloud {
 
     void BrainCloudWrapper::runCallbacks()
     {
-        m_BCClient->runCallbacks();
+        client->runCallbacks();
     }
 
     std::string BrainCloudWrapper::getStoredProfileId()

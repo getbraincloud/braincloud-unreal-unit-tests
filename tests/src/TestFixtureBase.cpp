@@ -32,12 +32,12 @@ void TestFixtureBase::SetUp()
 {
 	m_bcWrapper = new BrainCloudWrapper();
 
-	m_bc = m_bcWrapper->getBCClient();
-
-
-	//m_bc = BrainCloudClient::getInstance();
 	LoadIds();
-	m_bc->initialize(m_serverUrl.c_str(), m_secret.c_str(), m_appId.c_str(), m_version.c_str());
+
+
+	m_bcWrapper->initialize(m_serverUrl.c_str(), m_secret.c_str(), m_appId.c_str(), m_version.c_str(), "", "", "");
+
+	m_bc = m_bcWrapper->client;
 
 	m_bc->enableLogging(ENABLE_SETUP_TEARDOWN_LOGGING);
 

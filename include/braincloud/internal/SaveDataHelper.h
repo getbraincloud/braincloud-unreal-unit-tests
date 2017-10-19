@@ -8,7 +8,7 @@ class SaveDataHelper
 public:
     static SaveDataHelper * getInstance();
 
-    void initialize(const char * companyName, const char * appName);
+    void initialize(const char * companyName, const char * appName, const char * wrapperName = "");
 
     void saveData(const char * key, const char * data);
     std::string readData(const char * key);

@@ -21,13 +21,19 @@ SaveDataHelper * SaveDataHelper::getInstance()
 	return m_instance;
 }
 
-void SaveDataHelper::initialize(const char * companyName, const char * appName)
+void SaveDataHelper::initialize(const char * companyName, const char * appName, const char * wrapperName)
 {
 	if (companyName != NULL && appName != NULL)
 	{
 		std::string companyNameStr = companyName;
 		std::string gameNameStr = appName;
-		m_savePath = companyNameStr + "." + gameNameStr;
+
+		std::string prefix = wrapperName == NULL ? "" : wrapperName;
+		if(strlen(prefix.c_str()) > 0) {
+			prefix += ".";
+		}
+
+		m_savePath = prefix + companyNameStr + "." + gameNameStr;
 	}
 }
 
