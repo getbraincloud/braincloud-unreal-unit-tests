@@ -39,6 +39,8 @@ TEST_F(TestBCEvent, UpdateIncoming)
 	DeleteIncomingMessage();
 }
 
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wdeprecated-declarations"
 TEST_F(TestBCEvent, GetEvents)
 {
 	SendDefaultMessage();
@@ -49,6 +51,7 @@ TEST_F(TestBCEvent, GetEvents)
 
 	DeleteIncomingMessage();
 }
+#pragma clang diagnostic pop
 
 void TestBCEvent::SendDefaultMessage()
 {
