@@ -24,6 +24,38 @@ namespace BrainCloud {
 
         BrainCloud::BrainCloudClient* client;
 
+        /* Service getter methods */
+        BrainCloudPlayerStatistics * getPlayerStatisticsService() { return client->getPlayerStatisticsService(); }
+        BrainCloudGlobalStatistics * getGlobalStatisticsService() { return client->getGlobalStatisticsService(); }
+        BrainCloudIdentity * getIdentityService() { return client->getIdentityService(); }
+        BrainCloudProduct * getProductService() { return client->getProductService(); }
+        BrainCloudEntity * getEntityService() { return client->getEntityService(); }
+        BrainCloudGlobalEntity * getGlobalEntityService() { return client->getGlobalEntityService(); }
+        BrainCloudMatchmaking * getMatchmakingService() { return client->getMatchmakingService(); }
+        BrainCloudOneWayMatch * getOneWayMatchService() { return client->getOneWayMatchService(); }
+        BrainCloudPlaybackStream * getPlaybackStreamService() { return client->getPlaybackStreamService(); }
+        BrainCloudAsyncMatch * getAsyncMatchService() { return client->getAsyncMatchService(); }
+        BrainCloudScript * getScriptService() { return client->getScriptService(); }
+        BrainCloudPlayerState * getPlayerStateService() { return client->getPlayerStateService(); }
+        BrainCloudFriend * getFriendService() { return client->getFriendService(); }
+        BrainCloudEvent * getEventService() { return client->getEventService(); }
+        BrainCloudSocialLeaderboard * getSocialLeaderboardService() { return client->getSocialLeaderboardService(); }
+        BrainCloudGamification * getGamificationService() { return client->getGamificationService(); }
+        BrainCloudTime * getTimeService() { return client->getTimeService(); }
+        BrainCloudTournament * getTournamentService() { return client->getTournamentService(); }
+        BrainCloudAuthentication * getAuthenticationService() { return client->getAuthenticationService(); }
+        BrainCloudPushNotification * getPushNotificationService() { return client->getPushNotificationService(); }
+        BrainCloudPlayerStatisticsEvent * getPlayerStatisticsEventService() { return client->getPlayerStatisticsEventService(); }
+        BrainCloudSteam * getSteamService() { return client->getSteamService(); }
+        BrainCloudGlobalApp * getGlobalAppService() { return client->getGlobalAppService(); }
+        BrainCloudS3Handling * getS3HandlingService() { return client->getS3HandlingService(); }
+        BrainCloudRedemptionCode * getRedemptionCodeService() { return client->getRedemptionCodeService(); }
+        BrainCloudDataStream * getDataStreamService() { return client->getDataStreamService(); }
+        BrainCloudProfanity * getProfanityService() { return client->getProfanityService(); }
+        BrainCloudFile * getFileService() { return client->getFileService(); }
+        BrainCloudGroup * getGroupService() { return client->getGroupService(); }
+        BrainCloudMail * getMailService() { return client->getMailService(); }
+
         /**
          * Method returns a singleton instance of the BrainCloudWrapper.
          * @return A singleton instance of the BrainCloudWrapper.
@@ -54,7 +86,7 @@ namespace BrainCloud {
          * You are free to pick anything you want.
          * @param in_wrapperName A value used to differentiate saved wrapper data
          */
-        void initialize(const char * in_serverUrl, const char * in_secretKey, const char * in_appId, const char * in_version, const char * in_companyName, const char * in_appName, const char * in_wrapperName);
+        void initialize(const char * in_serverUrl, const char * in_secretKey, const char * in_appId, const char * in_version, const char * in_companyName, const char * in_appName, const char * in_wrapperName = "");
 
         /**
          * Authenticate a user anonymously with brainCloud - used for apps that don't want to bother

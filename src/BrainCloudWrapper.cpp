@@ -50,7 +50,7 @@ namespace BrainCloud {
 #pragma clang diagnostic pop
 
 
-    void BrainCloudWrapper::initialize(const char * url, const char * secretKey, const char * appId, const char * version, const char * companyName, const char * appName, const char * wrapperName = "")
+    void BrainCloudWrapper::initialize(const char * url, const char * secretKey, const char * appId, const char * version, const char * companyName, const char * appName, const char * wrapperName)
     {
         if(client == nullptr) {
             client = new BrainCloudClient();
