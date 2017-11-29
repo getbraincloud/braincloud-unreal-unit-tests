@@ -73,6 +73,9 @@ namespace BrainCloud
 	class BrainCloudClient
 	{
 	public:
+		static const bool EnableSingletonMode;
+		static const char * SingletonUseErrorMessage;
+
 		/**
 		 * Destructor
 		 */

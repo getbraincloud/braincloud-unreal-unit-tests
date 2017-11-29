@@ -1,5 +1,6 @@
 #include "braincloud/BrainCloudWrapper.h"
 #include "braincloud/internal/SaveDataHelper.h"
+#include "braincloud/BrainCloudClient.h"
 
 #define PROFILE_ID_KEY "profileId"
 #define ANONYMOUS_ID_KEY "anonymousId"
@@ -38,6 +39,10 @@ namespace BrainCloud {
 #pragma clang diagnostic ignored "-Wdeprecated-declarations"
     BrainCloudWrapper * BrainCloudWrapper::getInstance()
     {
+        if(BrainCloudClient::EnableSingletonMode == false) {
+            throw std::invalid_argument(BrainCloudClient::SingletonUseErrorMessage);
+        }
+
         if (m_instance == nullptr)
         {
             m_instance = new BrainCloudWrapper();
