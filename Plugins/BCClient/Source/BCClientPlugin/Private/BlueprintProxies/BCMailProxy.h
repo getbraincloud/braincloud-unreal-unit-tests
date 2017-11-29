@@ -6,6 +6,8 @@
 #include "IServerCallback.h"
 #include "BCMailProxy.generated.h"
 
+class ABrainCloud;
+
 UCLASS(MinimalAPI)
 class UBCMailProxy : public UBCBlueprintCallProxyBase, public IServerCallback
 {
@@ -25,7 +27,7 @@ public:
 	* Param - body The email body
 	*/
     UFUNCTION(BlueprintCallable, meta = (BlueprintInternalUseOnly = "true"), Category = "BrainCloud|Mail")
-        static UBCMailProxy* SendBasicEmail(const FString& profileId, const FString& subject, const FString& body);
+        static UBCMailProxy* SendBasicEmail(ABrainCloud *brainCloud, const FString& profileId, const FString& subject, const FString& body);
 
 	/**
 	* Sends an advanced email to the specified player
@@ -38,7 +40,7 @@ public:
 	*	a full list. http://getbraincloud.com/apidocs/apiref/#capi-mail
 	*/
 	UFUNCTION(BlueprintCallable, meta = (BlueprintInternalUseOnly = "true"), Category = "BrainCloud|Mail")
-		static UBCMailProxy* SendAdvancedEmail(const FString& profileId, const FString& jsonServiceParams);
+		static UBCMailProxy* SendAdvancedEmail(ABrainCloud *brainCloud, const FString& profileId, const FString& jsonServiceParams);
 
 	/**
 	* Sends an advanced email to the specified email address
@@ -51,7 +53,7 @@ public:
 	*	a full list. http://getbraincloud.com/apidocs/apiref/#capi-mail
 	*/
 	UFUNCTION(BlueprintCallable, meta = (BlueprintInternalUseOnly = "true"), Category = "BrainCloud|Mail")
-		static UBCMailProxy* SendAdvancedEmailByAddress(const FString& emailAddress, const FString& jsonServiceParams);
+		static UBCMailProxy* SendAdvancedEmailByAddress(ABrainCloud *brainCloud, const FString& emailAddress, const FString& jsonServiceParams);
 
     //Response delegates
     UPROPERTY(BlueprintAssignable)

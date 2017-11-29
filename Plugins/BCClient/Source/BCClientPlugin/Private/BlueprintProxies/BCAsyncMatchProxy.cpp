@@ -2,9 +2,10 @@
 
 #include "BCClientPluginPrivatePCH.h"
 #include "BCAsyncMatchProxy.h"
-
+#include "BCWrapperProxy.h"
 #include "BrainCloudClient.h"
 #include "ServiceName.h"
+#include "BrainCloudWrapper.h"
 #include "ServiceOperation.h"
 
 UBCAsyncMatchProxy::UBCAsyncMatchProxy(const FObjectInitializer& ObjectInitializer)
@@ -12,82 +13,82 @@ UBCAsyncMatchProxy::UBCAsyncMatchProxy(const FObjectInitializer& ObjectInitializ
 {
 }
 
-UBCAsyncMatchProxy* UBCAsyncMatchProxy::CreateMatch(FString jsonOpponentIds, FString pushNotificationMessage)
+UBCAsyncMatchProxy* UBCAsyncMatchProxy::CreateMatch(ABrainCloud *brainCloud, FString jsonOpponentIds, FString pushNotificationMessage)
 {
     UBCAsyncMatchProxy* Proxy = NewObject<UBCAsyncMatchProxy>();
-    BrainCloudClient::getInstance()->getAsyncMatchService()->createMatch(jsonOpponentIds, pushNotificationMessage, Proxy);
+    UBCWrapperProxy::GetBrainCloudInstance(brainCloud)->getAsyncMatchService()->createMatch(jsonOpponentIds, pushNotificationMessage, Proxy);
     return Proxy;
 }
 
-UBCAsyncMatchProxy* UBCAsyncMatchProxy::CreateMatchWithInitialTurn(FString jsonOpponentIds, FString jsonMatchState, FString pushNotificationMessage,
+UBCAsyncMatchProxy* UBCAsyncMatchProxy::CreateMatchWithInitialTurn(ABrainCloud *brainCloud, FString jsonOpponentIds, FString jsonMatchState, FString pushNotificationMessage,
     FString nextPlayer, FString jsonSummary)
 {
     UBCAsyncMatchProxy* Proxy = NewObject<UBCAsyncMatchProxy>();
-    BrainCloudClient::getInstance()->getAsyncMatchService()->createMatchWithInitialTurn(jsonOpponentIds, jsonMatchState, pushNotificationMessage, nextPlayer, jsonSummary, Proxy);
+    UBCWrapperProxy::GetBrainCloudInstance(brainCloud)->getAsyncMatchService()->createMatchWithInitialTurn(jsonOpponentIds, jsonMatchState, pushNotificationMessage, nextPlayer, jsonSummary, Proxy);
     return Proxy;
 }
 
-UBCAsyncMatchProxy* UBCAsyncMatchProxy::SubmitTurn(FString ownerId, FString matchId, int32 version, FString jsonMatchState, FString pushNotificationMessage,
+UBCAsyncMatchProxy* UBCAsyncMatchProxy::SubmitTurn(ABrainCloud *brainCloud, FString ownerId, FString matchId, int32 version, FString jsonMatchState, FString pushNotificationMessage,
     FString nextPlayer, FString jsonSummary, FString jsonStatistics)
 {
     UBCAsyncMatchProxy* Proxy = NewObject<UBCAsyncMatchProxy>();
-    BrainCloudClient::getInstance()->getAsyncMatchService()->submitTurn(ownerId, matchId, version, jsonMatchState, pushNotificationMessage, nextPlayer, jsonSummary, jsonStatistics, Proxy);
+    UBCWrapperProxy::GetBrainCloudInstance(brainCloud)->getAsyncMatchService()->submitTurn(ownerId, matchId, version, jsonMatchState, pushNotificationMessage, nextPlayer, jsonSummary, jsonStatistics, Proxy);
     return Proxy;
 }
 
-UBCAsyncMatchProxy* UBCAsyncMatchProxy::UpdateMatchSummaryData(FString ownerId, FString matchId, int32 version, FString jsonSummary)
+UBCAsyncMatchProxy* UBCAsyncMatchProxy::UpdateMatchSummaryData(ABrainCloud *brainCloud, FString ownerId, FString matchId, int32 version, FString jsonSummary)
 {
     UBCAsyncMatchProxy* Proxy = NewObject<UBCAsyncMatchProxy>();
-    BrainCloudClient::getInstance()->getAsyncMatchService()->updateMatchSummaryData(ownerId, matchId, version, jsonSummary, Proxy);
+    UBCWrapperProxy::GetBrainCloudInstance(brainCloud)->getAsyncMatchService()->updateMatchSummaryData(ownerId, matchId, version, jsonSummary, Proxy);
     return Proxy;
 }
 
-UBCAsyncMatchProxy* UBCAsyncMatchProxy::CompleteMatch(FString ownerId, FString matchId)
+UBCAsyncMatchProxy* UBCAsyncMatchProxy::CompleteMatch(ABrainCloud *brainCloud, FString ownerId, FString matchId)
 {
     UBCAsyncMatchProxy* Proxy = NewObject<UBCAsyncMatchProxy>();
-    BrainCloudClient::getInstance()->getAsyncMatchService()->completeMatch(ownerId, matchId, Proxy);
+    UBCWrapperProxy::GetBrainCloudInstance(brainCloud)->getAsyncMatchService()->completeMatch(ownerId, matchId, Proxy);
     return Proxy;
 }
 
-UBCAsyncMatchProxy* UBCAsyncMatchProxy::ReadMatch(FString ownerId, FString matchId)
+UBCAsyncMatchProxy* UBCAsyncMatchProxy::ReadMatch(ABrainCloud *brainCloud, FString ownerId, FString matchId)
 {
     UBCAsyncMatchProxy* Proxy = NewObject<UBCAsyncMatchProxy>();
-    BrainCloudClient::getInstance()->getAsyncMatchService()->readMatch(ownerId, matchId, Proxy);
+    UBCWrapperProxy::GetBrainCloudInstance(brainCloud)->getAsyncMatchService()->readMatch(ownerId, matchId, Proxy);
     return Proxy;
 }
 
-UBCAsyncMatchProxy* UBCAsyncMatchProxy::ReadMatchHistory(FString ownerId, FString matchId)
+UBCAsyncMatchProxy* UBCAsyncMatchProxy::ReadMatchHistory(ABrainCloud *brainCloud, FString ownerId, FString matchId)
 {
     UBCAsyncMatchProxy* Proxy = NewObject<UBCAsyncMatchProxy>();
-    BrainCloudClient::getInstance()->getAsyncMatchService()->readMatchHistory(ownerId, matchId, Proxy);
+    UBCWrapperProxy::GetBrainCloudInstance(brainCloud)->getAsyncMatchService()->readMatchHistory(ownerId, matchId, Proxy);
     return Proxy;
 }
 
-UBCAsyncMatchProxy* UBCAsyncMatchProxy::FindMatches()
+UBCAsyncMatchProxy* UBCAsyncMatchProxy::FindMatches(ABrainCloud *brainCloud)
 {
     UBCAsyncMatchProxy* Proxy = NewObject<UBCAsyncMatchProxy>();
-    BrainCloudClient::getInstance()->getAsyncMatchService()->findMatches(Proxy);
+    UBCWrapperProxy::GetBrainCloudInstance(brainCloud)->getAsyncMatchService()->findMatches(Proxy);
     return Proxy;
 }
 
-UBCAsyncMatchProxy* UBCAsyncMatchProxy::FindCompleteMatches()
+UBCAsyncMatchProxy* UBCAsyncMatchProxy::FindCompleteMatches(ABrainCloud *brainCloud)
 {
     UBCAsyncMatchProxy* Proxy = NewObject<UBCAsyncMatchProxy>();
-    BrainCloudClient::getInstance()->getAsyncMatchService()->findCompleteMatches(Proxy);
+    UBCWrapperProxy::GetBrainCloudInstance(brainCloud)->getAsyncMatchService()->findCompleteMatches(Proxy);
     return Proxy;
 }
 
-UBCAsyncMatchProxy* UBCAsyncMatchProxy::AbandonMatch(FString ownerId, FString matchId)
+UBCAsyncMatchProxy* UBCAsyncMatchProxy::AbandonMatch(ABrainCloud *brainCloud, FString ownerId, FString matchId)
 {
     UBCAsyncMatchProxy* Proxy = NewObject<UBCAsyncMatchProxy>();
-    BrainCloudClient::getInstance()->getAsyncMatchService()->abandonMatch(ownerId, matchId, Proxy);
+    UBCWrapperProxy::GetBrainCloudInstance(brainCloud)->getAsyncMatchService()->abandonMatch(ownerId, matchId, Proxy);
     return Proxy;
 }
 
-UBCAsyncMatchProxy* UBCAsyncMatchProxy::DeleteMatch(FString ownerId, FString matchId)
+UBCAsyncMatchProxy* UBCAsyncMatchProxy::DeleteMatch(ABrainCloud *brainCloud, FString ownerId, FString matchId)
 {
     UBCAsyncMatchProxy* Proxy = NewObject<UBCAsyncMatchProxy>();
-    BrainCloudClient::getInstance()->getAsyncMatchService()->deleteMatch(ownerId, matchId, Proxy);
+    UBCWrapperProxy::GetBrainCloudInstance(brainCloud)->getAsyncMatchService()->deleteMatch(ownerId, matchId, Proxy);
     return Proxy;
 }
 

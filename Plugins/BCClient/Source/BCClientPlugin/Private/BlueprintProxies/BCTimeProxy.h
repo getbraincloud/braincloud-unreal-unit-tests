@@ -6,6 +6,8 @@
 #include "IServerCallback.h"
 #include "BCTimeProxy.generated.h"
 
+class ABrainCloud;
+
 UCLASS(MinimalAPI)
 class UBCTimeProxy : public UBCBlueprintCallProxyBase, public IServerCallback
 {
@@ -22,7 +24,7 @@ public:
     * Service Operation - Read
     */
     UFUNCTION(BlueprintCallable, meta = (BlueprintInternalUseOnly = "true"), Category = "BrainCloud|Time")
-        static UBCTimeProxy* ReadServerTime();
+        static UBCTimeProxy* ReadServerTime(ABrainCloud *brainCloud);
 
     //Response delegates
     UPROPERTY(BlueprintAssignable)

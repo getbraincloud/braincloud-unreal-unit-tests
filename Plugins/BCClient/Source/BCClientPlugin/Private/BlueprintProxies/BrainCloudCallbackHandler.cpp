@@ -4,7 +4,9 @@
 #include "BrainCloudClient.h"
 #include "BrainCloudComms.h"
 #include "ServerCall.h"
-
+#include "BCWrapperProxy.h"
+#include "BrainCloudWrapper.h"
+#include "BrainCloud.h"
 #include "BrainCloudCallbackHandler.h"
 
 UBrainCloudCallbackHandler::UBrainCloudCallbackHandler(const FObjectInitializer& ObjectInitializer)
@@ -14,7 +16,9 @@ UBrainCloudCallbackHandler::UBrainCloudCallbackHandler(const FObjectInitializer&
 
 void UBrainCloudCallbackHandler::BeginDestroy()
 {
-    BrainCloudComms * comms = BrainCloudClient::getInstance()->getBrainCloudComms();
+	BrainCloudWrapper * bc = UBCWrapperProxy::GetBrainCloudInstance(_brainCloud);
+
+    BrainCloudComms * comms = bc->getBCClient()->getBrainCloudComms();
     if (comms != nullptr)
     {
         if (comms->IsEventCallback(this)) comms->DeregisterEventCallback();
@@ -23,18 +27,21 @@ void UBrainCloudCallbackHandler::BeginDestroy()
         if (comms->IsGlobalErrorCallback(this)) comms->DeregisterGlobalErrorCallback();
         if (comms->IsNetworkErrorCallback(this)) comms->DeregisterNetworkErrorCallback();
     }
+	
     Super::BeginDestroy();
 }
 
-void UBrainCloudCallbackHandler::RegisterCallbacks(bool fileCallbacks, bool rewardCallback, bool eventCallback, bool globalErrorCallback, bool networkErrorCallback)
+void UBrainCloudCallbackHandler::RegisterCallbacks(ABrainCloud* brainCloud, bool fileCallbacks, bool rewardCallback, bool eventCallback, bool globalErrorCallback, bool networkErrorCallback)
 {
-    BrainCloudClient * client = BrainCloudClient::getInstance();
+	_brainCloud = brainCloud;
 
-    if (fileCallbacks) client->registerFileUploadCallback(this);
-    if (rewardCallback) client->registerRewardCallback(this);
-    if (eventCallback) client->registerEventCallback(this);
-    if (globalErrorCallback) client->registerGlobalErrorCallback(this);
-    if (networkErrorCallback) client->registerNetworkErrorCallback(this);
+	BrainCloudWrapper * bc = UBCWrapperProxy::GetBrainCloudInstance(brainCloud);
+
+    if (fileCallbacks) bc->getBCClient()->registerFileUploadCallback(this);
+    if (rewardCallback) bc->getBCClient()->registerRewardCallback(this);
+    if (eventCallback) bc->getBCClient()->registerEventCallback(this);
+    if (globalErrorCallback) bc->getBCClient()->registerGlobalErrorCallback(this);
+    if (networkErrorCallback) bc->getBCClient()->registerNetworkErrorCallback(this);
 }
 
 void UBrainCloudCallbackHandler::fileUploadCompleted(const FString& fileUploadId, const FString& jsonResponse)

@@ -6,6 +6,8 @@
 #include "IServerCallback.h"
 #include "BCEventProxy.generated.h"
 
+class ABrainCloud;
+
 UCLASS(MinimalAPI)
 class UBCEventProxy : public UBCBlueprintCallProxyBase, public IServerCallback
 {
@@ -33,7 +35,7 @@ public:
     * user's sent events mailbox.
     */
     UFUNCTION(BlueprintCallable, meta = (BlueprintInternalUseOnly = "true"), Category = "BrainCloud|Event")
-        static UBCEventProxy* SendEvent(const FString& toPlayerId, const FString& eventType, const FString& jsonEventData);
+        static UBCEventProxy* SendEvent(ABrainCloud *brainCloud, const FString& toPlayerId, const FString& eventType, const FString& jsonEventData);
 
     /**
     * Updates an event in the player's incoming event mailbox.
@@ -45,7 +47,7 @@ public:
     * Param - jsonEventData The user-defined data for this event encoded in JSON.
     */
     UFUNCTION(BlueprintCallable, meta = (BlueprintInternalUseOnly = "true"), Category = "BrainCloud|Event")
-        static UBCEventProxy* UpdateIncomingEventData(const FString& evId, const FString& jsonEventData);
+        static UBCEventProxy* UpdateIncomingEventData(ABrainCloud *brainCloud, const FString& evId, const FString& jsonEventData);
 
     /**
     * Delete an event out of the player's incoming mailbox.
@@ -56,7 +58,7 @@ public:
     * Param - evId The event id
     */
     UFUNCTION(BlueprintCallable, meta = (BlueprintInternalUseOnly = "true"), Category = "BrainCloud|Event")
-        static UBCEventProxy* DeleteIncomingEvent(const FString& evId);
+        static UBCEventProxy* DeleteIncomingEvent(ABrainCloud *brainCloud, const FString& evId);
 
     /**
     * Get the events currently queued for the player.
@@ -68,7 +70,7 @@ public:
     * Param - includeSentEvents Get events sent from the player
     */
     UFUNCTION(BlueprintCallable, meta = (BlueprintInternalUseOnly = "true"), Category = "BrainCloud|Event")
-        static UBCEventProxy* GetEvents();
+        static UBCEventProxy* GetEvents(ABrainCloud *brainCloud);
 
     //Response delegates
     UPROPERTY(BlueprintAssignable)

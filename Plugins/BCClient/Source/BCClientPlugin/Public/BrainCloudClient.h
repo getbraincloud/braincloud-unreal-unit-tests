@@ -46,6 +46,9 @@ public:
 	/** Public constants */
 	static bool SINGLE_THREADED;
 
+	BrainCloudClient();
+
+
 	/**
 	 * BrainCloudClient is a singleton object. This method gives the caller access
 	 * to the singleton object in order to use the class.
@@ -431,7 +434,6 @@ public:
 protected:
 
 	//  void BeginDestroy() override;
-	BrainCloudClient();
 	~BrainCloudClient();
 	static BrainCloudClient * _instance;
 

@@ -4,7 +4,10 @@
 
 #include "BCBlueprintCallProxyBase.h"
 #include "IServerCallback.h"
+
 #include "BCAsyncMatchProxy.generated.h"
+
+class ABrainCloud;
 
 UCLASS(MinimalAPI)
 class UBCAsyncMatchProxy : public UBCBlueprintCallProxyBase, public IServerCallback
@@ -42,7 +45,7 @@ public:
     *  Refer to the Push Notification functions for the syntax required.
     */
     UFUNCTION(BlueprintCallable, meta = (BlueprintInternalUseOnly = "true"), Category = "BrainCloud|Async Match")
-        static UBCAsyncMatchProxy* CreateMatch(FString jsonOpponentIds, FString pushNotificationMessage);
+        static UBCAsyncMatchProxy* CreateMatch(ABrainCloud *brainCloud, FString jsonOpponentIds, FString pushNotificationMessage);
 
     /**
     * Creates an instance of an asynchronous match with an initial turn.
@@ -75,7 +78,7 @@ public:
     * Param - jsonSummary Optional JSON string defining what the other player will see as a summary of the game when listing their games
     */
     UFUNCTION(BlueprintCallable, meta = (BlueprintInternalUseOnly = "true"), Category = "BrainCloud|Async Match")
-        static UBCAsyncMatchProxy* CreateMatchWithInitialTurn(FString jsonOpponentIds, FString jsonMatchState, 
+        static UBCAsyncMatchProxy* CreateMatchWithInitialTurn(ABrainCloud *brainCloud, FString jsonOpponentIds, FString jsonMatchState,
             FString pushNotificationMessage, FString nextPlayer, FString jsonSummary);
 
     /**
@@ -95,7 +98,7 @@ public:
     * Param - jsonStatistics Optional JSON string blob provided by the caller
     */
     UFUNCTION(BlueprintCallable, meta = (BlueprintInternalUseOnly = "true"), Category = "BrainCloud|Async Match")
-        static UBCAsyncMatchProxy* SubmitTurn(FString ownerId, FString matchId, int32 version, FString jsonMatchState, FString pushNotificationMessage,
+        static UBCAsyncMatchProxy* SubmitTurn(ABrainCloud *brainCloud, FString ownerId, FString matchId, int32 version, FString jsonMatchState, FString pushNotificationMessage,
         FString nextPlayer, FString jsonSummary, FString jsonStatistics);
 
     /**
@@ -110,7 +113,7 @@ public:
     * Param - jsonSummary JSON string that other players will see as a summary of the game when listing their games
     */
     UFUNCTION(BlueprintCallable, meta = (BlueprintInternalUseOnly = "true"), Category = "BrainCloud|Async Match")
-        static UBCAsyncMatchProxy* UpdateMatchSummaryData(FString ownerId, FString matchId, int32 version, FString jsonSummary);
+        static UBCAsyncMatchProxy* UpdateMatchSummaryData(ABrainCloud *brainCloud, FString ownerId, FString matchId, int32 version, FString jsonSummary);
 
     /**
     * Marks the given match as complete.
@@ -122,7 +125,7 @@ public:
     * Param - matchId Match identifier
     */
     UFUNCTION(BlueprintCallable, meta = (BlueprintInternalUseOnly = "true"), Category = "BrainCloud|Async Match")
-        static UBCAsyncMatchProxy* CompleteMatch(FString ownerId, FString matchId);
+        static UBCAsyncMatchProxy* CompleteMatch(ABrainCloud *brainCloud, FString ownerId, FString matchId);
 
     /**
     * Returns the current state of the given match.
@@ -134,7 +137,7 @@ public:
     * Param - matchId   Match identifier
     */
     UFUNCTION(BlueprintCallable, meta = (BlueprintInternalUseOnly = "true"), Category = "BrainCloud|Async Match")
-        static UBCAsyncMatchProxy* ReadMatch(FString ownerId, FString matchId);
+        static UBCAsyncMatchProxy* ReadMatch(ABrainCloud *brainCloud, FString ownerId, FString matchId);
 
     /**
     * Returns the match history of the given match.
@@ -146,7 +149,7 @@ public:
     * Param - matchId   Match identifier
     */
     UFUNCTION(BlueprintCallable, meta = (BlueprintInternalUseOnly = "true"), Category = "BrainCloud|Async Match")
-        static UBCAsyncMatchProxy* ReadMatchHistory(FString ownerId, FString matchId);
+        static UBCAsyncMatchProxy* ReadMatchHistory(ABrainCloud *brainCloud, FString ownerId, FString matchId);
 
     /**
     * Returns all matches that are NOT in a COMPLETE state for which the player is involved.
@@ -155,7 +158,7 @@ public:
     * Service Operation - FindMatches
     */
     UFUNCTION(BlueprintCallable, meta = (BlueprintInternalUseOnly = "true"), Category = "BrainCloud|Async Match")
-        static UBCAsyncMatchProxy* FindMatches();
+        static UBCAsyncMatchProxy* FindMatches(ABrainCloud *brainCloud);
 
     /**
     * Returns all matches that are in a COMPLETE state for which the player is involved.
@@ -164,7 +167,7 @@ public:
     * Service Operation - FindMatchesCompleted
     */
     UFUNCTION(BlueprintCallable, meta = (BlueprintInternalUseOnly = "true"), Category = "BrainCloud|Async Match")
-        static UBCAsyncMatchProxy* FindCompleteMatches();
+        static UBCAsyncMatchProxy* FindCompleteMatches(ABrainCloud *brainCloud);
 
     /**
     * Marks the given match as abandoned.
@@ -179,7 +182,7 @@ public:
     * }
     */
     UFUNCTION(BlueprintCallable, meta = (BlueprintInternalUseOnly = "true"), Category = "BrainCloud|Async Match")
-        static UBCAsyncMatchProxy* AbandonMatch(FString ownerId, FString matchId);
+        static UBCAsyncMatchProxy* AbandonMatch(ABrainCloud *brainCloud, FString ownerId, FString matchId);
 
     /**
     * Removes the match and match history from the server. DEBUG ONLY, in production it is recommended
@@ -189,7 +192,7 @@ public:
     * Service Operation - Delete
     */
     UFUNCTION(BlueprintCallable, meta = (BlueprintInternalUseOnly = "true"), Category = "BrainCloud|Async Match")
-        static UBCAsyncMatchProxy* DeleteMatch(FString ownerId, FString matchId);
+        static UBCAsyncMatchProxy* DeleteMatch(ABrainCloud *brainCloud, FString ownerId, FString matchId);
 
     //Response delegates
     UPROPERTY(BlueprintAssignable)
@@ -197,6 +200,9 @@ public:
 
     UPROPERTY(BlueprintAssignable)
         FBrainCloudCallbackDelegate OnFailure;
+
+	UPROPERTY()
+		ABrainCloud *BrainCloudRef;
 
 protected:
     // IServerCallback interface

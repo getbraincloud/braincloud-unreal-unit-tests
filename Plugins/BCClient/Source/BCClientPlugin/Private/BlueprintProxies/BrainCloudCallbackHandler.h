@@ -18,6 +18,8 @@ DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FBCEventDelegate, const FString&, js
 DECLARE_DYNAMIC_MULTICAST_DELEGATE_FiveParams(FBCGlobalErrorDelegate, const FString&, serviceName, const FString&, serviceOperation, int32, statusCode, int32, reasonCode, const FString&, jsonResponse);
 DECLARE_DYNAMIC_MULTICAST_DELEGATE(FBCNetworkErrorDelegate);
 
+
+class ABrainCloud;
 class ServiceName;
 class ServiceOperation;
 
@@ -46,6 +48,7 @@ public:
     */
     UFUNCTION(BlueprintCallable, Category = "BrainCloud|Callback Handling")
         void RegisterCallbacks(
+			ABrainCloud* brainCloud,
             bool fileCallbacks = true, 
             bool rewardCallback = true, 
             bool eventCallback = true, 
@@ -81,4 +84,6 @@ protected:
     virtual void globalError(ServiceName serviceName, ServiceOperation serviceOperation, int32 statusCode, int32 reasonCode, const FString& jsonError);
 
     virtual void networkError();
+
+	ABrainCloud* _brainCloud;
 };
