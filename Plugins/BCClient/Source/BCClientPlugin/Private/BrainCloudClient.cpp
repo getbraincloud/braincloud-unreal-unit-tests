@@ -16,9 +16,14 @@
 
 // Define all static member variables.
 
+bool BrainCloudClient::ENABLED_SOFT_ERROR_MODE = true;
+bool BrainCloudClient::ENABLED_SINGLETON_MODE = true;
+
+const wchar_t BrainCloudClient::SINGLETON_USE_ERROR_MESSAGE[123] = TEXT("Singleton usage is disabled. If called by mistake, use your own variable that holds an instance of the bcWrapper/bcClient.");
+
 BrainCloudClient * BrainCloudClient::_instance = nullptr;
 
-FString BrainCloudClient::s_brainCloudClientVersion = TEXT("3.6.1");
+FString BrainCloudClient::s_brainCloudClientVersion = TEXT("3.6.5");
 
 ////////////////////////////////////////////////////
 // (De)Constructors
@@ -56,6 +61,18 @@ BrainCloudClient::~BrainCloudClient()
 */
 BrainCloudClient * BrainCloudClient::getInstance()
 {
+	if (ENABLED_SINGLETON_MODE == false) 
+	{
+		if (ENABLED_SOFT_ERROR_MODE)
+		{
+			UE_LOG(LogTemp, Warning, TEXT("%s"), SINGLETON_USE_ERROR_MESSAGE);
+		}
+		else 
+		{
+			UE_LOG(LogTemp, Fatal, TEXT("%s"), SINGLETON_USE_ERROR_MESSAGE);
+		}
+	}
+
 	if (_instance == nullptr) {
 		_instance = new BrainCloudClient();
 	}

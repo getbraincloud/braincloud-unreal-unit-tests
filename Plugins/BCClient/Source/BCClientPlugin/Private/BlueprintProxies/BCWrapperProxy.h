@@ -8,6 +8,7 @@
 
 #include "BCWrapperProxy.generated.h"
 
+class BrainCloudWrapper;
 class ABrainCloud;
 
 UCLASS(BlueprintType)
@@ -22,6 +23,8 @@ public:
 	
 	/**
 	* Create an actor that contains its own instance of the brainCloud Wrapper
+	* This actor will destory itself on EndPlay
+	*
 	* @param brainCloud - An actor that contains its own instance of the brainCloud Wrapper
 	*/
 	UFUNCTION(BlueprintCallable, Category = "BrainCloud")

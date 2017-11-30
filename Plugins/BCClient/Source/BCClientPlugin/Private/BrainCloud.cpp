@@ -15,17 +15,37 @@ ABrainCloud::ABrainCloud(FString& wrapperName)
 	BrainCloud = new BrainCloudWrapper(wrapperName);
 }
 
-ABrainCloud::~ABrainCloud()
-{
-	if (BrainCloud != nullptr)
-	{
-		delete BrainCloud;
-	}
-
-	BrainCloud = nullptr;
-}
 
 void ABrainCloud::BeginPlay()
 {
+	AActor::BeginPlay();
+
 	BrainCloud->setWrapperName(WrapperName);
 }
+
+
+void ABrainCloud::EndPlay(const EEndPlayReason::Type EndPlayReason)
+{
+	AActor::EndPlay(EndPlayReason);
+
+	this->RemoveFromRoot();
+	
+}
+
+void ABrainCloud::BeginDestroy()
+{
+	AActor::BeginDestroy();
+
+	if (!this->IsValidLowLevel()) {
+		return;
+	}
+
+	this->RemoveFromRoot();
+
+	this->Destroy();
+	this->ConditionalBeginDestroy();
+
+	delete BrainCloud;
+	BrainCloud = nullptr;
+}
+

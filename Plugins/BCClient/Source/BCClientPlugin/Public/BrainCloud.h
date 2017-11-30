@@ -23,8 +23,8 @@ public:
 	
 	ABrainCloud();
 	ABrainCloud(FString& wrapperName);
-
-	~ABrainCloud();
-
-	void BeginPlay();
+	
+	virtual void BeginPlay() override;
+	virtual void EndPlay(EEndPlayReason::Type EndPlayReason) override;
+	virtual void BeginDestroy() override;
 };

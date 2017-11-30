@@ -45,6 +45,11 @@ class BCCLIENTPLUGIN_API BrainCloudClient {
 public:
 	/** Public constants */
 	static bool SINGLE_THREADED;
+	
+	static bool ENABLED_SOFT_ERROR_MODE;
+	static bool ENABLED_SINGLETON_MODE;
+	static const wchar_t SINGLETON_USE_ERROR_MESSAGE[123];
+	
 
 	BrainCloudClient();
 
