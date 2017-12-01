@@ -13,6 +13,8 @@ public:
     char m_password[256];
     char m_profileId[256];
     char m_email[256];
+
+    BrainCloudClient *m_client;
     
     TestUser()
     {
@@ -21,7 +23,7 @@ public:
         m_profileId[0] = '\0';
         m_email[0] = '\0';
     }
-    TestUser(std::string prefix, int suffix);
+    TestUser(std::string prefix, int suffix, BrainCloudClient *client);
     
 private:
     void Authenticate();

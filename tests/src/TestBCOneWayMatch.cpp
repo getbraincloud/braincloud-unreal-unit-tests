@@ -25,6 +25,8 @@ TEST_F(TestBCOneWayMatch, CompleteMatch)
     tr.run(m_bc);
 }
 
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wdeprecated-declarations"
 void TestBCOneWayMatch::StartMatch()
 {
     TestResult tr;
@@ -36,9 +38,10 @@ void TestBCOneWayMatch::StartMatch()
     tr.run(m_bc);
     
     Json::Value streams = tr.m_response["data"]["streams"];
-    
+
     m_streamId = streams[0u]["playbackStreamId"].asString();
 }
+#pragma clang diagnostic pop
 
 void TestBCOneWayMatch::CancelMatch()
 {

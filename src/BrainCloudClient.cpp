@@ -41,8 +41,14 @@
 namespace BrainCloud {
 
 	// Define all static member variables.
+    bool BrainCloudClient::EnableSingletonMode = true;
+	const char * BrainCloudClient::SingletonUseErrorMessage =
+			"Singleton usage is disabled. If called by mistake, use your own variable that holds an instance of the bcWrapper/bcClient.";
+
+
+
 	BrainCloudClient * BrainCloudClient::_instance = NULL;
-	std::string BrainCloudClient::s_brainCloudClientVersion = "3.6.0";
+	std::string BrainCloudClient::s_brainCloudClientVersion = "3.6.5";
 
 	/**
 	 * Constructor
@@ -329,6 +335,10 @@ namespace BrainCloud {
 	 */
 	BrainCloudClient * BrainCloudClient::getInstance()
 	{
+        if(EnableSingletonMode == false) {
+            throw std::invalid_argument(SingletonUseErrorMessage);
+        }
+
 		if (_instance == NULL) {
 			_instance = new BrainCloudClient();
 		}

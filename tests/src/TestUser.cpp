@@ -4,33 +4,34 @@
 
 using namespace std;
 
-TestUser::TestUser(std::string prefix, int suffix)
+TestUser::TestUser(std::string prefix, int suffix, BrainCloudClient *client)
 {
 	sprintf(m_id, "%s%s%d", prefix.c_str(), "_CPP_", suffix);
 	sprintf(m_password, "%s", m_id);
 	sprintf(m_email, "%s@bctestuser.com", m_id);
+
+	m_client = client;
 
 	Authenticate();
 }
 
 void TestUser::Authenticate()
 {
-	BrainCloudClient* bc = BrainCloudClient::getInstance();
 	TestResult tr;
 
-	bc->getAuthenticationService()->authenticateUniversal(m_id, m_password, true, &tr);
-	tr.run(bc);
-	sprintf(m_profileId, "%s", bc->getAuthenticationService()->getProfileId().c_str());
+	m_client->getAuthenticationService()->authenticateUniversal(m_id, m_password, true, &tr);
+	tr.run(m_client);
+	sprintf(m_profileId, "%s", m_client->getAuthenticationService()->getProfileId().c_str());
 
-    bc->getPlayerStateService()->updateUserName(m_id, &tr);
-	tr.run(bc);
+	m_client->getPlayerStateService()->updateUserName(m_id, &tr);
+	tr.run(m_client);
 
-	bc->getPlayerStateService()->updateContactEmail("braincloudunittest@gmail.com", &tr);
-	tr.run(bc);
+	m_client->getPlayerStateService()->updateContactEmail("braincloudunittest@gmail.com", &tr);
+	tr.run(m_client);
 
-	bc->getPlayerStateService()->logout(&tr);
-	tr.run(bc);
+	m_client->getPlayerStateService()->logout(&tr);
+	tr.run(m_client);
 
-	bc->getAuthenticationService()->clearSavedProfileId();
+	m_client->getAuthenticationService()->clearSavedProfileId();
 }
 

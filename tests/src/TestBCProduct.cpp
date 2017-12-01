@@ -34,23 +34,32 @@ TEST_F(TestBCProduct, GetSalesInventoryByCategory)
     tr.run(m_bc);
 }
 
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wdeprecated-declarations"
 TEST_F(TestBCProduct, AwardCurrency)
 {
     TestResult tr;
     m_bc->getProductService()->awardCurrency(m_currencyType, 1000, &tr);
 	tr.runExpectFail(m_bc, 403, CURRENCY_SECURITY_ERROR);
 }
+#pragma clang diagnostic pop
 
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wdeprecated-declarations"
 TEST_F(TestBCProduct, ConsumeCurrency)
 {
     TestResult tr;
     m_bc->getProductService()->consumeCurrency(m_currencyType, 1000, &tr);
 	tr.runExpectFail(m_bc, 403, CURRENCY_SECURITY_ERROR);
 }
+#pragma clang diagnostic pop
  
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wdeprecated-declarations"
 TEST_F(TestBCProduct, ResetCurrency)
 {
     TestResult tr;
     m_bc->getProductService()->resetCurrency(&tr);
     tr.runExpectFail(m_bc, 403, CURRENCY_SECURITY_ERROR);
 }
+#pragma clang diagnostic pop
