@@ -73,7 +73,10 @@ namespace BrainCloud
 	class BrainCloudClient
 	{
 	public:
-		static const bool EnableSingletonMode;
+        /**
+         * Set to false to ensure an error is thrown when the brainCloud singleton is called
+         */
+		static bool EnableSingletonMode;
 		static const char * SingletonUseErrorMessage;
 
 		/**

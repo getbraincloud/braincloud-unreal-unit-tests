@@ -41,7 +41,7 @@
 namespace BrainCloud {
 
 	// Define all static member variables.
-	const bool BrainCloudClient::EnableSingletonMode = true;
+    bool BrainCloudClient::EnableSingletonMode = true;
 	const char * BrainCloudClient::SingletonUseErrorMessage =
 			"Singleton usage is disabled. If called by mistake, use your own variable that holds an instance of the bcWrapper/bcClient.";
 
