@@ -161,6 +161,7 @@ namespace BrainCloud {
 		static const ServiceOperation DecrementPlayerRating;
 		static const ServiceOperation ShieldOn;
 		static const ServiceOperation ShieldOnFor;
+		static const ServiceOperation IncrementShieldOnFor;
 		static const ServiceOperation ShieldOff;
 		static const ServiceOperation GetShieldExpiry;
 		static const ServiceOperation FindPlayers;

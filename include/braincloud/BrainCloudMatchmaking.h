@@ -90,6 +90,17 @@ namespace BrainCloud
         void turnShieldOnFor(int32_t in_minutes, IServerCallback * in_callback = NULL);
 
         /**
+         * Increases the shield on time by specified number of minutes 
+         *
+         * Service Name - MatchMaking
+         * Service Operation - IncrementShieldOnFor
+         *
+         * @param in_minutes Number of minutes to increase the shield time for
+         * @param in_callback The method to be invoked when the server response is received
+         */
+        void incrementShieldOnFor(int32_t in_minutes, IServerCallback * in_callback = NULL);
+
+        /**
          * Turns shield off
          *
          * Service Name - MatchMaking

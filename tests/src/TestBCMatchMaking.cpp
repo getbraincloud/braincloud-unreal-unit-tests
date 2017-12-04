@@ -97,6 +97,14 @@ TEST_F(TestBCMatchMaking, TurnShieldOnFOr)
     tr.run(m_bc);
 }
 
+TEST_F(TestBCMatchMaking, IncrementShieldOnFor)
+{
+    TestResult tr;
+
+    m_bc->getMatchmakingService()->incrementShieldOnFor(10, &tr);
+    tr.run(m_bc);
+}
+
 TEST_F(TestBCMatchMaking, FindPlayers)
 {
     TestResult tr;
