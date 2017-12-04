@@ -155,6 +155,7 @@ namespace BrainCloud
 	const ServiceOperation ServiceOperation::DecrementPlayerRating = ServiceOperation("DECREMENT_PLAYER_RATING");
 	const ServiceOperation ServiceOperation::ShieldOn = ServiceOperation("SHIELD_ON");
 	const ServiceOperation ServiceOperation::ShieldOnFor = ServiceOperation("SHIELD_ON_FOR");
+	const ServiceOperation ServiceOperation::IncrementShieldOnFor = ServiceOperation("INCREMENT_SHIELD_ON_FOR");
 	const ServiceOperation ServiceOperation::ShieldOff = ServiceOperation("SHIELD_OFF");
 	const ServiceOperation ServiceOperation::GetShieldExpiry = ServiceOperation("GET_SHIELD_EXPIRY");
 	const ServiceOperation ServiceOperation::FindPlayers = ServiceOperation("FIND_PLAYERS");

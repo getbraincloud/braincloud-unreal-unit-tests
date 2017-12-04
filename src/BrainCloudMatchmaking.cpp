@@ -71,6 +71,15 @@ namespace BrainCloud
         m_client->sendRequest(sc);
     }
 
+    void BrainCloudMatchmaking::incrementShieldOnFor(int32_t in_minutes, IServerCallback * in_callback)
+    {
+        Json::Value message;
+        message[OperationParam::MatchMakingServiceMinutes.getValue()] = in_minutes;
+
+        ServerCall * sc = new ServerCall(ServiceName::MatchMaking, ServiceOperation::IncrementShieldOnFor, message, in_callback);
+        m_client->sendRequest(sc);
+    }
+
     void BrainCloudMatchmaking::turnShieldOff(IServerCallback * in_callback)
     {
         ServerCall * sc = new ServerCall(ServiceName::MatchMaking, ServiceOperation::ShieldOff, Json::nullValue, in_callback);
