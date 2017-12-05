@@ -6,11 +6,12 @@
 #include "json/json.h"
 #include "braincloud/FriendPlatform.h"
 #include "braincloud/AuthenticationType.h"
-
 #include "TestBCFriend.h"
-
 #include <vector>
 #include <string>
+#include "braincloud/reason_codes.h"
+#include "braincloud/http_codes.h"
+
 
 using namespace BrainCloud;
 

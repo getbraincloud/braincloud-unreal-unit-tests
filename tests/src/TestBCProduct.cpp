@@ -2,6 +2,9 @@
 #include "braincloud/BrainCloudClient.h"
 #include "TestResult.h"
 #include "TestBCProduct.h"
+#include "braincloud/reason_codes.h"
+#include "braincloud/http_codes.h"
+
 
 using namespace BrainCloud;
 

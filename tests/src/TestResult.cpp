@@ -1,6 +1,9 @@
 #include <stdlib.h>
 #include "braincloud/BrainCloudClient.h"
 #include "TestResult.h"
+#include "braincloud/reason_codes.h"
+#include "braincloud/http_codes.h"
+
 
 #if __cplusplus < 201103L
 

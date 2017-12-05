@@ -1,5 +1,8 @@
 #include <stdlib.h>
 #include "TestBCComms.h"
+#include "braincloud/reason_codes.h"
+#include "braincloud/http_codes.h"
+
 
 
 // Note that TestBCAuth skips the normal authenticate setup provided by TestFixtureBase

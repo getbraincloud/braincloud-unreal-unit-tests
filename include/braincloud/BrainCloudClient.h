@@ -16,8 +16,6 @@
 #include "braincloud/INetworkErrorCallback.h"
 #include "braincloud/IRewardCallback.h"
 #include "braincloud/IServerCallback.h"
-#include "braincloud/reason_codes.h"
-#include "braincloud/http_codes.h"
 
 #include "braincloud/internal/IBrainCloudComms.h"
 #include "braincloud/BrainCloudTypes.h"

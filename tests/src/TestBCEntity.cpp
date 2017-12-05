@@ -5,6 +5,9 @@
 #include "TestResult.h"
 #include "json/json.h"
 #include "TestBCEntity.h"
+#include "braincloud/reason_codes.h"
+#include "braincloud/http_codes.h"
+
 
 using namespace BrainCloud;
 

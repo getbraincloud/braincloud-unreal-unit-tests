@@ -8,6 +8,8 @@
 #include <list>
 #include <sstream>
 #include "braincloud/internal/md5x.h"
+#include "braincloud/reason_codes.h"
+#include "braincloud/http_codes.h"
 
 #if defined(__APPLE__) && !defined(HG_PLATFORM_BB)
 #include "TargetConditionals.h"
