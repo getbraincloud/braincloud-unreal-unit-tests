@@ -69,6 +69,13 @@ UBCMatchmakingProxy* UBCMatchmakingProxy::TurnShieldOff(ABrainCloud *brainCloud)
     return Proxy;
 }
 
+UBCMatchmakingProxy* UBCMatchmakingProxy::IncrementShieldOnFor(ABrainCloud *brainCloud, int32 minutes)
+{
+	UBCMatchmakingProxy* Proxy = NewObject<UBCMatchmakingProxy>();
+	UBCWrapperProxy::GetBrainCloudInstance(brainCloud)->getMatchmakingService()->incrementShieldOnFor(minutes, Proxy);
+	return Proxy;
+}
+
 UBCMatchmakingProxy* UBCMatchmakingProxy::FindPlayers(ABrainCloud *brainCloud, int32 rangeDelta, int32 numMatches)
 {
     UBCMatchmakingProxy* Proxy = NewObject<UBCMatchmakingProxy>();

@@ -96,6 +96,17 @@ public:
     UFUNCTION(BlueprintCallable, meta = (BlueprintInternalUseOnly = "true"), Category = "BrainCloud|Matchmaking")
         static UBCMatchmakingProxy* TurnShieldOff(ABrainCloud *brainCloud);
 
+	/**
+	* Increases the shield on time by specified number of minutes 
+	*
+	* Service Name - MatchMaking
+	* Service Operation - IncrementShieldOnFor
+	*
+	* Param - minutes Number of minutes to increase the shield time for
+	*/
+	UFUNCTION(BlueprintCallable, meta = (BlueprintInternalUseOnly = "true"), Category = "BrainCloud|Matchmaking")
+		static UBCMatchmakingProxy* IncrementShieldOnFor(ABrainCloud *brainCloud, int32 minutes);
+
     /**
     * Finds matchmaking enabled players
     *
