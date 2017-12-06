@@ -83,7 +83,7 @@ void BrainCloudAsyncMatch::submitTurn(
     }
 
     ServerCall * sc = new ServerCall(ServiceName::AsyncMatch, ServiceOperation::SubmitTurn, message, callback);
-    _client->getInstance()->sendRequest(sc);
+    _client->sendRequest(sc);
 }
 
 void BrainCloudAsyncMatch::updateMatchSummaryData(const FString& ownerId, const FString& matchId, uint64 version, const FString& jsonSummary, IServerCallback* callback)

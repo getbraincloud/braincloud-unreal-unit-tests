@@ -160,6 +160,7 @@ const ServiceOperation ServiceOperation::DecrementPlayerRating = ServiceOperatio
 const ServiceOperation ServiceOperation::ShieldOn = ServiceOperation(TEXT("SHIELD_ON"));
 const ServiceOperation ServiceOperation::ShieldOnFor = ServiceOperation(TEXT("SHIELD_ON_FOR"));
 const ServiceOperation ServiceOperation::ShieldOff = ServiceOperation(TEXT("SHIELD_OFF"));
+const ServiceOperation ServiceOperation::IncrementShieldOnFor = ServiceOperation(TEXT("INCREMENT_SHIELD_ON_FOR"));
 const ServiceOperation ServiceOperation::GetShieldExpiry = ServiceOperation(TEXT("GET_SHIELD_EXPIRY"));
 const ServiceOperation ServiceOperation::FindPlayers = ServiceOperation(TEXT("FIND_PLAYERS"));
 const ServiceOperation ServiceOperation::FindPlayersUsingFilter = ServiceOperation(TEXT("FIND_PLAYERS_USING_FILTER"));

@@ -5,6 +5,37 @@
 #include "IServerCallback.h"
 
 class BrainCloudClient;
+#include "BrainCloudClient.h"
+#include "BrainCloudAuthentication.h"
+#include "BrainCloudLeaderboard.h"
+#include "BrainCloudPlayerState.h"
+#include "BrainCloudGamification.h"
+#include "BrainCloudGlobalEntity.h"
+#include "BrainCloudGlobalStatistics.h"
+#include "BrainCloudEntity.h"
+#include "BrainCloudPlayerStatistics.h"
+#include "BrainCloudTime.h"
+#include "BrainCloudPlayerStatisticsEvent.h"
+#include "BrainCloudProduct.h"
+#include "BrainCloudIdentity.h"
+#include "BrainCloudEvent.h"
+#include "BrainCloudS3Handling.h"
+#include "BrainCloudScript.h"
+#include "BrainCloudAsyncMatch.h"
+#include "BrainCloudFriend.h"
+#include "BrainCloudGlobalApp.h"
+#include "BrainCloudMatchmaking.h"
+#include "BrainCloudOneWayMatch.h"
+#include "BrainCloudPlaybackStream.h"
+#include "BrainCloudPushNotification.h"
+#include "BrainCloudRedemptionCode.h"
+#include "BrainCloudDataStream.h"
+#include "BrainCloudProfanity.h"
+#include "BrainCloudFile.h"
+#include "BrainCloudGroup.h"
+#include "BrainCloudMail.h"
+#include "BrainCloudTournament.h"
+
 class ServiceName;
 class ServiceOperation;
 
@@ -19,6 +50,8 @@ class ServiceOperation;
 class BCCLIENTPLUGIN_API BrainCloudWrapper : public IServerCallback
 {
 public:
+	BrainCloudWrapper();
+	BrainCloudWrapper(FString wrapperName);
 
     /**
      * Method returns a singleton instance of the BrainCloudWrapper.
@@ -186,12 +219,47 @@ public:
 	* @param callback The method to be invoked when the server response is received
 	*
 	*/
-	void reconnect(IServerCallback * callback = nullptr);
+	void reconnect(IServerCallback* callback = nullptr);
 
     /**
      * Run callbacks, to be called once per frame from your main thread
      */
     void runCallbacks();
+
+
+	BrainCloudClient* getClient() { return _client; }
+
+	//Service Getters
+	BrainCloudAuthentication* getAuthenticationService() { return _client->getAuthenticationService(); }
+	BrainCloudLeaderboard* getLeaderboardService() { return _client->getLeaderboardService(); }
+	BrainCloudPlayerState* getPlayerStateService() { return _client->getPlayerStateService(); }
+	BrainCloudGamification* getGamificationService() { return _client->getGamificationService(); }
+	BrainCloudGlobalEntity* getGlobalEntityService() { return _client->getGlobalEntityService(); }
+	BrainCloudGlobalStatistics* getGlobalStatisticsService() { return _client->getGlobalStatisticsService(); }
+	BrainCloudEntity* getEntityService() { return _client->getEntityService(); }
+	BrainCloudPlayerStatistics* getPlayerStatisticsService() { return _client->getPlayerStatisticsService(); }
+	BrainCloudTime* getTimeService() { return _client->getTimeService(); }
+	BrainCloudPlayerStatisticsEvent* getPlayerStatisticsEventService() { return _client->getPlayerStatisticsEventService(); }
+	BrainCloudProduct* getProductService() { return _client->getProductService(); }
+	BrainCloudIdentity* getIdentityService() { return _client->getIdentityService(); }
+	BrainCloudEvent* getEventService() { return _client->getEventService(); }
+	BrainCloudS3Handling* getS3HandlingService() { return _client->getS3HandlingService(); }
+	BrainCloudScript* getScriptService() { return _client->getScriptService(); }
+	BrainCloudAsyncMatch* getAsyncMatchService() { return _client->getAsyncMatchService(); }
+	BrainCloudFriend* getFriendService() { return _client->getFriendService(); }
+	BrainCloudGlobalApp* getGlobalAppService() { return _client->getGlobalAppService(); }
+	BrainCloudMatchmaking* getMatchmakingService() { return _client->getMatchmakingService(); }
+	BrainCloudOneWayMatch* getOneWayMatchService() { return _client->getOneWayMatchService(); }
+	BrainCloudPlaybackStream* getPlaybackStreamService() { return _client->getPlaybackStreamService(); }
+	BrainCloudPushNotification* getPushNotificationService() { return _client->getPushNotificationService(); }
+	BrainCloudRedemptionCode* getRedemptionCodeService() { return _client->getRedemptionCodeService(); }
+	BrainCloudDataStream* getDataStreamService() { return _client->getDataStreamService(); }
+	BrainCloudProfanity* getProfanityService() { return _client->getProfanityService(); }
+	BrainCloudFile* getFileService() { return _client->getFileService(); }
+	BrainCloudGroup* getGroupService() { return _client->getGroupService(); }
+	BrainCloudMail* getMailService() { return _client->getMailService(); }
+	BrainCloudTournament* getTournamentService() { return _client->getTournamentService(); }
+
 
     /**
      * Returns a singleton instance of the BrainCloudClient.
@@ -256,12 +324,19 @@ public:
      */
     bool getAlwaysAllowProfileSwitch();
 
+	/**
+	* Set the wrapper name
+	* @return String used to distinguish saved wrapper data
+	*/
+	void setWrapperName(FString wrapperName) { _wrapperName = wrapperName; }
+
+
     virtual void serverCallback(ServiceName serviceName, ServiceOperation serviceOperation, FString const & jsonData);
     virtual void serverError(ServiceName serviceName, ServiceOperation serviceOperation, int32 statusCode, int32 reasonCode, const FString & message);
 
 protected:
-    BrainCloudWrapper();
-
+    BrainCloudWrapper(BrainCloudClient *client);
+	
     void loadData();
     void saveData();
 
@@ -271,6 +346,8 @@ protected:
     FString _profileId;
     FString _anonymousId;
     FString _authenticationType;
+
+	FString _wrapperName;
 
     IServerCallback* _authenticateCallback = nullptr;
 

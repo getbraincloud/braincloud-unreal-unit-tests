@@ -3,7 +3,9 @@
 #include "BCClientPluginPrivatePCH.h"
 #include "BrainCloudClient.h"
 #include "ServerCall.h"
-
+#include "BrainCloud.h"
+#include "BCWrapperProxy.h"
+#include "BrainCloudWrapper.h"
 #include "BCDataStreamProxy.h"
 
 UBCDataStreamProxy::UBCDataStreamProxy(const FObjectInitializer& ObjectInitializer)
@@ -11,24 +13,24 @@ UBCDataStreamProxy::UBCDataStreamProxy(const FObjectInitializer& ObjectInitializ
 {
 }
 
-UBCDataStreamProxy* UBCDataStreamProxy::CustomPageEvent(const FString& eventName, const FString& jsonEventProperties)
+UBCDataStreamProxy* UBCDataStreamProxy::CustomPageEvent(ABrainCloud *brainCloud, const FString& eventName, const FString& jsonEventProperties)
 {
     UBCDataStreamProxy* Proxy = NewObject<UBCDataStreamProxy>();
-    BrainCloudClient::getInstance()->getDataStreamService()->customPageEvent(eventName, jsonEventProperties, Proxy);
+    UBCWrapperProxy::GetBrainCloudInstance(brainCloud)->getDataStreamService()->customPageEvent(eventName, jsonEventProperties, Proxy);
     return Proxy;
 }
 
-UBCDataStreamProxy* UBCDataStreamProxy::CustomScreenEvent(const FString& eventName, const FString& jsonEventProperties)
+UBCDataStreamProxy* UBCDataStreamProxy::CustomScreenEvent(ABrainCloud *brainCloud, const FString& eventName, const FString& jsonEventProperties)
 {
     UBCDataStreamProxy* Proxy = NewObject<UBCDataStreamProxy>();
-    BrainCloudClient::getInstance()->getDataStreamService()->customScreenEvent(eventName, jsonEventProperties, Proxy);
+    UBCWrapperProxy::GetBrainCloudInstance(brainCloud)->getDataStreamService()->customScreenEvent(eventName, jsonEventProperties, Proxy);
     return Proxy;
 }
 
-UBCDataStreamProxy* UBCDataStreamProxy::CustomTrackEvent(const FString& eventName, const FString& jsonEventProperties)
+UBCDataStreamProxy* UBCDataStreamProxy::CustomTrackEvent(ABrainCloud *brainCloud, const FString& eventName, const FString& jsonEventProperties)
 {
     UBCDataStreamProxy* Proxy = NewObject<UBCDataStreamProxy>();
-    BrainCloudClient::getInstance()->getDataStreamService()->customTrackEvent(eventName, jsonEventProperties, Proxy);
+    UBCWrapperProxy::GetBrainCloudInstance(brainCloud)->getDataStreamService()->customTrackEvent(eventName, jsonEventProperties, Proxy);
     return Proxy;
 }
 

@@ -6,6 +6,8 @@
 #include "IServerCallback.h"
 #include "BCRedemptionCodeProxy.generated.h"
 
+class ABrainCloud;
+
 UCLASS(MinimalAPI)
 class UBCRedemptionCodeProxy : public UBCBlueprintCallProxyBase, public IServerCallback
 {
@@ -26,7 +28,7 @@ public:
     * Param - callback The method to be invoked when the server response is received
     */
     UFUNCTION(BlueprintCallable, meta = (BlueprintInternalUseOnly = "true"), Category = "BrainCloud|Redemption Code")
-        static UBCRedemptionCodeProxy* RedeemCode(const FString& scanCode, const FString& codeType, const FString& customRedemptionInfo);
+        static UBCRedemptionCodeProxy* RedeemCode(ABrainCloud *brainCloud, const FString& scanCode, const FString& codeType, const FString& customRedemptionInfo);
 
     /**
     * Retrieve the codes already redeemed by player.
@@ -38,7 +40,7 @@ public:
     * Param - in_callback The method to be invoked when the server response is received
     */
     UFUNCTION(BlueprintCallable, meta = (BlueprintInternalUseOnly = "true"), Category = "BrainCloud|Redemption Code")
-        static UBCRedemptionCodeProxy* GetRedeemedCodes(const FString& codeType);
+        static UBCRedemptionCodeProxy* GetRedeemedCodes(ABrainCloud *brainCloud, const FString& codeType);
 
     //Response delegates
     UPROPERTY(BlueprintAssignable)

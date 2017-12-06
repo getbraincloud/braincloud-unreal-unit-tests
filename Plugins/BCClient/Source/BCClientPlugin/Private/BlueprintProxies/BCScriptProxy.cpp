@@ -3,7 +3,9 @@
 #include "BCClientPluginPrivatePCH.h"
 #include "BrainCloudClient.h"
 #include "ServerCall.h"
-
+#include "BrainCloud.h"
+#include "BCWrapperProxy.h"
+#include "BrainCloudWrapper.h"
 #include "BCScriptProxy.h"
 
 UBCScriptProxy::UBCScriptProxy(const FObjectInitializer& ObjectInitializer)
@@ -11,52 +13,52 @@ UBCScriptProxy::UBCScriptProxy(const FObjectInitializer& ObjectInitializer)
 {
 }
 
-UBCScriptProxy* UBCScriptProxy::RunScript(FString scriptName, FString jsonScriptData)
+UBCScriptProxy* UBCScriptProxy::RunScript(ABrainCloud *brainCloud, FString scriptName, FString jsonScriptData)
 {
 	UBCScriptProxy* Proxy = NewObject<UBCScriptProxy>();
-	BrainCloudClient::getInstance()->getScriptService()->runScript(scriptName, jsonScriptData, Proxy);
+	UBCWrapperProxy::GetBrainCloudInstance(brainCloud)->getScriptService()->runScript(scriptName, jsonScriptData, Proxy);
 	return Proxy;
 }
 
-UBCScriptProxy* UBCScriptProxy::ScheduleRunScriptUTC(FString scriptName, FString jsonScriptData, FDateTime startDateInUTC)
+UBCScriptProxy* UBCScriptProxy::ScheduleRunScriptUTC(ABrainCloud *brainCloud, FString scriptName, FString jsonScriptData, FDateTime startDateInUTC)
 {
 	UBCScriptProxy* Proxy = NewObject<UBCScriptProxy>();
-	BrainCloudClient::getInstance()->getScriptService()->scheduleRunScriptUTC(scriptName, jsonScriptData, startDateInUTC, Proxy);
+	UBCWrapperProxy::GetBrainCloudInstance(brainCloud)->getScriptService()->scheduleRunScriptUTC(scriptName, jsonScriptData, startDateInUTC, Proxy);
 	return Proxy;
 }
 
-UBCScriptProxy* UBCScriptProxy::ScheduleRunScriptMinutes(FString scriptName, FString jsonScriptData, int32 minutesFromNow)
+UBCScriptProxy* UBCScriptProxy::ScheduleRunScriptMinutes(ABrainCloud *brainCloud, FString scriptName, FString jsonScriptData, int32 minutesFromNow)
 {
 	UBCScriptProxy* Proxy = NewObject<UBCScriptProxy>();
-	BrainCloudClient::getInstance()->getScriptService()->scheduleRunScriptMinutes(scriptName, jsonScriptData, minutesFromNow, Proxy);
+	UBCWrapperProxy::GetBrainCloudInstance(brainCloud)->getScriptService()->scheduleRunScriptMinutes(scriptName, jsonScriptData, minutesFromNow, Proxy);
 	return Proxy;
 }
 
-UBCScriptProxy* UBCScriptProxy::RunParentScript(FString scriptName, FString jsonScriptData, FString parentLevel)
+UBCScriptProxy* UBCScriptProxy::RunParentScript(ABrainCloud *brainCloud, FString scriptName, FString jsonScriptData, FString parentLevel)
 {
 	UBCScriptProxy* Proxy = NewObject<UBCScriptProxy>();
-	BrainCloudClient::getInstance()->getScriptService()->runParentScript(scriptName, jsonScriptData, parentLevel, Proxy);
+	UBCWrapperProxy::GetBrainCloudInstance(brainCloud)->getScriptService()->runParentScript(scriptName, jsonScriptData, parentLevel, Proxy);
 	return Proxy;
 }
 
-UBCScriptProxy* UBCScriptProxy::CancelScheduledScript(const FString& jobId)
+UBCScriptProxy* UBCScriptProxy::CancelScheduledScript(ABrainCloud *brainCloud, const FString& jobId)
 {
 	UBCScriptProxy* Proxy = NewObject<UBCScriptProxy>();
-	BrainCloudClient::getInstance()->getScriptService()->cancelScheduledScript(jobId, Proxy);
+	UBCWrapperProxy::GetBrainCloudInstance(brainCloud)->getScriptService()->cancelScheduledScript(jobId, Proxy);
 	return Proxy;
 }
 
-UBCScriptProxy * UBCScriptProxy::RunPeerScript(const FString & scriptName, const FString & jsonScriptData, const FString & peer)
+UBCScriptProxy * UBCScriptProxy::RunPeerScript(ABrainCloud *brainCloud, const FString & scriptName, const FString & jsonScriptData, const FString & peer)
 {
 	UBCScriptProxy* Proxy = NewObject<UBCScriptProxy>();
-	BrainCloudClient::getInstance()->getScriptService()->runPeerScript(scriptName, jsonScriptData, peer, Proxy);
+	UBCWrapperProxy::GetBrainCloudInstance(brainCloud)->getScriptService()->runPeerScript(scriptName, jsonScriptData, peer, Proxy);
 	return Proxy;
 }
 
-UBCScriptProxy * UBCScriptProxy::RunPeerScriptAsync(const FString & scriptName, const FString & jsonScriptData, const FString & peer)
+UBCScriptProxy * UBCScriptProxy::RunPeerScriptAsync(ABrainCloud *brainCloud, const FString & scriptName, const FString & jsonScriptData, const FString & peer)
 {
 	UBCScriptProxy* Proxy = NewObject<UBCScriptProxy>();
-	BrainCloudClient::getInstance()->getScriptService()->runPeerScriptAsync(scriptName, jsonScriptData, peer, Proxy);
+	UBCWrapperProxy::GetBrainCloudInstance(brainCloud)->getScriptService()->runPeerScriptAsync(scriptName, jsonScriptData, peer, Proxy);
 	return Proxy;
 }
 

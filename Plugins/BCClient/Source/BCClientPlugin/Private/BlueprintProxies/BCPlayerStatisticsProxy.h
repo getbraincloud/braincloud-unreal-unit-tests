@@ -6,6 +6,8 @@
 #include "IServerCallback.h"
 #include "BCPlayerStatisticsProxy.generated.h"
 
+class ABrainCloud;
+
 UCLASS(MinimalAPI)
 class UBCPlayerStatisticsProxy : public UBCBlueprintCallProxyBase, public IServerCallback
 {
@@ -18,7 +20,7 @@ public:
 	* @deprecated Use ReadAllUserStats instead - removal after September 1 2017
 	*/
 	UFUNCTION(BlueprintCallable, meta = (BlueprintInternalUseOnly = "true"), Category = "BrainCloud|Player Statistics")
-		static UBCPlayerStatisticsProxy* ReadAllPlayerStats();
+		static UBCPlayerStatisticsProxy* ReadAllPlayerStats(ABrainCloud *brainCloud);
 
     /**
     * Read all available user statistics.
@@ -27,13 +29,13 @@ public:
     * Service Operation - Read
     */
     UFUNCTION(BlueprintCallable, meta = (BlueprintInternalUseOnly = "true"), Category = "BrainCloud|Player Statistics")
-        static UBCPlayerStatisticsProxy* ReadAllUserStats();
+        static UBCPlayerStatisticsProxy* ReadAllUserStats(ABrainCloud *brainCloud);
 
 	/**
 	* @deprecated Use ReadUserStatsSubset instead - removal after September 1 2017
 	*/
 	UFUNCTION(BlueprintCallable, meta = (BlueprintInternalUseOnly = "true"), Category = "BrainCloud|Player Statistics")
-		static UBCPlayerStatisticsProxy* ReadPlayerStatsSubset(const TArray<FString>& playerStats);
+		static UBCPlayerStatisticsProxy* ReadPlayerStatsSubset(ABrainCloud *brainCloud, const TArray<FString>& playerStats);
 
     /**
     * Reads a subset of user statistics.
@@ -45,13 +47,13 @@ public:
     * ex. [ "pantaloons", "minions" ]
     */
     UFUNCTION(BlueprintCallable, meta = (BlueprintInternalUseOnly = "true"), Category = "BrainCloud|Player Statistics")
-        static UBCPlayerStatisticsProxy* ReadUserStatsSubset(const TArray<FString>& userStats);
+        static UBCPlayerStatisticsProxy* ReadUserStatsSubset(ABrainCloud *brainCloud, const TArray<FString>& userStats);
 
 	/**
 	* @deprecated Use ReadUserStatisticsByCategory instead - removal after September 1 2017
 	*/
 	UFUNCTION(BlueprintCallable, meta = (BlueprintInternalUseOnly = "true"), Category = "BrainCloud|Player Statistics")
-		static UBCPlayerStatisticsProxy* ReadPlayerStatisticsByCategory(FString category);
+		static UBCPlayerStatisticsProxy* ReadPlayerStatisticsByCategory(ABrainCloud *brainCloud, FString category);
 
     /**
     * Reset all of the statistics for this user back to their initial value.
@@ -60,13 +62,13 @@ public:
     * Service Operation - Reset
     */
     UFUNCTION(BlueprintCallable, meta = (BlueprintInternalUseOnly = "true"), Category = "BrainCloud|Player Statistics")
-        static UBCPlayerStatisticsProxy* ReadUserStatisticsByCategory(FString category);
+        static UBCPlayerStatisticsProxy* ReadUserStatisticsByCategory(ABrainCloud *brainCloud, FString category);
 
 	/**
 	* @deprecated Use ResetAllUserStats instead - removal after September 1 2017
 	*/
 	UFUNCTION(BlueprintCallable, meta = (BlueprintInternalUseOnly = "true"), Category = "BrainCloud|Player Statistics")
-		static UBCPlayerStatisticsProxy* ResetAllPlayerStats();
+		static UBCPlayerStatisticsProxy* ResetAllPlayerStats(ABrainCloud *brainCloud);
 
     /**
     * Method retrieves the user statistics for the given category.
@@ -77,13 +79,13 @@ public:
     * Param - category The player statistics category
     */
     UFUNCTION(BlueprintCallable, meta = (BlueprintInternalUseOnly = "true"), Category = "BrainCloud|Player Statistics")
-        static UBCPlayerStatisticsProxy* ResetAllUserStats();
+        static UBCPlayerStatisticsProxy* ResetAllUserStats(ABrainCloud *brainCloud);
 
 	/**
 	* @deprecated Use IncrementUserStats instead - removal after September 1 2017
 	*/
 	UFUNCTION(BlueprintCallable, meta = (BlueprintInternalUseOnly = "true"), Category = "BrainCloud|Player Statistics")
-		static UBCPlayerStatisticsProxy* IncrementPlayerStats(FString jsonData);
+		static UBCPlayerStatisticsProxy* IncrementPlayerStats(ABrainCloud *brainCloud, FString jsonData);
 
     /**
     * Atomically increment (or decrement) user statistics.
@@ -109,7 +111,7 @@ public:
     * which increments stat1 by 9 up to a limit of 30.
     */
     UFUNCTION(BlueprintCallable, meta = (BlueprintInternalUseOnly = "true"), Category = "BrainCloud|Player Statistics")
-        static UBCPlayerStatisticsProxy* IncrementUserStats(FString jsonData);
+        static UBCPlayerStatisticsProxy* IncrementUserStats(ABrainCloud *brainCloud, FString jsonData);
 
     /**
     * Returns JSON representing the next experience level for the user.
@@ -118,7 +120,7 @@ public:
     * Service Operation - ReadNextXpLevel
     */
     UFUNCTION(BlueprintCallable, meta = (BlueprintInternalUseOnly = "true"), Category = "BrainCloud|Player Statistics")
-        static UBCPlayerStatisticsProxy* GetNextExperienceLevel();
+        static UBCPlayerStatisticsProxy* GetNextExperienceLevel(ABrainCloud *brainCloud);
 
     /**
     * Increments the user's experience. If the player goes up a level,
@@ -130,7 +132,7 @@ public:
     * Param - xpValue The amount to increase the user's experience by
     */
     UFUNCTION(BlueprintCallable, meta = (BlueprintInternalUseOnly = "true"), Category = "BrainCloud|Player Statistics")
-        static UBCPlayerStatisticsProxy* IncrementExperiencePoints(int32 xpValue);
+        static UBCPlayerStatisticsProxy* IncrementExperiencePoints(ABrainCloud *brainCloud, int32 xpValue);
 
     /**
     * Sets the user's experience to an absolute value. Note that this
@@ -143,7 +145,7 @@ public:
     * Param - xpValue The amount to set the the user's experience to
     */
     UFUNCTION(BlueprintCallable, meta = (BlueprintInternalUseOnly = "true"), Category = "BrainCloud|Player Statistics")
-        static UBCPlayerStatisticsProxy* SetExperiencePoints(int32 xpValue);
+        static UBCPlayerStatisticsProxy* SetExperiencePoints(ABrainCloud *brainCloud, int32 xpValue);
 
 	/**
 	* Apply statistics grammar to a partial set of statistics.
@@ -161,7 +163,7 @@ public:
 	* }
 	*/
 	UFUNCTION(BlueprintCallable, meta = (BlueprintInternalUseOnly = "true"), Category = "BrainCloud|Player Statistics")
-		static UBCPlayerStatisticsProxy* ProcessStatistics(FString jsonData);
+		static UBCPlayerStatisticsProxy* ProcessStatistics(ABrainCloud *brainCloud, FString jsonData);
 
     //Response delegates
     UPROPERTY(BlueprintAssignable)

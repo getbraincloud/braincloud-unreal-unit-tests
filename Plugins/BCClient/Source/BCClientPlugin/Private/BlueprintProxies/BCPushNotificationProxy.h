@@ -6,6 +6,8 @@
 #include "IServerCallback.h"
 #include "BCPushNotificationProxy.generated.h"
 
+class ABrainCloud;
+
 enum class EBCPlatform : uint8;
 
 UCLASS(MinimalAPI)
@@ -20,7 +22,7 @@ public:
     * Deregisters all device tokens currently registered to the player.
     */
     UFUNCTION(BlueprintCallable, meta = (BlueprintInternalUseOnly = "true"), Category = "BrainCloud|Push Notification")
-        static UBCPushNotificationProxy* DeregisterAllPushNotificationDeviceTokens();
+        static UBCPushNotificationProxy* DeregisterAllPushNotificationDeviceTokens(ABrainCloud *brainCloud);
 
     /**
     * Deregisters the given device token from the server to disable this device
@@ -31,7 +33,7 @@ public:
     *   On IOS, this is obtained using the application:didRegisterForRemoteNotificationsWithDeviceToken callback
     */
     UFUNCTION(BlueprintCallable, meta = (BlueprintInternalUseOnly = "true"), Category = "BrainCloud|Push Notification")
-        static UBCPushNotificationProxy* DeregisterPushNotificationDeviceToken(EBCPlatform platform, const FString& deviceToken);
+        static UBCPushNotificationProxy* DeregisterPushNotificationDeviceToken(ABrainCloud *brainCloud, EBCPlatform platform, const FString& deviceToken);
 
     /**
     * Registers the given device token with the server to enable this device
@@ -42,7 +44,7 @@ public:
     *   On IOS, this is obtained using the application:didRegisterForRemoteNotificationsWithDeviceToken callback
     */
     UFUNCTION(BlueprintCallable, meta = (BlueprintInternalUseOnly = "true"), Category = "BrainCloud|Push Notification")
-        static UBCPushNotificationProxy* RegisterPushNotificationDeviceToken(EBCPlatform platform, const FString& deviceToken);
+        static UBCPushNotificationProxy* RegisterPushNotificationDeviceToken(ABrainCloud *brainCloud, EBCPlatform platform, const FString& deviceToken);
 
     /**
     * Sends a simple push notification based on the passed in message.
@@ -52,7 +54,7 @@ public:
     * Param - message Text of the push notification
     */
     UFUNCTION(BlueprintCallable, meta = (BlueprintInternalUseOnly = "true"), Category = "BrainCloud|Push Notification")
-        static UBCPushNotificationProxy* SendSimplePushNotification(const FString& toPlayerId, const FString& message);
+        static UBCPushNotificationProxy* SendSimplePushNotification(ABrainCloud *brainCloud, const FString& toPlayerId, const FString& message);
 
     /**
     * Sends a notification to a user based on a brainCloud portal configured notification template.
@@ -62,7 +64,7 @@ public:
     * Param - notificationTemplateId Id of the notification template
     */
     UFUNCTION(BlueprintCallable, meta = (BlueprintInternalUseOnly = "true"), Category = "BrainCloud|Push Notification")
-        static UBCPushNotificationProxy* SendRichPushNotification(const FString& toPlayerId, int32 notificationTemplateId);
+        static UBCPushNotificationProxy* SendRichPushNotification(ABrainCloud *brainCloud, const FString& toPlayerId, int32 notificationTemplateId);
 
     /**
     * Sends a notification to a user based on a brainCloud portal configured notification template.
@@ -75,7 +77,7 @@ public:
     * Param - substitutionJson JSON defining the substitution params to use with the template
     */
     UFUNCTION(BlueprintCallable, meta = (BlueprintInternalUseOnly = "true"), Category = "BrainCloud|Push Notification")
-        static UBCPushNotificationProxy* SendRichPushNotificationWithParams(const FString& toPlayerId, int32 notificationTemplateId, const FString& substitutionJson);
+        static UBCPushNotificationProxy* SendRichPushNotificationWithParams(ABrainCloud *brainCloud, const FString& toPlayerId, int32 notificationTemplateId, const FString& substitutionJson);
 
     /**
     * Sends a notification to a "group" of user based on a brainCloud portal configured notification template.
@@ -87,7 +89,7 @@ public:
     * Param - substitutionsJson Map of substitution positions to strings
     */
     UFUNCTION(BlueprintCallable, meta = (BlueprintInternalUseOnly = "true"), Category = "BrainCloud|Push Notification")
-        static UBCPushNotificationProxy* SendTemplatedPushNotificationToGroup(const FString& groupId, int32 notificationTemplateId, const FString& substitutionJson);
+        static UBCPushNotificationProxy* SendTemplatedPushNotificationToGroup(ABrainCloud *brainCloud, const FString& groupId, int32 notificationTemplateId, const FString& substitutionJson);
 
     /**
     * Sends a notification to a "group" of user consisting of alert content and custom data.
@@ -98,7 +100,7 @@ public:
     * Param - customDataJson Optional custom data
     */
     UFUNCTION(BlueprintCallable, meta = (BlueprintInternalUseOnly = "true"), Category = "BrainCloud|Push Notification")
-        static UBCPushNotificationProxy* SendNormalizedPushNotificationToGroup(const FString& groupId, const FString& alertContentJson, const FString& customDataJson);
+        static UBCPushNotificationProxy* SendNormalizedPushNotificationToGroup(ABrainCloud *brainCloud, const FString& groupId, const FString& alertContentJson, const FString& customDataJson);
 
 	/**
 	* Schedules a normalized push notification to a user
@@ -111,7 +113,7 @@ public:
 	* Param - callback The method to be invoked when the server response is received
 	*/
 	UFUNCTION(BlueprintCallable, meta = (BlueprintInternalUseOnly = "true"), Category = "BrainCloud|Push Notification")
-		static UBCPushNotificationProxy* ScheduleRawPushNotificationUTC(const FString& profileId, const FString& fcmContent, const FString& iosContent, const FString& facebookContent, int32 startTime);
+		static UBCPushNotificationProxy* ScheduleRawPushNotificationUTC(ABrainCloud *brainCloud, const FString& profileId, const FString& fcmContent, const FString& iosContent, const FString& facebookContent, int32 startTime);
 
 	/**
 	* Schedules a normalized push notification to a user
@@ -124,7 +126,7 @@ public:
 	* Param - callback The method to be invoked when the server response is received
 	*/
 	UFUNCTION(BlueprintCallable, meta = (BlueprintInternalUseOnly = "true"), Category = "BrainCloud|Push Notification")
-		static UBCPushNotificationProxy* ScheduleRawPushNotificationMinutes(const FString& profileId, const FString& fcmContent, const FString& iosContent, const FString& facebookContent, int32 minutesFromNow);
+		static UBCPushNotificationProxy* ScheduleRawPushNotificationMinutes(ABrainCloud *brainCloud, const FString& profileId, const FString& fcmContent, const FString& iosContent, const FString& facebookContent, int32 minutesFromNow);
 
 	/**
 	* Sends a raw push notification to a target user.
@@ -136,7 +138,7 @@ public:
 	* Param - callback The method to be invoked when the server response is received
 	*/
 	UFUNCTION(BlueprintCallable, meta = (BlueprintInternalUseOnly = "true"), Category = "BrainCloud|Push Notification")
-		static UBCPushNotificationProxy* SendRawPushNotification(const FString& profileId, const FString& fcmContent, const FString& iosContent, const FString& facebookContent);
+		static UBCPushNotificationProxy* SendRawPushNotification(ABrainCloud *brainCloud, const FString& profileId, const FString& fcmContent, const FString& iosContent, const FString& facebookContent);
 
 	/**
 	* Sends a raw push notification to a target list of users.
@@ -148,7 +150,7 @@ public:
 	* Param - callback The method to be invoked when the server response is received
 	*/
 	UFUNCTION(BlueprintCallable, meta = (BlueprintInternalUseOnly = "true"), Category = "BrainCloud|Push Notification")
-		static UBCPushNotificationProxy* SendRawPushNotificationBatch(const TArray<FString> profileIds, const FString& fcmContent, const FString& iosContent, const FString& facebookContent);
+		static UBCPushNotificationProxy* SendRawPushNotificationBatch(ABrainCloud *brainCloud, const TArray<FString> profileIds, const FString& fcmContent, const FString& iosContent, const FString& facebookContent);
 
 	/**
 	* Sends a raw push notification to a target group.
@@ -160,7 +162,7 @@ public:
 	* Param - callback The method to be invoked when the server response is received
 	*/
 	UFUNCTION(BlueprintCallable, meta = (BlueprintInternalUseOnly = "true"), Category = "BrainCloud|Push Notification")
-		static UBCPushNotificationProxy* SendRawPushNotificationToGroup(const FString& groupId, const FString& fcmContent, const FString& iosContent, const FString& facebookContent);
+		static UBCPushNotificationProxy* SendRawPushNotificationToGroup(ABrainCloud *brainCloud, const FString& groupId, const FString& fcmContent, const FString& iosContent, const FString& facebookContent);
 
 	/**
 	* Schedules a normalized push notification to a user
@@ -171,7 +173,7 @@ public:
 	* Param - startTime Start time of sending the push notification
 	*/
 	UFUNCTION(BlueprintCallable, meta = (BlueprintInternalUseOnly = "true"), Category = "BrainCloud|Push Notification")
-		static UBCPushNotificationProxy* ScheduleNormalizedPushNotificationUTC(const FString& profileId, const FString& alertContentJson, const FString& customDataJson, const int32 startTime);
+		static UBCPushNotificationProxy* ScheduleNormalizedPushNotificationUTC(ABrainCloud *brainCloud, const FString& profileId, const FString& alertContentJson, const FString& customDataJson, const int32 startTime);
 
 	/**
 	* Schedules a normalized push notification to a user
@@ -182,7 +184,7 @@ public:
 	* Param - minutesFromNow Minutes from now to send the push notification
 	*/
 	UFUNCTION(BlueprintCallable, meta = (BlueprintInternalUseOnly = "true"), Category = "BrainCloud|Push Notification")
-		static UBCPushNotificationProxy* ScheduleNormalizedPushNotificationMinutes(const FString& profileId, const FString& alertContentJson, const FString& customDataJson, const int32 minutesFromNow);
+		static UBCPushNotificationProxy* ScheduleNormalizedPushNotificationMinutes(ABrainCloud *brainCloud, const FString& profileId, const FString& alertContentJson, const FString& customDataJson, const int32 minutesFromNow);
 
 	/**
 	* Schedules a rich push notification to a user
@@ -193,7 +195,7 @@ public:
 	* Param - startTime Start time of sending the push notification
 	*/
 	UFUNCTION(BlueprintCallable, meta = (BlueprintInternalUseOnly = "true"), Category = "BrainCloud|Push Notification")
-		static UBCPushNotificationProxy* ScheduleRichPushNotificationUTC(const FString& profileId, int32 notificationTemplateId, const FString& substitutionJson, const int32 startTime);
+		static UBCPushNotificationProxy* ScheduleRichPushNotificationUTC(ABrainCloud *brainCloud, const FString& profileId, int32 notificationTemplateId, const FString& substitutionJson, const int32 startTime);
 
 	/**
 	* Schedules a rich push notification to a user
@@ -204,7 +206,7 @@ public:
 	* Param - minutesFromNow Minutes from now to send the push notification
 	*/
 	UFUNCTION(BlueprintCallable, meta = (BlueprintInternalUseOnly = "true"), Category = "BrainCloud|Push Notification")
-		static UBCPushNotificationProxy* ScheduleRichPushNotificationMinutes(const FString& profileId, const int32 notificationTemplateId, const FString& substitutionJson, const int32 minutesFromNow);
+		static UBCPushNotificationProxy* ScheduleRichPushNotificationMinutes(ABrainCloud *brainCloud, const FString& profileId, const int32 notificationTemplateId, const FString& substitutionJson, const int32 minutesFromNow);
 
 	/**
 	* Sends a notification to a user consisting of alert content and custom data.
@@ -214,7 +216,7 @@ public:
 	* Param - customData Optional custom data
 	*/
 	UFUNCTION(BlueprintCallable, meta = (BlueprintInternalUseOnly = "true"), Category = "BrainCloud|Push Notification")
-		static UBCPushNotificationProxy* SendNormalizedPushNotification(const FString& toPlayerId, const FString& alertContentJson, const FString& customDataJson);
+		static UBCPushNotificationProxy* SendNormalizedPushNotification(ABrainCloud *brainCloud, const FString& toPlayerId, const FString& alertContentJson, const FString& customDataJson);
 
 	/**
 	* Sends a notification to a user consisting of alert content and custom data.
@@ -224,7 +226,7 @@ public:
 	* Param - customData Optional custom data
 	*/
 	UFUNCTION(BlueprintCallable, meta = (BlueprintInternalUseOnly = "true"), Category = "BrainCloud|Push Notification")
-		static UBCPushNotificationProxy* SendNormalizedPushNotificationBatch(const TArray<FString> profileIds, const FString& alertContentJson, const FString& customDataJson);
+		static UBCPushNotificationProxy* SendNormalizedPushNotificationBatch(ABrainCloud *brainCloud, const TArray<FString> profileIds, const FString& alertContentJson, const FString& customDataJson);
 
     //Response delegates
     UPROPERTY(BlueprintAssignable)

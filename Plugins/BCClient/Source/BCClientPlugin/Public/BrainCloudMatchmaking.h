@@ -94,6 +94,17 @@ public:
      */
     void turnShieldOff(IServerCallback * callback);
 
+	/**
+	* Increases the shield on time by specified number of minutes
+	*
+	* Service Name - MatchMaking
+	* Service Operation - IncrementShieldOnFor
+	*
+	* @param in_minutes Number of minutes to increase the shield time for
+	* @param in_callback The method to be invoked when the server response is received
+	*/
+	void incrementShieldOnFor(int32 minutes, IServerCallback * callback);
+
     /**
      * Finds matchmaking enabled players
      *

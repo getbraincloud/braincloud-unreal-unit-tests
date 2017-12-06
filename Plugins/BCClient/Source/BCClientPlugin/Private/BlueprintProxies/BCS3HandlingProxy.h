@@ -6,6 +6,8 @@
 #include "IServerCallback.h"
 #include "BCS3HandlingProxy.generated.h"
 
+class ABrainCloud;
+
 UCLASS(MinimalAPI)
 class UBCS3HandlingProxy : public UBCBlueprintCallProxyBase, public IServerCallback
 {
@@ -25,7 +27,7 @@ public:
     * Param - fileDetailsJson  An array of file details
     */
     UFUNCTION(BlueprintCallable, meta = (BlueprintInternalUseOnly = "true"), Category = "BrainCloud|S3 Handling")
-        static UBCS3HandlingProxy* GetUpdatedFiles(FString category, FString fileDetails);
+        static UBCS3HandlingProxy* GetUpdatedFiles(ABrainCloud *brainCloud, FString category, FString fileDetails);
 
 
     /*
@@ -37,7 +39,7 @@ public:
     * Param - category  Category of files to retrieve
     */
     UFUNCTION(BlueprintCallable, meta = (BlueprintInternalUseOnly = "true"), Category = "BrainCloud|S3 Handling")
-        static UBCS3HandlingProxy* GetFileList(FString category);
+        static UBCS3HandlingProxy* GetFileList(ABrainCloud *brainCloud, FString category);
 
 	/**
 	* Returns the CDN url for a file
@@ -45,7 +47,7 @@ public:
 	* Param - fileId ID of file
 	*/
 	UFUNCTION(BlueprintCallable, meta = (BlueprintInternalUseOnly = "true"), Category = "BrainCloud|S3 Handling")
-		static UBCS3HandlingProxy* GetCDNUrl(const FString& fileId);
+		static UBCS3HandlingProxy* GetCDNUrl(ABrainCloud *brainCloud, const FString& fileId);
 
     //Response delegates
     UPROPERTY(BlueprintAssignable)

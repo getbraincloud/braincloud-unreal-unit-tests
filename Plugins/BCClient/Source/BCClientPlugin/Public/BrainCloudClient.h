@@ -45,6 +45,14 @@ class BCCLIENTPLUGIN_API BrainCloudClient {
 public:
 	/** Public constants */
 	static bool SINGLE_THREADED;
+	
+	static bool ENABLED_SOFT_ERROR_MODE;
+	static bool ENABLED_SINGLETON_MODE;
+	static const wchar_t SINGLETON_USE_ERROR_MESSAGE[123];
+	
+
+	BrainCloudClient();
+
 
 	/**
 	 * BrainCloudClient is a singleton object. This method gives the caller access
@@ -431,7 +439,6 @@ public:
 protected:
 
 	//  void BeginDestroy() override;
-	BrainCloudClient();
 	~BrainCloudClient();
 	static BrainCloudClient * _instance;
 

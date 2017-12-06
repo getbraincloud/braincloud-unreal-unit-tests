@@ -3,8 +3,10 @@
 #include "BCClientPluginPrivatePCH.h"
 #include "BrainCloudClient.h"
 #include "ServerCall.h"
-
+#include "BrainCloud.h"
+#include "BCWrapperProxy.h"
 #include "BCGlobalAppProxy.h"
+#include "BrainCloudWrapper.h"
 
 UBCGlobalAppProxy::UBCGlobalAppProxy(const FObjectInitializer& ObjectInitializer)
     : Super(ObjectInitializer)
@@ -31,10 +33,10 @@ UBCGlobalAppProxy::UBCGlobalAppProxy(const FObjectInitializer& ObjectInitializer
 *   }
 * }
 */
-UBCGlobalAppProxy* UBCGlobalAppProxy::ReadProperties()
+UBCGlobalAppProxy* UBCGlobalAppProxy::ReadProperties(ABrainCloud *brainCloud)
 {
     UBCGlobalAppProxy* Proxy = NewObject<UBCGlobalAppProxy>();
-    BrainCloudClient::getInstance()->getGlobalAppService()->readProperties(Proxy);
+    UBCWrapperProxy::GetBrainCloudInstance(brainCloud)->getGlobalAppService()->readProperties(Proxy);
     return Proxy;
 }
 
