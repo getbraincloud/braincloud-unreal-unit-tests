@@ -15,7 +15,7 @@ UBCWrapperProxy::UBCWrapperProxy(const FObjectInitializer& ObjectInitializer)
 
 ABrainCloud* UBCWrapperProxy::CreateBrainCloudActor(const FString& wrapperName)
 {
-	ABrainCloud *brainCloudActor = ConstructObject<ABrainCloud>(ABrainCloud::StaticClass());
+	ABrainCloud *brainCloudActor = NewObject<ABrainCloud>(ABrainCloud::StaticClass());
 	brainCloudActor->AddToRoot();
 	brainCloudActor->WrapperName = wrapperName;
 	return brainCloudActor;
