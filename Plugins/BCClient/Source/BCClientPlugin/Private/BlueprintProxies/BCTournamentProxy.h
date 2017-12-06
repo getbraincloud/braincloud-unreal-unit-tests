@@ -6,6 +6,8 @@
 #include "IServerCallback.h"
 #include "BCTournamentProxy.generated.h"
 
+class ABrainCloud;
+
 UCLASS(MinimalAPI)
 class UBCTournamentProxy : public UBCBlueprintCallProxyBase, public IServerCallback
 {
@@ -24,7 +26,7 @@ public:
 	* Param - versionId Version of the tournament. Use -1 for the latest version.
 	*/
 	UFUNCTION(BlueprintCallable, meta = (BlueprintInternalUseOnly = "true"), Category = "BrainCloud|Tournament")
-		static UBCTournamentProxy* ClaimTournamentReward(const FString& leaderboardId, int32 versionId);
+		static UBCTournamentProxy* ClaimTournamentReward(ABrainCloud *brainCloud, const FString& leaderboardId, int32 versionId);
 
 	/**
 	* Get tournament status associated with a leaderboard
@@ -36,21 +38,21 @@ public:
 	* Param - versionId Version of the tournament. Use -1 for the latest version.
 	*/
 	UFUNCTION(BlueprintCallable, meta = (BlueprintInternalUseOnly = "true"), Category = "BrainCloud|Tournament")
-		static UBCTournamentProxy* GetTournamentStatus(const FString& leaderboardId, int32 versionId);
+		static UBCTournamentProxy* GetTournamentStatus(ABrainCloud *brainCloud, const FString& leaderboardId, int32 versionId);
 
 	/**
 	* Join the specified tournament.
 	* Any entry fees will be automatically collected.
 	*
 	* Service Name - tournament
-	* Service Operation - JOTOURNAMENT
+	* Service Operation - JOIN_TOURNAMENT
 	*
 	* Param - leaderboardId The leaderboard for the tournament
 	* Param - tournamentCode Tournament to join
 	* Param - initialScore Initial score for the user
 	*/
 	UFUNCTION(BlueprintCallable, meta = (BlueprintInternalUseOnly = "true"), Category = "BrainCloud|Tournament")
-		static UBCTournamentProxy* JoinTournament(const FString& leaderboardId, const FString& tournamentCode, int32 initialScore);
+		static UBCTournamentProxy* JoinTournament(ABrainCloud *brainCloud, const FString& leaderboardId, const FString& tournamentCode, int32 initialScore);
 
 	/**
 	* Removes player's score from tournament leaderboard
@@ -61,7 +63,7 @@ public:
 	* Param - leaderboardId The leaderboard for the tournament
 	*/
 	UFUNCTION(BlueprintCallable, meta = (BlueprintInternalUseOnly = "true"), Category = "BrainCloud|Tournament")
-		static UBCTournamentProxy* LeaveTournament(const FString& leaderboardId);
+		static UBCTournamentProxy* LeaveTournament(ABrainCloud *brainCloud, const FString& leaderboardId);
 
 	/**
 	* Post the users score to the leaderboard
@@ -75,7 +77,7 @@ public:
 	* Param - roundStartedTime Time the user started the match resulting in the score being posted in UTC.
 	*/
 	UFUNCTION(BlueprintCallable, meta = (BlueprintInternalUseOnly = "true"), Category = "BrainCloud|Tournament")
-		static UBCTournamentProxy* PostTournamentScore(const FString& leaderboardId, int32 score, const FString& jsonData, const struct FDateTime roundStartedTime);
+		static UBCTournamentProxy* PostTournamentScore(ABrainCloud *brainCloud, const FString& leaderboardId, int32 score, const FString& jsonData, const struct FDateTime roundStartedTime);
 
 	/**
 	* Returns the user's expected reward based on the current scores
@@ -86,7 +88,7 @@ public:
 	* Param - leaderboardId The leaderboard for the tournament
 	*/
 	UFUNCTION(BlueprintCallable, meta = (BlueprintInternalUseOnly = "true"), Category = "BrainCloud|Tournament")
-		static UBCTournamentProxy* ViewCurrentReward(const FString& leaderboardId);
+		static UBCTournamentProxy* ViewCurrentReward(ABrainCloud *brainCloud, const FString& leaderboardId);
 
 	/**
 	* Returns the user's reward from a finished tournament
@@ -98,7 +100,7 @@ public:
 	* Param - versionId Version of the tournament. Use -1 for the latest version.
 	*/
 	UFUNCTION(BlueprintCallable, meta = (BlueprintInternalUseOnly = "true"), Category = "BrainCloud|Tournament")
-		static UBCTournamentProxy* ViewReward(const FString& leaderboardId, int32 versionId);
+		static UBCTournamentProxy* ViewReward(ABrainCloud *brainCloud, const FString& leaderboardId, int32 versionId);
 
 	//Response delegates
 	UPROPERTY(BlueprintAssignable)

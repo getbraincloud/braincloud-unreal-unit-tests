@@ -3,7 +3,9 @@
 #include "BCClientPluginPrivatePCH.h"
 #include "BrainCloudClient.h"
 #include "ServerCall.h"
-
+#include "BrainCloud.h"
+#include "BCWrapperProxy.h"
+#include "BrainCloudWrapper.h"
 #include "BCRedemptionCodeProxy.h"
 
 UBCRedemptionCodeProxy::UBCRedemptionCodeProxy(const FObjectInitializer& ObjectInitializer)
@@ -11,17 +13,17 @@ UBCRedemptionCodeProxy::UBCRedemptionCodeProxy(const FObjectInitializer& ObjectI
 {
 }
 
-UBCRedemptionCodeProxy* UBCRedemptionCodeProxy::RedeemCode(const FString& scanCode, const FString& codeType, const FString& customRedemptionInfo)
+UBCRedemptionCodeProxy* UBCRedemptionCodeProxy::RedeemCode(ABrainCloud *brainCloud, const FString& scanCode, const FString& codeType, const FString& customRedemptionInfo)
 {
     UBCRedemptionCodeProxy* Proxy = NewObject<UBCRedemptionCodeProxy>();
-    BrainCloudClient::getInstance()->getRedemptionCodeService()->redeemCode(scanCode, codeType, customRedemptionInfo, Proxy);
+    UBCWrapperProxy::GetBrainCloudInstance(brainCloud)->getRedemptionCodeService()->redeemCode(scanCode, codeType, customRedemptionInfo, Proxy);
     return Proxy;
 }
 
-UBCRedemptionCodeProxy* UBCRedemptionCodeProxy::GetRedeemedCodes(const FString& codeType)
+UBCRedemptionCodeProxy* UBCRedemptionCodeProxy::GetRedeemedCodes(ABrainCloud *brainCloud, const FString& codeType)
 {
     UBCRedemptionCodeProxy* Proxy = NewObject<UBCRedemptionCodeProxy>();
-    BrainCloudClient::getInstance()->getRedemptionCodeService()->getRedeemedCodes(codeType, Proxy);
+    UBCWrapperProxy::GetBrainCloudInstance(brainCloud)->getRedemptionCodeService()->getRedeemedCodes(codeType, Proxy);
     return Proxy;
 }
 

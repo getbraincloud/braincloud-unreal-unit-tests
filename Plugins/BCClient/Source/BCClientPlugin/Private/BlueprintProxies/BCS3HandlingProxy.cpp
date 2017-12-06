@@ -3,7 +3,9 @@
 #include "BCClientPluginPrivatePCH.h"
 #include "BrainCloudClient.h"
 #include "ServerCall.h"
-
+#include "BrainCloud.h"
+#include "BCWrapperProxy.h"
+#include "BrainCloudWrapper.h"
 #include "BCS3HandlingProxy.h"
 
 UBCS3HandlingProxy::UBCS3HandlingProxy(const FObjectInitializer& ObjectInitializer)
@@ -11,24 +13,24 @@ UBCS3HandlingProxy::UBCS3HandlingProxy(const FObjectInitializer& ObjectInitializ
 {
 }
 
-UBCS3HandlingProxy* UBCS3HandlingProxy::GetUpdatedFiles(FString category, FString fileDetails)
+UBCS3HandlingProxy* UBCS3HandlingProxy::GetUpdatedFiles(ABrainCloud *brainCloud, FString category, FString fileDetails)
 {
     UBCS3HandlingProxy* Proxy = NewObject<UBCS3HandlingProxy>();
-    BrainCloudClient::getInstance()->getS3HandlingService()->getUpdatedFiles(category, fileDetails, Proxy);
+    UBCWrapperProxy::GetBrainCloudInstance(brainCloud)->getS3HandlingService()->getUpdatedFiles(category, fileDetails, Proxy);
     return Proxy;
 }
 
-UBCS3HandlingProxy* UBCS3HandlingProxy::GetFileList(FString category)
+UBCS3HandlingProxy* UBCS3HandlingProxy::GetFileList(ABrainCloud *brainCloud, FString category)
 {
     UBCS3HandlingProxy* Proxy = NewObject<UBCS3HandlingProxy>();
-    BrainCloudClient::getInstance()->getS3HandlingService()->getFileList(category, Proxy);
+    UBCWrapperProxy::GetBrainCloudInstance(brainCloud)->getS3HandlingService()->getFileList(category, Proxy);
     return Proxy;
 }
 
-UBCS3HandlingProxy* UBCS3HandlingProxy::GetCDNUrl(const FString& fileId)
+UBCS3HandlingProxy* UBCS3HandlingProxy::GetCDNUrl(ABrainCloud *brainCloud, const FString& fileId)
 {
 	UBCS3HandlingProxy* Proxy = NewObject<UBCS3HandlingProxy>();
-	BrainCloudClient::getInstance()->getS3HandlingService()->getCDNUrl(fileId, Proxy);
+	UBCWrapperProxy::GetBrainCloudInstance(brainCloud)->getS3HandlingService()->getCDNUrl(fileId, Proxy);
 	return Proxy;
 }
 

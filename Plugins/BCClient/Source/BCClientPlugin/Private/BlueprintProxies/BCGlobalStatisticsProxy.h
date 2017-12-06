@@ -6,6 +6,8 @@
 #include "IServerCallback.h"
 #include "BCGlobalStatisticsProxy.generated.h"
 
+class ABrainCloud;
+
 UCLASS(MinimalAPI)
 class UBCGlobalStatisticsProxy : public UBCBlueprintCallProxyBase, public IServerCallback
 {
@@ -21,7 +23,7 @@ public:
     * Service Operation - Read
     */
     UFUNCTION(BlueprintCallable, meta = (BlueprintInternalUseOnly = "true"), Category = "BrainCloud|Global Statistics")
-        static UBCGlobalStatisticsProxy* ReadAllGlobalStats();
+        static UBCGlobalStatisticsProxy* ReadAllGlobalStats(ABrainCloud *brainCloud);
 
     /**
     * Reads a subset of global statistics.
@@ -32,7 +34,7 @@ public:
     * Param - globalStats An array of statistics to read:
     */
     UFUNCTION(BlueprintCallable, meta = (BlueprintInternalUseOnly = "true"), Category = "BrainCloud|Global Statistics")
-        static UBCGlobalStatisticsProxy* ReadGlobalStatsSubset(const TArray<FString>& globalStats);
+        static UBCGlobalStatisticsProxy* ReadGlobalStatsSubset(ABrainCloud *brainCloud, const TArray<FString>& globalStats);
 
     /**
     * Method retrieves the game (aka global) statistics for the given category.
@@ -43,7 +45,7 @@ public:
     * Param - category The game statistics category
     */
     UFUNCTION(BlueprintCallable, meta = (BlueprintInternalUseOnly = "true"), Category = "BrainCloud|Global Statistics")
-        static UBCGlobalStatisticsProxy* ReadGlobalStatsForCategory(FString category);
+        static UBCGlobalStatisticsProxy* ReadGlobalStatsForCategory(ABrainCloud *brainCloud, FString category);
 
     /**
     * Atomically increment (or decrement) global statistics.
@@ -66,7 +68,7 @@ public:
     * which increments stat1 by 9 up to a limit of 30.
     */
     UFUNCTION(BlueprintCallable, meta = (BlueprintInternalUseOnly = "true"), Category = "BrainCloud|Global Statistics")
-        static UBCGlobalStatisticsProxy* IncrementGlobalGameStat(FString jsonData);
+        static UBCGlobalStatisticsProxy* IncrementGlobalGameStat(ABrainCloud *brainCloud, FString jsonData);
 
 	/**
 	* Apply statistics grammar to a partial set of statistics.
@@ -84,7 +86,7 @@ public:
 	* }
 	*/
 	UFUNCTION(BlueprintCallable, meta = (BlueprintInternalUseOnly = "true"), Category = "BrainCloud|Global Statistics")
-		static UBCGlobalStatisticsProxy* ProcessStatistics(FString jsonData);
+		static UBCGlobalStatisticsProxy* ProcessStatistics(ABrainCloud *brainCloud, FString jsonData);
 
     //Response delegates
     UPROPERTY(BlueprintAssignable)

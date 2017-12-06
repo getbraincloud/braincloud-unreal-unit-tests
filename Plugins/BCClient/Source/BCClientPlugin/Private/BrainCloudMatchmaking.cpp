@@ -73,6 +73,15 @@ void BrainCloudMatchmaking::turnShieldOff(IServerCallback * callback)
     _client->sendRequest(sc);
 }
 
+void BrainCloudMatchmaking::incrementShieldOnFor(int32 minutes, IServerCallback * callback)
+{
+	TSharedRef<FJsonObject> message = MakeShareable(new FJsonObject());
+	message->SetNumberField(OperationParam::MatchMakingServiceMinutes.getValue(), minutes);
+
+	ServerCall * sc = new ServerCall(ServiceName::MatchMaking, ServiceOperation::IncrementShieldOnFor, message, callback);
+	_client->sendRequest(sc);
+}
+
 void BrainCloudMatchmaking::findPlayers(int32 rangeDelta, int32 numMatches, IServerCallback * callback)
 {
     findPlayersWithAttributes(rangeDelta, numMatches, "", callback);

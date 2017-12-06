@@ -158,6 +158,7 @@ public:
 	static const ServiceOperation ShieldOn;
 	static const ServiceOperation ShieldOnFor;
 	static const ServiceOperation ShieldOff;
+	static const ServiceOperation IncrementShieldOnFor;
 	static const ServiceOperation GetShieldExpiry;
 	static const ServiceOperation FindPlayers;
 	static const ServiceOperation FindPlayersUsingFilter;

@@ -15,11 +15,34 @@ BrainCloudWrapper * BrainCloudWrapper::_instance = nullptr;
 
 BrainCloudWrapper::BrainCloudWrapper()
 {
-    _client = BrainCloudClient::getInstance();
+    _client = new BrainCloudClient();
+}
+
+BrainCloudWrapper::BrainCloudWrapper(FString wrapperName)
+{
+	_client = new BrainCloudClient();
+	_wrapperName = wrapperName;
+}
+
+BrainCloudWrapper::BrainCloudWrapper(BrainCloudClient *client)
+{
+	_client = client;
 }
 
 BrainCloudWrapper * BrainCloudWrapper::getInstance()
 {
+	if (BrainCloudClient::ENABLED_SINGLETON_MODE == false)
+	{
+		if (BrainCloudClient::ENABLED_SOFT_ERROR_MODE)
+		{
+			UE_LOG(LogTemp, Warning, TEXT("%s"), BrainCloudClient::SINGLETON_USE_ERROR_MESSAGE);
+		}
+		else
+		{
+			UE_LOG(LogTemp, Fatal, TEXT("%s"), BrainCloudClient::SINGLETON_USE_ERROR_MESSAGE);
+		}
+	}
+
     if (_instance == nullptr)
     {
         _instance = new BrainCloudWrapper();
@@ -196,7 +219,10 @@ void BrainCloudWrapper::serverError(ServiceName serviceName, ServiceOperation se
 void BrainCloudWrapper::loadData()
 {
     UBrainCloudSave* LoadGameInstance = Cast<UBrainCloudSave>(UGameplayStatics::CreateSaveGameObject(UBrainCloudSave::StaticClass()));
-    LoadGameInstance = Cast<UBrainCloudSave>(UGameplayStatics::LoadGameFromSlot(LoadGameInstance->SaveSlotName, LoadGameInstance->UserIndex));
+    
+	FString slotPrefix = _wrapperName;
+
+	LoadGameInstance = Cast<UBrainCloudSave>(UGameplayStatics::LoadGameFromSlot(slotPrefix + LoadGameInstance->SaveSlotName, LoadGameInstance->UserIndex));
     if (LoadGameInstance == nullptr) return;
 
     _profileId = LoadGameInstance->ProfileId;
@@ -210,5 +236,8 @@ void BrainCloudWrapper::saveData()
     SaveGameInstance->ProfileId = _profileId;
     SaveGameInstance->AnonymousId = _anonymousId;
     SaveGameInstance->AuthenticationType = _authenticationType;
-    UGameplayStatics::SaveGameToSlot(SaveGameInstance, SaveGameInstance->SaveSlotName, SaveGameInstance->UserIndex);
+
+	FString slotPrefix = _wrapperName;
+
+	UGameplayStatics::SaveGameToSlot(SaveGameInstance, _wrapperName + SaveGameInstance->SaveSlotName, SaveGameInstance->UserIndex);
 }

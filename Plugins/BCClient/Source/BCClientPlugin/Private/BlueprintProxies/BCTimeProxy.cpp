@@ -3,7 +3,9 @@
 #include "BCClientPluginPrivatePCH.h"
 #include "BrainCloudClient.h"
 #include "ServerCall.h"
-
+#include "BrainCloud.h"
+#include "BCWrapperProxy.h"
+#include "BrainCloudWrapper.h"
 #include "BCTimeProxy.h"
 
 UBCTimeProxy::UBCTimeProxy(const FObjectInitializer& ObjectInitializer)
@@ -11,10 +13,10 @@ UBCTimeProxy::UBCTimeProxy(const FObjectInitializer& ObjectInitializer)
 {
 }
 
-UBCTimeProxy* UBCTimeProxy::ReadServerTime()
+UBCTimeProxy* UBCTimeProxy::ReadServerTime(ABrainCloud *brainCloud)
 {
     UBCTimeProxy* Proxy = NewObject<UBCTimeProxy>();
-    BrainCloudClient::getInstance()->getTimeService()->readServerTime(Proxy);
+    UBCWrapperProxy::GetBrainCloudInstance(brainCloud)->getTimeService()->readServerTime(Proxy);
     return Proxy;
 }
 

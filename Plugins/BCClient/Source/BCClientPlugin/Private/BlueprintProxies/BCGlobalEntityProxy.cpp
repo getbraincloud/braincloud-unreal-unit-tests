@@ -3,123 +3,125 @@
 #include "BCClientPluginPrivatePCH.h"
 #include "BrainCloudClient.h"
 #include "ServerCall.h"
-
+#include "BrainCloud.h"
+#include "BCWrapperProxy.h"
 #include "BCGlobalEntityProxy.h"
+#include "BrainCloudWrapper.h"
 
 UBCGlobalEntityProxy::UBCGlobalEntityProxy(const FObjectInitializer& ObjectInitializer)
 	: Super(ObjectInitializer)
 {
 }
 
-UBCGlobalEntityProxy* UBCGlobalEntityProxy::CreateEntity(const FString& entityType, const FString& timeToLive, UBrainCloudACL* entityAcl, const FString& jsonEntityData)
+UBCGlobalEntityProxy* UBCGlobalEntityProxy::CreateEntity(ABrainCloud *brainCloud, const FString& entityType, const FString& timeToLive, UBrainCloudACL* entityAcl, const FString& jsonEntityData)
 {
 	UBCGlobalEntityProxy* Proxy = NewObject<UBCGlobalEntityProxy>();
-	BrainCloudClient::getInstance()->getGlobalEntityService()->createEntity(entityType, timeToLive.IsEmpty() ? 0 : FCString::Atoi64(*timeToLive), entityAcl, jsonEntityData, Proxy);
+	UBCWrapperProxy::GetBrainCloudInstance(brainCloud)->getGlobalEntityService()->createEntity(entityType, timeToLive.IsEmpty() ? 0 : FCString::Atoi64(*timeToLive), entityAcl, jsonEntityData, Proxy);
 	return Proxy;
 }
 
-UBCGlobalEntityProxy* UBCGlobalEntityProxy::CreateEntityWithIndexedId(const FString& entityType, const FString& indexedId, const FString& timeToLive, UBrainCloudACL* entityAcl, const FString& jsonEntityData)
+UBCGlobalEntityProxy* UBCGlobalEntityProxy::CreateEntityWithIndexedId(ABrainCloud *brainCloud, const FString& entityType, const FString& indexedId, const FString& timeToLive, UBrainCloudACL* entityAcl, const FString& jsonEntityData)
 {
 	UBCGlobalEntityProxy* Proxy = NewObject<UBCGlobalEntityProxy>();
-	BrainCloudClient::getInstance()->getGlobalEntityService()->createEntityWithIndexedId(entityType, indexedId, timeToLive.IsEmpty() ? 0 : FCString::Atoi64(*timeToLive), entityAcl, jsonEntityData, Proxy);
+	UBCWrapperProxy::GetBrainCloudInstance(brainCloud)->getGlobalEntityService()->createEntityWithIndexedId(entityType, indexedId, timeToLive.IsEmpty() ? 0 : FCString::Atoi64(*timeToLive), entityAcl, jsonEntityData, Proxy);
 	return Proxy;
 }
 
-UBCGlobalEntityProxy* UBCGlobalEntityProxy::UpdateEntity(const FString& entityId, int32 version, const FString& jsonEntityData)
+UBCGlobalEntityProxy* UBCGlobalEntityProxy::UpdateEntity(ABrainCloud *brainCloud, const FString& entityId, int32 version, const FString& jsonEntityData)
 {
 	UBCGlobalEntityProxy* Proxy = NewObject<UBCGlobalEntityProxy>();
-	BrainCloudClient::getInstance()->getGlobalEntityService()->updateEntity(entityId, version, jsonEntityData, Proxy);
+	UBCWrapperProxy::GetBrainCloudInstance(brainCloud)->getGlobalEntityService()->updateEntity(entityId, version, jsonEntityData, Proxy);
 	return Proxy;
 }
 
-UBCGlobalEntityProxy* UBCGlobalEntityProxy::UpdateEntityAcl(const FString& entityId, int32 version, UBrainCloudACL* entityAcl)
+UBCGlobalEntityProxy* UBCGlobalEntityProxy::UpdateEntityAcl(ABrainCloud *brainCloud, const FString& entityId, int32 version, UBrainCloudACL* entityAcl)
 {
 	UBCGlobalEntityProxy* Proxy = NewObject<UBCGlobalEntityProxy>();
-	BrainCloudClient::getInstance()->getGlobalEntityService()->updateEntityAcl(entityId, version, entityAcl, Proxy);
+	UBCWrapperProxy::GetBrainCloudInstance(brainCloud)->getGlobalEntityService()->updateEntityAcl(entityId, version, entityAcl, Proxy);
 	return Proxy;
 }
 
-UBCGlobalEntityProxy* UBCGlobalEntityProxy::UpdateEntityTimeToLive(const FString& entityId, int32 version, const FString& timeToLive)
+UBCGlobalEntityProxy* UBCGlobalEntityProxy::UpdateEntityTimeToLive(ABrainCloud *brainCloud, const FString& entityId, int32 version, const FString& timeToLive)
 {
 	UBCGlobalEntityProxy* Proxy = NewObject<UBCGlobalEntityProxy>();
-	BrainCloudClient::getInstance()->getGlobalEntityService()->updateEntityTimeToLive(entityId, version, timeToLive.IsEmpty() ? 0 : FCString::Atoi64(*timeToLive), Proxy);
+	UBCWrapperProxy::GetBrainCloudInstance(brainCloud)->getGlobalEntityService()->updateEntityTimeToLive(entityId, version, timeToLive.IsEmpty() ? 0 : FCString::Atoi64(*timeToLive), Proxy);
 	return Proxy;
 }
 
-UBCGlobalEntityProxy* UBCGlobalEntityProxy::DeleteEntity(const FString& entityId, int32 version)
+UBCGlobalEntityProxy* UBCGlobalEntityProxy::DeleteEntity(ABrainCloud *brainCloud, const FString& entityId, int32 version)
 {
 	UBCGlobalEntityProxy* Proxy = NewObject<UBCGlobalEntityProxy>();
-	BrainCloudClient::getInstance()->getGlobalEntityService()->deleteEntity(entityId, version, Proxy);
+	UBCWrapperProxy::GetBrainCloudInstance(brainCloud)->getGlobalEntityService()->deleteEntity(entityId, version, Proxy);
 	return Proxy;
 }
 
-UBCGlobalEntityProxy* UBCGlobalEntityProxy::ReadEntity(const FString& entityId)
+UBCGlobalEntityProxy* UBCGlobalEntityProxy::ReadEntity(ABrainCloud *brainCloud, const FString& entityId)
 {
 	UBCGlobalEntityProxy* Proxy = NewObject<UBCGlobalEntityProxy>();
-	BrainCloudClient::getInstance()->getGlobalEntityService()->readEntity(entityId, Proxy);
+	UBCWrapperProxy::GetBrainCloudInstance(brainCloud)->getGlobalEntityService()->readEntity(entityId, Proxy);
 	return Proxy;
 }
 
-UBCGlobalEntityProxy* UBCGlobalEntityProxy::GetList(const FString& whereQuery, const FString& orderBy, int32 maxReturn)
+UBCGlobalEntityProxy* UBCGlobalEntityProxy::GetList(ABrainCloud *brainCloud, const FString& whereQuery, const FString& orderBy, int32 maxReturn)
 {
 	UBCGlobalEntityProxy* Proxy = NewObject<UBCGlobalEntityProxy>();
-	BrainCloudClient::getInstance()->getGlobalEntityService()->getList(whereQuery, orderBy, maxReturn, Proxy);
+	UBCWrapperProxy::GetBrainCloudInstance(brainCloud)->getGlobalEntityService()->getList(whereQuery, orderBy, maxReturn, Proxy);
 	return Proxy;
 }
 
-UBCGlobalEntityProxy* UBCGlobalEntityProxy::GetListByIndexedId(const FString& entityIndexedId, int32 maxReturn)
+UBCGlobalEntityProxy* UBCGlobalEntityProxy::GetListByIndexedId(ABrainCloud *brainCloud, const FString& entityIndexedId, int32 maxReturn)
 {
 	UBCGlobalEntityProxy* Proxy = NewObject<UBCGlobalEntityProxy>();
-	BrainCloudClient::getInstance()->getGlobalEntityService()->getListByIndexedId(entityIndexedId, maxReturn, Proxy);
+	UBCWrapperProxy::GetBrainCloudInstance(brainCloud)->getGlobalEntityService()->getListByIndexedId(entityIndexedId, maxReturn, Proxy);
 	return Proxy;
 }
 
-UBCGlobalEntityProxy* UBCGlobalEntityProxy::GetListCount(const FString& whereQuery)
+UBCGlobalEntityProxy* UBCGlobalEntityProxy::GetListCount(ABrainCloud *brainCloud, const FString& whereQuery)
 {
 	UBCGlobalEntityProxy* Proxy = NewObject<UBCGlobalEntityProxy>();
-	BrainCloudClient::getInstance()->getGlobalEntityService()->getListCount(whereQuery, Proxy);
+	UBCWrapperProxy::GetBrainCloudInstance(brainCloud)->getGlobalEntityService()->getListCount(whereQuery, Proxy);
 	return Proxy;
 }
 
-UBCGlobalEntityProxy* UBCGlobalEntityProxy::GetPage(const FString& context)
+UBCGlobalEntityProxy* UBCGlobalEntityProxy::GetPage(ABrainCloud *brainCloud, const FString& context)
 {
 	UBCGlobalEntityProxy* Proxy = NewObject<UBCGlobalEntityProxy>();
-	BrainCloudClient::getInstance()->getGlobalEntityService()->getPage(context, Proxy);
+	UBCWrapperProxy::GetBrainCloudInstance(brainCloud)->getGlobalEntityService()->getPage(context, Proxy);
 	return Proxy;
 }
 
-UBCGlobalEntityProxy* UBCGlobalEntityProxy::GetPageOffset(const FString& context, int32 pageOffset)
+UBCGlobalEntityProxy* UBCGlobalEntityProxy::GetPageOffset(ABrainCloud *brainCloud, const FString& context, int32 pageOffset)
 {
 	UBCGlobalEntityProxy* Proxy = NewObject<UBCGlobalEntityProxy>();
-	BrainCloudClient::getInstance()->getGlobalEntityService()->getPageOffset(context, pageOffset, Proxy);
+	UBCWrapperProxy::GetBrainCloudInstance(brainCloud)->getGlobalEntityService()->getPageOffset(context, pageOffset, Proxy);
 	return Proxy;
 }
 
-UBCGlobalEntityProxy * UBCGlobalEntityProxy::IncrementGlobalEntityData(const FString & entityId, const FString & jsonData)
+UBCGlobalEntityProxy * UBCGlobalEntityProxy::IncrementGlobalEntityData(ABrainCloud *brainCloud, const FString & entityId, const FString & jsonData)
 {
 	UBCGlobalEntityProxy* Proxy = NewObject<UBCGlobalEntityProxy>();
-	BrainCloudClient::getInstance()->getGlobalEntityService()->incrementGlobalEntityData(entityId, jsonData, Proxy);
+	UBCWrapperProxy::GetBrainCloudInstance(brainCloud)->getGlobalEntityService()->incrementGlobalEntityData(entityId, jsonData, Proxy);
 	return Proxy;
 }
 
-UBCGlobalEntityProxy * UBCGlobalEntityProxy::GetRandomEntitiesMatching(const FString& where, int32 maxReturn)
+UBCGlobalEntityProxy * UBCGlobalEntityProxy::GetRandomEntitiesMatching(ABrainCloud *brainCloud, const FString& where, int32 maxReturn)
 {
 	UBCGlobalEntityProxy* Proxy = NewObject<UBCGlobalEntityProxy>();
-	BrainCloudClient::getInstance()->getGlobalEntityService()->getRandomEntitiesMatching(where, maxReturn, Proxy);
+	UBCWrapperProxy::GetBrainCloudInstance(brainCloud)->getGlobalEntityService()->getRandomEntitiesMatching(where, maxReturn, Proxy);
 	return Proxy;
 }
 
-UBCGlobalEntityProxy* UBCGlobalEntityProxy::UpdateEntityOwnerAndAcl(const FString& entityId, int32 version, const FString& ownerId, UBrainCloudACL* entityAcl)
+UBCGlobalEntityProxy* UBCGlobalEntityProxy::UpdateEntityOwnerAndAcl(ABrainCloud *brainCloud, const FString& entityId, int32 version, const FString& ownerId, UBrainCloudACL* entityAcl)
 {
 	UBCGlobalEntityProxy* Proxy = NewObject<UBCGlobalEntityProxy>();
-	BrainCloudClient::getInstance()->getGlobalEntityService()->updateEntityOwnerAndAcl(entityId, version, ownerId, entityAcl, Proxy);
+	UBCWrapperProxy::GetBrainCloudInstance(brainCloud)->getGlobalEntityService()->updateEntityOwnerAndAcl(entityId, version, ownerId, entityAcl, Proxy);
 	return Proxy;
 }
 
-UBCGlobalEntityProxy* UBCGlobalEntityProxy::MakeSystemEntity(const FString& entityId, int32 version, UBrainCloudACL* entityAcl)
+UBCGlobalEntityProxy* UBCGlobalEntityProxy::MakeSystemEntity(ABrainCloud *brainCloud, const FString& entityId, int32 version, UBrainCloudACL* entityAcl)
 {
 	UBCGlobalEntityProxy* Proxy = NewObject<UBCGlobalEntityProxy>();
-	BrainCloudClient::getInstance()->getGlobalEntityService()->makeSystemEntity(entityId, version, entityAcl, Proxy);
+	UBCWrapperProxy::GetBrainCloudInstance(brainCloud)->getGlobalEntityService()->makeSystemEntity(entityId, version, entityAcl, Proxy);
 	return Proxy;
 }
 

@@ -6,6 +6,8 @@
 #include "IServerCallback.h"
 #include "BCOneWayMatchProxy.generated.h"
 
+class ABrainCloud;
+
 UCLASS(MinimalAPI)
 class UBCOneWayMatchProxy : public UBCBlueprintCallProxyBase, public IServerCallback
 {
@@ -24,7 +26,7 @@ public:
     * Param - rangeDelta The range delta used for the initial match search
     */
     UFUNCTION(BlueprintCallable, meta = (BlueprintInternalUseOnly = "true"), Category = "BrainCloud|One Way Match")
-        static UBCOneWayMatchProxy* StartMatch(const FString& otherPlayerId, int32 rangeDelta);
+        static UBCOneWayMatchProxy* StartMatch(ABrainCloud *brainCloud, const FString& otherPlayerId, int32 rangeDelta);
 
     /**
     * Cancels a match
@@ -35,7 +37,7 @@ public:
     * Param - playbackStreamId The playback stream id returned in the start match
     */
     UFUNCTION(BlueprintCallable, meta = (BlueprintInternalUseOnly = "true"), Category = "BrainCloud|One Way Match")
-        static UBCOneWayMatchProxy* CancelMatch(const FString& playbackStreamId);
+        static UBCOneWayMatchProxy* CancelMatch(ABrainCloud *brainCloud, const FString& playbackStreamId);
 
     /**
     * Completes a match
@@ -46,7 +48,7 @@ public:
     * Param - playbackStreamId The playback stream id returned in the initial start match
     */
     UFUNCTION(BlueprintCallable, meta = (BlueprintInternalUseOnly = "true"), Category = "BrainCloud|One Way Match")
-        static UBCOneWayMatchProxy* CompleteMatch(const FString& playbackStreamId);
+        static UBCOneWayMatchProxy* CompleteMatch(ABrainCloud *brainCloud, const FString& playbackStreamId);
 
     //Response delegates
     UPROPERTY(BlueprintAssignable)

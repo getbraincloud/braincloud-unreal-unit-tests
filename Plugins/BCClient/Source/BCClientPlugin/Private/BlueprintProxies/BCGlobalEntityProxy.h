@@ -7,6 +7,8 @@
 #include "BrainCloudACL.h"
 #include "BCGlobalEntityProxy.generated.h"
 
+class ABrainCloud;
+
 UCLASS(MinimalAPI)
 class UBCGlobalEntityProxy : public UBCBlueprintCallProxyBase, public IServerCallback
 {
@@ -27,7 +29,7 @@ public:
 	* Param - jsonEntityData    The entity's data as a json string
 	*/
 	UFUNCTION(BlueprintCallable, meta = (BlueprintInternalUseOnly = "true"), Category = "BrainCloud|Global Entity")
-		static UBCGlobalEntityProxy* CreateEntity(const FString& entityType, const FString& timeToLive, UBrainCloudACL* entityAcl, const FString& jsonEntityData);
+		static UBCGlobalEntityProxy* CreateEntity(ABrainCloud *brainCloud, const FString& entityType, const FString& timeToLive, UBrainCloudACL* entityAcl, const FString& jsonEntityData);
 
 	/**
 	* Method creates a new entity on the server with an indexed id.
@@ -42,7 +44,7 @@ public:
 	* Param - jsonEntityData    The entity's data as a json string
 	*/
 	UFUNCTION(BlueprintCallable, meta = (BlueprintInternalUseOnly = "true"), Category = "BrainCloud|Global Entity")
-		static UBCGlobalEntityProxy* CreateEntityWithIndexedId(const FString& entityType, const FString& indexedId, const FString& timeToLive, UBrainCloudACL* entityAcl, const FString& jsonEntityData);
+		static UBCGlobalEntityProxy* CreateEntityWithIndexedId(ABrainCloud *brainCloud, const FString& entityType, const FString& indexedId, const FString& timeToLive, UBrainCloudACL* entityAcl, const FString& jsonEntityData);
 
 	/**
 	* Method updates an existing entity on the server.
@@ -55,7 +57,7 @@ public:
 	* Param - jsonEntityData    The entity's data as a json string
 	*/
 	UFUNCTION(BlueprintCallable, meta = (BlueprintInternalUseOnly = "true"), Category = "BrainCloud|Global Entity")
-		static UBCGlobalEntityProxy* UpdateEntity(const FString& entityId, int32 version, const FString& jsonEntityData);
+		static UBCGlobalEntityProxy* UpdateEntity(ABrainCloud *brainCloud, const FString& entityId, int32 version, const FString& jsonEntityData);
 
 	/**
 	* Method updates an existing entity's Acl on the server.
@@ -68,7 +70,7 @@ public:
 	* Param - entityAcl The entity's access control object list.
 	*/
 	UFUNCTION(BlueprintCallable, meta = (BlueprintInternalUseOnly = "true"), Category = "BrainCloud|Global Entity")
-		static UBCGlobalEntityProxy* UpdateEntityAcl(const FString& entityId, int32 version, UBrainCloudACL* entityAcl);
+		static UBCGlobalEntityProxy* UpdateEntityAcl(ABrainCloud *brainCloud, const FString& entityId, int32 version, UBrainCloudACL* entityAcl);
 
 	/**
 	* Method updates an existing entity's time to live on the server.
@@ -81,7 +83,7 @@ public:
 	* Param - timeToLive Sets expiry time for entity if > 0
 	*/
 	UFUNCTION(BlueprintCallable, meta = (BlueprintInternalUseOnly = "true"), Category = "BrainCloud|Global Entity")
-		static UBCGlobalEntityProxy* UpdateEntityTimeToLive(const FString& entityId, int32 version, const FString& timeToLive);
+		static UBCGlobalEntityProxy* UpdateEntityTimeToLive(ABrainCloud *brainCloud, const FString& entityId, int32 version, const FString& timeToLive);
 
 	/**
 	* Method deletes an existing entity on the server.
@@ -93,7 +95,7 @@ public:
 	* Param - version The version of the entity to delete
 	*/
 	UFUNCTION(BlueprintCallable, meta = (BlueprintInternalUseOnly = "true"), Category = "BrainCloud|Global Entity")
-		static UBCGlobalEntityProxy* DeleteEntity(const FString& entityId, int32 version);
+		static UBCGlobalEntityProxy* DeleteEntity(ABrainCloud *brainCloud, const FString& entityId, int32 version);
 
 	/**
 	* Method reads an existing entity from the server.
@@ -104,7 +106,7 @@ public:
 	* Param - entityId The entity ID
 	*/
 	UFUNCTION(BlueprintCallable, meta = (BlueprintInternalUseOnly = "true"), Category = "BrainCloud|Global Entity")
-		static UBCGlobalEntityProxy* ReadEntity(const FString& entityId);
+		static UBCGlobalEntityProxy* ReadEntity(ABrainCloud *brainCloud, const FString& entityId);
 
 	/**
 	* Method gets list of entities from the server base on type and/or where clause
@@ -117,7 +119,7 @@ public:
 	* Param - maxReturn The maximum number of entities to return
 	*/
 	UFUNCTION(BlueprintCallable, meta = (BlueprintInternalUseOnly = "true"), Category = "BrainCloud|Global Entity")
-		static UBCGlobalEntityProxy* GetList(const FString& whereQuery, const FString& orderBy, int32 maxReturn);
+		static UBCGlobalEntityProxy* GetList(ABrainCloud *brainCloud, const FString& whereQuery, const FString& orderBy, int32 maxReturn);
 
 	/**
 	* Method gets list of entities from the server base on indexed id
@@ -129,7 +131,7 @@ public:
 	* Param - maxReturn The maximum number of entities to return
 	*/
 	UFUNCTION(BlueprintCallable, meta = (BlueprintInternalUseOnly = "true"), Category = "BrainCloud|Global Entity")
-		static UBCGlobalEntityProxy* GetListByIndexedId(const FString& entityIndexedId, int32 maxReturn);
+		static UBCGlobalEntityProxy* GetListByIndexedId(ABrainCloud *brainCloud, const FString& entityIndexedId, int32 maxReturn);
 
 	/**
 	* Method gets a count of entities based on the where clause
@@ -140,7 +142,7 @@ public:
 	* Param - where Mongo style query string
 	*/
 	UFUNCTION(BlueprintCallable, meta = (BlueprintInternalUseOnly = "true"), Category = "BrainCloud|Global Entity")
-		static UBCGlobalEntityProxy* GetListCount(const FString& whereQuery);
+		static UBCGlobalEntityProxy* GetListCount(ABrainCloud *brainCloud, const FString& whereQuery);
 
 	/**
 	* Method uses a paging system to iterate through Global Entities
@@ -153,7 +155,7 @@ public:
 	* Param - context The json context for the page request. See the portal appendix documentation for format.
 	*/
 	UFUNCTION(BlueprintCallable, meta = (BlueprintInternalUseOnly = "true"), Category = "BrainCloud|Global Entity")
-		static UBCGlobalEntityProxy* GetPage(const FString& context);
+		static UBCGlobalEntityProxy* GetPage(ABrainCloud *brainCloud, const FString& context);
 
 	/**
 	* Method to retrieve previous or next pages after having called the GetPage method.
@@ -167,7 +169,7 @@ public:
 	*      retrieved using the context string to determine a starting point.
 	*/
 	UFUNCTION(BlueprintCallable, meta = (BlueprintInternalUseOnly = "true"), Category = "BrainCloud|Global Entity")
-		static UBCGlobalEntityProxy* GetPageOffset(const FString& context, int32 pageOffset);
+		static UBCGlobalEntityProxy* GetPageOffset(ABrainCloud *brainCloud, const FString& context, int32 pageOffset);
 
 	/**
 	* Partial increment of global entity data field items. Partial set of items incremented as specified.
@@ -180,7 +182,7 @@ public:
 	* Param - returnData Should the entity be returned in the response?
 	*/
 	UFUNCTION(BlueprintCallable, meta = (BlueprintInternalUseOnly = "true"), Category = "BrainCloud|Global Entity")
-		static UBCGlobalEntityProxy* IncrementGlobalEntityData(const FString& entityId, const FString& jsonData);
+		static UBCGlobalEntityProxy* IncrementGlobalEntityData(ABrainCloud *brainCloud, const FString& entityId, const FString& jsonData);
 
 	/**
 	* Gets a list of up to randomCount randomly selected entities from the server based on the where condition and specified maximum return count.
@@ -192,7 +194,7 @@ public:
 	* Param - maxReturn The maximum number of entities to return
 	*/
 	UFUNCTION(BlueprintCallable, meta = (BlueprintInternalUseOnly = "true"), Category = "BrainCloud|Global Entity")
-		static UBCGlobalEntityProxy* GetRandomEntitiesMatching(const FString& whereQuery, int32 maxReturn);
+		static UBCGlobalEntityProxy* GetRandomEntitiesMatching(ABrainCloud *brainCloud, const FString& whereQuery, int32 maxReturn);
 
 	/**
 	* Method updates an existing entity's Owner and ACL on the server.
@@ -206,7 +208,7 @@ public:
 	* Param - entityAcl The entity's access control list
 	*/
 	UFUNCTION(BlueprintCallable, meta = (BlueprintInternalUseOnly = "true"), Category = "BrainCloud|Global Entity")
-		static UBCGlobalEntityProxy* UpdateEntityOwnerAndAcl(const FString& entityId, int32 version, const FString& ownerId, UBrainCloudACL* entityAcl);
+		static UBCGlobalEntityProxy* UpdateEntityOwnerAndAcl(ABrainCloud *brainCloud, const FString& entityId, int32 version, const FString& ownerId, UBrainCloudACL* entityAcl);
 
 	/**
 	* Method clears the owner id of an existing entity and sets the ACL on the server.
@@ -219,7 +221,7 @@ public:
 	* Param - entityAcl The entity's access control list
 	*/
 	UFUNCTION(BlueprintCallable, meta = (BlueprintInternalUseOnly = "true"), Category = "BrainCloud|Global Entity")
-		static UBCGlobalEntityProxy* MakeSystemEntity(const FString& entityId, int32 version, UBrainCloudACL* entityAcl);
+		static UBCGlobalEntityProxy* MakeSystemEntity(ABrainCloud *brainCloud, const FString& entityId, int32 version, UBrainCloudACL* entityAcl);
 
 	//Response delegates
 	UPROPERTY(BlueprintAssignable)

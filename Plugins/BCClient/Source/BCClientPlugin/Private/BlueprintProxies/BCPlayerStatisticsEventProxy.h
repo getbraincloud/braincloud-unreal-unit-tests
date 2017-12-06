@@ -6,6 +6,8 @@
 #include "IServerCallback.h"
 #include "BCPlayerStatisticsEventProxy.generated.h"
 
+class ABrainCloud;
+
 UCLASS(MinimalAPI)
 class UBCPlayerStatisticsEventProxy : public UBCBlueprintCallProxyBase, public IServerCallback
 {
@@ -18,7 +20,7 @@ public:
 	* @deprecated Use TriggerStatsEvent instead
 	*/
 	UFUNCTION(BlueprintCallable, meta = (BlueprintInternalUseOnly = "true"), Category = "BrainCloud|Player Statistics Event")
-		static UBCPlayerStatisticsEventProxy* TriggerPlayerStatisticsEvent(FString eventName, int32 eventMultiplier);
+		static UBCPlayerStatisticsEventProxy* TriggerPlayerStatisticsEvent(ABrainCloud *brainCloud, FString eventName, int32 eventMultiplier);
 
     /**
     * Trigger an event server side that will increase the users statistics.
@@ -36,13 +38,13 @@ public:
     * @see BrainCloudPlayerStatistics
     */
     UFUNCTION(BlueprintCallable, meta = (BlueprintInternalUseOnly = "true"), Category = "BrainCloud|Player Statistics Event")
-        static UBCPlayerStatisticsEventProxy* TriggerStatsEvent(FString eventName, int32 eventMultiplier);
+        static UBCPlayerStatisticsEventProxy* TriggerStatsEvent(ABrainCloud *brainCloud, FString eventName, int32 eventMultiplier);
 
 	/**
 	* @deprecated Use TriggerStatsEvents instead
 	*/
 	UFUNCTION(BlueprintCallable, meta = (BlueprintInternalUseOnly = "true"), Category = "BrainCloud|Player Statistics Event")
-		static UBCPlayerStatisticsEventProxy* TriggerPlayerStatisticsEvents(FString jsonData);
+		static UBCPlayerStatisticsEventProxy* TriggerPlayerStatisticsEvents(ABrainCloud *brainCloud, FString jsonData);
 
     /**
     * See documentation for TriggerStatsEvent for more
@@ -64,7 +66,7 @@ public:
     *   ]
     */
     UFUNCTION(BlueprintCallable, meta = (BlueprintInternalUseOnly = "true"), Category = "BrainCloud|Player Statistics Event")
-        static UBCPlayerStatisticsEventProxy* TriggerStatsEvents(FString jsonData);
+        static UBCPlayerStatisticsEventProxy* TriggerStatsEvents(ABrainCloud *brainCloud, FString jsonData);
 
     //Response delegates
     UPROPERTY(BlueprintAssignable)

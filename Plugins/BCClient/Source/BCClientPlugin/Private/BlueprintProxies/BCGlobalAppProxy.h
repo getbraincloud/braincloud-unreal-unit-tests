@@ -6,6 +6,8 @@
 #include "IServerCallback.h"
 #include "BCGlobalAppProxy.generated.h"
 
+class ABrainCloud;
+
 UCLASS(MinimalAPI)
 class UBCGlobalAppProxy : public UBCBlueprintCallProxyBase, public IServerCallback
 {
@@ -21,7 +23,7 @@ public:
     * Service Operation - ReadProperties
     */
     UFUNCTION(BlueprintCallable, meta = (BlueprintInternalUseOnly = "true"), Category = "BrainCloud|Global App")
-        static UBCGlobalAppProxy* ReadProperties();
+        static UBCGlobalAppProxy* ReadProperties(ABrainCloud *brainCloud);
 
     //Response delegates
     UPROPERTY(BlueprintAssignable)
