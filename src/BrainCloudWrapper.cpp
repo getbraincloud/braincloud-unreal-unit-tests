@@ -9,14 +9,14 @@
 
 namespace BrainCloud {
 
-    BrainCloudWrapper * BrainCloudWrapper::m_instance = NULL;
+    BrainCloudWrapper * BrainCloudWrapper::m_instance = nullptr;
 
     std::string BrainCloudWrapper::AUTHENTICATION_ANONYMOUS = "anonymous";
 
 
     BrainCloudWrapper::BrainCloudWrapper()
-        : client(NULL)
-        , m_authenticateCallback(NULL)
+        : client(nullptr)
+        , m_authenticateCallback(nullptr)
         , m_lastUrl("")
         , m_lastSecretKey("")
         , m_lastGameId("")
@@ -106,7 +106,7 @@ namespace BrainCloud {
     {
         // send our saved app info to brainCloud
         // company and app name can be NULL since they are already set
-        initialize(m_lastUrl.c_str(), m_lastSecretKey.c_str(), m_lastGameId.c_str(), m_lastGameVersion.c_str(), NULL, NULL, m_wrapperName.c_str());
+        initialize(m_lastUrl.c_str(), m_lastSecretKey.c_str(), m_lastGameId.c_str(), m_lastGameVersion.c_str(), nullptr, nullptr, m_wrapperName.c_str());
 
         std::string authType = getStoredAuthenticationType();
         if (authType == AUTHENTICATION_ANONYMOUS)
@@ -279,7 +279,7 @@ namespace BrainCloud {
             }
         }
 
-        if (m_authenticateCallback != NULL)
+        if (m_authenticateCallback != nullptr)
         {
             m_authenticateCallback->serverCallback(serviceName, serviceOperation, jsonData);
         }
@@ -289,7 +289,7 @@ namespace BrainCloud {
         BrainCloud::ServiceOperation serviceOperation,
         int statusCode, int reasonCode, const std::string & message)
     {
-        if (m_authenticateCallback != NULL)
+        if (m_authenticateCallback != nullptr)
         {
             m_authenticateCallback->serverError(serviceName, serviceOperation, statusCode, reasonCode, message);
         }
@@ -299,7 +299,7 @@ namespace BrainCloud {
         BrainCloud::ServiceOperation serviceOperation,
         int statusCode, int reasonCode, int retry, const std::string & message)
     {
-        if (m_authenticateCallback != NULL)
+        if (m_authenticateCallback != nullptr)
         {
             m_authenticateCallback->serverWarning(serviceName, serviceOperation, statusCode, reasonCode, retry, message);
         }
