@@ -230,7 +230,6 @@ public:
 	BrainCloudClient* getClient() { return _client; }
 
 	//Service Getters
-	BrainCloudAuthentication* getAuthenticationService() { return _client->getAuthenticationService(); }
 	BrainCloudLeaderboard* getLeaderboardService() { return _client->getLeaderboardService(); }
 	BrainCloudPlayerState* getPlayerStateService() { return _client->getPlayerStateService(); }
 	BrainCloudGamification* getGamificationService() { return _client->getGamificationService(); }
