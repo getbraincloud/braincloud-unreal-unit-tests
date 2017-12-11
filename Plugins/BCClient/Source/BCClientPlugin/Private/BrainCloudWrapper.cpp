@@ -31,9 +31,9 @@ BrainCloudWrapper::BrainCloudWrapper(BrainCloudClient *client)
 
 BrainCloudWrapper * BrainCloudWrapper::getInstance()
 {
-	if (BrainCloudClient::ENABLED_SINGLETON_MODE == false)
+	if (BrainCloudClient::EnableSingletonMode == false)
 	{
-		if (BrainCloudClient::ENABLED_SOFT_ERROR_MODE)
+		if (BrainCloudClient::EnableSoftErrorMode)
 		{
 			UE_LOG(LogTemp, Warning, TEXT("%s"), BrainCloudClient::SINGLETON_USE_ERROR_MESSAGE);
 		}
