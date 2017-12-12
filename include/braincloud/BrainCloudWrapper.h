@@ -65,9 +65,11 @@ namespace BrainCloud {
         static BrainCloudWrapper* getInstance();
 
         /**
-         * Instantiate a copy of the brainCloud warapper. Don't use getInstance if creating your own copy.
+         * Instantiate a copy of the brainCloud wrapper. Don't use getInstance if creating your own copy.
+         *
+         * @param in_wrapperName
          */
-        BrainCloudWrapper();
+        BrainCloudWrapper(const char * in_wrapperName = "");
 
         ~BrainCloudWrapper();
 
@@ -83,9 +85,8 @@ namespace BrainCloud {
          * You are free to pick anything you want.
          * @param in_appName The app name used in the keychain for storing anonymous and profile ids.
          * You are free to pick anything you want.
-         * @param in_wrapperName A value used to differentiate saved wrapper data
          */
-        void initialize(const char * in_serverUrl, const char * in_secretKey, const char * in_appId, const char * in_version, const char * in_companyName, const char * in_appName, const char * in_wrapperName = "");
+        void initialize(const char * in_serverUrl, const char * in_secretKey, const char * in_appId, const char * in_version, const char * in_companyName, const char * in_appName);
 
         /**
          * Authenticate a user anonymously with brainCloud - used for apps that don't want to bother

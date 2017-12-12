@@ -14,14 +14,14 @@ namespace BrainCloud {
     std::string BrainCloudWrapper::AUTHENTICATION_ANONYMOUS = "anonymous";
 
 
-    BrainCloudWrapper::BrainCloudWrapper()
+    BrainCloudWrapper::BrainCloudWrapper(const char * in_wrapperName)
         : client(nullptr)
         , m_authenticateCallback(nullptr)
         , m_lastUrl("")
         , m_lastSecretKey("")
         , m_lastGameId("")
         , m_lastGameVersion("")
-        , m_wrapperName("")
+        , m_wrapperName(in_wrapperName)
         , m_alwaysAllowProfileSwitch(true)
     {
     }
@@ -55,14 +55,13 @@ namespace BrainCloud {
 #pragma clang diagnostic pop
 
 
-    void BrainCloudWrapper::initialize(const char * url, const char * secretKey, const char * appId, const char * version, const char * companyName, const char * appName, const char * wrapperName)
+    void BrainCloudWrapper::initialize(const char * url, const char * secretKey, const char * appId, const char * version, const char * companyName, const char * appName)
     {
         if(client == nullptr) {
             client = new BrainCloudClient();
         }
 
         // save the app info in case we need to reauthenticate
-        m_wrapperName = wrapperName;
         m_lastUrl = url;
         m_lastSecretKey = secretKey;
         m_lastGameId = appId;
@@ -73,7 +72,7 @@ namespace BrainCloud {
 
         // inialize the save data helper with our company and app name
         // if this is not called the profile ids will not be saved
-        SaveDataHelper::getInstance()->initialize(companyName, appName, wrapperName);
+        SaveDataHelper::getInstance()->initialize(companyName, appName);
     }
 
     void BrainCloudWrapper::initializeIdentity(bool in_isAnonymousAuth)
@@ -106,7 +105,7 @@ namespace BrainCloud {
     {
         // send our saved app info to brainCloud
         // company and app name can be NULL since they are already set
-        initialize(m_lastUrl.c_str(), m_lastSecretKey.c_str(), m_lastGameId.c_str(), m_lastGameVersion.c_str(), nullptr, nullptr, m_wrapperName.c_str());
+        initialize(m_lastUrl.c_str(), m_lastSecretKey.c_str(), m_lastGameId.c_str(), m_lastGameVersion.c_str(), nullptr, nullptr);
 
         std::string authType = getStoredAuthenticationType();
         if (authType == AUTHENTICATION_ANONYMOUS)
