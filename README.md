@@ -49,19 +49,17 @@ It is recommended to use the wrapper by default.
 
 ## How do I initialize brainCloud?
 If using the wrapper use the following code.
-```java
+```c++
 _bc = new BrainCloudWrapper(); // optionally pass in a _wrapperName
-_bc.initialize(_appId, _secret, _appVersion); // optionally pass in an _applicationContext
-```
-On Android, to use the wrapper serialization features, you also need to pass in or set the application context.
-```java
-_bc.setContext(_applicationContext);
+_bc->initialize("https://sharedprod.braincloudservers.com/dispatcherv2", _appId, _secret, _appVersion, _companyName, _appName);
 ```
 Your _appId, _secret, is set on the brainCloud dashboard. Under Design | Core App Info > Application IDs
 
 ![wrapper](/Screenshots/bc-ids.png?raw=true)
 
 _wrapperName prefixes saved operations that the wrapper will make. Use a _wrapperName if you plan on having multiple instances of brainCloud running.
+
+_companyName and _appName are also used in determining the fileName. ex. bitHeads.exampleApp, or mainWrapper.bitHeads.exampleApp
 
 _appVersion is the current version of our app. Having an _appVersion less than your minimum app version on brainCloud will prevent the user from accessing the service until they update their app to the lastest version you have provided them.
 
