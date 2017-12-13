@@ -24,7 +24,7 @@ https://guides.cocoapods.org/
 
 Here are a few common errors that you may see on your first attempt to connect to brainCloud.
 
-- **Game id not set**: Verify you've set up the game id and game secret correctly in the `initialize()` method.
+- **App id not set**: Verify you've set up the app id and app secret correctly in the `initialize()` method.
 - **Platform not enabled**: Verify you've enabled your platform on the portal.
 
 If you're still having issues, log into the portal and give us a shout through the help system (bottom right icon with the question mark and chat bubble).
