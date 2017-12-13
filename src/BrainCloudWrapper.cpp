@@ -9,14 +9,14 @@
 
 namespace BrainCloud {
 
-    BrainCloudWrapper * BrainCloudWrapper::m_instance = nullptr;
+    BrainCloudWrapper * BrainCloudWrapper::m_instance = NULL;
 
     std::string BrainCloudWrapper::AUTHENTICATION_ANONYMOUS = "anonymous";
 
 
     BrainCloudWrapper::BrainCloudWrapper(const char * in_wrapperName)
-        : client(nullptr)
-        , m_authenticateCallback(nullptr)
+        : client(NULL)
+        , m_authenticateCallback(NULL)
         , m_lastUrl("")
         , m_lastSecretKey("")
         , m_lastGameId("")
@@ -28,9 +28,9 @@ namespace BrainCloud {
 
     BrainCloudWrapper::~BrainCloudWrapper() {
         if (this != m_instance) {
-            if(client != nullptr) {
+            if(client != NULL) {
                 delete client;
-                client = nullptr;
+                client = NULL;
             }
         }
     }
@@ -43,7 +43,7 @@ namespace BrainCloud {
             throw std::invalid_argument(BrainCloudClient::SingletonUseErrorMessage);
         }
 
-        if (m_instance == nullptr)
+        if (m_instance == NULL)
         {
             m_instance = new BrainCloudWrapper();
 
@@ -57,7 +57,7 @@ namespace BrainCloud {
 
     void BrainCloudWrapper::initialize(const char * url, const char * secretKey, const char * appId, const char * version, const char * companyName, const char * appName)
     {
-        if(client == nullptr) {
+        if(client == NULL) {
             client = new BrainCloudClient();
         }
 
@@ -105,7 +105,7 @@ namespace BrainCloud {
     {
         // send our saved app info to brainCloud
         // company and app name can be NULL since they are already set
-        initialize(m_lastUrl.c_str(), m_lastSecretKey.c_str(), m_lastGameId.c_str(), m_lastGameVersion.c_str(), nullptr, nullptr);
+        initialize(m_lastUrl.c_str(), m_lastSecretKey.c_str(), m_lastGameId.c_str(), m_lastGameVersion.c_str(), NULL, NULL);
 
         std::string authType = getStoredAuthenticationType();
         if (authType == AUTHENTICATION_ANONYMOUS)
@@ -278,7 +278,7 @@ namespace BrainCloud {
             }
         }
 
-        if (m_authenticateCallback != nullptr)
+        if (m_authenticateCallback != NULL)
         {
             m_authenticateCallback->serverCallback(serviceName, serviceOperation, jsonData);
         }
@@ -288,7 +288,7 @@ namespace BrainCloud {
         BrainCloud::ServiceOperation serviceOperation,
         int statusCode, int reasonCode, const std::string & message)
     {
-        if (m_authenticateCallback != nullptr)
+        if (m_authenticateCallback != NULL)
         {
             m_authenticateCallback->serverError(serviceName, serviceOperation, statusCode, reasonCode, message);
         }
@@ -298,7 +298,7 @@ namespace BrainCloud {
         BrainCloud::ServiceOperation serviceOperation,
         int statusCode, int reasonCode, int retry, const std::string & message)
     {
-        if (m_authenticateCallback != nullptr)
+        if (m_authenticateCallback != NULL)
         {
             m_authenticateCallback->serverWarning(serviceName, serviceOperation, statusCode, reasonCode, retry, message);
         }
