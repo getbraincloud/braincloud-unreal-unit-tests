@@ -25,7 +25,9 @@ SaveDataHelper * SaveDataHelper::getInstance()
     return m_instance;
 }
 
-void SaveDataHelper::initialize(const char * companyName, const char * appName)
+
+
+void SaveDataHelper::initialize(const char * companyName, const char * appName, const char * wrapperName)
 {
 #if defined(WINDOWS) || defined(WIN32)
     if (companyName != NULL && appName != NULL)
