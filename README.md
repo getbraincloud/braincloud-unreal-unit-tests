@@ -52,11 +52,11 @@ Wrapper Name prefixes saved operations that the wrapper will make. Use a Wrapper
 
 Version is the current version of our app. Having an Version less than your minimum app version on brainCloud will prevent the user from accessing the service until they update their app to the lastest version you have provided them.
 
-![Min Version](/Screenshots/bc-minVersions.png?raw=true)
+![Min Version](/screenshots/bc-minVersions.png?raw=true)
 
 ## How do I authenticate a user with brainCloud?
 The simplest form of authenticating with brainCloud is Anonymous Authentication.
-![Authentication Anon](/screenshots/_bp-authanon.png?raw=true)
+![Authentication Anon](/screenshots/_bp-anonauth.png?raw=true)
 
 
 ## How do I attach an email to a user's brainCloud profile?
@@ -64,7 +64,7 @@ After having the user create an anonymous with brainCloud, they are probably goi
 
 Attaching email authenticate would look like this.
 
-![Authentication Anon](/screenshots/_bp-attachemail.png?raw=true)
+![Authentication Anon](/screenshots/_bp-emailattach.png?raw=true)
 
 There are many authentication types. You can also merge profiles and detach idenities. See the brainCloud documentation for more information:
 http://getbraincloud.com/apidocs/apiref/?cpp#capi-auth
