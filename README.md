@@ -54,7 +54,7 @@ Wrapper Name prefixes saved operations that the wrapper will make. Use a Wrapper
 ----------------
 
 #### Newly upgraded?
-If your app is already live, you should **NOT** specify the _wrapperName - otherwise the library will look in the wrong location for your user's stored anonymousID and profileID information. Only add a name if you intend to alter the save data.
+If your app is already live, you should **NOT** specify the Wrapper Name - otherwise the library will look in the wrong location for your user's stored anonymousID and profileID information. Only add a name if you intend to alter the save data.
 
 ---------------
 
