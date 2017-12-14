@@ -27,7 +27,7 @@ brainCloud consists of:
 - Design Portal – a portal that allows you to design and debug your apps
 - brainCloud Architecture
 
-![architecture](/Screenshots/bc-architecture.png?raw=true)
+![architecture](/screenshots/bc-architecture.png?raw=true)
 
 ## What's the difference between the brainCloud Wrapper and the brainCloud Client?
 The wrapper contains quality of life improvement around the brainCloud Client. It may contain device specific code, such as serializing the user's login id on an Android or iOS device.
