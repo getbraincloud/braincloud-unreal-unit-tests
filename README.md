@@ -50,6 +50,15 @@ Your Secret Key, and App Id, is set on the brainCloud dashboard. Under Design | 
 
 Wrapper Name prefixes saved operations that the wrapper will make. Use a Wrapper Name if you plan on having multiple instances of brainCloud running.
 
+
+----------------
+
+#### Newly upgraded?
+If your app is already live, you should **NOT** specify the _wrapperName - otherwise the library will look in the wrong location for your user's stored anonymousID and profileID information. Only add a name if you intend to alter the save data.
+
+---------------
+
+
 Version is the current version of our app. Having an Version less than your minimum app version on brainCloud will prevent the user from accessing the service until they update their app to the lastest version you have provided them.
 
 ![Min Version](/screenshots/bc-minVersions.png?raw=true)
