@@ -59,8 +59,13 @@ Your _appId, _secret, is set on the brainCloud dashboard. Under Design | Core Ap
 
 _wrapperName prefixes saved operations that the wrapper will make. Use a _wrapperName if you plan on having multiple instances of brainCloud running.
 
+
+----------------
+
 #### Newly upgraded?
 If your app is already live, you should **NOT** specify the _wrapperName - otherwise the library will look in the wrong location for your user's stored anonymousID and profileID information. Only add a name if you intend to alter the save data.
+
+---------------
 
 _companyName and _appName are also used in determining the fileName. ex. bitHeads.exampleApp, or mainWrapper.bitHeads.exampleApp
 
