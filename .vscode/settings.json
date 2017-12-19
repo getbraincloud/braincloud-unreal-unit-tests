@@ -1,0 +1,11 @@
+{
+	"typescript.tsc.autoDetect": "off",
+	"files.exclude": {
+		"C:/Users/Jon/Desktop/BCSubsystem/.git": true,
+		"C:/Users/Jon/Desktop/BCSubsystem/.vscode": true,
+		"C:/Users/Jon/Desktop/BCSubsystem/Content": true,
+		"C:/Users/Jon/Desktop/BCSubsystem/Intermediate": true,
+		"C:/Users/Jon/Desktop/BCSubsystem/Saved": true,
+		"C:/Users/Jon/Desktop/BCSubsystem/screenshots": true
+	}
+}
