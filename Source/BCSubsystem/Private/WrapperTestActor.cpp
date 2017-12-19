@@ -2,7 +2,6 @@
 
 #include "BCSubsystem.h"
 #include "WrapperTestActor.h"
-
 #include "BrainCloudWrapper.h"
 #include "ServiceName.h"
 #include "ServiceOperation.h"

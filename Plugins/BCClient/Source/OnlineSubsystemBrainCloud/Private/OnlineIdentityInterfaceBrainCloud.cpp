@@ -189,12 +189,17 @@ FString FOnlineIdentityBrainCloud::GetAuthToken(int32 LocalUserNum) const
     return TEXT("");
 }
 
+void FOnlineIdentityBrainCloud::RevokeAuthToken(const FUniqueNetId& UserId, const FOnRevokeAuthTokenCompleteDelegate& Delegate)
+{
+
+}
+
 void FOnlineIdentityBrainCloud::GetUserPrivilege(const FUniqueNetId& UserId, EUserPrivileges::Type Privilege, const FOnGetUserPrivilegeCompleteDelegate& Delegate)
 {
     Delegate.ExecuteIfBound(UserId, Privilege, (uint32)EPrivilegeResults::NoFailures);
 }
 
-FPlatformUserId FOnlineIdentityBrainCloud::GetPlatformUserIdFromUniqueNetId(const FUniqueNetId& _uniqueNetId)
+FPlatformUserId FOnlineIdentityBrainCloud::GetPlatformUserIdFromUniqueNetId(const FUniqueNetId& _uniqueNetId) const
 {
     return PLATFORMUSERID_NONE;
 }

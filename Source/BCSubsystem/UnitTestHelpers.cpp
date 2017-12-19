@@ -1,9 +1,8 @@
 // Copyright 2016 bitHeads, Inc. All Rights Reserved.
 
 #include "BCSubsystem.h"
-
-#include "BrainCloudClient.h"
 #include "UnitTestHelpers.h"
+#include "BrainCloudClient.h"
 
 UUnitTestHelpers::UUnitTestHelpers(const FObjectInitializer& ObjectInitializer)
 	: Super(ObjectInitializer)
