@@ -38,8 +38,9 @@ void ATitleFileSubsystemTestActor::BeginPlay()
 
 	_identity->OnLoginCompleteDelegates->AddUObject(this, &ATitleFileSubsystemTestActor::LoginCallback);
 
-	_titleFile->OnEnumerateFilesCompleteDelegates.AddUObject(this, &ATitleFileSubsystemTestActor::OnEnumerateFilesCompleteCallback);
-	_titleFile->OnReadFileCompleteDelegates.AddUObject(this, &ATitleFileSubsystemTestActor::OnReadFileCompleteCallback);
+	//TODO Jon
+	//_titleFile->OnEnumerateFilesCompleteDelegates.AddUObject(this, &ATitleFileSubsystemTestActor::OnEnumerateFilesCompleteCallback);
+	//_titleFile->OnReadFileCompleteDelegates.AddUObject(this, &ATitleFileSubsystemTestActor::OnReadFileCompleteCallback);
 
 	_identity->Login(0, FOnlineAccountCredentials("BrainCloud", "UnrealUser2", "UnrealUser2"));
 }
