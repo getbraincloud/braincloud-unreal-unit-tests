@@ -1,0 +1,114 @@
+{
+	"version": "0.2.0",
+	"configurations": [
+		{
+			"name": "BCSubsystem (Debug)",
+			"request": "launch",
+			"preLaunchTask": "BCSubsystem Win64 Debug Build",
+			"program": "C:\\Users\\Jon\\Desktop\\BCSubsystem\\Binaries\\Win64\\BCSubsystem-Win64-Debug.exe",
+			"args": [
+			],
+			"cwd": "C:\\Program Files\\Epic Games\\UE_4.18",
+			"stopAtEntry": false,
+			"externalConsole": true,
+			"type": "cppvsdbg",
+			"visualizerFile": "C:\\Program Files\\Epic Games\\UE_4.18\\Engine\\Extras\\VisualStudioDebugging\\UE4.natvis"
+		},
+		{
+			"name": "BCSubsystem (DebugGame)",
+			"request": "launch",
+			"preLaunchTask": "BCSubsystem Win64 DebugGame Build",
+			"program": "C:\\Users\\Jon\\Desktop\\BCSubsystem\\Binaries\\Win64\\BCSubsystem-Win64-DebugGame.exe",
+			"args": [
+			],
+			"cwd": "C:\\Program Files\\Epic Games\\UE_4.18",
+			"stopAtEntry": false,
+			"externalConsole": true,
+			"type": "cppvsdbg",
+			"visualizerFile": "C:\\Program Files\\Epic Games\\UE_4.18\\Engine\\Extras\\VisualStudioDebugging\\UE4.natvis"
+		},
+		{
+			"name": "BCSubsystem (Development)",
+			"request": "launch",
+			"preLaunchTask": "BCSubsystem Win64 Development Build",
+			"program": "C:\\Users\\Jon\\Desktop\\BCSubsystem\\Binaries\\Win64\\BCSubsystem.exe",
+			"args": [
+			],
+			"cwd": "C:\\Program Files\\Epic Games\\UE_4.18",
+			"stopAtEntry": false,
+			"externalConsole": true,
+			"type": "cppvsdbg",
+			"visualizerFile": "C:\\Program Files\\Epic Games\\UE_4.18\\Engine\\Extras\\VisualStudioDebugging\\UE4.natvis"
+		},
+		{
+			"name": "BCSubsystem (Shipping)",
+			"request": "launch",
+			"preLaunchTask": "BCSubsystem Win64 Shipping Build",
+			"program": "C:\\Users\\Jon\\Desktop\\BCSubsystem\\Binaries\\Win64\\BCSubsystem-Win64-Shipping.exe",
+			"args": [
+			],
+			"cwd": "C:\\Program Files\\Epic Games\\UE_4.18",
+			"stopAtEntry": false,
+			"externalConsole": true,
+			"type": "cppvsdbg",
+			"visualizerFile": "C:\\Program Files\\Epic Games\\UE_4.18\\Engine\\Extras\\VisualStudioDebugging\\UE4.natvis"
+		},
+		{
+			"name": "BCSubsystem (Test)",
+			"request": "launch",
+			"preLaunchTask": "BCSubsystem Win64 Test Build",
+			"program": "C:\\Users\\Jon\\Desktop\\BCSubsystem\\Binaries\\Win64\\BCSubsystem-Win64-Test.exe",
+			"args": [
+			],
+			"cwd": "C:\\Program Files\\Epic Games\\UE_4.18",
+			"stopAtEntry": false,
+			"externalConsole": true,
+			"type": "cppvsdbg",
+			"visualizerFile": "C:\\Program Files\\Epic Games\\UE_4.18\\Engine\\Extras\\VisualStudioDebugging\\UE4.natvis"
+		},
+		{
+			"name": "BCSubsystemEditor (Debug)",
+			"request": "launch",
+			"preLaunchTask": "BCSubsystemEditor Win64 Debug Build",
+			"program": "C:\\Program Files\\Epic Games\\UE_4.18\\Engine\\Binaries\\Win64\\UE4Editor-Win64-Debug.exe",
+			"args": [
+				"C:\\Users\\Jon\\Desktop\\BCSubsystem\\BCSubsystem.uproject",
+				"-debug"
+			],
+			"cwd": "C:\\Program Files\\Epic Games\\UE_4.18",
+			"stopAtEntry": false,
+			"externalConsole": true,
+			"type": "cppvsdbg",
+			"visualizerFile": "C:\\Program Files\\Epic Games\\UE_4.18\\Engine\\Extras\\VisualStudioDebugging\\UE4.natvis"
+		},
+		{
+			"name": "BCSubsystemEditor (DebugGame)",
+			"request": "launch",
+			"preLaunchTask": "BCSubsystemEditor Win64 DebugGame Build",
+			"program": "C:\\Program Files\\Epic Games\\UE_4.18\\Engine\\Binaries\\Win64\\UE4Editor.exe",
+			"args": [
+				"C:\\Users\\Jon\\Desktop\\BCSubsystem\\BCSubsystem.uproject",
+				"-debug"
+			],
+			"cwd": "C:\\Program Files\\Epic Games\\UE_4.18",
+			"stopAtEntry": false,
+			"externalConsole": true,
+			"type": "cppvsdbg",
+			"visualizerFile": "C:\\Program Files\\Epic Games\\UE_4.18\\Engine\\Extras\\VisualStudioDebugging\\UE4.natvis"
+		},
+		{
+			"name": "BCSubsystemEditor (Development)",
+			"request": "launch",
+			"preLaunchTask": "BCSubsystemEditor Win64 Development Build",
+			"program": "C:\\Program Files\\Epic Games\\UE_4.18\\Engine\\Binaries\\Win64\\UE4Editor.exe",
+			"args": [
+				"C:\\Users\\Jon\\Desktop\\BCSubsystem\\BCSubsystem.uproject"
+			],
+			"cwd": "C:\\Program Files\\Epic Games\\UE_4.18",
+			"stopAtEntry": false,
+			"externalConsole": true,
+			"type": "cppvsdbg",
+			"visualizerFile": "C:\\Program Files\\Epic Games\\UE_4.18\\Engine\\Extras\\VisualStudioDebugging\\UE4.natvis"
+		}
+	]
+}

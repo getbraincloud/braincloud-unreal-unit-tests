@@ -2,7 +2,6 @@
 
 #include "BCSubsystem.h"
 #include "EventCallbackTest.h"
-
 #include "BrainCloudClient.h"
 #include "ServiceName.h"
 #include "ServiceOperation.h"
