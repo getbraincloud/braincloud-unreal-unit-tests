@@ -1,9 +1,8 @@
 // Fill out your copyright notice in the Description page of Project Settings.
 
 #include "BCSubsystem.h"
-#include "BrainCloudClient.h"
-
 #include "SubsystemTestActor.h"
+#include "BrainCloudClient.h"
 
 
 // Sets default values

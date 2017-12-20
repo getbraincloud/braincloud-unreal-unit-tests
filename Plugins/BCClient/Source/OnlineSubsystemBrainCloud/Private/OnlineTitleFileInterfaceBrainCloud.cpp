@@ -181,12 +181,12 @@ void FOnlineTitleFileBrainCloud::EnumerateFilesSuccess(const FString & jsonData)
         _cachedFileHeaders.Add(fileHeader);
     }
 
-    OnEnumerateFilesCompleteDelegates.Broadcast(true);
+    OnEnumerateFilesCompleteDelegates.Broadcast(true, TEXT("FOnlineTitleFileBrainCloud"));
 }
 
 void FOnlineTitleFileBrainCloud::EnumerateFilesFail(int32 returnCode, const FString & jsonData)
 {
-    OnEnumerateFilesCompleteDelegates.Broadcast(false);
+    OnEnumerateFilesCompleteDelegates.Broadcast(false, TEXT("FOnlineTitleFileBrainCloud"));
 }
 
 void FOnlineTitleFileBrainCloud::RequestComplete(FHttpRequestPtr request, FHttpResponsePtr response, bool wasSuccess)
