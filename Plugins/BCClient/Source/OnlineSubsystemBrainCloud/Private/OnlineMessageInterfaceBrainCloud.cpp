@@ -175,12 +175,17 @@ void FOnlineMessageBrainCloud::EnumerateMessagesSuccess(const FString& jsonData)
         FString messageId = FString::FromInt((int64)messageObj->GetNumberField(TEXT("eventId")));
 
 
-        const TSharedRef <FUniqueNetIdString>  shptr_fromId = MakeShareable(new FUniqueNetIdString(fromId));
-        const TSharedRef <FUniqueNetIdString>  shptr_messageId = MakeShareable(new FUniqueNetIdString(messageId));
-
-        FOnlineMessageHeader *fOnlineMessageHeader = new FOnlineMessageHeader(shptr_fromId, shptr_messageId);
+        #if ENGINE_MINOR_VERSION >= 18
+        const TSharedRef <FUniqueNetIdString> sref_fromId = MakeShareable(new FUniqueNetIdString(fromId));
+        const TSharedRef <FUniqueNetIdString> sref_messageId = MakeShareable(new FUniqueNetIdString(messageId));
+        FOnlineMessageHeader *fOnlineMessageHeader = new FOnlineMessageHeader(sref_fromId, sref_messageId);
 
         TSharedPtr<FOnlineMessageHeader> header = MakeShareable(fOnlineMessageHeader);
+        #else
+        TSharedPtr<FOnlineMessageHeader> header = MakeShareable( 
+            new FOnlineMessageHeader(new FUniqueNetIdString(fromId), new FUniqueNetIdString(messageId))); 
+        #endif
+
 
         header->TimeStamp = FDateTime::FromUnixTimestamp((int64)messageObj->GetNumberField(TEXT("createdAt")) / 1000).ToString();
         header->Type = messageObj->GetStringField(TEXT("eventType"));
