@@ -63,6 +63,14 @@ Version is the current version of our app. Having an Version less than your mini
 
 ![Min Version](/screenshots/bc-minVersions.png?raw=true)
 
+## How do I keep the brainCloud SDK updating?
+In your project's update loop, you're going to want to update brainCloud client so it can check for responses.
+
+To do this, you need to call Run Callbacks
+
+![Min Version](/screenshots/_bp-runcallbacks.png?raw=true)
+
+
 ## How do I authenticate a user with brainCloud?
 The simplest form of authenticating with brainCloud is Anonymous Authentication.
 ![Authentication Anon](/screenshots/_bp-anonauth.png?raw=true)
