@@ -74,7 +74,7 @@ _appVersion is the current version of our app. Having an _appVersion less than y
 ![wrapper](/Screenshots/bc-minVersions.png?raw=true)
 
 ## How do I keep the brainCloud SDK updating?
-In your project's update loop, your going to want to update brainCloud client so it can check for responses.
+In your project's update loop, you're going to want to update brainCloud client so it can check for responses.
 
 To do this, you need to call runCallbacks();
 
