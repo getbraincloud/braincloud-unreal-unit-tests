@@ -3,7 +3,6 @@
 //  BrainCloudLib
 //
 
-
 #ifndef _BRAINCLOUDMANAGER_H_
 #define _BRAINCLOUDMANAGER_H_
 
@@ -12,16 +11,11 @@
 #include <list>
 #include <queue>
 
-#if defined(WIN32)
+#if defined(WIN32) && defined(USE_CURL)
 #include <WinSock2.h>
 #include <Windows.h>
-// compilers later than vs2010 define the timespec struct
-#if (_MSC_VER > 1600)
-#define HAVE_STRUCT_TIMESPEC 1
 #endif
-#endif
-
-#include <pthread.h>
+#include "braincloud/internal/Mutex.h"
 
 #include "json/json.h"
 #include "braincloud/internal/IBrainCloudComms.h"
@@ -91,9 +85,9 @@ namespace BrainCloud
         std::list<URLResponse> _responses;
         std::vector<ServerCall*> _inProgress;
 
-        pthread_mutex_t _loaderMutex;
-        pthread_mutex_t _queueMutex;
-        pthread_mutex_t _mutex;
+        RecursiveMutex _loaderMutex;
+        RecursiveMutex _queueMutex;
+        RecursiveMutex _mutex;
 
         int64_t _retryTimeMillis;
 

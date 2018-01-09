@@ -11,7 +11,7 @@ cd build
 
 mkdir debug
 cd debug
-cmake -D NO_CPPREST_SDK:BOOL=1 -D SKIP_TESTS:BOOL=1 -D gtest_force_shared_crt:BOOL=1 -DCMAKE_BUILD_TYPE=Debug -G "NMake Makefiles" ..\..\..\..
+cmake -D USE_CPPREST:BOOL=0 -D BUILD_TESTS:BOOL=0 -D gtest_force_shared_crt:BOOL=1 -DCMAKE_BUILD_TYPE=Debug -G "NMake Makefiles" ..\..\..\..
 if %errorlevel% neq 0 exit /b %errorlevel%
 nmake
 if %errorlevel% neq 0 exit /b %errorlevel%
@@ -19,7 +19,7 @@ if %errorlevel% neq 0 exit /b %errorlevel%
 cd ..
 mkdir release
 cd release
-cmake -D NO_CPPREST_SDK:BOOL=1 -D SKIP_TESTS:BOOL=1 -D gtest_force_shared_crt:BOOL=1 -DCMAKE_BUILD_TYPE=Release -G "NMake Makefiles" ..\..\..\..
+cmake -D USE_CPPREST:BOOL=0 -D BUILD_TESTS:BOOL=0 -D gtest_force_shared_crt:BOOL=1 -DCMAKE_BUILD_TYPE=Release -G "NMake Makefiles" ..\..\..\..
 if %errorlevel% neq 0 exit /b %errorlevel%
 nmake
 if %errorlevel% neq 0 exit /b %errorlevel%

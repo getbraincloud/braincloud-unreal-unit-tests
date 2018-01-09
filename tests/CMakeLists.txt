@@ -1,6 +1,15 @@
 cmake_minimum_required (VERSION 3.0)
+
 project (brainCloudUnitTest)
 
+if (UNIX AND NOT APPLE)
+    set(LINUX 1)
+endif()
+
+# Multi core compilation in VS
+if (MSVC)
+    SET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS}" "/MP")
+endif()
 
 ################################
 # Braincloud
@@ -12,49 +21,32 @@ include_directories("src")
 
 file(GLOB_RECURSE INCS "src/*.h")
 file(GLOB_RECURSE SOURCES "src/*.cpp")
-file(GLOB_RECURSE JSONCPP_FILES "${BC_DIR}/lib/jsoncpp-1.0.0/*.*")
 file(GLOB_RECURSE BC_INCS "${BC_DIR}/include/*.h")
 
 source_group(braincloud FILES ${BC_INCS})
-source_group(json FILES ${JSONCPP_FILES})
 source_group(headers FILES ${INCS})
 source_group(src FILES ${SOURCES})
 
-add_executable(bctests ${BC_INCS} ${JSONCPP_FILES} ${WRAPPER_INCS} ${INCS} ${SOURCES})
+add_definitions(-D_CRT_SECURE_NO_WARNINGS)
 
+add_executable(bctests ${BC_INCS} ${WRAPPER_INCS} ${INCS} ${SOURCES})
 
-if (${CMAKE_SYSTEM_NAME} MATCHES "Darwin")
-	find_library(CURL_LIB curl)
+if (APPLE)
 	find_library(GAMEKIT_LIB GameKit)
 	find_library(COREFOUNDATION_LIB CoreFoundation)
 	find_library(FOUNDATION_LIB Foundation)
-    find_library(SECURITY_LIB Security)
-    target_link_libraries(bctests PUBLIC ${CURL_LIB} ${GAMEKIT_LIB} ${COREFOUNDATION_LIB} ${FOUNDATION_LIB} ${SECURITY_LIB})
-
-elseif (${CMAKE_SYSTEM_NAME} MATCHES "Windows")
-	if (${NO_CPPREST_SDK})
-		include_directories("${BC_DIR}/lib/win32/curl-7.44.0/include")
-		
-		find_library(CURL_LIB libcurl_a.lib "${BC_DIR}/lib/win32/curl-7.44.0/lib")
-		target_link_libraries(bctests PUBLIC ${CURL_LIB})
-		
-		SET (CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} /SAFESEH:NO")
-		SET (CMAKE_SHARED_LINKER_FLAGS "${CMAKE_SHARED_LINKER_FLAGS} /SAFESEH:NO")
-		SET (CMAKE_MODULE_LINKER_FLAGS "${CMAKE_MODULE_LINKER_FLAGS} /SAFESEH:NO")
-		
-		add_custom_command(TARGET bctests POST_BUILD        # Adds a post-build event to MyTest
-		    COMMAND ${CMAKE_COMMAND} -E copy_if_different  # which executes "cmake - E copy_if_different..."
-		        "${BC_DIR}/lib/win32/pthread-w32-2-8-0/Pre-built.2/lib/pthreadVCE2.dll"      # <--this is in-file
-        		$<TARGET_FILE_DIR:bctests>)  
-	endif()
-
+	find_library(SECURITY_LIB Security)
+	target_link_libraries(bctests PUBLIC ${GAMEKIT_LIB} ${COREFOUNDATION_LIB} ${FOUNDATION_LIB} ${SECURITY_LIB})
 endif()
-
 
 ################################
 # GTest
 ################################
 
+if (MSVC_VERSION GREATER_EQUAL 1800)
+	# C++11 has tupple since at least Visual Studio 2013. and tr1 is deprecated in VS2017
+	add_definitions(-DGTEST_HAS_TR1_TUPLE=0)
+endif()
 add_subdirectory(gtest-1.7.0)
 include_directories(${gtest_SOURCE_DIR}/include ${gtest_SOURCE_DIR})
 target_link_libraries(bctests PUBLIC gtest gtest_main)

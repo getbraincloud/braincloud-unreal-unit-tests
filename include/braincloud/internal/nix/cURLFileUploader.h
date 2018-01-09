@@ -5,15 +5,16 @@
 #if defined(WIN32)
 #include <WinSock2.h>
 #include <Windows.h>
-// compilers later than vs2010 define the timespec struct
-#if (_MSC_VER > 1600)
-#define HAVE_STRUCT_TIMESPEC 1
 #endif
-#endif
-#include <pthread.h>
+#include "braincloud/internal/Mutex.h"
 #include <string>
 #include "curl/curl.h"
 #include "braincloud/internal/IFileUploader.h"
+
+#if !defined(USE_PTHREAD)
+#include <atomic>
+#endif
+
 
 namespace BrainCloud
 {
@@ -78,10 +79,16 @@ namespace BrainCloud
         std::string             _httpInternalResponse;
         std::string             _httpJsonResponse;
 
+#if defined(USE_PTHREAD)
         pthread_attr_t          _threadAttributes;
         pthread_t               _threadId;
-        pthread_mutex_t         _lock;
-        bool                    _threadRunning;
+#endif
+        Mutex                   _lock;
+#if defined(USE_PTHREAD) // We should use atomics also in pthread, but I'd rather not touch the behavior of the old code. At least putting it volatlie
+        volatile bool           _threadRunning;
+#else
+        std::atomic<bool>       _threadRunning;
+#endif
         bool                    _shouldCancelUpload;
         long                    _uploadTotalBytes;
         long                    _uploadTransferredBytes;

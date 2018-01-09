@@ -23,6 +23,9 @@
 #include <stdlib.h>
 #include <string.h>
 
+#if !defined(USE_PTHREAD)
+#include <thread>
+#endif
 
 bool cURLLoader::_initialized = false;
 long cURLLoader::_timeoutInterval = 0;
@@ -42,8 +45,10 @@ cURLLoader::cURLLoader()
     _socket = INVALID_SOCKET;
 #endif
 
+#if defined(USE_PTHREAD)
     memset(&_threadId, 0, sizeof(pthread_t));
     memset(&_threadAttributes, 0, sizeof(_threadAttributes));
+#endif
 }
 
 cURLLoader::~cURLLoader( )
@@ -59,7 +64,7 @@ void cURLLoader::close()
     // We can stop loading the page by killing its thread.
     if (_threadRunning)
     {
-        // close socket directly to kill the curl request more quickly
+        // close socket directly to kill the curl request more quickly (WAT !??)
 #ifndef WIN32
         if (_socket >= 0)  
         {
@@ -72,7 +77,10 @@ void cURLLoader::close()
             closesocket(_socket);
         }
 #endif
+#if defined(USE_PTHREAD)
         pthread_attr_destroy(&_threadAttributes);
+#else
+#endif
     }
 }
 
@@ -97,6 +105,7 @@ void cURLLoader::load( URLRequest const & urlRequest )
     // so make sure to cleanup beforehand...
     close();
 
+#if defined(USE_PTHREAD)
     // Start up a thread to load the web page.
     // Set up a new thread to handle the request.
     int rc = 0;
@@ -124,6 +133,11 @@ void cURLLoader::load( URLRequest const & urlRequest )
     } else {
         // Error
     }  // end if
+#else
+    _threadRunning = true;
+    auto thread = std::thread(loadThread, this);
+    thread.detach();
+#endif
 }
 
 bool cURLLoader::isDone()
@@ -488,7 +502,7 @@ void cURLLoader::loadThreadCurl( cURLLoader * loader )
         response.setReasonPhrase("cURL Out of Memory");
         //loader->getClient()->handleError(response);
     }
-    loader->_threadRunning = false;
+    loader->_threadRunning = false; // This is not even atomic !!!
 }
 
 #endif
