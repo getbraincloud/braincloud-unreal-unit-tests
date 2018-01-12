@@ -18,6 +18,9 @@ DerivedData
 *.xccheckout
 *.xcworkspace/
 
+# VSCode
+.vscode
+
 # CocoaPods
 Pods/
 
@@ -57,3 +60,4 @@ cmake_*
 autobuild/artifacts
 autobuild/tmp
 *.swp
+CMakeFiles/

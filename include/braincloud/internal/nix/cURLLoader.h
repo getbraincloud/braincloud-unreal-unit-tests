@@ -12,15 +12,22 @@
 #include <sys/socket.h>
 #include <unistd.h>
 #else
-#include <WinSock2.h>
-#include <Windows.h>
-// compilers later than vs2010 define the timespec struct
-#if (_MSC_VER > 1600)
-#define HAVE_STRUCT_TIMESPEC 1
-#endif
+    #include <WinSock2.h>
+    #include <Windows.h>
+    #if defined(USE_PTHREAD)
+        // compilers later than vs2010 define the timespec struct
+        #if (_MSC_VER > 1600)
+            #define HAVE_STRUCT_TIMESPEC 1
+        #endif
+    #endif
 #endif
 
+#if defined(USE_PTHREAD)
 #include <pthread.h>
+#else
+#include <atomic>
+#endif
+
 #include <string>
 
 #include "braincloud/internal/URLLoader.h"
@@ -69,10 +76,16 @@ private:
     static bool     _initialized;
     static long     _timeoutInterval;
         
+#if defined(USE_PTHREAD)
     pthread_attr_t  _threadAttributes;
     pthread_t       _threadId;
+#endif
     
-    bool            _threadRunning;
+#if defined(USE_PTHREAD) // We should use atomics also in pthread, but I'd rather not touch the behavior of the old code. At least putting it volatlie
+    volatile bool   _threadRunning;
+#else
+    std::atomic<bool> _threadRunning;
+#endif
 
 #ifndef WIN32
     int             _socket;
