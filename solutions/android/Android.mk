@@ -20,7 +20,7 @@ local_c_includes := \
 	#$(NDK_PROJECT_PATH)/include \
 	#$(NDK_PROJECT_PATH)/include/openssl
 
-local_c_flags := -DNO_WINDOWS_BRAINDEATH -fpermissive
+local_c_flags := -DNO_WINDOWS_BRAINDEATH -DUSE_CURL -DUSE_PTHREAD -fpermissive
 local_cpp_features := exceptions
 #local_ldlibs := -lz -lssl -lcrypto -lcurl
 #local_ldflags := -L$(LOCAL_PATH)/../Android/libs/armeabi
