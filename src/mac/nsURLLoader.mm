@@ -224,6 +224,15 @@ long nsURLLoader::_timeoutInterval = 0;
     
     _urlLoader->setThreadRunning(false);
 }
+
+#ifdef DISABLE_SSL_CHECK
+- (void)URLSession:(NSURLSession *)session didReceiveChallenge:(NSURLAuthenticationChallenge *)challenge completionHandler:(void (^)(NSURLSessionAuthChallengeDisposition, NSURLCredential *))completionHandler{
+    if([challenge.protectionSpace.authenticationMethod isEqualToString:NSURLAuthenticationMethodServerTrust]){
+        NSURLCredential *credential = [NSURLCredential credentialForTrust:challenge.protectionSpace.serverTrust];
+        completionHandler(NSURLSessionAuthChallengeUseCredential,credential);
+    }
+}
+#endif
 @end
 
 
