@@ -43,9 +43,11 @@ endif()
 # GTest
 ################################
 
+if (MSVC)
 if (MSVC_VERSION GREATER_EQUAL 1800)
 	# C++11 has tupple since at least Visual Studio 2013. and tr1 is deprecated in VS2017
 	add_definitions(-DGTEST_HAS_TR1_TUPLE=0)
+endif()
 endif()
 add_subdirectory(gtest-1.7.0)
 include_directories(${gtest_SOURCE_DIR}/include ${gtest_SOURCE_DIR})
