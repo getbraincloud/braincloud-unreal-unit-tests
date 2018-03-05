@@ -94,6 +94,18 @@ TEST_F(TestBCIdentity, RefreshIdentity)
 	tr.runExpectFail(m_bc, 400, 40464);
 }
 
+TEST_F(TestBCIdentity, changeEmailIdentity)
+{
+	TestResult tr;
+	m_bc->getIdentityService()->changeEmailIdentity(
+		GetUser(UserA)->m_email,
+		GetUser(UserA)->m_password,
+		GetUser(UserA)->m_email,
+		GetUser(UserA)->m_email,
+		&tr);
+	tr.runExpectFail(m_bc, 400, 40464);
+}
+
 TEST_F(TestBCIdentity, AttachPeerProfile)
 {
 	TestResult tr;
