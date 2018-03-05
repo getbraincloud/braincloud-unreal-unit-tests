@@ -196,7 +196,7 @@ namespace BrainCloud
 		m_client->sendRequest(sc);
 	}
 
-	void BrainCloudIdentity::changeEmailIdentity(const char * in_oldEmailAddress, const char * in_password, const char * in_newEmailAddress, const char * in_updateContactEmail,  IServerCallback * in_callback)
+	void BrainCloudIdentity::changeEmailIdentity(const char * in_oldEmailAddress, const char * in_password, const char * in_newEmailAddress, bool in_updateContactEmail,  IServerCallback * in_callback)
 	{
 		Json::Value message;
 		message[OperationParam::OldEmailAddress.getValue()] = in_oldEmailAddress;

@@ -101,7 +101,7 @@ TEST_F(TestBCIdentity, changeEmailIdentity)
 		GetUser(UserA)->m_email,
 		GetUser(UserA)->m_password,
 		GetUser(UserA)->m_email,
-		GetUser(UserA)->m_email,
+		true,
 		&tr);
 	tr.runExpectFail(m_bc, 400, 40464);
 }

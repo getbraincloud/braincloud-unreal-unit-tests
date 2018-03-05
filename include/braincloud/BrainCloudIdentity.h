@@ -496,7 +496,7 @@ namespace BrainCloud
 	    * @param in_callback The method to be invoked when the server response is received
 	    *
 		*/
-		void changeEmailIdentity(const char * in_oldEmailAddress, const char * in_password, const char * in_newEmailAddress, const char * in_updateContactEmail,  IServerCallback * in_callback = NULL);
+		void changeEmailIdentity(const char * in_oldEmailAddress, const char * in_password, const char * in_newEmailAddress, bool in_updateContactEmail,  IServerCallback * in_callback = NULL);
 
 		/**
 		 * Attach a new identity to a parent app
