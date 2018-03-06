@@ -477,6 +477,21 @@ public:
 	UFUNCTION(BlueprintCallable, meta = (BlueprintInternalUseOnly = "true"), Category = "BrainCloud|Identity")
 		static UBCIdentityProxy* RefreshIdentity(ABrainCloud *brainCloud, const FString& externalId, const FString& authenticationToken, EBCAuthType authenticationType);
 
+	 /**
+     * Allows email identity email address to be changed
+     *
+     * Service Name - identity
+     * Service Operation - CHANGE_EMAIL_IDENTITY
+     *
+     * Param - oldEmailAddress Old email address
+     * Param - password Password for identity
+     * Param - newEmailAddress New email address
+     * Param - updateContactEmail Whether to update contact email in profile
+     */
+	UFUNCTION(BlueprintCallable, meta = (BlueprintInternalUseOnly = "true"), Category = "BrainCloud|Identity")
+		static UBCIdentityProxy* ChangeEmailIdentity(ABrainCloud *brainCloud, const FString& oldEmailAddress, const FString& password, const FString& newEmailAddress, bool updateContactEmail);
+
+
 	/**
 	* Attach a new identity to a parent app
 	*

@@ -186,6 +186,19 @@ void BrainCloudIdentity::refreshIdentity(const FString& externalId, const FStrin
 	_client->sendRequest(sc);
 }
 
+void BrainCloudIdentity::changeEmailIdentity(const FString& oldEmailAddress, const FString& password, const FString& newEmailAddress,
+		bool updateContactEmail, IServerCallback* callback)
+{
+	TSharedRef<FJsonObject> message = MakeShareable(new FJsonObject());
+	message->SetStringField(OperationParam::IdentityServiceOldEmailAddress.getValue(), oldEmailAddress);
+	message->SetStringField(OperationParam::AuthenticateServiceAuthenticateAuthenticationToken.getValue(), password);
+	message->SetStringField(OperationParam::IdentityServiceNewEmailAddress.getValue(), newEmailAddress);
+	message->SetBoolField(OperationParam::IdentityServiceUpdateContactEmail.getValue(), updateContactEmail);
+
+	ServerCall * sc = new ServerCall(ServiceName::Identity, ServiceOperation::ChangeEmailIdentity, message, callback);
+	_client->sendRequest(sc);
+}
+
 void BrainCloudIdentity::attachParentWithIdentity(const FString & externalId, const FString & authenticationToken, EBCAuthType authenticationType, 
 	const FString & externalAuthName, bool forceCreate, IServerCallback * callback)
 {

@@ -478,6 +478,21 @@ public:
 	void refreshIdentity(const FString& externalId, const FString& authenticationToken, EBCAuthType authenticationType, IServerCallback * callback = nullptr);
 
 	/**
+     * Allows email identity email address to be changed
+     *
+     * Service Name - identity
+     * Service Operation - CHANGE_EMAIL_IDENTITY
+     *
+     * @param oldEmailAddress Old email address
+     * @param password Password for identity
+     * @param newEmailAddress New email address
+     * @param updateContactEmail Whether to update contact email in profile
+     * @param callback The method to be invoked when the server response is received
+     */
+	void changeEmailIdentity(const FString& oldEmailAddress, const FString& password, const FString& newEmailAddress,
+		bool updateContactEmail, IServerCallback* callback = nullptr);
+
+	/**
 	* Attach a new identity to a parent app
 	*
 	* Service Name - identity
