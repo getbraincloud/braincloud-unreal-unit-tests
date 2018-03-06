@@ -21,6 +21,7 @@ const ServiceOperation ServiceOperation::GetChildProfiles = ServiceOperation(TEX
 const ServiceOperation ServiceOperation::GetIdentities = ServiceOperation(TEXT("GET_IDENTITIES"));
 const ServiceOperation ServiceOperation::GetExpiredIdentities = ServiceOperation(TEXT("GET_EXPIRED_IDENTITIES"));
 const ServiceOperation ServiceOperation::RefreshIdentity = ServiceOperation(TEXT("REFRESH_IDENTITY"));
+const ServiceOperation ServiceOperation::ChangeEmailIdentity = ServiceOperation(TEXT("CHANGE_EMAIL_IDENTITY"));
 const ServiceOperation ServiceOperation::AttachParentWithIdentity = ServiceOperation(TEXT("ATTACH_PARENT_WITH_IDENTITY"));
 const ServiceOperation ServiceOperation::DetachParent = ServiceOperation(TEXT("DETACH_PARENT"));
 const ServiceOperation ServiceOperation::AttachPeerProfile = ServiceOperation(TEXT("ATTACH_PEER_PROFILE"));

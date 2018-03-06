@@ -77,6 +77,10 @@ public:
 	static const OperationParam IdentityServiceAuthenticationType;
 	static const OperationParam IdentityServiceConfirmAnonymous;
 
+	static const OperationParam IdentityServiceOldEmailAddress;
+	static const OperationParam IdentityServiceNewEmailAddress;
+	static const OperationParam IdentityServiceUpdateContactEmail;
+
 	// Async Match Service - Async Match Params
 	static const OperationParam AsyncMatchServicePlayers;
 	static const OperationParam AsyncMatchServiceMatchState;

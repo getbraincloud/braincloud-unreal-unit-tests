@@ -230,6 +230,13 @@ UBCIdentityProxy* UBCIdentityProxy::RefreshIdentity(ABrainCloud *brainCloud, con
 	return Proxy;
 }
 
+UBCIdentityProxy* UBCIdentityProxy::ChangeEmailIdentity(ABrainCloud *brainCloud, const FString& oldEmailAddress, const FString& password, const FString& newEmailAddress, bool updateContactEmail)
+{
+	UBCIdentityProxy* Proxy = NewObject<UBCIdentityProxy>();
+	UBCWrapperProxy::GetBrainCloudInstance(brainCloud)->getIdentityService()->changeEmailIdentity(oldEmailAddress, password, newEmailAddress, updateContactEmail, Proxy);
+	return Proxy;
+}
+
 UBCIdentityProxy * UBCIdentityProxy::AttachParentWithIdentity(ABrainCloud *brainCloud, const FString & externalId, const FString & authenticationToken, EBCAuthType authenticationType,
 	const FString & externalAuthName, bool forceCreate)
 {

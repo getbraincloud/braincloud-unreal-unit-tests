@@ -78,6 +78,10 @@ OperationParam::OperationParam(const FString& operation)
 	const OperationParam OperationParam::IdentityServiceAuthenticationType = OperationParam(TEXT("authenticationType"));
 	const OperationParam OperationParam::IdentityServiceConfirmAnonymous = OperationParam(TEXT("confirmAnonymous"));
 
+	const OperationParam OperationParam::IdentityServiceOldEmailAddress = OperationParam(TEXT("oldEmailAddress"));
+	const OperationParam OperationParam::IdentityServiceNewEmailAddress = OperationParam(TEXT("newEmailAddress"));
+	const OperationParam OperationParam::IdentityServiceUpdateContactEmail = OperationParam(TEXT("updateContactEmail"));
+
 	// Async Match Service - Async Match Params
 	const OperationParam OperationParam::AsyncMatchServicePlayers = OperationParam(TEXT("players"));
 	const OperationParam OperationParam::AsyncMatchServiceMatchState = OperationParam(TEXT("matchState"));
