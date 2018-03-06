@@ -354,6 +354,11 @@ namespace BrainCloud {
 		static const OperationParam GroupWhere;
 
 		//mail
+		static const OperationParam OldEmailAddress;
+		static const OperationParam NewEmailAddress;
+		static const OperationParam UpdateContactEmail;
+		static const OperationParam FieldAuthenticationToken;
+
 		static const OperationParam EmailAddress;
 		static const OperationParam Subject;
 		static const OperationParam Body;

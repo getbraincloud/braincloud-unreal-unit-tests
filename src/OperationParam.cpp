@@ -346,6 +346,14 @@ namespace BrainCloud
 	const OperationParam OperationParam::GroupAutoJoinStrategy = OperationParam("autoJoinStrategy");
 	const OperationParam OperationParam::GroupWhere = OperationParam("where");
 
+
+	//change mail
+	const OperationParam OperationParam::OldEmailAddress = OperationParam("oldEmailAddress");
+	const OperationParam OperationParam::NewEmailAddress = OperationParam("newEmailAddress");
+	const OperationParam OperationParam::UpdateContactEmail = OperationParam("updateContactEmail");
+	const OperationParam OperationParam::FieldAuthenticationToken = OperationParam("authenticationToken");
+
+
 	//mail
 	const OperationParam OperationParam::EmailAddress = OperationParam("emailAddress");
 	const OperationParam OperationParam::Subject = OperationParam("subject");

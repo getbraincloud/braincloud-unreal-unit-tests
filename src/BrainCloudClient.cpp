@@ -48,7 +48,7 @@ namespace BrainCloud {
 
 
 	BrainCloudClient * BrainCloudClient::_instance = NULL;
-	std::string BrainCloudClient::s_brainCloudClientVersion = "3.6.5";
+	std::string BrainCloudClient::s_brainCloudClientVersion = "3.7.0";
 
 	/**
 	 * Constructor

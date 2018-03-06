@@ -484,6 +484,21 @@ namespace BrainCloud
 		void refreshIdentity(const char * in_externalId, const char * in_authenticationToken, AuthenticationType in_authenticationType, IServerCallback * in_callback = NULL);
 
 		/**
+		* Allows email identity email address to be changed
+		*
+		* Service Name - identity
+		* Service Operation - CHANGE_EMAIL_IDENTITY
+		*
+		* @param in_oldEmailAddress Old email address
+	    * @param in_password Password for identity
+	    * @param in_newEmailAddress New email address
+	    * @param in_updateContactEmail Whether to update contact email in profile
+	    * @param in_callback The method to be invoked when the server response is received
+	    *
+		*/
+		void changeEmailIdentity(const char * in_oldEmailAddress, const char * in_password, const char * in_newEmailAddress, bool in_updateContactEmail,  IServerCallback * in_callback = NULL);
+
+		/**
 		 * Attach a new identity to a parent app
 		 *
 		 * Service Name - identity

@@ -196,6 +196,19 @@ namespace BrainCloud
 		m_client->sendRequest(sc);
 	}
 
+	void BrainCloudIdentity::changeEmailIdentity(const char * in_oldEmailAddress, const char * in_password, const char * in_newEmailAddress, bool in_updateContactEmail,  IServerCallback * in_callback)
+	{
+		Json::Value message;
+		message[OperationParam::OldEmailAddress.getValue()] = in_oldEmailAddress;
+		message[OperationParam::FieldAuthenticationToken.getValue()] = in_password;
+		message[OperationParam::NewEmailAddress.getValue()] = in_newEmailAddress;
+		message[OperationParam::UpdateContactEmail.getValue()] = in_updateContactEmail;
+
+		ServerCall * sc = new ServerCall(ServiceName::Identity, ServiceOperation::ChangeEmailIdentity, message, in_callback);
+		m_client->sendRequest(sc);
+	}
+
+
 	void BrainCloudIdentity::attachParentWithIdentity(const char * in_externalId, const char * in_authenticationToken, AuthenticationType in_authenticationType,
 		const char * in_externalAuthName, bool in_forceCreate, IServerCallback * in_callback)
 	{

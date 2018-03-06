@@ -94,6 +94,36 @@ TEST_F(TestBCIdentity, RefreshIdentity)
 	tr.runExpectFail(m_bc, 400, 40464);
 }
 
+TEST_F(TestBCIdentity, changeEmailIdentity)
+{
+	TestResult tr;
+
+	char m_newEmail[256];
+	char m_oldEmail[256];
+
+	sprintf(m_newEmail, "%s%d%s", "test_", rand() % 100000000, "@bitheads.com");
+	sprintf(m_oldEmail, "%s%d%s", "test_", rand() % 100000000, "@bitheads.com");
+
+	m_bc->getAuthenticationService()->authenticateEmailPassword(m_newEmail, m_newEmail, true, &tr);
+	tr.run(m_bc);
+
+	m_bc->getIdentityService()->changeEmailIdentity(
+		m_newEmail,
+		m_newEmail,
+		m_oldEmail,
+		true,
+		&tr);
+	tr.run(m_bc);
+
+	m_bc->getIdentityService()->changeEmailIdentity(
+		m_oldEmail,
+		m_newEmail,
+		m_newEmail,
+		true,
+		&tr);
+	tr.run(m_bc);
+}
+
 TEST_F(TestBCIdentity, AttachPeerProfile)
 {
 	TestResult tr;
