@@ -18,6 +18,7 @@ public:
 	static const ServiceOperation GetIdentities;
 	static const ServiceOperation GetExpiredIdentities;
 	static const ServiceOperation RefreshIdentity;
+	static const ServiceOperation ChangeEmailIdentity;
 	static const ServiceOperation AttachParentWithIdentity;
 	static const ServiceOperation DetachParent;
 	static const ServiceOperation AttachPeerProfile;
