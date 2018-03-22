@@ -16,10 +16,10 @@
 #define NO_PACKET_EXPECTED -1
 #define DEFAULT_AUTHENTICATION_TIMEOUT_MILLIS 15000
 
-
-namespace BrainCloud {
-
+namespace BrainCloud
+{
 	class IFileUploader;
+	class BrainCloudClient;
 
 	struct BrainCloudCallbackEvent
 	{
@@ -52,18 +52,15 @@ namespace BrainCloud {
 		COMPLETE = 4,
 	};
 
-	class BrainCloudClient;
-
 	// although named as an interface, this is actually an abstract class
 	class IBrainCloudComms
 	{
 	public:
+        static IBrainCloudComms* create(BrainCloudClient* in_client);
 
-		// pure virtual methods
-		IBrainCloudComms(BrainCloudClient* in_client);
 		virtual ~IBrainCloudComms();
 
-
+		// pure virtual methods
 		virtual void initialize(const char * serverURL, const char * appId, const char * secretKey) = 0;
 		virtual void addToQueue(ServerCall *) = 0;
 
@@ -132,11 +129,13 @@ namespace BrainCloud {
 		void insertEndOfMessageBundleMarker();
 
 		static void createJsonErrorResponse(int in_statusCode,
-			int in_reasonCode,
-			const std::string & in_statusMessage,
-			std::string & out_jsonErrorResponse);
+                                            int in_reasonCode,
+                                            const std::string & in_statusMessage,
+                                            std::string & out_jsonErrorResponse);
 
 	protected:
+        IBrainCloudComms(BrainCloudClient* in_client);
+
 		BrainCloudClient* _client;
 
 		int64_t _packetId;
@@ -194,5 +193,4 @@ namespace BrainCloud {
 		virtual void startFileUpload(const Json::Value & in_jsonPrepareUploadResponse) = 0;
 		void runCallbacksFileUpload();
 	};
-
 };

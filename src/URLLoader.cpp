@@ -1,11 +1,14 @@
 #include "braincloud/internal/URLLoader.h"
 
-URLLoader::URLLoader()
+namespace BrainCloud
 {
+    URLLoader::URLLoader()
+    {
 
-}
+    }
 
-URLLoader::~URLLoader( )
-{
+    URLLoader::~URLLoader()
+    {
 
+    }
 }

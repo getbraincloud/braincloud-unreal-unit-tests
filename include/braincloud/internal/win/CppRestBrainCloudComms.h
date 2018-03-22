@@ -13,11 +13,10 @@ namespace BrainCloud {
     class ServerCall;
     class BrainCloudClient;
 
-    class BrainCloudComms2 : virtual public IBrainCloudComms
+    class CppRestBrainCloudComms : virtual public IBrainCloudComms
     {
     public:
-        BrainCloudComms2(BrainCloudClient* in_client);
-        virtual ~BrainCloudComms2();
+        virtual ~CppRestBrainCloudComms();
         virtual void initialize(const char * serverURL, const char * appId, const char * secretKey);
         virtual void registerEventCallback(IEventCallback * in_eventCallback);
         virtual void deregisterEventCallback();
@@ -48,6 +47,10 @@ namespace BrainCloud {
         virtual void runCallbacks();
 
     protected:
+        friend class IBrainCloudComms;
+
+        CppRestBrainCloudComms(BrainCloudClient* in_client);
+
         virtual void startFileUpload(const Json::Value & in_jsonPrepareUploadResponse);
 
     private:

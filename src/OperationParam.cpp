@@ -243,16 +243,6 @@ namespace BrainCloud
 	const OperationParam OperationParam::ServiceMessageReasonCode = OperationParam("reasoncode");
 	const OperationParam OperationParam::ServiceMessageStatusMessage = OperationParam("statusmessage");
 
-	// bad place to define these constants...
-	const OperationParam OperationParam::ReleasePlatformIos = OperationParam("IOS");
-	const OperationParam OperationParam::ReleasePlatformFacebook = OperationParam("FB");
-	const OperationParam OperationParam::ReleasePlatformBlackberry = OperationParam("BB");
-	const OperationParam OperationParam::ReleasePlatformGoogleAndroid = OperationParam("ANG");
-	const OperationParam OperationParam::ReleasePlatformWindowsPhone = OperationParam("WINP");
-	const OperationParam OperationParam::ReleasePlatformWindows = OperationParam("WINDOWS");
-	const OperationParam OperationParam::ReleasePlatformMac = OperationParam("MAC");
-	const OperationParam OperationParam::ReleasePlatformLinux = OperationParam("LINUX");
-
 	const OperationParam OperationParam::ScriptServiceRunScriptName = OperationParam("scriptName");
 	const OperationParam OperationParam::ScriptServiceRunScriptData = OperationParam("scriptData");
 	const OperationParam OperationParam::ScriptServiceStartDateUTC = OperationParam("startDateUTC");

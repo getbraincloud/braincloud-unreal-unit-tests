@@ -203,13 +203,16 @@
     <ClInclude Include="..\..\..\include\braincloud\internal\URLResponse.h">
       <Filter>include\braincloud\internal</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\include\braincloud\internal\win\BrainCloudComms2.h">
+    <ClInclude Include="..\..\..\include\braincloud\internal\win\CppRestBrainCloudComms.h">
       <Filter>include\braincloud\internal\win</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\include\braincloud\internal\win\CppRestFileUploader.h">
       <Filter>include\braincloud\internal\win</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\include\braincloud\internal\win\MD5.h">
+      <Filter>include\braincloud\internal\win</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\braincloud\internal\win\WindowsSaveDataHelper.h">
       <Filter>include\braincloud\internal\win</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\include\braincloud\BrainCloudGroup.h">
@@ -370,13 +373,22 @@
     <ClCompile Include="..\..\..\src\URLResponse.cpp">
       <Filter>src</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\src\win\BrainCloudComms2.cpp">
+    <ClCompile Include="..\..\..\src\win\CppRestBrainCloudComms.cpp">
       <Filter>src\win</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\src\win\CppRestFileUploader.cpp">
       <Filter>src\win</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\src\win\MD5.cpp">
+      <Filter>src\win</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\win\WindowsDevice.cpp">
+      <Filter>src\win</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\win\WindowsGUID.cpp">
+      <Filter>src\win</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\win\WindowsSaveDataHelper.cpp">
       <Filter>src\win</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\src\BrainCloudGroup.cpp">

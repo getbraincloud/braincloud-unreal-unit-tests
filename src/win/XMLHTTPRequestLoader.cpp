@@ -18,6 +18,11 @@ static std::string utf16ToUtf8(const std::wstring& utf16)
 
 namespace BrainCloud
 {
+    URLLoader* URLLoader::create()
+    {
+        return new XMLHTTPRequestLoader();
+    }
+
     long XMLHTTPRequestLoader::_timeoutInterval = 0;
 
     XMLHTTPRequestLoader::XMLHTTPRequestLoader()

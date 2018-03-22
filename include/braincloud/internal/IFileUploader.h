@@ -26,6 +26,9 @@ namespace BrainCloud
             UPLOAD_STATUS_COMPLETE_SUCCESS = 4
         };
 
+        // Factory method
+        static IFileUploader* create();
+
         virtual ~IFileUploader() {};
 
         virtual void enableLogging(bool in_loggingEnabled) = 0;
@@ -50,6 +53,9 @@ namespace BrainCloud
         virtual int getErrorReasonCode() = 0;
 
         virtual bool isThreadRunning() = 0;
+
+    protected:
+        IFileUploader() {}
     };
 }
 

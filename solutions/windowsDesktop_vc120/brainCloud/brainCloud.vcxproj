@@ -236,9 +236,10 @@
     <ClInclude Include="..\..\..\include\braincloud\internal\URLRequestHeader.h" />
     <ClInclude Include="..\..\..\include\braincloud\internal\URLRequestMethod.h" />
     <ClInclude Include="..\..\..\include\braincloud\internal\URLResponse.h" />
-    <ClInclude Include="..\..\..\include\braincloud\internal\win\BrainCloudComms2.h" />
+    <ClInclude Include="..\..\..\include\braincloud\internal\win\CppRestBrainCloudComms.h" />
     <ClInclude Include="..\..\..\include\braincloud\internal\win\CppRestFileUploader.h" />
     <ClInclude Include="..\..\..\include\braincloud\internal\win\MD5.h" />
+    <ClInclude Include="..\..\..\include\braincloud\internal\win\WindowsSaveDataHelper.h" />
     <ClInclude Include="..\..\..\include\braincloud\IRewardCallback.h" />
     <ClInclude Include="..\..\..\include\braincloud\IServerCallback.h" />
     <ClInclude Include="..\..\..\include\braincloud\OperationParam.h" />
@@ -303,9 +304,12 @@
     <ClCompile Include="..\..\..\src\URLRequestHeader.cpp" />
     <ClCompile Include="..\..\..\src\URLRequestMethod.cpp" />
     <ClCompile Include="..\..\..\src\URLResponse.cpp" />
-    <ClCompile Include="..\..\..\src\win\BrainCloudComms2.cpp" />
+    <ClCompile Include="..\..\..\src\win\CppRestBrainCloudComms.cpp" />
     <ClCompile Include="..\..\..\src\win\CppRestFileUploader.cpp" />
     <ClCompile Include="..\..\..\src\win\MD5.cpp" />
+    <ClCompile Include="..\..\..\src\win\WindowsDevice.cpp" />
+    <ClCompile Include="..\..\..\src\win\WindowsGUID.cpp" />
+    <ClCompile Include="..\..\..\src\win\WindowsSaveDataHelper.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\..\lib\win32\cpprestsdk-static\Release\src\build\casablanca120.vcxproj">

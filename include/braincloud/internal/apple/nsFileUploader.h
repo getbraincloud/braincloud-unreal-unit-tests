@@ -33,7 +33,6 @@ namespace BrainCloud
     {
         
     public:
-        NSFileUploader();
         virtual ~NSFileUploader();
         
         virtual bool uploadFile(std::string & in_sessionId,
@@ -57,6 +56,11 @@ namespace BrainCloud
         virtual const std::string & getHttpResponse();
         virtual int getHttpStatus();
         virtual int getErrorReasonCode();
+
+    protected:
+        friend class IFileUploader;
+
+        NSFileUploader();
         
     private:
         static bool             _loggingEnabled;
