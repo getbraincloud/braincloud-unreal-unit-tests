@@ -1,25 +1,31 @@
-#ifndef __SAVE_DATA_HELPER__
-#define __SAVE_DATA_HELPER__
+#ifndef _SAVEDATAHELPER_H_
+#define _SAVEDATAHELPER_H_
 
 #include <string>
 
-class SaveDataHelper
+namespace BrainCloud
 {
-public:
-    static SaveDataHelper * getInstance();
+    class SaveDataHelper
+    {
+    public:
+        static SaveDataHelper* getInstance();
 
-    void initialize(const char * companyName, const char * appName, const char * wrapperName = "");
+        virtual void initialize(const char* companyName, const char* appName, const char* wrapperName = "") = 0;
 
-    void saveData(const char * key, const char * data);
-    std::string readData(const char * key);
-    void deleteData(const char * key);
+        virtual void saveData(const char* key, const char* data) = 0;
+        virtual std::string readData(const char* key) = 0;
+        virtual void deleteData(const char* key) = 0;
 
-private:
-    SaveDataHelper();
+    protected:
+        SaveDataHelper();
 
-    std::string m_savePath;
+    private:
+        static SaveDataHelper* create();
 
-    static SaveDataHelper * m_instance;
-};
+        static SaveDataHelper* s_instance;
+
+        std::string m_savePath;
+    };
+}
 
 #endif

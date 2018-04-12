@@ -1,5 +1,5 @@
 //
-//  BrainCloudComms.h
+//  DefaultBrainCloudComms.h
 //  BrainCloudLib
 //
 
@@ -32,12 +32,10 @@ namespace BrainCloud
 {
     class BrainCloudClient;
 
-    class BrainCloudComms : public IBrainCloudComms
+    class DefaultBrainCloudComms : public IBrainCloudComms
     {
-
     public:
-        BrainCloudComms(BrainCloudClient* in_client);
-        virtual ~BrainCloudComms( );
+        virtual ~DefaultBrainCloudComms();
 
         // from IBrainCloudComms
         virtual void initialize(const char * serverURL, const char * appId, const char * secretKey);
@@ -72,6 +70,10 @@ namespace BrainCloud
         bool handleResult( URLResponse const & );
 
     protected:
+        friend class IBrainCloudComms;
+
+        DefaultBrainCloudComms(BrainCloudClient* in_client);
+
         virtual void startFileUpload(const Json::Value & in_jsonPrepareUploadResponse);
 
     private:
@@ -109,7 +111,6 @@ namespace BrainCloud
 		void updateKillSwitch(const std::string & service, const std::string & operation, int32_t statusCode);
 		void resetKillSwitch();
     };
-
 };
 
 #endif

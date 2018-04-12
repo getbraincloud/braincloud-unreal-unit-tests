@@ -12,6 +12,8 @@ namespace BrainCloud
 
     private:
         GUID(){};
+
+        static std::string GUIDToString(const unsigned char* buffer);
     };
 }
 

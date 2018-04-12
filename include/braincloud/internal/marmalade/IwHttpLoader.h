@@ -27,7 +27,6 @@ namespace BrainCloud
     class IwHttpLoader : virtual public URLLoader
     {
     public:
-        IwHttpLoader();
         virtual ~IwHttpLoader();
 
         virtual void    close();
@@ -35,6 +34,11 @@ namespace BrainCloud
         virtual void    load(URLRequest const * r) { if (r != NULL) load(*r); }
         virtual bool    isDone();
         virtual void    setTimeout(int milliseconds) { _timeoutMillis = milliseconds; }
+
+    protected:
+        friend class URLLoader;
+
+        IwHttpLoader();
 
     private:
         enum eIwHttpLoaderState

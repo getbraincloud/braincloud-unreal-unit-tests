@@ -22,7 +22,6 @@ namespace BrainCloud
     {
 
     public:
-        cURLFileUploader();
         virtual ~cURLFileUploader();
 
         void close();
@@ -49,6 +48,10 @@ namespace BrainCloud
         virtual int getHttpStatus();
         virtual int getErrorReasonCode();
 
+    protected:
+        friend class IFileUploader;
+
+        cURLFileUploader();
         
     private:
         static void* run(void * in_fileUpload);

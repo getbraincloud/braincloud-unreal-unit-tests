@@ -22,6 +22,11 @@
 
 namespace BrainCloud
 {
+    URLLoader* URLLoader::create()
+    {
+        return new IwHttpLoader();
+    }
+
     IwHttpLoader::IwHttpLoader()
         : _state(StatusNone)
         , _iwhttp(NULL)

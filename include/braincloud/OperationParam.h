@@ -251,15 +251,6 @@ namespace BrainCloud {
 		static const OperationParam ServiceMessageReasonCode;
 		static const OperationParam ServiceMessageStatusMessage;
 
-		static const OperationParam ReleasePlatformIos;
-		static const OperationParam ReleasePlatformFacebook;
-		static const OperationParam ReleasePlatformBlackberry;
-		static const OperationParam ReleasePlatformGoogleAndroid;
-		static const OperationParam ReleasePlatformWindowsPhone;
-		static const OperationParam ReleasePlatformWindows;
-		static const OperationParam ReleasePlatformMac;
-		static const OperationParam ReleasePlatformLinux;
-
 		static const OperationParam ScriptServiceRunScriptName;
 		static const OperationParam ScriptServiceRunScriptData;
 		static const OperationParam ScriptServiceStartDateUTC;

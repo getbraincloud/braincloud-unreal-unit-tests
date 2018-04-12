@@ -14,7 +14,7 @@
 #include <ctype.h>
 #endif
 
-#include "braincloud/internal/mac/nsURLLoader.h"
+#include "braincloud/internal/apple/nsURLLoader.h"
 #include "braincloud/internal/URLRequestMethod.h"
 #include "braincloud/http_codes.h"
 #include <stdio.h>
@@ -22,16 +22,13 @@
 #include <string.h>
 #import <Foundation/Foundation.h>
 
-bool nsURLLoader::_initialized = false;
-long nsURLLoader::_timeoutInterval = 0;
-
 @interface URLSessionDelegate () {
-    nsURLLoader* _urlLoader;
+    BrainCloud::nsURLLoader* _urlLoader;
     NSURLSession *_session;
 }
 @end
 @implementation URLSessionDelegate
-- (instancetype)initWithLoader:(nsURLLoader*) loader
+- (instancetype)initWithLoader:(BrainCloud::nsURLLoader*) loader
 {
     self = [super init];
     if (self) {
@@ -236,64 +233,73 @@ long nsURLLoader::_timeoutInterval = 0;
 @end
 
 
-
-/**
- * Constructor
- *   - NOTE:  If a URLRequest is given, the object will try to contact the
- *            server immediately by calling the load() method.
- */
-
-nsURLLoader::nsURLLoader()
-: _threadRunning(false)
+namespace BrainCloud
 {
-}
+	URLLoader* URLLoader::create()
+	{
+		return new nsURLLoader();
+	}
 
-nsURLLoader::~nsURLLoader( )
-{
-    // Regardless of _threadRunning stop any URLSession and release it.
-    [_sessionDelegate stop];
-    _sessionDelegate = nil;
-}
+    bool nsURLLoader::_initialized = false;
+    long nsURLLoader::_timeoutInterval = 0;
 
-/**
- * Close a currently running load operation, if in progress.
- */
-void nsURLLoader::close()
-{
-    // We can stop loading the page by killing its thread.
-    if (_threadRunning)
-    {
-        [_sessionDelegate stop];
-        _sessionDelegate = nil;
-    }
-}
+	/**
+	 * Constructor
+	 *   - NOTE:  If a URLRequest is given, the object will try to contact the
+	 *            server immediately by calling the load() method.
+	 */
+
+	nsURLLoader::nsURLLoader()
+	: _threadRunning(false)
+	{
+	}
+
+	nsURLLoader::~nsURLLoader( )
+	{
+		// Regardless of _threadRunning stop any URLSession and release it.
+		[_sessionDelegate stop];
+		_sessionDelegate = nil;
+	}
+
+	/**
+	 * Close a currently running load operation, if in progress.
+	 */
+	void nsURLLoader::close()
+	{
+		// We can stop loading the page by killing its thread.
+		if (_threadRunning)
+		{
+			[_sessionDelegate stop];
+			_sessionDelegate = nil;
+		}
+	}
 
 
-/**
- * Issue an HTTP Request to the remote server, and load the response.
- *
- * @param urlRequest - HTTP Request
- */
-void nsURLLoader::load( URLRequest const & urlRequest )
-{
-    // Assume the specified URL in the request is valid.
-    setRequest(urlRequest);
+	/**
+	 * Issue an HTTP Request to the remote server, and load the response.
+	 *
+	 * @param urlRequest - HTTP Request
+	 */
+	void nsURLLoader::load( URLRequest const & urlRequest )
+	{
+		// Assume the specified URL in the request is valid.
+		setRequest(urlRequest);
     
-    _sessionDelegate = [[URLSessionDelegate alloc] initWithLoader:this];
-    if (_sessionDelegate) {
-        [_sessionDelegate start];
-        _initialized = true;
-        _threadRunning = true;
-    } else {
-        URLResponse response;
-        this->getResponse().setStatusCode(503);
-        this->getResponse().setReasonPhrase("URL Session Out of Memory");
-    }
+		_sessionDelegate = [[URLSessionDelegate alloc] initWithLoader:this];
+		if (_sessionDelegate) {
+			[_sessionDelegate start];
+			_initialized = true;
+			_threadRunning = true;
+		} else {
+			URLResponse response;
+			this->getResponse().setStatusCode(503);
+			this->getResponse().setReasonPhrase("URL Session Out of Memory");
+		}
 
+	}
+
+	bool nsURLLoader::isDone()
+	{
+		return !_threadRunning;
+	}
 }
-
-bool nsURLLoader::isDone()
-{
-    return !_threadRunning;
-}
-

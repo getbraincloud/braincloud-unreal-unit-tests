@@ -11,31 +11,19 @@
 #include "braincloud/reason_codes.h"
 #include "braincloud/http_codes.h"
 
-#if defined(__APPLE__) && !defined(HG_PLATFORM_BB)
-#include "TargetConditionals.h"
-#endif
-
 #include "braincloud/internal/IFileUploader.h"
 #include "braincloud/BrainCloudClient.h"
-#include "braincloud/internal/BrainCloudComms.h"
+#include "braincloud/internal/DefaultBrainCloudComms.h"
 #include "braincloud/internal/TimeUtil.h"
-
-#if defined (IW_SDK)
-#include "braincloud/internal/marmalade/IwHttpLoader.h"
-#elif (__APPLE__)
-#include "braincloud/internal/mac/nsURLLoader.h"
-#include "braincloud/internal/mac/nsFileUploader.h"
-#elif defined(USE_CURL)
-#include "braincloud/internal/nix/cURLLoader.h"
-#include "braincloud/internal/nix/cURLFileUploader.h"
-#elif defined(WIN32)
-#include "braincloud/internal/win/XMLHTTPRequestLoader.h"
-#include "braincloud/internal/win/XMLHTTPRequestFileUploader.h"
-#endif
 
 namespace BrainCloud
 {
-	BrainCloudComms::BrainCloudComms(BrainCloudClient* in_client)
+    IBrainCloudComms* IBrainCloudComms::create(BrainCloudClient* in_client)
+    {
+        return new DefaultBrainCloudComms(in_client);
+    }
+
+    DefaultBrainCloudComms::DefaultBrainCloudComms(BrainCloudClient* in_client)
 		: IBrainCloudComms(in_client)
 		, _loader(NULL)
 		, _request(NULL)
@@ -44,7 +32,7 @@ namespace BrainCloud
 		resetErrorCache();
 	}
 
-	BrainCloudComms::~BrainCloudComms()
+	DefaultBrainCloudComms::~DefaultBrainCloudComms()
 	{
 	}
 
@@ -53,7 +41,7 @@ namespace BrainCloud
 	// Public methods
 	////////////////////////////////////////////////////////
 
-	void BrainCloudComms::initialize(const char * serverURL, const char * appId, const char * secretKey)
+	void DefaultBrainCloudComms::initialize(const char * serverURL, const char * appId, const char * secretKey)
 	{
 		_serverUrl = serverURL;
 		_uploadUrl = serverURL;
@@ -71,7 +59,7 @@ namespace BrainCloud
 	/**
 	 * If data was received and needs to be communicated to the app layer, this is where it will be done
 	 */
-	void BrainCloudComms::runCallbacks()
+	void DefaultBrainCloudComms::runCallbacks()
 	{
 		if (!_isInitialized)
 		{
@@ -93,26 +81,27 @@ namespace BrainCloud
 				delete _loader;
 				_loader = NULL;
 			}
-			else
-			{
+            else
+            {
 #if defined(IW_SDK)
-				// iwhttp doesn't have a timeout mechanism so we have to monitor ourselves
-				// and cancel the request if it goes over the retry timeout
-				int64_t currentTimeMillis = TimeUtil::getCurrentTimeMillis();
-				int64_t retryTimeout = (int64_t)(getRetryTimeoutMillis(_retryCount));
-				if (currentTimeMillis >= _packetSendTimeMillis + retryTimeout)
-				{
-					if (_loggingEnabled)
-					{
-						std::cout << "#BCC Cancelling packet " << _expectedPacketId << " as we've exceeded timeout " << retryTimeout << std::endl;
-					}
+                //TODO: Move this into the request. Like we did in IXMLHttpRequestLoader which has a timeout in a thread
+                // iwhttp doesn't have a timeout mechanism so we have to monitor ourselves
+                // and cancel the request if it goes over the retry timeout
+                int64_t currentTimeMillis = TimeUtil::getCurrentTimeMillis();
+                int64_t retryTimeout = (int64_t)(getRetryTimeoutMillis(_retryCount));
+                if (currentTimeMillis >= _packetSendTimeMillis + retryTimeout)
+                {
+                    if (_loggingEnabled)
+                    {
+                        std::cout << "#BCC Cancelling packet " << _expectedPacketId << " as we've exceeded timeout " << retryTimeout << std::endl;
+                    }
 
-					// cancel the request and let the next tick handle it
-					_loader->close();
-				}
+                    // cancel the request and let the next tick handle it
+                    _loader->close();
+                }
 #endif
-			}
-		}
+            }
+        }
 		else
 		{
 			int64_t currentTimeMillis = TimeUtil::getCurrentTimeMillis();
@@ -210,70 +199,70 @@ namespace BrainCloud
         _mutex.unlock();
 	}
 
-	void BrainCloudComms::registerEventCallback(IEventCallback *in_eventCallback)
+	void DefaultBrainCloudComms::registerEventCallback(IEventCallback *in_eventCallback)
 	{
         _mutex.lock();
         _eventCallback = in_eventCallback;
         _mutex.unlock();
     }
 
-	void BrainCloudComms::deregisterEventCallback()
+	void DefaultBrainCloudComms::deregisterEventCallback()
 	{
         _mutex.lock();
         _eventCallback = NULL;
         _mutex.unlock();
     }
 
-	void BrainCloudComms::registerFileUploadCallback(IFileUploadCallback *in_fileUploadCallback)
+	void DefaultBrainCloudComms::registerFileUploadCallback(IFileUploadCallback *in_fileUploadCallback)
 	{
         _mutex.lock();
         _fileUploadCallback = in_fileUploadCallback;
         _mutex.unlock();
     }
 
-	void BrainCloudComms::deregisterFileUploadCallback()
+	void DefaultBrainCloudComms::deregisterFileUploadCallback()
 	{
         _mutex.lock();
         _fileUploadCallback = NULL;
         _mutex.unlock();
     }
 
-	void BrainCloudComms::registerRewardCallback(IRewardCallback *in_rewardCallback)
+	void DefaultBrainCloudComms::registerRewardCallback(IRewardCallback *in_rewardCallback)
 	{
         _mutex.lock();
         _rewardCallback = in_rewardCallback;
         _mutex.unlock();
     }
 
-	void BrainCloudComms::deregisterRewardCallback()
+	void DefaultBrainCloudComms::deregisterRewardCallback()
 	{
         _mutex.lock();
         _rewardCallback = NULL;
         _mutex.unlock();
     }
 
-	void BrainCloudComms::registerGlobalErrorCallback(IGlobalErrorCallback *in_globalErrorCallback)
+	void DefaultBrainCloudComms::registerGlobalErrorCallback(IGlobalErrorCallback *in_globalErrorCallback)
 	{
         _mutex.lock();
         _globalErrorCallback = in_globalErrorCallback;
         _mutex.unlock();
     }
 
-	void BrainCloudComms::deregisterGlobalErrorCallback()
+	void DefaultBrainCloudComms::deregisterGlobalErrorCallback()
 	{
         _mutex.lock();
         _globalErrorCallback = NULL;
         _mutex.unlock();
     }
 
-	void BrainCloudComms::registerNetworkErrorCallback(INetworkErrorCallback *in_networkErrorCallback)
+	void DefaultBrainCloudComms::registerNetworkErrorCallback(INetworkErrorCallback *in_networkErrorCallback)
 	{
         _mutex.lock();
         _networkErrorCallback = in_networkErrorCallback;
         _mutex.unlock();
     }
 
-	void BrainCloudComms::deregisterNetworkErrorCallback()
+	void DefaultBrainCloudComms::deregisterNetworkErrorCallback()
 	{
         _mutex.lock();
 		_networkErrorCallback = NULL;
@@ -283,7 +272,7 @@ namespace BrainCloud
 	/**
 	 * Add a new server call definition to the request queue.
 	 */
-	void BrainCloudComms::addToQueue(ServerCall * sc)
+	void DefaultBrainCloudComms::addToQueue(ServerCall * sc)
 	{
 		// Add the new ServerCall to the end of the queue.
         _queueMutex.lock();
@@ -291,14 +280,14 @@ namespace BrainCloud
         _queueMutex.unlock();
 	}
 
-	void BrainCloudComms::enableNetworkErrorMessageCaching(bool in_enabled)
+	void DefaultBrainCloudComms::enableNetworkErrorMessageCaching(bool in_enabled)
 	{
         _loaderMutex.lock();
 		_cacheMessagesOnNetworkError = in_enabled;
         _loaderMutex.unlock();
 	}
 
-	void BrainCloudComms::retryCachedMessages()
+	void DefaultBrainCloudComms::retryCachedMessages()
 	{
         _loaderMutex.lock();
 		if (_blockingQueue && _request)
@@ -311,7 +300,7 @@ namespace BrainCloud
         _loaderMutex.unlock();
 	}
 
-	void BrainCloudComms::flushCachedMessages(bool in_sendApiErrorCallbacks)
+	void DefaultBrainCloudComms::flushCachedMessages(bool in_sendApiErrorCallbacks)
 	{
         _loaderMutex.lock();
 		if (_blockingQueue)
@@ -336,7 +325,7 @@ namespace BrainCloud
         _loaderMutex.unlock();
 	}
 
-	void BrainCloudComms::handleResponseBundle(Json::Value & root)
+	void DefaultBrainCloudComms::handleResponseBundle(Json::Value & root)
 	{
 		Json::FastWriter writer;
 		Json::Value messages = root["responses"];
@@ -518,7 +507,7 @@ namespace BrainCloud
 	 * @param response
 	 * @return false if a retry is required, true if result parsed
 	 */
-	bool BrainCloudComms::handleResult(URLResponse const & response)
+	bool DefaultBrainCloudComms::handleResult(URLResponse const & response)
 	{
 		Json::Value root;
 		Json::Reader reader;
@@ -606,7 +595,7 @@ namespace BrainCloud
 		return needsRetry;
 	}
 
-	void BrainCloudComms::triggerCommsError(int statusCode, int responseCode, const std::string & in_error, const std::string & in_severity)
+	void DefaultBrainCloudComms::triggerCommsError(int statusCode, int responseCode, const std::string & in_error, const std::string & in_severity)
 	{
 		Json::Value errorRoot;
 		Json::Value messages;
@@ -630,13 +619,13 @@ namespace BrainCloud
 	 * This method would normally just be in the BrainCloud, but because we call
 	 * it from within the manager via a timer, we're placing it here...
 	 */
-	void BrainCloudComms::sendHeartbeat()
+	void DefaultBrainCloudComms::sendHeartbeat()
 	{
 		ServerCall * sc = new ServerCall(ServiceName::HeartBeat, ServiceOperation::Read, Json::Value(Json::nullValue), NULL);
 		addToQueue(sc);
 	}
 
-	void BrainCloudComms::resetCommunication()
+	void DefaultBrainCloudComms::resetCommunication()
 	{
 		_isAuthenticated = false;
 		_sessionId.clear();
@@ -690,7 +679,7 @@ namespace BrainCloud
         _queueMutex.unlock();
 	}
 
-	void BrainCloudComms::shutdown()
+	void DefaultBrainCloudComms::shutdown()
 	{
 		resetCommunication();
 		_isInitialized = false;
@@ -701,7 +690,7 @@ namespace BrainCloud
 	// Private methods
 	////////////////////////////////////////////////////////
 
-	bool BrainCloudComms::shouldRetryPacket()
+	bool DefaultBrainCloudComms::shouldRetryPacket()
 	{
 		for (unsigned int i = 0; i < _inProgress.size(); ++i)
 		{
@@ -718,7 +707,7 @@ namespace BrainCloud
 		return true;
 	}
 
-	long BrainCloudComms::getRetryTimeoutMillis(int retryAttempt)
+	long DefaultBrainCloudComms::getRetryTimeoutMillis(int retryAttempt)
 	{
 		if (!shouldRetryPacket())
 		{
@@ -728,7 +717,7 @@ namespace BrainCloud
 		return _packetTimeouts[retryAttempt >= (int)_packetTimeouts.size() ? _packetTimeouts.size() - 1 : retryAttempt] * 1000;
 	}
 
-	int BrainCloudComms::getMaxSendAttempts()
+	int DefaultBrainCloudComms::getMaxSendAttempts()
 	{
 		if (!shouldRetryPacket())
 		{
@@ -739,10 +728,10 @@ namespace BrainCloud
 	}
 
 
-	void BrainCloudComms::handleError(URLResponse const & response)
+	void DefaultBrainCloudComms::handleError(URLResponse const & response)
 	{
 #if ( defined(GAMECLIENT_DEBUGLEVEL)  )
-		std::cout << "BrainCloudComms::handleError() status(" << response.getStatusCode()
+		std::cout << "DefaultBrainCloudComms::handleError() status(" << response.getStatusCode()
 			<< ") reasonPhrase: " << response.getReasonPhrase() << " data: " << response.getData() << std::endl;
 #endif
 
@@ -782,7 +771,7 @@ namespace BrainCloud
 		}
 	}
 
-	void BrainCloudComms::updateKillSwitch(const std::string & service, const std::string & operation, int32_t statusCode)
+	void DefaultBrainCloudComms::updateKillSwitch(const std::string & service, const std::string & operation, int32_t statusCode)
 	{
 		if (statusCode == 900) return;
 
@@ -804,7 +793,7 @@ namespace BrainCloud
 		}
 	}
 
-	void BrainCloudComms::resetKillSwitch()
+	void DefaultBrainCloudComms::resetKillSwitch()
 	{
 		_killSwitchErrorCount = 0;
 		_killSwitchService = "";
@@ -815,7 +804,7 @@ namespace BrainCloud
 	 * Creates a fake response to stop packets being sent to the server
 	 * without a valid session.
 	 */
-	void BrainCloudComms::fakeErrorResponse(int32_t statusCode, int32_t reasonCode, const std::string & statusMessage)
+	void DefaultBrainCloudComms::fakeErrorResponse(int32_t statusCode, int32_t reasonCode, const std::string & statusMessage)
 	{
 		size_t numMessages = _inProgress.size();
 		Json::Value errorRoot;
@@ -857,7 +846,7 @@ namespace BrainCloud
 		}
 	}
 
-	void BrainCloudComms::resetErrorCache()
+	void DefaultBrainCloudComms::resetErrorCache()
 	{
 		_statusCodeCache = HTTP_FORBIDDEN;
 		_reasonCodeCache = NO_SESSION;
@@ -867,7 +856,7 @@ namespace BrainCloud
 	/**
 	 * If there are requests in the queue, make a call to the server.
 	 */
-	void BrainCloudComms::createAndSendBundle()
+	void DefaultBrainCloudComms::createAndSendBundle()
 	{
 		bool authenticating = false;
 		Json::Value messages(Json::arrayValue);
@@ -910,7 +899,7 @@ namespace BrainCloud
 		}
 
 		// We want to cap the number of messages in each bundle.
-		while (!_queue.empty() && _inProgress.size() < _maxBundleSize)
+		while (!_queue.empty() && (int)_inProgress.size() < _maxBundleSize)
 		{
 			ServerCall * call = _queue.front();
 			if (call->isEndOfBundleMarker())
@@ -1043,20 +1032,14 @@ namespace BrainCloud
 	}
 
 	// we assume loader mutex has been locked and var is null etc
-	void BrainCloudComms::startHttpRequest()
+	void DefaultBrainCloudComms::startHttpRequest()
 	{
-#if defined (IW_SDK)
-		_loader = new IwHttpLoader();
-		//#elif (TARGET_OS_WATCH == 1)
-#elif (__APPLE__)
-		_loader = new nsURLLoader();
-#elif defined(USE_CURL)
-		_loader = new cURLLoader();
-#elif defined(WIN32)
-        _loader = new XMLHTTPRequestLoader();
-#endif
-		_loader->setTimeout((int)getRetryTimeoutMillis(_retryCount));
-		_loader->load(_request);
+        _loader = URLLoader::create();
+        if (_loader)
+        {
+            _loader->setTimeout((int)getRetryTimeoutMillis(_retryCount));
+            _loader->load(_request);
+        }
 
 		_packetSendTimeMillis = TimeUtil::getCurrentTimeMillis();
 		_retryTimeMillis = RETRY_TIME_NOT_RETRYING;
@@ -1064,7 +1047,7 @@ namespace BrainCloud
 
 
 	// UPLOADER STUFF
-	void BrainCloudComms::cancelUpload(const char * in_fileUploadId)
+	void DefaultBrainCloudComms::cancelUpload(const char * in_fileUploadId)
 	{
         _mutex.lock();
 		tFileUploadsIterator it = _fileUploads.find(in_fileUploadId);
@@ -1075,7 +1058,7 @@ namespace BrainCloud
         _mutex.unlock();
 	}
 
-	double BrainCloudComms::getUploadProgress(const char * in_fileUploadId)
+	double DefaultBrainCloudComms::getUploadProgress(const char * in_fileUploadId)
 	{
 		double progress = 0;
         _mutex.lock();
@@ -1093,7 +1076,7 @@ namespace BrainCloud
 		return progress;
 	}
 
-	int64_t BrainCloudComms::getUploadTotalBytesToTransfer(const char * in_fileUploadId)
+	int64_t DefaultBrainCloudComms::getUploadTotalBytesToTransfer(const char * in_fileUploadId)
 	{
 		int64_t totalBytesToTransfer = 0;
         _mutex.lock();
@@ -1111,7 +1094,7 @@ namespace BrainCloud
 		return totalBytesToTransfer;
 	}
 
-	int64_t BrainCloudComms::getUploadBytesTransferred(const char * in_fileUploadId)
+	int64_t DefaultBrainCloudComms::getUploadBytesTransferred(const char * in_fileUploadId)
 	{
 		int64_t bytesToTransfer = 0;
         _mutex.lock();
@@ -1129,7 +1112,7 @@ namespace BrainCloud
 		return bytesToTransfer;
 	}
 
-	void BrainCloudComms::startFileUpload(const Json::Value & in_jsonPrepareUploadResponse)
+	void DefaultBrainCloudComms::startFileUpload(const Json::Value & in_jsonPrepareUploadResponse)
 	{
 		std::string fileUploadId = in_jsonPrepareUploadResponse["data"]["fileDetails"]["uploadId"].asString();
 		if (fileUploadId.length() <= 0)
@@ -1160,26 +1143,20 @@ namespace BrainCloud
             return;
 		}
 
-#if defined (IW_SDK)
-		std::cerr << "#BCC File upload operations not supported in Marmalade" << std::endl;
-#else
-#if defined (__APPLE__)
-		NSFileUploader *uploader = new NSFileUploader();
-#elif defined(USE_CURL)
-        cURLFileUploader *uploader = new cURLFileUploader();
-#elif defined(WIN32)
-        XMLHTTPRequestFileUploader *uploader = new XMLHTTPRequestFileUploader();
-#endif
-		uploader->enableLogging(_loggingEnabled);
-		uploader->setUploadLowTransferRateThreshold(_uploadLowTransferRateThresholdBytesPerSec);
-		uploader->setUploadLowTransferRateTimeout(_uploadLowTransferRateTimeoutSecs);
-		_fileUploads[fileUploadId] = uploader;
-		if (!uploader->uploadFile(_sessionId, fileUploadId, localPath, fileSize, _uploadUrl))
-		{
-			_fileUploads.erase(_fileUploads.find(fileUploadId));
-			delete uploader;
-		}
-#endif
+        IFileUploader* uploader = IFileUploader::create();
+        if (uploader)
+        {
+            uploader->enableLogging(_loggingEnabled);
+            uploader->setUploadLowTransferRateThreshold(_uploadLowTransferRateThresholdBytesPerSec);
+            uploader->setUploadLowTransferRateTimeout(_uploadLowTransferRateTimeoutSecs);
+            _fileUploads[fileUploadId] = uploader;
+            if (!uploader->uploadFile(_sessionId, fileUploadId, localPath, fileSize, _uploadUrl))
+            {
+                _fileUploads.erase(_fileUploads.find(fileUploadId));
+                delete uploader;
+            }
+        }
+
         _mutex.unlock();
     }
 

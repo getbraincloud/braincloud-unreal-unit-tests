@@ -1,6 +1,3 @@
-#ifndef __ANDROID__
-
-
 #include <string>
 #include <iostream>
 #include <sstream>
@@ -9,7 +6,7 @@
 #include "json/json.h"
 #include "cpprest/http_client.h"
 
-#include "braincloud/internal/win/BrainCloudComms2.h"
+#include "braincloud/internal/win/CppRestBrainCloudComms.h"
 #include "braincloud/internal/win/MD5.h"
 
 #include "braincloud/BrainCloudClient.h"
@@ -29,16 +26,21 @@ using namespace web::http;
 
 namespace BrainCloud
 {
-    BrainCloudComms2::BrainCloudComms2(BrainCloudClient* in_client) : IBrainCloudComms(in_client),
+    IBrainCloudComms* IBrainCloudComms::create(BrainCloudClient* in_client)
+    {
+        return new CppRestBrainCloudComms(in_client);
+    }
+
+    CppRestBrainCloudComms::CppRestBrainCloudComms(BrainCloudClient* in_client) : IBrainCloudComms(in_client),
         _tearDownThread(false)
     {
     }
 
-    BrainCloudComms2::~BrainCloudComms2()
+    CppRestBrainCloudComms::~CppRestBrainCloudComms()
     {
     }
 
-    void BrainCloudComms2::initialize(const char * serverURL, const char * appId, const char * secretKey)
+    void CppRestBrainCloudComms::initialize(const char * serverURL, const char * appId, const char * secretKey)
     {
 #ifdef VERBOSE
         std::cout << "Entering initialize(), initialized:" << _isInitialized << std::endl;
@@ -62,64 +64,64 @@ namespace BrainCloud
             _appId = appId;
             _secretKey = secretKey;
 
-            _processQueue = std::thread(&BrainCloudComms2::processQueue, this);
+            _processQueue = std::thread(&CppRestBrainCloudComms::processQueue, this);
         }
 #ifdef VERBOSE
         std::cout << "Exiting initialize()" << std::endl;
 #endif
     }
 
-    void BrainCloudComms2::registerEventCallback(IEventCallback *in_eventCallback)
+    void CppRestBrainCloudComms::registerEventCallback(IEventCallback *in_eventCallback)
     {
         _eventCallback = in_eventCallback;
     }
 
-    void BrainCloudComms2::deregisterEventCallback()
+    void CppRestBrainCloudComms::deregisterEventCallback()
     {
         _eventCallback = NULL;
     }
 
-    void BrainCloudComms2::registerFileUploadCallback(IFileUploadCallback *in_fileUploadCallback)
+    void CppRestBrainCloudComms::registerFileUploadCallback(IFileUploadCallback *in_fileUploadCallback)
     {
         std::unique_lock<std::recursive_mutex> lock(_uploaderMutex);
         _fileUploadCallback = in_fileUploadCallback;
     }
 
-    void BrainCloudComms2::deregisterFileUploadCallback()
+    void CppRestBrainCloudComms::deregisterFileUploadCallback()
     {
         std::unique_lock<std::recursive_mutex> lock(_uploaderMutex);
         _fileUploadCallback = NULL;
     }
 
-    void BrainCloudComms2::registerRewardCallback(IRewardCallback *in_rewardCallback)
+    void CppRestBrainCloudComms::registerRewardCallback(IRewardCallback *in_rewardCallback)
     {
         _rewardCallback = in_rewardCallback;
     }
 
-    void BrainCloudComms2::deregisterRewardCallback()
+    void CppRestBrainCloudComms::deregisterRewardCallback()
     {
         _rewardCallback = NULL;
     }
 
-    void BrainCloudComms2::registerGlobalErrorCallback(IGlobalErrorCallback *in_globalErrorCallback)
+    void CppRestBrainCloudComms::registerGlobalErrorCallback(IGlobalErrorCallback *in_globalErrorCallback)
     {
         _globalErrorCallback = in_globalErrorCallback;
     }
 
-    void BrainCloudComms2::deregisterGlobalErrorCallback()
+    void CppRestBrainCloudComms::deregisterGlobalErrorCallback()
     {
         _globalErrorCallback = NULL;
     }
 
-    void BrainCloudComms2::registerNetworkErrorCallback(INetworkErrorCallback *in_networkErrorCallback)
+    void CppRestBrainCloudComms::registerNetworkErrorCallback(INetworkErrorCallback *in_networkErrorCallback)
     {
     }
 
-    void BrainCloudComms2::deregisterNetworkErrorCallback()
+    void CppRestBrainCloudComms::deregisterNetworkErrorCallback()
     {
     }
 
-    void BrainCloudComms2::addToQueue(ServerCall *serverCall)
+    void CppRestBrainCloudComms::addToQueue(ServerCall *serverCall)
     {
 #ifdef VERBOSE
         std::cout << "Entering addToQueue()" << std::endl;
@@ -134,21 +136,21 @@ namespace BrainCloud
 #endif
     }
 
-    void BrainCloudComms2::enableNetworkErrorMessageCaching(bool in_enabled)
+    void CppRestBrainCloudComms::enableNetworkErrorMessageCaching(bool in_enabled)
     {
     }
 
-    void BrainCloudComms2::retryCachedMessages()
+    void CppRestBrainCloudComms::retryCachedMessages()
     {
     }
 
-    void BrainCloudComms2::flushCachedMessages(bool in_sendApiErrorCallbacks)
+    void CppRestBrainCloudComms::flushCachedMessages(bool in_sendApiErrorCallbacks)
     {}
 
 
 
 
-    void BrainCloudComms2::processQueue()
+    void CppRestBrainCloudComms::processQueue()
     {
 #ifdef VERBOSE
         std::cout << "Entering processQueue()" << std::endl;
@@ -183,7 +185,7 @@ namespace BrainCloud
     }
 
 
-    void BrainCloudComms2::log(const std::string & s)
+    void CppRestBrainCloudComms::log(const std::string & s)
     {
         if (_loggingEnabled)
         {
@@ -195,7 +197,7 @@ namespace BrainCloud
         }
     }
 
-    void BrainCloudComms2::fillInProgress()
+    void CppRestBrainCloudComms::fillInProgress()
     {
 #ifdef VERBOSE
         std::cout << "Entering fillInProgress()" << std::endl;
@@ -245,7 +247,7 @@ namespace BrainCloud
 #endif
     }
 
-    bool BrainCloudComms2::processMessages()
+    bool CppRestBrainCloudComms::processMessages()
     {
         try
         {
@@ -429,7 +431,7 @@ namespace BrainCloud
     * Creates a fake response to stop packets being sent to the server
     * without a valid session.
     */
-    void BrainCloudComms2::handleNoAuth()
+    void CppRestBrainCloudComms::handleNoAuth()
     {
         Json::Value errorRoot;
         errorRoot["packetId"] = (Json::Int64) _expectedPacketId;
@@ -463,7 +465,7 @@ namespace BrainCloud
         _inProgressQueue.clear();
     }
 
-    std::string BrainCloudComms2::getDataString()
+    std::string CppRestBrainCloudComms::getDataString()
     {
         Json::FastWriter writer;
         Json::Value messages(Json::arrayValue);
@@ -487,12 +489,12 @@ namespace BrainCloud
         return dataString;
     }
 
-    void BrainCloudComms2::reportParseError()
+    void CppRestBrainCloudComms::reportParseError()
     {
         reportError(HTTP_UNAVAILABLE, NO_REASON_CODE, "Unable to parse response");
     }
 
-    void BrainCloudComms2::reportError(uint32_t statusCode, uint32_t reasonCode, const std::string statusMessage)
+    void CppRestBrainCloudComms::reportError(uint32_t statusCode, uint32_t reasonCode, const std::string statusMessage)
     {
         uint32_t errorStatusCode = statusCode;
         uint32_t errorReasonCode = reasonCode;
@@ -529,7 +531,7 @@ namespace BrainCloud
         }
     }
 
-    void BrainCloudComms2::reportWarning(uint32_t statusCode, uint32_t reasonCode, const std::string data, uint8_t retryCount)
+    void CppRestBrainCloudComms::reportWarning(uint32_t statusCode, uint32_t reasonCode, const std::string data, uint8_t retryCount)
     {
         std::deque<std::shared_ptr < ServerCall > >::iterator it = _inProgressQueue.begin();
         for (; it != _inProgressQueue.end(); it++)
@@ -542,7 +544,7 @@ namespace BrainCloud
         }
     }
 
-    void BrainCloudComms2::reportResults(Json::Value& root)
+    void CppRestBrainCloudComms::reportResults(Json::Value& root)
     {
         Json::FastWriter writer;
         std::deque<std::shared_ptr < ServerCall > >::iterator it = _inProgressQueue.begin();
@@ -654,13 +656,13 @@ namespace BrainCloud
         }
     }
 
-    void BrainCloudComms2::sendHeartbeat()
+    void CppRestBrainCloudComms::sendHeartbeat()
     {
         ServerCall * sc = new ServerCall(ServiceName::HeartBeat, ServiceOperation::Read, Json::Value(Json::nullValue), NULL);
         addToQueue(sc);
     }
 
-    void BrainCloudComms2::resetCommunication()
+    void CppRestBrainCloudComms::resetCommunication()
     {
 #ifdef VERBOSE
         std::cout << "Entering resetCommunication()" << std::endl;
@@ -683,18 +685,18 @@ namespace BrainCloud
 #endif
     }
 
-    void BrainCloudComms2::shutdown()
+    void CppRestBrainCloudComms::shutdown()
     {
         resetCommunication();
     }
 
-    void BrainCloudComms2::runCallbacks()
+    void CppRestBrainCloudComms::runCallbacks()
     {
         std::unique_lock<std::recursive_mutex> lock(_uploaderMutex);
         runCallbacksFileUpload();
     }
 
-    bool BrainCloudComms2::shouldRetryPacket()
+    bool CppRestBrainCloudComms::shouldRetryPacket()
     {
         std::deque<std::shared_ptr < ServerCall > >::iterator it = _inProgressQueue.begin();
         for (; it != _inProgressQueue.end(); it++)
@@ -708,7 +710,7 @@ namespace BrainCloud
         return true;
     }
 
-    long BrainCloudComms2::getRetryTimeoutMillis(int retryAttempt)
+    long CppRestBrainCloudComms::getRetryTimeoutMillis(int retryAttempt)
     {
         if (!shouldRetryPacket())
         {
@@ -718,7 +720,7 @@ namespace BrainCloud
         return _packetTimeouts[retryAttempt >= (int)_packetTimeouts.size() ? _packetTimeouts.size() - 1 : retryAttempt] * 1000;
     }
 
-    int BrainCloudComms2::getMaxSendAttempts()
+    int CppRestBrainCloudComms::getMaxSendAttempts()
     {
         if (!shouldRetryPacket())
         {
@@ -728,14 +730,14 @@ namespace BrainCloud
         return (int)_packetTimeouts.size();
     }
 
-    void BrainCloudComms2::resetErrorCache()
+    void CppRestBrainCloudComms::resetErrorCache()
     {
         _statusCodeCache = HTTP_FORBIDDEN;
         _reasonCodeCache = NO_SESSION;
         _statusMessageCache = "No session";
     }
 
-    void BrainCloudComms2::cancelUpload(const char * in_fileUploadId)
+    void CppRestBrainCloudComms::cancelUpload(const char * in_fileUploadId)
     {
         std::unique_lock<std::recursive_mutex> lock(_uploaderMutex);
         tFileUploadsIterator it = _fileUploads.find(in_fileUploadId);
@@ -745,7 +747,7 @@ namespace BrainCloud
         }
     }
 
-    double BrainCloudComms2::getUploadProgress(const char * in_fileUploadId)
+    double CppRestBrainCloudComms::getUploadProgress(const char * in_fileUploadId)
     {
         double progress = 0;
         std::unique_lock<std::recursive_mutex> lock(_uploaderMutex);
@@ -762,7 +764,7 @@ namespace BrainCloud
         return progress;
     }
 
-    int64_t BrainCloudComms2::getUploadTotalBytesToTransfer(const char * in_fileUploadId)
+    int64_t CppRestBrainCloudComms::getUploadTotalBytesToTransfer(const char * in_fileUploadId)
     {
         int64_t totalBytesToTransfer = 0;
         std::unique_lock<std::recursive_mutex> lock(_uploaderMutex);
@@ -779,7 +781,7 @@ namespace BrainCloud
         return totalBytesToTransfer;
     }
 
-    int64_t BrainCloudComms2::getUploadBytesTransferred(const char * in_fileUploadId)
+    int64_t CppRestBrainCloudComms::getUploadBytesTransferred(const char * in_fileUploadId)
     {
         int64_t bytesToTransfer = 0;
         std::unique_lock<std::recursive_mutex> lock(_uploaderMutex);
@@ -796,7 +798,7 @@ namespace BrainCloud
         return bytesToTransfer;
     }
 
-    void BrainCloudComms2::startFileUpload(const Json::Value & in_jsonPrepareUploadResponse)
+    void CppRestBrainCloudComms::startFileUpload(const Json::Value & in_jsonPrepareUploadResponse)
     {
         std::string fileUploadId = in_jsonPrepareUploadResponse["data"]["fileDetails"]["uploadId"].asString();
         if (fileUploadId.length() <= 0)
@@ -838,5 +840,3 @@ namespace BrainCloud
         }
     }
 };
-
-#endif //__ANDROID__
