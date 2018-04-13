@@ -3,7 +3,10 @@
 #include "braincloud/reason_codes.h"
 #include "braincloud/http_codes.h"
 
-
+#if __cplusplus >= 201103L
+#include <chrono>
+#include <thread>
+#endif
 
 // Note that TestBCAuth skips the normal authenticate setup provided by TestFixtureBase
 // All TestBCAuth test methods must perform their own authenticate + logout
