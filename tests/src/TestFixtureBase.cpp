@@ -4,13 +4,11 @@
 #include "TestResult.h"
 #include "braincloud/AuthenticationType.h"
 
-#ifdef _WIN32
-#define getcwd _getcwd // stupid MSFT "deprecation" warning
-#endif
-
 using namespace std;
 
+#ifndef ID_FILE_NAME
 #define ID_FILE_NAME "ids.txt"
+#endif
 
 std::string TestFixtureBase::m_serverUrl = "";
 std::string TestFixtureBase::m_appId = "";
@@ -107,11 +105,6 @@ void TestFixtureBase::Init()
 void TestFixtureBase::LoadIds()
 {
 	if (m_serverUrl.length() > 0) return; //check if loaded
-
-	//Get current working directory
-	char buff[1024];
-	std::string currentDir = (getcwd(buff, sizeof(buff)) ? std::string(buff) : std::string(""));
-	printf("\nLooking for ids.txt in %s\n", currentDir.c_str());
 
 	FILE * fp = fopen(ID_FILE_NAME, "r");
 	if (fp == NULL)
