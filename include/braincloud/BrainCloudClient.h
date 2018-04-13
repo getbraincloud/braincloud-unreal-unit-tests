@@ -80,7 +80,7 @@ namespace BrainCloud
 		/**
 		 * Destructor
 		 */
-		virtual ~BrainCloudClient() { };
+		virtual ~BrainCloudClient();
 
 		/**
 		 * BrainCloudClient is a singleton object. This method gives the caller access

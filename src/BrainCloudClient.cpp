@@ -65,6 +65,41 @@ namespace BrainCloud
 	{
 	}
 
+    BrainCloudClient::~BrainCloudClient()
+    {
+        delete _brainCloudComms;
+        delete _tournamentService;
+        delete _timeService;
+        delete _steamService;
+        delete _socialLeaderboardService;
+        delete _scriptService;
+        delete _s3HandlingService;
+        delete _redemptionCodeService;
+        delete _pushNotificationService;
+        delete _profanityService;
+        delete _productService;
+        delete _playerStatisticsEventService;
+        delete _playerStatisticsService;
+        delete _playerStateService;
+        delete _playbackStreamService;
+        delete _oneWayMatchService;
+        delete _matchmakingService;
+        delete _mailService;
+        delete _identityService;
+        delete _groupService;
+        delete _globalStatisticsService;
+        delete _globalEntityService;
+        delete _globalAppService;
+        delete _gamificationService;
+        delete _friendService;
+        delete _fileService;
+        delete _eventService;
+        delete _entityService;
+        delete _dataStreamService;
+        delete _authenticationService;
+        delete _asyncMatchService;
+    }
+
 	////////////////////////////////////////////////////
 	// Public Methods
 	////////////////////////////////////////////////////
