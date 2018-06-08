@@ -663,10 +663,10 @@ void BrainCloudComms::FilterIncomingMessages(TSharedRef<ServerCall> servercall, 
 			if (_heartbeatInterval == 0)
 			{
 				int32 sessionTimeout = data->GetIntegerField(TEXT("playerSessionExpiry"));
-				sessionTimeout = (int32)sessionTimeout * 0.85;
+				sessionTimeout = (int32)((double)sessionTimeout * 0.85);
 
 				// minimum 30 secs
-				_heartbeatInterval = sessionTimeout > 30 ? sessionTimeout : 30;
+				_heartbeatInterval = sessionTimeout;
 				_heartbeatInterval *= 1000; //to ms
 			}
 
