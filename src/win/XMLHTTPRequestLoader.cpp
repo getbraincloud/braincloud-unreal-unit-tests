@@ -1,4 +1,5 @@
 #include "braincloud/internal/URLRequestMethod.h"
+#include "braincloud/internal/win/XMLHTTPEventSink.h"
 #include "braincloud/internal/win/XMLHTTPRequestLoader.h"
 
 #include "braincloud/http_codes.h"
@@ -9,6 +10,7 @@
 #include <mutex>
 #include <thread>
 #include <future>
+#include <iostream>
 
 static std::string utf16ToUtf8(const std::wstring& utf16)
 {
@@ -87,55 +89,6 @@ namespace BrainCloud
         }
     }
 
-    // There is no timeout setting on IXMLHTTPRequest.
-    // So we built that class to while on a condition_variable until the time.
-    class RequestTimeout final
-    {
-    public:
-        RequestTimeout(CComPtr<IXMLHTTPRequest>& request, long timeout)
-            : _request(request)
-            , _timeout(timeout)
-            , _completed(false)
-        {
-            if (_timeout)
-            {
-                auto thread = std::thread([this]
-                {
-                    auto startTime = std::chrono::steady_clock::now();
-                    auto endTime = startTime + std::chrono::milliseconds(_timeout);
-                    std::unique_lock<std::mutex> lock(_mutex);
-                    while (!_completed &&
-                           std::chrono::steady_clock::now() < endTime)
-                    {
-                        _conditionVariable.wait_until(lock, endTime);
-                    }
-                    if (!_completed)
-                    {
-                        _request->abort();
-                    }
-                });
-                thread.detach();
-            }
-        }
-
-        ~RequestTimeout()
-        {
-            if (_timeout)
-            {
-                std::unique_lock<std::mutex> lock(_mutex);
-                _completed = true;
-                _conditionVariable.notify_one();
-            }
-        }
-
-    private:
-        CComPtr<IXMLHTTPRequest> _request;
-        long _timeout;
-        std::mutex _mutex;
-        std::condition_variable _conditionVariable;
-        bool _completed; // Doesn't need to be atomic, it's protected by the mutex
-    };
-
     void XMLHTTPRequestLoader::loadThreadXMLHTTPRequest(XMLHTTPRequestLoader* pLoader)
     {
         HRESULT hr;
@@ -148,6 +101,11 @@ namespace BrainCloud
         const auto& data = urlRequest.getData();
         const auto& method = urlRequest.getMethod();
         bool hasTimeout = _timeoutInterval > 0;
+
+        bool isCompleted = false;
+        std::mutex mutex;
+        std::condition_variable cv;
+        IDispatch *pSink;
 
         // Create the request
         if (method == URLRequestMethod::GET)
@@ -167,17 +125,34 @@ namespace BrainCloud
 
             hr = request->open(_bstr_t("GET"),
                                _bstr_t(url.c_str()), 
-                               _variant_t(VARIANT_FALSE),
+                               _variant_t(VARIANT_TRUE),
                                _variant_t(),
                                _variant_t());
 
             setXMLHTTPRequestHeaders(pLoader, request);
 
-            // Start a timeout
-            RequestTimeout requestTimeout(request, _timeoutInterval);
+            // Hook up the onreadystatechange event handler
+            pSink = new XMLHTTPEventSink(request, [&]
+            {
+                // onCompleted
+                std::unique_lock<std::mutex> lock(mutex);
+                isCompleted = true;
+                cv.notify_all();
+            });
+            request->put_onreadystatechange(pSink);
 
             // Send
             hr = request->send(_variant_t());
+            if (hr != S_OK)
+            {
+                pLoader->_urlResponse.setStatusCode(HTTP_CLIENT_NETWORK_ERROR);
+                pLoader->_urlResponse.setReasonPhrase("Failed to send request");
+                pLoader->_threadRunning = false;
+                pLoader->_requestMutex.lock();
+                pLoader->_request = NULL;
+                pLoader->_requestMutex.unlock();
+                return;
+            }
         }
         else if (method == URLRequestMethod::POST)
         {
@@ -189,7 +164,7 @@ namespace BrainCloud
 
             hr = request->open(_bstr_t("POST"),
                                _bstr_t(url.c_str()), 
-                               _variant_t(VARIANT_FALSE),
+                               _variant_t(VARIANT_TRUE),
                                _variant_t(),
                                _variant_t());
 
@@ -212,11 +187,28 @@ namespace BrainCloud
             memcpy(pArrayData, data.data(), data.size());
             SafeArrayUnaccessData(var.parray);
 
-            // Start a timeout
-            RequestTimeout requestTimeout(request, _timeoutInterval);
+            // Hook up the onreadystatechange event handler
+            pSink = new XMLHTTPEventSink(request, [&]
+            {
+                // onCompleted
+                std::unique_lock<std::mutex> lock(mutex);
+                isCompleted = true;
+                cv.notify_all();
+            });
+            request->put_onreadystatechange(pSink);
 
             // Send
             hr = request->send(var);
+            if (hr != S_OK)
+            {
+                pLoader->_urlResponse.setStatusCode(HTTP_CLIENT_NETWORK_ERROR);
+                pLoader->_urlResponse.setReasonPhrase("Failed to send request");
+                pLoader->_threadRunning = false;
+                pLoader->_requestMutex.lock();
+                pLoader->_request = NULL;
+                pLoader->_requestMutex.unlock();
+                return;
+            }
         }
         else
         {
@@ -230,11 +222,34 @@ namespace BrainCloud
             return;
         }
 
-        if (hr != S_OK)
+        // We wait until the async request is done
+        auto startTime = std::chrono::steady_clock::now();
+        auto endTime = startTime + std::chrono::milliseconds(_timeoutInterval);
+        std::unique_lock<std::mutex> lock(mutex);
+        cv.wait_until(lock, endTime, [&]()
         {
+            return std::chrono::steady_clock::now() >= endTime || isCompleted;
+        });
+
+        pSink->Release();
+
+        // Check if we timed out
+        if (!isCompleted)
+        {
+            // Timeout
+            printf("#BCC TIMEOUT\n");
+
+            isCompleted = true;
             pLoader->_urlResponse.setStatusCode(HTTP_CLIENT_NETWORK_ERROR);
-            pLoader->_urlResponse.setReasonPhrase("Failed to send request");
             pLoader->_threadRunning = false;
+
+            // Abort the request in a thread
+            auto requestStopThread = std::thread([](CComPtr<IXMLHTTPRequest> request)
+            {
+                request->abort();
+            }, pLoader->_request);
+            requestStopThread.detach();
+
             pLoader->_requestMutex.lock();
             pLoader->_request = NULL;
             pLoader->_requestMutex.unlock();
@@ -269,8 +284,12 @@ namespace BrainCloud
         {
             BSTR bstrResponse = NULL;
             request->get_responseText(&bstrResponse);
-            std::wstring wret = bstrResponse;
-            if (bstrResponse) SysFreeString(bstrResponse);
+            std::wstring wret = L"";
+            if (bstrResponse)
+            {
+                wret = bstrResponse;
+                SysFreeString(bstrResponse);
+            }
             pLoader->_urlResponse.setReasonPhrase(utf16ToUtf8(wret));
         }
 
