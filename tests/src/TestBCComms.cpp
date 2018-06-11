@@ -330,7 +330,21 @@ void TestBCComms::sleepForMillisAndRunCallbacks(int millis)
 	}
 }
 
+TEST_F(TestBCCommsWithAuth, TimeoutAutoRetry30sec)
+{
+    TestResult tr;
 
+    m_bc->getScriptService()->runScript("TestTimeoutRetry", "{}", &tr);
+    tr.run(m_bc);
+}
+
+TEST_F(TestBCCommsWithAuth, TimeoutAutoRetry45sec)
+{
+    TestResult tr;
+
+    m_bc->getScriptService()->runScript("TestTimeoutRetry45", "{}", &tr);
+    tr.runExpectFail(m_bc, 900, 0);
+}
 
 
 // these are for dev testing not automated build machine stuff...
