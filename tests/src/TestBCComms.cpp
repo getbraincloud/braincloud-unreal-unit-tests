@@ -264,11 +264,11 @@ TEST_F(TestBCComms, MessageBundleMarker)
 	m_bc->getAuthenticationService()->authenticateUniversal(GetUser(UserA)->m_id, GetUser(UserA)->m_password, true, &tr);
 	m_bc->insertEndOfMessageBundleMarker();
 
-    m_bc->getPlayerStatisticsService()->readAllUserStats(&tr);
+	m_bc->getPlayerStatisticsService()->readAllUserStats(&tr);
 	m_bc->insertEndOfMessageBundleMarker();
 
-    m_bc->getPlayerStatisticsService()->readAllUserStats(&tr);
-    m_bc->getPlayerStatisticsService()->readAllUserStats(&tr);
+	m_bc->getPlayerStatisticsService()->readAllUserStats(&tr);
+	m_bc->getPlayerStatisticsService()->readAllUserStats(&tr);
 	m_bc->insertEndOfMessageBundleMarker();
 
 	tr.run(m_bc);
@@ -330,7 +330,21 @@ void TestBCComms::sleepForMillisAndRunCallbacks(int millis)
 	}
 }
 
+TEST_F(TestBCCommsWithAuth, TimeoutAutoRetry30sec)
+{
+	TestResult tr;
 
+	m_bc->getScriptService()->runScript("TestTimeoutRetry", "{}", &tr);
+	tr.run(m_bc);
+}
+
+TEST_F(TestBCCommsWithAuth, TimeoutAutoRetry45sec)
+{
+	TestResult tr;
+
+	m_bc->getScriptService()->runScript("TestTimeoutRetry45", "{}", &tr);
+	tr.runExpectFail(m_bc, HTTP_CLIENT_NETWORK_ERROR, CLIENT_NETWORK_ERROR_TIMEOUT);
+}
 
 
 // these are for dev testing not automated build machine stuff...

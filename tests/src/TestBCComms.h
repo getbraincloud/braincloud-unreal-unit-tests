@@ -17,4 +17,8 @@ protected:
     void sleepForMillisAndRunCallbacks(int millis);
 };
 
+class TestBCCommsWithAuth : public TestFixtureBase
+{
+};
+
 #endif
