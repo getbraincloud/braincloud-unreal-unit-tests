@@ -132,7 +132,7 @@ namespace BrainCloud {
 	void IBrainCloudComms::setPacketTimeoutsToDefault()
 	{
 		_packetTimeouts.clear();
-		_packetTimeouts.push_back(10);
+		_packetTimeouts.push_back(15);
 		_packetTimeouts.push_back(10);
 		_packetTimeouts.push_back(10);
 	}
