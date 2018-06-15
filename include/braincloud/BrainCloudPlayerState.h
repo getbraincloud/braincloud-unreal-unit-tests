@@ -88,10 +88,16 @@ namespace BrainCloud
         void logout(IServerCallback * in_callback = NULL);
 
         /**
-		* @deprecated Use updateUserName() instead - Removal after September 1 2017
+		* @deprecated Use updateName() instead - Removal after September 1 2017
 		*/
         DEPRECATED
-        void updatePlayerName(const char * in_userName, IServerCallback * in_callback = NULL);
+        void updatePlayerName(const char * in_name, IServerCallback * in_callback = NULL);
+
+		/**
+		* @deprecated Use updateName() instead
+		*/
+		DEPRECATED
+		void updateUserName(const char * in_name, IServerCallback * in_callback = NULL);
 
         /**
         * Sets the user's name.
@@ -102,7 +108,7 @@ namespace BrainCloud
         * @param in_userName The name of the user
         * @param in_callback The method to be invoked when the server response is received
         */
-        void updateUserName(const char *in_userName, IServerCallback *in_callback = NULL);
+        void updateName(const char *in_name, IServerCallback *in_callback = NULL);
 
         /**
          * Updates the "friend summary data" associated with the logged in user.
