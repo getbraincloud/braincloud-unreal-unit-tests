@@ -82,7 +82,12 @@ public:
 	/**
 	* @deprecated Use updateUserName instead - removal after September 1 2017
 	*/
-	void updatePlayerName(const FString& userName, IServerCallback * callback);
+	void updatePlayerName(const FString& name, IServerCallback * callback);
+
+    /**
+	* @deprecated Use updateUserName instead
+	*/
+	void updateUserName(const FString& name, IServerCallback * callback);
 
     /**
     * Sets the user's name.
@@ -90,10 +95,10 @@ public:
     * Service Name - playerState
     * Service Operation - UPDATE_NAME
     *
-    * @param userName The name of the user
+    * @param name The name of the user
     * @param callback The method to be invoked when the server response is received
     */
-    void updateUserName(const FString& userName, IServerCallback * callback);
+    void updateName(const FString& name, IServerCallback * callback);
 
     /**
     * Updates the "friend summary data" associated with the logged in user.
