@@ -2,7 +2,7 @@
 //  Platform.h
 //  BrainCloud
 //
-//  Created by Preston Jennings on 2015-09-10.
+//  Created by brainCloud Team on 2015-09-10.
 //
 //
 

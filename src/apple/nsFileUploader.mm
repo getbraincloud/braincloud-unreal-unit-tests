@@ -2,7 +2,7 @@
 //  nsFileUploader.m
 //  BrainCloudCpp
 //
-//  Created by Preston Jennings on 2016-06-03.
+//  Created by brainCloud Team on 2016-06-03.
 //  Copyright © 2016 BitHeads Inc. All rights reserved.
 //
 

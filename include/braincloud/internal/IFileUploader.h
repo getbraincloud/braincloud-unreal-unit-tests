@@ -2,7 +2,7 @@
 //  IFileUploader.h
 //  GameClientLib
 //
-//  Created by Preston Jennings on 2016-01-13.
+//  Created by brainCloud Team on 2016-01-13.
 //
 //
 
