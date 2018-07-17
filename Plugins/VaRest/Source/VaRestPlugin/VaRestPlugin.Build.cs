@@ -6,12 +6,10 @@ namespace UnrealBuildTool.Rules
 {
 	public class VaRestPlugin : ModuleRules
 	{
-#if WITH_FORWARDED_MODULE_RULES_CTOR
-    public VaRestPlugin(ReadOnlyTargetRules Target) : base(Target)
-#else
-        public VaRestPlugin(TargetInfo Target)
-#endif
+		public VaRestPlugin(ReadOnlyTargetRules Target) : base(Target)
 		{
+            PCHUsage = PCHUsageMode.UseExplicitOrSharedPCHs;
+
             PrivateIncludePaths.AddRange(
 				new string[] {
 					"VaRestPlugin/Private",

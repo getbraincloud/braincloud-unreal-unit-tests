@@ -4,14 +4,11 @@ using UnrealBuildTool;
 
 public class VaRestEditorPlugin : ModuleRules
 {
-#if WITH_FORWARDED_MODULE_RULES_CTOR
-    public VaRestEditorPlugin(ReadOnlyTargetRules Target) : base(Target)
-#else
-    public VaRestEditorPlugin(TargetInfo Target)
-#endif
+	public VaRestEditorPlugin(ReadOnlyTargetRules Target) : base(Target)
 	{
-		
-		PublicIncludePaths.AddRange(
+        PCHUsage = PCHUsageMode.UseExplicitOrSharedPCHs;
+
+        PublicIncludePaths.AddRange(
 			new string[] {
 				"VaRestPlugin",
 				"VaRestPlugin/Public"
