@@ -513,4 +513,28 @@ static const int BASIC_AUTH_FAILURE = 550013;
 
 static const int CONCURRENT_LOCK_ERROR = 600002;
 
+static const int LOBBY_NOT_FOUND = 40613;
+
+static const int MESSAGE_CONTENT_INVALID_JSON = 40614;
+
+static const int RTT_FEATURE_NOT_CONFIGURED = 40615;
+
+static const int CLOUD_CODE_ONLY_METHOD = 40616;
+
+static const int MESSAGE_FROM_JSON_ID_MUST_BE_NULL = 40617;
+
+static const int MESSAGE_FROM_JSON_NAME_MANDATORY = 40618;
+
+static const int INVALID_LOBBY_STEP_ALIGNMENT = 40619;
+
+static const int INVALID_LOBBY_STEP_STRATEGY = 40620;
+
+static const int MESSAGING_MAX_RECIPIENTS_EXCEEDED = 40621;
+
+static const int LOBBY_FEATURE_NOT_CONFIGURED = 40622;
+
+static const int TOO_MANY_USERS_FOR_LOBBY_TYPE = 40624;
+
+static const int TOO_MANY_USERS_FOR_TEAM = 40623;
+
 #endif
