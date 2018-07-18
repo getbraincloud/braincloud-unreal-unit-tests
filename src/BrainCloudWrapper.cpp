@@ -483,9 +483,6 @@ namespace BrainCloud {
 
     void BrainCloudWrapper::getIdentitiesCallback(IServerCallback *success)
     {
-		const char * JSON_DATA = "data";
-		const char * JSON_IDENTITIES = "identities";
-
 		IdentityCallback *identityCallback = new IdentityCallback(this, success);
 		identityCallback->authenticateCallback = success;
 
