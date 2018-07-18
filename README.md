@@ -21,7 +21,7 @@ Package | Description
 [**brainCloudClient_WindowsDesktop_X.X.X.zip**](https://github.com/getbraincloud/braincloud-cpp/releases) | Windows Desktop C++
 [**brainCloudClient_WindowsStore_X.X.X.zip**](https://github.com/getbraincloud/braincloud-cpp/releases) | Windows 8 Store (Tablets, Phone etc) C++
 
-Legacy
+**Legacy**
 
 Package | Description
  ---- | ----
