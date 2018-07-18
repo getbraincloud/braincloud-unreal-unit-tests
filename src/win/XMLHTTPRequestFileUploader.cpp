@@ -20,6 +20,11 @@ static std::wstring utf8ToUtf16(const std::string& utf8)
 
 namespace BrainCloud
 {
+    IFileUploader* IFileUploader::create()
+    {
+        return new XMLHTTPRequestFileUploader();
+    }
+
     bool XMLHTTPRequestFileUploader::_loggingEnabled = false;
 
     struct UploaderCallback final : public IXMLHTTPRequest2Callback

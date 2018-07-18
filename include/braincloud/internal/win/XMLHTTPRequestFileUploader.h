@@ -18,7 +18,6 @@ namespace BrainCloud
     {
 
     public:
-        XMLHTTPRequestFileUploader();
         virtual ~XMLHTTPRequestFileUploader();
 
         void close();
@@ -44,6 +43,11 @@ namespace BrainCloud
         virtual const std::string & getHttpResponse();
         virtual int getHttpStatus();
         virtual int getErrorReasonCode();
+
+    protected:
+        friend class IFileUploader;
+
+        XMLHTTPRequestFileUploader();
         
     private:
         static void* run(void* in_fileUpload);

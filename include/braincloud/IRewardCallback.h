@@ -2,7 +2,7 @@
 //  IRewardCallback.h
 //  GameClientLib
 //
-//  Created by Preston Jennings on 2015-10-29.
+//  Created by brainCloud Team on 2015-10-29.
 //
 //
 

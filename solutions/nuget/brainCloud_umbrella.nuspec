@@ -6,8 +6,8 @@
     <title>brainCloud C++ SDK</title>
     <summary>brainCloud C++ SDK for Windows Universal Apps</summary>
     <description>A C++ native library for connecting Windows 10 Universal Apps to the brainCloud back-end. Currently supports Visual Studio 2015.</description>
-    <authors>bitHeads inc, Preston Jennings</authors>
-    <owners>bitHeads inc, Preston Jennings</owners>
+    <authors>bitHeads inc, Paul Winterhalder</authors>
+    <owners>bitHeads inc, Paul Winterhalder</owners>
     <licenseUrl>http://getbraincloud.com</licenseUrl>
     <projectUrl>https://github.com/getbraincloud/braincloud-cpp</projectUrl>
     <iconUrl>http://getbraincloud.com/apidocs/wp-content/uploads/brainCloud.png</iconUrl>

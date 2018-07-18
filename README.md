@@ -8,6 +8,21 @@ If you haven't signed up or you want to log into the brainCloud portal, you can 
 
 https://portal.braincloudservers.com/
 
+## Releases
+
+Package | Description
+ ---- | ----
+[**Nutget**](https://www.nuget.org/packages/brainCloudCppSdk) | Windows Universal C++ Nuget Packages
+[**Cocoapod**](https://cocoapods.org/pods/BrainCloudCpp) | 	Cocoapod for AppleTV, iOS, OSX
+[**brainCloudClient_Android_C._X.X.X.zip**](https://github.com/getbraincloud/braincloud-cpp/releases) | Android C++ libraries
+[**brainCloudClient_Apple_C._X.X.X.zip**](https://github.com/getbraincloud/braincloud-cpp/releases) | Apple libraries for AppleTV, iOS, OSX
+[**brainCloudClient_Linux_i386_C._X.X.X.zip**](https://github.com/getbraincloud/braincloud-cpp/releases) | Compiled with GCC 4.4.7 on i386 platform 
+[**brainCloudClient_Linux_x86_64_C._X.X.X.zip**](https://github.com/getbraincloud/braincloud-cpp/releases) | Compiled with GCC 4.4.7 on x64 platform
+[**brainCloudClient_Win32_VC2008_C._X.X.X.zip**](https://github.com/getbraincloud/braincloud-cpp/releases) | Compiled using cURL and VC2008. No C++11.
+[**brainCloudClient_Win32_VC2010_C._X.X.X.zip**](https://github.com/getbraincloud/braincloud-cpp/releases) | Compiled using cURL and VC2010. No C++11.
+[**brainCloudClient_WindowsDesktop_X.X.X.zip**](https://github.com/getbraincloud/braincloud-cpp/releases) | Windows Desktop C++
+[**brainCloudClient_WindowsStore_X.X.X.zip**](https://github.com/getbraincloud/braincloud-cpp/releases) | Windows 8 Store (Tablets, Phone etc) C++
+
 ## Installation
 
 The library is distributed through `CocoaPods`. In order to install the library, simply add the following to your `Podfile`.

@@ -12,48 +12,47 @@ TEST_F(TestBCWrapper, AaaRunFirst)
 {
     // test that should be run before all others
 #if defined (USE_IMMEDIATE_RETRY)
-    BrainCloudClient::getInstance()->setImmediateRetryOnError(true);
+	m_bcWrapper->client->setImmediateRetryOnError(true);
 #else
-    BrainCloudClient::getInstance()->setImmediateRetryOnError(false);
+	m_bcWrapper->client->setImmediateRetryOnError(false);
 #endif
 
     // this forces us to create a new anonymous account
-    BrainCloud::BrainCloudWrapper::getInstance()->setStoredAnonymousId("");
-    BrainCloud::BrainCloudWrapper::getInstance()->setStoredProfileId("");
+	m_bcWrapper->setStoredAnonymousId("");
+	m_bcWrapper->setStoredProfileId("");
 }
 
 TEST_F(TestBCWrapper, AuthenticateAnonymous)
 {
-    BrainCloud::BrainCloudWrapper::getInstance()->initialize(m_serverUrl.c_str(), m_secret.c_str(), m_appId.c_str(), m_version.c_str(), "wrapper", "unittest");
     
     TestResult tr;
-    BrainCloud::BrainCloudWrapper::getInstance()->authenticateAnonymous(&tr);
+	m_bcWrapper->authenticateAnonymous(&tr);
     tr.run(m_bc);
     
-    std::string anonId = BrainCloud::BrainCloudWrapper::getInstance()->getStoredAnonymousId();
-    std::string profileId = BrainCloud::BrainCloudWrapper::getInstance()->getStoredProfileId();
+    std::string anonId = m_bcWrapper->getStoredAnonymousId();
+    std::string profileId = m_bcWrapper->getStoredProfileId();
     
     Logout();
-    BrainCloud::BrainCloudWrapper::getBC()->getAuthenticationService()->clearSavedProfileId();
+	m_bcWrapper->getBC()->getAuthenticationService()->clearSavedProfileId();
     
-    BrainCloud::BrainCloudWrapper::getInstance()->authenticateAnonymous(&tr);
+	m_bcWrapper->authenticateAnonymous(&tr);
     tr.run(m_bc);
     
-    EXPECT_TRUE(anonId.compare(BrainCloud::BrainCloudWrapper::getInstance()->getStoredAnonymousId()) == 0);
-    EXPECT_TRUE(profileId.compare(BrainCloud::BrainCloudWrapper::getInstance()->getStoredProfileId()) == 0);
+    EXPECT_TRUE(anonId.compare(m_bcWrapper->getStoredAnonymousId()) == 0);
+    EXPECT_TRUE(profileId.compare(m_bcWrapper->getStoredProfileId()) == 0);
     
     Logout();
 }
 
 TEST_F(TestBCWrapper, AuthenticateEmailPassword)
 {
-    BrainCloud::BrainCloudWrapper::getInstance()->initialize(m_serverUrl.c_str(), m_secret.c_str(), m_appId.c_str(), m_version.c_str(), "wrapper", "unittest");
+	m_bcWrapper->initialize(m_serverUrl.c_str(), m_secret.c_str(), m_appId.c_str(), m_version.c_str(), "wrapper", "unittest");
     
     std::string email = GetUser(UserA)->m_email;
     email.append("_wrapper");
     
     TestResult tr;
-    BrainCloud::BrainCloudWrapper::getInstance()->authenticateEmailPassword(email.c_str(), GetUser(UserA)->m_password, true, &tr);
+	m_bcWrapper->authenticateEmailPassword(email.c_str(), GetUser(UserA)->m_password, true, &tr);
     tr.run(m_bc);
     
     Logout();
@@ -61,12 +60,12 @@ TEST_F(TestBCWrapper, AuthenticateEmailPassword)
 
 TEST_F(TestBCWrapper, AuthenticateUniversal)
 {
-    BrainCloud::BrainCloudWrapper::getInstance()->initialize(m_serverUrl.c_str(), m_secret.c_str(), m_appId.c_str(), m_version.c_str(), "wrapper", "unittest");
+    m_bcWrapper->initialize(m_serverUrl.c_str(), m_secret.c_str(), m_appId.c_str(), m_version.c_str(), "wrapper", "unittest");
     
     TestResult tr;
     std::string uid = GetUser(UserA)->m_id;
     uid.append("_wrapper");
-    BrainCloud::BrainCloudWrapper::getInstance()->authenticateUniversal(uid.c_str(), GetUser(UserA)->m_password, true, &tr);
+    m_bcWrapper->authenticateUniversal(uid.c_str(), GetUser(UserA)->m_password, true, &tr);
     tr.run(m_bc);
     
     Logout();
@@ -74,56 +73,100 @@ TEST_F(TestBCWrapper, AuthenticateUniversal)
 
 TEST_F(TestBCWrapper, VerifyAlwaysAllowProfileFalse)
 {
-    BrainCloud::BrainCloudWrapper::getInstance()->initialize(m_serverUrl.c_str(), m_secret.c_str(), m_appId.c_str(), m_version.c_str(), "wrapper", "unittest");
-    BrainCloud::BrainCloudWrapper::getInstance()->setAlwaysAllowProfileSwitch(false);
+    m_bcWrapper->initialize(m_serverUrl.c_str(), m_secret.c_str(), m_appId.c_str(), m_version.c_str(), "wrapper", "unittest");
+    m_bcWrapper->setAlwaysAllowProfileSwitch(false);
 
     // this forces us to create a new anonymous account
-    BrainCloud::BrainCloudWrapper::getInstance()->setStoredAnonymousId("");
-    BrainCloud::BrainCloudWrapper::getInstance()->setStoredProfileId("");
+    m_bcWrapper->setStoredAnonymousId("");
+    m_bcWrapper->setStoredProfileId("");
 
     TestResult tr;
-    BrainCloud::BrainCloudWrapper::getInstance()->authenticateAnonymous(&tr);
+    m_bcWrapper->authenticateAnonymous(&tr);
     tr.run(m_bc);
 
-    std::string anonId = BrainCloud::BrainCloudWrapper::getInstance()->getStoredAnonymousId();
-    std::string profileId = BrainCloud::BrainCloudWrapper::getInstance()->getStoredProfileId();
+    std::string anonId = m_bcWrapper->getStoredAnonymousId();
+    std::string profileId = m_bcWrapper->getStoredProfileId();
     std::string uid = GetUser(UserA)->m_id;
     uid.append("_wrapperVerifyAlwaysAllowProfileFalse");
 
-    BrainCloud::BrainCloudWrapper::getBC()->getIdentityService()->attachUniversalIdentity(uid.c_str(), GetUser(UserA)->m_password, &tr);
+	m_bcWrapper->getBC()->getIdentityService()->attachUniversalIdentity(uid.c_str(), GetUser(UserA)->m_password, &tr);
     tr.run(m_bc);
 
     Logout();
-    BrainCloud::BrainCloudWrapper::getBC()->getAuthenticationService()->clearSavedProfileId();
+	m_bcWrapper->getBC()->getAuthenticationService()->clearSavedProfileId();
 
-    BrainCloud::BrainCloudWrapper::getInstance()->authenticateUniversal(uid.c_str(), GetUser(UserA)->m_password, true, &tr);
+    m_bcWrapper->authenticateUniversal(uid.c_str(), GetUser(UserA)->m_password, true, &tr);
     tr.run(m_bc);
 
-    EXPECT_TRUE(anonId.compare(BrainCloud::BrainCloudWrapper::getInstance()->getStoredAnonymousId()) == 0);
-    EXPECT_TRUE(profileId.compare(BrainCloud::BrainCloudWrapper::getInstance()->getStoredProfileId()) == 0);
+    EXPECT_TRUE(anonId.compare(m_bcWrapper->getStoredAnonymousId()) == 0);
+    EXPECT_TRUE(profileId.compare(m_bcWrapper->getStoredProfileId()) == 0);
 
-    BrainCloud::BrainCloudWrapper::getInstance()->setAlwaysAllowProfileSwitch(true);
+    m_bcWrapper->setAlwaysAllowProfileSwitch(true);
     Logout();
 }
 
 TEST_F(TestBCWrapper, Reconnect)
 {
-	BrainCloud::BrainCloudWrapper::getInstance()->initialize(m_serverUrl.c_str(), m_secret.c_str(), m_appId.c_str(), m_version.c_str(), "wrapper", "unittest");
+	m_bcWrapper->initialize(m_serverUrl.c_str(), m_secret.c_str(), m_appId.c_str(), m_version.c_str(), "wrapper", "unittest");
 
 	std::string email = GetUser(UserA)->m_email;
 	email.append("_wrapper");
 
 	TestResult tr;
-	BrainCloud::BrainCloudWrapper::getInstance()->authenticateEmailPassword(email.c_str(), GetUser(UserA)->m_password, true, &tr);
+	m_bcWrapper->authenticateEmailPassword(email.c_str(), GetUser(UserA)->m_password, true, &tr);
 	tr.run(m_bc);
 
-	BrainCloud::BrainCloudWrapper::getBC()->getPlayerStateService()->logout(&tr);
+	m_bcWrapper->getBC()->getPlayerStateService()->logout(&tr);
 	tr.run(m_bc);
 
-	BrainCloud::BrainCloudWrapper::getInstance()->reconnect(&tr);
+	m_bcWrapper->reconnect(&tr);
 	tr.run(m_bc);
 
 	Logout();
+}
+
+TEST_F(TestBCWrapper, SmartSwitchAnonToUniversal)
+{
+	
+	std::string uid = GetUser(UserA)->m_id;
+	uid.append("_wrapper");
+
+	m_bcWrapper->setStoredAnonymousId(m_bcWrapper->client->getAuthenticationService()->generateAnonymousId().c_str());
+	m_bcWrapper->resetStoredProfileId();
+
+	TestResult tr;
+
+	m_bcWrapper->authenticateAnonymous(&tr);
+	tr.run(m_bc);
+
+	std::string profileId = m_bcWrapper->getStoredProfileId();
+
+	m_bcWrapper->smartSwitchAuthenticateUniversal(uid.c_str(), GetUser(UserA)->m_password, true, &tr);
+	tr.run(m_bc);
+
+	EXPECT_TRUE(profileId.compare(m_bcWrapper->getStoredAnonymousId()) != 0);
+}
+
+TEST_F(TestBCWrapper, SmartSwitchUniversalToEmail)
+{
+	std::string email = GetUser(UserA)->m_email;
+	email.append("_wrapper");
+
+	m_bcWrapper->setStoredAnonymousId(m_bcWrapper->client->getAuthenticationService()->generateAnonymousId().c_str());
+	m_bcWrapper->resetStoredProfileId();
+
+	TestResult tr;
+	std::string uid = GetUser(UserA)->m_id;
+	uid.append("_wrapper");
+	m_bcWrapper->authenticateUniversal(uid.c_str(), GetUser(UserA)->m_password, true, &tr);
+	tr.run(m_bc);
+
+	std::string profileId = m_bcWrapper->getStoredProfileId();
+
+	m_bcWrapper->smartSwitchAuthenticateEmailPassword(email.c_str(), GetUser(UserA)->m_password, true, &tr);
+	tr.run(m_bc);
+
+	EXPECT_TRUE(profileId.compare(m_bcWrapper->getStoredProfileId()) != 0);
 }
 
 #endif

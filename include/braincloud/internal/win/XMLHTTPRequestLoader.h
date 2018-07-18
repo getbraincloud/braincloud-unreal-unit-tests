@@ -20,9 +20,6 @@ namespace BrainCloud
     class XMLHTTPRequestLoader : public URLLoader
     {
     public:
-        // Constructors
-        XMLHTTPRequestLoader();
-
         // Destructor
         virtual ~XMLHTTPRequestLoader();
 
@@ -35,6 +32,9 @@ namespace BrainCloud
         virtual void setTimeout(int milliseconds) { _timeoutInterval = milliseconds; }
 
     protected:
+        friend class URLLoader;
+
+        XMLHTTPRequestLoader();
 
     private:
         static void* loadThread(void*);

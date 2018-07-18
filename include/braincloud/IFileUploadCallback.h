@@ -2,7 +2,7 @@
 //  IFileUploadCallback.h
 //  GameClientLib
 //
-//  Created by Preston Jennings on 2016-01-12.
+//  Created by brainCloud Team on 2016-01-12.
 //
 //
 

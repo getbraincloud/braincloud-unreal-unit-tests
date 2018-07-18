@@ -3,7 +3,10 @@
 #include "braincloud/reason_codes.h"
 #include "braincloud/http_codes.h"
 
-
+#if __cplusplus >= 201103L
+#include <chrono>
+#include <thread>
+#endif
 
 // Note that TestBCAuth skips the normal authenticate setup provided by TestFixtureBase
 // All TestBCAuth test methods must perform their own authenticate + logout
@@ -261,11 +264,11 @@ TEST_F(TestBCComms, MessageBundleMarker)
 	m_bc->getAuthenticationService()->authenticateUniversal(GetUser(UserA)->m_id, GetUser(UserA)->m_password, true, &tr);
 	m_bc->insertEndOfMessageBundleMarker();
 
-    m_bc->getPlayerStatisticsService()->readAllUserStats(&tr);
+	m_bc->getPlayerStatisticsService()->readAllUserStats(&tr);
 	m_bc->insertEndOfMessageBundleMarker();
 
-    m_bc->getPlayerStatisticsService()->readAllUserStats(&tr);
-    m_bc->getPlayerStatisticsService()->readAllUserStats(&tr);
+	m_bc->getPlayerStatisticsService()->readAllUserStats(&tr);
+	m_bc->getPlayerStatisticsService()->readAllUserStats(&tr);
 	m_bc->insertEndOfMessageBundleMarker();
 
 	tr.run(m_bc);
@@ -327,7 +330,21 @@ void TestBCComms::sleepForMillisAndRunCallbacks(int millis)
 	}
 }
 
+TEST_F(TestBCCommsWithAuth, TimeoutAutoRetry30sec)
+{
+	TestResult tr;
 
+	m_bc->getScriptService()->runScript("TestTimeoutRetry", "{}", &tr);
+	tr.run(m_bc);
+}
+
+TEST_F(TestBCCommsWithAuth, TimeoutAutoRetry45sec)
+{
+	TestResult tr;
+
+	m_bc->getScriptService()->runScript("TestTimeoutRetry45", "{}", &tr);
+	tr.runExpectFail(m_bc, HTTP_CLIENT_NETWORK_ERROR, CLIENT_NETWORK_ERROR_TIMEOUT);
+}
 
 
 // these are for dev testing not automated build machine stuff...

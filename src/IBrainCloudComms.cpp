@@ -132,7 +132,7 @@ namespace BrainCloud {
 	void IBrainCloudComms::setPacketTimeoutsToDefault()
 	{
 		_packetTimeouts.clear();
-		_packetTimeouts.push_back(10);
+		_packetTimeouts.push_back(15);
 		_packetTimeouts.push_back(10);
 		_packetTimeouts.push_back(10);
 	}
@@ -184,27 +184,38 @@ namespace BrainCloud {
 	// Protected methods
 	//////////////////////////////////////////////////////
 
-	void IBrainCloudComms::setCredentials(const Json::Value& in_jsonAuthenticationResponse)
+	void IBrainCloudComms::setCredentials(const Json::Value& in_jsonResponse)
 	{
-		clearSessionId();
-		if (in_jsonAuthenticationResponse["data"] != Json::nullValue && in_jsonAuthenticationResponse["data"]["sessionId"] != Json::nullValue)
+		if (in_jsonResponse["data"] != Json::nullValue)
 		{
-			std::string sessionId = in_jsonAuthenticationResponse["data"].get("sessionId", "").asString();
-			std::string profileId = in_jsonAuthenticationResponse["data"].get("profileId", "").asString();
-			setSessionId(sessionId.c_str());
-			_client->getAuthenticationService()->setProfileId(profileId.c_str());
+			const Json::Value& jsonData = in_jsonResponse["data"];
+			if (jsonData["sessionId"] != Json::nullValue)
+			{
+				std::string sessionId = jsonData.get("sessionId", "").asString();
+				setSessionId(sessionId.c_str());
+			}
+
+			if (jsonData["profileId"] != Json::nullValue)
+			{
+				std::string profileId = jsonData.get("profileId", "").asString();
+				_client->getAuthenticationService()->setProfileId(profileId.c_str());
+			}
 		}
 	}
 
 	void IBrainCloudComms::filterIncomingMessages(const ServerCall* servercall, const Json::Value& response)
 	{
 		//This is a hook to perform processing on any messages that come in, before they are sent to the calling application.
+  
+		// A session id or a profile id could potentially come back in any messages
+		setCredentials(response);
 
 		if (servercall->getService() == ServiceName::AuthenticateV2 &&
 			servercall->getOperation() == ServiceOperation::Authenticate &&
 			response["reason_code"] == Json::nullValue)
 		{
 			_isAuthenticated = true;
+			clearSessionId();
 			setCredentials(response);
 
 			if (response["data"] != Json::nullValue)
@@ -215,11 +226,8 @@ namespace BrainCloud {
 					if (response["data"]["playerSessionExpiry"] != Json::nullValue)
 					{
 						int sessionTimeout = response["data"]["playerSessionExpiry"].asInt();
-						sessionTimeout = (int)(sessionTimeout * 0.85);
-						if (sessionTimeout > 30) // minimum 30 secs
-						{
-							_heartbeatInterval = sessionTimeout * 1000;
-						}
+						sessionTimeout = (int)((double)sessionTimeout * 0.85);
+                        _heartbeatInterval = sessionTimeout * 1000;
 					}
 				}
 

@@ -68,46 +68,62 @@ set (OS_SPECIFIC_INCS "")
 
 file(GLOB_RECURSE JSONCPP_FILES "${BC_DIR}/lib/jsoncpp-1.0.0/*.*")
 
-# cpprestsdk (most windows platforms) or curl (most *nix platforms)
+# HTTP related files
 if (WIN32 AND ${USE_CPPREST})
-	list(APPEND OS_SPECIFIC_INCS "include/braincloud/internal/win/BrainCloudComms2.h")
+	list(APPEND OS_SPECIFIC_INCS "include/braincloud/internal/win/CppRestBrainCloudComms.h")
 	list(APPEND OS_SPECIFIC_INCS "include/braincloud/internal/win/CppRestFileUploader.h")
 	list(APPEND OS_SPECIFIC_INCS "include/braincloud/internal/win/MD5.h")
-	list(APPEND OS_SPECIFIC_SRCS "src/win/BrainCloudComms2.cpp")
+	list(APPEND OS_SPECIFIC_SRCS "src/win/CppRestBrainCloudComms.cpp")
 	list(APPEND OS_SPECIFIC_SRCS "src/win/CppRestFileUploader.cpp")
 	list(APPEND OS_SPECIFIC_SRCS "src/win/MD5.cpp")
 elseif (USE_CURL)
-	list(APPEND OS_SPECIFIC_INCS "include/braincloud/internal/BrainCloudComms.h")
-	list(APPEND OS_SPECIFIC_SRCS "src/BrainCloudComms.cpp")
+	list(APPEND OS_SPECIFIC_INCS "include/braincloud/internal/DefaultBrainCloudComms.h")
+	list(APPEND OS_SPECIFIC_SRCS "src/DefaultBrainCloudComms.cpp")
 	list(APPEND OS_SPECIFIC_INCS "include/braincloud/internal/nix/cURLFileUploader.h")
 	list(APPEND OS_SPECIFIC_INCS "include/braincloud/internal/nix/cURLLoader.h")
 	list(APPEND OS_SPECIFIC_SRCS "src/nix/cURLFileUploader.cpp")
 	list(APPEND OS_SPECIFIC_SRCS "src/nix/cURLLoader.cpp")
 elseif (VS2013_OR_HIGHER)
-	list(APPEND OS_SPECIFIC_INCS "include/braincloud/internal/BrainCloudComms.h")
-	list(APPEND OS_SPECIFIC_SRCS "src/BrainCloudComms.cpp")
+	list(APPEND OS_SPECIFIC_INCS "include/braincloud/internal/DefaultBrainCloudComms.h")
+	list(APPEND OS_SPECIFIC_SRCS "src/DefaultBrainCloudComms.cpp")
+	list(APPEND OS_SPECIFIC_INCS "include/braincloud/internal/win/XMLHTTPEventSink.h")
 	list(APPEND OS_SPECIFIC_INCS "include/braincloud/internal/win/XMLHTTPRequestFileUploader.h")
 	list(APPEND OS_SPECIFIC_INCS "include/braincloud/internal/win/XMLHTTPRequestLoader.h")
+	list(APPEND OS_SPECIFIC_SRCS "src/win/XMLHTTPEventSink.cpp")
 	list(APPEND OS_SPECIFIC_SRCS "src/win/XMLHTTPRequestFileUploader.cpp")
 	list(APPEND OS_SPECIFIC_SRCS "src/win/XMLHTTPRequestLoader.cpp")
 else()
-	list(APPEND OS_SPECIFIC_INCS "include/braincloud/internal/BrainCloudComms.h")
-	list(APPEND OS_SPECIFIC_SRCS "src/BrainCloudComms.cpp")
+	list(APPEND OS_SPECIFIC_INCS "include/braincloud/internal/DefaultBrainCloudComms.h")
+	list(APPEND OS_SPECIFIC_SRCS "src/DefaultBrainCloudComms.cpp")
 endif()
 
 # other platform specific srcs/includes
 if (APPLE)
-    list(APPEND OS_SPECIFIC_INCS "include/braincloud/internal/mac/nsFileUploader.h")
-    list(APPEND OS_SPECIFIC_INCS "include/braincloud/internal/mac/nsURLLoader.h")
-    list(APPEND OS_SPECIFIC_SRCS "src/mac/GUID.mm")
-    list(APPEND OS_SPECIFIC_SRCS "src/mac/nsFileUploader.mm")
-    list(APPEND OS_SPECIFIC_SRCS "src/mac/nsURLLoader.mm")
-    list(APPEND OS_SPECIFIC_SRCS "src/mac/SaveDataHelper.mm")
-	include_directories("${BC_DIR}/lib/mac/sskeychain")
-    list(APPEND OS_SPECIFIC_SRCS "lib/mac/sskeychain/SSKeychain/SSKeychain.m")
-    list(APPEND OS_SPECIFIC_SRCS "lib/mac/sskeychain/SSKeychain/SSKeychainQuery.m")
+    list(APPEND OS_SPECIFIC_INCS "include/braincloud/internal/apple/AppleSaveDataHelper.h")
+    list(APPEND OS_SPECIFIC_INCS "include/braincloud/internal/apple/nsFileUploader.h")
+    list(APPEND OS_SPECIFIC_INCS "include/braincloud/internal/apple/nsURLLoader.h")
+    list(APPEND OS_SPECIFIC_SRCS "src/apple/GUID.mm")
+    list(APPEND OS_SPECIFIC_SRCS "src/apple/nsFileUploader.mm")
+    list(APPEND OS_SPECIFIC_SRCS "src/apple/nsURLLoader.mm")
+    list(APPEND OS_SPECIFIC_SRCS "src/apple/AppleSaveDataHelper.mm")
+	include_directories("${BC_DIR}/lib/apple/sskeychain")
+    list(APPEND OS_SPECIFIC_SRCS "lib/apple/sskeychain/SSKeychain/SSKeychain.m")
+    list(APPEND OS_SPECIFIC_SRCS "lib/apple/sskeychain/SSKeychain/SSKeychainQuery.m")
+    list(APPEND OS_SPECIFIC_SRCS "src/apple/AppleDevice.cpp")
+elseif (WIN32)
+	list(APPEND OS_SPECIFIC_SRCS "include/braincloud/internal/win/WindowsSaveDataHelper.h")
+	list(APPEND OS_SPECIFIC_SRCS "src/win/WindowsDevice.cpp")
+    list(APPEND OS_SPECIFIC_SRCS "src/win/WindowsGUID.cpp")
+	list(APPEND OS_SPECIFIC_SRCS "src/win/WindowsSaveDataHelper.cpp")
+elseif (LINUX)
+	list(APPEND OS_SPECIFIC_SRCS "include/braincloud/internal/DefaultSaveDataHelper.h")
+	list(APPEND OS_SPECIFIC_SRCS "src/DefaultGUID.cpp")
+	list(APPEND OS_SPECIFIC_SRCS "src/DefaultSaveDataHelper.cpp")
+	list(APPEND OS_SPECIFIC_SRCS "src/nix/LinuxDevice.cpp")
 else()
-    list(APPEND OS_SPECIFIC_SRCS "src/SaveDataHelper.cpp")
+	list(APPEND OS_SPECIFIC_SRCS "include/braincloud/internal/DefaultSaveDataHelper.h")
+	list(APPEND OS_SPECIFIC_SRCS "src/DefaultGUID.cpp")
+	list(APPEND OS_SPECIFIC_SRCS "src/DefaultSaveDataHelper.cpp")
 endif()
 
 include_directories("${BC_DIR}/include")
@@ -166,6 +182,7 @@ add_library(brainCloud STATIC
 	include/braincloud/reason_codes.h
 
 	# private headers
+	include/braincloud/internal/Device.h
 	include/braincloud/internal/Mutex.h
 	include/braincloud/internal/GUID.h
 	include/braincloud/internal/IBrainCloudComms.h
@@ -224,6 +241,7 @@ add_library(brainCloud STATIC
 	src/JsonUtil.cpp
 	src/OperationParam.cpp
 	src/Platform.cpp
+	src/SaveDataHelper.cpp
 	src/ServerCall.cpp
 	src/ServiceName.cpp
 	src/ServiceOperation.cpp

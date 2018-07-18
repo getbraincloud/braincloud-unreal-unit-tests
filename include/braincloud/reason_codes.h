@@ -13,7 +13,7 @@ static const int SWITCHING_FACEBOOK_MEMORY = 40201;
 static const int MERGING_MEMORY = 40202;
 static const int RESETING_MEMORY = 40203;
 static const int MOVING_ANONYMOUS_MEMORY = 40204;
-static const int LOGIN_SECURITY_ERROR = 40205;
+static const int LOGIN_SECURITY_ERROR = 40209;
 static const int MISSING_IDENTITY_ERROR = 40206;
 static const int SWITCHING_PROFILES = 40207;
 static const int MISSING_PROFILE_ERROR = 40208;
@@ -316,5 +316,225 @@ static const int CLIENT_UPLOAD_FILE_CANCELLED = 90100;
 static const int CLIENT_UPLOAD_FILE_TIMED_OUT = 90101;
 static const int CLIENT_UPLOAD_FILE_UNKNOWN = 90102;
 static const int CLIENT_DISABLED = 90200;
+
+static const int RECREATING_ANONYMOUS_MEMORY = 40203;
+
+static const int DATABASE_INPUT_TOO_LARGE_ERROR = 40218;
+
+static const int MISSING_APP_EMAIL_ACCOUNT = 40219;
+
+static const int INVALID_DATABASE_FIELD_NAME = 40347;
+
+static const int INVALID_AMOUNT = 40385;
+
+static const int GLOBAL_ENTITY_SECURITY_ERROR = 40535;
+
+static const int LEADERBOARD_SECURITY_ERROR = 40536;
+
+static const int NOT_A_SYSTEM_ENTITY = 40537;
+
+static const int CONTROLLER_ERROR = 40538;
+
+static const int EVENT_MISSING = 40539;
+
+static const int INVALID_XP_LEVEL = 40540;
+
+static const int INVALID_ITUNES_ID = 40541;
+
+static const int IMPORT_ERROR = 40542;
+
+static const int INVALID_ENTITY_TYPE = 40543;
+
+static const int FORM_ERROR = 40544;
+
+static const int INVALID_PARENT = 40545;
+
+static const int INVALID_CURRENCY = 40546;
+
+static const int INVALID_THRESHHOLD = 40547;
+
+static const int MATCH_ALREADY_EXISTS = 40548;
+
+static const int FRIEND_NOT_FOUND = 40549;
+
+static const int MATCH_NOT_FOUND = 40550;
+
+static const int MATCH_COMPLETE = 40551;
+
+static const int MATCH_NOT_STARTED = 40552;
+
+static const int MATCH_EXPIRED = 40553;
+
+static const int PLAYER_NOT_IN_MATCH = 40554;
+
+static const int INVALID_MATCH_VERSION = 40555;
+
+static const int INVALID_TURN_VERSION = 40556;
+
+static const int INVALID_DEVICE_TYPE = 40557;
+
+static const int DUPLICATE_ENTITY = 40558;
+
+static const int DUPLICATE_EVENT = 40559;
+
+static const int INVALID_LEADERBOARD_COUNT = 40560;
+
+static const int DUPLICATE_LEADERBOARD = 40561;
+
+static const int MICROSOFT_ERROR = 40562;
+
+static const int DUPLICATE_TOURNAMENT = 40563;
+
+static const int CREATE_SYSTEM_ENTITY_FAILED = 40564;
+
+static const int INVALID_MAX_NUM_STREAMS = 40565;
+
+static const int INVALID_PACKET_ID = 40566;
+
+static const int HOOK_ERROR = 40567;
+
+static const int INVALID_STREAM_ID = 40568;
+
+static const int INVALID_SCAN_CODE = 40569;
+
+static const int NO_CUSTOM_ENTITY_CONFIG_FOUND = 40570;
+
+static const int NO_CUSTOM_ENTITY_FOUND = 40571;
+
+static const int CLOUD_STORAGE_ERROR = 40572;
+
+static const int NO_CUSTOM_FIELD_CONFIG_FOUND = 40573;
+
+static const int MISSING_CUSTOM_ENTITY_QUERY = 40574;
+
+static const int INVALID_CUSTOM_ENTITY_JSON_WHERE = 40575;
+
+static const int INVALID_CUSTOM_ENTITY_JSON_FIELDS = 40576;
+
+static const int ENTITY_ID_NOT_CONFIGURED = 40577;
+
+static const int UNCONFIGURED_CUSTOM_FIELD_ERROR = 40578;
+
+static const int CUSTOM_ENTITY_SECURITY_ERROR = 40579;
+
+static const int CUSTOM_ENTITY_PARTIAL_UPDATE_INVALID_DATA = 40580;
+
+static const int TOURNAMENT_PLAY_HAS_NOT_STARTED = 40581;
+
+static const int TOURNAMENT_PLAY_HAS_ENDED = 40582;
+
+static const int NEW_CREDENTIAL_IN_USE = 40583;
+
+static const int OLD_CREDENTIAL_NOT_OWNED = 40584;
+
+static const int CLOUD_CODE_SECURITY_ERROR = 40585;
+
+static const int RTT_SERVER_NOT_FOUND = 40586;
+
+static const int RTT_CLIENT_NOT_FOUND = 40587;
+
+static const int NO_RTT_SERVERS_AVAILABLE = 40588;
+
+static const int PROFILE_SESSION_MISMATCH = 40589;
+
+static const int WAITING_FOR_ON_DEMAND_TOURNAMENT_TO_START = 40590;
+
+static const int CDN_URLS_NOT_SUPPORTED = 40591;
+
+static const int CLOUD_CONTAINER_ERROR = 40592;
+
+static const int MESSAGING_FEATURE_NOT_CONFIGURED = 40593;
+
+static const int CHAT_FEATURE_NOT_CONFIGURED = 40594;
+
+static const int MESSAGE_NOT_FOUND = 40595;
+
+static const int COLLECTION_CREATE_DISABLED = 40596;
+
+static const int LEADERBAORD_COLLECTION_CREATE_DISABLED = 40597;
+
+static const int MESSAGE_VERSION_MISMATCH = 40598;
+
+static const int MESSAGEBOX_VERSION_MISMATCH = 40599;
+
+static const int MESSAGE_TOO_LARGE = 40600;
+
+static const int FEATURE_NOT_ENABLED = 40601;
+
+static const int CHANNEL_NOT_FOUND = 40603;
+
+static const int MALFORMED_FORM_DATA = 40604;
+
+static const int MISSING_LAST_PACKET_RESPONSE = 40605;
+
+static const int PACKET_IN_PROGRESS = 40606;
+
+static const int LOBBY_MEMBER_NOT_FOUND = 40607;
+
+static const int LOBBY_TEAM_NOT_FOUND = 40608;
+
+static const int LOBBY_ENTRY_QUEUE_MEMBER_NOT_FOUND = 40609;
+
+static const int INVALID_HEADER_APP_ID = 40610;
+
+static const int LOBBY_TYPE_NOT_FOUND = 40611;
+
+static const int LOBBY_TEAM_FULL = 40612;
+
+static const int TWITTER_AUTH_ERROR = 500006;
+
+static const int TWITTER_ERROR = 500007;
+
+static const int NOT_TEAM_ADMIN = 550000;
+
+static const int NO_TEAM_ACCESS = 550001;
+
+static const int MISSING_COMPANY_RECORD = 550002;
+
+static const int TEAM_MEMBER_NOT_FOUND = 550003;
+
+static const int TEAM_MEMBER_NOT_ENABLED = 550004;
+
+static const int TEAM_MEMBER_NOT_ACTIVE = 550005;
+
+static const int TEAM_MEMBER_LOCKED = 550006;
+
+static const int INVALID_PASSWORD = 550007;
+
+static const int TOKEN_INVALID = 550008;
+
+static const int TOKEN_EXPIRED = 550009;
+
+static const int TEMPLATE_GAME_NOT_FOUND = 550011;
+
+static const int INVALID_TEMPLATE_GAME_TEAM = 550012;
+
+static const int BASIC_AUTH_FAILURE = 550013;
+
+static const int CONCURRENT_LOCK_ERROR = 600002;
+
+static const int LOBBY_NOT_FOUND = 40613;
+
+static const int MESSAGE_CONTENT_INVALID_JSON = 40614;
+
+static const int RTT_FEATURE_NOT_CONFIGURED = 40615;
+
+static const int CLOUD_CODE_ONLY_METHOD = 40616;
+
+static const int MESSAGE_FROM_JSON_ID_MUST_BE_NULL = 40617;
+
+static const int MESSAGE_FROM_JSON_NAME_MANDATORY = 40618;
+
+static const int INVALID_LOBBY_STEP_ALIGNMENT = 40619;
+
+static const int INVALID_LOBBY_STEP_STRATEGY = 40620;
+
+static const int MESSAGING_MAX_RECIPIENTS_EXCEEDED = 40621;
+
+static const int LOBBY_FEATURE_NOT_CONFIGURED = 40622;
+
+static const int TOO_MANY_USERS_FOR_LOBBY_TYPE = 40624;
+
+static const int TOO_MANY_USERS_FOR_TEAM = 40623;
 
 #endif

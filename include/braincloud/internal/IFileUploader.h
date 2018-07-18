@@ -2,7 +2,7 @@
 //  IFileUploader.h
 //  GameClientLib
 //
-//  Created by Preston Jennings on 2016-01-13.
+//  Created by brainCloud Team on 2016-01-13.
 //
 //
 
@@ -25,6 +25,9 @@ namespace BrainCloud
             UPLOAD_STATUS_COMPLETE_FAILED = 3,
             UPLOAD_STATUS_COMPLETE_SUCCESS = 4
         };
+
+        // Factory method
+        static IFileUploader* create();
 
         virtual ~IFileUploader() {};
 
@@ -50,6 +53,9 @@ namespace BrainCloud
         virtual int getErrorReasonCode() = 0;
 
         virtual bool isThreadRunning() = 0;
+
+    protected:
+        IFileUploader() {}
     };
 }
 

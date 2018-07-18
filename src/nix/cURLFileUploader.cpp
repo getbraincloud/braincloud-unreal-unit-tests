@@ -38,6 +38,11 @@ extern "C" FILE * __cdecl __iob_func(void) { return _iob; }
 
 namespace BrainCloud
 {
+    IFileUploader* IFileUploader::create()
+    {
+        return new cURLFileUploader();
+    }
+
     bool cURLFileUploader::_loggingEnabled = false;
     
     cURLFileUploader::cURLFileUploader()

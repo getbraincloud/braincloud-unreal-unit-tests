@@ -53,6 +53,7 @@ solutions/**/*.opendb
 solutions/**/*.suo
 solutions/**/bin
 solutions/**/AppPackages
+solutions/**/*.sdf
 
 # various build artifacts
 cmake_*
@@ -61,3 +62,22 @@ autobuild/artifacts
 autobuild/tmp
 *.swp
 CMakeFiles/
+CMakeCache.txt
+
+# visual studio
+.vs/
+*.vcxproj
+*.vcxproj.filters
+Debug/
+Win32/
+*.dir/
+*.sln
+
+# Linux
+*.a
+ids.txt
+Makefile
+
+# tests artifacts
+tests/bctests
+tests/uploadsimplefile.txt

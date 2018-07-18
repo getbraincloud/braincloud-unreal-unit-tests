@@ -6,7 +6,7 @@
 using namespace BrainCloud;
 
 
-TEST_F(TestBCPlayerState, DeletePlayer)
+TEST_F(TestBCPlayerState, DeleteUser)
 {
     Authenticate();
     TestResult tr;
@@ -82,11 +82,11 @@ TEST_F(TestBCPlayerState, UpdateAttributes)
     Logout();
 }
 
-TEST_F(TestBCPlayerState, UpdatePlayerName)
+TEST_F(TestBCPlayerState, UpdateName)
 {
     Authenticate();
     TestResult tr;
-    m_bc->getPlayerStateService()->updateUserName(GetUser(UserA)->m_id, &tr);
+    m_bc->getPlayerStateService()->updateName(GetUser(UserA)->m_id, &tr);
     tr.run(m_bc);
     Logout();
 }
