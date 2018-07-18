@@ -6,7 +6,7 @@
 using namespace BrainCloud;
 
 
-TEST_F(TestBCPlayerState, DeletePlayer)
+TEST_F(TestBCPlayerState, DeleteUser)
 {
     Authenticate();
     TestResult tr;

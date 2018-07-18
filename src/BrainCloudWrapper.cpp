@@ -226,7 +226,7 @@ namespace BrainCloud {
 				wrapper->client->getPlayerStateService()->logout();
 			}
 			else {
-				wrapper->client->getPlayerStateService()->deletePlayer();
+				wrapper->client->getPlayerStateService()->deleteUser ();
 			}
 			
 			wrapper->client->insertEndOfMessageBundleMarker();
