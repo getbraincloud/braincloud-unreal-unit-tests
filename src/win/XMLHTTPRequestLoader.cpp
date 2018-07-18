@@ -247,10 +247,10 @@ namespace BrainCloud
             pLoader->_requestMutex.lock();
             auto requestStopThread = std::thread([](CComPtr<IXMLHTTPRequest> request)
             {
-				if (request)
-				{
-                	request->abort();
-				}
+                if (request)
+                {
+                    request->abort();
+                }
             }, pLoader->_request);
             requestStopThread.detach();
 
