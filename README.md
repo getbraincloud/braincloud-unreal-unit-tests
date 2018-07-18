@@ -18,10 +18,16 @@ Package | Description
 [**brainCloudClient_Apple_C._X.X.X.zip**](https://github.com/getbraincloud/braincloud-cpp/releases) | Apple libraries for AppleTV, iOS, OSX
 [**brainCloudClient_Linux_i386_C._X.X.X.zip**](https://github.com/getbraincloud/braincloud-cpp/releases) | Compiled with GCC 4.4.7 on i386 platform 
 [**brainCloudClient_Linux_x86_64_C._X.X.X.zip**](https://github.com/getbraincloud/braincloud-cpp/releases) | Compiled with GCC 4.4.7 on x64 platform
-[**brainCloudClient_Win32_VC2008_C._X.X.X.zip**](https://github.com/getbraincloud/braincloud-cpp/releases) | Compiled using cURL and VC2008. No C++11.
-[**brainCloudClient_Win32_VC2010_C._X.X.X.zip**](https://github.com/getbraincloud/braincloud-cpp/releases) | Compiled using cURL and VC2010. No C++11.
 [**brainCloudClient_WindowsDesktop_X.X.X.zip**](https://github.com/getbraincloud/braincloud-cpp/releases) | Windows Desktop C++
 [**brainCloudClient_WindowsStore_X.X.X.zip**](https://github.com/getbraincloud/braincloud-cpp/releases) | Windows 8 Store (Tablets, Phone etc) C++
+
+**Legacy**
+
+Package | Description
+ ---- | ----
+ [**brainCloudClient_Win32_VC2008_C._3.7.0.zip**](https://github.com/getbraincloud/braincloud-cpp/releases/download/3.7.0/brainCloudClient_Win32_VC2008_C._3.7.0.zip) | Compiled using cURL and VC2008. No C++11.
+[**brainCloudClient_Win32_VC2010_C._3.7.0.zip**](https://github.com/getbraincloud/braincloud-cpp/releases/download/3.7.0/brainCloudClient_Win32_VC2010_C._3.7.0.zip) | Compiled using cURL and VC2010. No C++11.
+[**brainCloudClient_Marmalade_C++_3.2.0.zip**](http://d28b58vufdqdih.cloudfront.net/brainCloudClientLibs/brainCloudClient_Marmalade_C%2B%2B_3.2.0.zip) | 	Marmalade library
 
 ## Installation
 
