@@ -64,15 +64,18 @@ UBCPlayerStateProxy* UBCPlayerStateProxy::Logout(ABrainCloud *brainCloud)
 
 UBCPlayerStateProxy* UBCPlayerStateProxy::UpdatePlayerName(ABrainCloud *brainCloud, FString playerName)
 {
-	UBCPlayerStateProxy* Proxy = NewObject<UBCPlayerStateProxy>();
-	UBCWrapperProxy::GetBrainCloudInstance(brainCloud)->getPlayerStateService()->updateUserName(playerName, Proxy);
-	return Proxy;
+	return UpdateName(brainCloud, playerName);
 }
 
 UBCPlayerStateProxy* UBCPlayerStateProxy::UpdateUserName(ABrainCloud *brainCloud, FString userName)
 {
+    return UpdateName(brainCloud, userName);
+}
+
+UBCPlayerStateProxy* UBCPlayerStateProxy::UpdateName(ABrainCloud *brainCloud, FString name)
+{
     UBCPlayerStateProxy* Proxy = NewObject<UBCPlayerStateProxy>();
-    UBCWrapperProxy::GetBrainCloudInstance(brainCloud)->getPlayerStateService()->updateUserName(userName, Proxy);
+    UBCWrapperProxy::GetBrainCloudInstance(brainCloud)->getPlayerStateService()->updateUserName(name, Proxy);
     return Proxy;
 }
 

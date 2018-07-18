@@ -645,13 +645,28 @@ void BrainCloudComms::FilterIncomingMessages(TSharedRef<ServerCall> servercall, 
 	ServiceName service = servercall->getService();
 	ServiceOperation operation = servercall->getOperation();
 
+	TSharedPtr<FJsonObject> data = response->GetObjectField(TEXT("data"));
+
+	// A session id or a profile id could potentially come back in any messages
+	if (data.IsValid())
+	{
+		data->TryGetStringField(TEXT("sessionId"), _sessionId);
+
+		FString profileIdOut;
+		data->TryGetStringField(TEXT("profileId"), profileIdOut);
+
+		if(!profileIdOut.IsEmpty()) {
+			_client->getAuthenticationService()->setProfileId(profileIdOut);
+		}
+	}
+	
 	if (service == ServiceName::AuthenticateV2 && operation == ServiceOperation::Authenticate)
 	{
 		_isAuthenticated = true;
 		ResetErrorCache();
 		ClearSessionId();
 
-		TSharedPtr<FJsonObject> data = response->GetObjectField(TEXT("data"));
+		data = response->GetObjectField(TEXT("data"));
 
 		if (data.IsValid())
 		{
@@ -663,10 +678,10 @@ void BrainCloudComms::FilterIncomingMessages(TSharedRef<ServerCall> servercall, 
 			if (_heartbeatInterval == 0)
 			{
 				int32 sessionTimeout = data->GetIntegerField(TEXT("playerSessionExpiry"));
-				sessionTimeout = (int32)sessionTimeout * 0.85;
+				sessionTimeout = (int32)((double)sessionTimeout * 0.85);
 
 				// minimum 30 secs
-				_heartbeatInterval = sessionTimeout > 30 ? sessionTimeout : 30;
+				_heartbeatInterval = sessionTimeout;
 				_heartbeatInterval *= 1000; //to ms
 			}
 

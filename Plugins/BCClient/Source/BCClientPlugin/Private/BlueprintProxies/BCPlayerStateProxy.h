@@ -82,10 +82,17 @@ public:
         static UBCPlayerStateProxy* Logout(ABrainCloud *brainCloud);
 
 	/**
-	* @deprecated Use UpdateUserName instead
+	* @deprecated Use UpdateName instead
 	*/
 	UFUNCTION(BlueprintCallable, meta = (BlueprintInternalUseOnly = "true"), Category = "BrainCloud|Player State")
 		static UBCPlayerStateProxy* UpdatePlayerName(ABrainCloud *brainCloud, FString playerName);
+
+
+	/**
+	* @deprecated Use UpdateName instead
+	*/
+	UFUNCTION(BlueprintCallable, meta = (BlueprintInternalUseOnly = "true"), Category = "BrainCloud|Player State")
+        static UBCPlayerStateProxy* UpdateUserName(ABrainCloud *brainCloud, FString userName);
 
     /**
     * Sets the user's name.
@@ -93,10 +100,10 @@ public:
     * Service Name - playerState
     * Service Operation - UPDATE_NAME
     *
-    * Param - userName The name of the user
+    * Param - name The name of the user
     */
     UFUNCTION(BlueprintCallable, meta = (BlueprintInternalUseOnly = "true"), Category = "BrainCloud|Player State")
-        static UBCPlayerStateProxy* UpdateUserName(ABrainCloud *brainCloud, FString userName);
+        static UBCPlayerStateProxy* UpdateName(ABrainCloud *brainCloud, FString name);
 
     /**
     * Updates the "friend summary data" associated with the logged in player.
