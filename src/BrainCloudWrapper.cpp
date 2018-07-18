@@ -204,9 +204,6 @@ namespace BrainCloud {
 	class IdentityCallback : public IServerCallback
 	{
 	public: 
-		const char * JSON_DATA = "data";
-		const char * JSON_IDENTITIES = "identities";
-
 		BrainCloudWrapper * wrapper;
 		IServerCallback * authenticateCallback;
 
@@ -222,7 +219,7 @@ namespace BrainCloud {
 
 			reader.parse(jsonData, response);
 
-			Json::Value identitiesObject = response[JSON_DATA][JSON_IDENTITIES];
+			Json::Value identitiesObject = response["data"]["identities"];
 			std::vector<std::string> listOfIdentities = identitiesObject.getMemberNames();
 
 			if (listOfIdentities.size()) {
