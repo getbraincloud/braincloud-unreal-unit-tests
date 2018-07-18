@@ -75,17 +75,15 @@ void BrainCloudPlayerState::logout(IServerCallback * callback)
 
 void BrainCloudPlayerState::updatePlayerName(const FString& name, IServerCallback * callback)
 {
-	TSharedRef<FJsonObject> message = MakeShareable(new FJsonObject());
-	if (name.Len() > 0)
-	{
-		message->SetStringField(OperationParam::PlayerStateServiceUpdateNameData.getValue(), name);
-	}
-
-	ServerCall * sc = new ServerCall(ServiceName::PlayerState, ServiceOperation::UpdateName, message, callback);
-	_client->sendRequest(sc);
+	updateName(name, callback);
 }
 
 void BrainCloudPlayerState::updateUserName(const FString& name, IServerCallback * callback)
+{
+    updateName(name, callback);
+}
+
+void BrainCloudPlayerState::updateName(const FString& name, IServerCallback * callback)
 {
     TSharedRef<FJsonObject> message = MakeShareable(new FJsonObject());
     if (name.Len() > 0)
