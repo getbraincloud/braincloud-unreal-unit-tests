@@ -2,6 +2,9 @@ cmake_minimum_required(VERSION 3.0)
 
 project(brainCloud)
 
+# Setup modules path
+set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} "${CMAKE_CURRENT_SOURCE_DIR}/cmake/")
+
 # Usefull flags
 if (UNIX AND NOT APPLE)
     set(LINUX 1)
@@ -117,9 +120,9 @@ elseif (WIN32)
 	list(APPEND OS_SPECIFIC_SRCS "src/win/WindowsSaveDataHelper.cpp")
 elseif (LINUX)
 	list(APPEND OS_SPECIFIC_SRCS "include/braincloud/internal/DefaultSaveDataHelper.h")
-	list(APPEND OS_SPECIFIC_SRCS "src/DefaultGUID.cpp")
 	list(APPEND OS_SPECIFIC_SRCS "src/DefaultSaveDataHelper.cpp")
 	list(APPEND OS_SPECIFIC_SRCS "src/nix/LinuxDevice.cpp")
+	list(APPEND OS_SPECIFIC_SRCS "src/nix/LinuxGUID.cpp")
 else()
 	list(APPEND OS_SPECIFIC_SRCS "include/braincloud/internal/DefaultSaveDataHelper.h")
 	list(APPEND OS_SPECIFIC_SRCS "src/DefaultGUID.cpp")
@@ -273,7 +276,11 @@ if (APPLE)
 elseif (LINUX)
 	find_package(CURL REQUIRED)
 	list(APPEND includes PUBLIC ${CURL_INCLUDE_DIRS})
-	target_link_libraries(brainCloud PUBLIC ${CURL_LIBRARIES})
+
+    find_package(UUID REQUIRED)
+	list(APPEND includes PUBLIC ${UUID_INCLUDE_DIRS})
+
+	target_link_libraries(brainCloud PUBLIC ${CURL_LIBRARIES} ${UUID_LIBRARIES})
 elseif (WIN32)
 	if (${USE_CPPREST})
 		# TODO: the cpprestsdk-static is *not* built by the CMake project.
