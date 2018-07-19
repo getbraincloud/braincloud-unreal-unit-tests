@@ -38,7 +38,9 @@ Pod::Spec.new do |s|
   s.preserve_paths          = "include/*", "include/**/*"
   s.public_header_files     = "include/braincloud/*.h", "include/braincloud/internal/*.h", "include/braincloud/internal/applemac/*.h"
   s.source_files            = "src/*.{c,cpp}", "src/apple/*.{c,cpp,mm}", "include/braincloud/*.h", "include/braincloud/internal/*.h", "include/braincloud/internal/apple/*.h"
+  s.exclude_files           = "include/braincloud/internal/DefaultSaveDataHelper.cpp,include/braincloud/internal/DefaultGUID.cpp,include/braincloud/internal/DefaultFileUploader.cpp"
 
+  
   # hack for use_frameworks!
   s.xcconfig = {
     'USER_HEADER_SEARCH_PATHS' => '"${PODS_ROOT}/BrainCloudCpp/include"'
