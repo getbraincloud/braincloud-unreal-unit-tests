@@ -140,8 +140,8 @@ void BrainCloudFriend::findUserByUniversalId(const FString & searchText, int32 m
 void BrainCloudFriend::listFriends(EFriendPlatform friendPlatform, bool includeSummaryData, IServerCallback * callback)
 {
 	TSharedRef<FJsonObject> message = MakeShareable(new FJsonObject());
-	message->SetStringField(OperationParam::FriendServiceSearchText.getValue(), _platformStrings[friendPlatform]);
-	message->SetBoolField(OperationParam::FriendServiceFriendPlatform.getValue(), includeSummaryData);
+	message->SetBoolField(OperationParam::FriendServiceIncludeSummaryData.getValue(), includeSummaryData);
+	message->SetStringField(OperationParam::FriendServiceFriendPlatform.getValue(), _platformStrings[friendPlatform]);
 
 	ServerCall * sc = new ServerCall(ServiceName::Friend, ServiceOperation::ListFriends, message, callback);
 	_client->sendRequest(sc);
