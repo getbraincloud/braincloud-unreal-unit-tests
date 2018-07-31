@@ -71,7 +71,7 @@ public:
 	void SetHeartbeatInterval(int32 heartbeatInterval) { _heartbeatInterval = heartbeatInterval; }
 	void SetPacketTimeouts(const TArray<int32> & packetTimeouts) { _packetTimeouts = packetTimeouts; }
 	void SetPacketTimeoutsToDefault();
-	void SetAuthenticationPacketTimeout(int32 timeoutSecs) { _authenticationTimeout = timeoutSecs * 1000; }
+	void SetAuthenticationPacketTimeout(int32 timeoutSecs) { _authenticationTimeout = timeoutSecs; }
 	void SetOldStyleStatusMessageErrorCallback(bool useOldStatusMessage) { _useOldStatusMessage = useOldStatusMessage; }
 	void SetErrorCallbackOn202Status(bool isError) { _errorCallbackOn202 = isError; }
 	void SetUploadLowTransferRateTimeout(int32 timeoutSecs) { _uploadLowTransferRateTimeout = timeoutSecs; }
@@ -148,7 +148,7 @@ private:
 	int32 _retryCount = 0;
 	TArray<int32> _packetTimeouts;
 	int32 _maxBundleMessages = 10;
-	int32 _authenticationTimeout = 15000;
+	int32 _authenticationTimeout = 15;
 	bool _useOldStatusMessage = false;
 	bool _errorCallbackOn202 = true;
 
