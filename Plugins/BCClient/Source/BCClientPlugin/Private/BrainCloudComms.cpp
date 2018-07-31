@@ -43,7 +43,7 @@ void BrainCloudComms::Initialize(const FString& serverURL, const FString& secret
 void BrainCloudComms::SetPacketTimeoutsToDefault()
 {
 	_packetTimeouts.Empty();
-	_packetTimeouts.Add(10);
+	_packetTimeouts.Add(15);
 	_packetTimeouts.Add(10);
 	_packetTimeouts.Add(10);
 }
@@ -267,7 +267,7 @@ void BrainCloudComms::RunCallbacks()
 			double elapsedTime = FPlatformTime::Seconds() - _requestSentTime;
 			bool isError = false;
 
-			//request was sucessful
+			//request was successful
 			if (status == EHttpRequestStatus::Succeeded)
 			{
 				FHttpResponsePtr resp = _activeRequest->GetResponse();
@@ -294,17 +294,17 @@ void BrainCloudComms::RunCallbacks()
 			if (isError) //request failed
 			{
 				_activeRequest->CancelRequest();
-
 				if (_retryCount < GetMaxRetryAttempts())
 				{
-					if (_isLoggingEnabled) UE_LOG(LogBrainCloudComms, Warning, TEXT("Retrying..."));
+					if (_isLoggingEnabled) UE_LOG(LogBrainCloudComms, Warning, TEXT("Retrying...#%d of %d"), _retryCount + 1, GetMaxRetryAttempts() + 1 );
 					_retryWaitStart = FPlatformTime::Seconds();
 					_retryWaitTime = GetRetryTimeoutSeconds(_retryCount) - elapsedTime;
+					
 					_waitingForRetry = true;
 				}
 				else
 				{
-					if (_isLoggingEnabled) UE_LOG(LogBrainCloudComms, Warning, TEXT("Reached max retry limit"));
+					if (_isLoggingEnabled) UE_LOG(LogBrainCloudComms, Warning, TEXT("Reached max retry limit #%d of %d"), _retryCount + 1, GetMaxRetryAttempts() + 1 );
 					// if we're doing caching of messages on timeout, kick it in now!
 					if (_cacheMessagesOnNetworkError && _networkErrorCallback != nullptr)
 					{
