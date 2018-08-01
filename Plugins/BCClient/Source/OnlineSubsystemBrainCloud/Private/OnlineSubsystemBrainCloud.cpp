@@ -250,7 +250,7 @@ FText FOnlineSubsystemBrainCloud::GetOnlineServiceName() const
 }
 #endif
 
-bool FOnlineSubsystemBrainCloud::IsEnabled()
+bool FOnlineSubsystemBrainCloud::IsEnabled() const
 {
 	return true;
 }
