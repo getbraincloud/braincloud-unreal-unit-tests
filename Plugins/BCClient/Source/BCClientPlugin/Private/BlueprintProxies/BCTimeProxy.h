@@ -1,4 +1,4 @@
-// Copyright 2016 bitHeads, Inc. All Rights Reserved.
+// Copyright 2018 bitHeads, Inc. All Rights Reserved.
 
 #pragma once
 
@@ -24,7 +24,7 @@ public:
     * Service Operation - Read
     */
     UFUNCTION(BlueprintCallable, meta = (BlueprintInternalUseOnly = "true"), Category = "BrainCloud|Time")
-        static UBCTimeProxy* ReadServerTime(ABrainCloud *brainCloud);
+        static UBCTimeProxy* ReadServerTime(ABrainCloudActor *brainCloud);
 
     //Response delegates
     UPROPERTY(BlueprintAssignable)

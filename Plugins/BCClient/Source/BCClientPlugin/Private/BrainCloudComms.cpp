@@ -1,4 +1,4 @@
-// Copyright 2016 bitHeads, Inc. All Rights Reserved.
+// Copyright 2018 bitHeads, Inc. All Rights Reserved.
 
 #include "BCClientPluginPrivatePCH.h"
 #include "BrainCloudComms.h"
@@ -379,7 +379,7 @@ void BrainCloudComms::RetryCachedMessages()
 {
 	if (_blockingQueue)
 	{
-		UE_LOG(LogBrainCloudComms, Log, TEXT("Retrying cached messages"));
+		if (_isLoggingEnabled) UE_LOG(LogBrainCloudComms, Log, TEXT("Retrying cached messages"));
 		_blockingQueue = false;
 		_retryCount = 0;
 		_waitingForRetry = false;
@@ -389,7 +389,7 @@ void BrainCloudComms::RetryCachedMessages()
 
 void BrainCloudComms::FlushCachedMessages(bool sendApiErrorCallbacks)
 {
-	UE_LOG(LogBrainCloudComms, Log, TEXT("Flushing cached messages"));
+	if (_isLoggingEnabled) UE_LOG(LogBrainCloudComms, Log, TEXT("Flushing cached messages"));
 
 	if (sendApiErrorCallbacks)
 	{
@@ -664,17 +664,9 @@ void BrainCloudComms::FilterIncomingMessages(TSharedRef<ServerCall> servercall, 
 	{
 		_isAuthenticated = true;
 		ResetErrorCache();
-		ClearSessionId();
-
-		data = response->GetObjectField(TEXT("data"));
 
 		if (data.IsValid())
 		{
-			data->TryGetStringField(TEXT("sessionId"), _sessionId);
-
-			FString profileId = data->GetStringField(TEXT("profileId"));
-			_client->getAuthenticationService()->setProfileId(profileId);
-
 			if (_heartbeatInterval == 0)
 			{
 				int32 sessionTimeout = data->GetIntegerField(TEXT("playerSessionExpiry"));
@@ -706,17 +698,17 @@ void BrainCloudComms::FilterIncomingMessages(TSharedRef<ServerCall> servercall, 
 	}
 	else if (service == ServiceName::PlayerState && operation == ServiceOperation::UpdateName)
 	{
-		if (response->GetObjectField(TEXT("data")).IsValid())
+		if (data.IsValid())
 		{
-			FString name = response->GetObjectField(TEXT("data"))->GetStringField(TEXT("playerName"));
+			FString name = data->GetStringField(TEXT("playerName"));
 			_client->getPlayerStateService()->setUserName(name);
 		}
 	}
 	else if (service == ServiceName::File && operation == ServiceOperation::PrepareUserUpload)
 	{
-		if (response->HasField(TEXT("data")))
+		if (data.IsValid())
 		{
-			TSharedPtr<FJsonObject> fileInfo = response->GetObjectField(TEXT("data"))->GetObjectField(TEXT("fileDetails"));
+			TSharedPtr<FJsonObject> fileInfo = data->GetObjectField(TEXT("fileDetails"));
 
 			TSharedRef<BCFileUploader> uploader = MakeShareable(
 				new BCFileUploader(

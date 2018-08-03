@@ -1,4 +1,4 @@
-// Copyright 2016 bitHeads, Inc. All Rights Reserved.
+// Copyright 2018 bitHeads, Inc. All Rights Reserved.
 
 #pragma once
 
@@ -23,7 +23,7 @@ public:
     * Service Operation - Read
     */
     UFUNCTION(BlueprintCallable, meta = (BlueprintInternalUseOnly = "true"), Category = "BrainCloud|Matchmaking")
-        static UBCMatchmakingProxy* Read(ABrainCloud *brainCloud);
+        static UBCMatchmakingProxy* Read(ABrainCloudActor *brainCloud);
 
     /**
     * Sets player rating
@@ -34,7 +34,7 @@ public:
     * Param - playerRating The new player rating.
     */
     UFUNCTION(BlueprintCallable, meta = (BlueprintInternalUseOnly = "true"), Category = "BrainCloud|Matchmaking")
-        static UBCMatchmakingProxy* SetPlayerRating(ABrainCloud *brainCloud, int32 playerRating);
+        static UBCMatchmakingProxy* SetPlayerRating(ABrainCloudActor *brainCloud, int32 playerRating);
 
     /**
     * Resets player rating
@@ -43,7 +43,7 @@ public:
     * Service Operation - ResetPlayerRating
     */
     UFUNCTION(BlueprintCallable, meta = (BlueprintInternalUseOnly = "true"), Category = "BrainCloud|Matchmaking")
-        static UBCMatchmakingProxy* ResetPlayerRating(ABrainCloud *brainCloud);
+        static UBCMatchmakingProxy* ResetPlayerRating(ABrainCloudActor *brainCloud);
 
     /**
     * Increments player rating
@@ -54,7 +54,7 @@ public:
     * Param - increment The increment amount
     */
     UFUNCTION(BlueprintCallable, meta = (BlueprintInternalUseOnly = "true"), Category = "BrainCloud|Matchmaking")
-        static UBCMatchmakingProxy* IncrementPlayerRating(ABrainCloud *brainCloud, int32 increment);
+        static UBCMatchmakingProxy* IncrementPlayerRating(ABrainCloudActor *brainCloud, int32 increment);
 
     /**
     * Decrements player rating
@@ -65,7 +65,7 @@ public:
     * Param - decrement The decrement amount
     */
     UFUNCTION(BlueprintCallable, meta = (BlueprintInternalUseOnly = "true"), Category = "BrainCloud|Matchmaking")
-        static UBCMatchmakingProxy* DecrementPlayerRating(ABrainCloud *brainCloud, int32 decrement);
+        static UBCMatchmakingProxy* DecrementPlayerRating(ABrainCloudActor *brainCloud, int32 decrement);
 
     /**
     * Turns shield on
@@ -74,7 +74,7 @@ public:
     * Service Operation - ShieldOn
     */
     UFUNCTION(BlueprintCallable, meta = (BlueprintInternalUseOnly = "true"), Category = "BrainCloud|Matchmaking")
-        static UBCMatchmakingProxy* TurnShieldOn(ABrainCloud *brainCloud);
+        static UBCMatchmakingProxy* TurnShieldOn(ABrainCloudActor *brainCloud);
 
     /**
     * Turns shield on for the specified number of minutes
@@ -85,7 +85,7 @@ public:
     * Param - minutes Number of minutes to turn the shield on for
     */
     UFUNCTION(BlueprintCallable, meta = (BlueprintInternalUseOnly = "true"), Category = "BrainCloud|Matchmaking")
-        static UBCMatchmakingProxy* TurnShieldOnFor(ABrainCloud *brainCloud, int32 minutes);
+        static UBCMatchmakingProxy* TurnShieldOnFor(ABrainCloudActor *brainCloud, int32 minutes);
 
     /**
     * Turns shield off
@@ -94,7 +94,7 @@ public:
     * Service Operation - ShieldOff
     */
     UFUNCTION(BlueprintCallable, meta = (BlueprintInternalUseOnly = "true"), Category = "BrainCloud|Matchmaking")
-        static UBCMatchmakingProxy* TurnShieldOff(ABrainCloud *brainCloud);
+        static UBCMatchmakingProxy* TurnShieldOff(ABrainCloudActor *brainCloud);
 
 	/**
 	* Increases the shield on time by specified number of minutes 
@@ -105,7 +105,7 @@ public:
 	* Param - minutes Number of minutes to increase the shield time for
 	*/
 	UFUNCTION(BlueprintCallable, meta = (BlueprintInternalUseOnly = "true"), Category = "BrainCloud|Matchmaking")
-		static UBCMatchmakingProxy* IncrementShieldOnFor(ABrainCloud *brainCloud, int32 minutes);
+		static UBCMatchmakingProxy* IncrementShieldOnFor(ABrainCloudActor *brainCloud, int32 minutes);
 
     /**
     * Finds matchmaking enabled players
@@ -117,7 +117,7 @@ public:
     * Param - numMatches The maximum number of matches to return
     */
     UFUNCTION(BlueprintCallable, meta = (BlueprintInternalUseOnly = "true"), Category = "BrainCloud|Matchmaking")
-        static UBCMatchmakingProxy* FindPlayers(ABrainCloud *brainCloud, int32 rangeDelta, int32 numMatches);
+        static UBCMatchmakingProxy* FindPlayers(ABrainCloudActor *brainCloud, int32 rangeDelta, int32 numMatches);
 
     /**
     * Finds matchmaking enabled players with additional attributes
@@ -130,7 +130,7 @@ public:
     * Param - jsonAttributes Attributes match criteria
     */
     UFUNCTION(BlueprintCallable, meta = (BlueprintInternalUseOnly = "true"), Category = "BrainCloud|Matchmaking")
-        static UBCMatchmakingProxy* FindPlayersWithAttributes(ABrainCloud *brainCloud, int32 rangeDelta, int32 numMatches, const FString& jsonAttributes);
+        static UBCMatchmakingProxy* FindPlayersWithAttributes(ABrainCloudActor *brainCloud, int32 rangeDelta, int32 numMatches, const FString& jsonAttributes);
 
     /**
     * Finds matchmaking enabled players
@@ -143,7 +143,7 @@ public:
     * Param - jsonExtraParms Other parameters
     */
     UFUNCTION(BlueprintCallable, meta = (BlueprintInternalUseOnly = "true"), Category = "BrainCloud|Matchmaking")
-        static UBCMatchmakingProxy* FindPlayersUsingFilter(ABrainCloud *brainCloud, int32 rangeDelta, int32 numMatches, const FString& jsonExtraParms);
+        static UBCMatchmakingProxy* FindPlayersUsingFilter(ABrainCloudActor *brainCloud, int32 rangeDelta, int32 numMatches, const FString& jsonExtraParms);
 
     /**
     * Finds matchmaking enabled players using a cloud code filter
@@ -158,7 +158,7 @@ public:
     * Param - jsonExtraParms Parameters to pass to the CloudCode filter script
     */
     UFUNCTION(BlueprintCallable, meta = (BlueprintInternalUseOnly = "true"), Category = "BrainCloud|Matchmaking")
-        static UBCMatchmakingProxy* FindPlayersWithAttributesUsingFilter(ABrainCloud *brainCloud, int32 rangeDelta, int32 numMatches, const FString& jsonAttributes, const FString& jsonExtraParms);
+        static UBCMatchmakingProxy* FindPlayersWithAttributesUsingFilter(ABrainCloudActor *brainCloud, int32 rangeDelta, int32 numMatches, const FString& jsonAttributes, const FString& jsonExtraParms);
 
     /**
     * Enables Match Making for the Player
@@ -167,7 +167,7 @@ public:
     * Service Operation - EnableMatchMaking
     */
     UFUNCTION(BlueprintCallable, meta = (BlueprintInternalUseOnly = "true"), Category = "BrainCloud|Matchmaking")
-        static UBCMatchmakingProxy* EnableMatchMaking(ABrainCloud *brainCloud);
+        static UBCMatchmakingProxy* EnableMatchMaking(ABrainCloudActor *brainCloud);
 
     /**
     * Disables Match Making for the Player
@@ -176,7 +176,7 @@ public:
     * Service Operation - EnableMatchMaking
     */
     UFUNCTION(BlueprintCallable, meta = (BlueprintInternalUseOnly = "true"), Category = "BrainCloud|Matchmaking")
-        static UBCMatchmakingProxy* DisableMatchMaking(ABrainCloud *brainCloud);
+        static UBCMatchmakingProxy* DisableMatchMaking(ABrainCloudActor *brainCloud);
 
     //Response delegates
     UPROPERTY(BlueprintAssignable)

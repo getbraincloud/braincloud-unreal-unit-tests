@@ -1,4 +1,4 @@
-// Copyright 2016 bitHeads, Inc. All Rights Reserved.
+// Copyright 2018 bitHeads, Inc. All Rights Reserved.
 
 #pragma once
 
@@ -24,21 +24,21 @@ public:
     * @param profileId - The id of the profile id that was most recently used by the app (on this device)
     */
     UFUNCTION(BlueprintCallable, Category = "BrainCloud|Authentication")
-        static void Initialize(ABrainCloud *brainCloud, const FString& profileId, const FString& anonymousId);
+        static void Initialize(ABrainCloudActor *brainCloud, const FString& profileId, const FString& anonymousId);
 
 	/**
 	* Used to create the anonymous installation id for the brainCloud profile.
 	* Returns - A unique Anonymous ID
 	*/
 	UFUNCTION(BlueprintCallable, Category = "BrainCloud|Authentication")
-		static FString GenerateAnonymousId(ABrainCloud *brainCloud);
+		static FString GenerateAnonymousId(ABrainCloudActor *brainCloud);
 
     /**
     * Used to clear the saved profile id - to use in cases when the user is
     * attempting to switch to a different game profile.
     */
     UFUNCTION(BlueprintCallable, Category = "BrainCloud|Authentication")
-        static void ClearSavedProfileId(ABrainCloud *brainCloud);
+        static void ClearSavedProfileId(ABrainCloudActor *brainCloud);
 
     /**
     * Authenticate a user anonymously with brainCloud - used for apps that don't want to bother
@@ -50,7 +50,7 @@ public:
     * Param - forceCreate  Should a new profile be created if it does not exist?
     */
     UFUNCTION(BlueprintCallable, Category = "BrainCloud|Authentication")
-        static UBCAuthenticationProxy* AuthenticateAnonymous(ABrainCloud *brainCloud, bool forceCreate);
+        static UBCAuthenticationProxy* AuthenticateAnonymous(ABrainCloudActor *brainCloud, bool forceCreate);
 
     /*
     * Authenticate the user with brainCloud using their Facebook Credentials
@@ -64,7 +64,7 @@ public:
     * Param - forceCreate Should a new profile be created for this user if the account does not exist?
     */
     UFUNCTION(BlueprintCallable, meta = (BlueprintInternalUseOnly = "true"), Category = "BrainCloud|Authentication")
-        static UBCAuthenticationProxy* AuthenticateFacebook(ABrainCloud *brainCloud, FString facebookId, FString password, bool forceCreate);
+        static UBCAuthenticationProxy* AuthenticateFacebook(ABrainCloudActor *brainCloud, FString facebookId, FString password, bool forceCreate);
 
     /*
     * Authenticate the user using their Game Center id
@@ -76,7 +76,7 @@ public:
     * Param - forceCreate Should a new profile be created for this user if the account does not exist?
     */
     UFUNCTION(BlueprintCallable, meta = (BlueprintInternalUseOnly = "true"), Category = "BrainCloud|Authentication")
-        static UBCAuthenticationProxy* AuthenticateGameCenter(ABrainCloud *brainCloud, FString gameCenterId, bool forceCreate);
+        static UBCAuthenticationProxy* AuthenticateGameCenter(ABrainCloudActor *brainCloud, FString gameCenterId, bool forceCreate);
 
     /*
     * Authenticate the user with a custom Email and Password.  Note that the client app
@@ -95,7 +95,7 @@ public:
     * Param - forceCreate Should a new profile be created for this user if the account does not exist?
     */
     UFUNCTION(BlueprintCallable, meta = (BlueprintInternalUseOnly = "true"), Category = "BrainCloud|Authentication")
-        static UBCAuthenticationProxy* AuthenticateEmailPassword(ABrainCloud *brainCloud, FString email, FString password, bool forceCreate);
+        static UBCAuthenticationProxy* AuthenticateEmailPassword(ABrainCloudActor *brainCloud, FString email, FString password, bool forceCreate);
 
     /*
     * Authenticate the user using a userid and password (without any validation on the userid).
@@ -110,7 +110,7 @@ public:
     * Param - forceCreate Should a new profile be created for this user if the account does not exist?
     */
     UFUNCTION(BlueprintCallable, meta = (BlueprintInternalUseOnly = "true"), Category = "BrainCloud|Authentication")
-        static UBCAuthenticationProxy* AuthenticateUniversal(ABrainCloud *brainCloud, FString userId, FString password, bool forceCreate);
+        static UBCAuthenticationProxy* AuthenticateUniversal(ABrainCloudActor *brainCloud, FString userId, FString password, bool forceCreate);
 
     /*
     * Authenticate the user using a steam userid and session ticket (without any validation on the userid).
@@ -123,7 +123,7 @@ public:
     * Param - forceCreate Should a new profile be created for this user if the account does not exist?
     */
     UFUNCTION(BlueprintCallable, meta = (BlueprintInternalUseOnly = "true"), Category = "BrainCloud|Authentication")
-        static UBCAuthenticationProxy* AuthenticateSteam(ABrainCloud *brainCloud, FString steamId, FString sessionTicket, bool forceCreate);
+        static UBCAuthenticationProxy* AuthenticateSteam(ABrainCloudActor *brainCloud, FString steamId, FString sessionTicket, bool forceCreate);
 
     /*
     * Authenticate the user using a google userid(email address) and google authentication token.
@@ -136,7 +136,7 @@ public:
     * Param - forceCreate Should a new profile be created for this user if the account does not exist?
     */
     UFUNCTION(BlueprintCallable, meta = (BlueprintInternalUseOnly = "true"), Category = "BrainCloud|Authentication")
-        static UBCAuthenticationProxy* AuthenticateGoogle(ABrainCloud *brainCloud, FString googleId, FString token, bool forceCreate);
+        static UBCAuthenticationProxy* AuthenticateGoogle(ABrainCloudActor *brainCloud, FString googleId, FString token, bool forceCreate);
 
     /*
     * Authenticate the user using a Twitter userid, authentication token, and secret from Twitter.
@@ -150,7 +150,7 @@ public:
     * Param - forceCreate Should a new profile be created for this user if the account does not exist?
     */
     UFUNCTION(BlueprintCallable, meta = (BlueprintInternalUseOnly = "true"), Category = "BrainCloud|Authentication")
-        static UBCAuthenticationProxy* AuthenticateTwitter(ABrainCloud *brainCloud, FString twitterId, FString token, FString secret, bool forceCreate);
+        static UBCAuthenticationProxy* AuthenticateTwitter(ABrainCloudActor *brainCloud, FString twitterId, FString token, FString secret, bool forceCreate);
 
     /*
     * Authenticate the user using a Parse ID and authentication token.
@@ -163,7 +163,7 @@ public:
     * Param - forceCreate Should a new profile be created for this user if the account does not exist?
     */
     UFUNCTION(BlueprintCallable, meta = (BlueprintInternalUseOnly = "true"), Category = "BrainCloud|Authentication")
-        static UBCAuthenticationProxy* AuthenticateParse(ABrainCloud *brainCloud, FString parseId, FString token, bool forceCreate);
+        static UBCAuthenticationProxy* AuthenticateParse(ABrainCloudActor *brainCloud, FString parseId, FString token, bool forceCreate);
 
     /**
     * Authenticate the user via cloud code (which in turn validates the supplied credentials against an external system).
@@ -178,7 +178,7 @@ public:
     * Param - force Should a new profile be created for this user if the account does not exist?
     */
     UFUNCTION(BlueprintCallable, meta = (BlueprintInternalUseOnly = "true"), Category = "BrainCloud|Authentication")
-        static UBCAuthenticationProxy* AuthenticateExternal(ABrainCloud *brainCloud, FString userId, FString token, FString externalAuthName, bool forceCreate);
+        static UBCAuthenticationProxy* AuthenticateExternal(ABrainCloudActor *brainCloud, FString userId, FString token, FString externalAuthName, bool forceCreate);
 
     /**
     * Reset Email password - Sends a password reset email to the specified address
@@ -193,21 +193,21 @@ public:
     * SECURITY_ERROR (40209) - If the email address cannot be found.
     */
     UFUNCTION(BlueprintCallable, meta = (BlueprintInternalUseOnly = "true"), Category = "BrainCloud|Authentication")
-        static UBCAuthenticationProxy* ResetEmailPassword(ABrainCloud *brainCloud, const FString& email);
+        static UBCAuthenticationProxy* ResetEmailPassword(ABrainCloudActor *brainCloud, const FString& email);
 
     //Getters
     UFUNCTION(BlueprintCallable, Category = "BrainCloud|Authentication")
-        static const FString & GetAnonymousId(ABrainCloud *brainCloud);
+        static const FString & GetAnonymousId(ABrainCloudActor *brainCloud);
 
     UFUNCTION(BlueprintCallable, Category = "BrainCloud|Authentication")
-        static const FString & GetProfileId(ABrainCloud *brainCloud);
+        static const FString & GetProfileId(ABrainCloudActor *brainCloud);
 
     //Setters
     UFUNCTION(BlueprintCallable, Category = "BrainCloud|Authentication")
-        static void SetAnonymousId(ABrainCloud *brainCloud, FString anonymousId);
+        static void SetAnonymousId(ABrainCloudActor *brainCloud, FString anonymousId);
 
     UFUNCTION(BlueprintCallable, Category = "BrainCloud|Authentication")
-        static void SetProfileId(ABrainCloud *brainCloud, FString profileId);
+        static void SetProfileId(ABrainCloudActor *brainCloud, FString profileId);
 
     //Response delegates
     UPROPERTY(BlueprintAssignable)

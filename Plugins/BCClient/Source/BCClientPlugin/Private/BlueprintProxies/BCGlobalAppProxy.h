@@ -1,4 +1,4 @@
-// Copyright 2016 bitHeads, Inc. All Rights Reserved.
+// Copyright 2018 bitHeads, Inc. All Rights Reserved.
 
 #pragma once
 
@@ -23,7 +23,7 @@ public:
     * Service Operation - ReadProperties
     */
     UFUNCTION(BlueprintCallable, meta = (BlueprintInternalUseOnly = "true"), Category = "BrainCloud|Global App")
-        static UBCGlobalAppProxy* ReadProperties(ABrainCloud *brainCloud);
+        static UBCGlobalAppProxy* ReadProperties(ABrainCloudActor *brainCloud);
 
     //Response delegates
     UPROPERTY(BlueprintAssignable)

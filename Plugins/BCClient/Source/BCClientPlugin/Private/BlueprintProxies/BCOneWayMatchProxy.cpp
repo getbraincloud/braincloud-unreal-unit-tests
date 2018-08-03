@@ -1,9 +1,9 @@
-// Copyright 2016 bitHeads, Inc. All Rights Reserved.
+// Copyright 2018 bitHeads, Inc. All Rights Reserved.
 
 #include "BCClientPluginPrivatePCH.h"
 #include "BrainCloudClient.h"
 #include "ServerCall.h"
-#include "BrainCloud.h"
+#include "BrainCloudActor.h"
 #include "BCWrapperProxy.h"
 #include "BCOneWayMatchProxy.h"
 #include "BrainCloudWrapper.h"
@@ -13,21 +13,21 @@ UBCOneWayMatchProxy::UBCOneWayMatchProxy(const FObjectInitializer& ObjectInitial
 {
 }
 
-UBCOneWayMatchProxy* UBCOneWayMatchProxy::StartMatch(ABrainCloud *brainCloud, const FString& otherPlayerId, int32 rangeDelta)
+UBCOneWayMatchProxy* UBCOneWayMatchProxy::StartMatch(ABrainCloudActor *brainCloud, const FString& otherPlayerId, int32 rangeDelta)
 {
     UBCOneWayMatchProxy* Proxy = NewObject<UBCOneWayMatchProxy>();
     UBCWrapperProxy::GetBrainCloudInstance(brainCloud)->getOneWayMatchService()->startMatch(otherPlayerId, rangeDelta, Proxy);
     return Proxy;
 }
 
-UBCOneWayMatchProxy* UBCOneWayMatchProxy::CancelMatch(ABrainCloud *brainCloud, const FString& playbackStreamId)
+UBCOneWayMatchProxy* UBCOneWayMatchProxy::CancelMatch(ABrainCloudActor *brainCloud, const FString& playbackStreamId)
 {
     UBCOneWayMatchProxy* Proxy = NewObject<UBCOneWayMatchProxy>();
     UBCWrapperProxy::GetBrainCloudInstance(brainCloud)->getOneWayMatchService()->cancelMatch(playbackStreamId, Proxy);
     return Proxy;
 }
 
-UBCOneWayMatchProxy* UBCOneWayMatchProxy::CompleteMatch(ABrainCloud *brainCloud, const FString& playbackStreamId)
+UBCOneWayMatchProxy* UBCOneWayMatchProxy::CompleteMatch(ABrainCloudActor *brainCloud, const FString& playbackStreamId)
 {
     UBCOneWayMatchProxy* Proxy = NewObject<UBCOneWayMatchProxy>();
     UBCWrapperProxy::GetBrainCloudInstance(brainCloud)->getOneWayMatchService()->completeMatch(playbackStreamId, Proxy);

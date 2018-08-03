@@ -1,4 +1,4 @@
-// Copyright 2016 bitHeads, Inc. All Rights Reserved.
+// Copyright 2018 bitHeads, Inc. All Rights Reserved.
 
 #pragma once
 
@@ -28,7 +28,7 @@ public:
 	 * Param - groupId ID of the group.
 	 */
 	UFUNCTION(BlueprintCallable, meta = (BlueprintInternalUseOnly = "true"), Category = "BrainCloud|Group")
-		static UBCGroupProxy* AcceptGroupInvitation(ABrainCloud *brainCloud, const FString& groupId);
+		static UBCGroupProxy* AcceptGroupInvitation(ABrainCloudActor *brainCloud, const FString& groupId);
 
 	/**
 	 * Add a member to the group.
@@ -42,7 +42,7 @@ public:
 	 * Param - jsonAttributes Attributes of the member being added.
 	 */
 	UFUNCTION(BlueprintCallable, meta = (BlueprintInternalUseOnly = "true"), Category = "BrainCloud|Group")
-		static UBCGroupProxy* AddGroupMember(ABrainCloud *brainCloud, const FString& groupId, const FString& profileId, ERole role, const FString& jsonAttributes);
+		static UBCGroupProxy* AddGroupMember(ABrainCloudActor *brainCloud, const FString& groupId, const FString& profileId, ERole role, const FString& jsonAttributes);
 
 	/**
 	 * Approve an outstanding request to join the group.
@@ -56,7 +56,7 @@ public:
 	 * Param - jsonAttributes Attributes of the member being invited.
 	 */
 	UFUNCTION(BlueprintCallable, meta = (BlueprintInternalUseOnly = "true"), Category = "BrainCloud|Group")
-		static UBCGroupProxy* ApproveGroupJoinRequest(ABrainCloud *brainCloud, const FString& groupId, const FString& profileId, ERole role, const FString& jsonAttributes);
+		static UBCGroupProxy* ApproveGroupJoinRequest(ABrainCloudActor *brainCloud, const FString& groupId, const FString& profileId, ERole role, const FString& jsonAttributes);
 
 	/**
 	* Automatically join an open group that matches the search criteria and has space available.
@@ -69,7 +69,7 @@ public:
 	* Param - dataQueryJson Query parameters (optional)
 	*/
 	UFUNCTION(BlueprintCallable, meta = (BlueprintInternalUseOnly = "true"), Category = "BrainCloud|Group")
-		static UBCGroupProxy* AutoJoinGroup(ABrainCloud *brainCloud, const FString& groupType, EAutoJoinStrategy autoJoinStrategy, const FString& dataQueryJson);
+		static UBCGroupProxy* AutoJoinGroup(ABrainCloudActor *brainCloud, const FString& groupType, EAutoJoinStrategy autoJoinStrategy, const FString& dataQueryJson);
 
 	/**
 	 * Cancel an outstanding invitation to the group.
@@ -81,7 +81,7 @@ public:
 	 * Param - profileId Profile ID of the invitation being deleted.
 	 */
 	UFUNCTION(BlueprintCallable, meta = (BlueprintInternalUseOnly = "true"), Category = "BrainCloud|Group")
-		static UBCGroupProxy* CancelGroupInvitation(ABrainCloud *brainCloud, const FString& groupId, const FString& profileId);
+		static UBCGroupProxy* CancelGroupInvitation(ABrainCloudActor *brainCloud, const FString& groupId, const FString& profileId);
 
 	/**
 	 * Create a group.
@@ -99,7 +99,7 @@ public:
 	 */
 	UFUNCTION(BlueprintCallable, meta = (BlueprintInternalUseOnly = "true"), Category = "BrainCloud|Group")
 		static UBCGroupProxy* CreateGroup(
-			ABrainCloud *brainCloud,
+			ABrainCloudActor *brainCloud,
 			const FString& name,
 			const FString& type,
 			bool isOpenGroup,
@@ -122,7 +122,7 @@ public:
 	 */
 	UFUNCTION(BlueprintCallable, meta = (BlueprintInternalUseOnly = "true"), Category = "BrainCloud|Group")
 		static UBCGroupProxy* CreateGroupEntity(
-			ABrainCloud *brainCloud,
+			ABrainCloudActor *brainCloud,
 			const FString& groupId,
 			const FString& entityType,
 			bool isOwnedByGroupMember,
@@ -138,7 +138,7 @@ public:
 	 * Param - groupId ID of the group.
 	 */
 	UFUNCTION(BlueprintCallable, meta = (BlueprintInternalUseOnly = "true"), Category = "BrainCloud|Group")
-		static UBCGroupProxy* DeleteGroup(ABrainCloud *brainCloud, const FString& groupId, int32 version);
+		static UBCGroupProxy* DeleteGroup(ABrainCloudActor *brainCloud, const FString& groupId, int32 version);
 
 	/**
 	 * Delete a group entity.
@@ -151,7 +151,7 @@ public:
 	 * Param - version The current version of the group entity (for concurrency checking).
 	 */
 	UFUNCTION(BlueprintCallable, meta = (BlueprintInternalUseOnly = "true"), Category = "BrainCloud|Group")
-		static UBCGroupProxy* DeleteGroupEntity(ABrainCloud *brainCloud, const FString& groupId, const FString& entityId, int32 version);
+		static UBCGroupProxy* DeleteGroupEntity(ABrainCloudActor *brainCloud, const FString& groupId, const FString& entityId, int32 version);
 
 	/**
 	 * Read information on groups to which the current player belongs.
@@ -160,7 +160,7 @@ public:
 	 * Service Operation - GET_MY_GROUPS
 	 */
 	UFUNCTION(BlueprintCallable, meta = (BlueprintInternalUseOnly = "true"), Category = "BrainCloud|Group")
-		static UBCGroupProxy* GetMyGroups(ABrainCloud *brainCloud);
+		static UBCGroupProxy* GetMyGroups(ABrainCloudActor *brainCloud);
 
 	/**
 	 * Increment elements for the group's data field.
@@ -172,7 +172,7 @@ public:
 	 * Param - jsonData Partial data map with incremental values.
 	 */
 	UFUNCTION(BlueprintCallable, meta = (BlueprintInternalUseOnly = "true"), Category = "BrainCloud|Group")
-		static UBCGroupProxy* IncrementGroupData(ABrainCloud *brainCloud, const FString& groupId, const FString& jsonData);
+		static UBCGroupProxy* IncrementGroupData(ABrainCloudActor *brainCloud, const FString& groupId, const FString& jsonData);
 
 	/**
 	 * Increment elements for the group entity's data field.
@@ -185,7 +185,7 @@ public:
 	 * Param - jsonData Partial data map with incremental values.
 	 */
 	UFUNCTION(BlueprintCallable, meta = (BlueprintInternalUseOnly = "true"), Category = "BrainCloud|Group")
-		static UBCGroupProxy* IncrementGroupEntityData(ABrainCloud *brainCloud, const FString& groupId, const FString& entityId, const FString& jsonData);
+		static UBCGroupProxy* IncrementGroupEntityData(ABrainCloudActor *brainCloud, const FString& groupId, const FString& entityId, const FString& jsonData);
 
 	/**
 	 * Invite a member to the group.
@@ -199,7 +199,7 @@ public:
 	 * Param - jsonAttributes Attributes of the member being invited.
 	 */
 	UFUNCTION(BlueprintCallable, meta = (BlueprintInternalUseOnly = "true"), Category = "BrainCloud|Group")
-		static UBCGroupProxy* InviteGroupMember(ABrainCloud *brainCloud, const FString& groupId, const FString& profileId, ERole role, const FString& jsonAttributes);
+		static UBCGroupProxy* InviteGroupMember(ABrainCloudActor *brainCloud, const FString& groupId, const FString& profileId, ERole role, const FString& jsonAttributes);
 
 	/**
 	 * Join an open group or request to join a closed group.
@@ -210,7 +210,7 @@ public:
 	 * Param - groupId ID of the group.
 	 */
 	UFUNCTION(BlueprintCallable, meta = (BlueprintInternalUseOnly = "true"), Category = "BrainCloud|Group")
-		static UBCGroupProxy* JoinGroup(ABrainCloud *brainCloud, const FString& groupId);
+		static UBCGroupProxy* JoinGroup(ABrainCloudActor *brainCloud, const FString& groupId);
 
 	/**
 	 * Leave a group in which the player is a member.
@@ -221,7 +221,7 @@ public:
 	 * Param - groupId ID of the group.
 	 */
 	UFUNCTION(BlueprintCallable, meta = (BlueprintInternalUseOnly = "true"), Category = "BrainCloud|Group")
-		static UBCGroupProxy* LeaveGroup(ABrainCloud *brainCloud, const FString& groupId);
+		static UBCGroupProxy* LeaveGroup(ABrainCloudActor *brainCloud, const FString& groupId);
 
 	/**
 	 * Read a page of group information.
@@ -232,7 +232,7 @@ public:
 	 * Param - context Query context.
 	 */
 	UFUNCTION(BlueprintCallable, meta = (BlueprintInternalUseOnly = "true"), Category = "BrainCloud|Group")
-		static UBCGroupProxy* ListGroupsPage(ABrainCloud *brainCloud, const FString& jsonContext);
+		static UBCGroupProxy* ListGroupsPage(ABrainCloudActor *brainCloud, const FString& jsonContext);
 
 	/**
 	 * Read a page of group information.
@@ -244,7 +244,7 @@ public:
 	 * Param - offset Number of pages by which to offset the query.
 	 */
 	UFUNCTION(BlueprintCallable, meta = (BlueprintInternalUseOnly = "true"), Category = "BrainCloud|Group")
-		static UBCGroupProxy* ListGroupsPageByOffset(ABrainCloud *brainCloud, const FString& context, int32 pageOffset);
+		static UBCGroupProxy* ListGroupsPageByOffset(ABrainCloudActor *brainCloud, const FString& context, int32 pageOffset);
 
 	/**
 	 * Read information on groups to which the specified player belongs.  Access is subject to restrictions.
@@ -255,7 +255,7 @@ public:
 	 * Param - profileId
 	 */
 	UFUNCTION(BlueprintCallable, meta = (BlueprintInternalUseOnly = "true"), Category = "BrainCloud|Group")
-		static UBCGroupProxy* ListGroupsWithMember(ABrainCloud *brainCloud, const FString& profileId);
+		static UBCGroupProxy* ListGroupsWithMember(ABrainCloudActor *brainCloud, const FString& profileId);
 
 	/**
 	 * Read the specified group.
@@ -266,7 +266,7 @@ public:
 	 * Param - groupId ID of the group.
 	 */
 	UFUNCTION(BlueprintCallable, meta = (BlueprintInternalUseOnly = "true"), Category = "BrainCloud|Group")
-		static UBCGroupProxy* ReadGroup(ABrainCloud *brainCloud, const FString& groupId);
+		static UBCGroupProxy* ReadGroup(ABrainCloudActor *brainCloud, const FString& groupId);
 
 	/**
 	* Read the specified group's data.
@@ -277,7 +277,7 @@ public:
 	* Param - groupId ID of the group.
 	*/
 	UFUNCTION(BlueprintCallable, meta = (BlueprintInternalUseOnly = "true"), Category = "BrainCloud|Group")
-		static UBCGroupProxy* ReadGroupData(ABrainCloud *brainCloud, const FString& groupId);
+		static UBCGroupProxy* ReadGroupData(ABrainCloudActor *brainCloud, const FString& groupId);
 
 	/**
 	 * Read a page of group entity information.
@@ -288,7 +288,7 @@ public:
 	 * Param - context Query context.
 	 */
 	UFUNCTION(BlueprintCallable, meta = (BlueprintInternalUseOnly = "true"), Category = "BrainCloud|Group")
-		static UBCGroupProxy* ReadGroupEntitiesPage(ABrainCloud *brainCloud, const FString& jsonContext);
+		static UBCGroupProxy* ReadGroupEntitiesPage(ABrainCloudActor *brainCloud, const FString& jsonContext);
 
 	/**
 	 * Read a page of group entity information.
@@ -300,7 +300,7 @@ public:
 	 * Param - offset Number of pages by which to offset the query.
 	 */
 	UFUNCTION(BlueprintCallable, meta = (BlueprintInternalUseOnly = "true"), Category = "BrainCloud|Group")
-		static UBCGroupProxy* ReadGroupEntitiesPageByOffset(ABrainCloud *brainCloud, const FString& context, int32 pageOffset);
+		static UBCGroupProxy* ReadGroupEntitiesPageByOffset(ABrainCloudActor *brainCloud, const FString& context, int32 pageOffset);
 
 	/**
 	 * Read the specified group entity.
@@ -312,7 +312,7 @@ public:
 	 * Param - entityId ID of the entity.
 	 */
 	UFUNCTION(BlueprintCallable, meta = (BlueprintInternalUseOnly = "true"), Category = "BrainCloud|Group")
-		static UBCGroupProxy* ReadGroupEntity(ABrainCloud *brainCloud, const FString& groupId, const FString& entityId);
+		static UBCGroupProxy* ReadGroupEntity(ABrainCloudActor *brainCloud, const FString& groupId, const FString& entityId);
 
 	/**
 	 * Read the members of the group.
@@ -323,7 +323,7 @@ public:
 	 * Param - groupId ID of the group.
 	 */
 	UFUNCTION(BlueprintCallable, meta = (BlueprintInternalUseOnly = "true"), Category = "BrainCloud|Group")
-		static UBCGroupProxy* ReadGroupMembers(ABrainCloud *brainCloud, const FString& groupId);
+		static UBCGroupProxy* ReadGroupMembers(ABrainCloudActor *brainCloud, const FString& groupId);
 
 	/**
 	 * Reject an outstanding invitation to join the group.
@@ -334,7 +334,7 @@ public:
 	 * Param - groupId ID of the group.
 	 */
 	UFUNCTION(BlueprintCallable, meta = (BlueprintInternalUseOnly = "true"), Category = "BrainCloud|Group")
-		static UBCGroupProxy* RejectGroupInvitation(ABrainCloud *brainCloud, const FString& groupId);
+		static UBCGroupProxy* RejectGroupInvitation(ABrainCloudActor *brainCloud, const FString& groupId);
 
 	/**
 	 * Reject an outstanding request to join the group.
@@ -346,7 +346,7 @@ public:
 	 * Param - profileId Profile ID of the invitation being deleted.
 	 */
 	UFUNCTION(BlueprintCallable, meta = (BlueprintInternalUseOnly = "true"), Category = "BrainCloud|Group")
-		static UBCGroupProxy* RejectGroupJoinRequest(ABrainCloud *brainCloud, const FString& groupId, const FString& profileId);
+		static UBCGroupProxy* RejectGroupJoinRequest(ABrainCloudActor *brainCloud, const FString& groupId, const FString& profileId);
 
 	/**
 	 * Remove a member from the group.
@@ -358,7 +358,7 @@ public:
 	 * Param - profileId Profile ID of the member being deleted.
 	 */
 	UFUNCTION(BlueprintCallable, meta = (BlueprintInternalUseOnly = "true"), Category = "BrainCloud|Group")
-		static UBCGroupProxy* RemoveGroupMember(ABrainCloud *brainCloud, const FString& groupId, const FString& profileId);
+		static UBCGroupProxy* RemoveGroupMember(ABrainCloudActor *brainCloud, const FString& groupId, const FString& profileId);
 
 	/**
 	 * Updates a group's data.
@@ -371,7 +371,7 @@ public:
 	 * Param - jsonData Data to apply.
 	 */
 	UFUNCTION(BlueprintCallable, meta = (BlueprintInternalUseOnly = "true"), Category = "BrainCloud|Group")
-		static UBCGroupProxy* UpdateGroupData(ABrainCloud *brainCloud, const FString& groupId, int32 version, const FString& jsonData);
+		static UBCGroupProxy* UpdateGroupData(ABrainCloudActor *brainCloud, const FString& groupId, int32 version, const FString& jsonData);
 
 	/**
 	 * Update a group entity.
@@ -385,7 +385,7 @@ public:
 	 * Param - jsonData Custom application data.
 	 */
 	UFUNCTION(BlueprintCallable, meta = (BlueprintInternalUseOnly = "true"), Category = "BrainCloud|Group")
-		static UBCGroupProxy* UpdateGroupEntityData(ABrainCloud *brainCloud, const FString& groupId, const FString& entityId, int32 version, const FString& jsonData);
+		static UBCGroupProxy* UpdateGroupEntityData(ABrainCloudActor *brainCloud, const FString& groupId, const FString& entityId, int32 version, const FString& jsonData);
 
 	/**
 	 * Update a member of the group.
@@ -399,7 +399,7 @@ public:
 	 * Param - jsonAttributes Attributes of the member being updated (optional).
 	 */
 	UFUNCTION(BlueprintCallable, meta = (BlueprintInternalUseOnly = "true"), Category = "BrainCloud|Group")
-		static UBCGroupProxy* UpdateGroupMember(ABrainCloud *brainCloud, const FString& groupId, const FString& profileId, ERole role, const FString& jsonAttributes);
+		static UBCGroupProxy* UpdateGroupMember(ABrainCloudActor *brainCloud, const FString& groupId, const FString& profileId, ERole role, const FString& jsonAttributes);
 
 	/**
 	 * Updates a group's name.
@@ -411,7 +411,7 @@ public:
 	 * Param - name Name to apply.
 	 */
 	UFUNCTION(BlueprintCallable, meta = (BlueprintInternalUseOnly = "true"), Category = "BrainCloud|Group")
-		static UBCGroupProxy* UpdateGroupName(ABrainCloud *brainCloud, const FString& groupId, const FString& name);
+		static UBCGroupProxy* UpdateGroupName(ABrainCloudActor *brainCloud, const FString& groupId, const FString& name);
 
 	//Response delegates
 	UPROPERTY(BlueprintAssignable)

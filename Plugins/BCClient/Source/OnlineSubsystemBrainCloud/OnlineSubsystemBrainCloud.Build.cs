@@ -1,4 +1,4 @@
-// Copyright 2016 bitHeads, Inc. All Rights Reserved.
+// Copyright 2018 bitHeads, Inc. All Rights Reserved.
 
 using System.IO;
 using UnrealBuildTool;
@@ -16,7 +16,7 @@ public class OnlineSubsystemBrainCloud : ModuleRules
     public OnlineSubsystemBrainCloud(TargetInfo Target)
 #endif
     {
-        Definitions.Add("ONLINESUBSYSTEMBRAINCLOUD_PACKAGE=1");
+        PublicDefinitions.Add("ONLINESUBSYSTEMBRAINCLOUD_PACKAGE=1");
 
         PrivateIncludePaths.AddRange(
             new string[] {

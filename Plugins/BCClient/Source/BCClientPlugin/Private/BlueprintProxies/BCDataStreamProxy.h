@@ -1,4 +1,4 @@
-// Copyright 2016 bitHeads, Inc. All Rights Reserved.
+// Copyright 2018 bitHeads, Inc. All Rights Reserved.
 
 #pragma once
 
@@ -23,7 +23,7 @@ public:
     * Param - eventProperties Properties of event
     */
     UFUNCTION(BlueprintCallable, meta = (BlueprintInternalUseOnly = "true"), Category = "BrainCloud|DataStream")
-        static UBCDataStreamProxy* CustomPageEvent(ABrainCloud *brainCloud, const FString& eventName, const FString& jsonEventProperties);
+        static UBCDataStreamProxy* CustomPageEvent(ABrainCloudActor *brainCloud, const FString& eventName, const FString& jsonEventProperties);
 
     /**
     * Creates custom data stream screen event
@@ -32,7 +32,7 @@ public:
     * Param - eventProperties Properties of event
     */
     UFUNCTION(BlueprintCallable, meta = (BlueprintInternalUseOnly = "true"), Category = "BrainCloud|DataStream")
-        static UBCDataStreamProxy* CustomScreenEvent(ABrainCloud *brainCloud, const FString& eventName, const FString& jsonEventProperties);
+        static UBCDataStreamProxy* CustomScreenEvent(ABrainCloudActor *brainCloud, const FString& eventName, const FString& jsonEventProperties);
 
     /**
     * Creates custom data stream track event
@@ -41,7 +41,7 @@ public:
     * Param - eventProperties Properties of event
     */
     UFUNCTION(BlueprintCallable, meta = (BlueprintInternalUseOnly = "true"), Category = "BrainCloud|DataStream")
-        static UBCDataStreamProxy* CustomTrackEvent(ABrainCloud *brainCloud, const FString& eventName, const FString& jsonEventProperties);
+        static UBCDataStreamProxy* CustomTrackEvent(ABrainCloudActor *brainCloud, const FString& eventName, const FString& jsonEventProperties);
 
     //Response delegates
     UPROPERTY(BlueprintAssignable)
