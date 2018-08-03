@@ -1,4 +1,4 @@
-// Copyright 2016 bitHeads, Inc. All Rights Reserved.
+// Copyright 2018 bitHeads, Inc. All Rights Reserved.
 
 #include "BCClientPluginPrivatePCH.h"
 #include "BrainCloudClient.h"
@@ -6,7 +6,7 @@
 #include "ServerCall.h"
 #include "BCWrapperProxy.h"
 #include "BrainCloudWrapper.h"
-#include "BrainCloud.h"
+#include "BrainCloudActor.h"
 #include "BrainCloudCallbackHandler.h"
 
 UBrainCloudCallbackHandler::UBrainCloudCallbackHandler(const FObjectInitializer& ObjectInitializer)
@@ -31,7 +31,7 @@ void UBrainCloudCallbackHandler::BeginDestroy()
     Super::BeginDestroy();
 }
 
-void UBrainCloudCallbackHandler::RegisterCallbacks(ABrainCloud* brainCloud, bool fileCallbacks, bool rewardCallback, bool eventCallback, bool globalErrorCallback, bool networkErrorCallback)
+void UBrainCloudCallbackHandler::RegisterCallbacks(ABrainCloudActor * brainCloud, bool fileCallbacks, bool rewardCallback, bool eventCallback, bool globalErrorCallback, bool networkErrorCallback)
 {
 	_brainCloud = brainCloud;
 

@@ -8,6 +8,15 @@
 		}
 	],
 	"settings": {
-		"typescript.tsc.autoDetect": "off"
+		"typescript.tsc.autoDetect": "off",
+		"files.associations": {
+			"xutility": "cpp",
+			"iterator": "cpp",
+			"string": "cpp",
+			"ios": "cpp",
+			"algorithm": "cpp",
+			"*.rh": "cpp",
+			"__nullptr": "cpp"
+		}
 	}
 }

@@ -5,7 +5,7 @@
 			"name": "BCSubsystem (Debug)",
 			"request": "launch",
 			"preLaunchTask": "BCSubsystem Win64 Debug Build",
-			"program": "C:\\Users\\Jon\\Documents\\GitHub\\braincloud-unreal 4.19 - 2 4.20\\Binaries\\Win64\\BCSubsystem-Win64-Debug.exe",
+			"program": "C:\\Users\\Jon\\Documents\\GitHub\\braincloud-unreal\\Binaries\\Win64\\BCSubsystem-Win64-Debug.exe",
 			"args": [
 			],
 			"cwd": "C:\\Program Files\\Epic Games\\UE_4.20",
@@ -18,7 +18,7 @@
 			"name": "BCSubsystem (DebugGame)",
 			"request": "launch",
 			"preLaunchTask": "BCSubsystem Win64 DebugGame Build",
-			"program": "C:\\Users\\Jon\\Documents\\GitHub\\braincloud-unreal 4.19 - 2 4.20\\Binaries\\Win64\\BCSubsystem-Win64-DebugGame.exe",
+			"program": "C:\\Users\\Jon\\Documents\\GitHub\\braincloud-unreal\\Binaries\\Win64\\BCSubsystem-Win64-DebugGame.exe",
 			"args": [
 			],
 			"cwd": "C:\\Program Files\\Epic Games\\UE_4.20",
@@ -31,7 +31,7 @@
 			"name": "BCSubsystem (Development)",
 			"request": "launch",
 			"preLaunchTask": "BCSubsystem Win64 Development Build",
-			"program": "C:\\Users\\Jon\\Documents\\GitHub\\braincloud-unreal 4.19 - 2 4.20\\Binaries\\Win64\\BCSubsystem.exe",
+			"program": "C:\\Users\\Jon\\Documents\\GitHub\\braincloud-unreal\\Binaries\\Win64\\BCSubsystem.exe",
 			"args": [
 			],
 			"cwd": "C:\\Program Files\\Epic Games\\UE_4.20",
@@ -44,7 +44,7 @@
 			"name": "BCSubsystem (Shipping)",
 			"request": "launch",
 			"preLaunchTask": "BCSubsystem Win64 Shipping Build",
-			"program": "C:\\Users\\Jon\\Documents\\GitHub\\braincloud-unreal 4.19 - 2 4.20\\Binaries\\Win64\\BCSubsystem-Win64-Shipping.exe",
+			"program": "C:\\Users\\Jon\\Documents\\GitHub\\braincloud-unreal\\Binaries\\Win64\\BCSubsystem-Win64-Shipping.exe",
 			"args": [
 			],
 			"cwd": "C:\\Program Files\\Epic Games\\UE_4.20",
@@ -57,7 +57,7 @@
 			"name": "BCSubsystem (Test)",
 			"request": "launch",
 			"preLaunchTask": "BCSubsystem Win64 Test Build",
-			"program": "C:\\Users\\Jon\\Documents\\GitHub\\braincloud-unreal 4.19 - 2 4.20\\Binaries\\Win64\\BCSubsystem-Win64-Test.exe",
+			"program": "C:\\Users\\Jon\\Documents\\GitHub\\braincloud-unreal\\Binaries\\Win64\\BCSubsystem-Win64-Test.exe",
 			"args": [
 			],
 			"cwd": "C:\\Program Files\\Epic Games\\UE_4.20",
@@ -72,7 +72,7 @@
 			"preLaunchTask": "BCSubsystemEditor Win64 Debug Build",
 			"program": "C:\\Program Files\\Epic Games\\UE_4.20\\Engine\\Binaries\\Win64\\UE4Editor-Win64-Debug.exe",
 			"args": [
-				"C:\\Users\\Jon\\Documents\\GitHub\\braincloud-unreal 4.19 - 2 4.20\\BCSubsystem.uproject",
+				"C:\\Users\\Jon\\Documents\\GitHub\\braincloud-unreal\\BCSubsystem.uproject",
 				"-debug"
 			],
 			"cwd": "C:\\Program Files\\Epic Games\\UE_4.20",
@@ -87,7 +87,7 @@
 			"preLaunchTask": "BCSubsystemEditor Win64 DebugGame Build",
 			"program": "C:\\Program Files\\Epic Games\\UE_4.20\\Engine\\Binaries\\Win64\\UE4Editor.exe",
 			"args": [
-				"C:\\Users\\Jon\\Documents\\GitHub\\braincloud-unreal 4.19 - 2 4.20\\BCSubsystem.uproject",
+				"C:\\Users\\Jon\\Documents\\GitHub\\braincloud-unreal\\BCSubsystem.uproject",
 				"-debug"
 			],
 			"cwd": "C:\\Program Files\\Epic Games\\UE_4.20",
@@ -102,7 +102,7 @@
 			"preLaunchTask": "BCSubsystemEditor Win64 Development Build",
 			"program": "C:\\Program Files\\Epic Games\\UE_4.20\\Engine\\Binaries\\Win64\\UE4Editor.exe",
 			"args": [
-				"C:\\Users\\Jon\\Documents\\GitHub\\braincloud-unreal 4.19 - 2 4.20\\BCSubsystem.uproject"
+				"C:\\Users\\Jon\\Documents\\GitHub\\braincloud-unreal\\BCSubsystem.uproject"
 			],
 			"cwd": "C:\\Program Files\\Epic Games\\UE_4.20",
 			"stopAtEntry": false,
@@ -119,7 +119,7 @@
 			"args": [
 				"-projectfiles",
 				"-vscode",
-				"-project=\"C:\\Users\\Jon\\Documents\\GitHub\\braincloud-unreal 4.19 - 2 4.20\\BCSubsystem.uproject\"",
+				"-project=\"C:\\Users\\Jon\\Documents\\GitHub\\braincloud-unreal\\BCSubsystem.uproject\"",
 				"-game",
 				"-engine"
 			],

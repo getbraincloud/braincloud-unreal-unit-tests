@@ -1,4 +1,4 @@
-// Copyright 2016 bitHeads, Inc. All Rights Reserved.
+// Copyright 2018 bitHeads, Inc. All Rights Reserved.
 
 #pragma once
 
@@ -26,7 +26,7 @@ public:
     * Param - includeSharedData Whether to include shared data in the stream
     */
     UFUNCTION(BlueprintCallable, meta = (BlueprintInternalUseOnly = "true"), Category = "BrainCloud|Playback Stream")
-        static UBCPlaybackStreamProxy* StartStream(ABrainCloud *brainCloud, const FString& targetPlayerId, bool includeSharedData);
+        static UBCPlaybackStreamProxy* StartStream(ABrainCloudActor *brainCloud, const FString& targetPlayerId, bool includeSharedData);
 
     /**
     * Reads a stream
@@ -37,7 +37,7 @@ public:
     * Param - playbackStreamId Identifies the stream to read
     */
     UFUNCTION(BlueprintCallable, meta = (BlueprintInternalUseOnly = "true"), Category = "BrainCloud|Playback Stream")
-        static UBCPlaybackStreamProxy* ReadStream(ABrainCloud *brainCloud, const FString& playbackStreamId);
+        static UBCPlaybackStreamProxy* ReadStream(ABrainCloudActor *brainCloud, const FString& playbackStreamId);
 
     /**
     * Ends a stream
@@ -48,7 +48,7 @@ public:
     * Param - playbackStreamId Identifies the stream to read
     */
     UFUNCTION(BlueprintCallable, meta = (BlueprintInternalUseOnly = "true"), Category = "BrainCloud|Playback Stream")
-        static UBCPlaybackStreamProxy* EndStream(ABrainCloud *brainCloud, const FString& playbackStreamId);
+        static UBCPlaybackStreamProxy* EndStream(ABrainCloudActor *brainCloud, const FString& playbackStreamId);
 
     /**
     * Deletes a stream
@@ -59,7 +59,7 @@ public:
     * Param - playbackStreamId Identifies the stream to delete
     */
     UFUNCTION(BlueprintCallable, meta = (BlueprintInternalUseOnly = "true"), Category = "BrainCloud|Playback Stream")
-        static UBCPlaybackStreamProxy* DeleteStream(ABrainCloud *brainCloud, const FString& playbackStreamId);
+        static UBCPlaybackStreamProxy* DeleteStream(ABrainCloudActor *brainCloud, const FString& playbackStreamId);
 
     /**
     * Adds a stream event
@@ -72,19 +72,19 @@ public:
     * Param - jsonSummary Current summary data as of this event
     */
     UFUNCTION(BlueprintCallable, meta = (BlueprintInternalUseOnly = "true"), Category = "BrainCloud|Playback Stream")
-        static UBCPlaybackStreamProxy* AddEvent(ABrainCloud *brainCloud, const FString& playbackStreamId, const FString& jsonEventData, const FString& jsonSummary);
+        static UBCPlaybackStreamProxy* AddEvent(ABrainCloudActor *brainCloud, const FString& playbackStreamId, const FString& jsonEventData, const FString& jsonSummary);
 
     /**
     * @deprecated Use GetRecentStreamsForInitiatingPlayer instead - removal after September 1 2017
     */
     UFUNCTION(BlueprintCallable, meta = (BlueprintInternalUseOnly = "true"), Category = "BrainCloud|Playback Stream")
-        static UBCPlaybackStreamProxy* GetStreamSummariesForInitiatingPlayer(ABrainCloud *brainCloud, const FString& targetPlayerId);
+        static UBCPlaybackStreamProxy* GetStreamSummariesForInitiatingPlayer(ABrainCloudActor *brainCloud, const FString& targetPlayerId);
 
     /**
     * @deprecated Use GetRecentStreamsForTargetPlayer instead - removal after September 1 2017
     */
     UFUNCTION(BlueprintCallable, meta = (BlueprintInternalUseOnly = "true"), Category = "BrainCloud|Playback Stream")
-        static UBCPlaybackStreamProxy* GetStreamSummariesForTargetPlayer(ABrainCloud *brainCloud, const FString& targetPlayerId);
+        static UBCPlaybackStreamProxy* GetStreamSummariesForTargetPlayer(ABrainCloudActor *brainCloud, const FString& targetPlayerId);
 
 	/**
 	* Gets recent stream summaries for initiating player
@@ -97,7 +97,7 @@ public:
 	* Param - callback The callback.
 	*/
 	UFUNCTION(BlueprintCallable, meta = (BlueprintInternalUseOnly = "true"), Category = "BrainCloud|Playback Stream")
-		static UBCPlaybackStreamProxy* GetRecentStreamsForInitiatingPlayer(ABrainCloud *brainCloud, const FString& initiatingPlayerId, int32 maxNumStreams);
+		static UBCPlaybackStreamProxy* GetRecentStreamsForInitiatingPlayer(ABrainCloudActor *brainCloud, const FString& initiatingPlayerId, int32 maxNumStreams);
 
 	/**
 	* Gets recent stream summaries for target player
@@ -110,7 +110,7 @@ public:
 	* Param - callback The callback.
 	*/
 	UFUNCTION(BlueprintCallable, meta = (BlueprintInternalUseOnly = "true"), Category = "BrainCloud|Playback Stream")
-		static UBCPlaybackStreamProxy* GetRecentStreamsForTargetPlayer(ABrainCloud *brainCloud, const FString& targetPlayerId, int32 maxNumStreams);
+		static UBCPlaybackStreamProxy* GetRecentStreamsForTargetPlayer(ABrainCloudActor *brainCloud, const FString& targetPlayerId, int32 maxNumStreams);
 
 
     //Response delegates

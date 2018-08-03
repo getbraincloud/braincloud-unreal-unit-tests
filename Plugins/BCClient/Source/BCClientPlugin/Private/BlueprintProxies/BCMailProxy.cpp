@@ -1,9 +1,9 @@
-// Copyright 2016 bitHeads, Inc. All Rights Reserved.
+// Copyright 2018 bitHeads, Inc. All Rights Reserved.
 
 #include "BCClientPluginPrivatePCH.h"
 #include "BrainCloudClient.h"
 #include "ServerCall.h"
-#include "BrainCloud.h"
+#include "BrainCloudActor.h"
 #include "BCWrapperProxy.h"
 #include "BCMailProxy.h"
 #include "BrainCloudWrapper.h"
@@ -13,21 +13,21 @@ UBCMailProxy::UBCMailProxy(const FObjectInitializer& ObjectInitializer)
 {
 }
 
-UBCMailProxy* UBCMailProxy::SendBasicEmail(ABrainCloud *brainCloud, const FString& profileId, const FString& subject, const FString& body)
+UBCMailProxy* UBCMailProxy::SendBasicEmail(ABrainCloudActor *brainCloud, const FString& profileId, const FString& subject, const FString& body)
 {
 	UBCMailProxy* Proxy = NewObject<UBCMailProxy>();
 	UBCWrapperProxy::GetBrainCloudInstance(brainCloud)->getMailService()->sendBasicEmail(profileId, subject, body, Proxy);
 	return Proxy;
 }
 
-UBCMailProxy* UBCMailProxy::SendAdvancedEmail(ABrainCloud *brainCloud, const FString& profileId, const FString& jsonServiceParams)
+UBCMailProxy* UBCMailProxy::SendAdvancedEmail(ABrainCloudActor *brainCloud, const FString& profileId, const FString& jsonServiceParams)
 {
 	UBCMailProxy* Proxy = NewObject<UBCMailProxy>();
 	UBCWrapperProxy::GetBrainCloudInstance(brainCloud)->getMailService()->sendAdvancedEmail(profileId, jsonServiceParams, Proxy);
 	return Proxy;
 }
 
-UBCMailProxy* UBCMailProxy::SendAdvancedEmailByAddress(ABrainCloud *brainCloud, const FString& emailAddress, const FString& jsonServiceParams)
+UBCMailProxy* UBCMailProxy::SendAdvancedEmailByAddress(ABrainCloudActor *brainCloud, const FString& emailAddress, const FString& jsonServiceParams)
 {
 	UBCMailProxy* Proxy = NewObject<UBCMailProxy>();
 	UBCWrapperProxy::GetBrainCloudInstance(brainCloud)->getMailService()->sendAdvancedEmailByAddress(emailAddress, jsonServiceParams, Proxy);

@@ -1,9 +1,9 @@
-// Copyright 2016 bitHeads, Inc. All Rights Reserved.
+// Copyright 2018 bitHeads, Inc. All Rights Reserved.
 
 #include "BCClientPluginPrivatePCH.h"
 #include "BrainCloudClient.h"
 #include "ServerCall.h"
-#include "BrainCloud.h"
+#include "BrainCloudActor.h"
 #include "BCWrapperProxy.h"
 #include "BCFileProxy.h"
 #include "BrainCloudWrapper.h"
@@ -14,7 +14,7 @@ UBCFileProxy::UBCFileProxy(const FObjectInitializer& ObjectInitializer)
 }
 
 UBCFileProxy* UBCFileProxy::UploadFile(
-	ABrainCloud *brainCloud,
+	ABrainCloudActor *brainCloud,
     const FString& cloudPath,
     const FString& cloudFilename,
     bool shareable,
@@ -26,50 +26,50 @@ UBCFileProxy* UBCFileProxy::UploadFile(
     return Proxy;
 }
 
-UBCFileProxy* UBCFileProxy::ListUserFiles(ABrainCloud *brainCloud, const FString& cloudPath, bool recurse)
+UBCFileProxy* UBCFileProxy::ListUserFiles(ABrainCloudActor *brainCloud, const FString& cloudPath, bool recurse)
 {
     UBCFileProxy* Proxy = NewObject<UBCFileProxy>();
     UBCWrapperProxy::GetBrainCloudInstance(brainCloud)->getFileService()->listUserFiles(cloudPath, recurse, Proxy);
     return Proxy;
 }
 
-UBCFileProxy* UBCFileProxy::DeleteUserFile(ABrainCloud *brainCloud, const FString& cloudPath, const FString& cloudFilename)
+UBCFileProxy* UBCFileProxy::DeleteUserFile(ABrainCloudActor *brainCloud, const FString& cloudPath, const FString& cloudFilename)
 {
     UBCFileProxy* Proxy = NewObject<UBCFileProxy>();
     UBCWrapperProxy::GetBrainCloudInstance(brainCloud)->getFileService()->deleteUserFile(cloudPath, cloudFilename, Proxy);
     return Proxy;
 }
 
-UBCFileProxy* UBCFileProxy::DeleteUserFiles(ABrainCloud *brainCloud, const FString& cloudPath, bool recurse)
+UBCFileProxy* UBCFileProxy::DeleteUserFiles(ABrainCloudActor *brainCloud, const FString& cloudPath, bool recurse)
 {
     UBCFileProxy* Proxy = NewObject<UBCFileProxy>();
     UBCWrapperProxy::GetBrainCloudInstance(brainCloud)->getFileService()->deleteUserFiles(cloudPath, recurse, Proxy);
     return Proxy;
 }
 
-UBCFileProxy* UBCFileProxy::GetCDNUrl(ABrainCloud *brainCloud, const FString& cloudPath, const FString& cloudFileName)
+UBCFileProxy* UBCFileProxy::GetCDNUrl(ABrainCloudActor *brainCloud, const FString& cloudPath, const FString& cloudFileName)
 {
 	UBCFileProxy* Proxy = NewObject<UBCFileProxy>();
 	UBCWrapperProxy::GetBrainCloudInstance(brainCloud)->getFileService()->getCDNUrl(cloudPath, cloudFileName, Proxy);
 	return Proxy;
 }
 
-void UBCFileProxy::CancelUpload(ABrainCloud *brainCloud, const FString& uploadId)
+void UBCFileProxy::CancelUpload(ABrainCloudActor *brainCloud, const FString& uploadId)
 {
     UBCWrapperProxy::GetBrainCloudInstance(brainCloud)->getFileService()->cancelUpload(uploadId);
 }
 
-float UBCFileProxy::GetUploadProgress(ABrainCloud *brainCloud, const FString& uploadId)
+float UBCFileProxy::GetUploadProgress(ABrainCloudActor *brainCloud, const FString& uploadId)
 {
     return UBCWrapperProxy::GetBrainCloudInstance(brainCloud)->getFileService()->getUploadProgress(uploadId);
 }
 
-int32 UBCFileProxy::GetUploadBytesTransferred(ABrainCloud *brainCloud, const FString& uploadId)
+int32 UBCFileProxy::GetUploadBytesTransferred(ABrainCloudActor *brainCloud, const FString& uploadId)
 {
     return UBCWrapperProxy::GetBrainCloudInstance(brainCloud)->getFileService()->getUploadBytesTransferred(uploadId);
 }
 
-int32 UBCFileProxy::GetUploadTotalBytesToTransfer(ABrainCloud *brainCloud, const FString& uploadId)
+int32 UBCFileProxy::GetUploadTotalBytesToTransfer(ABrainCloudActor *brainCloud, const FString& uploadId)
 {
     return UBCWrapperProxy::GetBrainCloudInstance(brainCloud)->getFileService()->getUploadTotalBytesToTransfer(uploadId);
 }

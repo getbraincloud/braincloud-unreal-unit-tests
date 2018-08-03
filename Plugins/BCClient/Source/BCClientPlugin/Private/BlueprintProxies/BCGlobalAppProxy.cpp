@@ -1,9 +1,9 @@
-// Copyright 2016 bitHeads, Inc. All Rights Reserved.
+// Copyright 2018 bitHeads, Inc. All Rights Reserved.
 
 #include "BCClientPluginPrivatePCH.h"
 #include "BrainCloudClient.h"
 #include "ServerCall.h"
-#include "BrainCloud.h"
+#include "BrainCloudActor.h"
 #include "BCWrapperProxy.h"
 #include "BCGlobalAppProxy.h"
 #include "BrainCloudWrapper.h"
@@ -33,7 +33,7 @@ UBCGlobalAppProxy::UBCGlobalAppProxy(const FObjectInitializer& ObjectInitializer
 *   }
 * }
 */
-UBCGlobalAppProxy* UBCGlobalAppProxy::ReadProperties(ABrainCloud *brainCloud)
+UBCGlobalAppProxy* UBCGlobalAppProxy::ReadProperties(ABrainCloudActor *brainCloud)
 {
     UBCGlobalAppProxy* Proxy = NewObject<UBCGlobalAppProxy>();
     UBCWrapperProxy::GetBrainCloudInstance(brainCloud)->getGlobalAppService()->readProperties(Proxy);

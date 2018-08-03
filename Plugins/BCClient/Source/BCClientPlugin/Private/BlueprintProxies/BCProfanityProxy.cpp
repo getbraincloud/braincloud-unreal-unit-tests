@@ -1,9 +1,9 @@
-// Copyright 2016 bitHeads, Inc. All Rights Reserved.
+// Copyright 2018 bitHeads, Inc. All Rights Reserved.
 
 #include "BCClientPluginPrivatePCH.h"
 #include "BrainCloudClient.h"
 #include "ServerCall.h"
-#include "BrainCloud.h"
+#include "BrainCloudActor.h"
 #include "BCWrapperProxy.h"
 #include "BrainCloudWrapper.h"
 #include "BCProfanityProxy.h"
@@ -13,21 +13,21 @@ UBCProfanityProxy::UBCProfanityProxy(const FObjectInitializer& ObjectInitializer
 {
 }
 
-UBCProfanityProxy* UBCProfanityProxy::ProfanityCheck(ABrainCloud *brainCloud, const FString& text, const FString& languages, bool flagEmail, bool flagPhone, bool flagUrls)
+UBCProfanityProxy* UBCProfanityProxy::ProfanityCheck(ABrainCloudActor *brainCloud, const FString& text, const FString& languages, bool flagEmail, bool flagPhone, bool flagUrls)
 {
     UBCProfanityProxy* Proxy = NewObject<UBCProfanityProxy>();
     UBCWrapperProxy::GetBrainCloudInstance(brainCloud)->getProfanityService()->profanityCheck(text, languages, flagEmail, flagPhone, flagUrls, Proxy);
     return Proxy;
 }
 
-UBCProfanityProxy* UBCProfanityProxy::ProfanityReplaceText(ABrainCloud *brainCloud, const FString& text, const FString& replaceSymbol, const FString& languages, bool flagEmail, bool flagPhone, bool flagUrls)
+UBCProfanityProxy* UBCProfanityProxy::ProfanityReplaceText(ABrainCloudActor *brainCloud, const FString& text, const FString& replaceSymbol, const FString& languages, bool flagEmail, bool flagPhone, bool flagUrls)
 {
     UBCProfanityProxy* Proxy = NewObject<UBCProfanityProxy>();
     UBCWrapperProxy::GetBrainCloudInstance(brainCloud)->getProfanityService()->profanityReplaceText(text, replaceSymbol, languages, flagEmail, flagPhone, flagUrls, Proxy);
     return Proxy;
 }
 
-UBCProfanityProxy* UBCProfanityProxy::ProfanityIdentifyBadWords(ABrainCloud *brainCloud, const FString& text, const FString& languages, bool flagEmail, bool flagPhone, bool flagUrls)
+UBCProfanityProxy* UBCProfanityProxy::ProfanityIdentifyBadWords(ABrainCloudActor *brainCloud, const FString& text, const FString& languages, bool flagEmail, bool flagPhone, bool flagUrls)
 {
     UBCProfanityProxy* Proxy = NewObject<UBCProfanityProxy>();
     UBCWrapperProxy::GetBrainCloudInstance(brainCloud)->getProfanityService()->profanityIdentifyBadWords(text, languages, flagEmail, flagPhone, flagUrls, Proxy);

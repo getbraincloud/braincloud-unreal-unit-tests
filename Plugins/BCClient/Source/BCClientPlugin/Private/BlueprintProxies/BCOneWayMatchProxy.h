@@ -1,4 +1,4 @@
-// Copyright 2016 bitHeads, Inc. All Rights Reserved.
+// Copyright 2018 bitHeads, Inc. All Rights Reserved.
 
 #pragma once
 
@@ -26,7 +26,7 @@ public:
     * Param - rangeDelta The range delta used for the initial match search
     */
     UFUNCTION(BlueprintCallable, meta = (BlueprintInternalUseOnly = "true"), Category = "BrainCloud|One Way Match")
-        static UBCOneWayMatchProxy* StartMatch(ABrainCloud *brainCloud, const FString& otherPlayerId, int32 rangeDelta);
+        static UBCOneWayMatchProxy* StartMatch(ABrainCloudActor *brainCloud, const FString& otherPlayerId, int32 rangeDelta);
 
     /**
     * Cancels a match
@@ -37,7 +37,7 @@ public:
     * Param - playbackStreamId The playback stream id returned in the start match
     */
     UFUNCTION(BlueprintCallable, meta = (BlueprintInternalUseOnly = "true"), Category = "BrainCloud|One Way Match")
-        static UBCOneWayMatchProxy* CancelMatch(ABrainCloud *brainCloud, const FString& playbackStreamId);
+        static UBCOneWayMatchProxy* CancelMatch(ABrainCloudActor *brainCloud, const FString& playbackStreamId);
 
     /**
     * Completes a match
@@ -48,7 +48,7 @@ public:
     * Param - playbackStreamId The playback stream id returned in the initial start match
     */
     UFUNCTION(BlueprintCallable, meta = (BlueprintInternalUseOnly = "true"), Category = "BrainCloud|One Way Match")
-        static UBCOneWayMatchProxy* CompleteMatch(ABrainCloud *brainCloud, const FString& playbackStreamId);
+        static UBCOneWayMatchProxy* CompleteMatch(ABrainCloudActor *brainCloud, const FString& playbackStreamId);
 
     //Response delegates
     UPROPERTY(BlueprintAssignable)

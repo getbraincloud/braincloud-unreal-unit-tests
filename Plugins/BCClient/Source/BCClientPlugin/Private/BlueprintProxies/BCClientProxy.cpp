@@ -1,8 +1,8 @@
-// Copyright 2016 bitHeads, Inc. All Rights Reserved.
+// Copyright 2018 bitHeads, Inc. All Rights Reserved.
 
 #include "BCClientPluginPrivatePCH.h"
 #include "BrainCloudClient.h"
-#include "BrainCloud.h"
+#include "BrainCloudActor.h"
 #include "ServerCall.h"
 #include "BCWrapperProxy.h"
 #include "BrainCloudWrapper.h"
@@ -23,7 +23,7 @@ void UBCClientProxy::SingletonMode(const bool isEnabled)
 	BrainCloudClient::EnableSingletonMode = isEnabled;
 }
 
-void UBCClientProxy::Initialize(ABrainCloud *brainCloud, 
+void UBCClientProxy::Initialize(ABrainCloudActor *brainCloud, 
 	const FString& serverUrl,
 	const FString& secretKey,
 	const FString& appId,
@@ -32,154 +32,149 @@ void UBCClientProxy::Initialize(ABrainCloud *brainCloud,
 	UBCWrapperProxy::GetBrainCloudInstance(brainCloud)->initialize(serverUrl, secretKey, appId, version);
 }
 
-void UBCClientProxy::InitializeIdentity(ABrainCloud *brainCloud, const FString& profileId, const FString& anonymousId)
+void UBCClientProxy::InitializeIdentity(ABrainCloudActor *brainCloud, const FString& profileId, const FString& anonymousId)
 {
 	UBCWrapperProxy::GetBrainCloudInstance(brainCloud)->getBCClient()->initializeIdentity(profileId, anonymousId);
 }
 
-void UBCClientProxy::RunCallbacks(ABrainCloud *brainCloud)
+void UBCClientProxy::RunCallbacks(ABrainCloudActor *brainCloud)
 {
 	UBCWrapperProxy::GetBrainCloudInstance(brainCloud)->runCallbacks();
 }
 
-void UBCClientProxy::RestoreRecentSession(const FString& sessionId)
-{
-	// Remove this function
-}
-
-void UBCClientProxy::EnableLogging(ABrainCloud *brainCloud, bool shouldEnable)
+void UBCClientProxy::EnableLogging(ABrainCloudActor *brainCloud, bool shouldEnable)
 {
 	UBCWrapperProxy::GetBrainCloudInstance(brainCloud)->getBCClient()->enableLogging(shouldEnable);
 }
 
-bool UBCClientProxy::IsAuthenticated(ABrainCloud *brainCloud)
+bool UBCClientProxy::IsAuthenticated(ABrainCloudActor *brainCloud)
 {
 	return UBCWrapperProxy::GetBrainCloudInstance(brainCloud)->getBCClient()->isAuthenticated();
 }
 
-bool UBCClientProxy::IsInitialized(ABrainCloud *brainCloud)
+bool UBCClientProxy::IsInitialized(ABrainCloudActor *brainCloud)
 {
 	return UBCWrapperProxy::GetBrainCloudInstance(brainCloud)->getBCClient()->isInitialized();
 }
 
-void UBCClientProxy::ResetCommunication(ABrainCloud *brainCloud)
+void UBCClientProxy::ResetCommunication(ABrainCloudActor *brainCloud)
 {
 	UBCWrapperProxy::GetBrainCloudInstance(brainCloud)->getBCClient()->resetCommunication();
 }
 
-void UBCClientProxy::Heartbeat(ABrainCloud *brainCloud)
+void UBCClientProxy::Heartbeat(ABrainCloudActor *brainCloud)
 {
 	UBCWrapperProxy::GetBrainCloudInstance(brainCloud)->getBCClient()->heartbeat();
 }
 
 //Setters
-void UBCClientProxy::SetHeartbeatInterval(ABrainCloud *brainCloud, int32 intervalInMilliseconds)
+void UBCClientProxy::SetHeartbeatInterval(ABrainCloudActor *brainCloud, int32 intervalInMilliseconds)
 {
 	UBCWrapperProxy::GetBrainCloudInstance(brainCloud)->getBCClient()->setHeartbeatInterval(intervalInMilliseconds);
 }
 
-void UBCClientProxy::SetPacketTimeouts(ABrainCloud *brainCloud, const TArray<int32> & timeouts)
+void UBCClientProxy::SetPacketTimeouts(ABrainCloudActor *brainCloud, const TArray<int32> & timeouts)
 {
 	UBCWrapperProxy::GetBrainCloudInstance(brainCloud)->getBCClient()->setPacketTimeouts(timeouts);
 }
 
-void UBCClientProxy::SetPacketTimeoutsToDefault(ABrainCloud *brainCloud)
+void UBCClientProxy::SetPacketTimeoutsToDefault(ABrainCloudActor *brainCloud)
 {
 	UBCWrapperProxy::GetBrainCloudInstance(brainCloud)->getBCClient()->setPacketTimeoutsToDefault();
 }
 
-void UBCClientProxy::SetAuthenticationPacketTimeout(ABrainCloud *brainCloud, int32 timeoutSecs)
+void UBCClientProxy::SetAuthenticationPacketTimeout(ABrainCloudActor *brainCloud, int32 timeoutSecs)
 {
 	UBCWrapperProxy::GetBrainCloudInstance(brainCloud)->getBCClient()->setAuthenticationPacketTimeout(timeoutSecs);
 }
 
-void UBCClientProxy::SetOldStyleStatusMessageErrorCallback(ABrainCloud *brainCloud, bool enabled)
+void UBCClientProxy::SetOldStyleStatusMessageErrorCallback(ABrainCloudActor *brainCloud, bool enabled)
 {
 	UBCWrapperProxy::GetBrainCloudInstance(brainCloud)->getBCClient()->setOldStyleStatusMessageErrorCallback(enabled);
 }
 
-void UBCClientProxy::SetErrorCallbackOn202Status(ABrainCloud *brainCloud, bool isError)
+void UBCClientProxy::SetErrorCallbackOn202Status(ABrainCloudActor *brainCloud, bool isError)
 {
 	UBCWrapperProxy::GetBrainCloudInstance(brainCloud)->getBCClient()->setErrorCallbackOn202Status(isError);
 }
 
-void UBCClientProxy::SetUploadLowTransferRateTimeout(ABrainCloud *brainCloud, int32 timeoutSecs)
+void UBCClientProxy::SetUploadLowTransferRateTimeout(ABrainCloudActor *brainCloud, int32 timeoutSecs)
 {
 	UBCWrapperProxy::GetBrainCloudInstance(brainCloud)->getBCClient()->setUploadLowTransferRateTimeout(timeoutSecs);
 }
 
-void UBCClientProxy::SetUploadLowTransferRateThreshold(ABrainCloud *brainCloud, int32 bytesPerSec)
+void UBCClientProxy::SetUploadLowTransferRateThreshold(ABrainCloudActor *brainCloud, int32 bytesPerSec)
 {
 	UBCWrapperProxy::GetBrainCloudInstance(brainCloud)->getBCClient()->setUploadLowTransferRateThreshold(bytesPerSec);
 }
 
 //Getters
-const FString & UBCClientProxy::GetGameId(ABrainCloud *brainCloud)
+const FString & UBCClientProxy::GetGameId(ABrainCloudActor *brainCloud)
 {
 	return UBCWrapperProxy::GetBrainCloudInstance(brainCloud)->getBCClient()->getAppId();
 }
 
-const FString & UBCClientProxy::GetReleasePlatform(ABrainCloud *brainCloud)
+const FString & UBCClientProxy::GetReleasePlatform(ABrainCloudActor *brainCloud)
 {
 	return UBCWrapperProxy::GetBrainCloudInstance(brainCloud)->getBCClient()->getReleasePlatform();
 }
 
-const FString & UBCClientProxy::GetGameVersion(ABrainCloud *brainCloud)
+const FString & UBCClientProxy::GetGameVersion(ABrainCloudActor *brainCloud)
 {
 	return UBCWrapperProxy::GetBrainCloudInstance(brainCloud)->getBCClient()->getAppVersion();
 }
 
-const FString & UBCClientProxy::GetBrainCloudClientVersion(ABrainCloud *brainCloud)
+const FString & UBCClientProxy::GetBrainCloudClientVersion(ABrainCloudActor *brainCloud)
 {
 	return UBCWrapperProxy::GetBrainCloudInstance(brainCloud)->getBCClient()->getBrainCloudClientVersion();
 }
 
-const TArray<int32> & UBCClientProxy::GetPacketTimeouts(ABrainCloud *brainCloud)
+const TArray<int32> & UBCClientProxy::GetPacketTimeouts(ABrainCloudActor *brainCloud)
 {
 	return UBCWrapperProxy::GetBrainCloudInstance(brainCloud)->getBCClient()->getPacketTimeouts();
 }
 
-int32 UBCClientProxy::GetAuthenticationPacketTimeout(ABrainCloud *brainCloud)
+int32 UBCClientProxy::GetAuthenticationPacketTimeout(ABrainCloudActor *brainCloud)
 {
 	return UBCWrapperProxy::GetBrainCloudInstance(brainCloud)->getBCClient()->getAuthenticationPacketTimeout();
 }
 
-int32 UBCClientProxy::GetUploadLowTransferRateTimeout(ABrainCloud *brainCloud)
+int32 UBCClientProxy::GetUploadLowTransferRateTimeout(ABrainCloudActor *brainCloud)
 {
 	return UBCWrapperProxy::GetBrainCloudInstance(brainCloud)->getBCClient()->getUploadLowTransferRateTimeout();
 }
 
-int32 UBCClientProxy::GetUploadLowTransferRateThreshold(ABrainCloud *brainCloud)
+int32 UBCClientProxy::GetUploadLowTransferRateThreshold(ABrainCloudActor *brainCloud)
 {
 	return UBCWrapperProxy::GetBrainCloudInstance(brainCloud)->getBCClient()->getUploadLowTransferRateThreshold();
 }
 
-void UBCClientProxy::EnableNetworkErrorMessageCaching(ABrainCloud *brainCloud, bool enabled)
+void UBCClientProxy::EnableNetworkErrorMessageCaching(ABrainCloudActor *brainCloud, bool enabled)
 {
 	UBCWrapperProxy::GetBrainCloudInstance(brainCloud)->getBCClient()->enableNetworkErrorMessageCaching(enabled);
 }
 
-void UBCClientProxy::RetryCachedMessages(ABrainCloud *brainCloud)
+void UBCClientProxy::RetryCachedMessages(ABrainCloudActor *brainCloud)
 {
 	UBCWrapperProxy::GetBrainCloudInstance(brainCloud)->getBCClient()->retryCachedMessages();
 }
 
-void UBCClientProxy::FlushCachedMessages(ABrainCloud *brainCloud, bool sendApiErrorCallbacks)
+void UBCClientProxy::FlushCachedMessages(ABrainCloudActor *brainCloud, bool sendApiErrorCallbacks)
 {
 	UBCWrapperProxy::GetBrainCloudInstance(brainCloud)->getBCClient()->flushCachedMessages(sendApiErrorCallbacks);
 }
 
-void UBCClientProxy::InsertEndOfMessageBundleMarker(ABrainCloud *brainCloud)
+void UBCClientProxy::InsertEndOfMessageBundleMarker(ABrainCloudActor *brainCloud)
 {
 	UBCWrapperProxy::GetBrainCloudInstance(brainCloud)->getBCClient()->insertEndOfMessageBundleMarker();
 }
 
-void UBCClientProxy::OverrideCountryCode(ABrainCloud *brainCloud, const FString& countryCode)
+void UBCClientProxy::OverrideCountryCode(ABrainCloudActor *brainCloud, const FString& countryCode)
 {
 	UBCWrapperProxy::GetBrainCloudInstance(brainCloud)->getBCClient()->overrideCountryCode(countryCode);
 }
 
-void UBCClientProxy::OverrideLanguageCode(ABrainCloud *brainCloud, const FString& languageCode)
+void UBCClientProxy::OverrideLanguageCode(ABrainCloudActor *brainCloud, const FString& languageCode)
 {
 	UBCWrapperProxy::GetBrainCloudInstance(brainCloud)->getBCClient()->overrideLanguageCode(languageCode);
 }

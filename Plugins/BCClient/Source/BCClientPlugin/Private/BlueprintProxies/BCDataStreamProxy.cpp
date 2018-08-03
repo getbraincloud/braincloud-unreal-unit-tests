@@ -1,9 +1,9 @@
-// Copyright 2016 bitHeads, Inc. All Rights Reserved.
+// Copyright 2018 bitHeads, Inc. All Rights Reserved.
 
 #include "BCClientPluginPrivatePCH.h"
 #include "BrainCloudClient.h"
 #include "ServerCall.h"
-#include "BrainCloud.h"
+#include "BrainCloudActor.h"
 #include "BCWrapperProxy.h"
 #include "BrainCloudWrapper.h"
 #include "BCDataStreamProxy.h"
@@ -13,21 +13,21 @@ UBCDataStreamProxy::UBCDataStreamProxy(const FObjectInitializer& ObjectInitializ
 {
 }
 
-UBCDataStreamProxy* UBCDataStreamProxy::CustomPageEvent(ABrainCloud *brainCloud, const FString& eventName, const FString& jsonEventProperties)
+UBCDataStreamProxy* UBCDataStreamProxy::CustomPageEvent(ABrainCloudActor *brainCloud, const FString& eventName, const FString& jsonEventProperties)
 {
     UBCDataStreamProxy* Proxy = NewObject<UBCDataStreamProxy>();
     UBCWrapperProxy::GetBrainCloudInstance(brainCloud)->getDataStreamService()->customPageEvent(eventName, jsonEventProperties, Proxy);
     return Proxy;
 }
 
-UBCDataStreamProxy* UBCDataStreamProxy::CustomScreenEvent(ABrainCloud *brainCloud, const FString& eventName, const FString& jsonEventProperties)
+UBCDataStreamProxy* UBCDataStreamProxy::CustomScreenEvent(ABrainCloudActor *brainCloud, const FString& eventName, const FString& jsonEventProperties)
 {
     UBCDataStreamProxy* Proxy = NewObject<UBCDataStreamProxy>();
     UBCWrapperProxy::GetBrainCloudInstance(brainCloud)->getDataStreamService()->customScreenEvent(eventName, jsonEventProperties, Proxy);
     return Proxy;
 }
 
-UBCDataStreamProxy* UBCDataStreamProxy::CustomTrackEvent(ABrainCloud *brainCloud, const FString& eventName, const FString& jsonEventProperties)
+UBCDataStreamProxy* UBCDataStreamProxy::CustomTrackEvent(ABrainCloudActor *brainCloud, const FString& eventName, const FString& jsonEventProperties)
 {
     UBCDataStreamProxy* Proxy = NewObject<UBCDataStreamProxy>();
     UBCWrapperProxy::GetBrainCloudInstance(brainCloud)->getDataStreamService()->customTrackEvent(eventName, jsonEventProperties, Proxy);

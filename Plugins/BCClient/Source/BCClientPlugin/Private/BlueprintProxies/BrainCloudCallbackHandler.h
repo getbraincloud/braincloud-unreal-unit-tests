@@ -1,4 +1,4 @@
-// Copyright 2016 bitHeads, Inc. All Rights Reserved.
+// Copyright 2018 bitHeads, Inc. All Rights Reserved.
 
 #pragma once
 
@@ -48,7 +48,7 @@ public:
     */
     UFUNCTION(BlueprintCallable, Category = "BrainCloud|Callback Handling")
         void RegisterCallbacks(
-			ABrainCloud* brainCloud,
+			ABrainCloudActor * brainCloud,
             bool fileCallbacks = true, 
             bool rewardCallback = true, 
             bool eventCallback = true, 
@@ -85,5 +85,5 @@ protected:
 
     virtual void networkError();
 
-	ABrainCloud* _brainCloud;
+	ABrainCloudActor * _brainCloud;
 };
