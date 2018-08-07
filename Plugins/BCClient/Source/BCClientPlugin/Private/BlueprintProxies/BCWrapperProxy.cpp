@@ -127,6 +127,62 @@ UBCWrapperProxy *UBCWrapperProxy::AuthenticateUniversal(ABrainCloudActor *brainC
 	return Proxy;
 }
 
+UBCWrapperProxy *UBCWrapperProxy::SmartSwitchAuthenticateEmailPassword(ABrainCloudActor *brainCloud, const FString &email, const FString &password, bool forceCreate)
+{
+	UBCWrapperProxy *Proxy = NewObject<UBCWrapperProxy>();
+	UBCWrapperProxy::GetBrainCloudInstance(brainCloud)->smartSwitchAuthenticateEmailPassword(email, password, forceCreate, Proxy);
+	return Proxy;
+}
+
+UBCWrapperProxy *UBCWrapperProxy::SmartSwitchAuthenticateExternal(ABrainCloudActor *brainCloud, const FString &userid, const FString &token, const FString &externalAuthName, bool forceCreate)
+{
+	UBCWrapperProxy *Proxy = NewObject<UBCWrapperProxy>();
+	UBCWrapperProxy::GetBrainCloudInstance(brainCloud)->smartSwitchAuthenticateExternal(userid, token, externalAuthName, forceCreate, Proxy);
+	return Proxy;
+}
+
+UBCWrapperProxy *UBCWrapperProxy::SmartSwitchAuthenticateFacebook(ABrainCloudActor *brainCloud, const FString &fbUserId, const FString &fbAuthToken, bool forceCreate)
+{
+	UBCWrapperProxy *Proxy = NewObject<UBCWrapperProxy>();
+	UBCWrapperProxy::GetBrainCloudInstance(brainCloud)->smartSwitchAuthenticateFacebook(fbUserId, fbAuthToken, forceCreate, Proxy);
+	return Proxy;
+}
+
+UBCWrapperProxy *UBCWrapperProxy::SmartSwitchAuthenticateGameCenter(ABrainCloudActor *brainCloud, const FString &gameCenterId, bool forceCreate)
+{
+	UBCWrapperProxy *Proxy = NewObject<UBCWrapperProxy>();
+	UBCWrapperProxy::GetBrainCloudInstance(brainCloud)->smartSwitchAuthenticateGameCenter(gameCenterId, forceCreate, Proxy);
+	return Proxy;
+}
+
+UBCWrapperProxy *UBCWrapperProxy::SmartSwitchAuthenticateGoogle(ABrainCloudActor *brainCloud, const FString &userid, const FString &token, bool forceCreate)
+{
+	UBCWrapperProxy *Proxy = NewObject<UBCWrapperProxy>();
+	UBCWrapperProxy::GetBrainCloudInstance(brainCloud)->smartSwitchAuthenticateGoogle(userid, token, forceCreate, Proxy);
+	return Proxy;
+}
+
+UBCWrapperProxy *UBCWrapperProxy::SmartSwitchAuthenticateSteam(ABrainCloudActor *brainCloud, const FString &userid, const FString &sessionticket, bool forceCreate)
+{
+	UBCWrapperProxy *Proxy = NewObject<UBCWrapperProxy>();
+	UBCWrapperProxy::GetBrainCloudInstance(brainCloud)->smartSwitchAuthenticateSteam(userid, sessionticket, forceCreate, Proxy);
+	return Proxy;
+}
+
+UBCWrapperProxy *UBCWrapperProxy::SmartSwitchAuthenticateTwitter(ABrainCloudActor *brainCloud, const FString &userid, const FString &token, const FString &secret, bool forceCreate)
+{
+	UBCWrapperProxy *Proxy = NewObject<UBCWrapperProxy>();
+	UBCWrapperProxy::GetBrainCloudInstance(brainCloud)->smartSwitchAuthenticateTwitter(userid, token, secret, forceCreate, Proxy);
+	return Proxy;
+}
+
+UBCWrapperProxy *UBCWrapperProxy::SmartSwitchAuthenticateUniversal(ABrainCloudActor *brainCloud, const FString &userid, const FString &password, bool forceCreate)
+{
+	UBCWrapperProxy *Proxy = NewObject<UBCWrapperProxy>();
+	UBCWrapperProxy::GetBrainCloudInstance(brainCloud)->smartSwitchAuthenticateUniversal(userid, password, forceCreate, Proxy);
+	return Proxy;
+}
+
 UBCWrapperProxy *UBCWrapperProxy::SetStoredProfileId(ABrainCloudActor *brainCloud, FString profileId)
 {
 	UBCWrapperProxy *Proxy = NewObject<UBCWrapperProxy>();

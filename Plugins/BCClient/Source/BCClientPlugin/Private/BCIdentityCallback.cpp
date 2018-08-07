@@ -12,7 +12,8 @@ BCIdentityCallback::BCIdentityCallback(BrainCloudWrapper *in_wrapper, IServerCal
 }
 
 BCIdentityCallback::~BCIdentityCallback()
-{}
+{
+}
 
 void BCIdentityCallback::serverCallback(ServiceName serviceName, ServiceOperation serviceOperation, FString const &jsonData)
 {
@@ -20,19 +21,23 @@ void BCIdentityCallback::serverCallback(ServiceName serviceName, ServiceOperatio
     TSharedPtr<FJsonObject> jsonPacket = MakeShareable(new FJsonObject());
     bool res = FJsonSerializer::Deserialize(reader, jsonPacket);
 
-    TSharedPtr<FJsonObject> data = jsonPacket->GetObjectField(TEXT("data"));
-    TArray<TSharedPtr<FJsonValue>> identities = data->GetArrayField(TEXT("identities"));
-
-    if (identities.Num() == 0)
+    if (res)
     {
-        m_wrapper->getBCClient()->getPlayerStateService()->deleteUser(m_callback);
-    }
-    else
-    {
-        m_wrapper->getBCClient()->getPlayerStateService()->logout(m_callback);
+        TSharedPtr<FJsonObject> data = jsonPacket->GetObjectField(TEXT("data"));
+        TSharedPtr<FJsonObject> identities = data->GetObjectField(TEXT("identities"));
+
+        if (identities->Values.Num() == 0)
+        {
+            m_wrapper->getBCClient()->getPlayerStateService()->deleteUser(m_callback);
+        }
+        else
+        {
+            m_wrapper->getBCClient()->getPlayerStateService()->logout(m_callback);
+        }
+
+        m_wrapper->getBCClient()->insertEndOfMessageBundleMarker();
     }
 
-    m_wrapper->getBCClient()->insertEndOfMessageBundleMarker();
     delete this;
 }
 
