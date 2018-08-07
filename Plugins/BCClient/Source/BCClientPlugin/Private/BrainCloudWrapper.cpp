@@ -3,6 +3,7 @@
 #include "BCClientPluginPrivatePCH.h"
 #include "BrainCloudWrapper.h"
 
+#include "BCAuthType.h"
 #include "BrainCloudClient.h"
 #include "ServiceName.h"
 #include "ServiceOperation.h"
@@ -65,7 +66,7 @@ void BrainCloudWrapper::initializeIdentity(bool isAnonymousAuth)
     // create an anonymous ID if necessary
     FString profileId = getStoredProfileId();
     FString anonId = getStoredAnonymousId();
-    
+
     if ((!anonId.IsEmpty() && profileId.IsEmpty()) || anonId.IsEmpty())
     {
         setStoredAnonymousId(_client->getAuthenticationService()->generateAnonymousId());
@@ -156,36 +157,51 @@ void BrainCloudWrapper::authenticateUniversal(FString userid, FString password, 
 
 void BrainCloudWrapper::smartSwitchAuthenticateEmailPassword(const FString &in_email, const FString &in_password, bool in_forceCreate, IServerCallback *in_callback)
 {
-    SmartSwitchAuthenticateCallback *smartCallback = new SmartSwitchAuthenticateCallback(this, in_email, in_password, in_forceCreate, in_callback);
+    SmartSwitchAuthenticateCallback *smartCallback = new SmartSwitchAuthenticateCallback(this, EBCAuthType::Email, in_email, in_password, in_forceCreate, in_callback);
     getIdentitiesCallback(smartCallback);
 }
 
-void BrainCloudWrapper::smartSwitchAuthenticateExternal(const FString &userid, const FString &token, const FString &externalAuthName, bool forceCreate, IServerCallback *callback)
+void BrainCloudWrapper::smartSwitchAuthenticateExternal(const FString &userid, const FString &token, const FString &externalAuthName, bool in_forceCreate, IServerCallback *in_callback)
 {
+    SmartSwitchAuthenticateCallback *smartCallback = new SmartSwitchAuthenticateCallback(this, EBCAuthType::External, userid, token, externalAuthName, in_forceCreate, in_callback);
+    getIdentitiesCallback(smartCallback);
 }
 
-void BrainCloudWrapper::smartSwitchAuthenticateFacebook(const FString &fbUserId, const FString &fbAuthToken, bool forceCreate, IServerCallback *callback)
+void BrainCloudWrapper::smartSwitchAuthenticateFacebook(const FString &fbUserId, const FString &fbAuthToken, bool in_forceCreate, IServerCallback *in_callback)
 {
+    SmartSwitchAuthenticateCallback *smartCallback = new SmartSwitchAuthenticateCallback(this, EBCAuthType::Facebook, fbUserId, fbAuthToken, in_forceCreate, in_callback);
+    getIdentitiesCallback(smartCallback);
 }
 
-void BrainCloudWrapper::smartSwitchAuthenticateGameCenter(const FString &gameCenterId, bool forceCreate, IServerCallback *callback)
+void BrainCloudWrapper::smartSwitchAuthenticateGameCenter(const FString &gameCenterId, bool in_forceCreate, IServerCallback *in_callback)
 {
+    FString emptyToken = TEXT("");
+    SmartSwitchAuthenticateCallback *smartCallback = new SmartSwitchAuthenticateCallback(this, EBCAuthType::GameCenter, gameCenterId, emptyToken, in_forceCreate, in_callback);
+    getIdentitiesCallback(smartCallback);
 }
 
-void BrainCloudWrapper::smartSwitchAuthenticateGoogle(const FString &userid, const FString &token, bool forceCreate, IServerCallback *callback)
+void BrainCloudWrapper::smartSwitchAuthenticateGoogle(const FString &userid, const FString &token, bool in_forceCreate, IServerCallback *in_callback)
 {
+    SmartSwitchAuthenticateCallback *smartCallback = new SmartSwitchAuthenticateCallback(this, EBCAuthType::Google, userid, token, in_forceCreate, in_callback);
+    getIdentitiesCallback(smartCallback);
 }
 
-void BrainCloudWrapper::smartSwitchAuthenticateSteam(const FString &userid, const FString &sessionticket, bool forceCreate, IServerCallback *callback)
+void BrainCloudWrapper::smartSwitchAuthenticateSteam(const FString &userid, const FString &sessionticket, bool in_forceCreate, IServerCallback *in_callback)
 {
+    SmartSwitchAuthenticateCallback *smartCallback = new SmartSwitchAuthenticateCallback(this, EBCAuthType::Steam, userid, sessionticket, in_forceCreate, in_callback);
+    getIdentitiesCallback(smartCallback);
 }
 
-void BrainCloudWrapper::smartSwitchAuthenticateTwitter(const FString &userid, const FString &token, const FString &secret, bool forceCreate, IServerCallback *callback)
+void BrainCloudWrapper::smartSwitchAuthenticateTwitter(const FString &userid, const FString &token, const FString &secret, bool in_forceCreate, IServerCallback *in_callback)
 {
+    SmartSwitchAuthenticateCallback *smartCallback = new SmartSwitchAuthenticateCallback(this, EBCAuthType::Twitter, userid, token, secret, in_forceCreate, in_callback);
+    getIdentitiesCallback(smartCallback);
 }
 
-void BrainCloudWrapper::smartSwitchAuthenticateUniversal(const FString &userid, const FString &password, bool forceCreate, IServerCallback *callback)
+void BrainCloudWrapper::smartSwitchAuthenticateUniversal(const FString &userid, const FString &password, bool in_forceCreate, IServerCallback *in_callback)
 {
+    SmartSwitchAuthenticateCallback *smartCallback = new SmartSwitchAuthenticateCallback(this, EBCAuthType::Universal, userid, password, in_forceCreate, in_callback);
+    getIdentitiesCallback(smartCallback);
 }
 
 void BrainCloudWrapper::getIdentitiesCallback(IServerCallback *success)
