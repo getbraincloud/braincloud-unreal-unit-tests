@@ -23,7 +23,7 @@ public:
     * Service Operation - ReadProperties
     */
     UFUNCTION(BlueprintCallable, meta = (BlueprintInternalUseOnly = "true"), Category = "BrainCloud|Global App")
-        static UBCGlobalAppProxy* ReadProperties(ABrainCloudActor *brainCloud);
+        static UBCGlobalAppProxy* ReadProperties(UBrainCloudWrapper *brainCloudWrapper);
 
     //Response delegates
     UPROPERTY(BlueprintAssignable)

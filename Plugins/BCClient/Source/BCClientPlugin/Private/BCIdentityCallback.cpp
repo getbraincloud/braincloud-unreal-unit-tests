@@ -5,7 +5,7 @@
 #include "BrainCloudActor.h"
 #include "BrainCloudWrapper.h"
 
-BCIdentityCallback::BCIdentityCallback(BrainCloudWrapper *in_wrapper, IServerCallback *in_callback)
+BCIdentityCallback::BCIdentityCallback(UBrainCloudWrapper *in_wrapper, IServerCallback *in_callback)
 {
     m_wrapper = in_wrapper;
     m_callback = in_callback;

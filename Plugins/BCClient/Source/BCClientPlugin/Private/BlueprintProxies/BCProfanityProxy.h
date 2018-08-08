@@ -36,7 +36,7 @@ public:
     * 40424 - WebPurify not enabled
     */
     UFUNCTION(BlueprintCallable, meta = (BlueprintInternalUseOnly = "true"), Category = "BrainCloud|Profanity")
-        static UBCProfanityProxy* ProfanityCheck(ABrainCloudActor *brainCloud, const FString& text, const FString& languages, bool flagEmail, bool flagPhone, bool flagUrls);
+        static UBCProfanityProxy* ProfanityCheck(UBrainCloudWrapper *brainCloudWrapper, const FString& text, const FString& languages, bool flagEmail, bool flagPhone, bool flagUrls);
 
     /**
     * Replaces the characters of profanity text with a passed character(s).
@@ -59,7 +59,7 @@ public:
     * 40424 - WebPurify not enabled
     */
     UFUNCTION(BlueprintCallable, meta = (BlueprintInternalUseOnly = "true"), Category = "BrainCloud|Profanity")
-        static UBCProfanityProxy* ProfanityReplaceText(ABrainCloudActor *brainCloud, const FString& text, const FString& replaceSymbol, const FString& languages, bool flagEmail, bool flagPhone, bool flagUrls);
+        static UBCProfanityProxy* ProfanityReplaceText(UBrainCloudWrapper *brainCloudWrapper, const FString& text, const FString& replaceSymbol, const FString& languages, bool flagEmail, bool flagPhone, bool flagUrls);
 
     /**
     * Checks supplied text for profanity and returns a list of bad wors.
@@ -81,7 +81,7 @@ public:
     * 40424 - WebPurify not enabled
     */
     UFUNCTION(BlueprintCallable, meta = (BlueprintInternalUseOnly = "true"), Category = "BrainCloud|Profanity")
-        static UBCProfanityProxy* ProfanityIdentifyBadWords(ABrainCloudActor *brainCloud, const FString& text, const FString& languages, bool flagEmail, bool flagPhone, bool flagUrls);
+        static UBCProfanityProxy* ProfanityIdentifyBadWords(UBrainCloudWrapper *brainCloudWrapper, const FString& text, const FString& languages, bool flagEmail, bool flagPhone, bool flagUrls);
 
     //Response delegates
     UPROPERTY(BlueprintAssignable)
