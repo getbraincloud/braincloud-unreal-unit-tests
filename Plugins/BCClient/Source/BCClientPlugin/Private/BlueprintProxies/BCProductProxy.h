@@ -27,7 +27,7 @@ public:
     * if all currency types are being requested.
     */
     UFUNCTION(BlueprintCallable, meta = (BlueprintInternalUseOnly = "true"), Category = "BrainCloud|Product")
-        static UBCProductProxy* GetCurrency(ABrainCloudActor *brainCloud, const FString& currencyType);
+        static UBCProductProxy* GetCurrency(UBrainCloudWrapper *brainCloudWrapper, const FString& currencyType);
 
 	/**
 	* @deprecated Method is recommended to be used in Cloud Code only for security
@@ -35,7 +35,7 @@ public:
 	*/
 	DEPRECATED("3.2.0", "Method is recommended to be used in Cloud Code only for security. If you need to use it client side, enable 'Allow Currency Calls from Client' on the brainCloud dashboard")
 		UFUNCTION(BlueprintCallable, meta = (BlueprintInternalUseOnly = "true"), Category = "BrainCloud|Product")
-		static UBCProductProxy* AwardCurrency(ABrainCloudActor *brainCloud, const FString& currencyType, int32 amount);
+		static UBCProductProxy* AwardCurrency(UBrainCloudWrapper *brainCloudWrapper, const FString& currencyType, int32 amount);
 
 	/**
 	* @deprecated Method is recommended to be used in Cloud Code only for security
@@ -43,7 +43,7 @@ public:
 	*/
 	DEPRECATED("3.2.0", "Method is recommended to be used in Cloud Code only for security. If you need to use it client side, enable 'Allow Currency Calls from Client' on the brainCloud dashboard")
 		UFUNCTION(BlueprintCallable, meta = (BlueprintInternalUseOnly = "true"), Category = "BrainCloud|Product")
-		static UBCProductProxy* ConsumeCurrency(ABrainCloudActor *brainCloud, const FString& currencyType, int32 amount);
+		static UBCProductProxy* ConsumeCurrency(UBrainCloudWrapper *brainCloudWrapper, const FString& currencyType, int32 amount);
 
 	/**
 	* @deprecated Method is recommended to be used in Cloud Code only for security
@@ -51,7 +51,7 @@ public:
 	*/
 	DEPRECATED("3.2.0", "Method is recommended to be used in Cloud Code only for security. If you need to use it client side, enable 'Allow Currency Calls from Client' on the brainCloud dashboard")
 		UFUNCTION(BlueprintCallable, meta = (BlueprintInternalUseOnly = "true"), Category = "BrainCloud|Product")
-		static UBCProductProxy* ResetCurrency(ABrainCloudActor *brainCloud);
+		static UBCProductProxy* ResetCurrency(UBrainCloudWrapper *brainCloudWrapper);
 
     /**
     * Method gets the active sales inventory for the passed-in platform and
@@ -72,7 +72,7 @@ public:
     * inventory for. This is only used for Steam and Facebook stores.
     */
     UFUNCTION(BlueprintCallable, meta = (BlueprintInternalUseOnly = "true"), Category = "BrainCloud|Product")
-        static UBCProductProxy* GetSalesInventory(ABrainCloudActor *brainCloud, const FString& platform, const FString& userCurrency);
+        static UBCProductProxy* GetSalesInventory(UBrainCloudWrapper *brainCloudWrapper, const FString& platform, const FString& userCurrency);
 
     /**
     * Method gets the active sales inventory for the passed-in platform,
@@ -94,7 +94,7 @@ public:
     * Param - category Inventory category to retrieve
     */
     UFUNCTION(BlueprintCallable, meta = (BlueprintInternalUseOnly = "true"), Category = "BrainCloud|Product")
-        static UBCProductProxy* GetSalesInventoryByCategory(ABrainCloudActor *brainCloud, const FString& platform, const FString& userCurrency, const FString& category);
+        static UBCProductProxy* GetSalesInventoryByCategory(UBrainCloudWrapper *brainCloudWrapper, const FString& platform, const FString& userCurrency, const FString& category);
 
     /**
     * Method verifies an iTunes receipt and awards the items related to this receipt.
@@ -105,7 +105,7 @@ public:
     * Param - base64EncReceiptData The iTunes receipt
     */
     UFUNCTION(BlueprintCallable, meta = (BlueprintInternalUseOnly = "true"), Category = "BrainCloud|Product")
-        static UBCProductProxy* VerifyItunesReceipt(ABrainCloudActor *brainCloud, const FString& base64EncReceiptData);
+        static UBCProductProxy* VerifyItunesReceipt(UBrainCloudWrapper *brainCloudWrapper, const FString& base64EncReceiptData);
 
     /**
     * Initialize Steam Transaction
@@ -117,7 +117,7 @@ public:
     * Param - items Items to purchase
     */
     UFUNCTION(BlueprintCallable, meta = (BlueprintInternalUseOnly = "true"), Category = "BrainCloud|Product")
-        static UBCProductProxy* StartSteamTransaction(ABrainCloudActor *brainCloud, const FString& language, const FString& itemId);
+        static UBCProductProxy* StartSteamTransaction(UBrainCloudWrapper *brainCloudWrapper, const FString& language, const FString& itemId);
 
     /**
     * Finalize Steam Transaction
@@ -128,7 +128,7 @@ public:
     * Param - transId Steam transaction id
     */
     UFUNCTION(BlueprintCallable, meta = (BlueprintInternalUseOnly = "true"), Category = "BrainCloud|Product")
-        static UBCProductProxy* FinalizeSteamTransaction(ABrainCloudActor *brainCloud, const FString& transId);
+        static UBCProductProxy* FinalizeSteamTransaction(UBrainCloudWrapper *brainCloudWrapper, const FString& transId);
 
     /**
     * Verify Microsoft Receipt
@@ -139,7 +139,7 @@ public:
     * Param - receipt Receipt XML
     */
     UFUNCTION(BlueprintCallable, meta = (BlueprintInternalUseOnly = "true"), Category = "BrainCloud|Product")
-        static UBCProductProxy* VerifyMicrosoftReceipt(ABrainCloudActor *brainCloud, const FString& receipt);
+        static UBCProductProxy* VerifyMicrosoftReceipt(UBrainCloudWrapper *brainCloudWrapper, const FString& receipt);
 
     /**
     * Confirms a google play purchase. On success, the player will be awarded the
@@ -153,7 +153,7 @@ public:
     * Param - token Google Play token string
     */
     UFUNCTION(BlueprintCallable, meta = (BlueprintInternalUseOnly = "true"), Category = "BrainCloud|Product")
-        static UBCProductProxy* ConfirmGooglePlayPurchase(ABrainCloudActor *brainCloud, const FString& orderId, const FString& productId, const FString& token);
+        static UBCProductProxy* ConfirmGooglePlayPurchase(UBrainCloudWrapper *brainCloudWrapper, const FString& orderId, const FString& productId, const FString& token);
 
     /**
     * Get Eligible Promotions
@@ -162,7 +162,7 @@ public:
     * Service Operation - GetEligiblePromotions
     */
     UFUNCTION(BlueprintCallable, meta = (BlueprintInternalUseOnly = "true"), Category = "BrainCloud|Product")
-        static UBCProductProxy* GetEligiblePromotions(ABrainCloudActor *brainCloud);
+        static UBCProductProxy* GetEligiblePromotions(UBrainCloudWrapper *brainCloudWrapper);
 
     //Response delegates
     UPROPERTY(BlueprintAssignable)

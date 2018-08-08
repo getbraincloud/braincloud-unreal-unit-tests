@@ -13,24 +13,24 @@ UBCOneWayMatchProxy::UBCOneWayMatchProxy(const FObjectInitializer& ObjectInitial
 {
 }
 
-UBCOneWayMatchProxy* UBCOneWayMatchProxy::StartMatch(ABrainCloudActor *brainCloud, const FString& otherPlayerId, int32 rangeDelta)
+UBCOneWayMatchProxy* UBCOneWayMatchProxy::StartMatch(UBrainCloudWrapper *brainCloudWrapper, const FString& otherPlayerId, int32 rangeDelta)
 {
     UBCOneWayMatchProxy* Proxy = NewObject<UBCOneWayMatchProxy>();
-    UBCWrapperProxy::GetBrainCloudInstance(brainCloud)->getOneWayMatchService()->startMatch(otherPlayerId, rangeDelta, Proxy);
+    UBCWrapperProxy::GetBrainCloudInstance(brainCloudWrapper)->getOneWayMatchService()->startMatch(otherPlayerId, rangeDelta, Proxy);
     return Proxy;
 }
 
-UBCOneWayMatchProxy* UBCOneWayMatchProxy::CancelMatch(ABrainCloudActor *brainCloud, const FString& playbackStreamId)
+UBCOneWayMatchProxy* UBCOneWayMatchProxy::CancelMatch(UBrainCloudWrapper *brainCloudWrapper, const FString& playbackStreamId)
 {
     UBCOneWayMatchProxy* Proxy = NewObject<UBCOneWayMatchProxy>();
-    UBCWrapperProxy::GetBrainCloudInstance(brainCloud)->getOneWayMatchService()->cancelMatch(playbackStreamId, Proxy);
+    UBCWrapperProxy::GetBrainCloudInstance(brainCloudWrapper)->getOneWayMatchService()->cancelMatch(playbackStreamId, Proxy);
     return Proxy;
 }
 
-UBCOneWayMatchProxy* UBCOneWayMatchProxy::CompleteMatch(ABrainCloudActor *brainCloud, const FString& playbackStreamId)
+UBCOneWayMatchProxy* UBCOneWayMatchProxy::CompleteMatch(UBrainCloudWrapper *brainCloudWrapper, const FString& playbackStreamId)
 {
     UBCOneWayMatchProxy* Proxy = NewObject<UBCOneWayMatchProxy>();
-    UBCWrapperProxy::GetBrainCloudInstance(brainCloud)->getOneWayMatchService()->completeMatch(playbackStreamId, Proxy);
+    UBCWrapperProxy::GetBrainCloudInstance(brainCloudWrapper)->getOneWayMatchService()->completeMatch(playbackStreamId, Proxy);
     return Proxy;
 }
 

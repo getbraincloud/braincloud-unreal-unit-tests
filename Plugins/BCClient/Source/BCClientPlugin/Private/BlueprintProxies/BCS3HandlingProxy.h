@@ -27,7 +27,7 @@ public:
     * Param - fileDetailsJson  An array of file details
     */
     UFUNCTION(BlueprintCallable, meta = (BlueprintInternalUseOnly = "true"), Category = "BrainCloud|S3 Handling")
-        static UBCS3HandlingProxy* GetUpdatedFiles(ABrainCloudActor *brainCloud, FString category, FString fileDetails);
+        static UBCS3HandlingProxy* GetUpdatedFiles(UBrainCloudWrapper *brainCloudWrapper, FString category, FString fileDetails);
 
 
     /*
@@ -39,7 +39,7 @@ public:
     * Param - category  Category of files to retrieve
     */
     UFUNCTION(BlueprintCallable, meta = (BlueprintInternalUseOnly = "true"), Category = "BrainCloud|S3 Handling")
-        static UBCS3HandlingProxy* GetFileList(ABrainCloudActor *brainCloud, FString category);
+        static UBCS3HandlingProxy* GetFileList(UBrainCloudWrapper *brainCloudWrapper, FString category);
 
 	/**
 	* Returns the CDN url for a file
@@ -47,7 +47,7 @@ public:
 	* Param - fileId ID of file
 	*/
 	UFUNCTION(BlueprintCallable, meta = (BlueprintInternalUseOnly = "true"), Category = "BrainCloud|S3 Handling")
-		static UBCS3HandlingProxy* GetCDNUrl(ABrainCloudActor *brainCloud, const FString& fileId);
+		static UBCS3HandlingProxy* GetCDNUrl(UBrainCloudWrapper *brainCloudWrapper, const FString& fileId);
 
     //Response delegates
     UPROPERTY(BlueprintAssignable)

@@ -20,7 +20,7 @@ public:
 	* @deprecated Use TriggerStatsEvent instead
 	*/
 	UFUNCTION(BlueprintCallable, meta = (BlueprintInternalUseOnly = "true"), Category = "BrainCloud|Player Statistics Event")
-		static UBCPlayerStatisticsEventProxy* TriggerPlayerStatisticsEvent(ABrainCloudActor *brainCloud, FString eventName, int32 eventMultiplier);
+		static UBCPlayerStatisticsEventProxy* TriggerPlayerStatisticsEvent(UBrainCloudWrapper *brainCloudWrapper, FString eventName, int32 eventMultiplier);
 
     /**
     * Trigger an event server side that will increase the users statistics.
@@ -38,13 +38,13 @@ public:
     * @see BrainCloudPlayerStatistics
     */
     UFUNCTION(BlueprintCallable, meta = (BlueprintInternalUseOnly = "true"), Category = "BrainCloud|Player Statistics Event")
-        static UBCPlayerStatisticsEventProxy* TriggerStatsEvent(ABrainCloudActor *brainCloud, FString eventName, int32 eventMultiplier);
+        static UBCPlayerStatisticsEventProxy* TriggerStatsEvent(UBrainCloudWrapper *brainCloudWrapper, FString eventName, int32 eventMultiplier);
 
 	/**
 	* @deprecated Use TriggerStatsEvents instead
 	*/
 	UFUNCTION(BlueprintCallable, meta = (BlueprintInternalUseOnly = "true"), Category = "BrainCloud|Player Statistics Event")
-		static UBCPlayerStatisticsEventProxy* TriggerPlayerStatisticsEvents(ABrainCloudActor *brainCloud, FString jsonData);
+		static UBCPlayerStatisticsEventProxy* TriggerPlayerStatisticsEvents(UBrainCloudWrapper *brainCloudWrapper, FString jsonData);
 
     /**
     * See documentation for TriggerStatsEvent for more
@@ -66,7 +66,7 @@ public:
     *   ]
     */
     UFUNCTION(BlueprintCallable, meta = (BlueprintInternalUseOnly = "true"), Category = "BrainCloud|Player Statistics Event")
-        static UBCPlayerStatisticsEventProxy* TriggerStatsEvents(ABrainCloudActor *brainCloud, FString jsonData);
+        static UBCPlayerStatisticsEventProxy* TriggerStatsEvents(UBrainCloudWrapper *brainCloudWrapper, FString jsonData);
 
     //Response delegates
     UPROPERTY(BlueprintAssignable)

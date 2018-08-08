@@ -13,17 +13,17 @@ UBCRedemptionCodeProxy::UBCRedemptionCodeProxy(const FObjectInitializer& ObjectI
 {
 }
 
-UBCRedemptionCodeProxy* UBCRedemptionCodeProxy::RedeemCode(ABrainCloudActor *brainCloud, const FString& scanCode, const FString& codeType, const FString& customRedemptionInfo)
+UBCRedemptionCodeProxy* UBCRedemptionCodeProxy::RedeemCode(UBrainCloudWrapper *brainCloudWrapper, const FString& scanCode, const FString& codeType, const FString& customRedemptionInfo)
 {
     UBCRedemptionCodeProxy* Proxy = NewObject<UBCRedemptionCodeProxy>();
-    UBCWrapperProxy::GetBrainCloudInstance(brainCloud)->getRedemptionCodeService()->redeemCode(scanCode, codeType, customRedemptionInfo, Proxy);
+    UBCWrapperProxy::GetBrainCloudInstance(brainCloudWrapper)->getRedemptionCodeService()->redeemCode(scanCode, codeType, customRedemptionInfo, Proxy);
     return Proxy;
 }
 
-UBCRedemptionCodeProxy* UBCRedemptionCodeProxy::GetRedeemedCodes(ABrainCloudActor *brainCloud, const FString& codeType)
+UBCRedemptionCodeProxy* UBCRedemptionCodeProxy::GetRedeemedCodes(UBrainCloudWrapper *brainCloudWrapper, const FString& codeType)
 {
     UBCRedemptionCodeProxy* Proxy = NewObject<UBCRedemptionCodeProxy>();
-    UBCWrapperProxy::GetBrainCloudInstance(brainCloud)->getRedemptionCodeService()->getRedeemedCodes(codeType, Proxy);
+    UBCWrapperProxy::GetBrainCloudInstance(brainCloudWrapper)->getRedemptionCodeService()->getRedeemedCodes(codeType, Proxy);
     return Proxy;
 }
 
