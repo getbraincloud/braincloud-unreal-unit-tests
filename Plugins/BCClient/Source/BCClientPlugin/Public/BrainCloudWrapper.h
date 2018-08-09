@@ -407,6 +407,11 @@ class BCCLIENTPLUGIN_API UBrainCloudWrapper : public UObject, public IServerCall
     BrainCloudMail *getMailService() { return _client->getMailService(); }
     BrainCloudTournament *getTournamentService() { return _client->getTournamentService(); }
 
+    BrainCloudRTT *getRTTService() { return _client->getRTTService(); }
+    BrainCloudLobby *getLobbyService() { return _client->getLobbyService(); }
+    BrainCloudChat *getChatService() { return _client->getChatService(); }
+    BrainCloudMessaging *getMessagingService() { return _client->getMessagingService(); }
+
     /**
      * Returns a singleton instance of the BrainCloudClient.
      * @return A singleton instance of the BrainCloudClient.
