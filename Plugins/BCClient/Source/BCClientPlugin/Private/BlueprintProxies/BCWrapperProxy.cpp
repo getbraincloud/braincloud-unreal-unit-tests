@@ -21,6 +21,12 @@ ABrainCloudActor *UBCWrapperProxy::CreateBrainCloudActor(const FString &wrapperN
 	return brainCloudActor;
 }
 
+UBrainCloudWrapper *UBCWrapperProxy::GetBrainCloudWrapper(ABrainCloudActor *brainCloudActor)
+{
+	return brainCloudActor->BCWrapper;
+}
+
+
 void UBCWrapperProxy::SetDefaultBrainCloudInstance(UBrainCloudWrapper *brainCloudWrapper)
 {
 	DefaultBrainCloudInstance = brainCloudWrapper;
