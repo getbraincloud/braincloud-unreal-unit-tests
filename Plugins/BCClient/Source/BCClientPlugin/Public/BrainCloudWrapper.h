@@ -2,6 +2,8 @@
 
 #pragma once
 
+#include "CoreMinimal.h"
+#include "UObject/NoExportTypes.h"
 #include "IServerCallback.h"
 
 class BrainCloudClient;
@@ -36,31 +38,40 @@ class BrainCloudClient;
 #include "BrainCloudMail.h"
 #include "BrainCloudTournament.h"
 
+
+
 class ServiceName;
 class ServiceOperation;
 
+#include "BrainCloudWrapper.generated.h"
+
+
 /**
- * The BrainCloudWrapper provides some convenience functionality to developers when they are
+ * The UBrainCloudWrapper provides some convenience functionality to developers when they are
  * getting started with the authentication system.
  *
  * By using the wrapper authentication methods, the anonymous and profile ids will be automatically
  * persisted upon successful authentication. When authenticating, any stored anonymous/profile ids will
  * be sent to the server. This strategy is useful when using anonymous authentication.
  */
-class BCCLIENTPLUGIN_API BrainCloudWrapper : public IServerCallback
+UCLASS(BlueprintType)
+class BCCLIENTPLUGIN_API UBrainCloudWrapper : public UObject, public IServerCallback
 {
+    GENERATED_BODY()
+	
+
   public:
-    BrainCloudWrapper();
-    BrainCloudWrapper(FString wrapperName);
+    UBrainCloudWrapper();
+    UBrainCloudWrapper(FString wrapperName);
 
     /**
-     * Method returns a singleton instance of the BrainCloudWrapper.
-     * @return A singleton instance of the BrainCloudWrapper.
+     * Method returns a singleton instance of the UBrainCloudWrapper.
+     * @return A singleton instance of the UBrainCloudWrapper.
 	 *
-	 * @deprecated Use of the *singleton* has been deprecated. We recommend that you create your own *variable* to hold an instance of the brainCloudWrapper. Explanation here: http://getbraincloud.com/apidocs/release-3-6-5/
+	 * @deprecated Use of the *singleton* has been deprecated. We recommend that you create your own *variable* to hold an instance of the UBrainCloudWrapper. Explanation here: http://getbraincloud.com/apidocs/release-3-6-5/
      */
-    DEPRECATED("3.6.5", "Use of the *singleton* has been deprecated. We recommend that you create your own *variable* to hold an instance of the brainCloudWrapper. Explanation here: http://getbraincloud.com/apidocs/release-3-6-5/")
-    static BrainCloudWrapper *getInstance();
+    //DEPRECATED("3.6.5", "Use of the *singleton* has been deprecated. We recommend that you create your own *variable* to hold an instance of the UBrainCloudWrapper. Explanation here: http://getbraincloud.com/apidocs/release-3-6-5/")
+    static UBrainCloudWrapper *getInstance();
 
     /**
      * Method initializes the BrainCloudClient.
@@ -483,12 +494,12 @@ class BCCLIENTPLUGIN_API BrainCloudWrapper : public IServerCallback
     virtual void serverError(ServiceName serviceName, ServiceOperation serviceOperation, int32 statusCode, int32 reasonCode, const FString &message);
 
   protected:
-    BrainCloudWrapper(BrainCloudClient *client);
+    UBrainCloudWrapper(BrainCloudClient *client);
 
     void loadData();
     void saveData();
 
-    static BrainCloudWrapper *_instance;
+    static UBrainCloudWrapper *_instance;
     BrainCloudClient *_client = nullptr;
 
     FString _authenticationType;

@@ -5,7 +5,7 @@
 #include "BrainCloudActor.h"
 #include "BrainCloudWrapper.h"
 
-SmartSwitchAuthenticateCallback::SmartSwitchAuthenticateCallback(BrainCloudWrapper *in_wrapper, EBCAuthType in_authType, const FString &in_userId,
+SmartSwitchAuthenticateCallback::SmartSwitchAuthenticateCallback(UBrainCloudWrapper *in_wrapper, EBCAuthType in_authType, const FString &in_userId,
                                                                  const FString &in_token, bool forceCreate, IServerCallback *in_callback) : BCIdentityCallback(in_wrapper, in_callback)
 {
     m_userId = in_userId;
@@ -14,7 +14,7 @@ SmartSwitchAuthenticateCallback::SmartSwitchAuthenticateCallback(BrainCloudWrapp
     m_forceCreate = forceCreate;
 }
 
-SmartSwitchAuthenticateCallback::SmartSwitchAuthenticateCallback(BrainCloudWrapper *in_wrapper, EBCAuthType in_authType, const FString &in_userId,
+SmartSwitchAuthenticateCallback::SmartSwitchAuthenticateCallback(UBrainCloudWrapper *in_wrapper, EBCAuthType in_authType, const FString &in_userId,
                                                                  const FString &in_token, const FString &in_extraStringDetail, bool forceCreate, IServerCallback *in_callback) : BCIdentityCallback(in_wrapper, in_callback)
 {
     m_userId = in_userId;

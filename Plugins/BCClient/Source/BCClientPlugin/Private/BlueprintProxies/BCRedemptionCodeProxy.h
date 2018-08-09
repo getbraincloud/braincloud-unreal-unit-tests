@@ -28,7 +28,7 @@ public:
     * Param - callback The method to be invoked when the server response is received
     */
     UFUNCTION(BlueprintCallable, meta = (BlueprintInternalUseOnly = "true"), Category = "BrainCloud|Redemption Code")
-        static UBCRedemptionCodeProxy* RedeemCode(ABrainCloudActor *brainCloud, const FString& scanCode, const FString& codeType, const FString& customRedemptionInfo);
+        static UBCRedemptionCodeProxy* RedeemCode(UBrainCloudWrapper *brainCloudWrapper, const FString& scanCode, const FString& codeType, const FString& customRedemptionInfo);
 
     /**
     * Retrieve the codes already redeemed by player.
@@ -40,7 +40,7 @@ public:
     * Param - in_callback The method to be invoked when the server response is received
     */
     UFUNCTION(BlueprintCallable, meta = (BlueprintInternalUseOnly = "true"), Category = "BrainCloud|Redemption Code")
-        static UBCRedemptionCodeProxy* GetRedeemedCodes(ABrainCloudActor *brainCloud, const FString& codeType);
+        static UBCRedemptionCodeProxy* GetRedeemedCodes(UBrainCloudWrapper *brainCloudWrapper, const FString& codeType);
 
     //Response delegates
     UPROPERTY(BlueprintAssignable)

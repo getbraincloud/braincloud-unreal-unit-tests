@@ -13,24 +13,24 @@ UBCDataStreamProxy::UBCDataStreamProxy(const FObjectInitializer& ObjectInitializ
 {
 }
 
-UBCDataStreamProxy* UBCDataStreamProxy::CustomPageEvent(ABrainCloudActor *brainCloud, const FString& eventName, const FString& jsonEventProperties)
+UBCDataStreamProxy* UBCDataStreamProxy::CustomPageEvent(UBrainCloudWrapper *brainCloudWrapper, const FString& eventName, const FString& jsonEventProperties)
 {
     UBCDataStreamProxy* Proxy = NewObject<UBCDataStreamProxy>();
-    UBCWrapperProxy::GetBrainCloudInstance(brainCloud)->getDataStreamService()->customPageEvent(eventName, jsonEventProperties, Proxy);
+    UBCWrapperProxy::GetBrainCloudInstance(brainCloudWrapper)->getDataStreamService()->customPageEvent(eventName, jsonEventProperties, Proxy);
     return Proxy;
 }
 
-UBCDataStreamProxy* UBCDataStreamProxy::CustomScreenEvent(ABrainCloudActor *brainCloud, const FString& eventName, const FString& jsonEventProperties)
+UBCDataStreamProxy* UBCDataStreamProxy::CustomScreenEvent(UBrainCloudWrapper *brainCloudWrapper, const FString& eventName, const FString& jsonEventProperties)
 {
     UBCDataStreamProxy* Proxy = NewObject<UBCDataStreamProxy>();
-    UBCWrapperProxy::GetBrainCloudInstance(brainCloud)->getDataStreamService()->customScreenEvent(eventName, jsonEventProperties, Proxy);
+    UBCWrapperProxy::GetBrainCloudInstance(brainCloudWrapper)->getDataStreamService()->customScreenEvent(eventName, jsonEventProperties, Proxy);
     return Proxy;
 }
 
-UBCDataStreamProxy* UBCDataStreamProxy::CustomTrackEvent(ABrainCloudActor *brainCloud, const FString& eventName, const FString& jsonEventProperties)
+UBCDataStreamProxy* UBCDataStreamProxy::CustomTrackEvent(UBrainCloudWrapper *brainCloudWrapper, const FString& eventName, const FString& jsonEventProperties)
 {
     UBCDataStreamProxy* Proxy = NewObject<UBCDataStreamProxy>();
-    UBCWrapperProxy::GetBrainCloudInstance(brainCloud)->getDataStreamService()->customTrackEvent(eventName, jsonEventProperties, Proxy);
+    UBCWrapperProxy::GetBrainCloudInstance(brainCloudWrapper)->getDataStreamService()->customTrackEvent(eventName, jsonEventProperties, Proxy);
     return Proxy;
 }
 

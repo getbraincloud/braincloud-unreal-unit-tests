@@ -6,8 +6,6 @@
 #include "IServerCallback.h"
 #include "BCFileProxy.generated.h"
 
-class ABrainCloud;
-
 UCLASS(MinimalAPI)
 class UBCFileProxy : public UBCBlueprintCallProxyBase, public IServerCallback
 {
@@ -43,7 +41,7 @@ public:
     */
     UFUNCTION(BlueprintCallable, meta = (BlueprintInternalUseOnly = "true"), Category = "BrainCloud|File")
         static UBCFileProxy* UploadFile(
-			ABrainCloudActor *brainCloud,
+			UBrainCloudWrapper *brainCloudWrapper,
             const FString& cloudPath,
             const FString& cloudFilename,
             bool shareable,
@@ -58,7 +56,7 @@ public:
     * @param callback The method to be invoked when the server response is received
     */
     UFUNCTION(BlueprintCallable, meta = (BlueprintInternalUseOnly = "true"), Category = "BrainCloud|File")
-        static UBCFileProxy* ListUserFiles(ABrainCloudActor *brainCloud, const FString& cloudPath, bool recurse);
+        static UBCFileProxy* ListUserFiles(UBrainCloudWrapper *brainCloudWrapper, const FString& cloudPath, bool recurse);
 
     /**
     * Deletes a single user file.
@@ -72,7 +70,7 @@ public:
     * 40432 - File does not exist
     */
     UFUNCTION(BlueprintCallable, meta = (BlueprintInternalUseOnly = "true"), Category = "BrainCloud|File")
-        static UBCFileProxy* DeleteUserFile(ABrainCloudActor *brainCloud, const FString& cloudPath, const FString& cloudFilename);
+        static UBCFileProxy* DeleteUserFile(UBrainCloudWrapper *brainCloudWrapper, const FString& cloudPath, const FString& cloudFilename);
 
 
     /**
@@ -83,7 +81,7 @@ public:
     * @param callback The method to be invoked when the server response is received
     */
     UFUNCTION(BlueprintCallable, meta = (BlueprintInternalUseOnly = "true"), Category = "BrainCloud|File")
-        static UBCFileProxy* DeleteUserFiles(ABrainCloudActor *brainCloud, const FString& cloudPath, bool recurse);
+        static UBCFileProxy* DeleteUserFiles(UBrainCloudWrapper *brainCloudWrapper, const FString& cloudPath, bool recurse);
 
 	/**
 	* Returns the CDN url for a file object
@@ -92,7 +90,7 @@ public:
 	* Param - cloudFileName File name
 	*/
 	UFUNCTION(BlueprintCallable, meta = (BlueprintInternalUseOnly = "true"), Category = "BrainCloud|File")
-		static UBCFileProxy* GetCDNUrl(ABrainCloudActor *brainCloud, const FString& cloudPath, const FString& cloudFileName);
+		static UBCFileProxy* GetCDNUrl(UBrainCloudWrapper *brainCloudWrapper, const FString& cloudPath, const FString& cloudFileName);
 
     /**
     * Method cancels an upload. If an IFileUploadCallback has been registered with the BrainCloudClient class,
@@ -101,7 +99,7 @@ public:
     * @param uploadId The id of the upload
     */
     UFUNCTION(BlueprintCallable, Category = "BrainCloud|File")
-        static void CancelUpload(ABrainCloudActor *brainCloud, const FString& uploadId);
+        static void CancelUpload(UBrainCloudWrapper *brainCloudWrapper, const FString& uploadId);
 
     /**
     * Returns the progress of the given upload from 0.0 to 1.0
@@ -111,7 +109,7 @@ public:
     * @return A progress from 0.0 to 1.0 or -1 if upload not found.
     */
     UFUNCTION(BlueprintCallable, Category = "BrainCloud|File")
-        static float GetUploadProgress(ABrainCloudActor *brainCloud, const FString& uploadId);
+        static float GetUploadProgress(UBrainCloudWrapper *brainCloudWrapper, const FString& uploadId);
 
     /**
     * Returns the number of bytes uploaded or -1 if upload not found.
@@ -120,7 +118,7 @@ public:
     * @returns The number of bytes uploaded or -1 if upload not found.
     */
     UFUNCTION(BlueprintCallable, Category = "BrainCloud|File")
-        static int32 GetUploadBytesTransferred(ABrainCloudActor *brainCloud, const FString& uploadId);
+        static int32 GetUploadBytesTransferred(UBrainCloudWrapper *brainCloudWrapper, const FString& uploadId);
 
     /**
     * Returns the total number of bytes that will be uploaded or -1 if upload not found.
@@ -129,7 +127,7 @@ public:
     * @returns The total number of bytes that will be uploaded or -1 if upload not found.
     */
     UFUNCTION(BlueprintCallable, Category = "BrainCloud|File")
-        static int32 GetUploadTotalBytesToTransfer(ABrainCloudActor *brainCloud, const FString& uploadId);
+        static int32 GetUploadTotalBytesToTransfer(UBrainCloudWrapper *brainCloudWrapper, const FString& uploadId);
 
     //Response delegates
     UPROPERTY(BlueprintAssignable)

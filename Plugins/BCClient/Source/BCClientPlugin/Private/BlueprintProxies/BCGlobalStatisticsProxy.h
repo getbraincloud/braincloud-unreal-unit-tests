@@ -23,7 +23,7 @@ public:
     * Service Operation - Read
     */
     UFUNCTION(BlueprintCallable, meta = (BlueprintInternalUseOnly = "true"), Category = "BrainCloud|Global Statistics")
-        static UBCGlobalStatisticsProxy* ReadAllGlobalStats(ABrainCloudActor *brainCloud);
+        static UBCGlobalStatisticsProxy* ReadAllGlobalStats(UBrainCloudWrapper *brainCloudWrapper);
 
     /**
     * Reads a subset of global statistics.
@@ -34,7 +34,7 @@ public:
     * Param - globalStats An array of statistics to read:
     */
     UFUNCTION(BlueprintCallable, meta = (BlueprintInternalUseOnly = "true"), Category = "BrainCloud|Global Statistics")
-        static UBCGlobalStatisticsProxy* ReadGlobalStatsSubset(ABrainCloudActor *brainCloud, const TArray<FString>& globalStats);
+        static UBCGlobalStatisticsProxy* ReadGlobalStatsSubset(UBrainCloudWrapper *brainCloudWrapper, const TArray<FString>& globalStats);
 
     /**
     * Method retrieves the game (aka global) statistics for the given category.
@@ -45,7 +45,7 @@ public:
     * Param - category The game statistics category
     */
     UFUNCTION(BlueprintCallable, meta = (BlueprintInternalUseOnly = "true"), Category = "BrainCloud|Global Statistics")
-        static UBCGlobalStatisticsProxy* ReadGlobalStatsForCategory(ABrainCloudActor *brainCloud, FString category);
+        static UBCGlobalStatisticsProxy* ReadGlobalStatsForCategory(UBrainCloudWrapper *brainCloudWrapper, FString category);
 
     /**
     * Atomically increment (or decrement) global statistics.
@@ -68,7 +68,7 @@ public:
     * which increments stat1 by 9 up to a limit of 30.
     */
     UFUNCTION(BlueprintCallable, meta = (BlueprintInternalUseOnly = "true"), Category = "BrainCloud|Global Statistics")
-        static UBCGlobalStatisticsProxy* IncrementGlobalGameStat(ABrainCloudActor *brainCloud, FString jsonData);
+        static UBCGlobalStatisticsProxy* IncrementGlobalGameStat(UBrainCloudWrapper *brainCloudWrapper, FString jsonData);
 
 	/**
 	* Apply statistics grammar to a partial set of statistics.
@@ -86,7 +86,7 @@ public:
 	* }
 	*/
 	UFUNCTION(BlueprintCallable, meta = (BlueprintInternalUseOnly = "true"), Category = "BrainCloud|Global Statistics")
-		static UBCGlobalStatisticsProxy* ProcessStatistics(ABrainCloudActor *brainCloud, FString jsonData);
+		static UBCGlobalStatisticsProxy* ProcessStatistics(UBrainCloudWrapper *brainCloudWrapper, FString jsonData);
 
     //Response delegates
     UPROPERTY(BlueprintAssignable)

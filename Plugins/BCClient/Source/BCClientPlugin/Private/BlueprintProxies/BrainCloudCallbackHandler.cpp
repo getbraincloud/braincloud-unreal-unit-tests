@@ -6,7 +6,6 @@
 #include "ServerCall.h"
 #include "BCWrapperProxy.h"
 #include "BrainCloudWrapper.h"
-#include "BrainCloudActor.h"
 #include "BrainCloudCallbackHandler.h"
 
 UBrainCloudCallbackHandler::UBrainCloudCallbackHandler(const FObjectInitializer& ObjectInitializer)
@@ -16,7 +15,7 @@ UBrainCloudCallbackHandler::UBrainCloudCallbackHandler(const FObjectInitializer&
 
 void UBrainCloudCallbackHandler::BeginDestroy()
 {
-	BrainCloudWrapper * bc = UBCWrapperProxy::GetBrainCloudInstance(_brainCloud);
+	UBrainCloudWrapper * bc = UBCWrapperProxy::GetBrainCloudInstance(_brainCloudWrapper);
 
     BrainCloudComms * comms = bc->getBCClient()->getBrainCloudComms();
     if (comms != nullptr)
@@ -31,11 +30,11 @@ void UBrainCloudCallbackHandler::BeginDestroy()
     Super::BeginDestroy();
 }
 
-void UBrainCloudCallbackHandler::RegisterCallbacks(ABrainCloudActor * brainCloud, bool fileCallbacks, bool rewardCallback, bool eventCallback, bool globalErrorCallback, bool networkErrorCallback)
+void UBrainCloudCallbackHandler::RegisterCallbacks(UBrainCloudWrapper *brainCloudWrapper, bool fileCallbacks, bool rewardCallback, bool eventCallback, bool globalErrorCallback, bool networkErrorCallback)
 {
-	_brainCloud = brainCloud;
+	_brainCloudWrapper = brainCloudWrapper;
 
-	BrainCloudWrapper * bc = UBCWrapperProxy::GetBrainCloudInstance(brainCloud);
+	UBrainCloudWrapper * bc = UBCWrapperProxy::GetBrainCloudInstance(brainCloudWrapper);
 
     if (fileCallbacks) bc->getBCClient()->registerFileUploadCallback(this);
     if (rewardCallback) bc->getBCClient()->registerRewardCallback(this);

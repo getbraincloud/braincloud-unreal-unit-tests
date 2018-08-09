@@ -13,108 +13,108 @@ UBCMatchmakingProxy::UBCMatchmakingProxy(const FObjectInitializer& ObjectInitial
 {
 }
 
-UBCMatchmakingProxy* UBCMatchmakingProxy::Read(ABrainCloudActor *brainCloud)
+UBCMatchmakingProxy* UBCMatchmakingProxy::Read(UBrainCloudWrapper *brainCloudWrapper)
 {
     UBCMatchmakingProxy* Proxy = NewObject<UBCMatchmakingProxy>();
-	UBCWrapperProxy::GetBrainCloudInstance(brainCloud)->getMatchmakingService()->read(Proxy);
+	UBCWrapperProxy::GetBrainCloudInstance(brainCloudWrapper)->getMatchmakingService()->read(Proxy);
     return Proxy;
 }
 
-UBCMatchmakingProxy* UBCMatchmakingProxy::SetPlayerRating(ABrainCloudActor *brainCloud, int32 playerRating)
+UBCMatchmakingProxy* UBCMatchmakingProxy::SetPlayerRating(UBrainCloudWrapper *brainCloudWrapper, int32 playerRating)
 {
     UBCMatchmakingProxy* Proxy = NewObject<UBCMatchmakingProxy>();
-    UBCWrapperProxy::GetBrainCloudInstance(brainCloud)->getMatchmakingService()->setPlayerRating(playerRating, Proxy);
+    UBCWrapperProxy::GetBrainCloudInstance(brainCloudWrapper)->getMatchmakingService()->setPlayerRating(playerRating, Proxy);
     return Proxy;
 }
 
-UBCMatchmakingProxy* UBCMatchmakingProxy::ResetPlayerRating(ABrainCloudActor *brainCloud)
+UBCMatchmakingProxy* UBCMatchmakingProxy::ResetPlayerRating(UBrainCloudWrapper *brainCloudWrapper)
 {
     UBCMatchmakingProxy* Proxy = NewObject<UBCMatchmakingProxy>();
-    UBCWrapperProxy::GetBrainCloudInstance(brainCloud)->getMatchmakingService()->resetPlayerRating(Proxy);
+    UBCWrapperProxy::GetBrainCloudInstance(brainCloudWrapper)->getMatchmakingService()->resetPlayerRating(Proxy);
     return Proxy;
 }
 
-UBCMatchmakingProxy* UBCMatchmakingProxy::IncrementPlayerRating(ABrainCloudActor *brainCloud, int32 increment)
+UBCMatchmakingProxy* UBCMatchmakingProxy::IncrementPlayerRating(UBrainCloudWrapper *brainCloudWrapper, int32 increment)
 {
     UBCMatchmakingProxy* Proxy = NewObject<UBCMatchmakingProxy>();
-    UBCWrapperProxy::GetBrainCloudInstance(brainCloud)->getMatchmakingService()->incrementPlayerRating(increment, Proxy);
+    UBCWrapperProxy::GetBrainCloudInstance(brainCloudWrapper)->getMatchmakingService()->incrementPlayerRating(increment, Proxy);
     return Proxy;
 }
 
-UBCMatchmakingProxy* UBCMatchmakingProxy::DecrementPlayerRating(ABrainCloudActor *brainCloud, int32 decrement)
+UBCMatchmakingProxy* UBCMatchmakingProxy::DecrementPlayerRating(UBrainCloudWrapper *brainCloudWrapper, int32 decrement)
 {
     UBCMatchmakingProxy* Proxy = NewObject<UBCMatchmakingProxy>();
-    UBCWrapperProxy::GetBrainCloudInstance(brainCloud)->getMatchmakingService()->decrementPlayerRating(decrement, Proxy);
+    UBCWrapperProxy::GetBrainCloudInstance(brainCloudWrapper)->getMatchmakingService()->decrementPlayerRating(decrement, Proxy);
     return Proxy;
 }
 
-UBCMatchmakingProxy* UBCMatchmakingProxy::TurnShieldOn(ABrainCloudActor *brainCloud)
+UBCMatchmakingProxy* UBCMatchmakingProxy::TurnShieldOn(UBrainCloudWrapper *brainCloudWrapper)
 {
     UBCMatchmakingProxy* Proxy = NewObject<UBCMatchmakingProxy>();
-    UBCWrapperProxy::GetBrainCloudInstance(brainCloud)->getMatchmakingService()->turnShieldOn(Proxy);
+    UBCWrapperProxy::GetBrainCloudInstance(brainCloudWrapper)->getMatchmakingService()->turnShieldOn(Proxy);
     return Proxy;
 }
 
-UBCMatchmakingProxy* UBCMatchmakingProxy::TurnShieldOnFor(ABrainCloudActor *brainCloud, int32 minutes)
+UBCMatchmakingProxy* UBCMatchmakingProxy::TurnShieldOnFor(UBrainCloudWrapper *brainCloudWrapper, int32 minutes)
 {
     UBCMatchmakingProxy* Proxy = NewObject<UBCMatchmakingProxy>();
-    UBCWrapperProxy::GetBrainCloudInstance(brainCloud)->getMatchmakingService()->turnShieldOnFor(minutes, Proxy);
+    UBCWrapperProxy::GetBrainCloudInstance(brainCloudWrapper)->getMatchmakingService()->turnShieldOnFor(minutes, Proxy);
     return Proxy;
 }
 
-UBCMatchmakingProxy* UBCMatchmakingProxy::TurnShieldOff(ABrainCloudActor *brainCloud)
+UBCMatchmakingProxy* UBCMatchmakingProxy::TurnShieldOff(UBrainCloudWrapper *brainCloudWrapper)
 {
     UBCMatchmakingProxy* Proxy = NewObject<UBCMatchmakingProxy>();
-    UBCWrapperProxy::GetBrainCloudInstance(brainCloud)->getMatchmakingService()->turnShieldOff(Proxy);
+    UBCWrapperProxy::GetBrainCloudInstance(brainCloudWrapper)->getMatchmakingService()->turnShieldOff(Proxy);
     return Proxy;
 }
 
-UBCMatchmakingProxy* UBCMatchmakingProxy::IncrementShieldOnFor(ABrainCloudActor *brainCloud, int32 minutes)
+UBCMatchmakingProxy* UBCMatchmakingProxy::IncrementShieldOnFor(UBrainCloudWrapper *brainCloudWrapper, int32 minutes)
 {
 	UBCMatchmakingProxy* Proxy = NewObject<UBCMatchmakingProxy>();
-	UBCWrapperProxy::GetBrainCloudInstance(brainCloud)->getMatchmakingService()->incrementShieldOnFor(minutes, Proxy);
+	UBCWrapperProxy::GetBrainCloudInstance(brainCloudWrapper)->getMatchmakingService()->incrementShieldOnFor(minutes, Proxy);
 	return Proxy;
 }
 
-UBCMatchmakingProxy* UBCMatchmakingProxy::FindPlayers(ABrainCloudActor *brainCloud, int32 rangeDelta, int32 numMatches)
+UBCMatchmakingProxy* UBCMatchmakingProxy::FindPlayers(UBrainCloudWrapper *brainCloudWrapper, int32 rangeDelta, int32 numMatches)
 {
     UBCMatchmakingProxy* Proxy = NewObject<UBCMatchmakingProxy>();
-    UBCWrapperProxy::GetBrainCloudInstance(brainCloud)->getMatchmakingService()->findPlayers(rangeDelta, numMatches, Proxy);
+    UBCWrapperProxy::GetBrainCloudInstance(brainCloudWrapper)->getMatchmakingService()->findPlayers(rangeDelta, numMatches, Proxy);
     return Proxy;
 }
 
-UBCMatchmakingProxy * UBCMatchmakingProxy::FindPlayersWithAttributes(ABrainCloudActor *brainCloud, int32 rangeDelta, int32 numMatches, const FString & jsonAttributes)
+UBCMatchmakingProxy * UBCMatchmakingProxy::FindPlayersWithAttributes(UBrainCloudWrapper *brainCloudWrapper, int32 rangeDelta, int32 numMatches, const FString & jsonAttributes)
 {
     UBCMatchmakingProxy* Proxy = NewObject<UBCMatchmakingProxy>();
-    UBCWrapperProxy::GetBrainCloudInstance(brainCloud)->getMatchmakingService()->findPlayersWithAttributes(rangeDelta, numMatches, jsonAttributes, Proxy);
+    UBCWrapperProxy::GetBrainCloudInstance(brainCloudWrapper)->getMatchmakingService()->findPlayersWithAttributes(rangeDelta, numMatches, jsonAttributes, Proxy);
     return Proxy;
 }
 
-UBCMatchmakingProxy* UBCMatchmakingProxy::FindPlayersUsingFilter(ABrainCloudActor *brainCloud, int32 rangeDelta, int32 numMatches, const FString& jsonExtraParms)
+UBCMatchmakingProxy* UBCMatchmakingProxy::FindPlayersUsingFilter(UBrainCloudWrapper *brainCloudWrapper, int32 rangeDelta, int32 numMatches, const FString& jsonExtraParms)
 {
     UBCMatchmakingProxy* Proxy = NewObject<UBCMatchmakingProxy>();
-    UBCWrapperProxy::GetBrainCloudInstance(brainCloud)->getMatchmakingService()->findPlayersUsingFilter(rangeDelta, numMatches, jsonExtraParms, Proxy);
+    UBCWrapperProxy::GetBrainCloudInstance(brainCloudWrapper)->getMatchmakingService()->findPlayersUsingFilter(rangeDelta, numMatches, jsonExtraParms, Proxy);
     return Proxy;
 }
 
-UBCMatchmakingProxy * UBCMatchmakingProxy::FindPlayersWithAttributesUsingFilter(ABrainCloudActor *brainCloud, int32 rangeDelta, int32 numMatches, const FString & jsonAttributes, const FString & jsonExtraParms)
+UBCMatchmakingProxy * UBCMatchmakingProxy::FindPlayersWithAttributesUsingFilter(UBrainCloudWrapper *brainCloudWrapper, int32 rangeDelta, int32 numMatches, const FString & jsonAttributes, const FString & jsonExtraParms)
 {
     UBCMatchmakingProxy* Proxy = NewObject<UBCMatchmakingProxy>();
-    UBCWrapperProxy::GetBrainCloudInstance(brainCloud)->getMatchmakingService()->findPlayersWithAttributesUsingFilter(rangeDelta, numMatches, jsonAttributes, jsonExtraParms, Proxy);
+    UBCWrapperProxy::GetBrainCloudInstance(brainCloudWrapper)->getMatchmakingService()->findPlayersWithAttributesUsingFilter(rangeDelta, numMatches, jsonAttributes, jsonExtraParms, Proxy);
     return Proxy;
 }
 
-UBCMatchmakingProxy* UBCMatchmakingProxy::EnableMatchMaking(ABrainCloudActor *brainCloud)
+UBCMatchmakingProxy* UBCMatchmakingProxy::EnableMatchMaking(UBrainCloudWrapper *brainCloudWrapper)
 {
     UBCMatchmakingProxy* Proxy = NewObject<UBCMatchmakingProxy>();
-    UBCWrapperProxy::GetBrainCloudInstance(brainCloud)->getMatchmakingService()->enableMatchMaking(Proxy);
+    UBCWrapperProxy::GetBrainCloudInstance(brainCloudWrapper)->getMatchmakingService()->enableMatchMaking(Proxy);
     return Proxy;
 }
 
-UBCMatchmakingProxy* UBCMatchmakingProxy::DisableMatchMaking(ABrainCloudActor *brainCloud)
+UBCMatchmakingProxy* UBCMatchmakingProxy::DisableMatchMaking(UBrainCloudWrapper *brainCloudWrapper)
 {
     UBCMatchmakingProxy* Proxy = NewObject<UBCMatchmakingProxy>();
-    UBCWrapperProxy::GetBrainCloudInstance(brainCloud)->getMatchmakingService()->disableMatchMaking(Proxy);
+    UBCWrapperProxy::GetBrainCloudInstance(brainCloudWrapper)->getMatchmakingService()->disableMatchMaking(Proxy);
     return Proxy;
 }
 
