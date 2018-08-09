@@ -14,136 +14,136 @@ UBCPushNotificationProxy::UBCPushNotificationProxy(const FObjectInitializer& Obj
 {
 }
 
-UBCPushNotificationProxy* UBCPushNotificationProxy::DeregisterAllPushNotificationDeviceTokens(ABrainCloudActor *brainCloud)
+UBCPushNotificationProxy* UBCPushNotificationProxy::DeregisterAllPushNotificationDeviceTokens(UBrainCloudWrapper *brainCloudWrapper)
 {
     UBCPushNotificationProxy* Proxy = NewObject<UBCPushNotificationProxy>();
-    UBCWrapperProxy::GetBrainCloudInstance(brainCloud)->getPushNotificationService()->deregisterAllPushNotificationDeviceTokens(Proxy);
+    UBCWrapperProxy::GetBrainCloudInstance(brainCloudWrapper)->getPushNotificationService()->deregisterAllPushNotificationDeviceTokens(Proxy);
     return Proxy;
 }
 
-UBCPushNotificationProxy* UBCPushNotificationProxy::DeregisterPushNotificationDeviceToken(ABrainCloudActor *brainCloud, EBCPlatform platform, const FString& deviceToken)
+UBCPushNotificationProxy* UBCPushNotificationProxy::DeregisterPushNotificationDeviceToken(UBrainCloudWrapper *brainCloudWrapper, EBCPlatform platform, const FString& deviceToken)
 {
     UBCPushNotificationProxy* Proxy = NewObject<UBCPushNotificationProxy>();
-    UBCWrapperProxy::GetBrainCloudInstance(brainCloud)->getPushNotificationService()->deregisterPushNotificationDeviceToken(platform, deviceToken, Proxy);
+    UBCWrapperProxy::GetBrainCloudInstance(brainCloudWrapper)->getPushNotificationService()->deregisterPushNotificationDeviceToken(platform, deviceToken, Proxy);
     return Proxy;
 }
 
-UBCPushNotificationProxy* UBCPushNotificationProxy::RegisterPushNotificationDeviceToken(ABrainCloudActor *brainCloud, EBCPlatform platform, const FString& deviceToken)
+UBCPushNotificationProxy* UBCPushNotificationProxy::RegisterPushNotificationDeviceToken(UBrainCloudWrapper *brainCloudWrapper, EBCPlatform platform, const FString& deviceToken)
 {
     UBCPushNotificationProxy* Proxy = NewObject<UBCPushNotificationProxy>();
-    UBCWrapperProxy::GetBrainCloudInstance(brainCloud)->getPushNotificationService()->registerPushNotificationDeviceToken(platform, deviceToken, Proxy);
+    UBCWrapperProxy::GetBrainCloudInstance(brainCloudWrapper)->getPushNotificationService()->registerPushNotificationDeviceToken(platform, deviceToken, Proxy);
     return Proxy;
 }
 
-UBCPushNotificationProxy* UBCPushNotificationProxy::SendSimplePushNotification(ABrainCloudActor *brainCloud, const FString& toPlayerId, const FString& message)
+UBCPushNotificationProxy* UBCPushNotificationProxy::SendSimplePushNotification(UBrainCloudWrapper *brainCloudWrapper, const FString& toPlayerId, const FString& message)
 {
     UBCPushNotificationProxy* Proxy = NewObject<UBCPushNotificationProxy>();
-    UBCWrapperProxy::GetBrainCloudInstance(brainCloud)->getPushNotificationService()->sendSimplePushNotification(toPlayerId, message, Proxy);
+    UBCWrapperProxy::GetBrainCloudInstance(brainCloudWrapper)->getPushNotificationService()->sendSimplePushNotification(toPlayerId, message, Proxy);
     return Proxy;
 }
 
-UBCPushNotificationProxy* UBCPushNotificationProxy::SendRichPushNotification(ABrainCloudActor *brainCloud, const FString& toPlayerId, int32 notificationTemplateId)
+UBCPushNotificationProxy* UBCPushNotificationProxy::SendRichPushNotification(UBrainCloudWrapper *brainCloudWrapper, const FString& toPlayerId, int32 notificationTemplateId)
 {
     UBCPushNotificationProxy* Proxy = NewObject<UBCPushNotificationProxy>();
-    UBCWrapperProxy::GetBrainCloudInstance(brainCloud)->getPushNotificationService()->sendRichPushNotification(toPlayerId, notificationTemplateId, Proxy);
+    UBCWrapperProxy::GetBrainCloudInstance(brainCloudWrapper)->getPushNotificationService()->sendRichPushNotification(toPlayerId, notificationTemplateId, Proxy);
     return Proxy;
 }
 
-UBCPushNotificationProxy* UBCPushNotificationProxy::SendRichPushNotificationWithParams(ABrainCloudActor *brainCloud, const FString& toPlayerId, int32 notificationTemplateId, const FString& substitutionJson)
+UBCPushNotificationProxy* UBCPushNotificationProxy::SendRichPushNotificationWithParams(UBrainCloudWrapper *brainCloudWrapper, const FString& toPlayerId, int32 notificationTemplateId, const FString& substitutionJson)
 {
     UBCPushNotificationProxy* Proxy = NewObject<UBCPushNotificationProxy>();
-    UBCWrapperProxy::GetBrainCloudInstance(brainCloud)->getPushNotificationService()->sendRichPushNotificationWithParams(toPlayerId, notificationTemplateId, substitutionJson, Proxy);
+    UBCWrapperProxy::GetBrainCloudInstance(brainCloudWrapper)->getPushNotificationService()->sendRichPushNotificationWithParams(toPlayerId, notificationTemplateId, substitutionJson, Proxy);
     return Proxy;
 }
 
-UBCPushNotificationProxy* UBCPushNotificationProxy::SendTemplatedPushNotificationToGroup(ABrainCloudActor *brainCloud, const FString& groupId, int32 notificationTemplateId, const FString& substitutionJson)
+UBCPushNotificationProxy* UBCPushNotificationProxy::SendTemplatedPushNotificationToGroup(UBrainCloudWrapper *brainCloudWrapper, const FString& groupId, int32 notificationTemplateId, const FString& substitutionJson)
 {
     UBCPushNotificationProxy* Proxy = NewObject<UBCPushNotificationProxy>();
-    UBCWrapperProxy::GetBrainCloudInstance(brainCloud)->getPushNotificationService()->sendTemplatedPushNotificationToGroup(groupId, notificationTemplateId, substitutionJson, Proxy);
+    UBCWrapperProxy::GetBrainCloudInstance(brainCloudWrapper)->getPushNotificationService()->sendTemplatedPushNotificationToGroup(groupId, notificationTemplateId, substitutionJson, Proxy);
     return Proxy;
 }
 
-UBCPushNotificationProxy* UBCPushNotificationProxy::ScheduleRawPushNotificationUTC(ABrainCloudActor *brainCloud, const FString& profileId, const FString& fcmContent, const FString& iosContent, const FString& facebookContent, int32 startTime)
+UBCPushNotificationProxy* UBCPushNotificationProxy::ScheduleRawPushNotificationUTC(UBrainCloudWrapper *brainCloudWrapper, const FString& profileId, const FString& fcmContent, const FString& iosContent, const FString& facebookContent, int32 startTime)
 {
 	UBCPushNotificationProxy* Proxy = NewObject<UBCPushNotificationProxy>();
-	UBCWrapperProxy::GetBrainCloudInstance(brainCloud)->getPushNotificationService()->scheduleRawPushNotificationUTC(profileId, fcmContent, iosContent, facebookContent, startTime, Proxy);
+	UBCWrapperProxy::GetBrainCloudInstance(brainCloudWrapper)->getPushNotificationService()->scheduleRawPushNotificationUTC(profileId, fcmContent, iosContent, facebookContent, startTime, Proxy);
 	return Proxy;
 }
 
-UBCPushNotificationProxy* UBCPushNotificationProxy::ScheduleRawPushNotificationMinutes(ABrainCloudActor *brainCloud, const FString& profileId, const FString& fcmContent, const FString& iosContent, const FString& facebookContent, int32 minutesFromNow)
+UBCPushNotificationProxy* UBCPushNotificationProxy::ScheduleRawPushNotificationMinutes(UBrainCloudWrapper *brainCloudWrapper, const FString& profileId, const FString& fcmContent, const FString& iosContent, const FString& facebookContent, int32 minutesFromNow)
 {
 	UBCPushNotificationProxy* Proxy = NewObject<UBCPushNotificationProxy>();
-	UBCWrapperProxy::GetBrainCloudInstance(brainCloud)->getPushNotificationService()->scheduleRawPushNotificationMinutes(profileId, fcmContent, iosContent, facebookContent, minutesFromNow, Proxy);
+	UBCWrapperProxy::GetBrainCloudInstance(brainCloudWrapper)->getPushNotificationService()->scheduleRawPushNotificationMinutes(profileId, fcmContent, iosContent, facebookContent, minutesFromNow, Proxy);
 	return Proxy;
 }
 
-UBCPushNotificationProxy* UBCPushNotificationProxy::SendRawPushNotification(ABrainCloudActor *brainCloud, const FString& profileId, const FString& fcmContent, const FString& iosContent, const FString& facebookContent)
+UBCPushNotificationProxy* UBCPushNotificationProxy::SendRawPushNotification(UBrainCloudWrapper *brainCloudWrapper, const FString& profileId, const FString& fcmContent, const FString& iosContent, const FString& facebookContent)
 {
 	UBCPushNotificationProxy* Proxy = NewObject<UBCPushNotificationProxy>();
-	UBCWrapperProxy::GetBrainCloudInstance(brainCloud)->getPushNotificationService()->sendRawPushNotification(profileId, fcmContent, iosContent, facebookContent, Proxy);
+	UBCWrapperProxy::GetBrainCloudInstance(brainCloudWrapper)->getPushNotificationService()->sendRawPushNotification(profileId, fcmContent, iosContent, facebookContent, Proxy);
 	return Proxy;
 }
 
-UBCPushNotificationProxy* UBCPushNotificationProxy::SendRawPushNotificationBatch(ABrainCloudActor *brainCloud, const TArray<FString> profileIds, const FString& fcmContent, const FString& iosContent, const FString& facebookContent)
+UBCPushNotificationProxy* UBCPushNotificationProxy::SendRawPushNotificationBatch(UBrainCloudWrapper *brainCloudWrapper, const TArray<FString> profileIds, const FString& fcmContent, const FString& iosContent, const FString& facebookContent)
 {
 	UBCPushNotificationProxy* Proxy = NewObject<UBCPushNotificationProxy>();
-	UBCWrapperProxy::GetBrainCloudInstance(brainCloud)->getPushNotificationService()->sendRawPushNotificationBatch(profileIds, fcmContent, iosContent, facebookContent, Proxy);
+	UBCWrapperProxy::GetBrainCloudInstance(brainCloudWrapper)->getPushNotificationService()->sendRawPushNotificationBatch(profileIds, fcmContent, iosContent, facebookContent, Proxy);
 	return Proxy;
 }
 
-UBCPushNotificationProxy* UBCPushNotificationProxy::SendRawPushNotificationToGroup(ABrainCloudActor *brainCloud, const FString& groupId, const FString& fcmContent, const FString& iosContent, const FString& facebookContent)
+UBCPushNotificationProxy* UBCPushNotificationProxy::SendRawPushNotificationToGroup(UBrainCloudWrapper *brainCloudWrapper, const FString& groupId, const FString& fcmContent, const FString& iosContent, const FString& facebookContent)
 {
 	UBCPushNotificationProxy* Proxy = NewObject<UBCPushNotificationProxy>();
-	UBCWrapperProxy::GetBrainCloudInstance(brainCloud)->getPushNotificationService()->sendRawPushNotificationToGroup(groupId, fcmContent, iosContent, facebookContent, Proxy);
+	UBCWrapperProxy::GetBrainCloudInstance(brainCloudWrapper)->getPushNotificationService()->sendRawPushNotificationToGroup(groupId, fcmContent, iosContent, facebookContent, Proxy);
 	return Proxy;
 }
 
-UBCPushNotificationProxy* UBCPushNotificationProxy::SendNormalizedPushNotificationToGroup(ABrainCloudActor *brainCloud, const FString& groupId, const FString& alertContentJson, const FString& customDataJson)
+UBCPushNotificationProxy* UBCPushNotificationProxy::SendNormalizedPushNotificationToGroup(UBrainCloudWrapper *brainCloudWrapper, const FString& groupId, const FString& alertContentJson, const FString& customDataJson)
 {
     UBCPushNotificationProxy* Proxy = NewObject<UBCPushNotificationProxy>();
-    UBCWrapperProxy::GetBrainCloudInstance(brainCloud)->getPushNotificationService()->sendNormalizedPushNotificationToGroup(groupId, alertContentJson, customDataJson, Proxy);
+    UBCWrapperProxy::GetBrainCloudInstance(brainCloudWrapper)->getPushNotificationService()->sendNormalizedPushNotificationToGroup(groupId, alertContentJson, customDataJson, Proxy);
     return Proxy;
 }
 
-UBCPushNotificationProxy* UBCPushNotificationProxy::ScheduleNormalizedPushNotificationUTC(ABrainCloudActor *brainCloud, const FString& profileId, const FString& alertContentJson, const FString& substitutionJson, const int32 startTime)
+UBCPushNotificationProxy* UBCPushNotificationProxy::ScheduleNormalizedPushNotificationUTC(UBrainCloudWrapper *brainCloudWrapper, const FString& profileId, const FString& alertContentJson, const FString& substitutionJson, const int32 startTime)
 {
 	UBCPushNotificationProxy* Proxy = NewObject<UBCPushNotificationProxy>();
-	UBCWrapperProxy::GetBrainCloudInstance(brainCloud)->getPushNotificationService()->scheduleNormalizedPushNotificationUTC(profileId, alertContentJson, substitutionJson, startTime, Proxy);
+	UBCWrapperProxy::GetBrainCloudInstance(brainCloudWrapper)->getPushNotificationService()->scheduleNormalizedPushNotificationUTC(profileId, alertContentJson, substitutionJson, startTime, Proxy);
 	return Proxy;
 }
 
-UBCPushNotificationProxy* UBCPushNotificationProxy::ScheduleNormalizedPushNotificationMinutes(ABrainCloudActor *brainCloud, const FString& profileId, const FString& alertContentJson, const FString& substitutionJson, const int32 startTime)
+UBCPushNotificationProxy* UBCPushNotificationProxy::ScheduleNormalizedPushNotificationMinutes(UBrainCloudWrapper *brainCloudWrapper, const FString& profileId, const FString& alertContentJson, const FString& substitutionJson, const int32 startTime)
 {
 	UBCPushNotificationProxy* Proxy = NewObject<UBCPushNotificationProxy>();
-	UBCWrapperProxy::GetBrainCloudInstance(brainCloud)->getPushNotificationService()->scheduleNormalizedPushNotificationMinutes(profileId, alertContentJson, substitutionJson, startTime, Proxy);
+	UBCWrapperProxy::GetBrainCloudInstance(brainCloudWrapper)->getPushNotificationService()->scheduleNormalizedPushNotificationMinutes(profileId, alertContentJson, substitutionJson, startTime, Proxy);
 	return Proxy;
 }
 
-UBCPushNotificationProxy* UBCPushNotificationProxy::ScheduleRichPushNotificationUTC(ABrainCloudActor *brainCloud, const FString& profileId, const int32 notificationTemplateId, const FString& substitutionJson, const int32 startTime)
+UBCPushNotificationProxy* UBCPushNotificationProxy::ScheduleRichPushNotificationUTC(UBrainCloudWrapper *brainCloudWrapper, const FString& profileId, const int32 notificationTemplateId, const FString& substitutionJson, const int32 startTime)
 {
 	UBCPushNotificationProxy* Proxy = NewObject<UBCPushNotificationProxy>();
-	UBCWrapperProxy::GetBrainCloudInstance(brainCloud)->getPushNotificationService()->scheduleRichPushNotificationUTC(profileId, notificationTemplateId, substitutionJson, startTime, Proxy);
+	UBCWrapperProxy::GetBrainCloudInstance(brainCloudWrapper)->getPushNotificationService()->scheduleRichPushNotificationUTC(profileId, notificationTemplateId, substitutionJson, startTime, Proxy);
 	return Proxy;
 }
 
-UBCPushNotificationProxy* UBCPushNotificationProxy::ScheduleRichPushNotificationMinutes(ABrainCloudActor *brainCloud, const FString& profileId, const int32 notificationTemplateId, const FString& substitutionJson, const int32 minutesFromNow)
+UBCPushNotificationProxy* UBCPushNotificationProxy::ScheduleRichPushNotificationMinutes(UBrainCloudWrapper *brainCloudWrapper, const FString& profileId, const int32 notificationTemplateId, const FString& substitutionJson, const int32 minutesFromNow)
 {
 	UBCPushNotificationProxy* Proxy = NewObject<UBCPushNotificationProxy>();
-	UBCWrapperProxy::GetBrainCloudInstance(brainCloud)->getPushNotificationService()->scheduleRichPushNotificationMinutes(profileId, notificationTemplateId, substitutionJson, minutesFromNow, Proxy);
+	UBCWrapperProxy::GetBrainCloudInstance(brainCloudWrapper)->getPushNotificationService()->scheduleRichPushNotificationMinutes(profileId, notificationTemplateId, substitutionJson, minutesFromNow, Proxy);
 	return Proxy;
 }
 
-UBCPushNotificationProxy* UBCPushNotificationProxy::SendNormalizedPushNotification(ABrainCloudActor *brainCloud, const FString& toPlayerId, const FString& alertContentJson, const FString& customDataJson)
+UBCPushNotificationProxy* UBCPushNotificationProxy::SendNormalizedPushNotification(UBrainCloudWrapper *brainCloudWrapper, const FString& toPlayerId, const FString& alertContentJson, const FString& customDataJson)
 {
 	UBCPushNotificationProxy* Proxy = NewObject<UBCPushNotificationProxy>();
-	UBCWrapperProxy::GetBrainCloudInstance(brainCloud)->getPushNotificationService()->sendNormalizedPushNotification(toPlayerId, alertContentJson, customDataJson, Proxy);
+	UBCWrapperProxy::GetBrainCloudInstance(brainCloudWrapper)->getPushNotificationService()->sendNormalizedPushNotification(toPlayerId, alertContentJson, customDataJson, Proxy);
 	return Proxy;
 }
 
-UBCPushNotificationProxy* UBCPushNotificationProxy::SendNormalizedPushNotificationBatch(ABrainCloudActor *brainCloud, const TArray<FString> profileIds, const FString& alertContentJson, const FString& customDataJson)
+UBCPushNotificationProxy* UBCPushNotificationProxy::SendNormalizedPushNotificationBatch(UBrainCloudWrapper *brainCloudWrapper, const TArray<FString> profileIds, const FString& alertContentJson, const FString& customDataJson)
 {
 	UBCPushNotificationProxy* Proxy = NewObject<UBCPushNotificationProxy>();
-	UBCWrapperProxy::GetBrainCloudInstance(brainCloud)->getPushNotificationService()->sendNormalizedPushNotificationBatch(profileIds, alertContentJson, customDataJson, Proxy);
+	UBCWrapperProxy::GetBrainCloudInstance(brainCloudWrapper)->getPushNotificationService()->sendNormalizedPushNotificationBatch(profileIds, alertContentJson, customDataJson, Proxy);
 	return Proxy;
 }
 

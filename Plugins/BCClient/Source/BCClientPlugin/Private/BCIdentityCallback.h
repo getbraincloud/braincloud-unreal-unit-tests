@@ -1,7 +1,7 @@
 #pragma once
 #include "IServerCallback.h"
 
-class BrainCloudWrapper;
+class UBrainCloudWrapper;
 class ServiceName;
 class ServiceOperation;
 
@@ -11,12 +11,12 @@ class ServiceOperation;
 class BCIdentityCallback : public IServerCallback
 {
   public:
-    BCIdentityCallback(BrainCloudWrapper *in_wrapper, IServerCallback *in_callback);
+    BCIdentityCallback(UBrainCloudWrapper *in_wrapper, IServerCallback *in_callback);
 
     virtual ~BCIdentityCallback();
     virtual void serverCallback(ServiceName serviceName, ServiceOperation serviceOperation, FString const & jsonData);
     virtual void serverError(ServiceName serviceName, ServiceOperation serviceOperation, int32 statusCode, int32 reasonCode, const FString & message);
   protected:
-    BrainCloudWrapper *m_wrapper;
+    UBrainCloudWrapper *m_wrapper;
     IServerCallback *m_callback;
 };

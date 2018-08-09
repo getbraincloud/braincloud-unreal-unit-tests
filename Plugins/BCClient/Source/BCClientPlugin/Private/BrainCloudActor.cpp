@@ -6,12 +6,12 @@
 
 ABrainCloudActor::ABrainCloudActor()
 {
-	BCWrapper = new BrainCloudWrapper();
+	BCWrapper = NewObject<UBrainCloudWrapper>();
 }
 
 ABrainCloudActor::ABrainCloudActor(FString &wrapperName)
 {
-	BCWrapper = new BrainCloudWrapper(wrapperName);
+	BCWrapper = NewObject<UBrainCloudWrapper>();
 }
 
 void ABrainCloudActor::BeginPlay()
@@ -39,6 +39,5 @@ void ABrainCloudActor::BeginDestroy()
 	this->Destroy();
 	this->ConditionalBeginDestroy();
 
-	delete BCWrapper;
-	BCWrapper = nullptr;
+	BCWrapper->ConditionalBeginDestroy();
 }

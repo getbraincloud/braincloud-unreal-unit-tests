@@ -13,10 +13,10 @@ UBCTimeProxy::UBCTimeProxy(const FObjectInitializer& ObjectInitializer)
 {
 }
 
-UBCTimeProxy* UBCTimeProxy::ReadServerTime(ABrainCloudActor *brainCloud)
+UBCTimeProxy* UBCTimeProxy::ReadServerTime(UBrainCloudWrapper *brainCloudWrapper)
 {
     UBCTimeProxy* Proxy = NewObject<UBCTimeProxy>();
-    UBCWrapperProxy::GetBrainCloudInstance(brainCloud)->getTimeService()->readServerTime(Proxy);
+    UBCWrapperProxy::GetBrainCloudInstance(brainCloudWrapper)->getTimeService()->readServerTime(Proxy);
     return Proxy;
 }
 

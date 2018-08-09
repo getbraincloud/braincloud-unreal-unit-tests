@@ -5,7 +5,7 @@
 #include "GameFramework/Actor.h"
 #include "BrainCloudActor.generated.h"
 
-class BrainCloudWrapper;
+class UBrainCloudWrapper;
 
 /**
  * An actor to contain an instance of the brainCloud wrapper.
@@ -16,7 +16,7 @@ class BCCLIENTPLUGIN_API ABrainCloudActor : public AActor
 	GENERATED_BODY()
 
   public:
-	BrainCloudWrapper *BCWrapper = nullptr;
+	UBrainCloudWrapper *BCWrapper = nullptr;
 
 	ABrainCloudActor();
 	ABrainCloudActor(FString &wrapperName);

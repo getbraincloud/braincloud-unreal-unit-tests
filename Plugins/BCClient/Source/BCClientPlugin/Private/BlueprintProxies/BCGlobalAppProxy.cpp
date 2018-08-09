@@ -33,10 +33,10 @@ UBCGlobalAppProxy::UBCGlobalAppProxy(const FObjectInitializer& ObjectInitializer
 *   }
 * }
 */
-UBCGlobalAppProxy* UBCGlobalAppProxy::ReadProperties(ABrainCloudActor *brainCloud)
+UBCGlobalAppProxy* UBCGlobalAppProxy::ReadProperties(UBrainCloudWrapper *brainCloudWrapper)
 {
     UBCGlobalAppProxy* Proxy = NewObject<UBCGlobalAppProxy>();
-    UBCWrapperProxy::GetBrainCloudInstance(brainCloud)->getGlobalAppService()->readProperties(Proxy);
+    UBCWrapperProxy::GetBrainCloudInstance(brainCloudWrapper)->getGlobalAppService()->readProperties(Proxy);
     return Proxy;
 }
 

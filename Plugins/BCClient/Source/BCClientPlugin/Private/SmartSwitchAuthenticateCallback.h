@@ -3,7 +3,7 @@
 #include "IServerCallback.h"
 #include "BCAuthType.h"
 
-class BrainCloudWrapper;
+class UBrainCloudWrapper;
 class ServiceName;
 class ServiceOperation;
 
@@ -13,10 +13,10 @@ class ServiceOperation;
 class SmartSwitchAuthenticateCallback : public BCIdentityCallback
 {
 public:
-  SmartSwitchAuthenticateCallback(BrainCloudWrapper *in_wrapper, EBCAuthType in_authType, const FString &in_userId,
+  SmartSwitchAuthenticateCallback(UBrainCloudWrapper *in_wrapper, EBCAuthType in_authType, const FString &in_userId,
                                   const FString &in_token, bool forceCreate, IServerCallback *in_callback);
 
-  SmartSwitchAuthenticateCallback(BrainCloudWrapper *in_wrapper, EBCAuthType in_authType, const FString &in_userId,
+  SmartSwitchAuthenticateCallback(UBrainCloudWrapper *in_wrapper, EBCAuthType in_authType, const FString &in_userId,
                                   const FString &in_token, const FString &in_extraStringDetail, bool forceCreate, IServerCallback *in_callback);
 
   virtual ~SmartSwitchAuthenticateCallback();

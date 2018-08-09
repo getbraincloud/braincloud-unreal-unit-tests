@@ -24,7 +24,7 @@ public:
     * Service Operation - Read
     */
     UFUNCTION(BlueprintCallable, meta = (BlueprintInternalUseOnly = "true"), Category = "BrainCloud|Time")
-        static UBCTimeProxy* ReadServerTime(ABrainCloudActor *brainCloud);
+        static UBCTimeProxy* ReadServerTime(UBrainCloudWrapper *brainCloudWrapper);
 
     //Response delegates
     UPROPERTY(BlueprintAssignable)

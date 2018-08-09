@@ -13,67 +13,67 @@ UBCPlaybackStreamProxy::UBCPlaybackStreamProxy(const FObjectInitializer& ObjectI
 {
 }
 
-UBCPlaybackStreamProxy* UBCPlaybackStreamProxy::StartStream(ABrainCloudActor *brainCloud, const FString& targetPlayerId, bool includeSharedData)
+UBCPlaybackStreamProxy* UBCPlaybackStreamProxy::StartStream(UBrainCloudWrapper *brainCloudWrapper, const FString& targetPlayerId, bool includeSharedData)
 {
     UBCPlaybackStreamProxy* Proxy = NewObject<UBCPlaybackStreamProxy>();
-    UBCWrapperProxy::GetBrainCloudInstance(brainCloud)->getPlaybackStreamService()->startStream(targetPlayerId, includeSharedData, Proxy);
+    UBCWrapperProxy::GetBrainCloudInstance(brainCloudWrapper)->getPlaybackStreamService()->startStream(targetPlayerId, includeSharedData, Proxy);
     return Proxy;
 }
 
-UBCPlaybackStreamProxy* UBCPlaybackStreamProxy::ReadStream(ABrainCloudActor *brainCloud, const FString& playbackStreamId)
+UBCPlaybackStreamProxy* UBCPlaybackStreamProxy::ReadStream(UBrainCloudWrapper *brainCloudWrapper, const FString& playbackStreamId)
 {
     UBCPlaybackStreamProxy* Proxy = NewObject<UBCPlaybackStreamProxy>();
-    UBCWrapperProxy::GetBrainCloudInstance(brainCloud)->getPlaybackStreamService()->readStream(playbackStreamId, Proxy);
+    UBCWrapperProxy::GetBrainCloudInstance(brainCloudWrapper)->getPlaybackStreamService()->readStream(playbackStreamId, Proxy);
     return Proxy;
 }
 
-UBCPlaybackStreamProxy* UBCPlaybackStreamProxy::EndStream(ABrainCloudActor *brainCloud, const FString& playbackStreamId)
+UBCPlaybackStreamProxy* UBCPlaybackStreamProxy::EndStream(UBrainCloudWrapper *brainCloudWrapper, const FString& playbackStreamId)
 {
     UBCPlaybackStreamProxy* Proxy = NewObject<UBCPlaybackStreamProxy>();
-    UBCWrapperProxy::GetBrainCloudInstance(brainCloud)->getPlaybackStreamService()->endStream(playbackStreamId, Proxy);
+    UBCWrapperProxy::GetBrainCloudInstance(brainCloudWrapper)->getPlaybackStreamService()->endStream(playbackStreamId, Proxy);
     return Proxy;
 }
 
-UBCPlaybackStreamProxy* UBCPlaybackStreamProxy::DeleteStream(ABrainCloudActor *brainCloud, const FString& playbackStreamId)
+UBCPlaybackStreamProxy* UBCPlaybackStreamProxy::DeleteStream(UBrainCloudWrapper *brainCloudWrapper, const FString& playbackStreamId)
 {
     UBCPlaybackStreamProxy* Proxy = NewObject<UBCPlaybackStreamProxy>();
-    UBCWrapperProxy::GetBrainCloudInstance(brainCloud)->getPlaybackStreamService()->deleteStream(playbackStreamId, Proxy);
+    UBCWrapperProxy::GetBrainCloudInstance(brainCloudWrapper)->getPlaybackStreamService()->deleteStream(playbackStreamId, Proxy);
     return Proxy;
 }
 
-UBCPlaybackStreamProxy* UBCPlaybackStreamProxy::AddEvent(ABrainCloudActor *brainCloud, const FString& playbackStreamId, const FString& jsonEventData, const FString& jsonSummary)
+UBCPlaybackStreamProxy* UBCPlaybackStreamProxy::AddEvent(UBrainCloudWrapper *brainCloudWrapper, const FString& playbackStreamId, const FString& jsonEventData, const FString& jsonSummary)
 
 {
     UBCPlaybackStreamProxy* Proxy = NewObject<UBCPlaybackStreamProxy>();
-    UBCWrapperProxy::GetBrainCloudInstance(brainCloud)->getPlaybackStreamService()->addEvent(playbackStreamId, jsonEventData, jsonSummary, Proxy);
+    UBCWrapperProxy::GetBrainCloudInstance(brainCloudWrapper)->getPlaybackStreamService()->addEvent(playbackStreamId, jsonEventData, jsonSummary, Proxy);
     return Proxy;
 }
 
-UBCPlaybackStreamProxy* UBCPlaybackStreamProxy::GetStreamSummariesForInitiatingPlayer(ABrainCloudActor *brainCloud, const FString& targetPlayerId)
+UBCPlaybackStreamProxy* UBCPlaybackStreamProxy::GetStreamSummariesForInitiatingPlayer(UBrainCloudWrapper *brainCloudWrapper, const FString& targetPlayerId)
 {
     UBCPlaybackStreamProxy* Proxy = NewObject<UBCPlaybackStreamProxy>();
-    UBCWrapperProxy::GetBrainCloudInstance(brainCloud)->getPlaybackStreamService()->getStreamSummariesForInitiatingPlayer(targetPlayerId, Proxy);
+    UBCWrapperProxy::GetBrainCloudInstance(brainCloudWrapper)->getPlaybackStreamService()->getStreamSummariesForInitiatingPlayer(targetPlayerId, Proxy);
     return Proxy;
 }
 
-UBCPlaybackStreamProxy* UBCPlaybackStreamProxy::GetStreamSummariesForTargetPlayer(ABrainCloudActor *brainCloud, const FString& targetPlayerId)
+UBCPlaybackStreamProxy* UBCPlaybackStreamProxy::GetStreamSummariesForTargetPlayer(UBrainCloudWrapper *brainCloudWrapper, const FString& targetPlayerId)
 {
     UBCPlaybackStreamProxy* Proxy = NewObject<UBCPlaybackStreamProxy>();
-    UBCWrapperProxy::GetBrainCloudInstance(brainCloud)->getPlaybackStreamService()->getStreamSummariesForTargetPlayer(targetPlayerId, Proxy);
+    UBCWrapperProxy::GetBrainCloudInstance(brainCloudWrapper)->getPlaybackStreamService()->getStreamSummariesForTargetPlayer(targetPlayerId, Proxy);
     return Proxy;
 }
 
-UBCPlaybackStreamProxy* UBCPlaybackStreamProxy::GetRecentStreamsForInitiatingPlayer(ABrainCloudActor *brainCloud, const FString& targetPlayerId, int32 maxNumStreams)
+UBCPlaybackStreamProxy* UBCPlaybackStreamProxy::GetRecentStreamsForInitiatingPlayer(UBrainCloudWrapper *brainCloudWrapper, const FString& targetPlayerId, int32 maxNumStreams)
 {
 	UBCPlaybackStreamProxy* Proxy = NewObject<UBCPlaybackStreamProxy>();
-	UBCWrapperProxy::GetBrainCloudInstance(brainCloud)->getPlaybackStreamService()->getRecentStreamsForInitiatingPlayer(targetPlayerId, maxNumStreams, Proxy);
+	UBCWrapperProxy::GetBrainCloudInstance(brainCloudWrapper)->getPlaybackStreamService()->getRecentStreamsForInitiatingPlayer(targetPlayerId, maxNumStreams, Proxy);
 	return Proxy;
 }
 
-UBCPlaybackStreamProxy* UBCPlaybackStreamProxy::GetRecentStreamsForTargetPlayer(ABrainCloudActor *brainCloud, const FString& targetPlayerId, int32 maxNumStreams)
+UBCPlaybackStreamProxy* UBCPlaybackStreamProxy::GetRecentStreamsForTargetPlayer(UBrainCloudWrapper *brainCloudWrapper, const FString& targetPlayerId, int32 maxNumStreams)
 {
 	UBCPlaybackStreamProxy* Proxy = NewObject<UBCPlaybackStreamProxy>();
-	UBCWrapperProxy::GetBrainCloudInstance(brainCloud)->getPlaybackStreamService()->getRecentStreamsForTargetPlayer(targetPlayerId, maxNumStreams, Proxy);
+	UBCWrapperProxy::GetBrainCloudInstance(brainCloudWrapper)->getPlaybackStreamService()->getRecentStreamsForTargetPlayer(targetPlayerId, maxNumStreams, Proxy);
 	return Proxy;
 }
 

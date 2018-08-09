@@ -27,7 +27,7 @@ public:
 	* Param - body The email body
 	*/
     UFUNCTION(BlueprintCallable, meta = (BlueprintInternalUseOnly = "true"), Category = "BrainCloud|Mail")
-        static UBCMailProxy* SendBasicEmail(ABrainCloudActor *brainCloud, const FString& profileId, const FString& subject, const FString& body);
+        static UBCMailProxy* SendBasicEmail(UBrainCloudWrapper *brainCloudWrapper, const FString& profileId, const FString& subject, const FString& body);
 
 	/**
 	* Sends an advanced email to the specified player
@@ -40,7 +40,7 @@ public:
 	*	a full list. http://getbraincloud.com/apidocs/apiref/#capi-mail
 	*/
 	UFUNCTION(BlueprintCallable, meta = (BlueprintInternalUseOnly = "true"), Category = "BrainCloud|Mail")
-		static UBCMailProxy* SendAdvancedEmail(ABrainCloudActor *brainCloud, const FString& profileId, const FString& jsonServiceParams);
+		static UBCMailProxy* SendAdvancedEmail(UBrainCloudWrapper *brainCloudWrapper, const FString& profileId, const FString& jsonServiceParams);
 
 	/**
 	* Sends an advanced email to the specified email address
@@ -53,7 +53,7 @@ public:
 	*	a full list. http://getbraincloud.com/apidocs/apiref/#capi-mail
 	*/
 	UFUNCTION(BlueprintCallable, meta = (BlueprintInternalUseOnly = "true"), Category = "BrainCloud|Mail")
-		static UBCMailProxy* SendAdvancedEmailByAddress(ABrainCloudActor *brainCloud, const FString& emailAddress, const FString& jsonServiceParams);
+		static UBCMailProxy* SendAdvancedEmailByAddress(UBrainCloudWrapper *brainCloudWrapper, const FString& emailAddress, const FString& jsonServiceParams);
 
     //Response delegates
     UPROPERTY(BlueprintAssignable)
