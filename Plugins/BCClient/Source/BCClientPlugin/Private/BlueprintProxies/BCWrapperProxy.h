@@ -30,6 +30,15 @@ public:
   UFUNCTION(BlueprintCallable, Category = "BrainCloud")
   static ABrainCloudActor *CreateBrainCloudActor(const FString &wrapperName);
 
+ /**
+	* Get the brainCloud Wrapper from the BrainCloudActor helper
+	*
+	* @param brainCloud - An actor that contains its own instance of the brainCloud Wrapper
+	*/
+  UFUNCTION(BlueprintCallable, Category = "BrainCloud")
+	static UBrainCloudWrapper *GetBrainCloudWrapper(ABrainCloudActor *brainCloudActor);
+
+
   /**
 	* Set a default brainCloud instance to be used when none is provided.
 	* When not set, the brainCloud Singleton will be used

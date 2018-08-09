@@ -39,5 +39,5 @@ void ABrainCloudActor::BeginDestroy()
 	this->Destroy();
 	this->ConditionalBeginDestroy();
 
-	 BCWrapper->ConditionalBeginDestroy();
+	BCWrapper->ConditionalBeginDestroy();
 }
