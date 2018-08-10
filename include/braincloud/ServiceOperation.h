@@ -322,6 +322,9 @@ namespace BrainCloud {
 		static const ServiceOperation ViewReward;
 		static const ServiceOperation ClaimTournamentReward;
 
+		//rtt Registration
+		static const ServiceOperation RequestClientConnection;
+
 
 		std::string getValue() const { return _value; }
 

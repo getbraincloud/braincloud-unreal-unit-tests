@@ -47,6 +47,11 @@ namespace BrainCloud
 	const ServiceName ServiceName::Mail = ServiceName("mail");
 	const ServiceName ServiceName::Tournament = ServiceName("tournament");
 
+	const ServiceName ServiceName::RTTRegistration = ServiceName("rttRegistration");
+	const ServiceName ServiceName::Chat = ServiceName("Chat");
+	const ServiceName ServiceName::Messaging = ServiceName("Messaging");
+	const ServiceName ServiceName::Lobby = ServiceName("Lobby");
+
     ServiceName::ServiceName(const char * value)
     {
         _value = value;

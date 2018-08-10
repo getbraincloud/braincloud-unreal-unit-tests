@@ -314,6 +314,9 @@ namespace BrainCloud
 	const ServiceOperation ServiceOperation::SendAdvancedEmail = ServiceOperation("SEND_ADVANCED_EMAIL");
 	const ServiceOperation ServiceOperation::SendAdvancedEmailByAddress = ServiceOperation("SEND_ADVANCED_EMAIL_BY_ADDRESS");
 
+	//rtt registration
+	const ServiceOperation ServiceOperation::RequestClientConnection = ServiceOperation("REQUEST_CLIENT_CONNECTION");
+
 	ServiceOperation::ServiceOperation(const char * value)
 	{
 		_value = value;

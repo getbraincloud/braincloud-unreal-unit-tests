@@ -29,6 +29,7 @@ namespace BrainCloud
 	 */
 	BrainCloudClient::BrainCloudClient() :
         _brainCloudComms(IBrainCloudComms::create(this)),
+		_rttComms(new RTTComms(this)),
 		_asyncMatchService(new BrainCloudAsyncMatch(this)),
 		_authenticationService(new BrainCloudAuthentication(this)),
 		_dataStreamService(new BrainCloudDataStream(this)),
@@ -59,6 +60,7 @@ namespace BrainCloud
 		_steamService(new BrainCloudSteam(this)),
 		_timeService(new BrainCloudTime(this)),
 		_tournamentService(new BrainCloudTournament(this)),
+		_rttRegistrationService(new BrainCloudRTTRegistration(this)),
 		_releasePlatform(""),
 		_appVersion(""),
 		_timezoneOffset(0.0)
@@ -67,7 +69,9 @@ namespace BrainCloud
 
     BrainCloudClient::~BrainCloudClient()
     {
+		// [dsl]: Should be deleted in reverse order...
         delete _brainCloudComms;
+		delete _rttComms;
         delete _tournamentService;
         delete _timeService;
         delete _steamService;
@@ -98,11 +102,22 @@ namespace BrainCloud
         delete _dataStreamService;
         delete _authenticationService;
         delete _asyncMatchService;
+		delete _rttRegistrationService;
     }
 
 	////////////////////////////////////////////////////
 	// Public Methods
 	////////////////////////////////////////////////////
+
+	const std::string& BrainCloudClient::getRTTConnectionId() const
+	{
+		if (_rttComms)
+		{
+			return _rttComms->getConnectionId();
+		}
+		static std::string noConnectionId;
+		return noConnectionId;
+	}
 
 	const char * BrainCloudClient::getSessionId() const {
 		return(_brainCloudComms->getSessionId().c_str());
@@ -146,6 +161,11 @@ namespace BrainCloud
 			_brainCloudComms->initialize(urlToUse, in_appId, in_secretKey);
 		}
 
+		if (_rttComms)
+		{
+			_rttComms->initialize();
+		}
+
 		setupOSLocaleData();
 
         _releasePlatform = Device::getPlatformName();
@@ -161,6 +181,7 @@ namespace BrainCloud
 	void BrainCloudClient::runCallbacks()
 	{
 		_brainCloudComms->runCallbacks();
+		_rttComms->runCallbacks();
 	}
 
 	void BrainCloudClient::registerEventCallback(IEventCallback *in_eventCallback)
@@ -233,6 +254,7 @@ namespace BrainCloud
 
 	void BrainCloudClient::resetCommunication()
 	{
+		_rttComms->resetCommunication();
 		_brainCloudComms->resetCommunication();
 		_brainCloudComms->setSessionId("");
 		_authenticationService->setProfileId("");
@@ -240,6 +262,7 @@ namespace BrainCloud
 
 	void BrainCloudClient::shutdown()
 	{
+		_rttComms->shutdown();
 		_brainCloudComms->shutdown();
 		_brainCloudComms->setSessionId("");
 		_authenticationService->setProfileId("");
@@ -252,7 +275,7 @@ namespace BrainCloud
 
 	bool BrainCloudClient::isInitialized()
 	{
-		return _brainCloudComms->isInitialized();
+		return _brainCloudComms->isInitialized() && _rttComms->isInitialized();
 	}
 
 	void BrainCloudClient::setImmediateRetryOnError(bool value)
@@ -353,6 +376,8 @@ namespace BrainCloud
 	{
 		_brainCloudComms->insertEndOfMessageBundleMarker();
 	}
+
+	// RTT stuff
 
 	////////////////////////////////////////////////////
 	// Private Methods

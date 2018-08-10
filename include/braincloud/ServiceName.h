@@ -52,6 +52,11 @@ namespace BrainCloud {
 		static const ServiceName Mail;
 		static const ServiceName Tournament;
 
+		static const ServiceName RTTRegistration;
+		static const ServiceName Chat;
+		static const ServiceName Messaging;
+		static const ServiceName Lobby;
+
 
         std::string getValue() const { return _value; }
 
