@@ -2,13 +2,18 @@
 
 #pragma once
 
-class BrainCloudClient;
-class IServerCallback;
+#include "BCBlueprintCallProxyBase.h"
+#include "BCMessagingProxy.generated.h"
 
-class BCCLIENTPLUGIN_API BrainCloudMessaging
+class ABrainCloud;
+
+UCLASS(MinimalAPI)
+class UBCMessagingProxy : public UBCBlueprintCallProxyBase
 {
+    GENERATED_BODY()
+
   public:
-    BrainCloudMessaging(BrainCloudClient *client);
+    UBCMessagingProxy(const FObjectInitializer &ObjectInitializer);
 
     /**
     * Deletes specified user messages on the server.
@@ -20,7 +25,8 @@ class BCCLIENTPLUGIN_API BrainCloudMessaging
 	* @param in_msgsIds Array of msg Ids to delete
 	* @param in_callback Method to be invoked when the server response is received.
     */
-    void deleteMessages(const FString &in_msgBox, const TArray<FString> &in_msgsIds, IServerCallback *in_callback);
+    UFUNCTION(BlueprintCallable, meta = (BlueprintInternalUseOnly = "true"), Category = "BrainCloud|Messaging")
+    static UBCMessagingProxy *DeleteMessages(ABrainCloudActor *brainCloud, const FString &in_msgBox, const TArray<FString> &in_msgsIds);
 
     /**
     * Retrieve user's message boxes, including 'inbox', 'sent', etc.
@@ -30,7 +36,8 @@ class BCCLIENTPLUGIN_API BrainCloudMessaging
     *
 	* @param in_callback Method to be invoked when the server response is received.
     */
-    void getMessageBoxes(IServerCallback *in_callback);
+    UFUNCTION(BlueprintCallable, meta = (BlueprintInternalUseOnly = "true"), Category = "BrainCloud|Messaging")
+    static UBCMessagingProxy *GetMessageBoxes(ABrainCloudActor *brainCloud);
 
     /**
     * Returns count of user's 'total' messages and their 'unread' messages.
@@ -40,7 +47,8 @@ class BCCLIENTPLUGIN_API BrainCloudMessaging
     *
 	* @param in_callback Method to be invoked when the server response is received.
     */
-    void getMessageCounts(IServerCallback *in_callback);
+    UFUNCTION(BlueprintCallable, meta = (BlueprintInternalUseOnly = "true"), Category = "BrainCloud|Messaging")
+    static UBCMessagingProxy *GetMessageCounts(ABrainCloudActor *brainCloud);
 
     /**
     * Retrieves list of specified messages.
@@ -52,7 +60,8 @@ class BCCLIENTPLUGIN_API BrainCloudMessaging
 	* @param in_msgsIds Array of msg Ids to delete
 	* @param in_callback Method to be invoked when the server response is received.
     */
-    void getMessages(const FString &in_msgBox, const TArray<FString> &in_msgsIds, IServerCallback *in_callback);
+    UFUNCTION(BlueprintCallable, meta = (BlueprintInternalUseOnly = "true"), Category = "BrainCloud|Messaging")
+    static UBCMessagingProxy *GetMessages(ABrainCloudActor *brainCloud, const FString &in_msgBox, const TArray<FString> &in_msgsIds);
 
     /**
     * Retrieves a page of messages.
@@ -63,7 +72,8 @@ class BCCLIENTPLUGIN_API BrainCloudMessaging
     * @param in_context 
 	* @param in_callback Method to be invoked when the server response is received.
     */
-    void getMessagesPage(const FString &in_context, IServerCallback *in_callback);
+    UFUNCTION(BlueprintCallable, meta = (BlueprintInternalUseOnly = "true"), Category = "BrainCloud|Messaging")
+    static UBCMessagingProxy *GetMessagesPage(ABrainCloudActor *brainCloud, const FString &in_context);
 
     /**
     * Retrieves a page of messages.
@@ -75,7 +85,8 @@ class BCCLIENTPLUGIN_API BrainCloudMessaging
     * @param in_pageOffset 
 	* @param in_callback Method to be invoked when the server response is received.
     */
-    void getMessagesPageOffset(const FString &in_context, int32 in_pageOffset, IServerCallback *in_callback);
+    UFUNCTION(BlueprintCallable, meta = (BlueprintInternalUseOnly = "true"), Category = "BrainCloud|Messaging")
+    static UBCMessagingProxy *GetMessagesPageOffset(ABrainCloudActor *brainCloud, const FString &in_context, int32 in_pageOffset);
 
     /**
     * Retrieves a page of messages.
@@ -87,7 +98,8 @@ class BCCLIENTPLUGIN_API BrainCloudMessaging
 	* @param in_msgsIds Array of msg Ids to mark as read
 	* @param in_callback Method to be invoked when the server response is received.
     */
-    void markMessagesRead(const FString &in_msgBox, const TArray<FString> &in_msgsIds, IServerCallback *in_callback);
+    UFUNCTION(BlueprintCallable, meta = (BlueprintInternalUseOnly = "true"), Category = "BrainCloud|Messaging")
+    static UBCMessagingProxy *MarkMessagesRead(ABrainCloudActor *brainCloud, const FString &in_msgBox, const TArray<FString> &in_msgsIds);
 
     /**
     *Sends a message with specified 'subject' and 'text' to list of users.
@@ -100,7 +112,8 @@ class BCCLIENTPLUGIN_API BrainCloudMessaging
     * @param in_messageSubject Messsage subject
 	* @param in_callback Method to be invoked when the server response is received.
     */
-    void sendMessage(const TArray<FString> &in_toProfileIds, const FString &in_messageText, const FString &in_messageSubject, IServerCallback *in_callback);
+    UFUNCTION(BlueprintCallable, meta = (BlueprintInternalUseOnly = "true"), Category = "BrainCloud|Messaging")
+    static UBCMessagingProxy *SendMessage(ABrainCloudActor *brainCloud, const TArray<FString> &in_toProfileIds, const FString &in_messageText, const FString &in_messageSubject);
 
     /**
     *Sends a message with specified 'subject' and 'text' to list of users.
@@ -112,8 +125,6 @@ class BCCLIENTPLUGIN_API BrainCloudMessaging
 	* @param in_messageText Messsage Text
 	* @param in_callback Method to be invoked when the server response is received.
     */
-    void sendMessageSimple(const TArray<FString> &in_toProfileIds, const FString &in_messageText, IServerCallback *in_callback);
-
-  private:
-    BrainCloudClient *_client = nullptr;
+    UFUNCTION(BlueprintCallable, meta = (BlueprintInternalUseOnly = "true"), Category = "BrainCloud|Messaging")
+    static UBCMessagingProxy *SendMessageSimple(ABrainCloudActor *brainCloud, const TArray<FString> &in_toProfileIds, const FString &in_messageText);
 };

@@ -3,18 +3,17 @@
 #pragma once
 
 #include "BCBlueprintCallProxyBase.h"
-#include "IServerCallback.h"
 #include "BCProfanityProxy.generated.h"
 
 class ABrainCloud;
 
 UCLASS(MinimalAPI)
-class UBCProfanityProxy : public UBCBlueprintCallProxyBase, public IServerCallback
+class UBCProfanityProxy : public UBCBlueprintCallProxyBase
 {
     GENERATED_BODY()
 
-public:
-    UBCProfanityProxy(const FObjectInitializer& ObjectInitializer);
+  public:
+    UBCProfanityProxy(const FObjectInitializer &ObjectInitializer);
 
     /**
     * Checks supplied text for profanity.
@@ -36,7 +35,7 @@ public:
     * 40424 - WebPurify not enabled
     */
     UFUNCTION(BlueprintCallable, meta = (BlueprintInternalUseOnly = "true"), Category = "BrainCloud|Profanity")
-        static UBCProfanityProxy* ProfanityCheck(UBrainCloudWrapper *brainCloudWrapper, const FString& text, const FString& languages, bool flagEmail, bool flagPhone, bool flagUrls);
+    static UBCProfanityProxy *ProfanityCheck(UBrainCloudWrapper *brainCloudWrapper, const FString &text, const FString &languages, bool flagEmail, bool flagPhone, bool flagUrls);
 
     /**
     * Replaces the characters of profanity text with a passed character(s).
@@ -59,7 +58,7 @@ public:
     * 40424 - WebPurify not enabled
     */
     UFUNCTION(BlueprintCallable, meta = (BlueprintInternalUseOnly = "true"), Category = "BrainCloud|Profanity")
-        static UBCProfanityProxy* ProfanityReplaceText(UBrainCloudWrapper *brainCloudWrapper, const FString& text, const FString& replaceSymbol, const FString& languages, bool flagEmail, bool flagPhone, bool flagUrls);
+    static UBCProfanityProxy *ProfanityReplaceText(UBrainCloudWrapper *brainCloudWrapper, const FString &text, const FString &replaceSymbol, const FString &languages, bool flagEmail, bool flagPhone, bool flagUrls);
 
     /**
     * Checks supplied text for profanity and returns a list of bad wors.
@@ -81,18 +80,5 @@ public:
     * 40424 - WebPurify not enabled
     */
     UFUNCTION(BlueprintCallable, meta = (BlueprintInternalUseOnly = "true"), Category = "BrainCloud|Profanity")
-        static UBCProfanityProxy* ProfanityIdentifyBadWords(UBrainCloudWrapper *brainCloudWrapper, const FString& text, const FString& languages, bool flagEmail, bool flagPhone, bool flagUrls);
-
-    //Response delegates
-    UPROPERTY(BlueprintAssignable)
-        FBrainCloudCallbackDelegate OnSuccess;
-
-    UPROPERTY(BlueprintAssignable)
-        FBrainCloudCallbackDelegate OnFailure;
-
-protected:
-    // IServerCallback interface
-    void serverCallback(ServiceName serviceName, ServiceOperation serviceOperation, const FString& jsonData);
-    void serverError(ServiceName serviceName, ServiceOperation serviceOperation, int32 statusCode, int32 reasonCode, const FString& jsonError);
-    // End of IServerCallback interface
+    static UBCProfanityProxy *ProfanityIdentifyBadWords(UBrainCloudWrapper *brainCloud, const FString &text, const FString &languages, bool flagEmail, bool flagPhone, bool flagUrls);
 };

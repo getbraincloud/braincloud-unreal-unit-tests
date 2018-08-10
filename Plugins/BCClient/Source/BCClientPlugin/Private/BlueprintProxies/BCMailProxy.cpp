@@ -33,19 +33,3 @@ UBCMailProxy* UBCMailProxy::SendAdvancedEmailByAddress(UBrainCloudWrapper *brain
 	UBCWrapperProxy::GetBrainCloudInstance(brainCloudWrapper)->getMailService()->sendAdvancedEmailByAddress(emailAddress, jsonServiceParams, Proxy);
 	return Proxy;
 }
-
-//callbacks
-void UBCMailProxy::serverCallback(ServiceName serviceName, ServiceOperation serviceOperation, const FString& jsonData)
-{
-	FBC_ReturnData returnData = FBC_ReturnData(serviceName.getValue(), serviceOperation.getValue(), 200, 0);
-	OnSuccess.Broadcast(jsonData, returnData);
-	ConditionalBeginDestroy();
-}
-
-void UBCMailProxy::serverError(ServiceName serviceName, ServiceOperation serviceOperation, int32 statusCode, int32 reasonCode, const FString& jsonError)
-{
-	FBC_ReturnData returnData = FBC_ReturnData(serviceName.getValue(), serviceOperation.getValue(), statusCode, reasonCode);
-	OnFailure.Broadcast(jsonError, returnData);
-	ConditionalBeginDestroy();
-}
-

@@ -3,18 +3,17 @@
 #pragma once
 
 #include "BCBlueprintCallProxyBase.h"
-#include "IServerCallback.h"
 #include "BCGlobalAppProxy.generated.h"
 
 class ABrainCloud;
 
 UCLASS(MinimalAPI)
-class UBCGlobalAppProxy : public UBCBlueprintCallProxyBase, public IServerCallback
+class UBCGlobalAppProxy : public UBCBlueprintCallProxyBase
 {
     GENERATED_BODY()
 
-public:
-    UBCGlobalAppProxy(const FObjectInitializer& ObjectInitializer);
+  public:
+    UBCGlobalAppProxy(const FObjectInitializer &ObjectInitializer);
 
     /**
     * Read game's global properties
@@ -23,18 +22,5 @@ public:
     * Service Operation - ReadProperties
     */
     UFUNCTION(BlueprintCallable, meta = (BlueprintInternalUseOnly = "true"), Category = "BrainCloud|Global App")
-        static UBCGlobalAppProxy* ReadProperties(UBrainCloudWrapper *brainCloudWrapper);
-
-    //Response delegates
-    UPROPERTY(BlueprintAssignable)
-        FBrainCloudCallbackDelegate OnSuccess;
-
-    UPROPERTY(BlueprintAssignable)
-        FBrainCloudCallbackDelegate OnFailure;
-
-protected:
-    // IServerCallback interface
-    void serverCallback(ServiceName serviceName, ServiceOperation serviceOperation, const FString& jsonData);
-    void serverError(ServiceName serviceName, ServiceOperation serviceOperation, int32 statusCode, int32 reasonCode, const FString& jsonError);
-    // End of IServerCallback interface
+    static UBCGlobalAppProxy *ReadProperties(UBrainCloudWrapper *brainCloud);
 };
