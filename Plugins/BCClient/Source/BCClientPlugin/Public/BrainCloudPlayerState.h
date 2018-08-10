@@ -10,13 +10,13 @@ class BCCLIENTPLUGIN_API BrainCloudPlayerState
     friend class BrainCloudComms;
     friend class BrainCloudComms2;
 
-public:
-    BrainCloudPlayerState(BrainCloudClient* client);
+  public:
+    BrainCloudPlayerState(BrainCloudClient *client);
 
-	/**
+    /**
 	* @deprecated Use readUserState instead - removal after September 1 2017
 	*/
-	void readPlayerState(IServerCallback * callback, const FString& entityTypeFilter = TEXT(""));
+    void readPlayerState(IServerCallback *callback, const FString &entityTypeFilter = TEXT(""));
 
     /**
      * Read the state of the currently logged in user.
@@ -30,12 +30,12 @@ public:
      *
      * @param callback The method to be invoked when the server response is received
      */
-    void readUserState(IServerCallback * callback, const FString& entityTypeFilter = TEXT(""));
+    void readUserState(IServerCallback *callback, const FString &entityTypeFilter = TEXT(""));
 
-	/**
+    /**
 	* @deprecated Use deleteUser instead - removal after September 1 2017
 	*/
-	void deletePlayer(IServerCallback * callback);
+    void deletePlayer(IServerCallback *callback);
 
     /**
      * Completely deletes the user record and all data fully owned
@@ -48,12 +48,12 @@ public:
      *
      * @param callback The method to be invoked when the server response is received
      */
-    void deleteUser(IServerCallback * callback);
+    void deleteUser(IServerCallback *callback);
 
-	/**
+    /**
 	* @deprecated Use resetUserState instead - removal after September 1 2017
 	*/
-	void resetPlayerState(IServerCallback * callback);
+    void resetPlayerState(IServerCallback *callback);
 
     /**
      * This method will delete *most* data for the currently logged in user.
@@ -67,7 +67,7 @@ public:
      *
      * @param callback The method to be invoked when the server response is received
      */
-    void resetUserState(IServerCallback * callback);
+    void resetUserState(IServerCallback *callback);
 
     /**
      * Logs user out of server.
@@ -77,17 +77,17 @@ public:
      *
      * @param callback The method to be invoked when the server response is received
      */
-    void logout(IServerCallback * callback);
+    void logout(IServerCallback *callback);
 
-	/**
+    /**
 	* @deprecated Use updateUserName instead - removal after September 1 2017
 	*/
-	void updatePlayerName(const FString& name, IServerCallback * callback);
+    void updatePlayerName(const FString &name, IServerCallback *callback);
 
     /**
 	* @deprecated Use updateUserName instead
 	*/
-	void updateUserName(const FString& name, IServerCallback * callback);
+    void updateUserName(const FString &name, IServerCallback *callback);
 
     /**
     * Sets the user's name.
@@ -98,7 +98,7 @@ public:
     * @param name The name of the user
     * @param callback The method to be invoked when the server response is received
     */
-    void updateName(const FString& name, IServerCallback * callback);
+    void updateName(const FString &name, IServerCallback *callback);
 
     /**
     * Updates the "friend summary data" associated with the logged in user.
@@ -120,7 +120,7 @@ public:
     * }
     * @param callback Method to be invoked when the server response is received.
     */
-    void updateSummaryFriendData(const FString& jsonSummaryData, IServerCallback * callback);
+    void updateSummaryFriendData(const FString &jsonSummaryData, IServerCallback *callback);
 
     /**
     * Retrieve the user's attributes.
@@ -130,7 +130,7 @@ public:
     *
     * @param callback The method to be invoked when the server response is received
     */
-    void getAttributes(IServerCallback * callback);
+    void getAttributes(IServerCallback *callback);
 
     /**
     * Update user's attributes.
@@ -142,7 +142,7 @@ public:
     * @param wipeExisting Whether to wipe existing attributes prior to update.
     * @param callback The method to be invoked when the server response is received
     */
-    void updateAttributes(const FString& jsonAttributes, bool wipeExisting, IServerCallback * callback);
+    void updateAttributes(const FString &jsonAttributes, bool wipeExisting, IServerCallback *callback);
 
     /**
     * Remove user's attributes.
@@ -153,12 +153,12 @@ public:
     * @param attributeNames Array of attribute names.
     * @param callback The method to be invoked when the server response is received
     */
-    void removeAttributes(const TArray<FString>& attributeNames, IServerCallback * callback);
+    void removeAttributes(const TArray<FString> &attributeNames, IServerCallback *callback);
 
-	/**
+    /**
 	* @deprecated Use updateUserPictureUrl instead - removal after September 1 2017
 	*/
-	void updatePlayerPictureUrl(const FString& pictureUrl, IServerCallback * callback);
+    void updatePlayerPictureUrl(const FString &pictureUrl, IServerCallback *callback);
 
     /**
     * Update user's picture URL.
@@ -169,7 +169,7 @@ public:
     * @param pictureUrl URL to apply
     * @param callback The method to be invoked when the server response is received
     */
-    void updateUserPictureUrl(const FString& pictureUrl, IServerCallback * callback);
+    void updateUserPictureUrl(const FString &pictureUrl, IServerCallback *callback);
 
     /**
     * Update the user's contact email.
@@ -181,23 +181,23 @@ public:
     * @param contactEmail Updated email
     * @param callback The method to be invoked when the server response is received
     */
-    void updateContactEmail(const FString& contactEmail, IServerCallback * callback);
+    void updateContactEmail(const FString &contactEmail, IServerCallback *callback);
 
-	/**
+    /**
 	* @deprecated Use getUserName instead - removal after September 1 2017
 	*/
-	const FString& getPlayerName();
+    const FString &getPlayerName();
 
     /**
     * Gets a cached value of the currently authenticated user's name
     * @returns The cached currently authenticated user's name
     */
-    const FString& getUserName();
+    const FString &getUserName();
 
-protected:
-    void setUserName(const FString& name);
+  protected:
+    void setUserName(const FString &name);
 
-private:
-    BrainCloudClient* _client = nullptr;
+  private:
+    BrainCloudClient *_client = nullptr;
     FString _userName = "";
 };

@@ -3,7 +3,6 @@
 #pragma once
 
 #include "BCBlueprintCallProxyBase.h"
-#include "IServerCallback.h"
 #include "BrainCloudACL.h"
 
 #include "BCWrapperProxy.generated.h"
@@ -12,7 +11,7 @@ class UBrainCloudWrapper;
 class ABrainCloudActor;
 
 UCLASS(BlueprintType)
-class UBCWrapperProxy : public UBCBlueprintCallProxyBase, public IServerCallback
+class UBCWrapperProxy : public UBCBlueprintCallProxyBase
 {
   GENERATED_BODY()
 
@@ -381,18 +380,5 @@ public:
 	*
 	* @param brainCloud - An actor that contains its own instance of the brainCloud Wrapper
 	*/
-  static UBrainCloudWrapper *GetBrainCloudInstance(UBrainCloudWrapper *brainCloudWrapper);
-
-  //Response delegates
-  UPROPERTY(BlueprintAssignable)
-  FBrainCloudCallbackDelegate OnSuccess;
-
-  UPROPERTY(BlueprintAssignable)
-  FBrainCloudCallbackDelegate OnFailure;
-
-protected:
-  // IServerCallback interface
-  void serverCallback(ServiceName serviceName, ServiceOperation serviceOperation, const FString &jsonData);
-  void serverError(ServiceName serviceName, ServiceOperation serviceOperation, int32 statusCode, int32 reasonCode, const FString &jsonError);
-  // End of IServerCallback interface
+  static BrainCloudWrapper *GetBrainCloudInstance(UBrainCloudWrapper *brainCloud);
 };

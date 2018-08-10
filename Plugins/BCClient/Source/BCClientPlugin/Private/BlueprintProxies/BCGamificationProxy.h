@@ -3,18 +3,17 @@
 #pragma once
 
 #include "BCBlueprintCallProxyBase.h"
-#include "IServerCallback.h"
 #include "BCGamificationProxy.generated.h"
 
 class ABrainCloud;
 
 UCLASS(MinimalAPI)
-class UBCGamificationProxy : public UBCBlueprintCallProxyBase, public IServerCallback
+class UBCGamificationProxy : public UBCBlueprintCallProxyBase
 {
     GENERATED_BODY()
 
-public:
-    UBCGamificationProxy(const FObjectInitializer& ObjectInitializer);
+  public:
+    UBCGamificationProxy(const FObjectInitializer &ObjectInitializer);
 
     /**
     * Method retrieves all gamification data for the player.
@@ -23,7 +22,7 @@ public:
     * Service Operation - Read
     */
     UFUNCTION(BlueprintCallable, meta = (BlueprintInternalUseOnly = "true"), Category = "BrainCloud|Gamification")
-        static UBCGamificationProxy* ReadAllGamification(UBrainCloudWrapper *brainCloudWrapper, bool includeMetaData = false);
+    static UBCGamificationProxy *ReadAllGamification(UBrainCloudWrapper *brainCloudWrapper, bool includeMetaData = false);
 
     /**
     * Method retrieves all milestones defined for the game.
@@ -32,7 +31,7 @@ public:
     * Service Operation - ReadMilestones
     */
     UFUNCTION(BlueprintCallable, meta = (BlueprintInternalUseOnly = "true"), Category = "BrainCloud|Gamification")
-        static UBCGamificationProxy* ReadMilestones(UBrainCloudWrapper *brainCloudWrapper, bool includeMetaData = false);
+    static UBCGamificationProxy *ReadMilestones(UBrainCloudWrapper *brainCloudWrapper, bool includeMetaData = false);
 
     /**
     * Read all of the achievements defined for the game.
@@ -41,7 +40,7 @@ public:
     * Service Operation - ReadAchievements
     */
     UFUNCTION(BlueprintCallable, meta = (BlueprintInternalUseOnly = "true"), Category = "BrainCloud|Gamification")
-        static UBCGamificationProxy* ReadAchievements(UBrainCloudWrapper *brainCloudWrapper, bool includeMetaData = false);
+    static UBCGamificationProxy *ReadAchievements(UBrainCloudWrapper *brainCloudWrapper, bool includeMetaData = false);
 
     /**
     * Method returns all defined xp levels and any rewards associated
@@ -51,7 +50,7 @@ public:
     * Service Operation - ReadXpLevels
     */
     UFUNCTION(BlueprintCallable, meta = (BlueprintInternalUseOnly = "true"), Category = "BrainCloud|Gamification")
-        static UBCGamificationProxy* ReadXpLevelsMetaData(UBrainCloudWrapper *brainCloudWrapper);
+    static UBCGamificationProxy *ReadXpLevelsMetaData(UBrainCloudWrapper *brainCloudWrapper);
 
     /**
     * Method retrives the list of achieved achievements.
@@ -60,7 +59,7 @@ public:
     * Service Operation - ReadAchievedAchievements
     */
     UFUNCTION(BlueprintCallable, meta = (BlueprintInternalUseOnly = "true"), Category = "BrainCloud|Gamification")
-        static UBCGamificationProxy* ReadAchievedAchievements(UBrainCloudWrapper *brainCloudWrapper, bool includeMetaData = false);
+    static UBCGamificationProxy *ReadAchievedAchievements(UBrainCloudWrapper *brainCloudWrapper, bool includeMetaData = false);
 
     /**
     * Method retrieves the list of completed milestones.
@@ -69,7 +68,7 @@ public:
     * Service Operation - ReadCompleteMilestones
     */
     UFUNCTION(BlueprintCallable, meta = (BlueprintInternalUseOnly = "true"), Category = "BrainCloud|Gamification")
-        static UBCGamificationProxy* ReadCompletedMilestones(UBrainCloudWrapper *brainCloudWrapper, bool includeMetaData = false);
+    static UBCGamificationProxy *ReadCompletedMilestones(UBrainCloudWrapper *brainCloudWrapper, bool includeMetaData = false);
 
     /**
     * Method retrieves the list of in progress milestones
@@ -78,7 +77,7 @@ public:
     * Service Operation - ReadInProgressMilestones
     */
     UFUNCTION(BlueprintCallable, meta = (BlueprintInternalUseOnly = "true"), Category = "BrainCloud|Gamification")
-        static UBCGamificationProxy* ReadInProgressMilestones(UBrainCloudWrapper *brainCloudWrapper, bool includeMetaData = false);
+    static UBCGamificationProxy *ReadInProgressMilestones(UBrainCloudWrapper *brainCloudWrapper, bool includeMetaData = false);
 
     /**
     * Method retrieves milestones of the given category.
@@ -89,7 +88,7 @@ public:
     * Param - category The milestone category
     */
     UFUNCTION(BlueprintCallable, meta = (BlueprintInternalUseOnly = "true"), Category = "BrainCloud|Gamification")
-        static UBCGamificationProxy* ReadMilestonesByCategory(UBrainCloudWrapper *brainCloudWrapper, FString category, bool includeMetaData = false);
+    static UBCGamificationProxy *ReadMilestonesByCategory(UBrainCloudWrapper *brainCloudWrapper, FString category, bool includeMetaData = false);
 
     /**
     * Method will award the achievements specified. On success, this will
@@ -102,7 +101,7 @@ public:
     * Param - achievementIds A comma separated list of achievement ids to award
     */
     UFUNCTION(BlueprintCallable, meta = (BlueprintInternalUseOnly = "true"), Category = "BrainCloud|Gamification")
-        static UBCGamificationProxy* AwardAchievements(UBrainCloudWrapper *brainCloudWrapper, const TArray<FString>& achievements);
+    static UBCGamificationProxy *AwardAchievements(UBrainCloudWrapper *brainCloudWrapper, const TArray<FString> &achievements);
 
     /**
     * Resets the specified milestones' statuses to LOCKED.
@@ -113,7 +112,7 @@ public:
     * Param - milestoneIds List of milestones to reset
     */
     UFUNCTION(BlueprintCallable, meta = (BlueprintInternalUseOnly = "true"), Category = "BrainCloud|Gamification")
-        static UBCGamificationProxy* ResetMilestones(UBrainCloudWrapper *brainCloudWrapper, const TArray<FString>& milestoneIds);
+    static UBCGamificationProxy *ResetMilestones(UBrainCloudWrapper *brainCloudWrapper, const TArray<FString> &milestoneIds);
 
     /**
     * Method retrieves all of the quests defined for the game.
@@ -122,7 +121,7 @@ public:
     * Service Operation - ReadQuests
     */
     UFUNCTION(BlueprintCallable, meta = (BlueprintInternalUseOnly = "true"), Category = "BrainCloud|Gamification")
-        static UBCGamificationProxy* ReadQuests(UBrainCloudWrapper *brainCloudWrapper, bool includeMetaData = false);
+    static UBCGamificationProxy *ReadQuests(UBrainCloudWrapper *brainCloudWrapper, bool includeMetaData = false);
 
     /**
     *  Method returns all completed quests.
@@ -131,7 +130,7 @@ public:
     * Service Operation - ReadCompletedQuests
     */
     UFUNCTION(BlueprintCallable, meta = (BlueprintInternalUseOnly = "true"), Category = "BrainCloud|Gamification")
-        static UBCGamificationProxy* ReadCompletedQuests(UBrainCloudWrapper *brainCloudWrapper, bool includeMetaData = false);
+    static UBCGamificationProxy *ReadCompletedQuests(UBrainCloudWrapper *brainCloudWrapper, bool includeMetaData = false);
 
     /**
     *  Method returns quests that are in progress.
@@ -140,7 +139,7 @@ public:
     * Service Operation - ReadInProgressQuests
     */
     UFUNCTION(BlueprintCallable, meta = (BlueprintInternalUseOnly = "true"), Category = "BrainCloud|Gamification")
-        static UBCGamificationProxy* ReadInProgressQuests(UBrainCloudWrapper *brainCloudWrapper, bool includeMetaData = false);
+    static UBCGamificationProxy *ReadInProgressQuests(UBrainCloudWrapper *brainCloudWrapper, bool includeMetaData = false);
 
     /**
     *  Method returns quests that have not been started.
@@ -149,7 +148,7 @@ public:
     * Service Operation - ReadNotStartedQuests
     */
     UFUNCTION(BlueprintCallable, meta = (BlueprintInternalUseOnly = "true"), Category = "BrainCloud|Gamification")
-        static UBCGamificationProxy* ReadNotStartedQuests(UBrainCloudWrapper *brainCloudWrapper, bool includeMetaData = false);
+    static UBCGamificationProxy *ReadNotStartedQuests(UBrainCloudWrapper *brainCloudWrapper, bool includeMetaData = false);
 
     /**
     *  Method returns quests with a status.
@@ -158,7 +157,7 @@ public:
     * Service Operation - ReadQuestsWithStatus
     */
     UFUNCTION(BlueprintCallable, meta = (BlueprintInternalUseOnly = "true"), Category = "BrainCloud|Gamification")
-        static UBCGamificationProxy* ReadQuestsWithStatus(UBrainCloudWrapper *brainCloudWrapper, bool includeMetaData = false);
+    static UBCGamificationProxy *ReadQuestsWithStatus(UBrainCloudWrapper *brainCloudWrapper, bool includeMetaData = false);
 
     /**
     *  Method returns quests with a basic percentage.
@@ -167,7 +166,7 @@ public:
     * Service Operation - ReadQuestsWithBasicPercentage
     */
     UFUNCTION(BlueprintCallable, meta = (BlueprintInternalUseOnly = "true"), Category = "BrainCloud|Gamification")
-        static UBCGamificationProxy* ReadQuestsWithBasicPercentage(UBrainCloudWrapper *brainCloudWrapper, bool includeMetaData = false);
+    static UBCGamificationProxy *ReadQuestsWithBasicPercentage(UBrainCloudWrapper *brainCloudWrapper, bool includeMetaData = false);
 
     /**
     *  Method returns quests with a complex percentage.
@@ -176,7 +175,7 @@ public:
     * Service Operation - ReadQuestsWithComplexPercentage
     */
     UFUNCTION(BlueprintCallable, meta = (BlueprintInternalUseOnly = "true"), Category = "BrainCloud|Gamification")
-        static UBCGamificationProxy* ReadQuestsWithComplexPercentage(UBrainCloudWrapper *brainCloudWrapper, bool includeMetaData = false);
+    static UBCGamificationProxy *ReadQuestsWithComplexPercentage(UBrainCloudWrapper *brainCloudWrapper, bool includeMetaData = false);
 
     /**
     * Method returns quests for the given category.
@@ -187,18 +186,5 @@ public:
     * Param - category The quest category
     */
     UFUNCTION(BlueprintCallable, meta = (BlueprintInternalUseOnly = "true"), Category = "BrainCloud|Gamification")
-        static UBCGamificationProxy* ReadQuestsByCategory(UBrainCloudWrapper *brainCloudWrapper, FString category, bool includeMetaData = false);
-
-    //Response delegates
-    UPROPERTY(BlueprintAssignable)
-        FBrainCloudCallbackDelegate OnSuccess;
-
-    UPROPERTY(BlueprintAssignable)
-        FBrainCloudCallbackDelegate OnFailure;
-
-protected:
-    // IServerCallback interface
-    void serverCallback(ServiceName serviceName, ServiceOperation serviceOperation, const FString& jsonData);
-    void serverError(ServiceName serviceName, ServiceOperation serviceOperation, int32 statusCode, int32 reasonCode, const FString& jsonError);
-    // End of IServerCallback interface
+    static UBCGamificationProxy *ReadQuestsByCategory(UBrainCloudWrapper *brainCloud, FString category, bool includeMetaData = false);
 };

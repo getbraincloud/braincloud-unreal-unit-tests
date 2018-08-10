@@ -3,13 +3,12 @@
 #pragma once
 
 #include "BCBlueprintCallProxyBase.h"
-#include "IServerCallback.h"
 #include "BCChatProxy.generated.h"
 
 class ABrainCloud;
 
 UCLASS(MinimalAPI)
-class UBCChatProxy : public UBCBlueprintCallProxyBase, public IServerCallback
+class UBCChatProxy : public UBCBlueprintCallProxyBase
 {
 	GENERATED_BODY()
 
@@ -167,17 +166,4 @@ class UBCChatProxy : public UBCBlueprintCallProxyBase, public IServerCallback
 	UFUNCTION(BlueprintCallable, meta = (BlueprintInternalUseOnly = "true"), Category = "BrainCloud|Chat")
 	static UBCChatProxy *UpdateChatMessage(ABrainCloudActor *brainCloud, const FString &in_channelId, const FString &in_messageId, int32 in_version,
 										   const FString &in_plain, const FString &in_jsonRich);
-
-	//Response delegates
-	UPROPERTY(BlueprintAssignable)
-	FBrainCloudCallbackDelegate OnSuccess;
-
-	UPROPERTY(BlueprintAssignable)
-	FBrainCloudCallbackDelegate OnFailure;
-
-  protected:
-	// IServerCallback interface
-	void serverCallback(ServiceName serviceName, ServiceOperation serviceOperation, const FString &jsonData);
-	void serverError(ServiceName serviceName, ServiceOperation serviceOperation, int32 statusCode, int32 reasonCode, const FString &jsonError);
-	// End of IServerCallback interface
 };

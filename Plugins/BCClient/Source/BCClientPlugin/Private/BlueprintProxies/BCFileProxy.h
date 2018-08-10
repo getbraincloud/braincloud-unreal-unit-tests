@@ -3,11 +3,10 @@
 #pragma once
 
 #include "BCBlueprintCallProxyBase.h"
-#include "IServerCallback.h"
 #include "BCFileProxy.generated.h"
 
 UCLASS(MinimalAPI)
-class UBCFileProxy : public UBCBlueprintCallProxyBase, public IServerCallback
+class UBCFileProxy : public UBCBlueprintCallProxyBase
 {
     GENERATED_BODY()
 
@@ -129,16 +128,4 @@ public:
     UFUNCTION(BlueprintCallable, Category = "BrainCloud|File")
         static int32 GetUploadTotalBytesToTransfer(UBrainCloudWrapper *brainCloudWrapper, const FString& uploadId);
 
-    //Response delegates
-    UPROPERTY(BlueprintAssignable)
-        FBrainCloudCallbackDelegate OnSuccess;
-
-    UPROPERTY(BlueprintAssignable)
-        FBrainCloudCallbackDelegate OnFailure;
-
-protected:
-    // IServerCallback interface
-    void serverCallback(ServiceName serviceName, ServiceOperation serviceOperation, const FString& jsonData);
-    void serverError(ServiceName serviceName, ServiceOperation serviceOperation, int32 statusCode, int32 reasonCode, const FString& jsonError);
-    // End of IServerCallback interface
 };
