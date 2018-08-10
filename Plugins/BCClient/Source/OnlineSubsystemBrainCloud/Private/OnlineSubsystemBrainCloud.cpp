@@ -288,7 +288,7 @@ void FOnlineSubsystemBrainCloud::CleanupCallbackObjects()
 
 		if (_activeCallbacks[i]->IsComplete())
 		{
-			delete(_activeCallbacks[i]);
+			//delete(_activeCallbacks[i]);
 			_activeCallbacks[i] = nullptr;
 			_activeCallbacks.RemoveAt(i);
 		}
