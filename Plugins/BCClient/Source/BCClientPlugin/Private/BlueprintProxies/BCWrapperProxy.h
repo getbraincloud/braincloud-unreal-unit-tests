@@ -380,5 +380,5 @@ public:
 	*
 	* @param brainCloud - An actor that contains its own instance of the brainCloud Wrapper
 	*/
-  static BrainCloudWrapper *GetBrainCloudInstance(UBrainCloudWrapper *brainCloud);
+  static UBrainCloudWrapper *GetBrainCloudInstance(UBrainCloudWrapper *brainCloud);
 };

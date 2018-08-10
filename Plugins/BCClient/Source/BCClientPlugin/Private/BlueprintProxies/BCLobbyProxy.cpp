@@ -13,7 +13,7 @@ UBCLobbyProxy::UBCLobbyProxy(const FObjectInitializer &ObjectInitializer)
 {
 }
 
-UBCLobbyProxy *UBCLobbyProxy::FindLobby(ABrainCloudActor *brainCloud, const FString &in_roomType, int32 in_rating, int32 in_maxSteps,
+UBCLobbyProxy *UBCLobbyProxy::FindLobby(UBrainCloudWrapper *brainCloud, const FString &in_roomType, int32 in_rating, int32 in_maxSteps,
 										const FString &in_algoJson, const FString &in_filterJson, int32 in_timeoutSecs,
 										bool in_isReady, const FString &in_extraJson, const FString &in_teamCode, const TArray<FString> &in_otherUserCxIds)
 {
@@ -22,7 +22,7 @@ UBCLobbyProxy *UBCLobbyProxy::FindLobby(ABrainCloudActor *brainCloud, const FStr
 	return Proxy;
 }
 
-UBCLobbyProxy *UBCLobbyProxy::CreateLobby(ABrainCloudActor *brainCloud, const FString &in_roomType, int32 in_rating, int32 in_maxSteps,
+UBCLobbyProxy *UBCLobbyProxy::CreateLobby(UBrainCloudWrapper *brainCloud, const FString &in_roomType, int32 in_rating, int32 in_maxSteps,
 										  bool in_isReady, const FString &in_extraJson, const FString &in_teamCode,
 										  const FString &in_configJson, const TArray<FString> &in_otherUserCxIds)
 {
@@ -31,7 +31,7 @@ UBCLobbyProxy *UBCLobbyProxy::CreateLobby(ABrainCloudActor *brainCloud, const FS
 	return Proxy;
 }
 
-UBCLobbyProxy *UBCLobbyProxy::FindOrCreateLobby(ABrainCloudActor *brainCloud, const FString &in_roomType, int32 in_rating, int32 in_maxSteps,
+UBCLobbyProxy *UBCLobbyProxy::FindOrCreateLobby(UBrainCloudWrapper *brainCloud, const FString &in_roomType, int32 in_rating, int32 in_maxSteps,
 												const FString &in_algoJson, const FString &in_filterJson, int32 in_timeoutSecs,
 												bool in_isReady, const FString &in_extraJson, const FString &in_teamCode,
 												const FString &in_configJson, const TArray<FString> &in_otherUserCxIds)
@@ -41,14 +41,14 @@ UBCLobbyProxy *UBCLobbyProxy::FindOrCreateLobby(ABrainCloudActor *brainCloud, co
 	return Proxy;
 }
 
-UBCLobbyProxy *UBCLobbyProxy::GetLobbyData(ABrainCloudActor *brainCloud, const FString &in_lobbyID)
+UBCLobbyProxy *UBCLobbyProxy::GetLobbyData(UBrainCloudWrapper *brainCloud, const FString &in_lobbyID)
 {
 	UBCLobbyProxy *Proxy = NewObject<UBCLobbyProxy>();
 	UBCWrapperProxy::GetBrainCloudInstance(brainCloud)->getLobbyService()->getLobbyData(in_lobbyID, Proxy);
 	return Proxy;
 }
 
-UBCLobbyProxy *UBCLobbyProxy::UpdateReady(ABrainCloudActor *brainCloud, const FString &in_lobbyID, bool in_isReady,
+UBCLobbyProxy *UBCLobbyProxy::UpdateReady(UBrainCloudWrapper *brainCloud, const FString &in_lobbyID, bool in_isReady,
                                       const FString &in_extraJson)
 {
 	UBCLobbyProxy *Proxy = NewObject<UBCLobbyProxy>();
@@ -56,28 +56,28 @@ UBCLobbyProxy *UBCLobbyProxy::UpdateReady(ABrainCloudActor *brainCloud, const FS
 	return Proxy;
 }
 
-UBCLobbyProxy *UBCLobbyProxy::SwitchTeam(ABrainCloudActor *brainCloud, const FString &in_lobbyID, const FString &in_teamCode)
+UBCLobbyProxy *UBCLobbyProxy::SwitchTeam(UBrainCloudWrapper *brainCloud, const FString &in_lobbyID, const FString &in_teamCode)
 {
 	UBCLobbyProxy *Proxy = NewObject<UBCLobbyProxy>();
 	UBCWrapperProxy::GetBrainCloudInstance(brainCloud)->getLobbyService()->switchTeam(in_lobbyID, in_teamCode, Proxy);
 	return Proxy;
 }
 
-UBCLobbyProxy *UBCLobbyProxy::SendSignal(ABrainCloudActor *brainCloud, const FString &in_lobbyID, const FString &in_signalJson)
+UBCLobbyProxy *UBCLobbyProxy::SendSignal(UBrainCloudWrapper *brainCloud, const FString &in_lobbyID, const FString &in_signalJson)
 {
 	UBCLobbyProxy *Proxy = NewObject<UBCLobbyProxy>();
 	UBCWrapperProxy::GetBrainCloudInstance(brainCloud)->getLobbyService()->sendSignal(in_lobbyID, in_signalJson, Proxy);
 	return Proxy;
 }
 
-UBCLobbyProxy *UBCLobbyProxy::LeaveLobby(ABrainCloudActor *brainCloud, const FString &in_lobbyID)
+UBCLobbyProxy *UBCLobbyProxy::LeaveLobby(UBrainCloudWrapper *brainCloud, const FString &in_lobbyID)
 {
 	UBCLobbyProxy *Proxy = NewObject<UBCLobbyProxy>();
 	UBCWrapperProxy::GetBrainCloudInstance(brainCloud)->getLobbyService()->leaveLobby(in_lobbyID, Proxy);
 	return Proxy;
 }
 
-UBCLobbyProxy *UBCLobbyProxy::RemoveMember(ABrainCloudActor *brainCloud, const FString &in_lobbyID, const FString &in_connectionId)
+UBCLobbyProxy *UBCLobbyProxy::RemoveMember(UBrainCloudWrapper *brainCloud, const FString &in_lobbyID, const FString &in_connectionId)
 {
 	UBCLobbyProxy *Proxy = NewObject<UBCLobbyProxy>();
 	UBCWrapperProxy::GetBrainCloudInstance(brainCloud)->getLobbyService()->removeMember(in_lobbyID, in_connectionId, Proxy);
