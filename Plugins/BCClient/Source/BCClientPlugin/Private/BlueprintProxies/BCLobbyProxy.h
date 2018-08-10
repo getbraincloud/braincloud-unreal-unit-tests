@@ -33,7 +33,7 @@ class UBCLobbyProxy : public UBCBlueprintCallProxyBase
     * @param in_otherUserCxIds array of other user Connection Ids to bring when the lobby is found
     */
     UFUNCTION(BlueprintCallable, meta = (BlueprintInternalUseOnly = "true"), Category = "BrainCloud|Lobby")
-    static UBCLobbyProxy *FindLobby(ABrainCloudActor *brainCloud, const FString &in_roomType, int32 in_rating, int32 in_maxSteps,
+    static UBCLobbyProxy *FindLobby(UBrainCloudWrapper *brainCloud, const FString &in_roomType, int32 in_rating, int32 in_maxSteps,
                                     const FString &in_algoJson, const FString &in_filterJson, int32 in_timeoutSecs,
                                     bool in_isReady, const FString &in_extraJson, const FString &in_teamCode, const TArray<FString> &in_otherUserCxIds);
 
@@ -53,7 +53,7 @@ class UBCLobbyProxy : public UBCBlueprintCallProxyBase
     * @param in_otherUserCxIds array of other user Connection Ids to bring when the lobby is found
     */
     UFUNCTION(BlueprintCallable, meta = (BlueprintInternalUseOnly = "true"), Category = "BrainCloud|Lobby")
-    static UBCLobbyProxy *CreateLobby(ABrainCloudActor *brainCloud, const FString &in_roomType, int32 in_rating, int32 in_maxSteps,
+    static UBCLobbyProxy *CreateLobby(UBrainCloudWrapper *brainCloud, const FString &in_roomType, int32 in_rating, int32 in_maxSteps,
                                       bool in_isReady, const FString &in_extraJson, const FString &in_teamCode,
                                       const FString &in_configJson, const TArray<FString> &in_otherUserCxIds);
 
@@ -76,7 +76,7 @@ class UBCLobbyProxy : public UBCBlueprintCallProxyBase
     * @param in_otherUserCxIds array of other user Connection Ids to bring when the lobby is found
     */
     UFUNCTION(BlueprintCallable, meta = (BlueprintInternalUseOnly = "true"), Category = "BrainCloud|Lobby")
-    static UBCLobbyProxy *FindOrCreateLobby(ABrainCloudActor *brainCloud, const FString &in_roomType, int32 in_rating, int32 in_maxSteps,
+    static UBCLobbyProxy *FindOrCreateLobby(UBrainCloudWrapper *brainCloud, const FString &in_roomType, int32 in_rating, int32 in_maxSteps,
                                             const FString &in_algoJson, const FString &in_filterJson, int32 in_timeoutSecs,
                                             bool in_isReady, const FString &in_extraJson, const FString &in_teamCode,
                                             const FString &in_configJson, const TArray<FString> &in_otherUserCxIds);
@@ -90,7 +90,7 @@ class UBCLobbyProxy : public UBCBlueprintCallProxyBase
     * @param in_lobbyID the lobbyId
     */
     UFUNCTION(BlueprintCallable, meta = (BlueprintInternalUseOnly = "true"), Category = "BrainCloud|Lobby")
-    static UBCLobbyProxy *GetLobbyData(ABrainCloudActor *brainCloud, const FString &in_lobbyID);
+    static UBCLobbyProxy *GetLobbyData(UBrainCloudWrapper *brainCloud, const FString &in_lobbyID);
 
     /**
     * Updates the ready state of the player
@@ -103,7 +103,7 @@ class UBCLobbyProxy : public UBCBlueprintCallProxyBase
     * @param in_extraJson json string for extra customization 
     */
     UFUNCTION(BlueprintCallable, meta = (BlueprintInternalUseOnly = "true"), Category = "BrainCloud|Lobby")
-    static UBCLobbyProxy *UpdateReady(ABrainCloudActor *brainCloud, const FString &in_lobbyID, bool in_isReady,
+    static UBCLobbyProxy *UpdateReady(UBrainCloudWrapper *brainCloud, const FString &in_lobbyID, bool in_isReady,
                                       const FString &in_extraJson);
 
     /**
@@ -116,7 +116,7 @@ class UBCLobbyProxy : public UBCBlueprintCallProxyBase
     * @param in_teamCode team code
     */
     UFUNCTION(BlueprintCallable, meta = (BlueprintInternalUseOnly = "true"), Category = "BrainCloud|Lobby")
-    static UBCLobbyProxy *SwitchTeam(ABrainCloudActor *brainCloud, const FString &in_lobbyID, const FString &in_teamCode);
+    static UBCLobbyProxy *SwitchTeam(UBrainCloudWrapper *brainCloud, const FString &in_lobbyID, const FString &in_teamCode);
 
     /**
     * Sends LOBBY_SIGNAL_DATA message to all lobby members
@@ -127,7 +127,7 @@ class UBCLobbyProxy : public UBCBlueprintCallProxyBase
     * @param in_lobbyID the lobbyId
     * @param in_signalJson customizeable json string attached to signal to lobby members
     */
-    static UBCLobbyProxy *SendSignal(ABrainCloudActor *brainCloud, const FString &in_lobbyID, const FString &in_signalJson);
+    static UBCLobbyProxy *SendSignal(UBrainCloudWrapper *brainCloud, const FString &in_lobbyID, const FString &in_signalJson);
 
     /**
     * User leaves the specified lobby. if the user was the owner, a new owner will be chosen
@@ -137,7 +137,7 @@ class UBCLobbyProxy : public UBCBlueprintCallProxyBase
     *
     * @param in_lobbyID the lobbyId
     */
-    static UBCLobbyProxy *LeaveLobby(ABrainCloudActor *brainCloud, const FString &in_lobbyID);
+    static UBCLobbyProxy *LeaveLobby(UBrainCloudWrapper *brainCloud, const FString &in_lobbyID);
 
     /**
     *  Only valid from the owner of the lobby -- removes the specified member from the lobby
@@ -148,5 +148,5 @@ class UBCLobbyProxy : public UBCBlueprintCallProxyBase
     * @param in_lobbyID the lobbyId
     * @param in_connectionId connectionId (cxId) of member to remove
     */
-    static UBCLobbyProxy *RemoveMember(ABrainCloudActor *brainCloud, const FString &in_lobbyID, const FString &in_connectionId);
+    static UBCLobbyProxy *RemoveMember(UBrainCloudWrapper *brainCloud, const FString &in_lobbyID, const FString &in_connectionId);
 };

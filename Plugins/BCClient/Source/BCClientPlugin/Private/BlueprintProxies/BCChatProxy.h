@@ -27,7 +27,7 @@ class UBCChatProxy : public UBCBlueprintCallProxyBase
 	* @param in_callback Method to be invoked when the server response is received.
     */
 	UFUNCTION(BlueprintCallable, meta = (BlueprintInternalUseOnly = "true"), Category = "BrainCloud|Chat")
-	static UBCChatProxy *ChannelConnect(ABrainCloudActor *brainCloud, const FString &in_channelId, int32 in_maxToReturn);
+	static UBCChatProxy *ChannelConnect(UBrainCloudWrapper *brainCloud, const FString &in_channelId, int32 in_maxToReturn);
 
 	/**
     * Unregisters a listener for incoming events from <channelId>.
@@ -39,7 +39,7 @@ class UBCChatProxy : public UBCBlueprintCallProxyBase
 	* @param in_callback Method to be invoked when the server response is received.
     */
 	UFUNCTION(BlueprintCallable, meta = (BlueprintInternalUseOnly = "true"), Category = "BrainCloud|Chat")
-	static UBCChatProxy *ChannelDisconnect(ABrainCloudActor *brainCloud, const FString &in_channelId);
+	static UBCChatProxy *ChannelDisconnect(UBrainCloudWrapper *brainCloud, const FString &in_channelId);
 
 	/**
     * Delete a chat message. <version> 
@@ -53,7 +53,7 @@ class UBCChatProxy : public UBCBlueprintCallProxyBase
 	* @param in_callback Method to be invoked when the server response is received.
     */
 	UFUNCTION(BlueprintCallable, meta = (BlueprintInternalUseOnly = "true"), Category = "BrainCloud|Chat")
-	static UBCChatProxy *DeleteChatMessage(ABrainCloudActor *brainCloud, const FString &in_channelId, const FString &in_messageId, int32 in_version);
+	static UBCChatProxy *DeleteChatMessage(UBrainCloudWrapper *brainCloud, const FString &in_channelId, const FString &in_messageId, int32 in_version);
 
 	/**
     * Gets the channelId for the given <channelType> and <channelSubId>. .
@@ -66,7 +66,7 @@ class UBCChatProxy : public UBCBlueprintCallProxyBase
 	* @param in_callback Method to be invoked when the server response is received.
     */
 	UFUNCTION(BlueprintCallable, meta = (BlueprintInternalUseOnly = "true"), Category = "BrainCloud|Chat")
-	static UBCChatProxy *GetChannelId(ABrainCloudActor *brainCloud, const FString &in_channelType, const FString &in_channelSubId);
+	static UBCChatProxy *GetChannelId(UBrainCloudWrapper *brainCloud, const FString &in_channelType, const FString &in_channelSubId);
 
 	/**
     * Gets description info and activity stats for channel <channelId>.
@@ -80,7 +80,7 @@ class UBCChatProxy : public UBCBlueprintCallProxyBase
 	* @param in_callback Method to be invoked when the server response is received.
     */
 	UFUNCTION(BlueprintCallable, meta = (BlueprintInternalUseOnly = "true"), Category = "BrainCloud|Chat")
-	static UBCChatProxy *GetChannelInfo(ABrainCloudActor *brainCloud, const FString &in_channelId);
+	static UBCChatProxy *GetChannelInfo(UBrainCloudWrapper *brainCloud, const FString &in_channelId);
 
 	/**
     * Gets a populated chat object (normally for editing).
@@ -93,7 +93,7 @@ class UBCChatProxy : public UBCBlueprintCallProxyBase
 	* @param in_callback Method to be invoked when the server response is received.
     */
 	UFUNCTION(BlueprintCallable, meta = (BlueprintInternalUseOnly = "true"), Category = "BrainCloud|Chat")
-	static UBCChatProxy *GetChatMessage(ABrainCloudActor *brainCloud, const FString &in_channelId, const FString &in_messageId);
+	static UBCChatProxy *GetChatMessage(UBrainCloudWrapper *brainCloud, const FString &in_channelId, const FString &in_messageId);
 
 	/**
     * Get a list of <maxReturn> messages from history of channel <channelId>
@@ -106,7 +106,7 @@ class UBCChatProxy : public UBCBlueprintCallProxyBase
 	* @param in_callback Method to be invoked when the server response is received.
     */
 	UFUNCTION(BlueprintCallable, meta = (BlueprintInternalUseOnly = "true"), Category = "BrainCloud|Chat")
-	static UBCChatProxy *GetRecentChatMessages(ABrainCloudActor *brainCloud, const FString &in_channelId, int32 in_maxToReturn);
+	static UBCChatProxy *GetRecentChatMessages(UBrainCloudWrapper *brainCloud, const FString &in_channelId, int32 in_maxToReturn);
 
 	/**
     * Gets a list of the channels of type <channelType> that the user has access to.
@@ -118,7 +118,7 @@ class UBCChatProxy : public UBCBlueprintCallProxyBase
 	* @param in_callback Method to be invoked when the server response is received.
     */
 	UFUNCTION(BlueprintCallable, meta = (BlueprintInternalUseOnly = "true"), Category = "BrainCloud|Chat")
-	static UBCChatProxy *GetSubscribedChannels(ABrainCloudActor *brainCloud, const FString &in_channelType);
+	static UBCChatProxy *GetSubscribedChannels(UBrainCloudWrapper *brainCloud, const FString &in_channelType);
 
 	/**
     * Send a potentially rich chat message.
@@ -133,7 +133,7 @@ class UBCChatProxy : public UBCBlueprintCallProxyBase
 	* @param in_callback Method to be invoked when the server response is received.
     */
 	UFUNCTION(BlueprintCallable, meta = (BlueprintInternalUseOnly = "true"), Category = "BrainCloud|Chat")
-	static UBCChatProxy *PostChatMessage(ABrainCloudActor *brainCloud, const FString &in_channelId, const FString &in_plain, const FString &in_jsonRich, bool in_recordInHistory);
+	static UBCChatProxy *PostChatMessage(UBrainCloudWrapper *brainCloud, const FString &in_channelId, const FString &in_plain, const FString &in_jsonRich, bool in_recordInHistory);
 
 	/**
     * Sends a plain-text chat message.
@@ -147,7 +147,7 @@ class UBCChatProxy : public UBCBlueprintCallProxyBase
 	* @param in_callback Method to be invoked when the server response is received.
     */
 	UFUNCTION(BlueprintCallable, meta = (BlueprintInternalUseOnly = "true"), Category = "BrainCloud|Chat")
-	static UBCChatProxy *PostChatMessageSimple(ABrainCloudActor *brainCloud, const FString &in_channelId, const FString &in_plain, bool in_recordInHistory);
+	static UBCChatProxy *PostChatMessageSimple(UBrainCloudWrapper *brainCloud, const FString &in_channelId, const FString &in_plain, bool in_recordInHistory);
 
 	/**
     * Update a chat message. <content> must contain at least a "plain" field for plain-text messaging. <version> must match the latest or pass -1 to bypass version check.
@@ -164,6 +164,6 @@ class UBCChatProxy : public UBCBlueprintCallProxyBase
 	* @param in_callback Method to be invoked when the server response is received.
     */
 	UFUNCTION(BlueprintCallable, meta = (BlueprintInternalUseOnly = "true"), Category = "BrainCloud|Chat")
-	static UBCChatProxy *UpdateChatMessage(ABrainCloudActor *brainCloud, const FString &in_channelId, const FString &in_messageId, int32 in_version,
+	static UBCChatProxy *UpdateChatMessage(UBrainCloudWrapper *brainCloud, const FString &in_channelId, const FString &in_messageId, int32 in_version,
 										   const FString &in_plain, const FString &in_jsonRich);
 };
