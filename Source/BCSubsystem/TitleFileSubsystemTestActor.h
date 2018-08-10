@@ -27,7 +27,7 @@ public:
 
     void LoginCallback(int32 LocalUserNum, bool bWasSuccessful, const FUniqueNetId& UserId, const FString& Error);
 
-    void OnEnumerateFilesCompleteCallback(bool wasSuccess);
+    void OnEnumerateFilesCompleteCallback(bool wasSuccess, const FString& fileName);
 	void OnReadFileCompleteCallback(bool wasSuccess, const FString& fileName);
     
     TSharedPtr <const FUniqueNetId> _id;
