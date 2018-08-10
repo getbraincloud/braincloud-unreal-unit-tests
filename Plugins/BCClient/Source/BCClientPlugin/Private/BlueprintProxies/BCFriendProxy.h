@@ -1,21 +1,20 @@
-// Copyright 2016 bitHeads, Inc. All Rights Reserved.
+// Copyright 2018 bitHeads, Inc. All Rights Reserved.
 
 #pragma once
 
 #include "BCBlueprintCallProxyBase.h"
-#include "IServerCallback.h"
 #include "BrainCloudFriend.h"
 #include "BCFriendProxy.generated.h"
 
 class ABrainCloud;
 
 UCLASS(MinimalAPI)
-class UBCFriendProxy : public UBCBlueprintCallProxyBase, public IServerCallback
+class UBCFriendProxy : public UBCBlueprintCallProxyBase
 {
 	GENERATED_BODY()
 
-public:
-	UBCFriendProxy(const FObjectInitializer& ObjectInitializer);
+  public:
+	UBCFriendProxy(const FObjectInitializer &ObjectInitializer);
 
 	/**
 	* Retrieves profile information for the specified user.
@@ -27,7 +26,7 @@ public:
 	* Param - authenticationType The authentication type of the user ID
 	*/
 	UFUNCTION(BlueprintCallable, meta = (BlueprintInternalUseOnly = "true"), Category = "BrainCloud|Friend")
-		static UBCFriendProxy* GetProfileInfoForCredential(ABrainCloud *brainCloud, const FString& externalId, EBCAuthType authenticationType);
+	static UBCFriendProxy *GetProfileInfoForCredential(UBrainCloudWrapper *brainCloudWrapper, const FString &externalId, EBCAuthType authenticationType);
 
 	/**
 	* Retrieves profile information for the specified external auth user.
@@ -39,7 +38,7 @@ public:
 	* Param - externalAuthType The external authentication type used for this users's external ID
 	*/
 	UFUNCTION(BlueprintCallable, meta = (BlueprintInternalUseOnly = "true"), Category = "BrainCloud|Friend")
-		static UBCFriendProxy* GetProfileInfoForExternalAuthId(ABrainCloud *brainCloud, const FString& externalId, const FString& externalAuthType);
+	static UBCFriendProxy *GetProfileInfoForExternalAuthId(UBrainCloudWrapper *brainCloudWrapper, const FString &externalId, const FString &externalAuthType);
 
 	/**
 	* Retrieves the external ID for the specified user profile ID on the specified social platform.
@@ -48,7 +47,7 @@ public:
 	* Param - authenticationType Associated authentication type.
 	*/
 	UFUNCTION(BlueprintCallable, meta = (BlueprintInternalUseOnly = "true"), Category = "BrainCloud|Friend")
-		static UBCFriendProxy* GetExternalIdForProfileId(ABrainCloud *brainCloud, const FString& profileId, const FString& authenticationType);
+	static UBCFriendProxy *GetExternalIdForProfileId(UBrainCloudWrapper *brainCloudWrapper, const FString &profileId, const FString &authenticationType);
 
 	/**
 	* Returns user state of a particular user.
@@ -59,7 +58,7 @@ public:
 	* Param - profileId Profile Id of user to retrieve user state for.
 	*/
 	UFUNCTION(BlueprintCallable, meta = (BlueprintInternalUseOnly = "true"), Category = "BrainCloud|Friend")
-		static UBCFriendProxy* GetSummaryDataForProfileId(ABrainCloud *brainCloud, const FString& profileId);
+	static UBCFriendProxy *GetSummaryDataForProfileId(UBrainCloudWrapper *brainCloudWrapper, const FString &profileId);
 
 	/**
 	* Returns a particular entity of a particular friend.
@@ -71,7 +70,7 @@ public:
 	* Param - friendId Profile Id of friend who owns entity.
 	*/
 	UFUNCTION(BlueprintCallable, meta = (BlueprintInternalUseOnly = "true"), Category = "BrainCloud|Friend")
-		static UBCFriendProxy* ReadFriendEntity(ABrainCloud *brainCloud, const FString& entityId, const FString& friendId);
+	static UBCFriendProxy *ReadFriendEntity(UBrainCloudWrapper *brainCloudWrapper, const FString &entityId, const FString &friendId);
 
 	/**
 	* Returns entities of all friends optionally based on type.
@@ -82,12 +81,11 @@ public:
 	* Param - entityType Types of entities to retrieve.
 	*/
 	UFUNCTION(BlueprintCallable, meta = (BlueprintInternalUseOnly = "true"), Category = "BrainCloud|Friend")
-		static UBCFriendProxy* ReadFriendsEntities(ABrainCloud *brainCloud, const FString& entityType);
+	static UBCFriendProxy *ReadFriendsEntities(UBrainCloudWrapper *brainCloudWrapper, const FString &entityType);
 
 	/**
 	* @deprecated Use readAllUserStats instead
 	*/
-
 
 	/**
 	* Read a friend's user state.
@@ -98,7 +96,7 @@ public:
 	* Param - friendId Target friend
 	*/
 	UFUNCTION(BlueprintCallable, meta = (BlueprintInternalUseOnly = "true"), Category = "BrainCloud|Friend")
-		static UBCFriendProxy* ReadFriendPlayerState(ABrainCloud *brainCloud, const FString& friendId);
+	static UBCFriendProxy *ReadFriendPlayerState(UBrainCloudWrapper *brainCloudWrapper, const FString &friendId);
 
 	/**
 	* Finds a list of users matching the search text by performing an exact match search
@@ -110,7 +108,7 @@ public:
 	* Param - maxResults  Maximum number of results to return.
 	*/
 	UFUNCTION(BlueprintCallable, meta = (BlueprintInternalUseOnly = "true"), Category = "BrainCloud|Friend")
-		static UBCFriendProxy* FindUsersByExactName(ABrainCloud *brainCloud, const FString& searchText, int32 maxResults);
+	static UBCFriendProxy *FindUsersByExactName(UBrainCloudWrapper *brainCloudWrapper, const FString &searchText, int32 maxResults);
 
 	/**
 	* Finds a list of users matching the search text by performing a substring
@@ -123,13 +121,13 @@ public:
 	* Param - maxResults  Maximum number of results to return.
 	*/
 	UFUNCTION(BlueprintCallable, meta = (BlueprintInternalUseOnly = "true"), Category = "BrainCloud|Friend")
-		static UBCFriendProxy* FindUsersBySubstrName(ABrainCloud *brainCloud, const FString& searchText, int32 maxResults);
+	static UBCFriendProxy *FindUsersBySubstrName(UBrainCloudWrapper *brainCloudWrapper, const FString &searchText, int32 maxResults);
 
 	/**
 	* @deprecated Use FindUserByUniversalId instead
 	*/
 	UFUNCTION(BlueprintCallable, meta = (BlueprintInternalUseOnly = "true"), Category = "BrainCloud|Friend")
-		static UBCFriendProxy* FindPlayerByUniversalId(ABrainCloud *brainCloud, const FString& searchText, int32 maxResults);
+	static UBCFriendProxy *FindPlayerByUniversalId(UBrainCloudWrapper *brainCloudWrapper, const FString &searchText, int32 maxResults);
 
 	/**
 	* Retrieves profile information for the partial matches of the specified text.
@@ -142,7 +140,7 @@ public:
 	*                    "Too many results to return." is sent back instead of the users.
 	*/
 	UFUNCTION(BlueprintCallable, meta = (BlueprintInternalUseOnly = "true"), Category = "BrainCloud|Friend")
-		static UBCFriendProxy* FindUserByUniversalId(ABrainCloud *brainCloud, const FString& searchText, int32 maxResults);
+	static UBCFriendProxy *FindUserByUniversalId(UBrainCloudWrapper *brainCloudWrapper, const FString &searchText, int32 maxResults);
 
 	/**
 	* Retrieves a list of user and friend platform information for all friends of the current user.
@@ -154,7 +152,7 @@ public:
 	* Param - includeSummaryData  True if including summary data; false otherwise.
 	*/
 	UFUNCTION(BlueprintCallable, meta = (BlueprintInternalUseOnly = "true"), Category = "BrainCloud|Friend")
-		static UBCFriendProxy* ListFriends(ABrainCloud *brainCloud, EFriendPlatform friendPlatform, bool includeSummaryData);
+	static UBCFriendProxy *ListFriends(UBrainCloudWrapper *brainCloudWrapper, EFriendPlatform friendPlatform, bool includeSummaryData);
 
 	/**
 	* Links the current user and the specified users as brainCloud friends.
@@ -165,7 +163,7 @@ public:
 	* Param - profileIds Collection of profile IDs.
 	*/
 	UFUNCTION(BlueprintCallable, meta = (BlueprintInternalUseOnly = "true"), Category = "BrainCloud|Friend")
-		static UBCFriendProxy* AddFriends(ABrainCloud *brainCloud, const TArray<FString>& profileIds);
+	static UBCFriendProxy *AddFriends(UBrainCloudWrapper *brainCloudWrapper, const TArray<FString> &profileIds);
 
 	/**
 	* Unlinks the current user and the specified users as brainCloud friends.
@@ -176,7 +174,7 @@ public:
 	* Param - profileIds Collection of profile IDs.
 	*/
 	UFUNCTION(BlueprintCallable, meta = (BlueprintInternalUseOnly = "true"), Category = "BrainCloud|Friend")
-		static UBCFriendProxy* RemoveFriends(ABrainCloud *brainCloud, const TArray<FString>& profileIds);
+	static UBCFriendProxy *RemoveFriends(UBrainCloudWrapper *brainCloudWrapper, const TArray<FString> &profileIds);
 
 	/**
 	* Get users online status
@@ -187,18 +185,5 @@ public:
 	* Param - profileIds Collection of profile IDs.
 	*/
 	UFUNCTION(BlueprintCallable, meta = (BlueprintInternalUseOnly = "true"), Category = "BrainCloud|Friend")
-		static UBCFriendProxy* GetUsersOnlineStatus(ABrainCloud *brainCloud, const TArray<FString>& profileIds);
-
-	//Response delegates
-	UPROPERTY(BlueprintAssignable)
-		FBrainCloudCallbackDelegate OnSuccess;
-
-	UPROPERTY(BlueprintAssignable)
-		FBrainCloudCallbackDelegate OnFailure;
-
-protected:
-	// IServerCallback interface
-	void serverCallback(ServiceName serviceName, ServiceOperation serviceOperation, const FString& jsonData);
-	void serverError(ServiceName serviceName, ServiceOperation serviceOperation, int32 statusCode, int32 reasonCode, const FString& jsonError);
-	// End of IServerCallback interface
+	static UBCFriendProxy *GetUsersOnlineStatus(UBrainCloudWrapper *brainCloud, const TArray<FString> &profileIds);
 };

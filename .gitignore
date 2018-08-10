@@ -1,3 +1,7 @@
+# vscode
+.vscode/*
+BCSubsystem.code-workspace
+
 # Compiled Object files
 *.slo
 *.lo

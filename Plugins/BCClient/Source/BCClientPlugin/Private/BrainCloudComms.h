@@ -1,4 +1,4 @@
-// Copyright 2016 bitHeads, Inc. All Rights Reserved.
+// Copyright 2018 bitHeads, Inc. All Rights Reserved.
 
 #pragma once
 
@@ -59,6 +59,8 @@ public:
 	bool IsAuthenticated() { return _isAuthenticated; }
 	bool IsInitialized() { return _isInitialized; }
 	const FString& GetSessionId() const { return _sessionId; }
+	const FString& GetServerUrl() { return _serverUrl; }
+	const FString& GetSecretKey() { return _secretKey; }
 	const TArray<int32> & GetPacketTimeouts() { return _packetTimeouts; }
 	int32 GetAuthenticationPacketTimeout() { return _authenticationTimeout; }
 	int32 GetUploadLowTransferRateTimeout() { return _uploadLowTransferRateTimeout; }
@@ -71,7 +73,7 @@ public:
 	void SetHeartbeatInterval(int32 heartbeatInterval) { _heartbeatInterval = heartbeatInterval; }
 	void SetPacketTimeouts(const TArray<int32> & packetTimeouts) { _packetTimeouts = packetTimeouts; }
 	void SetPacketTimeoutsToDefault();
-	void SetAuthenticationPacketTimeout(int32 timeoutSecs) { _authenticationTimeout = timeoutSecs * 1000; }
+	void SetAuthenticationPacketTimeout(int32 timeoutSecs) { _authenticationTimeout = timeoutSecs; }
 	void SetOldStyleStatusMessageErrorCallback(bool useOldStatusMessage) { _useOldStatusMessage = useOldStatusMessage; }
 	void SetErrorCallbackOn202Status(bool isError) { _errorCallbackOn202 = isError; }
 	void SetUploadLowTransferRateTimeout(int32 timeoutSecs) { _uploadLowTransferRateTimeout = timeoutSecs; }
@@ -148,7 +150,7 @@ private:
 	int32 _retryCount = 0;
 	TArray<int32> _packetTimeouts;
 	int32 _maxBundleMessages = 10;
-	int32 _authenticationTimeout = 15000;
+	int32 _authenticationTimeout = 15;
 	bool _useOldStatusMessage = false;
 	bool _errorCallbackOn202 = true;
 

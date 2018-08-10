@@ -1,21 +1,20 @@
-// Copyright 2016 bitHeads, Inc. All Rights Reserved.
+// Copyright 2018 bitHeads, Inc. All Rights Reserved.
 
 #pragma once
 
 #include "BCBlueprintCallProxyBase.h"
-#include "IServerCallback.h"
 #include "BCAuthType.h"
 #include "BCIdentityProxy.generated.h"
 
 class ABrainCloud;
 
 UCLASS(MinimalAPI)
-class UBCIdentityProxy : public UBCBlueprintCallProxyBase, public IServerCallback
+class UBCIdentityProxy : public UBCBlueprintCallProxyBase
 {
 	GENERATED_BODY()
 
-public:
-	UBCIdentityProxy(const FObjectInitializer& ObjectInitializer);
+  public:
+	UBCIdentityProxy(const FObjectInitializer &ObjectInitializer);
 
 	/*
 	* Attach the user's Facebook credentials to the current profile.
@@ -34,7 +33,7 @@ public:
 	* To switch profiles, call ClearSavedProfileID() and call AuthenticateFacebook().
 	*/
 	UFUNCTION(BlueprintCallable, meta = (BlueprintInternalUseOnly = "true"), Category = "BrainCloud|Identity")
-		static UBCIdentityProxy* AttachFacebookIdentity(ABrainCloud *brainCloud, const FString& facebookId, const FString& authenticationToken);
+	static UBCIdentityProxy *AttachFacebookIdentity(UBrainCloudWrapper *brainCloudWrapper, const FString &facebookId, const FString &authenticationToken);
 
 	/*
 	* Merge the profile associated with the provided Facebook credentials with the
@@ -48,7 +47,7 @@ public:
 	*   (that will be further validated when sent to the bC service)
 	*/
 	UFUNCTION(BlueprintCallable, meta = (BlueprintInternalUseOnly = "true"), Category = "BrainCloud|Identity")
-		static UBCIdentityProxy* MergeFacebookIdentity(ABrainCloud *brainCloud, const FString& facebookId, const FString& authenticationToken);
+	static UBCIdentityProxy *MergeFacebookIdentity(UBrainCloudWrapper *brainCloudWrapper, const FString &facebookId, const FString &authenticationToken);
 
 	/*
 	* Detach the Facebook identity from this profile.
@@ -64,7 +63,7 @@ public:
 	* the profile wouldn't be retrievable if the user loses their device)
 	*/
 	UFUNCTION(BlueprintCallable, meta = (BlueprintInternalUseOnly = "true"), Category = "BrainCloud|Identity")
-		static UBCIdentityProxy* DetachFacebookIdentity(ABrainCloud *brainCloud, const FString& facebookId, bool continueAnon);
+	static UBCIdentityProxy *DetachFacebookIdentity(UBrainCloudWrapper *brainCloudWrapper, const FString &facebookId, bool continueAnon);
 
 	/*
 	* Attach a Game Center identity to the current profile.
@@ -81,7 +80,7 @@ public:
 	* To switch profiles, call ClearSavedProfileID() and call this method again.
 	*/
 	UFUNCTION(BlueprintCallable, meta = (BlueprintInternalUseOnly = "true"), Category = "BrainCloud|Identity")
-		static UBCIdentityProxy* AttachGameCenterIdentity(ABrainCloud *brainCloud, const FString& gameCenterId);
+	static UBCIdentityProxy *AttachGameCenterIdentity(UBrainCloudWrapper *brainCloudWrapper, const FString &gameCenterId);
 
 	/*
 	* Merge the profile associated with the specified Game Center identity with the current profile.
@@ -92,8 +91,7 @@ public:
 	* Param - gameCenterId The player's game center id  (use the playerID property from the local GKPlayer object)
 	*/
 	UFUNCTION(BlueprintCallable, meta = (BlueprintInternalUseOnly = "true"), Category = "BrainCloud|Identity")
-		static UBCIdentityProxy* MergeGameCenterIdentity(ABrainCloud *brainCloud, const FString& gameCenterId);
-
+	static UBCIdentityProxy *MergeGameCenterIdentity(UBrainCloudWrapper *brainCloudWrapper, const FString &gameCenterId);
 
 	/*
 	* Detach the Game Center identity from the current profile.
@@ -109,7 +107,7 @@ public:
 	* the profile wouldn't be retrievable if the user loses their device)
 	*/
 	UFUNCTION(BlueprintCallable, meta = (BlueprintInternalUseOnly = "true"), Category = "BrainCloud|Identity")
-		static UBCIdentityProxy* DetachGameCenterIdentity(ABrainCloud *brainCloud, const FString& gameCenterId, bool continueAnon);
+	static UBCIdentityProxy *DetachGameCenterIdentity(UBrainCloudWrapper *brainCloudWrapper, const FString &gameCenterId, bool continueAnon);
 
 	/*
 	* Attach a Email and Password identity to the current profile.
@@ -127,7 +125,7 @@ public:
 	* To switch profiles, call ClearSavedProfileID() and then call AuthenticateEmailPassword().
 	*/
 	UFUNCTION(BlueprintCallable, meta = (BlueprintInternalUseOnly = "true"), Category = "BrainCloud|Identity")
-		static UBCIdentityProxy* AttachEmailIdentity(ABrainCloud *brainCloud, const FString& email, const FString& password);
+	static UBCIdentityProxy *AttachEmailIdentity(UBrainCloudWrapper *brainCloudWrapper, const FString &email, const FString &password);
 
 	/*
 	* Merge the profile associated with the provided e=mail with the current profile.
@@ -139,7 +137,7 @@ public:
 	* Param - password The user's password
 	*/
 	UFUNCTION(BlueprintCallable, meta = (BlueprintInternalUseOnly = "true"), Category = "BrainCloud|Identity")
-		static UBCIdentityProxy* MergeEmailIdentity(ABrainCloud *brainCloud, const FString& email, const FString& password);
+	static UBCIdentityProxy *MergeEmailIdentity(UBrainCloudWrapper *brainCloudWrapper, const FString &email, const FString &password);
 
 	/*
 	* Detach the e-mail identity from the current profile
@@ -155,7 +153,7 @@ public:
 	* the profile wouldn't be retrievable if the user loses their device)
 	*/
 	UFUNCTION(BlueprintCallable, meta = (BlueprintInternalUseOnly = "true"), Category = "BrainCloud|Identity")
-		static UBCIdentityProxy* DetachEmailIdentity(ABrainCloud *brainCloud, const FString& email, bool continueAnon);
+	static UBCIdentityProxy *DetachEmailIdentity(UBrainCloudWrapper *brainCloudWrapper, const FString &email, bool continueAnon);
 
 	/*
 	* Attach a Universal (userId + password) identity to the current profile.
@@ -173,7 +171,7 @@ public:
 	* To switch profiles, call ClearSavedProfileID() and then call AuthenticateEmailPassword().
 	*/
 	UFUNCTION(BlueprintCallable, meta = (BlueprintInternalUseOnly = "true"), Category = "BrainCloud|Identity")
-		static UBCIdentityProxy* AttachUniversalIdentity(ABrainCloud *brainCloud, const FString& userId, const FString& password);
+	static UBCIdentityProxy *AttachUniversalIdentity(UBrainCloudWrapper *brainCloudWrapper, const FString &userId, const FString &password);
 
 	/*
 	* Merge the profile associated with the provided e=mail with the current profile.
@@ -185,7 +183,7 @@ public:
 	* Param - password The user's password
 	*/
 	UFUNCTION(BlueprintCallable, meta = (BlueprintInternalUseOnly = "true"), Category = "BrainCloud|Identity")
-		static UBCIdentityProxy* MergeUniversalIdentity(ABrainCloud *brainCloud, const FString& userId, const FString& password);
+	static UBCIdentityProxy *MergeUniversalIdentity(UBrainCloudWrapper *brainCloudWrapper, const FString &userId, const FString &password);
 
 	/*
 	* Detach the universal identity from the current profile
@@ -201,7 +199,7 @@ public:
 	* the profile wouldn't be retrievable if the user loses their device)
 	*/
 	UFUNCTION(BlueprintCallable, meta = (BlueprintInternalUseOnly = "true"), Category = "BrainCloud|Identity")
-		static UBCIdentityProxy* DetachUniversalIdentity(ABrainCloud *brainCloud, const FString& userId, bool continueAnon);
+	static UBCIdentityProxy *DetachUniversalIdentity(UBrainCloudWrapper *brainCloudWrapper, const FString &userId, bool continueAnon);
 
 	/*
 	* Attach a Steam (userid + steamsessionticket) identity to the current profile.
@@ -219,7 +217,7 @@ public:
 	* To switch profiles, call ClearSavedProfileID() and then call AuthenticateSteam().
 	*/
 	UFUNCTION(BlueprintCallable, meta = (BlueprintInternalUseOnly = "true"), Category = "BrainCloud|Identity")
-		static UBCIdentityProxy* AttachSteamIdentity(ABrainCloud *brainCloud, const FString& steamId, const FString& sessionTicket);
+	static UBCIdentityProxy *AttachSteamIdentity(UBrainCloudWrapper *brainCloudWrapper, const FString &steamId, const FString &sessionTicket);
 
 	/*
 	* Merge the profile associated with the provided steam userid with the current profile.
@@ -231,7 +229,7 @@ public:
 	* Param - sessionTicket The user's session ticket (hex encoded)
 	*/
 	UFUNCTION(BlueprintCallable, meta = (BlueprintInternalUseOnly = "true"), Category = "BrainCloud|Identity")
-		static UBCIdentityProxy* MergeSteamIdentity(ABrainCloud *brainCloud, const FString& steamId, const FString& sessionTicket);
+	static UBCIdentityProxy *MergeSteamIdentity(UBrainCloudWrapper *brainCloudWrapper, const FString &steamId, const FString &sessionTicket);
 
 	/*
 	* Detach the steam identity from the current profile
@@ -247,7 +245,7 @@ public:
 	* the profile wouldn't be retrievable if the user loses their device)
 	*/
 	UFUNCTION(BlueprintCallable, meta = (BlueprintInternalUseOnly = "true"), Category = "BrainCloud|Identity")
-		static UBCIdentityProxy* DetachSteamIdentity(ABrainCloud *brainCloud, const FString& steamId, bool continueAnon);
+	static UBCIdentityProxy *DetachSteamIdentity(UBrainCloudWrapper *brainCloudWrapper, const FString &steamId, bool continueAnon);
 
 	/**
 	* Attach the user's Google credentials to the current profile.
@@ -266,7 +264,7 @@ public:
 	* To switch profiles, call ClearSavedProfileID() and call AuthenticateGoogle().
 	*/
 	UFUNCTION(BlueprintCallable, meta = (BlueprintInternalUseOnly = "true"), Category = "BrainCloud|Identity")
-		static UBCIdentityProxy* AttachGoogleIdentity(ABrainCloud *brainCloud, const FString& googleId, const FString& authenticationToken);
+	static UBCIdentityProxy *AttachGoogleIdentity(UBrainCloudWrapper *brainCloudWrapper, const FString &googleId, const FString &authenticationToken);
 
 	/**
 	* Merge the profile associated with the provided Google credentials with the
@@ -280,7 +278,7 @@ public:
 	*   (that will be further validated when sent to the bC service)
 	*/
 	UFUNCTION(BlueprintCallable, meta = (BlueprintInternalUseOnly = "true"), Category = "BrainCloud|Identity")
-		static UBCIdentityProxy* MergeGoogleIdentity(ABrainCloud *brainCloud, const FString& googleId, const FString& authenticationToken);
+	static UBCIdentityProxy *MergeGoogleIdentity(UBrainCloudWrapper *brainCloudWrapper, const FString &googleId, const FString &authenticationToken);
 
 	/*
 	* Detach the Google identity from this profile.
@@ -296,7 +294,7 @@ public:
 	* the profile wouldn't be retrievable if the user loses their device)
 	*/
 	UFUNCTION(BlueprintCallable, meta = (BlueprintInternalUseOnly = "true"), Category = "BrainCloud|Identity")
-		static UBCIdentityProxy* DetachGoogleIdentity(ABrainCloud *brainCloud, const FString& googleId, bool continueAnon);
+	static UBCIdentityProxy *DetachGoogleIdentity(UBrainCloudWrapper *brainCloudWrapper, const FString &googleId, bool continueAnon);
 
 	/**
 	* Attach the user's Twitter credentials to the current profile.
@@ -315,7 +313,7 @@ public:
 	* To switch profiles, call ClearSavedProfileID() and call AuthenticateTwitter().
 	*/
 	UFUNCTION(BlueprintCallable, meta = (BlueprintInternalUseOnly = "true"), Category = "BrainCloud|Identity")
-		static UBCIdentityProxy* AttachTwitterIdentity(ABrainCloud *brainCloud, const FString& twitterId, const FString& authenticationToken, const FString& secret);
+	static UBCIdentityProxy *AttachTwitterIdentity(UBrainCloudWrapper *brainCloudWrapper, const FString &twitterId, const FString &authenticationToken, const FString &secret);
 
 	/**
 	* Merge the profile associated with the provided Twitter credentials with the
@@ -329,7 +327,7 @@ public:
 	* Param - secret The secret given when attempting to link with Twitter
 	*/
 	UFUNCTION(BlueprintCallable, meta = (BlueprintInternalUseOnly = "true"), Category = "BrainCloud|Identity")
-		static UBCIdentityProxy* MergeTwitterIdentity(ABrainCloud *brainCloud, const FString& twitterId, const FString& authenticationToken, const FString& secret);
+	static UBCIdentityProxy *MergeTwitterIdentity(UBrainCloudWrapper *brainCloudWrapper, const FString &twitterId, const FString &authenticationToken, const FString &secret);
 
 	/**
 	* Detach the Twitter identity from this profile.
@@ -345,7 +343,7 @@ public:
 	* the profile wouldn't be retrievable if the user loses their device)
 	*/
 	UFUNCTION(BlueprintCallable, meta = (BlueprintInternalUseOnly = "true"), Category = "BrainCloud|Identity")
-		static UBCIdentityProxy* DetachTwitterIdentity(ABrainCloud *brainCloud, const FString& twitterId, bool continueAnon);
+	static UBCIdentityProxy *DetachTwitterIdentity(UBrainCloudWrapper *brainCloudWrapper, const FString &twitterId, bool continueAnon);
 
 	/**
 	* Attach the user's Parse credentials to the current profile.
@@ -364,7 +362,7 @@ public:
 	* To switch profiles, call ClearSavedProfileID() and call AuthenticateParse().
 	*/
 	UFUNCTION(BlueprintCallable, meta = (BlueprintInternalUseOnly = "true"), Category = "BrainCloud|Identity")
-		static UBCIdentityProxy* AttachParseIdentity(ABrainCloud *brainCloud, const FString& parseId, const FString& authenticationToken);
+	static UBCIdentityProxy *AttachParseIdentity(UBrainCloudWrapper *brainCloudWrapper, const FString &parseId, const FString &authenticationToken);
 
 	/**
 	* Merge the profile associated with the provided Parse credentials with the
@@ -378,7 +376,7 @@ public:
 	*   (that will be further validated when sent to the bC service)
 	*/
 	UFUNCTION(BlueprintCallable, meta = (BlueprintInternalUseOnly = "true"), Category = "BrainCloud|Identity")
-		static UBCIdentityProxy* MergeParseIdentity(ABrainCloud *brainCloud, const FString& parseId, const FString& authenticationToken);
+	static UBCIdentityProxy *MergeParseIdentity(UBrainCloudWrapper *brainCloudWrapper, const FString &parseId, const FString &authenticationToken);
 
 	/*
 	* Detach the Parse identity from this profile.
@@ -394,7 +392,7 @@ public:
 	* the profile wouldn't be retrievable if the user loses their device)
 	*/
 	UFUNCTION(BlueprintCallable, meta = (BlueprintInternalUseOnly = "true"), Category = "BrainCloud|Identity")
-		static UBCIdentityProxy* DetachParseIdentity(ABrainCloud *brainCloud, const FString& parseId, bool continueAnon);
+	static UBCIdentityProxy *DetachParseIdentity(UBrainCloudWrapper *brainCloudWrapper, const FString &parseId, bool continueAnon);
 
 	/**
 	* Switch to a Child Profile
@@ -408,7 +406,7 @@ public:
 	* Param - forceCreate Should a new profile be created if it does not exist?
 	*/
 	UFUNCTION(BlueprintCallable, meta = (BlueprintInternalUseOnly = "true"), Category = "BrainCloud|Identity")
-		static UBCIdentityProxy* SwitchToChildProfile(ABrainCloud *brainCloud, const FString& childProfileId, const FString& childAppId, bool forceCreate);
+	static UBCIdentityProxy *SwitchToChildProfile(UBrainCloudWrapper *brainCloudWrapper, const FString &childProfileId, const FString &childAppId, bool forceCreate);
 
 	/**
 	* Switches to a child profile of an app when only one profile exists
@@ -421,7 +419,7 @@ public:
 	* Param - forceCreate Should a new profile be created if it does not exist?
 	*/
 	UFUNCTION(BlueprintCallable, meta = (BlueprintInternalUseOnly = "true"), Category = "BrainCloud|Identity")
-		static UBCIdentityProxy* SwitchToSingletonChildProfile(ABrainCloud *brainCloud, const FString& childAppId, bool forceCreate);
+	static UBCIdentityProxy *SwitchToSingletonChildProfile(UBrainCloudWrapper *brainCloudWrapper, const FString &childAppId, bool forceCreate);
 
 	/**
 	* Switch to a Parent Profile
@@ -433,7 +431,7 @@ public:
 	* If null and forceCreate is true a new profile will be created
 	*/
 	UFUNCTION(BlueprintCallable, meta = (BlueprintInternalUseOnly = "true"), Category = "BrainCloud|Identity")
-		static UBCIdentityProxy* SwitchToParentProfile(ABrainCloud *brainCloud, const FString& parentLevelName);
+	static UBCIdentityProxy *SwitchToParentProfile(UBrainCloudWrapper *brainCloudWrapper, const FString &parentLevelName);
 
 	/**
 	* Returns a list of all child profiles in child Apps
@@ -444,7 +442,7 @@ public:
 	* Param - includeSummaryData Whether to return the summary friend data along with this call
 	*/
 	UFUNCTION(BlueprintCallable, meta = (BlueprintInternalUseOnly = "true"), Category = "BrainCloud|Identity")
-		static UBCIdentityProxy* GetChildProfiles(ABrainCloud *brainCloud, bool includeSummaryData);
+	static UBCIdentityProxy *GetChildProfiles(UBrainCloudWrapper *brainCloudWrapper, bool includeSummaryData);
 
 	/**
 	* Retrieve list of identities
@@ -453,7 +451,7 @@ public:
 	* Service Operation - GET_IDENTITIES
 	*/
 	UFUNCTION(BlueprintCallable, meta = (BlueprintInternalUseOnly = "true"), Category = "BrainCloud|Identity")
-		static UBCIdentityProxy* GetIdentities(ABrainCloud *brainCloud);
+	static UBCIdentityProxy *GetIdentities(UBrainCloudWrapper *brainCloudWrapper);
 
 	/**
 	* Retrieve list of expired identities
@@ -462,7 +460,7 @@ public:
 	* Service Operation - GET_EXPIRED_IDENTITIES
 	*/
 	UFUNCTION(BlueprintCallable, meta = (BlueprintInternalUseOnly = "true"), Category = "BrainCloud|Identity")
-		static UBCIdentityProxy* GetExpiredIdentities(ABrainCloud *brainCloud);
+	static UBCIdentityProxy *GetExpiredIdentities(UBrainCloudWrapper *brainCloudWrapper);
 
 	/**
 	* Refreshes an identity for this user
@@ -475,9 +473,9 @@ public:
 	* Param - authenticationType Type of authentication
 	*/
 	UFUNCTION(BlueprintCallable, meta = (BlueprintInternalUseOnly = "true"), Category = "BrainCloud|Identity")
-		static UBCIdentityProxy* RefreshIdentity(ABrainCloud *brainCloud, const FString& externalId, const FString& authenticationToken, EBCAuthType authenticationType);
+	static UBCIdentityProxy *RefreshIdentity(UBrainCloudWrapper *brainCloudWrapper, const FString &externalId, const FString &authenticationToken, EBCAuthType authenticationType);
 
-	 /**
+	/**
      * Allows email identity email address to be changed
      *
      * Service Name - identity
@@ -489,8 +487,7 @@ public:
      * Param - updateContactEmail Whether to update contact email in profile
      */
 	UFUNCTION(BlueprintCallable, meta = (BlueprintInternalUseOnly = "true"), Category = "BrainCloud|Identity")
-		static UBCIdentityProxy* ChangeEmailIdentity(ABrainCloud *brainCloud, const FString& oldEmailAddress, const FString& password, const FString& newEmailAddress, bool updateContactEmail);
-
+	static UBCIdentityProxy *ChangeEmailIdentity(UBrainCloudWrapper *brainCloudWrapper, const FString &oldEmailAddress, const FString &password, const FString &newEmailAddress, bool updateContactEmail);
 
 	/**
 	* Attach a new identity to a parent app
@@ -505,8 +502,8 @@ public:
 	* Param - forceCreate Should a new profile be created if it does not exist?
 	*/
 	UFUNCTION(BlueprintCallable, meta = (BlueprintInternalUseOnly = "true"), Category = "BrainCloud|Identity")
-		static UBCIdentityProxy*  AttachParentWithIdentity(ABrainCloud *brainCloud, const FString& externalId, const FString& authenticationToken,
-			EBCAuthType authenticationType, const FString& externalAuthName, bool forceCreate);
+	static UBCIdentityProxy *AttachParentWithIdentity(UBrainCloudWrapper *brainCloudWrapper, const FString &externalId, const FString &authenticationToken,
+													  EBCAuthType authenticationType, const FString &externalAuthName, bool forceCreate);
 
 	/**
 	* Detaches parent from this user's profile
@@ -516,7 +513,7 @@ public:
 	*
 	*/
 	UFUNCTION(BlueprintCallable, meta = (BlueprintInternalUseOnly = "true"), Category = "BrainCloud|Identity")
-		static UBCIdentityProxy*  DetachParent(ABrainCloud *brainCloud);
+	static UBCIdentityProxy *DetachParent(UBrainCloudWrapper *brainCloudWrapper);
 
 	/**
 	* Attaches a peer identity to this user's profile
@@ -532,8 +529,8 @@ public:
 	* Param - forceCreate Should a new profile be created if it does not exist?
 	*/
 	UFUNCTION(BlueprintCallable, meta = (BlueprintInternalUseOnly = "true"), Category = "BrainCloud|Identity")
-		static UBCIdentityProxy*  AttachPeerProfile(ABrainCloud *brainCloud, const FString& peer, const FString& externalId, const FString& authenticationToken, EBCAuthType authenticationType,
-			const FString& externalAuthName, bool forceCreate);
+	static UBCIdentityProxy *AttachPeerProfile(UBrainCloudWrapper *brainCloudWrapper, const FString &peer, const FString &externalId, const FString &authenticationToken, EBCAuthType authenticationType,
+											   const FString &externalAuthName, bool forceCreate);
 
 	/**
 	* Detaches a peer identity from this user's profile
@@ -544,7 +541,7 @@ public:
 	* Param - peer Name of the peer to connect to
 	*/
 	UFUNCTION(BlueprintCallable, meta = (BlueprintInternalUseOnly = "true"), Category = "BrainCloud|Identity")
-		static UBCIdentityProxy*  DetachPeer(ABrainCloud *brainCloud, const FString& peer);
+	static UBCIdentityProxy *DetachPeer(UBrainCloudWrapper *brainCloudWrapper, const FString &peer);
 
 	/**
 	* Returns a list of peer profiles attached to this user
@@ -554,18 +551,5 @@ public:
 	*
 	*/
 	UFUNCTION(BlueprintCallable, meta = (BlueprintInternalUseOnly = "true"), Category = "BrainCloud|Identity")
-		static UBCIdentityProxy*  GetPeerProfiles(ABrainCloud *brainCloud);
-
-	//Response delegates
-	UPROPERTY(BlueprintAssignable)
-		FBrainCloudCallbackDelegate OnSuccess;
-
-	UPROPERTY(BlueprintAssignable)
-		FBrainCloudCallbackDelegate OnFailure;
-
-protected:
-	// IServerCallback interface
-	void serverCallback(ServiceName serviceName, ServiceOperation serviceOperation, const FString& jsonData);
-	void serverError(ServiceName serviceName, ServiceOperation serviceOperation, int32 statusCode, int32 reasonCode, const FString& jsonError);
-	// End of IServerCallback interface
+	static UBCIdentityProxy *GetPeerProfiles(UBrainCloudWrapper *brainCloud);
 };

@@ -1,4 +1,4 @@
-// Copyright 2016 bitHeads, Inc. All Rights Reserved.
+// Copyright 2018 bitHeads, Inc. All Rights Reserved.
 
 #include "OnlineSubsystemBrainCloudPrivatePCH.h"
 
@@ -250,7 +250,7 @@ FText FOnlineSubsystemBrainCloud::GetOnlineServiceName() const
 }
 #endif
 
-bool FOnlineSubsystemBrainCloud::IsEnabled()
+bool FOnlineSubsystemBrainCloud::IsEnabled() const
 {
 	return true;
 }

@@ -1,4 +1,4 @@
-// Copyright 2016 bitHeads, Inc. All Rights Reserved.
+// Copyright 2018 bitHeads, Inc. All Rights Reserved.
 
 #include "BCClientPluginPrivatePCH.h"
 #include "ServiceName.h"
@@ -50,6 +50,13 @@ const ServiceName ServiceName::Profanity = ServiceName("profanity");
 const ServiceName ServiceName::File = ServiceName("file");
 const ServiceName ServiceName::Group = ServiceName("group");
 const ServiceName ServiceName::Mail = ServiceName("mail");
+
+// RTT
+const ServiceName ServiceName::RTTRegistration = ServiceName("rttRegistration");
+const ServiceName ServiceName::RTT = ServiceName("rtt");
+const ServiceName ServiceName::Chat = ServiceName("chat");
+const ServiceName ServiceName::Messaging = ServiceName("messaging");
+const ServiceName ServiceName::Lobby = ServiceName("lobby");
 
 bool ServiceName::operator== (const ServiceName& s) const
 {

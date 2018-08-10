@@ -1,9 +1,9 @@
-// Copyright 2016 bitHeads, Inc. All Rights Reserved.
+// Copyright 2018 bitHeads, Inc. All Rights Reserved.
 
 #include "BCClientPluginPrivatePCH.h"
 #include "BrainCloudClient.h"
 #include "ServerCall.h"
-#include "BrainCloud.h"
+#include "BrainCloudActor.h"
 #include "BCWrapperProxy.h"
 #include "BrainCloudWrapper.h"
 #include "BCProductProxy.h"
@@ -13,102 +13,86 @@ UBCProductProxy::UBCProductProxy(const FObjectInitializer& ObjectInitializer)
 {
 }
 
-UBCProductProxy* UBCProductProxy::GetCurrency(ABrainCloud *brainCloud, const FString& currencyType)
+UBCProductProxy* UBCProductProxy::GetCurrency(UBrainCloudWrapper *brainCloudWrapper, const FString& currencyType)
 {
     UBCProductProxy* Proxy = NewObject<UBCProductProxy>();
-    UBCWrapperProxy::GetBrainCloudInstance(brainCloud)->getProductService()->getCurrency(currencyType, Proxy);
+    UBCWrapperProxy::GetBrainCloudInstance(brainCloudWrapper)->getProductService()->getCurrency(currencyType, Proxy);
     return Proxy;
 }
 
-UBCProductProxy* UBCProductProxy::AwardCurrency(ABrainCloud *brainCloud, const FString& currencyType, int32 amount)
+UBCProductProxy* UBCProductProxy::AwardCurrency(UBrainCloudWrapper *brainCloudWrapper, const FString& currencyType, int32 amount)
 {
 	UBCProductProxy* Proxy = NewObject<UBCProductProxy>();
-	UBCWrapperProxy::GetBrainCloudInstance(brainCloud)->getProductService()->awardCurrency(currencyType, amount, Proxy);
+	UBCWrapperProxy::GetBrainCloudInstance(brainCloudWrapper)->getProductService()->awardCurrency(currencyType, amount, Proxy);
 	return Proxy;
 }
 
-UBCProductProxy* UBCProductProxy::ConsumeCurrency(ABrainCloud *brainCloud, const FString& currencyType, int32 amount)
+UBCProductProxy* UBCProductProxy::ConsumeCurrency(UBrainCloudWrapper *brainCloudWrapper, const FString& currencyType, int32 amount)
 {
 	UBCProductProxy* Proxy = NewObject<UBCProductProxy>();
-	UBCWrapperProxy::GetBrainCloudInstance(brainCloud)->getProductService()->consumeCurrency(currencyType, amount, Proxy);
+	UBCWrapperProxy::GetBrainCloudInstance(brainCloudWrapper)->getProductService()->consumeCurrency(currencyType, amount, Proxy);
 	return Proxy;
 }
 
-UBCProductProxy* UBCProductProxy::ResetCurrency(ABrainCloud *brainCloud)
+UBCProductProxy* UBCProductProxy::ResetCurrency(UBrainCloudWrapper *brainCloudWrapper)
 {
 	UBCProductProxy* Proxy = NewObject<UBCProductProxy>();
-	UBCWrapperProxy::GetBrainCloudInstance(brainCloud)->getProductService()->resetCurrency(Proxy);
+	UBCWrapperProxy::GetBrainCloudInstance(brainCloudWrapper)->getProductService()->resetCurrency(Proxy);
 	return Proxy;
 }
 
-UBCProductProxy* UBCProductProxy::GetSalesInventory(ABrainCloud *brainCloud, const FString& platform, const FString& userCurrency)
+UBCProductProxy* UBCProductProxy::GetSalesInventory(UBrainCloudWrapper *brainCloudWrapper, const FString& platform, const FString& userCurrency)
 {
     UBCProductProxy* Proxy = NewObject<UBCProductProxy>();
-    UBCWrapperProxy::GetBrainCloudInstance(brainCloud)->getProductService()->getSalesInventory(platform, userCurrency, Proxy);
+    UBCWrapperProxy::GetBrainCloudInstance(brainCloudWrapper)->getProductService()->getSalesInventory(platform, userCurrency, Proxy);
     return Proxy;
 }
 
-UBCProductProxy* UBCProductProxy::GetSalesInventoryByCategory(ABrainCloud *brainCloud, const FString& platform, const FString& userCurrency, const FString& category)
+UBCProductProxy* UBCProductProxy::GetSalesInventoryByCategory(UBrainCloudWrapper *brainCloudWrapper, const FString& platform, const FString& userCurrency, const FString& category)
 {
     UBCProductProxy* Proxy = NewObject<UBCProductProxy>();
-    UBCWrapperProxy::GetBrainCloudInstance(brainCloud)->getProductService()->getSalesInventoryByCategory(platform, userCurrency, category, Proxy);
+    UBCWrapperProxy::GetBrainCloudInstance(brainCloudWrapper)->getProductService()->getSalesInventoryByCategory(platform, userCurrency, category, Proxy);
     return Proxy;
 }
 
-UBCProductProxy* UBCProductProxy::VerifyItunesReceipt(ABrainCloud *brainCloud, const FString& base64EncReceiptData)
+UBCProductProxy* UBCProductProxy::VerifyItunesReceipt(UBrainCloudWrapper *brainCloudWrapper, const FString& base64EncReceiptData)
 {
     UBCProductProxy* Proxy = NewObject<UBCProductProxy>();
-    UBCWrapperProxy::GetBrainCloudInstance(brainCloud)->getProductService()->verifyItunesReceipt(base64EncReceiptData, Proxy);
+    UBCWrapperProxy::GetBrainCloudInstance(brainCloudWrapper)->getProductService()->verifyItunesReceipt(base64EncReceiptData, Proxy);
     return Proxy;
 }
 
-UBCProductProxy* UBCProductProxy::StartSteamTransaction(ABrainCloud *brainCloud, const FString& language, const FString& itemId)
+UBCProductProxy* UBCProductProxy::StartSteamTransaction(UBrainCloudWrapper *brainCloudWrapper, const FString& language, const FString& itemId)
 {
     UBCProductProxy* Proxy = NewObject<UBCProductProxy>();
-    UBCWrapperProxy::GetBrainCloudInstance(brainCloud)->getProductService()->startSteamTransaction(language, itemId, Proxy);
+    UBCWrapperProxy::GetBrainCloudInstance(brainCloudWrapper)->getProductService()->startSteamTransaction(language, itemId, Proxy);
     return Proxy;
 }
 
-UBCProductProxy* UBCProductProxy::FinalizeSteamTransaction(ABrainCloud *brainCloud, const FString& transId)
+UBCProductProxy* UBCProductProxy::FinalizeSteamTransaction(UBrainCloudWrapper *brainCloudWrapper, const FString& transId)
 {
     UBCProductProxy* Proxy = NewObject<UBCProductProxy>();
-    UBCWrapperProxy::GetBrainCloudInstance(brainCloud)->getProductService()->finalizeSteamTransaction(transId, Proxy);
+    UBCWrapperProxy::GetBrainCloudInstance(brainCloudWrapper)->getProductService()->finalizeSteamTransaction(transId, Proxy);
     return Proxy;
 }
 
-UBCProductProxy* UBCProductProxy::VerifyMicrosoftReceipt(ABrainCloud *brainCloud, const FString& receipt)
+UBCProductProxy* UBCProductProxy::VerifyMicrosoftReceipt(UBrainCloudWrapper *brainCloudWrapper, const FString& receipt)
 {
     UBCProductProxy* Proxy = NewObject<UBCProductProxy>();
-    UBCWrapperProxy::GetBrainCloudInstance(brainCloud)->getProductService()->verifyMicrosoftReceipt(receipt, Proxy);
+    UBCWrapperProxy::GetBrainCloudInstance(brainCloudWrapper)->getProductService()->verifyMicrosoftReceipt(receipt, Proxy);
     return Proxy;
 }
 
-UBCProductProxy* UBCProductProxy::ConfirmGooglePlayPurchase(ABrainCloud *brainCloud, const FString& orderId, const FString& productId, const FString& token)
+UBCProductProxy* UBCProductProxy::ConfirmGooglePlayPurchase(UBrainCloudWrapper *brainCloudWrapper, const FString& orderId, const FString& productId, const FString& token)
 {
     UBCProductProxy* Proxy = NewObject<UBCProductProxy>();
-    UBCWrapperProxy::GetBrainCloudInstance(brainCloud)->getProductService()->confirmGooglePlayPurchase(orderId, productId, token, Proxy);
+    UBCWrapperProxy::GetBrainCloudInstance(brainCloudWrapper)->getProductService()->confirmGooglePlayPurchase(orderId, productId, token, Proxy);
     return Proxy;
 }
 
-UBCProductProxy* UBCProductProxy::GetEligiblePromotions(ABrainCloud *brainCloud)
+UBCProductProxy* UBCProductProxy::GetEligiblePromotions(UBrainCloudWrapper *brainCloudWrapper)
 {
     UBCProductProxy* Proxy = NewObject<UBCProductProxy>();
-    UBCWrapperProxy::GetBrainCloudInstance(brainCloud)->getProductService()->getEligiblePromotions(Proxy);
+    UBCWrapperProxy::GetBrainCloudInstance(brainCloudWrapper)->getProductService()->getEligiblePromotions(Proxy);
     return Proxy;
 }
-
-//callbacks
-void UBCProductProxy::serverCallback(ServiceName serviceName, ServiceOperation serviceOperation, const FString& jsonData)
-{
-    FBC_ReturnData returnData = FBC_ReturnData(serviceName.getValue(), serviceOperation.getValue(), 200, 0);
-    OnSuccess.Broadcast(jsonData, returnData);
-	ConditionalBeginDestroy();
-}
-
-void UBCProductProxy::serverError(ServiceName serviceName, ServiceOperation serviceOperation, int32 statusCode, int32 reasonCode, const FString& jsonError)
-{
-    FBC_ReturnData returnData = FBC_ReturnData(serviceName.getValue(), serviceOperation.getValue(), statusCode, reasonCode);
-    OnFailure.Broadcast(jsonError, returnData);
-	ConditionalBeginDestroy();
-}
-

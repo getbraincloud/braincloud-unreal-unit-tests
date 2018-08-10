@@ -1,4 +1,4 @@
-// Copyright 2016 bitHeads, Inc. All Rights Reserved.
+// Copyright 2018 bitHeads, Inc. All Rights Reserved.
 
 #include "BCClientPluginPrivatePCH.h"
 #include "BrainCloudClient.h"
@@ -21,7 +21,7 @@ bool BrainCloudClient::EnableSingletonMode = false;
 
 const wchar_t BrainCloudClient::SINGLETON_USE_ERROR_MESSAGE[123] = TEXT("Singleton usage is disabled. If called by mistake, use your own variable that holds an instance of the bcWrapper/bcClient.");
 
-BrainCloudClient * BrainCloudClient::_instance = nullptr;
+BrainCloudClient *BrainCloudClient::_instance = nullptr;
 
 FString BrainCloudClient::s_brainCloudClientVersion = TEXT("3.7.6");
 
@@ -51,7 +51,6 @@ BrainCloudClient::~BrainCloudClient()
 	}
 }
 
-
 ////////////////////////////////////////////////////
 // Public Methods
 ////////////////////////////////////////////////////
@@ -59,31 +58,32 @@ BrainCloudClient::~BrainCloudClient()
 /**
 * Retrieve the pointer to the singleton BrainCloudClient instance.
 */
-BrainCloudClient * BrainCloudClient::getInstance()
+BrainCloudClient *BrainCloudClient::getInstance()
 {
-	if (EnableSingletonMode == false) 
+	if (EnableSingletonMode == false)
 	{
 		if (EnableSoftErrorMode)
 		{
 			UE_LOG(LogTemp, Warning, TEXT("%s"), SINGLETON_USE_ERROR_MESSAGE);
 		}
-		else 
+		else
 		{
 			UE_LOG(LogTemp, Fatal, TEXT("%s"), SINGLETON_USE_ERROR_MESSAGE);
 		}
 	}
 
-	if (_instance == nullptr) {
+	if (_instance == nullptr)
+	{
 		_instance = new BrainCloudClient();
 	}
 	return _instance;
 }
 
 void BrainCloudClient::initialize(
-	const FString& serverUrl,
-	const FString& secretKey,
-	const FString& appId,
-	const FString& appVersion)
+	const FString &serverUrl,
+	const FString &secretKey,
+	const FString &appId,
+	const FString &appVersion)
 {
 	FString error = "";
 	if (serverUrl.IsEmpty())
@@ -101,7 +101,8 @@ void BrainCloudClient::initialize(
 		return;
 	}
 
-	if (!_brainCloudComms) _brainCloudComms = new BrainCloudComms(this);
+	if (!_brainCloudComms)
+		_brainCloudComms = new BrainCloudComms(this);
 
 	_brainCloudComms->Initialize(serverUrl, secretKey, appId);
 	determineReleasePlatform();
@@ -109,18 +110,21 @@ void BrainCloudClient::initialize(
 	_appId = appId;
 	_appVersion = appVersion;
 
-	if (_language.IsEmpty()) _language = FInternationalization::Get().GetCurrentCulture()->GetTwoLetterISOLanguageName();
-	if (_country.IsEmpty()) _country = FInternationalization::Get().GetCurrentCulture()->GetRegion();
+	if (_language.IsEmpty())
+		_language = FInternationalization::Get().GetCurrentCulture()->GetTwoLetterISOLanguageName();
+	if (_country.IsEmpty())
+		_country = FInternationalization::Get().GetCurrentCulture()->GetRegion();
 }
 
-void BrainCloudClient::initializeIdentity(const FString& profileId, const FString& anonymousId)
+void BrainCloudClient::initializeIdentity(const FString &profileId, const FString &anonymousId)
 {
 	getAuthenticationService()->initialize(profileId, anonymousId);
 }
 
 void BrainCloudClient::runCallbacks()
 {
-	if (_brainCloudComms) _brainCloudComms->RunCallbacks();
+	if (_brainCloudComms)
+		_brainCloudComms->RunCallbacks();
 }
 
 void BrainCloudClient::registerEventCallback(IEventCallback *eventCallback)
@@ -143,7 +147,7 @@ void BrainCloudClient::deregisterRewardCallback()
 	_brainCloudComms->DeregisterRewardCallback();
 }
 
-void BrainCloudClient::registerFileUploadCallback(IFileUploadCallback * fileUploadCallback)
+void BrainCloudClient::registerFileUploadCallback(IFileUploadCallback *fileUploadCallback)
 {
 	_brainCloudComms->RegisterFileUploadCallback(fileUploadCallback);
 }
@@ -153,7 +157,7 @@ void BrainCloudClient::deregisterFileUploadCallback()
 	_brainCloudComms->DeregisterFileUploadCallback();
 }
 
-void BrainCloudClient::registerGlobalErrorCallback(IGlobalErrorCallback * globalErrorCallback)
+void BrainCloudClient::registerGlobalErrorCallback(IGlobalErrorCallback *globalErrorCallback)
 {
 	_brainCloudComms->RegisterGlobalErrorCallback(globalErrorCallback);
 }
@@ -163,7 +167,7 @@ void BrainCloudClient::deregisterGlobalErrorCallback()
 	_brainCloudComms->DeregisterGlobalErrorCallback();
 }
 
-void BrainCloudClient::registerNetworkErrorCallback(INetworkErrorCallback * networkErrorCallback)
+void BrainCloudClient::registerNetworkErrorCallback(INetworkErrorCallback *networkErrorCallback)
 {
 	_brainCloudComms->RegisterNetworkErrorCallback(networkErrorCallback);
 }
@@ -193,7 +197,7 @@ void BrainCloudClient::heartbeat()
 	_brainCloudComms->Heartbeat();
 }
 
-void BrainCloudClient::sendRequest(ServerCall * serviceMessage)
+void BrainCloudClient::sendRequest(ServerCall *serviceMessage)
 {
 	_brainCloudComms->AddToQueue(serviceMessage);
 }
@@ -202,14 +206,16 @@ void BrainCloudClient::resetCommunication()
 {
 	_brainCloudComms->ResetCommunication();
 
-	if (_authenticationService) _authenticationService->clearSavedProfileId();
+	if (_authenticationService)
+		_authenticationService->clearSavedProfileId();
 }
 
-void BrainCloudClient::setHeartbeatInterval(int32 intervalInMilliseconds) {
+void BrainCloudClient::setHeartbeatInterval(int32 intervalInMilliseconds)
+{
 	_brainCloudComms->SetHeartbeatInterval(intervalInMilliseconds);
 }
 
-void BrainCloudClient::setPacketTimeouts(const TArray<int32> & timeouts)
+void BrainCloudClient::setPacketTimeouts(const TArray<int32> &timeouts)
 {
 	_brainCloudComms->SetPacketTimeouts(timeouts);
 }
@@ -219,7 +225,7 @@ void BrainCloudClient::setPacketTimeoutsToDefault()
 	_brainCloudComms->SetPacketTimeoutsToDefault();
 }
 
-const TArray<int32> & BrainCloudClient::getPacketTimeouts()
+const TArray<int32> &BrainCloudClient::getPacketTimeouts()
 {
 	return _brainCloudComms->GetPacketTimeouts();
 }
@@ -290,7 +296,7 @@ void BrainCloudClient::OnMapExit()
 	destroyService(_authenticationService);
 }
 
-BrainCloudAuthentication * BrainCloudClient::getAuthenticationService()
+BrainCloudAuthentication *BrainCloudClient::getAuthenticationService()
 {
 	if (_authenticationService == nullptr)
 	{
@@ -299,7 +305,7 @@ BrainCloudAuthentication * BrainCloudClient::getAuthenticationService()
 	return _authenticationService;
 }
 
-BrainCloudLeaderboard * BrainCloudClient::getLeaderboardService()
+BrainCloudLeaderboard *BrainCloudClient::getLeaderboardService()
 {
 	if (_leaderboardService == nullptr)
 	{
@@ -308,7 +314,7 @@ BrainCloudLeaderboard * BrainCloudClient::getLeaderboardService()
 	return _leaderboardService;
 }
 
-BrainCloudPlayerState * BrainCloudClient::getPlayerStateService()
+BrainCloudPlayerState *BrainCloudClient::getPlayerStateService()
 {
 	if (_playerStateService == nullptr)
 	{
@@ -317,7 +323,7 @@ BrainCloudPlayerState * BrainCloudClient::getPlayerStateService()
 	return _playerStateService;
 }
 
-BrainCloudGamification * BrainCloudClient::getGamificationService()
+BrainCloudGamification *BrainCloudClient::getGamificationService()
 {
 	if (_gamificationService == nullptr)
 	{
@@ -326,7 +332,7 @@ BrainCloudGamification * BrainCloudClient::getGamificationService()
 	return _gamificationService;
 }
 
-BrainCloudGlobalEntity * BrainCloudClient::getGlobalEntityService()
+BrainCloudGlobalEntity *BrainCloudClient::getGlobalEntityService()
 {
 	if (_globalEntityService == nullptr)
 	{
@@ -335,7 +341,7 @@ BrainCloudGlobalEntity * BrainCloudClient::getGlobalEntityService()
 	return _globalEntityService;
 }
 
-BrainCloudGlobalStatistics * BrainCloudClient::getGlobalStatisticsService()
+BrainCloudGlobalStatistics *BrainCloudClient::getGlobalStatisticsService()
 {
 	if (_globalStatisticsService == nullptr)
 	{
@@ -344,7 +350,7 @@ BrainCloudGlobalStatistics * BrainCloudClient::getGlobalStatisticsService()
 	return _globalStatisticsService;
 }
 
-BrainCloudEntity * BrainCloudClient::getEntityService()
+BrainCloudEntity *BrainCloudClient::getEntityService()
 {
 	if (_entityService == nullptr)
 	{
@@ -353,7 +359,7 @@ BrainCloudEntity * BrainCloudClient::getEntityService()
 	return _entityService;
 }
 
-BrainCloudPlayerStatistics * BrainCloudClient::getPlayerStatisticsService()
+BrainCloudPlayerStatistics *BrainCloudClient::getPlayerStatisticsService()
 {
 	if (_playerStatisticsService == nullptr)
 	{
@@ -362,7 +368,7 @@ BrainCloudPlayerStatistics * BrainCloudClient::getPlayerStatisticsService()
 	return _playerStatisticsService;
 }
 
-BrainCloudTime * BrainCloudClient::getTimeService()
+BrainCloudTime *BrainCloudClient::getTimeService()
 {
 	if (_timeService == nullptr)
 	{
@@ -371,7 +377,7 @@ BrainCloudTime * BrainCloudClient::getTimeService()
 	return _timeService;
 }
 
-BrainCloudPlayerStatisticsEvent * BrainCloudClient::getPlayerStatisticsEventService()
+BrainCloudPlayerStatisticsEvent *BrainCloudClient::getPlayerStatisticsEventService()
 {
 	if (_playerStatisticsEventService == nullptr)
 	{
@@ -380,7 +386,7 @@ BrainCloudPlayerStatisticsEvent * BrainCloudClient::getPlayerStatisticsEventServ
 	return _playerStatisticsEventService;
 }
 
-BrainCloudProduct * BrainCloudClient::getProductService()
+BrainCloudProduct *BrainCloudClient::getProductService()
 {
 	if (_productService == nullptr)
 	{
@@ -389,7 +395,7 @@ BrainCloudProduct * BrainCloudClient::getProductService()
 	return _productService;
 }
 
-BrainCloudIdentity * BrainCloudClient::getIdentityService()
+BrainCloudIdentity *BrainCloudClient::getIdentityService()
 {
 	if (_identityService == nullptr)
 	{
@@ -398,7 +404,7 @@ BrainCloudIdentity * BrainCloudClient::getIdentityService()
 	return _identityService;
 }
 
-BrainCloudEvent * BrainCloudClient::getEventService()
+BrainCloudEvent *BrainCloudClient::getEventService()
 {
 	if (_eventService == nullptr)
 	{
@@ -407,7 +413,7 @@ BrainCloudEvent * BrainCloudClient::getEventService()
 	return _eventService;
 }
 
-BrainCloudS3Handling * BrainCloudClient::getS3HandlingService()
+BrainCloudS3Handling *BrainCloudClient::getS3HandlingService()
 {
 	if (_s3HandlingService == nullptr)
 	{
@@ -416,7 +422,7 @@ BrainCloudS3Handling * BrainCloudClient::getS3HandlingService()
 	return _s3HandlingService;
 }
 
-BrainCloudScript * BrainCloudClient::getScriptService()
+BrainCloudScript *BrainCloudClient::getScriptService()
 {
 	if (_scriptService == nullptr)
 	{
@@ -425,7 +431,7 @@ BrainCloudScript * BrainCloudClient::getScriptService()
 	return _scriptService;
 }
 
-BrainCloudAsyncMatch * BrainCloudClient::getAsyncMatchService()
+BrainCloudAsyncMatch *BrainCloudClient::getAsyncMatchService()
 {
 	if (_asyncMatchService == nullptr)
 	{
@@ -434,7 +440,7 @@ BrainCloudAsyncMatch * BrainCloudClient::getAsyncMatchService()
 	return _asyncMatchService;
 }
 
-BrainCloudFriend * BrainCloudClient::getFriendService()
+BrainCloudFriend *BrainCloudClient::getFriendService()
 {
 	if (_friendService == nullptr)
 	{
@@ -443,7 +449,7 @@ BrainCloudFriend * BrainCloudClient::getFriendService()
 	return _friendService;
 }
 
-BrainCloudGlobalApp * BrainCloudClient::getGlobalAppService()
+BrainCloudGlobalApp *BrainCloudClient::getGlobalAppService()
 {
 	if (_globalAppService == nullptr)
 	{
@@ -452,7 +458,7 @@ BrainCloudGlobalApp * BrainCloudClient::getGlobalAppService()
 	return _globalAppService;
 }
 
-BrainCloudMatchmaking * BrainCloudClient::getMatchmakingService()
+BrainCloudMatchmaking *BrainCloudClient::getMatchmakingService()
 {
 	if (_matchmakingService == nullptr)
 	{
@@ -461,7 +467,7 @@ BrainCloudMatchmaking * BrainCloudClient::getMatchmakingService()
 	return _matchmakingService;
 }
 
-BrainCloudOneWayMatch * BrainCloudClient::getOneWayMatchService()
+BrainCloudOneWayMatch *BrainCloudClient::getOneWayMatchService()
 {
 	if (_oneWayMatchService == nullptr)
 	{
@@ -470,7 +476,7 @@ BrainCloudOneWayMatch * BrainCloudClient::getOneWayMatchService()
 	return _oneWayMatchService;
 }
 
-BrainCloudPlaybackStream * BrainCloudClient::getPlaybackStreamService()
+BrainCloudPlaybackStream *BrainCloudClient::getPlaybackStreamService()
 {
 	if (_playbackStreamService == nullptr)
 	{
@@ -479,7 +485,7 @@ BrainCloudPlaybackStream * BrainCloudClient::getPlaybackStreamService()
 	return _playbackStreamService;
 }
 
-BrainCloudPushNotification * BrainCloudClient::getPushNotificationService()
+BrainCloudPushNotification *BrainCloudClient::getPushNotificationService()
 {
 	if (_pushNotificationService == nullptr)
 	{
@@ -488,7 +494,7 @@ BrainCloudPushNotification * BrainCloudClient::getPushNotificationService()
 	return _pushNotificationService;
 }
 
-BrainCloudRedemptionCode * BrainCloudClient::getRedemptionCodeService()
+BrainCloudRedemptionCode *BrainCloudClient::getRedemptionCodeService()
 {
 	if (_redemptionCodeService == nullptr)
 	{
@@ -497,7 +503,7 @@ BrainCloudRedemptionCode * BrainCloudClient::getRedemptionCodeService()
 	return _redemptionCodeService;
 }
 
-BrainCloudDataStream * BrainCloudClient::getDataStreamService()
+BrainCloudDataStream *BrainCloudClient::getDataStreamService()
 {
 	if (_dataStreamService == nullptr)
 	{
@@ -506,7 +512,7 @@ BrainCloudDataStream * BrainCloudClient::getDataStreamService()
 	return _dataStreamService;
 }
 
-BrainCloudProfanity * BrainCloudClient::getProfanityService()
+BrainCloudProfanity *BrainCloudClient::getProfanityService()
 {
 	if (_profanityService == nullptr)
 	{
@@ -515,7 +521,7 @@ BrainCloudProfanity * BrainCloudClient::getProfanityService()
 	return _profanityService;
 }
 
-BrainCloudFile * BrainCloudClient::getFileService()
+BrainCloudFile *BrainCloudClient::getFileService()
 {
 	if (_fileService == nullptr)
 	{
@@ -524,7 +530,7 @@ BrainCloudFile * BrainCloudClient::getFileService()
 	return _fileService;
 }
 
-BrainCloudGroup * BrainCloudClient::getGroupService()
+BrainCloudGroup *BrainCloudClient::getGroupService()
 {
 	if (_groupService == nullptr)
 	{
@@ -533,7 +539,7 @@ BrainCloudGroup * BrainCloudClient::getGroupService()
 	return _groupService;
 }
 
-BrainCloudMail * BrainCloudClient::getMailService()
+BrainCloudMail *BrainCloudClient::getMailService()
 {
 	if (_mailService == nullptr)
 	{
@@ -542,13 +548,49 @@ BrainCloudMail * BrainCloudClient::getMailService()
 	return _mailService;
 }
 
-BrainCloudTournament * BrainCloudClient::getTournamentService()
+BrainCloudTournament *BrainCloudClient::getTournamentService()
 {
 	if (_tournamentService == nullptr)
 	{
 		_tournamentService = new BrainCloudTournament(this);
 	}
 	return _tournamentService;
+}
+
+BrainCloudRTT *BrainCloudClient::getRTTService()
+{
+	if (_rttService == nullptr)
+	{
+		_rttService = new BrainCloudRTT(this);
+	}
+	return _rttService;
+}
+
+BrainCloudLobby *BrainCloudClient::getLobbyService()
+{
+	if (_lobbyService == nullptr)
+	{
+		_lobbyService = new BrainCloudLobby(this);
+	}
+	return _lobbyService;
+}
+
+BrainCloudChat *BrainCloudClient::getChatService()
+{
+	if (_chatService == nullptr)
+	{
+		_chatService = new BrainCloudChat(this);
+	}
+	return _chatService;
+}
+
+BrainCloudMessaging *BrainCloudClient::getMessagingService()
+{
+	if (_messagingService == nullptr)
+	{
+		_messagingService = new BrainCloudMessaging(this);
+	}
+	return _messagingService;
 }
 
 ////////////////////////////////////////////////////
@@ -582,11 +624,12 @@ void BrainCloudClient::determineReleasePlatform()
 	}
 }
 
-template<class T> void BrainCloudClient::destroyService(T* &service)
+template <class T>
+void BrainCloudClient::destroyService(T *&service)
 {
 	if (service != nullptr)
 	{
-		delete(service);
+		delete (service);
 		service = nullptr;
 	}
 }

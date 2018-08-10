@@ -1,20 +1,19 @@
-// Copyright 2016 bitHeads, Inc. All Rights Reserved.
+// Copyright 2018 bitHeads, Inc. All Rights Reserved.
 
 #pragma once
 
 #include "BCBlueprintCallProxyBase.h"
-#include "IServerCallback.h"
 #include "BCS3HandlingProxy.generated.h"
 
 class ABrainCloud;
 
 UCLASS(MinimalAPI)
-class UBCS3HandlingProxy : public UBCBlueprintCallProxyBase, public IServerCallback
+class UBCS3HandlingProxy : public UBCBlueprintCallProxyBase
 {
     GENERATED_BODY()
 
-public:
-    UBCS3HandlingProxy(const FObjectInitializer& ObjectInitializer);
+  public:
+    UBCS3HandlingProxy(const FObjectInitializer &ObjectInitializer);
 
     /*
     * Sends an array of file details and returns
@@ -27,8 +26,7 @@ public:
     * Param - fileDetailsJson  An array of file details
     */
     UFUNCTION(BlueprintCallable, meta = (BlueprintInternalUseOnly = "true"), Category = "BrainCloud|S3 Handling")
-        static UBCS3HandlingProxy* GetUpdatedFiles(ABrainCloud *brainCloud, FString category, FString fileDetails);
-
+    static UBCS3HandlingProxy *GetUpdatedFiles(UBrainCloudWrapper *brainCloudWrapper, FString category, FString fileDetails);
 
     /*
     * Retrieves the details of custom files stored on the server
@@ -39,26 +37,13 @@ public:
     * Param - category  Category of files to retrieve
     */
     UFUNCTION(BlueprintCallable, meta = (BlueprintInternalUseOnly = "true"), Category = "BrainCloud|S3 Handling")
-        static UBCS3HandlingProxy* GetFileList(ABrainCloud *brainCloud, FString category);
+    static UBCS3HandlingProxy *GetFileList(UBrainCloudWrapper *brainCloudWrapper, FString category);
 
-	/**
+    /**
 	* Returns the CDN url for a file
 	*
 	* Param - fileId ID of file
 	*/
-	UFUNCTION(BlueprintCallable, meta = (BlueprintInternalUseOnly = "true"), Category = "BrainCloud|S3 Handling")
-		static UBCS3HandlingProxy* GetCDNUrl(ABrainCloud *brainCloud, const FString& fileId);
-
-    //Response delegates
-    UPROPERTY(BlueprintAssignable)
-        FBrainCloudCallbackDelegate OnSuccess;
-
-    UPROPERTY(BlueprintAssignable)
-        FBrainCloudCallbackDelegate OnFailure;
-
-protected:
-    // IServerCallback interface
-    void serverCallback(ServiceName serviceName, ServiceOperation serviceOperation, const FString& jsonData);
-    void serverError(ServiceName serviceName, ServiceOperation serviceOperation, int32 statusCode, int32 reasonCode, const FString& jsonError);
-    // End of IServerCallback interface
+    UFUNCTION(BlueprintCallable, meta = (BlueprintInternalUseOnly = "true"), Category = "BrainCloud|S3 Handling")
+    static UBCS3HandlingProxy *GetCDNUrl(UBrainCloudWrapper *brainCloud, const FString &fileId);
 };

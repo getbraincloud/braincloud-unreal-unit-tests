@@ -19,17 +19,17 @@ void AWrapperTestActor::BeginPlay()
 {
 	Super::BeginPlay();
 	
-	BrainCloudWrapper::getInstance()->initialize(
+	UBrainCloudWrapper::getInstance()->initialize(
 		"https://internal.braincloudservers.com/dispatcherv2",
 		"91c3a097-4697-4787-ba1c-ff6e737ff8b3",
 		"10299",
 		"1.0.0");
 
-	BrainCloudWrapper::getInstance()->authenticateAnonymous(this);
+	UBrainCloudWrapper::getInstance()->authenticateAnonymous(this);
 
-	FString id = BrainCloudWrapper::getInstance()->getStoredAnonymousId();
+	FString id = UBrainCloudWrapper::getInstance()->getStoredAnonymousId();
 	UE_LOG(LogTemp, Display, TEXT("Saved Anon ID | %s"), *id);
-	id = BrainCloudWrapper::getInstance()->getStoredProfileId();
+	id = UBrainCloudWrapper::getInstance()->getStoredProfileId();
 	UE_LOG(LogTemp, Display, TEXT("Saved Profile ID | %s"), *id);
 }
 
@@ -37,16 +37,16 @@ void AWrapperTestActor::BeginPlay()
 void AWrapperTestActor::Tick( float DeltaTime )
 {
 	Super::Tick( DeltaTime );
-	BrainCloudWrapper::getInstance()->runCallbacks();
+	UBrainCloudWrapper::getInstance()->runCallbacks();
 }
 
 void AWrapperTestActor::serverCallback(ServiceName serviceName, ServiceOperation serviceOperation, const FString& jsonData)
 {
 	if (serviceName == ServiceName::AuthenticateV2) //authenticate return handling
 	{
-		FString id = BrainCloudWrapper::getInstance()->getStoredAnonymousId();
+		FString id = UBrainCloudWrapper::getInstance()->getStoredAnonymousId();
 		UE_LOG(LogTemp, Display, TEXT("Authenticated! Anon ID | %s"), *id);
-		id = BrainCloudWrapper::getInstance()->getStoredProfileId();
+		id = UBrainCloudWrapper::getInstance()->getStoredProfileId();
 		UE_LOG(LogTemp, Display, TEXT("Authenticated! Profile ID | %s"), *id);
 	}
 }

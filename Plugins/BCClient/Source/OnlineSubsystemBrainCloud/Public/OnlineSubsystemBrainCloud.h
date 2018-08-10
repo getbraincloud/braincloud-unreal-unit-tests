@@ -1,4 +1,4 @@
-// Copyright 2016 bitHeads, Inc. All Rights Reserved.
+// Copyright 2018 bitHeads, Inc. All Rights Reserved.
 
 #pragma once
 
@@ -100,7 +100,7 @@ public:
     * Is the BrainCloud API available for use
     * @return true if BrainCloud functionality is available, false otherwise
     */
-    bool IsEnabled();
+    virtual bool IsEnabled() const override;
 
 PACKAGE_SCOPE:
 

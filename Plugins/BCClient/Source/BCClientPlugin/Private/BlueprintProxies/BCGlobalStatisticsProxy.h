@@ -1,20 +1,19 @@
-// Copyright 2016 bitHeads, Inc. All Rights Reserved.
+// Copyright 2018 bitHeads, Inc. All Rights Reserved.
 
 #pragma once
 
 #include "BCBlueprintCallProxyBase.h"
-#include "IServerCallback.h"
 #include "BCGlobalStatisticsProxy.generated.h"
 
 class ABrainCloud;
 
 UCLASS(MinimalAPI)
-class UBCGlobalStatisticsProxy : public UBCBlueprintCallProxyBase, public IServerCallback
+class UBCGlobalStatisticsProxy : public UBCBlueprintCallProxyBase
 {
     GENERATED_BODY()
 
-public:
-    UBCGlobalStatisticsProxy(const FObjectInitializer& ObjectInitializer);
+  public:
+    UBCGlobalStatisticsProxy(const FObjectInitializer &ObjectInitializer);
 
     /**
     * Method returns all of the global statistics.
@@ -23,7 +22,7 @@ public:
     * Service Operation - Read
     */
     UFUNCTION(BlueprintCallable, meta = (BlueprintInternalUseOnly = "true"), Category = "BrainCloud|Global Statistics")
-        static UBCGlobalStatisticsProxy* ReadAllGlobalStats(ABrainCloud *brainCloud);
+    static UBCGlobalStatisticsProxy *ReadAllGlobalStats(UBrainCloudWrapper *brainCloudWrapper);
 
     /**
     * Reads a subset of global statistics.
@@ -34,7 +33,7 @@ public:
     * Param - globalStats An array of statistics to read:
     */
     UFUNCTION(BlueprintCallable, meta = (BlueprintInternalUseOnly = "true"), Category = "BrainCloud|Global Statistics")
-        static UBCGlobalStatisticsProxy* ReadGlobalStatsSubset(ABrainCloud *brainCloud, const TArray<FString>& globalStats);
+    static UBCGlobalStatisticsProxy *ReadGlobalStatsSubset(UBrainCloudWrapper *brainCloudWrapper, const TArray<FString> &globalStats);
 
     /**
     * Method retrieves the game (aka global) statistics for the given category.
@@ -45,7 +44,7 @@ public:
     * Param - category The game statistics category
     */
     UFUNCTION(BlueprintCallable, meta = (BlueprintInternalUseOnly = "true"), Category = "BrainCloud|Global Statistics")
-        static UBCGlobalStatisticsProxy* ReadGlobalStatsForCategory(ABrainCloud *brainCloud, FString category);
+    static UBCGlobalStatisticsProxy *ReadGlobalStatsForCategory(UBrainCloudWrapper *brainCloudWrapper, FString category);
 
     /**
     * Atomically increment (or decrement) global statistics.
@@ -68,9 +67,9 @@ public:
     * which increments stat1 by 9 up to a limit of 30.
     */
     UFUNCTION(BlueprintCallable, meta = (BlueprintInternalUseOnly = "true"), Category = "BrainCloud|Global Statistics")
-        static UBCGlobalStatisticsProxy* IncrementGlobalGameStat(ABrainCloud *brainCloud, FString jsonData);
+    static UBCGlobalStatisticsProxy *IncrementGlobalGameStat(UBrainCloudWrapper *brainCloudWrapper, FString jsonData);
 
-	/**
+    /**
 	* Apply statistics grammar to a partial set of statistics.
 	*
 	* Service Name - GlobalStatistics
@@ -85,19 +84,6 @@ public:
 	*     "TREES_CLIMBED": 1
 	* }
 	*/
-	UFUNCTION(BlueprintCallable, meta = (BlueprintInternalUseOnly = "true"), Category = "BrainCloud|Global Statistics")
-		static UBCGlobalStatisticsProxy* ProcessStatistics(ABrainCloud *brainCloud, FString jsonData);
-
-    //Response delegates
-    UPROPERTY(BlueprintAssignable)
-        FBrainCloudCallbackDelegate OnSuccess;
-
-    UPROPERTY(BlueprintAssignable)
-        FBrainCloudCallbackDelegate OnFailure;
-
-protected:
-    // IServerCallback interface
-    void serverCallback(ServiceName serviceName, ServiceOperation serviceOperation, const FString& jsonData);
-    void serverError(ServiceName serviceName, ServiceOperation serviceOperation, int32 statusCode, int32 reasonCode, const FString& jsonError);
-    // End of IServerCallback interface
+    UFUNCTION(BlueprintCallable, meta = (BlueprintInternalUseOnly = "true"), Category = "BrainCloud|Global Statistics")
+    static UBCGlobalStatisticsProxy *ProcessStatistics(UBrainCloudWrapper *brainCloud, FString jsonData);
 };
