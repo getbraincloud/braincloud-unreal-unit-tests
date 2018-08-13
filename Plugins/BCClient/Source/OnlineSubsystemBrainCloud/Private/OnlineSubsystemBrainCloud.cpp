@@ -3,6 +3,7 @@
 #include "OnlineSubsystemBrainCloudPrivatePCH.h"
 
 #include "OnlineSubsystemBrainCloud.h"
+#include "BrainCloudWrapper.h"
 #include "BrainCloudClient.h"
 
 #include "OnlineAchievementsInterfaceBrainCloud.h"
@@ -143,11 +144,36 @@ bool FOnlineSubsystemBrainCloud::Tick(float DeltaTime)
 		return false;
 	}
 
-	BrainCloudClient::getInstance()->runCallbacks();
+	_clientPtr->runCallbacks();
 
 	CleanupCallbackObjects();
 
 	return true;
+}
+
+FOnlineSubsystemBrainCloud::FOnlineSubsystemBrainCloud() 
+{
+	_clientPtr = new BrainCloudClient();
+}
+
+#if ENGINE_MINOR_VERSION >= 16
+FOnlineSubsystemBrainCloud::FOnlineSubsystemBrainCloud(FName InSubsystemName, FName InInstanceName) : 
+	FOnlineSubsystemImpl(InSubsystemName, InInstanceName)
+{
+	_clientPtr = new BrainCloudClient();
+}
+
+#else
+FOnlineSubsystemBrainCloud::FOnlineSubsystemBrainCloud(FName InSubsystemName, FName InInstanceName) :
+		FOnlineSubsystemImpl(InInstanceName)
+{
+	_clientPtr = new BrainCloudClient();
+}
+#endif
+
+FOnlineSubsystemBrainCloud::~FOnlineSubsystemBrainCloud() 
+{
+	//delete _clientPtr;
 }
 
 bool FOnlineSubsystemBrainCloud::Init()
@@ -165,14 +191,14 @@ bool FOnlineSubsystemBrainCloud::Init()
 		{
 #if ENGINE_MINOR_VERSION >= 12
 			FString test = Configs->Find(TEXT("ServerURL"))->GetValue();
-			BrainCloudClient::getInstance()->initialize(
+			_clientPtr->initialize(
 				Configs->Find(TEXT("ServerURL"))->GetValue(),
 				Configs->Find(TEXT("Secret"))->GetValue(),
 				Configs->Find(TEXT("AppID"))->GetValue(),
 				Configs->Find(TEXT("Version"))->GetValue());
 #else
 			FString test = *Configs->Find(TEXT("ServerURL"));
-			BrainCloudClient::getInstance()->initialize(
+			_clientPtr->initialize(
 				*Configs->Find(TEXT("ServerURL")),
 				*Configs->Find(TEXT("Secret")),
 				*Configs->Find(TEXT("AppID")),
@@ -197,8 +223,6 @@ bool FOnlineSubsystemBrainCloud::Init()
 		TimeInterface = MakeShareable(new FOnlineTimeBrainCloud(this));
 		MessageInterface = MakeShareable(new FOnlineMessageBrainCloud(this));
 		TitleFileInterface = MakeShareable(new FOnlineTitleFileBrainCloud(this));
-
-		_clientPtr = BrainCloudClient::getInstance();
 	}
 	else
 	{

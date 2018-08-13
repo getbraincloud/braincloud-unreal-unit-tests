@@ -18,7 +18,7 @@ bool FOnlineTimeBrainCloud::QueryServerUtcTime()
     AssignableServerCallback* cb = _subysystem->GetCallbackObject<AssignableServerCallback>();
     cb->OnSuccessDelegate.AddRaw(this, &FOnlineTimeBrainCloud::OnQueryTimeComplete);
     cb->OnFailDelegate.AddRaw(this, &FOnlineTimeBrainCloud::OnQueryTimeFail);
-    BrainCloudClient::getInstance()->getTimeService()->readServerTime(cb);
+    _subysystem->GetClient()->getTimeService()->readServerTime(cb);
     return true;
 }
 
