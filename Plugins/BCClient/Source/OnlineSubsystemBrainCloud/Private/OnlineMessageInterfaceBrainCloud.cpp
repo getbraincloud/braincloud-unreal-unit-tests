@@ -26,7 +26,7 @@ bool FOnlineMessageBrainCloud::EnumerateMessages(int32 LocalUserNum)
     cb->OnSuccessDelegate.AddRaw(this, &FOnlineMessageBrainCloud::EnumerateMessagesSuccess);
     cb->OnFailDelegate.AddRaw(this, &FOnlineMessageBrainCloud::EnumerateMessagesFail);
 
-    BrainCloudClient::getInstance()->getEventService()->getEvents(cb);
+    _subsystem->GetClient()->getEventService()->getEvents(cb);
 
     return true;
 }
@@ -111,7 +111,8 @@ bool FOnlineMessageBrainCloud::SendMessage(int32 LocalUserNum, const TArray<TSha
 
     for (int32 i = 0; i < RecipientIds.Num(); i++)
     {
-        BrainCloudClient::getInstance()->getEventService()->sendEvent(
+        
+        _subsystem->GetClient()->getEventService()->sendEvent(
             RecipientIds[i]->ToString(),
             MessageType,
             jsonDataStr,
@@ -145,7 +146,7 @@ bool FOnlineMessageBrainCloud::DeleteMessage(int32 LocalUserNum, const FUniqueMe
     cb->OnSuccessDelegate.AddRaw(this, &FOnlineMessageBrainCloud::DeleteMessagesSuccess);
     cb->OnFailDelegate.AddRaw(this, &FOnlineMessageBrainCloud::DeleteMessagesFail);
 
-    BrainCloudClient::getInstance()->getEventService()->deleteIncomingEvent(
+    _subsystem->GetClient()->getEventService()->deleteIncomingEvent(
         message->FromUserId->ToString(),
         cb);
 

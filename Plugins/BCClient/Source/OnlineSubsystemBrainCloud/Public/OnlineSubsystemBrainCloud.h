@@ -17,6 +17,7 @@ typedef TSharedPtr<class FOnlineTitleFileBrainCloud, ESPMode::ThreadSafe> FOnlin
 typedef TSharedPtr<class FOnlineTimeBrainCloud, ESPMode::ThreadSafe> FOnlineTimeBrainCloudPtr;
 
 class BrainCloudClient;
+class UBrainCloudWrapper;
 class AssignableServerCallback;
 
 /**
@@ -28,9 +29,8 @@ class ONLINESUBSYSTEMBRAINCLOUD_API FOnlineSubsystemBrainCloud :
 
 public:
 
-    virtual ~FOnlineSubsystemBrainCloud()
-    {
-    }
+    virtual ~FOnlineSubsystemBrainCloud();
+    
 
     // IOnlineSubsystem
 
@@ -106,16 +106,12 @@ PACKAGE_SCOPE:
 
     /** Only the factory makes instances */
 #if ENGINE_MINOR_VERSION >= 16
-    FOnlineSubsystemBrainCloud(FName InSubsystemName, FName InInstanceName) :
-        FOnlineSubsystemImpl(InSubsystemName, InInstanceName)
-    {}
+    FOnlineSubsystemBrainCloud(FName InSubsystemName, FName InInstanceName);
 #else
-	FOnlineSubsystemBrainCloud(FName InSubsystemName, FName InInstanceName) :
-		FOnlineSubsystemImpl(InInstanceName)
-	{}
+	FOnlineSubsystemBrainCloud(FName InSubsystemName, FName InInstanceName);
 #endif
 
-    FOnlineSubsystemBrainCloud() {}
+    FOnlineSubsystemBrainCloud();
 
 private:
 
@@ -140,6 +136,7 @@ private:
     void CleanupCallbackObjects();
 
     TArray<AssignableServerCallback*> _activeCallbacks = TArray<AssignableServerCallback*>();
+    
     BrainCloudClient* _clientPtr = nullptr;
     FString _configPath = "";
 };
