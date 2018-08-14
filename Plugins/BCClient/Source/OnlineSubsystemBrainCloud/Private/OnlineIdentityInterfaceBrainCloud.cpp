@@ -1,4 +1,4 @@
-// Copyright 2016 bitHeads, Inc. All Rights Reserved.
+// Copyright 2018 bitHeads, Inc. All Rights Reserved.
 
 #include "OnlineSubsystemBrainCloudPrivatePCH.h"
 #include "OnlineIdentityInterfaceBrainCloud.h"
@@ -53,7 +53,7 @@ bool FOnlineIdentityBrainCloud::Login(int32 LocalUserNum, const FOnlineAccountCr
         cb->OnSuccessDelegate.AddRaw(this, &FOnlineIdentityBrainCloud::authenticateSuccess);
         cb->OnFailDelegate.AddRaw(this, &FOnlineIdentityBrainCloud::authenticateFail);
 
-        BrainCloudClient::getInstance()->getAuthenticationService()->authenticateUniversal(
+        Subsystem->GetClient()->getAuthenticationService()->authenticateUniversal(
             AccountCredentials.Id,
             AccountCredentials.Token,
             true,
@@ -80,7 +80,7 @@ bool FOnlineIdentityBrainCloud::Logout(int32 LocalUserNum)
         cb->OnSuccessDelegate.AddRaw(this, &FOnlineIdentityBrainCloud::logoutSuccess);
         cb->OnFailDelegate.AddRaw(this, &FOnlineIdentityBrainCloud::logoutFail);
 
-        BrainCloudClient::getInstance()->getPlayerStateService()->logout(cb);
+        Subsystem->GetClient()->getPlayerStateService()->logout(cb);
         return true;
     }
 
@@ -161,7 +161,7 @@ TSharedPtr<const FUniqueNetId> FOnlineIdentityBrainCloud::CreateUniquePlayerId(c
 
 ELoginStatus::Type FOnlineIdentityBrainCloud::GetLoginStatus(int32 LocalUserNum) const
 {
-    if (BrainCloudClient::getInstance()->isAuthenticated())
+    if (Subsystem->GetClient()->isAuthenticated())
     {
         return ELoginStatus::LoggedIn;
     }
@@ -176,12 +176,12 @@ ELoginStatus::Type FOnlineIdentityBrainCloud::GetLoginStatus(const FUniqueNetId&
 
 FString FOnlineIdentityBrainCloud::GetPlayerNickname(int32 LocalUserNum) const
 {
-    return BrainCloudClient::getInstance()->getPlayerStateService()->getUserName();
+    return Subsystem->GetClient()->getPlayerStateService()->getUserName();
 }
 
 FString FOnlineIdentityBrainCloud::GetPlayerNickname(const FUniqueNetId& UserId) const
 {
-    return BrainCloudClient::getInstance()->getPlayerStateService()->getUserName();
+    return Subsystem->GetClient()->getPlayerStateService()->getUserName();
 }
 
 FString FOnlineIdentityBrainCloud::GetAuthToken(int32 LocalUserNum) const

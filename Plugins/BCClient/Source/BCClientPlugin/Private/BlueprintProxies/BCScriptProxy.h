@@ -1,4 +1,4 @@
-// Copyright 2016 bitHeads, Inc. All Rights Reserved.
+// Copyright 2018 bitHeads, Inc. All Rights Reserved.
 
 #pragma once
 
@@ -27,7 +27,7 @@ public:
 	* @see The API documentation site for more details on cloud code
 	*/
 	UFUNCTION(BlueprintCallable, meta = (BlueprintInternalUseOnly = "true"), Category = "BrainCloud|Cloud Script")
-		static UBCScriptProxy* RunScript(ABrainCloud *brainCloud, FString scriptName, FString jsonScriptData);
+		static UBCScriptProxy* RunScript(UBrainCloudWrapper *brainCloudWrapper, FString scriptName, FString jsonScriptData);
 
 	/**
 	* Allows cloud script executions to be scheduled
@@ -41,7 +41,7 @@ public:
 	* @see The API documentation site for more details on cloud code
 	*/
 	UFUNCTION(BlueprintCallable, meta = (BlueprintInternalUseOnly = "true"), Category = "BrainCloud|Cloud Script")
-		static UBCScriptProxy* ScheduleRunScriptUTC(ABrainCloud *brainCloud, FString scriptName, FString jsonScriptData, FDateTime startDateInUTC);
+		static UBCScriptProxy* ScheduleRunScriptUTC(UBrainCloudWrapper *brainCloudWrapper, FString scriptName, FString jsonScriptData, FDateTime startDateInUTC);
 
 	/**
 	* Allows cloud script executions to be scheduled
@@ -55,7 +55,7 @@ public:
 	* @see The API documentation site for more details on cloud code
 	*/
 	UFUNCTION(BlueprintCallable, meta = (BlueprintInternalUseOnly = "true"), Category = "BrainCloud|Cloud Script")
-		static UBCScriptProxy* ScheduleRunScriptMinutes(ABrainCloud *brainCloud, FString scriptName, FString jsonScriptData, int32 minutesFromNow);
+		static UBCScriptProxy* ScheduleRunScriptMinutes(UBrainCloudWrapper *brainCloudWrapper, FString scriptName, FString jsonScriptData, int32 minutesFromNow);
 
 	/**
 	* Run a cloud script in a parent app
@@ -69,7 +69,7 @@ public:
 	* @see The API documentation site for more details on cloud code
 	*/
 	UFUNCTION(BlueprintCallable, meta = (BlueprintInternalUseOnly = "true"), Category = "BrainCloud|Cloud Script")
-		static UBCScriptProxy* RunParentScript(ABrainCloud *brainCloud, FString scriptName, FString jsonScriptData, FString parentLevel);
+		static UBCScriptProxy* RunParentScript(UBrainCloudWrapper *brainCloudWrapper, FString scriptName, FString jsonScriptData, FString parentLevel);
 
 	/**
 	* Cancels a scheduled cloud code script
@@ -80,7 +80,7 @@ public:
 	* Param - jobId ID of script job to cancel
 	*/
 	UFUNCTION(BlueprintCallable, meta = (BlueprintInternalUseOnly = "true"), Category = "BrainCloud|Cloud Script")
-		static UBCScriptProxy* CancelScheduledScript(ABrainCloud *brainCloud, const FString& jobId);
+		static UBCScriptProxy* CancelScheduledScript(UBrainCloudWrapper *brainCloudWrapper, const FString& jobId);
 
 	/**
 	* Runs a script from the context of a peer
@@ -93,7 +93,7 @@ public:
 	* Param - peer Peer the script belongs to
 	*/
 	UFUNCTION(BlueprintCallable, meta = (BlueprintInternalUseOnly = "true"), Category = "BrainCloud|Cloud Script")
-		static UBCScriptProxy* RunPeerScript(ABrainCloud *brainCloud, const FString& scriptName, const FString& jsonScriptData, const FString& peer);
+		static UBCScriptProxy* RunPeerScript(UBrainCloudWrapper *brainCloudWrapper, const FString& scriptName, const FString& jsonScriptData, const FString& peer);
 
 	/**
 	* Runs a script asynchronously from the context of a peer
@@ -107,7 +107,7 @@ public:
 	* Param - peer Peer the script belongs to
 	*/
 	UFUNCTION(BlueprintCallable, meta = (BlueprintInternalUseOnly = "true"), Category = "BrainCloud|Cloud Script")
-		static UBCScriptProxy* RunPeerScriptAsync(ABrainCloud *brainCloud, const FString& scriptName, const FString& jsonScriptData, const FString& peer);
+		static UBCScriptProxy* RunPeerScriptAsync(UBrainCloudWrapper *brainCloudWrapper, const FString& scriptName, const FString& jsonScriptData, const FString& peer);
 
 	//Response delegates
 	UPROPERTY(BlueprintAssignable)

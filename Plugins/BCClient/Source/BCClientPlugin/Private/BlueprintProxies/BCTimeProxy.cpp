@@ -1,9 +1,9 @@
-// Copyright 2016 bitHeads, Inc. All Rights Reserved.
+// Copyright 2018 bitHeads, Inc. All Rights Reserved.
 
 #include "BCClientPluginPrivatePCH.h"
 #include "BrainCloudClient.h"
 #include "ServerCall.h"
-#include "BrainCloud.h"
+#include "BrainCloudActor.h"
 #include "BCWrapperProxy.h"
 #include "BrainCloudWrapper.h"
 #include "BCTimeProxy.h"
@@ -13,10 +13,10 @@ UBCTimeProxy::UBCTimeProxy(const FObjectInitializer& ObjectInitializer)
 {
 }
 
-UBCTimeProxy* UBCTimeProxy::ReadServerTime(ABrainCloud *brainCloud)
+UBCTimeProxy* UBCTimeProxy::ReadServerTime(UBrainCloudWrapper *brainCloudWrapper)
 {
     UBCTimeProxy* Proxy = NewObject<UBCTimeProxy>();
-    UBCWrapperProxy::GetBrainCloudInstance(brainCloud)->getTimeService()->readServerTime(Proxy);
+    UBCWrapperProxy::GetBrainCloudInstance(brainCloudWrapper)->getTimeService()->readServerTime(Proxy);
     return Proxy;
 }
 

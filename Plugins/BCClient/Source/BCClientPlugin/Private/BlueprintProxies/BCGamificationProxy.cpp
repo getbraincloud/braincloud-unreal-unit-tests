@@ -1,9 +1,9 @@
-// Copyright 2016 bitHeads, Inc. All Rights Reserved.
+// Copyright 2018 bitHeads, Inc. All Rights Reserved.
 
 #include "BCClientPluginPrivatePCH.h"
 #include "BrainCloudClient.h"
 #include "ServerCall.h"
-#include "BrainCloud.h"
+#include "BrainCloudActor.h"
 #include "BCWrapperProxy.h"
 #include "BCGamificationProxy.h"
 #include "BrainCloudWrapper.h"
@@ -13,129 +13,129 @@ UBCGamificationProxy::UBCGamificationProxy(const FObjectInitializer& ObjectIniti
 {
 }
 
-UBCGamificationProxy* UBCGamificationProxy::ReadAllGamification(ABrainCloud *brainCloud, bool includeMetaData)
+UBCGamificationProxy* UBCGamificationProxy::ReadAllGamification(UBrainCloudWrapper *brainCloudWrapper, bool includeMetaData)
 {
     UBCGamificationProxy* Proxy = NewObject<UBCGamificationProxy>();
-    UBCWrapperProxy::GetBrainCloudInstance(brainCloud)->getGamificationService()->readAllGamification(Proxy, includeMetaData);
+    UBCWrapperProxy::GetBrainCloudInstance(brainCloudWrapper)->getGamificationService()->readAllGamification(Proxy, includeMetaData);
     return Proxy;
 }
 
-UBCGamificationProxy* UBCGamificationProxy::ReadMilestones(ABrainCloud *brainCloud, bool includeMetaData)
+UBCGamificationProxy* UBCGamificationProxy::ReadMilestones(UBrainCloudWrapper *brainCloudWrapper, bool includeMetaData)
 {
     UBCGamificationProxy* Proxy = NewObject<UBCGamificationProxy>();
-    UBCWrapperProxy::GetBrainCloudInstance(brainCloud)->getGamificationService()->readMilestones(Proxy, includeMetaData);
+    UBCWrapperProxy::GetBrainCloudInstance(brainCloudWrapper)->getGamificationService()->readMilestones(Proxy, includeMetaData);
     return Proxy;
 }
 
-UBCGamificationProxy* UBCGamificationProxy::ReadAchievements(ABrainCloud *brainCloud, bool includeMetaData)
+UBCGamificationProxy* UBCGamificationProxy::ReadAchievements(UBrainCloudWrapper *brainCloudWrapper, bool includeMetaData)
 {
     UBCGamificationProxy* Proxy = NewObject<UBCGamificationProxy>();
-    UBCWrapperProxy::GetBrainCloudInstance(brainCloud)->getGamificationService()->readAchievements(Proxy, includeMetaData);
+    UBCWrapperProxy::GetBrainCloudInstance(brainCloudWrapper)->getGamificationService()->readAchievements(Proxy, includeMetaData);
     return Proxy;
 }
 
-UBCGamificationProxy* UBCGamificationProxy::ReadXpLevelsMetaData(ABrainCloud *brainCloud)
+UBCGamificationProxy* UBCGamificationProxy::ReadXpLevelsMetaData(UBrainCloudWrapper *brainCloudWrapper)
 {
     UBCGamificationProxy* Proxy = NewObject<UBCGamificationProxy>();
-    UBCWrapperProxy::GetBrainCloudInstance(brainCloud)->getGamificationService()->readXpLevelsMetaData(Proxy);
+    UBCWrapperProxy::GetBrainCloudInstance(brainCloudWrapper)->getGamificationService()->readXpLevelsMetaData(Proxy);
     return Proxy;
 }
 
-UBCGamificationProxy* UBCGamificationProxy::ReadAchievedAchievements(ABrainCloud *brainCloud, bool includeMetaData)
+UBCGamificationProxy* UBCGamificationProxy::ReadAchievedAchievements(UBrainCloudWrapper *brainCloudWrapper, bool includeMetaData)
 {
     UBCGamificationProxy* Proxy = NewObject<UBCGamificationProxy>();
-    UBCWrapperProxy::GetBrainCloudInstance(brainCloud)->getGamificationService()->readAchievedAchievements(Proxy, includeMetaData);
+    UBCWrapperProxy::GetBrainCloudInstance(brainCloudWrapper)->getGamificationService()->readAchievedAchievements(Proxy, includeMetaData);
     return Proxy;
 }
 
-UBCGamificationProxy* UBCGamificationProxy::ReadCompletedMilestones(ABrainCloud *brainCloud, bool includeMetaData)
+UBCGamificationProxy* UBCGamificationProxy::ReadCompletedMilestones(UBrainCloudWrapper *brainCloudWrapper, bool includeMetaData)
 {
     UBCGamificationProxy* Proxy = NewObject<UBCGamificationProxy>();
-    UBCWrapperProxy::GetBrainCloudInstance(brainCloud)->getGamificationService()->readCompletedMilestones(Proxy, includeMetaData);
+    UBCWrapperProxy::GetBrainCloudInstance(brainCloudWrapper)->getGamificationService()->readCompletedMilestones(Proxy, includeMetaData);
     return Proxy;
 }
 
-UBCGamificationProxy* UBCGamificationProxy::ReadInProgressMilestones(ABrainCloud *brainCloud, bool includeMetaData)
+UBCGamificationProxy* UBCGamificationProxy::ReadInProgressMilestones(UBrainCloudWrapper *brainCloudWrapper, bool includeMetaData)
 {
     UBCGamificationProxy* Proxy = NewObject<UBCGamificationProxy>();
-    UBCWrapperProxy::GetBrainCloudInstance(brainCloud)->getGamificationService()->readInProgressMilestones(Proxy, includeMetaData);
+    UBCWrapperProxy::GetBrainCloudInstance(brainCloudWrapper)->getGamificationService()->readInProgressMilestones(Proxy, includeMetaData);
     return Proxy;
 }
 
-UBCGamificationProxy* UBCGamificationProxy::ReadMilestonesByCategory(ABrainCloud *brainCloud, FString category, bool includeMetaData)
+UBCGamificationProxy* UBCGamificationProxy::ReadMilestonesByCategory(UBrainCloudWrapper *brainCloudWrapper, FString category, bool includeMetaData)
 {
     UBCGamificationProxy* Proxy = NewObject<UBCGamificationProxy>();
-    UBCWrapperProxy::GetBrainCloudInstance(brainCloud)->getGamificationService()->readMilestonesByCategory(category, Proxy, includeMetaData);
+    UBCWrapperProxy::GetBrainCloudInstance(brainCloudWrapper)->getGamificationService()->readMilestonesByCategory(category, Proxy, includeMetaData);
     return Proxy;
 }
 
-UBCGamificationProxy* UBCGamificationProxy::AwardAchievements(ABrainCloud *brainCloud, const TArray<FString>& achievements)
+UBCGamificationProxy* UBCGamificationProxy::AwardAchievements(UBrainCloudWrapper *brainCloudWrapper, const TArray<FString>& achievements)
 {
     UBCGamificationProxy* Proxy = NewObject<UBCGamificationProxy>();
-    UBCWrapperProxy::GetBrainCloudInstance(brainCloud)->getGamificationService()->awardAchievements(achievements, Proxy);
+    UBCWrapperProxy::GetBrainCloudInstance(brainCloudWrapper)->getGamificationService()->awardAchievements(achievements, Proxy);
     return Proxy;
 }
 
-UBCGamificationProxy* UBCGamificationProxy::ResetMilestones(ABrainCloud *brainCloud, const TArray<FString>& milestoneIds)
+UBCGamificationProxy* UBCGamificationProxy::ResetMilestones(UBrainCloudWrapper *brainCloudWrapper, const TArray<FString>& milestoneIds)
 {
     UBCGamificationProxy* Proxy = NewObject<UBCGamificationProxy>();
-    UBCWrapperProxy::GetBrainCloudInstance(brainCloud)->getGamificationService()->resetMilestones(milestoneIds, Proxy);
+    UBCWrapperProxy::GetBrainCloudInstance(brainCloudWrapper)->getGamificationService()->resetMilestones(milestoneIds, Proxy);
     return Proxy;
 }
 
-UBCGamificationProxy* UBCGamificationProxy::ReadQuests(ABrainCloud *brainCloud, bool includeMetaData)
+UBCGamificationProxy* UBCGamificationProxy::ReadQuests(UBrainCloudWrapper *brainCloudWrapper, bool includeMetaData)
 {
     UBCGamificationProxy* Proxy = NewObject<UBCGamificationProxy>();
-    UBCWrapperProxy::GetBrainCloudInstance(brainCloud)->getGamificationService()->readQuests(Proxy, includeMetaData);
+    UBCWrapperProxy::GetBrainCloudInstance(brainCloudWrapper)->getGamificationService()->readQuests(Proxy, includeMetaData);
     return Proxy;
 }
 
-UBCGamificationProxy* UBCGamificationProxy::ReadCompletedQuests(ABrainCloud *brainCloud, bool includeMetaData)
+UBCGamificationProxy* UBCGamificationProxy::ReadCompletedQuests(UBrainCloudWrapper *brainCloudWrapper, bool includeMetaData)
 {
     UBCGamificationProxy* Proxy = NewObject<UBCGamificationProxy>();
-    UBCWrapperProxy::GetBrainCloudInstance(brainCloud)->getGamificationService()->readCompletedQuests(Proxy, includeMetaData);
+    UBCWrapperProxy::GetBrainCloudInstance(brainCloudWrapper)->getGamificationService()->readCompletedQuests(Proxy, includeMetaData);
     return Proxy;
 }
 
-UBCGamificationProxy* UBCGamificationProxy::ReadInProgressQuests(ABrainCloud *brainCloud, bool includeMetaData)
+UBCGamificationProxy* UBCGamificationProxy::ReadInProgressQuests(UBrainCloudWrapper *brainCloudWrapper, bool includeMetaData)
 {
     UBCGamificationProxy* Proxy = NewObject<UBCGamificationProxy>();
-    UBCWrapperProxy::GetBrainCloudInstance(brainCloud)->getGamificationService()->readInProgressQuests(Proxy, includeMetaData);
+    UBCWrapperProxy::GetBrainCloudInstance(brainCloudWrapper)->getGamificationService()->readInProgressQuests(Proxy, includeMetaData);
     return Proxy;
 }
 
-UBCGamificationProxy* UBCGamificationProxy::ReadNotStartedQuests(ABrainCloud *brainCloud, bool includeMetaData)
+UBCGamificationProxy* UBCGamificationProxy::ReadNotStartedQuests(UBrainCloudWrapper *brainCloudWrapper, bool includeMetaData)
 {
     UBCGamificationProxy* Proxy = NewObject<UBCGamificationProxy>();
-    UBCWrapperProxy::GetBrainCloudInstance(brainCloud)->getGamificationService()->readNotStartedQuests(Proxy, includeMetaData);
+    UBCWrapperProxy::GetBrainCloudInstance(brainCloudWrapper)->getGamificationService()->readNotStartedQuests(Proxy, includeMetaData);
     return Proxy;
 }
 
-UBCGamificationProxy* UBCGamificationProxy::ReadQuestsWithStatus(ABrainCloud *brainCloud, bool includeMetaData)
+UBCGamificationProxy* UBCGamificationProxy::ReadQuestsWithStatus(UBrainCloudWrapper *brainCloudWrapper, bool includeMetaData)
 {
     UBCGamificationProxy* Proxy = NewObject<UBCGamificationProxy>();
-    UBCWrapperProxy::GetBrainCloudInstance(brainCloud)->getGamificationService()->readQuestsWithStatus(Proxy, includeMetaData);
+    UBCWrapperProxy::GetBrainCloudInstance(brainCloudWrapper)->getGamificationService()->readQuestsWithStatus(Proxy, includeMetaData);
     return Proxy;
 }
 
-UBCGamificationProxy* UBCGamificationProxy::ReadQuestsWithBasicPercentage(ABrainCloud *brainCloud, bool includeMetaData)
+UBCGamificationProxy* UBCGamificationProxy::ReadQuestsWithBasicPercentage(UBrainCloudWrapper *brainCloudWrapper, bool includeMetaData)
 {
     UBCGamificationProxy* Proxy = NewObject<UBCGamificationProxy>();
-    UBCWrapperProxy::GetBrainCloudInstance(brainCloud)->getGamificationService()->readQuestsWithBasicPercentage(Proxy, includeMetaData);
+    UBCWrapperProxy::GetBrainCloudInstance(brainCloudWrapper)->getGamificationService()->readQuestsWithBasicPercentage(Proxy, includeMetaData);
     return Proxy;
 }
 
-UBCGamificationProxy* UBCGamificationProxy::ReadQuestsWithComplexPercentage(ABrainCloud *brainCloud, bool includeMetaData)
+UBCGamificationProxy* UBCGamificationProxy::ReadQuestsWithComplexPercentage(UBrainCloudWrapper *brainCloudWrapper, bool includeMetaData)
 {
     UBCGamificationProxy* Proxy = NewObject<UBCGamificationProxy>();
-    UBCWrapperProxy::GetBrainCloudInstance(brainCloud)->getGamificationService()->readQuestsWithComplexPercentage(Proxy, includeMetaData);
+    UBCWrapperProxy::GetBrainCloudInstance(brainCloudWrapper)->getGamificationService()->readQuestsWithComplexPercentage(Proxy, includeMetaData);
     return Proxy;
 }
 
-UBCGamificationProxy* UBCGamificationProxy::ReadQuestsByCategory(ABrainCloud *brainCloud, FString category, bool includeMetaData)
+UBCGamificationProxy* UBCGamificationProxy::ReadQuestsByCategory(UBrainCloudWrapper *brainCloudWrapper, FString category, bool includeMetaData)
 {
     UBCGamificationProxy* Proxy = NewObject<UBCGamificationProxy>();
-    UBCWrapperProxy::GetBrainCloudInstance(brainCloud)->getGamificationService()->readQuestsByCategory(category, Proxy, includeMetaData);
+    UBCWrapperProxy::GetBrainCloudInstance(brainCloudWrapper)->getGamificationService()->readQuestsByCategory(category, Proxy, includeMetaData);
     return Proxy;
 }
 
