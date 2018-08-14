@@ -16,7 +16,7 @@ Package | Description
 
 ## Example Projects
 
-Examples of using brainCloud in your Unity Projects can be found [here](https://github.com/getbraincloud/examples-unreal).
+Examples of using brainCloud in your Unreal Projects can be found [here](https://github.com/getbraincloud/examples-unreal).
 
 ## Troubleshooting
 
