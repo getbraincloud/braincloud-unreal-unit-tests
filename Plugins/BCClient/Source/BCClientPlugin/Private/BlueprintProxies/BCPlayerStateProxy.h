@@ -1,4 +1,4 @@
-// Copyright 2016 bitHeads, Inc. All Rights Reserved.
+// Copyright 2018 bitHeads, Inc. All Rights Reserved.
 
 #pragma once
 
@@ -20,7 +20,7 @@ public:
 	* @deprecated Use findUserByUniversalId instead
 	*/
 	UFUNCTION(BlueprintCallable, meta = (BlueprintInternalUseOnly = "true"), Category = "BrainCloud|Player State")
-		static UBCPlayerStateProxy* ReadPlayerState(ABrainCloud *brainCloud);
+		static UBCPlayerStateProxy* ReadPlayerState(UBrainCloudWrapper *brainCloudWrapper);
 
     /**
     * Read the state of the currently logged in user.
@@ -33,13 +33,13 @@ public:
     * Service Operation - Read
     */
     UFUNCTION(BlueprintCallable, meta = (BlueprintInternalUseOnly = "true"), Category = "BrainCloud|Player State")
-        static UBCPlayerStateProxy* ReadUserState(ABrainCloud *brainCloud);
+        static UBCPlayerStateProxy* ReadUserState(UBrainCloudWrapper *brainCloudWrapper);
 
 	/**
 	* @deprecated Use DeleteUser instead
 	*/
 	UFUNCTION(BlueprintCallable, meta = (BlueprintInternalUseOnly = "true"), Category = "BrainCloud|Player State")
-		static UBCPlayerStateProxy* DeletePlayer(ABrainCloud *brainCloud);
+		static UBCPlayerStateProxy* DeletePlayer(UBrainCloudWrapper *brainCloudWrapper);
 
     /**
     * Completely deletes the user record and all data fully owned
@@ -51,13 +51,13 @@ public:
     * Service Operation - FullReset
     */
     UFUNCTION(BlueprintCallable, meta = (BlueprintInternalUseOnly = "true"), Category = "BrainCloud|Player State")
-        static UBCPlayerStateProxy* DeleteUser(ABrainCloud *brainCloud);
+        static UBCPlayerStateProxy* DeleteUser(UBrainCloudWrapper *brainCloudWrapper);
 
 	/**
 	* @deprecated Use ResetUserState instead
 	*/
 	UFUNCTION(BlueprintCallable, meta = (BlueprintInternalUseOnly = "true"), Category = "BrainCloud|Player State")
-		static UBCPlayerStateProxy* ResetPlayerState(ABrainCloud *brainCloud);
+		static UBCPlayerStateProxy* ResetPlayerState(UBrainCloudWrapper *brainCloudWrapper);
 
     /**
     * This method will delete *most* data for the currently logged in user.
@@ -70,7 +70,7 @@ public:
     * Service Operation - DataReset
     */
     UFUNCTION(BlueprintCallable, meta = (BlueprintInternalUseOnly = "true"), Category = "BrainCloud|Player State")
-        static UBCPlayerStateProxy* ResetUserState(ABrainCloud *brainCloud);
+        static UBCPlayerStateProxy* ResetUserState(UBrainCloudWrapper *brainCloudWrapper);
 
     /**
     * Logs user out of server.
@@ -79,20 +79,20 @@ public:
     * Service Operation - Logout
     */
     UFUNCTION(BlueprintCallable, meta = (BlueprintInternalUseOnly = "true"), Category = "BrainCloud|Player State")
-        static UBCPlayerStateProxy* Logout(ABrainCloud *brainCloud);
+        static UBCPlayerStateProxy* Logout(UBrainCloudWrapper *brainCloudWrapper);
 
 	/**
 	* @deprecated Use UpdateName instead
 	*/
 	UFUNCTION(BlueprintCallable, meta = (BlueprintInternalUseOnly = "true"), Category = "BrainCloud|Player State")
-		static UBCPlayerStateProxy* UpdatePlayerName(ABrainCloud *brainCloud, FString playerName);
+		static UBCPlayerStateProxy* UpdatePlayerName(UBrainCloudWrapper *brainCloudWrapper, FString playerName);
 
 
 	/**
 	* @deprecated Use UpdateName instead
 	*/
 	UFUNCTION(BlueprintCallable, meta = (BlueprintInternalUseOnly = "true"), Category = "BrainCloud|Player State")
-        static UBCPlayerStateProxy* UpdateUserName(ABrainCloud *brainCloud, FString userName);
+        static UBCPlayerStateProxy* UpdateUserName(UBrainCloudWrapper *brainCloudWrapper, FString userName);
 
     /**
     * Sets the user's name.
@@ -103,7 +103,7 @@ public:
     * Param - name The name of the user
     */
     UFUNCTION(BlueprintCallable, meta = (BlueprintInternalUseOnly = "true"), Category = "BrainCloud|Player State")
-        static UBCPlayerStateProxy* UpdateName(ABrainCloud *brainCloud, FString name);
+        static UBCPlayerStateProxy* UpdateName(UBrainCloudWrapper *brainCloudWrapper, FString name);
 
     /**
     * Updates the "friend summary data" associated with the logged in player.
@@ -125,7 +125,7 @@ public:
     * }
     */
     UFUNCTION(BlueprintCallable, meta = (BlueprintInternalUseOnly = "true"), Category = "BrainCloud|Player State")
-        static UBCPlayerStateProxy* UpdateSummaryFriendData(ABrainCloud *brainCloud, const FString& jsonSummaryData);
+        static UBCPlayerStateProxy* UpdateSummaryFriendData(UBrainCloudWrapper *brainCloudWrapper, const FString& jsonSummaryData);
 
     /**
     * Retrieve the user's attributes.
@@ -134,7 +134,7 @@ public:
     * Service Operation - GetAttributes
     */
     UFUNCTION(BlueprintCallable, meta = (BlueprintInternalUseOnly = "true"), Category = "BrainCloud|Player State")
-        static UBCPlayerStateProxy* GetAttributes(ABrainCloud *brainCloud);
+        static UBCPlayerStateProxy* GetAttributes(UBrainCloudWrapper *brainCloudWrapper);
 
     /**
     * Update user's attributes.
@@ -146,7 +146,7 @@ public:
     * Param - wipeExisting Whether to wipe existing attributes prior to update.
     */
     UFUNCTION(BlueprintCallable, meta = (BlueprintInternalUseOnly = "true"), Category = "BrainCloud|Player State")
-        static UBCPlayerStateProxy* UpdateAttributes(ABrainCloud *brainCloud, FString jsonAttributes, bool wipeExisting);
+        static UBCPlayerStateProxy* UpdateAttributes(UBrainCloudWrapper *brainCloudWrapper, FString jsonAttributes, bool wipeExisting);
 
     /**
     * Remove user's attributes.
@@ -157,13 +157,13 @@ public:
     * Param - attributeNames Array of attribute names.
     */
     UFUNCTION(BlueprintCallable, meta = (BlueprintInternalUseOnly = "true"), Category = "BrainCloud|Player State")
-        static UBCPlayerStateProxy* RemoveAttributes(ABrainCloud *brainCloud, const TArray<FString>& attributeNames);
+        static UBCPlayerStateProxy* RemoveAttributes(UBrainCloudWrapper *brainCloudWrapper, const TArray<FString>& attributeNames);
 
 	/**
 	* @deprecated Use UpdateUserPictureUrl instead
 	*/
 	UFUNCTION(BlueprintCallable, meta = (BlueprintInternalUseOnly = "true"), Category = "BrainCloud|Player State")
-		static UBCPlayerStateProxy* UpdatePlayerPictureUrl(ABrainCloud *brainCloud, const FString& pictureUrl);
+		static UBCPlayerStateProxy* UpdatePlayerPictureUrl(UBrainCloudWrapper *brainCloudWrapper, const FString& pictureUrl);
 
     /**
     * Update user picture URL.
@@ -174,7 +174,7 @@ public:
     * Param - pictureUrl URL to apply
     */
     UFUNCTION(BlueprintCallable, meta = (BlueprintInternalUseOnly = "true"), Category = "BrainCloud|Player State")
-        static UBCPlayerStateProxy* UpdateUserPictureUrl(ABrainCloud *brainCloud, const FString& pictureUrl);
+        static UBCPlayerStateProxy* UpdateUserPictureUrl(UBrainCloudWrapper *brainCloudWrapper, const FString& pictureUrl);
 
     /**
     * Update the user's contact email.
@@ -186,7 +186,7 @@ public:
     * Param - contactEmail Updated email
     */
     UFUNCTION(BlueprintCallable, meta = (BlueprintInternalUseOnly = "true"), Category = "BrainCloud|Player State")
-        static UBCPlayerStateProxy* UpdateContactEmail(ABrainCloud *brainCloud, const FString& contactEmail);
+        static UBCPlayerStateProxy* UpdateContactEmail(UBrainCloudWrapper *brainCloudWrapper, const FString& contactEmail);
 
     //Response delegates
     UPROPERTY(BlueprintAssignable)

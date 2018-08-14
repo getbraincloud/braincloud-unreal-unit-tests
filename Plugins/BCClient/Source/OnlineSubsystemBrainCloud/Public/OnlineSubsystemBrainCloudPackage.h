@@ -1,4 +1,4 @@
-// Copyright 2016 bitHeads, Inc. All Rights Reserved.
+// Copyright 2018 bitHeads, Inc. All Rights Reserved.
 
 // Can't be #pragma once because other modules may define PACKAGE_SCOPE
 

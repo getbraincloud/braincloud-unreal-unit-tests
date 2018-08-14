@@ -30,7 +30,7 @@ bool FOnlineLeaderboardsBrainCloud::ReadLeaderboards(const TArray< TSharedRef<co
     lbcb->OnSuccessDelegate.AddRaw(this, &FOnlineLeaderboardsBrainCloud::readLeaderboardSuccess);
     lbcb->OnFailDelegate.AddRaw(this, &FOnlineLeaderboardsBrainCloud::readLeaderboardFail);
 
-    BrainCloudClient::getInstance()->getLeaderboardService()->getGlobalLeaderboardView(ReadObject->LeaderboardName.ToString(), ESortOrder::HIGH_TO_LOW, 9, 10, lbcb);
+    Subsystem->GetClient()->getLeaderboardService()->getGlobalLeaderboardView(ReadObject->LeaderboardName.ToString(), ESortOrder::HIGH_TO_LOW, 9, 10, lbcb);
 
     return true;
 }
@@ -113,7 +113,7 @@ bool FOnlineLeaderboardsBrainCloud::FlushLeaderboards(const FName& SessionName)
     for (int32 i = 0; i < UnreportedScores.Num(); ++i)
     {
         UE_LOG_ONLINE(Display, TEXT("Submitting an unreported score to %s. Value: %d"), *UnreportedScores[i].LeaderboardName, UnreportedScores[i].Score);
-        BrainCloudClient::getInstance()->getLeaderboardService()->postScore(UnreportedScores[i].LeaderboardName, (int32)UnreportedScores[i].Score, TEXT(""), nullptr);
+        Subsystem->GetClient()->getLeaderboardService()->postScore(UnreportedScores[i].LeaderboardName, (int32)UnreportedScores[i].Score, TEXT(""), nullptr);
     }
 
     UnreportedScores.Empty();

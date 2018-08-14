@@ -6,6 +6,8 @@
 #include "ServiceName.h"
 #include "HttpModule.h"
 
+#include "OnlineSubsystemBrainCloud.h"
+
 #include "AssignableServerCallback.h"
 
 FOnlineTitleFileBrainCloud::FOnlineTitleFileBrainCloud(FOnlineSubsystemBrainCloud * InSubsystem)
@@ -110,7 +112,7 @@ bool FOnlineTitleFileBrainCloud::EnumerateFiles(const FPagedQuery & Page)
     cb->OnSuccessDelegate.AddRaw(this, &FOnlineTitleFileBrainCloud::EnumerateFilesSuccess);
     cb->OnFailDelegate.AddRaw(this, &FOnlineTitleFileBrainCloud::EnumerateFilesFail);
 
-    BrainCloudClient::getInstance()->getS3HandlingService()->getFileList(TEXT(""), cb);
+    _subsystem->GetClient()->getS3HandlingService()->getFileList(TEXT(""), cb);
     return true;
 }
 

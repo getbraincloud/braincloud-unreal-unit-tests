@@ -39,8 +39,8 @@ void ATitleFileSubsystemTestActor::BeginPlay()
 	_identity->OnLoginCompleteDelegates->AddUObject(this, &ATitleFileSubsystemTestActor::LoginCallback);
 
 	//TODO Jon
-	//_titleFile->OnEnumerateFilesCompleteDelegates.AddUObject(this, &ATitleFileSubsystemTestActor::OnEnumerateFilesCompleteCallback);
-	//_titleFile->OnReadFileCompleteDelegates.AddUObject(this, &ATitleFileSubsystemTestActor::OnReadFileCompleteCallback);
+	_titleFile->OnEnumerateFilesCompleteDelegates.AddUObject(this, &ATitleFileSubsystemTestActor::OnEnumerateFilesCompleteCallback);
+	_titleFile->OnReadFileCompleteDelegates.AddUObject(this, &ATitleFileSubsystemTestActor::OnReadFileCompleteCallback);
 
 	_identity->Login(0, FOnlineAccountCredentials("BrainCloud", "UnrealUser2", "UnrealUser2"));
 }
@@ -55,7 +55,7 @@ void ATitleFileSubsystemTestActor::LoginCallback(int32 LocalUserNum, bool bWasSu
 	_titleFile->EnumerateFiles();
 }
 
-void ATitleFileSubsystemTestActor::OnEnumerateFilesCompleteCallback(bool wasSuccess)
+void ATitleFileSubsystemTestActor::OnEnumerateFilesCompleteCallback(bool wasSuccess, const FString& fileName)
 {
 	UE_LOG(LogTemp, Log, TEXT("EumerateMessages: %s"), wasSuccess ? TEXT("true") : TEXT("false"));
 

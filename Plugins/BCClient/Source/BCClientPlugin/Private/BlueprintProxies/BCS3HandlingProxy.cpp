@@ -1,9 +1,9 @@
-// Copyright 2016 bitHeads, Inc. All Rights Reserved.
+// Copyright 2018 bitHeads, Inc. All Rights Reserved.
 
 #include "BCClientPluginPrivatePCH.h"
 #include "BrainCloudClient.h"
 #include "ServerCall.h"
-#include "BrainCloud.h"
+#include "BrainCloudActor.h"
 #include "BCWrapperProxy.h"
 #include "BrainCloudWrapper.h"
 #include "BCS3HandlingProxy.h"
@@ -13,24 +13,24 @@ UBCS3HandlingProxy::UBCS3HandlingProxy(const FObjectInitializer& ObjectInitializ
 {
 }
 
-UBCS3HandlingProxy* UBCS3HandlingProxy::GetUpdatedFiles(ABrainCloud *brainCloud, FString category, FString fileDetails)
+UBCS3HandlingProxy* UBCS3HandlingProxy::GetUpdatedFiles(UBrainCloudWrapper *brainCloudWrapper, FString category, FString fileDetails)
 {
     UBCS3HandlingProxy* Proxy = NewObject<UBCS3HandlingProxy>();
-    UBCWrapperProxy::GetBrainCloudInstance(brainCloud)->getS3HandlingService()->getUpdatedFiles(category, fileDetails, Proxy);
+    UBCWrapperProxy::GetBrainCloudInstance(brainCloudWrapper)->getS3HandlingService()->getUpdatedFiles(category, fileDetails, Proxy);
     return Proxy;
 }
 
-UBCS3HandlingProxy* UBCS3HandlingProxy::GetFileList(ABrainCloud *brainCloud, FString category)
+UBCS3HandlingProxy* UBCS3HandlingProxy::GetFileList(UBrainCloudWrapper *brainCloudWrapper, FString category)
 {
     UBCS3HandlingProxy* Proxy = NewObject<UBCS3HandlingProxy>();
-    UBCWrapperProxy::GetBrainCloudInstance(brainCloud)->getS3HandlingService()->getFileList(category, Proxy);
+    UBCWrapperProxy::GetBrainCloudInstance(brainCloudWrapper)->getS3HandlingService()->getFileList(category, Proxy);
     return Proxy;
 }
 
-UBCS3HandlingProxy* UBCS3HandlingProxy::GetCDNUrl(ABrainCloud *brainCloud, const FString& fileId)
+UBCS3HandlingProxy* UBCS3HandlingProxy::GetCDNUrl(UBrainCloudWrapper *brainCloudWrapper, const FString& fileId)
 {
 	UBCS3HandlingProxy* Proxy = NewObject<UBCS3HandlingProxy>();
-	UBCWrapperProxy::GetBrainCloudInstance(brainCloud)->getS3HandlingService()->getCDNUrl(fileId, Proxy);
+	UBCWrapperProxy::GetBrainCloudInstance(brainCloudWrapper)->getS3HandlingService()->getCDNUrl(fileId, Proxy);
 	return Proxy;
 }
 

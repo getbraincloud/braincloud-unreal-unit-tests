@@ -1,8 +1,9 @@
-// Copyright 2016 bitHeads, Inc. All Rights Reserved.
+// Copyright 2018 bitHeads, Inc. All Rights Reserved.
 
 #include "BCClientPluginPrivatePCH.h"
 #include "BrainCloudWrapper.h"
 
+#include "BCAuthType.h"
 #include "BrainCloudClient.h"
 #include "ServiceName.h"
 #include "ServiceOperation.h"
@@ -11,176 +12,233 @@
 #include "BrainCloudSave.h"
 #include "Kismet/GameplayStatics.h"
 
-BrainCloudWrapper * BrainCloudWrapper::_instance = nullptr;
+#include "SmartSwitchAuthenticateCallback.h"
+#include "BrainCloudComms.h"
 
-BrainCloudWrapper::BrainCloudWrapper()
+UBrainCloudWrapper *UBrainCloudWrapper::_instance = nullptr;
+
+UBrainCloudWrapper::UBrainCloudWrapper()
 {
     _client = new BrainCloudClient();
 }
 
-BrainCloudWrapper::BrainCloudWrapper(FString wrapperName)
+UBrainCloudWrapper::UBrainCloudWrapper(FString wrapperName)
 {
-	_client = new BrainCloudClient();
-	_wrapperName = wrapperName;
+    _client = new BrainCloudClient();
+    _wrapperName = wrapperName;
 }
 
-BrainCloudWrapper::BrainCloudWrapper(BrainCloudClient *client)
+UBrainCloudWrapper::UBrainCloudWrapper(BrainCloudClient *client)
 {
-	_client = client;
+    _client = client;
 }
 
-BrainCloudWrapper * BrainCloudWrapper::getInstance()
+UBrainCloudWrapper *UBrainCloudWrapper::getInstance()
 {
-	if (BrainCloudClient::EnableSingletonMode == false)
-	{
-		if (BrainCloudClient::EnableSoftErrorMode)
-		{
-			UE_LOG(LogTemp, Warning, TEXT("%s"), BrainCloudClient::SINGLETON_USE_ERROR_MESSAGE);
-		}
-		else
-		{
-			UE_LOG(LogTemp, Fatal, TEXT("%s"), BrainCloudClient::SINGLETON_USE_ERROR_MESSAGE);
-		}
-	}
+    if (BrainCloudClient::EnableSingletonMode == false)
+    {
+        if (BrainCloudClient::EnableSoftErrorMode)
+        {
+            UE_LOG(LogTemp, Warning, TEXT("%s"), BrainCloudClient::SINGLETON_USE_ERROR_MESSAGE);
+        }
+        else
+        {
+            UE_LOG(LogTemp, Fatal, TEXT("%s"), BrainCloudClient::SINGLETON_USE_ERROR_MESSAGE);
+        }
+    }
 
     if (_instance == nullptr)
     {
-        _instance = new BrainCloudWrapper();
+       _instance = NewObject<UBrainCloudWrapper>();
     }
     return _instance;
 }
 
-void BrainCloudWrapper::initialize(FString url, FString secretKey, FString appId, FString appVersion)
+void UBrainCloudWrapper::initialize(FString url, FString secretKey, FString appId, FString appVersion)
 {
-    // save the game app in case we need to reauthenticate
-    _lastUrl = url;
-    _lastSecretKey = secretKey;
-    _lastAppId = appId;
-    _lastAppVersion = appVersion;
-
     // initialize the client with our app info
     _client->initialize(url, secretKey, appId, appVersion);
 
     loadData();
 }
 
-void BrainCloudWrapper::initializeIdentity(bool isAnonymousAuth)
+void UBrainCloudWrapper::initializeIdentity(bool isAnonymousAuth)
 {
     // create an anonymous ID if necessary
-    if ((!_anonymousId.IsEmpty() && _profileId.IsEmpty()) || _anonymousId.IsEmpty())
+    FString profileId = getStoredProfileId();
+    FString anonId = getStoredAnonymousId();
+
+    if ((!anonId.IsEmpty() && profileId.IsEmpty()) || anonId.IsEmpty())
     {
         setStoredAnonymousId(_client->getAuthenticationService()->generateAnonymousId());
         setStoredProfileId(TEXT(""));
     }
 
-    FString profileIdToAuthenticateWith = _profileId;
     if (!isAnonymousAuth && _alwaysAllowProfileSwitch)
     {
-        profileIdToAuthenticateWith = TEXT("");
+        profileId = TEXT("");
     }
     setStoredAuthenticationType(isAnonymousAuth ? OperationParam::AuthenticateServiceAuthenticateAuthAnonymous.getValue() : TEXT(""));
 
     // send our IDs to brainCloud
-    _client->initializeIdentity(profileIdToAuthenticateWith, _anonymousId);
+    _client->initializeIdentity(profileId, anonId);
 }
 
-void BrainCloudWrapper::reauthenticate()
+void UBrainCloudWrapper::reauthenticate()
 {
     // send our saved game info to brainCloud
     // company and game name can be nullptr since they are already set
-    initialize(_lastUrl, _lastSecretKey, _lastAppId, _lastAppVersion);
-
-    if (_authenticationType == OperationParam::AuthenticateServiceAuthenticateAuthAnonymous.getValue())
-    {
-        authenticateAnonymous();
-    }
+    initialize(_client->getBrainCloudComms()->GetServerUrl(), _client->getBrainCloudComms()->GetSecretKey(), _client->getAppId(), _client->getAppVersion());
+    authenticateAnonymous();
 }
 
 // authenticate the player with an anonymous id
-void BrainCloudWrapper::authenticateAnonymous(IServerCallback * callback)
+void UBrainCloudWrapper::authenticateAnonymous(IServerCallback *callback)
 {
     _authenticateCallback = callback;
     initializeIdentity(true);
     _client->getAuthenticationService()->authenticateAnonymous(true, this);
 }
 
-void BrainCloudWrapper::authenticateEmailPassword(FString email, FString password, bool forceCreate, IServerCallback * callback)
+void UBrainCloudWrapper::authenticateEmailPassword(FString email, FString password, bool forceCreate, IServerCallback *callback)
 {
     _authenticateCallback = callback;
     initializeIdentity();
     _client->getAuthenticationService()->authenticateEmailPassword(email, password, forceCreate, this);
 }
 
-void BrainCloudWrapper::authenticateExternal(FString userid, FString token, FString externalAuthName, bool forceCreate, IServerCallback * callback)
+void UBrainCloudWrapper::authenticateExternal(FString userid, FString token, FString externalAuthName, bool forceCreate, IServerCallback *callback)
 {
     _authenticateCallback = callback;
     initializeIdentity();
     _client->getAuthenticationService()->authenticateExternal(userid, token, externalAuthName, forceCreate, this);
 }
 
-void BrainCloudWrapper::authenticateFacebook(FString fbUserId, FString fbAuthToken, bool forceCreate, IServerCallback * callback)
+void UBrainCloudWrapper::authenticateFacebook(FString fbUserId, FString fbAuthToken, bool forceCreate, IServerCallback *callback)
 {
     _authenticateCallback = callback;
     initializeIdentity();
     _client->getAuthenticationService()->authenticateFacebook(fbUserId, fbAuthToken, forceCreate, this);
 }
 
-void BrainCloudWrapper::authenticateGameCenter(FString gameCenterId, bool forceCreate, IServerCallback * callback)
+void UBrainCloudWrapper::authenticateGameCenter(FString gameCenterId, bool forceCreate, IServerCallback *callback)
 {
     _authenticateCallback = callback;
     initializeIdentity();
     _client->getAuthenticationService()->authenticateGameCenter(gameCenterId, forceCreate, this);
 }
 
-void BrainCloudWrapper::authenticateGoogle(FString userid, FString token, bool forceCreate, IServerCallback * callback)
+void UBrainCloudWrapper::authenticateGoogle(FString userid, FString token, bool forceCreate, IServerCallback *callback)
 {
     _authenticateCallback = callback;
     initializeIdentity();
     _client->getAuthenticationService()->authenticateGoogle(userid, token, forceCreate, this);
 }
 
-void BrainCloudWrapper::authenticateSteam(FString userid, FString sessionticket, bool forceCreate, IServerCallback * callback)
+void UBrainCloudWrapper::authenticateSteam(FString userid, FString sessionticket, bool forceCreate, IServerCallback *callback)
 {
     _authenticateCallback = callback;
     initializeIdentity();
     _client->getAuthenticationService()->authenticateSteam(userid, sessionticket, forceCreate, this);
 }
 
-void BrainCloudWrapper::authenticateTwitter(FString userid, FString token, FString secret, bool forceCreate, IServerCallback * callback)
+void UBrainCloudWrapper::authenticateTwitter(FString userid, FString token, FString secret, bool forceCreate, IServerCallback *callback)
 {
     _authenticateCallback = callback;
     initializeIdentity();
     _client->getAuthenticationService()->authenticateTwitter(userid, token, secret, forceCreate, this);
 }
 
-void BrainCloudWrapper::authenticateUniversal(FString userid, FString password, bool forceCreate, IServerCallback * callback)
+void UBrainCloudWrapper::authenticateUniversal(FString userid, FString password, bool forceCreate, IServerCallback *callback)
 {
     _authenticateCallback = callback;
     initializeIdentity();
     _client->getAuthenticationService()->authenticateUniversal(userid, password, forceCreate, this);
 }
 
-void BrainCloudWrapper::reconnect(IServerCallback * callback)
+void UBrainCloudWrapper::smartSwitchAuthenticateEmailPassword(const FString &in_email, const FString &in_password, bool in_forceCreate, IServerCallback *in_callback)
 {
-	authenticateAnonymous(callback);
+    SmartSwitchAuthenticateCallback *smartCallback = new SmartSwitchAuthenticateCallback(this, EBCAuthType::Email, in_email, in_password, in_forceCreate, in_callback);
+    getIdentitiesCallback(smartCallback);
 }
 
-void BrainCloudWrapper::runCallbacks()
+void UBrainCloudWrapper::smartSwitchAuthenticateExternal(const FString &userid, const FString &token, const FString &externalAuthName, bool in_forceCreate, IServerCallback *in_callback)
+{
+    SmartSwitchAuthenticateCallback *smartCallback = new SmartSwitchAuthenticateCallback(this, EBCAuthType::External, userid, token, externalAuthName, in_forceCreate, in_callback);
+    getIdentitiesCallback(smartCallback);
+}
+
+void UBrainCloudWrapper::smartSwitchAuthenticateFacebook(const FString &fbUserId, const FString &fbAuthToken, bool in_forceCreate, IServerCallback *in_callback)
+{
+    SmartSwitchAuthenticateCallback *smartCallback = new SmartSwitchAuthenticateCallback(this, EBCAuthType::Facebook, fbUserId, fbAuthToken, in_forceCreate, in_callback);
+    getIdentitiesCallback(smartCallback);
+}
+
+void UBrainCloudWrapper::smartSwitchAuthenticateGameCenter(const FString &gameCenterId, bool in_forceCreate, IServerCallback *in_callback)
+{
+    FString emptyToken = TEXT("");
+    SmartSwitchAuthenticateCallback *smartCallback = new SmartSwitchAuthenticateCallback(this, EBCAuthType::GameCenter, gameCenterId, emptyToken, in_forceCreate, in_callback);
+    getIdentitiesCallback(smartCallback);
+}
+
+void UBrainCloudWrapper::smartSwitchAuthenticateGoogle(const FString &userid, const FString &token, bool in_forceCreate, IServerCallback *in_callback)
+{
+    SmartSwitchAuthenticateCallback *smartCallback = new SmartSwitchAuthenticateCallback(this, EBCAuthType::Google, userid, token, in_forceCreate, in_callback);
+    getIdentitiesCallback(smartCallback);
+}
+
+void UBrainCloudWrapper::smartSwitchAuthenticateSteam(const FString &userid, const FString &sessionticket, bool in_forceCreate, IServerCallback *in_callback)
+{
+    SmartSwitchAuthenticateCallback *smartCallback = new SmartSwitchAuthenticateCallback(this, EBCAuthType::Steam, userid, sessionticket, in_forceCreate, in_callback);
+    getIdentitiesCallback(smartCallback);
+}
+
+void UBrainCloudWrapper::smartSwitchAuthenticateTwitter(const FString &userid, const FString &token, const FString &secret, bool in_forceCreate, IServerCallback *in_callback)
+{
+    SmartSwitchAuthenticateCallback *smartCallback = new SmartSwitchAuthenticateCallback(this, EBCAuthType::Twitter, userid, token, secret, in_forceCreate, in_callback);
+    getIdentitiesCallback(smartCallback);
+}
+
+void UBrainCloudWrapper::smartSwitchAuthenticateUniversal(const FString &userid, const FString &password, bool in_forceCreate, IServerCallback *in_callback)
+{
+    SmartSwitchAuthenticateCallback *smartCallback = new SmartSwitchAuthenticateCallback(this, EBCAuthType::Universal, userid, password, in_forceCreate, in_callback);
+    getIdentitiesCallback(smartCallback);
+}
+
+void UBrainCloudWrapper::getIdentitiesCallback(IServerCallback *success)
+{
+    BCIdentityCallback *identityCallback = new BCIdentityCallback(this, success);
+    if (_client->isAuthenticated())
+    {
+        _client->getIdentityService()->getIdentities(identityCallback);
+    }
+    else
+    {
+        success->serverCallback(ServiceName::AuthenticateV2, ServiceOperation::Authenticate, "");
+    }
+}
+
+void UBrainCloudWrapper::reconnect(IServerCallback *callback)
+{
+    authenticateAnonymous(callback);
+}
+
+void UBrainCloudWrapper::runCallbacks()
 {
     _client->runCallbacks();
 }
 
-void BrainCloudWrapper::setAlwaysAllowProfileSwitch(bool alwaysAllow)
+void UBrainCloudWrapper::setAlwaysAllowProfileSwitch(bool alwaysAllow)
 {
     _alwaysAllowProfileSwitch = alwaysAllow;
 }
 
-bool BrainCloudWrapper::getAlwaysAllowProfileSwitch()
+bool UBrainCloudWrapper::getAlwaysAllowProfileSwitch()
 {
     return _alwaysAllowProfileSwitch;
 }
 
-void BrainCloudWrapper::serverCallback(ServiceName serviceName, ServiceOperation serviceOperation, FString const & jsonData)
+void UBrainCloudWrapper::serverCallback(ServiceName serviceName, ServiceOperation serviceOperation, FString const &jsonData)
 {
     if (serviceName == ServiceName::AuthenticateV2 && serviceOperation == ServiceOperation::Authenticate)
     {
@@ -207,8 +265,8 @@ void BrainCloudWrapper::serverCallback(ServiceName serviceName, ServiceOperation
     }
 }
 
-void BrainCloudWrapper::serverError(ServiceName serviceName, ServiceOperation serviceOperation,
-    int32 statusCode, int32 reasonCode, const FString & message)
+void UBrainCloudWrapper::serverError(ServiceName serviceName, ServiceOperation serviceOperation,
+                                    int32 statusCode, int32 reasonCode, const FString &message)
 {
     if (_authenticateCallback != nullptr)
     {
@@ -216,28 +274,30 @@ void BrainCloudWrapper::serverError(ServiceName serviceName, ServiceOperation se
     }
 }
 
-void BrainCloudWrapper::loadData()
+void UBrainCloudWrapper::loadData()
 {
-    UBrainCloudSave* LoadGameInstance = Cast<UBrainCloudSave>(UGameplayStatics::CreateSaveGameObject(UBrainCloudSave::StaticClass()));
-    
-	FString slotPrefix = _wrapperName;
+    UBrainCloudSave *LoadGameInstance = Cast<UBrainCloudSave>(UGameplayStatics::CreateSaveGameObject(UBrainCloudSave::StaticClass()));
 
-	LoadGameInstance = Cast<UBrainCloudSave>(UGameplayStatics::LoadGameFromSlot(slotPrefix + LoadGameInstance->SaveSlotName, LoadGameInstance->UserIndex));
-    if (LoadGameInstance == nullptr) return;
+    FString slotPrefix = _wrapperName;
+    FString slotName = slotPrefix + LoadGameInstance->SaveSlotName;
 
-    _profileId = LoadGameInstance->ProfileId;
-    _anonymousId = LoadGameInstance->AnonymousId;
+    LoadGameInstance = Cast<UBrainCloudSave>(UGameplayStatics::LoadGameFromSlot(slotName, LoadGameInstance->UserIndex));
+    if (LoadGameInstance == nullptr)
+        return;
+
+    _client->getAuthenticationService()->setProfileId(LoadGameInstance->ProfileId);
+    _client->getAuthenticationService()->setAnonymousId(LoadGameInstance->AnonymousId);
     _authenticationType = LoadGameInstance->AuthenticationType;
 }
 
-void BrainCloudWrapper::saveData()
+void UBrainCloudWrapper::saveData()
 {
-    UBrainCloudSave* SaveGameInstance = Cast<UBrainCloudSave>(UGameplayStatics::CreateSaveGameObject(UBrainCloudSave::StaticClass()));
-    SaveGameInstance->ProfileId = _profileId;
-    SaveGameInstance->AnonymousId = _anonymousId;
+    UBrainCloudSave *SaveGameInstance = Cast<UBrainCloudSave>(UGameplayStatics::CreateSaveGameObject(UBrainCloudSave::StaticClass()));
+    SaveGameInstance->ProfileId = _client->getAuthenticationService()->getProfileId();
+    SaveGameInstance->AnonymousId = _client->getAuthenticationService()->getAnonymousId();
     SaveGameInstance->AuthenticationType = _authenticationType;
 
-	FString slotPrefix = _wrapperName;
+    FString slotPrefix = _wrapperName;
 
-	UGameplayStatics::SaveGameToSlot(SaveGameInstance, _wrapperName + SaveGameInstance->SaveSlotName, SaveGameInstance->UserIndex);
+    UGameplayStatics::SaveGameToSlot(SaveGameInstance, _wrapperName + SaveGameInstance->SaveSlotName, SaveGameInstance->UserIndex);
 }
