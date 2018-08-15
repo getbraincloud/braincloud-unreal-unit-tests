@@ -22,6 +22,7 @@ public:
 
 	void Initialize(const FString& serverURL, const FString& secretKey, const FString& appId);
 	void EnableLogging(bool shouldEnable) { _isLoggingEnabled = shouldEnable; };
+	bool IsLoggingEnabled() { return _isLoggingEnabled; };
 
 	void AddToQueue(ServerCall *);
 	void ClearSessionId() { _sessionId.Empty(); }

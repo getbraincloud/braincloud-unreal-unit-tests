@@ -5,6 +5,7 @@
 
 #include "GameDelegates.h"
 #include "BrainCloudComms.h"
+#include "BrainCloudRTTComms.h"
 #include "ServerCall.h"
 #include "JsonUtil.h"
 #include "IServerCallback.h"
@@ -12,6 +13,8 @@
 #include "IRewardCallback.h"
 #include "IFileUploadCallback.h"
 #include "IGlobalErrorCallback.h"
+#include "INetworkErrorCallback.h"
+#include "IRTTCallback.h"
 #include "BCPlatform.h"
 
 // Define all static member variables.
@@ -35,7 +38,7 @@ FString BrainCloudClient::s_brainCloudClientVersion = TEXT("3.7.6");
 BrainCloudClient::BrainCloudClient()
 {
 	_brainCloudComms = new BrainCloudComms(this);
-	FGameDelegates::Get().GetEndPlayMapDelegate().AddRaw(this, &BrainCloudClient::OnMapExit);
+	_brainCloudRTTComms = new BrainCloudRTTComms(this);
 }
 
 /**
@@ -43,12 +46,44 @@ BrainCloudClient::BrainCloudClient()
  */
 BrainCloudClient::~BrainCloudClient()
 {
+	destroyService(_brainCloudComms);
+	destroyService(_brainCloudRTTComms);
+
+	destroyService(_authenticationService);
+	destroyService(_leaderboardService);
+	destroyService(_playerStateService);
+	destroyService(_gamificationService);
+	destroyService(_globalEntityService);
+	destroyService(_globalStatisticsService);
+	destroyService(_entityService);
+	destroyService(_playerStatisticsService);
+	destroyService(_timeService);
+	destroyService(_playerStatisticsEventService);
+	destroyService(_productService);
+	destroyService(_identityService);
+	destroyService(_eventService);
+	destroyService(_s3HandlingService);
+	destroyService(_scriptService);
+	destroyService(_asyncMatchService);
+	destroyService(_friendService);
+	destroyService(_globalAppService);
+	destroyService(_matchmakingService);
+	destroyService(_oneWayMatchService);
+	destroyService(_playbackStreamService);
+	destroyService(_pushNotificationService);
+	destroyService(_redemptionCodeService);
+	destroyService(_dataStreamService);
+	destroyService(_profanityService);
+	destroyService(_fileService);
+	destroyService(_groupService);
+	destroyService(_mailService);
+	destroyService(_tournamentService);
+	destroyService(_rttService);
+	destroyService(_lobbyService);
+	destroyService(_chatService);
+	destroyService(_messagingService);
+
 	_instance = nullptr;
-	if (_brainCloudComms != nullptr)
-	{
-		delete _brainCloudComms;
-		_brainCloudComms = nullptr;
-	}
 }
 
 ////////////////////////////////////////////////////
@@ -121,10 +156,35 @@ void BrainCloudClient::initializeIdentity(const FString &profileId, const FStrin
 	getAuthenticationService()->initialize(profileId, anonymousId);
 }
 
-void BrainCloudClient::runCallbacks()
+void BrainCloudClient::runCallbacks(eBCUpdateType in_updateType /*= eBCUpdateType::ALL*/)
 {
-	if (_brainCloudComms)
-		_brainCloudComms->RunCallbacks();
+	switch (in_updateType)
+	{
+	case eBCUpdateType::REST:
+	{
+		if (_brainCloudComms)
+			_brainCloudComms->RunCallbacks();
+	}
+	break;
+
+	case eBCUpdateType::RTT:
+	{
+		if (_brainCloudRTTComms)
+			_brainCloudRTTComms->RunCallbacks();
+	}
+	break;
+
+	default:
+	case eBCUpdateType::ALL:
+	{
+		if (_brainCloudComms)
+			_brainCloudComms->RunCallbacks();
+
+		if (_brainCloudRTTComms)
+			_brainCloudRTTComms->RunCallbacks();
+	}
+	break;
+	}
 }
 
 void BrainCloudClient::registerEventCallback(IEventCallback *eventCallback)
@@ -182,6 +242,11 @@ void BrainCloudClient::enableLogging(bool shouldEnable)
 	_brainCloudComms->EnableLogging(shouldEnable);
 }
 
+bool BrainCloudClient::isLoggingEnabled()
+{
+	return _brainCloudComms->IsLoggingEnabled();
+}
+
 bool BrainCloudClient::isAuthenticated()
 {
 	return _brainCloudComms != nullptr ? _brainCloudComms->IsAuthenticated() : false;
@@ -205,9 +270,70 @@ void BrainCloudClient::sendRequest(ServerCall *serviceMessage)
 void BrainCloudClient::resetCommunication()
 {
 	_brainCloudComms->ResetCommunication();
+	_brainCloudRTTComms->disableRTT();
 
 	if (_authenticationService)
 		_authenticationService->clearSavedProfileId();
+}
+
+void BrainCloudClient::enableRTT(eBCRTTConnectionType in_type, IServerCallback *in_callback)
+{
+	_brainCloudRTTComms->enableRTT(in_type, in_callback);
+}
+
+void BrainCloudClient::disableRTT()
+{
+	_brainCloudRTTComms->disableRTT();
+}
+
+void BrainCloudClient::setRTTHeartBeatSeconds(int32 in_value)
+{
+	_brainCloudRTTComms->setRTTHeartBeatSeconds(in_value);
+}
+
+void BrainCloudClient::deregisterAllRTTCallbacks()
+{
+	_brainCloudRTTComms->deregisterAllRTTCallbacks();
+}
+
+void BrainCloudClient::registerRTTEventCallback(IRTTCallback *in_callback)
+{
+	_brainCloudRTTComms->registerRTTCallback(ServiceName::Event, in_callback);
+}
+
+void BrainCloudClient::deregisterRTTEventCallback()
+{
+	_brainCloudRTTComms->deregisterRTTCallback(ServiceName::Event);
+}
+
+void BrainCloudClient::registerRTTChatCallback(IRTTCallback *in_callback)
+{
+	_brainCloudRTTComms->registerRTTCallback(ServiceName::Chat, in_callback);
+}
+
+void BrainCloudClient::deregisterRTTChatCallback()
+{
+	_brainCloudRTTComms->deregisterRTTCallback(ServiceName::Chat);
+}
+
+void BrainCloudClient::registerRTTMessagingCallback(IRTTCallback *in_callback)
+{
+	_brainCloudRTTComms->registerRTTCallback(ServiceName::Messaging, in_callback);
+}
+
+void BrainCloudClient::deregisterRTTMessagingCallback()
+{
+	_brainCloudRTTComms->deregisterRTTCallback(ServiceName::Messaging);
+}
+
+void BrainCloudClient::registerRTTLobbyCallback(IRTTCallback *in_callback)
+{
+	_brainCloudRTTComms->registerRTTCallback(ServiceName::Lobby, in_callback);
+}
+
+void BrainCloudClient::deregisterRTTLobbyCallback()
+{
+	_brainCloudRTTComms->deregisterRTTCallback(ServiceName::Lobby);
 }
 
 void BrainCloudClient::setHeartbeatInterval(int32 intervalInMilliseconds)
@@ -288,12 +414,6 @@ void BrainCloudClient::flushCachedMessages(bool sendApiErrorCallbacks)
 void BrainCloudClient::insertEndOfMessageBundleMarker()
 {
 	_brainCloudComms->InsertEndOfMessageBundleMarker();
-}
-
-void BrainCloudClient::OnMapExit()
-{
-	destroyService(_brainCloudComms);
-	destroyService(_authenticationService);
 }
 
 BrainCloudAuthentication *BrainCloudClient::getAuthenticationService()
@@ -591,6 +711,16 @@ BrainCloudMessaging *BrainCloudClient::getMessagingService()
 		_messagingService = new BrainCloudMessaging(this);
 	}
 	return _messagingService;
+}
+
+const FString &BrainCloudClient::getRTTConnectionId()
+{
+	return _brainCloudRTTComms->getConnectionId();
+}
+
+const FString &BrainCloudClient::getEventServer()
+{
+	return _brainCloudRTTComms->getEventServer();
 }
 
 ////////////////////////////////////////////////////

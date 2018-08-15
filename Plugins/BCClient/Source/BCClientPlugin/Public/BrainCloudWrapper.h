@@ -37,14 +37,10 @@ class BrainCloudClient;
 #include "BrainCloudGroup.h"
 #include "BrainCloudMail.h"
 #include "BrainCloudTournament.h"
-
-
+#include "BrainCloudWrapper.generated.h"
 
 class ServiceName;
 class ServiceOperation;
-
-#include "BrainCloudWrapper.generated.h"
-
 
 /**
  * The UBrainCloudWrapper provides some convenience functionality to developers when they are

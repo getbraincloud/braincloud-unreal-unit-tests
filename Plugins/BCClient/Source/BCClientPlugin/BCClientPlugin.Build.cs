@@ -36,7 +36,8 @@ public class BCClientPlugin : ModuleRules
                     "Core",
                     "CoreUObject",
                     "Engine",
-                    "Json"
+                    "Json",
+                    "WebSocket"
                 });
     }
 }
