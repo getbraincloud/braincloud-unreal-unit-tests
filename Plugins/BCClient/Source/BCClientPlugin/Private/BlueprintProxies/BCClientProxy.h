@@ -2,17 +2,18 @@
 
 #pragma once
 
+#include "BrainCloudClient.h"
 #include "BCClientProxy.generated.h"
 
 class ABrainCloudActor;
 
 UCLASS(MinimalAPI)
-class UBCClientProxy : public UObject
+class UBCClientProxy : public UBCBlueprintCallProxyBase
 {
 	GENERATED_BODY()
 
-public:
-	UBCClientProxy(const FObjectInitializer& ObjectInitializer);
+  public:
+	UBCClientProxy(const FObjectInitializer &ObjectInitializer);
 
 	/**
 	* Set Soft Error Handling Mode. Disabled by default
@@ -21,8 +22,8 @@ public:
 	* Param - isEnabled The state of the soft error handling
 	*/
 	UFUNCTION(BlueprintCallable, Category = "BrainCloud|Client")
-		static void SoftErrorHandlingMode(
-			const bool isEnabled);
+	static void SoftErrorHandlingMode(
+		const bool isEnabled);
 
 	/**
 	* Set whether the brainCloud singleton should be able to be used
@@ -31,8 +32,8 @@ public:
 	* Param - isEnabled The state of the singleton usage mode
 	*/
 	UFUNCTION(BlueprintCallable, Category = "BrainCloud|Client")
-		static void SingletonMode(
-			const bool isEnabled);
+	static void SingletonMode(
+		const bool isEnabled);
 
 	/**
 	* Method initializes the BrainCloudClient.
@@ -43,12 +44,12 @@ public:
 	* Param - version The app's version
 	*/
 	UFUNCTION(BlueprintCallable, Category = "BrainCloud|Client")
-		static void Initialize(
-			UBrainCloudWrapper *brainCloudWrapper, 
-			const FString& serverUrl = "https://sharedprod.braincloudservers.com/dispatcherv2",
-			const FString& secretKey = "",
-			const FString& appId = "",
-			const FString& version = "1.0.0");
+	static void Initialize(
+		UBrainCloudWrapper *brainCloudWrapper,
+		const FString &serverUrl = "https://sharedprod.braincloudservers.com/dispatcherv2",
+		const FString &secretKey = "",
+		const FString &appId = "",
+		const FString &version = "1.0.0");
 
 	/**
 	* Initialize - initializes the identity service with the saved
@@ -58,19 +59,19 @@ public:
 	* Param - anonymousId  The anonymous installation id that was generated for this device
 	*/
 	UFUNCTION(BlueprintCallable, Category = "BrainCloud|Client")
-		static void InitializeIdentity(UBrainCloudWrapper *brainCloudWrapper, const FString& profileId, const FString& anonymousId);
+	static void InitializeIdentity(UBrainCloudWrapper *brainCloudWrapper, const FString &profileId, const FString &anonymousId);
 
 	/**
 	* Run callbacks, to be called once per frame from your main thread
 	*/
 	UFUNCTION(BlueprintCallable, Category = "BrainCloud|Client")
-		static void RunCallbacks(UBrainCloudWrapper *brainCloudWrapper);
+	static void RunCallbacks(UBrainCloudWrapper *brainCloudWrapper);
 
 	/**
 	* Set to true to enable logging packets to the output log
 	*/
 	UFUNCTION(BlueprintCallable, Category = "BrainCloud|Client")
-		static void EnableLogging(UBrainCloudWrapper *brainCloudWrapper, bool shouldEnable);
+	static void EnableLogging(UBrainCloudWrapper *brainCloudWrapper, bool shouldEnable);
 
 	/**
 	* Returns whether the client is authenticated with the brainCloud server.
@@ -78,7 +79,7 @@ public:
 	* Return - True if authenticated, false otherwise.
 	*/
 	UFUNCTION(BlueprintCallable, Category = "BrainCloud|Client")
-		static bool IsAuthenticated(UBrainCloudWrapper *brainCloudWrapper);
+	static bool IsAuthenticated(UBrainCloudWrapper *brainCloudWrapper);
 
 	/**
 	* Returns whether the client is initialized.
@@ -86,20 +87,49 @@ public:
 	* Return - True if initialized, false otherwise.
 	*/
 	UFUNCTION(BlueprintCallable, Category = "BrainCloud|Client")
-		static bool IsInitialized(UBrainCloudWrapper *brainCloudWrapper);
+	static bool IsInitialized(UBrainCloudWrapper *brainCloudWrapper);
 
 	/**
 	* Clears any pending messages from communication library.
 	*/
 	UFUNCTION(BlueprintCallable, Category = "BrainCloud|Client")
-		static void ResetCommunication(UBrainCloudWrapper *brainCloudWrapper);
+	static void ResetCommunication(UBrainCloudWrapper *brainCloudWrapper);
+
+	/*
+	* Enables Real Time event for this session.
+	* Real Time events are disabled by default. Usually events
+	* need to be polled using GET_EVENTS. By enabling this, events will
+	* be received instantly when they happen through a TCP connection to an Event Server.
+	*
+	* This function will first call requestClientConnection, then connect to the address
+	*/
+	UFUNCTION(BlueprintCallable, Category = "BrainCloud|Client")
+	static UBCClientProxy *EnableRTT(UBrainCloudWrapper *brainCloudWrapper, eBCRTTConnectionType in_type);
+
+	/*
+	* Disables Real Time event for this session.
+	*/
+	UFUNCTION(BlueprintCallable, Category = "BrainCloud|Client")
+	static void DisableRTT(UBrainCloudWrapper *brainCloudWrapper);
+
+	/**
+	* 
+	*/
+	UFUNCTION(BlueprintCallable, Category = "BrainCloud|Client")
+	static void SetRTTHeartBeatSeconds(UBrainCloudWrapper *brainCloudWrapper, int32 in_value);
+
+	/**
+	* 
+	*/
+	UFUNCTION(BlueprintCallable, Category = "BrainCloud|Client")
+	static void DeregisterAllRTTCallbacks(UBrainCloudWrapper *brainCloudWrapper);
 
 	/**
 	* Send an empty message to the server, which essentially polls the
 	* server for any new events to send to this client.
 	*/
 	UFUNCTION(BlueprintCallable, Category = "BrainCloud|Client")
-		static void Heartbeat(UBrainCloudWrapper *brainCloudWrapper);
+	static void Heartbeat(UBrainCloudWrapper *brainCloudWrapper);
 
 	//Setters
 
@@ -109,7 +139,7 @@ public:
 	* Param - intervalInMilliseconds - The time between heartbeats in milliseconds
 	*/
 	UFUNCTION(BlueprintCallable, Category = "BrainCloud|Client")
-		static void SetHeartbeatInterval(UBrainCloudWrapper *brainCloudWrapper, int32 intervalInMilliseconds);
+	static void SetHeartbeatInterval(UBrainCloudWrapper *brainCloudWrapper, int32 intervalInMilliseconds);
 
 	/**
 	* Sets the packet timeouts using a list of integers that
@@ -125,13 +155,13 @@ public:
 	* Param - timeouts - An array of packet timeouts.
 	*/
 	UFUNCTION(BlueprintCallable, Category = "BrainCloud|Client")
-		static void SetPacketTimeouts(UBrainCloudWrapper *brainCloudWrapper, const TArray<int32> & timeouts);
+	static void SetPacketTimeouts(UBrainCloudWrapper *brainCloudWrapper, const TArray<int32> &timeouts);
 
 	/**
 	* Sets the packet timeouts back to the default ie {10, 10, 10}
 	*/
 	UFUNCTION(BlueprintCallable, Category = "BrainCloud|Client")
-		static void SetPacketTimeoutsToDefault(UBrainCloudWrapper *brainCloudWrapper);
+	static void SetPacketTimeoutsToDefault(UBrainCloudWrapper *brainCloudWrapper);
 
 	/**
 	* Sets the authentication packet timeout which is tracked separately
@@ -143,7 +173,7 @@ public:
 	* Param - timeoutSecs The timeout in seconds
 	*/
 	UFUNCTION(BlueprintCallable, Category = "BrainCloud|Client")
-		static void SetAuthenticationPacketTimeout(UBrainCloudWrapper *brainCloudWrapper, int32 timeoutSecs);
+	static void SetAuthenticationPacketTimeout(UBrainCloudWrapper *brainCloudWrapper, int32 timeoutSecs);
 
 	/**
 	* Returns the low transfer rate timeout in secs
@@ -151,7 +181,7 @@ public:
 	* Return - The low transfer rate timeout in secs
 	*/
 	UFUNCTION(BlueprintCallable, Category = "BrainCloud|Client")
-		static int32 GetUploadLowTransferRateTimeout(UBrainCloudWrapper *brainCloudWrapper);
+	static int32 GetUploadLowTransferRateTimeout(UBrainCloudWrapper *brainCloudWrapper);
 
 	/**
 	* Sets the timeout in seconds of a low speed upload
@@ -162,7 +192,7 @@ public:
 	* Param - timeoutSecs The timeout in secs
 	*/
 	UFUNCTION(BlueprintCallable, Category = "BrainCloud|Client")
-		static void SetUploadLowTransferRateTimeout(UBrainCloudWrapper *brainCloudWrapper, int32 timeoutSecs);
+	static void SetUploadLowTransferRateTimeout(UBrainCloudWrapper *brainCloudWrapper, int32 timeoutSecs);
 
 	/**
 	* Returns the low transfer rate threshold in bytes/sec
@@ -170,7 +200,7 @@ public:
 	* Return - The low transfer rate threshold in bytes/sec
 	*/
 	UFUNCTION(BlueprintCallable, Category = "BrainCloud|Client")
-		static int32 GetUploadLowTransferRateThreshold(UBrainCloudWrapper *brainCloudWrapper);
+	static int32 GetUploadLowTransferRateThreshold(UBrainCloudWrapper *brainCloudWrapper);
 
 	/**
 	* Sets the low transfer rate threshold of an upload in bytes/sec.
@@ -183,7 +213,7 @@ public:
 	* Param - bytesPerSec The low transfer rate threshold in bytes/sec
 	*/
 	UFUNCTION(BlueprintCallable, Category = "BrainCloud|Client")
-		static void SetUploadLowTransferRateThreshold(UBrainCloudWrapper *brainCloudWrapper, int32 bytesPerSec);
+	static void SetUploadLowTransferRateThreshold(UBrainCloudWrapper *brainCloudWrapper, int32 bytesPerSec);
 
 	/**
 	* Sets the error callback to return the status message instead of the
@@ -193,7 +223,7 @@ public:
 	* Param - enabled If set to true, enable
 	*/
 	UFUNCTION(BlueprintCallable, Category = "BrainCloud|Client")
-		static void SetOldStyleStatusMessageErrorCallback(UBrainCloudWrapper *brainCloudWrapper, bool enabled);
+	static void SetOldStyleStatusMessageErrorCallback(UBrainCloudWrapper *brainCloudWrapper, bool enabled);
 
 	/**
 	* Sets whether the error callback is triggered when a 202 status
@@ -203,20 +233,20 @@ public:
 	* Param - isError If set to true, 202 is treated as an error
 	*/
 	UFUNCTION(BlueprintCallable, Category = "BrainCloud|Client")
-		static void SetErrorCallbackOn202Status(UBrainCloudWrapper *brainCloudWrapper, bool isError);
+	static void SetErrorCallbackOn202Status(UBrainCloudWrapper *brainCloudWrapper, bool isError);
 
 	//Getters
 	UFUNCTION(BlueprintCallable, Category = "BrainCloud|Client")
-		static const FString & GetGameId(UBrainCloudWrapper *brainCloudWrapper);
+	static const FString &GetGameId(UBrainCloudWrapper *brainCloudWrapper);
 
 	UFUNCTION(BlueprintCallable, Category = "BrainCloud|Client")
-		static const FString & GetReleasePlatform(UBrainCloudWrapper *brainCloudWrapper);
+	static const FString &GetReleasePlatform(UBrainCloudWrapper *brainCloudWrapper);
 
 	UFUNCTION(BlueprintCallable, Category = "BrainCloud|Client")
-		static const FString & GetGameVersion(UBrainCloudWrapper *brainCloudWrapper);
+	static const FString &GetGameVersion(UBrainCloudWrapper *brainCloudWrapper);
 
 	UFUNCTION(BlueprintCallable, Category = "BrainCloud|Client")
-		static const FString & GetBrainCloudClientVersion(UBrainCloudWrapper *brainCloudWrapper);
+	static const FString &GetBrainCloudClientVersion(UBrainCloudWrapper *brainCloudWrapper);
 
 	/**
 	* Returns the list of packet timeouts.
@@ -224,7 +254,7 @@ public:
 	* Return - the list of packet timeouts.
 	*/
 	UFUNCTION(BlueprintCallable, Category = "BrainCloud|Client")
-		const TArray<int32> & GetPacketTimeouts(UBrainCloudWrapper *brainCloudWrapper);
+	const TArray<int32> &GetPacketTimeouts(UBrainCloudWrapper *brainCloudWrapper);
 
 	/**
 	* Gets the authentication packet timeout which is tracked separately
@@ -236,7 +266,7 @@ public:
 	* Return - The timeout in seconds
 	*/
 	UFUNCTION(BlueprintCallable, Category = "BrainCloud|Client")
-		static int32 GetAuthenticationPacketTimeout(UBrainCloudWrapper *brainCloudWrapper);
+	static int32 GetAuthenticationPacketTimeout(UBrainCloudWrapper *brainCloudWrapper);
 
 	/**
 	* Enables the message caching upon network error, which is disabled by default.
@@ -266,14 +296,14 @@ public:
 	* Param - enabled True if message should be cached on timeout
 	*/
 	UFUNCTION(BlueprintCallable, Category = "BrainCloud|Client")
-		static void EnableNetworkErrorMessageCaching(UBrainCloudWrapper *brainCloudWrapper, bool enabled);
+	static void EnableNetworkErrorMessageCaching(UBrainCloudWrapper *brainCloudWrapper, bool enabled);
 
 	/** 
 	* Attempts to resend any cached messages. If no messages are in the cache,
 	* this method does nothing.
 	*/
 	UFUNCTION(BlueprintCallable, Category = "BrainCloud|Client")
-		static void RetryCachedMessages(UBrainCloudWrapper *brainCloudWrapper);
+	static void RetryCachedMessages(UBrainCloudWrapper *brainCloudWrapper);
 
 	/**
 	* Flushes the cached messages to resume api call processing. This will dump
@@ -284,8 +314,7 @@ public:
 	* and reasonCode CLIENT_NETWORK_ERROR_TIMEOUT.
 	*/
 	UFUNCTION(BlueprintCallable, Category = "BrainCloud|Client")
-		static void FlushCachedMessages(UBrainCloudWrapper *brainCloudWrapper, bool sendApiErrorCallbacks);
-
+	static void FlushCachedMessages(UBrainCloudWrapper *brainCloudWrapper, bool sendApiErrorCallbacks);
 
 	/**
 	* Inserts a marker which will tell the brainCloud comms layer
@@ -302,7 +331,7 @@ public:
 	*
 	*/
 	UFUNCTION(BlueprintCallable, Category = "BrainCloud|Client")
-		static void InsertEndOfMessageBundleMarker(UBrainCloudWrapper *brainCloudWrapper);
+	static void InsertEndOfMessageBundleMarker(UBrainCloudWrapper *brainCloudWrapper);
 
 	/**
 	* Sets the country code sent to brainCloud when a user authenticates.
@@ -310,7 +339,7 @@ public:
 	* Param - countryCode ISO 3166-1 two-letter country code
 	*/
 	UFUNCTION(BlueprintCallable, Category = "BrainCloud|Client")
-		static void OverrideCountryCode(UBrainCloudWrapper *brainCloudWrapper, const FString& countryCode);
+	static void OverrideCountryCode(UBrainCloudWrapper *brainCloudWrapper, const FString &countryCode);
 
 	/**
 	* Sets the language code sent to brainCloud when a user authenticates.
@@ -319,5 +348,5 @@ public:
 	* Param - languageCode ISO 639-1 two-letter language code
 	*/
 	UFUNCTION(BlueprintCallable, Category = "BrainCloud|Client")
-		static void OverrideLanguageCode(UBrainCloudWrapper *brainCloudWrapper, const FString& languageCode);
+	static void OverrideLanguageCode(UBrainCloudWrapper *brainCloudWrapper, const FString &languageCode);
 };

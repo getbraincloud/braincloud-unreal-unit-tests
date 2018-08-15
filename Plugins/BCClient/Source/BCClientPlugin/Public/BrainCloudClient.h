@@ -37,12 +37,29 @@
 #include "BrainCloudMessaging.h"
 
 class BrainCloudComms;
+class BrainCloudRTTComms;
 class ServerCall;
 class IEventCallback;
 class IRewardCallback;
 class IFileUploadCallback;
 class IGlobalErrorCallback;
 class INetworkErrorCallback;
+class IRTTCallback;
+
+UENUM(BlueprintType)
+enum class eBCUpdateType : uint8
+{
+	ALL UMETA(DisplayName = "ALL"),
+	REST UMETA(DisplayName = "REST"),
+	RTT UMETA(DisplayName = "RTT")
+};
+
+UENUM(BlueprintType)
+enum class eBCRTTConnectionType : uint8
+{
+	WEBSOCKET UMETA(DisplayName = "WEBSOCKET"),
+	TCP UMETA(DisplayName = "TCP")
+};
 
 class BCCLIENTPLUGIN_API BrainCloudClient
 {
@@ -93,7 +110,7 @@ class BCCLIENTPLUGIN_API BrainCloudClient
 	/**
 	* Run callbacks, to be called once per frame from your main thread
 	*/
-	void runCallbacks();
+	void runCallbacks(eBCUpdateType in_updateType = eBCUpdateType::ALL);
 
 	/**
 	* Sets a callback handler for any out of band event messages that come from
@@ -178,6 +195,11 @@ class BCCLIENTPLUGIN_API BrainCloudClient
 	void enableLogging(bool shouldEnable);
 
 	/**
+	* 
+	*/
+	bool isLoggingEnabled();
+
+	/**
 	* Returns whether the client is authenticated with the brainCloud server.
 	* @return True if authenticated, false otherwise.
 	*/
@@ -207,6 +229,71 @@ class BCCLIENTPLUGIN_API BrainCloudClient
 	* Clears any pending messages from communication library.
 	*/
 	void resetCommunication();
+
+	/*
+	* Enables Real Time event for this session.
+	* Real Time events are disabled by default. Usually events
+	* need to be polled using GET_EVENTS. By enabling this, events will
+	* be received instantly when they happen through a TCP connection to an Event Server.
+	*
+	* This function will first call requestClientConnection, then connect to the address
+	*/
+	void enableRTT(eBCRTTConnectionType in_type, IServerCallback *in_callback);
+
+	/*
+	* Disables Real Time event for this session.
+	*/
+	void disableRTT();
+
+	/**
+	* 
+	*/
+	void setRTTHeartBeatSeconds(int32 in_value);
+
+	/**
+	* 
+	*/
+	void deregisterAllRTTCallbacks();
+
+	/**
+	* 
+	*/
+	void registerRTTEventCallback(IRTTCallback *in_callback);
+
+	/**
+	* 
+	*/
+	void deregisterRTTEventCallback();
+
+	/**
+	* 
+	*/
+	void registerRTTChatCallback(IRTTCallback *in_callback);
+
+	/**
+	* 
+	*/
+	void deregisterRTTChatCallback();
+
+	/**
+	* 
+	*/
+	void registerRTTMessagingCallback(IRTTCallback *in_callback);
+
+	/**
+	* 
+	*/
+	void deregisterRTTMessagingCallback();
+
+	/**
+	* 
+	*/
+	void registerRTTLobbyCallback(IRTTCallback *in_callback);
+
+	/**
+	* 
+	*/
+	void deregisterRTTLobbyCallback();
 
 	//Getters
 	BrainCloudAuthentication *getAuthenticationService();
@@ -250,6 +337,10 @@ class BCCLIENTPLUGIN_API BrainCloudClient
 	const FString &getGameId() { return _appId; };
 	const FString &getAppId() { return _appId; };
 	const FString &getReleasePlatform() { return _releasePlatform; };
+	const FString &getProfileId() { return getAuthenticationService()->getProfileId(); };
+
+	const FString &getRTTConnectionId();
+	const FString &getEventServer();
 
 	/**
 	* @deprecated Use getAppVersion instead - removal after September 1 2017
@@ -265,6 +356,7 @@ class BCCLIENTPLUGIN_API BrainCloudClient
 	const TArray<int32> &getPacketTimeouts();
 
 	BrainCloudComms *getBrainCloudComms() { return _brainCloudComms; }
+	BrainCloudRTTComms *getBrainCloudRTTComms() { return _brainCloudRTTComms; }
 
 	/**
 	* Gets the authentication packet timeout which is tracked separately
@@ -445,14 +537,13 @@ class BCCLIENTPLUGIN_API BrainCloudClient
 	*/
 	void overrideLanguageCode(const FString &languageCode) { _language = languageCode; }
 
-	void OnMapExit();
-
   protected:
 	//  void BeginDestroy() override;
 	~BrainCloudClient();
 	static BrainCloudClient *_instance;
 
 	BrainCloudComms *_brainCloudComms = nullptr;
+	BrainCloudRTTComms *_brainCloudRTTComms = nullptr;
 
 	BrainCloudAuthentication *_authenticationService = nullptr;
 	BrainCloudLeaderboard *_leaderboardService = nullptr;
