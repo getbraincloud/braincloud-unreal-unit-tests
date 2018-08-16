@@ -15,3 +15,13 @@ TEST_F(TestBCRTTComms, RequestClientConnection)
 	m_bc->getRTTRegistrationService()->requestClientConnection(&tr);
 	tr.run(m_bc);
 }
+
+// testEnableRTTWithWS
+
+TEST_F(TestBCRTTComms, EnableRTTWithTCP)
+{
+	TestResult tr;
+
+	m_bc->enableRTT(&tr, false);
+	tr.run(m_bc);
+}

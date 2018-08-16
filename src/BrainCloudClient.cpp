@@ -237,6 +237,7 @@ namespace BrainCloud
 	void BrainCloudClient::enableLogging(bool shouldEnable)
 	{
 		_brainCloudComms->enableLogging(shouldEnable);
+        _rttComms->enableLogging(shouldEnable);
 	}
 
 	/**
@@ -378,6 +379,60 @@ namespace BrainCloud
 	}
 
 	// RTT stuff
+	void BrainCloudClient::enableRTT(IRTTConnectCallback* in_callback, bool in_useWebSocket)
+	{
+		_rttComms->enableRTT(in_callback, in_useWebSocket);
+	}
+
+	void BrainCloudClient::disableRTT()
+	{
+		_rttComms->disableRTT();
+	}
+
+	void BrainCloudClient::registerRTTEventCallback(IRTTCallback* in_callback)
+	{
+		_rttComms->registerRTTCallback(ServiceName::Event, in_callback);
+	}
+
+	void BrainCloudClient::deregisterRTTEventCallback()
+	{
+		_rttComms->deregisterRTTCallback(ServiceName::Event);
+	}
+
+	void BrainCloudClient::registerRTTChatCallback(IRTTCallback* in_callback)
+	{
+		_rttComms->registerRTTCallback(ServiceName::Chat, in_callback);
+	}
+
+	void BrainCloudClient::deregisterRTTChatCallback()
+	{
+		_rttComms->deregisterRTTCallback(ServiceName::Chat);
+	}
+
+	void BrainCloudClient::registerRTTMessagingCallback(IRTTCallback* in_callback)
+	{
+		_rttComms->registerRTTCallback(ServiceName::Messaging, in_callback);
+	}
+
+	void BrainCloudClient::deregisterRTTMessagingCallback()
+	{
+		_rttComms->deregisterRTTCallback(ServiceName::Messaging);
+	}
+
+	void BrainCloudClient::registerRTTLobbyCallback(IRTTCallback* in_callback)
+	{
+		_rttComms->registerRTTCallback(ServiceName::Lobby, in_callback);
+	}
+
+	void BrainCloudClient::deregisterRTTLobbyCallback()
+	{
+		_rttComms->deregisterRTTCallback(ServiceName::Lobby);
+	}
+
+	void BrainCloudClient::deregisterAllCallbacks()
+	{
+		_rttComms->deregisterAllCallbacks();
+	}
 
 	////////////////////////////////////////////////////
 	// Private Methods

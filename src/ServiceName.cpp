@@ -62,6 +62,11 @@ namespace BrainCloud
         return _value == s.getValue();
     }
 
+    bool ServiceName::operator!= (const ServiceName& s) const
+    {
+        return _value != s.getValue();
+    }
+
     void ServiceName::operator= (const ServiceName& s)
     {
         _value = s.getValue();

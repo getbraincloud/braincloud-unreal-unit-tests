@@ -7,8 +7,7 @@
 
 using namespace BrainCloud;
 
-
-class TestResult : public IServerCallback, public IGlobalErrorCallback, public INetworkErrorCallback
+class TestResult : public IServerCallback, public IGlobalErrorCallback, public INetworkErrorCallback, public IRTTConnectCallback
 {
 public:
     bool m_done;
@@ -35,6 +34,8 @@ public:
     virtual void serverCallback( ServiceName serviceName, ServiceOperation serviceOperation, std::string const & jsonData);
     virtual void serverError( ServiceName serviceName, ServiceOperation serviceOperation, int statusCode, int reasonCode, const std::string & statusMessage);
     virtual void serverWarning( ServiceName serviceName, ServiceOperation serviceOperation, int statusCode, int reasonCode, int numRetries, const std::string & statusMessage);
+	virtual void rttConnectSuccess();
+	virtual void rttConnectFailure(const std::string& errorMessage);
     
     virtual void globalError( ServiceName serviceName, ServiceOperation serviceOperation, int statusCode, int reasonCode, const std::string & jsonError);
     
