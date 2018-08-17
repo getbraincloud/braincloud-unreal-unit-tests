@@ -19,8 +19,8 @@ public class BCClientPlugin : ModuleRules
     {
         PrivateIncludePaths.AddRange(
             new string[] {
-                    "BCClientPlugin/Private",
-                    "BCClientPlugin/Private/BlueprintProxies"
+                    Path.Combine(ModulePath,"Private"),
+                    Path.Combine(ModulePath,"Private/BlueprintProxies")
                 });
 
         PrivateDependencyModuleNames.AddRange(
@@ -36,8 +36,31 @@ public class BCClientPlugin : ModuleRules
                     "Core",
                     "CoreUObject",
                     "Engine",
-                    "Json",
-                    "WebSocket"
+                    "Json"
                 });
+
+        if (Target.Platform == UnrealTargetPlatform.Win64)
+        {
+            PublicDefinitions.Add("PLATFORM_UWP=0");
+            PrivateDependencyModuleNames.Add("zlib");
+            PrivateDependencyModuleNames.Add("OpenSSL");
+            PublicIncludePaths.Add(Path.Combine(ModulePath,"ThirdParty/include/Win64"));
+
+            PublicLibraryPaths.AddRange(
+                new string[] {
+                    Path.Combine(ModulePath, "ThirdParty/lib/Win64"),
+                });
+
+            string[] StaticLibrariesX64 = new string[] {
+                Path.Combine(ModulePath,"ThirdParty/lib/Win64/websockets_static.lib"),
+                //"libcrypto.lib",
+                //"libssl.lib",
+            };
+
+            foreach (string Lib in StaticLibrariesX64)
+            {
+                PublicAdditionalLibraries.Add(Lib);
+            }
+        }
     }
 }

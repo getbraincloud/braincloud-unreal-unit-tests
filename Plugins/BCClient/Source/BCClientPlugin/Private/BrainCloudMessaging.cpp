@@ -84,7 +84,7 @@ void BrainCloudMessaging::sendMessage(const TArray<FString> &in_toProfileIds, co
     message->SetArrayField(OperationParam::MessagingToProfileIds.getValue(), JsonUtil::arrayToJsonArray(in_toProfileIds));
     message->SetObjectField(OperationParam::MessagingContent.getValue(), content);
 
-    ServerCall *sc = new ServerCall(ServiceName::Messaging, ServiceOperation::SendMessage, message, in_callback);
+    ServerCall *sc = new ServerCall(ServiceName::Messaging, ServiceOperation::SEND_MESSAGE, message, in_callback);
     _client->sendRequest(sc);
 }
 
@@ -94,6 +94,6 @@ void BrainCloudMessaging::sendMessageSimple(const TArray<FString> &in_toProfileI
     message->SetArrayField(OperationParam::MessagingToProfileIds.getValue(), JsonUtil::arrayToJsonArray(in_toProfileIds));
     message->SetStringField(OperationParam::MessagingText.getValue(), in_messageText);
 
-    ServerCall *sc = new ServerCall(ServiceName::Messaging, ServiceOperation::SendMessage, message, in_callback);
+    ServerCall *sc = new ServerCall(ServiceName::Messaging, ServiceOperation::SendMessageSimple, message, in_callback);
     _client->sendRequest(sc);
 }

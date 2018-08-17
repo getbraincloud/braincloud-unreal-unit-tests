@@ -15,21 +15,26 @@ UBrainCloudCallbackHandler::UBrainCloudCallbackHandler(const FObjectInitializer 
 
 void UBrainCloudCallbackHandler::BeginDestroy()
 {
-    UBrainCloudWrapper *bc = UBCWrapperProxy::GetBrainCloudInstance(_brainCloudWrapper);
-
-    BrainCloudComms *comms = bc->getBCClient()->getBrainCloudComms();
-    if (comms != nullptr)
+    if (_brainCloudWrapper != nullptr)
     {
-        if (comms->IsEventCallback(this))
-            comms->DeregisterEventCallback();
-        if (comms->IsFileUploadCallback(this))
-            comms->DeregisterFileUploadCallback();
-        if (comms->IsRewardCallback(this))
-            comms->DeregisterRewardCallback();
-        if (comms->IsGlobalErrorCallback(this))
-            comms->DeregisterGlobalErrorCallback();
-        if (comms->IsNetworkErrorCallback(this))
-            comms->DeregisterNetworkErrorCallback();
+        UBrainCloudWrapper *bc = UBCWrapperProxy::GetBrainCloudInstance(_brainCloudWrapper);
+        if (bc != nullptr)
+        {
+            BrainCloudComms *comms = bc->getBCClient()->getBrainCloudComms();
+            if (comms != nullptr)
+            {
+                if (comms->IsEventCallback(this))
+                    comms->DeregisterEventCallback();
+                if (comms->IsFileUploadCallback(this))
+                    comms->DeregisterFileUploadCallback();
+                if (comms->IsRewardCallback(this))
+                    comms->DeregisterRewardCallback();
+                if (comms->IsGlobalErrorCallback(this))
+                    comms->DeregisterGlobalErrorCallback();
+                if (comms->IsNetworkErrorCallback(this))
+                    comms->DeregisterNetworkErrorCallback();
+            }
+        }
     }
 
     Super::BeginDestroy();
@@ -96,7 +101,7 @@ void UBrainCloudCallbackHandler::DeregisterRTTLobbyCallback(UBrainCloudWrapper *
 
 void UBrainCloudCallbackHandler::rttCallback(const FString &jsonData)
 {
-    // deserialize, which is this going to ? 
+    // deserialize, which is this going to ?
     RTTEventCallback.Broadcast(jsonData);
     RTTChatCallback.Broadcast(jsonData);
     RTTMessagingCallback.Broadcast(jsonData);

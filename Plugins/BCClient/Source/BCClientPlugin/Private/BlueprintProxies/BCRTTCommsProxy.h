@@ -15,13 +15,18 @@ class UBCRTTCommsProxy : public UBCBlueprintCallProxyBase
 
 public:
 	UBCRTTCommsProxy(const FObjectInitializer &ObjectInitializer);
+	virtual void BeginDestroy() override;
 
 	void SetRTTComms(BrainCloudRTTComms *in_comms);
 
 	// expose web socket functions
+	UFUNCTION()
 	void WebSocket_OnClose();
+	UFUNCTION()
 	void Websocket_OnOpen();
+	UFUNCTION()
 	void WebSocket_OnMessage(const FString &in_data);
+	UFUNCTION()
 	void WebSocket_OnError(const FString &in_error);
 
 private:

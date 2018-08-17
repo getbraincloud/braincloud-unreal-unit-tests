@@ -713,6 +713,11 @@ BrainCloudMessaging *BrainCloudClient::getMessagingService()
 	return _messagingService;
 }
 
+const FString &BrainCloudClient::getSessionId()
+{
+	return _brainCloudComms->GetSessionId();
+}
+
 const FString &BrainCloudClient::getRTTConnectionId()
 {
 	return _brainCloudRTTComms->getConnectionId();

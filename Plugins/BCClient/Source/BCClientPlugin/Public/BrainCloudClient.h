@@ -336,6 +336,7 @@ class BCCLIENTPLUGIN_API BrainCloudClient
 	*/
 	const FString &getGameId() { return _appId; };
 	const FString &getAppId() { return _appId; };
+	const FString &getSessionId();
 	const FString &getReleasePlatform() { return _releasePlatform; };
 	const FString &getProfileId() { return getAuthenticationService()->getProfileId(); };
 

@@ -40,10 +40,6 @@
     {
       "Name": "OnlineSubsystemUtils",
       "Enabled": true
-    },
-    {
-      "Name": "WebSocket",
-      "Enabled": true
     }
   ]
 }
