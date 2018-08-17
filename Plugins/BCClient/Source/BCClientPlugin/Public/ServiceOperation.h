@@ -339,7 +339,7 @@ class BCCLIENTPLUGIN_API ServiceOperation
 	static const ServiceOperation GetMessagesPage;
 	static const ServiceOperation GetMessagesPageOffset;
 	static const ServiceOperation MarkMessagesRead;
-	static const ServiceOperation SendMessage;
+	static const ServiceOperation SEND_MESSAGE;
 	static const ServiceOperation SendMessageSimple;
 	// lobby
 	static const ServiceOperation FindLobby;

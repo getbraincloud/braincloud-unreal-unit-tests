@@ -19,10 +19,6 @@
 		{
 			"Name": "BCClient",
 			"Enabled": true
-		},
-		{
-			"Name": "WebSocket",
-			"Enabled": true
 		}
 	]
 }

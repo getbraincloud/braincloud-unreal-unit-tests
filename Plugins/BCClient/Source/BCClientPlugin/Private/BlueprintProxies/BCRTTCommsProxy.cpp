@@ -9,6 +9,11 @@ UBCRTTCommsProxy::UBCRTTCommsProxy(const FObjectInitializer &ObjectInitializer)
     : Super(ObjectInitializer)
 {
 }
+void UBCRTTCommsProxy::BeginDestroy()
+{
+    m_commsPtr = nullptr;
+    Super::BeginDestroy();
+}
 
 void UBCRTTCommsProxy::SetRTTComms(BrainCloudRTTComms *in_comms)
 {

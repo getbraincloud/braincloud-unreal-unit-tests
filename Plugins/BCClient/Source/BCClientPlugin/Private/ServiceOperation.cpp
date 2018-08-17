@@ -342,7 +342,7 @@ const ServiceOperation ServiceOperation::GetMessages = ServiceOperation("GET_MES
 const ServiceOperation ServiceOperation::GetMessagesPage = ServiceOperation("GET_MESSAGES_PAGE");
 const ServiceOperation ServiceOperation::GetMessagesPageOffset = ServiceOperation("GET_MESSAGES_PAGE_OFFSET");
 const ServiceOperation ServiceOperation::MarkMessagesRead = ServiceOperation("MARK_MESSAGES_READ");
-const ServiceOperation ServiceOperation::SendMessage = ServiceOperation("SEND_MESSAGE");
+const ServiceOperation ServiceOperation::SEND_MESSAGE = ServiceOperation("SEND_MESSAGE");
 const ServiceOperation ServiceOperation::SendMessageSimple = ServiceOperation("SEND_MESSAGE_SIMPLE");
 
 // lobby
