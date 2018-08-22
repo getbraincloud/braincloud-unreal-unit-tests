@@ -7,8 +7,6 @@
 #include "BrainCloudLeaderboard.h"
 #include "BCLeaderboardProxy.generated.h"
 
-class ABrainCloud;
-
 UCLASS(MinimalAPI)
 class UBCLeaderboardProxy : public UBCBlueprintCallProxyBase
 {

@@ -5,8 +5,6 @@
 #include "BCBlueprintCallProxyBase.h"
 #include "BCRedemptionCodeProxy.generated.h"
 
-class ABrainCloud;
-
 UCLASS(MinimalAPI)
 class UBCRedemptionCodeProxy : public UBCBlueprintCallProxyBase
 {

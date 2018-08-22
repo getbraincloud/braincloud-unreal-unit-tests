@@ -3,6 +3,7 @@
 #pragma once
 
 #include "IServerCallback.h"
+#include "IRTTCallback.h"
 #include "ServiceName.h"
 #include "ServiceOperation.h"
 #include "BCBlueprintCallProxyBase.generated.h"
@@ -70,4 +71,3 @@ class UBCBlueprintCallProxyBase : public UObject, public IServerCallback
         ConditionalBeginDestroy();
     }
 };
-

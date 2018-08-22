@@ -2,10 +2,10 @@
 
 #pragma once
 
-#include "BrainCloudClient.h"
+#include "BCBlueprintCallProxyBase.h"
+#include "BCBlueprintRTTCallProxyBase.h"
 #include "IRTTCallback.h"
 #include "BCClientProxy.generated.h"
-class ABrainCloudActor;
 
 UCLASS(MinimalAPI)
 class UBCClientProxy : public UBCBlueprintCallProxyBase, public IRTTCallback

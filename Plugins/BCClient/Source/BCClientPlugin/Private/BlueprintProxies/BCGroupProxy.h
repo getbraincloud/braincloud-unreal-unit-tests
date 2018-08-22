@@ -6,8 +6,6 @@
 #include "BrainCloudGroup.h"
 #include "BCGroupProxy.generated.h"
 
-class ABrainCloud;
-
 class UBrainCloudGroupACL;
 
 UCLASS(MinimalAPI)

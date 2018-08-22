@@ -1,13 +1,10 @@
 // Copyright 2018 bitHeads, Inc. All Rights Reserved.
 
 #include "BCClientPluginPrivatePCH.h"
-#include "BrainCloudActor.h"
 #include "IRTTCallback.h"
 #include "ServerCall.h"
-#include "BCWrapperProxy.h"
 #include "BrainCloudWrapper.h"
 #include "BCClientProxy.h"
-#include "BrainCloudCallbackHandler.h"
 
 UBCClientProxy::UBCClientProxy(const FObjectInitializer &ObjectInitializer)
 	: Super(ObjectInitializer)
@@ -258,7 +255,6 @@ void UBCClientProxy::OverrideLanguageCode(UBrainCloudWrapper *brainCloudWrapper,
 
 void UBCClientProxy::rttCallback(const FString &jsonData)
 {
-	UE_LOG(LogBrainCloudComms, Warning, TEXT("rttCallback : %s"), *jsonData);
 	OnRTTEventCallback.Broadcast(jsonData);
 	OnRTTChatCallback.Broadcast(jsonData);
 	OnRTTMessagingCallback.Broadcast(jsonData);

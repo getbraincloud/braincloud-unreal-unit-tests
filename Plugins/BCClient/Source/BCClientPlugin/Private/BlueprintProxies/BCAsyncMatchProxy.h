@@ -3,10 +3,7 @@
 #pragma once
 
 #include "BCBlueprintCallProxyBase.h"
-
 #include "BCAsyncMatchProxy.generated.h"
-
-class ABrainCloud;
 
 UCLASS(MinimalAPI)
 class UBCAsyncMatchProxy : public UBCBlueprintCallProxyBase

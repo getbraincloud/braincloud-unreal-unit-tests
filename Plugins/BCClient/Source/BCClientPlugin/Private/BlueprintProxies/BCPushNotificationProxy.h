@@ -5,8 +5,6 @@
 #include "BCBlueprintCallProxyBase.h"
 #include "BCPushNotificationProxy.generated.h"
 
-class ABrainCloud;
-
 enum class EBCPlatform : uint8;
 
 UCLASS(MinimalAPI)

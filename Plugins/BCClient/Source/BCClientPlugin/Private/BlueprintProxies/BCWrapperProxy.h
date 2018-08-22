@@ -8,7 +8,6 @@
 #include "BCWrapperProxy.generated.h"
 
 class UBrainCloudWrapper;
-class ABrainCloudActor;
 
 UCLASS(BlueprintType)
 class UBCWrapperProxy : public UBCBlueprintCallProxyBase

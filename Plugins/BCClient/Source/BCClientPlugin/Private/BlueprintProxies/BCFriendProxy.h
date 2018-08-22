@@ -6,8 +6,6 @@
 #include "BrainCloudFriend.h"
 #include "BCFriendProxy.generated.h"
 
-class ABrainCloud;
-
 UCLASS(MinimalAPI)
 class UBCFriendProxy : public UBCBlueprintCallProxyBase
 {

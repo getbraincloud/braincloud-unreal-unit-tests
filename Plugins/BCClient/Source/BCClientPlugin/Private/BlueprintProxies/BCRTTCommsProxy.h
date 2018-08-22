@@ -5,7 +5,6 @@
 #include "BCBlueprintCallProxyBase.h"
 #include "BCRTTCommsProxy.generated.h"
 
-class ABrainCloud;
 class BrainCloudRTTComms;
 
 UCLASS(MinimalAPI)

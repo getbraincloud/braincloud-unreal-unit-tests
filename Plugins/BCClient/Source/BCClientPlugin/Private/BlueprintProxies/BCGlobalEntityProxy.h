@@ -6,8 +6,6 @@
 #include "BrainCloudACL.h"
 #include "BCGlobalEntityProxy.generated.h"
 
-class ABrainCloud;
-
 UCLASS(MinimalAPI)
 class UBCGlobalEntityProxy : public UBCBlueprintCallProxyBase
 {

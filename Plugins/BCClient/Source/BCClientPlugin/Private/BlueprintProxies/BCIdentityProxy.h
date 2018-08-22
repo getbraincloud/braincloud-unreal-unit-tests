@@ -6,8 +6,6 @@
 #include "BCAuthType.h"
 #include "BCIdentityProxy.generated.h"
 
-class ABrainCloud;
-
 UCLASS(MinimalAPI)
 class UBCIdentityProxy : public UBCBlueprintCallProxyBase
 {
