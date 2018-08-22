@@ -15,7 +15,7 @@ BCIdentityCallback::~BCIdentityCallback()
 {
 }
 
-void BCIdentityCallback::serverCallback(ServiceName serviceName, ServiceOperation serviceOperation, FString const &jsonData)
+void BCIdentityCallback::serverCallback(ServiceName serviceName, ServiceOperation serviceOperation, const FString &jsonData)
 {
     TSharedRef<TJsonReader<TCHAR>> reader = TJsonReaderFactory<TCHAR>::Create(jsonData);
     TSharedPtr<FJsonObject> jsonPacket = MakeShareable(new FJsonObject());

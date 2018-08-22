@@ -3,12 +3,12 @@
 #pragma once
 
 #include "BrainCloudClient.h"
+#include "IRTTCallback.h"
 #include "BCClientProxy.generated.h"
-
 class ABrainCloudActor;
 
 UCLASS(MinimalAPI)
-class UBCClientProxy : public UBCBlueprintCallProxyBase
+class UBCClientProxy : public UBCBlueprintCallProxyBase, public IRTTCallback
 {
 	GENERATED_BODY()
 
@@ -103,7 +103,7 @@ class UBCClientProxy : public UBCBlueprintCallProxyBase
 	*
 	* This function will first call requestClientConnection, then connect to the address
 	*/
-	UFUNCTION(BlueprintCallable, Category = "BrainCloud|Client")
+	UFUNCTION(BlueprintCallable, meta = (BlueprintInternalUseOnly = "true"), Category = "BrainCloud|Client")
 	static UBCClientProxy *EnableRTT(UBrainCloudWrapper *brainCloudWrapper, eBCRTTConnectionType in_type);
 
 	/*
@@ -117,6 +117,30 @@ class UBCClientProxy : public UBCBlueprintCallProxyBase
 	*/
 	UFUNCTION(BlueprintCallable, Category = "BrainCloud|Client")
 	static void SetRTTHeartBeatSeconds(UBrainCloudWrapper *brainCloudWrapper, int32 in_value);
+
+	/**
+	* 	
+	*/
+	UFUNCTION(BlueprintCallable, meta = (BlueprintInternalUseOnly = "true"), Category = "BrainCloud|Client")
+	static UBCClientProxy *RegisterRTTEventCallback(UBrainCloudWrapper *brainCloudWrapper);
+
+	/**
+	* 	
+	*/
+	UFUNCTION(BlueprintCallable, meta = (BlueprintInternalUseOnly = "true"), Category = "BrainCloud|Client")
+	static UBCClientProxy *RegisterRTTChatCallback(UBrainCloudWrapper *brainCloudWrapper);
+
+	/**
+	* 	
+	*/
+	UFUNCTION(BlueprintCallable, meta = (BlueprintInternalUseOnly = "true"), Category = "BrainCloud|Client")
+	static UBCClientProxy *RegisterRTTMessagingCallback(UBrainCloudWrapper *brainCloudWrapper);
+
+	/**
+	* 	
+	*/
+	UFUNCTION(BlueprintCallable, meta = (BlueprintInternalUseOnly = "true"), Category = "BrainCloud|Client")
+	static UBCClientProxy *RegisterRTTLobbyCallback(UBrainCloudWrapper *brainCloudWrapper);
 
 	/**
 	* 
@@ -240,6 +264,12 @@ class UBCClientProxy : public UBCBlueprintCallProxyBase
 	static const FString &GetGameId(UBrainCloudWrapper *brainCloudWrapper);
 
 	UFUNCTION(BlueprintCallable, Category = "BrainCloud|Client")
+	static const FString &GetAppId(UBrainCloudWrapper *brainCloudWrapper);
+
+	UFUNCTION(BlueprintCallable, Category = "BrainCloud|Client")
+	static const FString &GetSessionId(UBrainCloudWrapper *brainCloudWrapper);
+
+	UFUNCTION(BlueprintCallable, Category = "BrainCloud|Client")
 	static const FString &GetReleasePlatform(UBrainCloudWrapper *brainCloudWrapper);
 
 	UFUNCTION(BlueprintCallable, Category = "BrainCloud|Client")
@@ -247,6 +277,15 @@ class UBCClientProxy : public UBCBlueprintCallProxyBase
 
 	UFUNCTION(BlueprintCallable, Category = "BrainCloud|Client")
 	static const FString &GetBrainCloudClientVersion(UBrainCloudWrapper *brainCloudWrapper);
+
+	UFUNCTION(BlueprintCallable, Category = "BrainCloud|Client")
+	static const FString &GetProfileId(UBrainCloudWrapper *brainCloudWrapper);
+
+	UFUNCTION(BlueprintCallable, Category = "BrainCloud|Client")
+	static const FString &GetRTTConnectionId(UBrainCloudWrapper *brainCloudWrapper);
+
+	UFUNCTION(BlueprintCallable, Category = "BrainCloud|Client")
+	static const FString &GetEventServer(UBrainCloudWrapper *brainCloudWrapper);
 
 	/**
 	* Returns the list of packet timeouts.
@@ -349,4 +388,20 @@ class UBCClientProxy : public UBCBlueprintCallProxyBase
 	*/
 	UFUNCTION(BlueprintCallable, Category = "BrainCloud|Client")
 	static void OverrideLanguageCode(UBrainCloudWrapper *brainCloudWrapper, const FString &languageCode);
+
+	UPROPERTY(BlueprintAssignable)
+	FBrainCloudRTTCallbackDelegate OnRTTEventCallback;
+
+	UPROPERTY(BlueprintAssignable)
+	FBrainCloudRTTCallbackDelegate OnRTTChatCallback;
+
+	UPROPERTY(BlueprintAssignable)
+	FBrainCloudRTTCallbackDelegate OnRTTMessagingCallback;
+
+	UPROPERTY(BlueprintAssignable)
+	FBrainCloudRTTCallbackDelegate OnRTTLobbyCallback;
+	
+protected:
+	//callbacks
+	void rttCallback(const FString &jsonData);
 };

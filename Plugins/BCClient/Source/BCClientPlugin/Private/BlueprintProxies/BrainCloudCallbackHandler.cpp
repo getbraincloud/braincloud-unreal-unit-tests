@@ -59,55 +59,6 @@ void UBrainCloudCallbackHandler::RegisterCallbacks(UBrainCloudWrapper *brainClou
         bc->getBCClient()->registerNetworkErrorCallback(this);
 }
 
-void UBrainCloudCallbackHandler::RegisterRTTEventCallback(UBrainCloudWrapper *brainCloudWrapper)
-{
-    UBCWrapperProxy::GetBrainCloudInstance(brainCloudWrapper)->getBCClient()->registerRTTEventCallback(this);
-}
-
-void UBrainCloudCallbackHandler::DeregisterRTTEventCallback(UBrainCloudWrapper *brainCloudWrapper)
-{
-    UBCWrapperProxy::GetBrainCloudInstance(brainCloudWrapper)->getBCClient()->deregisterRTTEventCallback();
-}
-
-void UBrainCloudCallbackHandler::RegisterRTTChatCallback(UBrainCloudWrapper *brainCloudWrapper)
-{
-    UBCWrapperProxy::GetBrainCloudInstance(brainCloudWrapper)->getBCClient()->registerRTTChatCallback(this);
-}
-
-void UBrainCloudCallbackHandler::DeregisterRTTChatCallback(UBrainCloudWrapper *brainCloudWrapper)
-{
-    UBCWrapperProxy::GetBrainCloudInstance(brainCloudWrapper)->getBCClient()->deregisterRTTEventCallback();
-}
-
-void UBrainCloudCallbackHandler::RegisterRTTMessagingCallback(UBrainCloudWrapper *brainCloudWrapper)
-{
-    UBCWrapperProxy::GetBrainCloudInstance(brainCloudWrapper)->getBCClient()->registerRTTMessagingCallback(this);
-}
-
-void UBrainCloudCallbackHandler::DeregisterRTTMessagingCallback(UBrainCloudWrapper *brainCloudWrapper)
-{
-    UBCWrapperProxy::GetBrainCloudInstance(brainCloudWrapper)->getBCClient()->deregisterRTTMessagingCallback();
-}
-
-void UBrainCloudCallbackHandler::RegisterRTTLobbyCallback(UBrainCloudWrapper *brainCloudWrapper)
-{
-    UBCWrapperProxy::GetBrainCloudInstance(brainCloudWrapper)->getBCClient()->registerRTTLobbyCallback(this);
-}
-
-void UBrainCloudCallbackHandler::DeregisterRTTLobbyCallback(UBrainCloudWrapper *brainCloudWrapper)
-{
-    UBCWrapperProxy::GetBrainCloudInstance(brainCloudWrapper)->getBCClient()->deregisterRTTLobbyCallback();
-}
-
-void UBrainCloudCallbackHandler::rttCallback(const FString &jsonData)
-{
-    // deserialize, which is this going to ?
-    RTTEventCallback.Broadcast(jsonData);
-    RTTChatCallback.Broadcast(jsonData);
-    RTTMessagingCallback.Broadcast(jsonData);
-    RTTLobbyCallback.Broadcast(jsonData);
-}
-
 void UBrainCloudCallbackHandler::fileUploadCompleted(const FString &fileUploadId, const FString &jsonResponse)
 {
     FileUploadComplete.Broadcast(fileUploadId, jsonResponse);

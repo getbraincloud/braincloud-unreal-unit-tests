@@ -33,6 +33,7 @@ struct FBC_ReturnData
     }
 };
 
+DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FBrainCloudRTTCallbackDelegate, FString, JsonData);
 DECLARE_DYNAMIC_MULTICAST_DELEGATE_TwoParams(FBrainCloudCallbackDelegate, FString, JsonData, FBC_ReturnData, AdditionalData);
 
 UCLASS(MinimalAPI)
