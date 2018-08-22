@@ -118,7 +118,7 @@ class BCCLIENTPLUGIN_API UWebSocketBase : public UObject
 	virtual void BeginDestroy() override;
 
 	UFUNCTION(BlueprintCallable, Category = WebSocket)
-	void SendText(const FString &data);
+	bool SendText(const FString &data);
 
 	UFUNCTION(BlueprintCallable, Category = WebSocket)
 	void Close();

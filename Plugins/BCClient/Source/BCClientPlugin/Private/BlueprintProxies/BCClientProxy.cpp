@@ -2,6 +2,7 @@
 
 #include "BCClientPluginPrivatePCH.h"
 #include "BrainCloudActor.h"
+#include "IRTTCallback.h"
 #include "ServerCall.h"
 #include "BCWrapperProxy.h"
 #include "BrainCloudWrapper.h"
@@ -80,6 +81,34 @@ void UBCClientProxy::SetRTTHeartBeatSeconds(UBrainCloudWrapper *brainCloudWrappe
 	UBCWrapperProxy::GetBrainCloudInstance(brainCloudWrapper)->getBCClient()->setRTTHeartBeatSeconds(in_value);
 }
 
+UBCClientProxy *UBCClientProxy::RegisterRTTEventCallback(UBrainCloudWrapper *brainCloudWrapper)
+{
+	UBCClientProxy *Proxy = NewObject<UBCClientProxy>();
+	UBCWrapperProxy::GetBrainCloudInstance(brainCloudWrapper)->getBCClient()->registerRTTEventCallback(Proxy);
+	return Proxy;
+}
+
+UBCClientProxy *UBCClientProxy::RegisterRTTChatCallback(UBrainCloudWrapper *brainCloudWrapper)
+{
+	UBCClientProxy *Proxy = NewObject<UBCClientProxy>();
+	UBCWrapperProxy::GetBrainCloudInstance(brainCloudWrapper)->getBCClient()->registerRTTChatCallback(Proxy);
+	return Proxy;
+}
+
+UBCClientProxy *UBCClientProxy::RegisterRTTMessagingCallback(UBrainCloudWrapper *brainCloudWrapper)
+{
+	UBCClientProxy *Proxy = NewObject<UBCClientProxy>();
+	UBCWrapperProxy::GetBrainCloudInstance(brainCloudWrapper)->getBCClient()->registerRTTMessagingCallback(Proxy);
+	return Proxy;
+}
+
+UBCClientProxy *UBCClientProxy::RegisterRTTLobbyCallback(UBrainCloudWrapper *brainCloudWrapper)
+{
+	UBCClientProxy *Proxy = NewObject<UBCClientProxy>();
+	UBCWrapperProxy::GetBrainCloudInstance(brainCloudWrapper)->getBCClient()->registerRTTLobbyCallback(Proxy);
+	return Proxy;
+}
+
 void UBCClientProxy::DeregisterAllRTTCallbacks(UBrainCloudWrapper *brainCloudWrapper)
 {
 	UBCWrapperProxy::GetBrainCloudInstance(brainCloudWrapper)->getBCClient()->deregisterAllRTTCallbacks();
@@ -137,6 +166,16 @@ const FString &UBCClientProxy::GetGameId(UBrainCloudWrapper *brainCloudWrapper)
 	return UBCWrapperProxy::GetBrainCloudInstance(brainCloudWrapper)->getBCClient()->getAppId();
 }
 
+const FString &UBCClientProxy::GetAppId(UBrainCloudWrapper *brainCloudWrapper)
+{
+	return UBCWrapperProxy::GetBrainCloudInstance(brainCloudWrapper)->getBCClient()->getAppId();
+}
+
+const FString &UBCClientProxy::GetSessionId(UBrainCloudWrapper *brainCloudWrapper)
+{
+	return UBCWrapperProxy::GetBrainCloudInstance(brainCloudWrapper)->getBCClient()->getSessionId();
+}
+
 const FString &UBCClientProxy::GetReleasePlatform(UBrainCloudWrapper *brainCloudWrapper)
 {
 	return UBCWrapperProxy::GetBrainCloudInstance(brainCloudWrapper)->getBCClient()->getReleasePlatform();
@@ -150,6 +189,21 @@ const FString &UBCClientProxy::GetGameVersion(UBrainCloudWrapper *brainCloudWrap
 const FString &UBCClientProxy::GetBrainCloudClientVersion(UBrainCloudWrapper *brainCloudWrapper)
 {
 	return UBCWrapperProxy::GetBrainCloudInstance(brainCloudWrapper)->getBCClient()->getBrainCloudClientVersion();
+}
+
+const FString &UBCClientProxy::GetProfileId(UBrainCloudWrapper *brainCloudWrapper)
+{
+	return UBCWrapperProxy::GetBrainCloudInstance(brainCloudWrapper)->getBCClient()->getProfileId();
+}
+
+const FString &UBCClientProxy::GetRTTConnectionId(UBrainCloudWrapper *brainCloudWrapper)
+{
+	return UBCWrapperProxy::GetBrainCloudInstance(brainCloudWrapper)->getBCClient()->getRTTConnectionId();
+}
+
+const FString &UBCClientProxy::GetEventServer(UBrainCloudWrapper *brainCloudWrapper)
+{
+	return UBCWrapperProxy::GetBrainCloudInstance(brainCloudWrapper)->getBCClient()->getEventServer();
 }
 
 const TArray<int32> &UBCClientProxy::GetPacketTimeouts(UBrainCloudWrapper *brainCloudWrapper)
@@ -200,4 +254,13 @@ void UBCClientProxy::OverrideCountryCode(UBrainCloudWrapper *brainCloudWrapper, 
 void UBCClientProxy::OverrideLanguageCode(UBrainCloudWrapper *brainCloudWrapper, const FString &languageCode)
 {
 	UBCWrapperProxy::GetBrainCloudInstance(brainCloudWrapper)->getBCClient()->overrideLanguageCode(languageCode);
+}
+
+void UBCClientProxy::rttCallback(const FString &jsonData)
+{
+	UE_LOG(LogBrainCloudComms, Warning, TEXT("rttCallback : %s"), *jsonData);
+	OnRTTEventCallback.Broadcast(jsonData);
+	OnRTTChatCallback.Broadcast(jsonData);
+	OnRTTMessagingCallback.Broadcast(jsonData);
+	OnRTTLobbyCallback.Broadcast(jsonData);
 }

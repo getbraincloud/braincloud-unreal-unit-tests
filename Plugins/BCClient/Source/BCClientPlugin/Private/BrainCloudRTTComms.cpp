@@ -19,7 +19,9 @@
 #include "BCRTTCommsProxy.h"
 #include "WebSocketBase.h"
 #include <iostream>
+
 #define MAX_PAYLOAD 64 * 1024
+#define INITIAL_HEARTBEAT_TIME 10
 
 #if PLATFORM_UWP
 #elif PLATFORM_HTML5
@@ -50,8 +52,17 @@ static const struct lws_extension exts[] = {
 #endif
 
 BrainCloudRTTComms::BrainCloudRTTComms(BrainCloudClient *client) : m_client(client),
+																   m_appCallback(nullptr),
+																   m_connectedSocket(nullptr),
+																   m_cxId(TEXT("")),
+																   m_eventServer(TEXT("")),
 																   m_rttHeaders(nullptr),
-																   m_endpoint(nullptr)
+																   m_endpoint(nullptr),
+																   m_heartBeatSecs(INITIAL_HEARTBEAT_TIME),
+																   m_timeSinceLastRequest(0),
+																   m_lastNowMS(FPlatformTime::Seconds()),
+																   m_bIsConnected(false),
+																   m_lwsContext(nullptr)
 {
 	m_commsPtr = NewObject<UBCRTTCommsProxy>();
 	m_commsPtr->AddToRoot();
@@ -87,142 +98,23 @@ void BrainCloudRTTComms::RunCallbacks()
 		lws_service(m_lwsContext, 0);
 	}
 #endif
-	/*
-	if (!ListenerSocket)
-		return;
-	//Remote address
-	TSharedRef<FInternetAddr> RemoteAddress = ISocketSubsystem::Get(PLATFORM_SOCKETSUBSYSTEM)->CreateInternetAddr();
-	bool Pending;
 
-	// handle incoming connections
-	if (ListenerSocket->HasPendingConnection(Pending) && Pending)
+	if (m_bIsConnected)
 	{
-		//Already have a Connection? destroy previous
-		if (ConnectionSocket)
+		// check to see if we need to send an RTT heartbeat to keep the connection alive
+		float nowMS = FPlatformTime::Seconds();
+
+		// the heart beat
+		m_timeSinceLastRequest += (nowMS - m_lastNowMS);
+		m_lastNowMS = nowMS;
+		if (m_timeSinceLastRequest >= m_heartBeatSecs)
 		{
-			ConnectionSocket->Close();
-			ISocketSubsystem::Get(PLATFORM_SOCKETSUBSYSTEM)->DestroySocket(ConnectionSocket);
-		}
-
-		//New Connection receive!
-		ConnectionSocket = ListenerSocket->Accept(*RemoteAddress, TEXT("RamaTCP Received Socket Connection"));
-
-		if (ConnectionSocket != NULL)
-		{
-			//Global cache of current Remote
-			//RemoteAddressForConnection = FIPv4Endpoint(RemoteAddress);
-
-			//UE_LOG "Accepted Connection! WOOOHOOOO!!!";
-
-			//can thread this too GetWorldTimerManager().SetTimer(this, &AYourClass::TCPSocketListener, 0.01, true);
-		}
-	}
-	*/
-}
-/*
-bool BrainCloudRTTComms::StartTCPReceiver(const FString &YourChosenSocketName, const FString &TheIP, const int32 ThePort)
-{
-	ListenerSocket = CreateTCPConnectionListener(YourChosenSocketName, TheIP, ThePort);
-	if (!ListenerSocket)
-	{
-		GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Red, FString::Printf(TEXT("StartTCPReceiver>> Listen socket could not be created! ~> %s %d"), *TheIP, ThePort));
-		return false;
-	}
-
-	//Start the Listener! //thread this eventually GetWorldTimerManager().SetTimer(this, &AYourClass::TCPConnectionListener, 0.01, true);
-
-	return true;
-}
-
-bool BrainCloudRTTComms::FormatIP4ToNumber(const FString &TheIP, uint8 (&Out)[4])
-{
-	//IP Formatting
-	TheIP.Replace(TEXT(" "), TEXT(""));
-
-	//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ //	IP 4 Parts
-	TArray<FString> Parts;
-	TheIP.ParseIntoArray(Parts, TEXT("."), true);
-	if (Parts.Num() != 4)
-		return false;
-
-	for (int32 i = 0; i < 4; ++i)
-	{
-		Out[i] = FCString::Atoi(*Parts[i]);
-	}
-
-	return true;
-}
-FSocket *BrainCloudRTTComms::CreateTCPConnectionListener(const FString &YourChosenSocketName, const FString &TheIP, const int32 ThePort, const int32 ReceiveBufferSize)
-{
-	uint8 IP4Nums[4];
-	if (!FormatIP4ToNumber(TheIP, IP4Nums))
-	{
-		//VShow("Invalid IP! Expecting 4 parts separated by .");
-		return false;
-	}
-
-	//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-	//Create Socket
-	//FIPv6Address();
-	FIPv4Endpoint Endpoint(FIPv4Address(IP4Nums[0], IP4Nums[1], IP4Nums[2], IP4Nums[3]), ThePort);
-	FSocket *ListenSocket = FTcpSocketBuilder(*YourChosenSocketName).AsReusable().BoundToEndpoint(Endpoint).Listening(8);
-
-	//Set Buffer Size
-	int32 NewSize = 0;
-	ListenSocket->SetReceiveBufferSize(ReceiveBufferSize, NewSize);
-
-	//Done!
-	return ListenSocket;
-}
-
-/*
-void BrainCloudRTTComms::TCPConnectionListener()
-{
-	if (!ListenerSocket)
-		return;
-
-	//Remote address
-	TSharedRef<FInternetAddr> RemoteAddress = ISocketSubsystem::Get(PLATFORM_SOCKETSUBSYSTEM)->CreateInternetAddr();
-	bool Pending;
-
-	// handle incoming connections
-	if (ListenerSocket->HasPendingConnection(Pending) && Pending)
-	{
-		//Already have a Connection? destroy previous
-		if (ConnectionSocket)
-		{
-			ConnectionSocket->Close();
-			ISocketSubsystem::Get(PLATFORM_SOCKETSUBSYSTEM)->DestroySocket(ConnectionSocket);
-		}
-
-		//New Connection receive!
-		ConnectionSocket = ListenerSocket->Accept(*RemoteAddress, TEXT("RamaTCP Received Socket Connection"));
-
-		if (ConnectionSocket != NULL)
-		{
-			//Global cache of current Remote
-			Address RemoteAddressForConnection = FIPv4Endpoint(RemoteAddress);
-
-			//UE_LOG "Accepted Connection! WOOOHOOOO!!!";
-
-			//can thread this too GetWorldTimerManager().SetTimer(this, &AYourClass::TCPSocketListener, 0.01, true);
+			m_timeSinceLastRequest = 0;
+			send(buildHeartbeatRequest());
 		}
 	}
 }
 
-//Rama's String From Binary Array
-FString BrainCloudRTTComms::StringFromBinaryArray(uint8 *BinaryArray)
-{
-	//BinaryArray.Add(0);
-	// Add 0 termination. Even if the string is already 0-terminated, it doesn't change the results.
-	// Create a string from a byte array. The string is expected to be 0 terminated (i.e. a byte set to 0).
-	// Use UTF8_TO_TCHAR if needed.
-	// If you happen to know the data is UTF-16 (USC2) formatted, you do not need any conversion to begin with.
-	// Otherwise you might have to write your own conversion algorithm to convert between multilingual UTF-16 planes.
-	return FString(ANSI_TO_TCHAR(reinterpret_cast<const char*>(BinaryArray)));
-}
-*/
 #if PLATFORM_UWP
 #elif PLATFORM_HTML5
 #else
@@ -230,31 +122,11 @@ int BrainCloudRTTComms::callback_echo(struct lws *wsi, enum lws_callback_reasons
 {
 	void *pUser = lws_wsi_user(wsi);
 	UWebSocketBase *pWebSocketBase = (UWebSocketBase *)pUser;
-
-	if (reason != 31 &&
-		reason != 32 &&
-		reason != 33 &&
-		reason != 34 &&
-		reason != 35 &&
-		reason != 36)
-	{
-		UE_LOG(WebSocket, Warning, TEXT("lws_callback_reasons :%d"), reason);
-
-		UWebSocketBase *pWebSocketBase2 = (UWebSocketBase *)user;
-
-		if (!pWebSocketBase)
-			UE_LOG(WebSocket, Warning, TEXT("pWebSocketBase :%d"), reason);
-
-		if (!pWebSocketBase2)
-			UE_LOG(WebSocket, Warning, TEXT("pWebSocketBase2 :%d"), reason);
-	}
-
 	switch (reason)
 	{
 	case LWS_CALLBACK_CLOSED_CLIENT_HTTP:
 	case LWS_CALLBACK_CLOSED:
 
-		UE_LOG(WebSocket, Warning, TEXT("web socket CLOSED -- "));
 		if (!pWebSocketBase)
 			return -1;
 		pWebSocketBase->Cleanlws();
@@ -272,7 +144,6 @@ int BrainCloudRTTComms::callback_echo(struct lws *wsi, enum lws_callback_reasons
 	break;
 
 	case LWS_CALLBACK_CLIENT_ESTABLISHED:
-		UE_LOG(WebSocket, Warning, TEXT("web socket Established -- "));
 		if (!pWebSocketBase)
 			return -1;
 		pWebSocketBase->OnConnectComplete.Broadcast();
@@ -280,7 +151,6 @@ int BrainCloudRTTComms::callback_echo(struct lws *wsi, enum lws_callback_reasons
 
 	case LWS_CALLBACK_CLIENT_APPEND_HANDSHAKE_HEADER:
 	{
-		UE_LOG(WebSocket, Warning, TEXT("web socket handshake header -- "));
 		if (!pWebSocketBase)
 			return -1;
 
@@ -295,14 +165,12 @@ int BrainCloudRTTComms::callback_echo(struct lws *wsi, enum lws_callback_reasons
 	break;
 
 	case LWS_CALLBACK_CLIENT_RECEIVE:
-		UE_LOG(WebSocket, Warning, TEXT("web socket client receive -- "));
 		if (!pWebSocketBase)
 			return -1;
 		pWebSocketBase->ProcessRead((const char *)in, (int)len);
 		break;
 
 	case LWS_CALLBACK_CLIENT_WRITEABLE:
-		UE_LOG(WebSocket, Warning, TEXT("web socket client writable -- "));
 		if (!pWebSocketBase)
 			return -1;
 		pWebSocketBase->ProcessWriteable();
@@ -318,21 +186,35 @@ int BrainCloudRTTComms::callback_echo(struct lws *wsi, enum lws_callback_reasons
 
 void BrainCloudRTTComms::registerRTTCallback(ServiceName in_serviceName, IRTTCallback *callback)
 {
-	m_registeredRTTCallbacks[in_serviceName.getValue()] = callback;
+	m_registeredRTTCallbacks.Emplace(in_serviceName.getValue(), callback);
+	UE_LOG(LogBrainCloudComms, Log, TEXT("registerRTTCallback:  %s"), *in_serviceName.getValue());
 }
 
 void BrainCloudRTTComms::deregisterRTTCallback(ServiceName in_serviceName)
 {
-	m_registeredRTTCallbacks[in_serviceName.getValue()] = nullptr;
+	UObject *pObject = reinterpret_cast<UObject *>(m_registeredRTTCallbacks[in_serviceName.getValue()]);
+	if (pObject != nullptr)
+		pObject->ConditionalBeginDestroy();
+
+	m_registeredRTTCallbacks.Remove(in_serviceName.getValue());
+	//	m_registeredRTTCallbacks[in_serviceName.getValue()] = nullptr;
 }
 
 void BrainCloudRTTComms::deregisterAllRTTCallbacks()
 {
+	for (auto iterator = m_registeredRTTCallbacks.CreateIterator(); iterator; ++iterator)
+	{
+		UObject *pObject = reinterpret_cast<UObject *>(iterator.Value());
+		if (pObject != nullptr)
+			pObject->ConditionalBeginDestroy();
+	}
+
 	m_registeredRTTCallbacks.Empty();
 }
 
 void BrainCloudRTTComms::setRTTHeartBeatSeconds(int32 in_value)
 {
+	m_heartBeatSecs = in_value;
 }
 
 void BrainCloudRTTComms::connectWebSocket()
@@ -345,10 +227,8 @@ void BrainCloudRTTComms::connectWebSocket()
 
 void BrainCloudRTTComms::disconnect()
 {
-	m_lwsContext = nullptr;
-
 	// clear everything
-	if (m_connectedSocket != nullptr)
+	if (m_connectedSocket != nullptr && m_commsPtr != nullptr)
 	{
 		m_connectedSocket->OnConnectError.RemoveDynamic(m_commsPtr, &UBCRTTCommsProxy::WebSocket_OnError);
 		m_connectedSocket->OnClosed.RemoveDynamic(m_commsPtr, &UBCRTTCommsProxy::WebSocket_OnClose);
@@ -358,6 +238,11 @@ void BrainCloudRTTComms::disconnect()
 
 	delete m_connectedSocket;
 	m_connectedSocket = nullptr;
+
+	m_lwsContext = nullptr;
+
+	m_cxId = TEXT("");
+	m_eventServer = TEXT("");
 }
 
 void BrainCloudRTTComms::connect()
@@ -387,14 +272,65 @@ FString BrainCloudRTTComms::buildConnectionRequest()
 
 FString BrainCloudRTTComms::buildHeartbeatRequest()
 {
-	FString toReturn = TEXT("");
+	TSharedRef<FJsonObject> json = MakeShareable(new FJsonObject());
+	json->SetStringField("service", ServiceName::RTT.getValue());
+	json->SetStringField("operation", "HEARTBEAT");
+	json->SetObjectField("data", nullptr);
 
-	return toReturn;
+	return JsonUtil::jsonValueToString(json);
 }
 
 bool BrainCloudRTTComms::send(const FString &in_message)
 {
-	return false;
+	bool bMessageSent = false;
+	// early return
+	if ((m_connectedSocket == nullptr))
+	{
+		return bMessageSent;
+	}
+	m_timeSinceLastRequest = 0;
+
+	if (m_client->isLoggingEnabled())
+		UE_LOG(LogBrainCloudComms, Log, TEXT("RTT SEND:  %s"), *in_message);
+
+	bMessageSent = m_connectedSocket->SendText(in_message);
+
+	return bMessageSent;
+}
+
+void BrainCloudRTTComms::processRegisteredListeners(const FString &in_service, const FString &in_operation, const FString &in_jsonMessage)
+{
+	// does this go to one of our registered service listeners?
+	if (m_registeredRTTCallbacks.Contains(in_service))
+	{
+		m_registeredRTTCallbacks[in_service]->rttCallback(in_jsonMessage);
+	}
+	// are we actually connected? only pump this back, when the server says we've connected
+	else if (in_operation == TEXT("CONNECT"))
+	{
+		m_bIsConnected = true;
+		m_lastNowMS = FPlatformTime::Seconds();
+
+		// success callback!
+		// server callback rtt connected with data!
+		if (m_appCallback != nullptr)
+		{
+			m_appCallback->serverCallback(ServiceName::RTTRegistration, ServiceOperation::Connect, in_jsonMessage);
+		}
+	}
+	else if (in_operation == TEXT("error") || in_operation == TEXT("disconnect"))
+	{
+		if (in_operation == TEXT("disconnect"))
+		{
+			disconnect();
+		}
+
+		// error callback!
+		if (m_appCallback != nullptr)
+		{
+			m_appCallback->serverError(ServiceName::RTTRegistration, ServiceOperation::Connect, 400, -1, in_jsonMessage);
+		}
+	}
 }
 
 void BrainCloudRTTComms::startReceivingWebSocket()
@@ -407,16 +343,11 @@ void BrainCloudRTTComms::startReceivingWebSocket()
 	url += FString::Printf(TEXT("%d"), m_endpoint->GetIntegerField(TEXT("port")));
 	url += getUrlQueryParameters();
 
-	//FString url = TEXT("wss://echo.websocket.org");
-
 	setupWebSocket(url);
 }
 
 void BrainCloudRTTComms::setupWebSocket(const FString &in_url)
 {
-	if (m_client->isLoggingEnabled())
-		UE_LOG(LogBrainCloudComms, Warning, TEXT("Connection Request Started %s"), *in_url);
-
 #if PLATFORM_UWP
 #elif PLATFORM_HTML5
 #else
@@ -440,6 +371,7 @@ void BrainCloudRTTComms::setupWebSocket(const FString &in_url)
 	}
 #endif
 
+	m_timeSinceLastRequest = 0;
 	m_connectedSocket = NewObject<UWebSocketBase>();
 	m_connectedSocket->AddToRoot();
 
@@ -450,30 +382,21 @@ void BrainCloudRTTComms::setupWebSocket(const FString &in_url)
 	m_connectedSocket->OnReceiveData.AddDynamic(m_commsPtr, &UBCRTTCommsProxy::WebSocket_OnMessage);
 	m_connectedSocket->mlwsContext = m_lwsContext;
 
-	m_rttHeadersMap.Empty();
-	m_rttHeadersMap.Add(TEXT("Authorization"), TEXT("Basic MjAwMDE6bXlzZWNyZXQx"));
-
 	m_connectedSocket->Connect(in_url, m_rttHeadersMap);
-	/*
-	FString connectRequest = buildConnectionRequest();
-
-	if (m_client->isLoggingEnabled())
-		UE_LOG(LogBrainCloudComms, Warning, TEXT("connectRequest -- %s"), *connectRequest);
-
-	m_connectedSocket->SendText(connectRequest);
-	*/
 }
 
 void BrainCloudRTTComms::webSocket_OnClose()
 {
 	if (m_client->isLoggingEnabled())
-		UE_LOG(LogBrainCloudComms, Warning, TEXT("Connection closed"));
+		UE_LOG(LogBrainCloudComms, Log, TEXT("Connection closed"));
+
+	processRegisteredListeners(ServiceName::RTTRegistration.getValue(), "error", "{\"error\":\"Could not connect at this time\"}");
 }
 
 void BrainCloudRTTComms::websocket_OnOpen()
 {
-	if (m_client->isLoggingEnabled())
-		UE_LOG(LogBrainCloudComms, Warning, TEXT("Connection established."));
+	// first time connecting? send the server connection call
+	send(buildConnectionRequest());
 }
 
 void BrainCloudRTTComms::webSocket_OnMessage(const FString &in_message)
@@ -484,14 +407,53 @@ void BrainCloudRTTComms::webSocket_OnMessage(const FString &in_message)
 void BrainCloudRTTComms::webSocket_OnError(const FString &in_message)
 {
 	if (m_client->isLoggingEnabled())
-		UE_LOG(LogBrainCloudComms, Warning, TEXT("Error: %s"), *in_message);
+		UE_LOG(LogBrainCloudComms, Log, TEXT("Error: %s"), *in_message);
+
+	disconnect();
 }
 
 void BrainCloudRTTComms::onRecv(const FString &in_message)
 {
 	// deserialize and push broadcast to the correct m_registeredRTTCallbacks
 	if (m_client->isLoggingEnabled())
-		UE_LOG(LogBrainCloudComms, Warning, TEXT("RTT RECV:: %s"), *in_message);
+		UE_LOG(LogBrainCloudComms, Log, TEXT("RTT RECV:: %s"), *in_message);
+
+	TSharedPtr<FJsonObject> jsonData = JsonUtil::jsonStringToValue(in_message);
+	FString service = jsonData->GetStringField(TEXT("service"));
+	FString operation = jsonData->GetStringField(TEXT("operation"));
+	TSharedPtr<FJsonObject> innerData = nullptr;
+	bool bIsInnerDataValid = jsonData->HasTypedField<EJson::Object>(TEXT("data"));
+	if (bIsInnerDataValid)
+		innerData = jsonData->GetObjectField(TEXT("data"));
+
+	if (operation == "CONNECT")
+	{
+		int32 heartBeat = INITIAL_HEARTBEAT_TIME;
+		if (bIsInnerDataValid && innerData->HasField(TEXT("heartbeatSeconds")))
+		{
+			heartBeat = innerData->GetIntegerField(TEXT("heartbeatSeconds"));
+		}
+		else if (bIsInnerDataValid && innerData->HasField(TEXT("wsHeartbeatSecs")))
+		{
+			heartBeat = innerData->GetIntegerField(TEXT("wsHeartbeatSecs"));
+		}
+		setRTTHeartBeatSeconds(heartBeat);
+	}
+
+	if (bIsInnerDataValid)
+	{
+		if (innerData->HasField(TEXT("cxId")))
+		{
+			m_cxId = innerData->GetStringField(TEXT("cxId"));
+		}
+
+		if (innerData->HasField(TEXT("evs")))
+		{
+			m_eventServer = innerData->GetStringField(TEXT("evs"));
+		}
+	}
+
+	processRegisteredListeners(service, operation, in_message);
 }
 
 void BrainCloudRTTComms::setEndpointFromType(TArray<TSharedPtr<FJsonValue>> in_endpoints, FString in_socketType)
@@ -518,7 +480,7 @@ void BrainCloudRTTComms::setEndpointFromType(TArray<TSharedPtr<FJsonValue>> in_e
 
 FString BrainCloudRTTComms::getUrlQueryParameters()
 {
-	FString toReturn = TEXT("?");
+	FString toReturn = TEXT("/?");
 	int32 count = 0;
 
 	// clear this, since we add them within the iterator
@@ -572,20 +534,13 @@ void BrainCloudRTTComms::serverCallback(ServiceName serviceName, ServiceOperatio
 			connect();
 		}
 	}
-
-	/*
-	FBC_ReturnData returnData = FBC_ReturnData(serviceName.getValue(), serviceOperation.getValue(), 200, 0);
-	OnSuccess.Broadcast(jsonData, returnData);
-	ConditionalBeginDestroy();
-	*/
 }
 
 void BrainCloudRTTComms::serverError(ServiceName serviceName, ServiceOperation serviceOperation, int32 statusCode, int32 reasonCode, const FString &jsonError)
 {
-	m_bIsConnected = false;
-	/*
-	FBC_ReturnData returnData = FBC_ReturnData(serviceName.getValue(), serviceOperation.getValue(), statusCode, reasonCode);
-	OnFailure.Broadcast(jsonError, returnData);
-	ConditionalBeginDestroy();
-	*/
+	// server callback rtt connected with data!
+	if (m_appCallback != nullptr)
+		m_appCallback->serverError(serviceName, serviceOperation, statusCode, reasonCode, jsonError);
+
+	disconnect();
 }

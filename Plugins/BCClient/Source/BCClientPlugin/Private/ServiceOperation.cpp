@@ -320,6 +320,7 @@ const ServiceOperation ServiceOperation::ClaimTournamentReward = ServiceOperatio
 
 // rtt
 const ServiceOperation ServiceOperation::RequestClientConnection = ServiceOperation(TEXT("REQUEST_CLIENT_CONNECTION"));
+const ServiceOperation ServiceOperation::Connect = ServiceOperation(TEXT("CONNECT"));
 
 // chat
 const ServiceOperation ServiceOperation::ChannelConnect = ServiceOperation("CHANNEL_CONNECT");

@@ -382,11 +382,6 @@ void UWebSocketBase::Connect(const FString &uri, const TMap<FString, FString> &h
 	connectInfo.ietf_version_or_minus_one = -1;
 	connectInfo.userdata = this;
 
-	UE_LOG(WebSocket, Warning, TEXT("Connect -- lws_client_connect_via_info %s"), *uri);
-	UE_LOG(WebSocket, Warning, TEXT("address: %s"), *strAddress);
-	UE_LOG(WebSocket, Warning, TEXT("strPath: %s"), *strPath);
-	UE_LOG(WebSocket, Warning, TEXT("strHost: %s"), *strHost);
-
 	mlws = lws_client_connect_via_info(&connectInfo);
 	//mlws = lws_client_connect_extended(mlwsContext, TCHAR_TO_UTF8(*strAddress), iPort, iUseSSL, TCHAR_TO_UTF8(*strPath), TCHAR_TO_UTF8(*strHost), TCHAR_TO_UTF8(*strHost), NULL, -1, (void*)this);
 	if (mlws == nullptr)
@@ -398,31 +393,36 @@ void UWebSocketBase::Connect(const FString &uri, const TMap<FString, FString> &h
 #endif
 }
 
-void UWebSocketBase::SendText(const FString &data)
+bool UWebSocketBase::SendText(const FString &data)
 {
+	bool bSentMessage = false;
 #if PLATFORM_UWP
+	bSentMessage = true;
 	SendAsync(ref new String(*data)).then([this]() {
 	});
 
 #elif PLATFORM_HTML5
 	std::string strData = TCHAR_TO_UTF8(*data);
 	SocketSend(mWebSocketRef, strData.c_str(), (int)strData.size());
+	bSentMessage = true;
 #else
 	if (data.Len() > MAX_ECHO_PAYLOAD)
 	{
 		UE_LOG(WebSocket, Error, TEXT("too large package to send > MAX_ECHO_PAYLOAD:%d > %d"), data.Len(), MAX_ECHO_PAYLOAD);
-		return;
+		return bSentMessage;
 	}
 
 	if (mlws != nullptr)
 	{
 		mSendQueue.Add(data);
+		bSentMessage = true;
 	}
 	else
 	{
 		UE_LOG(WebSocket, Error, TEXT("the socket is closed, SendText fail"));
 	}
 #endif
+	return bSentMessage;
 }
 
 void UWebSocketBase::ProcessWriteable()
@@ -464,15 +464,11 @@ bool UWebSocketBase::ProcessHeader(unsigned char **p, unsigned char *end)
 		std::string strKey = TCHAR_TO_UTF8(*(it.Key));
 		std::string strValue = TCHAR_TO_UTF8(*(it.Value));
 
-		strKey += ":";
-
-		UE_LOG(WebSocket, Warning, TEXT("add header by name  %s:%s"), *(it.Key), *(it.Value));
-		/*
+		strKey += ":";		
 		if (lws_add_http_header_by_name(mlws, (const unsigned char *)strKey.c_str(), (const unsigned char *)strValue.c_str(), (int)strValue.size(), p, end))
 		{
 			return false;
 		}
-		*/
 	}
 #endif
 	return true;

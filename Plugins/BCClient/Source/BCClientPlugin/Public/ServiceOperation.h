@@ -318,6 +318,7 @@ class BCCLIENTPLUGIN_API ServiceOperation
 
 	// rtt
 	static const ServiceOperation RequestClientConnection;
+	static const ServiceOperation Connect;
 
 	// chat
 	static const ServiceOperation ChannelConnect;

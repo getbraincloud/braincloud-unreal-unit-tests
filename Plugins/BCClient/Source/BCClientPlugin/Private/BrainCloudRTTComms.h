@@ -50,18 +50,6 @@ class BrainCloudRTTComms : public IServerCallback
 	void websocket_OnOpen();
 	void webSocket_OnMessage(const FString &in_data);
 	void webSocket_OnError(const FString &in_error);
-/*
-	FSocket *ListenerSocket;
-	FSocket *ConnectionSocket;
-	FIPv4Endpoint RemoteAddressForConnection;
-
-	bool StartTCPReceiver(const FString &YourChosenSocketName, const FString &TheIP, const int32 ThePort);
-
-	FSocket *CreateTCPConnectionListener(const FString &YourChosenSocketName, const FString &TheIP, const int32 ThePort, const int32 ReceiveBufferSize = 2 * 1024 * 1024);
-
-	bool FormatIP4ToNumber(const FString &TheIP, uint8 (&Out)[4]);
-	FString StringFromBinaryArray(uint8 *BinaryArray);
-	*/
 
   private:
 	void connectWebSocket();
@@ -73,6 +61,8 @@ class BrainCloudRTTComms : public IServerCallback
 	bool send(const FString &in_message);
 
 	void startReceivingWebSocket();
+
+	void processRegisteredListeners(const FString &in_service, const FString &in_operation, const FString &in_jsonMessage);
 
 	FString getUrlQueryParameters();
 	void setupWebSocket(const FString &in_url);
@@ -88,7 +78,6 @@ class BrainCloudRTTComms : public IServerCallback
 	IServerCallback *m_appCallback;
 
 	TMap<FString, IRTTCallback *> m_registeredRTTCallbacks;
-	TDoubleLinkedList<TSharedRef<ServerCall>> m_messageQueue;
 
 	UWebSocketBase *m_connectedSocket;
 	UBCRTTCommsProxy *m_commsPtr;
@@ -99,6 +88,10 @@ class BrainCloudRTTComms : public IServerCallback
 	TMap<FString, FString> m_rttHeadersMap;
 	TSharedPtr<FJsonObject> m_rttHeaders;
 	TSharedPtr<FJsonObject> m_endpoint;
+
+	float m_heartBeatSecs;
+	float m_timeSinceLastRequest;
+	float m_lastNowMS;
 
 	eBCRTTConnectionType m_connectionType;
 	bool m_bIsConnected;
