@@ -317,6 +317,18 @@ namespace BrainCloud
 	//rtt registration
 	const ServiceOperation ServiceOperation::RequestClientConnection = ServiceOperation("REQUEST_CLIENT_CONNECTION");
 
+	//chat
+	const ServiceOperation ServiceOperation::ChannelConnect = ServiceOperation("CHANNEL_CONNECT");
+	const ServiceOperation ServiceOperation::ChannelDisconnect = ServiceOperation("CHANNEL_DISCONNECT");
+	const ServiceOperation ServiceOperation::DeleteChatMessage = ServiceOperation("DELETE_CHAT_MESSAGE");
+	const ServiceOperation ServiceOperation::GetChannelId = ServiceOperation("GET_CHANNEL_ID");
+	const ServiceOperation ServiceOperation::GetChannelInfo = ServiceOperation("GET_CHANNEL_INFO");
+	const ServiceOperation ServiceOperation::GetChatMessage = ServiceOperation("GET_CHAT_MESSAGE");
+	const ServiceOperation ServiceOperation::GetRecentChatMessages = ServiceOperation("GET_RECENT_CHAT_MESSAGES");
+	const ServiceOperation ServiceOperation::GetSubscribedChannels = ServiceOperation("GET_SUBSCRIBED_CHANNELS");
+	const ServiceOperation ServiceOperation::PostChatMessage = ServiceOperation("POST_CHAT_MESSAGE");
+	const ServiceOperation ServiceOperation::UpdateChatMessage = ServiceOperation("UPDATE_CHAT_MESSAGE");
+
 	ServiceOperation::ServiceOperation(const char * value)
 	{
 		_value = value;

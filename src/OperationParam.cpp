@@ -358,6 +358,17 @@ namespace BrainCloud
 	const OperationParam OperationParam::RoundStartedEpoch = OperationParam("roundStartedEpoch");
 	const OperationParam OperationParam::Data = OperationParam("data");
 
+	//chat
+	const OperationParam OperationParam::ChannelId = OperationParam("channelId");
+	const OperationParam OperationParam::MsgId = OperationParam("msgId");
+	const OperationParam OperationParam::Version = OperationParam("version");
+	const OperationParam OperationParam::ChannelType = OperationParam("channelType");
+	const OperationParam OperationParam::ChannelSubId = OperationParam("channelSubId");
+	const OperationParam OperationParam::MaxReturn = OperationParam("maxReturn");
+	const OperationParam OperationParam::Content = OperationParam("content");
+	const OperationParam OperationParam::RecordInHistory = OperationParam("recordInHistory");
+	const OperationParam OperationParam::Text = OperationParam("text");
+
 	OperationParam::OperationParam(const char * value)
 	{
 		_value = value;

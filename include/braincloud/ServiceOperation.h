@@ -325,6 +325,17 @@ namespace BrainCloud {
 		//rtt Registration
 		static const ServiceOperation RequestClientConnection;
 
+		//chat
+		static const ServiceOperation ChannelConnect;
+		static const ServiceOperation ChannelDisconnect;
+		static const ServiceOperation DeleteChatMessage;
+		static const ServiceOperation GetChannelId;
+		static const ServiceOperation GetChannelInfo;
+		static const ServiceOperation GetChatMessage;
+		static const ServiceOperation GetRecentChatMessages;
+		static const ServiceOperation GetSubscribedChannels;
+		static const ServiceOperation PostChatMessage;
+		static const ServiceOperation UpdateChatMessage;
 
 		std::string getValue() const { return _value; }
 

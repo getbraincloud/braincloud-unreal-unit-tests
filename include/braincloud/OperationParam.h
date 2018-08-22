@@ -364,11 +364,16 @@ namespace BrainCloud {
 		static const OperationParam RoundStartedEpoch;
 		static const OperationParam Data;
 
-		/*
-		 OfflineMatchServicePlayerId                        = new OperationParam("playerId");
-		  static const OperationParam OfflineMatchServiceRangeDelta                      = new OperationParam("rangeDelta");
-		  static const OperationParam OfflineMatchServicePlaybackStreamId
-		 */
+		//chat
+		static const OperationParam ChannelId;
+		static const OperationParam MsgId;
+		static const OperationParam Version;
+		static const OperationParam ChannelType;
+		static const OperationParam ChannelSubId;
+		static const OperationParam MaxReturn;
+		static const OperationParam Content;
+		static const OperationParam RecordInHistory;
+		static const OperationParam Text;
 
 		std::string getValue() const { return _value; }
 

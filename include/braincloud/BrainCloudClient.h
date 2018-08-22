@@ -52,6 +52,7 @@
 #include "braincloud/BrainCloudGroup.h"
 #include "braincloud/BrainCloudMail.h"
 #include "braincloud/BrainCloudRTTRegistration.h"
+#include "braincloud/BrainCloudChat.h"
 
 namespace Json {
 	class Value;
@@ -314,6 +315,7 @@ namespace BrainCloud
 		BrainCloudGroup * getGroupService() { return _groupService; }
 		BrainCloudMail * getMailService() { return _mailService; }
 		BrainCloudRTTRegistration * getRTTRegistrationService() { return _rttRegistrationService; }
+		BrainCloudChat * getChatService() { return _chatService; }
 
 		/**
 		* @deprecated Use getAppId() instead - Removal after September 1 2017
@@ -651,6 +653,7 @@ namespace BrainCloud
 		BrainCloudGroup * _groupService;
 		BrainCloudMail * _mailService;
 		BrainCloudRTTRegistration * _rttRegistrationService;
+		BrainCloudChat * _chatService;
 
 		static std::string s_brainCloudClientVersion;
 

@@ -54,6 +54,7 @@ namespace BrainCloud {
         BrainCloudFile * getFileService() { return client->getFileService(); }
         BrainCloudGroup * getGroupService() { return client->getGroupService(); }
         BrainCloudMail * getMailService() { return client->getMailService(); }
+        BrainCloudChat * getChatService() { return client->getChatService(); }
 
         /**
          * Method returns a singleton instance of the BrainCloudWrapper.
