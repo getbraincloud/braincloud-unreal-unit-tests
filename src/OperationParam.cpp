@@ -369,6 +369,22 @@ namespace BrainCloud
 	const OperationParam OperationParam::RecordInHistory = OperationParam("recordInHistory");
 	const OperationParam OperationParam::Text = OperationParam("text");
 
+	//lobby
+	const OperationParam OperationParam::LobbyType = OperationParam("lobbyType");
+	const OperationParam OperationParam::Rating = OperationParam("rating");
+	const OperationParam OperationParam::OtherUserCxIds = OperationParam("otherUserCxIds");
+	const OperationParam OperationParam::IsReady = OperationParam("isReady");
+	const OperationParam OperationParam::ExtraJson = OperationParam("extraJson");
+	const OperationParam OperationParam::TeamCode = OperationParam("teamCode");
+	const OperationParam OperationParam::Settings = OperationParam("settings");
+	const OperationParam OperationParam::MaxSteps = OperationParam("maxSteps");
+	const OperationParam OperationParam::Algo = OperationParam("algo");
+	const OperationParam OperationParam::Filter = OperationParam("filter");
+	const OperationParam OperationParam::LobbyId = OperationParam("lobbyId");
+	const OperationParam OperationParam::CxId = OperationParam("cxId");
+	const OperationParam OperationParam::SignalData = OperationParam("signalData");
+	const OperationParam OperationParam::ToTeamCode = OperationParam("toTeamCode");
+
 	OperationParam::OperationParam(const char * value)
 	{
 		_value = value;

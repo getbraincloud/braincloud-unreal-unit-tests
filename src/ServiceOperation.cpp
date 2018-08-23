@@ -329,6 +329,41 @@ namespace BrainCloud
 	const ServiceOperation ServiceOperation::PostChatMessage = ServiceOperation("POST_CHAT_MESSAGE");
 	const ServiceOperation ServiceOperation::UpdateChatMessage = ServiceOperation("UPDATE_CHAT_MESSAGE");
 
+	//lobby
+	const ServiceOperation ServiceOperation::CreateLobby = ServiceOperation("CREATE_LOBBY");
+	const ServiceOperation ServiceOperation::FindLobby = ServiceOperation("FIND_LOBBY");
+	const ServiceOperation ServiceOperation::FindOrCreateLobby = ServiceOperation("FIND_OR_CREATE_LOBBY");
+	const ServiceOperation ServiceOperation::GetLobbyData = ServiceOperation("GET_LOBBY_DATA");
+	const ServiceOperation ServiceOperation::LeaveLobby = ServiceOperation("LEAVE_LOBBY");
+	const ServiceOperation ServiceOperation::RemoveMember = ServiceOperation("REMOVE_MEMBER");
+	const ServiceOperation ServiceOperation::SendSignal = ServiceOperation("SEND_SIGNAL");
+	const ServiceOperation ServiceOperation::SwitchTeam = ServiceOperation("SWITCH_TEAM");
+	const ServiceOperation ServiceOperation::UpdateReady = ServiceOperation("UPDATE_READY");
+	const ServiceOperation ServiceOperation::UpdateSettings = ServiceOperation("UPDATE_SETTINGS");
+
+	//messaging
+	const ServiceOperation ServiceOperation::DeleteMessages = ServiceOperation("DELETE_MESSAGES");
+	const ServiceOperation ServiceOperation::GetMessageBoxes = ServiceOperation("GET_MESSAGE_BOXES");
+	const ServiceOperation ServiceOperation::GetMessageCounts = ServiceOperation("GET_MESSAGE_COUNTS");
+	const ServiceOperation ServiceOperation::GetMessages = ServiceOperation("GET_MESSAGES");
+	const ServiceOperation ServiceOperation::GetMessagesPage = ServiceOperation("GET_MESSAGES_PAGE");
+	const ServiceOperation ServiceOperation::GetMessagesPageOffset = ServiceOperation("GET_MESSAGES_PAGE_OFFSET");
+	const ServiceOperation ServiceOperation::MarkMessagesRead = ServiceOperation("MARK_MESSAGES_READ");
+	const ServiceOperation ServiceOperation::SendMessage = ServiceOperation("SEND_MESSAGE");
+	const ServiceOperation ServiceOperation::SendMessageSimple = ServiceOperation("SEND_MESSAGE_SIMPLE");
+
+	//presence
+	const ServiceOperation ServiceOperation::ForcePush = ServiceOperation("FORCE_PUSH");
+	const ServiceOperation ServiceOperation::GetPresenceOfFriends = ServiceOperation("GET_PRESENCE_OF_FRIENDS");
+	const ServiceOperation ServiceOperation::GetPresenceOfGroup = ServiceOperation("GET_PRESENCE_OF_GROUP");
+	const ServiceOperation ServiceOperation::GetPresenceOfUsers = ServiceOperation("GET_PRESENCE_OF_USERS");
+	const ServiceOperation ServiceOperation::RegisterListenersForFriends = ServiceOperation("REGISTER_LISTENERS_FOR_FRIENDS");
+	const ServiceOperation ServiceOperation::RegisterListenersForGroup = ServiceOperation("REGISTER_LISTENERS_FOR_GROUP");
+	const ServiceOperation ServiceOperation::RegisterListenersForProfiles = ServiceOperation("REGISTER_LISTENERS_FOR_PROFILES");
+	const ServiceOperation ServiceOperation::SetVisibility = ServiceOperation("SET_VISIBILITY");
+	const ServiceOperation ServiceOperation::StopListening = ServiceOperation("STOP_LISTENING");
+	const ServiceOperation ServiceOperation::UpdateActivity = ServiceOperation("UPDATE_ACTIVITY");
+
 	ServiceOperation::ServiceOperation(const char * value)
 	{
 		_value = value;

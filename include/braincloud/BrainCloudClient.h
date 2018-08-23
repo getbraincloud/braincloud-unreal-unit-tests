@@ -53,6 +53,9 @@
 #include "braincloud/BrainCloudMail.h"
 #include "braincloud/BrainCloudRTTRegistration.h"
 #include "braincloud/BrainCloudChat.h"
+#include "braincloud/BrainCloudLobby.h"
+#include "braincloud/BrainCloudMessaging.h"
+#include "braincloud/BrainCloudPresence.h"
 
 namespace Json {
 	class Value;
@@ -316,6 +319,9 @@ namespace BrainCloud
 		BrainCloudMail * getMailService() { return _mailService; }
 		BrainCloudRTTRegistration * getRTTRegistrationService() { return _rttRegistrationService; }
 		BrainCloudChat * getChatService() { return _chatService; }
+		BrainCloudLobby * getLobbyService() { return _lobbyService; }
+		BrainCloudMessaging * getMessagingService() { return _messagingService; }
+		BrainCloudPresence * getPresenceService() { return _presenceService; }
 
 		/**
 		* @deprecated Use getAppId() instead - Removal after September 1 2017
@@ -613,6 +619,15 @@ namespace BrainCloud
 		void deregisterRTTLobbyCallback();
 
 		/**
+		 * Listen to real time presence events.
+		 * 
+		 * Notes: RTT must be enabled for this app, and enableRTT must have been successfully called.
+		 * Only one presence callback can be registered at a time. Calling this a second time will override the previous callback.
+		 */
+		void registerRTTPresenceCallback(IRTTCallback* in_callback);
+		void deregisterRTTPresenceCallback();
+
+		/**
 		 * Clear all set RTT callbacks
 		 */
 		void deregisterAllCallbacks();
@@ -654,6 +669,9 @@ namespace BrainCloud
 		BrainCloudMail * _mailService;
 		BrainCloudRTTRegistration * _rttRegistrationService;
 		BrainCloudChat * _chatService;
+		BrainCloudLobby * _lobbyService;
+		BrainCloudMessaging * _messagingService;
+		BrainCloudPresence * _presenceService;
 
 		static std::string s_brainCloudClientVersion;
 

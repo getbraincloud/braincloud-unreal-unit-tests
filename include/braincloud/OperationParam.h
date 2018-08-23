@@ -375,6 +375,22 @@ namespace BrainCloud {
 		static const OperationParam RecordInHistory;
 		static const OperationParam Text;
 
+		//lobby
+		static const OperationParam LobbyType;
+		static const OperationParam Rating;
+		static const OperationParam OtherUserCxIds;
+		static const OperationParam IsReady;
+		static const OperationParam ExtraJson;
+		static const OperationParam TeamCode;
+		static const OperationParam Settings;
+		static const OperationParam MaxSteps;
+		static const OperationParam Algo;
+		static const OperationParam Filter;
+		static const OperationParam LobbyId;
+		static const OperationParam CxId;
+		static const OperationParam SignalData;
+		static const OperationParam ToTeamCode;
+
 		std::string getValue() const { return _value; }
 
 		bool operator== (const OperationParam& s) const;

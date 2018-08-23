@@ -337,6 +337,42 @@ namespace BrainCloud {
 		static const ServiceOperation PostChatMessage;
 		static const ServiceOperation UpdateChatMessage;
 
+		//lobby
+		static const ServiceOperation CreateLobby;
+		static const ServiceOperation FindLobby;
+		static const ServiceOperation FindOrCreateLobby;
+		static const ServiceOperation GetLobbyData;
+		static const ServiceOperation LeaveLobby;
+		static const ServiceOperation RemoveMember;
+		static const ServiceOperation SendSignal;
+		static const ServiceOperation SwitchTeam;
+		static const ServiceOperation UpdateReady;
+		static const ServiceOperation UpdateSettings;
+
+		//messaging
+		static const ServiceOperation DeleteMessages;
+		static const ServiceOperation GetMessageBoxes;
+		static const ServiceOperation GetMessageCounts;
+		static const ServiceOperation GetMessages;
+		static const ServiceOperation GetMessagesPage;
+		static const ServiceOperation GetMessagesPageOffset;
+		static const ServiceOperation MarkMessagesRead;
+		static const ServiceOperation SendMessage;
+		static const ServiceOperation SendMessageSimple;
+
+		//presence
+		static const ServiceOperation ForcePush;
+		static const ServiceOperation GetPresenceOfFriends;
+		static const ServiceOperation GetPresenceOfGroup;
+		static const ServiceOperation GetPresenceOfUsers;
+		static const ServiceOperation RegisterListenersForFriends;
+		static const ServiceOperation RegisterListenersForGroup;
+		static const ServiceOperation RegisterListenersForProfiles;
+		static const ServiceOperation SetVisibility;
+		static const ServiceOperation StopListening;
+		static const ServiceOperation UpdateActivity;
+
+
 		std::string getValue() const { return _value; }
 
 		bool operator== (const ServiceOperation& s) const;

@@ -44,13 +44,16 @@ namespace BrainCloud
 		_globalStatisticsService(new BrainCloudGlobalStatistics(this)),
 		_groupService(new BrainCloudGroup(this)),
 		_identityService(new BrainCloudIdentity(this)),
+		_lobbyService(new BrainCloudLobby(this)),
 		_mailService(new BrainCloudMail(this)),
 		_matchmakingService(new BrainCloudMatchmaking(this)),
+		_messagingService(new BrainCloudMessaging(this)),
 		_oneWayMatchService(new BrainCloudOneWayMatch(this)),
 		_playbackStreamService(new BrainCloudPlaybackStream(this)),
 		_playerStateService(new BrainCloudPlayerState(this)),
 		_playerStatisticsService(new BrainCloudPlayerStatistics(this)),
 		_playerStatisticsEventService(new BrainCloudPlayerStatisticsEvent(this)),
+		_presenceService(new BrainCloudPresence(this)),
 		_productService(new BrainCloudProduct(this)),
 		_profanityService(new BrainCloudProfanity(this)),
 		_pushNotificationService(new BrainCloudPushNotification(this)),
@@ -428,6 +431,16 @@ namespace BrainCloud
 	void BrainCloudClient::deregisterRTTLobbyCallback()
 	{
 		_rttComms->deregisterRTTCallback(ServiceName::Lobby);
+	}
+
+	void BrainCloudClient::registerRTTPresenceCallback(IRTTCallback* in_callback)
+	{
+		_rttComms->registerRTTCallback(ServiceName::Presence, in_callback);
+	}
+
+	void BrainCloudClient::deregisterRTTPresenceCallback()
+	{
+		_rttComms->deregisterRTTCallback(ServiceName::Presence);
 	}
 
 	void BrainCloudClient::deregisterAllCallbacks()

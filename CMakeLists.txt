@@ -228,13 +228,16 @@ add_library(brainCloud STATIC
 	src/BrainCloudGlobalStatistics.cpp
 	src/BrainCloudGroup.cpp
 	src/BrainCloudIdentity.cpp
+	src/BrainCloudLobby.cpp
 	src/BrainCloudMail.cpp
 	src/BrainCloudMatchmaking.cpp
+	src/BrainCloudMessaging.cpp
 	src/BrainCloudOneWayMatch.cpp
 	src/BrainCloudPlaybackStream.cpp
 	src/BrainCloudPlayerState.cpp
 	src/BrainCloudPlayerStatistics.cpp
 	src/BrainCloudPlayerStatisticsEvent.cpp
+	src/BrainCloudPresence.cpp
 	src/BrainCloudProduct.cpp
 	src/BrainCloudProfanity.cpp
 	src/BrainCloudPushNotification.cpp
