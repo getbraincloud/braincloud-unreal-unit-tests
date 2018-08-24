@@ -70,6 +70,7 @@ BrainCloudRTTComms::BrainCloudRTTComms(BrainCloudClient *client) : m_client(clie
 BrainCloudRTTComms::~BrainCloudRTTComms()
 {
 	disconnect();
+	deregisterAllRTTCallbacks();
 }
 
 void BrainCloudRTTComms::enableRTT(eBCRTTConnectionType in_connectionType, IServerCallback *callback)
@@ -183,6 +184,12 @@ int BrainCloudRTTComms::callback_echo(struct lws *wsi, enum lws_callback_reasons
 }
 #endif
 
+void BrainCloudRTTComms::registerRTTCallback(ServiceName in_serviceName, UBCBlueprintRTTCallProxyBase *callback)
+{
+	callback->AddToRoot();
+	m_registeredRTTBluePrintCallbacks.Emplace(in_serviceName.getValue(), callback);	
+}
+
 void BrainCloudRTTComms::registerRTTCallback(ServiceName in_serviceName, IRTTCallback *callback)
 {
 	m_registeredRTTCallbacks.Emplace(in_serviceName.getValue(), callback);
@@ -191,35 +198,31 @@ void BrainCloudRTTComms::registerRTTCallback(ServiceName in_serviceName, IRTTCal
 void BrainCloudRTTComms::deregisterRTTCallback(ServiceName in_serviceName)
 {
 	FString serviceName = in_serviceName.getValue();
-	UE_LOG(LogBrainCloudComms, Log, TEXT("deregisterRTTCallback: start %s - %d"), *serviceName, m_registeredRTTCallbacks.Num());
-
-	if (m_registeredRTTCallbacks.Contains(serviceName))
+	if (m_registeredRTTBluePrintCallbacks.Contains(serviceName))
 	{
-		UObject *pObject = reinterpret_cast<UObject *>(m_registeredRTTCallbacks[serviceName]);
-		UE_LOG(LogBrainCloudComms, Log, TEXT("deregisterRTTCallback: conditional destroy %d"), pObject->IsValidLowLevelFast() ? 1 : 0);
-		if (pObject->IsValidLowLevelFast())
-		{
-			UE_LOG(LogBrainCloudComms, Log, TEXT("deregisterRTTCallback: conditional destroy %s"), *in_serviceName.getValue());
-			pObject->RemoveFromRoot();
-			pObject->ConditionalBeginDestroy();
-		}
+		m_registeredRTTBluePrintCallbacks[serviceName]->RemoveFromRoot();
+		m_registeredRTTBluePrintCallbacks.Remove(serviceName);
+	}
+	else if (m_registeredRTTCallbacks.Contains(serviceName))
+	{
 		m_registeredRTTCallbacks.Remove(serviceName);
 	}
-	UE_LOG(LogBrainCloudComms, Log, TEXT("deregisterRTTCallback: last %s - %d"), *serviceName, m_registeredRTTCallbacks.Num());
 }
 
 void BrainCloudRTTComms::deregisterAllRTTCallbacks()
 {
-	for (auto iterator = m_registeredRTTCallbacks.CreateIterator(); iterator; ++iterator)
+	for (auto iterator = m_registeredRTTBluePrintCallbacks.CreateIterator(); iterator; ++iterator)
 	{
-		UObject *pObject = reinterpret_cast<UObject *>(iterator.Value());
-		if (pObject != nullptr)
+		UBCBlueprintRTTCallProxyBase *pObject = iterator.Value();
+		if (pObject->IsValidLowLevel())
 		{
+			pObject->RemoveFromRoot();
 			pObject->ConditionalBeginDestroy();
 		}
 	}
 
 	m_registeredRTTCallbacks.Empty();
+	m_registeredRTTBluePrintCallbacks.Empty();
 }
 
 void BrainCloudRTTComms::setRTTHeartBeatSeconds(int32 in_value)
@@ -315,7 +318,11 @@ bool BrainCloudRTTComms::send(const FString &in_message)
 void BrainCloudRTTComms::processRegisteredListeners(const FString &in_service, const FString &in_operation, const FString &in_jsonMessage)
 {
 	// does this go to one of our registered service listeners?
-	if (m_registeredRTTCallbacks.Contains(in_service))
+	if (m_registeredRTTBluePrintCallbacks.Contains(in_service))
+	{
+		m_registeredRTTBluePrintCallbacks[in_service]->rttCallback(in_jsonMessage);
+	}
+	else if (m_registeredRTTCallbacks.Contains(in_service))
 	{
 		m_registeredRTTCallbacks[in_service]->rttCallback(in_jsonMessage);
 	}

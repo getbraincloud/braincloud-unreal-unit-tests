@@ -53,7 +53,6 @@ class UBCBlueprintCallProxyBase : public UObject, public IServerCallback
     UPROPERTY(BlueprintAssignable)
     FBrainCloudCallbackDelegate OnFailure;
 
-  protected:
     //callbacks
     void serverCallback(ServiceName serviceName, ServiceOperation serviceOperation, const FString &jsonData)
     {

@@ -45,6 +45,7 @@ class IFileUploadCallback;
 class IGlobalErrorCallback;
 class INetworkErrorCallback;
 class IRTTCallback;
+class UBCBlueprintRTTCallProxyBase;
 
 UENUM(BlueprintType)
 enum class eBCUpdateType : uint8
@@ -85,7 +86,7 @@ class BCCLIENTPLUGIN_API BrainCloudClient
 	 * @deprecated Use of the *singleton* has been deprecated. We recommend that you create your own *variable* to hold an instance of the UBrainCloudWrapper. Explanation here: http://getbraincloud.com/apidocs/release-3-6-5/
 	 */
 	DEPRECATED("3.6.5", "Use of the *singleton* has been deprecated. We recommend that you create your own *variable* to hold an instance of the UBrainCloudWrapper. Explanation here: http://getbraincloud.com/apidocs/release-3-6-5/")
-	static BrainCloudClient * getInstance();
+	static BrainCloudClient *getInstance();
 
 	/**
 	* Method initializes the BrainCloudClient.
@@ -260,12 +261,22 @@ class BCCLIENTPLUGIN_API BrainCloudClient
 	/**
 	* 
 	*/
+	void registerRTTEventCallback(UBCBlueprintRTTCallProxyBase *in_callback);
+
+	/**
+	* 
+	*/
 	void registerRTTEventCallback(IRTTCallback *in_callback);
 
 	/**
 	* 
 	*/
 	void deregisterRTTEventCallback();
+
+	/**
+	* 
+	*/
+	void registerRTTChatCallback(UBCBlueprintRTTCallProxyBase *in_callback);
 
 	/**
 	* 
@@ -280,12 +291,22 @@ class BCCLIENTPLUGIN_API BrainCloudClient
 	/**
 	* 
 	*/
+	void registerRTTMessagingCallback(UBCBlueprintRTTCallProxyBase *in_callback);
+
+	/**
+	* 
+	*/
 	void registerRTTMessagingCallback(IRTTCallback *in_callback);
 
 	/**
 	* 
 	*/
 	void deregisterRTTMessagingCallback();
+
+	/**
+	* 
+	*/
+	void registerRTTLobbyCallback(UBCBlueprintRTTCallProxyBase *in_callback);
 
 	/**
 	* 
