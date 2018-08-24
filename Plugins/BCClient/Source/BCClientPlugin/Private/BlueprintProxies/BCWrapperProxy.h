@@ -53,7 +53,7 @@ public:
      * non-anonymous authentications.
      */
   UFUNCTION(BlueprintCallable, meta = (BlueprintInternalUseOnly = "true"), Category = "BrainCloud|Wrapper")
-  static UBCWrapperProxy *SetAlwaysAllowProfileSwitch(UBrainCloudWrapper *brainCloudWrapper, bool alwaysAllow);
+  static void SetAlwaysAllowProfileSwitch(UBrainCloudWrapper *brainCloudWrapper, bool alwaysAllow);
 
   /**
      * Method initializes the BrainCloudClient.
@@ -63,8 +63,8 @@ public:
      * @param appId The app's id
      * @param version The app's version
      */
-  UFUNCTION(BlueprintCallable, meta = (BlueprintInternalUseOnly = "true"), Category = "BrainCloud|Wrapper")
-  static UBCWrapperProxy *Initialize(UBrainCloudWrapper *brainCloudWrapper, FString serverUrl, FString secretKey, FString appId, FString version);
+  UFUNCTION(BlueprintCallable, Category = "BrainCloud|Wrapper")
+  static void Initialize(UBrainCloudWrapper *brainCloudWrapper, FString serverUrl, FString secretKey, FString appId, FString version);
 
   /**
      * Authenticate a user anonymously with brainCloud
@@ -342,28 +342,28 @@ public:
      * Sets the stored profile id, saves it as well
      * @param profileId The profile id to set
      */
-  UFUNCTION(BlueprintCallable, meta = (BlueprintInternalUseOnly = "true"), Category = "BrainCloud|Wrapper")
-  static UBCWrapperProxy *SetStoredProfileId(UBrainCloudWrapper *brainCloudWrapper, FString profileId);
+  UFUNCTION(BlueprintCallable,  Category = "BrainCloud|Wrapper")
+  static void SetStoredProfileId(UBrainCloudWrapper *brainCloudWrapper, FString profileId);
 
   /**
      * Returns the stored anonymous id
      * @return The stored anonymous id
      */
-  UFUNCTION(BlueprintCallable, meta = (BlueprintInternalUseOnly = "true"), Category = "BrainCloud|Wrapper")
+  UFUNCTION(BlueprintCallable, Category = "BrainCloud|Wrapper")
   static FString GetStoredProfileId(UBrainCloudWrapper *brainCloudWrapper);
 
   /**
      * Sets the stored anonymous id, saves it as well
      * @param anonymousId The anonymous id to set
      */
-  UFUNCTION(BlueprintCallable, meta = (BlueprintInternalUseOnly = "true"), Category = "BrainCloud|Wrapper")
-  static UBCWrapperProxy *SetStoredAnonymousId(UBrainCloudWrapper *brainCloudWrapper, FString anonymousId);
+  UFUNCTION(BlueprintCallable, Category = "BrainCloud|Wrapper")
+  static void SetStoredAnonymousId(UBrainCloudWrapper *brainCloudWrapper, FString anonymousId);
 
   /**
      * Returns the stored anonymous id
      * @return The stored anonymous id
      */
-  UFUNCTION(BlueprintCallable, meta = (BlueprintInternalUseOnly = "true"), Category = "BrainCloud|Wrapper")
+  UFUNCTION(BlueprintCallable, Category = "BrainCloud|Wrapper")
   static FString GetStoredAnonymousId(UBrainCloudWrapper *brainCloudWrapper);
 
   /**

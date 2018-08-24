@@ -3,7 +3,6 @@
 #include "BCClientPluginPrivatePCH.h"
 #include "ServerCall.h"
 #include "BCWrapperProxy.h"
-#include "BrainCloudActor.h"
 #include "BrainCloudClient.h"
 #include "BrainCloudWrapper.h"
 #include "BCAuthenticationProxy.h"

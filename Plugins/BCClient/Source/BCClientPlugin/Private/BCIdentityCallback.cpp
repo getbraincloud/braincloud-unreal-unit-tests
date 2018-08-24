@@ -2,7 +2,6 @@
 #include "BCClientPluginPrivatePCH.h"
 #include "BCIdentityCallback.h"
 #include "ServerCall.h"
-#include "BrainCloudActor.h"
 #include "BrainCloudWrapper.h"
 
 BCIdentityCallback::BCIdentityCallback(UBrainCloudWrapper *in_wrapper, IServerCallback *in_callback)

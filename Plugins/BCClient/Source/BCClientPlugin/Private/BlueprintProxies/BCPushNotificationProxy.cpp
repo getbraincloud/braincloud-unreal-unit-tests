@@ -4,7 +4,7 @@
 #include "BrainCloudClient.h"
 #include "ServerCall.h"
 #include "BCPlatform.h"
-#include "BrainCloudActor.h"
+
 #include "BCWrapperProxy.h"
 #include "BrainCloudWrapper.h"
 #include "BCPushNotificationProxy.h"
