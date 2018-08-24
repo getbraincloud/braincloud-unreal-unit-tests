@@ -54,11 +54,11 @@ UCLASS(BlueprintType)
 class BCCLIENTPLUGIN_API UBrainCloudWrapper : public UObject, public IServerCallback
 {
     GENERATED_BODY()
-	
 
   public:
     UBrainCloudWrapper();
     UBrainCloudWrapper(FString wrapperName);
+    virtual void BeginDestroy() override;
 
     /**
      * Method returns a singleton instance of the UBrainCloudWrapper.
@@ -510,6 +510,7 @@ class BCCLIENTPLUGIN_API UBrainCloudWrapper : public UObject, public IServerCall
     IServerCallback *_authenticateCallback = nullptr;
 
     bool _alwaysAllowProfileSwitch = true;
+    bool _createdWithClient = false;
 
     void initializeIdentity(bool isAnonymousAuth = false);
     void reauthenticate();

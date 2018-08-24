@@ -3,7 +3,6 @@
 #pragma once
 
 #include "IServerCallback.h"
-#include "IRTTCallback.h"
 #include "ServiceName.h"
 #include "ServiceOperation.h"
 #include "BCBlueprintCallProxyBase.generated.h"
@@ -34,7 +33,6 @@ struct FBC_ReturnData
     }
 };
 
-DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FBrainCloudRTTCallbackDelegate, FString, JsonData);
 DECLARE_DYNAMIC_MULTICAST_DELEGATE_TwoParams(FBrainCloudCallbackDelegate, FString, JsonData, FBC_ReturnData, AdditionalData);
 
 UCLASS(MinimalAPI)
@@ -61,6 +59,7 @@ class UBCBlueprintCallProxyBase : public UObject, public IServerCallback
     {
         FBC_ReturnData returnData = FBC_ReturnData(serviceName.getValue(), serviceOperation.getValue(), 200, 0);
         OnSuccess.Broadcast(jsonData, returnData);
+        this->RemoveFromRoot();
         ConditionalBeginDestroy();
     }
 
@@ -68,6 +67,7 @@ class UBCBlueprintCallProxyBase : public UObject, public IServerCallback
     {
         FBC_ReturnData returnData = FBC_ReturnData(serviceName.getValue(), serviceOperation.getValue(), statusCode, reasonCode);
         OnFailure.Broadcast(jsonError, returnData);
+        this->RemoveFromRoot();
         ConditionalBeginDestroy();
     }
 };

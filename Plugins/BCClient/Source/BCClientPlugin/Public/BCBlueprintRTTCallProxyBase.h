@@ -5,6 +5,8 @@
 #include "IRTTCallback.h"
 #include "BCBlueprintRTTCallProxyBase.generated.h"
 
+DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FBrainCloudRTTCallbackDelegate, FString, JsonData);
+
 UCLASS(MinimalAPI)
 class UBCBlueprintRTTCallProxyBase : public UObject, public IRTTCallback
 {

@@ -13,19 +13,12 @@ UBCWrapperProxy::UBCWrapperProxy(const FObjectInitializer &ObjectInitializer)
 {
 }
 
-ABrainCloudActor *UBCWrapperProxy::CreateBrainCloudActor(const FString &wrapperName)
+UBrainCloudWrapper *UBCWrapperProxy::CreateBrainCloudWrapper(const FString &wrapperName)
 {
-	ABrainCloudActor *brainCloudActor = NewObject<ABrainCloudActor>(NewObject<UBrainCloudWrapper>());
-	brainCloudActor->AddToRoot();
-	brainCloudActor->BCWrapper->setWrapperName(wrapperName);
-	return brainCloudActor;
+	UBrainCloudWrapper* wrapper = NewObject<UBrainCloudWrapper>();
+	wrapper->setWrapperName(wrapperName);
+	return wrapper;
 }
-
-UBrainCloudWrapper *UBCWrapperProxy::GetBrainCloudWrapper(ABrainCloudActor *brainCloudActor)
-{
-	return brainCloudActor->BCWrapper;
-}
-
 
 void UBCWrapperProxy::SetDefaultBrainCloudInstance(UBrainCloudWrapper *brainCloudWrapper)
 {

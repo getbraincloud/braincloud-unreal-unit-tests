@@ -54,6 +54,7 @@ static const struct lws_extension exts[] = {
 BrainCloudRTTComms::BrainCloudRTTComms(BrainCloudClient *client) : m_client(client),
 																   m_appCallback(nullptr),
 																   m_connectedSocket(nullptr),
+																   m_commsPtr(nullptr),
 																   m_cxId(TEXT("")),
 																   m_eventServer(TEXT("")),
 																   m_rttHeaders(nullptr),
@@ -64,8 +65,6 @@ BrainCloudRTTComms::BrainCloudRTTComms(BrainCloudClient *client) : m_client(clie
 																   m_bIsConnected(false),
 																   m_lwsContext(nullptr)
 {
-	m_commsPtr = NewObject<UBCRTTCommsProxy>();
-	m_commsPtr->AddToRoot();
 }
 
 BrainCloudRTTComms::~BrainCloudRTTComms()
@@ -187,17 +186,26 @@ int BrainCloudRTTComms::callback_echo(struct lws *wsi, enum lws_callback_reasons
 void BrainCloudRTTComms::registerRTTCallback(ServiceName in_serviceName, IRTTCallback *callback)
 {
 	m_registeredRTTCallbacks.Emplace(in_serviceName.getValue(), callback);
-	UE_LOG(LogBrainCloudComms, Log, TEXT("registerRTTCallback:  %s"), *in_serviceName.getValue());
 }
 
 void BrainCloudRTTComms::deregisterRTTCallback(ServiceName in_serviceName)
 {
-	UObject *pObject = reinterpret_cast<UObject *>(m_registeredRTTCallbacks[in_serviceName.getValue()]);
-	if (pObject != nullptr)
-		pObject->ConditionalBeginDestroy();
+	FString serviceName = in_serviceName.getValue();
+	UE_LOG(LogBrainCloudComms, Log, TEXT("deregisterRTTCallback: start %s - %d"), *serviceName, m_registeredRTTCallbacks.Num());
 
-	m_registeredRTTCallbacks.Remove(in_serviceName.getValue());
-	//	m_registeredRTTCallbacks[in_serviceName.getValue()] = nullptr;
+	if (m_registeredRTTCallbacks.Contains(serviceName))
+	{
+		UObject *pObject = reinterpret_cast<UObject *>(m_registeredRTTCallbacks[serviceName]);
+		UE_LOG(LogBrainCloudComms, Log, TEXT("deregisterRTTCallback: conditional destroy %d"), pObject->IsValidLowLevelFast() ? 1 : 0);
+		if (pObject->IsValidLowLevelFast())
+		{
+			UE_LOG(LogBrainCloudComms, Log, TEXT("deregisterRTTCallback: conditional destroy %s"), *in_serviceName.getValue());
+			pObject->RemoveFromRoot();
+			pObject->ConditionalBeginDestroy();
+		}
+		m_registeredRTTCallbacks.Remove(serviceName);
+	}
+	UE_LOG(LogBrainCloudComms, Log, TEXT("deregisterRTTCallback: last %s - %d"), *serviceName, m_registeredRTTCallbacks.Num());
 }
 
 void BrainCloudRTTComms::deregisterAllRTTCallbacks()
@@ -206,7 +214,9 @@ void BrainCloudRTTComms::deregisterAllRTTCallbacks()
 	{
 		UObject *pObject = reinterpret_cast<UObject *>(iterator.Value());
 		if (pObject != nullptr)
+		{
 			pObject->ConditionalBeginDestroy();
+		}
 	}
 
 	m_registeredRTTCallbacks.Empty();
@@ -230,11 +240,16 @@ void BrainCloudRTTComms::disconnect()
 	// clear everything
 	if (m_connectedSocket != nullptr && m_commsPtr != nullptr)
 	{
+		m_commsPtr->RemoveFromRoot();
+		m_connectedSocket->RemoveFromRoot();
 		m_connectedSocket->OnConnectError.RemoveDynamic(m_commsPtr, &UBCRTTCommsProxy::WebSocket_OnError);
 		m_connectedSocket->OnClosed.RemoveDynamic(m_commsPtr, &UBCRTTCommsProxy::WebSocket_OnClose);
 		m_connectedSocket->OnConnectComplete.RemoveDynamic(m_commsPtr, &UBCRTTCommsProxy::Websocket_OnOpen);
 		m_connectedSocket->OnReceiveData.RemoveDynamic(m_commsPtr, &UBCRTTCommsProxy::WebSocket_OnMessage);
 	}
+
+	delete m_commsPtr;
+	m_commsPtr = nullptr;
 
 	delete m_connectedSocket;
 	m_connectedSocket = nullptr;
@@ -290,10 +305,9 @@ bool BrainCloudRTTComms::send(const FString &in_message)
 	}
 	m_timeSinceLastRequest = 0;
 
-	if (m_client->isLoggingEnabled())
-		UE_LOG(LogBrainCloudComms, Log, TEXT("RTT SEND:  %s"), *in_message);
-
 	bMessageSent = m_connectedSocket->SendText(in_message);
+	if (bMessageSent && m_client->isLoggingEnabled())
+		UE_LOG(LogBrainCloudComms, Log, TEXT("RTT SEND:  %s"), *in_message);
 
 	return bMessageSent;
 }
@@ -372,8 +386,19 @@ void BrainCloudRTTComms::setupWebSocket(const FString &in_url)
 #endif
 
 	m_timeSinceLastRequest = 0;
-	m_connectedSocket = NewObject<UWebSocketBase>();
-	m_connectedSocket->AddToRoot();
+	// lazy load
+	if (m_connectedSocket == nullptr)
+	{
+		m_connectedSocket = NewObject<UWebSocketBase>();
+		m_connectedSocket->AddToRoot();
+	}
+
+	// lazy load
+	if (m_commsPtr == nullptr)
+	{
+		m_commsPtr = NewObject<UBCRTTCommsProxy>();
+		m_commsPtr->AddToRoot();
+	}
 
 	m_commsPtr->SetRTTComms(this);
 	m_connectedSocket->OnConnectError.AddDynamic(m_commsPtr, &UBCRTTCommsProxy::WebSocket_OnError);
@@ -415,9 +440,6 @@ void BrainCloudRTTComms::webSocket_OnError(const FString &in_message)
 void BrainCloudRTTComms::onRecv(const FString &in_message)
 {
 	// deserialize and push broadcast to the correct m_registeredRTTCallbacks
-	if (m_client->isLoggingEnabled())
-		UE_LOG(LogBrainCloudComms, Log, TEXT("RTT RECV:: %s"), *in_message);
-
 	TSharedPtr<FJsonObject> jsonData = JsonUtil::jsonStringToValue(in_message);
 	FString service = jsonData->GetStringField(TEXT("service"));
 	FString operation = jsonData->GetStringField(TEXT("operation"));
@@ -425,6 +447,9 @@ void BrainCloudRTTComms::onRecv(const FString &in_message)
 	bool bIsInnerDataValid = jsonData->HasTypedField<EJson::Object>(TEXT("data"));
 	if (bIsInnerDataValid)
 		innerData = jsonData->GetObjectField(TEXT("data"));
+
+	if (operation != "HEARTBEAT" && m_client->isLoggingEnabled())
+		UE_LOG(LogBrainCloudComms, Log, TEXT("RTT RECV:: %s"), *in_message);
 
 	if (operation == "CONNECT")
 	{

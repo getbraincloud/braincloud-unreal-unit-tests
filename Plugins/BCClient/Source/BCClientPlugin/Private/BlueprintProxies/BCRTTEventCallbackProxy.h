@@ -2,7 +2,6 @@
 
 #pragma once
 
-#include "BCBlueprintCallProxyBase.h"
 #include "BCBlueprintRTTCallProxyBase.h"
 #include "BCRTTEventCallbackProxy.generated.h"
 
@@ -17,6 +16,12 @@ class UBCRTTEventCallbackProxy : public UBCBlueprintRTTCallProxyBase
 	/**
 	* 	
 	*/
-	UFUNCTION(BlueprintCallable, meta = (BlueprintInternalUseOnly = "true"), Category = "BrainCloud|RTT Callback")
-	static UBCRTTEventCallbackProxy *RegisterRTTEventCallbackSimple(UBrainCloudWrapper *brainCloudWrapper);
+	UFUNCTION(BlueprintCallable, meta = (BlueprintInternalUseOnly = "true"), Category = "BrainCloud|Client")
+	static UBCRTTEventCallbackProxy *RegisterRTTEventCallback(UBrainCloudWrapper *brainCloudWrapper);
+
+	/**
+	* 	
+	*/
+	UFUNCTION(BlueprintCallable, Category = "BrainCloud|Client")
+	static void DeregisterRTTEventCallback(UBrainCloudWrapper *brainCloudWrapper);
 };

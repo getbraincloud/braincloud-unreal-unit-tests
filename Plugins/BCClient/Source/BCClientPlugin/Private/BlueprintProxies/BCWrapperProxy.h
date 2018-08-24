@@ -26,15 +26,7 @@ public:
 	* @param brainCloud - An actor that contains its own instance of the brainCloud Wrapper
 	*/
   UFUNCTION(BlueprintCallable, Category = "BrainCloud")
-  static ABrainCloudActor *CreateBrainCloudActor(const FString &wrapperName);
-
- /**
-	* Get the brainCloud Wrapper from the BrainCloudActor helper
-	*
-	* @param brainCloud - An actor that contains its own instance of the brainCloud Wrapper
-	*/
-  UFUNCTION(BlueprintCallable, Category = "BrainCloud")
-	static UBrainCloudWrapper *GetBrainCloudWrapper(ABrainCloudActor *brainCloudActor);
+  static UBrainCloudWrapper *CreateBrainCloudWrapper(const FString &wrapperName);
 
 
   /**

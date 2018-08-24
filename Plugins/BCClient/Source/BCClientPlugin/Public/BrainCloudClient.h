@@ -73,6 +73,8 @@ class BCCLIENTPLUGIN_API BrainCloudClient
 	static const wchar_t SINGLETON_USE_ERROR_MESSAGE[123];
 
 	BrainCloudClient();
+	//  void BeginDestroy() override;
+	~BrainCloudClient();
 
 	/**
 	 * BrainCloudClient is a singleton object. This method gives the caller access
@@ -539,8 +541,6 @@ class BCCLIENTPLUGIN_API BrainCloudClient
 	void overrideLanguageCode(const FString &languageCode) { _language = languageCode; }
 
   protected:
-	//  void BeginDestroy() override;
-	~BrainCloudClient();
 	static BrainCloudClient *_instance;
 
 	BrainCloudComms *_brainCloudComms = nullptr;

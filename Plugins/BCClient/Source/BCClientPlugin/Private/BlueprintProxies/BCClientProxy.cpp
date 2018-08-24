@@ -78,34 +78,6 @@ void UBCClientProxy::SetRTTHeartBeatSeconds(UBrainCloudWrapper *brainCloudWrappe
 	UBCWrapperProxy::GetBrainCloudInstance(brainCloudWrapper)->getBCClient()->setRTTHeartBeatSeconds(in_value);
 }
 
-UBCClientProxy *UBCClientProxy::RegisterRTTEventCallback(UBrainCloudWrapper *brainCloudWrapper)
-{
-	UBCClientProxy *Proxy = NewObject<UBCClientProxy>();
-	UBCWrapperProxy::GetBrainCloudInstance(brainCloudWrapper)->getBCClient()->registerRTTEventCallback(Proxy);
-	return Proxy;
-}
-
-UBCClientProxy *UBCClientProxy::RegisterRTTChatCallback(UBrainCloudWrapper *brainCloudWrapper)
-{
-	UBCClientProxy *Proxy = NewObject<UBCClientProxy>();
-	UBCWrapperProxy::GetBrainCloudInstance(brainCloudWrapper)->getBCClient()->registerRTTChatCallback(Proxy);
-	return Proxy;
-}
-
-UBCClientProxy *UBCClientProxy::RegisterRTTMessagingCallback(UBrainCloudWrapper *brainCloudWrapper)
-{
-	UBCClientProxy *Proxy = NewObject<UBCClientProxy>();
-	UBCWrapperProxy::GetBrainCloudInstance(brainCloudWrapper)->getBCClient()->registerRTTMessagingCallback(Proxy);
-	return Proxy;
-}
-
-UBCClientProxy *UBCClientProxy::RegisterRTTLobbyCallback(UBrainCloudWrapper *brainCloudWrapper)
-{
-	UBCClientProxy *Proxy = NewObject<UBCClientProxy>();
-	UBCWrapperProxy::GetBrainCloudInstance(brainCloudWrapper)->getBCClient()->registerRTTLobbyCallback(Proxy);
-	return Proxy;
-}
-
 void UBCClientProxy::DeregisterAllRTTCallbacks(UBrainCloudWrapper *brainCloudWrapper)
 {
 	UBCWrapperProxy::GetBrainCloudInstance(brainCloudWrapper)->getBCClient()->deregisterAllRTTCallbacks();
@@ -251,12 +223,4 @@ void UBCClientProxy::OverrideCountryCode(UBrainCloudWrapper *brainCloudWrapper, 
 void UBCClientProxy::OverrideLanguageCode(UBrainCloudWrapper *brainCloudWrapper, const FString &languageCode)
 {
 	UBCWrapperProxy::GetBrainCloudInstance(brainCloudWrapper)->getBCClient()->overrideLanguageCode(languageCode);
-}
-
-void UBCClientProxy::rttCallback(const FString &jsonData)
-{
-	OnRTTEventCallback.Broadcast(jsonData);
-	OnRTTChatCallback.Broadcast(jsonData);
-	OnRTTMessagingCallback.Broadcast(jsonData);
-	OnRTTLobbyCallback.Broadcast(jsonData);
 }

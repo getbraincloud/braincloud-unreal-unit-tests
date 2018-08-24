@@ -3,12 +3,10 @@
 #pragma once
 
 #include "BCBlueprintCallProxyBase.h"
-#include "BCBlueprintRTTCallProxyBase.h"
-#include "IRTTCallback.h"
 #include "BCClientProxy.generated.h"
 
 UCLASS(MinimalAPI)
-class UBCClientProxy : public UBCBlueprintCallProxyBase, public IRTTCallback
+class UBCClientProxy : public UBCBlueprintCallProxyBase
 {
 	GENERATED_BODY()
 
@@ -117,30 +115,6 @@ class UBCClientProxy : public UBCBlueprintCallProxyBase, public IRTTCallback
 	*/
 	UFUNCTION(BlueprintCallable, Category = "BrainCloud|Client")
 	static void SetRTTHeartBeatSeconds(UBrainCloudWrapper *brainCloudWrapper, int32 in_value);
-
-	/**
-	* 	
-	*/
-	UFUNCTION(BlueprintCallable, meta = (BlueprintInternalUseOnly = "true"), Category = "BrainCloud|Client")
-	static UBCClientProxy *RegisterRTTEventCallback(UBrainCloudWrapper *brainCloudWrapper);
-
-	/**
-	* 	
-	*/
-	UFUNCTION(BlueprintCallable, meta = (BlueprintInternalUseOnly = "true"), Category = "BrainCloud|Client")
-	static UBCClientProxy *RegisterRTTChatCallback(UBrainCloudWrapper *brainCloudWrapper);
-
-	/**
-	* 	
-	*/
-	UFUNCTION(BlueprintCallable, meta = (BlueprintInternalUseOnly = "true"), Category = "BrainCloud|Client")
-	static UBCClientProxy *RegisterRTTMessagingCallback(UBrainCloudWrapper *brainCloudWrapper);
-
-	/**
-	* 	
-	*/
-	UFUNCTION(BlueprintCallable, meta = (BlueprintInternalUseOnly = "true"), Category = "BrainCloud|Client")
-	static UBCClientProxy *RegisterRTTLobbyCallback(UBrainCloudWrapper *brainCloudWrapper);
 
 	/**
 	* 
@@ -388,20 +362,4 @@ class UBCClientProxy : public UBCBlueprintCallProxyBase, public IRTTCallback
 	*/
 	UFUNCTION(BlueprintCallable, Category = "BrainCloud|Client")
 	static void OverrideLanguageCode(UBrainCloudWrapper *brainCloudWrapper, const FString &languageCode);
-
-	UPROPERTY(BlueprintAssignable)
-	FBrainCloudRTTCallbackDelegate OnRTTEventCallback;
-
-	UPROPERTY(BlueprintAssignable)
-	FBrainCloudRTTCallbackDelegate OnRTTChatCallback;
-
-	UPROPERTY(BlueprintAssignable)
-	FBrainCloudRTTCallbackDelegate OnRTTMessagingCallback;
-
-	UPROPERTY(BlueprintAssignable)
-	FBrainCloudRTTCallbackDelegate OnRTTLobbyCallback;
-	
-protected:
-	//callbacks
-	void rttCallback(const FString &jsonData);
 };
