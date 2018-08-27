@@ -184,12 +184,14 @@ int BrainCloudRTTComms::callback_echo(struct lws *wsi, enum lws_callback_reasons
 }
 #endif
 
+// add blueprints
 void BrainCloudRTTComms::registerRTTCallback(ServiceName in_serviceName, UBCBlueprintRTTCallProxyBase *callback)
 {
 	callback->AddToRoot();
 	m_registeredRTTBluePrintCallbacks.Emplace(in_serviceName.getValue(), callback);	
 }
 
+// regular c++ overtyped, does nothing memory wise
 void BrainCloudRTTComms::registerRTTCallback(ServiceName in_serviceName, IRTTCallback *callback)
 {
 	m_registeredRTTCallbacks.Emplace(in_serviceName.getValue(), callback);

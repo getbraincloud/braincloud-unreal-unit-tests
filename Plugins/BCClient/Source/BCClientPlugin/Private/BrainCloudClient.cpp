@@ -192,6 +192,11 @@ void BrainCloudClient::registerEventCallback(IEventCallback *eventCallback)
 	_brainCloudComms->RegisterEventCallback(eventCallback);
 }
 
+void BrainCloudClient::registerEventCallback(UBCBlueprintRestCallProxyBase *eventCallback)
+{
+	_brainCloudComms->RegisterEventCallback(eventCallback);
+}
+
 void BrainCloudClient::deregisterEventCallback()
 {
 	_brainCloudComms->DeregisterEventCallback();
@@ -200,6 +205,11 @@ void BrainCloudClient::deregisterEventCallback()
 void BrainCloudClient::registerRewardCallback(IRewardCallback *rewardCallback)
 {
 	_brainCloudComms->RegisterRewardCallback(rewardCallback);
+}
+
+void BrainCloudClient::registerRewardCallback(UBCBlueprintRestCallProxyBase *eventCallback)
+{
+	_brainCloudComms->RegisterRewardCallback(eventCallback);
 }
 
 void BrainCloudClient::deregisterRewardCallback()
@@ -212,6 +222,11 @@ void BrainCloudClient::registerFileUploadCallback(IFileUploadCallback *fileUploa
 	_brainCloudComms->RegisterFileUploadCallback(fileUploadCallback);
 }
 
+void BrainCloudClient::registerFileUploadCallback(UBCBlueprintRestCallProxyBase *eventCallback)
+{
+	_brainCloudComms->RegisterFileUploadCallback(eventCallback);
+}
+
 void BrainCloudClient::deregisterFileUploadCallback()
 {
 	_brainCloudComms->DeregisterFileUploadCallback();
@@ -222,6 +237,11 @@ void BrainCloudClient::registerGlobalErrorCallback(IGlobalErrorCallback *globalE
 	_brainCloudComms->RegisterGlobalErrorCallback(globalErrorCallback);
 }
 
+void BrainCloudClient::registerGlobalErrorCallback(UBCBlueprintRestCallProxyBase *eventCallback)
+{
+	_brainCloudComms->RegisterGlobalErrorCallback(eventCallback);
+}
+
 void BrainCloudClient::deregisterGlobalErrorCallback()
 {
 	_brainCloudComms->DeregisterGlobalErrorCallback();
@@ -230,6 +250,11 @@ void BrainCloudClient::deregisterGlobalErrorCallback()
 void BrainCloudClient::registerNetworkErrorCallback(INetworkErrorCallback *networkErrorCallback)
 {
 	_brainCloudComms->RegisterNetworkErrorCallback(networkErrorCallback);
+}
+
+void BrainCloudClient::registerNetworkErrorCallback(UBCBlueprintRestCallProxyBase *eventCallback)
+{
+	_brainCloudComms->RegisterNetworkErrorCallback(eventCallback);
 }
 
 void BrainCloudClient::deregisterNetworkErrorCallback()

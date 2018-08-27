@@ -46,6 +46,7 @@ class IGlobalErrorCallback;
 class INetworkErrorCallback;
 class IRTTCallback;
 class UBCBlueprintRTTCallProxyBase;
+class UBCBlueprintRestCallProxyBase;
 
 UENUM(BlueprintType)
 enum class eBCUpdateType : uint8
@@ -135,6 +136,7 @@ class BCCLIENTPLUGIN_API BrainCloudClient
 	*   }
 	*/
 	void registerEventCallback(IEventCallback *eventCallback);
+	void registerEventCallback(UBCBlueprintRestCallProxyBase *eventCallback);	// blueprint support
 
 	/**
 	* Deregisters the event callback
@@ -148,6 +150,7 @@ class BCCLIENTPLUGIN_API BrainCloudClient
 	* @see The brainCloud apidocs site for more information on the return JSON
 	*/
 	void registerRewardCallback(IRewardCallback *rewardCallback);
+	void registerRewardCallback(UBCBlueprintRestCallProxyBase *rewardCallback);	// blueprint support
 
 	/**
 	* Deregisters the reward callback
@@ -160,6 +163,7 @@ class BCCLIENTPLUGIN_API BrainCloudClient
 	* @param fileUploadCallback The file upload callback handler.
 	*/
 	void registerFileUploadCallback(IFileUploadCallback *fileUploadCallback);
+	void registerFileUploadCallback(UBCBlueprintRestCallProxyBase *fileUploadCallback);	// blueprint support
 
 	/**
 	* Deregisters the file upload callback
@@ -172,6 +176,7 @@ class BCCLIENTPLUGIN_API BrainCloudClient
 	* @param globalErrorCallback The global error callback handler.
 	*/
 	void registerGlobalErrorCallback(IGlobalErrorCallback *globalErrorCallback);
+	void registerGlobalErrorCallback(UBCBlueprintRestCallProxyBase *globalErrorCallback);	// blueprint support
 
 	/**
 	* Registers a callback that is invoked for network errors.
@@ -181,6 +186,7 @@ class BCCLIENTPLUGIN_API BrainCloudClient
 	* @param networkErrorCallback The network error callback handler.
 	*/
 	void registerNetworkErrorCallback(INetworkErrorCallback *networkErrorCallback);
+	void registerNetworkErrorCallback(UBCBlueprintRestCallProxyBase *networkErrorCallback);	// blueprint support
 
 	/**
 	* Deregisters the network error callback
