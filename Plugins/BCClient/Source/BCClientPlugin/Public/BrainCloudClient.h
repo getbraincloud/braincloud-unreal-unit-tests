@@ -31,28 +31,52 @@
 #include "BrainCloudGroup.h"
 #include "BrainCloudMail.h"
 #include "BrainCloudTournament.h"
+#include "BrainCloudRTT.h"
+#include "BrainCloudLobby.h"
+#include "BrainCloudChat.h"
+#include "BrainCloudMessaging.h"
 
 class BrainCloudComms;
+class BrainCloudRTTComms;
 class ServerCall;
 class IEventCallback;
 class IRewardCallback;
 class IFileUploadCallback;
 class IGlobalErrorCallback;
 class INetworkErrorCallback;
+class IRTTCallback;
+class UBCBlueprintRTTCallProxyBase;
+class UBCBlueprintRestCallProxyBase;
 
-class BCCLIENTPLUGIN_API BrainCloudClient {
+UENUM(BlueprintType)
+enum class eBCUpdateType : uint8
+{
+	ALL UMETA(DisplayName = "ALL"),
+	REST UMETA(DisplayName = "REST"),
+	RTT UMETA(DisplayName = "RTT")
+};
 
-public:
+UENUM(BlueprintType)
+enum class eBCRTTConnectionType : uint8
+{
+	WEBSOCKET UMETA(DisplayName = "WEBSOCKET"),
+	TCP UMETA(DisplayName = "TCP")
+};
+
+class BCCLIENTPLUGIN_API BrainCloudClient
+{
+
+  public:
 	/** Public constants */
 	static bool SINGLE_THREADED;
-	
+
 	static bool EnableSoftErrorMode;
 	static bool EnableSingletonMode;
 	static const wchar_t SINGLETON_USE_ERROR_MESSAGE[123];
-	
 
 	BrainCloudClient();
-
+	//  void BeginDestroy() override;
+	~BrainCloudClient();
 
 	/**
 	 * BrainCloudClient is a singleton object. This method gives the caller access
@@ -63,7 +87,7 @@ public:
 	 * @deprecated Use of the *singleton* has been deprecated. We recommend that you create your own *variable* to hold an instance of the UBrainCloudWrapper. Explanation here: http://getbraincloud.com/apidocs/release-3-6-5/
 	 */
 	DEPRECATED("3.6.5", "Use of the *singleton* has been deprecated. We recommend that you create your own *variable* to hold an instance of the UBrainCloudWrapper. Explanation here: http://getbraincloud.com/apidocs/release-3-6-5/")
-	static BrainCloudClient * getInstance();
+	static BrainCloudClient *getInstance();
 
 	/**
 	* Method initializes the BrainCloudClient.
@@ -73,10 +97,10 @@ public:
 	* @param appId The app's id
 	* @param appVersion The app's version
 	*/
-	void initialize(const FString& serverUrl,
-		const FString& secretKey,
-		const FString& appId,
-		const FString& appVersion);
+	void initialize(const FString &serverUrl,
+					const FString &secretKey,
+					const FString &appId,
+					const FString &appVersion);
 
 	/**
 	* Initialize - initializes the identity service with the saved
@@ -85,12 +109,12 @@ public:
 	* @param profileId The id of the profile id that was most recently used by the app (on this device)
 	* @param anonymousId  The anonymous installation id that was generated for this device
 	*/
-	void initializeIdentity(const FString& profileId, const FString& anonymousId);
+	void initializeIdentity(const FString &profileId, const FString &anonymousId);
 
 	/**
 	* Run callbacks, to be called once per frame from your main thread
 	*/
-	void runCallbacks();
+	void runCallbacks(eBCUpdateType in_updateType = eBCUpdateType::ALL);
 
 	/**
 	* Sets a callback handler for any out of band event messages that come from
@@ -112,6 +136,7 @@ public:
 	*   }
 	*/
 	void registerEventCallback(IEventCallback *eventCallback);
+	void registerEventCallback(UBCBlueprintRestCallProxyBase *eventCallback);	// blueprint support
 
 	/**
 	* Deregisters the event callback
@@ -124,7 +149,8 @@ public:
 	* @param rewardCallback The reward callback handler.
 	* @see The brainCloud apidocs site for more information on the return JSON
 	*/
-	void registerRewardCallback(IRewardCallback * rewardCallback);
+	void registerRewardCallback(IRewardCallback *rewardCallback);
+	void registerRewardCallback(UBCBlueprintRestCallProxyBase *rewardCallback);	// blueprint support
 
 	/**
 	* Deregisters the reward callback
@@ -136,7 +162,8 @@ public:
 	*
 	* @param fileUploadCallback The file upload callback handler.
 	*/
-	void registerFileUploadCallback(IFileUploadCallback * fileUploadCallback);
+	void registerFileUploadCallback(IFileUploadCallback *fileUploadCallback);
+	void registerFileUploadCallback(UBCBlueprintRestCallProxyBase *fileUploadCallback);	// blueprint support
 
 	/**
 	* Deregisters the file upload callback
@@ -148,7 +175,8 @@ public:
 	*
 	* @param globalErrorCallback The global error callback handler.
 	*/
-	void registerGlobalErrorCallback(IGlobalErrorCallback * globalErrorCallback);
+	void registerGlobalErrorCallback(IGlobalErrorCallback *globalErrorCallback);
+	void registerGlobalErrorCallback(UBCBlueprintRestCallProxyBase *globalErrorCallback);	// blueprint support
 
 	/**
 	* Registers a callback that is invoked for network errors.
@@ -157,7 +185,8 @@ public:
 	*
 	* @param networkErrorCallback The network error callback handler.
 	*/
-	void registerNetworkErrorCallback(INetworkErrorCallback * networkErrorCallback);
+	void registerNetworkErrorCallback(INetworkErrorCallback *networkErrorCallback);
+	void registerNetworkErrorCallback(UBCBlueprintRestCallProxyBase *networkErrorCallback);	// blueprint support
 
 	/**
 	* Deregisters the network error callback
@@ -173,6 +202,11 @@ public:
 	* Set to true to enable logging packets to the output log
 	*/
 	void enableLogging(bool shouldEnable);
+
+	/**
+	* 
+	*/
+	bool isLoggingEnabled();
 
 	/**
 	* Returns whether the client is authenticated with the brainCloud server.
@@ -198,65 +232,161 @@ public:
 	*
 	* @param serviceMessage
 	*/
-	void sendRequest(ServerCall * serviceMessage);
+	void sendRequest(ServerCall *serviceMessage);
 
 	/**
 	* Clears any pending messages from communication library.
 	*/
 	void resetCommunication();
 
+	/*
+	* Enables Real Time event for this session.
+	* Real Time events are disabled by default. Usually events
+	* need to be polled using GET_EVENTS. By enabling this, events will
+	* be received instantly when they happen through a TCP connection to an Event Server.
+	*
+	* This function will first call requestClientConnection, then connect to the address
+	*/
+	void enableRTT(eBCRTTConnectionType in_type, IServerCallback *in_callback);
+
+	/*
+	* Disables Real Time event for this session.
+	*/
+	void disableRTT();
+
+	/**
+	* 
+	*/
+	void setRTTHeartBeatSeconds(int32 in_value);
+
+	/**
+	* 
+	*/
+	void deregisterAllRTTCallbacks();
+
+	/**
+	* 
+	*/
+	void registerRTTEventCallback(UBCBlueprintRTTCallProxyBase *in_callback);
+
+	/**
+	* 
+	*/
+	void registerRTTEventCallback(IRTTCallback *in_callback);
+
+	/**
+	* 
+	*/
+	void deregisterRTTEventCallback();
+
+	/**
+	* 
+	*/
+	void registerRTTChatCallback(UBCBlueprintRTTCallProxyBase *in_callback);
+
+	/**
+	* 
+	*/
+	void registerRTTChatCallback(IRTTCallback *in_callback);
+
+	/**
+	* 
+	*/
+	void deregisterRTTChatCallback();
+
+	/**
+	* 
+	*/
+	void registerRTTMessagingCallback(UBCBlueprintRTTCallProxyBase *in_callback);
+
+	/**
+	* 
+	*/
+	void registerRTTMessagingCallback(IRTTCallback *in_callback);
+
+	/**
+	* 
+	*/
+	void deregisterRTTMessagingCallback();
+
+	/**
+	* 
+	*/
+	void registerRTTLobbyCallback(UBCBlueprintRTTCallProxyBase *in_callback);
+
+	/**
+	* 
+	*/
+	void registerRTTLobbyCallback(IRTTCallback *in_callback);
+
+	/**
+	* 
+	*/
+	void deregisterRTTLobbyCallback();
+
 	//Getters
-	BrainCloudAuthentication * getAuthenticationService();
-	BrainCloudLeaderboard * getLeaderboardService();
-	BrainCloudPlayerState * getPlayerStateService();
-	BrainCloudGamification * getGamificationService();
-	BrainCloudGlobalEntity * getGlobalEntityService();
-	BrainCloudGlobalStatistics * getGlobalStatisticsService();
-	BrainCloudEntity * getEntityService();
-	BrainCloudPlayerStatistics * getPlayerStatisticsService();
-	BrainCloudTime * getTimeService();
-	BrainCloudPlayerStatisticsEvent * getPlayerStatisticsEventService();
-	BrainCloudProduct * getProductService();
-	BrainCloudIdentity * getIdentityService();
-	BrainCloudEvent * getEventService();
-	BrainCloudS3Handling * getS3HandlingService();
-	BrainCloudScript * getScriptService();
-	BrainCloudAsyncMatch * getAsyncMatchService();
-	BrainCloudFriend * getFriendService();
-	BrainCloudGlobalApp * getGlobalAppService();
-	BrainCloudMatchmaking * getMatchmakingService();
-	BrainCloudOneWayMatch * getOneWayMatchService();
-	BrainCloudPlaybackStream * getPlaybackStreamService();
-	BrainCloudPushNotification * getPushNotificationService();
-	BrainCloudRedemptionCode * getRedemptionCodeService();
-	BrainCloudDataStream * getDataStreamService();
-	BrainCloudProfanity * getProfanityService();
-	BrainCloudFile * getFileService();
-	BrainCloudGroup * getGroupService();
-	BrainCloudMail * getMailService();
-	BrainCloudTournament * getTournamentService();
+	BrainCloudAuthentication *getAuthenticationService();
+	BrainCloudLeaderboard *getLeaderboardService();
+	BrainCloudPlayerState *getPlayerStateService();
+	BrainCloudGamification *getGamificationService();
+	BrainCloudGlobalEntity *getGlobalEntityService();
+	BrainCloudGlobalStatistics *getGlobalStatisticsService();
+	BrainCloudEntity *getEntityService();
+	BrainCloudPlayerStatistics *getPlayerStatisticsService();
+	BrainCloudTime *getTimeService();
+	BrainCloudPlayerStatisticsEvent *getPlayerStatisticsEventService();
+	BrainCloudProduct *getProductService();
+	BrainCloudIdentity *getIdentityService();
+	BrainCloudEvent *getEventService();
+	BrainCloudS3Handling *getS3HandlingService();
+	BrainCloudScript *getScriptService();
+	BrainCloudAsyncMatch *getAsyncMatchService();
+	BrainCloudFriend *getFriendService();
+	BrainCloudGlobalApp *getGlobalAppService();
+	BrainCloudMatchmaking *getMatchmakingService();
+	BrainCloudOneWayMatch *getOneWayMatchService();
+	BrainCloudPlaybackStream *getPlaybackStreamService();
+	BrainCloudPushNotification *getPushNotificationService();
+	BrainCloudRedemptionCode *getRedemptionCodeService();
+	BrainCloudDataStream *getDataStreamService();
+	BrainCloudProfanity *getProfanityService();
+	BrainCloudFile *getFileService();
+	BrainCloudGroup *getGroupService();
+	BrainCloudMail *getMailService();
+	BrainCloudTournament *getTournamentService();
+
+	BrainCloudRTT *getRTTService();
+	BrainCloudLobby *getLobbyService();
+	BrainCloudChat *getChatService();
+	BrainCloudMessaging *getMessagingService();
 
 	/**
 	* @deprecated Use getAppId instead - removal after September 1 2017
 	*/
-	const FString & getGameId() { return _appId; };
-	const FString & getAppId() { return _appId; };
-	const FString & getReleasePlatform() { return _releasePlatform; };
+	const FString &getGameId() { return _appId; };
+	const FString &getAppId() { return _appId; };
+	const FString &getSessionId();
+	const FString &getReleasePlatform() { return _releasePlatform; };
+	const FString &getProfileId() { return getAuthenticationService()->getProfileId(); };
+
+	const FString &getRTTConnectionId();
+	const FString &getEventServer();
 
 	/**
 	* @deprecated Use getAppVersion instead - removal after September 1 2017
 	*/
-	const FString & getGameVersion() { return _appVersion; }
-	const FString & getAppVersion() { return _appVersion; };
-	const FString & getBrainCloudClientVersion() { return s_brainCloudClientVersion; };
+	const FString &getGameVersion() { return _appVersion; }
+	const FString &getAppVersion() { return _appVersion; };
+	const FString &getBrainCloudClientVersion() { return s_brainCloudClientVersion; };
 
-	const FString & getCountryCode() { return _country; }
-	const FString & getLanguageCode() { return _language; }
+	const FString &getCountryCode() { return _country; }
+	const FString &getLanguageCode() { return _language; }
 	const float getTimezoneOffset() { return _timezoneOffset; }
 
-	const TArray<int32> & getPacketTimeouts();
+	const TArray<int32> &getPacketTimeouts();
 
-	BrainCloudComms * getBrainCloudComms() { return _brainCloudComms; }
+	BrainCloudComms *getBrainCloudComms() { return _brainCloudComms; }
+	BrainCloudRTTComms *getBrainCloudRTTComms() { return _brainCloudRTTComms; }
 
 	/**
 	* Gets the authentication packet timeout which is tracked separately
@@ -301,7 +431,7 @@ public:
 	*
 	* @param timeouts An array of packet timeouts.
 	*/
-	void setPacketTimeouts(const TArray<int32> & timeouts);
+	void setPacketTimeouts(const TArray<int32> &timeouts);
 
 	/**
 	* Sets the packet timeouts back to the default ie {10, 10, 10}
@@ -427,7 +557,7 @@ public:
 	* Will override any auto detected country.
 	* @param countryCode ISO 3166-1 two-letter country code
 	*/
-	void overrideCountryCode(const FString& countryCode) { _country = countryCode; }
+	void overrideCountryCode(const FString &countryCode) { _country = countryCode; }
 
 	/**
 	* Sets the language code sent to brainCloud when a user authenticates.
@@ -435,47 +565,48 @@ public:
 	* Will override any auto detected language.
 	* @param languageCode ISO 639-1 two-letter language code
 	*/
-	void overrideLanguageCode(const FString& languageCode) { _language = languageCode; }
+	void overrideLanguageCode(const FString &languageCode) { _language = languageCode; }
 
-	void OnMapExit();
+  protected:
+	static BrainCloudClient *_instance;
 
-protected:
+	BrainCloudComms *_brainCloudComms = nullptr;
+	BrainCloudRTTComms *_brainCloudRTTComms = nullptr;
 
-	//  void BeginDestroy() override;
-	~BrainCloudClient();
-	static BrainCloudClient * _instance;
+	BrainCloudAuthentication *_authenticationService = nullptr;
+	BrainCloudLeaderboard *_leaderboardService = nullptr;
+	BrainCloudPlayerState *_playerStateService = nullptr;
+	BrainCloudGamification *_gamificationService = nullptr;
+	BrainCloudGlobalEntity *_globalEntityService = nullptr;
+	BrainCloudGlobalStatistics *_globalStatisticsService = nullptr;
+	BrainCloudEntity *_entityService = nullptr;
+	BrainCloudPlayerStatistics *_playerStatisticsService = nullptr;
+	BrainCloudTime *_timeService = nullptr;
+	BrainCloudPlayerStatisticsEvent *_playerStatisticsEventService = nullptr;
+	BrainCloudProduct *_productService = nullptr;
+	BrainCloudIdentity *_identityService = nullptr;
+	BrainCloudEvent *_eventService = nullptr;
+	BrainCloudS3Handling *_s3HandlingService = nullptr;
+	BrainCloudScript *_scriptService = nullptr;
+	BrainCloudAsyncMatch *_asyncMatchService = nullptr;
+	BrainCloudFriend *_friendService = nullptr;
+	BrainCloudGlobalApp *_globalAppService = nullptr;
+	BrainCloudMatchmaking *_matchmakingService = nullptr;
+	BrainCloudOneWayMatch *_oneWayMatchService = nullptr;
+	BrainCloudPlaybackStream *_playbackStreamService = nullptr;
+	BrainCloudPushNotification *_pushNotificationService = nullptr;
+	BrainCloudRedemptionCode *_redemptionCodeService = nullptr;
+	BrainCloudDataStream *_dataStreamService = nullptr;
+	BrainCloudProfanity *_profanityService = nullptr;
+	BrainCloudFile *_fileService = nullptr;
+	BrainCloudGroup *_groupService = nullptr;
+	BrainCloudMail *_mailService = nullptr;
+	BrainCloudTournament *_tournamentService = nullptr;
 
-	BrainCloudComms * _brainCloudComms = nullptr;
-
-	BrainCloudAuthentication * _authenticationService = nullptr;
-	BrainCloudLeaderboard * _leaderboardService = nullptr;
-	BrainCloudPlayerState * _playerStateService = nullptr;
-	BrainCloudGamification * _gamificationService = nullptr;
-	BrainCloudGlobalEntity * _globalEntityService = nullptr;
-	BrainCloudGlobalStatistics * _globalStatisticsService = nullptr;
-	BrainCloudEntity * _entityService = nullptr;
-	BrainCloudPlayerStatistics * _playerStatisticsService = nullptr;
-	BrainCloudTime * _timeService = nullptr;
-	BrainCloudPlayerStatisticsEvent * _playerStatisticsEventService = nullptr;
-	BrainCloudProduct * _productService = nullptr;
-	BrainCloudIdentity * _identityService = nullptr;
-	BrainCloudEvent * _eventService = nullptr;
-	BrainCloudS3Handling * _s3HandlingService = nullptr;
-	BrainCloudScript * _scriptService = nullptr;
-	BrainCloudAsyncMatch * _asyncMatchService = nullptr;
-	BrainCloudFriend * _friendService = nullptr;
-	BrainCloudGlobalApp * _globalAppService = nullptr;
-	BrainCloudMatchmaking * _matchmakingService = nullptr;
-	BrainCloudOneWayMatch * _oneWayMatchService = nullptr;
-	BrainCloudPlaybackStream * _playbackStreamService = nullptr;
-	BrainCloudPushNotification * _pushNotificationService = nullptr;
-	BrainCloudRedemptionCode * _redemptionCodeService = nullptr;
-	BrainCloudDataStream * _dataStreamService = nullptr;
-	BrainCloudProfanity * _profanityService = nullptr;
-	BrainCloudFile * _fileService = nullptr;
-	BrainCloudGroup * _groupService = nullptr;
-	BrainCloudMail * _mailService = nullptr;
-	BrainCloudTournament * _tournamentService = nullptr;
+	BrainCloudRTT *_rttService = nullptr;
+	BrainCloudLobby *_lobbyService = nullptr;
+	BrainCloudChat *_chatService = nullptr;
+	BrainCloudMessaging *_messagingService = nullptr;
 
 	static FString s_brainCloudClientVersion;
 
@@ -490,5 +621,6 @@ protected:
 
 	void determineReleasePlatform();
 
-	template<class T> void destroyService(T* &service);
+	template <class T>
+	void destroyService(T *&service);
 };

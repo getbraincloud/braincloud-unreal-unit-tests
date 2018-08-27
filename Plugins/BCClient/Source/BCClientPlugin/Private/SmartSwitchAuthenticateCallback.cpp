@@ -2,7 +2,7 @@
 #include "BCClientPluginPrivatePCH.h"
 #include "SmartSwitchAuthenticateCallback.h"
 #include "ServerCall.h"
-#include "BrainCloudActor.h"
+
 #include "BrainCloudWrapper.h"
 
 SmartSwitchAuthenticateCallback::SmartSwitchAuthenticateCallback(UBrainCloudWrapper *in_wrapper, EBCAuthType in_authType, const FString &in_userId,

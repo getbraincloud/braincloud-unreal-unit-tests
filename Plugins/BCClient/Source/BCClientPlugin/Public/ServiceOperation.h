@@ -4,7 +4,7 @@
 
 class BCCLIENTPLUGIN_API ServiceOperation
 {
-public:
+  public:
 	static const ServiceOperation None;
 
 	static const ServiceOperation Authenticate;
@@ -316,13 +316,52 @@ public:
 	static const ServiceOperation ViewReward;
 	static const ServiceOperation ClaimTournamentReward;
 
+	// rtt
+	static const ServiceOperation RequestClientConnection;
+	static const ServiceOperation Connect;
+
+	// chat
+	static const ServiceOperation ChannelConnect;
+	static const ServiceOperation ChannelDisconnect;
+	static const ServiceOperation DeleteChatMessage;
+	static const ServiceOperation GetChannelId;
+	static const ServiceOperation GetChannelInfo;
+	static const ServiceOperation GetChatMessage;
+	static const ServiceOperation GetRecentChatMessages;
+	static const ServiceOperation GetSubscribedChannels;
+	static const ServiceOperation PostChatMessage;
+	static const ServiceOperation PostChatMessageSimple;
+	static const ServiceOperation UpdateChatMessage;
+	// messaging
+	static const ServiceOperation DeleteMessages;
+	static const ServiceOperation GetMessageBoxes;
+	static const ServiceOperation GetMessageCounts;
+	static const ServiceOperation GetMessages;
+	static const ServiceOperation GetMessagesPage;
+	static const ServiceOperation GetMessagesPageOffset;
+	static const ServiceOperation MarkMessagesRead;
+	static const ServiceOperation SEND_MESSAGE;
+	static const ServiceOperation SendMessageSimple;
+	// lobby
+	static const ServiceOperation FindLobby;
+	static const ServiceOperation CreateLobby;
+	static const ServiceOperation FindOrCreateLobby;
+	static const ServiceOperation GetLobbyData;
+	static const ServiceOperation UpdateReady;
+	static const ServiceOperation UpdateLobbyConfig;
+	static const ServiceOperation SwitchTeam;
+	static const ServiceOperation SendSignal;
+	static const ServiceOperation JoinLobby;
+	static const ServiceOperation LeaveLobby;
+	static const ServiceOperation RemoveMember;
+
 	FString getValue() const { return _value; }
 
-	bool operator== (const ServiceOperation& s) const;
-	void operator= (const ServiceOperation& s);
+	bool operator==(const ServiceOperation &s) const;
+	void operator=(const ServiceOperation &s);
 
-private:
-	ServiceOperation(const FString& operation);
+  private:
+	ServiceOperation(const FString &operation);
 
 	FString _value;
 };

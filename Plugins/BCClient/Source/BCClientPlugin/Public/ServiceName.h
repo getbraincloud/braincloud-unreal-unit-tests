@@ -4,7 +4,7 @@
 
 class BCCLIENTPLUGIN_API ServiceName
 {
-public:
+  public:
     static const ServiceName None;
 
     static const ServiceName AuthenticateV2;
@@ -24,9 +24,9 @@ public:
     static const ServiceName GlobalEntity;
     static const ServiceName Friend;
     static const ServiceName Time;
-	static const ServiceName Tournament;
+    static const ServiceName Tournament;
 
-	static const ServiceName Leaderboard;
+    static const ServiceName Leaderboard;
     static const ServiceName Event;
     static const ServiceName Product;
     static const ServiceName PlayerStatistics;
@@ -46,16 +46,22 @@ public:
     static const ServiceName Profanity;
     static const ServiceName File;
     static const ServiceName Group;
-	static const ServiceName Mail;
+    static const ServiceName Mail;
+
+    // RTT
+    static const ServiceName RTTRegistration;
+    static const ServiceName RTT;
+    static const ServiceName Chat;
+    static const ServiceName Messaging;
+    static const ServiceName Lobby;
 
     FString getValue() const { return _value; }
 
-    bool operator== (const ServiceName& s) const;
-    void operator= (const ServiceName& s);
+    bool operator==(const ServiceName &s) const;
+    void operator=(const ServiceName &s);
 
-private:
-    ServiceName(const FString& value);
+  private:
+    ServiceName(const FString &value);
 
     FString _value;
 };
-

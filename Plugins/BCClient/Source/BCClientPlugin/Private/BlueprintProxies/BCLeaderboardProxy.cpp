@@ -3,7 +3,7 @@
 #include "BCClientPluginPrivatePCH.h"
 #include "BrainCloudClient.h"
 #include "ServerCall.h"
-#include "BrainCloudActor.h"
+
 #include "BCWrapperProxy.h"
 #include "BCLeaderboardProxy.h"
 #include "BrainCloudWrapper.h"
@@ -135,18 +135,4 @@ UBCLeaderboardProxy* UBCLeaderboardProxy::GetPlayerScoresFromLeaderboards(UBrain
 	UBCLeaderboardProxy* Proxy = NewObject<UBCLeaderboardProxy>();
 	UBCWrapperProxy::GetBrainCloudInstance(brainCloudWrapper)->getLeaderboardService()->getPlayerScoresFromLeaderboards(leaderboardIds, Proxy);
 	return Proxy;
-}
-
-void UBCLeaderboardProxy::serverCallback(ServiceName serviceName, ServiceOperation serviceOperation, const FString& jsonData)
-{
-	FBC_ReturnData returnData = FBC_ReturnData(serviceName.getValue(), serviceOperation.getValue(), 200, 0);
-	OnSuccess.Broadcast(jsonData, returnData);
-	ConditionalBeginDestroy();
-}
-
-void UBCLeaderboardProxy::serverError(ServiceName serviceName, ServiceOperation serviceOperation, int32 statusCode, int32 reasonCode, const FString& jsonError)
-{
-	FBC_ReturnData returnData = FBC_ReturnData(serviceName.getValue(), serviceOperation.getValue(), statusCode, reasonCode);
-	OnFailure.Broadcast(jsonError, returnData);
-	ConditionalBeginDestroy();
 }

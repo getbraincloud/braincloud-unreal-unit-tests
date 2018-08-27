@@ -2,6 +2,8 @@
 
 #include "BCBlueprintSupportPrivatePCH.h"
 #include "BCBlueprintCallProxyBase.h"
+#include "BCBlueprintRTTCallProxyBase.h"
+#include "BCBlueprintRestCallProxyBase.h"
 #include "BlueprintFunctionNodeSpawner.h"
 #include "BlueprintActionDatabaseRegistrar.h"
 
@@ -23,7 +25,10 @@ void UK2Node_BrainCloudCall::GetMenuActions(FBlueprintActionDatabaseRegistrar& A
     for (TObjectIterator<UClass> ClassIt; ClassIt; ++ClassIt)
     {
         UClass* Class = *ClassIt;
-        if (!Class->IsChildOf<UBCBlueprintCallProxyBase>() || Class->HasAnyClassFlags(CLASS_Abstract))
+        if ((!Class->IsChildOf<UBCBlueprintCallProxyBase>() && 
+            !Class->IsChildOf<UBCBlueprintRTTCallProxyBase>() && 
+            !Class->IsChildOf<UBCBlueprintRestCallProxyBase>() )||
+            Class->HasAnyClassFlags(CLASS_Abstract))
         {
             continue;
         }
@@ -47,7 +52,10 @@ void UK2Node_BrainCloudCall::GetMenuActions(FBlueprintActionDatabaseRegistrar& A
 
             UObjectProperty* ReturnProperty = Cast<UObjectProperty>(Function->GetReturnProperty());
             // see if the function is a static factory method for online proxies
-            bool const bIsProxyFactoryMethod = (ReturnProperty != nullptr) && ReturnProperty->PropertyClass->IsChildOf<UBCBlueprintCallProxyBase>();
+            bool const bIsProxyFactoryMethod = (ReturnProperty != nullptr) && 
+                                                (ReturnProperty->PropertyClass->IsChildOf<UBCBlueprintCallProxyBase>() ||
+                                                ReturnProperty->PropertyClass->IsChildOf<UBCBlueprintRTTCallProxyBase>() ||
+                                                ReturnProperty->PropertyClass->IsChildOf<UBCBlueprintRestCallProxyBase>());
 
             if (bIsProxyFactoryMethod)
             {

@@ -3,13 +3,10 @@
 #pragma once
 
 #include "BCBlueprintCallProxyBase.h"
-#include "IServerCallback.h"
 #include "BCProductProxy.generated.h"
 
-class ABrainCloud;
-
 UCLASS(MinimalAPI)
-class UBCProductProxy : public UBCBlueprintCallProxyBase, public IServerCallback
+class UBCProductProxy : public UBCBlueprintCallProxyBase
 {
     GENERATED_BODY()
 
@@ -164,16 +161,4 @@ public:
     UFUNCTION(BlueprintCallable, meta = (BlueprintInternalUseOnly = "true"), Category = "BrainCloud|Product")
         static UBCProductProxy* GetEligiblePromotions(UBrainCloudWrapper *brainCloudWrapper);
 
-    //Response delegates
-    UPROPERTY(BlueprintAssignable)
-        FBrainCloudCallbackDelegate OnSuccess;
-
-    UPROPERTY(BlueprintAssignable)
-        FBrainCloudCallbackDelegate OnFailure;
-
-protected:
-    // IServerCallback interface
-    void serverCallback(ServiceName serviceName, ServiceOperation serviceOperation, const FString& jsonData);
-    void serverError(ServiceName serviceName, ServiceOperation serviceOperation, int32 statusCode, int32 reasonCode, const FString& jsonError);
-    // End of IServerCallback interface
 };
