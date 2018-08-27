@@ -59,7 +59,7 @@ class UBCBlueprintRestCallProxyBase : public UObject, public IEventCallback, pub
         OnCallback.Broadcast(jsonResponse, returnData);
     }
 
-    void fileUploadCompletedfileUploadFailed(const FString& fileUploadId, int32 statusCode, int32 reasonCode, const FString& jsonResponse) 
+    void fileUploadFailed(const FString& fileUploadId, int32 statusCode, int32 reasonCode, const FString& jsonResponse) 
     {
         FBC_ReturnData returnData = FBC_ReturnData(fileUploadId, fileUploadId, statusCode, reasonCode);
         OnCallback.Broadcast(jsonResponse, returnData);
