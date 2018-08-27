@@ -3,7 +3,7 @@
 #include "BCClientPluginPrivatePCH.h"
 #include "BrainCloudClient.h"
 #include "ServerCall.h"
-#include "BrainCloudActor.h"
+
 #include "BCWrapperProxy.h"
 #include "BCPlayerStatisticsEventProxy.h"
 #include "BrainCloudWrapper.h"
@@ -40,19 +40,3 @@ UBCPlayerStatisticsEventProxy* UBCPlayerStatisticsEventProxy::TriggerStatsEvents
     UBCWrapperProxy::GetBrainCloudInstance(brainCloudWrapper)->getPlayerStatisticsEventService()->triggerStatsEvents(jsonData, Proxy);
     return Proxy;
 }
-
-//callbacks
-void UBCPlayerStatisticsEventProxy::serverCallback(ServiceName serviceName, ServiceOperation serviceOperation, const FString& jsonData)
-{
-    FBC_ReturnData returnData = FBC_ReturnData(serviceName.getValue(), serviceOperation.getValue(), 200, 0);
-    OnSuccess.Broadcast(jsonData, returnData);
-	ConditionalBeginDestroy();
-}
-
-void UBCPlayerStatisticsEventProxy::serverError(ServiceName serviceName, ServiceOperation serviceOperation, int32 statusCode, int32 reasonCode, const FString& jsonError)
-{
-    FBC_ReturnData returnData = FBC_ReturnData(serviceName.getValue(), serviceOperation.getValue(), statusCode, reasonCode);
-    OnFailure.Broadcast(jsonError, returnData);
-	ConditionalBeginDestroy();
-}
-

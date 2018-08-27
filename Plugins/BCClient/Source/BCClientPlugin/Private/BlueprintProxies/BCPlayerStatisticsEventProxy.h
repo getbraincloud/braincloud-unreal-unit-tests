@@ -3,24 +3,21 @@
 #pragma once
 
 #include "BCBlueprintCallProxyBase.h"
-#include "IServerCallback.h"
 #include "BCPlayerStatisticsEventProxy.generated.h"
 
-class ABrainCloud;
-
 UCLASS(MinimalAPI)
-class UBCPlayerStatisticsEventProxy : public UBCBlueprintCallProxyBase, public IServerCallback
+class UBCPlayerStatisticsEventProxy : public UBCBlueprintCallProxyBase
 {
     GENERATED_BODY()
 
-public:
-    UBCPlayerStatisticsEventProxy(const FObjectInitializer& ObjectInitializer);
+  public:
+    UBCPlayerStatisticsEventProxy(const FObjectInitializer &ObjectInitializer);
 
-	/**
+    /**
 	* @deprecated Use TriggerStatsEvent instead
 	*/
-	UFUNCTION(BlueprintCallable, meta = (BlueprintInternalUseOnly = "true"), Category = "BrainCloud|Player Statistics Event")
-		static UBCPlayerStatisticsEventProxy* TriggerPlayerStatisticsEvent(UBrainCloudWrapper *brainCloudWrapper, FString eventName, int32 eventMultiplier);
+    UFUNCTION(BlueprintCallable, meta = (BlueprintInternalUseOnly = "true"), Category = "BrainCloud|Player Statistics Event")
+    static UBCPlayerStatisticsEventProxy *TriggerPlayerStatisticsEvent(UBrainCloudWrapper *brainCloudWrapper, FString eventName, int32 eventMultiplier);
 
     /**
     * Trigger an event server side that will increase the users statistics.
@@ -38,13 +35,13 @@ public:
     * @see BrainCloudPlayerStatistics
     */
     UFUNCTION(BlueprintCallable, meta = (BlueprintInternalUseOnly = "true"), Category = "BrainCloud|Player Statistics Event")
-        static UBCPlayerStatisticsEventProxy* TriggerStatsEvent(UBrainCloudWrapper *brainCloudWrapper, FString eventName, int32 eventMultiplier);
+    static UBCPlayerStatisticsEventProxy *TriggerStatsEvent(UBrainCloudWrapper *brainCloudWrapper, FString eventName, int32 eventMultiplier);
 
-	/**
+    /**
 	* @deprecated Use TriggerStatsEvents instead
 	*/
-	UFUNCTION(BlueprintCallable, meta = (BlueprintInternalUseOnly = "true"), Category = "BrainCloud|Player Statistics Event")
-		static UBCPlayerStatisticsEventProxy* TriggerPlayerStatisticsEvents(UBrainCloudWrapper *brainCloudWrapper, FString jsonData);
+    UFUNCTION(BlueprintCallable, meta = (BlueprintInternalUseOnly = "true"), Category = "BrainCloud|Player Statistics Event")
+    static UBCPlayerStatisticsEventProxy *TriggerPlayerStatisticsEvents(UBrainCloudWrapper *brainCloudWrapper, FString jsonData);
 
     /**
     * See documentation for TriggerStatsEvent for more
@@ -66,18 +63,5 @@ public:
     *   ]
     */
     UFUNCTION(BlueprintCallable, meta = (BlueprintInternalUseOnly = "true"), Category = "BrainCloud|Player Statistics Event")
-        static UBCPlayerStatisticsEventProxy* TriggerStatsEvents(UBrainCloudWrapper *brainCloudWrapper, FString jsonData);
-
-    //Response delegates
-    UPROPERTY(BlueprintAssignable)
-        FBrainCloudCallbackDelegate OnSuccess;
-
-    UPROPERTY(BlueprintAssignable)
-        FBrainCloudCallbackDelegate OnFailure;
-
-protected:
-    // IServerCallback interface
-    void serverCallback(ServiceName serviceName, ServiceOperation serviceOperation, const FString& jsonData);
-    void serverError(ServiceName serviceName, ServiceOperation serviceOperation, int32 statusCode, int32 reasonCode, const FString& jsonError);
-    // End of IServerCallback interface
+    static UBCPlayerStatisticsEventProxy *TriggerStatsEvents(UBrainCloudWrapper *brainCloud, FString jsonData);
 };

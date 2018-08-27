@@ -3,7 +3,7 @@
 #include "BCClientPluginPrivatePCH.h"
 #include "ServiceOperation.h"
 
-ServiceOperation::ServiceOperation(const FString& operation)
+ServiceOperation::ServiceOperation(const FString &operation)
 {
 	_value = operation;
 }
@@ -318,12 +318,53 @@ const ServiceOperation ServiceOperation::ViewCurrentReward = ServiceOperation(TE
 const ServiceOperation ServiceOperation::ViewReward = ServiceOperation(TEXT("VIEW_REWARD"));
 const ServiceOperation ServiceOperation::ClaimTournamentReward = ServiceOperation(TEXT("CLAIM_TOURNAMENT_REWARD"));
 
-bool ServiceOperation::operator== (const ServiceOperation& s) const
+// rtt
+const ServiceOperation ServiceOperation::RequestClientConnection = ServiceOperation(TEXT("REQUEST_CLIENT_CONNECTION"));
+const ServiceOperation ServiceOperation::Connect = ServiceOperation(TEXT("CONNECT"));
+
+// chat
+const ServiceOperation ServiceOperation::ChannelConnect = ServiceOperation("CHANNEL_CONNECT");
+const ServiceOperation ServiceOperation::ChannelDisconnect = ServiceOperation("CHANNEL_DISCONNECT");
+const ServiceOperation ServiceOperation::DeleteChatMessage = ServiceOperation("DELETE_CHAT_MESSAGE");
+const ServiceOperation ServiceOperation::GetChannelId = ServiceOperation("GET_CHANNEL_ID");
+const ServiceOperation ServiceOperation::GetChannelInfo = ServiceOperation("GET_CHANNEL_INFO");
+const ServiceOperation ServiceOperation::GetChatMessage = ServiceOperation("GET_CHAT_MESSAGE");
+const ServiceOperation ServiceOperation::GetRecentChatMessages = ServiceOperation("GET_RECENT_CHAT_MESSAGES");
+const ServiceOperation ServiceOperation::GetSubscribedChannels = ServiceOperation("GET_SUBSCRIBED_CHANNELS");
+const ServiceOperation ServiceOperation::PostChatMessage = ServiceOperation("POST_CHAT_MESSAGE");
+const ServiceOperation ServiceOperation::PostChatMessageSimple = ServiceOperation("POST_CHAT_MESSAGE_SIMPLE");
+const ServiceOperation ServiceOperation::UpdateChatMessage = ServiceOperation("UPDATE_CHAT_MESSAGE");
+
+// messaging
+const ServiceOperation ServiceOperation::DeleteMessages = ServiceOperation("DELETE_MESSAGES");
+const ServiceOperation ServiceOperation::GetMessageBoxes = ServiceOperation("GET_MESSAGE_BOXES");
+const ServiceOperation ServiceOperation::GetMessageCounts = ServiceOperation("GET_MESSAGE_COUNTS");
+const ServiceOperation ServiceOperation::GetMessages = ServiceOperation("GET_MESSAGES");
+const ServiceOperation ServiceOperation::GetMessagesPage = ServiceOperation("GET_MESSAGES_PAGE");
+const ServiceOperation ServiceOperation::GetMessagesPageOffset = ServiceOperation("GET_MESSAGES_PAGE_OFFSET");
+const ServiceOperation ServiceOperation::MarkMessagesRead = ServiceOperation("MARK_MESSAGES_READ");
+const ServiceOperation ServiceOperation::SEND_MESSAGE = ServiceOperation("SEND_MESSAGE");
+const ServiceOperation ServiceOperation::SendMessageSimple = ServiceOperation("SEND_MESSAGE_SIMPLE");
+
+// lobby
+const ServiceOperation ServiceOperation::FindLobby = ServiceOperation("FIND_LOBBY");
+const ServiceOperation ServiceOperation::CreateLobby = ServiceOperation("CREATE_LOBBY");
+const ServiceOperation ServiceOperation::FindOrCreateLobby = ServiceOperation("FIND_OR_CREATE_LOBBY");
+const ServiceOperation ServiceOperation::GetLobbyData = ServiceOperation("GET_LOBBY_DATA");
+const ServiceOperation ServiceOperation::UpdateReady = ServiceOperation("UPDATE_READY");
+const ServiceOperation ServiceOperation::UpdateLobbyConfig = ServiceOperation("UPDATE_SETTINGS");
+const ServiceOperation ServiceOperation::SwitchTeam = ServiceOperation("SWITCH_TEAM");
+const ServiceOperation ServiceOperation::SendSignal = ServiceOperation("SEND_SIGNAL");
+const ServiceOperation ServiceOperation::JoinLobby = ServiceOperation("JOIN_LOBBY");
+const ServiceOperation ServiceOperation::LeaveLobby = ServiceOperation("LEAVE_LOBBY");
+const ServiceOperation ServiceOperation::RemoveMember = ServiceOperation("REMOVE_MEMBER");
+
+bool ServiceOperation::operator==(const ServiceOperation &s) const
 {
 	return _value == s.getValue();
 }
 
-void ServiceOperation::operator= (const ServiceOperation& s)
+void ServiceOperation::operator=(const ServiceOperation &s)
 {
 	_value = s.getValue();
 }

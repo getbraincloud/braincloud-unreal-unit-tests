@@ -2,7 +2,7 @@
 
 #include "BCClientPluginPrivatePCH.h"
 #include "ServerCall.h"
-#include "BrainCloudActor.h"
+
 #include "BCWrapperProxy.h"
 #include "BrainCloudWrapper.h"
 
@@ -13,19 +13,12 @@ UBCWrapperProxy::UBCWrapperProxy(const FObjectInitializer &ObjectInitializer)
 {
 }
 
-ABrainCloudActor *UBCWrapperProxy::CreateBrainCloudActor(const FString &wrapperName)
+UBrainCloudWrapper *UBCWrapperProxy::CreateBrainCloudWrapper(const FString &wrapperName)
 {
-	ABrainCloudActor *brainCloudActor = NewObject<ABrainCloudActor>(NewObject<UBrainCloudWrapper>());
-	brainCloudActor->AddToRoot();
-	brainCloudActor->BCWrapper->setWrapperName(wrapperName);
-	return brainCloudActor;
+	UBrainCloudWrapper* wrapper = NewObject<UBrainCloudWrapper>();
+	wrapper->setWrapperName(wrapperName);
+	return wrapper;
 }
-
-UBrainCloudWrapper *UBCWrapperProxy::GetBrainCloudWrapper(ABrainCloudActor *brainCloudActor)
-{
-	return brainCloudActor->BCWrapper;
-}
-
 
 void UBCWrapperProxy::SetDefaultBrainCloudInstance(UBrainCloudWrapper *brainCloudWrapper)
 {
@@ -56,18 +49,14 @@ UBrainCloudWrapper *UBCWrapperProxy::GetBrainCloudInstance(UBrainCloudWrapper *b
 	}
 }
 
-UBCWrapperProxy *UBCWrapperProxy::SetAlwaysAllowProfileSwitch(UBrainCloudWrapper *brainCloudWrapper, bool alwaysAllow)
+void UBCWrapperProxy::SetAlwaysAllowProfileSwitch(UBrainCloudWrapper *brainCloudWrapper, bool alwaysAllow)
 {
-	UBCWrapperProxy *Proxy = NewObject<UBCWrapperProxy>();
 	UBCWrapperProxy::GetBrainCloudInstance(brainCloudWrapper)->setAlwaysAllowProfileSwitch(alwaysAllow);
-	return Proxy;
 }
 
-UBCWrapperProxy *UBCWrapperProxy::Initialize(UBrainCloudWrapper *brainCloudWrapper, FString serverUrl, FString secretKey, FString appId, FString version)
+void UBCWrapperProxy::Initialize(UBrainCloudWrapper *brainCloudWrapper, FString serverUrl, FString secretKey, FString appId, FString version)
 {
-	UBCWrapperProxy *Proxy = NewObject<UBCWrapperProxy>();
 	UBCWrapperProxy::GetBrainCloudInstance(brainCloudWrapper)->initialize(serverUrl, secretKey, appId, version);
-	return Proxy;
 }
 
 UBCWrapperProxy *UBCWrapperProxy::AuthenticateAnonymous(UBrainCloudWrapper *brainCloudWrapper)
@@ -189,11 +178,9 @@ UBCWrapperProxy *UBCWrapperProxy::SmartSwitchAuthenticateUniversal(UBrainCloudWr
 	return Proxy;
 }
 
-UBCWrapperProxy *UBCWrapperProxy::SetStoredProfileId(UBrainCloudWrapper *brainCloudWrapper, FString profileId)
+void UBCWrapperProxy::SetStoredProfileId(UBrainCloudWrapper *brainCloudWrapper, FString profileId)
 {
-	UBCWrapperProxy *Proxy = NewObject<UBCWrapperProxy>();
 	UBCWrapperProxy::GetBrainCloudInstance(brainCloudWrapper)->setStoredProfileId(profileId);
-	return Proxy;
 }
 
 FString UBCWrapperProxy::GetStoredProfileId(UBrainCloudWrapper *brainCloudWrapper)
@@ -201,29 +188,12 @@ FString UBCWrapperProxy::GetStoredProfileId(UBrainCloudWrapper *brainCloudWrappe
 	return UBCWrapperProxy::GetBrainCloudInstance(brainCloudWrapper)->getStoredProfileId();
 }
 
-UBCWrapperProxy *UBCWrapperProxy::SetStoredAnonymousId(UBrainCloudWrapper *brainCloudWrapper, FString anonymousId)
+void UBCWrapperProxy::SetStoredAnonymousId(UBrainCloudWrapper *brainCloudWrapper, FString anonymousId)
 {
-	UBCWrapperProxy *Proxy = NewObject<UBCWrapperProxy>();
 	UBCWrapperProxy::GetBrainCloudInstance(brainCloudWrapper)->setStoredAnonymousId(anonymousId);
-	return Proxy;
 }
 
 FString UBCWrapperProxy::GetStoredAnonymousId(UBrainCloudWrapper *brainCloudWrapper)
 {
 	return UBCWrapperProxy::GetBrainCloudInstance(brainCloudWrapper)->getStoredAnonymousId();
-}
-
-//callbacks
-void UBCWrapperProxy::serverCallback(ServiceName serviceName, ServiceOperation serviceOperation, const FString &jsonData)
-{
-	FBC_ReturnData returnData = FBC_ReturnData(serviceName.getValue(), serviceOperation.getValue(), 200, 0);
-	OnSuccess.Broadcast(jsonData, returnData);
-	ConditionalBeginDestroy();
-}
-
-void UBCWrapperProxy::serverError(ServiceName serviceName, ServiceOperation serviceOperation, int32 statusCode, int32 reasonCode, const FString &jsonError)
-{
-	FBC_ReturnData returnData = FBC_ReturnData(serviceName.getValue(), serviceOperation.getValue(), statusCode, reasonCode);
-	OnFailure.Broadcast(jsonError, returnData);
-	ConditionalBeginDestroy();
 }

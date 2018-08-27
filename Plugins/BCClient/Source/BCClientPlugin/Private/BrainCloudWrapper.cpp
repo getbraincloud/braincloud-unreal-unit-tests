@@ -30,7 +30,17 @@ UBrainCloudWrapper::UBrainCloudWrapper(FString wrapperName)
 
 UBrainCloudWrapper::UBrainCloudWrapper(BrainCloudClient *client)
 {
+    _createdWithClient = true;
     _client = client;
+}
+
+void UBrainCloudWrapper::BeginDestroy()
+{
+    Super::BeginDestroy();
+    if (_createdWithClient)
+        _client = nullptr;
+    else
+        delete _client;
 }
 
 UBrainCloudWrapper *UBrainCloudWrapper::getInstance()
@@ -49,7 +59,7 @@ UBrainCloudWrapper *UBrainCloudWrapper::getInstance()
 
     if (_instance == nullptr)
     {
-       _instance = NewObject<UBrainCloudWrapper>();
+        _instance = NewObject<UBrainCloudWrapper>();
     }
     return _instance;
 }
@@ -266,7 +276,7 @@ void UBrainCloudWrapper::serverCallback(ServiceName serviceName, ServiceOperatio
 }
 
 void UBrainCloudWrapper::serverError(ServiceName serviceName, ServiceOperation serviceOperation,
-                                    int32 statusCode, int32 reasonCode, const FString &message)
+                                     int32 statusCode, int32 reasonCode, const FString &message)
 {
     if (_authenticateCallback != nullptr)
     {

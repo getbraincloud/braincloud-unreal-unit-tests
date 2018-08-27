@@ -51,6 +51,13 @@ const ServiceName ServiceName::File = ServiceName("file");
 const ServiceName ServiceName::Group = ServiceName("group");
 const ServiceName ServiceName::Mail = ServiceName("mail");
 
+// RTT
+const ServiceName ServiceName::RTTRegistration = ServiceName("rttRegistration");
+const ServiceName ServiceName::RTT = ServiceName("rtt");
+const ServiceName ServiceName::Chat = ServiceName("chat");
+const ServiceName ServiceName::Messaging = ServiceName("messaging");
+const ServiceName ServiceName::Lobby = ServiceName("lobby");
+
 bool ServiceName::operator== (const ServiceName& s) const
 {
     return _value == s.getValue();

@@ -3,7 +3,7 @@
 #include "BCClientPluginPrivatePCH.h"
 #include "BrainCloudClient.h"
 #include "ServerCall.h"
-#include "BrainCloudActor.h"
+
 #include "BCWrapperProxy.h"
 #include "BCGroupProxy.h"
 #include "BrainCloudGroupACL.h"
@@ -253,19 +253,3 @@ UBCGroupProxy* UBCGroupProxy::UpdateGroupName(UBrainCloudWrapper *brainCloudWrap
     UBCWrapperProxy::GetBrainCloudInstance(brainCloudWrapper)->getGroupService()->updateGroupName(groupId, name, Proxy);
     return Proxy;
 }
-
-//callbacks
-void UBCGroupProxy::serverCallback(ServiceName serviceName, ServiceOperation serviceOperation, const FString& jsonData)
-{
-    FBC_ReturnData returnData = FBC_ReturnData(serviceName.getValue(), serviceOperation.getValue(), 200, 0);
-    OnSuccess.Broadcast(jsonData, returnData);
-	ConditionalBeginDestroy();
-}
-
-void UBCGroupProxy::serverError(ServiceName serviceName, ServiceOperation serviceOperation, int32 statusCode, int32 reasonCode, const FString& jsonError)
-{
-    FBC_ReturnData returnData = FBC_ReturnData(serviceName.getValue(), serviceOperation.getValue(), statusCode, reasonCode);
-    OnFailure.Broadcast(jsonError, returnData);
-	ConditionalBeginDestroy();
-}
-

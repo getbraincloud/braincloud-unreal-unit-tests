@@ -2,7 +2,6 @@
 #include "BCClientPluginPrivatePCH.h"
 #include "BCIdentityCallback.h"
 #include "ServerCall.h"
-#include "BrainCloudActor.h"
 #include "BrainCloudWrapper.h"
 
 BCIdentityCallback::BCIdentityCallback(UBrainCloudWrapper *in_wrapper, IServerCallback *in_callback)
@@ -15,7 +14,7 @@ BCIdentityCallback::~BCIdentityCallback()
 {
 }
 
-void BCIdentityCallback::serverCallback(ServiceName serviceName, ServiceOperation serviceOperation, FString const &jsonData)
+void BCIdentityCallback::serverCallback(ServiceName serviceName, ServiceOperation serviceOperation, const FString &jsonData)
 {
     TSharedRef<TJsonReader<TCHAR>> reader = TJsonReaderFactory<TCHAR>::Create(jsonData);
     TSharedPtr<FJsonObject> jsonPacket = MakeShareable(new FJsonObject());
