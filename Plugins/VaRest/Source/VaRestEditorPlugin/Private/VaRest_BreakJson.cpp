@@ -1,7 +1,6 @@
 // Copyright 2015 Vladimir Alyamkin. All Rights Reserved.
 // Original code by https://github.com/unktomi
 
-
 #include "VaRest_BreakJson.h"
 #include "KismetCompiler.h"
 #include "EditorCategoryUtils.h"
@@ -19,19 +18,19 @@
 class FKCHandler_BreakJson : public FNodeHandlingFunctor
 {
 
-public:
-	FKCHandler_BreakJson(FKismetCompilerContext& InCompilerContext)
+  public:
+	FKCHandler_BreakJson(FKismetCompilerContext &InCompilerContext)
 		: FNodeHandlingFunctor(InCompilerContext)
 	{
 	}
 
-	virtual void Compile(FKismetFunctionContext& Context, UEdGraphNode* Node) override
+	virtual void Compile(FKismetFunctionContext &Context, UEdGraphNode *Node) override
 	{
-		UEdGraphPin* InputPin = NULL;
+		UEdGraphPin *InputPin = NULL;
 
 		for (int32 PinIndex = 0; PinIndex < Node->Pins.Num(); ++PinIndex)
 		{
-			UEdGraphPin* Pin = Node->Pins[PinIndex];
+			UEdGraphPin *Pin = Node->Pins[PinIndex];
 			if (Pin && (EGPD_Input == Pin->Direction))
 			{
 				InputPin = Pin;
@@ -50,7 +49,7 @@ public:
 
 		for (int32 PinIndex = 0; PinIndex < Node->Pins.Num(); ++PinIndex)
 		{
-			UEdGraphPin* Pin = Node->Pins[PinIndex];
+			UEdGraphPin *Pin = Node->Pins[PinIndex];
 			if (Pin && (EGPD_Output == Pin->Direction))
 			{
 				if (Pin->LinkedTo.Num() < 1)
@@ -68,7 +67,7 @@ public:
 				const FString &FieldType = Pin->PinType.PinCategory;
 #endif
 
-				FBPTerminal* FieldNameTerm = Context.CreateLocalTerminal(ETerminalSpecification::TS_Literal);
+				FBPTerminal *FieldNameTerm = Context.CreateLocalTerminal(ETerminalSpecification::TS_Literal);
 				FieldNameTerm->Type.PinCategory = CompilerContext.GetSchema()->PC_String;
 #if ENGINE_MINOR_VERSION >= 13
 				FieldNameTerm->SourcePin = Pin;
@@ -84,10 +83,10 @@ public:
 				FieldNameTerm->TextLiteral = FText::FromString(FieldName);
 #endif
 
- 				FBlueprintCompiledStatement& Statement = Context.AppendStatementForNode(Node);
+				FBlueprintCompiledStatement &Statement = Context.AppendStatementForNode(Node);
 				FName FunctionName;
 
-                bool bIsArray = Pin->PinType.ContainerType == EPinContainerType::Array;
+				bool bIsArray = Pin->PinType.ContainerType == EPinContainerType::Array;
 				if (FieldType == CompilerContext.GetSchema()->PC_Boolean)
 				{
 					FunctionName = bIsArray ? TEXT("GetBoolArrayField") : TEXT("GetBoolField");
@@ -120,13 +119,13 @@ public:
 		}
 	}
 
-	FBPTerminal* RegisterInputTerm(FKismetFunctionContext& Context, UVaRest_BreakJson* Node)
+	FBPTerminal *RegisterInputTerm(FKismetFunctionContext &Context, UVaRest_BreakJson *Node)
 	{
 		// Find input pin
-		UEdGraphPin* InputPin = NULL;
+		UEdGraphPin *InputPin = NULL;
 		for (int32 PinIndex = 0; PinIndex < Node->Pins.Num(); ++PinIndex)
 		{
-			UEdGraphPin* Pin = Node->Pins[PinIndex];
+			UEdGraphPin *Pin = Node->Pins[PinIndex];
 			if (Pin && (EGPD_Input == Pin->Direction))
 			{
 				InputPin = Pin;
@@ -136,7 +135,7 @@ public:
 		check(NULL != InputPin);
 
 		// Find structure source net
-		UEdGraphPin* Net = FEdGraphUtilities::GetNetFromPin(InputPin);
+		UEdGraphPin *Net = FEdGraphUtilities::GetNetFromPin(InputPin);
 		FBPTerminal **TermPtr = Context.NetMap.Find(Net);
 
 		if (!TermPtr)
@@ -151,24 +150,24 @@ public:
 		return *TermPtr;
 	}
 
-	void RegisterOutputTerm(FKismetFunctionContext& Context, UEdGraphPin* OutputPin, FBPTerminal* ContextTerm)
+	void RegisterOutputTerm(FKismetFunctionContext &Context, UEdGraphPin *OutputPin, FBPTerminal *ContextTerm)
 	{
 		FBPTerminal *Term = Context.CreateLocalTerminalFromPinAutoChooseScope(OutputPin, Context.NetNameMap->MakeValidName(OutputPin));
 		Context.NetMap.Add(OutputPin, Term);
 	}
 
-	virtual void RegisterNets(FKismetFunctionContext& Context, UEdGraphNode* InNode) override
+	virtual void RegisterNets(FKismetFunctionContext &Context, UEdGraphNode *InNode) override
 	{
-		UVaRest_BreakJson* Node = Cast<UVaRest_BreakJson>(InNode);
+		UVaRest_BreakJson *Node = Cast<UVaRest_BreakJson>(InNode);
 		FNodeHandlingFunctor::RegisterNets(Context, Node);
 
 		check(NULL != Node);
 
-		if (FBPTerminal* StructContextTerm = RegisterInputTerm(Context, Node))
+		if (FBPTerminal *StructContextTerm = RegisterInputTerm(Context, Node))
 		{
 			for (int32 PinIndex = 0; PinIndex < Node->Pins.Num(); ++PinIndex)
 			{
-				UEdGraphPin* Pin = Node->Pins[PinIndex];
+				UEdGraphPin *Pin = Node->Pins[PinIndex];
 				if (NULL != Pin && EGPD_Output == Pin->Direction)
 				{
 					RegisterOutputTerm(Context, Pin, StructContextTerm);
@@ -186,22 +185,27 @@ UVaRest_BreakJson::UVaRest_BreakJson(const FObjectInitializer &ObjectInitializer
 {
 }
 
-FNodeHandlingFunctor* UVaRest_BreakJson::CreateNodeHandler(class FKismetCompilerContext& CompilerContext) const
+FNodeHandlingFunctor *UVaRest_BreakJson::CreateNodeHandler(class FKismetCompilerContext &CompilerContext) const
 {
 	return new FKCHandler_BreakJson(CompilerContext);
 }
 
 void UVaRest_BreakJson::AllocateDefaultPins()
 {
-	const UEdGraphSchema_K2* K2Schema = GetDefault<UEdGraphSchema_K2>();
+	const UEdGraphSchema_K2 *K2Schema = GetDefault<UEdGraphSchema_K2>();
 
 	UClass *Class = Cast<UClass>(StaticLoadObject(UClass::StaticClass(), NULL, TEXT("class'VaRestPlugin.VaRestJsonObject'")));
-	UEdGraphPin* Pin = CreatePin(EGPD_Input, K2Schema->PC_Object, TEXT(""), Class, false, false, TEXT("Target"));
+	UEdGraphPin *Pin = nullptr;
 
-#if ENGINE_MINOR_VERSION >= 17
-        K2Schema->SetPinAutogeneratedDefaultValueBasedOnType(Pin);
+#if ENGINE_MINOR_VERSION >= 20
+	Pin = CreatePin(EGPD_Input, K2Schema->PC_Object, TEXT("Target"));
+	K2Schema->SetPinAutogeneratedDefaultValueBasedOnType(Pin);
+#elif ENGINE_MINOR_VERSION >= 17
+	Pin = CreatePin(EGPD_Input, K2Schema->PC_Object, TEXT(""), Class, false, false, TEXT("Target"));
+	K2Schema->SetPinAutogeneratedDefaultValueBasedOnType(Pin);
 #else
-        K2Schema->SetPinDefaultValueBasedOnType(Pin);
+	Pin = CreatePin(EGPD_Input, K2Schema->PC_Object, TEXT(""), Class, false, false, TEXT("Target"));
+	K2Schema->SetPinDefaultValueBasedOnType(Pin);
 #endif
 
 	CreateProjectionPins(Pin);
@@ -212,7 +216,7 @@ FLinearColor UVaRest_BreakJson::GetNodeTitleColor() const
 	return FLinearColor(255.0f, 255.0f, 0.0f);
 }
 
-void UVaRest_BreakJson::PostEditChangeProperty(struct FPropertyChangedEvent& PropertyChangedEvent)
+void UVaRest_BreakJson::PostEditChangeProperty(struct FPropertyChangedEvent &PropertyChangedEvent)
 {
 	bool bIsDirty = false;
 
@@ -231,13 +235,13 @@ void UVaRest_BreakJson::PostEditChangeProperty(struct FPropertyChangedEvent& Pro
 	Super::PostEditChangeProperty(PropertyChangedEvent);
 }
 
-void UVaRest_BreakJson::GetMenuActions(FBlueprintActionDatabaseRegistrar& ActionRegistrar) const
+void UVaRest_BreakJson::GetMenuActions(FBlueprintActionDatabaseRegistrar &ActionRegistrar) const
 {
 	// actions get registered under specific object-keys; the idea is that
 	// actions might have to be updated (or deleted) if their object-key is
 	// mutated (or removed)... here we use the node's class (so if the node
 	// type disappears, then the action should go with it)
-	UClass* ActionKey = GetClass();
+	UClass *ActionKey = GetClass();
 
 	// to keep from needlessly instantiating a UBlueprintNodeSpawner, first
 	// check to make sure that the registrar is looking for actions of this type
@@ -245,7 +249,7 @@ void UVaRest_BreakJson::GetMenuActions(FBlueprintActionDatabaseRegistrar& Action
 	// registrar would only accept actions corresponding to that asset)
 	if (ActionRegistrar.IsOpenForRegistration(ActionKey))
 	{
-		UBlueprintNodeSpawner* NodeSpawner = UBlueprintNodeSpawner::Create(GetClass());
+		UBlueprintNodeSpawner *NodeSpawner = UBlueprintNodeSpawner::Create(GetClass());
 		check(NodeSpawner != nullptr);
 
 		ActionRegistrar.AddBlueprintAction(ActionKey, NodeSpawner);
@@ -266,7 +270,7 @@ FText UVaRest_BreakJson::GetMenuCategory() const
 
 void UVaRest_BreakJson::CreateProjectionPins(UEdGraphPin *Source)
 {
-	const UEdGraphSchema_K2* K2Schema = GetDefault<UEdGraphSchema_K2>();
+	const UEdGraphSchema_K2 *K2Schema = GetDefault<UEdGraphSchema_K2>();
 	UClass *Class = Cast<UClass>(StaticLoadObject(UClass::StaticClass(), NULL, TEXT("class'VaRestPlugin.VaRestJsonObject'")));
 
 	for (TArray<FVaRest_NamedType>::TIterator it(Outputs); it; ++it)
@@ -280,26 +284,33 @@ void UVaRest_BreakJson::CreateProjectionPins(UEdGraphPin *Source)
 		UObject *Subtype = nullptr;
 		FString FieldName = (*it).Name;
 
-		switch ((*it).Type) {
-			case EVaRest_JsonType::JSON_Bool:
-				Type = K2Schema->PC_Boolean;
-				break;
+		switch ((*it).Type)
+		{
+		case EVaRest_JsonType::JSON_Bool:
+			Type = K2Schema->PC_Boolean;
+			break;
 
-			case EVaRest_JsonType::JSON_Number:
-				Type = K2Schema->PC_Float;
-				break;
+		case EVaRest_JsonType::JSON_Number:
+			Type = K2Schema->PC_Float;
+			break;
 
-			case EVaRest_JsonType::JSON_String:
-				Type = K2Schema->PC_String;
-				break;
+		case EVaRest_JsonType::JSON_String:
+			Type = K2Schema->PC_String;
+			break;
 
-			case EVaRest_JsonType::JSON_Object:
-				Type = K2Schema->PC_Object;
-				Subtype = Class;
-				break;
+		case EVaRest_JsonType::JSON_Object:
+			Type = K2Schema->PC_Object;
+			Subtype = Class;
+			break;
 		}
 
-		UEdGraphPin *OutputPin = CreatePin(EGPD_Output, Type, TEXT(""), Subtype, (*it).bIsArray, false, (*it).Name);
+		UEdGraphPin *OutputPin = nullptr;
+#if ENGINE_MINOR_VERSION >= 20
+		FName ConvertedFString = FName(*FieldName);
+		OutputPin = CreatePin(EGPD_Input, Type, ConvertedFString);
+#else
+		OutputPin = CreatePin(EGPD_Output, Type, TEXT(""), Subtype, (*it).bIsArray, false, (*it).Name);
+#endif
 	}
 }
 
@@ -311,19 +322,19 @@ FText UVaRest_BreakJson::GetNodeTitle(ENodeTitleType::Type TitleType) const
 class FKCHandler_MakeJson : public FNodeHandlingFunctor
 {
 
-public:
-	FKCHandler_MakeJson(FKismetCompilerContext& InCompilerContext)
+  public:
+	FKCHandler_MakeJson(FKismetCompilerContext &InCompilerContext)
 		: FNodeHandlingFunctor(InCompilerContext)
 	{
 	}
 
-	virtual void Compile(FKismetFunctionContext& Context, UEdGraphNode* Node) override
+	virtual void Compile(FKismetFunctionContext &Context, UEdGraphNode *Node) override
 	{
-		UEdGraphPin* OutputPin = NULL;
+		UEdGraphPin *OutputPin = NULL;
 
 		for (int32 PinIndex = 0; PinIndex < Node->Pins.Num(); ++PinIndex)
 		{
-			UEdGraphPin* Pin = Node->Pins[PinIndex];
+			UEdGraphPin *Pin = Node->Pins[PinIndex];
 			if (Pin && (EGPD_Output == Pin->Direction))
 			{
 				OutputPin = Pin;
@@ -341,13 +352,13 @@ public:
 		{
 			FName FunctionName = TEXT("ConstructJsonObject");
 			UFunction *FunctionPtr = Class->FindFunctionByName(FunctionName);
-			FBlueprintCompiledStatement& Statement = Context.AppendStatementForNode(Node);
+			FBlueprintCompiledStatement &Statement = Context.AppendStatementForNode(Node);
 			Statement.Type = KCST_CallFunction;
 			Statement.FunctionToCall = FunctionPtr;
 			Statement.FunctionContext = nullptr;
 			Statement.bIsParentContext = false;
 			Statement.LHS = *TargetTerm;
-			FBPTerminal* NullTerm = Context.CreateLocalTerminal(ETerminalSpecification::TS_Literal);
+			FBPTerminal *NullTerm = Context.CreateLocalTerminal(ETerminalSpecification::TS_Literal);
 			NullTerm->Type.PinCategory = CompilerContext.GetSchema()->PC_Object;
 			NullTerm->ObjectLiteral = nullptr;
 			NullTerm->SourcePin = OutputPin;
@@ -356,7 +367,7 @@ public:
 
 		for (int32 PinIndex = 0; PinIndex < Node->Pins.Num(); ++PinIndex)
 		{
-			UEdGraphPin* Pin = Node->Pins[PinIndex];
+			UEdGraphPin *Pin = Node->Pins[PinIndex];
 			if (Pin && (EGPD_Input == Pin->Direction))
 			{
 
@@ -370,14 +381,14 @@ public:
 				const FString &FieldType = Pin->PinType.PinCategory;
 #endif
 
-				FBPTerminal* FieldNameTerm = Context.CreateLocalTerminal(ETerminalSpecification::TS_Literal);
+				FBPTerminal *FieldNameTerm = Context.CreateLocalTerminal(ETerminalSpecification::TS_Literal);
 				FieldNameTerm->Type.PinCategory = CompilerContext.GetSchema()->PC_String;
 #if ENGINE_MINOR_VERSION >= 13
 				FieldNameTerm->SourcePin = Pin;
 #else
 				FieldNameTerm->Source = Pin;
 #endif
-				
+
 #if ENGINE_MINOR_VERSION >= 19
 				FieldNameTerm->Name = FieldName.ToString();
 				FieldNameTerm->TextLiteral = FText::FromName(FieldName);
@@ -386,7 +397,7 @@ public:
 				FieldNameTerm->TextLiteral = FText::FromString(FieldName);
 #endif
 
-				FBlueprintCompiledStatement& Statement = Context.AppendStatementForNode(Node);
+				FBlueprintCompiledStatement &Statement = Context.AppendStatementForNode(Node);
 				FName FunctionName;
 
 				bool bIsArray = Pin->PinType.ContainerType == EPinContainerType::Array;
@@ -423,10 +434,10 @@ public:
 		}
 	}
 
-	FBPTerminal* RegisterInputTerm(FKismetFunctionContext& Context, UEdGraphPin* InputPin)
+	FBPTerminal *RegisterInputTerm(FKismetFunctionContext &Context, UEdGraphPin *InputPin)
 	{
 		// Find structure source net
-		UEdGraphPin* Net = FEdGraphUtilities::GetNetFromPin(InputPin);
+		UEdGraphPin *Net = FEdGraphUtilities::GetNetFromPin(InputPin);
 		FBPTerminal **TermPtr = Context.NetMap.Find(Net);
 
 		if (!TermPtr)
@@ -441,22 +452,22 @@ public:
 		return *TermPtr;
 	}
 
-	void RegisterOutputTerm(FKismetFunctionContext& Context, UEdGraphPin* OutputPin)
+	void RegisterOutputTerm(FKismetFunctionContext &Context, UEdGraphPin *OutputPin)
 	{
 		FBPTerminal *Term = Context.CreateLocalTerminalFromPinAutoChooseScope(OutputPin, Context.NetNameMap->MakeValidName(OutputPin));
 		Context.NetMap.Add(OutputPin, Term);
 	}
 
-	virtual void RegisterNets(FKismetFunctionContext& Context, UEdGraphNode* InNode) override
+	virtual void RegisterNets(FKismetFunctionContext &Context, UEdGraphNode *InNode) override
 	{
-		UVaRest_MakeJson* Node = Cast<UVaRest_MakeJson>(InNode);
+		UVaRest_MakeJson *Node = Cast<UVaRest_MakeJson>(InNode);
 		FNodeHandlingFunctor::RegisterNets(Context, Node);
 
 		check(NULL != Node);
 		{
 			for (int32 PinIndex = 0; PinIndex < Node->Pins.Num(); ++PinIndex)
 			{
-				UEdGraphPin* Pin = Node->Pins[PinIndex];
+				UEdGraphPin *Pin = Node->Pins[PinIndex];
 				if (EGPD_Output == Pin->Direction)
 				{
 					RegisterOutputTerm(Context, Pin);
@@ -478,22 +489,27 @@ UVaRest_MakeJson::UVaRest_MakeJson(const FObjectInitializer &ObjectInitializer)
 {
 }
 
-FNodeHandlingFunctor* UVaRest_MakeJson::CreateNodeHandler(class FKismetCompilerContext& CompilerContext) const
+FNodeHandlingFunctor *UVaRest_MakeJson::CreateNodeHandler(class FKismetCompilerContext &CompilerContext) const
 {
 	return new FKCHandler_MakeJson(CompilerContext);
 }
 
 void UVaRest_MakeJson::AllocateDefaultPins()
 {
-	const UEdGraphSchema_K2* K2Schema = GetDefault<UEdGraphSchema_K2>();
+	const UEdGraphSchema_K2 *K2Schema = GetDefault<UEdGraphSchema_K2>();
 
 	UClass *Class = Cast<UClass>(StaticLoadObject(UClass::StaticClass(), NULL, TEXT("class'VaRestPlugin.VaRestJsonObject'")));
-	UEdGraphPin* Pin = CreatePin(EGPD_Output, K2Schema->PC_Object, TEXT(""), Class, false, false, TEXT("Target"));
+	UEdGraphPin *Pin = nullptr;
 
-#if ENGINE_MINOR_VERSION >= 17
-        K2Schema->SetPinAutogeneratedDefaultValueBasedOnType(Pin);
+#if ENGINE_MINOR_VERSION >= 20
+	Pin = CreatePin(EGPD_Input, K2Schema->PC_Object, TEXT("Target"));
+	K2Schema->SetPinAutogeneratedDefaultValueBasedOnType(Pin);
+#elif ENGINE_MINOR_VERSION >= 17
+	Pin = CreatePin(EGPD_Output, K2Schema->PC_Object, TEXT(""), Class, false, false, TEXT("Target"));
+	K2Schema->SetPinAutogeneratedDefaultValueBasedOnType(Pin);
 #else
-        K2Schema->SetPinDefaultValueBasedOnType(Pin);
+	Pin = CreatePin(EGPD_Output, K2Schema->PC_Object, TEXT(""), Class, false, false, TEXT("Target"));
+	K2Schema->SetPinDefaultValueBasedOnType(Pin);
 #endif
 
 	CreateProjectionPins(Pin);
@@ -504,7 +520,7 @@ FLinearColor UVaRest_MakeJson::GetNodeTitleColor() const
 	return FLinearColor(255.0f, 255.0f, 0.0f);
 }
 
-void UVaRest_MakeJson::PostEditChangeProperty(struct FPropertyChangedEvent& PropertyChangedEvent)
+void UVaRest_MakeJson::PostEditChangeProperty(struct FPropertyChangedEvent &PropertyChangedEvent)
 {
 	bool bIsDirty = false;
 
@@ -523,13 +539,13 @@ void UVaRest_MakeJson::PostEditChangeProperty(struct FPropertyChangedEvent& Prop
 	Super::PostEditChangeProperty(PropertyChangedEvent);
 }
 
-void UVaRest_MakeJson::GetMenuActions(FBlueprintActionDatabaseRegistrar& ActionRegistrar) const
+void UVaRest_MakeJson::GetMenuActions(FBlueprintActionDatabaseRegistrar &ActionRegistrar) const
 {
 	// actions get registered under specific object-keys; the idea is that
 	// actions might have to be updated (or deleted) if their object-key is
 	// mutated (or removed)... here we use the node's class (so if the node
 	// type disappears, then the action should go with it)
-	UClass* ActionKey = GetClass();
+	UClass *ActionKey = GetClass();
 
 	// to keep from needlessly instantiating a UBlueprintNodeSpawner, first
 	// check to make sure that the registrar is looking for actions of this type
@@ -537,7 +553,7 @@ void UVaRest_MakeJson::GetMenuActions(FBlueprintActionDatabaseRegistrar& ActionR
 	// registrar would only accept actions corresponding to that asset)
 	if (ActionRegistrar.IsOpenForRegistration(ActionKey))
 	{
-		UBlueprintNodeSpawner* NodeSpawner = UBlueprintNodeSpawner::Create(GetClass());
+		UBlueprintNodeSpawner *NodeSpawner = UBlueprintNodeSpawner::Create(GetClass());
 		check(NodeSpawner != nullptr);
 
 		ActionRegistrar.AddBlueprintAction(ActionKey, NodeSpawner);
@@ -558,7 +574,7 @@ FText UVaRest_MakeJson::GetMenuCategory() const
 
 void UVaRest_MakeJson::CreateProjectionPins(UEdGraphPin *Source)
 {
-	const UEdGraphSchema_K2* K2Schema = GetDefault<UEdGraphSchema_K2>();
+	const UEdGraphSchema_K2 *K2Schema = GetDefault<UEdGraphSchema_K2>();
 	UClass *Class = Cast<UClass>(StaticLoadObject(UClass::StaticClass(), NULL, TEXT("class'VaRestPlugin.VaRestJsonObject'")));
 
 	for (TArray<FVaRest_NamedType>::TIterator it(Inputs); it; ++it)
@@ -567,26 +583,33 @@ void UVaRest_MakeJson::CreateProjectionPins(UEdGraphPin *Source)
 		UObject *Subtype = nullptr;
 		FString FieldName = (*it).Name;
 
-		switch ((*it).Type) {
-			case EVaRest_JsonType::JSON_Bool:
-				Type = K2Schema->PC_Boolean;
-				break;
+		switch ((*it).Type)
+		{
+		case EVaRest_JsonType::JSON_Bool:
+			Type = K2Schema->PC_Boolean;
+			break;
 
-			case EVaRest_JsonType::JSON_Number:
-				Type = K2Schema->PC_Float;
-				break;
+		case EVaRest_JsonType::JSON_Number:
+			Type = K2Schema->PC_Float;
+			break;
 
-			case EVaRest_JsonType::JSON_String:
-				Type = K2Schema->PC_String;
-				break;
+		case EVaRest_JsonType::JSON_String:
+			Type = K2Schema->PC_String;
+			break;
 
-			case EVaRest_JsonType::JSON_Object:
-				Type = K2Schema->PC_Object;
-				Subtype = Class;
-				break;
+		case EVaRest_JsonType::JSON_Object:
+			Type = K2Schema->PC_Object;
+			Subtype = Class;
+			break;
 		}
 
-		UEdGraphPin *InputPin = CreatePin(EGPD_Input, Type, TEXT(""), Subtype, (*it).bIsArray, false, (*it).Name);
+		UEdGraphPin *InputPin = nullptr;
+#if ENGINE_MINOR_VERSION >= 20
+		FName ConvertedFString = FName(*FieldName);
+		InputPin = CreatePin(EGPD_Input, Type, ConvertedFString);
+#else
+		InputPin = CreatePin(EGPD_Input, Type, TEXT(""), Subtype, (*it).bIsArray, false, (*it).Name);
+#endif
 		InputPin->SetSavePinIfOrphaned(false);
 	}
 }
@@ -595,6 +618,5 @@ FText UVaRest_MakeJson::GetNodeTitle(ENodeTitleType::Type TitleType) const
 {
 	return LOCTEXT("VaRest_Make_Json.NodeTitle", "Make Json");
 }
-
 
 #undef LOCTEXT_NAMESPACE

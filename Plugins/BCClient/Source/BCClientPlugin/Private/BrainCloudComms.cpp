@@ -85,8 +85,6 @@ void BrainCloudComms::RegisterEventCallback(UBCBlueprintRestCallProxyBase *callb
 {
 	callback->AddToRoot();
 	m_registeredRestBluePrintCallbacks.Emplace(ServiceName::Event.getValue(), callback);
-
-	UE_LOG(LogBrainCloudComms, Log, TEXT("RegisterEventCallback"));
 }
 
 void BrainCloudComms::DeregisterEventCallback()
