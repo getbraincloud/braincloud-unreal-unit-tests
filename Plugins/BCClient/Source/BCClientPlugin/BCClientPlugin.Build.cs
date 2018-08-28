@@ -39,9 +39,9 @@ public class BCClientPlugin : ModuleRules
                 });
 
         // win64
+        PublicDefinitions.Add("PLATFORM_UWP=0");
         if (Target.Platform == UnrealTargetPlatform.Win64)
         {
-            PublicDefinitions.Add("PLATFORM_UWP=0");
             PrivateDependencyModuleNames.Add("zlib");
             PrivateDependencyModuleNames.Add("OpenSSL");
             PublicIncludePaths.Add(Path.Combine(ModulePath,"ThirdParty/include/Win64"));
@@ -63,7 +63,6 @@ public class BCClientPlugin : ModuleRules
         //win32
         else if (Target.Platform == UnrealTargetPlatform.Win32)
         {
-            PublicDefinitions.Add("PLATFORM_UWP=0");
             PrivateDependencyModuleNames.Add("zlib");
             PrivateDependencyModuleNames.Add("OpenSSL");
             PublicIncludePaths.Add(Path.Combine(ModulePath,"ThirdParty/include/Win32"));
@@ -84,7 +83,6 @@ public class BCClientPlugin : ModuleRules
         }
         else if(Target.Platform == UnrealTargetPlatform.HTML5)
         {
-            PublicDefinitions.Add("PLATFORM_UWP=0");
             PublicLibraryPaths.AddRange(
                 new string[] {
                     Path.Combine(ModulePath, "ThirdParty/lib/HTML5"),
@@ -101,7 +99,6 @@ public class BCClientPlugin : ModuleRules
         }
         else if(Target.Platform == UnrealTargetPlatform.Mac)
         {
-            PublicDefinitions.Add("PLATFORM_UWP=0");
             PublicIncludePaths.Add(Path.Combine(ModulePath,"ThirdParty/include/Mac"));
             PublicLibraryPaths.AddRange(
                 new string[] {
@@ -121,7 +118,6 @@ public class BCClientPlugin : ModuleRules
         }
         else if (Target.Platform == UnrealTargetPlatform.Linux)
         {
-            PublicDefinitions.Add("PLATFORM_UWP=0");
             PrivateDependencyModuleNames.Add("OpenSSL");
             PublicIncludePaths.Add(Path.Combine(ModulePath,"ThirdParty/include/Linux"));
             PublicLibraryPaths.AddRange(
@@ -140,7 +136,6 @@ public class BCClientPlugin : ModuleRules
         }
         else if(Target.Platform == UnrealTargetPlatform.IOS)
         {
-            PublicDefinitions.Add("PLATFORM_UWP=0");
             PublicIncludePaths.Add(Path.Combine(ModulePath,"ThirdParty/include/IOS"));
 
             PublicLibraryPaths.AddRange(
@@ -161,7 +156,6 @@ public class BCClientPlugin : ModuleRules
         }
         else if(Target.Platform == UnrealTargetPlatform.Android)
         {
-            PublicDefinitions.Add("PLATFORM_UWP=0");
             PublicIncludePaths.Add(Path.Combine(ModulePath,"ThirdParty/include/Android"));
 
             PublicLibraryPaths.AddRange(

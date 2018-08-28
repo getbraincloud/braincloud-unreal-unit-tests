@@ -856,7 +856,9 @@ void BrainCloudComms::FilterIncomingMessages(TSharedRef<ServerCall> servercall, 
 
 void BrainCloudComms::ResetCommunication()
 {
+	_queueMutex.Lock();
 	_messageQueue.Empty();
+	_queueMutex.Unlock();
 	_isAuthenticated = false;
 	_sessionId = TEXT("");
 	ResetErrorCache();

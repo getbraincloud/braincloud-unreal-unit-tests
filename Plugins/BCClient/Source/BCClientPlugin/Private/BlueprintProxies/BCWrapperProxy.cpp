@@ -22,11 +22,16 @@ UBrainCloudWrapper *UBCWrapperProxy::CreateBrainCloudWrapper(const FString &wrap
 
 void UBCWrapperProxy::SetDefaultBrainCloudInstance(UBrainCloudWrapper *brainCloudWrapper)
 {
+	ClearDefaultBrainCloudInstance();
+	
 	DefaultBrainCloudInstance = brainCloudWrapper;
+	DefaultBrainCloudInstance->AddToRoot();
 }
 
 void UBCWrapperProxy::ClearDefaultBrainCloudInstance()
 {
+	if (DefaultBrainCloudInstance != nullptr)
+		DefaultBrainCloudInstance->RemoveFromRoot();
 	DefaultBrainCloudInstance = nullptr;
 }
 

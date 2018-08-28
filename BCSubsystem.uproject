@@ -7,12 +7,7 @@
 		{
 			"Name": "BCSubsystem",
 			"Type": "Runtime",
-			"LoadingPhase": "Default",
-			"AdditionalDependencies": [
-				"Engine",
-				"CoreUObject",
-				"BCClientPlugin"
-			]
+			"LoadingPhase": "Default"
 		}
 	],
 	"Plugins": [
