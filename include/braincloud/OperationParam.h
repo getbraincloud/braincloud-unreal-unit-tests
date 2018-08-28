@@ -391,6 +391,25 @@ namespace BrainCloud {
 		static const OperationParam SignalData;
 		static const OperationParam ToTeamCode;
 
+		//messaging
+		static const OperationParam MessagingMsgbox;
+		static const OperationParam MessagingMsgIds;
+		static const OperationParam MessagingContext;
+		static const OperationParam MessagingPageOffset;
+		static const OperationParam MessagingToProfileIds;
+		static const OperationParam MessagingText;
+		static const OperationParam MessagingSubject;
+		static const OperationParam MessagingContentJson;
+
+		//presence
+		static const OperationParam PresencePlatform;
+		static const OperationParam PresenceIncludeOffline;
+		static const OperationParam PresenceGroupId;
+		static const OperationParam PresenceProfileIds;
+		static const OperationParam PresenceBidirectional;
+		static const OperationParam PresenceVisible;
+		static const OperationParam PresenceActivity;
+
 		std::string getValue() const { return _value; }
 
 		bool operator== (const OperationParam& s) const;

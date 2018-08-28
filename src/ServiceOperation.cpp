@@ -343,13 +343,13 @@ namespace BrainCloud
 
 	//messaging
 	const ServiceOperation ServiceOperation::DeleteMessages = ServiceOperation("DELETE_MESSAGES");
-	const ServiceOperation ServiceOperation::GetMessageBoxes = ServiceOperation("GET_MESSAGE_BOXES");
+	const ServiceOperation ServiceOperation::GetMessageboxes = ServiceOperation("GET_MESSAGE_BOXES");
 	const ServiceOperation ServiceOperation::GetMessageCounts = ServiceOperation("GET_MESSAGE_COUNTS");
 	const ServiceOperation ServiceOperation::GetMessages = ServiceOperation("GET_MESSAGES");
 	const ServiceOperation ServiceOperation::GetMessagesPage = ServiceOperation("GET_MESSAGES_PAGE");
 	const ServiceOperation ServiceOperation::GetMessagesPageOffset = ServiceOperation("GET_MESSAGES_PAGE_OFFSET");
 	const ServiceOperation ServiceOperation::MarkMessagesRead = ServiceOperation("MARK_MESSAGES_READ");
-	const ServiceOperation ServiceOperation::SendMessage = ServiceOperation("SEND_MESSAGE");
+	const ServiceOperation ServiceOperation::MessagingSendMessage = ServiceOperation("SEND_MESSAGE");
 	const ServiceOperation ServiceOperation::SendMessageSimple = ServiceOperation("SEND_MESSAGE_SIMPLE");
 
 	//presence

@@ -12,9 +12,83 @@ using namespace BrainCloud;
 // written correctly, not that the output from BC is correct. This is
 // verified more in depth by use case and JS unit tests.
 
-// TEST_F(TestBCChat, ChannelConnect)
-// {
-// 	TestResult tr;
-// 	m_bc->getChatService()->channelConnect("bad_channel_id", 10, &tr);
-// 	tr.runExpectFail(m_bc, HTTP_BAD_REQUEST, INSUFFICIENT_PERMISSIONS);
-// }
+TEST_F(TestBCPresence, ForcePush)
+{
+	TestResult tr;
+	m_bc->getPresenceService()->forcePush(&tr);
+	tr.run(m_bc);
+}
+
+TEST_F(TestBCPresence, GetPresenceOfFriends)
+{
+	TestResult tr;
+
+	m_bc->getPresenceService()->getPresenceOfFriends("brainCloud", true, &tr);
+	tr.run(m_bc);
+}
+
+TEST_F(TestBCPresence, GetPresenceOfGroup)
+{
+	TestResult tr;
+
+	m_bc->getPresenceService()->getPresenceOfGroup("invalid_group_id", true, &tr);
+	tr.runExpectFail(m_bc, HTTP_BAD_REQUEST, INVALID_GROUP_ID);
+}
+
+TEST_F(TestBCPresence, GetPresenceOfUsers)
+{
+	TestResult tr;
+
+	std::vector<std::string> profileIds = {"invalid_profile_id"};
+	m_bc->getPresenceService()->getPresenceOfUsers(profileIds, true, &tr);
+	tr.run(m_bc);
+}
+
+TEST_F(TestBCPresence, RegisterListenersForFriends)
+{
+	TestResult tr;
+
+	m_bc->getPresenceService()->registerListenersForFriends("brainCloud", true, &tr);
+	tr.run(m_bc);
+}
+
+TEST_F(TestBCPresence, RegisterListenersForGroup)
+{
+	TestResult tr;
+
+	m_bc->getPresenceService()->registerListenersForGroup("invalid_group_id", true, &tr);
+	tr.runExpectFail(m_bc, HTTP_BAD_REQUEST, INVALID_GROUP_ID);
+}
+
+TEST_F(TestBCPresence, RegisterListenersForProfiles)
+{
+	TestResult tr;
+
+	std::vector<std::string> profileIds = {"invalid_profile_id"};
+	m_bc->getPresenceService()->registerListenersForProfiles(profileIds, true, &tr);
+	tr.run(m_bc);
+}
+
+TEST_F(TestBCPresence, SetVisibility)
+{
+	TestResult tr;
+
+	m_bc->getPresenceService()->setVisibility(true, &tr);
+	tr.run(m_bc);
+}
+
+TEST_F(TestBCPresence, StopListening)
+{
+	TestResult tr;
+
+	m_bc->getPresenceService()->stopListening(&tr);
+	tr.run(m_bc);
+}
+
+TEST_F(TestBCPresence, UpdateActivity)
+{
+	TestResult tr;
+
+	m_bc->getPresenceService()->updateActivity("{\"status\":\"Work from home\"}", &tr);
+	tr.run(m_bc);
+}

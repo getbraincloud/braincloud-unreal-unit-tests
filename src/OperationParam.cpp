@@ -385,6 +385,25 @@ namespace BrainCloud
 	const OperationParam OperationParam::SignalData = OperationParam("signalData");
 	const OperationParam OperationParam::ToTeamCode = OperationParam("toTeamCode");
 
+	//messaging
+	const OperationParam OperationParam::MessagingMsgbox = OperationParam("msgbox");
+	const OperationParam OperationParam::MessagingMsgIds = OperationParam("msgIds");
+	const OperationParam OperationParam::MessagingContext = OperationParam("context");
+	const OperationParam OperationParam::MessagingPageOffset = OperationParam("pageOffset");
+	const OperationParam OperationParam::MessagingToProfileIds = OperationParam("toProfileIds");
+	const OperationParam OperationParam::MessagingText = OperationParam("text");
+	const OperationParam OperationParam::MessagingSubject = OperationParam("subject");
+	const OperationParam OperationParam::MessagingContentJson = OperationParam("contentJson");
+
+	//presence
+	const OperationParam OperationParam::PresencePlatform = OperationParam("platform");
+	const OperationParam OperationParam::PresenceIncludeOffline = OperationParam("includeOffline");
+	const OperationParam OperationParam::PresenceGroupId = OperationParam("groupId");
+	const OperationParam OperationParam::PresenceProfileIds = OperationParam("profileIds");
+	const OperationParam OperationParam::PresenceBidirectional = OperationParam("bidirectional");
+	const OperationParam OperationParam::PresenceVisible = OperationParam("visible");
+	const OperationParam OperationParam::PresenceActivity = OperationParam("activity");
+
 	OperationParam::OperationParam(const char * value)
 	{
 		_value = value;

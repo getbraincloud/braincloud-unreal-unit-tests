@@ -351,13 +351,13 @@ namespace BrainCloud {
 
 		//messaging
 		static const ServiceOperation DeleteMessages;
-		static const ServiceOperation GetMessageBoxes;
+		static const ServiceOperation GetMessageboxes;
 		static const ServiceOperation GetMessageCounts;
 		static const ServiceOperation GetMessages;
 		static const ServiceOperation GetMessagesPage;
 		static const ServiceOperation GetMessagesPageOffset;
 		static const ServiceOperation MarkMessagesRead;
-		static const ServiceOperation SendMessage;
+		static const ServiceOperation MessagingSendMessage; /* Windows has a macro called SendMessage */
 		static const ServiceOperation SendMessageSimple;
 
 		//presence
