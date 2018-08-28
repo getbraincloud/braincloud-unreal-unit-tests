@@ -364,11 +364,51 @@ namespace BrainCloud {
 		static const OperationParam RoundStartedEpoch;
 		static const OperationParam Data;
 
-		/*
-		 OfflineMatchServicePlayerId                        = new OperationParam("playerId");
-		  static const OperationParam OfflineMatchServiceRangeDelta                      = new OperationParam("rangeDelta");
-		  static const OperationParam OfflineMatchServicePlaybackStreamId
-		 */
+		//chat
+		static const OperationParam ChannelId;
+		static const OperationParam MsgId;
+		static const OperationParam Version;
+		static const OperationParam ChannelType;
+		static const OperationParam ChannelSubId;
+		static const OperationParam MaxReturn;
+		static const OperationParam Content;
+		static const OperationParam RecordInHistory;
+		static const OperationParam Text;
+
+		//lobby
+		static const OperationParam LobbyType;
+		static const OperationParam Rating;
+		static const OperationParam OtherUserCxIds;
+		static const OperationParam IsReady;
+		static const OperationParam ExtraJson;
+		static const OperationParam TeamCode;
+		static const OperationParam Settings;
+		static const OperationParam MaxSteps;
+		static const OperationParam Algo;
+		static const OperationParam Filter;
+		static const OperationParam LobbyId;
+		static const OperationParam CxId;
+		static const OperationParam SignalData;
+		static const OperationParam ToTeamCode;
+
+		//messaging
+		static const OperationParam MessagingMsgbox;
+		static const OperationParam MessagingMsgIds;
+		static const OperationParam MessagingContext;
+		static const OperationParam MessagingPageOffset;
+		static const OperationParam MessagingToProfileIds;
+		static const OperationParam MessagingText;
+		static const OperationParam MessagingSubject;
+		static const OperationParam MessagingContentJson;
+
+		//presence
+		static const OperationParam PresencePlatform;
+		static const OperationParam PresenceIncludeOffline;
+		static const OperationParam PresenceGroupId;
+		static const OperationParam PresenceProfileIds;
+		static const OperationParam PresenceBidirectional;
+		static const OperationParam PresenceVisible;
+		static const OperationParam PresenceActivity;
 
 		std::string getValue() const { return _value; }
 

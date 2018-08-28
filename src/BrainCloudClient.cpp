@@ -29,8 +29,10 @@ namespace BrainCloud
 	 */
 	BrainCloudClient::BrainCloudClient() :
         _brainCloudComms(IBrainCloudComms::create(this)),
+		_rttComms(new RTTComms(this)),
 		_asyncMatchService(new BrainCloudAsyncMatch(this)),
 		_authenticationService(new BrainCloudAuthentication(this)),
+		_chatService(new BrainCloudChat(this)),
 		_dataStreamService(new BrainCloudDataStream(this)),
 		_entityService(new BrainCloudEntity(this)),
 		_eventService(new BrainCloudEvent(this)),
@@ -42,13 +44,16 @@ namespace BrainCloud
 		_globalStatisticsService(new BrainCloudGlobalStatistics(this)),
 		_groupService(new BrainCloudGroup(this)),
 		_identityService(new BrainCloudIdentity(this)),
+		_lobbyService(new BrainCloudLobby(this)),
 		_mailService(new BrainCloudMail(this)),
 		_matchmakingService(new BrainCloudMatchmaking(this)),
+		_messagingService(new BrainCloudMessaging(this)),
 		_oneWayMatchService(new BrainCloudOneWayMatch(this)),
 		_playbackStreamService(new BrainCloudPlaybackStream(this)),
 		_playerStateService(new BrainCloudPlayerState(this)),
 		_playerStatisticsService(new BrainCloudPlayerStatistics(this)),
 		_playerStatisticsEventService(new BrainCloudPlayerStatisticsEvent(this)),
+		_presenceService(new BrainCloudPresence(this)),
 		_productService(new BrainCloudProduct(this)),
 		_profanityService(new BrainCloudProfanity(this)),
 		_pushNotificationService(new BrainCloudPushNotification(this)),
@@ -59,6 +64,7 @@ namespace BrainCloud
 		_steamService(new BrainCloudSteam(this)),
 		_timeService(new BrainCloudTime(this)),
 		_tournamentService(new BrainCloudTournament(this)),
+		_rttRegistrationService(new BrainCloudRTTRegistration(this)),
 		_releasePlatform(""),
 		_appVersion(""),
 		_timezoneOffset(0.0)
@@ -67,7 +73,9 @@ namespace BrainCloud
 
     BrainCloudClient::~BrainCloudClient()
     {
+		// [dsl]: Should be deleted in reverse order...
         delete _brainCloudComms;
+		delete _rttComms;
         delete _tournamentService;
         delete _timeService;
         delete _steamService;
@@ -98,11 +106,22 @@ namespace BrainCloud
         delete _dataStreamService;
         delete _authenticationService;
         delete _asyncMatchService;
+		delete _rttRegistrationService;
     }
 
 	////////////////////////////////////////////////////
 	// Public Methods
 	////////////////////////////////////////////////////
+
+	const std::string& BrainCloudClient::getRTTConnectionId() const
+	{
+		if (_rttComms)
+		{
+			return _rttComms->getConnectionId();
+		}
+		static std::string noConnectionId;
+		return noConnectionId;
+	}
 
 	const char * BrainCloudClient::getSessionId() const {
 		return(_brainCloudComms->getSessionId().c_str());
@@ -146,6 +165,11 @@ namespace BrainCloud
 			_brainCloudComms->initialize(urlToUse, in_appId, in_secretKey);
 		}
 
+		if (_rttComms)
+		{
+			_rttComms->initialize();
+		}
+
 		setupOSLocaleData();
 
         _releasePlatform = Device::getPlatformName();
@@ -161,6 +185,7 @@ namespace BrainCloud
 	void BrainCloudClient::runCallbacks()
 	{
 		_brainCloudComms->runCallbacks();
+		_rttComms->runCallbacks();
 	}
 
 	void BrainCloudClient::registerEventCallback(IEventCallback *in_eventCallback)
@@ -216,6 +241,7 @@ namespace BrainCloud
 	void BrainCloudClient::enableLogging(bool shouldEnable)
 	{
 		_brainCloudComms->enableLogging(shouldEnable);
+        _rttComms->enableLogging(shouldEnable);
 	}
 
 	/**
@@ -233,6 +259,7 @@ namespace BrainCloud
 
 	void BrainCloudClient::resetCommunication()
 	{
+		_rttComms->resetCommunication();
 		_brainCloudComms->resetCommunication();
 		_brainCloudComms->setSessionId("");
 		_authenticationService->setProfileId("");
@@ -240,6 +267,7 @@ namespace BrainCloud
 
 	void BrainCloudClient::shutdown()
 	{
+		_rttComms->shutdown();
 		_brainCloudComms->shutdown();
 		_brainCloudComms->setSessionId("");
 		_authenticationService->setProfileId("");
@@ -252,7 +280,7 @@ namespace BrainCloud
 
 	bool BrainCloudClient::isInitialized()
 	{
-		return _brainCloudComms->isInitialized();
+		return _brainCloudComms->isInitialized() && _rttComms->isInitialized();
 	}
 
 	void BrainCloudClient::setImmediateRetryOnError(bool value)
@@ -352,6 +380,72 @@ namespace BrainCloud
 	void BrainCloudClient::insertEndOfMessageBundleMarker()
 	{
 		_brainCloudComms->insertEndOfMessageBundleMarker();
+	}
+
+	// RTT stuff
+	void BrainCloudClient::enableRTT(IRTTConnectCallback* in_callback, bool in_useWebSocket)
+	{
+		_rttComms->enableRTT(in_callback, in_useWebSocket);
+	}
+
+	void BrainCloudClient::disableRTT()
+	{
+		_rttComms->disableRTT();
+	}
+
+	void BrainCloudClient::registerRTTEventCallback(IRTTCallback* in_callback)
+	{
+		_rttComms->registerRTTCallback(ServiceName::Event, in_callback);
+	}
+
+	void BrainCloudClient::deregisterRTTEventCallback()
+	{
+		_rttComms->deregisterRTTCallback(ServiceName::Event);
+	}
+
+	void BrainCloudClient::registerRTTChatCallback(IRTTCallback* in_callback)
+	{
+		_rttComms->registerRTTCallback(ServiceName::Chat, in_callback);
+	}
+
+	void BrainCloudClient::deregisterRTTChatCallback()
+	{
+		_rttComms->deregisterRTTCallback(ServiceName::Chat);
+	}
+
+	void BrainCloudClient::registerRTTMessagingCallback(IRTTCallback* in_callback)
+	{
+		_rttComms->registerRTTCallback(ServiceName::Messaging, in_callback);
+	}
+
+	void BrainCloudClient::deregisterRTTMessagingCallback()
+	{
+		_rttComms->deregisterRTTCallback(ServiceName::Messaging);
+	}
+
+	void BrainCloudClient::registerRTTLobbyCallback(IRTTCallback* in_callback)
+	{
+		_rttComms->registerRTTCallback(ServiceName::Lobby, in_callback);
+	}
+
+	void BrainCloudClient::deregisterRTTLobbyCallback()
+	{
+		_rttComms->deregisterRTTCallback(ServiceName::Lobby);
+	}
+
+	void BrainCloudClient::registerRTTPresenceCallback(IRTTCallback* in_callback)
+	{
+		_rttComms->registerRTTCallback(ServiceName::Presence, in_callback);
+	}
+
+	void BrainCloudClient::deregisterRTTPresenceCallback()
+	{
+		_rttComms->deregisterRTTCallback(ServiceName::Presence);
+	}
+
+	void BrainCloudClient::deregisterAllCallbacks()
+	{
+		_rttComms->deregisterAllCallbacks();
 	}
 
 	////////////////////////////////////////////////////

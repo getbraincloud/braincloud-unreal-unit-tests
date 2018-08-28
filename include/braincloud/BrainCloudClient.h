@@ -16,8 +16,10 @@
 #include "braincloud/INetworkErrorCallback.h"
 #include "braincloud/IRewardCallback.h"
 #include "braincloud/IServerCallback.h"
+#include "braincloud/IRTTConnectCallback.h"
 
 #include "braincloud/internal/IBrainCloudComms.h"
+#include "braincloud/internal/RTTComms.h"
 #include "braincloud/BrainCloudTypes.h"
 #include "braincloud/BrainCloudPlayerStatistics.h"
 #include "braincloud/BrainCloudGlobalStatistics.h"
@@ -49,6 +51,11 @@
 #include "braincloud/BrainCloudFile.h"
 #include "braincloud/BrainCloudGroup.h"
 #include "braincloud/BrainCloudMail.h"
+#include "braincloud/BrainCloudRTTRegistration.h"
+#include "braincloud/BrainCloudChat.h"
+#include "braincloud/BrainCloudLobby.h"
+#include "braincloud/BrainCloudMessaging.h"
+#include "braincloud/BrainCloudPresence.h"
 
 namespace Json {
 	class Value;
@@ -124,6 +131,12 @@ namespace BrainCloud
 		 * Not meant to be called by external clients, just for internal testing and use.
 		 */
 		IBrainCloudComms * getBrainCloudComms() const { return _brainCloudComms; }
+		
+		/**
+		 * Return a reference to the game RTT comms.
+		 * Not meant to be called by external clients, just for internal testing and use.
+		 */
+		RTTComms * getRTTComms() const { return _rttComms; }
 
 		/**
 		 * Run callbacks, to be called once per frame from your main thread
@@ -304,6 +317,11 @@ namespace BrainCloud
 		BrainCloudFile * getFileService() { return _fileService; }
 		BrainCloudGroup * getGroupService() { return _groupService; }
 		BrainCloudMail * getMailService() { return _mailService; }
+		BrainCloudRTTRegistration * getRTTRegistrationService() { return _rttRegistrationService; }
+		BrainCloudChat * getChatService() { return _chatService; }
+		BrainCloudLobby * getLobbyService() { return _lobbyService; }
+		BrainCloudMessaging * getMessagingService() { return _messagingService; }
+		BrainCloudPresence * getPresenceService() { return _presenceService; }
 
 		/**
 		* @deprecated Use getAppId() instead - Removal after September 1 2017
@@ -326,6 +344,8 @@ namespace BrainCloud
 			static std::string noAppId;
 			return noAppId;
 		}
+
+		const std::string& getRTTConnectionId() const;
 
 		const std::string & getReleasePlatform() const { return _releasePlatform; };
 
@@ -544,10 +564,79 @@ namespace BrainCloud
 		*/
 		void overrideLanguageCode(const char * in_languageCode) { _languageCode = in_languageCode; }
 
+		/**
+		 * Enables Real Time event for this session.
+		 * Real Time events are disabled by default. Usually events
+		 * need to be polled using GET_EVENTS. By enabling this, events will
+		 * be received instantly when they happen through a TCP connection to an Event Server.
+		 *
+		 * This function will first call requestClientConnection, then connect to the address
+		 *
+		 * @param callback The callback.
+		 * @param useWebSocket Use web sockets instead of TCP for the internal connections. Default is true
+		 */
+		void enableRTT(IRTTConnectCallback* in_callback, bool in_useWebSocket = true);
+
+		/**
+		 * Disables Real Time event for this session.
+		 */
+		void disableRTT();
+
+		/**
+		 * Listen to real time events.
+		 * 
+		 * Notes: RTT must be enabled for this app, and enableRTT must have been successfully called.
+		 * Only one event callback can be registered at a time. Calling this a second time will override the previous callback.
+		 */
+		void registerRTTEventCallback(IRTTCallback* in_callback);
+		void deregisterRTTEventCallback();
+
+		/**
+		 * Listen to real time chat messages.
+		 * 
+		 * Notes: RTT must be enabled for this app, and enableRTT must have been successfully called.
+		 * Only one chat callback can be registered at a time. Calling this a second time will override the previous callback.
+		 */
+		void registerRTTChatCallback(IRTTCallback* in_callback);
+		void deregisterRTTChatCallback();
+
+		/**
+		 * Listen to real time messaging.
+		 * 
+		 * Notes: RTT must be enabled for this app, and enableRTT must have been successfully called.
+		 * Only one messaging callback can be registered at a time. Calling this a second time will override the previous callback.
+		 */
+		void registerRTTMessagingCallback(IRTTCallback* in_callback);
+		void deregisterRTTMessagingCallback();
+
+		/**
+		 * Listen to real time lobby events.
+		 * 
+		 * Notes: RTT must be enabled for this app, and enableRTT must have been successfully called.
+		 * Only one lobby callback can be registered at a time. Calling this a second time will override the previous callback.
+		 */
+		void registerRTTLobbyCallback(IRTTCallback* in_callback);
+		void deregisterRTTLobbyCallback();
+
+		/**
+		 * Listen to real time presence events.
+		 * 
+		 * Notes: RTT must be enabled for this app, and enableRTT must have been successfully called.
+		 * Only one presence callback can be registered at a time. Calling this a second time will override the previous callback.
+		 */
+		void registerRTTPresenceCallback(IRTTCallback* in_callback);
+		void deregisterRTTPresenceCallback();
+
+		/**
+		 * Clear all set RTT callbacks
+		 */
+		void deregisterAllCallbacks();
+
 	protected:
 		static BrainCloudClient * _instance;
 
 		IBrainCloudComms * _brainCloudComms;
+		RTTComms * _rttComms;
 		BrainCloudPlayerStatistics * _playerStatisticsService;
 		BrainCloudGlobalStatistics * _globalStatisticsService;
 		BrainCloudIdentity * _identityService;
@@ -578,6 +667,11 @@ namespace BrainCloud
 		BrainCloudFile * _fileService;
 		BrainCloudGroup * _groupService;
 		BrainCloudMail * _mailService;
+		BrainCloudRTTRegistration * _rttRegistrationService;
+		BrainCloudChat * _chatService;
+		BrainCloudLobby * _lobbyService;
+		BrainCloudMessaging * _messagingService;
+		BrainCloudPresence * _presenceService;
 
 		static std::string s_brainCloudClientVersion;
 

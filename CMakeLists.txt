@@ -45,7 +45,7 @@ endif()
 # Compiler flags
 #=============================================================================
 # We want to use C++11 flag on the compiler for std::thread
-if (VS2013_OR_HIGHER)
+if (NOT WIN32 OR VS2013_OR_HIGHER)
 	set(CMAKE_CXX_STANDARD 11)
 endif()
 
@@ -113,20 +113,24 @@ if (APPLE)
     list(APPEND OS_SPECIFIC_SRCS "lib/apple/sskeychain/SSKeychain/SSKeychain.m")
     list(APPEND OS_SPECIFIC_SRCS "lib/apple/sskeychain/SSKeychain/SSKeychainQuery.m")
     list(APPEND OS_SPECIFIC_SRCS "src/apple/AppleDevice.cpp")
+    list(APPEND OS_SPECIFIC_SRCS "src/DefaultTCPSocket.cpp")
 elseif (WIN32)
 	list(APPEND OS_SPECIFIC_SRCS "include/braincloud/internal/win/WindowsSaveDataHelper.h")
+    list(APPEND OS_SPECIFIC_SRCS "src/win/Win32TCPSocket.cpp")
 	list(APPEND OS_SPECIFIC_SRCS "src/win/WindowsDevice.cpp")
     list(APPEND OS_SPECIFIC_SRCS "src/win/WindowsGUID.cpp")
 	list(APPEND OS_SPECIFIC_SRCS "src/win/WindowsSaveDataHelper.cpp")
 elseif (LINUX)
 	list(APPEND OS_SPECIFIC_SRCS "include/braincloud/internal/DefaultSaveDataHelper.h")
 	list(APPEND OS_SPECIFIC_SRCS "src/DefaultSaveDataHelper.cpp")
+    list(APPEND OS_SPECIFIC_SRCS "src/DefaultTCPSocket.cpp")
 	list(APPEND OS_SPECIFIC_SRCS "src/nix/LinuxDevice.cpp")
 	list(APPEND OS_SPECIFIC_SRCS "src/nix/LinuxGUID.cpp")
 else()
 	list(APPEND OS_SPECIFIC_SRCS "include/braincloud/internal/DefaultSaveDataHelper.h")
 	list(APPEND OS_SPECIFIC_SRCS "src/DefaultGUID.cpp")
 	list(APPEND OS_SPECIFIC_SRCS "src/DefaultSaveDataHelper.cpp")
+    list(APPEND OS_SPECIFIC_SRCS "src/DefaultTCPSocket.cpp")
 endif()
 
 include_directories("${BC_DIR}/include")
@@ -161,6 +165,7 @@ add_library(brainCloud STATIC
 	include/braincloud/BrainCloudProfanity.h
 	include/braincloud/BrainCloudPushNotification.h
 	include/braincloud/BrainCloudRedemptionCode.h
+	include/braincloud/BrainCloudRTTRegistration.h
 	include/braincloud/BrainCloudS3Handling.h
 	include/braincloud/BrainCloudScript.h
 	include/braincloud/BrainCloudSocialLeaderboard.h
@@ -190,7 +195,9 @@ add_library(brainCloud STATIC
 	include/braincloud/internal/GUID.h
 	include/braincloud/internal/IBrainCloudComms.h
 	include/braincloud/internal/IFileUploader.h
+	include/braincloud/internal/ITCPSocket.h
 	include/braincloud/internal/JsonUtil.h
+	include/braincloud/internal/RTTComms.h
 	include/braincloud/internal/SaveDataHelper.h
 	include/braincloud/internal/StringUtil.h
 	include/braincloud/internal/TimeUtil.h
@@ -208,6 +215,7 @@ add_library(brainCloud STATIC
 	src/AuthenticationType.cpp
 	src/BrainCloudAsyncMatch.cpp
 	src/BrainCloudAuthentication.cpp
+	src/BrainCloudChat.cpp
 	src/BrainCloudClient.cpp
 	src/BrainCloudDataStream.cpp
 	src/BrainCloudEntity.cpp
@@ -220,17 +228,21 @@ add_library(brainCloud STATIC
 	src/BrainCloudGlobalStatistics.cpp
 	src/BrainCloudGroup.cpp
 	src/BrainCloudIdentity.cpp
+	src/BrainCloudLobby.cpp
 	src/BrainCloudMail.cpp
 	src/BrainCloudMatchmaking.cpp
+	src/BrainCloudMessaging.cpp
 	src/BrainCloudOneWayMatch.cpp
 	src/BrainCloudPlaybackStream.cpp
 	src/BrainCloudPlayerState.cpp
 	src/BrainCloudPlayerStatistics.cpp
 	src/BrainCloudPlayerStatisticsEvent.cpp
+	src/BrainCloudPresence.cpp
 	src/BrainCloudProduct.cpp
 	src/BrainCloudProfanity.cpp
 	src/BrainCloudPushNotification.cpp
 	src/BrainCloudRedemptionCode.cpp
+	src/BrainCloudRTTRegistration.cpp
 	src/BrainCloudS3Handling.cpp
 	src/BrainCloudScript.cpp
 	src/BrainCloudSocialLeaderboard.cpp
@@ -244,6 +256,7 @@ add_library(brainCloud STATIC
 	src/JsonUtil.cpp
 	src/OperationParam.cpp
 	src/Platform.cpp
+	src/RTTComms.cpp
 	src/SaveDataHelper.cpp
 	src/ServerCall.cpp
 	src/ServiceName.cpp
@@ -299,7 +312,8 @@ elseif (WIN32)
 		target_link_libraries(brainCloud general ${BC_WINHTTP_LIB} ${BC_BCRYPT_LIB} ${BC_CRYPT32_LIB} debug ${BC_CPPREST_DEBUG_LIB} optimized ${BC_CPPREST_RELEASE_LIB})
 	else()
 		if (VS2013_OR_HIGHER)
-			target_link_libraries(brainCloud PUBLIC msxml6 comsuppwd)
+            find_package(Socket)
+			target_link_libraries(brainCloud PUBLIC msxml6 comsuppwd ${Socket_LIBRARIES})
 		else()
 			include_directories("${BC_DIR}/lib/win32/pthread-w32-2-8-0/Pre-built.2/include")
 
@@ -310,7 +324,7 @@ elseif (WIN32)
 			include_directories("${BC_DIR}/lib/win32/curl-7.44.0/include")
 			find_library(BC_CURL_LIB_RELEASE libcurl_a.lib "${BC_DIR}/lib/win32/curl-7.44.0/lib")
 			find_library(BC_CURL_LIB_DEBUG libcurl_a_debug.lib "${BC_DIR}/lib/win32/curl-7.44.0/lib")
-			target_link_libraries(brainCloud general ${BC_PTHREADW32_LIB} optimized ${BC_CURL_LIB_RELEASE} debug ${BC_CURL_LIB_DEBUG})
+			target_link_libraries(brainCloud general ${Socket_LIBRARIES} ${BC_PTHREADW32_LIB} optimized ${BC_CURL_LIB_RELEASE} debug ${BC_CURL_LIB_DEBUG})
 		endif()
 	endif()
 endif()

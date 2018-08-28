@@ -358,6 +358,52 @@ namespace BrainCloud
 	const OperationParam OperationParam::RoundStartedEpoch = OperationParam("roundStartedEpoch");
 	const OperationParam OperationParam::Data = OperationParam("data");
 
+	//chat
+	const OperationParam OperationParam::ChannelId = OperationParam("channelId");
+	const OperationParam OperationParam::MsgId = OperationParam("msgId");
+	const OperationParam OperationParam::Version = OperationParam("version");
+	const OperationParam OperationParam::ChannelType = OperationParam("channelType");
+	const OperationParam OperationParam::ChannelSubId = OperationParam("channelSubId");
+	const OperationParam OperationParam::MaxReturn = OperationParam("maxReturn");
+	const OperationParam OperationParam::Content = OperationParam("content");
+	const OperationParam OperationParam::RecordInHistory = OperationParam("recordInHistory");
+	const OperationParam OperationParam::Text = OperationParam("text");
+
+	//lobby
+	const OperationParam OperationParam::LobbyType = OperationParam("lobbyType");
+	const OperationParam OperationParam::Rating = OperationParam("rating");
+	const OperationParam OperationParam::OtherUserCxIds = OperationParam("otherUserCxIds");
+	const OperationParam OperationParam::IsReady = OperationParam("isReady");
+	const OperationParam OperationParam::ExtraJson = OperationParam("extraJson");
+	const OperationParam OperationParam::TeamCode = OperationParam("teamCode");
+	const OperationParam OperationParam::Settings = OperationParam("settings");
+	const OperationParam OperationParam::MaxSteps = OperationParam("maxSteps");
+	const OperationParam OperationParam::Algo = OperationParam("algo");
+	const OperationParam OperationParam::Filter = OperationParam("filter");
+	const OperationParam OperationParam::LobbyId = OperationParam("lobbyId");
+	const OperationParam OperationParam::CxId = OperationParam("cxId");
+	const OperationParam OperationParam::SignalData = OperationParam("signalData");
+	const OperationParam OperationParam::ToTeamCode = OperationParam("toTeamCode");
+
+	//messaging
+	const OperationParam OperationParam::MessagingMsgbox = OperationParam("msgbox");
+	const OperationParam OperationParam::MessagingMsgIds = OperationParam("msgIds");
+	const OperationParam OperationParam::MessagingContext = OperationParam("context");
+	const OperationParam OperationParam::MessagingPageOffset = OperationParam("pageOffset");
+	const OperationParam OperationParam::MessagingToProfileIds = OperationParam("toProfileIds");
+	const OperationParam OperationParam::MessagingText = OperationParam("text");
+	const OperationParam OperationParam::MessagingSubject = OperationParam("subject");
+	const OperationParam OperationParam::MessagingContentJson = OperationParam("contentJson");
+
+	//presence
+	const OperationParam OperationParam::PresencePlatform = OperationParam("platform");
+	const OperationParam OperationParam::PresenceIncludeOffline = OperationParam("includeOffline");
+	const OperationParam OperationParam::PresenceGroupId = OperationParam("groupId");
+	const OperationParam OperationParam::PresenceProfileIds = OperationParam("profileIds");
+	const OperationParam OperationParam::PresenceBidirectional = OperationParam("bidirectional");
+	const OperationParam OperationParam::PresenceVisible = OperationParam("visible");
+	const OperationParam OperationParam::PresenceActivity = OperationParam("activity");
+
 	OperationParam::OperationParam(const char * value)
 	{
 		_value = value;

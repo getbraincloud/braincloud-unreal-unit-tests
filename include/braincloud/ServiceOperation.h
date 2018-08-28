@@ -322,6 +322,56 @@ namespace BrainCloud {
 		static const ServiceOperation ViewReward;
 		static const ServiceOperation ClaimTournamentReward;
 
+		//rtt Registration
+		static const ServiceOperation RequestClientConnection;
+
+		//chat
+		static const ServiceOperation ChannelConnect;
+		static const ServiceOperation ChannelDisconnect;
+		static const ServiceOperation DeleteChatMessage;
+		static const ServiceOperation GetChannelId;
+		static const ServiceOperation GetChannelInfo;
+		static const ServiceOperation GetChatMessage;
+		static const ServiceOperation GetRecentChatMessages;
+		static const ServiceOperation GetSubscribedChannels;
+		static const ServiceOperation PostChatMessage;
+		static const ServiceOperation UpdateChatMessage;
+
+		//lobby
+		static const ServiceOperation CreateLobby;
+		static const ServiceOperation FindLobby;
+		static const ServiceOperation FindOrCreateLobby;
+		static const ServiceOperation GetLobbyData;
+		static const ServiceOperation LeaveLobby;
+		static const ServiceOperation RemoveMember;
+		static const ServiceOperation SendSignal;
+		static const ServiceOperation SwitchTeam;
+		static const ServiceOperation UpdateReady;
+		static const ServiceOperation UpdateSettings;
+
+		//messaging
+		static const ServiceOperation DeleteMessages;
+		static const ServiceOperation GetMessageboxes;
+		static const ServiceOperation GetMessageCounts;
+		static const ServiceOperation GetMessages;
+		static const ServiceOperation GetMessagesPage;
+		static const ServiceOperation GetMessagesPageOffset;
+		static const ServiceOperation MarkMessagesRead;
+		static const ServiceOperation MessagingSendMessage; /* Windows has a macro called SendMessage */
+		static const ServiceOperation SendMessageSimple;
+
+		//presence
+		static const ServiceOperation ForcePush;
+		static const ServiceOperation GetPresenceOfFriends;
+		static const ServiceOperation GetPresenceOfGroup;
+		static const ServiceOperation GetPresenceOfUsers;
+		static const ServiceOperation RegisterListenersForFriends;
+		static const ServiceOperation RegisterListenersForGroup;
+		static const ServiceOperation RegisterListenersForProfiles;
+		static const ServiceOperation SetVisibility;
+		static const ServiceOperation StopListening;
+		static const ServiceOperation UpdateActivity;
+
 
 		std::string getValue() const { return _value; }
 
