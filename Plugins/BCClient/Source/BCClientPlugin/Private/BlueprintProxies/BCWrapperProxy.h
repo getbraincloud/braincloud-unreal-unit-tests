@@ -16,23 +16,20 @@ class UBCWrapperProxy : public UBCBlueprintCallProxyBase
 
 public:
   static UBrainCloudWrapper *DefaultBrainCloudInstance;
-
   UBCWrapperProxy(const FObjectInitializer &ObjectInitializer);
 
   /**
 	* Create an actor that contains its own instance of the brainCloud Wrapper
-	* This actor will destory itself on EndPlay
 	*
-	* @param brainCloud - An actor that contains its own instance of the brainCloud Wrapper
+	* @param brainCloud - The brainCloud Wrapper
 	*/
   UFUNCTION(BlueprintCallable, Category = "BrainCloud")
   static UBrainCloudWrapper *CreateBrainCloudWrapper(const FString &wrapperName);
 
-
   /**
 	* Set a default brainCloud instance to be used when none is provided.
 	* When not set, the brainCloud Singleton will be used
-	* @param brainCloud - An actor that contains its own instance of the brainCloud Wrapper
+	* @param brainCloud - The brainCloud Wrapper
 	*/
   UFUNCTION(BlueprintCallable, Category = "BrainCloud")
   static void SetDefaultBrainCloudInstance(UBrainCloudWrapper *brainCloudWrapper);
