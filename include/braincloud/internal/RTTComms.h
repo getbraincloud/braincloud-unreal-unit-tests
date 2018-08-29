@@ -41,7 +41,7 @@ namespace BrainCloud
 		void runCallbacks();
 		void registerRTTCallback(const ServiceName& serviceName, IRTTCallback* in_callback);
 		void deregisterRTTCallback(const ServiceName& serviceName);
-		void deregisterAllCallbacks();
+		void deregisterAllRTTCallbacks();
 
 	private:
 		enum RTTCallbackType

@@ -443,9 +443,9 @@ namespace BrainCloud
 		_rttComms->deregisterRTTCallback(ServiceName::Presence);
 	}
 
-	void BrainCloudClient::deregisterAllCallbacks()
+	void BrainCloudClient::deregisterAllRTTCallbacks()
 	{
-		_rttComms->deregisterAllCallbacks();
+		_rttComms->deregisterAllRTTCallbacks();
 	}
 
 	////////////////////////////////////////////////////

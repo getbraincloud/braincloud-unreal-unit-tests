@@ -630,7 +630,7 @@ namespace BrainCloud
 		/**
 		 * Clear all set RTT callbacks
 		 */
-		void deregisterAllCallbacks();
+		void deregisterAllRTTCallbacks();
 
 	protected:
 		static BrainCloudClient * _instance;

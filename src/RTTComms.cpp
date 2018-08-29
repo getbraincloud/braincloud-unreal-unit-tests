@@ -197,7 +197,7 @@ namespace BrainCloud
         }
 	}
 
-	void RTTComms::deregisterAllCallbacks()
+	void RTTComms::deregisterAllRTTCallbacks()
 	{
         _callbacks.clear();
 	}
