@@ -102,6 +102,7 @@ namespace BrainCloud
 		std::atomic<bool> _isConnected;
         std::mutex _socketMutex;
         std::condition_variable _threadsCondition;
+        std::mutex _heartBeatMutex;
         std::condition_variable _heartbeatCondition;
         std::atomic<bool> _receivingRunning;
         std::atomic<bool> _heartbeatRunning;

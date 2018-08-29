@@ -81,12 +81,16 @@ namespace BrainCloud
     {
         std::unique_lock<std::mutex> lock(_socketMutex);
 
+        _isConnected = false;
+
         if (_socket)
         {
             _socket->close();
 
             // We wait for the recv/send threads to shutdown
+            _heartBeatMutex.lock();
             _heartbeatCondition.notify_one();
+            _heartBeatMutex.unlock();
             if (_receivingRunning || _heartbeatRunning)
             {
                 _threadsCondition.wait(lock, [this]()
@@ -308,18 +312,18 @@ namespace BrainCloud
 			std::string host = _endpoint["host"].asString();
 			int port = _endpoint["port"].asInt();
 
-            _socketMutex.lock();
-			_socket = ITCPSocket::create(host, port);
-			if (!_socket->isValid())
-			{
-                _socketMutex.unlock();
-                closeSocket();
-				failedToConnect();
-				return;
-			}
+            {
+                std::unique_lock<std::mutex> lock(_socketMutex);
+                _socket = ITCPSocket::create(host, port);
+                if (!_socket->isValid())
+                {
+                    closeSocket();
+                    failedToConnect();
+                    return;
+                }
 
-			_isConnected = true;
-            _socketMutex.unlock();
+                _isConnected = true;
+            }
 
 			_lastHeartbeatTime = TimeUtil::getCurrentTimeMillis();
 
@@ -390,12 +394,11 @@ namespace BrainCloud
 			std::cout << "RTT SEND " << message << std::endl;
 		}
 
-        _socketMutex.lock();
+        std::unique_lock<std::mutex> lock(_socketMutex);
         if (_isConnected)
         {
             _socket->send(message);
         }
-        _socketMutex.unlock();
 
 		return true;
 	}
@@ -415,10 +418,9 @@ namespace BrainCloud
                 onRecv(message);
 			}
 
-            _socketMutex.lock();
+            std::unique_lock<std::mutex> lock(_socketMutex);
             _receivingRunning = false;
             _threadsCondition.notify_one();
-            _socketMutex.unlock();
 		});
 		receiveThread.detach();
 	}
@@ -432,7 +434,7 @@ namespace BrainCloud
             jsonHeartbeat["operation"] = "HEARTBEAT";
             jsonHeartbeat["service"] = "rtt";
 
-            std::unique_lock<std::mutex> lock(_socketMutex);
+            std::unique_lock<std::mutex> lock(_heartBeatMutex);
 
             while (_isConnected)
             {
@@ -471,16 +473,14 @@ namespace BrainCloud
 
 		std::string serviceName = jsonData["service"].asString();
 		printf("serviceName: %s", serviceName.c_str());
-		if (serviceName == "rtt")
-		{
-			processRttMessage(jsonData);
-		}
+		processRttMessage(jsonData);
 	}
 
 	void RTTComms::processRttMessage(const Json::Value& json)
 	{
+        std::string serviceName = json["service"].asString();
 		std::string operation = json["operation"].asString();
-		if (operation == "CONNECT")
+		if (serviceName == "rtt" && operation == "CONNECT")
 		{
 			_heartbeatSeconds = json["data"].get("heartbeatSeconds", 30).asInt();
 			_connectionId = json["data"]["cxId"].asString();
@@ -491,5 +491,16 @@ namespace BrainCloud
 			_callbackEventQueue.push_back(RTTCallback(RTTCallbackType::ConnectSuccess));
 			_eventQueueMutex.unlock();
 		}
+        else
+        {
+            if (!serviceName.empty())
+            {
+                std::map<std::string, IRTTCallback*>::iterator it = _callbacks.find(serviceName);
+                if (it != _callbacks.end())
+                {
+                    it->second->rttCallback(json);
+                }
+            }
+        }
 	}
 };
