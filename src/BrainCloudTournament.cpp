@@ -30,6 +30,22 @@ namespace BrainCloud
 		m_client->sendRequest(sc);
 	}
 
+	void BrainCloudTournament::getDivisionInfo(const std::string& in_divSetId, IServerCallback * in_callback)
+	{
+		Json::Value message;
+		message[OperationParam::DivSetID.getValue()] = in_divSetId;
+
+		ServerCall * sc = new ServerCall(ServiceName::Tournament, ServiceOperation::GetDivisionInfo, message, in_callback);
+		m_client->sendRequest(sc);
+	}
+
+	void BrainCloudTournament::getMyDivisions(IServerCallback * in_callback)
+	{
+		Json::Value message;
+		ServerCall * sc = new ServerCall(ServiceName::Tournament, ServiceOperation::GetMyDivisions, message, in_callback);
+		m_client->sendRequest(sc);
+	}
+
 	void BrainCloudTournament::getTournamentStatus(const char * in_leaderboardId, int32_t in_versionId, IServerCallback * in_callback)
 	{
 		Json::Value message;
@@ -42,6 +58,18 @@ namespace BrainCloud
 		m_client->sendRequest(sc);
 	}
 
+	void BrainCloudTournament::joinDivision(const std::string& in_divSetId, const std::string& in_tournamentCode, int64_t in_initialScore, IServerCallback * in_callback)
+	{
+		Json::Value message;
+		message[OperationParam::DivSetID.getValue()] = in_divSetId;
+		message[OperationParam::TournamentCode.getValue()] = in_tournamentCode;
+		message[OperationParam::InitialScore.getValue()] = (Json::Int64) in_initialScore;
+
+		
+		ServerCall * sc = new ServerCall(ServiceName::Tournament, ServiceOperation::JoinDivision, message, in_callback);
+		m_client->sendRequest(sc);
+	}
+
 	void BrainCloudTournament::joinTournament(const char * in_leaderboardId, const char * in_tournamentCode, int64_t in_initialScore, IServerCallback * in_callback)
 	{
 		Json::Value message;
@@ -50,6 +78,15 @@ namespace BrainCloud
 		message[OperationParam::InitialScore.getValue()] = (Json::Int64) in_initialScore;
 
 		ServerCall * sc = new ServerCall(ServiceName::Tournament, ServiceOperation::JoinTournament, message, in_callback);
+		m_client->sendRequest(sc);
+	}
+
+	void BrainCloudTournament::leaveDivisionInstance(const std::string& in_leaderboardId, IServerCallback * in_callback)
+	{
+		Json::Value message; 
+		message[OperationParam::LeaderboardId.getValue()] = in_leaderboardId;
+
+		ServerCall * sc = new ServerCall(ServiceName::Tournament, ServiceOperation::LeaveDivisionInstance, message, in_callback);
 		m_client->sendRequest(sc);
 	}
 

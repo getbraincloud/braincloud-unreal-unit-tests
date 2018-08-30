@@ -28,6 +28,27 @@ namespace BrainCloud
 		 */
 		void claimTournamentReward(const char* in_leaderboardId, int32_t in_versionId, IServerCallback * in_callback = NULL);
 
+		 /**
+		 * Get the status of a division
+		 *
+		 * Service Name - tournament
+		 * Service Operation - GET_DIVISION_INFO
+		 *
+		 * @param in_divSetId The id for the division
+		 * @param in_callback The method to be invoked when the server response is received
+		 */
+		void getDivisionInfo(const std::string& in_divSetId, IServerCallback * in_callback = NULL);
+
+		 /**
+		 * Returns list of player's recently active divisions
+		 *
+		 * Service Name - tournament
+		 * Service Operation - GET_MY_DIVISIONS
+		 *
+		 * @param in_callback The method to be invoked when the server response is received
+		 */
+		void getMyDivisions(IServerCallback * in_callback = NULL);
+
 		/**
 		 * Get tournament status associated with a leaderboard
 		 *
@@ -39,6 +60,21 @@ namespace BrainCloud
 		 * @param in_callback The method to be invoked when the server response is received
 		 */
 		void getTournamentStatus(const char* in_leaderboardId, int32_t in_versionId, IServerCallback * in_callback = NULL);
+
+		 /**
+		 * Join the specified division.
+		 * If joining requires a fee, it is possible to fail at joining the division
+		 *
+		 * Service Name - tournament
+		 * Service Operation - JOIN_DIVISION
+		 *
+		 * @param in_divSetId The id for the division
+		 * @param in_tournamentCode Tournament to join
+		 * @param in_initialScore The initial score for players first joining a tournament
+		 *						 Usually 0, unless leaderboard is LOW_VALUE
+		 * @param in_callback The method to be invoked when the server response is received
+		 */
+		void joinDivision(const std::string& in_divSetId, const std::string& in_tournamentCode, int64_t in_initialScore, IServerCallback * in_callback = NULL);
 
 		/**
 		 * Join the specified tournament.
@@ -54,6 +90,18 @@ namespace BrainCloud
 		 * @param in_callback The method to be invoked when the server response is received
 		 */
 		void joinTournament(const char* in_leaderboardId, const char* in_tournamentCode, int64_t in_initialScore, IServerCallback * in_callback = NULL);
+
+		 /**
+		 * Removes player from division instance
+		 * Also removes division instance from player's division list
+		 *
+		 * Service Name - tournament
+		 * Service Operation - LEAVE_DIVISION_INSTANCE
+		 *
+		 * @param in_leaderboardId The leaderboard for the tournament
+		 * @param in_callback The method to be invoked when the server response is received
+		 */
+		void leaveDivisionInstance(const std::string& in_leaderboardId, IServerCallback * in_callback = NULL);
 
 		/**
 		 * Removes player's score from tournament leaderboard

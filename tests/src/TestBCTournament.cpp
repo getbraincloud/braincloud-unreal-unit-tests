@@ -21,6 +21,34 @@ TEST_F(TestBCTournament, ClaimTournamentReward)
 	LeaveTournament();
 }
 
+TEST_F(TestBCTournament, GetDivisionInfo)
+{
+	TestResult tr;
+	m_bc->getTournamentService()->getDivisionInfo("Invalid_Id", &tr);
+	tr.runExpectFail(m_bc, 400, DIVISION_SET_DOESNOT_EXIST);
+}
+
+TEST_F(TestBCTournament, GetMyDivisions)
+{
+	TestResult tr; 
+	m_bc->getTournamentService()->getMyDivisions(&tr);
+	tr.run(m_bc);
+}
+
+TEST_F(TestBCTournament, JoinDivision)
+{
+	TestResult tr; 
+	m_bc->getTournamentService()->joinDivision("Invalid_Id", _tournamentCode, 0,  &tr);
+	tr.runExpectFail(m_bc, 400, DIVISION_SET_DOESNOT_EXIST);
+}
+
+TEST_F(TestBCTournament, LeaveDivisionInstance)
+{
+	TestResult tr; 
+	m_bc->getTournamentService()->leaveDivisionInstance(_leaderboardId, &tr);
+	tr.runExpectFail(m_bc, 400, LEADERBOARD_NOT_DIVISION_SET_INSTANCE);
+}
+
 TEST_F(TestBCTournament, GetTournamentStatus)
 {
 	int32_t version = JoinTournament();
