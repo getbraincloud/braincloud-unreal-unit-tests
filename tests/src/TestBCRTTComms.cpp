@@ -67,48 +67,48 @@ private:
 
 TEST_F(TestBCRTTComms, RequestClientConnection)
 {
-	TestResult tr;
+    TestResult tr;
 
-	m_bc->getRTTRegistrationService()->requestClientConnection(&tr);
-	tr.run(m_bc);
+    m_bc->getRTTRegistrationService()->requestClientConnection(&tr);
+    tr.run(m_bc);
 }
 
 TEST_F(TestBCRTTComms, EnableDisableRTTWithTCP)
 {
-	TestResult tr;
-
-	m_bc->enableRTT(&tr, false);
-	tr.run(m_bc);
-
-    // disable, then re-enable. Should still succeed
-    m_bc->disableRTT();
-	m_bc->enableRTT(&tr, false);
-	tr.run(m_bc);
-}
-
-// TEST_F(TestBCRTTComms, EnableDisableRTTWithWS)
-// {
-// 	TestResult tr;
-
-// 	m_bc->enableRTT(&tr, true);
-// 	tr.run(m_bc);
-
-//     // disable, then re-enable. Should still succeed
-//     m_bc->disableRTT();
-// 	m_bc->enableRTT(&tr, true);
-// 	tr.run(m_bc);
-// }
-
-TEST_F(TestBCRTTComms, RTTChatCallback)
-{
-	TestResult tr;
+    TestResult tr;
 
     m_bc->enableRTT(&tr, false);
     tr.run(m_bc);
 
+    // disable, then re-enable. Should still succeed
+    m_bc->disableRTT();
+    m_bc->enableRTT(&tr, false);
+    tr.run(m_bc);
+}
+
+TEST_F(TestBCRTTComms, EnableDisableRTTWithWS)
+{
+    TestResult tr;
+
+    m_bc->enableRTT(&tr, true);
+    tr.run(m_bc);
+
+    // disable, then re-enable. Should still succeed
+    m_bc->disableRTT();
+    m_bc->enableRTT(&tr, true);
+    tr.run(m_bc);
+}
+
+TEST_F(TestBCRTTComms, RTTChatCallback)
+{
+    TestResult tr;
+
+    m_bc->enableRTT(&tr, true);
+    tr.run(m_bc);
+
     // Get channel Id
     m_bc->getChatService()->getChannelId("gl", "valid", &tr);
-	tr.run(m_bc);
+    tr.run(m_bc);
     std::string channelId = tr.m_response["data"]["channelId"].asString();
 
     // Connect to channel
@@ -142,9 +142,9 @@ TEST_F(TestBCRTTComms, RTTChatCallback)
 
 TEST_F(TestBCRTTComms, RTTLobbyCallback)
 {
-	TestResult tr;
+    TestResult tr;
 
-    m_bc->enableRTT(&tr, false);
+    m_bc->enableRTT(&tr, true);
     tr.run(m_bc);
 
     // Register for RTT lobby
@@ -163,9 +163,9 @@ TEST_F(TestBCRTTComms, RTTLobbyCallback)
 
 TEST_F(TestBCRTTComms, RTTEventCallback)
 {
-	TestResult tr;
+    TestResult tr;
 
-    m_bc->enableRTT(&tr, false);
+    m_bc->enableRTT(&tr, true);
     tr.run(m_bc);
 
     // Register for RTT lobby

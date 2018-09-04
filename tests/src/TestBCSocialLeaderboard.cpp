@@ -8,9 +8,6 @@
 
 using namespace BrainCloud;
 
-#define SSTR( x ) static_cast< std::ostringstream & >( \
-        ( std::ostringstream() << std::dec << x ) ).str()
-
 #define LB_ID "testLeaderboard"
 #define SOCIAL_LB_ID "testSocialLeaderboard"
 #define DYNAMIC_LB_ID "testDynamicLeaderboard"
@@ -219,8 +216,7 @@ void TestBCSocialLeaderboard::PostScoreToDynamic()
     time->tm_mday += 1;
     mktime(time);
 
-	std::string name = DYNAMIC_LB_ID;
-	name += SSTR(rand());
+	std::string name = DYNAMIC_LB_ID + std::to_string(rand());
 
     m_bc->getSocialLeaderboardService()->postScoreToDynamicLeaderboard(name.c_str(), 100, fw.write(jsonData), HIGH_VALUE, WEEKLY, time, 2, &tr);
     tr.run(m_bc);

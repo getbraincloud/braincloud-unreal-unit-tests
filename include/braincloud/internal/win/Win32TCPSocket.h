@@ -15,7 +15,7 @@ namespace BrainCloud
 	public:
 		virtual ~Win32TCPSocket();
 
-		virtual bool isValid() const;
+		virtual bool isValid();
 
 		virtual void send(const std::string& message);
 		virtual std::string recv();
