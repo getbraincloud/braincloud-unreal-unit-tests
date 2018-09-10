@@ -20,7 +20,7 @@ namespace BrainCloud
 	public:
 		virtual ~DefaultTCPSocket();
 
-		virtual bool isValid() const;
+		virtual bool isValid();
 
 		virtual void send(const std::string& message);
 		virtual std::string recv();

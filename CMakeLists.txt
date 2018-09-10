@@ -44,6 +44,11 @@ if (NOT USE_CPPREST AND NOT VS2013_OR_HIGHER AND NOT APPLE)
 	set(USE_PTHREAD 1)
 endif()
 
+# On non-windows platform, lets use libwebsockets
+# if (NOT WIN32) # Until we implement a windows specific solution
+    set(USE_LIBWEBSOCKETS 1)
+# endif()
+
 #=============================================================================
 # Compiler flags
 #=============================================================================
@@ -108,6 +113,13 @@ else()
     list(APPEND OS_SPECIFIC_INCS
         "include/braincloud/internal/DefaultBrainCloudComms.h")
 	list(APPEND OS_SPECIFIC_SRCS "src/DefaultBrainCloudComms.cpp")
+endif()
+
+if (USE_LIBWEBSOCKETS)
+    list(APPEND OS_SPECIFIC_INCS
+        "include/braincloud/internal/DefaultWebSocket.h")
+    list(APPEND OS_SPECIFIC_SRCS
+        "src/DefaultWebSocket.cpp")
 endif()
 
 # other platform specific srcs/includes
@@ -301,7 +313,7 @@ if (APPLE)
 	find_library(BC_FOUNDATION_LIB Foundation)
 	find_library(BC_SYSCONFIG_LIB SystemConfiguration)
 	find_library(BC_SECURITY_LIB Security)
-    target_link_libraries(brainCloud 
+    list(APPEND libs 
         ${BC_GAMEKIT_LIB}
         ${BC_COREFOUNDATION_LIB}
         ${BC_FOUNDATION_LIB}
@@ -314,7 +326,7 @@ elseif (LINUX)
     find_package(UUID REQUIRED)
 	list(APPEND includes PUBLIC ${UUID_INCLUDE_DIRS})
 
-    target_link_libraries(brainCloud PUBLIC
+    list(APPEND libs
         ${CURL_LIBRARIES}
         ${UUID_LIBRARIES})
 elseif (WIN32)
@@ -337,7 +349,7 @@ elseif (WIN32)
 		find_library(BC_BCRYPT_LIB bcrypt.lib ${WIN_PLATFORM_DIR})
 		find_library(BC_CRYPT32_LIB crypt32.lib ${WIN_PLATFORM_DIR})
 
-        target_link_libraries(brainCloud general
+        list(APPEND libs general
             ${BC_WINHTTP_LIB}
             ${BC_BCRYPT_LIB}
             ${BC_CRYPT32_LIB}
@@ -346,7 +358,7 @@ elseif (WIN32)
 	else()
 		if (VS2013_OR_HIGHER)
             find_package(Socket)
-            target_link_libraries(brainCloud PUBLIC
+            list(APPEND libs
                 msxml6
                 comsuppwd
                 ${Socket_LIBRARIES})
@@ -364,7 +376,7 @@ elseif (WIN32)
                 "${BC_DIR}/lib/win32/curl-7.44.0/lib")
             find_library(BC_CURL_LIB_DEBUG libcurl_a_debug.lib
                 "${BC_DIR}/lib/win32/curl-7.44.0/lib")
-            target_link_libraries(brainCloud general
+            list(APPEND libs general
                 ${Socket_LIBRARIES}
                 ${BC_PTHREADW32_LIB}
                 optimized ${BC_CURL_LIB_RELEASE}
@@ -373,4 +385,34 @@ elseif (WIN32)
 	endif()
 endif()
 
+# LibWebSockets
+if (USE_LIBWEBSOCKETS)
+    option(LWS_WITHOUT_SERVER
+        "Don't build the server part of the library" ON)
+    option(LWS_WITHOUT_TESTAPPS
+        "Don't build the libwebsocket-test-apps" ON)
+    option(LWS_WITHOUT_TEST_SERVER
+        "Don't build the test server" ON)
+    option(LWS_WITHOUT_TEST_SERVER_EXTPOLL 
+        "Don't build the test server version that uses external poll" ON)
+    option(LWS_WITHOUT_TEST_PING 
+        "Don't build the ping test application" ON)
+    option(LWS_WITHOUT_TEST_CLIENT
+        "Don't build the client test application" ON)
+    option(LWS_WITH_SHARED
+        "Build the shared version of the library" OFF)
+    add_subdirectory(./lib/libwebsockets/)
+    list(APPEND libs websockets)
+    list(APPEND includes 
+        PUBLIC ${CMAKE_CURRENT_BINARY_DIR}/lib/libwebsockets/include/)
+    
+    # OpenSSL
+    find_package(OpenSSL REQUIRED ssl crypto)
+    list(APPEND libs 
+        OpenSSL::SSL
+        OpenSSL::Crypto)
+endif()
+
+# Setup includes and linked libraries
 target_include_directories(brainCloud PUBLIC "${BC_DIR}/include" ${includes})
+target_link_libraries(brainCloud PUBLIC ${libs})

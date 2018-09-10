@@ -60,7 +60,7 @@ namespace BrainCloud
 		close();
 	}
 
-	bool Win32TCPSocket::isValid() const
+	bool Win32TCPSocket::isValid()
 	{
 		return _isValid;
 	}

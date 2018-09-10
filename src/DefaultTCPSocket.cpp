@@ -50,7 +50,7 @@ namespace BrainCloud
 		close();
 	}
 
-	bool DefaultTCPSocket::isValid() const
+	bool DefaultTCPSocket::isValid()
 	{
 		return _isValid;
 	}
