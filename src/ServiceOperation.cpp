@@ -301,7 +301,11 @@ namespace BrainCloud
 
 	//tournament
 	const ServiceOperation ServiceOperation::GetTournamentStatus = ServiceOperation("GET_TOURNAMENT_STATUS");
+	const ServiceOperation ServiceOperation::GetDivisionInfo = ServiceOperation("GET_DIVISION_INFO");
+	const ServiceOperation ServiceOperation::GetMyDivisions = ServiceOperation("GET_MY_DIVISIONS");
+	const ServiceOperation ServiceOperation::JoinDivision = ServiceOperation("JOIN_DIVISION");
 	const ServiceOperation ServiceOperation::JoinTournament = ServiceOperation("JOIN_TOURNAMENT");
+	const ServiceOperation ServiceOperation::LeaveDivisionInstance = ServiceOperation("LEAVE_DIVISION_INSTANCE");
 	const ServiceOperation ServiceOperation::LeaveTournament = ServiceOperation("LEAVE_TOURNAMENT");
 	const ServiceOperation ServiceOperation::PostTournamentScore = ServiceOperation("POST_TOURNAMENT_SCORE");
 	const ServiceOperation ServiceOperation::PostTournamentScoreWithResults = ServiceOperation("POST_TOURNAMENT_SCORE_WITH_RESULTS");

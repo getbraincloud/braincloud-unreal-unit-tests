@@ -351,6 +351,7 @@ namespace BrainCloud
 	const OperationParam OperationParam::ServiceParams = OperationParam("serviceParams");
 
 	const OperationParam OperationParam::LeaderboardId = OperationParam("leaderboardId");
+	const OperationParam OperationParam::DivSetID = OperationParam("divSetId");
 	const OperationParam OperationParam::VersionId = OperationParam("versionId");
 	const OperationParam OperationParam::TournamentCode = OperationParam("tournamentCode");
 	const OperationParam OperationParam::InitialScore = OperationParam("initialScore");

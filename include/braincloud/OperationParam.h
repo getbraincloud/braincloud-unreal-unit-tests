@@ -357,6 +357,7 @@ namespace BrainCloud {
 
 
 		static const OperationParam LeaderboardId;
+		static const OperationParam DivSetID;
 		static const OperationParam VersionId;
 		static const OperationParam TournamentCode;
 		static const OperationParam InitialScore;
