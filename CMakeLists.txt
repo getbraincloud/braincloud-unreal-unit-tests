@@ -408,9 +408,8 @@ if (USE_LIBWEBSOCKETS)
     
     # OpenSSL
     find_package(OpenSSL REQUIRED ssl crypto)
-    list(APPEND libs 
-        OpenSSL::SSL
-        OpenSSL::Crypto)
+    list(APPEND includes ${OPENSSL_INCLUDE_DIR})
+    list(APPEND libs ${OPENSSL_LIBRARIES})
 endif()
 
 # Setup includes and linked libraries

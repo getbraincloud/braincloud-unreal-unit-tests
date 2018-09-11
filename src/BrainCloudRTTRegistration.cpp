@@ -1,4 +1,4 @@
-#include "brainCloud/BrainCloudRTTRegistration.h"
+#include "braincloud/BrainCloudRTTRegistration.h"
 
 #include "braincloud/BrainCloudClient.h"
 #include "braincloud/IServerCallback.h"
