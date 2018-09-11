@@ -309,10 +309,26 @@ const ServiceOperation ServiceOperation::SendBasicEmail = ServiceOperation(TEXT(
 const ServiceOperation ServiceOperation::SendAdvancedEmail = ServiceOperation(TEXT("SEND_ADVANCED_EMAIL"));
 const ServiceOperation ServiceOperation::SendAdvancedEmailByAddress = ServiceOperation(TEXT("SEND_ADVANCED_EMAIL_BY_EMAIL"));
 
+//presence
+const ServiceOperation ServiceOperation::ForcePush = ServiceOperation(TEXT("FORCE_PUSH"));
+const ServiceOperation ServiceOperation::GetPresenceOfFriends = ServiceOperation(TEXT("GET_PRESENCE_OF_FRIENDS"));
+const ServiceOperation ServiceOperation::GetPresenceOfGroup = ServiceOperation(TEXT("GET_PRESENCE_OF_GROUP"));
+const ServiceOperation ServiceOperation::GetPresenceOfUsers = ServiceOperation(TEXT("GET_PRESENCE_OF_USERS"));
+const ServiceOperation ServiceOperation::RegisterListenersForFriends = ServiceOperation(TEXT("REGISTER_LISTENERS_FOR_FRIENDS"));
+const ServiceOperation ServiceOperation::RegisterListenersForGroup = ServiceOperation(TEXT("REGISTER_LISTENERS_FOR_GROUP"));
+const ServiceOperation ServiceOperation::RegisterListenersForProfiles = ServiceOperation(TEXT("REGISTER_LISTENERS_FOR_PROFILES"));
+const ServiceOperation ServiceOperation::SetVisibility = ServiceOperation(TEXT("SET_VISIBILITY"));
+const ServiceOperation ServiceOperation::StopListening = ServiceOperation(TEXT("STOP_LISTENING"));
+const ServiceOperation ServiceOperation::UpdateActivity = ServiceOperation(TEXT("UPDATE_ACTIVITY"));
+
 //tournament
 const ServiceOperation ServiceOperation::GetTournamentStatus = ServiceOperation(TEXT("GET_TOURNAMENT_STATUS"));
+const ServiceOperation ServiceOperation::GetDivisionInfo = ServiceOperation(TEXT("GET_DIVISION_INFO"));
+const ServiceOperation ServiceOperation::GetMyDivisions = ServiceOperation(TEXT("GET_MY_DIVISIONS"));
 const ServiceOperation ServiceOperation::JoinTournament = ServiceOperation(TEXT("JOIN_TOURNAMENT"));
+const ServiceOperation ServiceOperation::JoinDivision = ServiceOperation(TEXT("JOIN_DIVISION"));
 const ServiceOperation ServiceOperation::LeaveTournament = ServiceOperation(TEXT("LEAVE_TOURNAMENT"));
+const ServiceOperation ServiceOperation::LeaveDivisionInstance = ServiceOperation(TEXT("LEAVE_DIVISION_INSTANCE"));
 const ServiceOperation ServiceOperation::PostTournamentScore = ServiceOperation(TEXT("POST_TOURNAMENT_SCORE"));
 const ServiceOperation ServiceOperation::ViewCurrentReward = ServiceOperation(TEXT("VIEW_CURRENT_REWARD"));
 const ServiceOperation ServiceOperation::ViewReward = ServiceOperation(TEXT("VIEW_REWARD"));

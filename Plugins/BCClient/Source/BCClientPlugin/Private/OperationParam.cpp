@@ -171,6 +171,15 @@ const OperationParam OperationParam::PlayerStatisticEventServiceEventName = Oper
 const OperationParam OperationParam::PlayerStatisticEventServiceEventMultiplier = OperationParam("eventMultiplier");
 const OperationParam OperationParam::PlayerStatisticEventServiceEvents = OperationParam("events");
 
+// Presence Params
+const OperationParam OperationParam::PresenceServicePlatform = OperationParam("platform");
+const OperationParam OperationParam::PresenceServiceIncludeOffline = OperationParam("includeOffline");
+const OperationParam OperationParam::PresenceServiceGroupId = OperationParam("groupId");
+const OperationParam OperationParam::PresenceServiceProfileIds = OperationParam("profileIds");
+const OperationParam OperationParam::PresenceServiceBidirectional = OperationParam("bidirectional");
+const OperationParam OperationParam::PresenceServiceVisible = OperationParam("visible");
+const OperationParam OperationParam::PresenceServiceActivity = OperationParam("activity");
+
 // Player State Service - Read Params
 const OperationParam OperationParam::PlayerStateServiceReadEntitySubtype = OperationParam("entitySubType");
 
@@ -363,6 +372,7 @@ const OperationParam OperationParam::Body = OperationParam("body");
 const OperationParam OperationParam::ServiceParams = OperationParam("serviceParams");
 
 const OperationParam OperationParam::LeaderboardId = OperationParam("leaderboardId");
+const OperationParam OperationParam::DivSetId = OperationParam("divSetId");
 const OperationParam OperationParam::VersionId = OperationParam("versionId");
 const OperationParam OperationParam::TournamentCode = OperationParam("tournamentCode");
 const OperationParam OperationParam::InitialScore = OperationParam("initialScore");

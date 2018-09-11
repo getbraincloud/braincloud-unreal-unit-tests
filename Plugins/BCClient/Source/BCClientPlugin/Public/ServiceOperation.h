@@ -309,12 +309,28 @@ class BCCLIENTPLUGIN_API ServiceOperation
 
 	//tournament
 	static const ServiceOperation GetTournamentStatus;
+	static const ServiceOperation GetDivisionInfo;
+	static const ServiceOperation GetMyDivisions;
+	static const ServiceOperation JoinDivision;
+	static const ServiceOperation LeaveDivisionInstance;
 	static const ServiceOperation JoinTournament;
 	static const ServiceOperation LeaveTournament;
 	static const ServiceOperation PostTournamentScore;
 	static const ServiceOperation ViewCurrentReward;
 	static const ServiceOperation ViewReward;
 	static const ServiceOperation ClaimTournamentReward;
+
+	//presence
+	static const ServiceOperation ForcePush;
+	static const ServiceOperation GetPresenceOfFriends;
+	static const ServiceOperation GetPresenceOfGroup;
+	static const ServiceOperation GetPresenceOfUsers;
+	static const ServiceOperation RegisterListenersForFriends;
+	static const ServiceOperation RegisterListenersForGroup;
+	static const ServiceOperation RegisterListenersForProfiles;
+	static const ServiceOperation SetVisibility;
+	static const ServiceOperation StopListening;
+	static const ServiceOperation UpdateActivity;
 
 	// rtt
 	static const ServiceOperation RequestClientConnection;

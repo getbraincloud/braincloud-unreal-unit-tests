@@ -22,6 +22,7 @@ const ServiceName ServiceName::PlayerStatisticsEvent = ServiceName("playerStatis
 const ServiceName ServiceName::Twitter = ServiceName("twitter");
 const ServiceName ServiceName::Steam = ServiceName("steam");
 
+const ServiceName ServiceName::Presence = ServiceName("presence");
 const ServiceName ServiceName::PlayerState = ServiceName("playerState");
 const ServiceName ServiceName::Entity = ServiceName("entity");
 const ServiceName ServiceName::GlobalEntity = ServiceName("globalEntity");

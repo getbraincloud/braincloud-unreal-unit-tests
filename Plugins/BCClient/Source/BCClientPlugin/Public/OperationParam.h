@@ -171,6 +171,15 @@ class BCCLIENTPLUGIN_API OperationParam
 	static const OperationParam PlayerStatisticEventServiceEventMultiplier;
 	static const OperationParam PlayerStatisticEventServiceEvents;
 
+	// Presence Params
+	static const OperationParam PresenceServicePlatform;
+	static const OperationParam PresenceServiceIncludeOffline;
+	static const OperationParam PresenceServiceGroupId;
+	static const OperationParam PresenceServiceProfileIds;
+	static const OperationParam PresenceServiceBidirectional;
+	static const OperationParam PresenceServiceVisible;
+	static const OperationParam PresenceServiceActivity;
+
 	// Player State Service - Read Params
 	static const OperationParam PlayerStateServiceReadEntitySubtype;
 
@@ -363,6 +372,7 @@ class BCCLIENTPLUGIN_API OperationParam
 	static const OperationParam ServiceParams;
 
 	static const OperationParam LeaderboardId;
+	static const OperationParam DivSetId;
 	static const OperationParam VersionId;
 	static const OperationParam TournamentCode;
 	static const OperationParam InitialScore;

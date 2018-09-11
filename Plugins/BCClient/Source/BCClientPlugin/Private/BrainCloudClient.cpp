@@ -366,6 +366,21 @@ void BrainCloudClient::deregisterRTTMessagingCallback()
 	_brainCloudRTTComms->deregisterRTTCallback(ServiceName::Messaging);
 }
 
+void BrainCloudClient::registerRTTPresenceCallback(UBCBlueprintRTTCallProxyBase *in_callback)
+{
+	_brainCloudRTTComms->registerRTTCallback(ServiceName::Presence, in_callback);
+}
+
+void BrainCloudClient::registerRTTPresenceCallback(IRTTCallback *in_callback)
+{
+	_brainCloudRTTComms->registerRTTCallback(ServiceName::Presence, in_callback);
+}
+
+void BrainCloudClient::deregisterRTTPresenceCallback()
+{
+	_brainCloudRTTComms->deregisterRTTCallback(ServiceName::Presence);
+}
+
 void BrainCloudClient::registerRTTLobbyCallback(UBCBlueprintRTTCallProxyBase *in_callback)
 {
 	_brainCloudRTTComms->registerRTTCallback(ServiceName::Lobby, in_callback);

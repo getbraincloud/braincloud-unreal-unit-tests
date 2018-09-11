@@ -23,6 +23,27 @@ public:
 	void claimTournamentReward(const FString& leaderboardId, int32 versionId, IServerCallback * callback = nullptr);
 
 	/**
+	* Get the status of a division
+	*
+	* Service Name - tournament
+	* Service Operation - GET_DIVISION_INFO
+	*
+	* @param divSetId The id for the division
+	* @param callback The method to be invoked when the server response is received
+	*/
+	void getDivisionInfo(const FString & divSetId, IServerCallback * callback);
+
+	/**
+	* Returns list of player's recently active divisions
+	*
+	* Service Name - tournament
+	* Service Operation - GET_MY_DIVISIONS
+	*
+	* @param callback The method to be invoked when the server response is received
+	*/
+	void getMyDivisions(IServerCallback * callback);
+
+	/**
 	* Get tournament status associated with a leaderboard
 	*
 	* Service Name - tournament
@@ -35,11 +56,26 @@ public:
 	void getTournamentStatus(const FString& leaderboardId, int32 versionId, IServerCallback * callback = nullptr);
 
 	/**
+	* Join the specified division.
+	* If joining requires a fee, it is possible to fail at joining the division
+	*
+	* Service Name - tournament
+	* Service Operation - JOIN_DIVISION
+	*
+	* @param divSetId The id for the division
+	* @param tournamentCode Tournament to join
+	* @param initialScore The initial score for players first joining a tournament
+	*						 Usually 0, unless leaderboard is LOW_VALUE
+	* @param callback The method to be invoked when the server response is received
+	*/
+	void joinDivision(const FString & divSetId, const FString & tournamentCode, int32 initialScore, IServerCallback * callback);
+
+	/**
 	* Join the specified tournament.
 	* Any entry fees will be automatically collected.
 	*
 	* Service Name - tournament
-	* Service Operation - JOTOURNAMENT
+	* Service Operation - JOIN_TOURNAMENT
 	*
 	* @param leaderboardId The leaderboard for the tournament
 	* @param tournamentCode Tournament to join
@@ -47,6 +83,18 @@ public:
 	* @param callback The method to be invoked when the server response is received
 	*/
 	void joinTournament(const FString& leaderboardId, const FString& tournamentCode, int32 initialScore, IServerCallback * callback = nullptr);
+
+	/**
+	* Removes player from division instance
+	* Also removes division instance from player's division list
+	*
+	* Service Name - tournament
+	* Service Operation - LEAVE_DIVISION_INSTANCE
+	*
+	* @param leaderboardId The leaderboard for the tournament
+	* @param callback The method to be invoked when the server response is received
+	*/
+	void leaveDvisionInstance(const FString & leaderboardId, IServerCallback * callback);
 
 	/**
 	* Removes player's score from tournament leaderboard
