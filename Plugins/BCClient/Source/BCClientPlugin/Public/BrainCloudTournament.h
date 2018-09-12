@@ -94,7 +94,7 @@ public:
 	* @param leaderboardId The leaderboard for the tournament
 	* @param callback The method to be invoked when the server response is received
 	*/
-	void leaveDvisionInstance(const FString & leaderboardId, IServerCallback * callback);
+	void leaveDivisionInstance(const FString & leaderboardId, IServerCallback * callback);
 
 	/**
 	* Removes player's score from tournament leaderboard

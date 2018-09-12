@@ -77,7 +77,7 @@ void BrainCloudTournament::leaveTournament(const FString & leaderboardId, IServe
 	_client->sendRequest(sc);
 }
 
-void BrainCloudTournament::leaveDvisionInstance(const FString & leaderboardId, IServerCallback * callback)
+void BrainCloudTournament::leaveDivisionInstance(const FString & leaderboardId, IServerCallback * callback)
 {
 	TSharedRef<FJsonObject> message = MakeShareable(new FJsonObject());
 	message->SetStringField(OperationParam::LeaderboardId.getValue(), leaderboardId);

@@ -618,6 +618,7 @@ class BCCLIENTPLUGIN_API BrainCloudClient
 	BrainCloudGroup *_groupService = nullptr;
 	BrainCloudMail *_mailService = nullptr;
 	BrainCloudTournament *_tournamentService = nullptr;
+	BrainCloudPresence *_presenceService = nullptr;
 
 	BrainCloudRTT *_rttService = nullptr;
 	BrainCloudLobby *_lobbyService = nullptr;

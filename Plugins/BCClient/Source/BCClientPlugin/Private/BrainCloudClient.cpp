@@ -566,6 +566,15 @@ BrainCloudPlayerStatisticsEvent *BrainCloudClient::getPlayerStatisticsEventServi
 	return _playerStatisticsEventService;
 }
 
+BrainCloudPresence *BrainCloudClient::getPresenceService()
+{
+	if(_presenceService == nullptr)
+	{
+		_presenceService = new BrainCloudPresence(this);
+	}
+	return _presenceService;
+}
+
 BrainCloudProduct *BrainCloudClient::getProductService()
 {
 	if (_productService == nullptr)

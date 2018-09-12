@@ -7,7 +7,7 @@
 #include "ServerCall.h"
 #include "JsonUtil.h"
 
-BrainCloudProduct::BrainCloudProduct(BrainCloudClient* client) : _client(client) {};
+BrainCloudProduct::BrainCloudProduct(BrainCloudClient* client) : _client(client) {}
 
 void BrainCloudProduct::getCurrency(const FString& currencyType, IServerCallback * callback)
 {
