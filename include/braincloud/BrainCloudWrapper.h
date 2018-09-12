@@ -29,6 +29,8 @@ namespace BrainCloud {
         BrainCloudGlobalStatistics * getGlobalStatisticsService() { return client->getGlobalStatisticsService(); }
         BrainCloudIdentity * getIdentityService() { return client->getIdentityService(); }
         BrainCloudProduct * getProductService() { return client->getProductService(); }
+        BrainCloudVirtualCurrency * getVirtualCurrencyService() { return client->getVirtualCurrencyService(); }
+        BrainCloudAppStore * getAppStoreService() { return client->getAppStoreService(); }
         BrainCloudEntity * getEntityService() { return client->getEntityService(); }
         BrainCloudGlobalEntity * getGlobalEntityService() { return client->getGlobalEntityService(); }
         BrainCloudMatchmaking * getMatchmakingService() { return client->getMatchmakingService(); }

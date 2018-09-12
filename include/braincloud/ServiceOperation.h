@@ -376,6 +376,18 @@ namespace BrainCloud {
 		static const ServiceOperation StopListening;
 		static const ServiceOperation UpdateActivity;
 
+        //virtual currency
+        static const ServiceOperation VirtualCurrencyGetCurrency;
+        static const ServiceOperation VirtualCurrencyGetParentCurrency;
+        static const ServiceOperation VirtualCurrencyGetPeerCurrency;
+
+        //appstore
+        static const ServiceOperation AppStoreVerifyPurchase;
+        static const ServiceOperation AppStoreGetEligiblePromotions;
+        static const ServiceOperation AppStoreGetSalesInventory;
+        static const ServiceOperation AppStoreStartPurchase;
+        static const ServiceOperation AppStoreFinalizePurchase;
+
 
 		std::string getValue() const { return _value; }
 

@@ -216,6 +216,11 @@ namespace BrainCloud
 	const OperationParam OperationParam::ProductServiceVCId = OperationParam("vc_id");
 	const OperationParam OperationParam::ProductServiceVCAmount = OperationParam("vc_amount");
 
+	// Currency service
+	const OperationParam OperationParam::VirtualCurrencyServiceVCId = OperationParam("vcId");
+	const OperationParam OperationParam::VirtualCurrencyServiceLevelName = OperationParam("levelName");
+	const OperationParam OperationParam::VirtualCurrencyServicePeerCode = OperationParam("peerCode");
+
 	// Product Service - Get Inventory Params
 	const OperationParam OperationParam::ProductServiceGetInventoryPlatform = OperationParam("platform");
 	const OperationParam OperationParam::ProductServiceGetInventoryUserCurrency = OperationParam("user_currency");
@@ -404,6 +409,16 @@ namespace BrainCloud
 	const OperationParam OperationParam::PresenceBidirectional = OperationParam("bidirectional");
 	const OperationParam OperationParam::PresenceVisible = OperationParam("visible");
 	const OperationParam OperationParam::PresenceActivity = OperationParam("activity");
+
+    //appstore
+	const OperationParam OperationParam::AppStoreStoreId = OperationParam("storeId");
+	const OperationParam OperationParam::AppStoreReceiptData = OperationParam("receiptData");
+	const OperationParam OperationParam::AppStorePriceInfoCriteria = OperationParam("priceInfoCriteria");
+	const OperationParam OperationParam::AppStoreUserCurrency = OperationParam("user_currency");
+	const OperationParam OperationParam::AppStoreCategory = OperationParam("category");
+	const OperationParam OperationParam::AppStorePurchaseData = OperationParam("purchaseData");
+	const OperationParam OperationParam::AppStoreTransactionId = OperationParam("transactionId");
+	const OperationParam OperationParam::AppStoreTransactionData = OperationParam("transactionData");
 
 	OperationParam::OperationParam(const char * value)
 	{

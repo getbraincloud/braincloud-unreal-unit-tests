@@ -32,6 +32,8 @@ namespace BrainCloud {
 		static const ServiceName Leaderboard;
         static const ServiceName Event;
         static const ServiceName Product;
+        static const ServiceName VirtualCurrency;
+        static const ServiceName AppStore;
         static const ServiceName PlayerStatistics;
         static const ServiceName GlobalStatistics;
         static const ServiceName AsyncMatch;

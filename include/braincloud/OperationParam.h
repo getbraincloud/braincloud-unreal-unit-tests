@@ -224,6 +224,11 @@ namespace BrainCloud {
 		static const OperationParam ProductServiceVCId;
 		static const OperationParam ProductServiceVCAmount;
 
+        // Virtual Currency
+        static const OperationParam VirtualCurrencyServiceVCId;
+        static const OperationParam VirtualCurrencyServiceLevelName;
+        static const OperationParam VirtualCurrencyServicePeerCode;
+
 		// Product Service - Get Inventory Params
 		static const OperationParam ProductServiceGetInventoryPlatform;
 		static const OperationParam ProductServiceGetInventoryUserCurrency;
@@ -410,6 +415,16 @@ namespace BrainCloud {
 		static const OperationParam PresenceBidirectional;
 		static const OperationParam PresenceVisible;
 		static const OperationParam PresenceActivity;
+
+        //appstore
+		static const OperationParam AppStoreStoreId;
+		static const OperationParam AppStoreReceiptData;
+		static const OperationParam AppStorePriceInfoCriteria;
+		static const OperationParam AppStoreUserCurrency;
+		static const OperationParam AppStoreCategory;
+		static const OperationParam AppStorePurchaseData;
+		static const OperationParam AppStoreTransactionId;
+		static const OperationParam AppStoreTransactionData;
 
 		std::string getValue() const { return _value; }
 
