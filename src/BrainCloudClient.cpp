@@ -55,6 +55,8 @@ namespace BrainCloud
 		_playerStatisticsEventService(new BrainCloudPlayerStatisticsEvent(this)),
 		_presenceService(new BrainCloudPresence(this)),
 		_productService(new BrainCloudProduct(this)),
+		_virtualCurrencyService(new BrainCloudVirtualCurrency(this)),
+		_appStoreService(new BrainCloudAppStore(this)),
 		_profanityService(new BrainCloudProfanity(this)),
 		_pushNotificationService(new BrainCloudPushNotification(this)),
 		_redemptionCodeService(new BrainCloudRedemptionCode(this)),

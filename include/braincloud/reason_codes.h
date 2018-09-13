@@ -541,7 +541,7 @@ static const int DIVISION_SET_DOESNOT_EXIST = 40625;
 
 static const int LOBBY_CONFIG_NOT_FOUND = 40626;
 
-static const int PRESENCE_NOT_FOUND = 40627;
+
 
 static const int PRESENCE_FEATURE_NOT_CONFIGURED = 40628;
 
@@ -563,8 +563,14 @@ static const int DIVISION_SET_MAX_SIZE_REACHED = 40636;
 
 static const int DIVISION_SET_INFO_ERROR = 40637;
 
-static const int PURCHASE_FAILED = 40700;
 
-static const int PURCHASE_CANCELLED = 40701;
+
+static const int PRESENCE_NOT_INITIALIZED = 40627;
+
+static const int DIVISION_SET_API_MUST_BE_USED = 40638;
+
+static const int INVALID_STORE_ID = 40700;
+
+static const int METHOD_DEPRECATED = 40701;
 
 #endif

@@ -167,6 +167,7 @@ include_directories("${BC_DIR}/lib/jsoncpp-1.0.0")
 add_library(brainCloud STATIC
 	# public headers
 	include/braincloud/AuthenticationType.h
+	include/braincloud/BrainCloudAppStore.h
 	include/braincloud/BrainCloudAsyncMatch.h
 	include/braincloud/BrainCloudAuthentication.h
 	include/braincloud/BrainCloudClient.h
@@ -200,6 +201,7 @@ add_library(brainCloud STATIC
 	include/braincloud/BrainCloudTime.h
 	include/braincloud/BrainCloudTournament.h
 	include/braincloud/BrainCloudTypes.h
+	include/braincloud/BrainCloudVirtualCurrency.h
 	include/braincloud/BrainCloudWrapper.h
 	include/braincloud/FriendPlatform.h
 	include/braincloud/IEventCallback.h
@@ -240,6 +242,7 @@ add_library(brainCloud STATIC
 
 	# source files
 	src/AuthenticationType.cpp
+	src/BrainCloudAppStore.cpp
 	src/BrainCloudAsyncMatch.cpp
 	src/BrainCloudAuthentication.cpp
 	src/BrainCloudChat.cpp
@@ -276,6 +279,7 @@ add_library(brainCloud STATIC
 	src/BrainCloudSteam.cpp
 	src/BrainCloudTime.cpp
 	src/BrainCloudTournament.cpp
+	src/BrainCloudVirtualCurrency.cpp
 	src/BrainCloudWrapper.cpp
 	src/FriendPlatform.cpp
 	src/GUID.cpp
