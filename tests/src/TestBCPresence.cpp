@@ -74,7 +74,7 @@ TEST_F(TestBCPresence, SetVisibility)
 	TestResult tr;
 
 	m_bc->getPresenceService()->setVisibility(true, &tr);
-	tr.runExpectFail(m_bc, HTTP_BAD_REQUEST, PRESENCE_NOT_FOUND);
+	tr.runExpectFail(m_bc, HTTP_BAD_REQUEST, PRESENCE_NOT_INITIALIZED);
 }
 
 TEST_F(TestBCPresence, StopListening)
@@ -82,7 +82,7 @@ TEST_F(TestBCPresence, StopListening)
 	TestResult tr;
 
 	m_bc->getPresenceService()->stopListening(&tr);
-	tr.runExpectFail(m_bc, HTTP_BAD_REQUEST, PRESENCE_NOT_FOUND);
+	tr.runExpectFail(m_bc, HTTP_BAD_REQUEST, PRESENCE_NOT_INITIALIZED);
 }
 
 TEST_F(TestBCPresence, UpdateActivity)
@@ -90,5 +90,5 @@ TEST_F(TestBCPresence, UpdateActivity)
 	TestResult tr;
 
 	m_bc->getPresenceService()->updateActivity("{\"status\":\"Work from home\"}", &tr);
-	tr.runExpectFail(m_bc, HTTP_BAD_REQUEST, PRESENCE_NOT_FOUND);
+	tr.runExpectFail(m_bc, HTTP_BAD_REQUEST, PRESENCE_NOT_INITIALIZED);
 }
