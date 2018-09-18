@@ -12,7 +12,7 @@ https://portal.braincloudservers.com/
 
 Package | Description
  ---- | ----
-[**Nutget**](https://www.nuget.org/packages/brainCloudCppSdk) | Windows Universal C++ Nuget Packages
+[**Nuget**](https://www.nuget.org/packages/brainCloudCppSdk) | Windows Universal C++ Nuget Packages
 [**Cocoapod**](https://cocoapods.org/pods/BrainCloudCpp) | 	Cocoapod for AppleTV, iOS, OSX
 [**brainCloudClient_Android_C._X.X.X.zip**](https://github.com/getbraincloud/braincloud-cpp/releases) | Android C++ libraries
 [**brainCloudClient_Apple_C._X.X.X.zip**](https://github.com/getbraincloud/braincloud-cpp/releases) | Apple libraries for AppleTV, iOS, OSX
