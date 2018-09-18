@@ -36,9 +36,9 @@ Pod::Spec.new do |s|
 
   s.header_mappings_dir     = "include"
   s.preserve_paths          = "include/*", "include/**/*"
-  s.public_header_files     = "include/braincloud/*.h", "include/braincloud/internal/applemac/*.h"
-  s.source_files            = "src/*.{c,cpp}", "src/apple/*.{c,cpp,mm}", "include/braincloud/*.h"
-  s.exclude_files           = "src/*.cpp", "src/*/*.cpp", "include/braincloud/internal/*.h", "include/braincloud/internal/*/*.h"
+  s.public_header_files     = "include/braincloud/*.h", "include/braincloud/internal/*.h", "include/braincloud/internal/applemac/*.h"
+  s.source_files            = "src/*.{c,cpp}", "src/apple/*.{c,cpp,mm}", "include/braincloud/*.h", "include/braincloud/internal/*.h", "include/braincloud/internal/apple/*.h"
+  s.exclude_files           = "src/DefaultSaveDataHelper.cpp", "src/DefaultGUID.cpp" , "src/DefaultFileUploader.cpp"
 
   
   # hack for use_frameworks!
