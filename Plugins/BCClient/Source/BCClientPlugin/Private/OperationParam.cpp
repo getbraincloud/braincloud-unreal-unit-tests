@@ -380,6 +380,11 @@ const OperationParam OperationParam::Score = OperationParam("score");
 const OperationParam OperationParam::RoundStartedEpoch = OperationParam("roundStartedEpoch");
 const OperationParam OperationParam::Data = OperationParam("data");
 
+//virtual currency
+const OperationParam OperationParam::VcId = OperationParam("vcId");
+const OperationParam OperationParam::LevelName = OperationParam("levelName");
+const OperationParam OperationParam::PeerCode = OperationParam("peerCode");
+
 // chat
 const OperationParam OperationParam::ChatChannelId = OperationParam("channelId");
 const OperationParam OperationParam::ChatMaxReturn = OperationParam("maxReturn");

@@ -380,6 +380,11 @@ class BCCLIENTPLUGIN_API OperationParam
 	static const OperationParam RoundStartedEpoch;
 	static const OperationParam Data;
 
+	//currency
+	static const OperationParam VcId;
+	static const OperationParam LevelName;
+	static const OperationParam PeerCode;
+
 	static const OperationParam ChatChannelId;
 	static const OperationParam ChatMaxReturn;
 	static const OperationParam ChatMessageId;

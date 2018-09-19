@@ -334,6 +334,11 @@ const ServiceOperation ServiceOperation::ViewCurrentReward = ServiceOperation(TE
 const ServiceOperation ServiceOperation::ViewReward = ServiceOperation(TEXT("VIEW_REWARD"));
 const ServiceOperation ServiceOperation::ClaimTournamentReward = ServiceOperation(TEXT("CLAIM_TOURNAMENT_REWARD"));
 
+//virtual currency
+const ServiceOperation ServiceOperation::GetCurrency = ServiceOperation(TEXT("GET_CURRENCY"));
+const ServiceOperation ServiceOperation::GetParentCurrency = ServiceOperation(TEXT("GET_PARENT_CURRENCY"));
+const ServiceOperation ServiceOperation::GetPeerCurrency = ServiceOperation(TEXT("GET_PEER_CURRENCY"));
+
 // rtt
 const ServiceOperation ServiceOperation::RequestClientConnection = ServiceOperation(TEXT("REQUEST_CLIENT_CONNECTION"));
 const ServiceOperation ServiceOperation::Connect = ServiceOperation(TEXT("CONNECT"));

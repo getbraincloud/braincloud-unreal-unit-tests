@@ -29,6 +29,7 @@ const ServiceName ServiceName::GlobalEntity = ServiceName("globalEntity");
 const ServiceName ServiceName::Friend = ServiceName("friend");
 const ServiceName ServiceName::Time = ServiceName("time");
 const ServiceName ServiceName::Tournament = ServiceName("tournament");
+const ServiceName ServiceName::VirtualCurrency = ServiceName("virtualCurrency");
 
 const ServiceName ServiceName::Leaderboard = ServiceName("leaderboard");
 const ServiceName ServiceName::Event = ServiceName("event");

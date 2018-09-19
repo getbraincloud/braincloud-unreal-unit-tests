@@ -78,6 +78,8 @@ BrainCloudClient::~BrainCloudClient()
 	destroyService(_groupService);
 	destroyService(_mailService);
 	destroyService(_tournamentService);
+	destroyService(_presenceService);
+	destroyService(_virtualCurrencyService);
 	destroyService(_rttService);
 	destroyService(_lobbyService);
 	destroyService(_chatService);
@@ -745,6 +747,16 @@ BrainCloudTournament *BrainCloudClient::getTournamentService()
 	}
 	return _tournamentService;
 }
+
+BrainCloudVirtualCurrency *BrainCloudClient::getVirtualCurrencyService()
+{
+	if (_virtualCurrencyService == nullptr)
+	{
+		_virtualCurrencyService = new BrainCloudVirtualCurrency(this);
+	}
+	return _virtualCurrencyService;
+}
+
 
 BrainCloudRTT *BrainCloudClient::getRTTService()
 {

@@ -26,6 +26,7 @@ class BCCLIENTPLUGIN_API ServiceName
     static const ServiceName Friend;
     static const ServiceName Time;
     static const ServiceName Tournament;
+    static const ServiceName VirtualCurrency;
 
     static const ServiceName Leaderboard;
     static const ServiceName Event;
