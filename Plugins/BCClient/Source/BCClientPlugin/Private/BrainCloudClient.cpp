@@ -80,6 +80,7 @@ BrainCloudClient::~BrainCloudClient()
 	destroyService(_tournamentService);
 	destroyService(_presenceService);
 	destroyService(_virtualCurrencyService);
+	destroyService(_appStoreService);
 	destroyService(_rttService);
 	destroyService(_lobbyService);
 	destroyService(_chatService);
@@ -757,6 +758,14 @@ BrainCloudVirtualCurrency *BrainCloudClient::getVirtualCurrencyService()
 	return _virtualCurrencyService;
 }
 
+BrainCloudAppStore *BrainCloudClient::getAppStoreService()
+{
+	if (_appStoreService == nullptr)
+	{
+		_appStoreService = new BrainCloudAppStore(this);
+	}
+	return _appStoreService;
+}
 
 BrainCloudRTT *BrainCloudClient::getRTTService()
 {

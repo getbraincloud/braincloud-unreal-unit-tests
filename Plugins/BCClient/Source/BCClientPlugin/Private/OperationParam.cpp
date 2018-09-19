@@ -385,6 +385,15 @@ const OperationParam OperationParam::VcId = OperationParam("vcId");
 const OperationParam OperationParam::LevelName = OperationParam("levelName");
 const OperationParam OperationParam::PeerCode = OperationParam("peerCode");
 
+//app store
+const OperationParam OperationParam::StoreId = OperationParam("storeId");
+const OperationParam OperationParam::JsonReceiptData = OperationParam("jsonReceiptData");
+const OperationParam OperationParam::UserCurrency = OperationParam("userCurrency");
+const OperationParam OperationParam::Category = OperationParam("category");
+const OperationParam OperationParam::JsonPurchaseData = OperationParam("jsonPurchaseData");
+const OperationParam OperationParam::TransactionId = OperationParam("transactionId");
+const OperationParam OperationParam::JsonTransactionData = OperationParam("jsonTransactionData");
+
 // chat
 const OperationParam OperationParam::ChatChannelId = OperationParam("channelId");
 const OperationParam OperationParam::ChatMaxReturn = OperationParam("maxReturn");

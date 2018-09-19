@@ -339,6 +339,14 @@ const ServiceOperation ServiceOperation::GetCurrency = ServiceOperation(TEXT("GE
 const ServiceOperation ServiceOperation::GetParentCurrency = ServiceOperation(TEXT("GET_PARENT_CURRENCY"));
 const ServiceOperation ServiceOperation::GetPeerCurrency = ServiceOperation(TEXT("GET_PEER_CURRENCY"));
 
+//App Store
+const ServiceOperation ServiceOperation::VerifyPurchase = ServiceOperation(TEXT("VERIFY_PURCHASE"));
+const ServiceOperation ServiceOperation::GetEligiblePromotions = ServiceOperation(TEXT("GET_ELIGIBLE_PROMOTIONS"));
+const ServiceOperation ServiceOperation::GetSalesInventory = ServiceOperation(TEXT("GET_SALES_INVENTORY"));
+const ServiceOperation ServiceOperation::GetSalesInventoryByCategory = ServiceOperation(TEXT("GET_SALES_INVENTORY_BY_CATEGORY"));
+const ServiceOperation ServiceOperation::StartPurchase = ServiceOperation(TEXT("START_PURCHASE"));
+const ServiceOperation ServiceOperation::FinalizePurchase = ServiceOperation(TEXT("FINALIZE_PURCHASE"));
+
 // rtt
 const ServiceOperation ServiceOperation::RequestClientConnection = ServiceOperation(TEXT("REQUEST_CLIENT_CONNECTION"));
 const ServiceOperation ServiceOperation::Connect = ServiceOperation(TEXT("CONNECT"));

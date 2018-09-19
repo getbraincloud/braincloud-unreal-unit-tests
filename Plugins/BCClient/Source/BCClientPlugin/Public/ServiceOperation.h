@@ -337,6 +337,14 @@ class BCCLIENTPLUGIN_API ServiceOperation
 	static const ServiceOperation GetParentCurrency;
 	static const ServiceOperation GetPeerCurrency;
 
+	//App Store
+	static const ServiceOperation VerifyPurchase;
+	static const ServiceOperation GetEligiblePromotions;
+	static const ServiceOperation GetSalesInventory;
+	static const ServiceOperation GetSalesInventoryByCategory;
+	static const ServiceOperation StartPurchase;
+	static const ServiceOperation FinalizePurchase;
+
 	// rtt
 	static const ServiceOperation RequestClientConnection;
 	static const ServiceOperation Connect;

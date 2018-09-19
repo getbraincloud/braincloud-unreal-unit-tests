@@ -27,6 +27,7 @@ class BCCLIENTPLUGIN_API ServiceName
     static const ServiceName Time;
     static const ServiceName Tournament;
     static const ServiceName VirtualCurrency;
+    static const ServiceName AppStore;
 
     static const ServiceName Leaderboard;
     static const ServiceName Event;

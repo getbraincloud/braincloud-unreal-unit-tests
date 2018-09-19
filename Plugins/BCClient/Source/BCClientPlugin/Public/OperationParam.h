@@ -385,6 +385,15 @@ class BCCLIENTPLUGIN_API OperationParam
 	static const OperationParam LevelName;
 	static const OperationParam PeerCode;
 
+	//app store
+	static const OperationParam StoreId;
+	static const OperationParam JsonReceiptData;
+	static const OperationParam UserCurrency;
+	static const OperationParam Category;
+	static const OperationParam JsonPurchaseData;
+	static const OperationParam TransactionId;
+	static const OperationParam JsonTransactionData;
+
 	static const OperationParam ChatChannelId;
 	static const OperationParam ChatMaxReturn;
 	static const OperationParam ChatMessageId;

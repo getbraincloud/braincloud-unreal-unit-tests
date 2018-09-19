@@ -37,6 +37,7 @@
 #include "BrainCloudMessaging.h"
 #include "BrainCloudPresence.h"
 #include "BrainCloudVirtualCurrency.h"
+#include "BrainCloudAppStore.h"
 
 class BrainCloudComms;
 class BrainCloudRTTComms;
@@ -372,6 +373,7 @@ class BCCLIENTPLUGIN_API BrainCloudClient
 	BrainCloudTournament *getTournamentService();
 	BrainCloudPresence *getPresenceService();
 	BrainCloudVirtualCurrency *getVirtualCurrencyService();
+	BrainCloudAppStore *getAppStoreService();
 
 	BrainCloudRTT *getRTTService();
 	BrainCloudLobby *getLobbyService();
@@ -622,6 +624,7 @@ class BCCLIENTPLUGIN_API BrainCloudClient
 	BrainCloudTournament *_tournamentService = nullptr;
 	BrainCloudPresence *_presenceService = nullptr;
 	BrainCloudVirtualCurrency *_virtualCurrencyService = nullptr;
+	BrainCloudAppStore *_appStoreService = nullptr;
 
 	BrainCloudRTT *_rttService = nullptr;
 	BrainCloudLobby *_lobbyService = nullptr;

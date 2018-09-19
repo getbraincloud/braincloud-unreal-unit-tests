@@ -39,6 +39,7 @@ class BrainCloudClient;
 #include "BrainCloudTournament.h"
 #include "BrainCloudPresence.h"
 #include "BrainCloudVirtualCurrency.h"
+#include "BrainCloudAppStore.h"
 #include "BrainCloudWrapper.generated.h"
 
 class ServiceName;
@@ -406,6 +407,7 @@ class BCCLIENTPLUGIN_API UBrainCloudWrapper : public UObject, public IServerCall
     BrainCloudTournament *getTournamentService() { return _client->getTournamentService(); }
     BrainCloudPresence *getPresenceService() { return _client->getPresenceService(); }
     BrainCloudVirtualCurrency *getVirtualCurrencyService() { return _client->getVirtualCurrencyService(); }
+    BrainCloudAppStore *getAppStoreService() { return _client->getAppStoreService(); }
 
     BrainCloudRTT *getRTTService() { return _client->getRTTService(); }
     BrainCloudLobby *getLobbyService() { return _client->getLobbyService(); }
