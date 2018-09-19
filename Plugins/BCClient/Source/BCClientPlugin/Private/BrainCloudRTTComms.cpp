@@ -259,7 +259,7 @@ void BrainCloudRTTComms::disconnect()
 	delete m_connectedSocket;
 	m_connectedSocket = nullptr;
 
-	m_lws_destroy_context(m_lwsContext);
+	lws_context_destroy(m_lwsContext);
 	m_lwsContext = nullptr;
 
 	m_cxId = TEXT("");
