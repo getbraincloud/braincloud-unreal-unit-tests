@@ -6,7 +6,8 @@
 //
 //
 
-#pragma once
+#ifndef _AUTHENTICATIONTYPE_H_
+#define _AUTHENTICATIONTYPE_H_
 
 #include <string>
 
@@ -55,3 +56,5 @@ namespace BrainCloud
         return a.toString() == s;
     }
 }
+
+#endif /* _AUTHENTICATIONTYPE_H_ */
