@@ -14,7 +14,7 @@ BrainCloudVirtualCurrency::BrainCloudVirtualCurrency(BrainCloudClient* client) :
         TSharedRef<FJsonObject> message = MakeShareable(new FJsonObject());
 	    message->SetStringField(OperationParam::VirtualCurrencyVcId.getValue(), in_vcId);
 
-        ServerCall * sc = new ServerCall(ServiceName::VirtualCurrency, ServiceOperation::GetCurrency, message, callback);
+        ServerCall * sc = new ServerCall(ServiceName::VirtualCurrency, ServiceOperation::GetPlayerCurrency, message, callback);
 	    _client->sendRequest(sc);
     }
 

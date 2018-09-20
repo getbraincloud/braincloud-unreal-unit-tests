@@ -29,7 +29,7 @@ public:
 	*
 	 * If you need to use it client side, enable 'Allow Currency Calls from Client' on the brainCloud dashboard
 	*/
-	//DEPRECATED("3.2.0", "Warning: Method is recommended to be used in Cloud Code only for security. If you need to use it client side, enable 'Allow Currency Calls from Client' on the brainCloud dashboard.")
+	DEPRECATED("3.2.0", "Warning: Method is recommended to be used in Cloud Code only for security. If you need to use it client side, enable 'Allow Currency Calls from Client' on the brainCloud dashboard.")
 		void awardCurrency(const FString& currencyType, int32 amount, IServerCallback* callback);
 
 	/**
@@ -37,7 +37,7 @@ public:
 	 *
 	* If you need to use it client side, enable 'Allow Currency Calls from Client' on the brainCloud dashboard
 	*/
-	//DEPRECATED("3.2.0", "Warning: Method is recommended to be used in Cloud Code only for security. If you need to use it client side, enable 'Allow Currency Calls from Client' on the brainCloud dashboard.")
+	DEPRECATED("3.2.0", "Warning: Method is recommended to be used in Cloud Code only for security. If you need to use it client side, enable 'Allow Currency Calls from Client' on the brainCloud dashboard.")
 		void consumeCurrency(const FString& currencyType, int32 amount, IServerCallback* callback);
 
 	/**
@@ -45,7 +45,7 @@ public:
 	 *
 	* If you need to use it client side, enable 'Allow Currency Calls from Client' on the brainCloud dashboard
 	*/
-	//DEPRECATED("3.2.0", "Warning: Method is recommended to be used in Cloud Code only for security. If you need to use it client side, enable 'Allow Currency Calls from Client' on the brainCloud dashboard.")
+	DEPRECATED("3.2.0", "Warning: Method is recommended to be used in Cloud Code only for security. If you need to use it client side, enable 'Allow Currency Calls from Client' on the brainCloud dashboard.")
 		void resetCurrency(IServerCallback* callback);
 
     /**
