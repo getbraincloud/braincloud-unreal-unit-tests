@@ -30,7 +30,7 @@ class UBCAppStoreProxy : public UBCBlueprintCallProxyBase
     * @param in_callback The method to be invoked when the server response is received
     */
    	UFUNCTION(BlueprintCallable, meta = (BlueprintInternalUseOnly = "true"), Category = "BrainCloud|AppStore")
-	  static UBCAppStoreProxy *VerifyPurchase(UBrainCloudWrapper *brainCloudWrapper, const FString &storeId, const FString &jsonReceiptData);
+	  static UBCAppStoreProxy *VerifyPurchase(UBrainCloudWrapper *brainCloudWrapper, const FString &storeId, const FString &receiptData);
 
     /**
     * Returns the eligible promotions for the player.
@@ -104,7 +104,7 @@ class UBCAppStoreProxy : public UBCBlueprintCallProxyBase
     * @param in_callback The method to be invoked when the server response is received
     */
     UFUNCTION(BlueprintCallable, meta = (BlueprintInternalUseOnly = "true"), Category = "BrainCloud|AppStore")
-	  static UBCAppStoreProxy *StartPurchase(UBrainCloudWrapper *brainCloudWrapper, const FString &storeId, const FString &jsonPurchaseData);
+	  static UBCAppStoreProxy *StartPurchase(UBrainCloudWrapper *brainCloudWrapper, const FString &storeId, const FString &purchaseData);
 
     /**
     * Finalize A Two Staged Purchase Transaction
@@ -125,5 +125,5 @@ class UBCAppStoreProxy : public UBCBlueprintCallProxyBase
     * @param in_callback The method to be invoked when the server response is received
     */
     UFUNCTION(BlueprintCallable, meta = (BlueprintInternalUseOnly = "true"), Category = "BrainCloud|AppStore")
-	  static UBCAppStoreProxy *FinalizePurchase(UBrainCloudWrapper *brainCloudWrapper, const FString &storeId, const FString &transactionId, const FString& jsonTransactionData);
+	  static UBCAppStoreProxy *FinalizePurchase(UBrainCloudWrapper *brainCloudWrapper, const FString &storeId, const FString &transactionId, const FString& transactionData);
 };

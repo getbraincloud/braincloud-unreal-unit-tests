@@ -388,12 +388,12 @@ const OperationParam OperationParam::VirtualCurrencyPriceInfoCriteria = Operatio
 
 //app store
 const OperationParam OperationParam::AppStoreId = OperationParam("storeId");
-const OperationParam OperationParam::AppStoreJsonReceiptData = OperationParam("jsonReceiptData");
+const OperationParam OperationParam::AppStoreJsonReceiptData = OperationParam("receiptData");
 const OperationParam OperationParam::AppStoreUserCurrency = OperationParam("userCurrency");
 const OperationParam OperationParam::AppStoreCategory = OperationParam("category");
-const OperationParam OperationParam::AppStoreJsonPurchaseData = OperationParam("jsonPurchaseData");
+const OperationParam OperationParam::AppStoreJsonPurchaseData = OperationParam("purchaseData");
 const OperationParam OperationParam::AppStoreTransactionId = OperationParam("transactionId");
-const OperationParam OperationParam::AppStoreJsonTransactionData = OperationParam("jsonTransactionData");
+const OperationParam OperationParam::AppStoreJsonTransactionData = OperationParam("transactionData");
 const OperationParam OperationParam::AppStorePriceInfoCriteria = OperationParam("priceInfoCriteria");
 
 // chat
