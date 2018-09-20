@@ -341,9 +341,8 @@ const ServiceOperation ServiceOperation::GetPeerCurrency = ServiceOperation(TEXT
 
 //App Store
 const ServiceOperation ServiceOperation::VerifyPurchase = ServiceOperation(TEXT("VERIFY_PURCHASE"));
-const ServiceOperation ServiceOperation::GetEligiblePromotions = ServiceOperation(TEXT("GET_ELIGIBLE_PROMOTIONS"));
-const ServiceOperation ServiceOperation::GetSalesInventory = ServiceOperation(TEXT("GET_SALES_INVENTORY"));
-const ServiceOperation ServiceOperation::GetSalesInventoryByCategory = ServiceOperation(TEXT("GET_SALES_INVENTORY_BY_CATEGORY"));
+const ServiceOperation ServiceOperation::GetEligiblePromotions = ServiceOperation(TEXT("ELIGIBLE_PROMOTIONS"));
+const ServiceOperation ServiceOperation::GetSalesInventory = ServiceOperation(TEXT("GET_INVENTORY"));
 const ServiceOperation ServiceOperation::StartPurchase = ServiceOperation(TEXT("START_PURCHASE"));
 const ServiceOperation ServiceOperation::FinalizePurchase = ServiceOperation(TEXT("FINALIZE_PURCHASE"));
 

@@ -48,7 +48,7 @@ void BrainCloudAppStore::getSalesInventoryByCategory(const FString& in_storeId, 
     }
     message->SetObjectField(OperationParam::AppStorePriceInfoCriteria.getValue(), priceInfoCriteria);
 
-    ServerCall * sc = new ServerCall(ServiceName::AppStore, ServiceOperation::GetSalesInventoryByCategory, message, callback);
+    ServerCall * sc = new ServerCall(ServiceName::AppStore, ServiceOperation::GetSalesInventory, message, callback);
     _client->sendRequest(sc);
 }
 
