@@ -335,9 +335,9 @@ const ServiceOperation ServiceOperation::ViewReward = ServiceOperation(TEXT("VIE
 const ServiceOperation ServiceOperation::ClaimTournamentReward = ServiceOperation(TEXT("CLAIM_TOURNAMENT_REWARD"));
 
 //virtual currency
-const ServiceOperation ServiceOperation::GetCurrency = ServiceOperation(TEXT("GET_CURRENCY"));
-const ServiceOperation ServiceOperation::GetParentCurrency = ServiceOperation(TEXT("GET_PARENT_CURRENCY"));
-const ServiceOperation ServiceOperation::GetPeerCurrency = ServiceOperation(TEXT("GET_PEER_CURRENCY"));
+const ServiceOperation ServiceOperation::GetCurrency = ServiceOperation(TEXT("GET_PLAYER_VC"));
+const ServiceOperation ServiceOperation::GetParentCurrency = ServiceOperation(TEXT("GET_PARENT_VC"));
+const ServiceOperation ServiceOperation::GetPeerCurrency = ServiceOperation(TEXT("GET_PEER_VC"));
 
 //App Store
 const ServiceOperation ServiceOperation::VerifyPurchase = ServiceOperation(TEXT("VERIFY_PURCHASE"));

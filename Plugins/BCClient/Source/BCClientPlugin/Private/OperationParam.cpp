@@ -381,18 +381,20 @@ const OperationParam OperationParam::RoundStartedEpoch = OperationParam("roundSt
 const OperationParam OperationParam::Data = OperationParam("data");
 
 //virtual currency
-const OperationParam OperationParam::VcId = OperationParam("vcId");
-const OperationParam OperationParam::LevelName = OperationParam("levelName");
-const OperationParam OperationParam::PeerCode = OperationParam("peerCode");
+const OperationParam OperationParam::VirtualCurrencyVcId = OperationParam("vcId");
+const OperationParam OperationParam::VirtualCurrencyLevelName = OperationParam("levelName");
+const OperationParam OperationParam::VirtualCurrencyPeerCode = OperationParam("peerCode");
+const OperationParam OperationParam::VirtualCurrencyPriceInfoCriteria = OperationParam("priceInfoCriteria");
 
 //app store
-const OperationParam OperationParam::StoreId = OperationParam("storeId");
-const OperationParam OperationParam::JsonReceiptData = OperationParam("jsonReceiptData");
-const OperationParam OperationParam::UserCurrency = OperationParam("userCurrency");
-const OperationParam OperationParam::Category = OperationParam("category");
-const OperationParam OperationParam::JsonPurchaseData = OperationParam("jsonPurchaseData");
-const OperationParam OperationParam::TransactionId = OperationParam("transactionId");
-const OperationParam OperationParam::JsonTransactionData = OperationParam("jsonTransactionData");
+const OperationParam OperationParam::AppStoreId = OperationParam("storeId");
+const OperationParam OperationParam::AppStoreJsonReceiptData = OperationParam("jsonReceiptData");
+const OperationParam OperationParam::AppStoreUserCurrency = OperationParam("userCurrency");
+const OperationParam OperationParam::AppStoreCategory = OperationParam("category");
+const OperationParam OperationParam::AppStoreJsonPurchaseData = OperationParam("jsonPurchaseData");
+const OperationParam OperationParam::AppStoreTransactionId = OperationParam("transactionId");
+const OperationParam OperationParam::AppStoreJsonTransactionData = OperationParam("jsonTransactionData");
+const OperationParam OperationParam::AppStorePriceInfoCriteria = OperationParam("priceInfoCriteria");
 
 // chat
 const OperationParam OperationParam::ChatChannelId = OperationParam("channelId");

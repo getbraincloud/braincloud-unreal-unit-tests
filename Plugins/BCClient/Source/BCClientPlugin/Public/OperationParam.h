@@ -380,19 +380,21 @@ class BCCLIENTPLUGIN_API OperationParam
 	static const OperationParam RoundStartedEpoch;
 	static const OperationParam Data;
 
-	//currency
-	static const OperationParam VcId;
-	static const OperationParam LevelName;
-	static const OperationParam PeerCode;
+	//virtual currency
+	static const OperationParam VirtualCurrencyVcId;
+	static const OperationParam VirtualCurrencyLevelName;
+	static const OperationParam VirtualCurrencyPeerCode;
+	static const OperationParam VirtualCurrencyPriceInfoCriteria;
 
 	//app store
-	static const OperationParam StoreId;
-	static const OperationParam JsonReceiptData;
-	static const OperationParam UserCurrency;
-	static const OperationParam Category;
-	static const OperationParam JsonPurchaseData;
-	static const OperationParam TransactionId;
-	static const OperationParam JsonTransactionData;
+	static const OperationParam AppStoreId;
+	static const OperationParam AppStoreJsonReceiptData;
+	static const OperationParam AppStoreUserCurrency;
+	static const OperationParam AppStoreCategory;
+	static const OperationParam AppStoreJsonPurchaseData;
+	static const OperationParam AppStoreTransactionId;
+	static const OperationParam AppStoreJsonTransactionData;
+	static const OperationParam AppStorePriceInfoCriteria;
 
 	static const OperationParam ChatChannelId;
 	static const OperationParam ChatMaxReturn;

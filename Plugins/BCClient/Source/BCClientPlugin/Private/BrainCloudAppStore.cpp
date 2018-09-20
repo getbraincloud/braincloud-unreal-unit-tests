@@ -12,8 +12,8 @@ BrainCloudAppStore::BrainCloudAppStore(BrainCloudClient* client) : _client(clien
 void BrainCloudAppStore::verifyPurchase(const FString& in_storeId, const FString& in_jsonReceiptData, IServerCallback * callback)
 {
     TSharedRef<FJsonObject> message = MakeShareable(new FJsonObject());
-    message->SetStringField(OperationParam::StoreId.getValue(), in_storeId);
-    message->SetStringField(OperationParam::JsonReceiptData.getValue(), in_jsonReceiptData);
+    message->SetStringField(OperationParam::AppStoreId.getValue(), in_storeId);
+    message->SetObjectField(OperationParam::AppStoreJsonReceiptData.getValue(), JsonUtil::jsonStringToValue(in_jsonReceiptData));
 
     ServerCall * sc = new ServerCall(ServiceName::AppStore, ServiceOperation::VerifyPurchase, message, callback);
     _client->sendRequest(sc);
@@ -29,20 +29,24 @@ void BrainCloudAppStore::getEligiblePromotions(IServerCallback * callback)
 
 void BrainCloudAppStore::getSalesInventory(const FString& in_storeId, const FString& in_userCurrency, IServerCallback * callback)
 {
-    TSharedRef<FJsonObject> message = MakeShareable(new FJsonObject());
-    message->SetStringField(OperationParam::StoreId.getValue(), in_storeId);
-    message->SetStringField(OperationParam::UserCurrency.getValue(), in_userCurrency);
-
-    ServerCall * sc = new ServerCall(ServiceName::AppStore, ServiceOperation::GetSalesInventory, message, callback);
-    _client->sendRequest(sc);
+    getSalesInventoryByCategory(in_storeId, in_userCurrency, "", callback);
 }
 
 void BrainCloudAppStore::getSalesInventoryByCategory(const FString& in_storeId, const FString& in_userCurrency, const FString& in_category, IServerCallback * callback)
 {
     TSharedRef<FJsonObject> message = MakeShareable(new FJsonObject());
-    message->SetStringField(OperationParam::StoreId.getValue(), in_storeId);
-    message->SetStringField(OperationParam::UserCurrency.getValue(), in_userCurrency);
-    message->SetStringField(OperationParam::Category.getValue(), in_category);
+    message->SetStringField(OperationParam::AppStoreId.getValue(), in_storeId);
+    if(!in_category.IsEmpty())
+    {
+        message->SetStringField(OperationParam::AppStoreCategory.getValue(), in_category);
+    }
+
+    TSharedRef<FJsonObject> priceInfoCriteria = MakeShareable(new FJsonObject());
+    if(!in_userCurrency.IsEmpty())
+    {
+        priceInfoCriteria->SetStringField(OperationParam::AppStoreUserCurrency.getValue(), in_userCurrency);
+    }
+    message->SetObjectField(OperationParam::AppStorePriceInfoCriteria.getValue(), priceInfoCriteria);
 
     ServerCall * sc = new ServerCall(ServiceName::AppStore, ServiceOperation::GetSalesInventoryByCategory, message, callback);
     _client->sendRequest(sc);
@@ -51,8 +55,8 @@ void BrainCloudAppStore::getSalesInventoryByCategory(const FString& in_storeId, 
 void BrainCloudAppStore::startPurchase(const FString& in_storeId, const FString& in_jsonPurchaseData, IServerCallback * callback)
 {
     TSharedRef<FJsonObject> message = MakeShareable(new FJsonObject());
-    message->SetStringField(OperationParam::StoreId.getValue(), in_storeId);
-    message->SetStringField(OperationParam::JsonPurchaseData.getValue(), in_jsonPurchaseData);
+    message->SetStringField(OperationParam::AppStoreId.getValue(), in_storeId);
+    message->SetObjectField(OperationParam::AppStoreJsonPurchaseData.getValue(), JsonUtil::jsonStringToValue(in_jsonPurchaseData));
 
     ServerCall * sc = new ServerCall(ServiceName::AppStore, ServiceOperation::StartPurchase, message, callback);
     _client->sendRequest(sc);
@@ -61,9 +65,9 @@ void BrainCloudAppStore::startPurchase(const FString& in_storeId, const FString&
 void BrainCloudAppStore::finalizePurchase(const FString& in_storeId, const FString& in_transactionId, const FString& in_jsonTransactionData, IServerCallback * callback)
 {
     TSharedRef<FJsonObject> message = MakeShareable(new FJsonObject());
-    message->SetStringField(OperationParam::StoreId.getValue(), in_storeId);
-    message->SetStringField(OperationParam::TransactionId.getValue(), in_transactionId);
-    message->SetStringField(OperationParam::JsonTransactionData.getValue(), in_jsonTransactionData);
+    message->SetStringField(OperationParam::AppStoreId.getValue(), in_storeId);
+    message->SetStringField(OperationParam::AppStoreTransactionId.getValue(), in_transactionId);
+    message->SetObjectField(OperationParam::AppStoreJsonTransactionData.getValue(), JsonUtil::jsonStringToValue(in_jsonTransactionData));
 
     ServerCall * sc = new ServerCall(ServiceName::AppStore, ServiceOperation::FinalizePurchase, message, callback);
     _client->sendRequest(sc);
