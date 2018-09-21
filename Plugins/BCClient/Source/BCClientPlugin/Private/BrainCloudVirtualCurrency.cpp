@@ -37,3 +37,23 @@ BrainCloudVirtualCurrency::BrainCloudVirtualCurrency(BrainCloudClient* client) :
         ServerCall * sc = new ServerCall(ServiceName::VirtualCurrency, ServiceOperation::GetPeerCurrency, message, callback);
 	    _client->sendRequest(sc);
     }
+
+    void BrainCloudVirtualCurrency::awardCurrency(const FString& currencyType, int32 amount, IServerCallback* callback)
+    {
+        TSharedRef<FJsonObject> message = MakeShareable(new FJsonObject());
+	    message->SetStringField(OperationParam::VirtualCurrencyVcId.getValue(), currencyType);
+        message->SetNumberField(OperationParam::VirtualCurrencyAmount.getValue(), amount);
+
+        ServerCall * sc = new ServerCall(ServiceName::VirtualCurrency, ServiceOperation::AwardVirtualCurrency, message, callback);
+	    _client->sendRequest(sc);
+    }
+
+    void BrainCloudVirtualCurrency::consumeCurrency(const FString& currencyType, int32 amount, IServerCallback* callback)
+    {
+        TSharedRef<FJsonObject> message = MakeShareable(new FJsonObject());
+	    message->SetStringField(OperationParam::VirtualCurrencyVcId.getValue(), currencyType);
+        message->SetNumberField(OperationParam::VirtualCurrencyAmount.getValue(), amount);
+
+        ServerCall * sc = new ServerCall(ServiceName::VirtualCurrency, ServiceOperation::ConsumeVirtualCurrency, message, callback);
+	    _client->sendRequest(sc);
+    }

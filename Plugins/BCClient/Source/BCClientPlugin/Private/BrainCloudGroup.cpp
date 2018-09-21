@@ -356,6 +356,16 @@ void BrainCloudGroup::updateGroupName(const FString& groupId, const FString& nam
 	_client->sendRequest(sc);
 }
 
+void BrainCloudGroup::setGroupOpen(const FString& groupId, bool isOpenGroup, IServerCallback* callback)
+{
+	TSharedRef<FJsonObject> message = MakeShareable(new FJsonObject());
+	message->SetStringField(OperationParam::GroupId.getValue(), groupId);
+	message->SetBoolField(OperationParam::GroupIsOpenGroup.getValue(), isOpenGroup);
+
+	ServerCall * sc = new ServerCall(ServiceName::Group, ServiceOperation::SetGroupOpen, message, callback);
+	_client->sendRequest(sc);
+}
+
 FString BrainCloudGroup::roleToString(ERole role)
 {
 	switch (role)
@@ -383,3 +393,4 @@ FString BrainCloudGroup::AutoJoinStrategyToString(EAutoJoinStrategy strategy)
 	}
 	return "STRATEGY_NOT_FOUND";
 }
+

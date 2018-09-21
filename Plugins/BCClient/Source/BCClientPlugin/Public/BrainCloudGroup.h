@@ -422,6 +422,18 @@ public:
      */
     void updateGroupName(const FString& groupId, const FString& name, IServerCallback* callback = nullptr);
 
+    /**
+     * Set whether a group is open true or false
+     *
+     * Service Name - group
+     * Service Operation - SET_GROUP_OPEN
+     *
+     * @param groupId ID of the group.
+     * @param isOpenGroup whether its open or not
+     * @param callback The method to be invoked when the server response is received
+     */
+    void setGroupOpen(const FString& groupId, bool isOpenGroup, IServerCallback* callback = nullptr);
+    
 private:
     BrainCloudClient* _client = nullptr;
 

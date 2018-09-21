@@ -385,6 +385,7 @@ const OperationParam OperationParam::VirtualCurrencyVcId = OperationParam("vcId"
 const OperationParam OperationParam::VirtualCurrencyLevelName = OperationParam("levelName");
 const OperationParam OperationParam::VirtualCurrencyPeerCode = OperationParam("peerCode");
 const OperationParam OperationParam::VirtualCurrencyPriceInfoCriteria = OperationParam("priceInfoCriteria");
+const OperationParam OperationParam::VirtualCurrencyAmount = OperationParam("vcAmount");
 
 //app store
 const OperationParam OperationParam::AppStoreId = OperationParam("storeId");

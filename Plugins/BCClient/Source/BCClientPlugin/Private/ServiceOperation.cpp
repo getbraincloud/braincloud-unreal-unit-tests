@@ -303,6 +303,7 @@ const ServiceOperation ServiceOperation::UpdateGroupData = ServiceOperation(TEXT
 const ServiceOperation ServiceOperation::UpdateGroupEntity = ServiceOperation(TEXT("UPDATE_GROUP_ENTITY_DATA"));
 const ServiceOperation ServiceOperation::UpdateGroupMember = ServiceOperation(TEXT("UPDATE_GROUP_MEMBER"));
 const ServiceOperation ServiceOperation::UpdateGroupName = ServiceOperation(TEXT("UPDATE_GROUP_NAME"));
+const ServiceOperation ServiceOperation::SetGroupOpen = ServiceOperation(TEXT("SET_GROUP_OPEN"));
 
 //mail
 const ServiceOperation ServiceOperation::SendBasicEmail = ServiceOperation(TEXT("SEND_BASIC_EMAIL"));
@@ -338,6 +339,8 @@ const ServiceOperation ServiceOperation::ClaimTournamentReward = ServiceOperatio
 const ServiceOperation ServiceOperation::GetPlayerCurrency = ServiceOperation(TEXT("GET_PLAYER_VC"));
 const ServiceOperation ServiceOperation::GetParentCurrency = ServiceOperation(TEXT("GET_PARENT_VC"));
 const ServiceOperation ServiceOperation::GetPeerCurrency = ServiceOperation(TEXT("GET_PEER_VC"));
+const ServiceOperation ServiceOperation::AwardVirtualCurrency = ServiceOperation(TEXT("AWARD_VC"));
+const ServiceOperation ServiceOperation::ConsumeVirtualCurrency = ServiceOperation(TEXT("CONSUME_VC"));
 
 //App Store
 const ServiceOperation ServiceOperation::VerifyPurchase = ServiceOperation(TEXT("VERIFY_PURCHASE"));

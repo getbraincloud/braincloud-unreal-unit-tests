@@ -253,3 +253,10 @@ UBCGroupProxy* UBCGroupProxy::UpdateGroupName(UBrainCloudWrapper *brainCloudWrap
     UBCWrapperProxy::GetBrainCloudInstance(brainCloudWrapper)->getGroupService()->updateGroupName(groupId, name, Proxy);
     return Proxy;
 }
+
+UBCGroupProxy* UBCGroupProxy::SetGroupOpen(UBrainCloudWrapper *brainCloudWrapper, const FString& groupId, bool isOpenGroup)
+{
+    UBCGroupProxy* Proxy = NewObject<UBCGroupProxy>();
+    UBCWrapperProxy::GetBrainCloudInstance(brainCloudWrapper)->getGroupService()->setGroupOpen(groupId, isOpenGroup, Proxy);
+    return Proxy;
+}

@@ -385,6 +385,7 @@ class BCCLIENTPLUGIN_API OperationParam
 	static const OperationParam VirtualCurrencyLevelName;
 	static const OperationParam VirtualCurrencyPeerCode;
 	static const OperationParam VirtualCurrencyPriceInfoCriteria;
+	static const OperationParam VirtualCurrencyAmount;
 
 	//app store
 	static const OperationParam AppStoreId;

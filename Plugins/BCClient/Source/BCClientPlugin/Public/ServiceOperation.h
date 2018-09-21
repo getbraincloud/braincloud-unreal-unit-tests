@@ -301,6 +301,7 @@ class BCCLIENTPLUGIN_API ServiceOperation
 	static const ServiceOperation UpdateGroupEntity;
 	static const ServiceOperation UpdateGroupMember;
 	static const ServiceOperation UpdateGroupName;
+	static const ServiceOperation SetGroupOpen;
 
 	//mail
 	static const ServiceOperation SendBasicEmail;
@@ -336,6 +337,8 @@ class BCCLIENTPLUGIN_API ServiceOperation
 	static const ServiceOperation GetPlayerCurrency;
 	static const ServiceOperation GetParentCurrency;
 	static const ServiceOperation GetPeerCurrency;
+	static const ServiceOperation ConsumeVirtualCurrency;
+	static const ServiceOperation AwardVirtualCurrency;
 
 	//App Store
 	static const ServiceOperation VerifyPurchase;
