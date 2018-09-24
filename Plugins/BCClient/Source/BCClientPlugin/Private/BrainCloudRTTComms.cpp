@@ -85,6 +85,7 @@ void BrainCloudRTTComms::enableRTT(eBCRTTConnectionType in_connectionType, IServ
 
 void BrainCloudRTTComms::disableRTT()
 {
+	disconnect();
 }
 
 void BrainCloudRTTComms::RunCallbacks()
