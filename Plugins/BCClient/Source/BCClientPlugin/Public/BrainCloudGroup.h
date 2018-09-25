@@ -14,8 +14,8 @@ enum class ERole : uint8
 UENUM(BlueprintType)
 enum class EAutoJoinStrategy : uint8
 {
-	JoinFirstGroup UMETA(DisplayName = "JoinFirstGroup"),
-	JoinRandomGroup UMETA(DisplayName = "JoinRandomGroup")
+    JoinFirstGroup UMETA(DisplayName = "JoinFirstGroup"),
+    JoinRandomGroup UMETA(DisplayName = "JoinRandomGroup")
 };
 
 class BrainCloudClient;
@@ -24,8 +24,8 @@ class UBrainCloudGroupACL;
 
 class BCCLIENTPLUGIN_API BrainCloudGroup
 {
-public:
-    BrainCloudGroup(BrainCloudClient* client);
+  public:
+    BrainCloudGroup(BrainCloudClient *client);
 
     /**
      * Accept an outstanding invitation to join the group.
@@ -36,7 +36,7 @@ public:
      * @param groupId ID of the group.
      * @param callback The method to be invoked when the server response is received
      */
-    void acceptGroupInvitation(const FString& groupId, IServerCallback* callback = nullptr);
+    void acceptGroupInvitation(const FString &groupId, IServerCallback *callback = nullptr);
 
     /**
      * Add a member to the group.
@@ -50,7 +50,7 @@ public:
      * @param jsonAttributes Attributes of the member being added.
      * @param callback The method to be invoked when the server response is received
      */
-    void addGroupMember(const FString& groupId, const FString& profileId, ERole role, const FString& jsonAttributes, IServerCallback* callback = nullptr);
+    void addGroupMember(const FString &groupId, const FString &profileId, ERole role, const FString &jsonAttributes, IServerCallback *callback = nullptr);
 
     /**
      * Approve an outstanding request to join the group.
@@ -64,9 +64,9 @@ public:
      * @param jsonAttributes Attributes of the member being invited.
      * @param callback The method to be invoked when the server response is received
      */
-    void approveGroupJoinRequest(const FString& groupId, const FString& profileId, ERole role, const FString& jsonAttributes, IServerCallback* callback = nullptr);
+    void approveGroupJoinRequest(const FString &groupId, const FString &profileId, ERole role, const FString &jsonAttributes, IServerCallback *callback = nullptr);
 
-	/**
+    /**
 	* Automatically join an open group that matches the search criteria and has space available.
 	*
 	* Service Name - group
@@ -77,7 +77,7 @@ public:
 	* @param dataQueryJson Query parameters (optional)
 	* @param callback The method to be invoked when the server response is received
 	*/
-	void autoJoinGroup(const FString& groupType, EAutoJoinStrategy autoJoinStrategy, const FString& dataQueryJson, IServerCallback* callback = nullptr);
+    void autoJoinGroup(const FString &groupType, EAutoJoinStrategy autoJoinStrategy, const FString &dataQueryJson, IServerCallback *callback = nullptr);
 
     /**
      * Cancel an outstanding invitation to the group.
@@ -89,7 +89,7 @@ public:
      * @param profileId Profile ID of the invitation being deleted.
      * @param callback The method to be invoked when the server response is received
      */
-    void cancelGroupInvitation(const FString& groupId, const FString& profileId, IServerCallback* callback = nullptr);
+    void cancelGroupInvitation(const FString &groupId, const FString &profileId, IServerCallback *callback = nullptr);
 
     /**
      * Create a group.
@@ -107,14 +107,14 @@ public:
      * @param callback The method to be invoked when the server response is received
      */
     void createGroup(
-        const FString& name,
-        const FString& groupType,
+        const FString &name,
+        const FString &groupType,
         bool isOpenGroup,
-        UBrainCloudGroupACL* acl,
-        const FString& jsonData,
-        const FString& jsonOwnerAttributes,
-        const FString& jsonDefaultMemberAttributes,
-        IServerCallback* callback = nullptr);
+        UBrainCloudGroupACL *acl,
+        const FString &jsonData,
+        const FString &jsonOwnerAttributes,
+        const FString &jsonDefaultMemberAttributes,
+        IServerCallback *callback = nullptr);
 
     /**
      * Create a group entity.
@@ -130,12 +130,12 @@ public:
      * @param callback The method to be invoked when the server response is received
      */
     void createGroupEntity(
-        const FString& groupId,
-        const FString& entityType,
+        const FString &groupId,
+        const FString &entityType,
         bool isOwnedByGroupMember,
-        UBrainCloudGroupACL* acl,
-        const FString& jsonData,
-        IServerCallback* callback = nullptr);
+        UBrainCloudGroupACL *acl,
+        const FString &jsonData,
+        IServerCallback *callback = nullptr);
 
     /**
      * Delete a group.
@@ -147,7 +147,7 @@ public:
      * @param version Current version of the group
      * @param callback The method to be invoked when the server response is received
      */
-    void deleteGroup(const FString& groupId, int32 version, IServerCallback* callback = nullptr);
+    void deleteGroup(const FString &groupId, int32 version, IServerCallback *callback = nullptr);
 
     /**
      * Delete a group entity.
@@ -160,7 +160,7 @@ public:
      * @param version The current version of the group entity (for concurrency checking).
      * @param callback The method to be invoked when the server response is received
      */
-    void deleteGroupEntity(const FString& groupId, const FString& entityId, int32 version, IServerCallback* callback = nullptr);
+    void deleteGroupEntity(const FString &groupId, const FString &entityId, int32 version, IServerCallback *callback = nullptr);
 
     /**
      * Read information on groups to which the current player belongs.
@@ -169,7 +169,7 @@ public:
      * Service Operation - GET_MY_GROUPS
      * @param callback The method to be invoked when the server response is received
      */
-    void getMyGroups(IServerCallback* callback = nullptr);
+    void getMyGroups(IServerCallback *callback = nullptr);
 
     /**
      * Increment elements for the group's data field.
@@ -181,7 +181,7 @@ public:
      * @param jsonData Partial data map with incremental values.
      * @param callback The method to be invoked when the server response is received
      */
-    void incrementGroupData(const FString& groupId, const FString& jsonData, IServerCallback* callback = nullptr);
+    void incrementGroupData(const FString &groupId, const FString &jsonData, IServerCallback *callback = nullptr);
 
     /**
      * Increment elements for the group entity's data field.
@@ -194,7 +194,7 @@ public:
      * @param jsonData Partial data map with incremental values.
      * @param callback The method to be invoked when the server response is received
      */
-    void incrementGroupEntityData(const FString& groupId, const FString& entityId, const FString& jsonData, IServerCallback* callback = nullptr);
+    void incrementGroupEntityData(const FString &groupId, const FString &entityId, const FString &jsonData, IServerCallback *callback = nullptr);
 
     /**
      * Invite a member to the group.
@@ -208,7 +208,7 @@ public:
      * @param jsonAttributes Attributes of the member being invited.
      * @param callback The method to be invoked when the server response is received
      */
-    void inviteGroupMember(const FString& groupId, const FString& profileId, ERole role, const FString& jsonAttributes, IServerCallback* callback = nullptr);
+    void inviteGroupMember(const FString &groupId, const FString &profileId, ERole role, const FString &jsonAttributes, IServerCallback *callback = nullptr);
 
     /**
      * Join an open group or request to join a closed group.
@@ -219,7 +219,7 @@ public:
      * @param groupId ID of the group.
      * @param callback The method to be invoked when the server response is received
      */
-    void joinGroup(const FString& groupId, IServerCallback* callback = nullptr);
+    void joinGroup(const FString &groupId, IServerCallback *callback = nullptr);
 
     /**
      * Leave a group in which the player is a member.
@@ -230,7 +230,7 @@ public:
      * @param groupId ID of the group.
      * @param callback The method to be invoked when the server response is received
      */
-    void leaveGroup(const FString& groupId, IServerCallback* callback = nullptr);
+    void leaveGroup(const FString &groupId, IServerCallback *callback = nullptr);
 
     /**
      * Read a page of group information.
@@ -241,7 +241,7 @@ public:
      * @param context Query context.
      * @param callback The method to be invoked when the server response is received
      */
-    void listGroupsPage(const FString& jsonContext, IServerCallback* callback = nullptr);
+    void listGroupsPage(const FString &jsonContext, IServerCallback *callback = nullptr);
 
     /**
      * Read a page of group information.
@@ -253,7 +253,7 @@ public:
      * @param offset Number of pages by which to offset the query.
      * @param callback The method to be invoked when the server response is received
      */
-    void listGroupsPageByOffset(const FString& encodedContext, int32 pageOffset, IServerCallback* callback = nullptr);
+    void listGroupsPageByOffset(const FString &encodedContext, int32 pageOffset, IServerCallback *callback = nullptr);
 
     /**
      * Read information on groups to which the specified player belongs.  Access is subject to restrictions.
@@ -264,7 +264,7 @@ public:
      * @param profileId
      * @param callback The method to be invoked when the server response is received
      */
-    void listGroupsWithMember(const FString& profileId, IServerCallback* callback = nullptr);
+    void listGroupsWithMember(const FString &profileId, IServerCallback *callback = nullptr);
 
     /**
      * Read the specified group.
@@ -275,9 +275,9 @@ public:
      * @param groupId ID of the group.
      * @param callback The method to be invoked when the server response is received
      */
-    void readGroup(const FString& groupId, IServerCallback* callback = nullptr);
+    void readGroup(const FString &groupId, IServerCallback *callback = nullptr);
 
-	/**
+    /**
 	* Read the specified group's data.
 	*
 	* Service Name - group
@@ -286,7 +286,7 @@ public:
 	* @param groupId ID of the group.
 	* @param callback The method to be invoked when the server response is received
 	*/
-	void readGroupData(const FString& groupId, IServerCallback* callback = nullptr);
+    void readGroupData(const FString &groupId, IServerCallback *callback = nullptr);
 
     /**
      * Read a page of group entity information.
@@ -297,7 +297,7 @@ public:
      * @param context Query context.
      * @param callback The method to be invoked when the server response is received
      */
-    void readGroupEntitiesPage(const FString& jsonContext, IServerCallback* callback = nullptr);
+    void readGroupEntitiesPage(const FString &jsonContext, IServerCallback *callback = nullptr);
 
     /**
      * Read a page of group entity information.
@@ -309,7 +309,7 @@ public:
      * @param offset Number of pages by which to offset the query.
      * @param callback The method to be invoked when the server response is received
      */
-    void readGroupEntitiesPageByOffset(const FString& encodedContext, int32 pageOffset, IServerCallback* callback = nullptr);
+    void readGroupEntitiesPageByOffset(const FString &encodedContext, int32 pageOffset, IServerCallback *callback = nullptr);
 
     /**
      * Read the specified group entity.
@@ -321,7 +321,7 @@ public:
      * @param entityId ID of the entity.
      * @param callback The method to be invoked when the server response is received
      */
-    void readGroupEntity(const FString& groupId, const FString& entityId, IServerCallback* callback = nullptr);
+    void readGroupEntity(const FString &groupId, const FString &entityId, IServerCallback *callback = nullptr);
 
     /**
      * Read the members of the group.
@@ -332,7 +332,7 @@ public:
      * @param groupId ID of the group.
      * @param callback The method to be invoked when the server response is received
      */
-    void readGroupMembers(const FString& groupId, IServerCallback* callback = nullptr);
+    void readGroupMembers(const FString &groupId, IServerCallback *callback = nullptr);
 
     /**
      * Reject an outstanding invitation to join the group.
@@ -343,7 +343,7 @@ public:
      * @param groupId ID of the group.
      * @param callback The method to be invoked when the server response is received
      */
-    void rejectGroupInvitation(const FString& groupId, IServerCallback* callback = nullptr);
+    void rejectGroupInvitation(const FString &groupId, IServerCallback *callback = nullptr);
 
     /**
      * Reject an outstanding request to join the group.
@@ -355,7 +355,7 @@ public:
      * @param profileId Profile ID of the invitation being deleted.
      * @param callback The method to be invoked when the server response is received
      */
-    void rejectGroupJoinRequest(const FString& groupId, const FString& profileId, IServerCallback* callback = nullptr);
+    void rejectGroupJoinRequest(const FString &groupId, const FString &profileId, IServerCallback *callback = nullptr);
 
     /**
      * Remove a member from the group.
@@ -367,7 +367,7 @@ public:
      * @param profileId Profile ID of the member being deleted.
      * @param callback The method to be invoked when the server response is received
      */
-    void removeGroupMember(const FString& groupId, const FString& profileId, IServerCallback* callback = nullptr);
+    void removeGroupMember(const FString &groupId, const FString &profileId, IServerCallback *callback = nullptr);
 
     /**
      * Updates a group's data.
@@ -380,7 +380,7 @@ public:
      * @param jsonData Data to apply.
      * @param callback The method to be invoked when the server response is received
      */
-    void updateGroupData(const FString& groupId, int32 version, const FString& jsonData, IServerCallback* callback = nullptr);
+    void updateGroupData(const FString &groupId, int32 version, const FString &jsonData, IServerCallback *callback = nullptr);
 
     /**
      * Update a group entity.
@@ -394,7 +394,7 @@ public:
      * @param jsonData Custom application data.
      * @param callback The method to be invoked when the server response is received
      */
-    void updateGroupEntityData(const FString& groupId, const FString& entityId, int32 version, const FString& jsonData, IServerCallback* callback = nullptr);
+    void updateGroupEntityData(const FString &groupId, const FString &entityId, int32 version, const FString &jsonData, IServerCallback *callback = nullptr);
 
     /**
      * Update a member of the group.
@@ -408,7 +408,7 @@ public:
      * @param jsonAttributes Attributes of the member being updated (optional).
      * @param callback The method to be invoked when the server response is received
      */
-    void updateGroupMember(const FString& groupId, const FString& profileId, ERole role, const FString& jsonAttributes, IServerCallback* callback = nullptr);
+    void updateGroupMember(const FString &groupId, const FString &profileId, ERole role, const FString &jsonAttributes, IServerCallback *callback = nullptr);
 
     /**
      * Updates a group's name.
@@ -420,7 +420,7 @@ public:
      * @param name Name to apply.
      * @param callback The method to be invoked when the server response is received
      */
-    void updateGroupName(const FString& groupId, const FString& name, IServerCallback* callback = nullptr);
+    void updateGroupName(const FString &groupId, const FString &name, IServerCallback *callback = nullptr);
 
     /**
      * Set whether a group is open true or false
@@ -432,12 +432,11 @@ public:
      * @param isOpenGroup whether its open or not
      * @param callback The method to be invoked when the server response is received
      */
-    void setGroupOpen(const FString& groupId, bool isOpenGroup, IServerCallback* callback = nullptr);
-    
-private:
-    BrainCloudClient* _client = nullptr;
+    void setGroupOpen(const FString &groupId, bool isOpenGroup, IServerCallback *callback = nullptr);
+
+  private:
+    BrainCloudClient *_client = nullptr;
 
     FString roleToString(ERole role);
-	FString AutoJoinStrategyToString(EAutoJoinStrategy strategy);
+    FString AutoJoinStrategyToString(EAutoJoinStrategy strategy);
 };
-

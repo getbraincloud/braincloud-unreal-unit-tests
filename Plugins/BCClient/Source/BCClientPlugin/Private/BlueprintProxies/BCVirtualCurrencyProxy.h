@@ -7,11 +7,11 @@
 UCLASS(MinimalAPI)
 class UBCVirtualCurrencyProxy : public UBCBlueprintCallProxyBase
 {
-    GENERATED_BODY()
+  GENERATED_BODY()
 
-  public:
-    UBCVirtualCurrencyProxy(const FObjectInitializer &ObjectInitializer);
-    /**
+public:
+  UBCVirtualCurrencyProxy(const FObjectInitializer &ObjectInitializer);
+  /**
     * Retrieve the user's currency account. Optional parameters: vcId (if retrieving all currencies).
     *
     * Service Name - VirtualCurrency
@@ -19,10 +19,10 @@ class UBCVirtualCurrencyProxy : public UBCBlueprintCallProxyBase
     *
     * @param vcId
     */
-   	UFUNCTION(BlueprintCallable, meta = (BlueprintInternalUseOnly = "true"), Category = "BrainCloud|VirtualCurrency")
-    static UBCVirtualCurrencyProxy *GetCurrency(UBrainCloudWrapper *brainCloudWrapper, const FString &vcId);
+  UFUNCTION(BlueprintCallable, meta = (BlueprintInternalUseOnly = "true"), Category = "BrainCloud|VirtualCurrency")
+  static UBCVirtualCurrencyProxy *GetCurrency(UBrainCloudWrapper *brainCloudWrapper, const FString &vcId);
 
-    /**
+  /**
     * Retrieve the parent user's currency account. Optional parameters: vcId (if retrieving all currencies).
     *
     * Service Name - VirtualCurrency
@@ -31,10 +31,10 @@ class UBCVirtualCurrencyProxy : public UBCBlueprintCallProxyBase
     * @param vcId
     * @param levelName
     */
-   	UFUNCTION(BlueprintCallable, meta = (BlueprintInternalUseOnly = "true"), Category = "BrainCloud|VirtualCurrency")
-    static UBCVirtualCurrencyProxy *GetParentCurrency(UBrainCloudWrapper *brainCloudWrapper, const FString &vcId, const FString &levelName);
+  UFUNCTION(BlueprintCallable, meta = (BlueprintInternalUseOnly = "true"), Category = "BrainCloud|VirtualCurrency")
+  static UBCVirtualCurrencyProxy *GetParentCurrency(UBrainCloudWrapper *brainCloudWrapper, const FString &vcId, const FString &levelName);
 
-    /**
+  /**
     * Retrieve the peer user's currency account. Optional parameters: vcId (if retrieving all currencies).
     *
     * Service Name - VirtualCurrency
@@ -43,22 +43,22 @@ class UBCVirtualCurrencyProxy : public UBCBlueprintCallProxyBase
     * @param vcId
     * @param peerCode
     */
-    UFUNCTION(BlueprintCallable, meta = (BlueprintInternalUseOnly = "true"), Category = "BrainCloud|VirtualCurrency")
-    static UBCVirtualCurrencyProxy *GetPeerCurrency(UBrainCloudWrapper *brainCloudWrapper, const FString &vcId, const FString &peerCode);
+  UFUNCTION(BlueprintCallable, meta = (BlueprintInternalUseOnly = "true"), Category = "BrainCloud|VirtualCurrency")
+  static UBCVirtualCurrencyProxy *GetPeerCurrency(UBrainCloudWrapper *brainCloudWrapper, const FString &vcId, const FString &peerCode);
 
-    /**
+  /**
 	  * @warning Method is recommended to be used in Cloud Code only for security
 	  *
 	  * For security reasons calling this API from the client is not recommended, and is rejected at the server by default. To over-ride, enable the 'Allow Currency Calls from Client" compatibility setting in the Design Portal.
 	  */
-    UFUNCTION(BlueprintCallable, meta = (BlueprintInternalUseOnly = "true"), Category = "BrainCloud|VirtualCurrency")
-    static UBCVirtualCurrencyProxy *AwardCurrency(UBrainCloudWrapper *brainCloudWrapper, const FString &currencyType, int32 amount);
+  UFUNCTION(BlueprintCallable, meta = (BlueprintInternalUseOnly = "true"), Category = "BrainCloud|VirtualCurrency")
+  static UBCVirtualCurrencyProxy *AwardCurrency(UBrainCloudWrapper *brainCloudWrapper, const FString &currencyType, int32 amount);
 
-	  /**
+  /**
 	  * @warning Method is recommended to be used in Cloud Code only for security
 	  *
 	  * For security reasons calling this API from the client is not recommended, and is rejected at the server by default. To over-ride, enable the 'Allow Currency Calls from Client" compatibility setting in the Design Portal.
 	  */
-    UFUNCTION(BlueprintCallable, meta = (BlueprintInternalUseOnly = "true"), Category = "BrainCloud|VirtualCurrency")
-    static UBCVirtualCurrencyProxy *ConsumeCurrency(UBrainCloudWrapper *brainCloudWrapper, const FString &currencyType, int32 amount);
+  UFUNCTION(BlueprintCallable, meta = (BlueprintInternalUseOnly = "true"), Category = "BrainCloud|VirtualCurrency")
+  static UBCVirtualCurrencyProxy *ConsumeCurrency(UBrainCloudWrapper *brainCloudWrapper, const FString &currencyType, int32 amount);
 };

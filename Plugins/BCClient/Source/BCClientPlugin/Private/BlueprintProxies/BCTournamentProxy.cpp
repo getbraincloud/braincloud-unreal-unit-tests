@@ -8,94 +8,84 @@
 #include "BrainCloudWrapper.h"
 #include "BCTournamentProxy.h"
 
-UBCTournamentProxy::UBCTournamentProxy(const FObjectInitializer& ObjectInitializer)
-    : Super(ObjectInitializer)
+UBCTournamentProxy::UBCTournamentProxy(const FObjectInitializer &ObjectInitializer)
+	: Super(ObjectInitializer)
 {
 }
 
-UBCTournamentProxy* UBCTournamentProxy::ClaimTournamentReward(UBrainCloudWrapper *brainCloudWrapper, const FString& leaderboardId, int32 versionId)
+UBCTournamentProxy *UBCTournamentProxy::ClaimTournamentReward(UBrainCloudWrapper *brainCloudWrapper, const FString &leaderboardId, int32 versionId)
 {
-	UBCTournamentProxy* Proxy = NewObject<UBCTournamentProxy>();
+	UBCTournamentProxy *Proxy = NewObject<UBCTournamentProxy>();
 	UBCWrapperProxy::GetBrainCloudInstance(brainCloudWrapper)->getTournamentService()->claimTournamentReward(leaderboardId, versionId, Proxy);
 	return Proxy;
 }
 
-
-UBCTournamentProxy* UBCTournamentProxy::GetTournamentStatus(UBrainCloudWrapper *brainCloudWrapper, const FString& leaderboardId, int32 versionId)
+UBCTournamentProxy *UBCTournamentProxy::GetTournamentStatus(UBrainCloudWrapper *brainCloudWrapper, const FString &leaderboardId, int32 versionId)
 {
-	UBCTournamentProxy* Proxy = NewObject<UBCTournamentProxy>();
+	UBCTournamentProxy *Proxy = NewObject<UBCTournamentProxy>();
 	UBCWrapperProxy::GetBrainCloudInstance(brainCloudWrapper)->getTournamentService()->getTournamentStatus(leaderboardId, versionId, Proxy);
 	return Proxy;
 }
 
-
-UBCTournamentProxy* UBCTournamentProxy::GetDivisionInfo(UBrainCloudWrapper *brainCloudWrapper, const FString& divSetId)
+UBCTournamentProxy *UBCTournamentProxy::GetDivisionInfo(UBrainCloudWrapper *brainCloudWrapper, const FString &divSetId)
 {
-	UBCTournamentProxy* Proxy = NewObject<UBCTournamentProxy>();
+	UBCTournamentProxy *Proxy = NewObject<UBCTournamentProxy>();
 	UBCWrapperProxy::GetBrainCloudInstance(brainCloudWrapper)->getTournamentService()->getDivisionInfo(divSetId, Proxy);
 	return Proxy;
 }
 
-
-UBCTournamentProxy* UBCTournamentProxy::GetMyDivisions(UBrainCloudWrapper *brainCloudWrapper)
+UBCTournamentProxy *UBCTournamentProxy::GetMyDivisions(UBrainCloudWrapper *brainCloudWrapper)
 {
-	UBCTournamentProxy* Proxy = NewObject<UBCTournamentProxy>();
+	UBCTournamentProxy *Proxy = NewObject<UBCTournamentProxy>();
 	UBCWrapperProxy::GetBrainCloudInstance(brainCloudWrapper)->getTournamentService()->getMyDivisions(Proxy);
 	return Proxy;
 }
 
-
-UBCTournamentProxy* UBCTournamentProxy::JoinDivision(UBrainCloudWrapper *brainCloudWrapper, const FString &divSetId, const FString &tournamentCode, int32 initialScore)
+UBCTournamentProxy *UBCTournamentProxy::JoinDivision(UBrainCloudWrapper *brainCloudWrapper, const FString &divSetId, const FString &tournamentCode, int32 initialScore)
 {
-	UBCTournamentProxy* Proxy = NewObject<UBCTournamentProxy>();
+	UBCTournamentProxy *Proxy = NewObject<UBCTournamentProxy>();
 	UBCWrapperProxy::GetBrainCloudInstance(brainCloudWrapper)->getTournamentService()->joinDivision(divSetId, tournamentCode, initialScore, Proxy);
 	return Proxy;
 }
 
-
-UBCTournamentProxy* UBCTournamentProxy::LeaveDivisionInstance(UBrainCloudWrapper *brainCloudWrapper, const FString &leaderboardId)
+UBCTournamentProxy *UBCTournamentProxy::LeaveDivisionInstance(UBrainCloudWrapper *brainCloudWrapper, const FString &leaderboardId)
 {
-	UBCTournamentProxy* Proxy = NewObject<UBCTournamentProxy>();
+	UBCTournamentProxy *Proxy = NewObject<UBCTournamentProxy>();
 	UBCWrapperProxy::GetBrainCloudInstance(brainCloudWrapper)->getTournamentService()->leaveDivisionInstance(leaderboardId, Proxy);
 	return Proxy;
 }
-	
 
-UBCTournamentProxy* UBCTournamentProxy::JoinTournament(UBrainCloudWrapper *brainCloudWrapper, const FString& leaderboardId, const FString& tournamentCode, int32 initialScore)
+UBCTournamentProxy *UBCTournamentProxy::JoinTournament(UBrainCloudWrapper *brainCloudWrapper, const FString &leaderboardId, const FString &tournamentCode, int32 initialScore)
 {
-	UBCTournamentProxy* Proxy = NewObject<UBCTournamentProxy>();
+	UBCTournamentProxy *Proxy = NewObject<UBCTournamentProxy>();
 	UBCWrapperProxy::GetBrainCloudInstance(brainCloudWrapper)->getTournamentService()->joinTournament(leaderboardId, tournamentCode, initialScore, Proxy);
 	return Proxy;
 }
 
-
-UBCTournamentProxy* UBCTournamentProxy::LeaveTournament(UBrainCloudWrapper *brainCloudWrapper, const FString& leaderboardId)
+UBCTournamentProxy *UBCTournamentProxy::LeaveTournament(UBrainCloudWrapper *brainCloudWrapper, const FString &leaderboardId)
 {
-	UBCTournamentProxy* Proxy = NewObject<UBCTournamentProxy>();
+	UBCTournamentProxy *Proxy = NewObject<UBCTournamentProxy>();
 	UBCWrapperProxy::GetBrainCloudInstance(brainCloudWrapper)->getTournamentService()->leaveTournament(leaderboardId, Proxy);
 	return Proxy;
 }
 
-
-UBCTournamentProxy* UBCTournamentProxy::PostTournamentScore(UBrainCloudWrapper *brainCloudWrapper, const FString& leaderboardId, int32 score, const FString& jsonData, const struct FDateTime roundStartedTime)
+UBCTournamentProxy *UBCTournamentProxy::PostTournamentScore(UBrainCloudWrapper *brainCloudWrapper, const FString &leaderboardId, int32 score, const FString &jsonData, const struct FDateTime roundStartedTime)
 {
-	UBCTournamentProxy* Proxy = NewObject<UBCTournamentProxy>();
+	UBCTournamentProxy *Proxy = NewObject<UBCTournamentProxy>();
 	UBCWrapperProxy::GetBrainCloudInstance(brainCloudWrapper)->getTournamentService()->postTournamentScore(leaderboardId, score, jsonData, roundStartedTime, Proxy);
 	return Proxy;
 }
 
-
-UBCTournamentProxy* UBCTournamentProxy::ViewCurrentReward(UBrainCloudWrapper *brainCloudWrapper, const FString& leaderboardId)
+UBCTournamentProxy *UBCTournamentProxy::ViewCurrentReward(UBrainCloudWrapper *brainCloudWrapper, const FString &leaderboardId)
 {
-	UBCTournamentProxy* Proxy = NewObject<UBCTournamentProxy>();
+	UBCTournamentProxy *Proxy = NewObject<UBCTournamentProxy>();
 	UBCWrapperProxy::GetBrainCloudInstance(brainCloudWrapper)->getTournamentService()->viewCurrentReward(leaderboardId, Proxy);
 	return Proxy;
 }
 
-
-UBCTournamentProxy* UBCTournamentProxy::ViewReward(UBrainCloudWrapper *brainCloudWrapper, const FString& leaderboardId, int32 versionId)
+UBCTournamentProxy *UBCTournamentProxy::ViewReward(UBrainCloudWrapper *brainCloudWrapper, const FString &leaderboardId, int32 versionId)
 {
-	UBCTournamentProxy* Proxy = NewObject<UBCTournamentProxy>();
+	UBCTournamentProxy *Proxy = NewObject<UBCTournamentProxy>();
 	UBCWrapperProxy::GetBrainCloudInstance(brainCloudWrapper)->getTournamentService()->viewReward(leaderboardId, versionId, Proxy);
 	return Proxy;
 }

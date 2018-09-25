@@ -10,10 +10,10 @@ class UBCPresenceProxy : public UBCBlueprintCallProxyBase
 {
   GENERATED_BODY()
 
-  public:
-    UBCPresenceProxy(const FObjectInitializer &ObjectInitializer);
+public:
+  UBCPresenceProxy(const FObjectInitializer &ObjectInitializer);
 
-/**
+  /**
 * Force an RTT presence update to all listeners of the caller.
 *
 * Service Name - Presence
@@ -21,9 +21,9 @@ class UBCPresenceProxy : public UBCBlueprintCallProxyBase
 *
 */
   UFUNCTION(BlueprintCallable, meta = (BlueprintInternalUseOnly = "true"), Category = "BrainCloud|Presence")
-    static UBCPresenceProxy* ForcePush(UBrainCloudWrapper *brainCloudWrapper);
+  static UBCPresenceProxy *ForcePush(UBrainCloudWrapper *brainCloudWrapper);
 
-/**
+  /**
 * Gets the presence data for the given <platform>. Can be one of "all",
 * "brainCloud", or "facebook". Will not include offline profiles
 * unless <includeOffline> is set to true.
@@ -35,8 +35,8 @@ class UBCPresenceProxy : public UBCBlueprintCallProxyBase
 * @param includeOffline Will not include offline profiles unless includeOffline is set to true.
 */
   UFUNCTION(BlueprintCallable, meta = (BlueprintInternalUseOnly = "true"), Category = "BrainCloud|Presence")
-    static UBCPresenceProxy* GetPresenceOfFriends(UBrainCloudWrapper *brainCloudWrapper, const FString &platform, bool includeOffline);
-/**
+  static UBCPresenceProxy *GetPresenceOfFriends(UBrainCloudWrapper *brainCloudWrapper, const FString &platform, bool includeOffline);
+  /**
 * Gets the presence data for the given <groupId>. Will not include
 * offline profiles unless <includeOffline> is set to true.
 *
@@ -48,9 +48,9 @@ class UBCPresenceProxy : public UBCBlueprintCallProxyBase
 * @param callback The method to be invoked when the server response is received 
 */
   UFUNCTION(BlueprintCallable, meta = (BlueprintInternalUseOnly = "true"), Category = "BrainCloud|Presence")
-    static UBCPresenceProxy* GetPresenceOfGroup(UBrainCloudWrapper *brainCloudWrapper, const FString &groupId, bool includeOffline);
+  static UBCPresenceProxy *GetPresenceOfGroup(UBrainCloudWrapper *brainCloudWrapper, const FString &groupId, bool includeOffline);
 
-/**
+  /**
 * Gets the presence data for the given <profileIds>. Will not include
 * offline profiles unless <includeOffline> is set to true.
 *
@@ -62,9 +62,9 @@ class UBCPresenceProxy : public UBCBlueprintCallProxyBase
 * @param callback The method to be invoked when the server response is received 
 */
   UFUNCTION(BlueprintCallable, meta = (BlueprintInternalUseOnly = "true"), Category = "BrainCloud|Presence")
-    static UBCPresenceProxy* GetPresenceOfUsers(UBrainCloudWrapper *brainCloudWrapper, const TArray<FString> &profileIds, bool includeOffline);
+  static UBCPresenceProxy *GetPresenceOfUsers(UBrainCloudWrapper *brainCloudWrapper, const TArray<FString> &profileIds, bool includeOffline);
 
-/**
+  /**
 * Registers the caller for RTT presence updates from friends for the
 * given <platform>. Can be one of "all", "brainCloud", or "facebook".
 * If <bidirectional> is set to true, then also registers the targeted
@@ -78,9 +78,9 @@ class UBCPresenceProxy : public UBCBlueprintCallProxyBase
 * @param callback The method to be invoked when the server response is received 
 */
   UFUNCTION(BlueprintCallable, meta = (BlueprintInternalUseOnly = "true"), Category = "BrainCloud|Presence")
-    static UBCPresenceProxy* RegisterListenersForFriends(UBrainCloudWrapper *brainCloudWrapper, const FString &platform, bool biderectional);
+  static UBCPresenceProxy *RegisterListenersForFriends(UBrainCloudWrapper *brainCloudWrapper, const FString &platform, bool biderectional);
 
-/**
+  /**
 * Registers the caller for RTT presence updates from the members of
 * the given <groupId>. Caller must be a member of said group. If
 * <bidirectional> is set to true, then also registers the targeted
@@ -94,8 +94,8 @@ class UBCPresenceProxy : public UBCBlueprintCallProxyBase
 * @param callback The method to be invoked when the server response is received 
 */
   UFUNCTION(BlueprintCallable, meta = (BlueprintInternalUseOnly = "true"), Category = "BrainCloud|Presence")
-    static UBCPresenceProxy* RegisterListenersForGroup(UBrainCloudWrapper *brainCloudWrapper, const FString &groupId, bool biderectional);
-/**
+  static UBCPresenceProxy *RegisterListenersForGroup(UBrainCloudWrapper *brainCloudWrapper, const FString &groupId, bool biderectional);
+  /**
 * Registers the caller for RTT presence updates for the given
 * <profileIds>. If <bidirectional> is set to true, then also registers
 * the targeted users for presence updates from the caller.
@@ -108,9 +108,9 @@ class UBCPresenceProxy : public UBCBlueprintCallProxyBase
 * @param callback The method to be invoked when the server response is received 
 */
   UFUNCTION(BlueprintCallable, meta = (BlueprintInternalUseOnly = "true"), Category = "BrainCloud|Presence")
-    static UBCPresenceProxy* RegisterListenersForProfiles(UBrainCloudWrapper *brainCloudWrapper, const TArray<FString> &profileIds, bool biderectional);
+  static UBCPresenceProxy *RegisterListenersForProfiles(UBrainCloudWrapper *brainCloudWrapper, const TArray<FString> &profileIds, bool biderectional);
 
-/**
+  /**
 * Update the presence data visible field for the caller.
 *
 * Service Name - Presence
@@ -120,8 +120,8 @@ class UBCPresenceProxy : public UBCBlueprintCallProxyBase
 * @param callback The method to be invoked when the server response is received 
 */
   UFUNCTION(BlueprintCallable, meta = (BlueprintInternalUseOnly = "true"), Category = "BrainCloud|Presence")
-    static UBCPresenceProxy* SetVisibility(UBrainCloudWrapper *brainCloudWrapper, bool visible);
-/**
+  static UBCPresenceProxy *SetVisibility(UBrainCloudWrapper *brainCloudWrapper, bool visible);
+  /**
 * Stops the caller from receiving RTT presence updates. Does not
 * affect the broadcasting of *their* presence updates to other
 * listeners.
@@ -132,8 +132,8 @@ class UBCPresenceProxy : public UBCBlueprintCallProxyBase
 * @param callback The method to be invoked when the server response is received 
 */
   UFUNCTION(BlueprintCallable, meta = (BlueprintInternalUseOnly = "true"), Category = "BrainCloud|Presence")
-    static UBCPresenceProxy* StopListening(UBrainCloudWrapper *brainCloudWrapper);
-/**
+  static UBCPresenceProxy *StopListening(UBrainCloudWrapper *brainCloudWrapper);
+  /**
 * Update the presence data activity field for the caller.
 *
 * Service Name - Presence
@@ -143,5 +143,5 @@ class UBCPresenceProxy : public UBCBlueprintCallProxyBase
 * @param callback The method to be invoked when the server response is received 
 */
   UFUNCTION(BlueprintCallable, meta = (BlueprintInternalUseOnly = "true"), Category = "BrainCloud|Presence")
-    static UBCPresenceProxy* UpdateActivity(UBrainCloudWrapper *brainCloudWrapper, const FString &jsonActivity);
+  static UBCPresenceProxy *UpdateActivity(UBrainCloudWrapper *brainCloudWrapper, const FString &jsonActivity);
 };

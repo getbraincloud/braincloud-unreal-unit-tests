@@ -37,7 +37,7 @@ class UBCTournamentProxy : public UBCBlueprintCallProxyBase
 	UFUNCTION(BlueprintCallable, meta = (BlueprintInternalUseOnly = "true"), Category = "BrainCloud|Tournament")
 	static UBCTournamentProxy *GetTournamentStatus(UBrainCloudWrapper *brainCloudWrapper, const FString &leaderboardId, int32 versionId);
 
-		/**
+	/**
 	* Get the status of a division
 	*
 	* Service Name - tournament
@@ -74,8 +74,8 @@ class UBCTournamentProxy : public UBCBlueprintCallProxyBase
 	* @param callback The method to be invoked when the server response is received
 	*/
 	UFUNCTION(BlueprintCallable, meta = (BlueprintInternalUseOnly = "true"), Category = "BrainCloud|Tournament")
-	static UBCTournamentProxy *JoinDivision(UBrainCloudWrapper *brainCloudWrapper,const FString &divSetId, const FString &tournamentCode, int32 initialScore);
-	
+	static UBCTournamentProxy *JoinDivision(UBrainCloudWrapper *brainCloudWrapper, const FString &divSetId, const FString &tournamentCode, int32 initialScore);
+
 	/**
 	* Removes player from division instance
 	* Also removes division instance from player's division list
@@ -87,8 +87,8 @@ class UBCTournamentProxy : public UBCBlueprintCallProxyBase
 	* @param callback The method to be invoked when the server response is received
 	*/
 	UFUNCTION(BlueprintCallable, meta = (BlueprintInternalUseOnly = "true"), Category = "BrainCloud|Tournament")
-	static UBCTournamentProxy *LeaveDivisionInstance(UBrainCloudWrapper *brainCloudWrapper,const FString &leaderboardId);
-	
+	static UBCTournamentProxy *LeaveDivisionInstance(UBrainCloudWrapper *brainCloudWrapper, const FString &leaderboardId);
+
 	/**
 	* Join the specified tournament.
 	* Any entry fees will be automatically collected.
