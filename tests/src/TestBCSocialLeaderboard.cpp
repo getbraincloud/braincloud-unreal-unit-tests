@@ -21,6 +21,14 @@ TEST_F(TestBCSocialLeaderboard, GetSocialLeaderboard)
     tr.run(m_bc);
 }
 
+TEST_F(TestBCSocialLeaderboard, GetSocialLeaderboardByVersion)
+{
+    TestResult tr;
+
+    m_bc->getSocialLeaderboardService()->getSocialLeaderboardByVersion(LB_ID, true, 0, &tr);
+    tr.run(m_bc);
+}
+
 TEST_F(TestBCSocialLeaderboard, GetMultiSocialLeaderboard)
 {
     // post a few scores first so we have some data
@@ -134,6 +142,21 @@ TEST_F(TestBCSocialLeaderboard, GetGroupSocialLeaderboard)
     tr.run(m_bc);
 }
 
+TEST_F(TestBCSocialLeaderboard, GetGroupSocialLeaderboardByVersion)
+{
+    TestResult tr;
+    m_bc->getGroupService()->createGroup("testGroup", "test", false, "", "", "", "", &tr);
+    tr.run(m_bc);
+
+    std::string groupId = tr.m_response["data"]["groupId"].asString();
+
+    m_bc->getSocialLeaderboardService()->getGroupSocialLeaderboardByVersion(SOCIAL_LB_ID, groupId.c_str(), 0, &tr);
+    tr.run(m_bc);
+
+    m_bc->getGroupService()->deleteGroup(groupId.c_str(), -1, &tr);
+    tr.run(m_bc);
+}
+
 TEST_F(TestBCSocialLeaderboard, GetPlayersSocialLeaderboard)
 {
 	TestResult tr;
@@ -143,6 +166,18 @@ TEST_F(TestBCSocialLeaderboard, GetPlayersSocialLeaderboard)
 	profileIds.push_back(GetUser(UserB)->m_profileId);
 
 	m_bc->getSocialLeaderboardService()->getPlayersSocialLeaderboard(SOCIAL_LB_ID, profileIds, &tr);
+	tr.run(m_bc);
+}
+
+TEST_F(TestBCSocialLeaderboard, GetPlayersSocialLeaderboardByVersion)
+{
+	TestResult tr;
+
+	std::vector<std::string> profileIds;
+	profileIds.push_back(GetUser(UserA)->m_profileId);
+	profileIds.push_back(GetUser(UserB)->m_profileId);
+
+	m_bc->getSocialLeaderboardService()->getPlayersSocialLeaderboardByVersion(SOCIAL_LB_ID, profileIds, 0, &tr);
 	tr.run(m_bc);
 }
 

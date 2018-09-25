@@ -64,6 +64,30 @@ namespace BrainCloud
 		void getSocialLeaderboard(const char * in_leaderboardId, bool in_replaceName, IServerCallback * in_callback = NULL);
 
 		/**
+		 * Method returns the social leaderboard by its version. A player's social leaderboard is
+		 * comprised of players who are recognized as being your friend.
+		 * For now, this applies solely to Facebook connected players who are
+		 * friends with the logged in player (who also must be Facebook connected).
+		 * In the future this will expand to other identification means (such as
+		 * Game Center, Google circles etc).
+		 *
+		 * Leaderboards entries contain the player's score and optionally, some user-defined
+		 * data associated with the score. The currently logged in player will also
+		 * be returned in the social leaderboard.
+		 *
+		 * Note: If no friends have played the game, the bestScore, createdAt, updatedAt
+		 * will contain NULL.
+		 *
+		 * @param in_leaderboardId The id of the leaderboard to retrieve
+		 * @param in_replaceName If true, the currently logged in player's name will be replaced
+		 * by the string "You".
+		 * @param in_versionId the version of the leaderboard
+		 * @param in_callback The method to be invoked when the server response is received
+		 *
+		 */
+		void getSocialLeaderboardByVersion(const char * in_leaderboardId, bool in_replaceName, int in_versionId, IServerCallback * in_callback = NULL);
+
+		/**
 		 * Reads multiple social leaderboards.
 		 *
 		 * @param in_leaderboardIds Collection of leaderboard IDs.
@@ -277,6 +301,19 @@ namespace BrainCloud
 		void getGroupSocialLeaderboard(const char * in_leaderboardId, const char * in_groupId, IServerCallback * in_callback = NULL);
 
 		/**
+		 * Retrieve the social leaderboard for a group by its version.
+		 *
+		 * Service Name - leaderboard
+		 * Service Operation - GET_GROUP_SOCIAL_LEADERBOARD
+		 *
+		 * @param in_leaderboardId The leaderboard to retrieve
+		 * @param in_groupId The ID of the group
+		 * @param in_versionId the version of the leaderboard
+		 * @param in_callback The method to be invoked when the server response is received
+		 */
+		void getGroupSocialLeaderboardByVersion(const char * in_leaderboardId, const char * in_groupId, int in_versionId, IServerCallback * in_callback = NULL);
+
+		/**
 		 * Retrieve the social leaderboard for a list of players.
 		 *
 		 * Service Name - leaderboard
@@ -287,6 +324,18 @@ namespace BrainCloud
 		 * @param in_callback The method to be invoked when the server response is received
 		 */
 		void getPlayersSocialLeaderboard(const char * in_leaderboardId, std::vector<std::string> in_profileIds, IServerCallback * in_callback = NULL);
+
+		/**
+		 * Retrieve the social leaderboard for a list of players by its version.
+		 *
+		 * Service Name - leaderboard
+		 * Service Operation - GET_PLAYERS_SOCIAL_LEADERBOARD
+		 *
+		 * @param in_leaderboardId The leaderboard to retrieve
+		 * @param in_profileIds The IDs of the players
+		 * @param in_callback The method to be invoked when the server response is received
+		 */
+		void getPlayersSocialLeaderboardByVersion(const char * in_leaderboardId, std::vector<std::string> in_profileIds, int in_versionId, IServerCallback * in_callback = NULL);
 
 		/**
 		 * Retrieve a list of all leaderboards
