@@ -309,6 +309,7 @@ namespace BrainCloud {
 		static const ServiceOperation UpdateGroupEntity;
 		static const ServiceOperation UpdateGroupMember;
 		static const ServiceOperation UpdateGroupName;
+		static const ServiceOperation SetGroupOpen;
 
 		//mail
 		static const ServiceOperation SendBasicEmail;
