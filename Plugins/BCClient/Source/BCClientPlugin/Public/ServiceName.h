@@ -16,6 +16,7 @@ class BCCLIENTPLUGIN_API ServiceName
     static const ServiceName PushNotification;
     static const ServiceName GlobalGameStatistics;
     static const ServiceName PlayerStatisticsEvent;
+    static const ServiceName Presence;
     static const ServiceName Twitter;
     static const ServiceName Steam;
 
@@ -25,6 +26,8 @@ class BCCLIENTPLUGIN_API ServiceName
     static const ServiceName Friend;
     static const ServiceName Time;
     static const ServiceName Tournament;
+    static const ServiceName VirtualCurrency;
+    static const ServiceName AppStore;
 
     static const ServiceName Leaderboard;
     static const ServiceName Event;

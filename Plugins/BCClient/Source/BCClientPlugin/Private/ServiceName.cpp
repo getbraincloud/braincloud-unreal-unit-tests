@@ -22,12 +22,15 @@ const ServiceName ServiceName::PlayerStatisticsEvent = ServiceName("playerStatis
 const ServiceName ServiceName::Twitter = ServiceName("twitter");
 const ServiceName ServiceName::Steam = ServiceName("steam");
 
+const ServiceName ServiceName::Presence = ServiceName("presence");
 const ServiceName ServiceName::PlayerState = ServiceName("playerState");
 const ServiceName ServiceName::Entity = ServiceName("entity");
 const ServiceName ServiceName::GlobalEntity = ServiceName("globalEntity");
 const ServiceName ServiceName::Friend = ServiceName("friend");
 const ServiceName ServiceName::Time = ServiceName("time");
 const ServiceName ServiceName::Tournament = ServiceName("tournament");
+const ServiceName ServiceName::VirtualCurrency = ServiceName("virtualCurrency");
+const ServiceName ServiceName::AppStore = ServiceName("appStore");                       
 
 const ServiceName ServiceName::Leaderboard = ServiceName("leaderboard");
 const ServiceName ServiceName::Event = ServiceName("event");

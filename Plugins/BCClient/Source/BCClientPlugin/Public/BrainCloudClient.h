@@ -35,6 +35,9 @@
 #include "BrainCloudLobby.h"
 #include "BrainCloudChat.h"
 #include "BrainCloudMessaging.h"
+#include "BrainCloudPresence.h"
+#include "BrainCloudVirtualCurrency.h"
+#include "BrainCloudAppStore.h"
 
 class BrainCloudComms;
 class BrainCloudRTTComms;
@@ -312,6 +315,20 @@ class BCCLIENTPLUGIN_API BrainCloudClient
 	/**
 	* 
 	*/
+	void registerRTTPresenceCallback(UBCBlueprintRTTCallProxyBase *in_callback);
+
+	/**
+	* 
+	*/
+	void registerRTTPresenceCallback(IRTTCallback *in_callback);
+
+	/**
+	* 
+	*/
+	void deregisterRTTPresenceCallback();
+	/**
+	* 
+	*/
 	void registerRTTLobbyCallback(UBCBlueprintRTTCallProxyBase *in_callback);
 
 	/**
@@ -354,6 +371,9 @@ class BCCLIENTPLUGIN_API BrainCloudClient
 	BrainCloudGroup *getGroupService();
 	BrainCloudMail *getMailService();
 	BrainCloudTournament *getTournamentService();
+	BrainCloudPresence *getPresenceService();
+	BrainCloudVirtualCurrency *getVirtualCurrencyService();
+	BrainCloudAppStore *getAppStoreService();
 
 	BrainCloudRTT *getRTTService();
 	BrainCloudLobby *getLobbyService();
@@ -602,6 +622,9 @@ class BCCLIENTPLUGIN_API BrainCloudClient
 	BrainCloudGroup *_groupService = nullptr;
 	BrainCloudMail *_mailService = nullptr;
 	BrainCloudTournament *_tournamentService = nullptr;
+	BrainCloudPresence *_presenceService = nullptr;
+	BrainCloudVirtualCurrency *_virtualCurrencyService = nullptr;
+	BrainCloudAppStore *_appStoreService = nullptr;
 
 	BrainCloudRTT *_rttService = nullptr;
 	BrainCloudLobby *_lobbyService = nullptr;

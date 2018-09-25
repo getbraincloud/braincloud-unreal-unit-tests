@@ -409,4 +409,17 @@ class UBCGroupProxy : public UBCBlueprintCallProxyBase
 	 */
 	UFUNCTION(BlueprintCallable, meta = (BlueprintInternalUseOnly = "true"), Category = "BrainCloud|Group")
 	static UBCGroupProxy *UpdateGroupName(UBrainCloudWrapper *brainCloud, const FString &groupId, const FString &name);
+
+	/**
+     * Set whether a group is open true or false
+     *
+     * Service Name - group
+     * Service Operation - SET_GROUP_OPEN
+     *
+     * @param groupId ID of the group.
+     * @param isOpenGroup whether its open or not
+     * @param callback The method to be invoked when the server response is received
+     */
+	UFUNCTION(BlueprintCallable, meta = (BlueprintInternalUseOnly = "true"), Category = "BrainCloud|Group")
+	static UBCGroupProxy *SetGroupOpen(UBrainCloudWrapper *brainCloud, const FString &groupId, bool isOpenGroup);
 };

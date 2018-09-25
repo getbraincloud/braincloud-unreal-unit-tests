@@ -301,6 +301,7 @@ class BCCLIENTPLUGIN_API ServiceOperation
 	static const ServiceOperation UpdateGroupEntity;
 	static const ServiceOperation UpdateGroupMember;
 	static const ServiceOperation UpdateGroupName;
+	static const ServiceOperation SetGroupOpen;
 
 	//mail
 	static const ServiceOperation SendBasicEmail;
@@ -309,12 +310,43 @@ class BCCLIENTPLUGIN_API ServiceOperation
 
 	//tournament
 	static const ServiceOperation GetTournamentStatus;
+	static const ServiceOperation GetDivisionInfo;
+	static const ServiceOperation GetMyDivisions;
+	static const ServiceOperation JoinDivision;
+	static const ServiceOperation LeaveDivisionInstance;
 	static const ServiceOperation JoinTournament;
 	static const ServiceOperation LeaveTournament;
 	static const ServiceOperation PostTournamentScore;
 	static const ServiceOperation ViewCurrentReward;
 	static const ServiceOperation ViewReward;
 	static const ServiceOperation ClaimTournamentReward;
+
+	//presence
+	static const ServiceOperation ForcePush;
+	static const ServiceOperation GetPresenceOfFriends;
+	static const ServiceOperation GetPresenceOfGroup;
+	static const ServiceOperation GetPresenceOfUsers;
+	static const ServiceOperation RegisterListenersForFriends;
+	static const ServiceOperation RegisterListenersForGroup;
+	static const ServiceOperation RegisterListenersForProfiles;
+	static const ServiceOperation SetVisibility;
+	static const ServiceOperation StopListening;
+	static const ServiceOperation UpdateActivity;
+
+	//virtualCurrency 
+	static const ServiceOperation GetPlayerCurrency;
+	static const ServiceOperation GetParentCurrency;
+	static const ServiceOperation GetPeerCurrency;
+	static const ServiceOperation ConsumeVirtualCurrency;
+	static const ServiceOperation AwardVirtualCurrency;
+
+	//App Store
+	static const ServiceOperation VerifyPurchase;
+	static const ServiceOperation GetEligiblePromotions;
+	static const ServiceOperation GetSalesInventory;
+	static const ServiceOperation GetSalesInventoryByCategory;
+	static const ServiceOperation StartPurchase;
+	static const ServiceOperation FinalizePurchase;
 
 	// rtt
 	static const ServiceOperation RequestClientConnection;

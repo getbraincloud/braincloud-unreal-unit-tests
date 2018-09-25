@@ -78,6 +78,9 @@ BrainCloudClient::~BrainCloudClient()
 	destroyService(_groupService);
 	destroyService(_mailService);
 	destroyService(_tournamentService);
+	destroyService(_presenceService);
+	destroyService(_virtualCurrencyService);
+	destroyService(_appStoreService);
 	destroyService(_rttService);
 	destroyService(_lobbyService);
 	destroyService(_chatService);
@@ -366,6 +369,21 @@ void BrainCloudClient::deregisterRTTMessagingCallback()
 	_brainCloudRTTComms->deregisterRTTCallback(ServiceName::Messaging);
 }
 
+void BrainCloudClient::registerRTTPresenceCallback(UBCBlueprintRTTCallProxyBase *in_callback)
+{
+	_brainCloudRTTComms->registerRTTCallback(ServiceName::Presence, in_callback);
+}
+
+void BrainCloudClient::registerRTTPresenceCallback(IRTTCallback *in_callback)
+{
+	_brainCloudRTTComms->registerRTTCallback(ServiceName::Presence, in_callback);
+}
+
+void BrainCloudClient::deregisterRTTPresenceCallback()
+{
+	_brainCloudRTTComms->deregisterRTTCallback(ServiceName::Presence);
+}
+
 void BrainCloudClient::registerRTTLobbyCallback(UBCBlueprintRTTCallProxyBase *in_callback)
 {
 	_brainCloudRTTComms->registerRTTCallback(ServiceName::Lobby, in_callback);
@@ -551,6 +569,15 @@ BrainCloudPlayerStatisticsEvent *BrainCloudClient::getPlayerStatisticsEventServi
 	return _playerStatisticsEventService;
 }
 
+BrainCloudPresence *BrainCloudClient::getPresenceService()
+{
+	if(_presenceService == nullptr)
+	{
+		_presenceService = new BrainCloudPresence(this);
+	}
+	return _presenceService;
+}
+
 BrainCloudProduct *BrainCloudClient::getProductService()
 {
 	if (_productService == nullptr)
@@ -720,6 +747,24 @@ BrainCloudTournament *BrainCloudClient::getTournamentService()
 		_tournamentService = new BrainCloudTournament(this);
 	}
 	return _tournamentService;
+}
+
+BrainCloudVirtualCurrency *BrainCloudClient::getVirtualCurrencyService()
+{
+	if (_virtualCurrencyService == nullptr)
+	{
+		_virtualCurrencyService = new BrainCloudVirtualCurrency(this);
+	}
+	return _virtualCurrencyService;
+}
+
+BrainCloudAppStore *BrainCloudClient::getAppStoreService()
+{
+	if (_appStoreService == nullptr)
+	{
+		_appStoreService = new BrainCloudAppStore(this);
+	}
+	return _appStoreService;
 }
 
 BrainCloudRTT *BrainCloudClient::getRTTService()
