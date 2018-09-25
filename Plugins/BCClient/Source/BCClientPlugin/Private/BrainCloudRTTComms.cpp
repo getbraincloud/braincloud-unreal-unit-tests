@@ -85,7 +85,7 @@ void BrainCloudRTTComms::enableRTT(eBCRTTConnectionType in_connectionType, IServ
 
 void BrainCloudRTTComms::disableRTT()
 {
-	disconnect();
+	processRegisteredListeners(ServiceName::RTTRegistration.getValue(), "disconnect", "{\"error\":\"DisableRTT Called\"}");
 }
 
 void BrainCloudRTTComms::RunCallbacks()
@@ -265,6 +265,8 @@ void BrainCloudRTTComms::disconnect()
 
 	m_cxId = TEXT("");
 	m_eventServer = TEXT("");
+
+	m_bIsConnected = false;
 }
 
 void BrainCloudRTTComms::connect()
@@ -445,7 +447,7 @@ void BrainCloudRTTComms::webSocket_OnError(const FString &in_message)
 	if (m_client->isLoggingEnabled())
 		UE_LOG(LogBrainCloudComms, Log, TEXT("Error: %s"), *in_message);
 
-	disconnect();
+	processRegisteredListeners(ServiceName::RTTRegistration.getValue(), "disconnect", "{\"error\":"+in_message+"}");
 }
 
 void BrainCloudRTTComms::onRecv(const FString &in_message)
@@ -574,9 +576,9 @@ void BrainCloudRTTComms::serverCallback(ServiceName serviceName, ServiceOperatio
 
 void BrainCloudRTTComms::serverError(ServiceName serviceName, ServiceOperation serviceOperation, int32 statusCode, int32 reasonCode, const FString &jsonError)
 {
+	disconnect();
+	
 	// server callback rtt connected with data!
 	if (m_appCallback != nullptr)
 		m_appCallback->serverError(serviceName, serviceOperation, statusCode, reasonCode, jsonError);
-
-	disconnect();
 }
