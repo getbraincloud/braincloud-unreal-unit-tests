@@ -171,6 +171,15 @@ class BCCLIENTPLUGIN_API OperationParam
 	static const OperationParam PlayerStatisticEventServiceEventMultiplier;
 	static const OperationParam PlayerStatisticEventServiceEvents;
 
+	// Presence Params
+	static const OperationParam PresenceServicePlatform;
+	static const OperationParam PresenceServiceIncludeOffline;
+	static const OperationParam PresenceServiceGroupId;
+	static const OperationParam PresenceServiceProfileIds;
+	static const OperationParam PresenceServiceBidirectional;
+	static const OperationParam PresenceServiceVisible;
+	static const OperationParam PresenceServiceActivity;
+
 	// Player State Service - Read Params
 	static const OperationParam PlayerStateServiceReadEntitySubtype;
 
@@ -363,12 +372,30 @@ class BCCLIENTPLUGIN_API OperationParam
 	static const OperationParam ServiceParams;
 
 	static const OperationParam LeaderboardId;
+	static const OperationParam DivSetId;
 	static const OperationParam VersionId;
 	static const OperationParam TournamentCode;
 	static const OperationParam InitialScore;
 	static const OperationParam Score;
 	static const OperationParam RoundStartedEpoch;
 	static const OperationParam Data;
+
+	//virtual currency
+	static const OperationParam VirtualCurrencyVcId;
+	static const OperationParam VirtualCurrencyLevelName;
+	static const OperationParam VirtualCurrencyPeerCode;
+	static const OperationParam VirtualCurrencyPriceInfoCriteria;
+	static const OperationParam VirtualCurrencyAmount;
+
+	//app store
+	static const OperationParam AppStoreId;
+	static const OperationParam AppStoreJsonReceiptData;
+	static const OperationParam AppStoreUserCurrency;
+	static const OperationParam AppStoreCategory;
+	static const OperationParam AppStoreJsonPurchaseData;
+	static const OperationParam AppStoreTransactionId;
+	static const OperationParam AppStoreJsonTransactionData;
+	static const OperationParam AppStorePriceInfoCriteria;
 
 	static const OperationParam ChatChannelId;
 	static const OperationParam ChatMaxReturn;
