@@ -38,6 +38,29 @@ class UBCLeaderboardProxy : public UBCBlueprintCallProxyBase
 	static UBCLeaderboardProxy *GetSocialLeaderboard(UBrainCloudWrapper *brainCloudWrapper, FString leaderboardId, bool replaceName);
 
 	/**
+	* Method returns the social leaderboard by its version. A player's social leaderboard is
+	* comprised of players who are recognized as being your friend.
+	* For now, this applies solely to Facebook connected players who are
+	* friends with the logged in player (who also must be Facebook connected).
+	* In the future this will expand to other identification means (such as
+	* Game Centre, Google circles etc).
+	*
+	* Leaderboards entries contain the player's score and optionally, some user-defined
+	* data associated with the score. The currently logged in player will also
+	* be returned in the social leaderboard.
+	*
+	* Note: If no friends have played the game, the bestScore, createdAt, updatedAt
+	* will contain NULL.
+	*
+	* Param - leaderboardId The id of the leaderboard to retrieve
+	* Param - replaceName If true, the currently logged in player's name will be replaced
+	* Param - versionId the version
+	* by the string "You".
+	*/
+	UFUNCTION(BlueprintCallable, meta = (BlueprintInternalUseOnly = "true"), Category = "BrainCloud|Leaderboard")
+	static UBCLeaderboardProxy *GetSocialLeaderboardByVersion(UBrainCloudWrapper *brainCloudWrapper, FString leaderboardId, bool replaceName, int32 versionId);
+
+	/**
 	* Reads multiple social leaderboards.
 	*
 	* Param - leaderboardIds Collection of leaderboard IDs.
@@ -219,6 +242,16 @@ class UBCLeaderboardProxy : public UBCBlueprintCallProxyBase
 	UFUNCTION(BlueprintCallable, meta = (BlueprintInternalUseOnly = "true"), Category = "BrainCloud|Leaderboard")
 	static UBCLeaderboardProxy *GetGroupSocialLeaderboard(UBrainCloudWrapper *brainCloudWrapper, const FString &leaderboardId, const FString &groupId);
 
+		/**
+	* Retrieve the social leaderboard for a group by its version.
+	*
+	* Param - leaderboardId The leaderboard to retrieve
+	* Param - groupId The ID of the group
+	* Param - versionId the version
+	*/
+	UFUNCTION(BlueprintCallable, meta = (BlueprintInternalUseOnly = "true"), Category = "BrainCloud|Leaderboard")
+	static UBCLeaderboardProxy *GetGroupSocialLeaderboardByVersion(UBrainCloudWrapper *brainCloudWrapper, const FString &leaderboardId, const FString &groupId, int32 versionId);
+
 	/**
 	* Retrieve the social leaderboard for a list of players.
 	*
@@ -227,6 +260,16 @@ class UBCLeaderboardProxy : public UBCBlueprintCallProxyBase
 	*/
 	UFUNCTION(BlueprintCallable, meta = (BlueprintInternalUseOnly = "true"), Category = "BrainCloud|Leaderboard")
 	static UBCLeaderboardProxy *GetPlayersSocialLeaderboard(UBrainCloudWrapper *brainCloudWrapper, const FString &leaderboardId, const TArray<FString> profileIds);
+
+		/**
+	* Retrieve the social leaderboard for a list of players.
+	*
+	* Param - leaderboardId The leaderboard to retrieve
+	* Param - profileIds The IDs of the players
+	* Param - versionId the version
+	*/
+	UFUNCTION(BlueprintCallable, meta = (BlueprintInternalUseOnly = "true"), Category = "BrainCloud|Leaderboard")
+	static UBCLeaderboardProxy *GetPlayersSocialLeaderboardByVersion(UBrainCloudWrapper *brainCloudWrapper, const FString &leaderboardId, const TArray<FString> profileIds, int32 versionId);
 
 	/**
 	* Retrieve a list of all leaderboards
