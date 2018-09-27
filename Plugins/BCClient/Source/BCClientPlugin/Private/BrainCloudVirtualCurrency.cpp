@@ -12,7 +12,9 @@ BrainCloudVirtualCurrency::BrainCloudVirtualCurrency(BrainCloudClient *client) :
 void BrainCloudVirtualCurrency::getCurrency(const FString &in_vcId, IServerCallback *callback)
 {
     TSharedRef<FJsonObject> message = MakeShareable(new FJsonObject());
+    if (OperationParam::isOptionalParamValid(in_vcId)) {
     message->SetStringField(OperationParam::VirtualCurrencyVcId.getValue(), in_vcId);
+    }
 
     ServerCall *sc = new ServerCall(ServiceName::VirtualCurrency, ServiceOperation::GetPlayerCurrency, message, callback);
     _client->sendRequest(sc);
@@ -21,7 +23,9 @@ void BrainCloudVirtualCurrency::getCurrency(const FString &in_vcId, IServerCallb
 void BrainCloudVirtualCurrency::getParentCurrency(const FString &in_vcId, const FString &in_levelName, IServerCallback *callback)
 {
     TSharedRef<FJsonObject> message = MakeShareable(new FJsonObject());
+    if (OperationParam::isOptionalParamValid(in_vcId)) {
     message->SetStringField(OperationParam::VirtualCurrencyVcId.getValue(), in_vcId);
+    }
     message->SetStringField(OperationParam::VirtualCurrencyLevelName.getValue(), in_levelName);
 
     ServerCall *sc = new ServerCall(ServiceName::VirtualCurrency, ServiceOperation::GetParentCurrency, message, callback);
@@ -31,7 +35,9 @@ void BrainCloudVirtualCurrency::getParentCurrency(const FString &in_vcId, const 
 void BrainCloudVirtualCurrency::getPeerCurrency(const FString &in_vcId, const FString &in_peerCode, IServerCallback *callback)
 {
     TSharedRef<FJsonObject> message = MakeShareable(new FJsonObject());
+    if (OperationParam::isOptionalParamValid(in_vcId)) {
     message->SetStringField(OperationParam::VirtualCurrencyVcId.getValue(), in_vcId);
+    }
     message->SetStringField(OperationParam::VirtualCurrencyPeerCode.getValue(), in_peerCode);
 
     ServerCall *sc = new ServerCall(ServiceName::VirtualCurrency, ServiceOperation::GetPeerCurrency, message, callback);
