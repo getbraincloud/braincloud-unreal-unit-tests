@@ -27,6 +27,17 @@ namespace BrainCloud
 		m_client->getBrainCloudComms()->addToQueue(sc);
 	}
 
+	void BrainCloudSocialLeaderboard::getSocialLeaderboardByVersion(const char * in_leaderboardId, bool in_replaceName, int in_versionId, IServerCallback * in_callback)
+	{
+		Json::Value message;
+		message[OperationParam::SocialLeaderboardServiceLeaderboardId.getValue()] = in_leaderboardId;
+		message[OperationParam::SocialLeaderboardServiceReplaceName.getValue()] = in_replaceName;
+		message[OperationParam::SocialLeaderboardServiceVersionId.getValue()] = in_versionId;
+
+		ServerCall * sc = new ServerCall(ServiceName::Leaderboard, ServiceOperation::GetSocialLeaderboardByVersion, message, in_callback);
+		m_client->getBrainCloudComms()->addToQueue(sc);
+	}
+
 	void BrainCloudSocialLeaderboard::getMultiSocialLeaderboard(const std::vector<std::string> & in_leaderboardIds, int in_leaderboardResultCount, bool in_replaceName, IServerCallback * in_callback)
 	{
 		Json::Value message;
@@ -205,6 +216,17 @@ namespace BrainCloud
 		m_client->getBrainCloudComms()->addToQueue(sc);
 	}
 
+	void BrainCloudSocialLeaderboard::getGroupSocialLeaderboardByVersion(const char * in_leaderboardId, const char * in_groupId, int in_versionId, IServerCallback * in_callback)
+	{
+		Json::Value message;
+		message[OperationParam::SocialLeaderboardServiceLeaderboardId.getValue()] = in_leaderboardId;
+		message[OperationParam::GroupId.getValue()] = in_groupId;
+		message[OperationParam::SocialLeaderboardServiceVersionId.getValue()] = in_versionId;
+
+		ServerCall * sc = new ServerCall(ServiceName::Leaderboard, ServiceOperation::GetGroupSocialLeaderboardByVersion, message, in_callback);
+		m_client->getBrainCloudComms()->addToQueue(sc);
+	}
+
 	void BrainCloudSocialLeaderboard::getPlayersSocialLeaderboard(const char * in_leaderboardId, std::vector<std::string> in_profileIds, IServerCallback * in_callback)
 	{
 		Json::Value message;
@@ -212,6 +234,17 @@ namespace BrainCloud
 		message[OperationParam::ProfileIds.getValue()] = JsonUtil::stringVectorToJson(in_profileIds);
 
 		ServerCall * sc = new ServerCall(ServiceName::Leaderboard, ServiceOperation::GetPlayersSocialLeaderboard, message, in_callback);
+		m_client->getBrainCloudComms()->addToQueue(sc);
+	}
+
+	void BrainCloudSocialLeaderboard::getPlayersSocialLeaderboardByVersion(const char * in_leaderboardId, std::vector<std::string> in_profileIds, int in_versionId, IServerCallback * in_callback)
+	{
+		Json::Value message;
+		message[OperationParam::SocialLeaderboardServiceLeaderboardId.getValue()] = in_leaderboardId;
+		message[OperationParam::ProfileIds.getValue()] = JsonUtil::stringVectorToJson(in_profileIds);
+		message[OperationParam::SocialLeaderboardServiceVersionId.getValue()] = in_versionId;
+
+		ServerCall * sc = new ServerCall(ServiceName::Leaderboard, ServiceOperation::GetPlayersSocialLeaderboardByVersion, message, in_callback);
 		m_client->getBrainCloudComms()->addToQueue(sc);
 	}
 

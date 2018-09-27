@@ -12,20 +12,20 @@ using namespace BrainCloud;
 TEST_F(TestBCVirtualCurrency, GetCurrency)
 {
     TestResult tr;
-    m_bc->getVirtualCurrencyService()->getCurrency("_invalid_id_", &tr);
+    m_bc->getVirtualCurrencyService()->getCurrency(NULL, &tr);
     tr.run(m_bc);
 }
 
 TEST_F(TestBCVirtualCurrency, GetParentCurrency)
 {
     TestResult tr;
-    m_bc->getVirtualCurrencyService()->getParentCurrency("_invalid_id_", "_invalid_level_", &tr);
+    m_bc->getVirtualCurrencyService()->getParentCurrency(NULL, "_invalid_level_", &tr);
     tr.runExpectFail(m_bc, HTTP_BAD_REQUEST, MISSING_PLAYER_PARENT);
 }
 
 TEST_F(TestBCVirtualCurrency, GetPeerCurrency)
 {
     TestResult tr;
-    m_bc->getVirtualCurrencyService()->getPeerCurrency("_invalid_id_", "_invalid_peer_code_", &tr);
+    m_bc->getVirtualCurrencyService()->getPeerCurrency(NULL, "_invalid_peer_code_", &tr);
     tr.runExpectFail(m_bc, HTTP_BAD_REQUEST, PROFILE_PEER_NOT_FOUND);
 }

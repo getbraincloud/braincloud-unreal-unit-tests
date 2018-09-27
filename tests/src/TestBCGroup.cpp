@@ -564,6 +564,22 @@ TEST_F(TestBCGroup, UpdateGroupName)
 	Logout();
 }
 
+TEST_F(TestBCGroup, SetGroupOpen)
+{
+	Authenticate(UserA);
+	CreateGroup();
+
+	TestResult tr;
+	m_bc->getGroupService()->setGroupOpen(
+		_groupId.c_str(),
+		true,
+		&tr);
+	tr.run(m_bc);
+
+	DeleteGroup();
+	Logout();
+}
+
 /*
  * Helpers
  */
@@ -650,3 +666,4 @@ std::string TestBCGroup::CreateContext(int numItemsPerPage, int startPage, std::
 
 	return fw.write(context);
 }
+
