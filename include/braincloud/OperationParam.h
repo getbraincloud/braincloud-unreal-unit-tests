@@ -228,6 +228,7 @@ namespace BrainCloud {
         static const OperationParam VirtualCurrencyServiceVCId;
         static const OperationParam VirtualCurrencyServiceLevelName;
         static const OperationParam VirtualCurrencyServicePeerCode;
+        static const OperationParam VirtualCurrencyServiceAmount;
 
 		// Product Service - Get Inventory Params
 		static const OperationParam ProductServiceGetInventoryPlatform;

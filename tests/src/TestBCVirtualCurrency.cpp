@@ -8,6 +8,19 @@
 
 using namespace BrainCloud;
 
+TEST_F(TestBCVirtualCurrency, AwardCurrency)
+{
+    TestResult tr;
+    m_bc->getVirtualCurrencyService()->awardCurrency("_invalid_id_", 42, &tr);
+    tr.runExpectFail(m_bc, HTTP_FORBIDDEN, INVALID_CURRENCY);
+}
+
+TEST_F(TestBCVirtualCurrency, ConsumeCurrency)
+{
+    TestResult tr;
+    m_bc->getVirtualCurrencyService()->consumeCurrency("_invalid_id_", 42, &tr);
+    tr.runExpectFail(m_bc, HTTP_FORBIDDEN, INVALID_CURRENCY);
+}
 
 TEST_F(TestBCVirtualCurrency, GetCurrency)
 {
