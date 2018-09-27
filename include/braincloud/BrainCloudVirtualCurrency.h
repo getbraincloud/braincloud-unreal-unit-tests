@@ -17,6 +17,18 @@ namespace BrainCloud
         BrainCloudVirtualCurrency(BrainCloudClient* in_client);
 
         /**
+         * @warning Method is recommended to be used in Cloud Code only for security
+         * If you need to use it client side, enable 'Allow Currency Calls from Client' on the brainCloud dashboard
+         */
+        void awardCurrency(const std::string& in_currencyType, int32_t in_amount, IServerCallback * in_callback = NULL);
+
+        /**
+         * @warning Method is recommended to be used in Cloud Code only for security
+         * If you need to use it client side, enable 'Allow Currency Calls from Client' on the brainCloud dashboard
+         */
+        void consumeCurrency(const std::string& in_currencyType, int32_t in_amount, IServerCallback * in_callback = NULL);
+
+        /**
         * Retrieve the user's currency account. Optional parameters: vcId (if retrieving all currencies).
         *
         * Service Name - VirtualCurrency

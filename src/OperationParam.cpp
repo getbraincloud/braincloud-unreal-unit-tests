@@ -220,6 +220,7 @@ namespace BrainCloud
 	const OperationParam OperationParam::VirtualCurrencyServiceVCId = OperationParam("vcId");
 	const OperationParam OperationParam::VirtualCurrencyServiceLevelName = OperationParam("levelName");
 	const OperationParam OperationParam::VirtualCurrencyServicePeerCode = OperationParam("peerCode");
+	const OperationParam OperationParam::VirtualCurrencyServiceAmount = OperationParam("vcAmount");
 
 	// Product Service - Get Inventory Params
 	const OperationParam OperationParam::ProductServiceGetInventoryPlatform = OperationParam("platform");

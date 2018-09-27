@@ -16,6 +16,25 @@ namespace BrainCloud
 {
     BrainCloudVirtualCurrency::BrainCloudVirtualCurrency(BrainCloudClient* in_client) : m_client(in_client) { }
 
+    void BrainCloudVirtualCurrency::awardCurrency(const std::string& in_currencyType, int32_t in_amount, IServerCallback * in_callback)
+    {
+        Json::Value message;
+        message[OperationParam::VirtualCurrencyServiceVCId.getValue()] = in_currencyType;
+        message[OperationParam::VirtualCurrencyServiceAmount.getValue()] = (Json::Int)in_amount;
+
+        ServerCall * sc = new ServerCall(ServiceName::VirtualCurrency, ServiceOperation::AwardVC, message, in_callback);
+        m_client->sendRequest(sc);
+    }
+
+    void BrainCloudVirtualCurrency::consumeCurrency(const std::string& in_currencyType, int32_t in_amount, IServerCallback * in_callback)
+    {
+        Json::Value message;
+        message[OperationParam::VirtualCurrencyServiceVCId.getValue()] = in_currencyType;
+        message[OperationParam::VirtualCurrencyServiceAmount.getValue()] = (Json::Int)in_amount;
+        ServerCall * sc = new ServerCall(ServiceName::VirtualCurrency, ServiceOperation::ConsumeVC, message, in_callback);
+        m_client->sendRequest(sc);
+    }
+
     void BrainCloudVirtualCurrency::getCurrency(const char* in_vcId, IServerCallback * in_callback)
     {
         Json::Value message = Json::nullValue;
