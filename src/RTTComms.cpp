@@ -4,7 +4,9 @@
 #include "braincloud/IRTTCallback.h"
 #include "braincloud/IRTTConnectCallback.h"
 #include "braincloud/internal/ITCPSocket.h"
+#ifndef TARGET_OS_WATCH
 #include "braincloud/internal/IWebSocket.h"
+#endif
 #include "braincloud/internal/TimeUtil.h"
 
 #include <iostream>
@@ -293,6 +295,7 @@ namespace BrainCloud
 
     void RTTComms::connect()
     {
+#ifndef TARGET_OS_WATCH
         std::thread connectionThread([this]
         {
             std::string host = _endpoint["host"].asString();
@@ -363,6 +366,8 @@ namespace BrainCloud
             onSocketConnected();
         });
         connectionThread.detach();
+
+#endif
     }
 
     void RTTComms::failedToConnect()
