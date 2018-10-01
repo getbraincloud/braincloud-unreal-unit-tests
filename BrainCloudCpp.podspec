@@ -52,7 +52,7 @@ Pod::Spec.new do |s|
   s.dependency                'SSKeychain'
   s.dependency                'BrainCloudJsonCpp'
 
-  s.ios.s.dependency        = 'SocketRocket', '~> 0.5'
+  s.ios.dependency          = 'SocketRocket', '~> 0.5'
   s.osx.dependency          = 'SocketRocket', '~> 0.5'
   #s.watchos.dependency     = 'SocketRocket', '~> 0.5'
   s.tvos.dependency         = 'SocketRocket', '~> 0.5'
