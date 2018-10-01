@@ -1,3 +1,5 @@
+#ifndef TARGET_OS_WATCH
+
 #include "braincloud/internal/apple/AppleWebSocket.h"
 
 #include <algorithm>
@@ -231,3 +233,5 @@ namespace BrainCloud
         _recvCondition.notify_all();
     }
 };
+
+#endif
