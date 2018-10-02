@@ -402,7 +402,7 @@ if (USE_LIBWEBSOCKETS)
     option(LWS_WITH_MBEDTLS "" ON)
     set(LWS_MBEDTLS_INCLUDE_DIRS
         "${CMAKE_CURRENT_BINARY_DIR}/lib/mbedtls/include/")
-    if (UNIX)
+    if (UNIX AND NOT CMAKE_GENERATOR STREQUAL Xcode)
         set(LWS_MBEDTLS_LIBRARIES
             "${CMAKE_CURRENT_BINARY_DIR}/lib/mbedtls/library/libmbedtls.a"
             "${CMAKE_CURRENT_BINARY_DIR}/lib/mbedtls/library/libmbedcrypto.a"
