@@ -1,5 +1,3 @@
-#ifndef TARGET_OS_WATCH
-
 #ifndef _APPLEWEBSOCKET_H_
 #define _APPLEWEBSOCKET_H_
 
@@ -83,5 +81,3 @@ namespace BrainCloud
 };
 
 #endif /* _APPLEWEBSOCKET_H_ */
-
-#endif

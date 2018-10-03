@@ -1,5 +1,3 @@
-#ifndef TARGET_OS_WATCH
-
 #include "braincloud/internal/DefaultWebSocket.h"
 
 #include <algorithm>
@@ -381,5 +379,3 @@ namespace BrainCloud
         return true;
     }
 };
-
-#endif
