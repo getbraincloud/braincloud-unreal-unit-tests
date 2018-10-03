@@ -1,3 +1,5 @@
+#ifndef TARGET_OS_WATCH
+
 #ifndef _DEFAULTWEBSOCKER_H_
 #define _DEFAULTWEBSOCKER_H_
 
@@ -71,3 +73,5 @@ namespace BrainCloud
 };
 
 #endif /* _DEFAULTTCPSOCKER_H_ */
+
+#endif
