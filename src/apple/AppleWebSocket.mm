@@ -1,4 +1,4 @@
-#ifndef TARGET_OS_WATCH
+#if (TARGET_OS_WATCH != 1)
 
 #include "braincloud/internal/apple/AppleWebSocket.h"
 

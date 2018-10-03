@@ -19,13 +19,6 @@ Pod::Spec.new do |s|
   s.tvos.deployment_target = "9.0"
   s.watchos.deployment_target = "2.0"
 
-  pch_AF = <<-EOS
-  #ifndef TARGET_OS_WATCH
-   #define TARGET_OS_WATCH 0
-  #endif
-  EOS
-   s.prefix_header_contents = pch_AF
-
   # ―――  Spec License  ――――――――――――――――――――――――――――――――――――――――――――――――――――――――――― #
 
   s.license                = {:type => "Apache License, Version 2.0", :file => "LICENSE"}

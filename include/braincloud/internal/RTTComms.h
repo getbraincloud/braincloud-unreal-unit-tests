@@ -19,9 +19,9 @@ namespace BrainCloud
     class IRTTConnectCallback;
     class IRTTCallback;
     class ISocket;
-    #ifndef TARGET_OS_WATCH
+#if (TARGET_OS_WATCH != 1)
     class IWebSocket;
-    #endif
+#endif
 
     class RTTComms : public IServerCallback
     {
