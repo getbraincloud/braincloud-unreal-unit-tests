@@ -3,7 +3,7 @@
 #include "BCClientPluginPrivatePCH.h"
 #include "ServiceOperation.h"
 
-ServiceOperation::ServiceOperation(const FString& operation)
+ServiceOperation::ServiceOperation(const FString &operation)
 {
 	_value = operation;
 }
@@ -95,6 +95,7 @@ const ServiceOperation ServiceOperation::GetUsersOnlineStatus = ServiceOperation
 const ServiceOperation ServiceOperation::RemoveFriends = ServiceOperation(TEXT("REMOVE_FRIENDS"));
 const ServiceOperation ServiceOperation::FindPlayerByUniversalId = ServiceOperation(TEXT("FIND_PLAYER_BY_UNIVERSAL_ID"));
 const ServiceOperation ServiceOperation::GetSocialLeaderboard = ServiceOperation(TEXT("GET_SOCIAL_LEADERBOARD"));
+const ServiceOperation ServiceOperation::GetSocialLeaderboardByVersion = ServiceOperation(TEXT("GET_SOCIAL_LEADERBOARD_BY_VERSION"));
 const ServiceOperation ServiceOperation::GetMultiSocialLeaderboard = ServiceOperation(TEXT("GET_MULTI_SOCIAL_LEADERBOARD"));
 const ServiceOperation ServiceOperation::GetGlobalLeaderboard = ServiceOperation(TEXT("GET_GLOBAL_LEADERBOARD"));
 const ServiceOperation ServiceOperation::GetGlobalLeaderboardPage = ServiceOperation(TEXT("GET_GLOBAL_LEADERBOARD_PAGE"));
@@ -105,8 +106,10 @@ const ServiceOperation ServiceOperation::RewardTournament = ServiceOperation(TEX
 const ServiceOperation ServiceOperation::PostScore = ServiceOperation(TEXT("POST_SCORE"));
 const ServiceOperation ServiceOperation::PostScoreDynamic = ServiceOperation(TEXT("POST_SCORE_DYNAMIC"));
 const ServiceOperation ServiceOperation::GetGroupSocialLeaderboard = ServiceOperation(TEXT("GET_GROUP_SOCIAL_LEADERBOARD"));
+const ServiceOperation ServiceOperation::GetGroupSocialLeaderboardByVersion = ServiceOperation(TEXT("GET_GROUP_SOCIAL_LEADERBOARD_BY_VERSION"));
 const ServiceOperation ServiceOperation::GetSummaryDataForProfileId = ServiceOperation(TEXT("GET_SUMMARY_DATA_FOR_PROFILE_ID"));
 const ServiceOperation ServiceOperation::GetPlayersSocialLeaderboard = ServiceOperation(TEXT("GET_PLAYERS_SOCIAL_LEADERBOARD"));
+const ServiceOperation ServiceOperation::GetPlayersSocialLeaderboardByVersion = ServiceOperation(TEXT("GET_PLAYERS_SOCIAL_LEADERBOARD_BY_VERSION"));
 const ServiceOperation ServiceOperation::ListAllLeaderboards = ServiceOperation(TEXT("LIST_ALL_LEADERBOARDS"));
 const ServiceOperation ServiceOperation::GetGlobalLeaderboardEntryCount = ServiceOperation(TEXT("GET_GLOBAL_LEADERBOARD_ENTRY_COUNT"));
 const ServiceOperation ServiceOperation::RemovePlayerScore = ServiceOperation(TEXT("REMOVE_PLAYER_SCORE"));
@@ -303,27 +306,99 @@ const ServiceOperation ServiceOperation::UpdateGroupData = ServiceOperation(TEXT
 const ServiceOperation ServiceOperation::UpdateGroupEntity = ServiceOperation(TEXT("UPDATE_GROUP_ENTITY_DATA"));
 const ServiceOperation ServiceOperation::UpdateGroupMember = ServiceOperation(TEXT("UPDATE_GROUP_MEMBER"));
 const ServiceOperation ServiceOperation::UpdateGroupName = ServiceOperation(TEXT("UPDATE_GROUP_NAME"));
+const ServiceOperation ServiceOperation::SetGroupOpen = ServiceOperation(TEXT("SET_GROUP_OPEN"));
 
 //mail
 const ServiceOperation ServiceOperation::SendBasicEmail = ServiceOperation(TEXT("SEND_BASIC_EMAIL"));
 const ServiceOperation ServiceOperation::SendAdvancedEmail = ServiceOperation(TEXT("SEND_ADVANCED_EMAIL"));
 const ServiceOperation ServiceOperation::SendAdvancedEmailByAddress = ServiceOperation(TEXT("SEND_ADVANCED_EMAIL_BY_EMAIL"));
 
+//presence
+const ServiceOperation ServiceOperation::ForcePush = ServiceOperation(TEXT("FORCE_PUSH"));
+const ServiceOperation ServiceOperation::GetPresenceOfFriends = ServiceOperation(TEXT("GET_PRESENCE_OF_FRIENDS"));
+const ServiceOperation ServiceOperation::GetPresenceOfGroup = ServiceOperation(TEXT("GET_PRESENCE_OF_GROUP"));
+const ServiceOperation ServiceOperation::GetPresenceOfUsers = ServiceOperation(TEXT("GET_PRESENCE_OF_USERS"));
+const ServiceOperation ServiceOperation::RegisterListenersForFriends = ServiceOperation(TEXT("REGISTER_LISTENERS_FOR_FRIENDS"));
+const ServiceOperation ServiceOperation::RegisterListenersForGroup = ServiceOperation(TEXT("REGISTER_LISTENERS_FOR_GROUP"));
+const ServiceOperation ServiceOperation::RegisterListenersForProfiles = ServiceOperation(TEXT("REGISTER_LISTENERS_FOR_PROFILES"));
+const ServiceOperation ServiceOperation::SetVisibility = ServiceOperation(TEXT("SET_VISIBILITY"));
+const ServiceOperation ServiceOperation::StopListening = ServiceOperation(TEXT("STOP_LISTENING"));
+const ServiceOperation ServiceOperation::UpdateActivity = ServiceOperation(TEXT("UPDATE_ACTIVITY"));
+
 //tournament
 const ServiceOperation ServiceOperation::GetTournamentStatus = ServiceOperation(TEXT("GET_TOURNAMENT_STATUS"));
+const ServiceOperation ServiceOperation::GetDivisionInfo = ServiceOperation(TEXT("GET_DIVISION_INFO"));
+const ServiceOperation ServiceOperation::GetMyDivisions = ServiceOperation(TEXT("GET_MY_DIVISIONS"));
 const ServiceOperation ServiceOperation::JoinTournament = ServiceOperation(TEXT("JOIN_TOURNAMENT"));
+const ServiceOperation ServiceOperation::JoinDivision = ServiceOperation(TEXT("JOIN_DIVISION"));
 const ServiceOperation ServiceOperation::LeaveTournament = ServiceOperation(TEXT("LEAVE_TOURNAMENT"));
+const ServiceOperation ServiceOperation::LeaveDivisionInstance = ServiceOperation(TEXT("LEAVE_DIVISION_INSTANCE"));
 const ServiceOperation ServiceOperation::PostTournamentScore = ServiceOperation(TEXT("POST_TOURNAMENT_SCORE"));
 const ServiceOperation ServiceOperation::ViewCurrentReward = ServiceOperation(TEXT("VIEW_CURRENT_REWARD"));
 const ServiceOperation ServiceOperation::ViewReward = ServiceOperation(TEXT("VIEW_REWARD"));
 const ServiceOperation ServiceOperation::ClaimTournamentReward = ServiceOperation(TEXT("CLAIM_TOURNAMENT_REWARD"));
 
-bool ServiceOperation::operator== (const ServiceOperation& s) const
+//virtual currency
+const ServiceOperation ServiceOperation::GetPlayerCurrency = ServiceOperation(TEXT("GET_PLAYER_VC"));
+const ServiceOperation ServiceOperation::GetParentCurrency = ServiceOperation(TEXT("GET_PARENT_VC"));
+const ServiceOperation ServiceOperation::GetPeerCurrency = ServiceOperation(TEXT("GET_PEER_VC"));
+const ServiceOperation ServiceOperation::AwardVirtualCurrency = ServiceOperation(TEXT("AWARD_VC"));
+const ServiceOperation ServiceOperation::ConsumeVirtualCurrency = ServiceOperation(TEXT("CONSUME_VC"));
+
+//App Store
+const ServiceOperation ServiceOperation::VerifyPurchase = ServiceOperation(TEXT("VERIFY_PURCHASE"));
+const ServiceOperation ServiceOperation::GetEligiblePromotions = ServiceOperation(TEXT("ELIGIBLE_PROMOTIONS"));
+const ServiceOperation ServiceOperation::GetSalesInventory = ServiceOperation(TEXT("GET_INVENTORY"));
+const ServiceOperation ServiceOperation::StartPurchase = ServiceOperation(TEXT("START_PURCHASE"));
+const ServiceOperation ServiceOperation::FinalizePurchase = ServiceOperation(TEXT("FINALIZE_PURCHASE"));
+
+// rtt
+const ServiceOperation ServiceOperation::RequestClientConnection = ServiceOperation(TEXT("REQUEST_CLIENT_CONNECTION"));
+const ServiceOperation ServiceOperation::Connect = ServiceOperation(TEXT("CONNECT"));
+
+// chat
+const ServiceOperation ServiceOperation::ChannelConnect = ServiceOperation("CHANNEL_CONNECT");
+const ServiceOperation ServiceOperation::ChannelDisconnect = ServiceOperation("CHANNEL_DISCONNECT");
+const ServiceOperation ServiceOperation::DeleteChatMessage = ServiceOperation("DELETE_CHAT_MESSAGE");
+const ServiceOperation ServiceOperation::GetChannelId = ServiceOperation("GET_CHANNEL_ID");
+const ServiceOperation ServiceOperation::GetChannelInfo = ServiceOperation("GET_CHANNEL_INFO");
+const ServiceOperation ServiceOperation::GetChatMessage = ServiceOperation("GET_CHAT_MESSAGE");
+const ServiceOperation ServiceOperation::GetRecentChatMessages = ServiceOperation("GET_RECENT_CHAT_MESSAGES");
+const ServiceOperation ServiceOperation::GetSubscribedChannels = ServiceOperation("GET_SUBSCRIBED_CHANNELS");
+const ServiceOperation ServiceOperation::PostChatMessage = ServiceOperation("POST_CHAT_MESSAGE");
+const ServiceOperation ServiceOperation::PostChatMessageSimple = ServiceOperation("POST_CHAT_MESSAGE_SIMPLE");
+const ServiceOperation ServiceOperation::UpdateChatMessage = ServiceOperation("UPDATE_CHAT_MESSAGE");
+
+// messaging
+const ServiceOperation ServiceOperation::DeleteMessages = ServiceOperation("DELETE_MESSAGES");
+const ServiceOperation ServiceOperation::GetMessageBoxes = ServiceOperation("GET_MESSAGE_BOXES");
+const ServiceOperation ServiceOperation::GetMessageCounts = ServiceOperation("GET_MESSAGE_COUNTS");
+const ServiceOperation ServiceOperation::GetMessages = ServiceOperation("GET_MESSAGES");
+const ServiceOperation ServiceOperation::GetMessagesPage = ServiceOperation("GET_MESSAGES_PAGE");
+const ServiceOperation ServiceOperation::GetMessagesPageOffset = ServiceOperation("GET_MESSAGES_PAGE_OFFSET");
+const ServiceOperation ServiceOperation::MarkMessagesRead = ServiceOperation("MARK_MESSAGES_READ");
+const ServiceOperation ServiceOperation::SEND_MESSAGE = ServiceOperation("SEND_MESSAGE");
+const ServiceOperation ServiceOperation::SendMessageSimple = ServiceOperation("SEND_MESSAGE_SIMPLE");
+
+// lobby
+const ServiceOperation ServiceOperation::FindLobby = ServiceOperation("FIND_LOBBY");
+const ServiceOperation ServiceOperation::CreateLobby = ServiceOperation("CREATE_LOBBY");
+const ServiceOperation ServiceOperation::FindOrCreateLobby = ServiceOperation("FIND_OR_CREATE_LOBBY");
+const ServiceOperation ServiceOperation::GetLobbyData = ServiceOperation("GET_LOBBY_DATA");
+const ServiceOperation ServiceOperation::UpdateReady = ServiceOperation("UPDATE_READY");
+const ServiceOperation ServiceOperation::UpdateLobbyConfig = ServiceOperation("UPDATE_SETTINGS");
+const ServiceOperation ServiceOperation::SwitchTeam = ServiceOperation("SWITCH_TEAM");
+const ServiceOperation ServiceOperation::SendSignal = ServiceOperation("SEND_SIGNAL");
+const ServiceOperation ServiceOperation::JoinLobby = ServiceOperation("JOIN_LOBBY");
+const ServiceOperation ServiceOperation::LeaveLobby = ServiceOperation("LEAVE_LOBBY");
+const ServiceOperation ServiceOperation::RemoveMember = ServiceOperation("REMOVE_MEMBER");
+
+bool ServiceOperation::operator==(const ServiceOperation &s) const
 {
 	return _value == s.getValue();
 }
 
-void ServiceOperation::operator= (const ServiceOperation& s)
+void ServiceOperation::operator=(const ServiceOperation &s)
 {
 	_value = s.getValue();
 }

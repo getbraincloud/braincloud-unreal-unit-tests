@@ -10,6 +10,7 @@ class INetworkErrorCallback;
 class ServerCall;
 class BCFileUploader;
 class BrainCloudClient;
+class UBCBlueprintRestCallProxyBase;
 
 class BrainCloudComms
 {
@@ -22,6 +23,7 @@ public:
 
 	void Initialize(const FString& serverURL, const FString& secretKey, const FString& appId);
 	void EnableLogging(bool shouldEnable) { _isLoggingEnabled = shouldEnable; };
+	bool IsLoggingEnabled() { return _isLoggingEnabled; };
 
 	void AddToQueue(ServerCall *);
 	void ClearSessionId() { _sessionId.Empty(); }
@@ -32,28 +34,28 @@ public:
 
 	//Event callback
 	void RegisterEventCallback(IEventCallback * eventCallback) { _eventCallback = eventCallback; };
-	void DeregisterEventCallback() { _eventCallback = nullptr; }
-	bool IsEventCallback(IEventCallback * eventCallback) { return eventCallback == _eventCallback; }
+	void RegisterEventCallback(UBCBlueprintRestCallProxyBase *callback);
+	void DeregisterEventCallback();
 
 	//Reward callback
 	void RegisterRewardCallback(IRewardCallback * rewardCallback) { _rewardCallback = rewardCallback; }
-	void DeregisterRewardCallback() { _rewardCallback = nullptr; }
-	bool IsRewardCallback(IRewardCallback * rewardCallback) { return rewardCallback == _rewardCallback; }
+	void RegisterRewardCallback(UBCBlueprintRestCallProxyBase *callback);
+	void DeregisterRewardCallback();
 
 	//File upload callback
 	void RegisterFileUploadCallback(IFileUploadCallback * fileUploadCallback) { _fileUploadCallback = fileUploadCallback; }
-	void DeregisterFileUploadCallback() { _fileUploadCallback = nullptr; }
-	bool IsFileUploadCallback(IFileUploadCallback * fileUploadCallback) { return fileUploadCallback == _fileUploadCallback; }
+	void RegisterFileUploadCallback(UBCBlueprintRestCallProxyBase *callback);
+	void DeregisterFileUploadCallback();
 
 	//Global error callback
 	void RegisterGlobalErrorCallback(IGlobalErrorCallback * globalErrorCallback) { _globalErrorCallback = globalErrorCallback; }
-	void DeregisterGlobalErrorCallback() { _globalErrorCallback = nullptr; }
-	bool IsGlobalErrorCallback(IGlobalErrorCallback * globalErrorCallback) { return globalErrorCallback == _globalErrorCallback; }
+	void RegisterGlobalErrorCallback(UBCBlueprintRestCallProxyBase *callback);
+	void DeregisterGlobalErrorCallback();
 
 	//Network error callback
 	void RegisterNetworkErrorCallback(INetworkErrorCallback * networkErrorCallback) { _networkErrorCallback = networkErrorCallback; }
-	void DeregisterNetworkErrorCallback() { _networkErrorCallback = nullptr; }
-	bool IsNetworkErrorCallback(INetworkErrorCallback * networkErrorCallback) { return networkErrorCallback == _networkErrorCallback; }
+	void RegisterNetworkErrorCallback(UBCBlueprintRestCallProxyBase *callback);
+	void DeregisterNetworkErrorCallback();
 
 	//Getters
 	bool IsAuthenticated() { return _isAuthenticated; }
@@ -142,6 +144,7 @@ private:
 	IFileUploadCallback * _fileUploadCallback = nullptr;
 	IGlobalErrorCallback * _globalErrorCallback = nullptr;
 	INetworkErrorCallback * _networkErrorCallback = nullptr;
+	TMap<FString, UBCBlueprintRestCallProxyBase *> m_registeredRestBluePrintCallbacks;
 
 	uint64 _packetId = 0;
 

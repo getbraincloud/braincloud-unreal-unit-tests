@@ -3,19 +3,15 @@
 #pragma once
 
 #include "BCBlueprintCallProxyBase.h"
-#include "IServerCallback.h"
-
 #include "BCAuthenticationProxy.generated.h"
 
-class ABrainCloud;
-
 UCLASS(MinimalAPI)
-class UBCAuthenticationProxy : public UBCBlueprintCallProxyBase, public IServerCallback
+class UBCAuthenticationProxy : public UBCBlueprintCallProxyBase
 {
     GENERATED_BODY()
 
-public:
-    UBCAuthenticationProxy(const FObjectInitializer& ObjectInitializer);
+  public:
+    UBCAuthenticationProxy(const FObjectInitializer &ObjectInitializer);
 
     /**
     * Initializes the identity service with the saved
@@ -24,21 +20,21 @@ public:
     * @param profileId - The id of the profile id that was most recently used by the app (on this device)
     */
     UFUNCTION(BlueprintCallable, Category = "BrainCloud|Authentication")
-        static void Initialize(UBrainCloudWrapper *brainCloudWrapper, const FString& profileId, const FString& anonymousId);
+    static void Initialize(UBrainCloudWrapper *brainCloudWrapper, const FString &profileId, const FString &anonymousId);
 
-	/**
+    /**
 	* Used to create the anonymous installation id for the brainCloud profile.
 	* Returns - A unique Anonymous ID
 	*/
-	UFUNCTION(BlueprintCallable, Category = "BrainCloud|Authentication")
-		static FString GenerateAnonymousId(UBrainCloudWrapper *brainCloudWrapper);
+    UFUNCTION(BlueprintCallable, Category = "BrainCloud|Authentication")
+    static FString GenerateAnonymousId(UBrainCloudWrapper *brainCloudWrapper);
 
     /**
     * Used to clear the saved profile id - to use in cases when the user is
     * attempting to switch to a different game profile.
     */
     UFUNCTION(BlueprintCallable, Category = "BrainCloud|Authentication")
-        static void ClearSavedProfileId(UBrainCloudWrapper *brainCloudWrapper);
+    static void ClearSavedProfileId(UBrainCloudWrapper *brainCloudWrapper);
 
     /**
     * Authenticate a user anonymously with brainCloud - used for apps that don't want to bother
@@ -50,7 +46,7 @@ public:
     * Param - forceCreate  Should a new profile be created if it does not exist?
     */
     UFUNCTION(BlueprintCallable, Category = "BrainCloud|Authentication")
-        static UBCAuthenticationProxy* AuthenticateAnonymous(UBrainCloudWrapper *brainCloudWrapper, bool forceCreate);
+    static UBCAuthenticationProxy *AuthenticateAnonymous(UBrainCloudWrapper *brainCloudWrapper, bool forceCreate);
 
     /*
     * Authenticate the user with brainCloud using their Facebook Credentials
@@ -64,7 +60,7 @@ public:
     * Param - forceCreate Should a new profile be created for this user if the account does not exist?
     */
     UFUNCTION(BlueprintCallable, meta = (BlueprintInternalUseOnly = "true"), Category = "BrainCloud|Authentication")
-        static UBCAuthenticationProxy* AuthenticateFacebook(UBrainCloudWrapper *brainCloudWrapper, FString facebookId, FString password, bool forceCreate);
+    static UBCAuthenticationProxy *AuthenticateFacebook(UBrainCloudWrapper *brainCloudWrapper, FString facebookId, FString password, bool forceCreate);
 
     /*
     * Authenticate the user using their Game Center id
@@ -76,7 +72,7 @@ public:
     * Param - forceCreate Should a new profile be created for this user if the account does not exist?
     */
     UFUNCTION(BlueprintCallable, meta = (BlueprintInternalUseOnly = "true"), Category = "BrainCloud|Authentication")
-        static UBCAuthenticationProxy* AuthenticateGameCenter(UBrainCloudWrapper *brainCloudWrapper, FString gameCenterId, bool forceCreate);
+    static UBCAuthenticationProxy *AuthenticateGameCenter(UBrainCloudWrapper *brainCloudWrapper, FString gameCenterId, bool forceCreate);
 
     /*
     * Authenticate the user with a custom Email and Password.  Note that the client app
@@ -95,7 +91,7 @@ public:
     * Param - forceCreate Should a new profile be created for this user if the account does not exist?
     */
     UFUNCTION(BlueprintCallable, meta = (BlueprintInternalUseOnly = "true"), Category = "BrainCloud|Authentication")
-        static UBCAuthenticationProxy* AuthenticateEmailPassword(UBrainCloudWrapper *brainCloudWrapper, FString email, FString password, bool forceCreate);
+    static UBCAuthenticationProxy *AuthenticateEmailPassword(UBrainCloudWrapper *brainCloudWrapper, FString email, FString password, bool forceCreate);
 
     /*
     * Authenticate the user using a userid and password (without any validation on the userid).
@@ -110,7 +106,7 @@ public:
     * Param - forceCreate Should a new profile be created for this user if the account does not exist?
     */
     UFUNCTION(BlueprintCallable, meta = (BlueprintInternalUseOnly = "true"), Category = "BrainCloud|Authentication")
-        static UBCAuthenticationProxy* AuthenticateUniversal(UBrainCloudWrapper *brainCloudWrapper, FString userId, FString password, bool forceCreate);
+    static UBCAuthenticationProxy *AuthenticateUniversal(UBrainCloudWrapper *brainCloudWrapper, FString userId, FString password, bool forceCreate);
 
     /*
     * Authenticate the user using a steam userid and session ticket (without any validation on the userid).
@@ -123,7 +119,7 @@ public:
     * Param - forceCreate Should a new profile be created for this user if the account does not exist?
     */
     UFUNCTION(BlueprintCallable, meta = (BlueprintInternalUseOnly = "true"), Category = "BrainCloud|Authentication")
-        static UBCAuthenticationProxy* AuthenticateSteam(UBrainCloudWrapper *brainCloudWrapper, FString steamId, FString sessionTicket, bool forceCreate);
+    static UBCAuthenticationProxy *AuthenticateSteam(UBrainCloudWrapper *brainCloudWrapper, FString steamId, FString sessionTicket, bool forceCreate);
 
     /*
     * Authenticate the user using a google userid(email address) and google authentication token.
@@ -136,7 +132,7 @@ public:
     * Param - forceCreate Should a new profile be created for this user if the account does not exist?
     */
     UFUNCTION(BlueprintCallable, meta = (BlueprintInternalUseOnly = "true"), Category = "BrainCloud|Authentication")
-        static UBCAuthenticationProxy* AuthenticateGoogle(UBrainCloudWrapper *brainCloudWrapper, FString googleId, FString token, bool forceCreate);
+    static UBCAuthenticationProxy *AuthenticateGoogle(UBrainCloudWrapper *brainCloudWrapper, FString googleId, FString token, bool forceCreate);
 
     /*
     * Authenticate the user using a Twitter userid, authentication token, and secret from Twitter.
@@ -150,7 +146,7 @@ public:
     * Param - forceCreate Should a new profile be created for this user if the account does not exist?
     */
     UFUNCTION(BlueprintCallable, meta = (BlueprintInternalUseOnly = "true"), Category = "BrainCloud|Authentication")
-        static UBCAuthenticationProxy* AuthenticateTwitter(UBrainCloudWrapper *brainCloudWrapper, FString twitterId, FString token, FString secret, bool forceCreate);
+    static UBCAuthenticationProxy *AuthenticateTwitter(UBrainCloudWrapper *brainCloudWrapper, FString twitterId, FString token, FString secret, bool forceCreate);
 
     /*
     * Authenticate the user using a Parse ID and authentication token.
@@ -163,7 +159,7 @@ public:
     * Param - forceCreate Should a new profile be created for this user if the account does not exist?
     */
     UFUNCTION(BlueprintCallable, meta = (BlueprintInternalUseOnly = "true"), Category = "BrainCloud|Authentication")
-        static UBCAuthenticationProxy* AuthenticateParse(UBrainCloudWrapper *brainCloudWrapper, FString parseId, FString token, bool forceCreate);
+    static UBCAuthenticationProxy *AuthenticateParse(UBrainCloudWrapper *brainCloudWrapper, FString parseId, FString token, bool forceCreate);
 
     /**
     * Authenticate the user via cloud code (which in turn validates the supplied credentials against an external system).
@@ -178,7 +174,7 @@ public:
     * Param - force Should a new profile be created for this user if the account does not exist?
     */
     UFUNCTION(BlueprintCallable, meta = (BlueprintInternalUseOnly = "true"), Category = "BrainCloud|Authentication")
-        static UBCAuthenticationProxy* AuthenticateExternal(UBrainCloudWrapper *brainCloudWrapper, FString userId, FString token, FString externalAuthName, bool forceCreate);
+    static UBCAuthenticationProxy *AuthenticateExternal(UBrainCloudWrapper *brainCloudWrapper, FString userId, FString token, FString externalAuthName, bool forceCreate);
 
     /**
     * Reset Email password - Sends a password reset email to the specified address
@@ -193,32 +189,19 @@ public:
     * SECURITY_ERROR (40209) - If the email address cannot be found.
     */
     UFUNCTION(BlueprintCallable, meta = (BlueprintInternalUseOnly = "true"), Category = "BrainCloud|Authentication")
-        static UBCAuthenticationProxy* ResetEmailPassword(UBrainCloudWrapper *brainCloudWrapper, const FString& email);
+    static UBCAuthenticationProxy *ResetEmailPassword(UBrainCloudWrapper *brainCloudWrapper, const FString &email);
 
     //Getters
     UFUNCTION(BlueprintCallable, Category = "BrainCloud|Authentication")
-        static const FString & GetAnonymousId(UBrainCloudWrapper *brainCloudWrapper);
+    static const FString &GetAnonymousId(UBrainCloudWrapper *brainCloudWrapper);
 
     UFUNCTION(BlueprintCallable, Category = "BrainCloud|Authentication")
-        static const FString & GetProfileId(UBrainCloudWrapper *brainCloudWrapper);
+    static const FString &GetProfileId(UBrainCloudWrapper *brainCloudWrapper);
 
     //Setters
     UFUNCTION(BlueprintCallable, Category = "BrainCloud|Authentication")
-        static void SetAnonymousId(UBrainCloudWrapper *brainCloudWrapper, FString anonymousId);
+    static void SetAnonymousId(UBrainCloudWrapper *brainCloudWrapper, FString anonymousId);
 
     UFUNCTION(BlueprintCallable, Category = "BrainCloud|Authentication")
-        static void SetProfileId(UBrainCloudWrapper *brainCloudWrapper, FString profileId);
-
-    //Response delegates
-    UPROPERTY(BlueprintAssignable)
-        FBrainCloudCallbackDelegate OnSuccess;
-
-    UPROPERTY(BlueprintAssignable)
-        FBrainCloudCallbackDelegate OnFailure;
-
-protected:
-    // IServerCallback interface
-    void serverCallback(ServiceName serviceName, ServiceOperation serviceOperation, const FString& jsonData);
-    void serverError(ServiceName serviceName, ServiceOperation serviceOperation, int32 statusCode, int32 reasonCode, const FString& jsonError);
-    // End of IServerCallback interface
+    static void SetProfileId(UBrainCloudWrapper *brainCloud, FString profileId);
 };

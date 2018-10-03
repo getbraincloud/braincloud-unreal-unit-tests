@@ -22,12 +22,15 @@ const ServiceName ServiceName::PlayerStatisticsEvent = ServiceName("playerStatis
 const ServiceName ServiceName::Twitter = ServiceName("twitter");
 const ServiceName ServiceName::Steam = ServiceName("steam");
 
+const ServiceName ServiceName::Presence = ServiceName("presence");
 const ServiceName ServiceName::PlayerState = ServiceName("playerState");
 const ServiceName ServiceName::Entity = ServiceName("entity");
 const ServiceName ServiceName::GlobalEntity = ServiceName("globalEntity");
 const ServiceName ServiceName::Friend = ServiceName("friend");
 const ServiceName ServiceName::Time = ServiceName("time");
 const ServiceName ServiceName::Tournament = ServiceName("tournament");
+const ServiceName ServiceName::VirtualCurrency = ServiceName("virtualCurrency");
+const ServiceName ServiceName::AppStore = ServiceName("appStore");                       
 
 const ServiceName ServiceName::Leaderboard = ServiceName("leaderboard");
 const ServiceName ServiceName::Event = ServiceName("event");
@@ -50,6 +53,13 @@ const ServiceName ServiceName::Profanity = ServiceName("profanity");
 const ServiceName ServiceName::File = ServiceName("file");
 const ServiceName ServiceName::Group = ServiceName("group");
 const ServiceName ServiceName::Mail = ServiceName("mail");
+
+// RTT
+const ServiceName ServiceName::RTTRegistration = ServiceName("rttRegistration");
+const ServiceName ServiceName::RTT = ServiceName("rtt");
+const ServiceName ServiceName::Chat = ServiceName("chat");
+const ServiceName ServiceName::Messaging = ServiceName("messaging");
+const ServiceName ServiceName::Lobby = ServiceName("lobby");
 
 bool ServiceName::operator== (const ServiceName& s) const
 {

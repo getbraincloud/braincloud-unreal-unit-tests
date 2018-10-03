@@ -3,7 +3,7 @@
 #include "BCClientPluginPrivatePCH.h"
 #include "BrainCloudClient.h"
 #include "ServerCall.h"
-#include "BrainCloudActor.h"
+
 #include "BCWrapperProxy.h"
 #include "BCMatchmakingProxy.h"
 #include "BrainCloudWrapper.h"
@@ -117,19 +117,3 @@ UBCMatchmakingProxy* UBCMatchmakingProxy::DisableMatchMaking(UBrainCloudWrapper 
     UBCWrapperProxy::GetBrainCloudInstance(brainCloudWrapper)->getMatchmakingService()->disableMatchMaking(Proxy);
     return Proxy;
 }
-
-//callbacks
-void UBCMatchmakingProxy::serverCallback(ServiceName serviceName, ServiceOperation serviceOperation, const FString& jsonData)
-{
-    FBC_ReturnData returnData = FBC_ReturnData(serviceName.getValue(), serviceOperation.getValue(), 200, 0);
-    OnSuccess.Broadcast(jsonData, returnData);
-	ConditionalBeginDestroy();
-}
-
-void UBCMatchmakingProxy::serverError(ServiceName serviceName, ServiceOperation serviceOperation, int32 statusCode, int32 reasonCode, const FString& jsonError)
-{
-    FBC_ReturnData returnData = FBC_ReturnData(serviceName.getValue(), serviceOperation.getValue(), statusCode, reasonCode);
-    OnFailure.Broadcast(jsonError, returnData);
-	ConditionalBeginDestroy();
-}
-
