@@ -61,6 +61,31 @@ public:
 	void getSocialLeaderboard(const FString& leaderboardId, bool replaceName, IServerCallback * callback = nullptr);
 
 	/**
+	 * Method returns the social leaderboard by its version. A player's social leaderboard is
+	 * comprised of players who are recognized as being your friend.
+	 * For now, this applies solely to Facebook connected players who are
+	 * friends with the logged in player (who also must be Facebook connected).
+	 * In the future this will expand to other identification means (such as
+	 * Game Center, Google circles etc).
+	 *
+	 * Leaderboards entries contain the player's score and optionally, some user-defined
+	 * data associated with the score. The currently logged in player will also
+	 * be returned in the social leaderboard.
+	 *
+	 * Note: If no friends have played the game, the bestScore, createdAt, updatedAt
+	 * will contain NULL.
+	 *
+	 * @param leaderboardId The id of the leaderboard to retrieve
+	 * @param replaceName If true, the currently logged in player's name will be replaced
+	 * @param versionId the version
+	 * by the string "You".
+	 * @param callback The method to be invoked when the server response is received
+	 *
+	 */
+	void getSocialLeaderboardByVersion(const FString& leaderboardId, bool replaceName, int32 version, IServerCallback * callback = nullptr);
+
+
+	/**
 	* Reads multiple social leaderboards.
 	*
 	* @param leaderboardIds Collection of leaderboard IDs.
@@ -258,6 +283,19 @@ public:
 	void getGroupSocialLeaderboard(const FString& leaderboardId, const FString& groupId, IServerCallback * callback = nullptr);
 
 	/**
+	* Retrieve the social leaderboard for a group by its version.
+	*
+	* Service Name - leaderboard
+	* Service Operation - GET_GROUP_SOCIAL_LEADERBOARD_BY_VERSION
+	*
+	* @param leaderboardId The leaderboard to retrieve
+	* @param groupId The ID of the group
+	* @param versionId the version
+	* @param callback The method to be invoked when the server response is received
+	*/
+	void getGroupSocialLeaderboardByVersion(const FString& leaderboardId, const FString& groupId, int32 versionId, IServerCallback * callback = nullptr);
+
+	/**
 	* Retrieve the social leaderboard for a list of players.
 	*
 	* Service Name - leaderboard
@@ -268,6 +306,19 @@ public:
 	* @param callback The method to be invoked when the server response is received
 	*/
 	void getPlayersSocialLeaderboard(const FString& leaderboardId, const TArray<FString> profileIds, IServerCallback * callback = nullptr);
+
+	/**
+	* Retrieve the social leaderboard for a list of players by the version of the leaderboard.
+	*
+	* Service Name - leaderboard
+	* Service Operation - GET_PLAYERS_SOCIAL_LEADERBOARD_BY_VERSION
+	*
+	* @param leaderboardId The leaderboard to retrieve
+	* @param profileIds The IDs of the players
+	* @param versionId the version
+	* @param callback The method to be invoked when the server response is received
+	*/
+	void getPlayersSocialLeaderboardByVersion(const FString& leaderboardId, const TArray<FString> profileIds, int32 versionId, IServerCallback * callback = nullptr);
 
 	/**
 	* Retrieve a list of all leaderboards

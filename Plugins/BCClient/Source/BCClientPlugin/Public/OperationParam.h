@@ -4,7 +4,7 @@
 
 class BCCLIENTPLUGIN_API OperationParam
 {
-public:
+  public:
 	static const OperationParam Authenticate;
 
 	//Push Notification Service - Send Params
@@ -170,6 +170,15 @@ public:
 	static const OperationParam PlayerStatisticEventServiceEventName;
 	static const OperationParam PlayerStatisticEventServiceEventMultiplier;
 	static const OperationParam PlayerStatisticEventServiceEvents;
+
+	// Presence Params
+	static const OperationParam PresenceServicePlatform;
+	static const OperationParam PresenceServiceIncludeOffline;
+	static const OperationParam PresenceServiceGroupId;
+	static const OperationParam PresenceServiceProfileIds;
+	static const OperationParam PresenceServiceBidirectional;
+	static const OperationParam PresenceServiceVisible;
+	static const OperationParam PresenceServiceActivity;
 
 	// Player State Service - Read Params
 	static const OperationParam PlayerStateServiceReadEntitySubtype;
@@ -363,6 +372,7 @@ public:
 	static const OperationParam ServiceParams;
 
 	static const OperationParam LeaderboardId;
+	static const OperationParam DivSetId;
 	static const OperationParam VersionId;
 	static const OperationParam TournamentCode;
 	static const OperationParam InitialScore;
@@ -370,15 +380,78 @@ public:
 	static const OperationParam RoundStartedEpoch;
 	static const OperationParam Data;
 
+	//virtual currency
+	static const OperationParam VirtualCurrencyVcId;
+	static const OperationParam VirtualCurrencyLevelName;
+	static const OperationParam VirtualCurrencyPeerCode;
+	static const OperationParam VirtualCurrencyPriceInfoCriteria;
+	static const OperationParam VirtualCurrencyAmount;
+
+	//app store
+	static const OperationParam AppStoreId;
+	static const OperationParam AppStoreJsonReceiptData;
+	static const OperationParam AppStoreUserCurrency;
+	static const OperationParam AppStoreCategory;
+	static const OperationParam AppStoreJsonPurchaseData;
+	static const OperationParam AppStoreTransactionId;
+	static const OperationParam AppStoreJsonTransactionData;
+	static const OperationParam AppStorePriceInfoCriteria;
+
+	static const OperationParam ChatChannelId;
+	static const OperationParam ChatMaxReturn;
+	static const OperationParam ChatMessageId;
+	static const OperationParam ChatVersion;
+	static const OperationParam ChatChannelType;
+	static const OperationParam ChatChannelSubId;
+	static const OperationParam ChatContent;
+	static const OperationParam ChatText;
+	static const OperationParam ChatRich;
+	static const OperationParam ChatRecordInHistory;
+	
+	static const OperationParam AllChannelType;
+	static const OperationParam GlobalChannelType;
+	static const OperationParam GroupChannelType;
+	
+	static const OperationParam MessagingMessageBox;
+	static const OperationParam MessagingMessageIds;
+	static const OperationParam MessagingContext;
+	static const OperationParam MessagingPageOffset;
+	static const OperationParam MessagingFromName;
+	static const OperationParam MessagingToProfileIds;
+	static const OperationParam MessagingContent;
+	static const OperationParam MessagingSubject;
+	static const OperationParam MessagingText;
+	static const OperationParam InboxMessageType;
+	static const OperationParam SentMessageType;
+	
+	static const OperationParam LobbyRoomType;
+	static const OperationParam LobbyRating;
+	static const OperationParam LobbyAlgorithm;
+	static const OperationParam LobbyMaxSteps;
+	static const OperationParam LobbyStrategy;
+	static const OperationParam LobbyAlignment;
+	static const OperationParam LobbyRanges;
+	static const OperationParam LobbyFilterJson;
+	static const OperationParam LobbySettings;
+	static const OperationParam LobbyTimeoutSeconds;
+	static const OperationParam LobbyIsReady;
+	static const OperationParam LobbyOtherUserCxIds;
+	static const OperationParam LobbyExtraJson;
+	static const OperationParam LobbyTeamCode;
+	static const OperationParam LobbyIdentifier;
+	static const OperationParam LobbyToTeamName;
+	static const OperationParam LobbySignalData;
+	static const OperationParam LobbyConnectionId;
+
 	FString getValue() const { return _value; }
 
-	bool operator== (const OperationParam& s) const;
-	void operator= (const OperationParam& s);
+	bool operator==(const OperationParam &s) const;
+	void operator=(const OperationParam &s);
 
-	static bool isOptionalParamValid(const FString& param);
+	static bool isOptionalParamValid(const FString &param);
 
-private:
+  private:
 	FString _value;
 
-	OperationParam(const FString& value);
+	OperationParam(const FString &value);
 };

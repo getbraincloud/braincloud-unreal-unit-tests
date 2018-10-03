@@ -37,14 +37,13 @@ class BrainCloudClient;
 #include "BrainCloudGroup.h"
 #include "BrainCloudMail.h"
 #include "BrainCloudTournament.h"
-
-
+#include "BrainCloudPresence.h"
+#include "BrainCloudVirtualCurrency.h"
+#include "BrainCloudAppStore.h"
+#include "BrainCloudWrapper.generated.h"
 
 class ServiceName;
 class ServiceOperation;
-
-#include "BrainCloudWrapper.generated.h"
-
 
 /**
  * The UBrainCloudWrapper provides some convenience functionality to developers when they are
@@ -58,11 +57,11 @@ UCLASS(BlueprintType)
 class BCCLIENTPLUGIN_API UBrainCloudWrapper : public UObject, public IServerCallback
 {
     GENERATED_BODY()
-	
 
   public:
     UBrainCloudWrapper();
     UBrainCloudWrapper(FString wrapperName);
+    virtual void BeginDestroy() override;
 
     /**
      * Method returns a singleton instance of the UBrainCloudWrapper.
@@ -406,6 +405,14 @@ class BCCLIENTPLUGIN_API UBrainCloudWrapper : public UObject, public IServerCall
     BrainCloudGroup *getGroupService() { return _client->getGroupService(); }
     BrainCloudMail *getMailService() { return _client->getMailService(); }
     BrainCloudTournament *getTournamentService() { return _client->getTournamentService(); }
+    BrainCloudPresence *getPresenceService() { return _client->getPresenceService(); }
+    BrainCloudVirtualCurrency *getVirtualCurrencyService() { return _client->getVirtualCurrencyService(); }
+    BrainCloudAppStore *getAppStoreService() { return _client->getAppStoreService(); }
+
+    BrainCloudRTT *getRTTService() { return _client->getRTTService(); }
+    BrainCloudLobby *getLobbyService() { return _client->getLobbyService(); }
+    BrainCloudChat *getChatService() { return _client->getChatService(); }
+    BrainCloudMessaging *getMessagingService() { return _client->getMessagingService(); }
 
     /**
      * Returns a singleton instance of the BrainCloudClient.
@@ -509,6 +516,7 @@ class BCCLIENTPLUGIN_API UBrainCloudWrapper : public UObject, public IServerCall
     IServerCallback *_authenticateCallback = nullptr;
 
     bool _alwaysAllowProfileSwitch = true;
+    bool _createdWithClient = false;
 
     void initializeIdentity(bool isAnonymousAuth = false);
     void reauthenticate();

@@ -1,0 +1,23 @@
+// Copyright 2018 bitHeads, Inc. All Rights Reserved.
+
+#include "BCClientPluginPrivatePCH.h"
+#include "BCWrapperProxy.h"
+#include "BrainCloudWrapper.h"
+#include "BCRTTPresenceCallbackProxy.h"
+
+UBCRTTPresenceCallbackProxy::UBCRTTPresenceCallbackProxy(const FObjectInitializer &ObjectInitializer)
+	: Super(ObjectInitializer)
+{
+}
+
+UBCRTTPresenceCallbackProxy *UBCRTTPresenceCallbackProxy::RegisterRTTPresenceCallback(UBrainCloudWrapper *brainCloudWrapper)
+{
+	UBCRTTPresenceCallbackProxy *Proxy = NewObject<UBCRTTPresenceCallbackProxy>();
+	UBCWrapperProxy::GetBrainCloudInstance(brainCloudWrapper)->getBCClient()->registerRTTPresenceCallback(Proxy);
+	return Proxy;
+}
+
+void UBCRTTPresenceCallbackProxy::DeregisterRTTPresenceCallback(UBrainCloudWrapper *brainCloudWrapper)
+{
+	UBCWrapperProxy::GetBrainCloudInstance(brainCloudWrapper)->getBCClient()->deregisterRTTPresenceCallback();
+}

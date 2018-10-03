@@ -15,10 +15,12 @@
 #include "BrainCloudClient.h"
 #include "BCFileUploader.h"
 
+#include "BCBlueprintRestCallProxyBase.h"
+
 #include "ReasonCodes.h"
 #include "HttpCodes.h"
 
-BrainCloudComms::BrainCloudComms(BrainCloudClient* client) : _client(client)
+BrainCloudComms::BrainCloudComms(BrainCloudClient *client) : _client(client)
 {
 	SetPacketTimeoutsToDefault();
 	FHttpModule::Get().SetHttpTimeout(30);
@@ -26,9 +28,14 @@ BrainCloudComms::BrainCloudComms(BrainCloudClient* client) : _client(client)
 
 BrainCloudComms::~BrainCloudComms()
 {
+	DeregisterEventCallback();
+	DeregisterRewardCallback();
+	DeregisterFileUploadCallback();
+	DeregisterGlobalErrorCallback();
+	DeregisterNetworkErrorCallback();
 }
 
-void BrainCloudComms::Initialize(const FString& serverURL, const FString& secretKey, const FString& appId)
+void BrainCloudComms::Initialize(const FString &serverURL, const FString &secretKey, const FString &appId)
 {
 	_isInitialized = true;
 	_serverUrl = serverURL;
@@ -50,7 +57,8 @@ void BrainCloudComms::SetPacketTimeoutsToDefault()
 
 void BrainCloudComms::AddToQueue(ServerCall *serverCall)
 {
-	if (!_isInitialized) UE_LOG(LogBrainCloudComms, Error, TEXT("Attempted to send request but client is not initialized!"));
+	if (!_isInitialized)
+		UE_LOG(LogBrainCloudComms, Error, TEXT("Attempted to send request but client is not initialized!"));
 
 	TSharedRef<ServerCall> sc = MakeShareable(serverCall);
 
@@ -65,11 +73,102 @@ void BrainCloudComms::InsertEndOfMessageBundleMarker()
 	int32 queueCount = _messageQueue.Num();
 	_queueMutex.Unlock();
 
-	if (queueCount <= 0) return;
+	if (queueCount <= 0)
+		return;
 
 	_queueMutex.Lock();
 	_messageQueue.GetHead()->GetValue()->setIsEndOfBundle(true);
 	_queueMutex.Unlock();
+}
+
+void BrainCloudComms::RegisterEventCallback(UBCBlueprintRestCallProxyBase *callback)
+{
+	callback->AddToRoot();
+	m_registeredRestBluePrintCallbacks.Emplace(ServiceName::Event.getValue(), callback);
+}
+
+void BrainCloudComms::DeregisterEventCallback()
+{
+	FString serviceName = ServiceName::Event.getValue();
+	if (m_registeredRestBluePrintCallbacks.Contains(serviceName))
+	{
+		m_registeredRestBluePrintCallbacks[serviceName]->RemoveFromRoot();
+		m_registeredRestBluePrintCallbacks.Remove(serviceName);
+	}
+
+	_eventCallback = nullptr;
+}
+
+void BrainCloudComms::RegisterRewardCallback(UBCBlueprintRestCallProxyBase *callback)
+{
+	callback->AddToRoot();
+	m_registeredRestBluePrintCallbacks.Emplace("reward", callback);
+}
+
+void BrainCloudComms::DeregisterRewardCallback()
+{
+	FString serviceName = TEXT("reward");
+	if (m_registeredRestBluePrintCallbacks.Contains(serviceName))
+	{
+		m_registeredRestBluePrintCallbacks[serviceName]->RemoveFromRoot();
+		m_registeredRestBluePrintCallbacks.Remove(serviceName);
+	}
+
+	_rewardCallback = nullptr;
+}
+
+void BrainCloudComms::RegisterFileUploadCallback(UBCBlueprintRestCallProxyBase *callback)
+{
+	callback->AddToRoot();
+	m_registeredRestBluePrintCallbacks.Emplace(ServiceName::File.getValue(), callback);
+}
+
+void BrainCloudComms::DeregisterFileUploadCallback()
+{
+	FString serviceName = ServiceName::File.getValue();
+	if (m_registeredRestBluePrintCallbacks.Contains(serviceName))
+	{
+		m_registeredRestBluePrintCallbacks[serviceName]->RemoveFromRoot();
+		m_registeredRestBluePrintCallbacks.Remove(serviceName);
+	}
+
+	_fileUploadCallback = nullptr;
+}
+
+void BrainCloudComms::RegisterGlobalErrorCallback(UBCBlueprintRestCallProxyBase *callback)
+{
+	callback->AddToRoot();
+	m_registeredRestBluePrintCallbacks.Emplace("globalError", callback);
+}
+
+void BrainCloudComms::DeregisterGlobalErrorCallback()
+{
+	FString serviceName = TEXT("globalError");
+	if (m_registeredRestBluePrintCallbacks.Contains(serviceName))
+	{
+		m_registeredRestBluePrintCallbacks[serviceName]->RemoveFromRoot();
+		m_registeredRestBluePrintCallbacks.Remove(serviceName);
+	}
+
+	_globalErrorCallback = nullptr;
+}
+
+void BrainCloudComms::RegisterNetworkErrorCallback(UBCBlueprintRestCallProxyBase *callback)
+{
+	callback->AddToRoot();
+	m_registeredRestBluePrintCallbacks.Emplace("networkError", callback);
+}
+
+void BrainCloudComms::DeregisterNetworkErrorCallback()
+{
+	FString serviceName = TEXT("networkError");
+	if (m_registeredRestBluePrintCallbacks.Contains(serviceName))
+	{
+		m_registeredRestBluePrintCallbacks[serviceName]->RemoveFromRoot();
+		m_registeredRestBluePrintCallbacks.Remove(serviceName);
+	}
+
+	_networkErrorCallback = nullptr;
 }
 
 BrainCloudComms::PacketRef BrainCloudComms::BuildPacket()
@@ -79,7 +178,8 @@ BrainCloudComms::PacketRef BrainCloudComms::BuildPacket()
 	_queueMutex.Lock();
 
 	auto nextNode = _messageQueue.GetTail();
-	while (nextNode != nullptr) {
+	while (nextNode != nullptr)
+	{
 		TSharedRef<ServerCall> message = nextNode->GetValue();
 
 		if (message->getOperation() == ServiceOperation::Authenticate)
@@ -116,7 +216,7 @@ BrainCloudComms::PacketRef BrainCloudComms::BuildPacket()
 
 BrainCloudComms::PacketRef BrainCloudComms::BuildPacket(TSharedRef<ServerCall> sc)
 {
-	PacketRef packet = MakeShareable(new TArray<TSharedRef<ServerCall> >());
+	PacketRef packet = MakeShareable(new TArray<TSharedRef<ServerCall>>());
 	packet->Add(sc);
 	return packet;
 }
@@ -134,7 +234,8 @@ TSharedRef<IHttpRequest> BrainCloudComms::SendPacket(PacketRef packet)
 	httpRequest->SetHeader(TEXT("X-Braincloud-PacketId"), packetIdStr);
 
 	FString dataString = GetDataString(packet, _packetId++);
-	if (_isLoggingEnabled) UE_LOG(LogBrainCloudComms, Log, TEXT("Sending request:%s\n"), *dataString);
+	if (_isLoggingEnabled)
+		UE_LOG(LogBrainCloudComms, Log, TEXT("Sending request:%s\n"), *dataString);
 
 	httpRequest->SetContentAsString(dataString);
 
@@ -154,7 +255,8 @@ TSharedRef<IHttpRequest> BrainCloudComms::SendPacket(PacketRef packet)
 
 void BrainCloudComms::ResendActivePacket()
 {
-	if (!_activeRequest.IsValid()) return;
+	if (!_activeRequest.IsValid())
+		return;
 	TSharedRef<IHttpRequest> httpRequest = FHttpModule::Get().CreateRequest();
 
 	httpRequest->SetURL(_serverUrl);
@@ -204,7 +306,8 @@ void BrainCloudComms::CreateAndSendNextRequestBundle()
 	int32 queueCount = _messageQueue.Num();
 	_queueMutex.Unlock();
 
-	if (queueCount <= 0) return;
+	if (queueCount <= 0)
+		return;
 
 	bool isAuth = false;
 
@@ -248,7 +351,8 @@ void BrainCloudComms::CreateAndSendNextRequestBundle()
 
 void BrainCloudComms::RunCallbacks()
 {
-	if (!_isInitialized || _blockingQueue) return;
+	if (!_isInitialized || _blockingQueue)
+		return;
 
 	if (_activeRequest.IsValid())
 	{
@@ -275,19 +379,21 @@ void BrainCloudComms::RunCallbacks()
 				{
 					if (resp->GetResponseCode() == HttpCode::OK)
 						HandleResponse(_activeRequest->GetResponse()->GetResponseCode(),
-							_activeRequest->GetResponse()->GetContentAsString());
-					else isError = true;
+									   _activeRequest->GetResponse()->GetContentAsString());
+					else
+						isError = true;
 				}
 			}
-			else if (_activeRequest->GetStatus() == EHttpRequestStatus::Processing
-				&& elapsedTime > GetRetryTimeoutSeconds(_retryCount))   //request timeout
+			else if (_activeRequest->GetStatus() == EHttpRequestStatus::Processing && elapsedTime > GetRetryTimeoutSeconds(_retryCount)) //request timeout
 			{
-				if (_isLoggingEnabled) UE_LOG(LogBrainCloudComms, Warning, TEXT("Request timed out"));
+				if (_isLoggingEnabled)
+					UE_LOG(LogBrainCloudComms, Warning, TEXT("Request timed out"));
 				isError = true;
 			}
 			else if (!_waitingForRetry && status == EHttpRequestStatus::Failed)
 			{
-				if (_isLoggingEnabled) UE_LOG(LogBrainCloudComms, Warning, TEXT("Request failed"));
+				if (_isLoggingEnabled)
+					UE_LOG(LogBrainCloudComms, Warning, TEXT("Request failed"));
 				isError = true;
 			}
 
@@ -296,21 +402,26 @@ void BrainCloudComms::RunCallbacks()
 				_activeRequest->CancelRequest();
 				if (_retryCount < GetMaxRetryAttempts())
 				{
-					if (_isLoggingEnabled) UE_LOG(LogBrainCloudComms, Warning, TEXT("Retrying...#%d of %d"), _retryCount + 1, GetMaxRetryAttempts() + 1 );
+					if (_isLoggingEnabled)
+						UE_LOG(LogBrainCloudComms, Warning, TEXT("Retrying...#%d of %d"), _retryCount + 1, GetMaxRetryAttempts() + 1);
 					_retryWaitStart = FPlatformTime::Seconds();
 					_retryWaitTime = GetRetryTimeoutSeconds(_retryCount) - elapsedTime;
-					
+
 					_waitingForRetry = true;
 				}
 				else
 				{
-					if (_isLoggingEnabled) UE_LOG(LogBrainCloudComms, Warning, TEXT("Reached max retry limit #%d of %d"), _retryCount + 1, GetMaxRetryAttempts() + 1 );
+					if (_isLoggingEnabled)
+						UE_LOG(LogBrainCloudComms, Warning, TEXT("Reached max retry limit #%d of %d"), _retryCount + 1, GetMaxRetryAttempts() + 1);
 					// if we're doing caching of messages on timeout, kick it in now!
-					if (_cacheMessagesOnNetworkError && _networkErrorCallback != nullptr)
+					INetworkErrorCallback *networkErrorCallback = _networkErrorCallback != nullptr ? _networkErrorCallback : m_registeredRestBluePrintCallbacks.Contains("networkError") ? m_registeredRestBluePrintCallbacks["networkError"] : nullptr;
+
+					if (_cacheMessagesOnNetworkError && networkErrorCallback != nullptr)
 					{
-						if (_isLoggingEnabled) UE_LOG(LogBrainCloudComms, Log, TEXT("Caching messages"));
+						if (_isLoggingEnabled)
+							UE_LOG(LogBrainCloudComms, Log, TEXT("Caching messages"));
 						_blockingQueue = true;
-						_networkErrorCallback->networkError();
+						networkErrorCallback->networkError();
 					}
 					else
 					{
@@ -343,7 +454,8 @@ void BrainCloudComms::HandleResponse(int32 statusCode, FString responseBody)
 {
 	if (statusCode == HttpCode::OK)
 	{
-		if (_isLoggingEnabled) UE_LOG(LogBrainCloudComms, Log, TEXT("Got response: %s\n"), *responseBody);
+		if (_isLoggingEnabled)
+			UE_LOG(LogBrainCloudComms, Log, TEXT("Got response: %s\n"), *responseBody);
 
 		TSharedRef<TJsonReader<TCHAR>> reader = TJsonReaderFactory<TCHAR>::Create(responseBody);
 		TSharedPtr<FJsonObject> jsonPacket = MakeShareable(new FJsonObject());
@@ -352,15 +464,16 @@ void BrainCloudComms::HandleResponse(int32 statusCode, FString responseBody)
 		if (res)
 		{
 			ReportResults(_currentPacket.ToSharedRef(), jsonPacket.ToSharedRef());
+			IEventCallback *eventCallback = _eventCallback != nullptr ? _eventCallback : m_registeredRestBluePrintCallbacks.Contains(ServiceName::Event.getValue()) ? m_registeredRestBluePrintCallbacks[ServiceName::Event.getValue()] : nullptr;
 
-			if (_eventCallback && jsonPacket->HasField(TEXT("events")))
+			if (eventCallback && jsonPacket->HasField(TEXT("events")))
 			{
 				TArray<TSharedPtr<FJsonValue>> events = jsonPacket->GetArrayField(TEXT("events"));
 				if (events.Num() > 0)
 				{
 					TSharedRef<FJsonObject> eventsRoot = MakeShareable(new FJsonObject);
 					eventsRoot->SetArrayField(TEXT("events"), events);
-					_eventCallback->eventCallback(GetJsonString(eventsRoot));
+					eventCallback->eventCallback(GetJsonString(eventsRoot));
 				}
 			}
 		}
@@ -379,7 +492,8 @@ void BrainCloudComms::RetryCachedMessages()
 {
 	if (_blockingQueue)
 	{
-		if (_isLoggingEnabled) UE_LOG(LogBrainCloudComms, Log, TEXT("Retrying cached messages"));
+		if (_isLoggingEnabled)
+			UE_LOG(LogBrainCloudComms, Log, TEXT("Retrying cached messages"));
 		_blockingQueue = false;
 		_retryCount = 0;
 		_waitingForRetry = false;
@@ -389,7 +503,8 @@ void BrainCloudComms::RetryCachedMessages()
 
 void BrainCloudComms::FlushCachedMessages(bool sendApiErrorCallbacks)
 {
-	if (_isLoggingEnabled) UE_LOG(LogBrainCloudComms, Log, TEXT("Flushing cached messages"));
+	if (_isLoggingEnabled)
+		UE_LOG(LogBrainCloudComms, Log, TEXT("Flushing cached messages"));
 
 	if (sendApiErrorCallbacks)
 	{
@@ -414,22 +529,24 @@ void BrainCloudComms::FlushCachedMessages(bool sendApiErrorCallbacks)
 
 void BrainCloudComms::UpdateUploads()
 {
-	if (_fileUploads.Num() <= 0) return;
+	if (_fileUploads.Num() <= 0)
+		return;
 
 	int32 count = _fileUploads.Num();
 
+	IFileUploadCallback *fileCallback = _fileUploadCallback != nullptr ? _fileUploadCallback : m_registeredRestBluePrintCallbacks.Contains(ServiceName::File.getValue()) ? m_registeredRestBluePrintCallbacks[ServiceName::File.getValue()] : nullptr;
 	for (int32 i = count - 1; i >= 0; --i)
 	{
 		if (_fileUploads[i]->GetStatus() == BCFileUploader::UPLOAD_STATUS_COMPLETE_SUCCESS)
 		{
-			if (_fileUploadCallback != nullptr)
-				_fileUploadCallback->fileUploadCompleted(_fileUploads[i]->GetUploadId(), _fileUploads[i]->GetResponse());
+			if (fileCallback != nullptr)
+				fileCallback->fileUploadCompleted(_fileUploads[i]->GetUploadId(), _fileUploads[i]->GetResponse());
 			_fileUploads.RemoveAt(i);
 		}
 		else if (_fileUploads[i]->GetStatus() == BCFileUploader::UPLOAD_STATUS_COMPLETE_FAILED)
 		{
-			if (_fileUploadCallback != nullptr)
-				_fileUploadCallback->fileUploadFailed(
+			if (fileCallback != nullptr)
+				fileCallback->fileUploadFailed(
 					_fileUploads[i]->GetUploadId(),
 					_fileUploads[i]->GetHttpStatus(),
 					_fileUploads[i]->GetErrorReasonCode(),
@@ -439,34 +556,38 @@ void BrainCloudComms::UpdateUploads()
 	}
 }
 
-void BrainCloudComms::CancelUpload(const FString& uploadId)
+void BrainCloudComms::CancelUpload(const FString &uploadId)
 {
 	TSharedPtr<BCFileUploader> uploader = FindFileUploader(uploadId);
-	if (uploader.IsValid()) uploader->CancelUpload();
+	if (uploader.IsValid())
+		uploader->CancelUpload();
 }
 
-float BrainCloudComms::GetUploadProgress(const FString& uploadId)
+float BrainCloudComms::GetUploadProgress(const FString &uploadId)
 {
 	TSharedPtr<BCFileUploader> uploader = FindFileUploader(uploadId);
-	if (uploader.IsValid()) return uploader->GetProgress();
+	if (uploader.IsValid())
+		return uploader->GetProgress();
 	return -1.0f;
 }
 
-int32 BrainCloudComms::GetUploadBytesTransferred(const FString& uploadId)
+int32 BrainCloudComms::GetUploadBytesTransferred(const FString &uploadId)
 {
 	TSharedPtr<BCFileUploader> uploader = FindFileUploader(uploadId);
-	if (uploader.IsValid()) return uploader->GetBytesTransferred();
+	if (uploader.IsValid())
+		return uploader->GetBytesTransferred();
 	return -1;
 }
 
-int32 BrainCloudComms::GetUploadTotalBytesToTransfer(const FString& uploadId)
+int32 BrainCloudComms::GetUploadTotalBytesToTransfer(const FString &uploadId)
 {
 	TSharedPtr<BCFileUploader> uploader = FindFileUploader(uploadId);
-	if (uploader.IsValid()) return uploader->GetTotalBytesToTransfer();
+	if (uploader.IsValid())
+		return uploader->GetTotalBytesToTransfer();
 	return -1;
 }
 
-TSharedPtr<BCFileUploader> BrainCloudComms::FindFileUploader(const FString& uploadId)
+TSharedPtr<BCFileUploader> BrainCloudComms::FindFileUploader(const FString &uploadId)
 {
 	int32 count = _fileUploads.Num();
 	for (int32 i = 0; i < count; ++i)
@@ -477,7 +598,8 @@ TSharedPtr<BCFileUploader> BrainCloudComms::FindFileUploader(const FString& uplo
 		}
 	}
 
-	if (_isLoggingEnabled) UE_LOG(LogBrainCloudComms, Log, TEXT("Could not find Uploader with ID: %s"), *uploadId);
+	if (_isLoggingEnabled)
+		UE_LOG(LogBrainCloudComms, Log, TEXT("Could not find Uploader with ID: %s"), *uploadId);
 	return nullptr;
 }
 
@@ -485,7 +607,8 @@ void BrainCloudComms::FakeErrorResponse(uint32 statusCode, uint32 reasonCode, co
 {
 	PacketRef requestPacket = BuildPacket();
 	FString sendString = GetDataString(requestPacket, _packetId);
-	if (_isLoggingEnabled) UE_LOG(LogBrainCloudComms, Log, TEXT("Sending request:%s\n"), *sendString);
+	if (_isLoggingEnabled)
+		UE_LOG(LogBrainCloudComms, Log, TEXT("Sending request:%s\n"), *sendString);
 
 	_currentPacket = requestPacket;
 	ReportError(requestPacket, statusCode, reasonCode, statusMessage);
@@ -496,7 +619,9 @@ void BrainCloudComms::ReportResults(PacketRef requestPacket, TSharedRef<FJsonObj
 	TArray<TSharedPtr<FJsonValue>> responses = responsePacket->GetArrayField(TEXT("responses"));
 
 	TArray<TSharedPtr<FJsonValue>> apiRewards;
-	UObject* tempCallback = nullptr;
+	UObject *tempCallback = nullptr;
+	IRewardCallback *rewardCallback = _rewardCallback != nullptr ? _rewardCallback : m_registeredRestBluePrintCallbacks.Contains("reward") ? m_registeredRestBluePrintCallbacks["reward"] : nullptr;
+
 	for (int32 i = 0; i < responses.Num(); i++)
 	{
 		TSharedRef<ServerCall> sc = (*requestPacket)[i];
@@ -504,7 +629,7 @@ void BrainCloudComms::ReportResults(PacketRef requestPacket, TSharedRef<FJsonObj
 
 		uint32 statusCode = respObj->GetNumberField(TEXT("status"));
 
-		IServerCallback* callback = sc->getCallback();
+		IServerCallback *callback = sc->getCallback();
 
 		FString jsonRespStr = GetJsonString(respObj.ToSharedRef());
 
@@ -512,7 +637,8 @@ void BrainCloudComms::ReportResults(PacketRef requestPacket, TSharedRef<FJsonObj
 		{
 			ResetKillSwitch();
 			FilterIncomingMessages(sc, respObj.ToSharedRef());
-			if (callback != nullptr) callback->serverCallback(sc->getService(), sc->getOperation(), *jsonRespStr);
+			if (callback != nullptr)
+				callback->serverCallback(sc->getService(), sc->getOperation(), *jsonRespStr);
 		}
 		else
 		{
@@ -520,9 +646,7 @@ void BrainCloudComms::ReportResults(PacketRef requestPacket, TSharedRef<FJsonObj
 			if (respObj->HasField(TEXT("reason_code")))
 			{
 				reasonCode = respObj->GetNumberField(TEXT("reason_code"));
-				if (reasonCode == ReasonCode::PLAYER_SESSION_EXPIRED || reasonCode == ReasonCode::NO_SESSION
-					|| reasonCode == ReasonCode::PLAYER_SESSION_LOGGED_OUT || sc->getOperation() == ServiceOperation::Logout
-					|| sc->getOperation() == ServiceOperation::FullReset)
+				if (reasonCode == ReasonCode::PLAYER_SESSION_EXPIRED || reasonCode == ReasonCode::NO_SESSION || reasonCode == ReasonCode::PLAYER_SESSION_LOGGED_OUT || sc->getOperation() == ServiceOperation::Logout || sc->getOperation() == ServiceOperation::FullReset)
 				{
 					_isAuthenticated = false;
 					_sessionId = TEXT("");
@@ -544,13 +668,16 @@ void BrainCloudComms::ReportResults(PacketRef requestPacket, TSharedRef<FJsonObj
 
 			if (callback != nullptr)
 				callback->serverError(sc->getService(), sc->getOperation(), statusCode, reasonCode, *errorString);
-			if (_globalErrorCallback != nullptr)
-				_globalErrorCallback->globalError(sc->getService(), sc->getOperation(), statusCode, reasonCode, *errorString);
-			
+
+			IGlobalErrorCallback *globalErrorCallback = _globalErrorCallback != nullptr ? _globalErrorCallback : m_registeredRestBluePrintCallbacks.Contains("globalError") ? m_registeredRestBluePrintCallbacks["globalError"] : nullptr;
+
+			if (globalErrorCallback != nullptr)
+				globalErrorCallback->globalError(sc->getService(), sc->getOperation(), statusCode, reasonCode, *errorString);
+
 			UpdateKillSwitch(sc->getService().getValue(), sc->getOperation().getValue(), statusCode);
 		}
 
-		if (_rewardCallback && (statusCode == HttpCode::OK || (!_errorCallbackOn202 && statusCode == 202)))
+		if (rewardCallback && (statusCode == HttpCode::OK || (!_errorCallbackOn202 && statusCode == 202)))
 		{
 			ServiceName service = sc->getService();
 			ServiceOperation operation = sc->getOperation();
@@ -566,9 +693,7 @@ void BrainCloudComms::ReportResults(PacketRef requestPacket, TSharedRef<FJsonObj
 				}
 			}
 			// player stat increment or statistics event trigger
-			else if ((service == ServiceName::PlayerStatistics && operation == ServiceOperation::Update)
-				|| (service == ServiceName::PlayerStatisticsEvent
-					&& (operation == ServiceOperation::Trigger || operation == ServiceOperation::TriggerMultiple)))
+			else if ((service == ServiceName::PlayerStatistics && operation == ServiceOperation::Update) || (service == ServiceName::PlayerStatisticsEvent && (operation == ServiceOperation::Trigger || operation == ServiceOperation::TriggerMultiple)))
 			{
 				if (respObj->GetObjectField(TEXT("data"))->GetObjectField(TEXT("rewards"))->Values.Num() > 0)
 				{
@@ -597,7 +722,7 @@ void BrainCloudComms::ReportResults(PacketRef requestPacket, TSharedRef<FJsonObj
 
 		if (FJsonSerializer::Serialize(rewards, writer))
 		{
-			_rewardCallback->rewardCallback(jsonString);
+			rewardCallback->rewardCallback(jsonString);
 		}
 	}
 
@@ -611,7 +736,7 @@ void BrainCloudComms::ReportError(PacketRef requestPacket, uint32 statusCode, ui
 	for (int32 i = 0; i < arr.Num(); i++)
 	{
 		TSharedRef<ServerCall> sc = arr[i];
-		IServerCallback* callback = sc->getCallback();
+		IServerCallback *callback = sc->getCallback();
 		if (callback != nullptr)
 		{
 			FString errorString;
@@ -631,8 +756,10 @@ void BrainCloudComms::ReportError(PacketRef requestPacket, uint32 statusCode, ui
 				errorString = GetJsonString(jsonObj);
 			}
 			callback->serverError(sc->getService(), sc->getOperation(), statusCode, reasonCode, *errorString);
-			if (_globalErrorCallback != nullptr)
-				_globalErrorCallback->globalError(sc->getService(), sc->getOperation(), statusCode, reasonCode, *errorString);
+
+			IGlobalErrorCallback *globalErrorCallback = _globalErrorCallback != nullptr ? _globalErrorCallback : m_registeredRestBluePrintCallbacks.Contains("globalError") ? m_registeredRestBluePrintCallbacks["globalError"] : nullptr;
+			if (globalErrorCallback != nullptr)
+				globalErrorCallback->globalError(sc->getService(), sc->getOperation(), statusCode, reasonCode, *errorString);
 		}
 	}
 
@@ -655,11 +782,12 @@ void BrainCloudComms::FilterIncomingMessages(TSharedRef<ServerCall> servercall, 
 		FString profileIdOut;
 		data->TryGetStringField(TEXT("profileId"), profileIdOut);
 
-		if(!profileIdOut.IsEmpty()) {
+		if (!profileIdOut.IsEmpty())
+		{
 			_client->getAuthenticationService()->setProfileId(profileIdOut);
 		}
 	}
-	
+
 	if (service == ServiceName::AuthenticateV2 && operation == ServiceOperation::Authenticate)
 	{
 		_isAuthenticated = true;
@@ -679,7 +807,7 @@ void BrainCloudComms::FilterIncomingMessages(TSharedRef<ServerCall> servercall, 
 
 			_maxBundleMessages = data->GetNumberField(TEXT("maxBundleMsgs"));
 
-			if(data->HasField("maxKillCount"))
+			if (data->HasField("maxKillCount"))
 				_killSwitchThreshold = data->GetNumberField(TEXT("maxKillCount"));
 
 			//set player name
@@ -688,7 +816,7 @@ void BrainCloudComms::FilterIncomingMessages(TSharedRef<ServerCall> servercall, 
 		}
 	}
 	else if (service == ServiceName::PlayerState &&
-		(operation == ServiceOperation::FullReset || operation == ServiceOperation::Logout))
+			 (operation == ServiceOperation::FullReset || operation == ServiceOperation::Logout))
 	{
 		_isAuthenticated = false;
 		_sessionId = TEXT("");
@@ -728,13 +856,16 @@ void BrainCloudComms::FilterIncomingMessages(TSharedRef<ServerCall> servercall, 
 
 void BrainCloudComms::ResetCommunication()
 {
+	_queueMutex.Lock();
 	_messageQueue.Empty();
+	_queueMutex.Unlock();
 	_isAuthenticated = false;
 	_sessionId = TEXT("");
 	ResetErrorCache();
 	_waitingForRetry = false;
 
-	if (_activeRequest.IsValid()) _activeRequest->CancelRequest();
+	if (_activeRequest.IsValid())
+		_activeRequest->CancelRequest();
 	_activeRequest = nullptr;
 	_currentPacket = nullptr;
 
@@ -748,9 +879,10 @@ void BrainCloudComms::ResetErrorCache()
 	_statusMessageCache = TEXT("No session");
 }
 
-void BrainCloudComms::UpdateKillSwitch(const FString& service, const FString& operation, int32 statusCode)
+void BrainCloudComms::UpdateKillSwitch(const FString &service, const FString &operation, int32 statusCode)
 {
-	if (statusCode == 900) return;
+	if (statusCode == 900)
+		return;
 
 	if (_killSwitchService.IsEmpty())
 	{
@@ -764,7 +896,7 @@ void BrainCloudComms::UpdateKillSwitch(const FString& service, const FString& op
 	if (!_killSwitchEngaged && _killSwitchErrorCount >= _killSwitchThreshold)
 	{
 		_killSwitchEngaged = true;
-		if (_isLoggingEnabled) 
+		if (_isLoggingEnabled)
 			UE_LOG(LogBrainCloudComms, Error, TEXT("Client disabled due to repeated errors from a single API call: %s | %s"), *service, *operation);
 	}
 }
@@ -781,7 +913,7 @@ void BrainCloudComms::Heartbeat()
 	if (_isAuthenticated && FPlatformTime::Seconds() - _requestSentTime > _heartbeatInterval)
 	{
 		TSharedRef<FJsonObject> val = MakeShareable(new FJsonObject());
-		ServerCall * sc = new ServerCall(ServiceName::HeartBeat, ServiceOperation::Read, val, nullptr);
+		ServerCall *sc = new ServerCall(ServiceName::HeartBeat, ServiceOperation::Read, val, nullptr);
 		AddToQueue(sc);
 	}
 }
@@ -793,8 +925,7 @@ bool BrainCloudComms::ShouldRetryPacket()
 	{
 		TSharedRef<ServerCall> sc = arr[i];
 
-		if (arr[i]->getService() == ServiceName::AuthenticateV2
-			&& (arr[i]->getOperation() == ServiceOperation::Authenticate))
+		if (arr[i]->getService() == ServiceName::AuthenticateV2 && (arr[i]->getOperation() == ServiceOperation::Authenticate))
 		{
 			return false;
 		}

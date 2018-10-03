@@ -7,15 +7,13 @@
 #include "BrainCloudLeaderboard.h"
 #include "BCLeaderboardProxy.generated.h"
 
-class ABrainCloud;
-
 UCLASS(MinimalAPI)
-class UBCLeaderboardProxy : public UBCBlueprintCallProxyBase, public IServerCallback
+class UBCLeaderboardProxy : public UBCBlueprintCallProxyBase
 {
 	GENERATED_BODY()
 
-public:
-	UBCLeaderboardProxy(const FObjectInitializer& ObjectInitializer);
+  public:
+	UBCLeaderboardProxy(const FObjectInitializer &ObjectInitializer);
 
 	/**
 	* Method returns the social leaderboard. A player's social leaderboard is
@@ -37,7 +35,30 @@ public:
 	* by the string "You".
 	*/
 	UFUNCTION(BlueprintCallable, meta = (BlueprintInternalUseOnly = "true"), Category = "BrainCloud|Leaderboard")
-		static UBCLeaderboardProxy* GetSocialLeaderboard(UBrainCloudWrapper *brainCloudWrapper, FString leaderboardId, bool replaceName);
+	static UBCLeaderboardProxy *GetSocialLeaderboard(UBrainCloudWrapper *brainCloudWrapper, FString leaderboardId, bool replaceName);
+
+	/**
+	* Method returns the social leaderboard by its version. A player's social leaderboard is
+	* comprised of players who are recognized as being your friend.
+	* For now, this applies solely to Facebook connected players who are
+	* friends with the logged in player (who also must be Facebook connected).
+	* In the future this will expand to other identification means (such as
+	* Game Centre, Google circles etc).
+	*
+	* Leaderboards entries contain the player's score and optionally, some user-defined
+	* data associated with the score. The currently logged in player will also
+	* be returned in the social leaderboard.
+	*
+	* Note: If no friends have played the game, the bestScore, createdAt, updatedAt
+	* will contain NULL.
+	*
+	* Param - leaderboardId The id of the leaderboard to retrieve
+	* Param - replaceName If true, the currently logged in player's name will be replaced
+	* Param - versionId the version
+	* by the string "You".
+	*/
+	UFUNCTION(BlueprintCallable, meta = (BlueprintInternalUseOnly = "true"), Category = "BrainCloud|Leaderboard") 
+	static UBCLeaderboardProxy *GetSocialLeaderboardByVersion(UBrainCloudWrapper *brainCloudWrapper, FString leaderboardId, bool replaceName, int32 versionId); 
 
 	/**
 	* Reads multiple social leaderboards.
@@ -48,7 +69,7 @@ public:
 	* by the string "You".
 	*/
 	UFUNCTION(BlueprintCallable, meta = (BlueprintInternalUseOnly = "true"), Category = "BrainCloud|Leaderboard")
-		static UBCLeaderboardProxy* GetMultiSocialLeaderboard(UBrainCloudWrapper *brainCloudWrapper, const TArray<FString>& leaderboardIds, int32 leaderboardResultCount, bool replaceName);
+	static UBCLeaderboardProxy *GetMultiSocialLeaderboard(UBrainCloudWrapper *brainCloudWrapper, const TArray<FString> &leaderboardIds, int32 leaderboardResultCount, bool replaceName);
 
 	/**
 	* Method returns a page of global leaderboard results.
@@ -67,7 +88,7 @@ public:
 	* Param - endIndex The index at which to end the page.
 	*/
 	UFUNCTION(BlueprintCallable, meta = (BlueprintInternalUseOnly = "true"), Category = "BrainCloud|Leaderboard")
-		static UBCLeaderboardProxy* GetGlobalLeaderboardPage(UBrainCloudWrapper *brainCloudWrapper, FString leaderboardId, ESortOrder sortOrder, int32 startIndex, int32 endIndex);
+	static UBCLeaderboardProxy *GetGlobalLeaderboardPage(UBrainCloudWrapper *brainCloudWrapper, FString leaderboardId, ESortOrder sortOrder, int32 startIndex, int32 endIndex);
 
 	/**
 	* Method returns a page of global leaderboard results.
@@ -84,7 +105,7 @@ public:
 	* Param - versionId The historical version to retrieve.
 	*/
 	UFUNCTION(BlueprintCallable, meta = (BlueprintInternalUseOnly = "true"), Category = "BrainCloud|Leaderboard")
-		static UBCLeaderboardProxy* GetGlobalLeaderboardPageByVersion(UBrainCloudWrapper *brainCloudWrapper, FString leaderboardId, ESortOrder sortOrder, int32 startIndex, int32 endIndex, int32 versionId);
+	static UBCLeaderboardProxy *GetGlobalLeaderboardPageByVersion(UBrainCloudWrapper *brainCloudWrapper, FString leaderboardId, ESortOrder sortOrder, int32 startIndex, int32 endIndex, int32 versionId);
 
 	/**
 	* Method returns a view of global leaderboard results that centers on the current player.
@@ -101,7 +122,7 @@ public:
 	* Param - afterCount The count of number of players after the current player to include.
 	*/
 	UFUNCTION(BlueprintCallable, meta = (BlueprintInternalUseOnly = "true"), Category = "BrainCloud|Leaderboard")
-		static UBCLeaderboardProxy* GetGlobalLeaderboardView(UBrainCloudWrapper *brainCloudWrapper, FString leaderboardId, ESortOrder sortOrder, int32 beforeCount, int32 afterCount);
+	static UBCLeaderboardProxy *GetGlobalLeaderboardView(UBrainCloudWrapper *brainCloudWrapper, FString leaderboardId, ESortOrder sortOrder, int32 beforeCount, int32 afterCount);
 
 	/**
 	* Method returns a view of global leaderboard results that centers on the current player.
@@ -118,7 +139,7 @@ public:
 	* Param - versionId The historical version to retrieve.
 	*/
 	UFUNCTION(BlueprintCallable, meta = (BlueprintInternalUseOnly = "true"), Category = "BrainCloud|Leaderboard")
-		static UBCLeaderboardProxy* GetGlobalLeaderboardViewByVersion(UBrainCloudWrapper *brainCloudWrapper, FString leaderboardId, ESortOrder sortOrder, int32 beforeCount, int32 afterCount, int32 versionId);
+	static UBCLeaderboardProxy *GetGlobalLeaderboardViewByVersion(UBrainCloudWrapper *brainCloudWrapper, FString leaderboardId, ESortOrder sortOrder, int32 beforeCount, int32 afterCount, int32 versionId);
 
 	/**
 	* Gets the number of entries in a global leaderboard
@@ -126,7 +147,7 @@ public:
 	* Param - leaderboardId The id of the leaderboard to retrieve.
 	*/
 	UFUNCTION(BlueprintCallable, meta = (BlueprintInternalUseOnly = "true"), Category = "BrainCloud|Leaderboard")
-		static UBCLeaderboardProxy* GetGlobalLeaderboardEntryCount(UBrainCloudWrapper *brainCloudWrapper, FString leaderboardId);
+	static UBCLeaderboardProxy *GetGlobalLeaderboardEntryCount(UBrainCloudWrapper *brainCloudWrapper, FString leaderboardId);
 
 	/** Gets the global leaderboard versions.
 	*
@@ -136,7 +157,7 @@ public:
 	* Param - leaderboardId The leaderboard
 	*/
 	UFUNCTION(BlueprintCallable, meta = (BlueprintInternalUseOnly = "true"), Category = "BrainCloud|Leaderboard")
-		static UBCLeaderboardProxy* GetGlobalLeaderboardVersions(UBrainCloudWrapper *brainCloudWrapper, FString leaderboardId);
+	static UBCLeaderboardProxy *GetGlobalLeaderboardVersions(UBrainCloudWrapper *brainCloudWrapper, FString leaderboardId);
 
 	/**
 	* Post the players score to the given social leaderboard.
@@ -153,7 +174,7 @@ public:
 	* Param - data Optional user-defined data to post with the score
 	*/
 	UFUNCTION(BlueprintCallable, meta = (BlueprintInternalUseOnly = "true"), Category = "BrainCloud|Leaderboard")
-		static UBCLeaderboardProxy* PostScore(UBrainCloudWrapper *brainCloudWrapper, FString leaderboardId, int32 score, FString jsonData);
+	static UBCLeaderboardProxy *PostScore(UBrainCloudWrapper *brainCloudWrapper, FString leaderboardId, int32 score, FString jsonData);
 
 	/**
 	* Post the players score to the given social leaderboard.
@@ -174,8 +195,8 @@ public:
 	* Param - retainedCount How many rotations to keep
 	*/
 	UFUNCTION(BlueprintCallable, meta = (BlueprintInternalUseOnly = "true"), Category = "BrainCloud|Leaderboard")
-		static UBCLeaderboardProxy* PostScoreToDynamicLeaderboard(UBrainCloudWrapper *brainCloudWrapper, FString leaderboardId, int32 score, FString jsonData,
-			ESocialLeaderboardType leaderboardType, ERotationType rotationType, FDateTime rotationStart, int32 retainedCount);
+	static UBCLeaderboardProxy *PostScoreToDynamicLeaderboard(UBrainCloudWrapper *brainCloudWrapper, FString leaderboardId, int32 score, FString jsonData,
+															  ESocialLeaderboardType leaderboardType, ERotationType rotationType, FDateTime rotationStart, int32 retainedCount);
 
 	/**
 	* Post the players score to the given social leaderboard.
@@ -197,8 +218,8 @@ public:
 	* Param - numDaysToRotate How many days between each rotation
 	*/
 	UFUNCTION(BlueprintCallable, meta = (BlueprintInternalUseOnly = "true"), Category = "BrainCloud|Leaderboard")
-		static UBCLeaderboardProxy* PostScoreToDynamicLeaderboardDays(UBrainCloudWrapper *brainCloudWrapper, FString leaderboardId, int32 score, FString jsonData,
-			ESocialLeaderboardType leaderboardType, FDateTime rotationStart, int32 retainedCount, int32 numDaysToRotate);
+	static UBCLeaderboardProxy *PostScoreToDynamicLeaderboardDays(UBrainCloudWrapper *brainCloudWrapper, FString leaderboardId, int32 score, FString jsonData,
+																  ESocialLeaderboardType leaderboardType, FDateTime rotationStart, int32 retainedCount, int32 numDaysToRotate);
 
 	/**
 	* Removes a player's score from the leaderboard
@@ -210,17 +231,27 @@ public:
 	* Param - versionId The version of the leaderboard
 	*/
 	UFUNCTION(BlueprintCallable, meta = (BlueprintInternalUseOnly = "true"), Category = "BrainCloud|Leaderboard")
-		static UBCLeaderboardProxy* RemovePlayerScore(UBrainCloudWrapper *brainCloudWrapper, const FString& leaderboardId, int32 versionId);
+	static UBCLeaderboardProxy *RemovePlayerScore(UBrainCloudWrapper *brainCloudWrapper, const FString &leaderboardId, int32 versionId);
 
-    /**
+	/**
 	* Retrieve the social leaderboard for a group.
 	*
 	* Param - leaderboardId The leaderboard to retrieve
 	* Param - groupId The ID of the group
 	*/
 	UFUNCTION(BlueprintCallable, meta = (BlueprintInternalUseOnly = "true"), Category = "BrainCloud|Leaderboard")
-		static UBCLeaderboardProxy* GetGroupSocialLeaderboard(UBrainCloudWrapper *brainCloudWrapper, const FString& leaderboardId, const FString& groupId);
+	static UBCLeaderboardProxy *GetGroupSocialLeaderboard(UBrainCloudWrapper *brainCloudWrapper, const FString &leaderboardId, const FString &groupId);
 
+	/**
+	* Retrieve the social leaderboard for a group by its version.
+	*
+	* Param - leaderboardId The leaderboard to retrieve
+	* Param - groupId The ID of the group
+	* Param - versionId the version
+	*/
+	UFUNCTION(BlueprintCallable, meta = (BlueprintInternalUseOnly = "true"), Category = "BrainCloud|Leaderboard") 
+	static UBCLeaderboardProxy *GetGroupSocialLeaderboardByVersion(UBrainCloudWrapper *brainCloudWrapper, const FString &leaderboardId, const FString &groupId, int32 versionId); 
+	
 	/**
 	* Retrieve the social leaderboard for a list of players.
 	*
@@ -228,7 +259,17 @@ public:
 	* Param - profileIds The IDs of the players
 	*/
 	UFUNCTION(BlueprintCallable, meta = (BlueprintInternalUseOnly = "true"), Category = "BrainCloud|Leaderboard")
-		static UBCLeaderboardProxy* GetPlayersSocialLeaderboard(UBrainCloudWrapper *brainCloudWrapper, const FString& leaderboardId, const TArray<FString> profileIds);
+	static UBCLeaderboardProxy *GetPlayersSocialLeaderboard(UBrainCloudWrapper *brainCloudWrapper, const FString &leaderboardId, const TArray<FString> profileIds);
+
+	/**
+	* Retrieve the social leaderboard for a list of players.
+	*
+	* Param - leaderboardId The leaderboard to retrieve
+	* Param - profileIds The IDs of the players
+	* Param - versionId the version
+	*/
+	UFUNCTION(BlueprintCallable, meta = (BlueprintInternalUseOnly = "true"), Category = "BrainCloud|Leaderboard") 
+	static UBCLeaderboardProxy *GetPlayersSocialLeaderboardByVersion(UBrainCloudWrapper *brainCloudWrapper, const FString &leaderboardId, const TArray<FString> profileIds, int32 versionId); 
 
 	/**
 	* Retrieve a list of all leaderboards
@@ -237,7 +278,7 @@ public:
 	* Service Operation - LIST_ALL_LEADERBOARDS
 	*/
 	UFUNCTION(BlueprintCallable, meta = (BlueprintInternalUseOnly = "true"), Category = "BrainCloud|Leaderboard")
-		static UBCLeaderboardProxy* ListAllLeaderboards(UBrainCloudWrapper *brainCloudWrapper);
+	static UBCLeaderboardProxy *ListAllLeaderboards(UBrainCloudWrapper *brainCloudWrapper);
 
 	/**
 	* Gets a player's score from a leaderboard
@@ -249,7 +290,7 @@ public:
 	* Param - versionId The version of the leaderboard. Use -1 for current.
 	*/
 	UFUNCTION(BlueprintCallable, meta = (BlueprintInternalUseOnly = "true"), Category = "BrainCloud|Leaderboard")
-		static UBCLeaderboardProxy* GetPlayerScore(UBrainCloudWrapper *brainCloudWrapper, const FString& leaderboardId, int32 versionId);
+	static UBCLeaderboardProxy *GetPlayerScore(UBrainCloudWrapper *brainCloudWrapper, const FString &leaderboardId, int32 versionId);
 
 	/**
 	* Gets a player's score from multiple leaderboards
@@ -260,18 +301,5 @@ public:
 	* @Param - leaderboardIds A collection of leaderboardIds to retrieve scores from
 	*/
 	UFUNCTION(BlueprintCallable, meta = (BlueprintInternalUseOnly = "true"), Category = "BrainCloud|Leaderboard")
-		static UBCLeaderboardProxy* GetPlayerScoresFromLeaderboards(UBrainCloudWrapper *brainCloudWrapper, const TArray<FString> leaderboardIds);
-
-	//Response delegates
-	UPROPERTY(BlueprintAssignable)
-		FBrainCloudCallbackDelegate OnSuccess;
-
-	UPROPERTY(BlueprintAssignable)
-		FBrainCloudCallbackDelegate OnFailure;
-
-protected:
-	// IServerCallback interface
-	void serverCallback(ServiceName serviceName, ServiceOperation serviceOperation, const FString& jsonData);
-	void serverError(ServiceName serviceName, ServiceOperation serviceOperation, int32 statusCode, int32 reasonCode, const FString& jsonError);
-	// End of IServerCallback interface
+	static UBCLeaderboardProxy *GetPlayerScoresFromLeaderboards(UBrainCloudWrapper *brainCloud, const TArray<FString> leaderboardIds);
 };
