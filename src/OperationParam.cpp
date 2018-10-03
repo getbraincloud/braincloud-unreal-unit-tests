@@ -216,6 +216,12 @@ namespace BrainCloud
 	const OperationParam OperationParam::ProductServiceVCId = OperationParam("vc_id");
 	const OperationParam OperationParam::ProductServiceVCAmount = OperationParam("vc_amount");
 
+	// Currency service
+	const OperationParam OperationParam::VirtualCurrencyServiceVCId = OperationParam("vcId");
+	const OperationParam OperationParam::VirtualCurrencyServiceLevelName = OperationParam("levelName");
+	const OperationParam OperationParam::VirtualCurrencyServicePeerCode = OperationParam("peerCode");
+	const OperationParam OperationParam::VirtualCurrencyServiceAmount = OperationParam("vcAmount");
+
 	// Product Service - Get Inventory Params
 	const OperationParam OperationParam::ProductServiceGetInventoryPlatform = OperationParam("platform");
 	const OperationParam OperationParam::ProductServiceGetInventoryUserCurrency = OperationParam("user_currency");
@@ -351,12 +357,69 @@ namespace BrainCloud
 	const OperationParam OperationParam::ServiceParams = OperationParam("serviceParams");
 
 	const OperationParam OperationParam::LeaderboardId = OperationParam("leaderboardId");
+	const OperationParam OperationParam::DivSetID = OperationParam("divSetId");
 	const OperationParam OperationParam::VersionId = OperationParam("versionId");
 	const OperationParam OperationParam::TournamentCode = OperationParam("tournamentCode");
 	const OperationParam OperationParam::InitialScore = OperationParam("initialScore");
 	const OperationParam OperationParam::Score = OperationParam("score");
 	const OperationParam OperationParam::RoundStartedEpoch = OperationParam("roundStartedEpoch");
 	const OperationParam OperationParam::Data = OperationParam("data");
+
+	//chat
+	const OperationParam OperationParam::ChannelId = OperationParam("channelId");
+	const OperationParam OperationParam::MsgId = OperationParam("msgId");
+	const OperationParam OperationParam::Version = OperationParam("version");
+	const OperationParam OperationParam::ChannelType = OperationParam("channelType");
+	const OperationParam OperationParam::ChannelSubId = OperationParam("channelSubId");
+	const OperationParam OperationParam::MaxReturn = OperationParam("maxReturn");
+	const OperationParam OperationParam::Content = OperationParam("content");
+	const OperationParam OperationParam::RecordInHistory = OperationParam("recordInHistory");
+	const OperationParam OperationParam::Text = OperationParam("text");
+
+	//lobby
+	const OperationParam OperationParam::LobbyType = OperationParam("lobbyType");
+	const OperationParam OperationParam::Rating = OperationParam("rating");
+	const OperationParam OperationParam::OtherUserCxIds = OperationParam("otherUserCxIds");
+	const OperationParam OperationParam::IsReady = OperationParam("isReady");
+	const OperationParam OperationParam::ExtraJson = OperationParam("extraJson");
+	const OperationParam OperationParam::TeamCode = OperationParam("teamCode");
+	const OperationParam OperationParam::Settings = OperationParam("settings");
+	const OperationParam OperationParam::MaxSteps = OperationParam("maxSteps");
+	const OperationParam OperationParam::Algo = OperationParam("algo");
+	const OperationParam OperationParam::Filter = OperationParam("filter");
+	const OperationParam OperationParam::LobbyId = OperationParam("lobbyId");
+	const OperationParam OperationParam::CxId = OperationParam("cxId");
+	const OperationParam OperationParam::SignalData = OperationParam("signalData");
+	const OperationParam OperationParam::ToTeamCode = OperationParam("toTeamCode");
+
+	//messaging
+	const OperationParam OperationParam::MessagingMsgbox = OperationParam("msgbox");
+	const OperationParam OperationParam::MessagingMsgIds = OperationParam("msgIds");
+	const OperationParam OperationParam::MessagingContext = OperationParam("context");
+	const OperationParam OperationParam::MessagingPageOffset = OperationParam("pageOffset");
+	const OperationParam OperationParam::MessagingToProfileIds = OperationParam("toProfileIds");
+	const OperationParam OperationParam::MessagingText = OperationParam("text");
+	const OperationParam OperationParam::MessagingSubject = OperationParam("subject");
+	const OperationParam OperationParam::MessagingContentJson = OperationParam("contentJson");
+
+	//presence
+	const OperationParam OperationParam::PresencePlatform = OperationParam("platform");
+	const OperationParam OperationParam::PresenceIncludeOffline = OperationParam("includeOffline");
+	const OperationParam OperationParam::PresenceGroupId = OperationParam("groupId");
+	const OperationParam OperationParam::PresenceProfileIds = OperationParam("profileIds");
+	const OperationParam OperationParam::PresenceBidirectional = OperationParam("bidirectional");
+	const OperationParam OperationParam::PresenceVisible = OperationParam("visible");
+	const OperationParam OperationParam::PresenceActivity = OperationParam("activity");
+
+    //appstore
+	const OperationParam OperationParam::AppStoreStoreId = OperationParam("storeId");
+	const OperationParam OperationParam::AppStoreReceiptData = OperationParam("receiptData");
+	const OperationParam OperationParam::AppStorePriceInfoCriteria = OperationParam("priceInfoCriteria");
+	const OperationParam OperationParam::AppStoreUserCurrency = OperationParam("user_currency");
+	const OperationParam OperationParam::AppStoreCategory = OperationParam("category");
+	const OperationParam OperationParam::AppStorePurchaseData = OperationParam("purchaseData");
+	const OperationParam OperationParam::AppStoreTransactionId = OperationParam("transactionId");
+	const OperationParam OperationParam::AppStoreTransactionData = OperationParam("transactionData");
 
 	OperationParam::OperationParam(const char * value)
 	{

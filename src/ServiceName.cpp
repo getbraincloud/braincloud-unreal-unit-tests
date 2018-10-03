@@ -27,6 +27,8 @@ namespace BrainCloud
 	const ServiceName ServiceName::Leaderboard = ServiceName("leaderboard");
     const ServiceName ServiceName::Event = ServiceName("event");
     const ServiceName ServiceName::Product = ServiceName("product");
+    const ServiceName ServiceName::VirtualCurrency = ServiceName("virtualCurrency");
+    const ServiceName ServiceName::AppStore = ServiceName("appStore");
     const ServiceName ServiceName::PlayerStatistics = ServiceName("playerStatistics");
     const ServiceName ServiceName::GlobalStatistics = ServiceName("globalGameStatistics");
     const ServiceName ServiceName::AsyncMatch = ServiceName("asyncMatch");
@@ -47,6 +49,12 @@ namespace BrainCloud
 	const ServiceName ServiceName::Mail = ServiceName("mail");
 	const ServiceName ServiceName::Tournament = ServiceName("tournament");
 
+	const ServiceName ServiceName::RTTRegistration = ServiceName("rttRegistration");
+	const ServiceName ServiceName::Chat = ServiceName("chat");
+	const ServiceName ServiceName::Messaging = ServiceName("messaging");
+	const ServiceName ServiceName::Lobby = ServiceName("lobby");
+	const ServiceName ServiceName::Presence = ServiceName("presence");
+
     ServiceName::ServiceName(const char * value)
     {
         _value = value;
@@ -55,6 +63,11 @@ namespace BrainCloud
     bool ServiceName::operator== (const ServiceName& s) const
     {
         return _value == s.getValue();
+    }
+
+    bool ServiceName::operator!= (const ServiceName& s) const
+    {
+        return _value != s.getValue();
     }
 
     void ServiceName::operator= (const ServiceName& s)

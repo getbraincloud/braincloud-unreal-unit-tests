@@ -143,6 +143,29 @@ bool TestResult::runExpectFail(BrainCloudClient * in_bc, int expectedStatus, int
     return ret;
 }
 
+void TestResult::rttConnectSuccess()
+{
+    m_response.clear();
+    m_result = true;
+    --m_apiCountExpected;
+    if (m_apiCountExpected <= 0)
+    {
+        m_done = true;
+    }
+}
+
+void TestResult::rttConnectFailure(const std::string& errorMessage)
+{
+    m_statusMessage = errorMessage;
+
+    m_result = false;
+    --m_apiCountExpected;
+    if (m_apiCountExpected <= 0)
+    {
+        m_done = true;
+    }
+}
+
 void TestResult::serverCallback(ServiceName serviceName, ServiceOperation serviceOperation, std::string const & jsonData)
 {
     Json::Value value;

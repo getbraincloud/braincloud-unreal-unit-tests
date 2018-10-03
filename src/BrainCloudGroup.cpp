@@ -368,6 +368,16 @@ namespace BrainCloud
 		m_client->getBrainCloudComms()->addToQueue(sc);
 	}
 
+	void BrainCloudGroup::setGroupOpen(const char * in_groupId, bool in_isOpenGroup, IServerCallback *in_callback)
+	{
+		Json::Value message;
+		message[OperationParam::GroupId.getValue()] = in_groupId;
+		message[OperationParam::GroupIsOpenGroup.getValue()] = in_isOpenGroup;
+
+		ServerCall * sc = new ServerCall(ServiceName::Group, ServiceOperation::SetGroupOpen, message, in_callback);
+		m_client->getBrainCloudComms()->addToQueue(sc);
+	}
+
 	std::string BrainCloudGroup::roleToString(eGroupMember::Role role)
 	{
 		if (role == eGroupMember::MEMBER)

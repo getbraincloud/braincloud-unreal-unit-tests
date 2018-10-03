@@ -23,13 +23,13 @@ mkdir artifacts
 
 mkdir -p artifacts/linux_debug
 pushd artifacts/linux_debug
-cmake ../../.. -DCMAKE_BUILD_TYPE=DEBUG -DCMAKE_CXX_COMPILER=/usr/bin/g++-4.4 -DCMAKE_C_COMPILER=/usr/bin/gcc-4.4
+cmake ../../.. -DCMAKE_BUILD_TYPE=DEBUG
 make
 popd
 
 mkdir -p artifacts/linux_release
 pushd artifacts/linux_release
-cmake ../../.. -DCMAKE_BUILD_TYPE=RELEASE -DCMAKE_CXX_COMPILER=/usr/bin/g++-4.4 -DCMAKE_C_COMPILER=/usr/bin/gcc-4.4
+cmake ../../.. -DCMAKE_BUILD_TYPE=RELEASE
 make
 popd
 

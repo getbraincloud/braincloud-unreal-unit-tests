@@ -95,6 +95,7 @@ namespace BrainCloud {
 		static const ServiceOperation GetUsersOnlineStatus;
 		static const ServiceOperation FindPlayerByUniversalId;
 		static const ServiceOperation GetSocialLeaderboard;
+		static const ServiceOperation GetSocialLeaderboardByVersion;
 		static const ServiceOperation GetMultiSocialLeaderboard;
 		static const ServiceOperation GetGlobalLeaderboard;
 		static const ServiceOperation GetGlobalLeaderboardPage;
@@ -105,8 +106,10 @@ namespace BrainCloud {
 		static const ServiceOperation PostScore;
 		static const ServiceOperation PostScoreDynamic;
 		static const ServiceOperation GetGroupSocialLeaderboard;
+		static const ServiceOperation GetGroupSocialLeaderboardByVersion;
 		static const ServiceOperation GetSummaryDataForProfileId;
 		static const ServiceOperation GetPlayersSocialLeaderboard;
+		static const ServiceOperation GetPlayersSocialLeaderboardByVersion;
 		static const ServiceOperation ListAllLeaderboards;
 		static const ServiceOperation GetGlobalLeaderboardEntryCount;
 		static const ServiceOperation RemovePlayerScore;
@@ -306,6 +309,7 @@ namespace BrainCloud {
 		static const ServiceOperation UpdateGroupEntity;
 		static const ServiceOperation UpdateGroupMember;
 		static const ServiceOperation UpdateGroupName;
+		static const ServiceOperation SetGroupOpen;
 
 		//mail
 		static const ServiceOperation SendBasicEmail;
@@ -314,13 +318,79 @@ namespace BrainCloud {
 
 		//tournament
 		static const ServiceOperation GetTournamentStatus;
+		static const ServiceOperation GetDivisionInfo;
+		static const ServiceOperation GetMyDivisions;
+		static const ServiceOperation JoinDivision;
 		static const ServiceOperation JoinTournament;
+		static const ServiceOperation LeaveDivisionInstance;
 		static const ServiceOperation LeaveTournament;
 		static const ServiceOperation PostTournamentScore;
 		static const ServiceOperation PostTournamentScoreWithResults;
 		static const ServiceOperation ViewCurrentReward;
 		static const ServiceOperation ViewReward;
 		static const ServiceOperation ClaimTournamentReward;
+
+		//rtt Registration
+		static const ServiceOperation RequestClientConnection;
+
+		//chat
+		static const ServiceOperation ChannelConnect;
+		static const ServiceOperation ChannelDisconnect;
+		static const ServiceOperation DeleteChatMessage;
+		static const ServiceOperation GetChannelId;
+		static const ServiceOperation GetChannelInfo;
+		static const ServiceOperation GetChatMessage;
+		static const ServiceOperation GetRecentChatMessages;
+		static const ServiceOperation GetSubscribedChannels;
+		static const ServiceOperation PostChatMessage;
+		static const ServiceOperation UpdateChatMessage;
+
+		//lobby
+		static const ServiceOperation CreateLobby;
+		static const ServiceOperation FindLobby;
+		static const ServiceOperation FindOrCreateLobby;
+		static const ServiceOperation GetLobbyData;
+		static const ServiceOperation LeaveLobby;
+		static const ServiceOperation RemoveMember;
+		static const ServiceOperation SendSignal;
+		static const ServiceOperation SwitchTeam;
+		static const ServiceOperation UpdateReady;
+		static const ServiceOperation UpdateSettings;
+
+		//messaging
+		static const ServiceOperation DeleteMessages;
+		static const ServiceOperation GetMessageboxes;
+		static const ServiceOperation GetMessageCounts;
+		static const ServiceOperation GetMessages;
+		static const ServiceOperation GetMessagesPage;
+		static const ServiceOperation GetMessagesPageOffset;
+		static const ServiceOperation MarkMessagesRead;
+		static const ServiceOperation MessagingSendMessage; /* Windows has a macro called SendMessage */
+		static const ServiceOperation SendMessageSimple;
+
+		//presence
+		static const ServiceOperation ForcePush;
+		static const ServiceOperation GetPresenceOfFriends;
+		static const ServiceOperation GetPresenceOfGroup;
+		static const ServiceOperation GetPresenceOfUsers;
+		static const ServiceOperation RegisterListenersForFriends;
+		static const ServiceOperation RegisterListenersForGroup;
+		static const ServiceOperation RegisterListenersForProfiles;
+		static const ServiceOperation SetVisibility;
+		static const ServiceOperation StopListening;
+		static const ServiceOperation UpdateActivity;
+
+        //virtual currency
+        static const ServiceOperation VirtualCurrencyGetCurrency;
+        static const ServiceOperation VirtualCurrencyGetParentCurrency;
+        static const ServiceOperation VirtualCurrencyGetPeerCurrency;
+
+        //appstore
+        static const ServiceOperation AppStoreVerifyPurchase;
+        static const ServiceOperation AppStoreGetEligiblePromotions;
+        static const ServiceOperation AppStoreGetSalesInventory;
+        static const ServiceOperation AppStoreStartPurchase;
+        static const ServiceOperation AppStoreFinalizePurchase;
 
 
 		std::string getValue() const { return _value; }

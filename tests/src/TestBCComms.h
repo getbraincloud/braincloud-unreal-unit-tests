@@ -1,5 +1,5 @@
-#ifndef _TESTBCAUTH_H_
-#define _TESTBCAUTH_H_
+#ifndef _TESTBCCOMMS_H_
+#define _TESTBCCOMMS_H_
 
 #include "TestFixtureBase.h"
 #include "braincloud/IGlobalErrorCallback.h"

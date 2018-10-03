@@ -32,6 +32,8 @@ namespace BrainCloud {
 		static const ServiceName Leaderboard;
         static const ServiceName Event;
         static const ServiceName Product;
+        static const ServiceName VirtualCurrency;
+        static const ServiceName AppStore;
         static const ServiceName PlayerStatistics;
         static const ServiceName GlobalStatistics;
         static const ServiceName AsyncMatch;
@@ -52,10 +54,17 @@ namespace BrainCloud {
 		static const ServiceName Mail;
 		static const ServiceName Tournament;
 
+		static const ServiceName RTTRegistration;
+		static const ServiceName Chat;
+		static const ServiceName Messaging;
+		static const ServiceName Lobby;
+		static const ServiceName Presence;
+
 
         std::string getValue() const { return _value; }
 
         bool operator== (const ServiceName& s) const;
+        bool operator!= (const ServiceName& s) const;
         void operator= (const ServiceName& s);
 
     private:

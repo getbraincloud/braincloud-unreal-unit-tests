@@ -29,6 +29,8 @@ namespace BrainCloud {
         BrainCloudGlobalStatistics * getGlobalStatisticsService() { return client->getGlobalStatisticsService(); }
         BrainCloudIdentity * getIdentityService() { return client->getIdentityService(); }
         BrainCloudProduct * getProductService() { return client->getProductService(); }
+        BrainCloudVirtualCurrency * getVirtualCurrencyService() { return client->getVirtualCurrencyService(); }
+        BrainCloudAppStore * getAppStoreService() { return client->getAppStoreService(); }
         BrainCloudEntity * getEntityService() { return client->getEntityService(); }
         BrainCloudGlobalEntity * getGlobalEntityService() { return client->getGlobalEntityService(); }
         BrainCloudMatchmaking * getMatchmakingService() { return client->getMatchmakingService(); }
@@ -54,6 +56,10 @@ namespace BrainCloud {
         BrainCloudFile * getFileService() { return client->getFileService(); }
         BrainCloudGroup * getGroupService() { return client->getGroupService(); }
         BrainCloudMail * getMailService() { return client->getMailService(); }
+        BrainCloudChat * getChatService() { return client->getChatService(); }
+        BrainCloudMessaging * getMessagingService() { return client->getMessagingService(); }
+        BrainCloudLobby * getLobbyService() { return client->getLobbyService(); }
+        BrainCloudPresence * getPresenceService() { return client->getPresenceService(); }
 
         /**
          * Method returns a singleton instance of the BrainCloudWrapper.

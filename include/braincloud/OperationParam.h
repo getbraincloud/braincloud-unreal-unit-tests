@@ -224,6 +224,12 @@ namespace BrainCloud {
 		static const OperationParam ProductServiceVCId;
 		static const OperationParam ProductServiceVCAmount;
 
+        // Virtual Currency
+        static const OperationParam VirtualCurrencyServiceVCId;
+        static const OperationParam VirtualCurrencyServiceLevelName;
+        static const OperationParam VirtualCurrencyServicePeerCode;
+        static const OperationParam VirtualCurrencyServiceAmount;
+
 		// Product Service - Get Inventory Params
 		static const OperationParam ProductServiceGetInventoryPlatform;
 		static const OperationParam ProductServiceGetInventoryUserCurrency;
@@ -357,6 +363,7 @@ namespace BrainCloud {
 
 
 		static const OperationParam LeaderboardId;
+		static const OperationParam DivSetID;
 		static const OperationParam VersionId;
 		static const OperationParam TournamentCode;
 		static const OperationParam InitialScore;
@@ -364,11 +371,61 @@ namespace BrainCloud {
 		static const OperationParam RoundStartedEpoch;
 		static const OperationParam Data;
 
-		/*
-		 OfflineMatchServicePlayerId                        = new OperationParam("playerId");
-		  static const OperationParam OfflineMatchServiceRangeDelta                      = new OperationParam("rangeDelta");
-		  static const OperationParam OfflineMatchServicePlaybackStreamId
-		 */
+		//chat
+		static const OperationParam ChannelId;
+		static const OperationParam MsgId;
+		static const OperationParam Version;
+		static const OperationParam ChannelType;
+		static const OperationParam ChannelSubId;
+		static const OperationParam MaxReturn;
+		static const OperationParam Content;
+		static const OperationParam RecordInHistory;
+		static const OperationParam Text;
+
+		//lobby
+		static const OperationParam LobbyType;
+		static const OperationParam Rating;
+		static const OperationParam OtherUserCxIds;
+		static const OperationParam IsReady;
+		static const OperationParam ExtraJson;
+		static const OperationParam TeamCode;
+		static const OperationParam Settings;
+		static const OperationParam MaxSteps;
+		static const OperationParam Algo;
+		static const OperationParam Filter;
+		static const OperationParam LobbyId;
+		static const OperationParam CxId;
+		static const OperationParam SignalData;
+		static const OperationParam ToTeamCode;
+
+		//messaging
+		static const OperationParam MessagingMsgbox;
+		static const OperationParam MessagingMsgIds;
+		static const OperationParam MessagingContext;
+		static const OperationParam MessagingPageOffset;
+		static const OperationParam MessagingToProfileIds;
+		static const OperationParam MessagingText;
+		static const OperationParam MessagingSubject;
+		static const OperationParam MessagingContentJson;
+
+		//presence
+		static const OperationParam PresencePlatform;
+		static const OperationParam PresenceIncludeOffline;
+		static const OperationParam PresenceGroupId;
+		static const OperationParam PresenceProfileIds;
+		static const OperationParam PresenceBidirectional;
+		static const OperationParam PresenceVisible;
+		static const OperationParam PresenceActivity;
+
+        //appstore
+		static const OperationParam AppStoreStoreId;
+		static const OperationParam AppStoreReceiptData;
+		static const OperationParam AppStorePriceInfoCriteria;
+		static const OperationParam AppStoreUserCurrency;
+		static const OperationParam AppStoreCategory;
+		static const OperationParam AppStorePurchaseData;
+		static const OperationParam AppStoreTransactionId;
+		static const OperationParam AppStoreTransactionData;
 
 		std::string getValue() const { return _value; }
 

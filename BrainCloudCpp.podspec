@@ -10,7 +10,7 @@ Pod::Spec.new do |s|
   # ―――  Spec Metadata  ―――――――――――――――――――――――――――――――――――――――――――――――――――――――――― #
 
   s.name     = "BrainCloudCpp"
-  s.version  = "3.7.5"
+  s.version  = "3.9.0"
   s.summary  = "The C++ client library for brainCloud"
   s.homepage = "http://getbraincloud.com/"
 
@@ -18,6 +18,13 @@ Pod::Spec.new do |s|
   s.osx.deployment_target  = "10.9"
   s.tvos.deployment_target = "9.0"
   s.watchos.deployment_target = "2.0"
+
+  pch_AF = <<-EOS
+  #ifndef TARGET_OS_WATCH
+   #define TARGET_OS_WATCH 0
+  #endif
+  EOS
+   s.prefix_header_contents = pch_AF
 
   # ―――  Spec License  ――――――――――――――――――――――――――――――――――――――――――――――――――――――――――― #
 
@@ -36,8 +43,9 @@ Pod::Spec.new do |s|
 
   s.header_mappings_dir     = "include"
   s.preserve_paths          = "include/*", "include/**/*"
-  s.public_header_files     = "include/braincloud/*.h", "include/braincloud/internal/*.h", "include/braincloud/internal/applemac/*.h"
+  s.public_header_files     = "include/braincloud/*.h", "include/braincloud/internal/*.h", "include/braincloud/internal/apple/*.h"
   s.source_files            = "src/*.{c,cpp}", "src/apple/*.{c,cpp,mm}", "include/braincloud/*.h", "include/braincloud/internal/*.h", "include/braincloud/internal/apple/*.h"
+  s.exclude_files           = "src/DefaultSaveDataHelper.cpp", "src/DefaultGUID.cpp" , "src/DefaultFileUploader.cpp", "src/DefaultWebSocket.cpp"
 
   # hack for use_frameworks!
   s.xcconfig = {
@@ -50,4 +58,8 @@ Pod::Spec.new do |s|
   s.osx.framework           = 'LDAP'
   s.dependency                'SSKeychain'
   s.dependency                'BrainCloudJsonCpp'
+  s.ios.dependency            'SocketRocket', '~> 0.5'
+  s.osx.dependency            'SocketRocket', '~> 0.5'
+  #s.watchos.dependency       'SocketRocket', '~> 0.5'
+  s.tvos.dependency           'SocketRocket', '~> 0.5'
 end

@@ -8,9 +8,6 @@
 
 using namespace BrainCloud;
 
-#define SSTR( x ) static_cast< std::ostringstream & >( \
-        ( std::ostringstream() << std::dec << x ) ).str()
-
 #define LB_ID "testLeaderboard"
 #define SOCIAL_LB_ID "testSocialLeaderboard"
 #define DYNAMIC_LB_ID "testDynamicLeaderboard"
@@ -21,6 +18,14 @@ TEST_F(TestBCSocialLeaderboard, GetSocialLeaderboard)
     TestResult tr;
 
     m_bc->getSocialLeaderboardService()->getSocialLeaderboard(LB_ID, true, &tr);
+    tr.run(m_bc);
+}
+
+TEST_F(TestBCSocialLeaderboard, GetSocialLeaderboardByVersion)
+{
+    TestResult tr;
+
+    m_bc->getSocialLeaderboardService()->getSocialLeaderboardByVersion(LB_ID, true, 0, &tr);
     tr.run(m_bc);
 }
 
@@ -137,6 +142,21 @@ TEST_F(TestBCSocialLeaderboard, GetGroupSocialLeaderboard)
     tr.run(m_bc);
 }
 
+TEST_F(TestBCSocialLeaderboard, GetGroupSocialLeaderboardByVersion)
+{
+    TestResult tr;
+    m_bc->getGroupService()->createGroup("testGroup", "test", false, "", "", "", "", &tr);
+    tr.run(m_bc);
+
+    std::string groupId = tr.m_response["data"]["groupId"].asString();
+
+    m_bc->getSocialLeaderboardService()->getGroupSocialLeaderboardByVersion(SOCIAL_LB_ID, groupId.c_str(), 0, &tr);
+    tr.run(m_bc);
+
+    m_bc->getGroupService()->deleteGroup(groupId.c_str(), -1, &tr);
+    tr.run(m_bc);
+}
+
 TEST_F(TestBCSocialLeaderboard, GetPlayersSocialLeaderboard)
 {
 	TestResult tr;
@@ -146,6 +166,18 @@ TEST_F(TestBCSocialLeaderboard, GetPlayersSocialLeaderboard)
 	profileIds.push_back(GetUser(UserB)->m_profileId);
 
 	m_bc->getSocialLeaderboardService()->getPlayersSocialLeaderboard(SOCIAL_LB_ID, profileIds, &tr);
+	tr.run(m_bc);
+}
+
+TEST_F(TestBCSocialLeaderboard, GetPlayersSocialLeaderboardByVersion)
+{
+	TestResult tr;
+
+	std::vector<std::string> profileIds;
+	profileIds.push_back(GetUser(UserA)->m_profileId);
+	profileIds.push_back(GetUser(UserB)->m_profileId);
+
+	m_bc->getSocialLeaderboardService()->getPlayersSocialLeaderboardByVersion(SOCIAL_LB_ID, profileIds, 0, &tr);
 	tr.run(m_bc);
 }
 
@@ -219,8 +251,7 @@ void TestBCSocialLeaderboard::PostScoreToDynamic()
     time->tm_mday += 1;
     mktime(time);
 
-	std::string name = DYNAMIC_LB_ID;
-	name += SSTR(rand());
+	std::string name = DYNAMIC_LB_ID + std::to_string(rand());
 
     m_bc->getSocialLeaderboardService()->postScoreToDynamicLeaderboard(name.c_str(), 100, fw.write(jsonData), HIGH_VALUE, WEEKLY, time, 2, &tr);
     tr.run(m_bc);

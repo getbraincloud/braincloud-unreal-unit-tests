@@ -1,0 +1,6 @@
+[submodule "lib/libwebsockets"]
+	path = lib/libwebsockets
+	url = https://github.com/warmcat/libwebsockets.git
+[submodule "lib/mbedtls"]
+	path = lib/mbedtls
+	url = https://github.com/ARMmbed/mbedtls.git

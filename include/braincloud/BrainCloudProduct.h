@@ -16,6 +16,8 @@ namespace BrainCloud
         BrainCloudProduct(BrainCloudClient* in_client);
 
         /**
+         * @deprecated Will be removed September 2019, Please use BrainCloudVirtualCurrency.getCurrency
+         *
          * Gets the player's currency for the given currency type
          * or all currency types if null passed in.
          *
@@ -27,7 +29,7 @@ namespace BrainCloud
          *
          * @param in_callback The method to be invoked when the server response is received
          */
-        void getCurrency(const char* in_currencyType, IServerCallback * in_callback = NULL);
+        DEPRECATED void getCurrency(const char* in_currencyType, IServerCallback * in_callback = NULL);
 
         /**
          * @deprecated Method is recommended to be used in Cloud Code only for security
@@ -48,6 +50,8 @@ namespace BrainCloud
 		DEPRECATED void resetCurrency(IServerCallback * in_callback = NULL);
 
         /**
+         * @deprecated Will be removed September 2019, Please use BrainCloudAppStore.getSalesInventory
+         *
          * Method gets the active sales inventory for the passed-in platform and
          * currency type.
          *
@@ -66,9 +70,11 @@ namespace BrainCloud
          * inventory for. This is only used for Steam and Facebook stores.
          * @param in_callback The method to be invoked when the server response is received
          */
-        void getSalesInventory(const char * in_platform, const char * in_userCurrency, IServerCallback * in_callback = NULL);
+        DEPRECATED void getSalesInventory(const char * in_platform, const char * in_userCurrency, IServerCallback * in_callback = NULL);
 
         /**
+         * @deprecated Will be removed September 2019, Please use BrainCloudAppStore.getSalesInventoryByCategory
+         *
          * Method gets the active sales inventory for the passed-in platform,
          * currency type and category.
          *
@@ -88,9 +94,11 @@ namespace BrainCloud
          * @param in_category Inventory category to retrieve
          * @param in_callback The method to be invoked when the server response is received
          */
-        void getSalesInventoryByCategory(const char * in_platform, const char * in_userCurrency, const char * in_category, IServerCallback * in_callback = NULL);
+        DEPRECATED void getSalesInventoryByCategory(const char * in_platform, const char * in_userCurrency, const char * in_category, IServerCallback * in_callback = NULL);
 
         /**
+         * @deprecated Will be removed September 2019, Please use BrainCloudAppStore.verifyPurchase
+         *
          * Method verifies an iTunes receipt and awards the items related to this receipt.
          *
          * Service Name - Product
@@ -99,10 +107,12 @@ namespace BrainCloud
          * @param in_base64EncReceiptData The iTunes receipt
          * @param in_callback The method to be invoked when the server response is received
          */
-        void verifyItunesReceipt(const std::string& in_base64EncReceiptData, IServerCallback * in_callback = NULL);
+        DEPRECATED void verifyItunesReceipt(const std::string& in_base64EncReceiptData, IServerCallback * in_callback = NULL);
 
 
         /**
+         * @deprecated Will be removed September 2019, Please use BrainCloudAppStore.verifyPurchase
+         *
          * Initialize Steam Transaction
          *
          * Service Name - Product
@@ -112,9 +122,11 @@ namespace BrainCloud
          * @param in_items Items to purchase
          * @param in_callback The method to be invoked when the server response is received
          */
-        void startSteamTransaction(const char* in_language, const char* in_itemId, IServerCallback * in_callback = NULL);
+        DEPRECATED void startSteamTransaction(const char* in_language, const char* in_itemId, IServerCallback * in_callback = NULL);
 
         /**
+         * @deprecated Will be removed September 2019, Please use BrainCloudAppStore.verifyPurchase
+         *
          * Finalize Steam Transaction. On success, the player will be awarded the
          * associated currencies.
          *
@@ -124,9 +136,11 @@ namespace BrainCloud
          * @param in_transId Steam transaction id
          * @param in_callback The method to be invoked when the server response is received
          */
-        void finalizeSteamTransaction(const char* in_transId, IServerCallback * in_callback = NULL);
+        DEPRECATED void finalizeSteamTransaction(const char* in_transId, IServerCallback * in_callback = NULL);
 
         /**
+         * @deprecated Will be removed September 2019, Please use BrainCloudAppStore.verifyPurchase
+         *
          * Verify Microsoft Receipt. On success, the player will be awarded the
          * associated currencies.
          *
@@ -136,9 +150,11 @@ namespace BrainCloud
          * @param in_receipt Receipt XML
          * @param in_callback The method to be invoked when the server response is received
          */
-        void verifyMicrosoftReceipt(const char* in_receipt, IServerCallback * in_callback = NULL);
+        DEPRECATED void verifyMicrosoftReceipt(const char* in_receipt, IServerCallback * in_callback = NULL);
 
         /**
+         * @deprecated Will be removed September 2019, Please use BrainCloudAppStore.verifyPurchase
+         *
          * Confirms a google play purchase. On success, the player will be awarded the
          * associated currencies.
          *
@@ -150,13 +166,15 @@ namespace BrainCloud
          * @param in_token Google Play token string
          * @param in_callback The method to be invoked when the server response is received
          */
-        void confirmGooglePlayPurchase(
+        DEPRECATED void confirmGooglePlayPurchase(
             const char * in_orderId,
             const char * in_productId,
             const char * in_token,
             IServerCallback * in_callback = NULL);
 
         /**
+         * @deprecated Will be removed September 2019, Please use BrainCloudAppStore.getEligiblePromotions
+         *
          * Get Eligible Promotions
          *
          * Service Name - Product
@@ -164,7 +182,7 @@ namespace BrainCloud
          *
          * @param in_callback The method to be invoked when the server response is received
          */
-        void getEligiblePromotions(IServerCallback * in_callback = NULL);
+        DEPRECATED void getEligiblePromotions(IServerCallback * in_callback = NULL);
 
     private:
         BrainCloudClient * m_client;

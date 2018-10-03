@@ -33,7 +33,7 @@ namespace BrainCloud
             }
         }
 
-        bool isValid() const { return _isValid; }
+        bool isValid() { return _isValid; }
 
         void lock()
         {
@@ -75,7 +75,7 @@ namespace BrainCloud
             }
         }
 
-        bool isValid() const { return _isValid; }
+        bool isValid() { return _isValid; }
 
         void lock()
         {
@@ -100,7 +100,7 @@ namespace BrainCloud
 class Mutex
 {
 public:
-    bool isValid() const { return true; }
+    bool isValid() { return true; }
 
     void lock()
     {
@@ -119,7 +119,7 @@ private:
 class RecursiveMutex
 {
 public:
-    bool isValid() const { return true; }
+    bool isValid() { return true; }
 
     void lock()
     {

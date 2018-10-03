@@ -130,3 +130,6 @@ _bc->getBCClient()->getIdentityService()->attachEmailIdentity(_email, _password,
 ```
 There are many authentication types. You can also merge profiles and detach idenities. See the brainCloud documentation for more information:
 http://getbraincloud.com/apidocs/apiref/?java#capi-auth
+
+## Attributions
+The brainCloud C++ library uses [libwebsockets v3.0.1](https://github.com/warmcat/libwebsockets/releases/tag/v3.0.1).
