@@ -366,7 +366,7 @@ namespace BrainCloud
             onSocketConnected();
         });
         connectionThread.detach();
-#elif
+#else
         failedToConnect();
 #endif
     }
