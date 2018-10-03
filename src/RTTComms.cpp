@@ -4,7 +4,7 @@
 #include "braincloud/IRTTCallback.h"
 #include "braincloud/IRTTConnectCallback.h"
 #include "braincloud/internal/ITCPSocket.h"
-#ifndef TARGET_OS_WATCH
+#if (TARGET_OS_WATCH != 1)
 #include "braincloud/internal/IWebSocket.h"
 #endif
 #include "braincloud/internal/TimeUtil.h"
@@ -295,7 +295,7 @@ namespace BrainCloud
 
     void RTTComms::connect()
     {
-#ifndef TARGET_OS_WATCH
+#if (TARGET_OS_WATCH != 1)
         std::thread connectionThread([this]
         {
             std::string host = _endpoint["host"].asString();
