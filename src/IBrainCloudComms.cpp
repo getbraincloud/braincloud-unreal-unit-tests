@@ -57,6 +57,20 @@ namespace BrainCloud {
 	{
 	}
 
+    void IBrainCloudComms::initializeWithApps(const char * serverURL, const char * defaultAppId, const std::map<std::string, std::string>& secretMap)
+    {
+        _secretMap = secretMap;
+
+        std::string secretKey("MISSING");
+        std::map<std::string, std::string>::const_iterator it = _secretMap.find(defaultAppId);
+        if (it != _secretMap.end())
+        {
+            secretKey = it->second;
+        }
+
+        initialize(serverURL, defaultAppId, secretKey.c_str());
+    }
+
 	void IBrainCloudComms::enableLogging(bool shouldEnable)
 	{
 		_loggingEnabled = shouldEnable;
@@ -189,18 +203,32 @@ namespace BrainCloud {
 		if (in_jsonResponse["data"] != Json::nullValue)
 		{
 			const Json::Value& jsonData = in_jsonResponse["data"];
+
 			if (jsonData["sessionId"] != Json::nullValue)
 			{
 				std::string sessionId = jsonData.get("sessionId", "").asString();
 				setSessionId(sessionId.c_str());
 			}
 
-			if (jsonData["profileId"] != Json::nullValue)
-			{
-				std::string profileId = jsonData.get("profileId", "").asString();
-				_client->getAuthenticationService()->setProfileId(profileId.c_str());
-			}
-		}
+            if (jsonData["profileId"] != Json::nullValue)
+            {
+                std::string profileId = jsonData.get("profileId", "").asString();
+                _client->getAuthenticationService()->setProfileId(profileId.c_str());
+            }
+
+            if (jsonData["switchToAppId"] != Json::nullValue)
+            {
+                _appId = jsonData.get("switchToAppId", "").asString();
+
+                // Update secret key
+                _secretKey = "MISSING";
+                std::map<std::string, std::string>::const_iterator it = _secretMap.find(_appId);
+                if (it != _secretMap.end())
+                {
+                    _secretKey = it->second;
+                }
+            }
+        }
 	}
 
 	void IBrainCloudComms::filterIncomingMessages(const ServerCall* servercall, const Json::Value& response)

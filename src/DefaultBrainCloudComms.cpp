@@ -53,6 +53,7 @@ namespace BrainCloud
 		_uploadUrl += "/uploader";
 		_appId = appId;
 		_secretKey = secretKey;
+		_secretMap[appId] = _secretKey;
 		_isInitialized = true;
 	}
 

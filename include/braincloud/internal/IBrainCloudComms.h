@@ -13,6 +13,8 @@
 #include "braincloud/ServiceName.h"
 #include "braincloud/ServiceOperation.h"
 
+#include <map>
+
 #define NO_PACKET_EXPECTED -1
 #define DEFAULT_AUTHENTICATION_TIMEOUT_MILLIS 15000
 
@@ -62,6 +64,7 @@ namespace BrainCloud
 
 		// pure virtual methods
 		virtual void initialize(const char * serverURL, const char * appId, const char * secretKey) = 0;
+		void initializeWithApps(const char * serverURL, const char * defaultAppId, const std::map<std::string, std::string>& secretMap);
 		virtual void addToQueue(ServerCall *) = 0;
 
 		virtual void sendHeartbeat() = 0;
@@ -170,6 +173,7 @@ namespace BrainCloud
 		std::string _serverUrl;
 		std::string _uploadUrl;
 		std::string _secretKey;
+		std::map<std::string, std::string> _secretMap;
 		std::vector<int> _packetTimeouts;
 
 		typedef std::map<std::string, IFileUploader *>::iterator tFileUploadsIterator;

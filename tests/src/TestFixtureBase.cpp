@@ -16,6 +16,7 @@ std::string TestFixtureBase::m_secret = "";
 std::string TestFixtureBase::m_version = "";
 std::string TestFixtureBase::m_parentLevelName = "";
 std::string TestFixtureBase::m_childAppId = "";
+std::string TestFixtureBase::m_childSecret = "";
 std::string TestFixtureBase::m_peerName = "";
 
 bool TestFixtureBase::m_init = false;
@@ -32,8 +33,10 @@ void TestFixtureBase::SetUp()
 
 	LoadIds();
 
-
-	m_bcWrapper->initialize(m_serverUrl.c_str(), m_secret.c_str(), m_appId.c_str(), m_version.c_str(), "", "");
+	std::map<std::string, std::string> secretMap;
+	secretMap[m_appId] = m_secret;
+	secretMap[m_childAppId] = m_childSecret;
+	m_bcWrapper->initializeWithApps(m_serverUrl.c_str(), m_appId.c_str(), secretMap, m_version.c_str(), "", "");
 
 	m_bc = m_bcWrapper->client;
 
@@ -155,6 +158,10 @@ void TestFixtureBase::LoadIds()
 			{
 				m_childAppId = line.substr(line.find("childAppId") + sizeof("childAppId"), line.length() - 1);
 			}
+			else if (line.find("childSecret") != string::npos)
+			{
+				m_childSecret = line.substr(line.find("childSecret") + sizeof("childSecret"), line.length() - 1);
+			}
 			else if (line.find("parentLevelName") != string::npos)
 			{
 				m_parentLevelName = line.substr(line.find("parentLevelName") + sizeof("parentLevelName"), line.length() - 1);
@@ -171,6 +178,7 @@ void TestFixtureBase::LoadIds()
 		printf("\nSecret - %s", m_secret.c_str());
 		printf("\nVersion - %s", m_version.c_str());
 		printf("\nChild App ID - %s", m_childAppId.c_str());
+		printf("\nChild Secret - %s", m_childSecret.c_str());
 		printf("\nParent Level Name - %s\n", m_parentLevelName.c_str());
 		printf("\nPeer Name - %s\n", m_peerName.c_str());
 	}
@@ -235,6 +243,8 @@ void TestFixtureBase::Logout()
 	//
 	// In any case, the test case will call resetCommunication in the TearDown - the only worry
 	// is if re-init will use different parameters from what the test case was expecting. Super unlikely.
-
-	m_bc->initialize(m_serverUrl.c_str(), m_secret.c_str(), m_appId.c_str(), m_version.c_str());
+	std::map<std::string, std::string> secretMap;
+	secretMap[m_appId] = m_secret;
+	secretMap[m_childAppId] = m_childSecret;
+	m_bc->initializeWithApps(m_serverUrl.c_str(), m_appId.c_str(), secretMap, m_version.c_str());
 }
