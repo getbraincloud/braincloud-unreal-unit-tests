@@ -104,6 +104,19 @@ class BCCLIENTPLUGIN_API BrainCloudClient
 					const FString &secretKey,
 					const FString &appId,
 					const FString &appVersion);
+	/**
+	* Method initializes the BrainCloudClient with multiple app/secret.
+	* Used when needed to switch between child and parent apps
+	*
+	* @param serverURL The url to the brainCloud server
+	* @param appId The app's id
+	* @param appIdSecretMap is the map of <appId, secretKey>
+	* @param appVersion The app's version
+	*/
+	void initializeWithApps(const FString &serverUrl,
+							const TMap<FString, FString> appIdSecretMap,
+							const FString &appId,
+							const FString &appVersion);
 
 	/**
 	* Initialize - initializes the identity service with the saved

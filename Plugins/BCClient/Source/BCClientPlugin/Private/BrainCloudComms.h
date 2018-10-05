@@ -22,6 +22,7 @@ public:
 	~BrainCloudComms();
 
 	void Initialize(const FString& serverURL, const FString& secretKey, const FString& appId);
+	void InitializeWithApps(const FString& serverURL, const FString& defaultApp, TMap<FString, FString> appIdSecretMap);
 	void EnableLogging(bool shouldEnable) { _isLoggingEnabled = shouldEnable; };
 	bool IsLoggingEnabled() { return _isLoggingEnabled; };
 
@@ -136,6 +137,7 @@ private:
 
 	FString _serverUrl;
 	FString _secretKey;
+	TMap<FString, FString> appIdSecretMap;
 	FString _appId;
 	FString _uploadUrl;
 

@@ -72,6 +72,21 @@ void UBrainCloudWrapper::initialize(FString url, FString secretKey, FString appI
     loadData();
 }
 
+void UBrainCloudWrapper::initializeWithApp(FString url, FString defaultApp, TMap<FString, FString> appIdSecretMap, FString appVersion, FString company, FString appName)
+{
+    if(_client == nullptr)
+    {
+        _client = new BrainCloudClient();
+    }
+}
+
+{
+    // initialize the client with our app info
+    _client->initialize(url, secretKey, appId, appVersion);
+
+    loadData();
+}
+
 void UBrainCloudWrapper::initializeIdentity(bool isAnonymousAuth)
 {
     // create an anonymous ID if necessary
