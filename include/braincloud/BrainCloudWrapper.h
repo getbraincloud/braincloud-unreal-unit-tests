@@ -1,5 +1,6 @@
 #pragma once
 
+#include <map>
 #include <string>
 #include <list>
 #include <algorithm>
@@ -92,6 +93,22 @@ namespace BrainCloud {
          * You are free to pick anything you want.
          */
         void initialize(const char * in_serverUrl, const char * in_secretKey, const char * in_appId, const char * in_version, const char * in_companyName, const char * in_appName);
+
+        /**
+         * Method initializes the BrainCloudClient with multiple app/secret.
+         * Used when needed to switch between child and parent apps.
+         *
+         * @param in_serverURL The url to the brainCloud server
+         *     Currently this should be:  https://sharedprod.braincloudservers.com/dispatcherv2
+         * @param in_defaultAppId The default app id that we start with
+         * @param in_secretMap A map of <appId, secretKey>
+         * @param in_version The app version
+         * @param in_companyName The company name used in the keychain for storing anonymous and profile ids.
+         * You are free to pick anything you want.
+         * @param in_appName The app name used in the keychain for storing anonymous and profile ids.
+         * You are free to pick anything you want.
+         */
+        void initializeWithApps(const char * in_serverURL, const char * in_defaultAppId, const std::map<std::string, std::string>& in_secretMap, const char * in_version, const char * in_companyName, const char * in_appName);
 
         /**
          * Authenticate a user anonymously with brainCloud - used for apps that don't want to bother

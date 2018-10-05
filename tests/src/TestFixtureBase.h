@@ -31,6 +31,7 @@ protected:
     static std::string m_version;
     static std::string m_parentLevelName;
     static std::string m_childAppId;
+    static std::string m_childSecret;
 	static std::string m_peerName;
 
     virtual void SetUp();
