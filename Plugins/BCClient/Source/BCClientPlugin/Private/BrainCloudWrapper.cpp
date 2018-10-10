@@ -72,17 +72,26 @@ void UBrainCloudWrapper::initialize(FString url, FString secretKey, FString appI
     loadData();
 }
 
-void UBrainCloudWrapper::initializeWithApp(FString url, FString defaultApp, TMap<FString, FString> appIdSecretMap, FString appVersion, FString company, FString appName)
+void UBrainCloudWrapper::initializeWithApps(FString url, FString appId, TMap<FString, FString> secretMap, FString appVersion, FString company, FString appName)
 {
     if(_client == nullptr)
     {
         _client = new BrainCloudClient();
     }
-}
 
-{
+    FString defaultSecretKey = "MISSING";
+    if(secretMap.Contains(appId))
+    {
+            defaultSecretKey = secretMap.Find(appId);
+    }
+
+    _lastUrl = url;
+    _lastSecretKey = defaultSecretKey;
+    _lastGameId = appId;
+    _lastGameVersion = appVersion;
+    
     // initialize the client with our app info
-    _client->initialize(url, secretKey, appId, appVersion);
+    _client->initializeWithApps(url, appId, secretMap, appVersion);
 
     loadData();
 }

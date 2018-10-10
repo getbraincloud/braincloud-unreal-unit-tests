@@ -114,7 +114,7 @@ class BCCLIENTPLUGIN_API BrainCloudClient
 	* @param appVersion The app's version
 	*/
 	void initializeWithApps(const FString &serverUrl,
-							const TMap<FString, FString> appIdSecretMap,
+							const TMap<FString, FString> &secretMap,
 							const FString &appId,
 							const FString &appVersion);
 
@@ -601,6 +601,8 @@ class BCCLIENTPLUGIN_API BrainCloudClient
 	void overrideLanguageCode(const FString &languageCode) { _language = languageCode; }
 
   protected:
+
+	void initializeComms(const char* serverUrl, const char* appId, const TMap<FString, FString>& secretMap);
 	static BrainCloudClient *_instance;
 
 	BrainCloudComms *_brainCloudComms = nullptr;

@@ -41,10 +41,24 @@ void BrainCloudComms::Initialize(const FString &serverURL, const FString &secret
 	_serverUrl = serverURL;
 	_secretKey = secretKey;
 	_appId = appId;
+	_secretMap.Emplace(appId, secretKey);
 
 	_uploadUrl = _serverUrl;
 	_uploadUrl.RemoveFromEnd(TEXT("/dispatcherv2"));
 	_uploadUrl += TEXT("/uploader");
+}
+
+void BrainCloudComms::InitializeWithApps(const FString &serverURL, const TMap<FString, FString> &secretMap, const FString &appId)
+{
+	_secretMap = secretMap;
+
+	FString secretKey = "MISSING";
+	if(_secretMap.Contains(appId))
+	{
+		secretKey = secretMap.Find(appId);
+	}
+
+	Initialize(serverURL, appId, secretKey);
 }
 
 void BrainCloudComms::SetPacketTimeoutsToDefault()
@@ -785,6 +799,19 @@ void BrainCloudComms::FilterIncomingMessages(TSharedRef<ServerCall> servercall, 
 		if (!profileIdOut.IsEmpty())
 		{
 			_client->getAuthenticationService()->setProfileId(profileIdOut);
+		}
+
+		data->TryGetStringField(TEXT("switchToAppId", _appId));
+		if(!appIdOut.IsEmpty())
+		{
+			_appId = data.get("switchToAppId", "").GetContentAsString();
+
+			//update the secret key
+			_secretKey = "MISSING";
+			if(_secretMap.Contains(_appId))
+			{
+				_secretKey = _secretMap.Find(_appId);
+			}
 		}
 	}
 

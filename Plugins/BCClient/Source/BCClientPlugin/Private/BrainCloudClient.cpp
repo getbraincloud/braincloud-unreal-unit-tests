@@ -154,6 +154,54 @@ void BrainCloudClient::initialize(
 		_country = FInternationalization::Get().GetCurrentCulture()->GetRegion();
 }
 
+void BrainCloudClient::initializeWithApps(
+	const FString &serverUrl,
+	const FString &secretMap,
+	const FString &appId,
+	const FString &appVersion)
+{
+	FString error = "";
+	if (serverUrl.IsEmpty())
+		error = "serverURL was null or empty";
+	else if (appId.IsEmpty())
+		error = "appId was null or empty";
+	else if (secretMap.Find(appId))
+		error = "secret was null or empty";
+	else if (appVersion.IsEmpty())
+		error = "appVersion was null or empty";
+
+	if (!error.IsEmpty())
+	{
+		UE_LOG(LogTemp, Error, TEXT("ERROR | Failed to initialize brainCloud - %s"), *error);
+		return;
+	}
+
+	if (!_brainCloudComms)
+		_brainCloudComms = new BrainCloudComms(this);
+
+	_brainCloudComms->Initialize(serverUrl, secretKey, appId);
+	determineReleasePlatform();
+
+	_appId = appId;
+	_appVersion = appVersion;
+
+	if (_language.IsEmpty())
+		_language = FInternationalization::Get().GetCurrentCulture()->GetTwoLetterISOLanguageName();
+	if (_country.IsEmpty())
+		_country = FInternationalization::Get().GetCurrentCulture()->GetRegion();
+}
+
+void BrainCloudClient::initializeComms(const char* serverURL, const* char appId, const TMap<String, String>& secretMap)
+{
+	if(_brainCloudComms)
+	{
+		const char* urlToUse = serverURL;
+		FStrign url = serverURL;
+
+		if(url.find("dispatcherv2") == )
+	}
+}
+
 void BrainCloudClient::initializeIdentity(const FString &profileId, const FString &anonymousId)
 {
 	getAuthenticationService()->initialize(profileId, anonymousId);
