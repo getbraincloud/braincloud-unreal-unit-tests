@@ -23,6 +23,7 @@ namespace BrainCloud
 
     BrainCloudClient * BrainCloudClient::_instance = NULL;
     std::string BrainCloudClient::s_brainCloudClientVersion = "3.9.1";
+    const char* BC_SERVER_URL = "https://sharedprod.braincloudservers.com/dispatcherv2"; 
 
     /**
      * Constructor
@@ -185,6 +186,11 @@ namespace BrainCloud
         _appVersion = in_appVersion;
     }
 
+    void BrainCloudClient::initialize(const char * in_secretKey, const char * in_appId, const char * in_appVersion)
+    {
+        initialize(BC_SERVER_URL, in_secretKey, in_appId, in_appVersion);
+    }
+
     void BrainCloudClient::initializeWithApps(const char * in_serverURL, const char * in_defaultAppId, const std::map<std::string, std::string>& in_secretMap, const char * in_appVersion)
     {
         std::string error = "";
@@ -208,6 +214,11 @@ namespace BrainCloud
 
         _releasePlatform = Device::getPlatformName();
         _appVersion = in_appVersion;
+    }
+
+    void BrainCloudClient::initializeWithApps(const char* in_defaultAppId, const std::map<std::string, std::string>& in_secretMap, const char* in_appVersion)
+    {
+        initializeWithApps(BC_SERVER_URL, in_defaultAppId, in_secretMap, in_appVersion);
     }
 
     void BrainCloudClient::initializeIdentity(const char * in_profileId, const char * in_anonymousId)
