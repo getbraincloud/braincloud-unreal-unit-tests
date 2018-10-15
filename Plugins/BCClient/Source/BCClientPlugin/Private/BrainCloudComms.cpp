@@ -50,12 +50,12 @@ void BrainCloudComms::Initialize(const FString &serverURL, const FString &secret
 
 void BrainCloudComms::InitializeWithApps(const FString &serverURL, const FString &appId, const TMap<FString, FString> &secretMap)
 {
-	//refresh the map
-	//_secretMap.Empty();
-	// for(auto It = secretMap.CreateConstIterator(); It; It++)
-	// {
-	// 	_secretMap.Emplace(It.secretMap.Key(), *It.secretMap.Value());
-	// }
+	//refresh the map 
+	_secretMap.Empty(); 
+	for(auto It = secretMap.CreateConstIterator(); It; ++It) 
+	{ 
+		_secretMap.Emplace(It.Key(), It.Value()); 
+	} 
 
 	FString secretKey = "MISSING";
 	if(_secretMap.Contains(appId))
