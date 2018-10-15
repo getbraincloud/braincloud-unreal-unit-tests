@@ -156,17 +156,18 @@ void BrainCloudClient::initialize(
 
 void BrainCloudClient::initializeWithApps(
 	const FString &serverUrl,
-	const FString &secretMap,
 	const FString &appId,
+	const TMap<FString, FString> &secretMap,
 	const FString &appVersion)
 {
+	const FString &newAppId = secretMap[appId];
 	FString error = "";
 	if (serverUrl.IsEmpty())
 		error = "serverURL was null or empty";
 	else if (appId.IsEmpty())
 		error = "appId was null or empty";
-	else if (secretMap.Find(appId))
-		error = "secret was null or empty";
+	else if (newAppId.IsEmpty())
+		error = "no matching secret for appId";
 	else if (appVersion.IsEmpty())
 		error = "appVersion was null or empty";
 
@@ -179,7 +180,7 @@ void BrainCloudClient::initializeWithApps(
 	if (!_brainCloudComms)
 		_brainCloudComms = new BrainCloudComms(this);
 
-	_brainCloudComms->Initialize(serverUrl, secretKey, appId);
+	_brainCloudComms->Initialize(serverUrl, secretMap[_appId], appId);
 	determineReleasePlatform();
 
 	_appId = appId;
@@ -189,17 +190,6 @@ void BrainCloudClient::initializeWithApps(
 		_language = FInternationalization::Get().GetCurrentCulture()->GetTwoLetterISOLanguageName();
 	if (_country.IsEmpty())
 		_country = FInternationalization::Get().GetCurrentCulture()->GetRegion();
-}
-
-void BrainCloudClient::initializeComms(const char* serverURL, const* char appId, const TMap<String, String>& secretMap)
-{
-	if(_brainCloudComms)
-	{
-		const char* urlToUse = serverURL;
-		FStrign url = serverURL;
-
-		if(url.find("dispatcherv2") == )
-	}
 }
 
 void BrainCloudClient::initializeIdentity(const FString &profileId, const FString &anonymousId)

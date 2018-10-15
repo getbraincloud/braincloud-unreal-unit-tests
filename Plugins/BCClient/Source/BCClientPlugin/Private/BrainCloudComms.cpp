@@ -48,14 +48,19 @@ void BrainCloudComms::Initialize(const FString &serverURL, const FString &secret
 	_uploadUrl += TEXT("/uploader");
 }
 
-void BrainCloudComms::InitializeWithApps(const FString &serverURL, const TMap<FString, FString> &secretMap, const FString &appId)
+void BrainCloudComms::InitializeWithApps(const FString &serverURL, const FString &appId, const TMap<FString, FString> &secretMap)
 {
-	_secretMap = secretMap;
+	//refresh the map
+	//_secretMap.Empty();
+	// for(auto It = secretMap.CreateConstIterator(); It; It++)
+	// {
+	// 	_secretMap.Emplace(It.secretMap.Key(), *It.secretMap.Value());
+	// }
 
 	FString secretKey = "MISSING";
 	if(_secretMap.Contains(appId))
 	{
-		secretKey = secretMap.Find(appId);
+		secretKey = secretMap[appId];
 	}
 
 	Initialize(serverURL, appId, secretKey);
@@ -801,16 +806,17 @@ void BrainCloudComms::FilterIncomingMessages(TSharedRef<ServerCall> servercall, 
 			_client->getAuthenticationService()->setProfileId(profileIdOut);
 		}
 
-		data->TryGetStringField(TEXT("switchToAppId", _appId));
+		FString appIdOut;
+		data->TryGetStringField(TEXT("switchToAppId"), appIdOut);
 		if(!appIdOut.IsEmpty())
 		{
-			_appId = data.get("switchToAppId", "").GetContentAsString();
+			_appId = data->GetStringField("switchToAppId");
 
 			//update the secret key
 			_secretKey = "MISSING";
 			if(_secretMap.Contains(_appId))
 			{
-				_secretKey = _secretMap.Find(_appId);
+				_secretKey = _secretMap[_appId];
 			}
 		}
 	}

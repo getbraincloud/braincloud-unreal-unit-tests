@@ -82,7 +82,7 @@ void UBrainCloudWrapper::initializeWithApps(FString url, FString appId, TMap<FSt
     FString defaultSecretKey = "MISSING";
     if(secretMap.Contains(appId))
     {
-            defaultSecretKey = secretMap.Find(appId);
+            defaultSecretKey = secretMap[appId];
     }
 
     _lastUrl = url;

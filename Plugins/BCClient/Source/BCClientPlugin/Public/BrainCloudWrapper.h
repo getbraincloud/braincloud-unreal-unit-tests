@@ -94,7 +94,7 @@ class BCCLIENTPLUGIN_API UBrainCloudWrapper : public UObject, public IServerCall
      * @param appName app name used in the keychain for storing anonymous and profile ids. Pick anything
      * 
      */
-    void initializeWithApps(FString serverUrl, TMap<String, String> secretMap, FString appId, FString appVersion, FString companyName, FString appName);
+    void initializeWithApps(FString serverUrl, FString appId, TMap<FString, FString> secretMap, FString appVersion, FString companyName, FString appName);
 
     /**
      * Authenticate a user anonymously with brainCloud - used for apps that don't want to bother

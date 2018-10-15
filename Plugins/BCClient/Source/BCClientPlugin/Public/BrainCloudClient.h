@@ -114,8 +114,8 @@ class BCCLIENTPLUGIN_API BrainCloudClient
 	* @param appVersion The app's version
 	*/
 	void initializeWithApps(const FString &serverUrl,
-							const TMap<FString, FString> &secretMap,
 							const FString &appId,
+							const TMap<FString, FString> &secretMap,
 							const FString &appVersion);
 
 	/**
