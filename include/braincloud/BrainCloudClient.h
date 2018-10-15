@@ -10,6 +10,8 @@
 #endif
 
 #include <string>
+#include <map>
+
 #include "braincloud/IEventCallback.h"
 #include "braincloud/IFileUploadCallback.h"
 #include "braincloud/IGlobalErrorCallback.h"
@@ -118,6 +120,19 @@ namespace BrainCloud
 		 * @param in_appVersion The version
 		 */
 		void initialize(const char * in_serverURL, const char * in_secretKey, const char * in_appId, const char * in_appVersion);
+
+
+		/**
+		 * Method initializes the BrainCloudClient with multiple app/secret.
+		 * Used when needed to switch between child and parent apps.
+		 *
+		 * @param in_serverURL The url to the brainCloud server
+		 *     Currently this should be:  https://sharedprod.braincloudservers.com/dispatcherv2
+		 * @param in_defaultAppId The default app id that we start with
+		 * @param in_secretMap A map of <appId, secretKey>
+		 * @param in_appVersion The version
+		 */
+		void initializeWithApps(const char * in_serverURL, const char * in_defaultAppId, const std::map<std::string, std::string>& in_secretMap, const char * in_appVersion);
 
 		/**
 		* Initialize - initializes the identity service with the saved
@@ -637,6 +652,8 @@ namespace BrainCloud
 		void deregisterAllRTTCallbacks();
 
 	protected:
+		void initializeComms(const char * in_serverURL, const char * in_appId, const std::map<std::string, std::string>& in_secretMap);
+
 		static BrainCloudClient * _instance;
 
 		IBrainCloudComms * _brainCloudComms;

@@ -75,6 +75,35 @@ namespace BrainCloud {
         SaveDataHelper::getInstance()->initialize(companyName, appName);
     }
 
+    void BrainCloudWrapper::initializeWithApps(const char * url, const char * in_defaultAppId, const std::map<std::string, std::string>& in_secretMap, const char * version, const char * companyName, const char * appName)
+    {
+        if (client == NULL)
+        {
+            client = new BrainCloudClient();
+        }
+
+        // Find the default secret key that matches the default app id
+        std::string defaultSecretKey;
+        std::map<std::string, std::string>::const_iterator it = in_secretMap.find(in_defaultAppId);
+        if (it != in_secretMap.end())
+        {
+            defaultSecretKey = it->second;
+        }
+
+        // save the app info in case we need to reauthenticate
+        m_lastUrl = url;
+        m_lastSecretKey = defaultSecretKey;
+        m_lastGameId = in_defaultAppId;
+        m_lastGameVersion = version;
+
+        // initialize the client with our app info
+        client->initializeWithApps(url, in_defaultAppId, in_secretMap, version);
+
+        // inialize the save data helper with our company and app name
+        // if this is not called the profile ids will not be saved
+        SaveDataHelper::getInstance()->initialize(companyName, appName);
+    }
+
     void BrainCloudWrapper::initializeIdentity(bool in_isAnonymousAuth)
     {
         // check if we already have saved IDs
