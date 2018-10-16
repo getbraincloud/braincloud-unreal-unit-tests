@@ -48,7 +48,7 @@ void BrainCloudComms::Initialize(const FString &serverURL, const FString &secret
 	_uploadUrl += TEXT("/uploader");
 }
 
-void BrainCloudComms::InitializeWithApps(const FString &serverURL, const FString &appId, const TMap<FString, FString> &secretMap)
+void BrainCloudComms::InitializeWithApps(const FString &serverURL, const TMap<FString, FString> &secretMap, const FString &appId)
 {
 	//refresh the map 
 	_secretMap.Empty(); 
@@ -63,7 +63,7 @@ void BrainCloudComms::InitializeWithApps(const FString &serverURL, const FString
 		secretKey = secretMap[appId];
 	}
 
-	Initialize(serverURL, appId, secretKey);
+	Initialize(serverURL, secretKey, appId);
 }
 
 void BrainCloudComms::SetPacketTimeoutsToDefault()

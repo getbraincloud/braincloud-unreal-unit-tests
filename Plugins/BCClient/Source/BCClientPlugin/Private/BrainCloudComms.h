@@ -22,7 +22,7 @@ public:
 	~BrainCloudComms();
 
 	void Initialize(const FString& serverURL, const FString& secretKey, const FString& appId);
-	void InitializeWithApps(const FString& serverURL, const FString& appId, const TMap<FString, FString> &secretMap);
+	void InitializeWithApps(const FString& serverURL, const TMap<FString, FString> &secretMap, const FString& appId);
 	void EnableLogging(bool shouldEnable) { _isLoggingEnabled = shouldEnable; };
 	bool IsLoggingEnabled() { return _isLoggingEnabled; };
 

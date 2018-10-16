@@ -180,7 +180,7 @@ void BrainCloudClient::initializeWithApps(
 	if (!_brainCloudComms)
 		_brainCloudComms = new BrainCloudComms(this);
 
-	_brainCloudComms->Initialize(serverUrl, secretMap[_appId], appId);
+	_brainCloudComms->InitializeWithApps(serverUrl, secretMap, appId);
 	determineReleasePlatform();
 
 	_appId = appId;

@@ -49,6 +49,14 @@ class UBCClientProxy : public UBCBlueprintCallProxyBase
 		const FString &appId = "",
 		const FString &version = "1.0.0");
 
+	/**
+	* Method initializes the BrainCloudClient.
+	*
+	* Param - serverURL The url to the brainCloud server
+	* Param - secretMap The map of appId to secret
+	* Param - appId The app's id
+	* Param - version The app's version
+	*/
 	UFUNCTION(BlueprintCallable, Category = "BrainCloud|Client")
 	static void InitializeWithApps(
 		UBrainCloudWrapper *brainCloudWrapper,
