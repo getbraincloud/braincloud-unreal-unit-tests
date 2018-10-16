@@ -89,6 +89,8 @@ void UBrainCloudWrapper::initializeWithApps(FString url, FString appId, TMap<FSt
     _lastSecretKey = defaultSecretKey;
     _lastGameId = appId;
     _lastGameVersion = appVersion;
+    _company = company;
+    _appName = appName;
     
     // initialize the client with our app info
     _client->initializeWithApps(url, appId, secretMap, appVersion);

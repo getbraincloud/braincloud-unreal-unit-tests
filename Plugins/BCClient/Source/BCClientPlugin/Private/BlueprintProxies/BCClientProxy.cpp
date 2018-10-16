@@ -33,7 +33,7 @@ void UBCClientProxy::Initialize(
 
 void UBCClientProxy::InitializeWithApps(
 	UBrainCloudWrapper *brainCloudWrapper,
-	const FString &secretMap,
+	const TMap<FString, FString> &secretMap,
 	const FString &serverUrl,
 	const FString &appId,
 	const FString &version)

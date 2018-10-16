@@ -527,6 +527,8 @@ class BCCLIENTPLUGIN_API UBrainCloudWrapper : public UObject, public IServerCall
     FString _lastSecretKey;
     FString _lastGameId;
     FString _lastGameVersion;
+    FString _company;
+    FString _appName;
 
     FString _authenticationType;
 
