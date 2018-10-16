@@ -83,6 +83,20 @@ class BCCLIENTPLUGIN_API UBrainCloudWrapper : public UObject, public IServerCall
     void initialize(FString serverUrl, FString secretKey, FString appId, FString version);
 
     /**
+     * Method initializes the BrainCloudClient with multiple app/secret
+     * Used when needed to switch between child and parent apps
+     *
+     * @param serverURL The url to the brainCloud server
+     * @param appIdSecretMap The map of <appid, secretKey>
+     * @param defaultAppId the default app id we start with
+     * @param version The app's version
+     * @param companyName company name used in the keycheain for storing anonymous and profile ids. Pick anything
+     * @param appName app name used in the keychain for storing anonymous and profile ids. Pick anything
+     * 
+     */
+    void initializeWithApps(FString serverUrl, FString appId, TMap<FString, FString> secretMap, FString appVersion, FString companyName, FString appName);
+
+    /**
      * Authenticate a user anonymously with brainCloud - used for apps that don't want to bother
      * the user to login, or for users who are sensitive to their privacy
      *
@@ -508,6 +522,13 @@ class BCCLIENTPLUGIN_API UBrainCloudWrapper : public UObject, public IServerCall
 
     static UBrainCloudWrapper *_instance;
     BrainCloudClient *_client = nullptr;
+
+    FString _lastUrl;
+    FString _lastSecretKey;
+    FString _lastGameId;
+    FString _lastGameVersion;
+    FString _company;
+    FString _appName;
 
     FString _authenticationType;
 

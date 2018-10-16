@@ -104,6 +104,19 @@ class BCCLIENTPLUGIN_API BrainCloudClient
 					const FString &secretKey,
 					const FString &appId,
 					const FString &appVersion);
+	/**
+	* Method initializes the BrainCloudClient with multiple app/secret.
+	* Used when needed to switch between child and parent apps
+	*
+	* @param serverURL The url to the brainCloud server
+	* @param appId The app's id
+	* @param appIdSecretMap is the map of <appId, secretKey>
+	* @param appVersion The app's version
+	*/
+	void initializeWithApps(const FString &serverUrl,
+							const FString &appId,
+							const TMap<FString, FString> &secretMap,
+							const FString &appVersion);
 
 	/**
 	* Initialize - initializes the identity service with the saved
@@ -588,6 +601,8 @@ class BCCLIENTPLUGIN_API BrainCloudClient
 	void overrideLanguageCode(const FString &languageCode) { _language = languageCode; }
 
   protected:
+
+	void initializeComms(const char* serverUrl, const char* appId, const TMap<FString, FString>& secretMap);
 	static BrainCloudClient *_instance;
 
 	BrainCloudComms *_brainCloudComms = nullptr;
