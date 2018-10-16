@@ -64,7 +64,11 @@ public:
   static void Initialize(UBrainCloudWrapper *brainCloudWrapper, FString serverUrl, FString secretKey, FString appId, FString version);
 
   UFUNCTION(BlueprintCallable, Category = "BrainCloud|Wrapper")
+<<<<<<< HEAD
   static void InitializeWithApps(UBrainCloudWrapper *brainCloudWrapper, FString serverUrl, FString appId, TMap<FString, FString> secretMap,  FString version, FString company, FString appName);
+=======
+  static void InitializeWithApps(UBrainCloudWrapper *brainCloudWrapper, FString serverUrl, FString appId, TMap<FString, FString> secretMap, FString version, FString company, FString appName);
+>>>>>>> bf59b1123afee1e93b803edfd6f555d98c980e1f
 
   /**
      * Authenticate a user anonymously with brainCloud
