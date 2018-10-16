@@ -31,6 +31,16 @@ void UBCClientProxy::Initialize(
 	UBCWrapperProxy::GetBrainCloudInstance(brainCloudWrapper)->initialize(serverUrl, secretKey, appId, version);
 }
 
+void UBCClientProxy::InitializeWithApps(
+	UBrainCloudWrapper *brainCloudWrapper,
+	const TMap<FString, FString> &secretMap,
+	const FString &serverUrl,
+	const FString &appId,
+	const FString &version)
+{
+	UBCWrapperProxy::GetBrainCloudInstance(brainCloudWrapper)->initializeWithApps(serverUrl, appId, secretMap, version, "company", "appName");
+}
+
 void UBCClientProxy::InitializeIdentity(UBrainCloudWrapper *brainCloudWrapper, const FString &profileId, const FString &anonymousId)
 {
 	UBCWrapperProxy::GetBrainCloudInstance(brainCloudWrapper)->getBCClient()->initializeIdentity(profileId, anonymousId);
