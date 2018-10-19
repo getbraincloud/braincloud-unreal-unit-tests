@@ -64,6 +64,11 @@ void UBCWrapperProxy::Initialize(UBrainCloudWrapper *brainCloudWrapper, FString 
 	UBCWrapperProxy::GetBrainCloudInstance(brainCloudWrapper)->initialize(serverUrl, secretKey, appId, version);
 }
 
+void UBCWrapperProxy::InitializeWithApps(UBrainCloudWrapper *brainCloudWrapper, FString serverUrl, FString appId, TMap<FString, FString> secretMap, FString version, FString company, FString appName)
+{
+	UBCWrapperProxy::GetBrainCloudInstance(brainCloudWrapper)->initializeWithApps(serverUrl, appId, secretMap, version, company, appName);
+}
+
 UBCWrapperProxy *UBCWrapperProxy::AuthenticateAnonymous(UBrainCloudWrapper *brainCloudWrapper)
 {
 	UBCWrapperProxy *Proxy = NewObject<UBCWrapperProxy>();
