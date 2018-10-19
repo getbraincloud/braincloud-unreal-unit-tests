@@ -64,6 +64,17 @@ public:
   static void Initialize(UBrainCloudWrapper *brainCloudWrapper, FString serverUrl, FString secretKey, FString appId, FString version);
 
   /**
+     * Method initializes the BrainCloudClient.
+     *
+     * @param serverURL The url to the brainCloud server
+     * @param secretMap The map of appID to secret
+     * @param appId The app's id
+     * @param version The app's version
+     */
+  UFUNCTION(BlueprintCallable, Category = "BrainCloud|Wrapper")
+  static void InitializeWithApps(UBrainCloudWrapper *brainCloudWrapper, FString serverUrl, FString appId, TMap<FString, FString> secretMap, FString version, FString company, FString appName);
+
+  /**
      * Authenticate a user anonymously with brainCloud
      *
      * Service Name - Authenticate
