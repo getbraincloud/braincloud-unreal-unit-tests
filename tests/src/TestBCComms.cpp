@@ -46,11 +46,6 @@ TEST_F(TestBCComms, BadSecret)
 	m_bc->resetCommunication();
 }
 
-TEST_F(TestBCComms, BadPacketId)
-{
-	// not sure how to do this one
-}
-
 TEST_F(TestBCComms, Heartbeat)
 {
 	//speed up heartbeat

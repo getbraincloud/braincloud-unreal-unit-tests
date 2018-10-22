@@ -1,4 +1,9 @@
-cmake_minimum_required(VERSION 3.0)
+if (WIN32)
+    # We require 3.4.0 for UWP generation
+    cmake_minimum_required(VERSION 3.4.0)
+else()
+    cmake_minimum_required(VERSION 3.0.0)
+endif()
 
 project(brainCloud)
 
@@ -101,12 +106,12 @@ elseif (USE_CURL)
 elseif (VS2013_OR_HIGHER)
     list(APPEND OS_SPECIFIC_INCS
         "include/braincloud/internal/DefaultBrainCloudComms.h"
-        "include/braincloud/internal/win/XMLHTTPEventSink.h"
+        "include/braincloud/internal/win/XMLHTTPRequestCallback.h"
         "include/braincloud/internal/win/XMLHTTPRequestFileUploader.h"
         "include/braincloud/internal/win/XMLHTTPRequestLoader.h")
     list(APPEND OS_SPECIFIC_SRCS
         "src/DefaultBrainCloudComms.cpp"
-        "src/win/XMLHTTPEventSink.cpp"
+        "src/win/XMLHTTPRequestCallback.cpp"
         "src/win/XMLHTTPRequestFileUploader.cpp"
         "src/win/XMLHTTPRequestLoader.cpp")
 else()
