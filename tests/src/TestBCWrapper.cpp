@@ -24,6 +24,18 @@ TEST_F(TestBCWrapper, AaaRunFirst)
 
 TEST_F(TestBCWrapper, AuthenticateAnonymous)
 {
+    m_bcWrapper->initialize(m_serverUrl.c_str(), m_secret.c_str(), m_appId.c_str(), m_version.c_str(), "wrapper", "unittest");
+
+    TestResult tr;
+	m_bcWrapper->authenticateAnonymous(&tr);
+    tr.run(m_bc);
+    
+    Logout();
+}
+
+//Singleton usage is disabled DEPRECATED
+TEST_F(TestBCWrapper, DISABLED_AuthenticateAnonymous)
+{
     
     TestResult tr;
 	m_bcWrapper->authenticateAnonymous(&tr);
@@ -71,7 +83,8 @@ TEST_F(TestBCWrapper, AuthenticateUniversal)
     Logout();
 }
 
-TEST_F(TestBCWrapper, VerifyAlwaysAllowProfileFalse)
+//Singleton usage is disabled
+TEST_F(TestBCWrapper, DISABLED_VerifyAlwaysAllowProfileFalse)
 {
     m_bcWrapper->initialize(m_serverUrl.c_str(), m_secret.c_str(), m_appId.c_str(), m_version.c_str(), "wrapper", "unittest");
     m_bcWrapper->setAlwaysAllowProfileSwitch(false);
@@ -106,6 +119,19 @@ TEST_F(TestBCWrapper, VerifyAlwaysAllowProfileFalse)
 }
 
 TEST_F(TestBCWrapper, Reconnect)
+{
+	TestResult tr;
+
+	m_bcWrapper->initialize(m_serverUrl.c_str(), m_secret.c_str(), m_appId.c_str(), m_version.c_str(), "wrapper", "unittest");
+
+	m_bcWrapper->reconnect(&tr);
+	tr.run(m_bc);
+
+	Logout();
+}
+
+//Singleton usage is disabled
+TEST_F(TestBCWrapper, DISABLED_Reconnect)
 {
 	m_bcWrapper->initialize(m_serverUrl.c_str(), m_secret.c_str(), m_appId.c_str(), m_version.c_str(), "wrapper", "unittest");
 

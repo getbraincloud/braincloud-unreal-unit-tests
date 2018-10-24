@@ -9,7 +9,7 @@ using namespace BrainCloud;
 TEST_F(TestBCTime, ReadServerTime)
 {
     TestResult tr;
-    
+
     m_bc->getTimeService()->readServerTime(&tr);
     tr.run(m_bc);
 }
