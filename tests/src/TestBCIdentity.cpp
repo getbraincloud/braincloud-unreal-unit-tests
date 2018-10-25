@@ -104,24 +104,19 @@ TEST_F(TestBCIdentity, changeEmailIdentity)
 	sprintf(m_newEmail, "%s%d%s", "test_", rand() % 100000000, "@bitheads.com");
 	sprintf(m_oldEmail, "%s%d%s", "test_", rand() % 100000000, "@bitheads.com");
 
-	m_bc->getAuthenticationService()->authenticateEmailPassword(m_newEmail, m_newEmail, true, &tr);
-	tr.run(m_bc);
+	const char* password = "password";
 
-	m_bc->getIdentityService()->changeEmailIdentity(
-		m_newEmail,
-		m_newEmail,
-		m_oldEmail,
-		true,
-		&tr);
-	tr.run(m_bc);
+	//expected that the old e-mail randomly generated isn't already associated with the profile. 
+	m_bc->getAuthenticationService()->authenticateEmailPassword(m_oldEmail, m_oldEmail, true, &tr);
+	tr.runExpectFail(m_bc, 202, 40206);
 
 	m_bc->getIdentityService()->changeEmailIdentity(
 		m_oldEmail,
-		m_newEmail,
+		password,
 		m_newEmail,
 		true,
 		&tr);
-	tr.run(m_bc);
+	tr.runExpectFail(m_bc, 400, 40584);
 }
 
 TEST_F(TestBCIdentity, AttachPeerProfile)

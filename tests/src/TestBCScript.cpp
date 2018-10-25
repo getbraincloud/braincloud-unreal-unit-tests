@@ -7,15 +7,12 @@
 
 using namespace BrainCloud;
 
+
 TEST_F(TestBCScript, RunScript)
 {
 	TestResult tr;
-	Json::FastWriter fw;
-	Json::Value scriptData;
-	scriptData["testParam1"] = 1;
-
-	m_bc->getScriptService()->runScript(m_scriptName, fw.write(scriptData), &tr);
-	tr.run(m_bc);
+	m_bc->getScriptService()->runScript("emptyScript", "{}", &tr);
+	tr.run(m_bc);	
 }
 
 TEST_F(TestBCScript, ScheduleScriptUTC)
