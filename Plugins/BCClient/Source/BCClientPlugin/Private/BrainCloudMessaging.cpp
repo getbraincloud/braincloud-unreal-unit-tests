@@ -74,15 +74,11 @@ void BrainCloudMessaging::markMessagesRead(const FString &in_msgBox, const TArra
     _client->sendRequest(sc);
 }
 
-void BrainCloudMessaging::sendMessage(const TArray<FString> &in_toProfileIds, const FString &in_messageText, const FString &in_messageSubject, IServerCallback *in_callback)
+void BrainCloudMessaging::sendMessage(const TArray<FString> &in_toProfileIds, const FString &contentJson, IServerCallback *in_callback)
 {
-    TSharedRef<FJsonObject> content = MakeShareable(new FJsonObject());
-    content->SetStringField(OperationParam::MessagingText.getValue(), in_messageText);
-    content->SetStringField(OperationParam::MessagingSubject.getValue(), in_messageSubject);
-
     TSharedRef<FJsonObject> message = MakeShareable(new FJsonObject());
     message->SetArrayField(OperationParam::MessagingToProfileIds.getValue(), JsonUtil::arrayToJsonArray(in_toProfileIds));
-    message->SetObjectField(OperationParam::MessagingContent.getValue(), content);
+    message->SetObjectField(OperationParam::MessagingContent.getValue(), JsonUtil::jsonStringToValue(contentJson));
 
     ServerCall *sc = new ServerCall(ServiceName::Messaging, ServiceOperation::SEND_MESSAGE, message, in_callback);
     _client->sendRequest(sc);

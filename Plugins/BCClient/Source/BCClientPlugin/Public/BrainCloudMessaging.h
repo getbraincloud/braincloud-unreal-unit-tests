@@ -100,7 +100,7 @@ class BCCLIENTPLUGIN_API BrainCloudMessaging
     * @param in_messageSubject Messsage subject
 	* @param in_callback Method to be invoked when the server response is received.
     */
-    void sendMessage(const TArray<FString> &in_toProfileIds, const FString &in_messageText, const FString &in_messageSubject, IServerCallback *in_callback);
+    void sendMessage(const TArray<FString> &in_toProfileIds, const FString &contentJson, IServerCallback *in_callback);
 
     /**
     *Sends a message with specified 'subject' and 'text' to list of users.

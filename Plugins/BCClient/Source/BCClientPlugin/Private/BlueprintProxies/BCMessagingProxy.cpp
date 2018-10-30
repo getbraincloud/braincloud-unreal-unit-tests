@@ -63,10 +63,10 @@ UBCMessagingProxy* UBCMessagingProxy::MarkMessagesRead(UBrainCloudWrapper *brain
 	return Proxy;
 }
 
-UBCMessagingProxy* UBCMessagingProxy::SendMessage(UBrainCloudWrapper *brainCloud, const TArray<FString> &in_toProfileIds, const FString &in_messageText, const FString &in_messageSubject)
+UBCMessagingProxy* UBCMessagingProxy::SendMessage(UBrainCloudWrapper *brainCloud, const TArray<FString> &in_toProfileIds, const FString &contentJson)
 {
 	UBCMessagingProxy* Proxy = NewObject<UBCMessagingProxy>();
-	UBCWrapperProxy::GetBrainCloudInstance(brainCloud)->getMessagingService()->sendMessage(in_toProfileIds, in_messageText, in_messageSubject, Proxy);
+	UBCWrapperProxy::GetBrainCloudInstance(brainCloud)->getMessagingService()->sendMessage(in_toProfileIds, contentJson, Proxy);
 	return Proxy;
 }
 
