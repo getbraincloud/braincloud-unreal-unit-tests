@@ -415,7 +415,7 @@ const OperationParam OperationParam::GlobalChannelType = OperationParam("gl");
 const OperationParam OperationParam::GroupChannelType = OperationParam("gr");
 
 // messaging
-const OperationParam OperationParam::MessagingMessageBox = OperationParam("msgBox");
+const OperationParam OperationParam::MessagingMessageBox = OperationParam("msgbox");
 const OperationParam OperationParam::MessagingMessageIds = OperationParam("msgIds");
 const OperationParam OperationParam::MessagingContext = OperationParam("context");
 const OperationParam OperationParam::MessagingPageOffset = OperationParam("pageOffset");
