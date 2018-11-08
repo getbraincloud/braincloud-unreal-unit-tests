@@ -2,7 +2,7 @@
 
 #include <Windows.h>
 
-#if defined(WINAPI_FAMILY) && WINAPI_FAMILY == WINAPI_FAMILY_PHONE_APP
+#if (defined(WINAPI_FAMILY) && WINAPI_FAMILY == WINAPI_FAMILY_PHONE_APP) || defined(BC_UWP)
 static const std::string PLATFORM_NAME("WINP");
 #else
 static const std::string PLATFORM_NAME("WINDOWS");

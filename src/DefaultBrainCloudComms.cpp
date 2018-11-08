@@ -7,7 +7,11 @@
 #include <string>
 #include <list>
 #include <sstream>
+#if defined(BC_UWP)
+#include "braincloud/internal/win/MD5.h"
+#else
 #include "braincloud/internal/md5x.h"
+#endif
 #include "braincloud/reason_codes.h"
 #include "braincloud/http_codes.h"
 
@@ -993,6 +997,10 @@ namespace BrainCloud
 				dataString += _secretKey;
 				// get binary md5 digest
 
+#if defined(BC_UWP)
+                MD5 state(dataString);
+                std::string sig = state.hexdigest();
+#else
 				//encode the string in an md5 format
 				const int DIGEST_LENGTH = 16;
 				md5_state_t     state;
@@ -1012,6 +1020,7 @@ namespace BrainCloud
 				// convert to uppercase std::string and add sig to header
 				std::string sig((const char*)buf, DIGEST_LENGTH * 2);
 				std::transform(sig.begin(), sig.end(), sig.begin(), toupper);
+#endif
 				request->addHeader(URLRequestHeader("X-SIG", sig));
 				request->addHeader(URLRequestHeader("X-APPID", _appId));
 			}

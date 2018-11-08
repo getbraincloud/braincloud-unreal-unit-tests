@@ -3,7 +3,6 @@
 
 #include <functional>
 
-#include <atlbase.h>
 #include <msxml6.h>
 
 namespace BrainCloud

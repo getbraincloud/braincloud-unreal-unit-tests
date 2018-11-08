@@ -6,8 +6,6 @@
 #include <atomic>
 #include <mutex>
 
-#include <atlbase.h>
-#include <comutil.h>
 #include <msxml6.h>
 
 namespace BrainCloud
