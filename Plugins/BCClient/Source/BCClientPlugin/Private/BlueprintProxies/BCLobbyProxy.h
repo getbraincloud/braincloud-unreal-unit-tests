@@ -125,6 +125,7 @@ class UBCLobbyProxy : public UBCBlueprintCallProxyBase
     * @param in_lobbyID the lobbyId
     * @param in_signalJson customizeable json string attached to signal to lobby members
     */
+    UFUNCTION(BlueprintCallable, meta = (BlueprintInternalUseOnly = "true"), Category = "BrainCloud|Lobby")
     static UBCLobbyProxy *SendSignal(UBrainCloudWrapper *brainCloud, const FString &in_lobbyID, const FString &in_signalJson);
 
     /**
@@ -135,6 +136,7 @@ class UBCLobbyProxy : public UBCBlueprintCallProxyBase
     *
     * @param in_lobbyID the lobbyId
     */
+    UFUNCTION(BlueprintCallable, meta = (BlueprintInternalUseOnly = "true"), Category = "BrainCloud|Lobby")
     static UBCLobbyProxy *LeaveLobby(UBrainCloudWrapper *brainCloud, const FString &in_lobbyID);
 
     /**
@@ -146,5 +148,19 @@ class UBCLobbyProxy : public UBCBlueprintCallProxyBase
     * @param in_lobbyID the lobbyId
     * @param in_connectionId connectionId (cxId) of member to remove
     */
+    UFUNCTION(BlueprintCallable, meta = (BlueprintInternalUseOnly = "true"), Category = "BrainCloud|Lobby")
     static UBCLobbyProxy *RemoveMember(UBrainCloudWrapper *brainCloud, const FString &in_lobbyID, const FString &in_connectionId);
+
+    /**
+    *  Valid only for the owner of the group -- edits the overally lobby config data
+    * 
+    * Service Name - lobby
+	* Service Operation - UPDATE_SETTINGS
+    *
+    * @param in_lobbyID the lobbyId
+    * @param in_configJson json string of the lobby config
+	* @param in_callback Method to be invoked when the server response is received.
+    */
+    UFUNCTION(BlueprintCallable, meta = (BlueprintInternalUseOnly = "true"), Category = "BrainCloud|Lobby")
+    static UBCLobbyProxy *UpdateLobbyConfig(UBrainCloudWrapper *brainCloud, const FString &in_lobbyID, const FString &in_configJson);
 };
