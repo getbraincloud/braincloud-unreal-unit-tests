@@ -128,7 +128,7 @@ void BrainCloudChat::updateChatMessage(const FString &in_channelId, const FStrin
     message->SetNumberField(OperationParam::ChatVersion.getValue(), in_version);
     message->SetObjectField(OperationParam::ChatContent.getValue(), content);
 
-    ServerCall * sc = new ServerCall(ServiceName::Chat, ServiceOperation::PostChatMessageSimple, message, in_callback);
+    ServerCall * sc = new ServerCall(ServiceName::Chat, ServiceOperation::UpdateChatMessage, message, in_callback);
     _client->sendRequest(sc);
 }
 
