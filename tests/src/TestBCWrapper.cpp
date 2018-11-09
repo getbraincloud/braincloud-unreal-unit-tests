@@ -83,7 +83,7 @@ TEST_F(TestBCWrapper, AuthenticateUniversal)
     Logout();
 }
 
-//Singleton usage is disabled
+//Singleton usage is disabled DEPRECATED
 TEST_F(TestBCWrapper, DISABLED_VerifyAlwaysAllowProfileFalse)
 {
     m_bcWrapper->initialize(m_serverUrl.c_str(), m_secret.c_str(), m_appId.c_str(), m_version.c_str(), "wrapper", "unittest");
@@ -130,7 +130,7 @@ TEST_F(TestBCWrapper, Reconnect)
 	Logout();
 }
 
-//Singleton usage is disabled
+//Singleton usage is disabled DEPRECATED
 TEST_F(TestBCWrapper, DISABLED_Reconnect)
 {
 	m_bcWrapper->initialize(m_serverUrl.c_str(), m_secret.c_str(), m_appId.c_str(), m_version.c_str(), "wrapper", "unittest");
