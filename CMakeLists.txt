@@ -338,6 +338,7 @@ add_library(brainCloud STATIC
 if (UWP)
     set_source_files_properties(
         "src/win/WindowsSaveDataHelper.cpp"
+        "src/win/UWPWebSocket.cpp"
         PROPERTIES COMPILE_FLAGS "/ZW")
 endif()
 
