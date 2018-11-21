@@ -1,6 +1,5 @@
 #include "TestBCWrapper.h"
 #include "braincloud/BrainCloudWrapper.h"
-//using namespace std;
 
 // These tests are normally commented out for apple as the wrapper
 // manipulates the keychain which asks the user for confirmation.
@@ -161,14 +160,14 @@ TEST_F(TestBCWrapper, SmartSwitchAnonToUniversal)
 	uid.append("_wrapper");
 
 	/*
-	string anonIdtest =  "\n STORED ID: " + m_bcWrapper->getStoredAnonymousId() + "\n";
-	cout<< anonIdtest;
+	std::string anonIdtest =  "\n STORED ID: " + m_bcWrapper->getStoredAnonymousId() + "\n";
+	std::cout<< anonIdtest;
 
 	//after testing and test cases it's noticeable that this fucntion does not work for linux. 
 	m_bcWrapper->setStoredAnonymousId(m_bcWrapper->client->getAuthenticationService()->generateAnonymousId().c_str());
 	
-	string anonIdtest1 =  "\n STORED ID: " + m_bcWrapper->getStoredAnonymousId() + "\n";
-	cout<< anonIdtest1;
+	std::string anonIdtest1 =  "\n STORED ID: " + m_bcWrapper->getStoredAnonymousId() + "\n";
+	std::cout<< anonIdtest1;
 	*/
 	//CONFIRMED : setStoredAnonymousId uses a pure virtual method save data helper, which is only implemented for Windows. Due to this it will not work on linux. 
 
@@ -179,9 +178,6 @@ TEST_F(TestBCWrapper, SmartSwitchAnonToUniversal)
 
 	m_bcWrapper->authenticateAnonymous(&tr);
 	tr.run(m_bc);
-	
-	string anonIdtest2 =  "\n STORED ID: " + m_bcWrapper->getStoredAnonymousId() + "\n";
-	cout<< anonIdtest2;
 
 	std::string profileId = m_bcWrapper->getStoredProfileId();
 
@@ -189,9 +185,6 @@ TEST_F(TestBCWrapper, SmartSwitchAnonToUniversal)
 	tr.run(m_bc);
 
 	EXPECT_TRUE(profileId.compare(m_bcWrapper->getStoredAnonymousId()) != 0);
-
-	string anonIdtest3 =  "\n STORED ID: " + m_bcWrapper->getStoredAnonymousId() + "\n";
-	cout<< anonIdtest3;
 
 	#elif defined (UNIX)
 
