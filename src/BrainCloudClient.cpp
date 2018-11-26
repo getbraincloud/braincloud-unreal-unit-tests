@@ -76,9 +76,7 @@ namespace BrainCloud
 
     BrainCloudClient::~BrainCloudClient()
     {
-        // [dsl]: Should be deleted in reverse order...
-        delete _brainCloudComms;
-        delete _rttComms;
+        delete _rttRegistrationService;
         delete _tournamentService;
         delete _timeService;
         delete _steamService;
@@ -88,14 +86,19 @@ namespace BrainCloud
         delete _redemptionCodeService;
         delete _pushNotificationService;
         delete _profanityService;
+        delete _appStoreService;
+        delete _virtualCurrencyService;
         delete _productService;
+        delete _presenceService;
         delete _playerStatisticsEventService;
         delete _playerStatisticsService;
         delete _playerStateService;
         delete _playbackStreamService;
         delete _oneWayMatchService;
+        delete _messagingService;
         delete _matchmakingService;
         delete _mailService;
+        delete _lobbyService;
         delete _identityService;
         delete _groupService;
         delete _globalStatisticsService;
@@ -107,9 +110,11 @@ namespace BrainCloud
         delete _eventService;
         delete _entityService;
         delete _dataStreamService;
+        delete _chatService;
         delete _authenticationService;
         delete _asyncMatchService;
-        delete _rttRegistrationService;
+        delete _rttComms;
+        delete _brainCloudComms;
     }
 
     ////////////////////////////////////////////////////
