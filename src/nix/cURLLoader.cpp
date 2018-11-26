@@ -508,7 +508,7 @@ namespace BrainCloud
         else
         {
             URLResponse response;
-            response.setStatusCode(503);
+            response.setStatusCode(HTTP_CLIENT_NETWORK_ERROR);
             response.setReasonPhrase("cURL Out of Memory");
             //loader->getClient()->handleError(response);
         }
