@@ -33,29 +33,6 @@ TEST_F(TestBCWrapper, AuthenticateAnonymous)
     Logout();
 }
 
-//Singleton usage is disabled DEPRECATED
-TEST_F(TestBCWrapper, DISABLED_AuthenticateAnonymous)
-{
-    
-    TestResult tr;
-	m_bcWrapper->authenticateAnonymous(&tr);
-    tr.run(m_bc);
-    
-    std::string anonId = m_bcWrapper->getStoredAnonymousId();
-    std::string profileId = m_bcWrapper->getStoredProfileId();
-    
-    Logout();
-	m_bcWrapper->getBC()->getAuthenticationService()->clearSavedProfileId();
-    
-	m_bcWrapper->authenticateAnonymous(&tr);
-    tr.run(m_bc);
-    
-    EXPECT_TRUE(anonId.compare(m_bcWrapper->getStoredAnonymousId()) == 0);
-    EXPECT_TRUE(profileId.compare(m_bcWrapper->getStoredProfileId()) == 0);
-    
-    Logout();
-}
-
 TEST_F(TestBCWrapper, AuthenticateEmailPassword)
 {
 	m_bcWrapper->initialize(m_serverUrl.c_str(), m_secret.c_str(), m_appId.c_str(), m_version.c_str(), "wrapper", "unittest");
@@ -83,8 +60,7 @@ TEST_F(TestBCWrapper, AuthenticateUniversal)
     Logout();
 }
 
-//Singleton usage is disabled DEPRECATED
-TEST_F(TestBCWrapper, DISABLED_VerifyAlwaysAllowProfileFalse)
+TEST_F(TestBCWrapper, VerifyAlwaysAllowProfileFalse)
 {
     m_bcWrapper->initialize(m_serverUrl.c_str(), m_secret.c_str(), m_appId.c_str(), m_version.c_str(), "wrapper", "unittest");
     m_bcWrapper->setAlwaysAllowProfileSwitch(false);
@@ -102,11 +78,11 @@ TEST_F(TestBCWrapper, DISABLED_VerifyAlwaysAllowProfileFalse)
     std::string uid = GetUser(UserA)->m_id;
     uid.append("_wrapperVerifyAlwaysAllowProfileFalse");
 
-	m_bcWrapper->getBC()->getIdentityService()->attachUniversalIdentity(uid.c_str(), GetUser(UserA)->m_password, &tr);
+	m_bcWrapper->getIdentityService()->attachUniversalIdentity(uid.c_str(), GetUser(UserA)->m_password, &tr);
     tr.run(m_bc);
 
     Logout();
-	m_bcWrapper->getBC()->getAuthenticationService()->clearSavedProfileId();
+	m_bcWrapper->getBCClient()->getAuthenticationService()->clearSavedProfileId();
 
     m_bcWrapper->authenticateUniversal(uid.c_str(), GetUser(UserA)->m_password, true, &tr);
     tr.run(m_bc);
@@ -123,27 +99,6 @@ TEST_F(TestBCWrapper, Reconnect)
 	TestResult tr;
 
 	m_bcWrapper->initialize(m_serverUrl.c_str(), m_secret.c_str(), m_appId.c_str(), m_version.c_str(), "wrapper", "unittest");
-
-	m_bcWrapper->reconnect(&tr);
-	tr.run(m_bc);
-
-	Logout();
-}
-
-//Singleton usage is disabled DEPRECATED
-TEST_F(TestBCWrapper, DISABLED_Reconnect)
-{
-	m_bcWrapper->initialize(m_serverUrl.c_str(), m_secret.c_str(), m_appId.c_str(), m_version.c_str(), "wrapper", "unittest");
-
-	std::string email = GetUser(UserA)->m_email;
-	email.append("_wrapper");
-
-	TestResult tr;
-	m_bcWrapper->authenticateEmailPassword(email.c_str(), GetUser(UserA)->m_password, true, &tr);
-	tr.run(m_bc);
-
-	m_bcWrapper->getBC()->getPlayerStateService()->logout(&tr);
-	tr.run(m_bc);
 
 	m_bcWrapper->reconnect(&tr);
 	tr.run(m_bc);
