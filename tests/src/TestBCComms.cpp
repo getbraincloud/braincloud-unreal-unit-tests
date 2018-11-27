@@ -343,30 +343,3 @@ TEST_F(TestBCCommsWithAuth, TimeoutAutoRetry45sec)
 	m_bc->getScriptService()->runScript("TestTimeoutRetry45", "{}", &tr);
 	tr.runExpectFail(m_bc, HTTP_CLIENT_NETWORK_ERROR, CLIENT_NETWORK_ERROR_TIMEOUT);
 }
-
-
-// these are for dev testing not automated build machine stuff...
-/*
-TEST_F(TestBCComms, devBadAuthNoRetry)
-{
-TestResult tr;
-m_bc->initialize("http://localhost:3099", "", "123", "1.0.0", "", "");
-m_bc->getAuthenticationService()->authenticateUniversal("abc", "123", true, &tr);
-tr.runExpectFail(m_bc, -1, -1);
-
-// this should always succeed but helps devs verify that only one auth packet gets sent
-m_bc->resetCommunication();
-}
-
-TEST_F(TestBCComms, devBad503)
-{
-// this test assumes you're running a server that returns 503
-TestResult tr;
-m_bc->initialize("http://207.181.118.113:5432", "", "123", "1.0.0", "", "");
-// don't authenticate as we want retries to happen
-m_bc->getPlayerStateService()->getAttributes(&tr);
-tr.runExpectFail(m_bc, HTTP_CUSTOM, CLIENT_NETWORK_ERROR_TIMEOUT);
-
-m_bc->resetCommunication();
-}
-*/
