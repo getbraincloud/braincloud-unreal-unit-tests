@@ -2,6 +2,7 @@
 #define _XMLHTTPREQUESTCALLBACK_H_
 
 #include <functional>
+#include <mutex>
 
 #include <msxml6.h>
 
@@ -44,10 +45,13 @@ namespace BrainCloud
             /* [in] */ __RPC__in_opt IXMLHTTPRequest2 *pXHR,
             /* [in] */ HRESULT hrError) override;
 
+        void clear();
+
     private:
         LONG _refCount;
         int _httpStatus;
 
+        std::mutex _callbacksMutex;
         std::function<void(const std::string&, int)> _onSuccess;
         std::function<void(int)> _onError;
     };

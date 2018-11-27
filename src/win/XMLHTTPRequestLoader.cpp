@@ -370,6 +370,7 @@ namespace BrainCloud
             pLoader->_threadRunning = false;
 
             // Abort the request in a thread
+            pCallback->clear();
             pLoader->_requestMutex.lock();
             std::thread requestStopThread([=]
             {

@@ -18,6 +18,14 @@ namespace BrainCloud
 
     XMLHTTPRequestCallback::~XMLHTTPRequestCallback()
     {
+        std::unique_lock<std::mutex> lock(_callbacksMutex);
+    }
+
+    void XMLHTTPRequestCallback::clear()
+    {
+        std::unique_lock<std::mutex> lock(_callbacksMutex);
+        _onSuccess = nullptr;
+        _onError = nullptr;
     }
 
     HRESULT STDMETHODCALLTYPE XMLHTTPRequestCallback::QueryInterface(
@@ -104,6 +112,7 @@ namespace BrainCloud
             resultMessage.append(buffer, byteRead);
         }
 
+        std::unique_lock<std::mutex> lock(_callbacksMutex);
         if (_onSuccess)
         {
             _onSuccess(resultMessage, _httpStatus);
@@ -115,6 +124,7 @@ namespace BrainCloud
         /* [in] */ __RPC__in_opt IXMLHTTPRequest2 *pXHR,
         /* [in] */ HRESULT hrError)
     {
+        std::unique_lock<std::mutex> lock(_callbacksMutex);
         if (_onError)
         {
             _onError(_httpStatus);
