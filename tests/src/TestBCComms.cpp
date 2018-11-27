@@ -36,7 +36,7 @@ TEST_F(TestBCComms, BadEndPoint)
 }
 
 //test forever throws a bad-sig error 40301, sends a packet as -1. and expects 0
-TEST_F(TestBCComms, DISABLED_BadSecret)
+TEST_F(TestBCComms, BadSecret)
 {
 	TestResult tr;
 	m_bc->initialize("https://internal.braincloudservers.com/dispatcherv2", "fail-unit-test", "10170", "1.0.0");

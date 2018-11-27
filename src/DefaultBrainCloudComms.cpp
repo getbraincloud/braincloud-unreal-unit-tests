@@ -343,6 +343,30 @@ namespace BrainCloud
 			{
 				std::cout << "#BCC Dropping packet id " << receivedPacketId << " as we're expecting " << _expectedPacketId << std::endl;
 			}
+
+            _mutex.lock();
+            for (unsigned int i = 0; i < _inProgress.size(); ++i)
+            {
+                ServerCall * serverCall = _inProgress[i];
+
+                IServerCallback* callback = serverCall->getCallback();
+                if (callback)
+                {
+                    // set up the callback event
+                    BrainCloudCallbackEvent* event = new BrainCloudCallbackEvent();
+                    event->callback = callback;
+                    event->m_service = serverCall->getService();
+                    event->m_operation = serverCall->getOperation();
+                    event->m_error = true;
+                    event->m_statusCode = messages[i]["status"].asInt();
+                    event->m_reasonCode = messages[i]["reason_code"].asInt();
+                    event->m_data = messages[i]["status_message"].asString();
+
+                    _apiCallbackQueue.push(event);
+                }
+            }
+            _mutex.unlock();
+
 			return;
 		}
 		_expectedPacketId = NO_PACKET_EXPECTED;
