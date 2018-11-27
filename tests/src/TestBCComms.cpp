@@ -327,7 +327,7 @@ void TestBCComms::sleepForMillisAndRunCallbacks(int millis)
 }
 
 //runScript doesn't get a response from the server, and auto fails its tests. 
-TEST_F(TestBCCommsWithAuth, DISABLED_TimeoutAutoRetry30sec)
+TEST_F(TestBCCommsWithAuth, TimeoutAutoRetry30sec)
 {
 	TestResult tr;
 	
@@ -336,7 +336,7 @@ TEST_F(TestBCCommsWithAuth, DISABLED_TimeoutAutoRetry30sec)
 }
 
 //runScript doesn't get a response from the server, and auto fails its test
-TEST_F(TestBCCommsWithAuth, DISABLED_TimeoutAutoRetry45sec)
+TEST_F(TestBCCommsWithAuth, TimeoutAutoRetry45sec)
 {
 	TestResult tr;
 
