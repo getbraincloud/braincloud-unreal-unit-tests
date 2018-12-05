@@ -415,13 +415,13 @@ const OperationParam OperationParam::GlobalChannelType = OperationParam("gl");
 const OperationParam OperationParam::GroupChannelType = OperationParam("gr");
 
 // messaging
-const OperationParam OperationParam::MessagingMessageBox = OperationParam("msgBox");
+const OperationParam OperationParam::MessagingMessageBox = OperationParam("msgbox");
 const OperationParam OperationParam::MessagingMessageIds = OperationParam("msgIds");
 const OperationParam OperationParam::MessagingContext = OperationParam("context");
 const OperationParam OperationParam::MessagingPageOffset = OperationParam("pageOffset");
 const OperationParam OperationParam::MessagingFromName = OperationParam("fromName");
 const OperationParam OperationParam::MessagingToProfileIds = OperationParam("toProfileIds");
-const OperationParam OperationParam::MessagingContent = OperationParam("content");
+const OperationParam OperationParam::MessagingContent = OperationParam("contentJson");
 const OperationParam OperationParam::MessagingSubject = OperationParam("subject");
 const OperationParam OperationParam::MessagingText = OperationParam("text");
 const OperationParam OperationParam::InboxMessageType = OperationParam("inbox");

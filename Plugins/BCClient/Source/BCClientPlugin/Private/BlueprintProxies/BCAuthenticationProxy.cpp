@@ -90,6 +90,13 @@ UBCAuthenticationProxy* UBCAuthenticationProxy::AuthenticateParse(UBrainCloudWra
     return Proxy;
 }
 
+UBCAuthenticationProxy* UBCAuthenticationProxy::AuthenticateHandoff(UBrainCloudWrapper *brainCloudWrapper, FString handoffId, FString securityToken)
+{
+    UBCAuthenticationProxy* Proxy = NewObject<UBCAuthenticationProxy>();
+	UBCWrapperProxy::GetBrainCloudInstance(brainCloudWrapper)->getClient()->getAuthenticationService()->authenticateHandoff(handoffId, securityToken, Proxy);
+    return Proxy;
+}
+
 UBCAuthenticationProxy* UBCAuthenticationProxy::AuthenticateExternal(UBrainCloudWrapper *brainCloudWrapper, FString userId, FString token, FString externalAuthName, bool forceCreate)
 {
     UBCAuthenticationProxy* Proxy = NewObject<UBCAuthenticationProxy>();
