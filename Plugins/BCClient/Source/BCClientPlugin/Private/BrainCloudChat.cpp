@@ -105,15 +105,9 @@ void BrainCloudChat::postChatMessage(const FString &in_channelId, const FString 
 
 void BrainCloudChat::postChatMessageSimple(const FString &in_channelId, const FString &in_plain, bool in_recordInHistory, IServerCallback *in_callback)
 {
-    // build content
-    TSharedRef<FJsonObject> content = MakeShareable(new FJsonObject());
-    TSharedRef<FJsonObject> emptyRich = MakeShareable(new FJsonObject());
-    content->SetStringField(OperationParam::ChatText.getValue(), in_plain);
-    content->SetObjectField(OperationParam::ChatRich.getValue(), emptyRich);
-        
     TSharedRef<FJsonObject> message = MakeShareable(new FJsonObject());
     message->SetStringField(OperationParam::ChatChannelId.getValue(), in_channelId);
-    message->SetObjectField(OperationParam::ChatContent.getValue(), content);
+    message->SetStringField(OperationParam::ChatText.getValue(), in_plain);
     message->SetBoolField(OperationParam::ChatRecordInHistory.getValue(), in_recordInHistory);
 
     ServerCall * sc = new ServerCall(ServiceName::Chat, ServiceOperation::PostChatMessageSimple, message, in_callback);
@@ -134,7 +128,7 @@ void BrainCloudChat::updateChatMessage(const FString &in_channelId, const FStrin
     message->SetNumberField(OperationParam::ChatVersion.getValue(), in_version);
     message->SetObjectField(OperationParam::ChatContent.getValue(), content);
 
-    ServerCall * sc = new ServerCall(ServiceName::Chat, ServiceOperation::PostChatMessageSimple, message, in_callback);
+    ServerCall * sc = new ServerCall(ServiceName::Chat, ServiceOperation::UpdateChatMessage, message, in_callback);
     _client->sendRequest(sc);
 }
 
