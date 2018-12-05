@@ -94,6 +94,11 @@ void BrainCloudAuthentication::authenticateParse(const FString& userid, const FS
 	authenticate(userid, token, EBCAuthType::Parse, "", forceCreate, callback);
 }
 
+void BrainCloudAuthentication::authenticateHandoff(const FString& handoffId, const FString& securityToken, IServerCallback * callback)
+{
+	authenticate(handoffId, securityToken, EBCAuthType::Handoff, "", false, callback);
+}
+
 void BrainCloudAuthentication::authenticateExternal(const FString& userid, const FString& token, const FString& externalAuthName, bool forceCreate, IServerCallback * callback)
 {
 	authenticate(userid, token, EBCAuthType::External, externalAuthName, forceCreate, callback);
