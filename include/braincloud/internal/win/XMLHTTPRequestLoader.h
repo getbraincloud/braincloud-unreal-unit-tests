@@ -11,8 +11,6 @@
 #include <atomic>
 #include <mutex>
 
-#include <atlbase.h>
-#include <comutil.h>
 #include <msxml6.h>
 
 namespace BrainCloud
@@ -24,12 +22,15 @@ namespace BrainCloud
         virtual ~XMLHTTPRequestLoader();
 
         // Override the pure virtual methods.
-        virtual void    close();
-        virtual void    load(URLRequest const &);
-        virtual void    load(URLRequest const * r) { if (r != NULL) load(*r); }
-        virtual bool    isDone();
+        virtual void close();
+        virtual void load(URLRequest const &);
+        virtual void load(URLRequest const * r) { if (r != NULL) load(*r); }
+        virtual bool isDone();
 
         virtual void setTimeout(int milliseconds) { _timeoutInterval = milliseconds; }
+
+        void onError(int httpCode);
+        void onSuccess(const std::string& response, int httpCode);
 
     protected:
         friend class URLLoader;
@@ -44,7 +45,7 @@ namespace BrainCloud
 
         std::atomic<bool> _threadRunning;
         std::mutex _requestMutex;
-        CComPtr<IXMLHTTPRequest> _request;
+        IXMLHTTPRequest2* _pRequest;
     };
 }
 

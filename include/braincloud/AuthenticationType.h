@@ -25,6 +25,7 @@ namespace BrainCloud
         static const AuthenticationType & Google;
         static const AuthenticationType & Twitter;
         static const AuthenticationType & Parse;
+        static const AuthenticationType & Handoff;
         static const AuthenticationType & External;
         static const AuthenticationType & Unknown;
 

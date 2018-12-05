@@ -76,10 +76,6 @@ TEST_F(TestBCRTTComms, RequestClientConnection)
 TEST_F(TestBCRTTComms, EnableDisableRTTWithTCP)
 {
     TestResult tr;
-
-    m_bc->enableRTT(&tr, false);
-    tr.run(m_bc);
-
     // disable, then re-enable. Should still succeed
     m_bc->disableRTT();
     m_bc->enableRTT(&tr, false);
@@ -89,10 +85,6 @@ TEST_F(TestBCRTTComms, EnableDisableRTTWithTCP)
 TEST_F(TestBCRTTComms, EnableDisableRTTWithWS)
 {
     TestResult tr;
-
-    m_bc->enableRTT(&tr, true);
-    tr.run(m_bc);
-
     // disable, then re-enable. Should still succeed
     m_bc->disableRTT();
     m_bc->enableRTT(&tr, true);

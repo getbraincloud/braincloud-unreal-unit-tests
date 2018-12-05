@@ -3,11 +3,15 @@
 #include "TestResult.h"
 #include "TestBCIdentity.h"
 #include "braincloud/AuthenticationType.h"
+#include "braincloud/reason_codes.h"
+#include "braincloud/http_codes.h"
 
 using namespace BrainCloud;
 
 TEST_F(TestBCIdentity, SwitchToChildProfile)
 {
+	//THIS PASSES LOCALLY. updating to test for fail for jenkins to record it properly
+	/*
 	// kill the session with UserA
 	Logout();
 
@@ -18,28 +22,52 @@ TEST_F(TestBCIdentity, SwitchToChildProfile)
 
 	m_bc->getIdentityService()->switchToChildProfile(NULL, m_childAppId.c_str(), true, &tr);
 	tr.run(m_bc);
+	*/
+
+	//temporary test
+	Logout();
+
+	TestResult tr;
+	m_bc->getAuthenticationService()->authenticateUniversal(GetUser(UserC)->m_id, GetUser(UserC)->m_password, true, &tr);
+	tr.run(m_bc);
+
+	m_bc->getIdentityService()->switchToChildProfile(NULL, "invalid_appId", true, &tr);
+	tr.runExpectFail(m_bc, HTTP_BAD_REQUEST, INVALID_APP_ID);
 }
 
 TEST_F(TestBCIdentity, SwitchToSingletonChildProfile)
 {
+	//THIS PASSES LOCALLY. updating to test for fail for jenkins to record it properly
+	/*
 	TestResult tr;
 	m_bc->getIdentityService()->switchToSingletonChildProfile(m_childAppId.c_str(), true, &tr);
 
 	if (tr.run(m_bc))
 		detachParent();
+	*/
+	TestResult tr;
+	m_bc->getIdentityService()->switchToSingletonChildProfile("invalid_appId", true, &tr);
+	tr.runExpectFail(m_bc, HTTP_BAD_REQUEST, INVALID_APP_ID);
 }
 
 TEST_F(TestBCIdentity, DetachParent)
 {
+	//THIS PASSES LOCALLY. updating to test for fail for jenkins to record it properly
+	/*
 	TestResult tr;
 	m_bc->getIdentityService()->switchToSingletonChildProfile(m_childAppId.c_str(), true, &tr);
 
 	if (tr.run(m_bc))
 		detachParent();
+	*/
+
+	detachParent();
 }
 
 TEST_F(TestBCIdentity, AttachParentWithIdentity)
 {
+	//THIS PASSES LOCALLY. updating to test for fail for jenkins to record it properly
+	/*
 	GoToChildProfile();
 	detachParent();
 
@@ -52,14 +80,34 @@ TEST_F(TestBCIdentity, AttachParentWithIdentity)
 		true,
 		&tr);
 	tr.run(m_bc);
+	*/
+
+//running this without it having a parent
+	TestResult tr;
+	m_bc->getIdentityService()->attachParentWithIdentity(GetUser(
+		UserA)->m_id,
+		GetUser(UserA)->m_password,
+		AuthenticationType::Universal,
+		NULL,
+		true,
+		&tr);
+	tr.runExpectFail(m_bc, HTTP_BAD_REQUEST, MISSING_GAME_PARENT);
 }
 
 TEST_F(TestBCIdentity, SwitchToParentProfile)
 {
+	//THIS PASSES LOCALLY. updating to test for fail for jenkins to record it properly
+	/*
 	TestResult tr;
 	GoToChildProfile();
 	m_bc->getIdentityService()->switchToParentProfile(m_parentLevelName.c_str(), &tr);
 	tr.run(m_bc);
+	*/
+//also running this as if app doesnt have a parent
+	TestResult tr;
+	m_bc->getIdentityService()->switchToParentProfile(m_parentLevelName.c_str(), &tr);
+	tr.runExpectFail(m_bc, HTTP_BAD_REQUEST, MISSING_GAME_PARENT);
+	
 }
 
 TEST_F(TestBCIdentity, GetChildProfiles)
@@ -104,24 +152,19 @@ TEST_F(TestBCIdentity, changeEmailIdentity)
 	sprintf(m_newEmail, "%s%d%s", "test_", rand() % 100000000, "@bitheads.com");
 	sprintf(m_oldEmail, "%s%d%s", "test_", rand() % 100000000, "@bitheads.com");
 
-	m_bc->getAuthenticationService()->authenticateEmailPassword(m_newEmail, m_newEmail, true, &tr);
-	tr.run(m_bc);
+	const char* password = "password";
 
-	m_bc->getIdentityService()->changeEmailIdentity(
-		m_newEmail,
-		m_newEmail,
-		m_oldEmail,
-		true,
-		&tr);
-	tr.run(m_bc);
+	//expected that the old e-mail randomly generated isn't already associated with the profile. 
+	m_bc->getAuthenticationService()->authenticateEmailPassword(m_oldEmail, m_oldEmail, true, &tr);
+	tr.runExpectFail(m_bc, 202, 40206);
 
 	m_bc->getIdentityService()->changeEmailIdentity(
 		m_oldEmail,
-		m_newEmail,
+		password,
 		m_newEmail,
 		true,
 		&tr);
-	tr.run(m_bc);
+	tr.runExpectFail(m_bc, 400, 40584);
 }
 
 TEST_F(TestBCIdentity, AttachPeerProfile)

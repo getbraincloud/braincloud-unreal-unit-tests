@@ -22,7 +22,8 @@ namespace BrainCloud
             "Singleton usage is disabled. If called by mistake, use your own variable that holds an instance of the bcWrapper/bcClient.";
 
     BrainCloudClient * BrainCloudClient::_instance = NULL;
-    std::string BrainCloudClient::s_brainCloudClientVersion = "3.9.1";
+    std::string BrainCloudClient::s_brainCloudClientVersion = "3.10.0";
+    const char* BC_SERVER_URL = "https://sharedprod.braincloudservers.com/dispatcherv2"; 
 
     /**
      * Constructor
@@ -75,9 +76,7 @@ namespace BrainCloud
 
     BrainCloudClient::~BrainCloudClient()
     {
-        // [dsl]: Should be deleted in reverse order...
-        delete _brainCloudComms;
-        delete _rttComms;
+        delete _rttRegistrationService;
         delete _tournamentService;
         delete _timeService;
         delete _steamService;
@@ -87,14 +86,19 @@ namespace BrainCloud
         delete _redemptionCodeService;
         delete _pushNotificationService;
         delete _profanityService;
+        delete _appStoreService;
+        delete _virtualCurrencyService;
         delete _productService;
+        delete _presenceService;
         delete _playerStatisticsEventService;
         delete _playerStatisticsService;
         delete _playerStateService;
         delete _playbackStreamService;
         delete _oneWayMatchService;
+        delete _messagingService;
         delete _matchmakingService;
         delete _mailService;
+        delete _lobbyService;
         delete _identityService;
         delete _groupService;
         delete _globalStatisticsService;
@@ -106,9 +110,11 @@ namespace BrainCloud
         delete _eventService;
         delete _entityService;
         delete _dataStreamService;
+        delete _chatService;
         delete _authenticationService;
         delete _asyncMatchService;
-        delete _rttRegistrationService;
+        delete _rttComms;
+        delete _brainCloudComms;
     }
 
     ////////////////////////////////////////////////////
@@ -185,6 +191,11 @@ namespace BrainCloud
         _appVersion = in_appVersion;
     }
 
+    void BrainCloudClient::initialize(const char * in_secretKey, const char * in_appId, const char * in_appVersion)
+    {
+        initialize(BC_SERVER_URL, in_secretKey, in_appId, in_appVersion);
+    }
+
     void BrainCloudClient::initializeWithApps(const char * in_serverURL, const char * in_defaultAppId, const std::map<std::string, std::string>& in_secretMap, const char * in_appVersion)
     {
         std::string error = "";
@@ -208,6 +219,11 @@ namespace BrainCloud
 
         _releasePlatform = Device::getPlatformName();
         _appVersion = in_appVersion;
+    }
+
+    void BrainCloudClient::initializeWithApps(const char* in_defaultAppId, const std::map<std::string, std::string>& in_secretMap, const char* in_appVersion)
+    {
+        initializeWithApps(BC_SERVER_URL, in_defaultAppId, in_secretMap, in_appVersion);
     }
 
     void BrainCloudClient::initializeIdentity(const char * in_profileId, const char * in_anonymousId)

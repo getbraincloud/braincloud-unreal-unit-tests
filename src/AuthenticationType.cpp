@@ -11,6 +11,7 @@ namespace BrainCloud
     const AuthenticationType & AuthenticationType::Google = AuthenticationType("Google");
     const AuthenticationType & AuthenticationType::Twitter = AuthenticationType("Twitter");
     const AuthenticationType & AuthenticationType::Parse = AuthenticationType("Parse");
+    const AuthenticationType & AuthenticationType::Handoff = AuthenticationType("Handoff");
     const AuthenticationType & AuthenticationType::External = AuthenticationType("External");
     const AuthenticationType & AuthenticationType::Unknown = AuthenticationType("Unknown");
 
@@ -62,6 +63,10 @@ namespace BrainCloud
         if (in_AuthenticationType == Parse)
         {
             return AuthenticationType::Parse;
+        }
+        if (in_AuthenticationType == Handoff)
+        {
+            return AuthenticationType::Handoff;
         }
         if (in_AuthenticationType == External)
         {

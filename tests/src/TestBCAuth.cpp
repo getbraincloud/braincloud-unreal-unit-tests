@@ -1,4 +1,6 @@
 #include "TestBCAuth.h"
+#include "braincloud/http_codes.h"
+#include "braincloud/reason_codes.h"
 
 TEST_F(TestBCAuth, AaaRunFirst)
 {
@@ -36,7 +38,15 @@ TEST_F(TestBCAuth, AuthenticateParse)
 {
     TestResult tr;
     m_bc->getAuthenticationService()->authenticateParse("VVVbiejp0k", "r:b1oj5nchWRnQnWlJbsTQjObTT", true, &tr);
-    tr.runExpectFail(m_bc, 403, 40307);
+    tr.runExpectFail(m_bc, HTTP_FORBIDDEN, TOKEN_DOES_NOT_MATCH_USER);
+    Logout();
+}
+
+TEST_F(TestBCAuth, AuthenticateHandoff)
+{
+    TestResult tr;
+    m_bc->getAuthenticationService()->authenticateHandoff("invalid_handoffId", "invalid_securityToken", &tr);
+    tr.runExpectFail(m_bc, HTTP_FORBIDDEN, TOKEN_DOES_NOT_MATCH_USER);
     Logout();
 }
 

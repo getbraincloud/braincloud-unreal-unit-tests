@@ -90,11 +90,10 @@ namespace BrainCloud
 		 * Service Operation - SendMessage
 		 *
 		 * @param toProfileIds
-		 * @param messageText
-		 * @param messageSubject
+		 * @param contentJson the message you are sending
 		 * @param callback The method to be invoked when the server response is received
 		 */
-		void sendMessage(const std::vector<std::string>& in_toProfileIds, const std::string& in_messageText, const std::string& in_messageSubject, IServerCallback* in_callback = NULL);
+		void sendMessage(const std::vector<std::string>& in_toProfileIds, std::string in_contentJson, IServerCallback* in_callback = NULL);
 
 		/**
 		 * Sends a simple message to specified list of users.

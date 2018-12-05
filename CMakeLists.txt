@@ -1,4 +1,13 @@
-cmake_minimum_required(VERSION 3.0)
+if (CMAKE_SYSTEM_NAME STREQUAL WindowsStore)
+    set(UWP 1)
+endif()
+
+if (UWP)
+    # We require 3.4.0 for UWP generation
+    cmake_minimum_required(VERSION 3.4.0)
+else()
+    cmake_minimum_required(VERSION 3.0.0)
+endif()
 
 project(brainCloud)
 
@@ -29,6 +38,17 @@ option(BUILD_TESTS "brainCloud Unit Tests" OFF)
 #=============================================================================
 add_definitions(-DUSE_IMMEDIATE_RETRY)
 add_definitions(-DGAMECLIENT_DEBUGLEVEL=1)
+if (UWP)
+    add_definitions(-DBC_UWP)
+    add_definitions(-D_CRT_SECURE_NO_WARNINGS) # sprintf instead of sprintf_s
+    if (BUILD_TESTS)
+        # add_definitions(-Dgtest_force_shared_crt=ON)
+        option(
+            gtest_force_shared_crt
+            "Use shared (DLL) run-time lib even when Google Test is built as static lib."
+            ON)
+    endif()
+endif()
 
 # On VS2013+, lets not use CURL but straight Windows' IXMLHttpRequest2, 
 # unless specified otherwise
@@ -44,10 +64,10 @@ if (NOT USE_CPPREST AND NOT VS2013_OR_HIGHER AND NOT APPLE)
     set(USE_PTHREAD 1)
 endif()
 
-# On non-windows platform, lets use libwebsockets
-# if (NOT WIN32) # Until we implement a windows specific solution
+# lets use libwebsockets by default
+if (NOT UWP)
     set(USE_LIBWEBSOCKETS 1)
-# endif()
+endif()
 
 #=============================================================================
 # Compiler flags
@@ -55,11 +75,6 @@ endif()
 # We want to use C++11 flag on the compiler for std::thread
 if (NOT WIN32 OR VS2013_OR_HIGHER)
     set(CMAKE_CXX_STANDARD 11)
-endif()
-
-# Multi core compilation in VS
-if (MSVC)
-    SET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS}" "/MP")
 endif()
 
 #=============================================================================
@@ -101,12 +116,12 @@ elseif (USE_CURL)
 elseif (VS2013_OR_HIGHER)
     list(APPEND OS_SPECIFIC_INCS
         "include/braincloud/internal/DefaultBrainCloudComms.h"
-        "include/braincloud/internal/win/XMLHTTPEventSink.h"
+        "include/braincloud/internal/win/XMLHTTPRequestCallback.h"
         "include/braincloud/internal/win/XMLHTTPRequestFileUploader.h"
         "include/braincloud/internal/win/XMLHTTPRequestLoader.h")
     list(APPEND OS_SPECIFIC_SRCS
         "src/DefaultBrainCloudComms.cpp"
-        "src/win/XMLHTTPEventSink.cpp"
+        "src/win/XMLHTTPRequestCallback.cpp"
         "src/win/XMLHTTPRequestFileUploader.cpp"
         "src/win/XMLHTTPRequestLoader.cpp")
 else()
@@ -146,6 +161,14 @@ elseif (WIN32)
         "src/win/WindowsDevice.cpp"
         "src/win/WindowsGUID.cpp"
         "src/win/WindowsSaveDataHelper.cpp")
+    if (UWP)
+        list(APPEND OS_SPECIFIC_INCS
+            "include/braincloud/internal/win/UWPWebSocket.h"
+            "include/braincloud/internal/win/MD5.h")
+        list(APPEND OS_SPECIFIC_SRCS
+            "src/win/UWPWebSocket.cpp"
+            "src/win/MD5.cpp")
+    endif()
 elseif (LINUX)
     list(APPEND OS_SPECIFIC_SRCS
         "include/braincloud/internal/DefaultSaveDataHelper.h"
@@ -159,6 +182,10 @@ else()
         "src/DefaultGUID.cpp"
         "src/DefaultSaveDataHelper.cpp"
         "src/DefaultTCPSocket.cpp")
+endif()
+
+if (NOT UWP)
+    list(APPEND OS_SPECIFIC_SRCS "src/md5x.c") # UWP doesn't like c files
 endif()
 
 include_directories("${BC_DIR}/include")
@@ -301,12 +328,19 @@ add_library(brainCloud STATIC
     src/URLRequestHeader.cpp
     src/URLRequestMethod.cpp
     src/URLResponse.cpp
-    src/md5x.c
 
     ${OS_SPECIFIC_INCS}
     ${OS_SPECIFIC_SRCS}
     ${JSONCPP_FILES}
 )
+
+# Set files to be "consume windows runtime exceptions" to build them with CX
+if (UWP)
+    set_source_files_properties(
+        "src/win/WindowsSaveDataHelper.cpp"
+        "src/win/UWPWebSocket.cpp"
+        PROPERTIES COMPILE_FLAGS "/ZW")
+endif()
 
 #=============================================================================
 # Libraries
@@ -364,7 +398,6 @@ elseif (WIN32)
             find_package(Socket)
             list(APPEND libs
                 msxml6
-                comsuppwd
                 ${Socket_LIBRARIES})
         else()
             include_directories(
@@ -427,3 +460,15 @@ endif()
 # Setup includes and linked libraries
 target_include_directories(brainCloud PUBLIC "${BC_DIR}/include" ${includes})
 target_link_libraries(brainCloud PUBLIC ${libs})
+
+# Compile flags
+if (WIN32 AND NOT UWP)
+    target_compile_options(brainCloud PRIVATE 
+        /MP     # Multi-core compilation
+    )
+elseif (UWP)
+    target_compile_options(brainCloud PRIVATE
+        /MP     # Multi-core compilation
+        /wd4996 # DEPRECATED throws error without this
+    )
+endif()

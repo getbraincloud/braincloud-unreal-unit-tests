@@ -93,6 +93,11 @@ namespace BrainCloud {
         authenticate(in_userid, in_token, AuthenticationType::Parse, NULL, in_forceCreate, in_callback);
     }
 
+    void BrainCloudAuthentication::authenticateHandoff(const char * in_handoffId, const char * in_securityToken, IServerCallback * in_callback)
+    {
+        authenticate(in_handoffId, in_securityToken, AuthenticationType::Parse, NULL, false, in_callback);
+    }
+
     void BrainCloudAuthentication::authenticateExternal(
         const char * in_userid,
         const char * in_token,

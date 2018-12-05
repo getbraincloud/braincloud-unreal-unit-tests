@@ -109,7 +109,6 @@ namespace BrainCloud
 		 */
 		BrainCloudClient();
 
-
 		/**
 		 * Method initializes the BrainCloudClient.
 		 *
@@ -121,6 +120,15 @@ namespace BrainCloud
 		 */
 		void initialize(const char * in_serverURL, const char * in_secretKey, const char * in_appId, const char * in_appVersion);
 
+		/**
+		 * Method initializes the BrainCloudClient. Automatically passes in current serverURL
+		 * as https://sharedprod.braincloudservers.com/dispatcherv2
+		 *  
+		 * @param in_secretKey The secret key for your game
+		 * @param in_appId The app id
+		 * @param in_appVersion The version
+		 */
+		void initialize(const char * in_secretKey, const char * in_appId, const char * in_appVersion);
 
 		/**
 		 * Method initializes the BrainCloudClient with multiple app/secret.
@@ -133,6 +141,17 @@ namespace BrainCloud
 		 * @param in_appVersion The version
 		 */
 		void initializeWithApps(const char * in_serverURL, const char * in_defaultAppId, const std::map<std::string, std::string>& in_secretMap, const char * in_appVersion);
+
+		/**
+		 * Method initializes the BrainCloudClient with multiple app/secret.
+		 * Used when needed to switch between child and parent apps. Automatically passes in 
+		 * current serverURL which is https://sharedprod.braincloudservers.com/dispatcherv2
+		 *
+		 * @param in_defaultAppId The default app id that we start with
+		 * @param in_secretMap A map of <appId, secretKey>
+		 * @param in_appVersion The version
+		 */
+		void initializeWithApps(const char * in_defaultAppId, const std::map<std::string, std::string>& in_secretMap, const char * in_appVersion);
 
 		/**
 		* Initialize - initializes the identity service with the saved
