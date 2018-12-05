@@ -26,7 +26,7 @@ const wchar_t BrainCloudClient::SINGLETON_USE_ERROR_MESSAGE[123] = TEXT("Singlet
 
 BrainCloudClient *BrainCloudClient::_instance = nullptr;
 
-FString BrainCloudClient::s_brainCloudClientVersion = TEXT("3.7.6");
+FString BrainCloudClient::s_brainCloudClientVersion = TEXT("3.10.0");
 
 ////////////////////////////////////////////////////
 // (De)Constructors

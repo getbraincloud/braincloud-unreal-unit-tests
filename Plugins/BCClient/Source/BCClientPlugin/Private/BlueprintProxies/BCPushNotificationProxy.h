@@ -128,14 +128,14 @@ class UBCPushNotificationProxy : public UBCBlueprintCallProxyBase
 	/**
 	* Sends a raw push notification to a target user.
 	*
-	* Param - toProfileId The profileId of the user to receive the notification
+	* Param - toPlayerId The playerId of the user to receive the notification
 	* Param - fcmContent Valid Fcm data content
 	* Param - iosContent Valid ios data content
 	* Param - facebookContent Facebook template string
 	* Param - callback The method to be invoked when the server response is received
 	*/
 	UFUNCTION(BlueprintCallable, meta = (BlueprintInternalUseOnly = "true"), Category = "BrainCloud|Push Notification")
-	static UBCPushNotificationProxy *SendRawPushNotification(UBrainCloudWrapper *brainCloudWrapper, const FString &profileId, const FString &fcmContent, const FString &iosContent, const FString &facebookContent);
+	static UBCPushNotificationProxy *SendRawPushNotification(UBrainCloudWrapper *brainCloudWrapper, const FString &playerId, const FString &fcmContent, const FString &iosContent, const FString &facebookContent);
 
 	/**
 	* Sends a raw push notification to a target list of users.

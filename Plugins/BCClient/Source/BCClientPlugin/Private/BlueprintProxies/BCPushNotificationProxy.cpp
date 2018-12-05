@@ -77,10 +77,10 @@ UBCPushNotificationProxy* UBCPushNotificationProxy::ScheduleRawPushNotificationM
 	return Proxy;
 }
 
-UBCPushNotificationProxy* UBCPushNotificationProxy::SendRawPushNotification(UBrainCloudWrapper *brainCloudWrapper, const FString& profileId, const FString& fcmContent, const FString& iosContent, const FString& facebookContent)
+UBCPushNotificationProxy* UBCPushNotificationProxy::SendRawPushNotification(UBrainCloudWrapper *brainCloudWrapper, const FString& playerId, const FString& fcmContent, const FString& iosContent, const FString& facebookContent)
 {
 	UBCPushNotificationProxy* Proxy = NewObject<UBCPushNotificationProxy>();
-	UBCWrapperProxy::GetBrainCloudInstance(brainCloudWrapper)->getPushNotificationService()->sendRawPushNotification(profileId, fcmContent, iosContent, facebookContent, Proxy);
+	UBCWrapperProxy::GetBrainCloudInstance(brainCloudWrapper)->getPushNotificationService()->sendRawPushNotification(playerId, fcmContent, iosContent, facebookContent, Proxy);
 	return Proxy;
 }
 

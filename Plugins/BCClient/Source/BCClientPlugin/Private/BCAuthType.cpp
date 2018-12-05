@@ -25,6 +25,8 @@ FString BCAuthType::EnumToString(EBCAuthType type)
         return TEXT("Twitter");
     case EBCAuthType::Parse:
         return TEXT("Parse");
+    case EBCAuthType::Handoff:
+        return TEXT("Handoff");
     case EBCAuthType::External:
         return TEXT("External");
     case EBCAuthType::Unknown:

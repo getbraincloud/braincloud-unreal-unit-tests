@@ -36,6 +36,6 @@ void BrainCloudMail::sendAdvancedEmailByAddress(const FString& emailAddress, con
 	message->SetStringField(OperationParam::EmailAddress.getValue(), emailAddress);
 	message->SetObjectField(OperationParam::ServiceParams.getValue(), JsonUtil::jsonStringToValue(jsonServiceParams));
 
-	ServerCall * sc = new ServerCall(ServiceName::Mail, ServiceOperation::SendAdvancedEmail, message, callback);
+	ServerCall * sc = new ServerCall(ServiceName::Mail, ServiceOperation::SendAdvancedEmailByAddress, message, callback);
 	_client->sendRequest(sc);
 }
