@@ -111,6 +111,13 @@ UBCAuthenticationProxy* UBCAuthenticationProxy::ResetEmailPassword(UBrainCloudWr
     return Proxy;
 }
 
+UBCAuthenticationProxy* UBCAuthenticationProxy::ResetEmailPasswordAdvanced(UBrainCloudWrapper *brainCloudWrapper, const FString& email, const FString& serviceParams)
+{
+    UBCAuthenticationProxy* Proxy = NewObject<UBCAuthenticationProxy>();
+	UBCWrapperProxy::GetBrainCloudInstance(brainCloudWrapper)->getClient()->getAuthenticationService()->resetEmailPasswordAdvanced(email, serviceParams, Proxy);
+    return Proxy;
+}
+
 //Getters
 const FString & UBCAuthenticationProxy::GetAnonymousId(UBrainCloudWrapper *brainCloudWrapper)
 {
