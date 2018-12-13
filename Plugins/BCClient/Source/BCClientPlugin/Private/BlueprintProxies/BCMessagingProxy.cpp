@@ -56,10 +56,10 @@ UBCMessagingProxy* UBCMessagingProxy::GetMessagesPageOffset(UBrainCloudWrapper *
 	return Proxy;
 }
 
-UBCMessagingProxy* UBCMessagingProxy::MarkMessagesRead(UBrainCloudWrapper *brainCloud, const FString &in_msgBox, const TArray<FString> &in_msgsIds)
+UBCMessagingProxy* UBCMessagingProxy::MarkMessagesRead(UBrainCloudWrapper *brainCloud, const FString &in_msgBox, const TArray<FString> &in_msgsIds, bool markAsRead)
 {
 	UBCMessagingProxy* Proxy = NewObject<UBCMessagingProxy>();
-	UBCWrapperProxy::GetBrainCloudInstance(brainCloud)->getMessagingService()->markMessagesRead(in_msgBox, in_msgsIds, Proxy);
+	UBCWrapperProxy::GetBrainCloudInstance(brainCloud)->getMessagingService()->markMessagesRead(in_msgBox, in_msgsIds, markAsRead, Proxy);
 	return Proxy;
 }
 

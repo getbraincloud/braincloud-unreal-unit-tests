@@ -15,6 +15,7 @@ const ServiceOperation ServiceOperation::Attach = ServiceOperation(TEXT("ATTACH"
 const ServiceOperation ServiceOperation::Merge = ServiceOperation(TEXT("MERGE"));
 const ServiceOperation ServiceOperation::Detach = ServiceOperation(TEXT("DETACH"));
 const ServiceOperation ServiceOperation::ResetEmailPassword = ServiceOperation(TEXT("RESET_EMAIL_PASSWORD"));
+const ServiceOperation ServiceOperation::ResetEmailPasswordAdvanced = ServiceOperation(TEXT("RESET_EMAIL_PASSWORD_ADVANCED"));
 const ServiceOperation ServiceOperation::SwitchToChildProfile = ServiceOperation(TEXT("SWITCH_TO_CHILD_PROFILE"));
 const ServiceOperation ServiceOperation::SwitchToParentProfile = ServiceOperation(TEXT("SWITCH_TO_PARENT_PROFILE"));
 const ServiceOperation ServiceOperation::GetChildProfiles = ServiceOperation(TEXT("GET_CHILD_PROFILES"));

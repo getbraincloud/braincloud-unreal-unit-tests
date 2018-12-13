@@ -116,6 +116,19 @@ void BrainCloudAuthentication::resetEmailPassword(const FString& email, IServerC
 	brainCloudClientRef->sendRequest(sc);
 }
 
+void BrainCloudAuthentication::resetEmailPasswordAdvanced(const FString& emailAddress, const FString& in_serviceParams, IServerCallback * callback)
+{
+	BrainCloudClient * brainCloudClientRef = _client;
+
+	TSharedRef<FJsonObject> message = MakeShareable(new FJsonObject());
+	message->SetStringField(OperationParam::AuthenticateServiceAuthenticateGameId.getValue(), brainCloudClientRef->getAppId());
+	message->SetStringField(OperationParam::AuthenticateServiceAuthenticateEmailAddress.getValue(), emailAddress);
+	message->SetObjectField(OperationParam::AuthenticateServiceAuthenticateServiceParams.getValue(), JsonUtil::jsonStringToValue(in_serviceParams));
+
+	ServerCall * sc = new ServerCall(ServiceName::AuthenticateV2, ServiceOperation::ResetEmailPasswordAdvanced, message, callback);
+	brainCloudClientRef->sendRequest(sc);
+}
+
 void BrainCloudAuthentication::authenticate(
 	const FString& externalId,
 	const FString& authenticationToken,

@@ -64,10 +64,11 @@ void BrainCloudMessaging::getMessagesPageOffset(const FString &in_context, int32
     _client->sendRequest(sc);
 }
 
-void BrainCloudMessaging::markMessagesRead(const FString &in_msgBox, const TArray<FString> &in_msgsIds, IServerCallback *in_callback)
+void BrainCloudMessaging::markMessagesRead(const FString &in_msgBox, const TArray<FString> &in_msgsIds, bool in_markAsRead, IServerCallback *in_callback)
 {
     TSharedRef<FJsonObject> message = MakeShareable(new FJsonObject());
     message->SetStringField(OperationParam::MessagingMessageBox.getValue(), in_msgBox);
+    message->SetBoolField(OperationParam::MessagingMarkAsRead.getValue(), in_markAsRead);
     message->SetArrayField(OperationParam::MessagingMessageIds.getValue(), JsonUtil::arrayToJsonArray(in_msgsIds));
 
     ServerCall *sc = new ServerCall(ServiceName::Messaging, ServiceOperation::MarkMessagesRead, message, in_callback);

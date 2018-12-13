@@ -44,7 +44,9 @@ class BCCLIENTPLUGIN_API OperationParam
 	static const OperationParam AuthenticateServiceAuthenticateAuthenticationType;
 	static const OperationParam AuthenticateServiceAuthenticateAuthenticationToken;
 	static const OperationParam AuthenticateServiceAuthenticateExternalId;
+	static const OperationParam AuthenticateServiceAuthenticateEmailAddress;
 	static const OperationParam AuthenticateServiceAuthenticateGameId;
+	static const OperationParam AuthenticateServiceAuthenticateServiceParams;
 	static const OperationParam AuthenticateServiceAuthenticateDeviceId;
 	static const OperationParam AuthenticateServiceAuthenticateForceMergeFlag;
 	static const OperationParam AuthenticateServiceAuthenticateReleasePlatform;
@@ -414,6 +416,7 @@ class BCCLIENTPLUGIN_API OperationParam
 	
 	static const OperationParam MessagingMessageBox;
 	static const OperationParam MessagingMessageIds;
+	static const OperationParam MessagingMarkAsRead;
 	static const OperationParam MessagingContext;
 	static const OperationParam MessagingPageOffset;
 	static const OperationParam MessagingFromName;
