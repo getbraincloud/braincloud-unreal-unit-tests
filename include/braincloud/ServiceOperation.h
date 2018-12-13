@@ -14,6 +14,7 @@ namespace BrainCloud {
 		static const ServiceOperation Merge;
 		static const ServiceOperation Detach;
 		static const ServiceOperation ResetEmailPassword;
+		static const ServiceOperation ResetEmailPasswordAdvanced;
 		static const ServiceOperation SwitchToChildProfile;
 		static const ServiceOperation SwitchToParentProfile;
 		static const ServiceOperation GetChildProfiles;

@@ -9,6 +9,7 @@ namespace BrainCloud
 	const ServiceOperation ServiceOperation::Merge = ServiceOperation("MERGE");
 	const ServiceOperation ServiceOperation::Detach = ServiceOperation("DETACH");
 	const ServiceOperation ServiceOperation::ResetEmailPassword = ServiceOperation("RESET_EMAIL_PASSWORD");
+	const ServiceOperation ServiceOperation::ResetEmailPasswordAdvanced = ServiceOperation("RESET_EMAIL_PASSWORD_ADVANCED");
 	const ServiceOperation ServiceOperation::SwitchToChildProfile = ServiceOperation("SWITCH_TO_CHILD_PROFILE");
 	const ServiceOperation ServiceOperation::SwitchToParentProfile = ServiceOperation("SWITCH_TO_PARENT_PROFILE");
 	const ServiceOperation ServiceOperation::GetChildProfiles = ServiceOperation("GET_CHILD_PROFILES");

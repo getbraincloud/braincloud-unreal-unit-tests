@@ -92,6 +92,6 @@ TEST_F(TestBCMessaging, MarkMessagesRead)
 	auto profileId = m_bc->getAuthenticationService()->getProfileId();
 
 	std::vector<std::string> msgIds = {"invalidMsgId"};
-	m_bc->getMessagingService()->markMessagesRead("inbox", msgIds, &tr);
+	m_bc->getMessagingService()->markMessagesRead("inbox", msgIds, true, &tr);
 	tr.run(m_bc);
 }

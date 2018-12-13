@@ -117,7 +117,7 @@ namespace BrainCloud
 		 * @param msgIds
 		 * @param callback The method to be invoked when the server response is received
 		 */
-		void markMessagesRead(const std::string& in_msgbox, const std::vector<std::string>& in_msgIds, IServerCallback* in_callback = NULL);
+		void markMessagesRead(const std::string& in_msgbox, const std::vector<std::string>& in_msgIds, bool markAsRead, IServerCallback* in_callback = NULL);
 
 	private:
 		BrainCloudClient* m_client;

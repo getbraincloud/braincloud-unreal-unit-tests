@@ -10,6 +10,7 @@
 #include "braincloud/OperationParam.h"
 #include "braincloud/AuthenticationType.h"
 #include "json/json.h"
+#include "braincloud/internal/JsonUtil.h"
 
 #include "braincloud/internal/StringUtil.h"
 #include "braincloud/internal/GUID.h"
@@ -115,6 +116,17 @@ namespace BrainCloud {
         message[OperationParam::AuthenticateServiceAuthenticateGameId.getValue()] = m_client->getAppId().c_str();
 
         ServerCall * sc = new ServerCall(ServiceName::AuthenticateV2, ServiceOperation::ResetEmailPassword, message, in_callback);
+        m_client->sendRequest(sc);
+    }
+
+    void BrainCloudAuthentication::resetEmailPasswordAdvanced(const char * in_emailAddress, std::string in_serviceParams, IServerCallback * in_callback)
+    {
+        Json::Value message;
+        message[OperationParam::AuthenticateServiceAuthenticateGameId.getValue()] = m_client->getAppId().c_str();
+        message[OperationParam::AuthenticateServiceAuthenticateEmailAddress.getValue()] = in_emailAddress;
+        message[OperationParam::AuthenticateServiceAuthenticateServiceParams.getValue()] = JsonUtil::jsonStringToValue(in_serviceParams);;
+
+        ServerCall * sc = new ServerCall(ServiceName::AuthenticateV2, ServiceOperation::ResetEmailPasswordAdvanced, message, in_callback);
         m_client->sendRequest(sc);
     }
 

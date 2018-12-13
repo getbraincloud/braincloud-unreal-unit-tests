@@ -3,7 +3,10 @@
 #pragma once
 
 #include <string>
+#include <map>
+#include "json/json.h"
 #include "braincloud/BrainCloudTypes.h"
+
 
 namespace BrainCloud
 {
@@ -211,6 +214,25 @@ namespace BrainCloud
 		 * SECURITY_ERROR (40209) - If the email address cannot be found.
 		 */
 		void resetEmailPassword(const char * in_externalId, IServerCallback * in_callback = NULL);
+
+		/**
+		 * Reset Email password with service parameters - Sends a password reset email to 
+		 * the specified address
+		 *
+		 * Service Name - Authenticate
+		 * Operation - ResetEmailPasswordAdvanced
+		 *
+		 * @param appId the applicationId
+		 * @param in_emailAddress The email address to send the reset email to.
+		 * @param in_serviceParams - parameters to send to the email service. See documentation for
+		 * full list. http://getbraincloud.com/apidocs/apiref/#capi-mail
+		 * @param in_callback The method to be invoked when the server response is received
+		 *
+		 * Note the follow error reason codes:
+		 *
+		 * SECURITY_ERROR (40209) - If the email address cannot be found.
+		 */
+		void resetEmailPasswordAdvanced(const char * in_emailAddress, std::string in_serviceParams, IServerCallback * in_callback = NULL);
 
 		const std::string & getAnonymousId() const { return _anonymousId; }
 		const std::string & getProfileId() const { return _profileId; }

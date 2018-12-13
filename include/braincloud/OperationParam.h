@@ -46,6 +46,8 @@ namespace BrainCloud {
 		static const OperationParam AuthenticateServiceAuthenticateAuthenticationType;
 		static const OperationParam AuthenticateServiceAuthenticateAuthenticationToken;
 		static const OperationParam AuthenticateServiceAuthenticateExternalId;
+		static const OperationParam AuthenticateServiceAuthenticateEmailAddress;
+		static const OperationParam AuthenticateServiceAuthenticateServiceParams;
 		static const OperationParam AuthenticateServiceAuthenticateGameId;
 		static const OperationParam AuthenticateServiceAuthenticateDeviceId;
 		static const OperationParam AuthenticateServiceAuthenticateForceMergeFlag;
@@ -401,6 +403,7 @@ namespace BrainCloud {
 		//messaging
 		static const OperationParam MessagingMsgbox;
 		static const OperationParam MessagingMsgIds;
+		static const OperationParam MessagingMarkAsRead;
 		static const OperationParam MessagingContext;
 		static const OperationParam MessagingPageOffset;
 		static const OperationParam MessagingToProfileIds;
