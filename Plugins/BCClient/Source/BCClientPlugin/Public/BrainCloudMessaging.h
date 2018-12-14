@@ -52,7 +52,7 @@ class BCCLIENTPLUGIN_API BrainCloudMessaging
 	* @param in_msgsIds Array of msg Ids to delete
 	* @param in_callback Method to be invoked when the server response is received.
     */
-    void getMessages(const FString &in_msgBox, const TArray<FString> &in_msgsIds, IServerCallback *in_callback);
+    void getMessages(const FString &in_msgBox, const TArray<FString> &in_msgsIds, bool markAsRead, IServerCallback *in_callback);
 
     /**
     * Retrieves a page of messages.
@@ -87,7 +87,7 @@ class BCCLIENTPLUGIN_API BrainCloudMessaging
 	* @param in_msgsIds Array of msg Ids to mark as read
 	* @param in_callback Method to be invoked when the server response is received.
     */
-    void markMessagesRead(const FString &in_msgBox, const TArray<FString> &in_msgsIds, bool in_markAsRead, IServerCallback *in_callback);
+    void markMessagesRead(const FString &in_msgBox, const TArray<FString> &in_msgsIds, IServerCallback *in_callback);
 
     /**
     *Sends a message with specified 'subject' and 'text' to list of users.
