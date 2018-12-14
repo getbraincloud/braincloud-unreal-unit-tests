@@ -42,7 +42,7 @@ TEST_F(TestBCMessaging, GetMessages)
 	TestResult tr;
 
 	std::vector<std::string> msgIds = {"invalidMsgId"};
-	m_bc->getMessagingService()->getMessages("inbox", msgIds, &tr);
+	m_bc->getMessagingService()->getMessages("inbox", msgIds, true, &tr);
 	tr.runExpectFail(m_bc, HTTP_BAD_REQUEST, MESSAGE_NOT_FOUND);
 }
 
@@ -92,6 +92,6 @@ TEST_F(TestBCMessaging, MarkMessagesRead)
 	auto profileId = m_bc->getAuthenticationService()->getProfileId();
 
 	std::vector<std::string> msgIds = {"invalidMsgId"};
-	m_bc->getMessagingService()->markMessagesRead("inbox", msgIds, true, &tr);
+	m_bc->getMessagingService()->markMessagesRead("inbox", msgIds, &tr);
 	tr.run(m_bc);
 }
