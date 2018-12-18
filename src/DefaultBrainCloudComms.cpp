@@ -914,7 +914,8 @@ namespace BrainCloud
 				}
 
 				if (call->getOperation() == ServiceOperation::Authenticate
-					|| call->getOperation() == ServiceOperation::ResetEmailPassword)
+					|| call->getOperation() == ServiceOperation::ResetEmailPassword
+					|| call->getOperation() == ServiceOperation::ResetEmailPasswordAdvanced)
 				{
 					bFoundAuthCallInCurrentMarker = true;
 					break;
@@ -960,7 +961,8 @@ namespace BrainCloud
 			_inProgress.push_back(call);
 			_queue.erase(_queue.begin());
 			if (call->getOperation() == ServiceOperation::Authenticate
-				|| call->getOperation() == ServiceOperation::ResetEmailPassword)
+				|| call->getOperation() == ServiceOperation::ResetEmailPassword
+				|| call->getOperation() == ServiceOperation::ResetEmailPasswordAdvanced)
 			{
 				authenticating = true;
 			}
