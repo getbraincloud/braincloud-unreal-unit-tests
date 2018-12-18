@@ -339,7 +339,8 @@ void BrainCloudComms::CreateAndSendNextRequestBundle()
 		{
 			auto operation = itr->getOperation();
 			if (operation == ServiceOperation::Authenticate ||
-				operation == ServiceOperation::ResetEmailPassword)
+				operation == ServiceOperation::ResetEmailPassword||
+				operation == ServiceOperation::ResetEmailPasswordAdvanced)
 			{
 				isAuth = true;
 				break;
