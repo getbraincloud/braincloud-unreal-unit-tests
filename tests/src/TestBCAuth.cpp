@@ -16,8 +16,6 @@ TEST_F(TestBCAuth, AaaRunFirst)
 // Note that TestBCAuth skips the normal authenticate setup provided by TestFixtureBase
 // All TestBCAuth test methods must perform their own authenticate + logout
 
-
-
 TEST_F(TestBCAuth, AuthenticateEmailPassword)
 {
     TestResult tr;

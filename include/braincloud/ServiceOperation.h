@@ -90,6 +90,9 @@ namespace BrainCloud {
 		static const ServiceOperation FindPlayerByName;
 		static const ServiceOperation FindUsersByExactName;
 		static const ServiceOperation FindUsersBySubstrName;
+		static const ServiceOperation FindUserByExactUniversalId;
+		static const ServiceOperation FindUsersByUniversalIdStartingWith;
+		static const ServiceOperation FindUsersByNameStartingWith;
 		static const ServiceOperation ListFriends;
 		static const ServiceOperation AddFriends;
 		static const ServiceOperation RemoveFriends;
