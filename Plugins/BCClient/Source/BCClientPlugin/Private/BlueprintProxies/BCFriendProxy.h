@@ -128,17 +128,49 @@ class UBCFriendProxy : public UBCBlueprintCallProxyBase
 	static UBCFriendProxy *FindPlayerByUniversalId(UBrainCloudWrapper *brainCloudWrapper, const FString &searchText, int32 maxResults);
 
 	/**
+	* @deprecated Use FindUserByExactUniversalId
+	*/
+	UFUNCTION(BlueprintCallable, meta = (BlueprintInternalUseOnly = "true"), Category = "BrainCloud|Friend")
+	static UBCFriendProxy *FindUserByUniversalId(UBrainCloudWrapper *brainCloudWrapper, const FString &searchText, int32 maxResults);
+
+	/**
 	* Retrieves profile information for the partial matches of the specified text.
 	*
 	* Service Name - Friend
-	* Service Operation - FIND_PLAYER_BY_UNIVERSAL_ID
+	* Service Operation - FIND_USER_BY_EXACT_UNIVERSAL_ID
 	*
 	* Param - searchText Universal ID text on which to search.
 	* Param - maxResults Maximum number of results to return. If there are more the message
 	*                    "Too many results to return." is sent back instead of the users.
 	*/
 	UFUNCTION(BlueprintCallable, meta = (BlueprintInternalUseOnly = "true"), Category = "BrainCloud|Friend")
-	static UBCFriendProxy *FindUserByUniversalId(UBrainCloudWrapper *brainCloudWrapper, const FString &searchText, int32 maxResults);
+	static UBCFriendProxy *FindUserByExactUniversalId(UBrainCloudWrapper *brainCloudWrapper, const FString &searchText);
+
+	/**
+	* Retrieves profiles for the partial matches of the specified Universal Id text.
+	*
+	* Service Name - Friend
+	* Service Operation - FIND_USERS_BY_NAME_STARTING_WITH
+	*
+	* Param - searchText Universal ID text on which to search.
+	* Param - maxResults Maximum number of results to return. If there are more the message
+	*                    "Too many results to return." is sent back instead of the users.
+	*/
+	UFUNCTION(BlueprintCallable, meta = (BlueprintInternalUseOnly = "true"), Category = "BrainCloud|Friend")
+	static UBCFriendProxy *FindUsersByNameStartingWith(UBrainCloudWrapper *brainCloudWrapper, const FString &searchText, int32 maxResults);
+
+	/**
+	* Retrieves profiles for the partial matches of the specified Universal Id text.
+	*
+	* Service Name - Friend
+	* Service Operation - FIND_USERS_BY_UNIVERSAL_ID_STARTING_WITH
+	*
+	* Param - searchText Universal ID text on which to search.
+	* Param - maxResults Maximum number of results to return. If there are more the message
+	*                    "Too many results to return." is sent back instead of the users.
+	*/
+	UFUNCTION(BlueprintCallable, meta = (BlueprintInternalUseOnly = "true"), Category = "BrainCloud|Friend")
+	static UBCFriendProxy *FindUsersByUniversalIdStartingWith(UBrainCloudWrapper *brainCloudWrapper, const FString &searchText, int32 maxResults);
 
 	/**
 	* Retrieves a list of user and friend platform information for all friends of the current user.
