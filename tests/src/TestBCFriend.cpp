@@ -43,6 +43,27 @@ TEST_F(TestBCFriend, FindUsersByExactName)
 	tr.run(m_bc);
 }
 
+TEST_F(TestBCFriend, FindUserByExactUniversalId)
+{
+	TestResult tr;
+	m_bc->getFriendService()->findUserByExactUniversalId("test", &tr);
+	tr.run(m_bc);
+}
+
+TEST_F(TestBCFriend, FindUsersByUniversalIdStartingWith)
+{
+	TestResult tr;
+	m_bc->getFriendService()->findUsersByUniversalIdStartingWith("test", 30, &tr);
+	tr.run(m_bc);
+}
+
+TEST_F(TestBCFriend, FindUsersByNameStartingWith)
+{
+	TestResult tr;
+	m_bc->getFriendService()->findUsersByExactName("test", 30, &tr);
+	tr.run(m_bc);
+}
+
 TEST_F(TestBCFriend, FindUsersBySubstrName)
 {
 	TestResult tr;
