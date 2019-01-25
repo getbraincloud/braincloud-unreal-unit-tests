@@ -127,6 +127,35 @@ void BrainCloudFriend::findPlayerByUniversalId(const FString & searchText, int32
 	_client->sendRequest(sc);
 }
 
+void BrainCloudFriend::findUserByExactUniversalId(const FString & searchText, IServerCallback * callback)
+{
+	TSharedRef<FJsonObject> message = MakeShareable(new FJsonObject());
+	message->SetStringField(OperationParam::FriendServiceSearchText.getValue(), searchText);
+
+	ServerCall * sc = new ServerCall(ServiceName::Friend, ServiceOperation::FindUserByExactUniversalId, message, callback);
+	_client->sendRequest(sc);
+}
+
+void BrainCloudFriend::findUsersByUniversalIdStartingWith(const FString & searchText, int32 maxResults, IServerCallback * callback)
+{
+	TSharedRef<FJsonObject> message = MakeShareable(new FJsonObject());
+	message->SetStringField(OperationParam::FriendServiceSearchText.getValue(), searchText);
+	message->SetNumberField(OperationParam::FriendServiceMaxResults.getValue(), maxResults);
+
+	ServerCall * sc = new ServerCall(ServiceName::Friend, ServiceOperation::FindUsersByUniversalIdStartingWith, message, callback);
+	_client->sendRequest(sc);
+}
+
+void BrainCloudFriend::findUsersByNameStartingWith(const FString & searchText, int32 maxResults, IServerCallback * callback)
+{
+	TSharedRef<FJsonObject> message = MakeShareable(new FJsonObject());
+	message->SetStringField(OperationParam::FriendServiceSearchText.getValue(), searchText);
+	message->SetNumberField(OperationParam::FriendServiceMaxResults.getValue(), maxResults);
+
+	ServerCall * sc = new ServerCall(ServiceName::Friend, ServiceOperation::FindUsersByNameStartingWith, message, callback);
+	_client->sendRequest(sc);
+}
+
 void BrainCloudFriend::findUserByUniversalId(const FString & searchText, int32 maxResults, IServerCallback * callback)
 {
 	TSharedRef<FJsonObject> message = MakeShareable(new FJsonObject());

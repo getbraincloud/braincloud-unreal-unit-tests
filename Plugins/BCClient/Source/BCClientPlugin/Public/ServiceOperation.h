@@ -92,6 +92,9 @@ class BCCLIENTPLUGIN_API ServiceOperation
 	static const ServiceOperation GetUsersOnlineStatus;
 	static const ServiceOperation RemoveFriends;
 	static const ServiceOperation FindPlayerByUniversalId;
+	static const ServiceOperation FindUserByExactUniversalId;
+	static const ServiceOperation FindUsersByUniversalIdStartingWith;
+	static const ServiceOperation FindUsersByNameStartingWith;
 	static const ServiceOperation GetSocialLeaderboard;
 	static const ServiceOperation GetSocialLeaderboardByVersion;
 	static const ServiceOperation GetMultiSocialLeaderboard;
