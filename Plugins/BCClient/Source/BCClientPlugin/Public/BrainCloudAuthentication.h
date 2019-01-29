@@ -204,7 +204,7 @@ public:
     *
     * SECURITY_ERROR (40209) - If the email address cannot be found.
     */
-    void resetEmailPassword(const FString& email, IServerCallback * callback);
+    void resetEmailPassword(const FString& in_email, IServerCallback * in_callback);
 
     /**
     * Reset Email password with service parameters- Sends a password reset email to the specified address
@@ -227,7 +227,7 @@ public:
     *
     * SECURITY_ERROR (40209) - If the email address cannot be found.
     */
-    void resetEmailPasswordAdvanced(const FString& emailAddress, const FString& in_serviceParams, IServerCallback * callback);
+    void resetEmailPasswordAdvanced(const FString& in_emailAddress, const FString& in_serviceParams, IServerCallback * in_callback);
 
     const FString & getAnonymousId() const;
     const FString & getProfileId() const;
