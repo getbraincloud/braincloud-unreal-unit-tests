@@ -76,9 +76,9 @@ UBCPresenceProxy *UBCPresenceProxy::StopListening(UBrainCloudWrapper *brainCloud
     return Proxy;
 }
 
-UBCPresenceProxy *UBCPresenceProxy::UpdateActivity(UBrainCloudWrapper *brainCloudWrapper, const FString &jsonActivity)
+UBCPresenceProxy *UBCPresenceProxy::UpdateActivity(UBrainCloudWrapper *brainCloudWrapper, const FString &activity)
 {
     UBCPresenceProxy *Proxy = NewObject<UBCPresenceProxy>();
-    UBCWrapperProxy::GetBrainCloudInstance(brainCloudWrapper)->getPresenceService()->updateActivity(jsonActivity, Proxy);
+    UBCWrapperProxy::GetBrainCloudInstance(brainCloudWrapper)->getPresenceService()->updateActivity(activity, Proxy);
     return Proxy;
 }

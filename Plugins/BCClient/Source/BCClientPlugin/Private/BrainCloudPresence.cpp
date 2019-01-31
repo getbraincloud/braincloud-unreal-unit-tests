@@ -95,7 +95,7 @@ void BrainCloudPresence::stopListening(IServerCallback *callback)
 void BrainCloudPresence::updateActivity(const FString &activity, IServerCallback *callback)
 {
     TSharedRef<FJsonObject> message = MakeShareable(new FJsonObject());
-    message->SetStringField(OperationParam::PresenceServiceActivity.getValue(), activity);
+    message->SetObjectField(OperationParam::PresenceServiceActivity.getValue(), JsonUtil::jsonStringToValue(activity));
 
     ServerCall *sc = new ServerCall(ServiceName::Presence, ServiceOperation::UpdateActivity, message, callback);
     _client->sendRequest(sc);
