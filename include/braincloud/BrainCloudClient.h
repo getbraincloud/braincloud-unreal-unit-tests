@@ -621,6 +621,11 @@ namespace BrainCloud
 		void disableRTT();
 
 		/**
+		 *returns true if RTT is enabled 
+		 */
+		bool getRTTEnabled();
+
+		/**
 		 * Listen to real time events.
 		 * 
 		 * Notes: RTT must be enabled for this app, and enableRTT must have been successfully called.

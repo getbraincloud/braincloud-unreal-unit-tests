@@ -123,6 +123,11 @@ namespace BrainCloud
         resetCommunication();
     }
 
+    bool RTTComms::isRTTEnabled()
+    {
+        return _isConnected;
+    }
+
     bool RTTComms::getLoggingEnabled()
     {
         return _loggingEnabled;
