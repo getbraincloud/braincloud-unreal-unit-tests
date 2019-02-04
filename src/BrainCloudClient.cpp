@@ -444,7 +444,7 @@ namespace BrainCloud
 
     bool BrainCloudClient::getRTTEnabled()
     {
-        _rttComms->getRTTEnabled();
+        _rttComms->isRTTEnabled();
     }
 
     void BrainCloudClient::registerRTTEventCallback(IRTTCallback* in_callback)
