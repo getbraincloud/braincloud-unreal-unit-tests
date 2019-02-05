@@ -126,6 +126,12 @@ class UBCClientProxy : public UBCBlueprintCallProxyBase
 	UFUNCTION(BlueprintCallable, Category = "BrainCloud|Client")
 	static void DisableRTT(UBrainCloudWrapper *brainCloudWrapper);
 
+	/*
+	* returns true if rtt is enabled
+	*/
+	UFUNCTION(BlueprintCallable, Category = "BrainCloud|Client")
+	static void GetRTTEnabled(UBrainCloudWrapper *brainCloudWrapper);
+
 	/**
 	* 
 	*/

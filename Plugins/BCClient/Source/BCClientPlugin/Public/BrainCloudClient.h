@@ -270,6 +270,11 @@ class BCCLIENTPLUGIN_API BrainCloudClient
 	*/
 	void disableRTT();
 
+	/*
+	*Returns true id RTT is enabled
+	*/
+	bool getRTTEnabled();
+
 	/**
 	* 
 	*/
