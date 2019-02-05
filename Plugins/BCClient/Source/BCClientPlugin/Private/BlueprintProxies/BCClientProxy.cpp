@@ -83,11 +83,6 @@ void UBCClientProxy::DisableRTT(UBrainCloudWrapper *brainCloudWrapper)
 	UBCWrapperProxy::GetBrainCloudInstance(brainCloudWrapper)->getBCClient()->disableRTT();
 }
 
-void UBCClientProxy::GetRTTEnabled(UBrainCloudWrapper *brainCloudWrapper)
-{
-	UBCWrapperProxy::GetBrainCloudInstance(brainCloudWrapper)->getBCClient()->getRTTEnabled();
-}
-
 void UBCClientProxy::SetRTTHeartBeatSeconds(UBrainCloudWrapper *brainCloudWrapper, int32 in_value)
 {
 	UBCWrapperProxy::GetBrainCloudInstance(brainCloudWrapper)->getBCClient()->setRTTHeartBeatSeconds(in_value);
