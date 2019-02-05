@@ -29,6 +29,7 @@ class BrainCloudRTTComms : public IServerCallback
 
 	void enableRTT(eBCRTTConnectionType in_connectionType, IServerCallback *callback);
 	void disableRTT();
+	bool isRTTEnabled();
 	void RunCallbacks();
 
 	void registerRTTCallback(ServiceName in_serviceName, UBCBlueprintRTTCallProxyBase *callback);
