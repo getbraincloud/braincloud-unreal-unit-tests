@@ -418,7 +418,7 @@ namespace BrainCloud
 	const OperationParam OperationParam::AppStoreStoreId = OperationParam("storeId");
 	const OperationParam OperationParam::AppStoreReceiptData = OperationParam("receiptData");
 	const OperationParam OperationParam::AppStorePriceInfoCriteria = OperationParam("priceInfoCriteria");
-	const OperationParam OperationParam::AppStoreUserCurrency = OperationParam("user_currency");
+	const OperationParam OperationParam::AppStoreUserCurrency = OperationParam("userCurrency");
 	const OperationParam OperationParam::AppStoreCategory = OperationParam("category");
 	const OperationParam OperationParam::AppStorePurchaseData = OperationParam("purchaseData");
 	const OperationParam OperationParam::AppStoreTransactionId = OperationParam("transactionId");
