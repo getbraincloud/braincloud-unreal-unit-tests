@@ -134,13 +134,7 @@ public:
 	void findPlayerByUniversalId(const FString& searchText, int32 maxResults, IServerCallback * callback = nullptr);
 
 	/**
-	* Retrieves profile information for the partial matches of the specified text.
-	*
-	* Service Name - Friend
-	* Service Operation - FIND_PLAYER_BY_UNIVERSAL_ID
-	*
-	* @param searchText Universal ID text on which to search.
-	* @param maxResults Maximum number of results to return.
+	* @deprecated Use readFriendUserState instead - removal after February 1 2017
 	*/
 	void findUserByUniversalId(const FString& searchText, int32 maxResults, IServerCallback * callback = nullptr);
 
