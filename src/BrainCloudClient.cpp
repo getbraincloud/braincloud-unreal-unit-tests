@@ -22,7 +22,7 @@ namespace BrainCloud
             "Singleton usage is disabled. If called by mistake, use your own variable that holds an instance of the bcWrapper/bcClient.";
 
     BrainCloudClient * BrainCloudClient::_instance = NULL;
-    std::string BrainCloudClient::s_brainCloudClientVersion = "3.10.0";
+    std::string BrainCloudClient::s_brainCloudClientVersion = "3.11.0";
     const char* BC_SERVER_URL = "https://sharedprod.braincloudservers.com/dispatcherv2"; 
 
     /**
@@ -440,6 +440,11 @@ namespace BrainCloud
     void BrainCloudClient::disableRTT()
     {
         _rttComms->disableRTT();
+    }
+
+    bool BrainCloudClient::getRTTEnabled()
+    {
+        return _rttComms->isRTTEnabled();
     }
 
     void BrainCloudClient::registerRTTEventCallback(IRTTCallback* in_callback)

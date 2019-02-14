@@ -61,6 +61,18 @@ namespace BrainCloud
 		void getMessages(const std::string& in_msgbox, const std::vector<std::string>& in_msgIds, IServerCallback* in_callback = NULL);
 
 		/**
+		 * Retrieves list of specified messages.
+		 *
+		 * Service Name - Messaging
+		 * Service Operation - GetMessages
+		 *
+		 * @param msgIds Arrays of message ids to get.
+		 * @param markAsRead mark messages that are read
+		 * @param callback The method to be invoked when the server response is received
+		 */
+		void getMessages(const std::string& in_msgbox, const std::vector<std::string>& in_msgIds, bool markAsRead, IServerCallback* in_callback = NULL);
+
+		/**
 		 * Retrieves a page of messages.
 		 *
 		 * Service Name - Messaging

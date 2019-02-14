@@ -9,6 +9,7 @@ namespace BrainCloud
 	const ServiceOperation ServiceOperation::Merge = ServiceOperation("MERGE");
 	const ServiceOperation ServiceOperation::Detach = ServiceOperation("DETACH");
 	const ServiceOperation ServiceOperation::ResetEmailPassword = ServiceOperation("RESET_EMAIL_PASSWORD");
+	const ServiceOperation ServiceOperation::ResetEmailPasswordAdvanced = ServiceOperation("RESET_EMAIL_PASSWORD_ADVANCED");
 	const ServiceOperation ServiceOperation::SwitchToChildProfile = ServiceOperation("SWITCH_TO_CHILD_PROFILE");
 	const ServiceOperation ServiceOperation::SwitchToParentProfile = ServiceOperation("SWITCH_TO_PARENT_PROFILE");
 	const ServiceOperation ServiceOperation::GetChildProfiles = ServiceOperation("GET_CHILD_PROFILES");
@@ -81,6 +82,9 @@ namespace BrainCloud
 	const ServiceOperation ServiceOperation::ReadFriendsPlayerState = ServiceOperation("READ_FRIEND_PLAYER_STATE");
 	const ServiceOperation ServiceOperation::FindPlayerByName = ServiceOperation("FIND_PLAYER_BY_NAME");
 	const ServiceOperation ServiceOperation::FindUsersByExactName = ServiceOperation("FIND_USERS_BY_EXACT_NAME");
+	const ServiceOperation ServiceOperation::FindUserByExactUniversalId = ServiceOperation("FIND_USER_BY_EXACT_UNIVERSAL_ID");
+	const ServiceOperation ServiceOperation::FindUsersByUniversalIdStartingWith= ServiceOperation("FIND_USERS_BY_UNIVERSAL_ID_STARTING_WITH");
+	const ServiceOperation ServiceOperation::FindUsersByNameStartingWith= ServiceOperation("FIND_USERS_BY_NAME_STARTING_WITH");
 	const ServiceOperation ServiceOperation::FindUsersBySubstrName = ServiceOperation("FIND_USERS_BY_SUBSTR_NAME");
 	const ServiceOperation ServiceOperation::ListFriends = ServiceOperation("LIST_FRIENDS");
 	const ServiceOperation ServiceOperation::AddFriends = ServiceOperation("ADD_FRIENDS");

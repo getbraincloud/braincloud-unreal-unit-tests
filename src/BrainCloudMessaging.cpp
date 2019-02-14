@@ -47,9 +47,15 @@ namespace BrainCloud
 
 	void BrainCloudMessaging::getMessages(const std::string& in_msgbox, const std::vector<std::string>& in_msgIds, IServerCallback* in_callback)
     {
+			getMessages(in_msgbox, in_msgIds, false, in_callback);
+    }
+
+		void BrainCloudMessaging::getMessages(const std::string& in_msgbox, const std::vector<std::string>& in_msgIds, bool markAsRead, IServerCallback* in_callback)
+    {
 		Json::Value message;
 		message[OperationParam::MessagingMsgbox.getValue()] = in_msgbox;
 		message[OperationParam::MessagingMsgIds.getValue()] = JsonUtil::stringVectorToJson(in_msgIds);
+		message[OperationParam::MessagingMarkAsRead.getValue()] = markAsRead;
 
 		ServerCall* sc = new ServerCall(ServiceName::Messaging, ServiceOperation::GetMessages, message, in_callback);
 		m_client->sendRequest(sc);

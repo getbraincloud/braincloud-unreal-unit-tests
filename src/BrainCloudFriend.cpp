@@ -39,6 +39,36 @@ namespace BrainCloud
 		m_client->getBrainCloudComms()->addToQueue(sc);
 	}
 
+	void BrainCloudFriend::findUserByExactUniversalId(const char * in_searchText, IServerCallback * in_callback)
+	{
+		Json::Value message;
+		message[OperationParam::FriendServiceSearchText.getValue()] = in_searchText;
+
+		ServerCall * sc = new ServerCall(ServiceName::Friend, ServiceOperation::FindUserByExactUniversalId, message, in_callback);
+		m_client->getBrainCloudComms()->addToQueue(sc);
+	}
+
+
+	void BrainCloudFriend::findUsersByNameStartingWith(const char * in_searchText, int32_t in_maxResults, IServerCallback * in_callback)
+	{
+		Json::Value message;
+		message[OperationParam::FriendServiceSearchText.getValue()] = in_searchText;
+		message[OperationParam::FriendServiceMaxResults.getValue()] = in_maxResults;
+
+		ServerCall * sc = new ServerCall(ServiceName::Friend, ServiceOperation::FindUsersByUniversalIdStartingWith, message, in_callback);
+		m_client->getBrainCloudComms()->addToQueue(sc);
+	}
+
+
+	void BrainCloudFriend::findUsersByUniversalIdStartingWith(const char * in_searchText, int32_t in_maxResults, IServerCallback * in_callback)
+	{
+		Json::Value message;
+		message[OperationParam::FriendServiceSearchText.getValue()] = in_searchText;
+		message[OperationParam::FriendServiceMaxResults.getValue()] = in_maxResults;
+
+		ServerCall * sc = new ServerCall(ServiceName::Friend, ServiceOperation::FindUsersByNameStartingWith, message, in_callback);
+		m_client->getBrainCloudComms()->addToQueue(sc);
+	}
 
 	void BrainCloudFriend::getProfileInfoForCredential(const char * in_externalId, AuthenticationType in_authenticationType, IServerCallback * in_callback)
 	{

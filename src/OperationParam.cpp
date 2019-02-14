@@ -38,6 +38,8 @@ namespace BrainCloud
 	const OperationParam OperationParam::AuthenticateServiceAuthenticateAuthenticationType = OperationParam("authenticationType");
 	const OperationParam OperationParam::AuthenticateServiceAuthenticateAuthenticationToken = OperationParam("authenticationToken");
 	const OperationParam OperationParam::AuthenticateServiceAuthenticateExternalId = OperationParam("externalId");
+	const OperationParam OperationParam::AuthenticateServiceAuthenticateEmailAddress = OperationParam("emailAddress");
+	const OperationParam OperationParam::AuthenticateServiceAuthenticateServiceParams = OperationParam("serviceParams");
 	const OperationParam OperationParam::AuthenticateServiceAuthenticateGameId = OperationParam("gameId");
 	const OperationParam OperationParam::AuthenticateServiceAuthenticateDeviceId = OperationParam("deviceId");
 	const OperationParam OperationParam::AuthenticateServiceAuthenticateForceMergeFlag = OperationParam("forceMergeFlag");
@@ -395,6 +397,7 @@ namespace BrainCloud
 	//messaging
 	const OperationParam OperationParam::MessagingMsgbox = OperationParam("msgbox");
 	const OperationParam OperationParam::MessagingMsgIds = OperationParam("msgIds");
+	const OperationParam OperationParam::MessagingMarkAsRead = OperationParam("markAsRead");
 	const OperationParam OperationParam::MessagingContext = OperationParam("context");
 	const OperationParam OperationParam::MessagingPageOffset = OperationParam("pageOffset");
 	const OperationParam OperationParam::MessagingToProfileIds = OperationParam("toProfileIds");
@@ -415,7 +418,7 @@ namespace BrainCloud
 	const OperationParam OperationParam::AppStoreStoreId = OperationParam("storeId");
 	const OperationParam OperationParam::AppStoreReceiptData = OperationParam("receiptData");
 	const OperationParam OperationParam::AppStorePriceInfoCriteria = OperationParam("priceInfoCriteria");
-	const OperationParam OperationParam::AppStoreUserCurrency = OperationParam("user_currency");
+	const OperationParam OperationParam::AppStoreUserCurrency = OperationParam("userCurrency");
 	const OperationParam OperationParam::AppStoreCategory = OperationParam("category");
 	const OperationParam OperationParam::AppStorePurchaseData = OperationParam("purchaseData");
 	const OperationParam OperationParam::AppStoreTransactionId = OperationParam("transactionId");

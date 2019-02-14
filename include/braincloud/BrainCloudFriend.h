@@ -25,12 +25,33 @@ namespace BrainCloud
 		void findPlayerByUniversalId(const char * in_searchText, int32_t in_maxResults, IServerCallback * in_callback = NULL);
 
 		/**
-		 * Retrieves profile information for the partial matches of the specified text.
+		 * @deprecated Use findUserByUniversalId() instead use findUserByExactUniversalId
+		 */
+		void findUserByUniversalId(const char * in_searchText, int32_t in_maxResults, IServerCallback * in_callback = NULL);
+
+		/**
+		 * Retrieves profile information of the specified universal Id.
+		 *
+		 * @param in_searchText Universal ID text on which to search.
+		 */
+		void findUserByExactUniversalId(const char * in_searchText, IServerCallback * in_callback = NULL);
+
+		/**
+		 * Retrieves profile information for the users whos names start with search text.
+		 *
+		 * @param in_searchText Name text on which to search.
+		 * @param in_maxResults Maximum number of results to return.
+		 */
+		void findUsersByNameStartingWith(const char * in_searchText, int32_t in_maxResults, IServerCallback * in_callback = NULL);
+
+		/**
+		 * Retrieves profile information for the users whos UniversalId start with search text.
 		 *
 		 * @param in_searchText Universal ID text on which to search.
 		 * @param in_maxResults Maximum number of results to return.
 		 */
-		void findUserByUniversalId(const char * in_searchText, int32_t in_maxResults, IServerCallback * in_callback = NULL);
+		void findUsersByUniversalIdStartingWith(const char * in_searchText, int32_t in_maxResults, IServerCallback * in_callback = NULL);
+
 
 		/**
 		* Retrieves profile information for the specified user.

@@ -36,6 +36,7 @@ namespace BrainCloud
 
         void enableRTT(IRTTConnectCallback* in_callback, bool in_useWebSocket);
         void disableRTT();
+        bool isRTTEnabled();
         bool getLoggingEnabled();
         void enableLogging(bool isEnabled);
         const std::string& getConnectionId();

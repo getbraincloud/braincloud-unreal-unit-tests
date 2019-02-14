@@ -520,6 +520,16 @@ namespace BrainCloud {
 		}
     }
 
+    void BrainCloudWrapper::resetEmailPassword(const char * in_externalId, IServerCallback * in_callback)
+    {
+        client->getAuthenticationService()->resetEmailPassword(in_externalId, in_callback);
+    }
+
+    void BrainCloudWrapper::resetEmailPasswordAdvanced(const char * in_emailAddress, std::string in_serviceParams, IServerCallback * in_callback)
+    {
+        client->getAuthenticationService()->resetEmailPasswordAdvanced(in_emailAddress, in_serviceParams, in_callback);
+    }
+
 	void BrainCloudWrapper::reconnect(IServerCallback * in_callback)
 	{
 		authenticateAnonymous(in_callback);
