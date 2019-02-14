@@ -204,7 +204,30 @@ public:
     *
     * SECURITY_ERROR (40209) - If the email address cannot be found.
     */
-    void resetEmailPassword(const FString& email, IServerCallback * callback);
+    void resetEmailPassword(const FString& in_email, IServerCallback * in_callback);
+
+    /**
+    * Reset Email password with service parameters- Sends a password reset email to the specified address
+    *
+    * Service Name - Authenticate
+    * Operation - ResetEmailPasswordAdvanced
+    *
+    * @param appId the application id
+    * @param emailAddress The email address to send the reset email to.
+    * @param serviceParams parameters to send to the email service see the doc for a full 
+    * list. http://getbraincloud.com/apidocs/apiref/#capi-mail
+    * @param callback The method to be invoked when the server response is received
+    * @return The JSON returned in the callback is as follows:
+    * {
+    *   "status": 200,
+    *   "data": {}
+    * }
+    *
+    * Note the follow error reason codes:
+    *
+    * SECURITY_ERROR (40209) - If the email address cannot be found.
+    */
+    void resetEmailPasswordAdvanced(const FString& in_emailAddress, const FString& in_serviceParams, IServerCallback * in_callback);
 
     const FString & getAnonymousId() const;
     const FString & getProfileId() const;

@@ -88,6 +88,11 @@ void BrainCloudRTTComms::disableRTT()
 	processRegisteredListeners(ServiceName::RTTRegistration.getValue(), "disconnect", "{\"error\":\"DisableRTT Called\"}");
 }
 
+bool BrainCloudRTTComms::isRTTEnabled()
+{
+	return m_bIsConnected;
+}
+
 void BrainCloudRTTComms::RunCallbacks()
 {
 #if PLATFORM_UWP

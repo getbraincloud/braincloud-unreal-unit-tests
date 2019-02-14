@@ -35,10 +35,10 @@ UBCMessagingProxy* UBCMessagingProxy::GetMessageCounts(UBrainCloudWrapper *brain
 	return Proxy;
 }
 
-UBCMessagingProxy* UBCMessagingProxy::GetMessages(UBrainCloudWrapper *brainCloud, const FString &in_msgBox, const TArray<FString> &in_msgsIds)
+UBCMessagingProxy* UBCMessagingProxy::GetMessages(UBrainCloudWrapper *brainCloud, const FString &in_msgBox, const TArray<FString> &in_msgsIds, bool in_markAsRead)
 {
 	UBCMessagingProxy* Proxy = NewObject<UBCMessagingProxy>();
-	UBCWrapperProxy::GetBrainCloudInstance(brainCloud)->getMessagingService()->getMessages(in_msgBox, in_msgsIds, Proxy);
+	UBCWrapperProxy::GetBrainCloudInstance(brainCloud)->getMessagingService()->getMessages(in_msgBox, in_msgsIds, in_markAsRead, Proxy);
 	return Proxy;
 }
 
