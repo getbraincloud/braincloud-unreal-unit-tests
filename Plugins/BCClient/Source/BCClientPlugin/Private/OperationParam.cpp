@@ -45,7 +45,9 @@ const OperationParam OperationParam::TwitterServiceTweetPic = OperationParam("pi
 const OperationParam OperationParam::AuthenticateServiceAuthenticateAuthenticationType = OperationParam("authenticationType");
 const OperationParam OperationParam::AuthenticateServiceAuthenticateAuthenticationToken = OperationParam("authenticationToken");
 const OperationParam OperationParam::AuthenticateServiceAuthenticateExternalId = OperationParam("externalId");
+const OperationParam OperationParam::AuthenticateServiceAuthenticateEmailAddress = OperationParam("emailAddress");
 const OperationParam OperationParam::AuthenticateServiceAuthenticateGameId = OperationParam("gameId");
+const OperationParam OperationParam::AuthenticateServiceAuthenticateServiceParams = OperationParam("serviceParams");
 const OperationParam OperationParam::AuthenticateServiceAuthenticateDeviceId = OperationParam("deviceId");
 const OperationParam OperationParam::AuthenticateServiceAuthenticateForceMergeFlag = OperationParam("forceMergeFlag");
 const OperationParam OperationParam::AuthenticateServiceAuthenticateReleasePlatform = OperationParam("releasePlatform");
@@ -417,6 +419,7 @@ const OperationParam OperationParam::GroupChannelType = OperationParam("gr");
 // messaging
 const OperationParam OperationParam::MessagingMessageBox = OperationParam("msgbox");
 const OperationParam OperationParam::MessagingMessageIds = OperationParam("msgIds");
+const OperationParam OperationParam::MessagingMarkAsRead = OperationParam("markAsRead");
 const OperationParam OperationParam::MessagingContext = OperationParam("context");
 const OperationParam OperationParam::MessagingPageOffset = OperationParam("pageOffset");
 const OperationParam OperationParam::MessagingFromName = OperationParam("fromName");

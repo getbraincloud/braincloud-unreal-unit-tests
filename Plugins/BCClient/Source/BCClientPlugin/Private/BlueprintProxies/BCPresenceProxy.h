@@ -143,5 +143,5 @@ public:
 * @param callback The method to be invoked when the server response is received 
 */
   UFUNCTION(BlueprintCallable, meta = (BlueprintInternalUseOnly = "true"), Category = "BrainCloud|Presence")
-  static UBCPresenceProxy *UpdateActivity(UBrainCloudWrapper *brainCloudWrapper, const FString &jsonActivity);
+  static UBCPresenceProxy *UpdateActivity(UBrainCloudWrapper *brainCloudWrapper, const FString &activity);
 };

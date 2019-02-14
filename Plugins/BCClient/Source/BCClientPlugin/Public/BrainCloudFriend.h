@@ -134,15 +134,41 @@ public:
 	void findPlayerByUniversalId(const FString& searchText, int32 maxResults, IServerCallback * callback = nullptr);
 
 	/**
+	* @deprecated Use readFriendUserState instead - removal after February 1 2017
+	*/
+	void findUserByUniversalId(const FString& searchText, int32 maxResults, IServerCallback * callback = nullptr);
+
+	/**
 	* Retrieves profile information for the partial matches of the specified text.
 	*
 	* Service Name - Friend
-	* Service Operation - FIND_PLAYER_BY_UNIVERSAL_ID
+	* Service Operation - FIND_USER_BY_EXACT_UNIVERSAL_ID
+	*
+	* @param searchText Universal ID text on which to search.
+	*/
+	void findUserByExactUniversalId(const FString& searchText, IServerCallback * callback = nullptr);
+
+	/**
+	* Retrieves profile information for the partial matches of the specified text.
+	*
+	* Service Name - Friend
+	* Service Operation - FIND_USERS_BY_UNIVERSAL_ID_STARTING_WITH
 	*
 	* @param searchText Universal ID text on which to search.
 	* @param maxResults Maximum number of results to return.
 	*/
-	void findUserByUniversalId(const FString& searchText, int32 maxResults, IServerCallback * callback = nullptr);
+	void findUsersByUniversalIdStartingWith(const FString& searchText, int32 maxResults, IServerCallback * callback = nullptr);
+
+	/**
+	* Retrieves profile information for the partial matches of the specified text.
+	*
+	* Service Name - Friend
+	* Service Operation - FIND_USER_BY_NAME_STARTING_WITH
+	*
+	* @param searchText Universal ID text on which to search.
+	* @param maxResults Maximum number of results to return.
+	*/
+	void findUsersByNameStartingWith(const FString& searchText, int32 maxResults, IServerCallback * callback = nullptr);
 
 	/**
 	* Retrieves a list of user and friend platform information for all friends of the current user.

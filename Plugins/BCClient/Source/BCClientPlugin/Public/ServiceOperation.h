@@ -12,6 +12,7 @@ class BCCLIENTPLUGIN_API ServiceOperation
 	static const ServiceOperation Merge;
 	static const ServiceOperation Detach;
 	static const ServiceOperation ResetEmailPassword;
+	static const ServiceOperation ResetEmailPasswordAdvanced;
 	static const ServiceOperation SwitchToChildProfile;
 	static const ServiceOperation SwitchToParentProfile;
 	static const ServiceOperation GetChildProfiles;
@@ -91,6 +92,9 @@ class BCCLIENTPLUGIN_API ServiceOperation
 	static const ServiceOperation GetUsersOnlineStatus;
 	static const ServiceOperation RemoveFriends;
 	static const ServiceOperation FindPlayerByUniversalId;
+	static const ServiceOperation FindUserByExactUniversalId;
+	static const ServiceOperation FindUsersByUniversalIdStartingWith;
+	static const ServiceOperation FindUsersByNameStartingWith;
 	static const ServiceOperation GetSocialLeaderboard;
 	static const ServiceOperation GetSocialLeaderboardByVersion;
 	static const ServiceOperation GetMultiSocialLeaderboard;

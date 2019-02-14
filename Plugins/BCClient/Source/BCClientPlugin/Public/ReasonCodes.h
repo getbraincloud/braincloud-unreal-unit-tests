@@ -316,4 +316,14 @@ public:
     static const int32 CLIENT_UPLOAD_FILE_TIMED_OUT = 90101;
     static const int32 CLIENT_UPLOAD_FILE_UNKNOWN = 90102;
 	static const int32 CLIENT_DISABLED = 90200;
+
+    static const int32 RTT_LEFT_BY_CHOICE = 80000;
+    static const int32 RTT_EVICTED = 80001;
+    static const int32 RTT_LOST_CONNECTION = 80002;
+    static const int32 RTT_TIMEOUT = 80100;
+    static const int32 RTT_ROOM_READY = 80101;
+    static const int32 RTT_ROOM_CANCELLED = 80102;
+    static const int32 RTT_ERROR_ASSIGNING_ROOM = 80103;
+    static const int32 RTT_ERROR_LAUNCHING_ROOM = 80104;
+    static const int32 RTT_NO_LOBBIES_FOUND = 80200; 
 };
