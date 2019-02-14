@@ -55,7 +55,7 @@ class UBCMessagingProxy : public UBCBlueprintCallProxyBase
 	* @param in_msgsIds Array of msg Ids to delete	
     */
     UFUNCTION(BlueprintCallable, meta = (BlueprintInternalUseOnly = "true"), Category = "BrainCloud|Messaging")
-    static UBCMessagingProxy *GetMessages(UBrainCloudWrapper *brainCloud, const FString &in_msgBox, const TArray<FString> &in_msgsIds);
+    static UBCMessagingProxy *GetMessages(UBrainCloudWrapper *brainCloud, const FString &in_msgBox, const TArray<FString> &in_msgsIds, bool markAsRead);
 
     /**
     * Retrieves a page of messages.

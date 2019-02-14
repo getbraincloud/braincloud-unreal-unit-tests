@@ -203,6 +203,31 @@ class UBCAuthenticationProxy : public UBCBlueprintCallProxyBase
     */
     UFUNCTION(BlueprintCallable, meta = (BlueprintInternalUseOnly = "true"), Category = "BrainCloud|Authentication")
     static UBCAuthenticationProxy *ResetEmailPassword(UBrainCloudWrapper *brainCloudWrapper, const FString &email);
+    
+
+    /**
+    * Reset Email password with service parameters- Sends a password reset email to the specified address
+    *
+    * Service Name - Authenticate
+    * Operation - ResetEmailPasswordAdvanced
+    *
+    * @param appId the application id
+    * @param emailAddress The email address to send the reset email to.
+    * @param serviceParams parameters to send to the email service see the doc for a full 
+    * list. http://getbraincloud.com/apidocs/apiref/#capi-mail
+    * @param callback The method to be invoked when the server response is received
+    * @return The JSON returned in the callback is as follows:
+    * {
+    *   "status": 200,
+    *   "data": {}
+    * }
+    *
+    * Note the follow error reason codes:
+    *
+    * SECURITY_ERROR (40209) - If the email address cannot be found.
+    */
+    UFUNCTION(BlueprintCallable, meta = (BlueprintInternalUseOnly = "true"), Category = "BrainCloud|Authentication")
+    static UBCAuthenticationProxy *ResetEmailPasswordAdvanced(UBrainCloudWrapper *brainCloudWrapper, const FString &email, const FString &serviceParams);
 
     //Getters
     UFUNCTION(BlueprintCallable, Category = "BrainCloud|Authentication")

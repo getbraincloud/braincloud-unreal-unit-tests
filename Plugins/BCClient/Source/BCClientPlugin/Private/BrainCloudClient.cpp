@@ -352,6 +352,11 @@ void BrainCloudClient::disableRTT()
 	_brainCloudRTTComms->disableRTT();
 }
 
+bool BrainCloudClient::getRTTEnabled()
+{
+	return _brainCloudRTTComms->isRTTEnabled();
+}
+
 void BrainCloudClient::setRTTHeartBeatSeconds(int32 in_value)
 {
 	_brainCloudRTTComms->setRTTHeartBeatSeconds(in_value);

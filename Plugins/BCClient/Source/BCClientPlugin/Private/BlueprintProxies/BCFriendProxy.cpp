@@ -90,6 +90,27 @@ UBCFriendProxy * UBCFriendProxy::FindUserByUniversalId(UBrainCloudWrapper *brain
 	return Proxy;
 }
 
+UBCFriendProxy * UBCFriendProxy::FindUserByExactUniversalId(UBrainCloudWrapper *brainCloudWrapper, const FString & searchText)
+{
+	UBCFriendProxy* Proxy = NewObject<UBCFriendProxy>();
+	UBCWrapperProxy::GetBrainCloudInstance(brainCloudWrapper)->getFriendService()->findUserByExactUniversalId(searchText, Proxy);
+	return Proxy;
+}
+
+UBCFriendProxy * UBCFriendProxy::FindUsersByUniversalIdStartingWith(UBrainCloudWrapper *brainCloudWrapper, const FString & searchText, int32 maxResults)
+{
+	UBCFriendProxy* Proxy = NewObject<UBCFriendProxy>();
+	UBCWrapperProxy::GetBrainCloudInstance(brainCloudWrapper)->getFriendService()->findUsersByUniversalIdStartingWith(searchText, maxResults, Proxy);
+	return Proxy;
+}
+
+UBCFriendProxy * UBCFriendProxy::FindUsersByNameStartingWith(UBrainCloudWrapper *brainCloudWrapper, const FString & searchText, int32 maxResults)
+{
+	UBCFriendProxy* Proxy = NewObject<UBCFriendProxy>();
+	UBCWrapperProxy::GetBrainCloudInstance(brainCloudWrapper)->getFriendService()->findUsersByNameStartingWith(searchText, maxResults, Proxy);
+	return Proxy;
+}
+
 UBCFriendProxy * UBCFriendProxy::ListFriends(UBrainCloudWrapper *brainCloudWrapper, EFriendPlatform friendPlatform, bool includeSummaryData)
 {
 	UBCFriendProxy* Proxy = NewObject<UBCFriendProxy>();

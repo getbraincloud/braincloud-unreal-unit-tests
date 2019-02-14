@@ -254,6 +254,16 @@ void UBrainCloudWrapper::getIdentitiesCallback(IServerCallback *success)
     }
 }
 
+void UBrainCloudWrapper::resetEmailPassword(const FString& in_email, IServerCallback * in_callback)
+{
+    _client->getAuthenticationService()->resetEmailPassword(in_email, in_callback);
+}
+
+void UBrainCloudWrapper::resetEmailPasswordAdvanced(const FString& in_emailAddress, const FString& in_serviceParams, IServerCallback * in_callback)
+{
+    _client->getAuthenticationService()->resetEmailPasswordAdvanced(in_emailAddress, in_serviceParams, in_callback);
+}
+
 void UBrainCloudWrapper::reconnect(IServerCallback *callback)
 {
     authenticateAnonymous(callback);
