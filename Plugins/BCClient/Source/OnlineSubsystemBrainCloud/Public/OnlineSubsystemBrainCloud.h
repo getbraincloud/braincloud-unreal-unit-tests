@@ -29,9 +29,9 @@ class ONLINESUBSYSTEMBRAINCLOUD_API FOnlineSubsystemBrainCloud :
 
 public:
 
+    FOnlineSubsystemBrainCloud();
     virtual ~FOnlineSubsystemBrainCloud();
     
-
     // IOnlineSubsystem
 
     virtual IOnlineSessionPtr GetSessionInterface() const override;
@@ -60,6 +60,7 @@ public:
     virtual IOnlinePresencePtr GetPresenceInterface() const override;
     virtual IOnlineChatPtr GetChatInterface() const override;
     virtual IOnlineTurnBasedPtr GetTurnBasedInterface() const override;
+    virtual IOnlineTournamentPtr GetTournamentInterface() const override;
 #if ENGINE_MINOR_VERSION >= 17
 	virtual FText GetOnlineServiceName() const override;
 #endif
@@ -110,8 +111,6 @@ PACKAGE_SCOPE:
 #else
 	FOnlineSubsystemBrainCloud(FName InSubsystemName, FName InInstanceName);
 #endif
-
-    FOnlineSubsystemBrainCloud();
 
 private:
 
