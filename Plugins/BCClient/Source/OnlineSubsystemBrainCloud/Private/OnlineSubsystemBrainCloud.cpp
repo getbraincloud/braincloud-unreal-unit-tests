@@ -15,6 +15,16 @@
 
 #include "AssignableServerCallback.h"
 
+//FOnlineSubsystemBrainCloud::FOnlineSubsystemBrainCloud() 
+//{
+//	_clientPtr = new BrainCloudClient();
+//}
+
+FOnlineSubsystemBrainCloud::~FOnlineSubsystemBrainCloud() 
+{
+	//delete _clientPtr;
+}
+
 IOnlineSessionPtr FOnlineSubsystemBrainCloud::GetSessionInterface() const
 {
 	return nullptr;
@@ -137,6 +147,11 @@ IOnlineTurnBasedPtr FOnlineSubsystemBrainCloud::GetTurnBasedInterface() const
 	return nullptr;
 }
 
+IOnlineTournamentPtr FOnlineSubsystemBrainCloud::GetTournamentInterface() const
+{
+	return nullptr;
+}
+
 bool FOnlineSubsystemBrainCloud::Tick(float DeltaTime)
 {
 	if (!FOnlineSubsystemImpl::Tick(DeltaTime))
@@ -149,11 +164,6 @@ bool FOnlineSubsystemBrainCloud::Tick(float DeltaTime)
 	CleanupCallbackObjects();
 
 	return true;
-}
-
-FOnlineSubsystemBrainCloud::FOnlineSubsystemBrainCloud() 
-{
-	_clientPtr = new BrainCloudClient();
 }
 
 #if ENGINE_MINOR_VERSION >= 16
@@ -170,11 +180,6 @@ FOnlineSubsystemBrainCloud::FOnlineSubsystemBrainCloud(FName InSubsystemName, FN
 	_clientPtr = new BrainCloudClient();
 }
 #endif
-
-FOnlineSubsystemBrainCloud::~FOnlineSubsystemBrainCloud() 
-{
-	//delete _clientPtr;
-}
 
 bool FOnlineSubsystemBrainCloud::Init()
 {
