@@ -16,6 +16,8 @@ public class BCBlueprintSupport : ModuleRules
     public BCBlueprintSupport(TargetInfo Target)
 #endif
     {
+        PrivatePCHHeaderFile = "Private/BCBlueprintSupportPrivatePCH.h";
+
         MinFilesUsingPrecompiledHeaderOverride = 1;
         bFasterWithoutUnity = true;
 

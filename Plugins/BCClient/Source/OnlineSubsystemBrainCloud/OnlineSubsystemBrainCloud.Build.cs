@@ -16,6 +16,8 @@ public class OnlineSubsystemBrainCloud : ModuleRules
     public OnlineSubsystemBrainCloud(TargetInfo Target)
 #endif
     {
+        PrivatePCHHeaderFile = "Private/OnlineSubsystemBrainCloudPrivatePCH.h";
+
         PublicDefinitions.Add("ONLINESUBSYSTEMBRAINCLOUD_PACKAGE=1");
 
         PrivateIncludePaths.AddRange(
