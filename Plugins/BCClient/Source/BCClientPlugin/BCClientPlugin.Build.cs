@@ -16,6 +16,8 @@ public class BCClientPlugin : ModuleRules
     public BCClientPlugin(TargetInfo Target)
 #endif
     {
+        PrivatePCHHeaderFile = "Private/BCClientPluginPrivatePCH.h";
+        
         PrivateIncludePaths.AddRange(
             new string[] {
                     Path.Combine(ModulePath,"Private"),
