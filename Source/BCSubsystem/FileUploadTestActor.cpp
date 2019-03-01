@@ -17,35 +17,42 @@ AFileUploadTestActor::AFileUploadTestActor()
 void AFileUploadTestActor::BeginPlay()
 {
 	Super::BeginPlay();
-	BrainCloudClient::getInstance()->initialize(
+	#pragma warning(suppress: 4996)
+	BrainCloudClient* bcClient = BrainCloudClient::getInstance();
+	bcClient->initialize(
 		"https://internal.braincloudservers.com/dispatcherv2",
 		"91c3a097-4697-4787-ba1c-ff6e737ff8b3",
 		"10299",
 		"1.0.0");
 
-	BrainCloudClient::getInstance()->enableLogging(true);
-	BrainCloudClient::getInstance()->registerFileUploadCallback(this);
-	BrainCloudClient::getInstance()->getAuthenticationService()->authenticateUniversal("UnrealUser", "UnrealUser", true, this);
+	bcClient->enableLogging(true);
+	bcClient->registerFileUploadCallback(this);
+	bcClient->getAuthenticationService()->authenticateUniversal("UnrealUser", "UnrealUser", true, this);
 }
 
 // Called every frame
 void AFileUploadTestActor::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
-	BrainCloudClient::getInstance()->runCallbacks();
+	
+	#pragma warning(suppress: 4996)
+	BrainCloudClient* bcClient = BrainCloudClient::getInstance();
+
+	bcClient->runCallbacks();
 
 	if (_isUploading)
 	{
-		double progress = BrainCloudClient::getInstance()->getFileService()->getUploadProgress(_uploadId);
-		int32 uploadedBytes = BrainCloudClient::getInstance()->getFileService()->getUploadBytesTransferred(_uploadId);
-		int32 totalBytes = BrainCloudClient::getInstance()->getFileService()->getUploadTotalBytesToTransfer(_uploadId);
+		BrainCloudFile* bcFile = bcClient->getFileService();
+		double progress = bcFile->getUploadProgress(_uploadId);
+		int32 uploadedBytes = bcFile->getUploadBytesTransferred(_uploadId);
+		int32 totalBytes = bcFile->getUploadTotalBytesToTransfer(_uploadId);
 		UE_LOG(LogTemp, Display, TEXT("Progress | %f | %d/%d"), progress, uploadedBytes, totalBytes);
 
 		if (_shouldCancel)
 		{
 			if (_cancelTimer <= 0.0f)
 			{
-				BrainCloudClient::getInstance()->getFileService()->cancelUpload(_uploadId);
+				bcFile->cancelUpload(_uploadId);
 				_shouldCancel = false;
 			}
 			else _cancelTimer -= DeltaTime;
@@ -60,6 +67,7 @@ void AFileUploadTestActor::serverCallback(ServiceName serviceName, ServiceOperat
 		UE_LOG(LogTemp, Display, TEXT("Authenticated! Seinding upload request..."));
 
 		//send our next request
+		#pragma warning(suppress: 4996)
 		BrainCloudClient::getInstance()->getFileService()->uploadFile("", "testUnreal", true, true, "C:/Users/bradleyh/Pictures/deepField_med.jpg", this);
 	}
 	else if (serviceName == ServiceName::File) //File return handling
