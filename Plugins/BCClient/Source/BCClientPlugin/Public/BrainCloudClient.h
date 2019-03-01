@@ -75,7 +75,7 @@ class BCCLIENTPLUGIN_API BrainCloudClient
 
 	static bool EnableSoftErrorMode;
 	static bool EnableSingletonMode;
-	static const wchar_t SINGLETON_USE_ERROR_MESSAGE[123];
+	static const FString  SINGLETON_USE_ERROR_MESSAGE;
 
 	BrainCloudClient();
 	//  void BeginDestroy() override;

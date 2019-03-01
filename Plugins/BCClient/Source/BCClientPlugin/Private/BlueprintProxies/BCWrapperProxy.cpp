@@ -50,6 +50,8 @@ UBrainCloudWrapper *UBCWrapperProxy::GetBrainCloudInstance(UBrainCloudWrapper *b
 	// Using the brainCloud singleton (not recommended)
 	else
 	{
+		//C
+		#pragma warning(suppress: 4996)
 		return UBrainCloudWrapper::getInstance();
 	}
 }

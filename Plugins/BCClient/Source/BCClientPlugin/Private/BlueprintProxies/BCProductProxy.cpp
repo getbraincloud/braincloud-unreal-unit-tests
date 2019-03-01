@@ -23,6 +23,7 @@ UBCProductProxy* UBCProductProxy::GetCurrency(UBrainCloudWrapper *brainCloudWrap
 UBCProductProxy* UBCProductProxy::AwardCurrency(UBrainCloudWrapper *brainCloudWrapper, const FString& currencyType, int32 amount)
 {
 	UBCProductProxy* Proxy = NewObject<UBCProductProxy>();
+    #pragma warning(suppress: 4996)
 	UBCWrapperProxy::GetBrainCloudInstance(brainCloudWrapper)->getProductService()->awardCurrency(currencyType, amount, Proxy);
 	return Proxy;
 }
@@ -30,13 +31,16 @@ UBCProductProxy* UBCProductProxy::AwardCurrency(UBrainCloudWrapper *brainCloudWr
 UBCProductProxy* UBCProductProxy::ConsumeCurrency(UBrainCloudWrapper *brainCloudWrapper, const FString& currencyType, int32 amount)
 {
 	UBCProductProxy* Proxy = NewObject<UBCProductProxy>();
+    #pragma warning(suppress: 4996)
 	UBCWrapperProxy::GetBrainCloudInstance(brainCloudWrapper)->getProductService()->consumeCurrency(currencyType, amount, Proxy);
-	return Proxy;
+	 return Proxy;
 }
 
 UBCProductProxy* UBCProductProxy::ResetCurrency(UBrainCloudWrapper *brainCloudWrapper)
 {
 	UBCProductProxy* Proxy = NewObject<UBCProductProxy>();
+    
+    #pragma warning(suppress: 4996)
 	UBCWrapperProxy::GetBrainCloudInstance(brainCloudWrapper)->getProductService()->resetCurrency(Proxy);
 	return Proxy;
 }

@@ -22,7 +22,7 @@
 bool BrainCloudClient::EnableSoftErrorMode = false;
 bool BrainCloudClient::EnableSingletonMode = false;
 
-const wchar_t BrainCloudClient::SINGLETON_USE_ERROR_MESSAGE[123] = TEXT("Singleton usage is disabled. If called by mistake, use your own variable that holds an instance of the bcWrapper/bcClient.");
+const FString BrainCloudClient::SINGLETON_USE_ERROR_MESSAGE = TEXT("Singleton usage is disabled. If called by mistake, use your own variable that holds an instance of the bcWrapper/bcClient.");
 
 BrainCloudClient *BrainCloudClient::_instance = nullptr;
 
@@ -102,11 +102,11 @@ BrainCloudClient *BrainCloudClient::getInstance()
 	{
 		if (EnableSoftErrorMode)
 		{
-			UE_LOG(LogTemp, Warning, TEXT("%s"), SINGLETON_USE_ERROR_MESSAGE);
+			UE_LOG(LogTemp, Warning, TEXT("%s"), *SINGLETON_USE_ERROR_MESSAGE);
 		}
 		else
 		{
-			UE_LOG(LogTemp, Fatal, TEXT("%s"), SINGLETON_USE_ERROR_MESSAGE);
+			UE_LOG(LogTemp, Fatal, TEXT("%s"), *SINGLETON_USE_ERROR_MESSAGE);
 		}
 	}
 

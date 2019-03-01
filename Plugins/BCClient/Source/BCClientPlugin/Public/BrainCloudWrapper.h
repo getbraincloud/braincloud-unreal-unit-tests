@@ -480,8 +480,8 @@ class BCCLIENTPLUGIN_API UBrainCloudWrapper : public UObject, public IServerCall
      * Returns a singleton instance of the BrainCloudClient.
      * @return A singleton instance of the BrainCloudClient.
      */
+    #pragma warning(suppress: 4996)
     static BrainCloudClient *getBC() { return getInstance()->_client; }
-
     /**
      * Returns a singleton instance of the BrainCloudClient.
      * @return A singleton instance of the BrainCloudClient.
