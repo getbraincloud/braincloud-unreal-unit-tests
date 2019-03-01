@@ -18,22 +18,27 @@ AEventCallbackTest::AEventCallbackTest()
 void AEventCallbackTest::BeginPlay()
 {
 	Super::BeginPlay();
-    BrainCloudClient::getInstance()->initialize(
+    
+	#pragma warning(suppress: 4996)
+    BrainCloudClient *bcClient = BrainCloudClient::getInstance();
+
+    bcClient->initialize(
         "https://internal.braincloudservers.com/dispatcherv2",
         "91c3a097-4697-4787-ba1c-ff6e737ff8b3",
         "10299",
         "1.0.0");
 
-    BrainCloudClient::getInstance()->enableLogging(true);
-    BrainCloudClient::getInstance()->getAuthenticationService()->authenticateUniversal("UnrealUser", "UnrealUser", true, this);	
-    BrainCloudClient::getInstance()->registerEventCallback(this);
-    BrainCloudClient::getInstance()->registerRewardCallback(this);
+    bcClient->enableLogging(true);
+    bcClient->getAuthenticationService()->authenticateUniversal("UnrealUser", "UnrealUser", true, this);	
+    bcClient->registerEventCallback(this);
+    bcClient->registerRewardCallback(this);
 }
 
 // Called every frame
 void AEventCallbackTest::Tick( float DeltaTime )
 {
 	Super::Tick( DeltaTime );
+    #pragma warning(suppress: 4996)
     BrainCloudClient::getInstance()->runCallbacks();
 }
 
@@ -51,12 +56,15 @@ void AEventCallbackTest::serverCallback(ServiceName serviceName, ServiceOperatio
 {
     if (serviceName == ServiceName::AuthenticateV2)
     {
-        BrainCloudClient::getInstance()->getEventService()->sendEvent(
-            BrainCloudClient::getInstance()->getAuthenticationService()->getProfileId(),
+	    #pragma warning(suppress: 4996)
+        BrainCloudClient *bcClient = BrainCloudClient::getInstance();
+
+        bcClient->getEventService()->sendEvent(
+            bcClient->getAuthenticationService()->getProfileId(),
             "test",
             "{ \"RoundsWon\" : 0 }",
             nullptr);
-        BrainCloudClient::getInstance()->getPlayerStatisticsEventService()->triggerStatsEvent("test", 1, nullptr);
+        bcClient->getPlayerStatisticsEventService()->triggerStatsEvent("test", 1, nullptr);
     }
 }
 

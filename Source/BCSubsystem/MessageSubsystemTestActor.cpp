@@ -28,6 +28,8 @@ void AMessageSubsystemTestActor::Tick(float DeltaTime)
 void AMessageSubsystemTestActor::BeginPlay()
 {
 	Super::BeginPlay();
+	
+	#pragma warning(suppress: 4996)
 	BrainCloudClient::getInstance()->enableLogging(true);
 
 	_identity->OnLoginCompleteDelegates->AddUObject(this, &AMessageSubsystemTestActor::LoginCallback);

@@ -14,8 +14,8 @@ FBrainCloudInitParams UUnitTestHelpers::InitializeFromFile()
 	FBrainCloudInitParams params;
 
 	IPlatformFile& platformFile = FPlatformFileManager::Get().GetPlatformFile();
-	FString projectDir = FPaths::GameDir();
-	FString filePath = FPaths::Combine(*FPaths::GameDir(), TEXT("ids.txt"));
+	FString projectDir = FPaths::ProjectDir();
+	FString filePath = FPaths::Combine(*FPaths::ProjectDir(), TEXT("ids.txt"));
 
 	if (platformFile.FileExists(*filePath))
 	{
@@ -32,37 +32,37 @@ FBrainCloudInitParams UUnitTestHelpers::InitializeFromFile()
 			if (line.StartsWith("serverUrl"))
 			{
 				line.Split(TEXT("="), nullptr, &params.ServerUrl);
-				params.ServerUrl.TrimTrailing();
+				params.ServerUrl.TrimEnd();
 			}
 			else if (line.StartsWith("appId"))
 			{
 				line.Split(TEXT("="), nullptr, &params.AppId);
-				params.AppId.TrimTrailing();
+				params.AppId.TrimEnd();
 			}
 			else if (line.StartsWith("secret"))
 			{
 				line.Split(TEXT("="), nullptr, &params.Secret);
-				params.Secret.TrimTrailing();
+				params.Secret.TrimEnd();
 			}
 			else if (line.StartsWith("version"))
 			{
 				line.Split(TEXT("="), nullptr, &params.Version);
-				params.Version.TrimTrailing();
+				params.Version.TrimEnd();
 			}
 			else if (line.StartsWith("childAppId"))
 			{
 				line.Split(TEXT("="), nullptr, &params.ChildAppId);
-				params.ChildAppId.TrimTrailing();
+				params.ChildAppId.TrimEnd();
 			}
 			else if (line.StartsWith("parentLevelName"))
 			{
 				line.Split(TEXT("="), nullptr, &params.ParentLevelName);
-				params.ParentLevelName.TrimTrailing();
+				params.ParentLevelName.TrimEnd();
 			}
 			else if (line.StartsWith("peerName"))
 			{
 				line.Split(TEXT("="), nullptr, &params.PeerName);
-				params.PeerName.TrimTrailing();
+				params.PeerName.TrimEnd();
 			}
 		}
 	}

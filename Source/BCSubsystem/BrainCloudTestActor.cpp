@@ -17,13 +17,16 @@ ABrainCloudTestActor::ABrainCloudTestActor()
 void ABrainCloudTestActor::BeginPlay()
 {
     Super::BeginPlay();
-    BrainCloudClient::getInstance()->initialize(
+    #pragma warning(suppress: 4996)
+    BrainCloudClient *bcClient = BrainCloudClient::getInstance();
+
+    bcClient->initialize(
         "https://internal.braincloudservers.com/dispatcherv2", 
         "91c3a097-4697-4787-ba1c-ff6e737ff8b3", 
         "10299", 
         "1.0.0");
 
-    BrainCloudClient::getInstance()->getAuthenticationService()->authenticateUniversal("UnrealUser", "UnrealUser", true, this);
+    bcClient->getAuthenticationService()->authenticateUniversal("UnrealUser", "UnrealUser", true, this);
 
     //JSON TEST
     //FString writeJsonStr;
@@ -61,6 +64,7 @@ void ABrainCloudTestActor::BeginPlay()
 void ABrainCloudTestActor::Tick(float DeltaTime)
 {
     Super::Tick(DeltaTime);
+    #pragma warning(suppress: 4996)
     BrainCloudClient::getInstance()->runCallbacks();
 }
 
@@ -71,6 +75,7 @@ void ABrainCloudTestActor::serverCallback(ServiceName serviceName, ServiceOperat
         UE_LOG(LogTemp, Display, TEXT("Authenticated!"));
 
         //send our next request
+        #pragma warning(suppress: 4996)
         BrainCloudClient::getInstance()->getTimeService()->readServerTime(this);
     }
     else if (serviceName == ServiceName::Time) //time return handling
