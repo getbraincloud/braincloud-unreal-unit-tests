@@ -49,11 +49,11 @@ UBrainCloudWrapper *UBrainCloudWrapper::getInstance()
     {
         if (BrainCloudClient::EnableSoftErrorMode)
         {
-            UE_LOG(LogTemp, Warning, TEXT("%s"), BrainCloudClient::SINGLETON_USE_ERROR_MESSAGE);
+            UE_LOG(LogTemp, Warning, TEXT("%s"), *BrainCloudClient::SINGLETON_USE_ERROR_MESSAGE);
         }
         else
         {
-            UE_LOG(LogTemp, Fatal, TEXT("%s"), BrainCloudClient::SINGLETON_USE_ERROR_MESSAGE);
+            UE_LOG(LogTemp, Fatal, TEXT("%s"), *BrainCloudClient::SINGLETON_USE_ERROR_MESSAGE);
         }
     }
 
