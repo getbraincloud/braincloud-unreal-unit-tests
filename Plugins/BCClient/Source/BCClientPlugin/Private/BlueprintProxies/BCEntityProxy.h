@@ -11,8 +11,8 @@ class UBCEntityProxy : public UBCBlueprintCallProxyBase
 {
     GENERATED_BODY()
 
-public:
-    UBCEntityProxy(const FObjectInitializer& ObjectInitializer);
+  public:
+    UBCEntityProxy(const FObjectInitializer &ObjectInitializer);
 
     /**
     * Method creates a new entity on the server.
@@ -26,7 +26,7 @@ public:
     * permissions which make the entity readable/writeable by only the player.
     */
     UFUNCTION(BlueprintCallable, meta = (BlueprintInternalUseOnly = "true"), Category = "BrainCloud|Entity")
-        static UBCEntityProxy* CreateEntity(UBrainCloudWrapper *brainCloudWrapper, const FString& entityType, const FString& jsonEntityData, UBrainCloudACL* jsonEntityAcl);
+    static UBCEntityProxy *CreateEntity(UBrainCloudWrapper *brainCloudWrapper, const FString &entityType, const FString &jsonEntityData, UBrainCloudACL *jsonEntityAcl);
 
     /**
     * Method updates a new entity on the server. This operation results in the entity
@@ -42,7 +42,7 @@ public:
     * permissions which make the entity readable/writeable by only the player.
     */
     UFUNCTION(BlueprintCallable, meta = (BlueprintInternalUseOnly = "true"), Category = "BrainCloud|Entity")
-        static UBCEntityProxy* UpdateEntity(UBrainCloudWrapper *brainCloudWrapper, const FString& entityId, const FString& entityType, const FString& jsonEntityData, UBrainCloudACL* jsonEntityAcl);
+    static UBCEntityProxy *UpdateEntity(UBrainCloudWrapper *brainCloudWrapper, const FString &entityId, const FString &entityType, const FString &jsonEntityData, UBrainCloudACL *jsonEntityAcl);
 
     /** 
     * Method retreives a singleton entity on the server. If the entity doesn't exist, null is returned.
@@ -53,7 +53,7 @@ public:
     * Param - entityType The entity type as defined by the user
     */
     UFUNCTION(BlueprintCallable, meta = (BlueprintInternalUseOnly = "true"), Category = "BrainCloud|Entity")
-        static UBCEntityProxy* GetEntity(UBrainCloudWrapper *brainCloudWrapper, const FString& entityId);
+    static UBCEntityProxy *GetEntity(UBrainCloudWrapper *brainCloudWrapper, const FString &entityId);
 
     /** 
     * Method to get a specific entity.
@@ -64,7 +64,7 @@ public:
     * Param - entityId The entity id
     */
     UFUNCTION(BlueprintCallable, meta = (BlueprintInternalUseOnly = "true"), Category = "BrainCloud|Entity")
-        static UBCEntityProxy* GetSingleton(UBrainCloudWrapper *brainCloudWrapper, const FString& entityType);
+    static UBCEntityProxy *GetSingleton(UBrainCloudWrapper *brainCloudWrapper, const FString &entityType);
 
     /**
     * Method updates a new singleton entity on the server. This operation results in the entity
@@ -78,7 +78,7 @@ public:
     * permissions which make the entity readable/writeable by only the player.
     */
     UFUNCTION(BlueprintCallable, meta = (BlueprintInternalUseOnly = "true"), Category = "BrainCloud|Entity")
-        static UBCEntityProxy* UpdateSingleton(UBrainCloudWrapper *brainCloudWrapper, const FString& entityType, const FString& jsonEntityData);
+    static UBCEntityProxy *UpdateSingleton(UBrainCloudWrapper *brainCloudWrapper, const FString &entityType, const FString &jsonEntityData);
 
     /**
     * Method deletes the given entity on the server.
@@ -89,7 +89,7 @@ public:
     * Param - entityId The id of the entity to update
     */
     UFUNCTION(BlueprintCallable, meta = (BlueprintInternalUseOnly = "true"), Category = "BrainCloud|Entity")
-        static UBCEntityProxy* DeleteEntity(UBrainCloudWrapper *brainCloudWrapper, const FString& entityId);
+    static UBCEntityProxy *DeleteEntity(UBrainCloudWrapper *brainCloudWrapper, const FString &entityId);
 
     /**
     * Method deletes the given singleton entity on the server.
@@ -100,7 +100,7 @@ public:
     * Param - entityType The type of the entity to delete
     */
     UFUNCTION(BlueprintCallable, meta = (BlueprintInternalUseOnly = "true"), Category = "BrainCloud|Entity")
-        static UBCEntityProxy* DeleteSingleton(UBrainCloudWrapper *brainCloudWrapper, const FString& entityType);
+    static UBCEntityProxy *DeleteSingleton(UBrainCloudWrapper *brainCloudWrapper, const FString &entityType);
 
     /** Method returns all player entities that match the given type.
     * Service Name - Entity
@@ -109,7 +109,7 @@ public:
     * Param - entityType The entity type to search for
     */
     UFUNCTION(BlueprintCallable, meta = (BlueprintInternalUseOnly = "true"), Category = "BrainCloud|Entity")
-        static UBCEntityProxy* GetEntitiesByType(UBrainCloudWrapper *brainCloudWrapper, const FString& entityType);
+    static UBCEntityProxy *GetEntitiesByType(UBrainCloudWrapper *brainCloudWrapper, const FString &entityType);
 
     /**
     * Method returns a shared entity for the given player and entity ID.
@@ -123,7 +123,7 @@ public:
     * Param - entityId The ID of the entity that will be retrieved
     */
     UFUNCTION(BlueprintCallable, meta = (BlueprintInternalUseOnly = "true"), Category = "BrainCloud|Entity")
-        static UBCEntityProxy* GetSharedEntityForPlayerId(UBrainCloudWrapper *brainCloudWrapper, const FString& profileId, const FString& entityId);
+    static UBCEntityProxy *GetSharedEntityForPlayerId(UBrainCloudWrapper *brainCloudWrapper, const FString &profileId, const FString &entityId);
 
     /**
     * Method returns all shared entities for the given player id.
@@ -136,7 +136,7 @@ public:
     * Param - playerId The player id to retrieve shared entities for
     */
     UFUNCTION(BlueprintCallable, meta = (BlueprintInternalUseOnly = "true"), Category = "BrainCloud|Entity")
-        static UBCEntityProxy* GetSharedEntitiesForPlayerId(UBrainCloudWrapper *brainCloudWrapper, const FString& profileId);
+    static UBCEntityProxy *GetSharedEntitiesForPlayerId(UBrainCloudWrapper *brainCloudWrapper, const FString &profileId);
 
     /**
     * Method updates a shared entity owned by another player. This operation results in the entity
@@ -151,7 +151,7 @@ public:
     * Param - jsonEntityData    The entity's data as a json string.
     */
     UFUNCTION(BlueprintCallable, meta = (BlueprintInternalUseOnly = "true"), Category = "BrainCloud|Entity")
-        static UBCEntityProxy* UpdateSharedEntity(UBrainCloudWrapper *brainCloudWrapper, const FString& entityId, const FString& targetProfileId, const FString& entityType, const FString& jsonEntityData);
+    static UBCEntityProxy *UpdateSharedEntity(UBrainCloudWrapper *brainCloudWrapper, const FString &entityId, const FString &targetProfileId, const FString &entityType, const FString &jsonEntityData);
 
     /**
     * Method gets list of entities from the server base on type and/or where clause
@@ -164,7 +164,7 @@ public:
     * Param - maxReturn The maximum number of entities to return
     */
     UFUNCTION(BlueprintCallable, meta = (BlueprintInternalUseOnly = "true"), Category = "BrainCloud|Entity")
-        static UBCEntityProxy* GetList(UBrainCloudWrapper *brainCloudWrapper, const FString& whereJson, const FString& orderByJson, int32 maxReturn);
+    static UBCEntityProxy *GetList(UBrainCloudWrapper *brainCloudWrapper, const FString &whereJson, const FString &orderByJson, int32 maxReturn);
 
     /**
     * Method gets a count of entities based on the where clause
@@ -175,7 +175,7 @@ public:
     * Param - whereJson Mongo style query string
     */
     UFUNCTION(BlueprintCallable, meta = (BlueprintInternalUseOnly = "true"), Category = "BrainCloud|Entity")
-        static UBCEntityProxy* GetListCount(UBrainCloudWrapper *brainCloudWrapper, const FString& whereJson);
+    static UBCEntityProxy *GetListCount(UBrainCloudWrapper *brainCloudWrapper, const FString &whereJson);
 
     /**
     * Method uses a paging system to iterate through user entities
@@ -189,7 +189,7 @@ public:
     *                   See the portal appendix documentation for format.
     */
     UFUNCTION(BlueprintCallable, meta = (BlueprintInternalUseOnly = "true"), Category = "BrainCloud|Entity")
-        static UBCEntityProxy* GetPage(UBrainCloudWrapper *brainCloudWrapper, const FString& context);
+    static UBCEntityProxy *GetPage(UBrainCloudWrapper *brainCloudWrapper, const FString &context);
 
     /**
     * Method to retrieve previous or next pages after having called the GetPage method.
@@ -203,7 +203,7 @@ public:
     *      retrieved using the context string to determine a starting point.
     */
     UFUNCTION(BlueprintCallable, meta = (BlueprintInternalUseOnly = "true"), Category = "BrainCloud|Entity")
-        static UBCEntityProxy* GetPageOffset(UBrainCloudWrapper *brainCloudWrapper, const FString& context, int32 pageOffset);
+    static UBCEntityProxy *GetPageOffset(UBrainCloudWrapper *brainCloudWrapper, const FString &context, int32 pageOffset);
 
     /**
     * Partial increment of entity data field items. Partial set of items incremented as specified.
@@ -215,9 +215,9 @@ public:
     * Param - jsonData The entity's data object
     */
     UFUNCTION(BlueprintCallable, meta = (BlueprintInternalUseOnly = "true"), Category = "BrainCloud|Entity")
-        static UBCEntityProxy* IncrementUserEntityData(UBrainCloudWrapper *brainCloudWrapper, const FString& entityId, const FString& jsonData);
+    static UBCEntityProxy *IncrementUserEntityData(UBrainCloudWrapper *brainCloudWrapper, const FString &entityId, const FString &jsonData);
 
-	/**
+    /**
 	* Partial increment of entity data field items. Partial set of items incremented as specified.
 	*
 	* Service Name - entity
@@ -227,8 +227,8 @@ public:
 	* Param - targetPlayerId Profile ID of the entity owner
 	* Param - jsonData The entity's data object
 	*/
-	UFUNCTION(BlueprintCallable, meta = (BlueprintInternalUseOnly = "true"), Category = "BrainCloud|Entity")
-		static UBCEntityProxy* IncrementSharedUserEntityData(UBrainCloudWrapper *brainCloudWrapper, const FString& entityId, const FString& targetProfileId, const FString& jsonData);
+    UFUNCTION(BlueprintCallable, meta = (BlueprintInternalUseOnly = "true"), Category = "BrainCloud|Entity")
+    static UBCEntityProxy *IncrementSharedUserEntityData(UBrainCloudWrapper *brainCloudWrapper, const FString &entityId, const FString &targetProfileId, const FString &jsonData);
 
     /**
     * Method gets list of shared entities for the specified player based on type and/or where clause
@@ -242,6 +242,5 @@ public:
     * @param maxReturn The maximum number of entities to return
     */
     UFUNCTION(BlueprintCallable, meta = (BlueprintInternalUseOnly = "true"), Category = "BrainCloud|Entity")
-        static UBCEntityProxy* GetSharedEntitiesListForPlayerId(UBrainCloudWrapper *brainCloudWrapper, const FString& profileId, const FString& whereJson, const FString& orderByJson, int32 maxReturn);
-
+    static UBCEntityProxy *GetSharedEntitiesListForPlayerId(UBrainCloudWrapper *brainCloudWrapper, const FString &profileId, const FString &whereJson, const FString &orderByJson, int32 maxReturn);
 };

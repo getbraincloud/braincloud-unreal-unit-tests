@@ -7,8 +7,8 @@ class IServerCallback;
 
 class BCCLIENTPLUGIN_API BrainCloudGlobalApp
 {
-public:
-    BrainCloudGlobalApp(BrainCloudClient* client);
+  public:
+    BrainCloudGlobalApp(BrainCloudClient *client);
 
     /**
      * Read game's global properties
@@ -18,8 +18,8 @@ public:
      *
      * @param - callback The method to be invoked when the server response is received
      */
-    void readProperties(IServerCallback * callback);
+    void readProperties(IServerCallback *callback);
 
-private:
-    BrainCloudClient* _client = nullptr;
+  private:
+    BrainCloudClient *_client = nullptr;
 };

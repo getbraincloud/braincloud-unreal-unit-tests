@@ -7,8 +7,8 @@ class IServerCallback;
 
 class BCCLIENTPLUGIN_API BrainCloudTournament
 {
-public:
-	BrainCloudTournament(BrainCloudClient* client);
+  public:
+	BrainCloudTournament(BrainCloudClient *client);
 
 	/**
 	* Processes any outstanding rewards for the given player
@@ -20,7 +20,7 @@ public:
 	* @param versionId Version of the tournament. Use -1 for the latest version.
 	* @param callback The method to be invoked when the server response is received
 	*/
-	void claimTournamentReward(const FString& leaderboardId, int32 versionId, IServerCallback * callback = nullptr);
+	void claimTournamentReward(const FString &leaderboardId, int32 versionId, IServerCallback *callback = nullptr);
 
 	/**
 	* Get the status of a division
@@ -31,7 +31,7 @@ public:
 	* @param divSetId The id for the division
 	* @param callback The method to be invoked when the server response is received
 	*/
-	void getDivisionInfo(const FString & divSetId, IServerCallback * callback);
+	void getDivisionInfo(const FString &divSetId, IServerCallback *callback);
 
 	/**
 	* Returns list of player's recently active divisions
@@ -41,7 +41,7 @@ public:
 	*
 	* @param callback The method to be invoked when the server response is received
 	*/
-	void getMyDivisions(IServerCallback * callback);
+	void getMyDivisions(IServerCallback *callback);
 
 	/**
 	* Get tournament status associated with a leaderboard
@@ -53,7 +53,7 @@ public:
 	* @param versionId Version of the tournament. Use -1 for the latest version.
 	* @param callback The method to be invoked when the server response is received
 	*/
-	void getTournamentStatus(const FString& leaderboardId, int32 versionId, IServerCallback * callback = nullptr);
+	void getTournamentStatus(const FString &leaderboardId, int32 versionId, IServerCallback *callback = nullptr);
 
 	/**
 	* Join the specified division.
@@ -68,7 +68,7 @@ public:
 	*						 Usually 0, unless leaderboard is LOW_VALUE
 	* @param callback The method to be invoked when the server response is received
 	*/
-	void joinDivision(const FString & divSetId, const FString & tournamentCode, int32 initialScore, IServerCallback * callback);
+	void joinDivision(const FString &divSetId, const FString &tournamentCode, int32 initialScore, IServerCallback *callback);
 
 	/**
 	* Join the specified tournament.
@@ -82,7 +82,7 @@ public:
 	* @param initialScore Initial score for the user
 	* @param callback The method to be invoked when the server response is received
 	*/
-	void joinTournament(const FString& leaderboardId, const FString& tournamentCode, int32 initialScore, IServerCallback * callback = nullptr);
+	void joinTournament(const FString &leaderboardId, const FString &tournamentCode, int32 initialScore, IServerCallback *callback = nullptr);
 
 	/**
 	* Removes player from division instance
@@ -94,7 +94,7 @@ public:
 	* @param leaderboardId The leaderboard for the tournament
 	* @param callback The method to be invoked when the server response is received
 	*/
-	void leaveDivisionInstance(const FString & leaderboardId, IServerCallback * callback);
+	void leaveDivisionInstance(const FString &leaderboardId, IServerCallback *callback);
 
 	/**
 	* Removes player's score from tournament leaderboard
@@ -105,7 +105,7 @@ public:
 	* @param leaderboardId The leaderboard for the tournament
 	* @param callback The method to be invoked when the server response is received
 	*/
-	void leaveTournament(const FString& leaderboardId, IServerCallback * callback = nullptr);
+	void leaveTournament(const FString &leaderboardId, IServerCallback *callback = nullptr);
 
 	/**
 	* Post the users score to the leaderboard
@@ -119,7 +119,7 @@ public:
 	* @param roundStartedTime Time the user started the match resulting in the score being posted in UTC.
 	* @param callback The method to be invoked when the server response is received
 	*/
-	void postTournamentScore(const FString& leaderboardId, int32 score, const FString& jsonData, const struct FDateTime roundStartedTime, IServerCallback * callback = nullptr);
+	void postTournamentScore(const FString &leaderboardId, int32 score, const FString &jsonData, const struct FDateTime roundStartedTime, IServerCallback *callback = nullptr);
 
 	/**
 	* Returns the user's expected reward based on the current scores
@@ -130,7 +130,7 @@ public:
 	* @param leaderboardId The leaderboard for the tournament
 	* @param callback The method to be invoked when the server response is received
 	*/
-	void viewCurrentReward(const FString& leaderboardId, IServerCallback * callback = nullptr);
+	void viewCurrentReward(const FString &leaderboardId, IServerCallback *callback = nullptr);
 
 	/**
 	* Returns the user's reward from a finished tournament
@@ -142,9 +142,8 @@ public:
 	* @param versionId Version of the tournament. Use -1 for the latest version.
 	* @param callback The method to be invoked when the server response is received
 	*/
-	void viewReward(const FString& leaderboardId, int32 versionId, IServerCallback * callback = nullptr);
+	void viewReward(const FString &leaderboardId, int32 versionId, IServerCallback *callback = nullptr);
 
-private:
-	BrainCloudClient* _client = nullptr;
+  private:
+	BrainCloudClient *_client = nullptr;
 };
-

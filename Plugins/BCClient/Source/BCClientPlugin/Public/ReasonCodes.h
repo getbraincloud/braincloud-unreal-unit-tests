@@ -4,7 +4,7 @@
 
 class BCCLIENTPLUGIN_API ReasonCode
 {
-public:
+  public:
     // Error codes
     static const int32 NO_REASON_CODE = 0;
 
@@ -33,17 +33,16 @@ public:
     static const int32 PROPERTY_NOT_OVERRIDEABLE = 40216;
     static const int32 UNKNOWN_AUTH_ERROR = 40217;
 
-
-    // Forbidden (403)... 
+    // Forbidden (403)...
     static const int32 UNABLE_TO_GET_FRIENDS_FROM_FACEBOOK = 40300;
     static const int32 BAD_SIGNATURE = 40301;
     static const int32 UNABLE_TO_VALIDATE_PLAYER = 40302;
-	static const int32 UNABLE_TO_VALIDATE_USER = UNABLE_TO_VALIDATE_PLAYER;
+    static const int32 UNABLE_TO_VALIDATE_USER = UNABLE_TO_VALIDATE_PLAYER;
     static const int32 PLAYER_SESSION_EXPIRED = 40303;
-	static const int32 USER_SESSION_EXPIRED = PLAYER_SESSION_EXPIRED;
+    static const int32 USER_SESSION_EXPIRED = PLAYER_SESSION_EXPIRED;
     static const int32 NO_SESSION = 40304;
     static const int32 PLAYER_SESSION_MISMATCH = 40305;
-	static const int32 USER_SESSION_MISMATCH = PLAYER_SESSION_MISMATCH;
+    static const int32 USER_SESSION_MISMATCH = PLAYER_SESSION_MISMATCH;
     static const int32 OPERATION_REQUIRES_A_SESSION = 40306;
     static const int32 TOKEN_DOES_NOT_MATCH_USER = 40307;
     static const int32 EVENT_CAN_ONLY_SEND_TO_FRIEND_OR_SELF = 40309;
@@ -52,9 +51,8 @@ public:
     static const int32 VC_LIMIT_EXCEEDED = 40312;
     static const int32 UNABLE_TO_GET_MY_DATA_FROM_FACEBOOK = 40313;
     static const int32 INVALID_AUTHENTICATION_TYPE = 40315;
-	static const int32 INVALID_GAME_ID = 40316;
-	static const int32 INVALID_APP_ID = INVALID_GAME_ID;
-
+    static const int32 INVALID_GAME_ID = 40316;
+    static const int32 INVALID_APP_ID = INVALID_GAME_ID;
 
     // This product and receipt have already been claimed
     static const int32 APPLE_TRANS_ID_ALREADY_CLAIMED = 40317;
@@ -67,12 +65,12 @@ public:
     static const int32 PLATFORM_NOT_SUPPORTED = 40320;
 
     static const int32 INVALID_PLAYER_STATISTICS_EVENT_NAME = 40321;
-	static const int32 INVALID_USER_STATISTICS_EVENT_NAME = INVALID_PLAYER_STATISTICS_EVENT_NAME;
+    static const int32 INVALID_USER_STATISTICS_EVENT_NAME = INVALID_PLAYER_STATISTICS_EVENT_NAME;
 
     // App Version No Longer Supported
     static const int32 GAME_VERSION_NOT_SUPPORTED = 40322;
-	static const int32 APP_VERSION_NOT_SUPPORTED = GAME_VERSION_NOT_SUPPORTED;
-	// @deprecated - use APP_VERSION_NOT_SUPPORTED
+    static const int32 APP_VERSION_NOT_SUPPORTED = GAME_VERSION_NOT_SUPPORTED;
+    // @deprecated - use APP_VERSION_NOT_SUPPORTED
     static const int32 APP_VERSION_NO_LONGER_SUPPORTED = GAME_VERSION_NOT_SUPPORTED;
 
     static const int32 BAD_REFERENCE_DATA = 40324;
@@ -82,10 +80,10 @@ public:
     static const int32 MISSING_TWEET = 40328;
     static const int32 FACEBOOK_PAYMENT_ID_ALREADY_PROCESSED = 40329;
     static const int32 DISABLED_GAME = 40330;
-	static const int32 DISABLED_APP = DISABLED_GAME;
+    static const int32 DISABLED_APP = DISABLED_GAME;
     static const int32 MATCH_MAKING_DISABLED = 40331;
     static const int32 UPDATE_FAILED = 40332;
-    static const int32 INVALID_OPERATION = 40333;   // invalid operation for API call
+    static const int32 INVALID_OPERATION = 40333; // invalid operation for API call
     static const int32 MATCH_RANGE_ERROR = 40334;
     static const int32 PLAYER_IN_MATCH = 40335;
     static const int32 MATCH_PLAYER_SHIELDED = 40336;
@@ -105,11 +103,11 @@ public:
     static const int32 S3_ERROR = 40350;
     static const int32 INVALID_ATTRIBUTES = 40351;
     static const int32 IMPORT_MISSING_GAME_DATA = 40352;
-	static const int32 IMPORT_MISSING_APP_DATA = IMPORT_MISSING_GAME_DATA;
+    static const int32 IMPORT_MISSING_APP_DATA = IMPORT_MISSING_GAME_DATA;
     static const int32 IMPORT_SCHEMA_VERSION_TOO_OLD = 40353;
     static const int32 IMPORT_SCHEMA_VERSION_INVALID = 40355;
     static const int32 PLAYER_SESSION_LOGGED_OUT = 40356;
-	static const int32 USER_SESSION_LOGGED_OUT = PLAYER_SESSION_LOGGED_OUT;
+    static const int32 USER_SESSION_LOGGED_OUT = PLAYER_SESSION_LOGGED_OUT;
     static const int32 API_HOOK_SCRIPT_ERROR = 40357;
     static const int32 MISSING_REQUIRED_PARAMETER = 40358;
     static const int32 INVALID_PARAMETER_TYPE = 40359;
@@ -125,34 +123,34 @@ public:
     static const int32 INVALID_STATISTIC_NAME = 40369;
     static const int32 INVALID_HTTP_REQUEST = 40370;
     static const int32 GAME_LIMIT_REACHED = 40371;
-	static const int32 APP_LIMIT_REACHED = GAME_LIMIT_REACHED;
+    static const int32 APP_LIMIT_REACHED = GAME_LIMIT_REACHED;
     static const int32 GAME_RUNSTATE_DISABLED = 40372;
-	static const int32 APP_RUNSTATE_DISABLED = GAME_RUNSTATE_DISABLED;
+    static const int32 APP_RUNSTATE_DISABLED = GAME_RUNSTATE_DISABLED;
     static const int32 INVALID_COMPANY_ID = 40373;
     static const int32 INVALID_PLAYER_ID = 40374;
-	static const int32 INVALID_USER_ID = INVALID_PLAYER_ID;
+    static const int32 INVALID_USER_ID = INVALID_PLAYER_ID;
     static const int32 INVALID_TEMPLATE_ID = 40375;
     static const int32 MINIMUM_SEARCH_INPUT = 40376;
     static const int32 MISSING_GAME_PARENT = 40377;
-	static const int32 MISSING_APP_PARENT = MISSING_GAME_PARENT;
-	static const int32 GAME_PARENT_MISMATCH = 40378;
-	static const int32 APP_PARENT_MISMATCH = GAME_PARENT_MISMATCH;
+    static const int32 MISSING_APP_PARENT = MISSING_GAME_PARENT;
+    static const int32 GAME_PARENT_MISMATCH = 40378;
+    static const int32 APP_PARENT_MISMATCH = GAME_PARENT_MISMATCH;
     static const int32 CHILD_PLAYER_MISSING = 40379;
-	static const int32 CHILD_USER_MISSING = CHILD_PLAYER_MISSING;
+    static const int32 CHILD_USER_MISSING = CHILD_PLAYER_MISSING;
     static const int32 MISSING_PLAYER_PARENT = 40380;
-	static const int32 MISSING_USER_PARENT = MISSING_PLAYER_PARENT;
+    static const int32 MISSING_USER_PARENT = MISSING_PLAYER_PARENT;
     static const int32 PLAYER_PARENT_MISMATCH = 40381;
-	static const int32 USER_PARENT_MISMATCH = PLAYER_PARENT_MISMATCH;
+    static const int32 USER_PARENT_MISMATCH = PLAYER_PARENT_MISMATCH;
     static const int32 MISSING_PLAYER_ID = 40382;
-	static const int32 MISSING_USER_ID = MISSING_PLAYER_ID;
+    static const int32 MISSING_USER_ID = MISSING_PLAYER_ID;
     static const int32 DECODE_CONTEXT = 40383;
     static const int32 INVALID_QUERY_CONTEXT = 40384;
     static const int32 GROUP_MEMBER_NOT_FOUND = 40385;
     static const int32 INVALID_SORT = 40386;
     static const int32 GAME_NOT_FOUND = 40387;
-	static const int32 APP_NOT_FOUND = GAME_NOT_FOUND;
+    static const int32 APP_NOT_FOUND = GAME_NOT_FOUND;
     static const int32 GAMES_NOT_IN_SAME_COMPANY = 40388;
-	static const int32 APPS_NOT_IN_SAME_COMPANY = GAMES_NOT_IN_SAME_COMPANY;
+    static const int32 APPS_NOT_IN_SAME_COMPANY = GAMES_NOT_IN_SAME_COMPANY;
     static const int32 IMPORT_NO_PARENT_ASSIGNED = 40389;
     static const int32 IMPORT_PARENT_CURRENCIES_MISMATCH = 40390;
     static const int32 INVALID_SUBSTITUION_ENTRY = 40391;
@@ -202,99 +200,99 @@ public:
     static const int32 UPLOAD_JOB_EXPIRED = 40435;
     static const int32 UPLOADER_EXCEPTION = 40436;
     static const int32 UPLOADER_FILESIZE_MISMATCH = 40437;
-	static const int32 PUSH_NOTIFICATIONS_NOT_CONFIGURED = 40438;
-	static const int32 MATCHMAKING_FILTER_SCRIPT_FAILURE = 40439;
-	static const int32 ACCOUNT_ALREADY_EXISTS = 40440;
-	static const int32 PROFILE_ALREADY_EXISTS = 40441;
-	static const int32 MISSING_NOTIFICATION_BODY = 40442;
-	static const int32 INVALID_SERVICE_CODE = 40443;
-	static const int32 IP_ADDRESS_BLOCKED = 40444;
-	static const int32 UNAPPROVED_SERVICE_CODE = 40445;
-	static const int32 PROFILE_NOT_FOUND = 40446;
-	static const int32 ENTITY_NOT_SHARED = 40447;
-	static const int32 SELF_FRIEND = 40448;
-	static const int32 PARSE_NOT_CONFIGURED = 40449;
-	static const int32 PARSE_NOT_ENABLED = 40450;
-	static const int32 PARSE_REQUEST_ERROR = 40451;
-	static const int32 GROUP_CANNOT_ADD_OWNER = 40452;
-	static const int32 NOT_GROUP_MEMBER = 40453;
-	static const int32 INVALID_GROUP_ROLE = 40454;
-	static const int32 GROUP_OWNER_DELETE = 40455;
-	static const int32 NOT_INVITED_GROUP_MEMBER = 40456;
-	static const int32 GROUP_IS_FULL = 40457;
-	static const int32 GROUP_OWNER_CANNOT_LEAVE = 40458;
-	static const int32 INVALID_INCREMENT_VALUE = 40459;
-	static const int32 GROUP_VERSION_MISMATCH = 40460;
-	static const int32 GROUP_ENTITY_VERSION_MISMATCH = 40461;
-	static const int32 INVALID_GROUP_ID = 40462;
-	static const int32 INVALID_FIELD_NAME = 40463;
-	static const int32 UNSUPPORTED_AUTH_TYPE = 40464;
-	static const int32 CLOUDCODE_JOB_NOT_FOUND = 40465;
-	static const int32 CLOUDCODE_JOB_NOT_SCHEDULED = 40466;
-	static const int32 GROUP_TYPE_NOT_FOUND = 40467;
-	static const int32 MATCHING_GROUPS_NOT_FOUND = 40468;
-	static const int32 GENERATE_CDN_URL_ERROR = 40469;
-	static const int32 INVALID_PROFILE_IDS = 40470;
-	static const int32 MAX_PROFILE_IDS_EXCEEDED = 40471;
-	static const int32 PROFILE_ID_MISMATCH = 40472;
-	static const int32 LEADERBOARD_DOESNOT_EXIST = 40473;
-	static const int32 APP_LICENSING_EXCEEDED = 40474;
-	static const int32 SENDGRID_NOT_INSTALLED = 40475;
-	static const int32 SENDGRID_EMAIL_SEND_ERROR = 40476;
-	static const int32 SENDGRID_NOT_ENABLED_FOR_APP = 40477;
-	static const int32 SENDGRID_GET_TEMPLATES_ERROR = 40478;
-	static const int32 SENDGRID_INVALID_API_KEY = 40479;
-	static const int32 EMAIL_SERVICE_NOT_CONFIGURED = 40480;
-	static const int32 INVALID_EMAIL_TEMPLATE_TYPE = 40481;
-	static const int32 SENDGRID_KEY_EMPTY_OR_NULL = 40482;
-	static const int32 BODY_TEMPLATE_CANNOT_COEXIST = 40483;
-	static const int32 SUBSTITUTION_BODY_CANNOT_COEXIST = 40484;
-	static const int32 INVALID_FROM_ADDRESS = 40485;
-	static const int32 INVALID_FROM_NAME = 40486;
-	static const int32 INVALID_REPLY_TO_ADDRESS = 40487;
-	static const int32 INVALID_REPLY_TO_NAME = 40488;
-	static const int32 FROM_NAME_WITHOUT_FROM_ADDRESS = 40489;
-	static const int32 REPLY_TO_NAME_WITHOUT_REPLY_TO_ADDRESS = 40490;
-	static const int32 CURRENCY_SECURITY_ERROR = 40491;
-	static const int32 INVALID_PEER_CODE = 40492;
-	static const int32 PEER_NO_LONGER_EXISTS = 40493;
+    static const int32 PUSH_NOTIFICATIONS_NOT_CONFIGURED = 40438;
+    static const int32 MATCHMAKING_FILTER_SCRIPT_FAILURE = 40439;
+    static const int32 ACCOUNT_ALREADY_EXISTS = 40440;
+    static const int32 PROFILE_ALREADY_EXISTS = 40441;
+    static const int32 MISSING_NOTIFICATION_BODY = 40442;
+    static const int32 INVALID_SERVICE_CODE = 40443;
+    static const int32 IP_ADDRESS_BLOCKED = 40444;
+    static const int32 UNAPPROVED_SERVICE_CODE = 40445;
+    static const int32 PROFILE_NOT_FOUND = 40446;
+    static const int32 ENTITY_NOT_SHARED = 40447;
+    static const int32 SELF_FRIEND = 40448;
+    static const int32 PARSE_NOT_CONFIGURED = 40449;
+    static const int32 PARSE_NOT_ENABLED = 40450;
+    static const int32 PARSE_REQUEST_ERROR = 40451;
+    static const int32 GROUP_CANNOT_ADD_OWNER = 40452;
+    static const int32 NOT_GROUP_MEMBER = 40453;
+    static const int32 INVALID_GROUP_ROLE = 40454;
+    static const int32 GROUP_OWNER_DELETE = 40455;
+    static const int32 NOT_INVITED_GROUP_MEMBER = 40456;
+    static const int32 GROUP_IS_FULL = 40457;
+    static const int32 GROUP_OWNER_CANNOT_LEAVE = 40458;
+    static const int32 INVALID_INCREMENT_VALUE = 40459;
+    static const int32 GROUP_VERSION_MISMATCH = 40460;
+    static const int32 GROUP_ENTITY_VERSION_MISMATCH = 40461;
+    static const int32 INVALID_GROUP_ID = 40462;
+    static const int32 INVALID_FIELD_NAME = 40463;
+    static const int32 UNSUPPORTED_AUTH_TYPE = 40464;
+    static const int32 CLOUDCODE_JOB_NOT_FOUND = 40465;
+    static const int32 CLOUDCODE_JOB_NOT_SCHEDULED = 40466;
+    static const int32 GROUP_TYPE_NOT_FOUND = 40467;
+    static const int32 MATCHING_GROUPS_NOT_FOUND = 40468;
+    static const int32 GENERATE_CDN_URL_ERROR = 40469;
+    static const int32 INVALID_PROFILE_IDS = 40470;
+    static const int32 MAX_PROFILE_IDS_EXCEEDED = 40471;
+    static const int32 PROFILE_ID_MISMATCH = 40472;
+    static const int32 LEADERBOARD_DOESNOT_EXIST = 40473;
+    static const int32 APP_LICENSING_EXCEEDED = 40474;
+    static const int32 SENDGRID_NOT_INSTALLED = 40475;
+    static const int32 SENDGRID_EMAIL_SEND_ERROR = 40476;
+    static const int32 SENDGRID_NOT_ENABLED_FOR_APP = 40477;
+    static const int32 SENDGRID_GET_TEMPLATES_ERROR = 40478;
+    static const int32 SENDGRID_INVALID_API_KEY = 40479;
+    static const int32 EMAIL_SERVICE_NOT_CONFIGURED = 40480;
+    static const int32 INVALID_EMAIL_TEMPLATE_TYPE = 40481;
+    static const int32 SENDGRID_KEY_EMPTY_OR_NULL = 40482;
+    static const int32 BODY_TEMPLATE_CANNOT_COEXIST = 40483;
+    static const int32 SUBSTITUTION_BODY_CANNOT_COEXIST = 40484;
+    static const int32 INVALID_FROM_ADDRESS = 40485;
+    static const int32 INVALID_FROM_NAME = 40486;
+    static const int32 INVALID_REPLY_TO_ADDRESS = 40487;
+    static const int32 INVALID_REPLY_TO_NAME = 40488;
+    static const int32 FROM_NAME_WITHOUT_FROM_ADDRESS = 40489;
+    static const int32 REPLY_TO_NAME_WITHOUT_REPLY_TO_ADDRESS = 40490;
+    static const int32 CURRENCY_SECURITY_ERROR = 40491;
+    static const int32 INVALID_PEER_CODE = 40492;
+    static const int32 PEER_NO_LONGER_EXISTS = 40493;
 
-	static const int32 CANNOT_MODIFY_TOURNAMENT_WITH_LEADERBOARD_SERVICE = 40494;
-	static const int32 NO_TOURNAMENT_ASSOCIATED_WITH_LEADERBOARD = 40495;
-	static const int32 TOURNAMENT_NOT_ASSOCIATED_WITH_LEADERBOARD = 40496;
-	static const int32 PLAYER_ALREADY_TOURNAMENT_FOR_LEADERBOARD = 40497;
-	static const int32 PLAYER_EARLY_FOR_JOINING_TOURNAMENT = 40498;
-	static const int32 NO_LEADERBOARD_FOUND = 40499;
-	static const int32 PLAYER_NOT_IN_TIME_RANGE_FOR_POSTSCORE_TOURNAMENT = 40500;
-	static const int32 LEADERBOARD_ID_BAD = 40501;
-	static const int32 SCORE_INPUT_BAD = 40502;
-	static const int32 ROUND_STARTED_EPOCH_INPUT_BAD = 40503;
-	static const int32 TOURNAMENT_CODE_INPUT_BAD = 40504;
-	static const int32 PLAYER_NOT_ENROLLED_IN_TOURNAMENT = 40505;
-	static const int32 LEADERBOARD_VERSION_ID_INVALID = 40506;
-	static const int32 NOT_ENOUGH_BALANCE_TO_JOIN_TOURNAMENT = 40507;
-	static const int32 PARENT_ALREADY_ATTACHED = 40508;
-	static const int32 PEER_ALREADY_ATTACHED = 40509;
-	static const int32 IDENTITY_NOT_ATTACHED_WITH_PARENT = 40510;
-	static const int32 IDENTITY_NOT_ATTACHED_WITH_PEER = 40511;
-	static const int32 LEADERBOARD_SCORE_UPDATE_ERROR = 40512;
-	static const int32 ERROR_CLAIMING_REWARD = 40513;
-	static const int32 NOT_ENOUGH_PARENT_BALANCE_TO_JOIN_TOURNAMENT = 40514;
-	static const int32 NOT_ENOUGH_PEER_BALANCE_TO_JOIN_TOURNAMENT = 40515;
-	static const int32 PLAYER_LATE_FOR_JOINING_TOURNAMENT = 40516;
-	static const int32 VIEWING_REWARD_FOR_NON_PROCESSED_TOURNAMENTS = 40517;
-	static const int32 NO_REWARD_ASSOCIATED_WITH_LEADERBOARD = 40518;
-	static const int32 PROFILE_PEER_NOT_FOUND = 40519;
-	static const int32 LEADERBOARD_IN_ACTIVE_STATE = 40520;
-	static const int32 LEADERBOARD_IN_CALCULATING_STATE = 40521;
-	static const int32 TOURNAMENT_RESULT_PROCESSING_FAILED = 40522;
-	static const int32 TOURNAMENT_REWARDS_ALREADY_CLAIMED = 40523;
-	static const int32 NO_TOURNAMENT_FOUND = 40524;
-	static const int32 UNEXPECTED_ERROR_RANK_ZERO_AFTER_PROCESSING = 40525;
-	static const int32 UNEXPECTED_ERROR_DELETING_TOURNAMENT_LEADERBOARD_SCORE = 40526;
-	static const int32 INVALID_RUN_STATE = 40527;
-	static const int32 LEADERBOARD_SCORE_DOESNOT_EXIST = 40528;
-	static const int32 INITIAL_SCORE_NULL = 40529;
+    static const int32 CANNOT_MODIFY_TOURNAMENT_WITH_LEADERBOARD_SERVICE = 40494;
+    static const int32 NO_TOURNAMENT_ASSOCIATED_WITH_LEADERBOARD = 40495;
+    static const int32 TOURNAMENT_NOT_ASSOCIATED_WITH_LEADERBOARD = 40496;
+    static const int32 PLAYER_ALREADY_TOURNAMENT_FOR_LEADERBOARD = 40497;
+    static const int32 PLAYER_EARLY_FOR_JOINING_TOURNAMENT = 40498;
+    static const int32 NO_LEADERBOARD_FOUND = 40499;
+    static const int32 PLAYER_NOT_IN_TIME_RANGE_FOR_POSTSCORE_TOURNAMENT = 40500;
+    static const int32 LEADERBOARD_ID_BAD = 40501;
+    static const int32 SCORE_INPUT_BAD = 40502;
+    static const int32 ROUND_STARTED_EPOCH_INPUT_BAD = 40503;
+    static const int32 TOURNAMENT_CODE_INPUT_BAD = 40504;
+    static const int32 PLAYER_NOT_ENROLLED_IN_TOURNAMENT = 40505;
+    static const int32 LEADERBOARD_VERSION_ID_INVALID = 40506;
+    static const int32 NOT_ENOUGH_BALANCE_TO_JOIN_TOURNAMENT = 40507;
+    static const int32 PARENT_ALREADY_ATTACHED = 40508;
+    static const int32 PEER_ALREADY_ATTACHED = 40509;
+    static const int32 IDENTITY_NOT_ATTACHED_WITH_PARENT = 40510;
+    static const int32 IDENTITY_NOT_ATTACHED_WITH_PEER = 40511;
+    static const int32 LEADERBOARD_SCORE_UPDATE_ERROR = 40512;
+    static const int32 ERROR_CLAIMING_REWARD = 40513;
+    static const int32 NOT_ENOUGH_PARENT_BALANCE_TO_JOIN_TOURNAMENT = 40514;
+    static const int32 NOT_ENOUGH_PEER_BALANCE_TO_JOIN_TOURNAMENT = 40515;
+    static const int32 PLAYER_LATE_FOR_JOINING_TOURNAMENT = 40516;
+    static const int32 VIEWING_REWARD_FOR_NON_PROCESSED_TOURNAMENTS = 40517;
+    static const int32 NO_REWARD_ASSOCIATED_WITH_LEADERBOARD = 40518;
+    static const int32 PROFILE_PEER_NOT_FOUND = 40519;
+    static const int32 LEADERBOARD_IN_ACTIVE_STATE = 40520;
+    static const int32 LEADERBOARD_IN_CALCULATING_STATE = 40521;
+    static const int32 TOURNAMENT_RESULT_PROCESSING_FAILED = 40522;
+    static const int32 TOURNAMENT_REWARDS_ALREADY_CLAIMED = 40523;
+    static const int32 NO_TOURNAMENT_FOUND = 40524;
+    static const int32 UNEXPECTED_ERROR_RANK_ZERO_AFTER_PROCESSING = 40525;
+    static const int32 UNEXPECTED_ERROR_DELETING_TOURNAMENT_LEADERBOARD_SCORE = 40526;
+    static const int32 INVALID_RUN_STATE = 40527;
+    static const int32 LEADERBOARD_SCORE_DOESNOT_EXIST = 40528;
+    static const int32 INITIAL_SCORE_NULL = 40529;
 
     static const int32 NO_TWITTER_CONSUMER_KEY = 500001;
     static const int32 NO_TWITTER_CONSUMER_SECRET = 500002;
@@ -308,14 +306,14 @@ public:
     static const int32 FACEBOOK_APPLICATION_TOKEN_REQUEST_ERROR = 500013;
     static const int32 FACEBOOK_BAD_APPLICATION_TOKEN_SIGNATURE = 500014;
 
-	static const int32 MONGO_DB_EXCEPTION = 600001;
+    static const int32 MONGO_DB_EXCEPTION = 600001;
 
     // Client defined value for a timeout detected client-side.
     static const int32 CLIENT_NETWORK_ERROR_TIMEOUT = 90001;
     static const int32 CLIENT_UPLOAD_FILE_CANCELLED = 90100;
     static const int32 CLIENT_UPLOAD_FILE_TIMED_OUT = 90101;
     static const int32 CLIENT_UPLOAD_FILE_UNKNOWN = 90102;
-	static const int32 CLIENT_DISABLED = 90200;
+    static const int32 CLIENT_DISABLED = 90200;
 
     static const int32 RTT_LEFT_BY_CHOICE = 80000;
     static const int32 RTT_EVICTED = 80001;
@@ -325,5 +323,5 @@ public:
     static const int32 RTT_ROOM_CANCELLED = 80102;
     static const int32 RTT_ERROR_ASSIGNING_ROOM = 80103;
     static const int32 RTT_ERROR_LAUNCHING_ROOM = 80104;
-    static const int32 RTT_NO_LOBBIES_FOUND = 80200; 
+    static const int32 RTT_NO_LOBBIES_FOUND = 80200;
 };

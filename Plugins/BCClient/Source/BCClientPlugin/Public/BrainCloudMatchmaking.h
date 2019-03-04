@@ -7,8 +7,8 @@ class IServerCallback;
 
 class BCCLIENTPLUGIN_API BrainCloudMatchmaking
 {
-public:
-    BrainCloudMatchmaking(BrainCloudClient* client);
+  public:
+    BrainCloudMatchmaking(BrainCloudClient *client);
 
     /**
      * Read match making record
@@ -18,7 +18,7 @@ public:
      *
      * @param callback The method to be invoked when the server response is received
      */
-    void read(IServerCallback * callback);
+    void read(IServerCallback *callback);
 
     /**
      * Sets player rating
@@ -29,7 +29,7 @@ public:
      * @param playerRating The new player rating.
      * @param callback The method to be invoked when the server response is received
      */
-    void setPlayerRating(int32 playerRating, IServerCallback * callback);
+    void setPlayerRating(int32 playerRating, IServerCallback *callback);
 
     /**
      * Resets player rating
@@ -39,7 +39,7 @@ public:
      *
      * @param callback The method to be invoked when the server response is received
      */
-    void resetPlayerRating(IServerCallback * callback);
+    void resetPlayerRating(IServerCallback *callback);
 
     /**
      * Increments player rating
@@ -50,7 +50,7 @@ public:
      * @param increment The increment amount
      * @param callback The method to be invoked when the server response is received
      */
-    void incrementPlayerRating(int32 increment, IServerCallback * callback);
+    void incrementPlayerRating(int32 increment, IServerCallback *callback);
 
     /**
      * Decrements player rating
@@ -61,7 +61,7 @@ public:
      * @param decrement The decrement amount
      * @param callback The method to be invoked when the server response is received
      */
-    void decrementPlayerRating(int32 decrement, IServerCallback * callback);
+    void decrementPlayerRating(int32 decrement, IServerCallback *callback);
 
     /**
      * Turns shield on
@@ -71,7 +71,7 @@ public:
      *
      * @param callback The method to be invoked when the server response is received
      */
-    void turnShieldOn(IServerCallback * callback);
+    void turnShieldOn(IServerCallback *callback);
 
     /**
      * Turns shield on for the specified number of minutes
@@ -82,7 +82,7 @@ public:
      * @param minutes Number of minutes to turn the shield on for
      * @param callback The method to be invoked when the server response is received
      */
-    void turnShieldOnFor(int32 minutes, IServerCallback * callback);
+    void turnShieldOnFor(int32 minutes, IServerCallback *callback);
 
     /**
      * Turns shield off
@@ -92,9 +92,9 @@ public:
      *
      * @param callback The method to be invoked when the server response is received
      */
-    void turnShieldOff(IServerCallback * callback);
+    void turnShieldOff(IServerCallback *callback);
 
-	/**
+    /**
 	* Increases the shield on time by specified number of minutes
 	*
 	* Service Name - MatchMaking
@@ -103,7 +103,7 @@ public:
 	* @param in_minutes Number of minutes to increase the shield time for
 	* @param in_callback The method to be invoked when the server response is received
 	*/
-	void incrementShieldOnFor(int32 minutes, IServerCallback * callback);
+    void incrementShieldOnFor(int32 minutes, IServerCallback *callback);
 
     /**
      * Finds matchmaking enabled players
@@ -115,7 +115,7 @@ public:
      * @param numMatches The maximum number of matches to return
      * @param callback The method to be invoked when the server response is received
      */
-    void findPlayers(int32 rangeDelta, int32 numMatches, IServerCallback * callback);
+    void findPlayers(int32 rangeDelta, int32 numMatches, IServerCallback *callback);
 
     /**
     * Finds matchmaking enabled players with additional attributes
@@ -128,7 +128,7 @@ public:
     * @param jsonAttributes Attributes match criteria
     * @param callback The method to be invoked when the server response is received
     */
-    void findPlayersWithAttributes(int32 rangeDelta, int32 numMatches, const FString& jsonAttributes, IServerCallback * callback);
+    void findPlayersWithAttributes(int32 rangeDelta, int32 numMatches, const FString &jsonAttributes, IServerCallback *callback);
 
     /**
      * Finds matchmaking enabled players
@@ -141,7 +141,7 @@ public:
      * @param jsonExtraParms Other parameters
      * @param callback The method to be invoked when the server response is received
      */
-    void findPlayersUsingFilter(int32 rangeDelta, int32 numMatches, const FString& jsonExtraParms, IServerCallback * callback);
+    void findPlayersUsingFilter(int32 rangeDelta, int32 numMatches, const FString &jsonExtraParms, IServerCallback *callback);
 
     /**
     * Finds matchmaking enabled players using a cloud code filter
@@ -159,9 +159,9 @@ public:
     void findPlayersWithAttributesUsingFilter(
         int32 rangeDelta,
         int32 numMatches,
-        const FString& jsonAttributes,
-        const FString& jsonExtraParms,
-        IServerCallback * callback);
+        const FString &jsonAttributes,
+        const FString &jsonExtraParms,
+        IServerCallback *callback);
 
     /**
      * Enables Match Making for the Player
@@ -171,7 +171,7 @@ public:
      *
      * @param callback The method to be invoked when the server response is received
      */
-    void enableMatchMaking(IServerCallback * callback);
+    void enableMatchMaking(IServerCallback *callback);
 
     /**
     * Disables Match Making for the Player
@@ -181,8 +181,8 @@ public:
     *
     * @param callback The method to be invoked when the server response is received
     */
-    void disableMatchMaking(IServerCallback * callback);
+    void disableMatchMaking(IServerCallback *callback);
 
-private:
-    BrainCloudClient* _client = nullptr;
+  private:
+    BrainCloudClient *_client = nullptr;
 };

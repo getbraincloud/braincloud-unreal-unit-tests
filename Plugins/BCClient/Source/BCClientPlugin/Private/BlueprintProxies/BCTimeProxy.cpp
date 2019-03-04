@@ -8,14 +8,14 @@
 #include "BrainCloudWrapper.h"
 #include "BCTimeProxy.h"
 
-UBCTimeProxy::UBCTimeProxy(const FObjectInitializer& ObjectInitializer)
+UBCTimeProxy::UBCTimeProxy(const FObjectInitializer &ObjectInitializer)
     : Super(ObjectInitializer)
 {
 }
 
-UBCTimeProxy* UBCTimeProxy::ReadServerTime(UBrainCloudWrapper *brainCloudWrapper)
+UBCTimeProxy *UBCTimeProxy::ReadServerTime(UBrainCloudWrapper *brainCloudWrapper)
 {
-    UBCTimeProxy* Proxy = NewObject<UBCTimeProxy>();
+    UBCTimeProxy *Proxy = NewObject<UBCTimeProxy>();
     UBCWrapperProxy::GetBrainCloudInstance(brainCloudWrapper)->getTimeService()->readServerTime(Proxy);
     return Proxy;
 }

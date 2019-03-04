@@ -1,7 +1,6 @@
 // Copyright 2018 bitHeads, Inc. All Rights Reserved.
 #pragma once
 
-
 UENUM(BlueprintType)
 enum class EAcl : uint8
 {
@@ -12,7 +11,7 @@ enum class EAcl : uint8
 
 class BCCLIENTPLUGIN_API IAcl
 {
-public:
+  public:
     virtual ~IAcl() {}
     virtual FString toJsonString() = 0;
     virtual TSharedRef<FJsonObject> toJsonObject() = 0;

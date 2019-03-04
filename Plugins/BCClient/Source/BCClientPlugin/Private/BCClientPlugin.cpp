@@ -12,7 +12,6 @@ class FBCClientPlugin : public IBCClientPlugin
 
     virtual void ShutdownModule() override
     {
-
     }
 };
 

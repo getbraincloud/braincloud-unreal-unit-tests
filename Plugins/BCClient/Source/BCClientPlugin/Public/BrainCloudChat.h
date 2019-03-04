@@ -148,7 +148,7 @@ class BCCLIENTPLUGIN_API BrainCloudChat
     * @param in_recordInHistory Whether to record the message in history, or to only send it to currently active participants
 	* @param in_callback Method to be invoked when the server response is received.
     */
-    void updateChatMessage(const FString &in_channelId, const FString &in_messageId, int32 in_version, 
+    void updateChatMessage(const FString &in_channelId, const FString &in_messageId, int32 in_version,
                            const FString &in_plain, const FString &in_jsonRich, IServerCallback *in_callback);
 
   private:

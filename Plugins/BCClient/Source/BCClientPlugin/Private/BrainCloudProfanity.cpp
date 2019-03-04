@@ -7,10 +7,10 @@
 #include "ServerCall.h"
 #include "JsonUtil.h"
 
-BrainCloudProfanity::BrainCloudProfanity(BrainCloudClient* client) : _client(client) {};
+BrainCloudProfanity::BrainCloudProfanity(BrainCloudClient *client) : _client(client){};
 
-void BrainCloudProfanity::profanityCheck(const FString& text, const FString& languages, bool flagEmail,
-    bool flagPhone, bool flagUrls, IServerCallback * callback)
+void BrainCloudProfanity::profanityCheck(const FString &text, const FString &languages, bool flagEmail,
+                                         bool flagPhone, bool flagUrls, IServerCallback *callback)
 {
     TSharedRef<FJsonObject> message = MakeShareable(new FJsonObject());
 
@@ -23,12 +23,12 @@ void BrainCloudProfanity::profanityCheck(const FString& text, const FString& lan
     message->SetBoolField(OperationParam::ProfanityFlagPhone.getValue(), flagPhone);
     message->SetBoolField(OperationParam::ProfanityFlagUrls.getValue(), flagUrls);
 
-    ServerCall * sc = new ServerCall(ServiceName::Profanity, ServiceOperation::ProfanityCheck, message, callback);
+    ServerCall *sc = new ServerCall(ServiceName::Profanity, ServiceOperation::ProfanityCheck, message, callback);
     _client->sendRequest(sc);
 }
 
-void BrainCloudProfanity::profanityReplaceText(const FString& text, const FString& replaceSymbol, const FString& languages,
-    bool flagEmail, bool flagPhone, bool flagUrls, IServerCallback * callback)
+void BrainCloudProfanity::profanityReplaceText(const FString &text, const FString &replaceSymbol, const FString &languages,
+                                               bool flagEmail, bool flagPhone, bool flagUrls, IServerCallback *callback)
 {
     TSharedRef<FJsonObject> message = MakeShareable(new FJsonObject());
 
@@ -42,12 +42,12 @@ void BrainCloudProfanity::profanityReplaceText(const FString& text, const FStrin
     message->SetBoolField(OperationParam::ProfanityFlagPhone.getValue(), flagPhone);
     message->SetBoolField(OperationParam::ProfanityFlagUrls.getValue(), flagUrls);
 
-    ServerCall * sc = new ServerCall(ServiceName::Profanity, ServiceOperation::ProfanityReplaceText, message, callback);
+    ServerCall *sc = new ServerCall(ServiceName::Profanity, ServiceOperation::ProfanityReplaceText, message, callback);
     _client->sendRequest(sc);
 }
 
-void BrainCloudProfanity::profanityIdentifyBadWords(const FString& text, const FString& languages, bool flagEmail,
-    bool flagPhone, bool flagUrls, IServerCallback * callback)
+void BrainCloudProfanity::profanityIdentifyBadWords(const FString &text, const FString &languages, bool flagEmail,
+                                                    bool flagPhone, bool flagUrls, IServerCallback *callback)
 {
     TSharedRef<FJsonObject> message = MakeShareable(new FJsonObject());
 
@@ -60,6 +60,6 @@ void BrainCloudProfanity::profanityIdentifyBadWords(const FString& text, const F
     message->SetBoolField(OperationParam::ProfanityFlagPhone.getValue(), flagPhone);
     message->SetBoolField(OperationParam::ProfanityFlagUrls.getValue(), flagUrls);
 
-    ServerCall * sc = new ServerCall(ServiceName::Profanity, ServiceOperation::ProfanityIdenitfyBadWords, message, callback);
+    ServerCall *sc = new ServerCall(ServiceName::Profanity, ServiceOperation::ProfanityIdenitfyBadWords, message, callback);
     _client->sendRequest(sc);
 }

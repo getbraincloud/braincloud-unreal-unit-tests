@@ -50,15 +50,15 @@ void BrainCloudComms::Initialize(const FString &serverURL, const FString &secret
 
 void BrainCloudComms::InitializeWithApps(const FString &serverURL, const TMap<FString, FString> &secretMap, const FString &appId)
 {
-	//refresh the map 
-	_secretMap.Empty(); 
-	for(auto It = secretMap.CreateConstIterator(); It; ++It) 
-	{ 
-		_secretMap.Emplace(It.Key(), It.Value()); 
-	} 
+	//refresh the map
+	_secretMap.Empty();
+	for (auto It = secretMap.CreateConstIterator(); It; ++It)
+	{
+		_secretMap.Emplace(It.Key(), It.Value());
+	}
 
 	FString secretKey = "MISSING";
-	if(_secretMap.Contains(appId))
+	if (_secretMap.Contains(appId))
 	{
 		secretKey = secretMap[appId];
 	}
@@ -339,7 +339,7 @@ void BrainCloudComms::CreateAndSendNextRequestBundle()
 		{
 			auto operation = itr->getOperation();
 			if (operation == ServiceOperation::Authenticate ||
-				operation == ServiceOperation::ResetEmailPassword||
+				operation == ServiceOperation::ResetEmailPassword ||
 				operation == ServiceOperation::ResetEmailPasswordAdvanced)
 			{
 				isAuth = true;
@@ -809,13 +809,13 @@ void BrainCloudComms::FilterIncomingMessages(TSharedRef<ServerCall> servercall, 
 
 		FString appIdOut;
 		data->TryGetStringField(TEXT("switchToAppId"), appIdOut);
-		if(!appIdOut.IsEmpty())
+		if (!appIdOut.IsEmpty())
 		{
 			_appId = data->GetStringField("switchToAppId");
 
 			//update the secret key
 			_secretKey = "MISSING";
-			if(_secretMap.Contains(_appId))
+			if (_secretMap.Contains(_appId))
 			{
 				_secretKey = _secretMap[_appId];
 			}

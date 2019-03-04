@@ -5,9 +5,10 @@
 class BrainCloudClient;
 class IServerCallback;
 
-class BCCLIENTPLUGIN_API BrainCloudEvent {
-public:
-	BrainCloudEvent(BrainCloudClient* client);
+class BCCLIENTPLUGIN_API BrainCloudEvent
+{
+  public:
+	BrainCloudEvent(BrainCloudClient *client);
 
 	/**
 	 * Sends an event to the designated player id with the attached json data.
@@ -28,7 +29,7 @@ public:
 	 * user's sent events mailbox.
 	 * @param callback The method to be invoked when the server response is received
 	 */
-	void sendEvent(const FString& toPlayerId, const FString& eventType, const FString& jsonEventData, IServerCallback* callback);
+	void sendEvent(const FString &toPlayerId, const FString &eventType, const FString &jsonEventData, IServerCallback *callback);
 
 	/**
 	 * Updates an event in the player's incoming event mailbox.
@@ -40,7 +41,7 @@ public:
 	 * @param jsonEventData The user-defined data for this event encoded in JSON.
 	 * @param callback The method to be invoked when the server response is received
 	 */
-	void updateIncomingEventData(const FString& evId, const FString& jsonEventData, IServerCallback* callback);
+	void updateIncomingEventData(const FString &evId, const FString &jsonEventData, IServerCallback *callback);
 
 	/**
 	 * Delete an event out of the player's incoming mailbox.
@@ -51,7 +52,7 @@ public:
 	 * @param evId The event id
 	 * @param callback The method to be invoked when the server response is received
 	 */
-	void deleteIncomingEvent(const FString& evId, IServerCallback* callback);
+	void deleteIncomingEvent(const FString &evId, IServerCallback *callback);
 
 	/**
 	* Get the events currently queued for the player.
@@ -61,8 +62,8 @@ public:
 	*
 	* @param callback The method to be invoked when the server response is received
 	*/
-	void getEvents(IServerCallback * callback);
+	void getEvents(IServerCallback *callback);
 
-private:
-	BrainCloudClient* _client = nullptr;
+  private:
+	BrainCloudClient *_client = nullptr;
 };

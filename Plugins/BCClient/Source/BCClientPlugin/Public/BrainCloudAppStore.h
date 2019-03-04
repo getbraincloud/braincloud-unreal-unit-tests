@@ -8,9 +8,9 @@ class IServerCallback;
 class BCCLIENTPLUGIN_API BrainCloudAppStore
 {
 public:
-    BrainCloudAppStore(BrainCloudClient* client);
-    
-    /**
+  BrainCloudAppStore(BrainCloudClient *client);
+
+  /**
     * Verifies that purchase was properly made at the store.
     *
     * Service Name - AppStore
@@ -27,9 +27,9 @@ public:
     * @param receiptData the specific store data required
     * @param in_callback The method to be invoked when the server response is received
     */
-    void verifyPurchase(const FString& in_storeId, const FString& in_jsonReceiptData, IServerCallback * callback = nullptr);
+  void verifyPurchase(const FString &in_storeId, const FString &in_jsonReceiptData, IServerCallback *callback = nullptr);
 
-    /**
+  /**
     * Returns the eligible promotions for the player.
     *
     * Service Name - AppStore
@@ -37,9 +37,9 @@ public:
     *
     * @param in_callback The method to be invoked when the server response is received
     */
-    void getEligiblePromotions(IServerCallback * callback = nullptr);
+  void getEligiblePromotions(IServerCallback *callback = nullptr);
 
-    /**
+  /**
     * Method gets the active sales inventory for the passed-in
     * currency type.
     *
@@ -57,9 +57,9 @@ public:
     * @param userCurrency The currency type to retrieve the sales inventory for.
     * @param in_callback The method to be invoked when the server response is received
     */
-    void getSalesInventory(const FString& in_storeId, const FString& in_userCurrency, IServerCallback * callback = nullptr);
+  void getSalesInventory(const FString &in_storeId, const FString &in_userCurrency, IServerCallback *callback = nullptr);
 
-    /**
+  /**
     * Method gets the active sales inventory for the passed-in
     * currency type.
     *
@@ -78,9 +78,9 @@ public:
     * @param category The product category
     * @param in_callback The method to be invoked when the server response is received
     */
-    void getSalesInventoryByCategory(const FString& in_storeId, const FString& in_userCurrency, const FString& in_category, IServerCallback * callback = nullptr);
+  void getSalesInventoryByCategory(const FString &in_storeId, const FString &in_userCurrency, const FString &in_category, IServerCallback *callback = nullptr);
 
-    /**
+  /**
     * Start A Two Staged Purchase Transaction
     *
     * Service Name - AppStore
@@ -97,11 +97,9 @@ public:
     * @param purchaseData specific data for purchasing 2 staged purchases
     * @param in_callback The method to be invoked when the server response is received
     */
-    void startPurchase(const FString& in_storeId, const FString& in_jsonPurchaseData, IServerCallback * callback = nullptr);
+  void startPurchase(const FString &in_storeId, const FString &in_jsonPurchaseData, IServerCallback *callback = nullptr);
 
-
-
-    /**
+  /**
     * Finalize A Two Staged Purchase Transaction
     *
     * Service Name - AppStore
@@ -119,10 +117,8 @@ public:
     * @param transactionData specific data for purchasing 2 staged purchases
     * @param in_callback The method to be invoked when the server response is received
     */
-    void finalizePurchase(const FString& in_storeId, const FString& in_transactionId, const FString& in_jsonTransactionData, IServerCallback * callback = nullptr);
+  void finalizePurchase(const FString &in_storeId, const FString &in_transactionId, const FString &in_jsonTransactionData, IServerCallback *callback = nullptr);
 
 private:
-    BrainCloudClient* _client = nullptr;
+  BrainCloudClient *_client = nullptr;
 };
-
-

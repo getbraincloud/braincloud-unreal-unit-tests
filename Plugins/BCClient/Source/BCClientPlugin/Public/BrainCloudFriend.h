@@ -17,8 +17,8 @@ enum class EFriendPlatform : uint8
 
 class BCCLIENTPLUGIN_API BrainCloudFriend
 {
-public:
-	BrainCloudFriend(BrainCloudClient* client);
+  public:
+	BrainCloudFriend(BrainCloudClient *client);
 
 	/**
 	* Retrieves profile information for the specified user.
@@ -30,7 +30,7 @@ public:
 	* @param authenticationType The authentication type of the user ID
 	* @param callback Method to be invoked when the server response is received.
 	*/
-	void getProfileInfoForCredential(const FString& externalId, EBCAuthType authenticationType, IServerCallback * callback = nullptr);
+	void getProfileInfoForCredential(const FString &externalId, EBCAuthType authenticationType, IServerCallback *callback = nullptr);
 
 	/**
 	* Retrieves profile information for the specified external auth user.
@@ -42,7 +42,7 @@ public:
 	* @param externalAuthType The external authentication type used for this users's external ID
 	* @param callback Method to be invoked when the server response is received.
 	*/
-	void getProfileInfoForExternalAuthId(const FString& externalId, const FString& externalAuthType, IServerCallback * callback = nullptr);
+	void getProfileInfoForExternalAuthId(const FString &externalId, const FString &externalAuthType, IServerCallback *callback = nullptr);
 
 	/**
 	* Retrieves the external ID for the specified user profile ID on the specified social platform.
@@ -51,7 +51,7 @@ public:
 	* @param authenticationType Associated authentication type.
 	* @param callback Method to be invoked when the server response is received.
 	*/
-	void getExternalIdForProfileId(const FString& profileId, const FString& authenticationType, IServerCallback * callback = nullptr);
+	void getExternalIdForProfileId(const FString &profileId, const FString &authenticationType, IServerCallback *callback = nullptr);
 
 	/**
 	* Returns a particular entity of a particular friend.
@@ -63,7 +63,7 @@ public:
 	* @param friendId Profile Id of friend who owns entity.
 	* @param callback Method to be invoked when the server response is received.
 	*/
-	void readFriendEntity(const FString& entityId, const FString&  friendId, IServerCallback * callback = nullptr);
+	void readFriendEntity(const FString &entityId, const FString &friendId, IServerCallback *callback = nullptr);
 
 	/**
 	* Returns entities of all friends optionally based on type.
@@ -74,13 +74,13 @@ public:
 	* @param entityType Types of entities to retrieve.
 	* @param callback Method to be invoked when the server response is received.
 	*/
-	void readFriendsEntities(const FString& entityType, IServerCallback * callback = nullptr);
+	void readFriendsEntities(const FString &entityType, IServerCallback *callback = nullptr);
 
 	/**
 	* @deprecated Use readFriendUserState instead - removal after September 1 2017
 	*/
-	void readFriendPlayerState(const FString& friendId, IServerCallback * callback = nullptr);
-	
+	void readFriendPlayerState(const FString &friendId, IServerCallback *callback = nullptr);
+
 	/**
 	* Read a friend's user state.
 	*
@@ -90,7 +90,7 @@ public:
 	* @param friendId Target friend
 	* @param callback Method to be invoked when the server response is received.
 	*/
-	void readFriendUserState(const FString& friendId, IServerCallback * callback = nullptr);
+	void readFriendUserState(const FString &friendId, IServerCallback *callback = nullptr);
 
 	/**
 	* Returns user state of a particular user.
@@ -101,7 +101,7 @@ public:
 	* @param profileId Profile Id of user to retrieve user state for.
 	* @param callback Method to be invoked when the server response is received.
 	*/
-	void getSummaryDataForProfileId(const FString& profileId, IServerCallback * callback = nullptr);
+	void getSummaryDataForProfileId(const FString &profileId, IServerCallback *callback = nullptr);
 
 	/**
 	* Finds a list of users matching the search text by performing an exact match search
@@ -113,7 +113,7 @@ public:
 	* @param maxResults  Maximum number of results to return.
 	* @param callback Method to be invoked when the server response is received.
 	*/
-	void findUsersByExactName(const FString& searchText, int32 maxResults, IServerCallback * callback = nullptr);
+	void findUsersByExactName(const FString &searchText, int32 maxResults, IServerCallback *callback = nullptr);
 
 	/**
 	* Finds a list of users matching the search text by performing a substring
@@ -126,17 +126,17 @@ public:
 	* @param maxResults  Maximum number of results to return. If there are more the message
 	* @param callback Method to be invoked when the server response is received.
 	*/
-	void findUsersBySubstrName(const FString& searchText, int32 maxResults, IServerCallback * callback = nullptr);
+	void findUsersBySubstrName(const FString &searchText, int32 maxResults, IServerCallback *callback = nullptr);
 
 	/**
 	* @deprecated Use findUserByUniversalId instead - removal after September 1 2017
 	*/
-	void findPlayerByUniversalId(const FString& searchText, int32 maxResults, IServerCallback * callback = nullptr);
+	void findPlayerByUniversalId(const FString &searchText, int32 maxResults, IServerCallback *callback = nullptr);
 
 	/**
 	* @deprecated Use readFriendUserState instead - removal after February 1 2017
 	*/
-	void findUserByUniversalId(const FString& searchText, int32 maxResults, IServerCallback * callback = nullptr);
+	void findUserByUniversalId(const FString &searchText, int32 maxResults, IServerCallback *callback = nullptr);
 
 	/**
 	* Retrieves profile information for the partial matches of the specified text.
@@ -146,7 +146,7 @@ public:
 	*
 	* @param searchText Universal ID text on which to search.
 	*/
-	void findUserByExactUniversalId(const FString& searchText, IServerCallback * callback = nullptr);
+	void findUserByExactUniversalId(const FString &searchText, IServerCallback *callback = nullptr);
 
 	/**
 	* Retrieves profile information for the partial matches of the specified text.
@@ -157,7 +157,7 @@ public:
 	* @param searchText Universal ID text on which to search.
 	* @param maxResults Maximum number of results to return.
 	*/
-	void findUsersByUniversalIdStartingWith(const FString& searchText, int32 maxResults, IServerCallback * callback = nullptr);
+	void findUsersByUniversalIdStartingWith(const FString &searchText, int32 maxResults, IServerCallback *callback = nullptr);
 
 	/**
 	* Retrieves profile information for the partial matches of the specified text.
@@ -168,7 +168,7 @@ public:
 	* @param searchText Universal ID text on which to search.
 	* @param maxResults Maximum number of results to return.
 	*/
-	void findUsersByNameStartingWith(const FString& searchText, int32 maxResults, IServerCallback * callback = nullptr);
+	void findUsersByNameStartingWith(const FString &searchText, int32 maxResults, IServerCallback *callback = nullptr);
 
 	/**
 	* Retrieves a list of user and friend platform information for all friends of the current user.
@@ -180,7 +180,7 @@ public:
 	* @param includeSummaryData  True if including summary data; false otherwise.
 	* @param callback Method to be invoked when the server response is received.
 	*/
-	void listFriends(EFriendPlatform friendPlatform, bool includeSummaryData, IServerCallback * callback = nullptr);
+	void listFriends(EFriendPlatform friendPlatform, bool includeSummaryData, IServerCallback *callback = nullptr);
 
 	/**
 	* Links the current user and the specified users as brainCloud friends.
@@ -191,7 +191,7 @@ public:
 	* @param profileIds Collection of profile IDs.
 	* @param callback Method to be invoked when the server response is received.
 	*/
-	void addFriends(const TArray<FString>& profileIds, IServerCallback * callback = nullptr);
+	void addFriends(const TArray<FString> &profileIds, IServerCallback *callback = nullptr);
 
 	/**
 	* Unlinks the current user and the specified users as brainCloud friends.
@@ -202,7 +202,7 @@ public:
 	* @param profileIds Collection of profile IDs.
 	* @param callback Method to be invoked when the server response is received.
 	*/
-	void removeFriends(const TArray<FString>& profileIds, IServerCallback * callback = nullptr);
+	void removeFriends(const TArray<FString> &profileIds, IServerCallback *callback = nullptr);
 
 	/**
 	* Get users online status
@@ -213,10 +213,10 @@ public:
 	* @param profileIds Collection of profile IDs.
 	* @param callback Method to be invoked when the server response is received.
 	*/
-	void getUsersOnlineStatus(const TArray<FString>& profileIds, IServerCallback * callback = nullptr);
+	void getUsersOnlineStatus(const TArray<FString> &profileIds, IServerCallback *callback = nullptr);
 
-private:
-	BrainCloudClient* _client = nullptr;
+  private:
+	BrainCloudClient *_client = nullptr;
 
 	TMap<EFriendPlatform, FString> _platformStrings;
 };

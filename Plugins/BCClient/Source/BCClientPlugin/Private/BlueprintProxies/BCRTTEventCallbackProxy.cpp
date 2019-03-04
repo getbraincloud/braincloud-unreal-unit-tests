@@ -15,7 +15,7 @@ UBCRTTEventCallbackProxy *UBCRTTEventCallbackProxy::RegisterRTTEventCallback(UBr
 	UBCRTTEventCallbackProxy *Proxy = NewObject<UBCRTTEventCallbackProxy>();
 	UBCWrapperProxy::GetBrainCloudInstance(brainCloudWrapper)->getBCClient()->registerRTTEventCallback(Proxy);
 	return Proxy;
-} 
+}
 
 void UBCRTTEventCallbackProxy::DeregisterRTTEventCallback(UBrainCloudWrapper *brainCloudWrapper)
 {

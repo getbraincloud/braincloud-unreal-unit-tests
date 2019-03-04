@@ -9,18 +9,18 @@ class BCCLIENTPLUGIN_API UBrainCloudGroupACL : public UObject, public IAcl
 {
     GENERATED_BODY()
 
-public:
+  public:
     UFUNCTION()
-        virtual FString toJsonString();
+    virtual FString toJsonString();
 
     UFUNCTION(BlueprintCallable, Category = "BrainCloud|ACL")
-        static UBrainCloudGroupACL* CreateNewGroupACL(EAcl other, EAcl member);
+    static UBrainCloudGroupACL *CreateNewGroupACL(EAcl other, EAcl member);
 
     virtual TSharedRef<FJsonObject> toJsonObject();
 
     UPROPERTY(EditAnywhere, BlueprintReadWrite)
-        EAcl Other;
+    EAcl Other;
 
     UPROPERTY(EditAnywhere, BlueprintReadWrite)
-        EAcl Member;
+    EAcl Member;
 };

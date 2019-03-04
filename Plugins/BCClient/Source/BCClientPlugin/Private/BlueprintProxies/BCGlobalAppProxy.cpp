@@ -8,7 +8,7 @@
 #include "BCGlobalAppProxy.h"
 #include "BrainCloudWrapper.h"
 
-UBCGlobalAppProxy::UBCGlobalAppProxy(const FObjectInitializer& ObjectInitializer)
+UBCGlobalAppProxy::UBCGlobalAppProxy(const FObjectInitializer &ObjectInitializer)
     : Super(ObjectInitializer)
 {
 }
@@ -33,9 +33,9 @@ UBCGlobalAppProxy::UBCGlobalAppProxy(const FObjectInitializer& ObjectInitializer
 *   }
 * }
 */
-UBCGlobalAppProxy* UBCGlobalAppProxy::ReadProperties(UBrainCloudWrapper *brainCloudWrapper)
+UBCGlobalAppProxy *UBCGlobalAppProxy::ReadProperties(UBrainCloudWrapper *brainCloudWrapper)
 {
-    UBCGlobalAppProxy* Proxy = NewObject<UBCGlobalAppProxy>();
+    UBCGlobalAppProxy *Proxy = NewObject<UBCGlobalAppProxy>();
     UBCWrapperProxy::GetBrainCloudInstance(brainCloudWrapper)->getGlobalAppService()->readProperties(Proxy);
     return Proxy;
 }
