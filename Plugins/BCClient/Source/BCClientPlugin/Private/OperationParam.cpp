@@ -411,7 +411,7 @@ const OperationParam OperationParam::ChatText = OperationParam("text");
 const OperationParam OperationParam::ChatRich = OperationParam("rich");
 const OperationParam OperationParam::ChatRecordInHistory = OperationParam("recordInHisory");
 
-// chat channel types 
+// chat channel types
 const OperationParam OperationParam::AllChannelType = OperationParam("all");
 const OperationParam OperationParam::GlobalChannelType = OperationParam("gl");
 const OperationParam OperationParam::GroupChannelType = OperationParam("gr");

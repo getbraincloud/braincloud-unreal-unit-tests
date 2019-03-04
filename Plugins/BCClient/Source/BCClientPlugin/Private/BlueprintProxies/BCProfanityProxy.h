@@ -8,12 +8,12 @@
 UCLASS(MinimalAPI)
 class UBCProfanityProxy : public UBCBlueprintCallProxyBase
 {
-    GENERATED_BODY()
+  GENERATED_BODY()
 
-  public:
-    UBCProfanityProxy(const FObjectInitializer &ObjectInitializer);
+public:
+  UBCProfanityProxy(const FObjectInitializer &ObjectInitializer);
 
-    /**
+  /**
     * Checks supplied text for profanity.
     *
     * Service Name - Profanity
@@ -32,10 +32,10 @@ class UBCProfanityProxy : public UBCBlueprintCallProxyBase
     * 40423 - WebPurify returned an error (Http status != 200)
     * 40424 - WebPurify not enabled
     */
-    UFUNCTION(BlueprintCallable, meta = (BlueprintInternalUseOnly = "true"), Category = "BrainCloud|Profanity")
-    static UBCProfanityProxy *ProfanityCheck(UBrainCloudWrapper *brainCloudWrapper, const FString &text, const FString &languages, bool flagEmail, bool flagPhone, bool flagUrls);
+  UFUNCTION(BlueprintCallable, meta = (BlueprintInternalUseOnly = "true"), Category = "BrainCloud|Profanity")
+  static UBCProfanityProxy *ProfanityCheck(UBrainCloudWrapper *brainCloudWrapper, const FString &text, const FString &languages, bool flagEmail, bool flagPhone, bool flagUrls);
 
-    /**
+  /**
     * Replaces the characters of profanity text with a passed character(s).
     *
     * Service Name - Profanity
@@ -55,10 +55,10 @@ class UBCProfanityProxy : public UBCBlueprintCallProxyBase
     * 40423 - WebPurify returned an error (Http status != 200)
     * 40424 - WebPurify not enabled
     */
-    UFUNCTION(BlueprintCallable, meta = (BlueprintInternalUseOnly = "true"), Category = "BrainCloud|Profanity")
-    static UBCProfanityProxy *ProfanityReplaceText(UBrainCloudWrapper *brainCloudWrapper, const FString &text, const FString &replaceSymbol, const FString &languages, bool flagEmail, bool flagPhone, bool flagUrls);
+  UFUNCTION(BlueprintCallable, meta = (BlueprintInternalUseOnly = "true"), Category = "BrainCloud|Profanity")
+  static UBCProfanityProxy *ProfanityReplaceText(UBrainCloudWrapper *brainCloudWrapper, const FString &text, const FString &replaceSymbol, const FString &languages, bool flagEmail, bool flagPhone, bool flagUrls);
 
-    /**
+  /**
     * Checks supplied text for profanity and returns a list of bad wors.
     *
     * Service Name - Profanity
@@ -77,6 +77,6 @@ class UBCProfanityProxy : public UBCBlueprintCallProxyBase
     * 40423 - WebPurify returned an error (Http status != 200)
     * 40424 - WebPurify not enabled
     */
-    UFUNCTION(BlueprintCallable, meta = (BlueprintInternalUseOnly = "true"), Category = "BrainCloud|Profanity")
-    static UBCProfanityProxy *ProfanityIdentifyBadWords(UBrainCloudWrapper *brainCloud, const FString &text, const FString &languages, bool flagEmail, bool flagPhone, bool flagUrls);
+  UFUNCTION(BlueprintCallable, meta = (BlueprintInternalUseOnly = "true"), Category = "BrainCloud|Profanity")
+  static UBCProfanityProxy *ProfanityIdentifyBadWords(UBrainCloudWrapper *brainCloud, const FString &text, const FString &languages, bool flagEmail, bool flagPhone, bool flagUrls);
 };

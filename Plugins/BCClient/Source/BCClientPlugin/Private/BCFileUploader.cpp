@@ -6,11 +6,10 @@
 #include "ReasonCodes.h"
 #include "HttpCodes.h"
 
-BCFileUploader::BCFileUploader(int32 lowTransferRateTimeoutSecs, int32 lowTransferRateThresholdBytes, int32 overallTimeoutSecs, bool loggingEnabled) :
-    _lowTransferRateTimeout(lowTransferRateTimeoutSecs),
-    _lowTransferRateThreshold(lowTransferRateThresholdBytes),
-    _overallTimeout(overallTimeoutSecs),
-    _isLoggingEnabled(loggingEnabled)
+BCFileUploader::BCFileUploader(int32 lowTransferRateTimeoutSecs, int32 lowTransferRateThresholdBytes, int32 overallTimeoutSecs, bool loggingEnabled) : _lowTransferRateTimeout(lowTransferRateTimeoutSecs),
+                                                                                                                                                       _lowTransferRateThreshold(lowTransferRateThresholdBytes),
+                                                                                                                                                       _overallTimeout(overallTimeoutSecs),
+                                                                                                                                                       _isLoggingEnabled(loggingEnabled)
 {
     _status = UPLOAD_STATUS_PENDING;
 }
@@ -19,7 +18,7 @@ BCFileUploader::~BCFileUploader()
 {
 }
 
-bool BCFileUploader::UploadFile(FString & filePath, FString & sessionId, FString & fileUploadId, FString & uploadUrl)
+bool BCFileUploader::UploadFile(FString &filePath, FString &sessionId, FString &fileUploadId, FString &uploadUrl)
 {
     if (!FPaths::FileExists(filePath))
     {
@@ -64,7 +63,8 @@ bool BCFileUploader::UploadFile(FString & filePath, FString & sessionId, FString
     _request->OnRequestProgress().BindRaw(this, &BCFileUploader::OnRequestProgress);
 
     _request->ProcessRequest();
-    if (_isLoggingEnabled) UE_LOG(LogBrainCloudComms, Log, TEXT("Uploading file '%s'\n"), *_fileName);
+    if (_isLoggingEnabled)
+        UE_LOG(LogBrainCloudComms, Log, TEXT("Uploading file '%s'\n"), *_fileName);
     _status = UPLOAD_STATUS_UPLOADING;
 
     _startTime = FPlatformTime::Seconds();
@@ -79,7 +79,8 @@ void BCFileUploader::CancelUpload()
     FString message = FString::Printf(TEXT("Upload of %s canceled by user"), *_fileName);
     ReportError(HttpCode::CLIENT_NETWORK_ERROR, ReasonCode::CLIENT_UPLOAD_FILE_CANCELLED, message);
 
-    if (_isLoggingEnabled) UE_LOG(LogBrainCloudComms, Log, TEXT("Upload of %s canceled by user"), *_fileName);
+    if (_isLoggingEnabled)
+        UE_LOG(LogBrainCloudComms, Log, TEXT("Upload of %s canceled by user"), *_fileName);
 }
 
 void BCFileUploader::OnProcessRequestComplete(FHttpRequestPtr request, FHttpResponsePtr response, bool bWasSuccessful)
@@ -118,7 +119,7 @@ void BCFileUploader::OnRequestProgress(FHttpRequestPtr request, int32 bytesSent,
     }
 }
 
-TArray<uint8> BCFileUploader::CreateContent(FString & boundary, FString & sessionId, FString & fileUploadId, FString & fileName, TArray<uint8>& data)
+TArray<uint8> BCFileUploader::CreateContent(FString &boundary, FString &sessionId, FString &fileUploadId, FString &fileName, TArray<uint8> &data)
 {
     FString boundaryLine = FString::Printf(TEXT("--%s\r\n"), *boundary);
 
@@ -139,15 +140,15 @@ TArray<uint8> BCFileUploader::CreateContent(FString & boundary, FString & sessio
     content += TEXT("Content-Type: application/octet-stream\r\n\r\n");
 
     FTCHARToUTF8 Converter(*content);
-    TArray<uint8>payload;
+    TArray<uint8> payload;
     payload.SetNum(Converter.Length());
-    FMemory::Memcpy(payload.GetData(), (uint8*)(ANSICHAR*)Converter.Get(), payload.Num());
+    FMemory::Memcpy(payload.GetData(), (uint8 *)(ANSICHAR *)Converter.Get(), payload.Num());
 
     FString finalLine = FString::Printf(TEXT("\r\n--%s--"), *boundary);
     FTCHARToUTF8 NewConverter(*finalLine);
-    TArray<uint8>finalPayload;
+    TArray<uint8> finalPayload;
     finalPayload.SetNum(NewConverter.Length());
-    FMemory::Memcpy(finalPayload.GetData(), (uint8*)(ANSICHAR*)NewConverter.Get(), finalPayload.Num());
+    FMemory::Memcpy(finalPayload.GetData(), (uint8 *)(ANSICHAR *)NewConverter.Get(), finalPayload.Num());
 
     payload.Append(data);
     payload.Append(finalPayload);
@@ -155,7 +156,7 @@ TArray<uint8> BCFileUploader::CreateContent(FString & boundary, FString & sessio
     return payload;
 }
 
-void BCFileUploader::ReportError(int32 statusCode, int32 reasonCode, FString& statusMessage)
+void BCFileUploader::ReportError(int32 statusCode, int32 reasonCode, FString &statusMessage)
 {
     _statusCode = statusCode;
     _reasonCode = reasonCode;
@@ -163,7 +164,7 @@ void BCFileUploader::ReportError(int32 statusCode, int32 reasonCode, FString& st
     _status = UPLOAD_STATUS_COMPLETE_FAILED;
 }
 
-FString BCFileUploader::CreateErrorString(int32 statusCode, int32 reasonCode, FString& statusMessage)
+FString BCFileUploader::CreateErrorString(int32 statusCode, int32 reasonCode, FString &statusMessage)
 {
     TSharedRef<FJsonObject> jsonObj = MakeShareable(new FJsonObject());
 

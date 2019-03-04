@@ -7,8 +7,8 @@ class IServerCallback;
 
 class BCCLIENTPLUGIN_API BrainCloudScript
 {
-public:
-    BrainCloudScript(BrainCloudClient* client);
+  public:
+    BrainCloudScript(BrainCloudClient *client);
 
     /**
      * Executes a script on the server.
@@ -21,7 +21,7 @@ public:
      * @param callback The method to be invoked when the server response is received
      * @see The API documentation site for more details on cloud code
      */
-    void runScript(const FString& scriptName, const FString& jsonScriptData, IServerCallback * callback = nullptr);
+    void runScript(const FString &scriptName, const FString &jsonScriptData, IServerCallback *callback = nullptr);
 
     /**
     * Allows cloud script executions to be scheduled
@@ -35,7 +35,7 @@ public:
     * @param callback The method to be invoked when the server response is received
     * @see The API documentation site for more details on cloud code
     */
-    void scheduleRunScriptUTC(const FString& scriptName, const FString& jsonScriptData, const struct FDateTime startDateInUTC, IServerCallback * callback = nullptr);
+    void scheduleRunScriptUTC(const FString &scriptName, const FString &jsonScriptData, const struct FDateTime startDateInUTC, IServerCallback *callback = nullptr);
 
     /**
     * Allows cloud script executions to be scheduled
@@ -49,7 +49,7 @@ public:
     * @param callback The method to be invoked when the server response is received
     * @see The API documentation site for more details on cloud code
     */
-    void scheduleRunScriptMinutes(const FString& scriptName, const FString& jsonScriptData, int32 minutesFromNow, IServerCallback * callback = nullptr);
+    void scheduleRunScriptMinutes(const FString &scriptName, const FString &jsonScriptData, int32 minutesFromNow, IServerCallback *callback = nullptr);
 
     /**
     * Run a cloud script in a parent app
@@ -63,9 +63,9 @@ public:
     * @param callback The method to be invoked when the server response is received
     * @see The API documentation site for more details on cloud code
     */
-    void runParentScript(const FString& scriptName, const FString& jsonScriptData, const FString& parentLevel, IServerCallback * callback = nullptr);
+    void runParentScript(const FString &scriptName, const FString &jsonScriptData, const FString &parentLevel, IServerCallback *callback = nullptr);
 
-	/**
+    /**
 	* Cancels a scheduled cloud code script
 	*
 	* Service Name - Script
@@ -74,9 +74,9 @@ public:
 	* @param jobId ID of script job to cancel
 	* @param callback The method to be invoked when the server response is received
 	*/
-	void cancelScheduledScript(const FString& jobId, IServerCallback * callback = nullptr);
+    void cancelScheduledScript(const FString &jobId, IServerCallback *callback = nullptr);
 
-	/**
+    /**
 	* Runs a script from the context of a peer
 	*
 	* Service Name - Script
@@ -87,9 +87,9 @@ public:
 	* @param peer Peer the script belongs to
 	* @param callback The method to be invoked when the server response is received
 	*/
-	void runPeerScript(const FString& scriptName, const FString& jsonScriptData, const FString& peer, IServerCallback * callback = nullptr);
+    void runPeerScript(const FString &scriptName, const FString &jsonScriptData, const FString &peer, IServerCallback *callback = nullptr);
 
-	/**
+    /**
 	* Runs a script asynchronously from the context of a peer
 	* This method does not wait for the script to complete before returning
 	*
@@ -101,8 +101,8 @@ public:
 	* @param peer Peer the script belongs to
 	* @param callback The method to be invoked when the server response is received
 	*/
-	void runPeerScriptAsync(const FString& scriptName, const FString& jsonScriptData, const FString& peer, IServerCallback * callback = nullptr);
+    void runPeerScriptAsync(const FString &scriptName, const FString &jsonScriptData, const FString &peer, IServerCallback *callback = nullptr);
 
-private:
-    BrainCloudClient* _client = nullptr;
+  private:
+    BrainCloudClient *_client = nullptr;
 };

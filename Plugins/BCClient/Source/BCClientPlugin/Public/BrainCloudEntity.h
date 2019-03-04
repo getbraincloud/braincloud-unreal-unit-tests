@@ -9,9 +9,9 @@ class IAcl;
 class BCCLIENTPLUGIN_API BrainCloudEntity
 {
 public:
-    BrainCloudEntity(BrainCloudClient* client);
+  BrainCloudEntity(BrainCloudClient *client);
 
-    /**
+  /**
      * Method creates a new entity on the server.
      *
      * Service Name - Entity
@@ -23,9 +23,9 @@ public:
      * permissions which make the entity readable/writeable by only the player.
      * @param callback The method to be invoked when the server response is received
      */
-    void createEntity(const FString& entityType, const FString& jsonEntityData, IAcl* jsonEntityAcl, IServerCallback* callback);
+  void createEntity(const FString &entityType, const FString &jsonEntityData, IAcl *jsonEntityAcl, IServerCallback *callback);
 
-    /**
+  /**
      * Method updates a new entity on the server. This operation results in the entity
      * data being completely replaced by the passed in JSON string.
      *
@@ -39,9 +39,9 @@ public:
      * permissions which make the entity readable/writeable by only the player.
      * @param callback The method to be invoked when the server response is received
      */
-    void updateEntity(const FString& entityId, const FString& entityType, const FString& jsonEntityData, IAcl* jsonEntityAcl, IServerCallback* callback);
+  void updateEntity(const FString &entityId, const FString &entityType, const FString &jsonEntityData, IAcl *jsonEntityAcl, IServerCallback *callback);
 
-    /** Method to get a specific entity.
+  /** Method to get a specific entity.
     *
     * Service Name - Entity
     * Service Operation - Read
@@ -49,9 +49,9 @@ public:
     * @param entityId The entity id
     * @param callback The method to be invoked when the server response is received
     */
-    void getEntity(const FString& entityId, IServerCallback* callback);
+  void getEntity(const FString &entityId, IServerCallback *callback);
 
-    /**
+  /**
     * Method retreives a singleton entity on the server. If the entity doesn't exist, null is returned.
     *
     * Service Name - Entity
@@ -60,9 +60,9 @@ public:
     * @param entityType The entity type as defined by the user
     * @param callback The method to be invoked when the server response is received
     */
-    void getSingleton(const FString& entityType, IServerCallback * callback);
+  void getSingleton(const FString &entityType, IServerCallback *callback);
 
-    /**
+  /**
     * Method updates a new singleton entity on the server. This operation results in the entity
     * data being completely replaced by the passed in JSON string. If the entity doesn't exists it is created
     *
@@ -74,9 +74,9 @@ public:
     * permissions which make the entity readable/writeable by only the player.
     * @param callback The method to be invoked when the server response is received
     */
-    void updateSingleton(const FString& entityType, const FString& jsonEntityData, IServerCallback* callback);
+  void updateSingleton(const FString &entityType, const FString &jsonEntityData, IServerCallback *callback);
 
-    /**
+  /**
      * Method deletes the given entity on the server.
      *
      * Service Name - Entity
@@ -85,9 +85,9 @@ public:
      * @param entityId The id of the entity to update
      * @param callback The method to be invoked when the server response is received
      */
-    void deleteEntity(const FString& entityId, IServerCallback* callback);
+  void deleteEntity(const FString &entityId, IServerCallback *callback);
 
-    /**
+  /**
     * Method deletes the given singleton entity on the server.
     *
     * Service Name - Entity
@@ -96,24 +96,23 @@ public:
     * @param entityType The type of the entity to delete
     * @param callback The method to be invoked when the server response is received
     */
-    void deleteSingleton(const FString& entityType, IServerCallback* callback);
+  void deleteSingleton(const FString &entityType, IServerCallback *callback);
 
-    /** Method returns all player entities that match the given type.
+  /** Method returns all player entities that match the given type.
      * Service Name - Entity
      * Service Operation - ReadByType
      *
      * @param entityType The entity type to search for
      * @param callback The method to be invoked when the server response is received
      */
-    void getEntitiesByType(const FString& entityType, IServerCallback* callback);
+  void getEntitiesByType(const FString &entityType, IServerCallback *callback);
 
-
-    /**
+  /**
     * @deprecated Use getSharedEntityForProfileId instead - removal after September 1 2017
     */
-    void getSharedEntityForPlayerId(const FString &profileId, const FString &entityId, IServerCallback *callback = nullptr);
+  void getSharedEntityForPlayerId(const FString &profileId, const FString &entityId, IServerCallback *callback = nullptr);
 
-    /**
+  /**
     * Method returns a shared entity for the given player and entity ID.
     * An entity is shared if its ACL allows for the currently logged
     * in player to read the data.
@@ -125,14 +124,14 @@ public:
     * @param entityId The ID of the entity that will be retrieved
     * @param callback The method to be invoked when the server response is received
     */
-    void getSharedEntityForProfileId(const FString &profileId, const FString &entityId, IServerCallback *callback = nullptr);
+  void getSharedEntityForProfileId(const FString &profileId, const FString &entityId, IServerCallback *callback = nullptr);
 
-    /**
+  /**
     * @deprecated Use getSharedEntitiesForProfileId instead - removal after September 1 2017
     */
-    void getSharedEntitiesForPlayerId(const FString& profileId, IServerCallback* callback);
+  void getSharedEntitiesForPlayerId(const FString &profileId, IServerCallback *callback);
 
-    /**
+  /**
      * Method returns all shared entities for the given player id.
      * An entity is shared if its ACL allows for the currently logged
      * in player to read the data.
@@ -143,17 +142,14 @@ public:
      * @param profileId The player id to retrieve shared entities for
      * @param callback The method to be invoked when the server response is received
      */
-    void getSharedEntitiesForProfileId(const FString &profileId, IServerCallback *callback);
+  void getSharedEntitiesForProfileId(const FString &profileId, IServerCallback *callback);
 
-
-
-    /**
+  /**
     * @deprecated Use getSharedEntitiesListForProfileId instead - removal after September 1 2017
     */
-    void getSharedEntitiesListForPlayerId(const FString& profileId, const FString& whereJson, const FString& orderByJson, int32 maxReturn, IServerCallback * callback = nullptr);
+  void getSharedEntitiesListForPlayerId(const FString &profileId, const FString &whereJson, const FString &orderByJson, int32 maxReturn, IServerCallback *callback = nullptr);
 
-
-    /**
+  /**
     * Method gets list of shared entities for the specified player based on type and/or where clause
     *
     * Service Name - Entity
@@ -165,9 +161,9 @@ public:
     * @param maxReturn The maximum number of entities to return
     * @param callback The method to be invoked when the server response is received
     */
-    void getSharedEntitiesListForProfileId(const FString &profileId, const FString &whereJson, const FString &orderByJson, int32 maxReturn, IServerCallback *callback = nullptr);
+  void getSharedEntitiesListForProfileId(const FString &profileId, const FString &whereJson, const FString &orderByJson, int32 maxReturn, IServerCallback *callback = nullptr);
 
-    /**
+  /**
      * Method updates a shared entity owned by another player. This operation results in the entity
      * data being completely replaced by the passed in JSON string.
      *
@@ -180,9 +176,9 @@ public:
      * @param jsonEntityData    The entity's data as a json string.
      * @param callback The method to be invoked when the server response is received
      */
-    void updateSharedEntity(const FString& entityId, const FString& targetProfileId, const FString& entityType, const FString& jsonEntityData, IServerCallback* callback);
+  void updateSharedEntity(const FString &entityId, const FString &targetProfileId, const FString &entityType, const FString &jsonEntityData, IServerCallback *callback);
 
-    /**
+  /**
     * Method gets list of entities from the server base on type and/or where clause
     *
     * Service Name - Entity
@@ -193,9 +189,9 @@ public:
     * @param maxReturn The maximum number of entities to return
     * @param callback The callback object
     */
-    void getList(const FString& whereJson, const FString& orderByJson, int32 maxReturn, IServerCallback* callback);
+  void getList(const FString &whereJson, const FString &orderByJson, int32 maxReturn, IServerCallback *callback);
 
-    /**
+  /**
     * Method gets a count of entities based on the where clause
     *
     * Service Name - Entity
@@ -204,9 +200,9 @@ public:
     * @param whereJson Mongo style query string
     * @param callback The callback object
     */
-    void getListCount(const FString& whereJson, IServerCallback* callback);
+  void getListCount(const FString &whereJson, IServerCallback *callback);
 
-    /**
+  /**
     * Method uses a paging system to iterate through user entities
     * After retrieving a page of entities with this method,
     * use GetPageOffset() to retrieve previous or next pages.
@@ -218,9 +214,9 @@ public:
     *                   See the portal appendix documentation for format.
     * @param callback The callback object
     */
-    void getPage(const FString& context, IServerCallback * callback);
+  void getPage(const FString &context, IServerCallback *callback);
 
-    /**
+  /**
     * Method to retrieve previous or next pages after having called the GetPage method.
     *
     * Service Name - Entity
@@ -232,9 +228,9 @@ public:
     *      retrieved using the context string to determine a starting point.
     * @param callback The callback object
     */
-    void getPageOffset(const FString& context, int32 pageOffset, IServerCallback * callback);
+  void getPageOffset(const FString &context, int32 pageOffset, IServerCallback *callback);
 
-    /**
+  /**
     * Partial increment of entity data field items. Partial set of items incremented as specified.
     *
     * Service Name - entity
@@ -245,9 +241,9 @@ public:
     * @param returnData Should the entity be returned in the response?
     * @param callback The callback object
     */
-    void incrementUserEntityData(const FString& entityId, const FString& jsonData, IServerCallback * callback = nullptr);
+  void incrementUserEntityData(const FString &entityId, const FString &jsonData, IServerCallback *callback = nullptr);
 
-	/**
+  /**
 	* Partial increment of entity data field items. Partial set of items incremented as specified.
 	*
 	* Service Name - entity
@@ -259,8 +255,8 @@ public:
 	* @param returnData Should the entity be returned in the response?
 	* @param callback The callback object
 	*/
-	void incrementSharedUserEntityData(const FString& entityId, const FString& targetProfileId, const FString& jsonData, IServerCallback * callback = nullptr);
+  void incrementSharedUserEntityData(const FString &entityId, const FString &targetProfileId, const FString &jsonData, IServerCallback *callback = nullptr);
 
 private:
-    BrainCloudClient* _client = nullptr;
+  BrainCloudClient *_client = nullptr;
 };

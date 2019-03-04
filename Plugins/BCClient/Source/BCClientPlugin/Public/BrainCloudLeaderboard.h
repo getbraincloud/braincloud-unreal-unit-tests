@@ -21,7 +21,6 @@ enum class ERotationType : uint8
 	YEARLY UMETA(DisplayName = "Yearly")
 };
 
-
 UENUM(BlueprintType)
 enum class ESortOrder : uint8
 {
@@ -34,8 +33,8 @@ class IServerCallback;
 
 class BCCLIENTPLUGIN_API BrainCloudLeaderboard
 {
-public:
-	BrainCloudLeaderboard(BrainCloudClient* client);
+  public:
+	BrainCloudLeaderboard(BrainCloudClient *client);
 
 	/**
 	 * Method returns the social leaderboard. A player's social leaderboard is
@@ -58,7 +57,7 @@ public:
 	 * @param callback The method to be invoked when the server response is received
 	 *
 	 */
-	void getSocialLeaderboard(const FString& leaderboardId, bool replaceName, IServerCallback * callback = nullptr);
+	void getSocialLeaderboard(const FString &leaderboardId, bool replaceName, IServerCallback *callback = nullptr);
 
 	/**
 	 * Method returns the social leaderboard by its version. A player's social leaderboard is
@@ -82,8 +81,7 @@ public:
 	 * @param callback The method to be invoked when the server response is received
 	 *
 	 */
-	void getSocialLeaderboardByVersion(const FString& leaderboardId, bool replaceName, int32 version, IServerCallback * callback = nullptr);
-
+	void getSocialLeaderboardByVersion(const FString &leaderboardId, bool replaceName, int32 version, IServerCallback *callback = nullptr);
 
 	/**
 	* Reads multiple social leaderboards.
@@ -94,9 +92,9 @@ public:
 	* by the string "You".
 	* @param callback The method to be invoked when the server response is received
 	*/
-	void getMultiSocialLeaderboard(const TArray<FString>& leaderboardIds, int32 leaderboardResultCount, bool replaceName, IServerCallback * callback = nullptr);
+	void getMultiSocialLeaderboard(const TArray<FString> &leaderboardIds, int32 leaderboardResultCount, bool replaceName, IServerCallback *callback = nullptr);
 
-    /**
+	/**
 	* Method returns a page of global leaderboard results.
 	*
 	* Leaderboards entries contain the player's score and optionally, some user-defined
@@ -113,7 +111,7 @@ public:
 	* @param endIndex The index at which to end the page.
 	* @param callback The method to be invoked when the server response is received
 	*/
-	void getGlobalLeaderboardPage(const FString& leaderboardId, ESortOrder sortOrder, int32 startIndex, int32 endIndex, IServerCallback * callback = nullptr);
+	void getGlobalLeaderboardPage(const FString &leaderboardId, ESortOrder sortOrder, int32 startIndex, int32 endIndex, IServerCallback *callback = nullptr);
 
 	/**
 	* Method returns a page of global leaderboard results.
@@ -130,7 +128,7 @@ public:
 	* @param versionId The historical version to retrieve.
 	* @param callback The method to be invoked when the server response is received
 	*/
-	void getGlobalLeaderboardPageByVersion(const FString& leaderboardId, ESortOrder sortOrder, int32 startIndex, int32 endIndex, int32 versionId, IServerCallback * callback = nullptr);
+	void getGlobalLeaderboardPageByVersion(const FString &leaderboardId, ESortOrder sortOrder, int32 startIndex, int32 endIndex, int32 versionId, IServerCallback *callback = nullptr);
 
 	/**
 	* Method returns a view of global leaderboard results that centers on the current player.
@@ -147,7 +145,7 @@ public:
 	* @param afterCount The count of number of players after the current player to include.
 	* @param callback The method to be invoked when the server response is received
 	*/
-	void getGlobalLeaderboardView(const FString& leaderboardId, ESortOrder sortOrder, int32 beforeCount, int32 afterCount, IServerCallback * callback = nullptr);
+	void getGlobalLeaderboardView(const FString &leaderboardId, ESortOrder sortOrder, int32 beforeCount, int32 afterCount, IServerCallback *callback = nullptr);
 
 	/**
 	* Method returns a view of global leaderboard results that centers on the current player.
@@ -164,8 +162,8 @@ public:
 	* @param versionId The historical version to retrieve.
 	* @param callback The method to be invoked when the server response is received
 	*/
-	void getGlobalLeaderboardViewByVersion(const FString& leaderboardId, ESortOrder sortOrder, int32 beforeCount, int32 afterCount,
-		int32 versionId, IServerCallback * callback = nullptr);
+	void getGlobalLeaderboardViewByVersion(const FString &leaderboardId, ESortOrder sortOrder, int32 beforeCount, int32 afterCount,
+										   int32 versionId, IServerCallback *callback = nullptr);
 
 	/**
 	* Gets the number of entries in a global leaderboard
@@ -176,7 +174,7 @@ public:
 	* @param leaderboardId The leaderboard ID
 	* @param callback The method to be invoked when the server response is received
 	*/
-	void getGlobalLeaderboardEntryCount(const FString& leaderboardId, IServerCallback * callback = nullptr);
+	void getGlobalLeaderboardEntryCount(const FString &leaderboardId, IServerCallback *callback = nullptr);
 
 	/** Gets the global leaderboard versions.
 	*
@@ -186,7 +184,7 @@ public:
 	* @param leaderboardId The leaderboard
 	* @param callback The method to be invoked when the server response is received
 	*/
-	void getGlobalLeaderboardVersions(const FString& leaderboardId, IServerCallback * callback = nullptr);
+	void getGlobalLeaderboardVersions(const FString &leaderboardId, IServerCallback *callback = nullptr);
 
 	/**
 	 * Post the players score to the given social leaderboard.
@@ -203,7 +201,7 @@ public:
 	 * @param data Optional user-defined data to post with the score
 	 * @param callback The method to be invoked when the server response is received
 	 */
-	void postScore(const FString& leaderboardId, int32 score, const FString& jsonOtherData, IServerCallback * callback = nullptr);
+	void postScore(const FString &leaderboardId, int32 score, const FString &jsonOtherData, IServerCallback *callback = nullptr);
 
 	/**
 	 * Post the players score to the given social leaderboard.
@@ -224,8 +222,8 @@ public:
 	 * @param retainedCount How many rotations to keep
 	 * @param callback The method to be invoked when the server response is received
 	 */
-	void postScoreToDynamicLeaderboard(const FString& leaderboardId, int32 score, const FString& jsonData,
-		ESocialLeaderboardType leaderboardType, ERotationType rotationType, const FDateTime& rotationStart, int32 retainedCount, IServerCallback * callback = nullptr);
+	void postScoreToDynamicLeaderboard(const FString &leaderboardId, int32 score, const FString &jsonData,
+									   ESocialLeaderboardType leaderboardType, ERotationType rotationType, const FDateTime &rotationStart, int32 retainedCount, IServerCallback *callback = nullptr);
 
 	/**
 	* Post the players score to the given social leaderboard.
@@ -246,8 +244,8 @@ public:
 	* @param numDaysToRotate How many days between each rotation
 	* @param callback The method to be invoked when the server response is received
 	*/
-	void postScoreToDynamicLeaderboardDays(const FString& leaderboardId, int32 score, const FString& jsonData,
-		ESocialLeaderboardType leaderboardType, const FDateTime& rotationStart, int32 retainedCount, int32 numDaysToRotate, IServerCallback * callback = nullptr);
+	void postScoreToDynamicLeaderboardDays(const FString &leaderboardId, int32 score, const FString &jsonData,
+										   ESocialLeaderboardType leaderboardType, const FDateTime &rotationStart, int32 retainedCount, int32 numDaysToRotate, IServerCallback *callback = nullptr);
 
 	/**
 	* Removes a player's score from the leaderboard
@@ -259,7 +257,7 @@ public:
 	* @param versionId The version of the leaderboard
 	* @param callback The method to be invoked when the server response is received
 	*/
-	void removePlayerScore(const FString& leaderboardId, int32 versionId, IServerCallback * callback = nullptr);
+	void removePlayerScore(const FString &leaderboardId, int32 versionId, IServerCallback *callback = nullptr);
 
 	/**
 	 * Method to retrieve the player's completed tournaments for the game.
@@ -268,7 +266,7 @@ public:
 	 *  replaceName: True to replace the player's name with "You"; false otherwise.
 	 *  callback: client-side callback for the results
 	 */
-	void playerTournamentReward(const FString& eventName, uint64 multiplier, IServerCallback * callback = nullptr);
+	void playerTournamentReward(const FString &eventName, uint64 multiplier, IServerCallback *callback = nullptr);
 
 	/**
 	* Retrieve the social leaderboard for a group.
@@ -280,7 +278,7 @@ public:
 	* @param groupId The ID of the group
 	* @param callback The method to be invoked when the server response is received
 	*/
-	void getGroupSocialLeaderboard(const FString& leaderboardId, const FString& groupId, IServerCallback * callback = nullptr);
+	void getGroupSocialLeaderboard(const FString &leaderboardId, const FString &groupId, IServerCallback *callback = nullptr);
 
 	/**
 	* Retrieve the social leaderboard for a group by its version.
@@ -293,7 +291,7 @@ public:
 	* @param versionId the version
 	* @param callback The method to be invoked when the server response is received
 	*/
-	void getGroupSocialLeaderboardByVersion(const FString& leaderboardId, const FString& groupId, int32 versionId, IServerCallback * callback = nullptr);
+	void getGroupSocialLeaderboardByVersion(const FString &leaderboardId, const FString &groupId, int32 versionId, IServerCallback *callback = nullptr);
 
 	/**
 	* Retrieve the social leaderboard for a list of players.
@@ -305,7 +303,7 @@ public:
 	* @param profileIds The IDs of the players
 	* @param callback The method to be invoked when the server response is received
 	*/
-	void getPlayersSocialLeaderboard(const FString& leaderboardId, const TArray<FString> profileIds, IServerCallback * callback = nullptr);
+	void getPlayersSocialLeaderboard(const FString &leaderboardId, const TArray<FString> profileIds, IServerCallback *callback = nullptr);
 
 	/**
 	* Retrieve the social leaderboard for a list of players by the version of the leaderboard.
@@ -318,7 +316,7 @@ public:
 	* @param versionId the version
 	* @param callback The method to be invoked when the server response is received
 	*/
-	void getPlayersSocialLeaderboardByVersion(const FString& leaderboardId, const TArray<FString> profileIds, int32 versionId, IServerCallback * callback = nullptr);
+	void getPlayersSocialLeaderboardByVersion(const FString &leaderboardId, const TArray<FString> profileIds, int32 versionId, IServerCallback *callback = nullptr);
 
 	/**
 	* Retrieve a list of all leaderboards
@@ -328,7 +326,7 @@ public:
 	*
 	* @param callback The method to be invoked when the server response is received
 	*/
-	void listAllLeaderboards(IServerCallback * callback = nullptr);
+	void listAllLeaderboards(IServerCallback *callback = nullptr);
 
 	/**
 	* Gets a player's score from a leaderboard
@@ -340,7 +338,7 @@ public:
 	* @param versionId The version of the leaderboard. Use -1 for current.
 	* @param callback The method to be invoked when the server response is received
 	*/
-	void getPlayerScore(const FString& leaderboardId, int32 versionId, IServerCallback * callback = nullptr);
+	void getPlayerScore(const FString &leaderboardId, int32 versionId, IServerCallback *callback = nullptr);
 
 	/**
 	* Gets a player's score from multiple leaderboards
@@ -351,10 +349,10 @@ public:
 	* @param leaderboardIds A collection of leaderboardIds to retrieve scores from
 	* @param callback The method to be invoked when the server response is received
 	*/
-	void getPlayerScoresFromLeaderboards(const TArray<FString> leaderboardIds, IServerCallback * callback = nullptr);
+	void getPlayerScoresFromLeaderboards(const TArray<FString> leaderboardIds, IServerCallback *callback = nullptr);
 
-private:
-	BrainCloudClient* _client = nullptr;
+  private:
+	BrainCloudClient *_client = nullptr;
 
 	FString leaderboardTypeToString(ESocialLeaderboardType type);
 	FString leaderboardRotationTypeToString(ERotationType type);

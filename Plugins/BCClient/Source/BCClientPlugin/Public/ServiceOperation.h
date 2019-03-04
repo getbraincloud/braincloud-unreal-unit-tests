@@ -340,7 +340,7 @@ class BCCLIENTPLUGIN_API ServiceOperation
 	static const ServiceOperation StopListening;
 	static const ServiceOperation UpdateActivity;
 
-	//virtualCurrency 
+	//virtualCurrency
 	static const ServiceOperation GetPlayerCurrency;
 	static const ServiceOperation GetParentCurrency;
 	static const ServiceOperation GetPeerCurrency;

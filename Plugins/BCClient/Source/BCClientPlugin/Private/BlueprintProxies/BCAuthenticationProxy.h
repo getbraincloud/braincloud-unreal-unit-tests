@@ -203,7 +203,6 @@ class UBCAuthenticationProxy : public UBCBlueprintCallProxyBase
     */
     UFUNCTION(BlueprintCallable, meta = (BlueprintInternalUseOnly = "true"), Category = "BrainCloud|Authentication")
     static UBCAuthenticationProxy *ResetEmailPassword(UBrainCloudWrapper *brainCloudWrapper, const FString &email);
-    
 
     /**
     * Reset Email password with service parameters- Sends a password reset email to the specified address

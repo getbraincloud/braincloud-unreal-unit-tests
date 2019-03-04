@@ -8,17 +8,17 @@
 UCLASS(MinimalAPI)
 class UBCGlobalAppProxy : public UBCBlueprintCallProxyBase
 {
-    GENERATED_BODY()
+  GENERATED_BODY()
 
-  public:
-    UBCGlobalAppProxy(const FObjectInitializer &ObjectInitializer);
+public:
+  UBCGlobalAppProxy(const FObjectInitializer &ObjectInitializer);
 
-    /**
+  /**
     * Read game's global properties
     *
     * Service Name - GlobalApp
     * Service Operation - ReadProperties
     */
-    UFUNCTION(BlueprintCallable, meta = (BlueprintInternalUseOnly = "true"), Category = "BrainCloud|Global App")
-    static UBCGlobalAppProxy *ReadProperties(UBrainCloudWrapper *brainCloud);
+  UFUNCTION(BlueprintCallable, meta = (BlueprintInternalUseOnly = "true"), Category = "BrainCloud|Global App")
+  static UBCGlobalAppProxy *ReadProperties(UBrainCloudWrapper *brainCloud);
 };

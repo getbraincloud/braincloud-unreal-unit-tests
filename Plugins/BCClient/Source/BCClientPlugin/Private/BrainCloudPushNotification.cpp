@@ -8,101 +8,101 @@
 #include "JsonUtil.h"
 #include "BCPlatform.h"
 
-BrainCloudPushNotification::BrainCloudPushNotification(BrainCloudClient* client) : _client(client) {}
+BrainCloudPushNotification::BrainCloudPushNotification(BrainCloudClient *client) : _client(client) {}
 
-void BrainCloudPushNotification::deregisterAllPushNotificationDeviceTokens(IServerCallback * callback)
+void BrainCloudPushNotification::deregisterAllPushNotificationDeviceTokens(IServerCallback *callback)
 {
-    TSharedRef<FJsonObject> message = MakeShareable(new FJsonObject());
-    ServerCall * sc = new ServerCall(ServiceName::PushNotification, ServiceOperation::DeregisterAll, message, callback);
-    _client->sendRequest(sc);
+	TSharedRef<FJsonObject> message = MakeShareable(new FJsonObject());
+	ServerCall *sc = new ServerCall(ServiceName::PushNotification, ServiceOperation::DeregisterAll, message, callback);
+	_client->sendRequest(sc);
 }
 
-void BrainCloudPushNotification::deregisterPushNotificationDeviceToken(EBCPlatform platform, const FString & token, IServerCallback * callback)
+void BrainCloudPushNotification::deregisterPushNotificationDeviceToken(EBCPlatform platform, const FString &token, IServerCallback *callback)
 {
-    TSharedRef<FJsonObject> message = MakeShareable(new FJsonObject());
-    message->SetStringField(OperationParam::PushNotificationRegisterParamDeviceType.getValue(), BCPlatform::EnumToString(platform));
-    message->SetStringField(OperationParam::PushNotificationRegisterParamDeviceToken.getValue(), token);
+	TSharedRef<FJsonObject> message = MakeShareable(new FJsonObject());
+	message->SetStringField(OperationParam::PushNotificationRegisterParamDeviceType.getValue(), BCPlatform::EnumToString(platform));
+	message->SetStringField(OperationParam::PushNotificationRegisterParamDeviceToken.getValue(), token);
 
-    ServerCall * sc = new ServerCall(ServiceName::PushNotification, ServiceOperation::Deregister, message, callback);
-    _client->sendRequest(sc);
+	ServerCall *sc = new ServerCall(ServiceName::PushNotification, ServiceOperation::Deregister, message, callback);
+	_client->sendRequest(sc);
 }
 
-void BrainCloudPushNotification::registerPushNotificationDeviceToken(EBCPlatform platform, const FString& deviceToken, IServerCallback * callback)
+void BrainCloudPushNotification::registerPushNotificationDeviceToken(EBCPlatform platform, const FString &deviceToken, IServerCallback *callback)
 {
-    registerPushNotificationDeviceToken(BCPlatform::EnumToString(platform), deviceToken, callback);
+	registerPushNotificationDeviceToken(BCPlatform::EnumToString(platform), deviceToken, callback);
 }
 
-void BrainCloudPushNotification::registerPushNotificationDeviceToken(const FString& type, const FString& token, IServerCallback * callback)
+void BrainCloudPushNotification::registerPushNotificationDeviceToken(const FString &type, const FString &token, IServerCallback *callback)
 {
-    TSharedRef<FJsonObject> message = MakeShareable(new FJsonObject());
-    message->SetStringField(OperationParam::PushNotificationRegisterParamDeviceType.getValue(), type);
-    message->SetStringField(OperationParam::PushNotificationRegisterParamDeviceToken.getValue(), token);
+	TSharedRef<FJsonObject> message = MakeShareable(new FJsonObject());
+	message->SetStringField(OperationParam::PushNotificationRegisterParamDeviceType.getValue(), type);
+	message->SetStringField(OperationParam::PushNotificationRegisterParamDeviceToken.getValue(), token);
 
-    ServerCall * sc = new ServerCall(ServiceName::PushNotification, ServiceOperation::Register, message, callback);
-    _client->sendRequest(sc);
+	ServerCall *sc = new ServerCall(ServiceName::PushNotification, ServiceOperation::Register, message, callback);
+	_client->sendRequest(sc);
 }
 
-void BrainCloudPushNotification::sendSimplePushNotification(const FString& toProfileId, const FString& message, IServerCallback * callback)
+void BrainCloudPushNotification::sendSimplePushNotification(const FString &toProfileId, const FString &message, IServerCallback *callback)
 {
-    TSharedRef<FJsonObject> messageObj = MakeShareable(new FJsonObject());
-    messageObj->SetStringField(OperationParam::PushNotificationSendParamToPlayerId.getValue(), toProfileId);
-    messageObj->SetStringField(OperationParam::PushNotificationSendParamMessage.getValue(), message);
+	TSharedRef<FJsonObject> messageObj = MakeShareable(new FJsonObject());
+	messageObj->SetStringField(OperationParam::PushNotificationSendParamToPlayerId.getValue(), toProfileId);
+	messageObj->SetStringField(OperationParam::PushNotificationSendParamMessage.getValue(), message);
 
-    ServerCall * sc = new ServerCall(ServiceName::PushNotification, ServiceOperation::SendSimple, messageObj, callback);
-    _client->sendRequest(sc);
+	ServerCall *sc = new ServerCall(ServiceName::PushNotification, ServiceOperation::SendSimple, messageObj, callback);
+	_client->sendRequest(sc);
 }
 
-void BrainCloudPushNotification::sendRichPushNotification(const FString& toProfileId, int32 notificationTemplateId, IServerCallback * callback)
+void BrainCloudPushNotification::sendRichPushNotification(const FString &toProfileId, int32 notificationTemplateId, IServerCallback *callback)
 {
-    sendRichPushNotificationWithParams(toProfileId, notificationTemplateId, "", callback);
+	sendRichPushNotificationWithParams(toProfileId, notificationTemplateId, "", callback);
 }
 
-void BrainCloudPushNotification::sendRichPushNotificationWithParams(const FString& toProfileId, int32 notificationTemplateId, const FString& substitutionJson, IServerCallback * callback)
+void BrainCloudPushNotification::sendRichPushNotificationWithParams(const FString &toProfileId, int32 notificationTemplateId, const FString &substitutionJson, IServerCallback *callback)
 {
-    TSharedRef<FJsonObject> message = MakeShareable(new FJsonObject());
-    message->SetStringField(OperationParam::PushNotificationSendParamToPlayerId.getValue(), toProfileId);
-    message->SetNumberField(OperationParam::PushNotificationSendParamNotificationTemplateId.getValue(), notificationTemplateId);
+	TSharedRef<FJsonObject> message = MakeShareable(new FJsonObject());
+	message->SetStringField(OperationParam::PushNotificationSendParamToPlayerId.getValue(), toProfileId);
+	message->SetNumberField(OperationParam::PushNotificationSendParamNotificationTemplateId.getValue(), notificationTemplateId);
 
-    if (OperationParam::isOptionalParamValid(substitutionJson))
-    {
-        message->SetObjectField(OperationParam::PushNotificationSendParamSubstitution.getValue(), JsonUtil::jsonStringToValue(substitutionJson));
-    }
+	if (OperationParam::isOptionalParamValid(substitutionJson))
+	{
+		message->SetObjectField(OperationParam::PushNotificationSendParamSubstitution.getValue(), JsonUtil::jsonStringToValue(substitutionJson));
+	}
 
-    ServerCall * sc = new ServerCall(ServiceName::PushNotification, ServiceOperation::SendRich, message, callback);
-    _client->sendRequest(sc);
+	ServerCall *sc = new ServerCall(ServiceName::PushNotification, ServiceOperation::SendRich, message, callback);
+	_client->sendRequest(sc);
 }
 
-void BrainCloudPushNotification::sendTemplatedPushNotificationToGroup(const FString& groupId, int32 notificationTemplateId, const FString& substitutionsJson, IServerCallback * callback)
+void BrainCloudPushNotification::sendTemplatedPushNotificationToGroup(const FString &groupId, int32 notificationTemplateId, const FString &substitutionsJson, IServerCallback *callback)
 {
-    TSharedRef<FJsonObject> message = MakeShareable(new FJsonObject());
-    message->SetStringField(OperationParam::GroupId.getValue(), groupId);
-    message->SetNumberField(OperationParam::PushNotificationSendParamNotificationTemplateId.getValue(), notificationTemplateId);
+	TSharedRef<FJsonObject> message = MakeShareable(new FJsonObject());
+	message->SetStringField(OperationParam::GroupId.getValue(), groupId);
+	message->SetNumberField(OperationParam::PushNotificationSendParamNotificationTemplateId.getValue(), notificationTemplateId);
 
-    if (OperationParam::isOptionalParamValid(substitutionsJson))
-    {
-        message->SetObjectField(OperationParam::PushNotificationSendParamSubstitution.getValue(), JsonUtil::jsonStringToValue(substitutionsJson));
-    }
+	if (OperationParam::isOptionalParamValid(substitutionsJson))
+	{
+		message->SetObjectField(OperationParam::PushNotificationSendParamSubstitution.getValue(), JsonUtil::jsonStringToValue(substitutionsJson));
+	}
 
-    ServerCall * sc = new ServerCall(ServiceName::PushNotification, ServiceOperation::SendTemplatedToGroup, message, callback);
-    _client->sendRequest(sc);
+	ServerCall *sc = new ServerCall(ServiceName::PushNotification, ServiceOperation::SendTemplatedToGroup, message, callback);
+	_client->sendRequest(sc);
 }
 
-void BrainCloudPushNotification::sendNormalizedPushNotificationToGroup(const FString& groupId, const FString& alertContentJson, const FString& customDataJson, IServerCallback * callback)
+void BrainCloudPushNotification::sendNormalizedPushNotificationToGroup(const FString &groupId, const FString &alertContentJson, const FString &customDataJson, IServerCallback *callback)
 {
-    TSharedRef<FJsonObject> message = MakeShareable(new FJsonObject());
-    message->SetStringField(OperationParam::GroupId.getValue(), groupId);
-    message->SetObjectField(OperationParam::AlertContent.getValue(), JsonUtil::jsonStringToValue(alertContentJson));
+	TSharedRef<FJsonObject> message = MakeShareable(new FJsonObject());
+	message->SetStringField(OperationParam::GroupId.getValue(), groupId);
+	message->SetObjectField(OperationParam::AlertContent.getValue(), JsonUtil::jsonStringToValue(alertContentJson));
 
-    if (OperationParam::isOptionalParamValid(customDataJson))
-    {
-        message->SetObjectField(OperationParam::CustomData.getValue(), JsonUtil::jsonStringToValue(customDataJson));
-    }
+	if (OperationParam::isOptionalParamValid(customDataJson))
+	{
+		message->SetObjectField(OperationParam::CustomData.getValue(), JsonUtil::jsonStringToValue(customDataJson));
+	}
 
-    ServerCall * sc = new ServerCall(ServiceName::PushNotification, ServiceOperation::SendNormalizedToGroup, message, callback);
-    _client->sendRequest(sc);
+	ServerCall *sc = new ServerCall(ServiceName::PushNotification, ServiceOperation::SendNormalizedToGroup, message, callback);
+	_client->sendRequest(sc);
 }
 
-void BrainCloudPushNotification::scheduleRawPushNotificationUTC(const FString& profileId, const FString& fcmContent, const FString& iosContent, const FString& facebookContent, int32 startTime, IServerCallback * callback)
+void BrainCloudPushNotification::scheduleRawPushNotificationUTC(const FString &profileId, const FString &fcmContent, const FString &iosContent, const FString &facebookContent, int32 startTime, IServerCallback *callback)
 {
 	TSharedRef<FJsonObject> message = MakeShareable(new FJsonObject());
 	message->SetStringField(OperationParam::ProfileId.getValue(), profileId);
@@ -124,11 +124,11 @@ void BrainCloudPushNotification::scheduleRawPushNotificationUTC(const FString& p
 
 	message->SetNumberField(OperationParam::StartTimeUTC.getValue(), startTime);
 
-	ServerCall * sc = new ServerCall(ServiceName::PushNotification, ServiceOperation::ScheduledRawNotifcation, message, callback);
+	ServerCall *sc = new ServerCall(ServiceName::PushNotification, ServiceOperation::ScheduledRawNotifcation, message, callback);
 	_client->sendRequest(sc);
 }
 
-void BrainCloudPushNotification::scheduleRawPushNotificationMinutes(const FString& profileId, const FString& fcmContent, const FString& iosContent, const FString& facebookContent, int32 minutesFromNow, IServerCallback * callback)
+void BrainCloudPushNotification::scheduleRawPushNotificationMinutes(const FString &profileId, const FString &fcmContent, const FString &iosContent, const FString &facebookContent, int32 minutesFromNow, IServerCallback *callback)
 {
 	TSharedRef<FJsonObject> message = MakeShareable(new FJsonObject());
 	message->SetStringField(OperationParam::ProfileId.getValue(), profileId);
@@ -150,11 +150,11 @@ void BrainCloudPushNotification::scheduleRawPushNotificationMinutes(const FStrin
 
 	message->SetNumberField(OperationParam::MinutesFromNow.getValue(), minutesFromNow);
 
-	ServerCall * sc = new ServerCall(ServiceName::PushNotification, ServiceOperation::ScheduledRawNotifcation, message, callback);
+	ServerCall *sc = new ServerCall(ServiceName::PushNotification, ServiceOperation::ScheduledRawNotifcation, message, callback);
 	_client->sendRequest(sc);
 }
 
-void BrainCloudPushNotification::sendRawPushNotification(const FString& profileId, const FString& fcmContent, const FString& iosContent, const FString& facebookContent, IServerCallback * callback)
+void BrainCloudPushNotification::sendRawPushNotification(const FString &profileId, const FString &fcmContent, const FString &iosContent, const FString &facebookContent, IServerCallback *callback)
 {
 	TSharedRef<FJsonObject> message = MakeShareable(new FJsonObject());
 	message->SetStringField(OperationParam::PushNotificationSendParamToPlayerId.getValue(), profileId);
@@ -174,11 +174,11 @@ void BrainCloudPushNotification::sendRawPushNotification(const FString& profileI
 		message->SetObjectField(OperationParam::FacebookContent.getValue(), JsonUtil::jsonStringToValue(facebookContent));
 	}
 
-	ServerCall * sc = new ServerCall(ServiceName::PushNotification, ServiceOperation::SendRaw, message, callback);
+	ServerCall *sc = new ServerCall(ServiceName::PushNotification, ServiceOperation::SendRaw, message, callback);
 	_client->sendRequest(sc);
 }
 
-void BrainCloudPushNotification::sendRawPushNotificationBatch(const TArray<FString> profileIds, const FString& fcmContent, const FString& iosContent, const FString& facebookContent, IServerCallback * callback)
+void BrainCloudPushNotification::sendRawPushNotificationBatch(const TArray<FString> profileIds, const FString &fcmContent, const FString &iosContent, const FString &facebookContent, IServerCallback *callback)
 {
 	TSharedRef<FJsonObject> message = MakeShareable(new FJsonObject());
 	message->SetArrayField(OperationParam::ProfileIds.getValue(), JsonUtil::arrayToJsonArray(profileIds));
@@ -198,11 +198,11 @@ void BrainCloudPushNotification::sendRawPushNotificationBatch(const TArray<FStri
 		message->SetObjectField(OperationParam::FacebookContent.getValue(), JsonUtil::jsonStringToValue(facebookContent));
 	}
 
-	ServerCall * sc = new ServerCall(ServiceName::PushNotification, ServiceOperation::SendRawBatch, message, callback);
+	ServerCall *sc = new ServerCall(ServiceName::PushNotification, ServiceOperation::SendRawBatch, message, callback);
 	_client->sendRequest(sc);
 }
 
-void BrainCloudPushNotification::sendRawPushNotificationToGroup(const FString& groupId, const FString& fcmContent, const FString& iosContent, const FString& facebookContent, IServerCallback * callback)
+void BrainCloudPushNotification::sendRawPushNotificationToGroup(const FString &groupId, const FString &fcmContent, const FString &iosContent, const FString &facebookContent, IServerCallback *callback)
 {
 	TSharedRef<FJsonObject> message = MakeShareable(new FJsonObject());
 	message->SetStringField(OperationParam::GroupId.getValue(), groupId);
@@ -222,11 +222,11 @@ void BrainCloudPushNotification::sendRawPushNotificationToGroup(const FString& g
 		message->SetObjectField(OperationParam::FacebookContent.getValue(), JsonUtil::jsonStringToValue(facebookContent));
 	}
 
-	ServerCall * sc = new ServerCall(ServiceName::PushNotification, ServiceOperation::SendRawToGroup, message, callback);
+	ServerCall *sc = new ServerCall(ServiceName::PushNotification, ServiceOperation::SendRawToGroup, message, callback);
 	_client->sendRequest(sc);
 }
 
-void BrainCloudPushNotification::scheduleNormalizedPushNotificationUTC(const FString& profileId, const FString& alertContentJson, const FString& customDataJson, const int32 startTime, IServerCallback * callback)
+void BrainCloudPushNotification::scheduleNormalizedPushNotificationUTC(const FString &profileId, const FString &alertContentJson, const FString &customDataJson, const int32 startTime, IServerCallback *callback)
 {
 	TSharedRef<FJsonObject> message = MakeShareable(new FJsonObject());
 	message->SetStringField(OperationParam::PushNotificationSendParamProfileId.getValue(), profileId);
@@ -239,12 +239,11 @@ void BrainCloudPushNotification::scheduleNormalizedPushNotificationUTC(const FSt
 
 	message->SetNumberField(OperationParam::StartTimeUTC.getValue(), startTime);
 
-
-	ServerCall * sc = new ServerCall(ServiceName::PushNotification, ServiceOperation::ScheduleNormalizedNotifcation, message, callback);
+	ServerCall *sc = new ServerCall(ServiceName::PushNotification, ServiceOperation::ScheduleNormalizedNotifcation, message, callback);
 	_client->sendRequest(sc);
 }
 
-void BrainCloudPushNotification::scheduleNormalizedPushNotificationMinutes(const FString& profileId, const FString& alertContentJson, const FString& customDataJson, const int32 minutesFromNow, IServerCallback * callback)
+void BrainCloudPushNotification::scheduleNormalizedPushNotificationMinutes(const FString &profileId, const FString &alertContentJson, const FString &customDataJson, const int32 minutesFromNow, IServerCallback *callback)
 {
 	TSharedRef<FJsonObject> message = MakeShareable(new FJsonObject());
 	message->SetStringField(OperationParam::PushNotificationSendParamProfileId.getValue(), profileId);
@@ -257,11 +256,11 @@ void BrainCloudPushNotification::scheduleNormalizedPushNotificationMinutes(const
 
 	message->SetNumberField(OperationParam::MinutesFromNow.getValue(), minutesFromNow);
 
-	ServerCall * sc = new ServerCall(ServiceName::PushNotification, ServiceOperation::ScheduleNormalizedNotifcation, message, callback);
+	ServerCall *sc = new ServerCall(ServiceName::PushNotification, ServiceOperation::ScheduleNormalizedNotifcation, message, callback);
 	_client->sendRequest(sc);
 }
 
-void BrainCloudPushNotification::scheduleRichPushNotificationUTC(const FString& profileId, const int32 notificationTemplateId, const FString& substitutionJson, const int32 startTime, IServerCallback * callback)
+void BrainCloudPushNotification::scheduleRichPushNotificationUTC(const FString &profileId, const int32 notificationTemplateId, const FString &substitutionJson, const int32 startTime, IServerCallback *callback)
 {
 	TSharedRef<FJsonObject> message = MakeShareable(new FJsonObject());
 	message->SetStringField(OperationParam::PushNotificationSendParamProfileId.getValue(), profileId);
@@ -274,11 +273,11 @@ void BrainCloudPushNotification::scheduleRichPushNotificationUTC(const FString& 
 
 	message->SetNumberField(OperationParam::StartTimeUTC.getValue(), startTime);
 
-	ServerCall * sc = new ServerCall(ServiceName::PushNotification, ServiceOperation::ScheduledRichNotifcation, message, callback);
+	ServerCall *sc = new ServerCall(ServiceName::PushNotification, ServiceOperation::ScheduledRichNotifcation, message, callback);
 	_client->sendRequest(sc);
 }
 
-void BrainCloudPushNotification::scheduleRichPushNotificationMinutes(const FString& profileId, const int32 notificationTemplateId, const FString& substitutionJson, const int32 minutesFromNow, IServerCallback * callback)
+void BrainCloudPushNotification::scheduleRichPushNotificationMinutes(const FString &profileId, const int32 notificationTemplateId, const FString &substitutionJson, const int32 minutesFromNow, IServerCallback *callback)
 {
 	TSharedRef<FJsonObject> message = MakeShareable(new FJsonObject());
 	message->SetStringField(OperationParam::PushNotificationSendParamProfileId.getValue(), profileId);
@@ -291,11 +290,11 @@ void BrainCloudPushNotification::scheduleRichPushNotificationMinutes(const FStri
 
 	message->SetNumberField(OperationParam::StartTimeUTC.getValue(), minutesFromNow);
 
-	ServerCall * sc = new ServerCall(ServiceName::PushNotification, ServiceOperation::ScheduledRichNotifcation, message, callback);
+	ServerCall *sc = new ServerCall(ServiceName::PushNotification, ServiceOperation::ScheduledRichNotifcation, message, callback);
 	_client->sendRequest(sc);
 }
 
-void BrainCloudPushNotification::sendNormalizedPushNotification(const FString& toProfileId, const FString& alertContentJson, const FString& customDataJson, IServerCallback * callback)
+void BrainCloudPushNotification::sendNormalizedPushNotification(const FString &toProfileId, const FString &alertContentJson, const FString &customDataJson, IServerCallback *callback)
 {
 	TSharedRef<FJsonObject> message = MakeShareable(new FJsonObject());
 	message->SetStringField(OperationParam::PushNotificationSendParamToPlayerId.getValue(), toProfileId);
@@ -306,11 +305,11 @@ void BrainCloudPushNotification::sendNormalizedPushNotification(const FString& t
 		message->SetObjectField(OperationParam::CustomData.getValue(), JsonUtil::jsonStringToValue(customDataJson));
 	}
 
-	ServerCall * sc = new ServerCall(ServiceName::PushNotification, ServiceOperation::SendNormalized, message, callback);
+	ServerCall *sc = new ServerCall(ServiceName::PushNotification, ServiceOperation::SendNormalized, message, callback);
 	_client->sendRequest(sc);
 }
 
-void BrainCloudPushNotification::sendNormalizedPushNotificationBatch(const TArray<FString> profileIds, const FString& alertContentJson, const FString& customDataJson, IServerCallback * callback)
+void BrainCloudPushNotification::sendNormalizedPushNotificationBatch(const TArray<FString> profileIds, const FString &alertContentJson, const FString &customDataJson, IServerCallback *callback)
 {
 	TSharedRef<FJsonObject> message = MakeShareable(new FJsonObject());
 	message->SetArrayField(OperationParam::ProfileIds.getValue(), JsonUtil::arrayToJsonArray(profileIds));
@@ -321,6 +320,6 @@ void BrainCloudPushNotification::sendNormalizedPushNotificationBatch(const TArra
 		message->SetObjectField(OperationParam::CustomData.getValue(), JsonUtil::jsonStringToValue(customDataJson));
 	}
 
-	ServerCall * sc = new ServerCall(ServiceName::PushNotification, ServiceOperation::SendNormalizedBatch, message, callback);
+	ServerCall *sc = new ServerCall(ServiceName::PushNotification, ServiceOperation::SendNormalizedBatch, message, callback);
 	_client->sendRequest(sc);
 }

@@ -7,8 +7,8 @@ class IServerCallback;
 
 class BCCLIENTPLUGIN_API BrainCloudProfanity
 {
-public:
-    BrainCloudProfanity(BrainCloudClient* client);
+  public:
+    BrainCloudProfanity(BrainCloudClient *client);
 
     /**
      * Checks supplied text for profanity.
@@ -31,12 +31,12 @@ public:
      * 40424 - WebPurify not enabled
      */
     void profanityCheck(
-        const FString& text,
-        const FString& languages,
+        const FString &text,
+        const FString &languages,
         bool flagEmail,
         bool flagPhone,
         bool flagUrls,
-        IServerCallback * callback = nullptr);
+        IServerCallback *callback = nullptr);
 
     /**
      * Replaces the characters of profanity text with a passed character(s).
@@ -60,14 +60,13 @@ public:
      * 40424 - WebPurify not enabled
      */
     void profanityReplaceText(
-        const FString& text,
-        const FString& replaceSymbol,
-        const FString& languages,
+        const FString &text,
+        const FString &replaceSymbol,
+        const FString &languages,
         bool flagEmail,
         bool flagPhone,
         bool flagUrls,
-        IServerCallback * callback = nullptr);
-
+        IServerCallback *callback = nullptr);
 
     /**
      * Checks supplied text for profanity and returns a list of bad wors.
@@ -90,15 +89,13 @@ public:
      * 40424 - WebPurify not enabled
      */
     void profanityIdentifyBadWords(
-        const FString& text,
-        const FString& languages,
+        const FString &text,
+        const FString &languages,
         bool flagEmail,
         bool flagPhone,
         bool flagUrls,
-        IServerCallback * callback = nullptr);
+        IServerCallback *callback = nullptr);
 
-private:
-    BrainCloudClient* _client = nullptr;
+  private:
+    BrainCloudClient *_client = nullptr;
 };
-
-
