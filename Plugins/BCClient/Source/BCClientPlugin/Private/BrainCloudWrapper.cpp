@@ -68,21 +68,20 @@ void UBrainCloudWrapper::initialize(FString url, FString secretKey, FString appI
 {
     // initialize the client with our app info
     _client->initialize(url, secretKey, appId, appVersion);
-
     loadData();
 }
 
 void UBrainCloudWrapper::initializeWithApps(FString url, FString appId, TMap<FString, FString> secretMap, FString appVersion, FString company, FString appName)
 {
-    if(_client == nullptr)
+    if (_client == nullptr)
     {
         _client = new BrainCloudClient();
     }
 
     FString defaultSecretKey = "MISSING";
-    if(secretMap.Contains(appId))
+    if (secretMap.Contains(appId))
     {
-            defaultSecretKey = secretMap[appId];
+        defaultSecretKey = secretMap[appId];
     }
 
     _lastUrl = url;
@@ -91,7 +90,7 @@ void UBrainCloudWrapper::initializeWithApps(FString url, FString appId, TMap<FSt
     _lastGameVersion = appVersion;
     _company = company;
     _appName = appName;
-    
+
     // initialize the client with our app info
     _client->initializeWithApps(url, appId, secretMap, appVersion);
 
@@ -106,7 +105,8 @@ void UBrainCloudWrapper::initializeIdentity(bool isAnonymousAuth)
 
     if ((!anonId.IsEmpty() && profileId.IsEmpty()) || anonId.IsEmpty())
     {
-        setStoredAnonymousId(_client->getAuthenticationService()->generateAnonymousId());
+        anonId = _client->getAuthenticationService()->generateAnonymousId();
+        setStoredAnonymousId(anonId);
         setStoredProfileId(TEXT(""));
     }
 
@@ -124,7 +124,12 @@ void UBrainCloudWrapper::reauthenticate()
 {
     // send our saved game info to brainCloud
     // company and game name can be nullptr since they are already set
-    initialize(_client->getBrainCloudComms()->GetServerUrl(), _client->getBrainCloudComms()->GetSecretKey(), _client->getAppId(), _client->getAppVersion());
+    FString &serverURL = _client->getBrainCloudComms()->GetServerUrl();
+    FString &secretKey = _client->getBrainCloudComms()->GetSecretKey();
+    FString &appId = _client->getAppId();
+    FString &appVersion = _client->getAppVersion();
+
+    initialize(serverURL, secretKey, appId, appVersion);
     authenticateAnonymous();
 }
 
@@ -254,12 +259,12 @@ void UBrainCloudWrapper::getIdentitiesCallback(IServerCallback *success)
     }
 }
 
-void UBrainCloudWrapper::resetEmailPassword(const FString& in_email, IServerCallback * in_callback)
+void UBrainCloudWrapper::resetEmailPassword(const FString &in_email, IServerCallback *in_callback)
 {
     _client->getAuthenticationService()->resetEmailPassword(in_email, in_callback);
 }
 
-void UBrainCloudWrapper::resetEmailPasswordAdvanced(const FString& in_emailAddress, const FString& in_serviceParams, IServerCallback * in_callback)
+void UBrainCloudWrapper::resetEmailPasswordAdvanced(const FString &in_emailAddress, const FString &in_serviceParams, IServerCallback *in_callback)
 {
     _client->getAuthenticationService()->resetEmailPasswordAdvanced(in_emailAddress, in_serviceParams, in_callback);
 }
