@@ -124,10 +124,10 @@ void UBrainCloudWrapper::reauthenticate()
 {
     // send our saved game info to brainCloud
     // company and game name can be nullptr since they are already set
-    FString &serverURL = _client->getBrainCloudComms()->GetServerUrl();
-    FString &secretKey = _client->getBrainCloudComms()->GetSecretKey();
-    FString &appId = _client->getAppId();
-    FString &appVersion = _client->getAppVersion();
+    const FString &serverURL = _client->getBrainCloudComms()->GetServerUrl();
+    const FString &secretKey = _client->getBrainCloudComms()->GetSecretKey();
+    const FString &appId = _client->getAppId();
+    const FString &appVersion = _client->getAppVersion();
 
     initialize(serverURL, secretKey, appId, appVersion);
     authenticateAnonymous();
