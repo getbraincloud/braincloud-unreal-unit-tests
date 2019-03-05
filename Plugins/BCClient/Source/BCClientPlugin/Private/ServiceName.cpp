@@ -3,7 +3,7 @@
 #include "BCClientPluginPrivatePCH.h"
 #include "ServiceName.h"
 
-ServiceName::ServiceName(const FString& name)
+ServiceName::ServiceName(const FString &name)
 {
     _value = name;
 }
@@ -30,7 +30,7 @@ const ServiceName ServiceName::Friend = ServiceName("friend");
 const ServiceName ServiceName::Time = ServiceName("time");
 const ServiceName ServiceName::Tournament = ServiceName("tournament");
 const ServiceName ServiceName::VirtualCurrency = ServiceName("virtualCurrency");
-const ServiceName ServiceName::AppStore = ServiceName("appStore");                       
+const ServiceName ServiceName::AppStore = ServiceName("appStore");
 
 const ServiceName ServiceName::Leaderboard = ServiceName("leaderboard");
 const ServiceName ServiceName::Event = ServiceName("event");
@@ -61,12 +61,12 @@ const ServiceName ServiceName::Chat = ServiceName("chat");
 const ServiceName ServiceName::Messaging = ServiceName("messaging");
 const ServiceName ServiceName::Lobby = ServiceName("lobby");
 
-bool ServiceName::operator== (const ServiceName& s) const
+bool ServiceName::operator==(const ServiceName &s) const
 {
     return _value == s.getValue();
 }
 
-void ServiceName::operator= (const ServiceName& s)
+void ServiceName::operator=(const ServiceName &s)
 {
     _value = s.getValue();
 }

@@ -13,21 +13,21 @@ class BCCLIENTPLUGIN_API UBrainCloudSave : public USaveGame
 {
     GENERATED_BODY()
 
-public:
+  public:
     UPROPERTY(VisibleAnywhere, Category = Basic)
-        FString ProfileId;
+    FString ProfileId;
 
     UPROPERTY(VisibleAnywhere, Category = Basic)
-        FString AnonymousId;
+    FString AnonymousId;
 
     UPROPERTY(VisibleAnywhere, Category = Basic)
-        FString AuthenticationType;
+    FString AuthenticationType;
 
     UPROPERTY(VisibleAnywhere, Category = Basic)
-        FString SaveSlotName;
+    FString SaveSlotName;
 
     UPROPERTY(VisibleAnywhere, Category = Basic)
-        uint32 UserIndex;
+    uint32 UserIndex;
 
     UBrainCloudSave();
 };

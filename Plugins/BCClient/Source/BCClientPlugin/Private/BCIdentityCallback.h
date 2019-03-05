@@ -10,13 +10,14 @@ class ServiceOperation;
 */
 class BCIdentityCallback : public IServerCallback
 {
-  public:
-    BCIdentityCallback(UBrainCloudWrapper *in_wrapper, IServerCallback *in_callback);
+public:
+  BCIdentityCallback(UBrainCloudWrapper *in_wrapper, IServerCallback *in_callback);
 
-    virtual ~BCIdentityCallback();
-    virtual void serverCallback(ServiceName serviceName, ServiceOperation serviceOperation, FString const & jsonData);
-    virtual void serverError(ServiceName serviceName, ServiceOperation serviceOperation, int32 statusCode, int32 reasonCode, const FString & message);
-  protected:
-    UBrainCloudWrapper *m_wrapper;
-    IServerCallback *m_callback;
+  virtual ~BCIdentityCallback();
+  virtual void serverCallback(ServiceName serviceName, ServiceOperation serviceOperation, FString const &jsonData);
+  virtual void serverError(ServiceName serviceName, ServiceOperation serviceOperation, int32 statusCode, int32 reasonCode, const FString &message);
+
+protected:
+  UBrainCloudWrapper *m_wrapper;
+  IServerCallback *m_callback;
 };

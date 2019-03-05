@@ -49,7 +49,7 @@ UBCLobbyProxy *UBCLobbyProxy::GetLobbyData(UBrainCloudWrapper *brainCloud, const
 }
 
 UBCLobbyProxy *UBCLobbyProxy::UpdateReady(UBrainCloudWrapper *brainCloud, const FString &in_lobbyID, bool in_isReady,
-                                      const FString &in_extraJson)
+										  const FString &in_extraJson)
 {
 	UBCLobbyProxy *Proxy = NewObject<UBCLobbyProxy>();
 	UBCWrapperProxy::GetBrainCloudInstance(brainCloud)->getLobbyService()->updateReady(in_lobbyID, in_isReady, in_extraJson, Proxy);

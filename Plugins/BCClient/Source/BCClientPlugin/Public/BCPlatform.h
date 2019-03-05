@@ -28,8 +28,9 @@ enum class EBCPlatform : uint8
 
 class BCCLIENTPLUGIN_API BCPlatform
 {
-public:
+  public:
     static FString EnumToString(EBCPlatform platform);
-private:
-    BCPlatform() {};
+
+  private:
+    BCPlatform(){};
 };

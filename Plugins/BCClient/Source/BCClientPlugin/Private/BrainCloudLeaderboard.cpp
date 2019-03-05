@@ -7,46 +7,46 @@
 #include "ServerCall.h"
 #include "JsonUtil.h"
 
-BrainCloudLeaderboard::BrainCloudLeaderboard(BrainCloudClient* client) : _client(client) {};
+BrainCloudLeaderboard::BrainCloudLeaderboard(BrainCloudClient *client) : _client(client){};
 
-void BrainCloudLeaderboard::getSocialLeaderboard(const FString& leaderboardId, bool replaceName, IServerCallback * callback)
+void BrainCloudLeaderboard::getSocialLeaderboard(const FString &leaderboardId, bool replaceName, IServerCallback *callback)
 {
 	TSharedRef<FJsonObject> message = MakeShareable(new FJsonObject());
 	message->SetStringField(OperationParam::LeaderboardServiceLeaderboardId.getValue(), leaderboardId);
 	message->SetBoolField(OperationParam::LeaderboardServiceReplaceName.getValue(), replaceName);
 
-	ServerCall * sc = new ServerCall(ServiceName::Leaderboard, ServiceOperation::GetSocialLeaderboard, message, callback);
+	ServerCall *sc = new ServerCall(ServiceName::Leaderboard, ServiceOperation::GetSocialLeaderboard, message, callback);
 	_client->sendRequest(sc);
 }
 
-void BrainCloudLeaderboard::getSocialLeaderboardByVersion(const FString& leaderboardId, bool replaceName, int32 versionId, IServerCallback * callback)
+void BrainCloudLeaderboard::getSocialLeaderboardByVersion(const FString &leaderboardId, bool replaceName, int32 versionId, IServerCallback *callback)
 {
 	TSharedRef<FJsonObject> message = MakeShareable(new FJsonObject());
 	message->SetStringField(OperationParam::LeaderboardServiceLeaderboardId.getValue(), leaderboardId);
 	message->SetBoolField(OperationParam::LeaderboardServiceReplaceName.getValue(), replaceName);
 	message->SetNumberField(OperationParam::LeaderboardServiceVersionId.getValue(), versionId);
 
-	ServerCall * sc = new ServerCall(ServiceName::Leaderboard, ServiceOperation::GetSocialLeaderboardByVersion, message, callback);
+	ServerCall *sc = new ServerCall(ServiceName::Leaderboard, ServiceOperation::GetSocialLeaderboardByVersion, message, callback);
 	_client->sendRequest(sc);
 }
 
-void BrainCloudLeaderboard::getMultiSocialLeaderboard(const TArray<FString>& leaderboardIds, int32 leaderboardResultCount, bool replaceName, IServerCallback * callback)
+void BrainCloudLeaderboard::getMultiSocialLeaderboard(const TArray<FString> &leaderboardIds, int32 leaderboardResultCount, bool replaceName, IServerCallback *callback)
 {
 	TSharedRef<FJsonObject> message = MakeShareable(new FJsonObject());
 	message->SetArrayField(OperationParam::LeaderboardServiceLeaderboardIds.getValue(), JsonUtil::arrayToJsonArray(leaderboardIds));
 	message->SetNumberField(OperationParam::LeaderboardServiceLeaderboardResultCount.getValue(), leaderboardResultCount);
 	message->SetBoolField(OperationParam::LeaderboardServiceReplaceName.getValue(), replaceName);
 
-	ServerCall * sc = new ServerCall(ServiceName::Leaderboard, ServiceOperation::GetMultiSocialLeaderboard, message, callback);
+	ServerCall *sc = new ServerCall(ServiceName::Leaderboard, ServiceOperation::GetMultiSocialLeaderboard, message, callback);
 	_client->sendRequest(sc);
 }
 
-void BrainCloudLeaderboard::getGlobalLeaderboardPage(const FString& leaderboardId, ESortOrder sortOrder, int32 startIndex, int32 endIndex, IServerCallback * callback)
+void BrainCloudLeaderboard::getGlobalLeaderboardPage(const FString &leaderboardId, ESortOrder sortOrder, int32 startIndex, int32 endIndex, IServerCallback *callback)
 {
 	getGlobalLeaderboardPageByVersion(leaderboardId, sortOrder, startIndex, endIndex, -1, callback);
 }
 
-void BrainCloudLeaderboard::getGlobalLeaderboardPageByVersion(const FString& leaderboardId, ESortOrder sortOrder, int32 startIndex, int32 endIndex, int32 versionId, IServerCallback * callback)
+void BrainCloudLeaderboard::getGlobalLeaderboardPageByVersion(const FString &leaderboardId, ESortOrder sortOrder, int32 startIndex, int32 endIndex, int32 versionId, IServerCallback *callback)
 {
 	TSharedRef<FJsonObject> message = MakeShareable(new FJsonObject());
 	message->SetStringField(OperationParam::LeaderboardServiceLeaderboardId.getValue(), leaderboardId);
@@ -57,16 +57,16 @@ void BrainCloudLeaderboard::getGlobalLeaderboardPageByVersion(const FString& lea
 	if (versionId != -1)
 		message->SetNumberField(OperationParam::LeaderboardServiceVersionId.getValue(), versionId);
 
-	ServerCall * sc = new ServerCall(ServiceName::Leaderboard, ServiceOperation::GetGlobalLeaderboardPage, message, callback);
+	ServerCall *sc = new ServerCall(ServiceName::Leaderboard, ServiceOperation::GetGlobalLeaderboardPage, message, callback);
 	_client->sendRequest(sc);
 }
 
-void BrainCloudLeaderboard::getGlobalLeaderboardView(const FString& leaderboardId, ESortOrder sortOrder, int32 beforeCount, int32 afterCount, IServerCallback * callback)
+void BrainCloudLeaderboard::getGlobalLeaderboardView(const FString &leaderboardId, ESortOrder sortOrder, int32 beforeCount, int32 afterCount, IServerCallback *callback)
 {
 	getGlobalLeaderboardViewByVersion(leaderboardId, sortOrder, beforeCount, afterCount, -1, callback);
 }
 
-void BrainCloudLeaderboard::getGlobalLeaderboardViewByVersion(const FString& leaderboardId, ESortOrder sortOrder, int32 beforeCount, int32 afterCount, int32 versionId, IServerCallback * callback)
+void BrainCloudLeaderboard::getGlobalLeaderboardViewByVersion(const FString &leaderboardId, ESortOrder sortOrder, int32 beforeCount, int32 afterCount, int32 versionId, IServerCallback *callback)
 {
 	TSharedRef<FJsonObject> message = MakeShareable(new FJsonObject());
 	message->SetStringField(OperationParam::LeaderboardServiceLeaderboardId.getValue(), leaderboardId);
@@ -77,42 +77,42 @@ void BrainCloudLeaderboard::getGlobalLeaderboardViewByVersion(const FString& lea
 	if (versionId != -1)
 		message->SetNumberField(OperationParam::LeaderboardServiceVersionId.getValue(), versionId);
 
-	ServerCall * sc = new ServerCall(ServiceName::Leaderboard, ServiceOperation::GetGlobalLeaderboardView, message, callback);
+	ServerCall *sc = new ServerCall(ServiceName::Leaderboard, ServiceOperation::GetGlobalLeaderboardView, message, callback);
 	_client->sendRequest(sc);
 }
 
-void BrainCloudLeaderboard::getGlobalLeaderboardEntryCount(const FString & leaderboardId, IServerCallback * callback)
+void BrainCloudLeaderboard::getGlobalLeaderboardEntryCount(const FString &leaderboardId, IServerCallback *callback)
 {
 	TSharedRef<FJsonObject> message = MakeShareable(new FJsonObject());
 	message->SetStringField(OperationParam::LeaderboardServiceLeaderboardId.getValue(), leaderboardId);
 
-	ServerCall * sc = new ServerCall(ServiceName::Leaderboard, ServiceOperation::GetGlobalLeaderboardEntryCount, message, callback);
+	ServerCall *sc = new ServerCall(ServiceName::Leaderboard, ServiceOperation::GetGlobalLeaderboardEntryCount, message, callback);
 	_client->sendRequest(sc);
 }
 
-void BrainCloudLeaderboard::getGlobalLeaderboardVersions(const FString& leaderboardId, IServerCallback * callback)
+void BrainCloudLeaderboard::getGlobalLeaderboardVersions(const FString &leaderboardId, IServerCallback *callback)
 {
 	TSharedRef<FJsonObject> message = MakeShareable(new FJsonObject());
 	message->SetStringField(OperationParam::LeaderboardServiceLeaderboardId.getValue(), leaderboardId);
 
-	ServerCall * sc = new ServerCall(ServiceName::Leaderboard, ServiceOperation::GetGlobalLeaderboardVersions, message, callback);
+	ServerCall *sc = new ServerCall(ServiceName::Leaderboard, ServiceOperation::GetGlobalLeaderboardVersions, message, callback);
 	_client->sendRequest(sc);
 }
 
-void BrainCloudLeaderboard::postScore(const FString& leaderboardId, int32 score, const FString& jsonOtherData, IServerCallback * callback)
+void BrainCloudLeaderboard::postScore(const FString &leaderboardId, int32 score, const FString &jsonOtherData, IServerCallback *callback)
 {
 	TSharedRef<FJsonObject> message = MakeShareable(new FJsonObject());
 	message->SetStringField(OperationParam::LeaderboardServiceLeaderboardId.getValue(), leaderboardId);
 	message->SetNumberField(OperationParam::LeaderboardServiceScore.getValue(), score);
 	message->SetObjectField(OperationParam::LeaderboardServiceData.getValue(), JsonUtil::jsonStringToValue(jsonOtherData));
 
-	ServerCall * sc = new ServerCall(ServiceName::Leaderboard, ServiceOperation::PostScore, message, callback);
+	ServerCall *sc = new ServerCall(ServiceName::Leaderboard, ServiceOperation::PostScore, message, callback);
 	_client->sendRequest(sc);
 }
 
-void BrainCloudLeaderboard::postScoreToDynamicLeaderboard(const FString& leaderboardId, int32 score, const FString& jsonData,
-	ESocialLeaderboardType leaderboardType, ERotationType rotationType, const FDateTime& rotationStart,
-	int32 retainedCount, IServerCallback * callback)
+void BrainCloudLeaderboard::postScoreToDynamicLeaderboard(const FString &leaderboardId, int32 score, const FString &jsonData,
+														  ESocialLeaderboardType leaderboardType, ERotationType rotationType, const FDateTime &rotationStart,
+														  int32 retainedCount, IServerCallback *callback)
 {
 	TSharedRef<FJsonObject> message = MakeShareable(new FJsonObject());
 	message->SetStringField(OperationParam::LeaderboardServiceLeaderboardId.getValue(), leaderboardId);
@@ -127,12 +127,12 @@ void BrainCloudLeaderboard::postScoreToDynamicLeaderboard(const FString& leaderb
 
 	message->SetNumberField(OperationParam::LeaderboardServiceRetainedCount.getValue(), retainedCount);
 
-	ServerCall * sc = new ServerCall(ServiceName::Leaderboard, ServiceOperation::PostScoreDynamic, message, callback);
+	ServerCall *sc = new ServerCall(ServiceName::Leaderboard, ServiceOperation::PostScoreDynamic, message, callback);
 	_client->sendRequest(sc);
 }
 
-void BrainCloudLeaderboard::postScoreToDynamicLeaderboardDays(const FString& leaderboardId, int32 score, const FString& jsonData,
-	ESocialLeaderboardType leaderboardType, const FDateTime& rotationStart, int32 retainedCount, int32 numDaysToRotate, IServerCallback * callback)
+void BrainCloudLeaderboard::postScoreToDynamicLeaderboardDays(const FString &leaderboardId, int32 score, const FString &jsonData,
+															  ESocialLeaderboardType leaderboardType, const FDateTime &rotationStart, int32 retainedCount, int32 numDaysToRotate, IServerCallback *callback)
 {
 	TSharedRef<FJsonObject> message = MakeShareable(new FJsonObject());
 	message->SetStringField(OperationParam::LeaderboardServiceLeaderboardId.getValue(), leaderboardId);
@@ -147,95 +147,95 @@ void BrainCloudLeaderboard::postScoreToDynamicLeaderboardDays(const FString& lea
 
 	message->SetNumberField(OperationParam::LeaderboardServiceRetainedCount.getValue(), retainedCount);
 
-	ServerCall * sc = new ServerCall(ServiceName::Leaderboard, ServiceOperation::PostScoreDynamic, message, callback);
+	ServerCall *sc = new ServerCall(ServiceName::Leaderboard, ServiceOperation::PostScoreDynamic, message, callback);
 	_client->sendRequest(sc);
 }
 
-void BrainCloudLeaderboard::removePlayerScore(const FString & leaderboardId, int32 versionId, IServerCallback * callback)
+void BrainCloudLeaderboard::removePlayerScore(const FString &leaderboardId, int32 versionId, IServerCallback *callback)
 {
 	TSharedRef<FJsonObject> message = MakeShareable(new FJsonObject());
 	message->SetStringField(OperationParam::LeaderboardServiceLeaderboardId.getValue(), leaderboardId);
 	message->SetNumberField(OperationParam::ProfileIds.getValue(), versionId);
 
-	ServerCall * sc = new ServerCall(ServiceName::Leaderboard, ServiceOperation::RemovePlayerScore, message, callback);
+	ServerCall *sc = new ServerCall(ServiceName::Leaderboard, ServiceOperation::RemovePlayerScore, message, callback);
 	_client->sendRequest(sc);
 }
 
-void BrainCloudLeaderboard::playerTournamentReward(const FString& eventName, uint64 multiplier, IServerCallback * callback)
+void BrainCloudLeaderboard::playerTournamentReward(const FString &eventName, uint64 multiplier, IServerCallback *callback)
 {
 	TSharedRef<FJsonObject> message = MakeShareable(new FJsonObject());
 	message->SetStringField(OperationParam::LeaderboardServiceEventName.getValue(), eventName);
 	message->SetNumberField(OperationParam::LeaderboardServiceEventMultiplier.getValue(), multiplier);
 
-	ServerCall * sc = new ServerCall(ServiceName::Leaderboard, ServiceOperation::RewardTournament, message, callback);
+	ServerCall *sc = new ServerCall(ServiceName::Leaderboard, ServiceOperation::RewardTournament, message, callback);
 	_client->sendRequest(sc);
 }
 
-void BrainCloudLeaderboard::getGroupSocialLeaderboard(const FString & leaderboardId, const FString & groupId, IServerCallback * callback)
+void BrainCloudLeaderboard::getGroupSocialLeaderboard(const FString &leaderboardId, const FString &groupId, IServerCallback *callback)
 {
 	TSharedRef<FJsonObject> message = MakeShareable(new FJsonObject());
 	message->SetStringField(OperationParam::LeaderboardServiceLeaderboardId.getValue(), leaderboardId);
 	message->SetStringField(OperationParam::GroupId.getValue(), groupId);
 
-	ServerCall * sc = new ServerCall(ServiceName::Leaderboard, ServiceOperation::GetGroupSocialLeaderboard, message, callback);
+	ServerCall *sc = new ServerCall(ServiceName::Leaderboard, ServiceOperation::GetGroupSocialLeaderboard, message, callback);
 	_client->sendRequest(sc);
 }
 
-void BrainCloudLeaderboard::getGroupSocialLeaderboardByVersion(const FString & leaderboardId, const FString & groupId, int32 versionId, IServerCallback * callback)
+void BrainCloudLeaderboard::getGroupSocialLeaderboardByVersion(const FString &leaderboardId, const FString &groupId, int32 versionId, IServerCallback *callback)
 {
 	TSharedRef<FJsonObject> message = MakeShareable(new FJsonObject());
 	message->SetStringField(OperationParam::LeaderboardServiceLeaderboardId.getValue(), leaderboardId);
 	message->SetStringField(OperationParam::GroupId.getValue(), groupId);
 	message->SetNumberField(OperationParam::LeaderboardServiceVersionId.getValue(), versionId);
 
-	ServerCall * sc = new ServerCall(ServiceName::Leaderboard, ServiceOperation::GetGroupSocialLeaderboardByVersion, message, callback);
+	ServerCall *sc = new ServerCall(ServiceName::Leaderboard, ServiceOperation::GetGroupSocialLeaderboardByVersion, message, callback);
 	_client->sendRequest(sc);
 }
 
-void BrainCloudLeaderboard::getPlayersSocialLeaderboard(const FString& leaderboardId, const TArray<FString> profileIds, IServerCallback * callback)
+void BrainCloudLeaderboard::getPlayersSocialLeaderboard(const FString &leaderboardId, const TArray<FString> profileIds, IServerCallback *callback)
 {
 	TSharedRef<FJsonObject> message = MakeShareable(new FJsonObject());
 	message->SetStringField(OperationParam::LeaderboardServiceLeaderboardId.getValue(), leaderboardId);
 	message->SetArrayField(OperationParam::ProfileIds.getValue(), JsonUtil::arrayToJsonArray(profileIds));
 
-	ServerCall * sc = new ServerCall(ServiceName::Leaderboard, ServiceOperation::GetPlayersSocialLeaderboard, message, callback);
+	ServerCall *sc = new ServerCall(ServiceName::Leaderboard, ServiceOperation::GetPlayersSocialLeaderboard, message, callback);
 	_client->sendRequest(sc);
 }
 
-void BrainCloudLeaderboard::getPlayersSocialLeaderboardByVersion(const FString& leaderboardId, const TArray<FString> profileIds, int32 versionId, IServerCallback * callback)
+void BrainCloudLeaderboard::getPlayersSocialLeaderboardByVersion(const FString &leaderboardId, const TArray<FString> profileIds, int32 versionId, IServerCallback *callback)
 {
 	TSharedRef<FJsonObject> message = MakeShareable(new FJsonObject());
 	message->SetStringField(OperationParam::LeaderboardServiceLeaderboardId.getValue(), leaderboardId);
 	message->SetArrayField(OperationParam::ProfileIds.getValue(), JsonUtil::arrayToJsonArray(profileIds));
 	message->SetNumberField(OperationParam::LeaderboardServiceVersionId.getValue(), versionId);
 
-	ServerCall * sc = new ServerCall(ServiceName::Leaderboard, ServiceOperation::GetPlayersSocialLeaderboardByVersion, message, callback);
+	ServerCall *sc = new ServerCall(ServiceName::Leaderboard, ServiceOperation::GetPlayersSocialLeaderboardByVersion, message, callback);
 	_client->sendRequest(sc);
 }
 
-void BrainCloudLeaderboard::listAllLeaderboards(IServerCallback * callback)
+void BrainCloudLeaderboard::listAllLeaderboards(IServerCallback *callback)
 {
 	TSharedRef<FJsonObject> message = MakeShareable(new FJsonObject());
-	ServerCall * sc = new ServerCall(ServiceName::Leaderboard, ServiceOperation::ListAllLeaderboards, message, callback);
+	ServerCall *sc = new ServerCall(ServiceName::Leaderboard, ServiceOperation::ListAllLeaderboards, message, callback);
 	_client->sendRequest(sc);
 }
 
-void BrainCloudLeaderboard::getPlayerScore(const FString & leaderboardId, int32 versionId, IServerCallback * callback)
+void BrainCloudLeaderboard::getPlayerScore(const FString &leaderboardId, int32 versionId, IServerCallback *callback)
 {
 	TSharedRef<FJsonObject> message = MakeShareable(new FJsonObject());
 	message->SetStringField(OperationParam::LeaderboardServiceLeaderboardId.getValue(), leaderboardId);
 	message->SetNumberField(OperationParam::ProfileIds.getValue(), versionId);
 
-	ServerCall * sc = new ServerCall(ServiceName::Leaderboard, ServiceOperation::GetPlayerScore, message, callback);
+	ServerCall *sc = new ServerCall(ServiceName::Leaderboard, ServiceOperation::GetPlayerScore, message, callback);
 	_client->sendRequest(sc);
 }
 
-void BrainCloudLeaderboard::getPlayerScoresFromLeaderboards(const TArray<FString> leaderboardIds, IServerCallback * callback)
+void BrainCloudLeaderboard::getPlayerScoresFromLeaderboards(const TArray<FString> leaderboardIds, IServerCallback *callback)
 {
 	TSharedRef<FJsonObject> message = MakeShareable(new FJsonObject());
 	message->SetArrayField(OperationParam::LeaderboardServiceLeaderboardIds.getValue(), JsonUtil::arrayToJsonArray(leaderboardIds));
 
-	ServerCall * sc = new ServerCall(ServiceName::Leaderboard, ServiceOperation::GetPlayerScoresFromLeaderboards, message, callback);
+	ServerCall *sc = new ServerCall(ServiceName::Leaderboard, ServiceOperation::GetPlayerScoresFromLeaderboards, message, callback);
 	_client->sendRequest(sc);
 }
 

@@ -4,8 +4,7 @@
 
 class BCCLIENTPLUGIN_API IRewardCallback
 {
-public:
-
+  public:
     /**
      * The rewardCallback method is invoked whenever a brainCloud server API call returns rewards data.
      *
@@ -27,6 +26,5 @@ public:
      *   ]
      * }
      */
-    virtual void rewardCallback(const FString& jsonData) = 0;
+    virtual void rewardCallback(const FString &jsonData) = 0;
 };
-

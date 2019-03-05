@@ -393,7 +393,7 @@ class BCCLIENTPLUGIN_API UBrainCloudWrapper : public UObject, public IServerCall
     *
     * SECURITY_ERROR (40209) - If the email address cannot be found.
     */
-    void resetEmailPassword(const FString& email, IServerCallback * callback);
+    void resetEmailPassword(const FString &email, IServerCallback *callback);
 
     /**
     * Reset Email password with service parameters- Sends a password reset email to the specified address
@@ -416,12 +416,12 @@ class BCCLIENTPLUGIN_API UBrainCloudWrapper : public UObject, public IServerCall
     *
     * SECURITY_ERROR (40209) - If the email address cannot be found.
     */
-    void resetEmailPasswordAdvanced(const FString& emailAddress, const FString& in_serviceParams, IServerCallback * callback);
+    void resetEmailPasswordAdvanced(const FString &emailAddress, const FString &in_serviceParams, IServerCallback *callback);
 
-    const FString & getAnonymousId() const;
-    const FString & getProfileId() const;
-    void setAnonymousId(const FString& anonymousId);
-    void setProfileId(const FString& profileId);
+    const FString &getAnonymousId() const;
+    const FString &getProfileId() const;
+    void setAnonymousId(const FString &anonymousId);
+    void setProfileId(const FString &profileId);
 
     /*
 	* Re-authenticates the user with brainCloud
@@ -476,12 +476,15 @@ class BCCLIENTPLUGIN_API UBrainCloudWrapper : public UObject, public IServerCall
     BrainCloudChat *getChatService() { return _client->getChatService(); }
     BrainCloudMessaging *getMessagingService() { return _client->getMessagingService(); }
 
-    /**
+/**
      * Returns a singleton instance of the BrainCloudClient.
      * @return A singleton instance of the BrainCloudClient.
      */
-    #pragma warning(suppress: 4996)
-    static BrainCloudClient *getBC() { return getInstance()->_client; }
+#pragma warning(suppress : 4996)
+    static BrainCloudClient *getBC()
+    {
+        return getInstance()->_client;
+    }
     /**
      * Returns a singleton instance of the BrainCloudClient.
      * @return A singleton instance of the BrainCloudClient.

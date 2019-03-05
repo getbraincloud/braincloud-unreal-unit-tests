@@ -614,7 +614,7 @@ BrainCloudPlayerStatisticsEvent *BrainCloudClient::getPlayerStatisticsEventServi
 
 BrainCloudPresence *BrainCloudClient::getPresenceService()
 {
-	if(_presenceService == nullptr)
+	if (_presenceService == nullptr)
 	{
 		_presenceService = new BrainCloudPresence(this);
 	}

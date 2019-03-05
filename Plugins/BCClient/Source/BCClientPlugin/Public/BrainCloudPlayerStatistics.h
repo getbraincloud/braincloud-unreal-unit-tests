@@ -7,13 +7,13 @@ class IServerCallback;
 
 class BCCLIENTPLUGIN_API BrainCloudPlayerStatistics
 {
-public:
-	BrainCloudPlayerStatistics(BrainCloudClient* client);
+  public:
+	BrainCloudPlayerStatistics(BrainCloudClient *client);
 
 	/**
 	* @deprecated Use readAllUserStats instead - removal after September 1 2017
 	*/
-	void readAllPlayerStats(IServerCallback* callback = nullptr);
+	void readAllPlayerStats(IServerCallback *callback = nullptr);
 
 	/**
 	 * Read all available player statistics.
@@ -23,12 +23,12 @@ public:
 	 *
 	 * @param callback The method to be invoked when the server response is received
 	 */
-	void readAllUserStats(IServerCallback* callback = nullptr);
+	void readAllUserStats(IServerCallback *callback = nullptr);
 
 	/**
 	* @deprecated Use readUserStatsSubset instead - removal after September 1 2017
 	*/
-	void readPlayerStatsSubset(const TArray<FString>& playerStats, IServerCallback* callback = nullptr);
+	void readPlayerStatsSubset(const TArray<FString> &playerStats, IServerCallback *callback = nullptr);
 
 	/**
 	 * Reads a subset of user statistics.
@@ -39,12 +39,12 @@ public:
 	 * @param playerStats The array containing the subset of statistics to read.
 	 * @param callback The method to be invoked when the server response is received
 	 */
-	void readUserStatsSubset(const TArray<FString>& playerStats, IServerCallback* callback = nullptr);
+	void readUserStatsSubset(const TArray<FString> &playerStats, IServerCallback *callback = nullptr);
 
 	/**
 	* @deprecated Use resetAllUserStats instead - removal after September 1 2017
 	*/
-	void resetAllPlayerStats(IServerCallback* callback = nullptr);
+	void resetAllPlayerStats(IServerCallback *callback = nullptr);
 
 	/**
 	 * Reset all of the statistics for this user back to their initial value.
@@ -54,12 +54,12 @@ public:
 	 *
 	 * @param callback The method to be invoked when the server response is received
 	 */
-	void resetAllUserStats(IServerCallback* callback = nullptr);
+	void resetAllUserStats(IServerCallback *callback = nullptr);
 
 	/**
 	* @deprecated Use readUserStatisticsByCategory instead - removal after September 1 2017
 	*/
-	void readPlayerStatisticsByCategory(const FString& category, IServerCallback * callback = nullptr);
+	void readPlayerStatisticsByCategory(const FString &category, IServerCallback *callback = nullptr);
 
 	/**
 	* Method retrieves the user statistics for the given category.
@@ -70,12 +70,12 @@ public:
 	* @param category The user statistics category
 	* @param callback Method to be invoked when the server response is received.
 	*/
-	void readUserStatisticsByCategory(const FString& category, IServerCallback * callback = nullptr);
+	void readUserStatisticsByCategory(const FString &category, IServerCallback *callback = nullptr);
 
 	/**
 	* @deprecated Use incrementUserStats instead - removal after September 1 2017
 	*/
-	void incrementPlayerStats(const FString& jsonData, IServerCallback* callback = nullptr);
+	void incrementPlayerStats(const FString &jsonData, IServerCallback *callback = nullptr);
 
 	/**
 	 * Atomically increment (or decrement) user statistics.
@@ -102,7 +102,7 @@ public:
 	 *
 	 * @param callback The method to be invoked when the server response is received
 	 */
-	void incrementUserStats(const FString& jsonData, IServerCallback* callback = nullptr);
+	void incrementUserStats(const FString &jsonData, IServerCallback *callback = nullptr);
 
 	/**
 	 * Returns JSON representing the next experience level for the user.
@@ -112,7 +112,7 @@ public:
 	 *
 	 * @param callback The method to be invoked when the server response is received
 	 */
-	void getNextExperienceLevel(IServerCallback* callback = nullptr);
+	void getNextExperienceLevel(IServerCallback *callback = nullptr);
 
 	/**
 	 * Increments the user's experience. If the user goes up a level,
@@ -124,7 +124,7 @@ public:
 	 * @param xpValue The amount to increase the user's experience by
 	 * @param callback The method to be invoked when the server response is received
 	 */
-	void incrementExperiencePoints(int32 xpValue, IServerCallback* callback = nullptr);
+	void incrementExperiencePoints(int32 xpValue, IServerCallback *callback = nullptr);
 
 	/**
 	 * Sets the user's experience to an absolute value. Note that this
@@ -137,7 +137,7 @@ public:
 	 * @param xpValue The amount to set the the user's experience to
 	 * @param callback The method to be invoked when the server response is received
 	 */
-	void setExperiencePoints(int32 xpValue, IServerCallback* callback = nullptr);
+	void setExperiencePoints(int32 xpValue, IServerCallback *callback = nullptr);
 
 	/**
 	* Apply statistics grammar to a partial set of statistics.
@@ -155,8 +155,8 @@ public:
 	* }
 	* @param callback Method to be invoked when the server response is received.
 	*/
-	void processStatistics(const FString& jsonData, IServerCallback* callback = nullptr);
+	void processStatistics(const FString &jsonData, IServerCallback *callback = nullptr);
 
-private:
-	BrainCloudClient* _client = nullptr;
+  private:
+	BrainCloudClient *_client = nullptr;
 };

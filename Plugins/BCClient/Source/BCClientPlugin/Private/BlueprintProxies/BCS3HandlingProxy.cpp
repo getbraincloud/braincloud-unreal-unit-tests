@@ -8,28 +8,28 @@
 #include "BrainCloudWrapper.h"
 #include "BCS3HandlingProxy.h"
 
-UBCS3HandlingProxy::UBCS3HandlingProxy(const FObjectInitializer& ObjectInitializer)
+UBCS3HandlingProxy::UBCS3HandlingProxy(const FObjectInitializer &ObjectInitializer)
     : Super(ObjectInitializer)
 {
 }
 
-UBCS3HandlingProxy* UBCS3HandlingProxy::GetUpdatedFiles(UBrainCloudWrapper *brainCloudWrapper, FString category, FString fileDetails)
+UBCS3HandlingProxy *UBCS3HandlingProxy::GetUpdatedFiles(UBrainCloudWrapper *brainCloudWrapper, FString category, FString fileDetails)
 {
-    UBCS3HandlingProxy* Proxy = NewObject<UBCS3HandlingProxy>();
+    UBCS3HandlingProxy *Proxy = NewObject<UBCS3HandlingProxy>();
     UBCWrapperProxy::GetBrainCloudInstance(brainCloudWrapper)->getS3HandlingService()->getUpdatedFiles(category, fileDetails, Proxy);
     return Proxy;
 }
 
-UBCS3HandlingProxy* UBCS3HandlingProxy::GetFileList(UBrainCloudWrapper *brainCloudWrapper, FString category)
+UBCS3HandlingProxy *UBCS3HandlingProxy::GetFileList(UBrainCloudWrapper *brainCloudWrapper, FString category)
 {
-    UBCS3HandlingProxy* Proxy = NewObject<UBCS3HandlingProxy>();
+    UBCS3HandlingProxy *Proxy = NewObject<UBCS3HandlingProxy>();
     UBCWrapperProxy::GetBrainCloudInstance(brainCloudWrapper)->getS3HandlingService()->getFileList(category, Proxy);
     return Proxy;
 }
 
-UBCS3HandlingProxy* UBCS3HandlingProxy::GetCDNUrl(UBrainCloudWrapper *brainCloudWrapper, const FString& fileId)
+UBCS3HandlingProxy *UBCS3HandlingProxy::GetCDNUrl(UBrainCloudWrapper *brainCloudWrapper, const FString &fileId)
 {
-	UBCS3HandlingProxy* Proxy = NewObject<UBCS3HandlingProxy>();
-	UBCWrapperProxy::GetBrainCloudInstance(brainCloudWrapper)->getS3HandlingService()->getCDNUrl(fileId, Proxy);
-	return Proxy;
+    UBCS3HandlingProxy *Proxy = NewObject<UBCS3HandlingProxy>();
+    UBCWrapperProxy::GetBrainCloudInstance(brainCloudWrapper)->getS3HandlingService()->getCDNUrl(fileId, Proxy);
+    return Proxy;
 }
