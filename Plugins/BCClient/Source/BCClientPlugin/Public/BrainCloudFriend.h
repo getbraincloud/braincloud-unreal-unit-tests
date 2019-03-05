@@ -160,21 +160,6 @@ class BCCLIENTPLUGIN_API BrainCloudFriend
 	void findUsersByUniversalIdStartingWith(const FString &searchText, int32 maxResults, IServerCallback *callback = nullptr);
 
 	/**
-	* @deprecated Use readFriendUserState instead - removal after February 1 2017
-	*/
-	void findUserByUniversalId(const FString& searchText, int32 maxResults, IServerCallback * callback = nullptr);
-
-	/**
-	* Retrieves profile information for the partial matches of the specified text.
-	*
-	* Service Name - Friend
-	* Service Operation - FIND_USER_BY_EXACT_UNIVERSAL_ID
-	*
-	* @param searchText Universal ID text on which to search.
-	*/
-	void findUserByExactUniversalId(const FString& searchText, IServerCallback * callback = nullptr);
-
-	/**
 	* Retrieves profile information for the partial matches of the specified text.
 	*
 	* Service Name - Friend
