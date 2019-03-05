@@ -7,11 +7,11 @@
 #include "ServerCall.h"
 #include "JsonUtil.h"
 
-BrainCloudRTT::BrainCloudRTT(BrainCloudClient* client) : _client(client) {};
+BrainCloudRTT::BrainCloudRTT(BrainCloudClient *client) : _client(client){};
 
-void BrainCloudRTT::requestClientConnection(IServerCallback* callback)
+void BrainCloudRTT::requestClientConnection(IServerCallback *callback)
 {
     TSharedRef<FJsonObject> message = MakeShareable(new FJsonObject());
-    ServerCall * sc = new ServerCall(ServiceName::RTTRegistration, ServiceOperation::RequestClientConnection, message, callback);
+    ServerCall *sc = new ServerCall(ServiceName::RTTRegistration, ServiceOperation::RequestClientConnection, message, callback);
     _client->sendRequest(sc);
 }

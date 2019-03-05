@@ -7,9 +7,9 @@
 #include "ServerCall.h"
 #include "JsonUtil.h"
 
-BrainCloudRedemptionCode::BrainCloudRedemptionCode(BrainCloudClient* client) : _client(client) {};
+BrainCloudRedemptionCode::BrainCloudRedemptionCode(BrainCloudClient *client) : _client(client){};
 
-void BrainCloudRedemptionCode::redeemCode(const FString&  scanCode, const FString&  codeType, const FString&  customRedemptionInfo, IServerCallback * callback)
+void BrainCloudRedemptionCode::redeemCode(const FString &scanCode, const FString &codeType, const FString &customRedemptionInfo, IServerCallback *callback)
 {
     TSharedRef<FJsonObject> message = MakeShareable(new FJsonObject());
 
@@ -18,17 +18,17 @@ void BrainCloudRedemptionCode::redeemCode(const FString&  scanCode, const FStrin
     if (OperationParam::isOptionalParamValid(customRedemptionInfo))
         message->SetStringField(OperationParam::RedemptionCodeServiceCustomRedemptionInfo.getValue(), customRedemptionInfo);
 
-    ServerCall * sc = new ServerCall(ServiceName::RedemptionCode, ServiceOperation::RedeemCode, message, callback);
+    ServerCall *sc = new ServerCall(ServiceName::RedemptionCode, ServiceOperation::RedeemCode, message, callback);
     _client->sendRequest(sc);
 }
 
-void BrainCloudRedemptionCode::getRedeemedCodes(const FString&  codeType, IServerCallback * callback)
+void BrainCloudRedemptionCode::getRedeemedCodes(const FString &codeType, IServerCallback *callback)
 {
     TSharedRef<FJsonObject> message = MakeShareable(new FJsonObject());
 
     if (OperationParam::isOptionalParamValid(codeType))
         message->SetStringField(OperationParam::RedemptionCodeServiceCodeType.getValue(), codeType);
 
-    ServerCall * sc = new ServerCall(ServiceName::RedemptionCode, ServiceOperation::GetRedeemedCodes, message, callback);
+    ServerCall *sc = new ServerCall(ServiceName::RedemptionCode, ServiceOperation::GetRedeemedCodes, message, callback);
     _client->sendRequest(sc);
 }

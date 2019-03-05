@@ -75,7 +75,7 @@ class BCCLIENTPLUGIN_API BrainCloudClient
 
 	static bool EnableSoftErrorMode;
 	static bool EnableSingletonMode;
-	static const FString  SINGLETON_USE_ERROR_MESSAGE;
+	static const FString SINGLETON_USE_ERROR_MESSAGE;
 
 	BrainCloudClient();
 	//  void BeginDestroy() override;
@@ -152,7 +152,7 @@ class BCCLIENTPLUGIN_API BrainCloudClient
 	*   }
 	*/
 	void registerEventCallback(IEventCallback *eventCallback);
-	void registerEventCallback(UBCBlueprintRestCallProxyBase *eventCallback);	// blueprint support
+	void registerEventCallback(UBCBlueprintRestCallProxyBase *eventCallback); // blueprint support
 
 	/**
 	* Deregisters the event callback
@@ -166,7 +166,7 @@ class BCCLIENTPLUGIN_API BrainCloudClient
 	* @see The brainCloud apidocs site for more information on the return JSON
 	*/
 	void registerRewardCallback(IRewardCallback *rewardCallback);
-	void registerRewardCallback(UBCBlueprintRestCallProxyBase *rewardCallback);	// blueprint support
+	void registerRewardCallback(UBCBlueprintRestCallProxyBase *rewardCallback); // blueprint support
 
 	/**
 	* Deregisters the reward callback
@@ -179,7 +179,7 @@ class BCCLIENTPLUGIN_API BrainCloudClient
 	* @param fileUploadCallback The file upload callback handler.
 	*/
 	void registerFileUploadCallback(IFileUploadCallback *fileUploadCallback);
-	void registerFileUploadCallback(UBCBlueprintRestCallProxyBase *fileUploadCallback);	// blueprint support
+	void registerFileUploadCallback(UBCBlueprintRestCallProxyBase *fileUploadCallback); // blueprint support
 
 	/**
 	* Deregisters the file upload callback
@@ -192,7 +192,7 @@ class BCCLIENTPLUGIN_API BrainCloudClient
 	* @param globalErrorCallback The global error callback handler.
 	*/
 	void registerGlobalErrorCallback(IGlobalErrorCallback *globalErrorCallback);
-	void registerGlobalErrorCallback(UBCBlueprintRestCallProxyBase *globalErrorCallback);	// blueprint support
+	void registerGlobalErrorCallback(UBCBlueprintRestCallProxyBase *globalErrorCallback); // blueprint support
 
 	/**
 	* Registers a callback that is invoked for network errors.
@@ -202,7 +202,7 @@ class BCCLIENTPLUGIN_API BrainCloudClient
 	* @param networkErrorCallback The network error callback handler.
 	*/
 	void registerNetworkErrorCallback(INetworkErrorCallback *networkErrorCallback);
-	void registerNetworkErrorCallback(UBCBlueprintRestCallProxyBase *networkErrorCallback);	// blueprint support
+	void registerNetworkErrorCallback(UBCBlueprintRestCallProxyBase *networkErrorCallback); // blueprint support
 
 	/**
 	* Deregisters the network error callback
@@ -606,8 +606,7 @@ class BCCLIENTPLUGIN_API BrainCloudClient
 	void overrideLanguageCode(const FString &languageCode) { _language = languageCode; }
 
   protected:
-
-	void initializeComms(const char* serverUrl, const char* appId, const TMap<FString, FString>& secretMap);
+	void initializeComms(const char *serverUrl, const char *appId, const TMap<FString, FString> &secretMap);
 	static BrainCloudClient *_instance;
 
 	BrainCloudComms *_brainCloudComms = nullptr;

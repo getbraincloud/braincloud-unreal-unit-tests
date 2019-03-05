@@ -95,6 +95,7 @@ const ServiceOperation ServiceOperation::AddFriends = ServiceOperation(TEXT("ADD
 const ServiceOperation ServiceOperation::GetUsersOnlineStatus = ServiceOperation(TEXT("GET_USERS_ONLINE_STATUS"));
 const ServiceOperation ServiceOperation::RemoveFriends = ServiceOperation(TEXT("REMOVE_FRIENDS"));
 const ServiceOperation ServiceOperation::FindPlayerByUniversalId = ServiceOperation(TEXT("FIND_PLAYER_BY_UNIVERSAL_ID"));
+const ServiceOperation ServiceOperation::FindUserByUniversalId = ServiceOperation(TEXT("FIND_USER_BY_UNIVERSAL_ID"));
 const ServiceOperation ServiceOperation::FindUserByExactUniversalId = ServiceOperation(TEXT("FIND_USER_BY_EXACT_UNIVERSAL_ID"));
 const ServiceOperation ServiceOperation::FindUsersByUniversalIdStartingWith = ServiceOperation(TEXT("FIND_USERS_BY_UNIVERSAL_ID_STARTING_WITH"));
 const ServiceOperation ServiceOperation::FindUsersByNameStartingWith = ServiceOperation(TEXT("FIND_USERS_BY_NAME_STARTING_WITH"));

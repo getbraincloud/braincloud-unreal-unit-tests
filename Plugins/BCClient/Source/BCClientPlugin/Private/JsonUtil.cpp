@@ -3,7 +3,7 @@
 #include "BCClientPluginPrivatePCH.h"
 #include "JsonUtil.h"
 
-TArray<TSharedPtr<FJsonValue>> JsonUtil::commaSepStringToJsonArray(const TCHAR * str)
+TArray<TSharedPtr<FJsonValue>> JsonUtil::commaSepStringToJsonArray(const TCHAR *str)
 {
     TArray<TSharedPtr<FJsonValue>> jsonArray;
     TArray<FString> strArray;
@@ -14,7 +14,7 @@ TArray<TSharedPtr<FJsonValue>> JsonUtil::commaSepStringToJsonArray(const TCHAR *
     return arrayToJsonArray(strArray);
 }
 
-TSharedPtr<FJsonValue> JsonUtil::jsonStringToActualValue(const FString& jsonString)
+TSharedPtr<FJsonValue> JsonUtil::jsonStringToActualValue(const FString &jsonString)
 {
     TSharedRef<TJsonReader<>> reader = TJsonReaderFactory<>::Create(jsonString);
     TSharedPtr<FJsonValue> jsonValue;
@@ -23,7 +23,7 @@ TSharedPtr<FJsonValue> JsonUtil::jsonStringToActualValue(const FString& jsonStri
     return jsonValue;
 }
 
-TSharedPtr<FJsonObject> JsonUtil::jsonStringToValue(const FString& jsonString)
+TSharedPtr<FJsonObject> JsonUtil::jsonStringToValue(const FString &jsonString)
 {
     TSharedRef<TJsonReader<>> reader = TJsonReaderFactory<>::Create(jsonString);
     TSharedPtr<FJsonObject> jsonValue;
@@ -32,7 +32,7 @@ TSharedPtr<FJsonObject> JsonUtil::jsonStringToValue(const FString& jsonString)
     return jsonValue;
 }
 
-TSharedPtr<FJsonObject> JsonUtil::jsonStringToValue(const TCHAR * jsonString)
+TSharedPtr<FJsonObject> JsonUtil::jsonStringToValue(const TCHAR *jsonString)
 {
     TSharedRef<TJsonReader<>> reader = TJsonReaderFactory<>::Create(jsonString);
     TSharedPtr<FJsonObject> jsonValue = MakeShareable(new FJsonObject());
@@ -41,7 +41,7 @@ TSharedPtr<FJsonObject> JsonUtil::jsonStringToValue(const TCHAR * jsonString)
     return jsonValue;
 }
 
-FString JsonUtil::jsonValueToString(const TSharedRef<FJsonObject>& jsonValue)
+FString JsonUtil::jsonValueToString(const TSharedRef<FJsonObject> &jsonValue)
 {
     FString jsonStr;
 
@@ -51,7 +51,7 @@ FString JsonUtil::jsonValueToString(const TSharedRef<FJsonObject>& jsonValue)
     return jsonStr;
 }
 
-FString JsonUtil::jsonArrayToString(const TArray<TSharedPtr<FJsonValue>>& jsonArray)
+FString JsonUtil::jsonArrayToString(const TArray<TSharedPtr<FJsonValue>> &jsonArray)
 {
     FString jsonStr;
 
@@ -61,7 +61,7 @@ FString JsonUtil::jsonArrayToString(const TArray<TSharedPtr<FJsonValue>>& jsonAr
     return jsonStr;
 }
 
-TArray<TSharedPtr<FJsonValue>> JsonUtil::arrayToJsonArray(const TArray<FString>& array)
+TArray<TSharedPtr<FJsonValue>> JsonUtil::arrayToJsonArray(const TArray<FString> &array)
 {
     TArray<TSharedPtr<FJsonValue>> jsonArray;
 
@@ -72,7 +72,7 @@ TArray<TSharedPtr<FJsonValue>> JsonUtil::arrayToJsonArray(const TArray<FString>&
     return jsonArray;
 }
 
-TArray<TSharedPtr<FJsonValue>> JsonUtil::arrayToJsonArray(const TArray<int32>& array)
+TArray<TSharedPtr<FJsonValue>> JsonUtil::arrayToJsonArray(const TArray<int32> &array)
 {
     TArray<TSharedPtr<FJsonValue>> jsonArray;
 

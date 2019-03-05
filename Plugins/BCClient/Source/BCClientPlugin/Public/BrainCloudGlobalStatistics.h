@@ -5,9 +5,10 @@
 class BrainCloudClient;
 class IServerCallback;
 
-class BCCLIENTPLUGIN_API BrainCloudGlobalStatistics {
-public:
-	BrainCloudGlobalStatistics(BrainCloudClient* client);
+class BCCLIENTPLUGIN_API BrainCloudGlobalStatistics
+{
+  public:
+	BrainCloudGlobalStatistics(BrainCloudClient *client);
 
 	/**
 	 * Method returns all of the global statistics.
@@ -17,7 +18,7 @@ public:
 	 *
 	 * @param callback Method to be invoked when the server response is received.
 	 */
-	void readAllGlobalStats(IServerCallback* callback = nullptr);
+	void readAllGlobalStats(IServerCallback *callback = nullptr);
 
 	/**
 	 * Reads a subset of global statistics.
@@ -28,7 +29,7 @@ public:
 	 * @param globalStats An array of statistics to read.
 	 * @param callback Method to be invoked when the server response is received.
 	 */
-	void readGlobalStatsSubset(const TArray<FString>& globalStats, IServerCallback* callback = nullptr);
+	void readGlobalStatsSubset(const TArray<FString> &globalStats, IServerCallback *callback = nullptr);
 
 	/**
 	* Method retrieves the game (aka global) statistics for the given category.
@@ -39,7 +40,7 @@ public:
 	* @param category The game statistics category
 	* @param callback Method to be invoked when the server response is received.
 	*/
-	void readGlobalStatsForCategory(const FString& category, IServerCallback * callback = nullptr);
+	void readGlobalStatsForCategory(const FString &category, IServerCallback *callback = nullptr);
 
 	/**
 	 * Atomically increment (or decrement) global statistics.
@@ -63,7 +64,7 @@ public:
 	 *
 	 * @param callback Method to be invoked when the server response is received.
 	 */
-	void incrementGlobalGameStat(const FString& jsonData, IServerCallback* callback = nullptr);
+	void incrementGlobalGameStat(const FString &jsonData, IServerCallback *callback = nullptr);
 
 	/**
 	* Apply statistics grammar to a partial set of statistics.
@@ -81,8 +82,8 @@ public:
 	* }
 	* @param callback Method to be invoked when the server response is received.
 	*/
-	void processStatistics(const FString& jsonData, IServerCallback* callback = nullptr);
+	void processStatistics(const FString &jsonData, IServerCallback *callback = nullptr);
 
-private:
-	BrainCloudClient* _client = nullptr;
+  private:
+	BrainCloudClient *_client = nullptr;
 };

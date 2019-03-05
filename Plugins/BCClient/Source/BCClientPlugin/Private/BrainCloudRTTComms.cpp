@@ -194,7 +194,7 @@ int BrainCloudRTTComms::callback_echo(struct lws *wsi, enum lws_callback_reasons
 void BrainCloudRTTComms::registerRTTCallback(ServiceName in_serviceName, UBCBlueprintRTTCallProxyBase *callback)
 {
 	callback->AddToRoot();
-	m_registeredRTTBluePrintCallbacks.Emplace(in_serviceName.getValue(), callback);	
+	m_registeredRTTBluePrintCallbacks.Emplace(in_serviceName.getValue(), callback);
 }
 
 // regular c++ overtyped, does nothing memory wise
@@ -452,7 +452,7 @@ void BrainCloudRTTComms::webSocket_OnError(const FString &in_message)
 	if (m_client->isLoggingEnabled())
 		UE_LOG(LogBrainCloudComms, Log, TEXT("Error: %s"), *in_message);
 
-	processRegisteredListeners(ServiceName::RTTRegistration.getValue(), "disconnect", "{\"error\":"+in_message+"}");
+	processRegisteredListeners(ServiceName::RTTRegistration.getValue(), "disconnect", "{\"error\":" + in_message + "}");
 }
 
 void BrainCloudRTTComms::onRecv(const FString &in_message)
@@ -582,7 +582,7 @@ void BrainCloudRTTComms::serverCallback(ServiceName serviceName, ServiceOperatio
 void BrainCloudRTTComms::serverError(ServiceName serviceName, ServiceOperation serviceOperation, int32 statusCode, int32 reasonCode, const FString &jsonError)
 {
 	disconnect();
-	
+
 	// server callback rtt connected with data!
 	if (m_appCallback != nullptr)
 		m_appCallback->serverError(serviceName, serviceOperation, statusCode, reasonCode, jsonError);

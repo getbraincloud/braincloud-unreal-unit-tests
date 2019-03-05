@@ -7,11 +7,11 @@
 #include "ServerCall.h"
 #include "JsonUtil.h"
 
-BrainCloudGlobalApp::BrainCloudGlobalApp(BrainCloudClient* client) : _client(client) {};
+BrainCloudGlobalApp::BrainCloudGlobalApp(BrainCloudClient *client) : _client(client){};
 
-void BrainCloudGlobalApp::readProperties(IServerCallback * callback)
+void BrainCloudGlobalApp::readProperties(IServerCallback *callback)
 {
     TSharedRef<FJsonObject> message = MakeShareable(new FJsonObject());
-    ServerCall * sc = new ServerCall(ServiceName::GlobalApp, ServiceOperation::ReadProperties, message, callback);
+    ServerCall *sc = new ServerCall(ServiceName::GlobalApp, ServiceOperation::ReadProperties, message, callback);
     _client->sendRequest(sc);
 }

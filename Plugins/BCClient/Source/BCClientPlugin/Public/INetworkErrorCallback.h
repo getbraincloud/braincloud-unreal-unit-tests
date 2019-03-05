@@ -2,10 +2,11 @@
 
 #pragma once
 
-class BCCLIENTPLUGIN_API INetworkErrorCallback {
+class BCCLIENTPLUGIN_API INetworkErrorCallback
+{
 
-public:
-    virtual ~INetworkErrorCallback() { }
+  public:
+    virtual ~INetworkErrorCallback() {}
 
     /**
      * The networkError method is invoked whenever a network error is encountered

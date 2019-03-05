@@ -3,9 +3,9 @@
 #include "BCClientPluginPrivatePCH.h"
 #include "BrainCloudACL.h"
 
-UBrainCloudACL* UBrainCloudACL::CreateNewACL(EAcl access)
+UBrainCloudACL *UBrainCloudACL::CreateNewACL(EAcl access)
 {
-    UBrainCloudACL* newObj = NewObject<UBrainCloudACL>();
+    UBrainCloudACL *newObj = NewObject<UBrainCloudACL>();
     newObj->Other = access;
     return newObj;
 }
@@ -24,4 +24,3 @@ TSharedRef<FJsonObject> UBrainCloudACL::toJsonObject()
     object->SetNumberField("other", (uint8)Other);
     return object.ToSharedRef();
 }
-

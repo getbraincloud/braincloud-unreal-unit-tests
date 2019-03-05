@@ -13,10 +13,10 @@
  * Constructor
  */
 ServerCall::ServerCall(ServiceName serviceName, ServiceOperation serviceOperation,
-    TSharedRef<FJsonObject, ESPMode::NotThreadSafe> data, IServerCallback * callback /* = nullptr*/)
+                       TSharedRef<FJsonObject, ESPMode::NotThreadSafe> data, IServerCallback *callback /* = nullptr*/)
     : _callback(callback),
-    _operation(serviceOperation),
-    _service(serviceName)
+      _operation(serviceOperation),
+      _service(serviceName)
 {
     _data = data;
 }

@@ -10,12 +10,13 @@ class OperationParam;
  * Pure virtual class providing a means for waking up the client when a
  * response is received from the server.
  */
-class BCCLIENTPLUGIN_API IServerCallback {
+class BCCLIENTPLUGIN_API IServerCallback
+{
 
-public:
+  public:
     // Destructor - make sure it is virtual to avoid problems with
     // destroying a sub-classed object using an IServerCallback pointer.
-    virtual ~IServerCallback()  { }
+    virtual ~IServerCallback() {}
 
     // All sub-classes must implement the following methods.
 
@@ -27,7 +28,7 @@ public:
     * @param serviceOperation - requested operation
     * @param jsonData - returned data from the server
     */
-    virtual void serverCallback(ServiceName serviceName, ServiceOperation serviceOperation, const FString& jsonData) = 0;
+    virtual void serverCallback(ServiceName serviceName, ServiceOperation serviceOperation, const FString &jsonData) = 0;
 
     /**
      * Errors are returned back to the layer which is interfacing with the
@@ -42,5 +43,5 @@ public:
      * @param reasonCode The brainCloud reason code (see reason codes on apidocs site)
      * @param jsonError The error json string
      */
-    virtual void serverError(ServiceName serviceName, ServiceOperation serviceOperation, int32 statusCode, int32 reasonCode, const FString& jsonError) = 0;
+    virtual void serverError(ServiceName serviceName, ServiceOperation serviceOperation, int32 statusCode, int32 reasonCode, const FString &jsonError) = 0;
 };
