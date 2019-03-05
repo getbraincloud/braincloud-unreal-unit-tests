@@ -130,9 +130,7 @@ UBCLeaderboardProxy *UBCLeaderboardProxy::GetPlayersSocialLeaderboard(UBrainClou
 	return Proxy;
 }
 
-
- 
-UBCLeaderboardProxy* UBCLeaderboardProxy::GetPlayersSocialLeaderboardByVersion(UBrainCloudWrapper *brainCloudWrapper, const FString& leaderboardId, const TArray<FString> profileIds, int32 versionId)
+UBCLeaderboardProxy *UBCLeaderboardProxy::GetPlayersSocialLeaderboardByVersion(UBrainCloudWrapper *brainCloudWrapper, const FString &leaderboardId, const TArray<FString> profileIds, int32 versionId)
 {
 	UBCLeaderboardProxy *Proxy = NewObject<UBCLeaderboardProxy>();
 	UBCWrapperProxy::GetBrainCloudInstance(brainCloudWrapper)->getLeaderboardService()->getPlayersSocialLeaderboardByVersion(leaderboardId, profileIds, versionId, Proxy);

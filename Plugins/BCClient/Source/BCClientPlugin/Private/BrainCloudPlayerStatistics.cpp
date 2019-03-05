@@ -7,113 +7,113 @@
 #include "ServerCall.h"
 #include "JsonUtil.h"
 
-BrainCloudPlayerStatistics::BrainCloudPlayerStatistics(BrainCloudClient* client) : _client(client) {};
+BrainCloudPlayerStatistics::BrainCloudPlayerStatistics(BrainCloudClient *client) : _client(client){};
 
-void BrainCloudPlayerStatistics::readAllPlayerStats(IServerCallback* callback)
+void BrainCloudPlayerStatistics::readAllPlayerStats(IServerCallback *callback)
 {
 	TSharedRef<FJsonObject> message = MakeShareable(new FJsonObject());
-	ServerCall * sc = new ServerCall(ServiceName::PlayerStatistics, ServiceOperation::Read, message, callback);
+	ServerCall *sc = new ServerCall(ServiceName::PlayerStatistics, ServiceOperation::Read, message, callback);
 	_client->sendRequest(sc);
 }
 
-void BrainCloudPlayerStatistics::readAllUserStats(IServerCallback* callback)
+void BrainCloudPlayerStatistics::readAllUserStats(IServerCallback *callback)
 {
 	TSharedRef<FJsonObject> message = MakeShareable(new FJsonObject());
-	ServerCall * sc = new ServerCall(ServiceName::PlayerStatistics, ServiceOperation::Read, message, callback);
+	ServerCall *sc = new ServerCall(ServiceName::PlayerStatistics, ServiceOperation::Read, message, callback);
 	_client->sendRequest(sc);
 }
 
-void BrainCloudPlayerStatistics::readPlayerStatsSubset(const TArray<FString>& playerStats, IServerCallback* callback)
-{
-	TSharedRef<FJsonObject> message = MakeShareable(new FJsonObject());
-	message->SetArrayField(OperationParam::PlayerStatisticsServiceStats.getValue(), JsonUtil::arrayToJsonArray(playerStats));
-	ServerCall * sc = new ServerCall(ServiceName::PlayerStatistics, ServiceOperation::ReadSubset, message, callback);
-	_client->sendRequest(sc);
-}
-
-void BrainCloudPlayerStatistics::readUserStatsSubset(const TArray<FString>& playerStats, IServerCallback* callback)
+void BrainCloudPlayerStatistics::readPlayerStatsSubset(const TArray<FString> &playerStats, IServerCallback *callback)
 {
 	TSharedRef<FJsonObject> message = MakeShareable(new FJsonObject());
 	message->SetArrayField(OperationParam::PlayerStatisticsServiceStats.getValue(), JsonUtil::arrayToJsonArray(playerStats));
-	ServerCall * sc = new ServerCall(ServiceName::PlayerStatistics, ServiceOperation::ReadSubset, message, callback);
+	ServerCall *sc = new ServerCall(ServiceName::PlayerStatistics, ServiceOperation::ReadSubset, message, callback);
 	_client->sendRequest(sc);
 }
 
-void BrainCloudPlayerStatistics::readPlayerStatisticsByCategory(const FString& category, IServerCallback * callback)
+void BrainCloudPlayerStatistics::readUserStatsSubset(const TArray<FString> &playerStats, IServerCallback *callback)
+{
+	TSharedRef<FJsonObject> message = MakeShareable(new FJsonObject());
+	message->SetArrayField(OperationParam::PlayerStatisticsServiceStats.getValue(), JsonUtil::arrayToJsonArray(playerStats));
+	ServerCall *sc = new ServerCall(ServiceName::PlayerStatistics, ServiceOperation::ReadSubset, message, callback);
+	_client->sendRequest(sc);
+}
+
+void BrainCloudPlayerStatistics::readPlayerStatisticsByCategory(const FString &category, IServerCallback *callback)
 {
 	TSharedRef<FJsonObject> message = MakeShareable(new FJsonObject());
 	message->SetStringField(OperationParam::GamificationServiceCategory.getValue(), category);
 
-	ServerCall * sc = new ServerCall(ServiceName::Gamification, ServiceOperation::ReadPlayerStatisticsByCategory, message, callback);
+	ServerCall *sc = new ServerCall(ServiceName::Gamification, ServiceOperation::ReadPlayerStatisticsByCategory, message, callback);
 	_client->sendRequest(sc);
 }
 
-void BrainCloudPlayerStatistics::readUserStatisticsByCategory(const FString& category, IServerCallback * callback)
+void BrainCloudPlayerStatistics::readUserStatisticsByCategory(const FString &category, IServerCallback *callback)
 {
 	TSharedRef<FJsonObject> message = MakeShareable(new FJsonObject());
 	message->SetStringField(OperationParam::GamificationServiceCategory.getValue(), category);
 
-	ServerCall * sc = new ServerCall(ServiceName::Gamification, ServiceOperation::ReadPlayerStatisticsByCategory, message, callback);
+	ServerCall *sc = new ServerCall(ServiceName::Gamification, ServiceOperation::ReadPlayerStatisticsByCategory, message, callback);
 	_client->sendRequest(sc);
 }
 
-void BrainCloudPlayerStatistics::resetAllPlayerStats(IServerCallback* callback)
+void BrainCloudPlayerStatistics::resetAllPlayerStats(IServerCallback *callback)
 {
 	TSharedRef<FJsonObject> message = MakeShareable(new FJsonObject());
-	ServerCall * sc = new ServerCall(ServiceName::PlayerStatistics, ServiceOperation::Reset, message, callback);
+	ServerCall *sc = new ServerCall(ServiceName::PlayerStatistics, ServiceOperation::Reset, message, callback);
 	_client->sendRequest(sc);
 }
 
-void BrainCloudPlayerStatistics::resetAllUserStats(IServerCallback* callback)
+void BrainCloudPlayerStatistics::resetAllUserStats(IServerCallback *callback)
 {
 	TSharedRef<FJsonObject> message = MakeShareable(new FJsonObject());
-	ServerCall * sc = new ServerCall(ServiceName::PlayerStatistics, ServiceOperation::Reset, message, callback);
+	ServerCall *sc = new ServerCall(ServiceName::PlayerStatistics, ServiceOperation::Reset, message, callback);
 	_client->sendRequest(sc);
 }
 
-void BrainCloudPlayerStatistics::incrementPlayerStats(const FString& jsonData, IServerCallback* callback)
-{
-	TSharedRef<FJsonObject> message = MakeShareable(new FJsonObject());
-	message->SetObjectField(OperationParam::PlayerStatisticsServiceStats.getValue(), JsonUtil::jsonStringToValue(jsonData));
-	ServerCall * sc = new ServerCall(ServiceName::PlayerStatistics, ServiceOperation::Update, message, callback);
-	_client->sendRequest(sc);
-}
-
-void BrainCloudPlayerStatistics::incrementUserStats(const FString& jsonData, IServerCallback* callback)
+void BrainCloudPlayerStatistics::incrementPlayerStats(const FString &jsonData, IServerCallback *callback)
 {
 	TSharedRef<FJsonObject> message = MakeShareable(new FJsonObject());
 	message->SetObjectField(OperationParam::PlayerStatisticsServiceStats.getValue(), JsonUtil::jsonStringToValue(jsonData));
-	ServerCall * sc = new ServerCall(ServiceName::PlayerStatistics, ServiceOperation::Update, message, callback);
+	ServerCall *sc = new ServerCall(ServiceName::PlayerStatistics, ServiceOperation::Update, message, callback);
 	_client->sendRequest(sc);
 }
 
-void BrainCloudPlayerStatistics::getNextExperienceLevel(IServerCallback* callback)
+void BrainCloudPlayerStatistics::incrementUserStats(const FString &jsonData, IServerCallback *callback)
 {
 	TSharedRef<FJsonObject> message = MakeShareable(new FJsonObject());
-	ServerCall * sc = new ServerCall(ServiceName::PlayerStatistics, ServiceOperation::ReadNextXplevel, message, callback);
+	message->SetObjectField(OperationParam::PlayerStatisticsServiceStats.getValue(), JsonUtil::jsonStringToValue(jsonData));
+	ServerCall *sc = new ServerCall(ServiceName::PlayerStatistics, ServiceOperation::Update, message, callback);
 	_client->sendRequest(sc);
 }
 
-void BrainCloudPlayerStatistics::incrementExperiencePoints(int32 xpValue, IServerCallback* callback)
+void BrainCloudPlayerStatistics::getNextExperienceLevel(IServerCallback *callback)
+{
+	TSharedRef<FJsonObject> message = MakeShareable(new FJsonObject());
+	ServerCall *sc = new ServerCall(ServiceName::PlayerStatistics, ServiceOperation::ReadNextXplevel, message, callback);
+	_client->sendRequest(sc);
+}
+
+void BrainCloudPlayerStatistics::incrementExperiencePoints(int32 xpValue, IServerCallback *callback)
 {
 	TSharedRef<FJsonObject> message = MakeShareable(new FJsonObject());
 	message->SetNumberField(OperationParam::PlayerStatisticsExperiencePoints.getValue(), xpValue);
-	ServerCall * sc = new ServerCall(ServiceName::PlayerStatistics, ServiceOperation::Update, message, callback);
+	ServerCall *sc = new ServerCall(ServiceName::PlayerStatistics, ServiceOperation::Update, message, callback);
 	_client->sendRequest(sc);
 }
 
-void BrainCloudPlayerStatistics::setExperiencePoints(int32 xpValue, IServerCallback* callback)
+void BrainCloudPlayerStatistics::setExperiencePoints(int32 xpValue, IServerCallback *callback)
 {
 	TSharedRef<FJsonObject> message = MakeShareable(new FJsonObject());
 	message->SetNumberField(OperationParam::PlayerStatisticsExperiencePoints.getValue(), xpValue);
-	ServerCall * sc = new ServerCall(ServiceName::PlayerStatistics, ServiceOperation::SetXpPoints, message, callback);
+	ServerCall *sc = new ServerCall(ServiceName::PlayerStatistics, ServiceOperation::SetXpPoints, message, callback);
 	_client->sendRequest(sc);
 }
 
-void BrainCloudPlayerStatistics::processStatistics(const FString& jsonData, IServerCallback* callback)
+void BrainCloudPlayerStatistics::processStatistics(const FString &jsonData, IServerCallback *callback)
 {
 	TSharedRef<FJsonObject> message = MakeShareable(new FJsonObject());
 	message->SetObjectField(OperationParam::PlayerStatisticsServiceStats.getValue(), JsonUtil::jsonStringToValue(jsonData));
-	ServerCall * sc = new ServerCall(ServiceName::PlayerStatistics, ServiceOperation::ProcessStatistics, message, callback);
+	ServerCall *sc = new ServerCall(ServiceName::PlayerStatistics, ServiceOperation::ProcessStatistics, message, callback);
 	_client->sendRequest(sc);
 }

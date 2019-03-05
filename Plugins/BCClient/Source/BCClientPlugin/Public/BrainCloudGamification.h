@@ -7,15 +7,16 @@ class IServerCallback;
 class ServiceName;
 class ServiceOperation;
 
-class BCCLIENTPLUGIN_API BrainCloudGamification {
-public:
-    BrainCloudGamification(BrainCloudClient* client);
+class BCCLIENTPLUGIN_API BrainCloudGamification
+{
+  public:
+    BrainCloudGamification(BrainCloudClient *client);
 
     /**
      * Sets the achievement awarded delegate which is called anytime
      * an achievement is awarded
      */
-    void setAchievementAwardedDelegate(IServerCallback * callback);
+    void setAchievementAwardedDelegate(IServerCallback *callback);
 
     /**
     * Method retrieves all gamification data for the player.
@@ -25,7 +26,7 @@ public:
     *
     * @param callback Method to be invoked when the server response is received.
     */
-    void readAllGamification(IServerCallback * callback, bool includeMetaData = false);
+    void readAllGamification(IServerCallback *callback, bool includeMetaData = false);
 
     /**
      * Method retrieves all milestones defined for the game.
@@ -35,7 +36,7 @@ public:
      *
      * @param callback Method to be invoked when the server response is received.
      */
-    void readMilestones(IServerCallback * callback, bool includeMetaData = false);
+    void readMilestones(IServerCallback *callback, bool includeMetaData = false);
 
     /**
      * Read all of the achievements defined for the game.
@@ -45,7 +46,7 @@ public:
      *
      * @param callback Method to be invoked when the server response is received.
      */
-    void readAchievements(IServerCallback * callback, bool includeMetaData = false);
+    void readAchievements(IServerCallback *callback, bool includeMetaData = false);
 
     /**
      * Method returns all defined xp levels and any rewards associated
@@ -56,7 +57,7 @@ public:
      *
      * @param callback Method to be invoked when the server response is received.
      */
-    void readXpLevelsMetaData(IServerCallback * callback);
+    void readXpLevelsMetaData(IServerCallback *callback);
 
     /**
     * Method retrives the list of achieved achievements.
@@ -66,7 +67,7 @@ public:
     *
     * @param callback Method to be invoked when the server response is received.
     */
-    void readAchievedAchievements(IServerCallback * callback, bool includeMetaData = false);
+    void readAchievedAchievements(IServerCallback *callback, bool includeMetaData = false);
 
     /**
      * Method retrieves the list of completed milestones.
@@ -76,7 +77,7 @@ public:
      *
      * @param callback Method to be invoked when the server response is received.
      */
-    void readCompletedMilestones(IServerCallback * callback, bool includeMetaData = false);
+    void readCompletedMilestones(IServerCallback *callback, bool includeMetaData = false);
 
     /**
      * Method retrieves the list of in progress milestones
@@ -86,7 +87,7 @@ public:
      *
      * @param callback Method to be invoked when the server response is received.
      */
-    void readInProgressMilestones(IServerCallback * callback, bool includeMetaData = false);
+    void readInProgressMilestones(IServerCallback *callback, bool includeMetaData = false);
 
     /**
     * Method retrieves milestones of the given category.
@@ -97,7 +98,7 @@ public:
     * @param category The milestone category
     * @param callback Method to be invoked when the server response is received.
     */
-    void readMilestonesByCategory(const FString& category, IServerCallback * callback, bool includeMetaData = false);
+    void readMilestonesByCategory(const FString &category, IServerCallback *callback, bool includeMetaData = false);
 
     /**
     * Method will award the achievements specified. On success, this will
@@ -110,9 +111,9 @@ public:
     * @param achievementIds A list of achievement ids to award
     * @param callback Method to be invoked when the server response is received.
     */
-    void awardAchievements(const TArray<FString>& achievements, IServerCallback * callback);
+    void awardAchievements(const TArray<FString> &achievements, IServerCallback *callback);
 
-    void achievementAwardedCallback(ServiceName serviceName, ServiceOperation serviceOperation, const TCHAR* jsonData);
+    void achievementAwardedCallback(ServiceName serviceName, ServiceOperation serviceOperation, const TCHAR *jsonData);
 
     /**
     * Resets the specified milestones' statuses to LOCKED.
@@ -123,7 +124,7 @@ public:
     * @param milestoneIds List of milestones to reset
     * @param callback Method to be invoked when the server response is received.
     */
-    void resetMilestones(const TArray<FString>& milestoneIds, IServerCallback * callback);
+    void resetMilestones(const TArray<FString> &milestoneIds, IServerCallback *callback);
 
     /**
      * Method retrieves all of the quests defined for the game.
@@ -133,7 +134,7 @@ public:
      *
      * @param callback Method to be invoked when the server response is received.
      */
-    void readQuests(IServerCallback * callback, bool includeMetaData = false);
+    void readQuests(IServerCallback *callback, bool includeMetaData = false);
 
     /**
      *  Method returns all completed quests.
@@ -143,7 +144,7 @@ public:
      *
      * @param callback Method to be invoked when the server response is received.
      */
-    void readCompletedQuests(IServerCallback * callback, bool includeMetaData = false);
+    void readCompletedQuests(IServerCallback *callback, bool includeMetaData = false);
 
     /**
      *  Method returns quests that are in progress.
@@ -153,7 +154,7 @@ public:
      *
      * @param callback Method to be invoked when the server response is received.
      */
-    void readInProgressQuests(IServerCallback * callback, bool includeMetaData = false);
+    void readInProgressQuests(IServerCallback *callback, bool includeMetaData = false);
 
     /**
      *  Method returns quests that have not been started.
@@ -163,7 +164,7 @@ public:
      *
      * @param callback Method to be invoked when the server response is received.
      */
-    void readNotStartedQuests(IServerCallback * callback, bool includeMetaData = false);
+    void readNotStartedQuests(IServerCallback *callback, bool includeMetaData = false);
 
     /**
      *  Method returns quests with a status.
@@ -173,7 +174,7 @@ public:
      *
      * @param callback Method to be invoked when the server response is received.
      */
-    void readQuestsWithStatus(IServerCallback * callback, bool includeMetaData = false);
+    void readQuestsWithStatus(IServerCallback *callback, bool includeMetaData = false);
 
     /**
      *  Method returns quests with a basic percentage.
@@ -183,7 +184,7 @@ public:
      *
      * @param callback Method to be invoked when the server response is received.
      */
-    void readQuestsWithBasicPercentage(IServerCallback * callback, bool includeMetaData = false);
+    void readQuestsWithBasicPercentage(IServerCallback *callback, bool includeMetaData = false);
 
     /**
      *  Method returns quests with a complex percentage.
@@ -193,7 +194,7 @@ public:
      *
      * @param callback Method to be invoked when the server response is received.
      */
-    void readQuestsWithComplexPercentage(IServerCallback * callback, bool includeMetaData = false);
+    void readQuestsWithComplexPercentage(IServerCallback *callback, bool includeMetaData = false);
 
     /**
      * Method returns quests for the given category.
@@ -204,13 +205,13 @@ public:
      * @param category The quest category
      * @param callback Method to be invoked when the server response is received.
      */
-    void readQuestsByCategory(const FString& category, IServerCallback * callback, bool includeMetaData = false);
+    void readQuestsByCategory(const FString &category, IServerCallback *callback, bool includeMetaData = false);
 
     // goes through JSON response to award achievements via third party (ie game centre, facebook etc).
     // notifies achievement delegate
-    void checkForAchievementsToAward(ServiceName serviceName, ServiceOperation serviceOperation, const TCHAR* jsonData);
+    void checkForAchievementsToAward(ServiceName serviceName, ServiceOperation serviceOperation, const TCHAR *jsonData);
 
-private:
-    BrainCloudClient* _client = nullptr;
-    IServerCallback* m_achievementsDelegate;
+  private:
+    BrainCloudClient *_client = nullptr;
+    IServerCallback *m_achievementsDelegate;
 };

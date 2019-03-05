@@ -7,8 +7,8 @@ class IServerCallback;
 
 class BCCLIENTPLUGIN_API BrainCloudMail
 {
-public:
-    BrainCloudMail(BrainCloudClient* client);
+  public:
+	BrainCloudMail(BrainCloudClient *client);
 
 	/**
 	* Sends a simple text email to the specified user
@@ -21,7 +21,7 @@ public:
 	* @param body The email body
 	* @param callback The method to be invoked when the server response is received
 	*/
-	void sendBasicEmail(const FString& profileId, const FString& subject, const FString& body, IServerCallback * callback = nullptr);
+	void sendBasicEmail(const FString &profileId, const FString &subject, const FString &body, IServerCallback *callback = nullptr);
 
 	/**
 	* Sends an advanced email to the specified user
@@ -34,7 +34,7 @@ public:
 	*	a full list. http://getbraincloud.com/apidocs/apiref/#capi-mail
 	* @param callback The method to be invoked when the server response is received
 	*/
-	void sendAdvancedEmail(const FString& profileId, const FString& jsonServiceParams, IServerCallback * callback = nullptr);
+	void sendAdvancedEmail(const FString &profileId, const FString &jsonServiceParams, IServerCallback *callback = nullptr);
 
 	/**
 	* Sends an advanced email to the specified email address
@@ -47,8 +47,8 @@ public:
 	*	a full list. http://getbraincloud.com/apidocs/apiref/#capi-mail
 	* @param callback The method to be invoked when the server response is received
 	*/
-	void sendAdvancedEmailByAddress(const FString& emailAddress, const FString& jsonServiceParams, IServerCallback * callback = nullptr);
+	void sendAdvancedEmailByAddress(const FString &emailAddress, const FString &jsonServiceParams, IServerCallback *callback = nullptr);
 
-private:
-    BrainCloudClient* _client = nullptr;
+  private:
+	BrainCloudClient *_client = nullptr;
 };

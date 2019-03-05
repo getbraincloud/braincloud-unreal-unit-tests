@@ -409,11 +409,11 @@ class BCCLIENTPLUGIN_API OperationParam
 	static const OperationParam ChatText;
 	static const OperationParam ChatRich;
 	static const OperationParam ChatRecordInHistory;
-	
+
 	static const OperationParam AllChannelType;
 	static const OperationParam GlobalChannelType;
 	static const OperationParam GroupChannelType;
-	
+
 	static const OperationParam MessagingMessageBox;
 	static const OperationParam MessagingMessageIds;
 	static const OperationParam MessagingMarkAsRead;
@@ -426,7 +426,7 @@ class BCCLIENTPLUGIN_API OperationParam
 	static const OperationParam MessagingText;
 	static const OperationParam InboxMessageType;
 	static const OperationParam SentMessageType;
-	
+
 	static const OperationParam LobbyRoomType;
 	static const OperationParam LobbyRating;
 	static const OperationParam LobbyAlgorithm;

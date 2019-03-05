@@ -4,7 +4,7 @@
 
 class BCCLIENTPLUGIN_API IFileUploadCallback
 {
-public:
+  public:
     virtual ~IFileUploadCallback() {}
 
     /**
@@ -33,7 +33,7 @@ public:
      *  }
      * }
      */
-    virtual void fileUploadCompleted(const FString& fileUploadId, const FString& jsonResponse) = 0;
+    virtual void fileUploadCompleted(const FString &fileUploadId, const FString &jsonResponse) = 0;
 
     /**
      * Method called when a file upload has failed.
@@ -50,6 +50,5 @@ public:
      *   "severity": "ERROR"
      * }
      */
-    virtual void fileUploadFailed(const FString& fileUploadId, int32 statusCode, int32 reasonCode, const FString& jsonResponse) = 0;
+    virtual void fileUploadFailed(const FString &fileUploadId, int32 statusCode, int32 reasonCode, const FString &jsonResponse) = 0;
 };
-

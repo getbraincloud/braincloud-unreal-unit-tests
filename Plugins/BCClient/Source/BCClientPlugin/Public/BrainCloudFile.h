@@ -7,8 +7,8 @@ class IServerCallback;
 
 class BCCLIENTPLUGIN_API BrainCloudFile
 {
-public:
-    BrainCloudFile(BrainCloudClient* client);
+  public:
+    BrainCloudFile(BrainCloudClient *client);
 
     /**
      * Prepares a user file upload. On success the file will begin uploading
@@ -29,19 +29,19 @@ public:
      * 40430 - File exists, replaceIfExists not set
      */
     bool uploadFile(
-        const FString& cloudPath,
-        const FString& cloudFilename,
+        const FString &cloudPath,
+        const FString &cloudFilename,
         bool shareable,
         bool replaceIfExists,
-        const FString& localPath,
-        IServerCallback * callback = nullptr);
+        const FString &localPath,
+        IServerCallback *callback = nullptr);
 
     /**
      * List all user files
      *
      * @param callback The method to be invoked when the server response is received
      */
-    void listUserFiles(IServerCallback * callback = nullptr);
+    void listUserFiles(IServerCallback *callback = nullptr);
 
     /**
      * List user files from the given cloud path
@@ -50,7 +50,7 @@ public:
      * @param recurse Whether to recurse into sub-directories
      * @param callback The method to be invoked when the server response is received
      */
-    void listUserFiles(const FString& cloudPath, bool recurse, IServerCallback * callback = nullptr);
+    void listUserFiles(const FString &cloudPath, bool recurse, IServerCallback *callback = nullptr);
 
     /**
      * Deletes a single user file.
@@ -65,7 +65,7 @@ public:
      * 40432 - File does not exist
      *
      */
-    void deleteUserFile(const FString& cloudPath, const FString& cloudFilename, IServerCallback * callback = nullptr);
+    void deleteUserFile(const FString &cloudPath, const FString &cloudFilename, IServerCallback *callback = nullptr);
 
     /**
      * Delete multiple user files
@@ -74,16 +74,16 @@ public:
      * @param recurse Whether to recurse into sub-directories
      * @param callback The method to be invoked when the server response is received
      */
-    void deleteUserFiles(const FString& cloudPath, bool recurse, IServerCallback * callback = nullptr);
+    void deleteUserFiles(const FString &cloudPath, bool recurse, IServerCallback *callback = nullptr);
 
-	/**
+    /**
 	* Returns the CDN url for a file object
 	*
 	* @param cloudPath File path
 	* @param cloudFileName File name
 	* @param callback The method to be invoked when the server response is received
 	*/
-	void getCDNUrl(const FString& cloudPath, const FString& cloudFileName, IServerCallback * callback = nullptr);
+    void getCDNUrl(const FString &cloudPath, const FString &cloudFileName, IServerCallback *callback = nullptr);
 
     /**
      * Method cancels an upload. If an IFileUploadCallback has been registered with the BrainCloudClient class,
@@ -91,7 +91,7 @@ public:
      *
      * @param uploadId The id of the upload
      */
-    void cancelUpload(const FString& uploadId);
+    void cancelUpload(const FString &uploadId);
 
     /**
      * Returns the progress of the given upload from 0.0 to 1.0
@@ -100,7 +100,7 @@ public:
      * @param uploadId The id of the upload
      * @return A progress from 0.0 to 1.0 or -1 if upload not found.
      */
-    float getUploadProgress(const FString& uploadId);
+    float getUploadProgress(const FString &uploadId);
 
     /**
      * Returns the number of bytes uploaded or -1 if upload not found.
@@ -108,7 +108,7 @@ public:
      * @param uploadId The id of the upload
      * @return The number of bytes uploaded or -1 if upload not found.
      */
-    int32 getUploadBytesTransferred(const FString& uploadId);
+    int32 getUploadBytesTransferred(const FString &uploadId);
 
     /**
      * Returns the total number of bytes that will be uploaded or -1 if upload not found.
@@ -116,9 +116,8 @@ public:
      * @param uploadId The id of the upload
      * @return The total number of bytes that will be uploaded or -1 if upload not found.
      */
-    int32 getUploadTotalBytesToTransfer(const FString& uploadId);
+    int32 getUploadTotalBytesToTransfer(const FString &uploadId);
 
-private:
-    BrainCloudClient* _client = nullptr;
+  private:
+    BrainCloudClient *_client = nullptr;
 };
-

@@ -7,13 +7,13 @@ class IServerCallback;
 
 class BCCLIENTPLUGIN_API BrainCloudPlayerStatisticsEvent
 {
-public:
-    BrainCloudPlayerStatisticsEvent(BrainCloudClient* client);
+  public:
+    BrainCloudPlayerStatisticsEvent(BrainCloudClient *client);
 
-	/**
+    /**
 	* @deprecated Use triggerStatsEvent instead - removal after September 1 2017
 	*/
-	void triggerPlayerStatisticsEvent(const FString& eventName, int32 eventMultiplier, IServerCallback* callback);
+    void triggerPlayerStatisticsEvent(const FString &eventName, int32 eventMultiplier, IServerCallback *callback);
 
     /**
      * Trigger an event server side that will increase the users statistics.
@@ -32,12 +32,12 @@ public:
      *
      * @param callback The method to be invoked when the server response is received
      */
-    void triggerStatsEvent(const FString& eventName, int32 eventMultiplier, IServerCallback* callback);
+    void triggerStatsEvent(const FString &eventName, int32 eventMultiplier, IServerCallback *callback);
 
-	/**
+    /**
 	* @deprecated Use triggerStatsEvents instead - removal after September 1 2017
 	*/
-	void triggerPlayerStatisticsEvents(const FString& jsonData, IServerCallback* callback);
+    void triggerPlayerStatisticsEvents(const FString &jsonData, IServerCallback *callback);
 
     /**
      * See documentation for TriggerStatsEvent for more
@@ -58,8 +58,8 @@ public:
      *     }
      *   ]
      */
-    void triggerStatsEvents(const FString& jsonData, IServerCallback* callback);
+    void triggerStatsEvents(const FString &jsonData, IServerCallback *callback);
 
-private:
-    BrainCloudClient* _client = nullptr;
+  private:
+    BrainCloudClient *_client = nullptr;
 };

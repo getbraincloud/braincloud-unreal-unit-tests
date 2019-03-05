@@ -8,9 +8,9 @@ class IServerCallback;
 class BCCLIENTPLUGIN_API BrainCloudAsyncMatch
 {
 public:
-    BrainCloudAsyncMatch(BrainCloudClient* client);
+  BrainCloudAsyncMatch(BrainCloudClient *client);
 
-    /**
+  /**
     * Creates an instance of an asynchronous match.
     *
     * Service Name - AsyncMatch
@@ -38,9 +38,9 @@ public:
     *  Refer to the Push Notification functions for the syntax required.
     * @param callback Optional instance of IServerCallback to call when the server response is received.
     */
-    void createMatch(const FString& jsonOpponentIds, const FString& pushNotificationMessage, IServerCallback* callback);
+  void createMatch(const FString &jsonOpponentIds, const FString &pushNotificationMessage, IServerCallback *callback);
 
-    /**
+  /**
     * Creates an instance of an asynchronous match with an initial turn.
     *
     * Service Name - AsyncMatch
@@ -71,15 +71,15 @@ public:
     * @param jsonSummary Optional JSON string defining what the other player will see as a summary of the game when listing their games
     * @param callback Optional instance of IServerCallback to call when the server response is received.
     */
-    void createMatchWithInitialTurn(
-        const FString& jsonOpponentIds,
-        const FString& jsonMatchState,
-        const FString& pushNotificationMessage,
-        const FString& nextPlayer,
-        const FString& jsonSummary,
-        IServerCallback* callback);
+  void createMatchWithInitialTurn(
+      const FString &jsonOpponentIds,
+      const FString &jsonMatchState,
+      const FString &pushNotificationMessage,
+      const FString &nextPlayer,
+      const FString &jsonSummary,
+      IServerCallback *callback);
 
-    /**
+  /**
     * Submits a turn for the given match.
     *
     * Service Name - AsyncMatch
@@ -96,17 +96,17 @@ public:
     * @param jsonStatistics Optional JSON string blob provided by the caller
     * @param callback Optional instance of IServerCallback to call when the server response is received.
     */
-    void submitTurn(const FString& ownerId,
-        const FString& matchId,
-        uint64 version,
-        const FString& jsonMatchState,
-        const FString& pushNotificationMessage,
-        const FString& nextPlayer,
-        const FString& jsonSummary,
-        const FString& jsonStatistics,
-        IServerCallback* callback);
+  void submitTurn(const FString &ownerId,
+                  const FString &matchId,
+                  uint64 version,
+                  const FString &jsonMatchState,
+                  const FString &pushNotificationMessage,
+                  const FString &nextPlayer,
+                  const FString &jsonSummary,
+                  const FString &jsonStatistics,
+                  IServerCallback *callback);
 
-    /**
+  /**
     * Allows the current player (only) to update Summary data without having to submit a whole turn.
     *
     * Service Name - AsyncMatch
@@ -118,9 +118,9 @@ public:
     * @param jsonSummary JSON string that other players will see as a summary of the game when listing their games
     * @param callback Optional instance of IServerCallback to call when the server response is received.
     */
-    void updateMatchSummaryData(const FString& ownerId, const FString& matchId, uint64 version, const FString& jsonSummary, IServerCallback* callback);
+  void updateMatchSummaryData(const FString &ownerId, const FString &matchId, uint64 version, const FString &jsonSummary, IServerCallback *callback);
 
-    /**
+  /**
     * Marks the given match as complete.
     *
     * Service Name - AsyncMatch
@@ -130,9 +130,9 @@ public:
     * @param matchId Match identifier
     * @param callback Optional instance of IServerCallback to call when the server response is received.
     */
-    void completeMatch(const FString& ownerId, const FString& matchId, IServerCallback* callback);
+  void completeMatch(const FString &ownerId, const FString &matchId, IServerCallback *callback);
 
-    /**
+  /**
     * Returns the current state of the given match.
     *
     * Service Name - AsyncMatch
@@ -142,9 +142,9 @@ public:
     * @param matchId   Match identifier
     * @param callback  Optional instance of IServerCallback to call when the server response is received.
     */
-    void readMatch(const FString& ownerId, const FString& matchId, IServerCallback* callback);
+  void readMatch(const FString &ownerId, const FString &matchId, IServerCallback *callback);
 
-    /**
+  /**
     * Returns the match history of the given match.
     *
     * Service Name - AsyncMatch
@@ -154,9 +154,9 @@ public:
     * @param matchId   Match identifier
     * @param callback  Optional instance of IServerCallback to call when the server response is received.
     */
-    void readMatchHistory(const FString& ownerId, const FString& matchId, IServerCallback* callback);
+  void readMatchHistory(const FString &ownerId, const FString &matchId, IServerCallback *callback);
 
-    /**
+  /**
     * Returns all matches that are NOT in a COMPLETE state for which the player is involved.
     *
     * Service Name - AsyncMatch
@@ -164,9 +164,9 @@ public:
     *
     * @param callback  Optional instance of IServerCallback to call when the server response is received.
     */
-    void findMatches(IServerCallback* callback);
+  void findMatches(IServerCallback *callback);
 
-    /**
+  /**
     * Returns all matches that are in a COMPLETE state for which the player is involved.
     *
     * Service Name - AsyncMatch
@@ -174,9 +174,9 @@ public:
     *
     * @param callback  Optional instance of IServerCallback to call when the server response is received.
     */
-    void findCompleteMatches(IServerCallback* callback);
+  void findCompleteMatches(IServerCallback *callback);
 
-    /**
+  /**
     * Marks the given match as abandoned.
     *
     * Service Name - AsyncMatch
@@ -186,9 +186,9 @@ public:
     * @param matchId   Match identifier
     * @param callback  Optional instance of IServerCallback to call when the server response is received.
     */
-    void abandonMatch(const FString& ownerId, const FString& matchId, IServerCallback* callback);
+  void abandonMatch(const FString &ownerId, const FString &matchId, IServerCallback *callback);
 
-    /**
+  /**
     * Removes the match and match history from the server. DEBUG ONLY, in production it is recommended
     *   the user leave it as completed.
     *
@@ -199,8 +199,8 @@ public:
     * @param matchId   Match identifier
     * @param callback  Optional instance of IServerCallback to call when the server response is received.
     */
-    void deleteMatch(const FString& ownerId, const FString& matchId, IServerCallback* callback);
+  void deleteMatch(const FString &ownerId, const FString &matchId, IServerCallback *callback);
 
 private:
-    BrainCloudClient* _client = nullptr;
+  BrainCloudClient *_client = nullptr;
 };

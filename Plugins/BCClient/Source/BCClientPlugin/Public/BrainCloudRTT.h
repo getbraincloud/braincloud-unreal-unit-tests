@@ -8,14 +8,13 @@ class IServerCallback;
 class BCCLIENTPLUGIN_API BrainCloudRTT
 {
 public:
-    BrainCloudRTT(BrainCloudClient* client);
+  BrainCloudRTT(BrainCloudClient *client);
 
-    /// <summary>
-    /// Requests the event server address
-    /// </summary>
-    void requestClientConnection(IServerCallback* callback);
+  /// <summary>
+  /// Requests the event server address
+  /// </summary>
+  void requestClientConnection(IServerCallback *callback);
 
 private:
-    BrainCloudClient* _client = nullptr;
+  BrainCloudClient *_client = nullptr;
 };
-

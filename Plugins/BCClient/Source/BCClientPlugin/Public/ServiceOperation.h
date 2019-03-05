@@ -91,6 +91,7 @@ class BCCLIENTPLUGIN_API ServiceOperation
 	static const ServiceOperation AddFriends;
 	static const ServiceOperation GetUsersOnlineStatus;
 	static const ServiceOperation RemoveFriends;
+	static const ServiceOperation FindUserByUniversalId;
 	static const ServiceOperation FindPlayerByUniversalId;
 	static const ServiceOperation FindUserByExactUniversalId;
 	static const ServiceOperation FindUsersByUniversalIdStartingWith;
@@ -340,7 +341,7 @@ class BCCLIENTPLUGIN_API ServiceOperation
 	static const ServiceOperation StopListening;
 	static const ServiceOperation UpdateActivity;
 
-	//virtualCurrency 
+	//virtualCurrency
 	static const ServiceOperation GetPlayerCurrency;
 	static const ServiceOperation GetParentCurrency;
 	static const ServiceOperation GetPeerCurrency;

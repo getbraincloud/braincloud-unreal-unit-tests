@@ -13,7 +13,7 @@ class UBCBlueprintRTTCallProxyBase : public UObject, public IRTTCallback
     GENERATED_BODY()
 
   public:
-    UBCBlueprintRTTCallProxyBase(const FObjectInitializer &ObjectInitializer){}
+    UBCBlueprintRTTCallProxyBase(const FObjectInitializer &ObjectInitializer) {}
 
     //Response delegates
     UPROPERTY(BlueprintAssignable)

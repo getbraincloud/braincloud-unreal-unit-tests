@@ -3,9 +3,9 @@
 #include "BCClientPluginPrivatePCH.h"
 #include "BrainCloudGroupACL.h"
 
-UBrainCloudGroupACL* UBrainCloudGroupACL::CreateNewGroupACL(EAcl other, EAcl member)
+UBrainCloudGroupACL *UBrainCloudGroupACL::CreateNewGroupACL(EAcl other, EAcl member)
 {
-    UBrainCloudGroupACL* newObj = NewObject<UBrainCloudGroupACL>();
+    UBrainCloudGroupACL *newObj = NewObject<UBrainCloudGroupACL>();
     newObj->Other = other;
     newObj->Member = member;
     return newObj;
@@ -26,4 +26,3 @@ TSharedRef<FJsonObject> UBrainCloudGroupACL::toJsonObject()
     object->SetNumberField("member", (uint8)Member);
     return object.ToSharedRef();
 }
-

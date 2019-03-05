@@ -18,7 +18,7 @@ class UBCBlueprintRestCallProxyBase : public UObject, public IEventCallback, pub
     GENERATED_BODY()
 
   public:
-    UBCBlueprintRestCallProxyBase(const FObjectInitializer &ObjectInitializer){}
+    UBCBlueprintRestCallProxyBase(const FObjectInitializer &ObjectInitializer) {}
 
     //Response delegates
     UPROPERTY(BlueprintAssignable)
@@ -46,20 +46,20 @@ class UBCBlueprintRestCallProxyBase : public UObject, public IEventCallback, pub
     }
 
     //IGlobalErrorCallback
-    void globalError(ServiceName serviceName, ServiceOperation serviceOperation, int32 statusCode, int32 reasonCode, const FString& jsonError)
+    void globalError(ServiceName serviceName, ServiceOperation serviceOperation, int32 statusCode, int32 reasonCode, const FString &jsonError)
     {
         FBC_ReturnData returnData = FBC_ReturnData(serviceName.getValue(), serviceOperation.getValue(), statusCode, reasonCode);
         OnCallback.Broadcast(jsonError, returnData);
     }
 
     //IFileUploadCallback
-    void fileUploadCompleted(const FString& fileUploadId, const FString& jsonResponse)
+    void fileUploadCompleted(const FString &fileUploadId, const FString &jsonResponse)
     {
         FBC_ReturnData returnData = FBC_ReturnData(fileUploadId, fileUploadId, 200, 0);
         OnCallback.Broadcast(jsonResponse, returnData);
     }
 
-    void fileUploadFailed(const FString& fileUploadId, int32 statusCode, int32 reasonCode, const FString& jsonResponse) 
+    void fileUploadFailed(const FString &fileUploadId, int32 statusCode, int32 reasonCode, const FString &jsonResponse)
     {
         FBC_ReturnData returnData = FBC_ReturnData(fileUploadId, fileUploadId, statusCode, reasonCode);
         OnCallback.Broadcast(jsonResponse, returnData);

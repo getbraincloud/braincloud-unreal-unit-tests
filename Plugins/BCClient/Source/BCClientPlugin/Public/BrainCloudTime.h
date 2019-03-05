@@ -8,9 +8,9 @@ class IServerCallback;
 class BCCLIENTPLUGIN_API BrainCloudTime
 {
 public:
-    BrainCloudTime(BrainCloudClient* client);
+  BrainCloudTime(BrainCloudClient *client);
 
-    /**
+  /**
      * Method returns the server time in UTC. This is in UNIX millis time format.
      * For instance 1396378241893 represents 2014-04-01 2:50:41.893 in GMT-4.
      *
@@ -21,9 +21,8 @@ public:
      *
      * @param callback The method to be invoked when the server response is received
      */
-    void readServerTime(IServerCallback* callback);
+  void readServerTime(IServerCallback *callback);
 
 private:
-    BrainCloudClient* _client = nullptr;
+  BrainCloudClient *_client = nullptr;
 };
-

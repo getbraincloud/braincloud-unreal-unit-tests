@@ -21,8 +21,9 @@ enum class EBCAuthType : uint8
 
 class BCCLIENTPLUGIN_API BCAuthType
 {
-public:
+  public:
 	static FString EnumToString(EBCAuthType platform);
-private:
-	BCAuthType() {};
+
+  private:
+	BCAuthType(){};
 };
