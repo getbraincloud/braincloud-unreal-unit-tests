@@ -314,8 +314,6 @@ FString BrainCloudComms::GetDataString(PacketRef packet, uint64 packetId)
 	jsonDataObject->SetNumberField(TEXT("packetId"), packetId);
 
 	FJsonSerializer::Serialize(jsonDataObject, writer);
-
-	jsonStr += TEXT("\r\n\r\n");
 	return jsonStr;
 }
 

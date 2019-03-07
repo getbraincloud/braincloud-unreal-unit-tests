@@ -483,6 +483,7 @@ class BCCLIENTPLUGIN_API UBrainCloudWrapper : public UObject, public IServerCall
 #pragma warning(suppress : 4996)
     static BrainCloudClient *getBC()
     {
+#pragma warning(suppress : 4996)
         return getInstance()->_client;
     }
     /**
