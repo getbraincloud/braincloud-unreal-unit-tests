@@ -43,6 +43,7 @@ class UBCBlueprintCallProxyBase : public UObject, public IServerCallback
   public:
     UBCBlueprintCallProxyBase(const FObjectInitializer &ObjectInitializer)
     {
+        // ensures these are not removed during scene loads! which is important!
         this->AddToRoot();
     }
 
@@ -58,6 +59,8 @@ class UBCBlueprintCallProxyBase : public UObject, public IServerCallback
     {
         FBC_ReturnData returnData = FBC_ReturnData(serviceName.getValue(), serviceOperation.getValue(), 200, 0);
         OnSuccess.Broadcast(jsonData, returnData);
+        
+        // allow it to be removed, if no longer referenced
         this->RemoveFromRoot();
         ConditionalBeginDestroy();
     }
@@ -66,6 +69,8 @@ class UBCBlueprintCallProxyBase : public UObject, public IServerCallback
     {
         FBC_ReturnData returnData = FBC_ReturnData(serviceName.getValue(), serviceOperation.getValue(), statusCode, reasonCode);
         OnFailure.Broadcast(jsonError, returnData);
+        
+        // allow it to be removed, if no longer referenced
         this->RemoveFromRoot();
         ConditionalBeginDestroy();
     }
