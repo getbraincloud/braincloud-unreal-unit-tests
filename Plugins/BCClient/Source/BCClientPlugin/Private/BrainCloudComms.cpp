@@ -705,17 +705,19 @@ void BrainCloudComms::ReportResults(PacketRef requestPacket, TSharedRef<FJsonObj
 			// authenticate
 			if (service == ServiceName::AuthenticateV2 && operation == ServiceOperation::Authenticate)
 			{
-				if (respObj->GetObjectField(TEXT("data"))->GetObjectField(TEXT("rewards"))->GetObjectField(TEXT("rewards"))->Values.Num() > 0)
+				TSharedPtr<FJsonObject> rewardData = respObj->GetObjectField(TEXT("data"))->GetObjectField(TEXT("rewards"));
+				if (rewardData->GetObjectField(TEXT("rewards"))->Values.Num() > 0)
 				{
-					rewards = respObj->GetObjectField(TEXT("data"))->GetObjectField(TEXT("rewards"));
+					rewards = rewardData;
 				}
 			}
 			// player stat increment or statistics event trigger
 			else if ((service == ServiceName::PlayerStatistics && operation == ServiceOperation::Update) || (service == ServiceName::PlayerStatisticsEvent && (operation == ServiceOperation::Trigger || operation == ServiceOperation::TriggerMultiple)))
 			{
-				if (respObj->GetObjectField(TEXT("data"))->GetObjectField(TEXT("rewards"))->Values.Num() > 0)
+				TSharedPtr<FJsonObject> data = respObj->GetObjectField(TEXT("data"));
+				if (data->GetObjectField(TEXT("rewards"))->Values.Num() > 0)
 				{
-					rewards = respObj->GetObjectField(TEXT("data"));
+					rewards = data;
 				}
 			}
 
@@ -790,15 +792,16 @@ void BrainCloudComms::FilterIncomingMessages(TSharedRef<ServerCall> servercall, 
 	ServiceName service = servercall->getService();
 	ServiceOperation operation = servercall->getOperation();
 
-	TSharedPtr<FJsonObject> data = response->GetObjectField(TEXT("data"));
-
+	TSharedPtr<FJsonValue> Field = response->TryGetField(TEXT("data"));
+	const TSharedPtr<FJsonObject>* data = nullptr;
+	bool isDataValid = Field->TryGetObject(data);
 	// A session id or a profile id could potentially come back in any messages
-	if (data.IsValid())
+	if ( isDataValid )
 	{
-		data->TryGetStringField(TEXT("sessionId"), _sessionId);
+		(*data)->TryGetStringField(TEXT("sessionId"), _sessionId);
 
 		FString profileIdOut;
-		data->TryGetStringField(TEXT("profileId"), profileIdOut);
+		(*data)->TryGetStringField(TEXT("profileId"), profileIdOut);
 
 		if (!profileIdOut.IsEmpty())
 		{
@@ -806,10 +809,10 @@ void BrainCloudComms::FilterIncomingMessages(TSharedRef<ServerCall> servercall, 
 		}
 
 		FString appIdOut;
-		data->TryGetStringField(TEXT("switchToAppId"), appIdOut);
+		(*data)->TryGetStringField(TEXT("switchToAppId"), appIdOut);
 		if (!appIdOut.IsEmpty())
 		{
-			_appId = data->GetStringField("switchToAppId");
+			_appId = (*data)->GetStringField("switchToAppId");
 
 			//update the secret key
 			_secretKey = "MISSING";
@@ -825,11 +828,11 @@ void BrainCloudComms::FilterIncomingMessages(TSharedRef<ServerCall> servercall, 
 		_isAuthenticated = true;
 		ResetErrorCache();
 
-		if (data.IsValid())
+		if (isDataValid)
 		{
 			if (_heartbeatInterval == 0)
 			{
-				int32 sessionTimeout = data->GetIntegerField(TEXT("playerSessionExpiry"));
+				int32 sessionTimeout = (*data)->GetIntegerField(TEXT("playerSessionExpiry"));
 				sessionTimeout = (int32)((double)sessionTimeout * 0.85);
 
 				// minimum 30 secs
@@ -837,13 +840,13 @@ void BrainCloudComms::FilterIncomingMessages(TSharedRef<ServerCall> servercall, 
 				_heartbeatInterval *= 1000; //to ms
 			}
 
-			_maxBundleMessages = data->GetNumberField(TEXT("maxBundleMsgs"));
+			_maxBundleMessages = (*data)->GetNumberField(TEXT("maxBundleMsgs"));
 
-			if (data->HasField("maxKillCount"))
-				_killSwitchThreshold = data->GetNumberField(TEXT("maxKillCount"));
+			if ((*data)->HasField("maxKillCount"))
+				_killSwitchThreshold = (*data)->GetNumberField(TEXT("maxKillCount"));
 
 			//set player name
-			FString name = data->GetStringField(TEXT("playerName"));
+			FString name = (*data)->GetStringField(TEXT("playerName"));
 			_client->getPlayerStateService()->setUserName(name);
 		}
 	}
@@ -858,17 +861,17 @@ void BrainCloudComms::FilterIncomingMessages(TSharedRef<ServerCall> servercall, 
 	}
 	else if (service == ServiceName::PlayerState && operation == ServiceOperation::UpdateName)
 	{
-		if (data.IsValid())
+		if (isDataValid)
 		{
-			FString name = data->GetStringField(TEXT("playerName"));
+			FString name = (*data)->GetStringField(TEXT("playerName"));
 			_client->getPlayerStateService()->setUserName(name);
 		}
 	}
 	else if (service == ServiceName::File && operation == ServiceOperation::PrepareUserUpload)
 	{
-		if (data.IsValid())
+		if (isDataValid)
 		{
-			TSharedPtr<FJsonObject> fileInfo = data->GetObjectField(TEXT("fileDetails"));
+			TSharedPtr<FJsonObject> fileInfo = (*data)->GetObjectField(TEXT("fileDetails"));
 
 			TSharedRef<BCFileUploader> uploader = MakeShareable(
 				new BCFileUploader(
