@@ -108,7 +108,7 @@ Steps (Command lines are done in PowerShell):
 Do the following step by adding brainCloud directly to your NDK Application's CMake project.
 
 ## Add brainCloud to your application's cmake project.
-If this is an Android project, do those steps inside your `YourAppDir/app/` directory where the `CMakeLists.txt` resides.
+If this is an Android project, do those steps inside your `YourAppDir/app/src/main/cpp/` directory where the `CMakeLists.txt` resides.
 
 1. Clone the repository to your submodules, in `./thirdparty/` path.
    ```bash
@@ -124,7 +124,7 @@ If this is an Android project, do those steps inside your `YourAppDir/app/` dire
 3. Add the following to your `CMakeLists.txt`:
    ```cmake
    add_subdirectory(./thirdparty/braincloud-cpp)
-   target_link_libraries(${PROJECT_NAME} brainCloud)
+   target_link_libraries(${PROJECT_NAME} brainCloud) # Note the capital 'C'
    ```
 4. **For Android apps only**, don't forget to add `INTERNET` permission to your `AndroidManifest.xml` or else brainCloud won't work.
    ```xml

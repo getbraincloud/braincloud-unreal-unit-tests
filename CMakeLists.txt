@@ -394,10 +394,10 @@ elseif (ANDROID)
         HINTS "${BC_DIR}/lib/android/libs/${ANDROID_ABI}")
     find_package(ZLIB REQUIRED)
 
-    list(APPEND libs PUBLIC
-        ${BC_CURL_LIB}
-        ${BC_SSL_LIB}
-        ${BC_CRYPTO_LIB}
+    list(APPEND libs PUBLIC 
+        ${BC_CURL_LIB} 
+        ${BC_SSL_LIB} 
+        ${BC_CRYPTO_LIB} 
         ${ZLIB_LIBRARIES})
 elseif (WIN32)
     if (${USE_CPPREST})
