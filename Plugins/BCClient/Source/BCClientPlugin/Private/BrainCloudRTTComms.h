@@ -1,17 +1,20 @@
 // Copyright 2018 bitHeads, Inc. All Rights Reserved.
 
-#pragma once
-
-#include "ServiceName.h"
 #include "IServerCallback.h"
+
+#pragma once
 
 #if PLATFORM_UWP
 #elif PLATFORM_HTML5
 #else
-#include "libwebsockets.h"
+class libwebsockets;
 struct lws_context;
 #endif
 
+enum class eBCRTTConnectionType : uint8;
+class IRTTCallback;
+class ServiceOperation;
+class ServiceName;
 class INetworkErrorCallback;
 class ServerCall;
 class BCFileUploader;

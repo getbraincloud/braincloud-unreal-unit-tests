@@ -7,6 +7,8 @@
 #include "Serialization/JsonReader.h"
 #include "Serialization/JsonSerializer.h"
 
+#include "JsonUtil.h"
+#include "BCBlueprintRTTCallProxyBase.h"
 #include "IServerCallback.h"
 #include "ServerCall.h"
 #include "ServiceName.h"
@@ -313,7 +315,7 @@ bool BrainCloudRTTComms::send(const FString &in_message)
 {
 	bool bMessageSent = false;
 	// early return
-	if ((m_connectedSocket == nullptr))
+	if (m_connectedSocket == nullptr)
 	{
 		return bMessageSent;
 	}
