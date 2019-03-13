@@ -10,7 +10,7 @@
 class libwebsockets;
 struct lws_context;
 struct lws;
-enum class lws_callback_reasons : int;
+enum lws_callback_reasons : int;
 #endif
 
 enum class eBCRTTConnectionType : uint8;
