@@ -158,15 +158,43 @@ public class BCClientPlugin : ModuleRules
         }
         else if(Target.Platform == UnrealTargetPlatform.Android)
         {
-            PublicIncludePaths.Add(Path.Combine(ModulePath,"ThirdParty/include/Android"));
+            //TODO : find a way to get the engine path with UnrealBuildTool - note, have tried Fpaths and BuildConfiguration.RelativeEnginePath() and 
+                //DirectoryReference.GetCurrentDirectory(). We want to use the UE4 shipped socket lib, otherwise the static ones we save may get old. 
+                //libWebSockets for Android are located in the Engine here "/Source/ThirdParty/libWebSockets/libwebsockets/lib/Android"
+            //string pathToAndroidLibWebSockets = BuildConfiguration.RelativeEnginePath() + "/Source/ThirdParty/libWebSockets/libwebsockets/lib/Android"; 
+            PublicIncludePaths.Add(Path.Combine(ModulePath, "ThirdParty/include/Android/"));
 
             PublicLibraryPaths.AddRange(
                 new string[] {
+                    //armeabi-v7a
                     Path.Combine(ModulePath, "ThirdParty/lib/Android/armeabi-v7a"),
+                    //Path.Combine(ModulePath, "ThirdParty/lib/Android/ARMv7"),
+                    //Path.Combine(ModulePath, pathToAndroidLibWebSockets + "/ARMv7/Release/libwebsockets.a"),
+                    //arm64
+                    //Path.Combine(ModulePath, "ThirdParty/lib/Android/ARM64"),
+                    //Path.Combine(ModulePath, pathToAndroidLibWebSockets + "/ARM64/Release/libwebsockets.a"),
+                    //x64
+                    //Path.Combine(ModulePath, "ThirdParty/lib/Android/x64"),
+                    //Path.Combine(ModulePath, pathToAndroidLibWebSockets + "/x64/Release/libwebsockets.a"),
+                    //x86
+                    //Path.Combine(ModulePath, "ThirdParty/lib/Android/x86"),
+                    //Path.Combine(ModulePath, pathToAndroidLibWebSockets + "/x86/Release/libwebsockets.a"),
                 });
 
             string[] StaticLibrariesAndroid = new string[] {
-                 Path.Combine(ModulePath,"ThirdParty/lib/Android/armeabi-v7a/libwebsockets.a"),
+                    //arm7
+                    Path.Combine(ModulePath,"ThirdParty/lib/Android/armeabi-v7a/libwebsockets.a"),
+                    //Path.Combine(ModulePath,"ThirdParty/lib/Android/ARMv7/libwebsockets.a"),
+                    //Path.Combine(ModulePath, pathToAndroidLibWebSockets + "/ARMv7/Release/libwebsockets.a"),
+                    //arm64
+                    //Path.Combine(ModulePath,"ThirdParty/lib/Android/ARM64/libwebsockets.a"),
+                    //Path.Combine(ModulePath, pathToAndroidLibWebSockets + "/ARM64/Release/libwebsockets.a"),
+                    //x64
+                    //Path.Combine(ModulePath,"ThirdParty/lib/Android/x64/libwebsockets.a"),
+                    //Path.Combine(ModulePath, pathToAndroidLibWebSockets + "/x64/Release/libwebsockets.a"),
+                    //x86
+                    //Path.Combine(ModulePath,"ThirdParty/lib/Android/x86/libwebsockets.a"),
+                    //Path.Combine(ModulePath, pathToAndroidLibWebSockets + "/x86/Release/libwebsockets.a"),
             };
 
             foreach (string Lib in StaticLibrariesAndroid)
