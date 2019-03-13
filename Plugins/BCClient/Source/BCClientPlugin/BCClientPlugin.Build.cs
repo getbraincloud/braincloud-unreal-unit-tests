@@ -167,8 +167,8 @@ public class BCClientPlugin : ModuleRules
             PublicLibraryPaths.AddRange(
                 new string[] {
                     //armeabi-v7a
-                    Path.Combine(ModulePath, "ThirdParty/lib/Android/armeabi-v7a"),
-                    //Path.Combine(ModulePath, "ThirdParty/lib/Android/ARMv7"),
+                    //Path.Combine(ModulePath, "ThirdParty/lib/Android/armeabi-v7a"),
+                    Path.Combine(ModulePath, "ThirdParty/lib/Android/ARMv7"),
                     //Path.Combine(ModulePath, pathToAndroidLibWebSockets + "/ARMv7/Release/libwebsockets.a"),
                     //arm64
                     //Path.Combine(ModulePath, "ThirdParty/lib/Android/ARM64"),
@@ -183,8 +183,8 @@ public class BCClientPlugin : ModuleRules
 
             string[] StaticLibrariesAndroid = new string[] {
                     //arm7
-                    Path.Combine(ModulePath,"ThirdParty/lib/Android/armeabi-v7a/libwebsockets.a"),
-                    //Path.Combine(ModulePath,"ThirdParty/lib/Android/ARMv7/libwebsockets.a"),
+                    //Path.Combine(ModulePath,"ThirdParty/lib/Android/armeabi-v7a/libwebsockets.a"),
+                    Path.Combine(ModulePath,"ThirdParty/lib/Android/ARMv7/libwebsockets.a"),
                     //Path.Combine(ModulePath, pathToAndroidLibWebSockets + "/ARMv7/Release/libwebsockets.a"),
                     //arm64
                     //Path.Combine(ModulePath,"ThirdParty/lib/Android/ARM64/libwebsockets.a"),

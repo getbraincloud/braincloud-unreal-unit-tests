@@ -7,6 +7,7 @@
 #include "Serialization/JsonReader.h"
 #include "Serialization/JsonSerializer.h"
 
+#include "libWebSockets.h"
 #include "JsonUtil.h"
 #include "BCBlueprintRTTCallProxyBase.h"
 #include "IServerCallback.h"
