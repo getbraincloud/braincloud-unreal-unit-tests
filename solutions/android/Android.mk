@@ -77,7 +77,7 @@ local_src_files := \
 local_c_includes := \
 	$(wildcard $(LOCAL_PATH)/../../include) \
 	$(wildcard $(LOCAL_PATH)/../../lib/jsoncpp-1.0.0) \
-	$(wildcard $(LOCAL_PATH)/../../lib/android/cocos-curl/include) 
+	$(wildcard $(LOCAL_PATH)/../../lib/android/include) 
 
 	#$(wildcard $(LOCAL_PATH)/../../lib/android/curl-7.40.0/include) 
 
