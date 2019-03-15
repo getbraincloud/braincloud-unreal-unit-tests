@@ -167,17 +167,15 @@ public class BCClientPlugin : ModuleRules
 
             //we have several types of targets. Need to separate those targets when building so that the right target builds with the right libWebSockets lib
 
-            //////////////////////////////////////////////////////////////////////////////
-
             //so we want to build ARM_7 and ARM64 separately by default
             string folderDir = "ThirdParty/lib/Android/ARMv7"; //Default to ARMv7
             string staticLibLoc = "ThirdParty/lib/Android/ARMv7/libwebsockets.a"; //ARMv7 Location
             
-            //if(Target.Architecture == "ARM64")
-            //{
-            //    folderDir = "ThirdParty/lib/Android/ARM64";
-            //    staticLibLoc = "ThirdParty/lib/Android/ARM64/libwebsockets.a"; //ARM64 location
-            //}
+            if(Target.Architecture == "ARM64")
+            {
+                folderDir = "ThirdParty/lib/Android/ARM64";
+                staticLibLoc = "ThirdParty/lib/Android/ARM64/libwebsockets.a"; //ARM64 location
+            }
 
             PublicLibraryPaths.AddRange(
                 new string[] {
@@ -192,65 +190,6 @@ public class BCClientPlugin : ModuleRules
             {
                 PublicAdditionalLibraries.Add(Lib);
             }
-
-            //////////////////////////////////////////////////////////////////////////////////////////////
-
-            //string folderDir = "ThirdParty/lib/Android/";
-            //string staticLibLoc = "ThirdParty/lib/Android/ARMv7/libwebsockets.a"; //ARMv7 Location
-
-            //ARMv7
-            // PublicLibraryPaths.AddRange(
-            //     new string[] {
-            //         Path.Combine(ModulePath, folderDir + "ARMv7"),
-            // });
-
-            // string[] StaticLibrariesAndroidARMv7 = new string[] {
-            //         Path.Combine(ModulePath, "ThirdParty/lib/Android/ARMv7/libwebsockets.a"),
-            // };
-
-            // foreach (string Lib in StaticLibrariesAndroidARMv7)
-            // {
-            //     PublicAdditionalLibraries.Add(Lib);
-            // }
-
-            // //ARM64
-            // PublicLibraryPaths.AddRange(
-            //     new string[] {
-            //         Path.Combine(ModulePath, folderDir + "ARM64"),
-            // });
-
-            // string[] StaticLibrariesAndroidARM64 = new string[] {
-            //         Path.Combine(ModulePath, "ThirdParty/lib/Android/ARM64/libwebsockets.a"),
-            // };
-
-            // foreach (string Lib in StaticLibrariesAndroidARM64)
-            // {
-            //     PublicAdditionalLibraries.Add(Lib);
-            // }
-
         }
-
-        // else if(Target.Platform == UnrealTargetPlatform.Android && Target.Architecture == "ARM64")
-        // {
-        //     PublicIncludePaths.Add(Path.Combine(ModulePath, "ThirdParty/include/Android/"));
-
-        //     //so we want to build ARM_7 and ARM64 separately by default
-        //     string folderDir = "ThirdParty/lib/Android/ARM64"; //Default to ARMv7
-        //     string staticLibLoc = "ThirdParty/lib/Android/ARM64/libwebsockets.a"; //ARMv7 Location
-
-        //     PublicLibraryPaths.AddRange(
-        //         new string[] {
-        //             Path.Combine(ModulePath, folderDir),
-        //         });
-
-        //     string[] StaticLibrariesAndroid = new string[] {
-        //             Path.Combine(ModulePath, staticLibLoc),
-        //     };
-
-        //     foreach (string Lib in StaticLibrariesAndroid)
-        //     {
-        //         PublicAdditionalLibraries.Add(Lib);
-        //     }
-        // }
     }
 }
