@@ -43,16 +43,18 @@ UBrainCloudWrapper *UBCWrapperProxy::GetBrainCloudInstance(UBrainCloudWrapper *b
 		return brainCloudWrapper;
 	}
 	// Using a default state instance of brainCloud
-	else if (DefaultBrainCloudInstance != nullptr)
-	{
-		return DefaultBrainCloudInstance;
-	}
-	// Using the brainCloud singleton (not recommended)
+	// else if (DefaultBrainCloudInstance != nullptr)
+	// {
+	// 	return DefaultBrainCloudInstance;
+	// }
+	// else
+	// {
+    // 	#pragma warning(suppress : 4996)
+    // 	return UBrainCloudWrapper::getInstance();
+    // }
 	else
 	{
-//C
-#pragma warning(suppress : 4996)
-		return UBrainCloudWrapper::getInstance();
+		return DefaultBrainCloudInstance;
 	}
 }
 

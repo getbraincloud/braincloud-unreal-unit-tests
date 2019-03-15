@@ -15,7 +15,7 @@
 #include "SmartSwitchAuthenticateCallback.h"
 #include "BrainCloudComms.h"
 
-UBrainCloudWrapper *UBrainCloudWrapper::_instance = nullptr;
+//UBrainCloudWrapper *UBrainCloudWrapper::_instance = nullptr;
 
 UBrainCloudWrapper::UBrainCloudWrapper()
 {
@@ -41,27 +41,6 @@ void UBrainCloudWrapper::BeginDestroy()
         _client = nullptr;
     else
         delete _client;
-}
-
-UBrainCloudWrapper *UBrainCloudWrapper::getInstance()
-{
-    if (BrainCloudClient::EnableSingletonMode == false)
-    {
-        if (BrainCloudClient::EnableSoftErrorMode)
-        {
-            UE_LOG(LogTemp, Warning, TEXT("%s"), *BrainCloudClient::SINGLETON_USE_ERROR_MESSAGE);
-        }
-        else
-        {
-            UE_LOG(LogTemp, Fatal, TEXT("%s"), *BrainCloudClient::SINGLETON_USE_ERROR_MESSAGE);
-        }
-    }
-
-    if (_instance == nullptr)
-    {
-        _instance = NewObject<UBrainCloudWrapper>();
-    }
-    return _instance;
 }
 
 void UBrainCloudWrapper::initialize(FString url, FString secretKey, FString appId, FString appVersion)

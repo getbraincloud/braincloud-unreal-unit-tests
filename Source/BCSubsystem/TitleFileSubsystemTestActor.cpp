@@ -21,8 +21,10 @@ void ATitleFileSubsystemTestActor::Tick(float DeltaTime)
 void ATitleFileSubsystemTestActor::BeginPlay()
 {
 	Super::BeginPlay();
-    #pragma warning(suppress: 4996)
-	BrainCloudClient::getInstance()->enableLogging(true);
+	/////////////////////////////////////////////////////
+    //#pragma warning(suppress: 4996)
+	//BrainCloudClient::getInstance()->enableLogging(true);
+	/////////////////////////////////////////////////////
 
 	_subsystem = IOnlineSubsystem::Get();
 	if (_subsystem)

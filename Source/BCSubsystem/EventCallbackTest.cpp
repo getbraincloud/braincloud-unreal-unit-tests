@@ -18,28 +18,31 @@ AEventCallbackTest::AEventCallbackTest()
 void AEventCallbackTest::BeginPlay()
 {
 	Super::BeginPlay();
-    
-	#pragma warning(suppress: 4996)
-    BrainCloudClient *bcClient = BrainCloudClient::getInstance();
+    ///////////////////////////////////
+	// #pragma warning(suppress: 4996)
+    // BrainCloudClient *bcClient = BrainCloudClient::getInstance();
 
-    bcClient->initialize(
-        "https://internal.braincloudservers.com/dispatcherv2",
-        "91c3a097-4697-4787-ba1c-ff6e737ff8b3",
-        "10299",
-        "1.0.0");
+    // bcClient->initialize(
+    //     "https://internal.braincloudservers.com/dispatcherv2",
+    //     "91c3a097-4697-4787-ba1c-ff6e737ff8b3",
+    //     "10299",
+    //     "1.0.0");
 
-    bcClient->enableLogging(true);
-    bcClient->getAuthenticationService()->authenticateUniversal("UnrealUser", "UnrealUser", true, this);	
-    bcClient->registerEventCallback(this);
-    bcClient->registerRewardCallback(this);
+    // bcClient->enableLogging(true);
+    // bcClient->getAuthenticationService()->authenticateUniversal("UnrealUser", "UnrealUser", true, this);	
+    // bcClient->registerEventCallback(this);
+    // bcClient->registerRewardCallback(this);
+    ///////////////////////////////////
 }
 
 // Called every frame
 void AEventCallbackTest::Tick( float DeltaTime )
 {
 	Super::Tick( DeltaTime );
-    #pragma warning(suppress: 4996)
-    BrainCloudClient::getInstance()->runCallbacks();
+    /////////////////////////
+    //#pragma warning(suppress: 4996)
+    //BrainCloudClient::getInstance()->runCallbacks();
+    ////////////////////////
 }
 
 void AEventCallbackTest::eventCallback(const FString& jsonData)
@@ -56,15 +59,17 @@ void AEventCallbackTest::serverCallback(ServiceName serviceName, ServiceOperatio
 {
     if (serviceName == ServiceName::AuthenticateV2)
     {
-	    #pragma warning(suppress: 4996)
-        BrainCloudClient *bcClient = BrainCloudClient::getInstance();
+        ///////////////////////
+	    // #pragma warning(suppress: 4996)
+        // BrainCloudClient *bcClient = BrainCloudClient::getInstance();
 
-        bcClient->getEventService()->sendEvent(
-            bcClient->getAuthenticationService()->getProfileId(),
-            "test",
-            "{ \"RoundsWon\" : 0 }",
-            nullptr);
-        bcClient->getPlayerStatisticsEventService()->triggerStatsEvent("test", 1, nullptr);
+        // bcClient->getEventService()->sendEvent(
+        //     bcClient->getAuthenticationService()->getProfileId(),
+        //     "test",
+        //     "{ \"RoundsWon\" : 0 }",
+        //     nullptr);
+        // bcClient->getPlayerStatisticsEventService()->triggerStatsEvent("test", 1, nullptr);
+        ////////////////////////
     }
 }
 

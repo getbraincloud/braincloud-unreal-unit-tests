@@ -18,41 +18,47 @@ AWrapperTestActor::AWrapperTestActor()
 void AWrapperTestActor::BeginPlay()
 {
 	Super::BeginPlay();
-	#pragma warning(suppress: 4996)
-	UBrainCloudWrapper* wrapper = UBrainCloudWrapper::getInstance();
-	wrapper->initialize(
-		"https://internal.braincloudservers.com/dispatcherv2",
-		"91c3a097-4697-4787-ba1c-ff6e737ff8b3",
-		"10299",
-		"1.0.0");
+	//////////////////////////////
+	// #pragma warning(suppress: 4996)
+	// UBrainCloudWrapper* wrapper = UBrainCloudWrapper::getInstance();
+	// wrapper->initialize(
+	// 	"https://internal.braincloudservers.com/dispatcherv2",
+	// 	"91c3a097-4697-4787-ba1c-ff6e737ff8b3",
+	// 	"10299",
+	// 	"1.0.0");
 
-	wrapper->authenticateAnonymous(this);
+	// wrapper->authenticateAnonymous(this);
 
-	FString id =wrapper->getStoredAnonymousId();
-	UE_LOG(LogTemp, Display, TEXT("Saved Anon ID | %s"), *id);
-	id = wrapper->getStoredProfileId();
-	UE_LOG(LogTemp, Display, TEXT("Saved Profile ID | %s"), *id);
+	// FString id =wrapper->getStoredAnonymousId();
+	// UE_LOG(LogTemp, Display, TEXT("Saved Anon ID | %s"), *id);
+	// id = wrapper->getStoredProfileId();
+	// UE_LOG(LogTemp, Display, TEXT("Saved Profile ID | %s"), *id);
+	////////////////////////////////
 }
 
 // Called every frame
 void AWrapperTestActor::Tick( float DeltaTime )
 {
 	Super::Tick( DeltaTime );
-	#pragma warning(suppress: 4996)
-	UBrainCloudWrapper::getInstance()->runCallbacks();
+	//////////////////////////
+	//#pragma warning(suppress: 4996)
+	//UBrainCloudWrapper::getInstance()->runCallbacks();
+	/////////////////////////
 }
 
 void AWrapperTestActor::serverCallback(ServiceName serviceName, ServiceOperation serviceOperation, const FString& jsonData)
 {
 	if (serviceName == ServiceName::AuthenticateV2) //authenticate return handling
 	{
-		#pragma warning(suppress: 4996)
-		UBrainCloudWrapper* wrapper = UBrainCloudWrapper::getInstance();
+		////////////////////
+		// #pragma warning(suppress: 4996)
+		// UBrainCloudWrapper* wrapper = UBrainCloudWrapper::getInstance();
 
-		FString id = wrapper->getStoredAnonymousId();
-		UE_LOG(LogTemp, Display, TEXT("Authenticated! Anon ID | %s"), *id);
-		id = wrapper->getStoredProfileId();
-		UE_LOG(LogTemp, Display, TEXT("Authenticated! Profile ID | %s"), *id);
+		// FString id = wrapper->getStoredAnonymousId();
+		// UE_LOG(LogTemp, Display, TEXT("Authenticated! Anon ID | %s"), *id);
+		// id = wrapper->getStoredProfileId();
+		// UE_LOG(LogTemp, Display, TEXT("Authenticated! Profile ID | %s"), *id);
+		////////////////////
 	}
 }
 
