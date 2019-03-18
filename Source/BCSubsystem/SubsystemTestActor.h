@@ -16,7 +16,7 @@ class BCSUBSYSTEM_API ASubsystemTestActor : public AActor
 {
     GENERATED_BODY()
 
-public:
+  public:
     // Sets default values for this actor's properties
     ASubsystemTestActor();
 
@@ -26,18 +26,18 @@ public:
     // Called every frame
     virtual void Tick(float DeltaSeconds) override;
 
-    void LoginCallback(int32 LocalUserNum, bool bWasSuccessful, const FUniqueNetId& UserId, const FString& Error);
+    void LoginCallback(int32 LocalUserNum, bool bWasSuccessful, const FUniqueNetId &UserId, const FString &Error);
     void LeaderboardCallback(bool bWasSuccessful);
-    void AchievementReadCallback(const FUniqueNetId& UserId, bool success);
+    void AchievementReadCallback(const FUniqueNetId &UserId, bool success);
 
     FOnQueryAchievementsCompleteDelegate delegates;
 
     void Test1();
     void Test2();
-    
-    TSharedPtr <const FUniqueNetId> _id;
 
-    IOnlineSubsystem* _subsystem;
+    TSharedPtr<const FUniqueNetId> _id;
+
+    IOnlineSubsystem *_subsystem;
     IOnlineIdentityPtr _identity;
     IOnlineLeaderboardsPtr _leaderboard;
     IOnlineAchievementsPtr _achievements;

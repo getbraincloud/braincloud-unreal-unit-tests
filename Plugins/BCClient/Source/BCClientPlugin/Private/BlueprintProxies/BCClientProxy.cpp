@@ -11,16 +11,6 @@ UBCClientProxy::UBCClientProxy(const FObjectInitializer &ObjectInitializer)
 {
 }
 
-void UBCClientProxy::SoftErrorHandlingMode(const bool isEnabled)
-{
-	BrainCloudClient::EnableSoftErrorMode = isEnabled;
-}
-
-void UBCClientProxy::SingletonMode(const bool isEnabled)
-{
-	BrainCloudClient::EnableSingletonMode = isEnabled;
-}
-
 void UBCClientProxy::Initialize(
 	UBrainCloudWrapper *brainCloudWrapper,
 	const FString &serverUrl,
