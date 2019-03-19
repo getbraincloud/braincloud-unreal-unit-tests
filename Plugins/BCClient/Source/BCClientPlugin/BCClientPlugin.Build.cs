@@ -1,5 +1,13 @@
 // Copyright 2018 bitHeads, Inc. All Rights Reserved.
 
+//Uncomment the android architecture you are building for.
+//#define ANDROID_ARM64
+#define ANDROID_ARMv7
+//#define ANDROID_x86
+//#define ANDROID_x86_64
+
+using System.Collections.Generic;
+using System;
 using System.IO;
 using UnrealBuildTool;
 
@@ -17,7 +25,7 @@ public class BCClientPlugin : ModuleRules
 #endif
     {
         PrivatePCHHeaderFile = "Private/BCClientPluginPrivatePCH.h";
-        
+
         PrivateIncludePaths.AddRange(
             new string[] {
                     Path.Combine(ModulePath,"Private"),
@@ -46,7 +54,7 @@ public class BCClientPlugin : ModuleRules
         {
             PrivateDependencyModuleNames.Add("zlib");
             PrivateDependencyModuleNames.Add("OpenSSL");
-            PublicIncludePaths.Add(Path.Combine(ModulePath,"ThirdParty/include/Win64"));
+            PublicIncludePaths.Add(Path.Combine(ModulePath, "ThirdParty/include/Win64"));
 
             PublicLibraryPaths.AddRange(
                 new string[] {
@@ -67,7 +75,7 @@ public class BCClientPlugin : ModuleRules
         {
             PrivateDependencyModuleNames.Add("zlib");
             PrivateDependencyModuleNames.Add("OpenSSL");
-            PublicIncludePaths.Add(Path.Combine(ModulePath,"ThirdParty/include/Win32"));
+            PublicIncludePaths.Add(Path.Combine(ModulePath, "ThirdParty/include/Win32"));
 
             PublicLibraryPaths.AddRange(
                 new string[] {
@@ -83,7 +91,7 @@ public class BCClientPlugin : ModuleRules
                 PublicAdditionalLibraries.Add(Lib);
             }
         }
-        else if(Target.Platform == UnrealTargetPlatform.HTML5)
+        else if (Target.Platform == UnrealTargetPlatform.HTML5)
         {
             PublicLibraryPaths.AddRange(
                 new string[] {
@@ -99,9 +107,9 @@ public class BCClientPlugin : ModuleRules
                 PublicAdditionalLibraries.Add(Lib);
             }
         }
-        else if(Target.Platform == UnrealTargetPlatform.Mac)
+        else if (Target.Platform == UnrealTargetPlatform.Mac)
         {
-            PublicIncludePaths.Add(Path.Combine(ModulePath,"ThirdParty/include/Mac"));
+            PublicIncludePaths.Add(Path.Combine(ModulePath, "ThirdParty/include/Mac"));
             PublicLibraryPaths.AddRange(
                 new string[] {
                     Path.Combine(ModulePath, "ThirdParty/lib/Mac"),
@@ -121,24 +129,24 @@ public class BCClientPlugin : ModuleRules
         else if (Target.Platform == UnrealTargetPlatform.Linux)
         {
             PrivateDependencyModuleNames.Add("OpenSSL");
-            PublicIncludePaths.Add(Path.Combine(ModulePath,"ThirdParty/include/Linux"));
+            PublicIncludePaths.Add(Path.Combine(ModulePath, "ThirdParty/include/Linux"));
             PublicLibraryPaths.AddRange(
                 new string[] {
                     Path.Combine(ModulePath, "ThirdParty/lib/Linux"),
                 });
 
-             string[] StaticLibrariesLinux = new string[] {
+            string[] StaticLibrariesLinux = new string[] {
                  Path.Combine(ModulePath,"ThirdParty/lib/Linux/libwebsockets.a"),
             };
-            
+
             foreach (string Lib in StaticLibrariesLinux)
             {
                 PublicAdditionalLibraries.Add(Lib);
             }
         }
-        else if(Target.Platform == UnrealTargetPlatform.IOS)
+        else if (Target.Platform == UnrealTargetPlatform.IOS)
         {
-            PublicIncludePaths.Add(Path.Combine(ModulePath,"ThirdParty/include/IOS"));
+            PublicIncludePaths.Add(Path.Combine(ModulePath, "ThirdParty/include/IOS"));
 
             PublicLibraryPaths.AddRange(
                 new string[] {
@@ -156,18 +164,57 @@ public class BCClientPlugin : ModuleRules
                 PublicAdditionalLibraries.Add(Lib);
             }
         }
-        else if(Target.Platform == UnrealTargetPlatform.Android)
+        else if (Target.Platform == UnrealTargetPlatform.Android)
         {
-            PublicIncludePaths.Add(Path.Combine(ModulePath,"ThirdParty/include/Android"));
+            PublicIncludePaths.Add(Path.Combine(ModulePath, "ThirdParty/include/Android/"));
 
-            PublicLibraryPaths.AddRange(
-                new string[] {
-                    Path.Combine(ModulePath, "ThirdParty/lib/Android/armeabi-v7a"),
-                });
+            string folderDir = "ThirdParty/lib/Android/";
+            string libDir = "ThirdParty/lib/Android/";
+            string libName = "/libwebsockets.a";
+            string buildScript = "BCClientPlugin.Build.cs";
 
-            string[] StaticLibrariesAndroid = new string[] {
-                 Path.Combine(ModulePath,"ThirdParty/lib/Android/armeabi-v7a/libwebsockets.a"),
-            };
+            List<string> StaticLibrariesAndroid = new List<string>();
+            // multiple supported arch types
+#if ANDROID_ARM64
+            System.Console.WriteLine(Path.Combine(ModulePath, buildScript) + " building for ARM64");
+            PublicLibraryPaths.Add(Path.Combine(ModulePath, folderDir + "ARM64"));
+            StaticLibrariesAndroid.Add(Path.Combine(ModulePath, libDir + "ARM64" + libName));
+#endif
+
+#if ANDROID_ARMv7
+            System.Console.WriteLine(Path.Combine(ModulePath, buildScript) + " building for ARMv7");
+            PublicLibraryPaths.Add(Path.Combine(ModulePath, folderDir + "ARMv7"));
+            StaticLibrariesAndroid.Add(Path.Combine(ModulePath, libDir + "ARMv7" + libName));
+#endif
+
+#if ANDROID_x86
+            System.Console.WriteLine(Path.Combine(ModulePath, buildScript) + " building for x86");
+            PublicLibraryPaths.Add(Path.Combine(ModulePath, folderDir + "x86"));
+            StaticLibrariesAndroid.Add(Path.Combine(ModulePath, libDir + "x86" + libName));
+#endif
+
+#if ANDROID_x86_64
+            System.Console.WriteLine(Path.Combine(ModulePath, buildScript) + " building for x86_64");
+            PublicLibraryPaths.Add(Path.Combine(ModulePath, folderDir + "x64"));
+            StaticLibrariesAndroid.Add(Path.Combine(ModulePath, libDir + "x64" + libName));
+#endif
+
+            //if StaticLibraries has nothing in it, none of their libraries matched up, so we'll use the default ARM64 libWebSockets, 
+            //and send them a message telling them that they are using an unsupported library. 
+            if (StaticLibrariesAndroid.Count == 0)
+            {
+                System.Console.WriteLine("UNSUPPORTED ARCHITECTURE - Go to " + Path.Combine(ModulePath, buildScript) + " and uncomment #define for the architecture you are trying to build apk for.");
+                System.Console.WriteLine(Path.Combine(ModulePath, buildScript) + " building for default ARMv7");
+                //unreal default ARMv7 paths.
+                PublicLibraryPaths.Add(Path.Combine(ModulePath, folderDir + "ARMv7"));
+                StaticLibrariesAndroid.Add(Path.Combine(ModulePath, libDir + "ARMv7" + libName));
+            }
+
+            if (StaticLibrariesAndroid.Count > 1)
+            {
+                System.Console.WriteLine("Can only build an apk for one architecture at a time, if you need multiple apks, build the architectures separately.");
+                System.Console.WriteLine("Go to " + Path.Combine(ModulePath, buildScript) + " and uncomment #define for the architecture you are trying to build apk for. Then make sure that in your editor or Engine.ini, that only one architecture is set to true");
+            }
 
             foreach (string Lib in StaticLibrariesAndroid)
             {

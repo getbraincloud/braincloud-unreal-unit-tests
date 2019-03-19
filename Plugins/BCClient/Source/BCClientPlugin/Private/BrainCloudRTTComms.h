@@ -2,16 +2,21 @@
 
 #pragma once
 
-#include "ServiceName.h"
 #include "IServerCallback.h"
 
 #if PLATFORM_UWP
 #elif PLATFORM_HTML5
 #else
-#include "libwebsockets.h"
+class libwebsockets;
 struct lws_context;
+struct lws;
+enum lws_callback_reasons : int;
 #endif
 
+enum class eBCRTTConnectionType : uint8;
+class IRTTCallback;
+class ServiceOperation;
+class ServiceName;
 class INetworkErrorCallback;
 class ServerCall;
 class BCFileUploader;
