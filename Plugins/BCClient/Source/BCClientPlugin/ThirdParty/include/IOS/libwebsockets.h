@@ -883,7 +883,7 @@ struct lws_ssl_info {
  * add it at where specified so existing users are unaffected.
  */
 /** enum lws_callback_reasons - reason you're getting a protocol callback */
-enum lws_callback_reasons {
+enum lws_callback_reasons : int {
 	LWS_CALLBACK_ESTABLISHED				=  0,
 	/**< (VH) after the server completes a handshake with an incoming
 	 * client.  If you built the library with ssl support, in is a
