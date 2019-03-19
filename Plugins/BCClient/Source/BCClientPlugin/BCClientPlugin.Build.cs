@@ -166,10 +166,6 @@ public class BCClientPlugin : ModuleRules
         }
         else if (Target.Platform == UnrealTargetPlatform.Android)
         {
-            //TODO : find a way to get the engine path with UnrealBuildTool - note, have tried Fpaths and BuildConfiguration.RelativeEnginePath() and 
-            //DirectoryReference.GetCurrentDirectory(). We want to use the UE4 shipped socket lib, otherwise the static ones we save may get old. 
-            //libWebSockets for Android are located in the Engine here "/Source/ThirdParty/libWebSockets/libwebsockets/lib/Android"
-            //string pathToAndroidLibWebSockets = BuildConfiguration.RelativeEnginePath() + "/Source/ThirdParty/libWebSockets/libwebsockets/lib/Android"; 
             PublicIncludePaths.Add(Path.Combine(ModulePath, "ThirdParty/include/Android/"));
 
             string folderDir = "ThirdParty/lib/Android/";
@@ -198,7 +194,7 @@ public class BCClientPlugin : ModuleRules
 #endif
 
 #if ANDROID_x86_64
-            System.Console.WriteLine(Path.Combine(ModulePath, buildScript) + "building for x86_64");
+            System.Console.WriteLine(Path.Combine(ModulePath, buildScript) + " building for x86_64");
             PublicLibraryPaths.Add(Path.Combine(ModulePath, folderDir + "x64"));
             StaticLibrariesAndroid.Add(Path.Combine(ModulePath, libDir + "x64" + libName));
 #endif
@@ -207,7 +203,7 @@ public class BCClientPlugin : ModuleRules
             //and send them a message telling them that they are using an unsupported library. 
             if (StaticLibrariesAndroid.Count == 0)
             {
-                System.Console.WriteLine("UNSUPPORTED ARCHITECTURE - Go to" + Path.Combine(ModulePath, buildScript) + " and uncomment #define for the architecture you are trying to build apk for.");
+                System.Console.WriteLine("UNSUPPORTED ARCHITECTURE - Go to " + Path.Combine(ModulePath, buildScript) + " and uncomment #define for the architecture you are trying to build apk for.");
                 System.Console.WriteLine(Path.Combine(ModulePath, buildScript) + " building for default ARMv7");
                 //unreal default ARMv7 paths.
                 PublicLibraryPaths.Add(Path.Combine(ModulePath, folderDir + "ARMv7"));
@@ -217,7 +213,7 @@ public class BCClientPlugin : ModuleRules
             if (StaticLibrariesAndroid.Count > 1)
             {
                 System.Console.WriteLine("Can only build an apk for one architecture at a time, if you need multiple apks, build the architectures separately.");
-                System.Console.WriteLine("Go to" + Path.Combine(ModulePath, buildScript) + " and uncomment #define for the architecture you are trying to build apk for. Then make sure that in your editor or Engine.ini, that only one architecture is set to true");
+                System.Console.WriteLine("Go to " + Path.Combine(ModulePath, buildScript) + " and uncomment #define for the architecture you are trying to build apk for. Then make sure that in your editor or Engine.ini, that only one architecture is set to true");
             }
 
             foreach (string Lib in StaticLibrariesAndroid)

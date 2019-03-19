@@ -1,8 +1,8 @@
 // Copyright 2018 bitHeads, Inc. All Rights Reserved.
 
-#include "IServerCallback.h"
-
 #pragma once
+
+#include "IServerCallback.h"
 
 #if PLATFORM_UWP
 #elif PLATFORM_HTML5
