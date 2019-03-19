@@ -180,25 +180,25 @@ public class BCClientPlugin : ModuleRules
             List<string> StaticLibrariesAndroid = new List<string>();
             // multiple supported arch types
 #if ANDROID_ARM64
-            System.Console.WriteLine("Attempting to build APK for ARM64");
+            System.Console.WriteLine(Path.Combine(ModulePath, buildScript) + " building for ARM64");
             PublicLibraryPaths.Add(Path.Combine(ModulePath, folderDir + "ARM64"));
             StaticLibrariesAndroid.Add(Path.Combine(ModulePath, libDir + "ARM64" + libName));
 #endif
 
 #if ANDROID_ARMv7
-            System.Console.WriteLine("Attempting to build APK for ARMv7");
+            System.Console.WriteLine(Path.Combine(ModulePath, buildScript) + " building for ARMv7");
             PublicLibraryPaths.Add(Path.Combine(ModulePath, folderDir + "ARMv7"));
             StaticLibrariesAndroid.Add(Path.Combine(ModulePath, libDir + "ARMv7" + libName));
 #endif
 
 #if ANDROID_x86
-            System.Console.WriteLine("Attempting to build APK for x86");
+            System.Console.WriteLine(Path.Combine(ModulePath, buildScript) + " building for x86");
             PublicLibraryPaths.Add(Path.Combine(ModulePath, folderDir + "x86"));
             StaticLibrariesAndroid.Add(Path.Combine(ModulePath, libDir + "x86" + libName));
 #endif
 
 #if ANDROID_x86_64
-            System.Console.WriteLine("Attempting to build APK for x86_64");
+            System.Console.WriteLine(Path.Combine(ModulePath, buildScript) + "building for x86_64");
             PublicLibraryPaths.Add(Path.Combine(ModulePath, folderDir + "x64"));
             StaticLibrariesAndroid.Add(Path.Combine(ModulePath, libDir + "x64" + libName));
 #endif
@@ -208,7 +208,7 @@ public class BCClientPlugin : ModuleRules
             if (StaticLibrariesAndroid.Count == 0)
             {
                 System.Console.WriteLine("UNSUPPORTED ARCHITECTURE - Go to" + Path.Combine(ModulePath, buildScript) + " and uncomment #define for the architecture you are trying to build apk for.");
-                System.Console.WriteLine("Attempting to build default architecture ARMv7...");
+                System.Console.WriteLine(Path.Combine(ModulePath, buildScript) + " building for default ARMv7");
                 //unreal default ARMv7 paths.
                 PublicLibraryPaths.Add(Path.Combine(ModulePath, folderDir + "ARMv7"));
                 StaticLibrariesAndroid.Add(Path.Combine(ModulePath, libDir + "ARMv7" + libName));
@@ -216,7 +216,7 @@ public class BCClientPlugin : ModuleRules
 
             if (StaticLibrariesAndroid.Count > 1)
             {
-                System.Console.WriteLine("BRAINCLOUD NOTICE - can only build an apk for one architecture at a time, if you need multiple apks, build the architectures separately.");
+                System.Console.WriteLine("Can only build an apk for one architecture at a time, if you need multiple apks, build the architectures separately.");
                 System.Console.WriteLine("Go to" + Path.Combine(ModulePath, buildScript) + " and uncomment #define for the architecture you are trying to build apk for. Then make sure that in your editor or Engine.ini, that only one architecture is set to true");
             }
 
