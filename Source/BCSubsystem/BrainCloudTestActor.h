@@ -6,6 +6,8 @@
 #include "IServerCallback.h"
 #include "BrainCloudTestActor.generated.h"
 
+class UBrainCloudWrapper;
+
 UCLASS()
 class BCSUBSYSTEM_API ABrainCloudTestActor : public AActor, public IServerCallback
 {
@@ -25,4 +27,7 @@ public:
     void serverCallback(ServiceName serviceName, ServiceOperation serviceOperation, const FString& jsonData);
     void serverError(ServiceName serviceName, ServiceOperation serviceOperation, int32 statusCode, int32 reasonCode, const FString& jsonError);
     // End of IServerCallback interface
+	
+	private: 
+	UBrainCloudWrapper* m_wrapper;
 };
