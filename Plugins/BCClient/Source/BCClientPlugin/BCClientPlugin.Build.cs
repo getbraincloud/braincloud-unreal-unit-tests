@@ -1,8 +1,10 @@
 // Copyright 2018 bitHeads, Inc. All Rights Reserved.
 
 //Uncomment the android architecture you are building for.
-#define ANDROID_ARM64
-//#define ANDROID_ARMv7
+//#define ANDROID_ARM64
+#define ANDROID_ARMv7
+//#define ANDROID_x86
+//#define ANDROID_x86_64
 
 using System.Collections.Generic;
 using System;
@@ -179,8 +181,8 @@ public class BCClientPlugin : ModuleRules
             // multiple supported arch types
 #if ANDROID_ARM64
             System.Console.WriteLine("Building APK for ARM64");
-                PublicLibraryPaths.Add(Path.Combine(ModulePath, folderDir + "ARM64"));
-                StaticLibrariesAndroid.Add(Path.Combine(ModulePath, libDir + "ARM64" + libName));
+            PublicLibraryPaths.Add(Path.Combine(ModulePath, folderDir + "ARM64"));
+            StaticLibrariesAndroid.Add(Path.Combine(ModulePath, libDir + "ARM64" + libName));
 #endif
 
 #if ANDROID_ARMv7
@@ -189,22 +191,33 @@ public class BCClientPlugin : ModuleRules
             StaticLibrariesAndroid.Add(Path.Combine(ModulePath, libDir + "ARMv7" + libName));
 #endif
 
+#if ANDROID_x86
+            System.Console.WriteLine("Building APK for x86");
+            PublicLibraryPaths.Add(Path.Combine(ModulePath, folderDir + "x86"));
+            StaticLibrariesAndroid.Add(Path.Combine(ModulePath, libDir + "x86" + libName));
+#endif
+
+#if ANDROID_x86_64
+            System.Console.WriteLine("Building APK for x86_64");
+            PublicLibraryPaths.Add(Path.Combine(ModulePath, folderDir + "x64"));
+            StaticLibrariesAndroid.Add(Path.Combine(ModulePath, libDir + "x64" + libName));
+#endif
+
             //if StaticLibraries has nothing in it, none of their libraries matched up, so we'll use the default ARM64 libWebSockets, 
             //and send them a message telling them that they are using an unsupported library. 
             if (StaticLibrariesAndroid.Count == 0)
             {
-                System.Console.WriteLine("UNSUPPORTED ARCHITECTURE - Go to" + Path.Combine(ModulePath, buildScriptPath) + " and uncomment #define for appropriate architecture.");
-                System.Console.WriteLine("Attempting to build default architecture ARM64...");
-                //default ARM64 paths.
-                //PublicLibraryPaths.Add(Path.Combine(ModulePath, folderDir + "ARM64"));
-                //StaticLibrariesAndroid.Add(Path.Combine(ModulePath, libDir + "ARM64" + libName));
+                System.Console.WriteLine("UNSUPPORTED ARCHITECTURE - Go to" + Path.Combine(ModulePath, buildScriptPath) + " and uncomment #define for the architecture you are trying to build apk for.");
+                System.Console.WriteLine("Attempting to build default architecture ARMv7...");
+                //unreal default ARMv7 paths.
+                PublicLibraryPaths.Add(Path.Combine(ModulePath, folderDir + "ARMv7"));
+                StaticLibrariesAndroid.Add(Path.Combine(ModulePath, libDir + "ARMv7" + libName));
             }
 
             if (StaticLibrariesAndroid.Count > 1)
             {
                 System.Console.WriteLine("BRAINCLOUD NOTICE - can only build an apk for one architecture at a time, if you need multiple apks, build the architectures separately.");
-                System.Console.WriteLine("Go to" + Path.Combine(ModulePath, buildScriptPath) + " and uncomment #define for architecture you are trying to build apk for.");
-
+                System.Console.WriteLine("Go to" + Path.Combine(ModulePath, buildScriptPath) + " and uncomment #define for the architecture you are trying to build apk for.");
             }
 
             foreach (string Lib in StaticLibrariesAndroid)
