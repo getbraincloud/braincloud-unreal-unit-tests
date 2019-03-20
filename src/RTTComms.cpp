@@ -532,14 +532,9 @@ namespace BrainCloud
         }
         else
         {
-            if (!serviceName.empty())
-            {
-                std::map<std::string, IRTTCallback*>::iterator it = _callbacks.find(serviceName);
-                if (it != _callbacks.end())
-                {
-                    it->second->rttCallback(json);
-                }
-            }
+            _eventQueueMutex.lock();
+            _callbackEventQueue.push_back(RTTCallback(RTTCallbackType::Event, json));
+            _eventQueueMutex.unlock();
         }
     }
 };

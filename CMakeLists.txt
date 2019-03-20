@@ -134,7 +134,7 @@ else()
     list(APPEND OS_SPECIFIC_SRCS "src/DefaultBrainCloudComms.cpp")
 endif()
 
-if (USE_LIBWEBSOCKETS)
+if (USE_LIBWEBSOCKETS OR ANDROID)
     list(APPEND OS_SPECIFIC_INCS
         "include/braincloud/internal/DefaultWebSocket.h")
     list(APPEND OS_SPECIFIC_SRCS
@@ -183,12 +183,10 @@ elseif (LINUX)
 elseif (ANDROID)
     list(APPEND OS_SPECIFIC_SRCS
         "include/braincloud/internal/DefaultSaveDataHelper.h"
-        "include/braincloud/internal/android/AndroidWebSocket.h"
         "include/braincloud/internal/android/com_bitheads_braincloud_AndroidBridge.h"
         "src/DefaultSaveDataHelper.cpp"
         "src/DefaultTCPSocket.cpp"
         "src/android/AndroidDevice.cpp"
-        "src/android/AndroidWebSocket.cpp"
         "src/android/com_bitheads_braincloud_AndroidBridge.cpp"
         "src/DefaultGUID.cpp")
 else()
@@ -386,19 +384,21 @@ elseif (ANDROID)
     list(APPEND includes PUBLIC "${BC_DIR}/lib/android/include/${ANDROID_ABI}")
 
     SET(CMAKE_FIND_ROOT_PATH_MODE_LIBRARY BOTH)
-    find_library(BC_CURL_LIB NAMES curl
-        HINTS "${BC_DIR}/lib/android/libs/${ANDROID_ABI}")
-    find_library(BC_SSL_LIB NAMES ssl
-        HINTS "${BC_DIR}/lib/android/libs/${ANDROID_ABI}")
-    find_library(BC_CRYPTO_LIB NAMES crypto
-        HINTS "${BC_DIR}/lib/android/libs/${ANDROID_ABI}")
+    find_library(BC_CURL_LIB NAMES curl HINTS "${BC_DIR}/lib/android/libs/${ANDROID_ABI}")
+    find_library(BC_LWS_LIB NAMES websockets HINTS "${BC_DIR}/lib/android/libs/${ANDROID_ABI}")
+    find_library(BC_UV_LIB NAMES uv_a HINTS "${BC_DIR}/lib/android/libs/${ANDROID_ABI}")
+    find_library(BC_CRYPTO_LIB NAMES crypto HINTS "${BC_DIR}/lib/android/libs/${ANDROID_ABI}")
+    find_library(BC_SSL_LIB NAMES ssl HINTS "${BC_DIR}/lib/android/libs/${ANDROID_ABI}")
     find_package(ZLIB REQUIRED)
 
     list(APPEND libs PUBLIC 
         ${BC_CURL_LIB} 
+        ${BC_LWS_LIB} 
+        ${BC_UV_LIB} 
         ${BC_SSL_LIB} 
         ${BC_CRYPTO_LIB} 
-        ${ZLIB_LIBRARIES})
+        ${ZLIB_LIBRARIES}
+    )
 elseif (WIN32)
     if (${USE_CPPREST})
         # TODO: the cpprestsdk-static is *not* built by the CMake project.
@@ -455,15 +455,13 @@ elseif (WIN32)
 endif()
 
 if (USE_LIBWEBSOCKETS)
-    # mbedtls
+    # TLS
     option(ENABLE_TESTING "" OFF)
     option(ENABLE_PROGRAMS "" OFF)
     add_subdirectory(./lib/mbedtls/)
     list(APPEND libs PUBLIC mbedtls mbedx509 mbedcrypto)
     list(APPEND includes 
         PUBLIC ${CMAKE_CURRENT_BINARY_DIR}/lib/mbedtls/include/)
-    
-    # LibWebSockets
     option(LWS_WITH_MBEDTLS "" ON)
     set(LWS_MBEDTLS_INCLUDE_DIRS
         "${CMAKE_CURRENT_BINARY_DIR}/lib/mbedtls/include/")
@@ -476,6 +474,8 @@ if (USE_LIBWEBSOCKETS)
         set(LWS_MBEDTLS_LIBRARIES 
             "${CMAKE_CURRENT_BINARY_DIR}/lib/mbedtls/library/")
     endif()
+    
+    # LibWebSockets
     option(LWS_WITHOUT_SERVER "" ON)
     option(LWS_WITHOUT_TESTAPPS "" ON)
     option(LWS_WITHOUT_TEST_SERVER "" ON)
