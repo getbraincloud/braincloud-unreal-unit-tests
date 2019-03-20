@@ -118,7 +118,7 @@ void BrainCloudRTTComms::RunCallbacks()
 		if (m_timeSinceLastRequest >= m_heartBeatSecs)
 		{
 			m_timeSinceLastRequest = 0;
-			send(buildHeartbeatRequest());
+			send(buildHeartbeatRequest(), false);
 		}
 	}
 }
@@ -311,7 +311,7 @@ FString BrainCloudRTTComms::buildHeartbeatRequest()
 	return JsonUtil::jsonValueToString(json);
 }
 
-bool BrainCloudRTTComms::send(const FString &in_message)
+bool BrainCloudRTTComms::send(const FString &in_message, bool in_allowLogging/* = true*/)
 {
 	bool bMessageSent = false;
 	// early return
@@ -319,10 +319,9 @@ bool BrainCloudRTTComms::send(const FString &in_message)
 	{
 		return bMessageSent;
 	}
-	m_timeSinceLastRequest = 0;
 
 	bMessageSent = m_connectedSocket->SendText(in_message);
-	if (bMessageSent && m_client->isLoggingEnabled())
+	if (in_allowLogging && bMessageSent && m_client->isLoggingEnabled())
 		UE_LOG(LogBrainCloudComms, Log, TEXT("RTT SEND:  %s"), *in_message);
 
 	return bMessageSent;

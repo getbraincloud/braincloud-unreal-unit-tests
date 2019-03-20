@@ -66,7 +66,7 @@ class BrainCloudRTTComms : public IServerCallback
 
 	FString buildConnectionRequest();
 	FString buildHeartbeatRequest();
-	bool send(const FString &in_message);
+	bool send(const FString &in_message, bool in_allowLogging = true);
 
 	void startReceivingWebSocket();
 
