@@ -87,7 +87,8 @@ void BrainCloudRTTComms::enableRTT(eBCRTTConnectionType in_connectionType, IServ
 
 void BrainCloudRTTComms::disableRTT()
 {
-	processRegisteredListeners(ServiceName::RTTRegistration.getValue(), "disconnect", "{\"error\":\"DisableRTT Called\"}");
+	if (isRTTEnabled())
+		processRegisteredListeners(ServiceName::RTTRegistration.getValue(), "disconnect", "{\"error\":\"DisableRTT Called\"}");
 }
 
 bool BrainCloudRTTComms::isRTTEnabled()
