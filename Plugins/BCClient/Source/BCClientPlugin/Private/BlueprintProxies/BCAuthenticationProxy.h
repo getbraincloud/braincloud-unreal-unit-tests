@@ -172,7 +172,7 @@ class UBCAuthenticationProxy : public UBCBlueprintCallProxyBase
     * @param callback The method to be invoked when the server response is received
     */
     UFUNCTION(BlueprintCallable, meta = (BlueprintInternalUseOnly = "true"), Category = "BrainCloud|Authentication")
-    static UBCAuthenticationProxy *AuthenticateHandoff(UBrainCloudWrapper *brainCloudWrapper, FString handoffId, FString securityToken);
+    static UBCAuthenticationProxy *AuthenticateHandoff(UBrainCloudWrapper *brainCloudWrapper, FString handoffId, FString securityToken, bool forceCreate);
 
     /**
     * Authenticate the user via cloud code (which in turn validates the supplied credentials against an external system).

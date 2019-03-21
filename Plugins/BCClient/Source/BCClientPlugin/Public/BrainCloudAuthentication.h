@@ -170,7 +170,7 @@ public:
     * @param securityToken The security token entered byt the user
     * @param callback The method to be invoked when the server response is received
     */
-  void authenticateHandoff(const FString &handoffId, const FString &securityToken, IServerCallback *callback);
+  void authenticateHandoff(const FString &handoffId, const FString &securityToken, bool forceCreate, IServerCallback *callback);
 
   /**
     * Authenticate the user via cloud code (which in turn validates the supplied credentials against an external system).
