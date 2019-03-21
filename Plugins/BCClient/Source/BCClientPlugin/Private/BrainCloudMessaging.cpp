@@ -58,7 +58,7 @@ void BrainCloudMessaging::getMessagesPage(const FString &in_context, IServerCall
 void BrainCloudMessaging::getMessagesPageOffset(const FString &in_context, int32 in_pageOffset, IServerCallback *in_callback)
 {
     TSharedRef<FJsonObject> message = MakeShareable(new FJsonObject());
-    message->SetObjectField(OperationParam::MessagingContext.getValue(), JsonUtil::jsonStringToValue(in_context));
+    message->SetStringField(OperationParam::MessagingContext.getValue(), in_context);
     message->SetNumberField(OperationParam::MessagingPageOffset.getValue(), in_pageOffset);
 
     ServerCall *sc = new ServerCall(ServiceName::Messaging, ServiceOperation::GetMessagesPageOffset, message, in_callback);
