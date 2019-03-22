@@ -15,12 +15,12 @@
 
 #include "AssignableServerCallback.h"
 
-//FOnlineSubsystemBrainCloud::FOnlineSubsystemBrainCloud() 
+//FOnlineSubsystemBrainCloud::FOnlineSubsystemBrainCloud()
 //{
 //	_clientPtr = new BrainCloudClient();
 //}
 
-FOnlineSubsystemBrainCloud::~FOnlineSubsystemBrainCloud() 
+FOnlineSubsystemBrainCloud::~FOnlineSubsystemBrainCloud()
 {
 	//delete _clientPtr;
 }
@@ -146,11 +146,12 @@ IOnlineTurnBasedPtr FOnlineSubsystemBrainCloud::GetTurnBasedInterface() const
 {
 	return nullptr;
 }
-
+#if ENGINE_MINOR_VERSION >= 21
 IOnlineTournamentPtr FOnlineSubsystemBrainCloud::GetTournamentInterface() const
 {
 	return nullptr;
 }
+#endif
 
 bool FOnlineSubsystemBrainCloud::Tick(float DeltaTime)
 {
@@ -167,15 +168,13 @@ bool FOnlineSubsystemBrainCloud::Tick(float DeltaTime)
 }
 
 #if ENGINE_MINOR_VERSION >= 16
-FOnlineSubsystemBrainCloud::FOnlineSubsystemBrainCloud(FName InSubsystemName, FName InInstanceName) : 
-	FOnlineSubsystemImpl(InSubsystemName, InInstanceName)
+FOnlineSubsystemBrainCloud::FOnlineSubsystemBrainCloud(FName InSubsystemName, FName InInstanceName) : FOnlineSubsystemImpl(InSubsystemName, InInstanceName)
 {
 	_clientPtr = new BrainCloudClient();
 }
 
 #else
-FOnlineSubsystemBrainCloud::FOnlineSubsystemBrainCloud(FName InSubsystemName, FName InInstanceName) :
-		FOnlineSubsystemImpl(InInstanceName)
+FOnlineSubsystemBrainCloud::FOnlineSubsystemBrainCloud(FName InSubsystemName, FName InInstanceName) : FOnlineSubsystemImpl(InInstanceName)
 {
 	_clientPtr = new BrainCloudClient();
 }
@@ -191,7 +190,7 @@ bool FOnlineSubsystemBrainCloud::Init()
 
 	if (FPaths::FileExists(_configPath))
 	{
-		FConfigSection* Configs = GConfig->GetSectionPrivate(TEXT("BrainCloud.Client"), false, true, _configPath);
+		FConfigSection *Configs = GConfig->GetSectionPrivate(TEXT("BrainCloud.Client"), false, true, _configPath);
 		if (Configs)
 		{
 #if ENGINE_MINOR_VERSION >= 12
@@ -244,11 +243,11 @@ bool FOnlineSubsystemBrainCloud::Shutdown()
 	FOnlineSubsystemImpl::Shutdown();
 
 #define DESTRUCT_INTERFACE(Interface) \
-    if (Interface.IsValid()) \
-                        { \
-        ensure(Interface.IsUnique()); \
-        Interface = nullptr; \
-                        }
+	if (Interface.IsValid())          \
+	{                                 \
+		ensure(Interface.IsUnique()); \
+		Interface = nullptr;          \
+	}
 
 	// Destruct the interfaces
 	DESTRUCT_INTERFACE(IdentityInterface);
@@ -268,7 +267,7 @@ FString FOnlineSubsystemBrainCloud::GetAppId() const
 	return TEXT("");
 }
 
-bool FOnlineSubsystemBrainCloud::Exec(UWorld* InWorld, const TCHAR* Cmd, FOutputDevice& Ar)
+bool FOnlineSubsystemBrainCloud::Exec(UWorld *InWorld, const TCHAR *Cmd, FOutputDevice &Ar)
 {
 	return false;
 }
@@ -284,12 +283,12 @@ bool FOnlineSubsystemBrainCloud::IsEnabled() const
 	return true;
 }
 
-BrainCloudClient* FOnlineSubsystemBrainCloud::GetClient()
+BrainCloudClient *FOnlineSubsystemBrainCloud::GetClient()
 {
 	return _clientPtr;
 }
 
-TSharedPtr<FJsonObject> FOnlineSubsystemBrainCloud::GetJsonData(const FString & jsonString)
+TSharedPtr<FJsonObject> FOnlineSubsystemBrainCloud::GetJsonData(const FString &jsonString)
 {
 	TSharedRef<TJsonReader<>> reader = TJsonReaderFactory<>::Create(jsonString);
 	TSharedPtr<FJsonObject> jsonValue = MakeShareable(new FJsonObject());
@@ -298,14 +297,15 @@ TSharedPtr<FJsonObject> FOnlineSubsystemBrainCloud::GetJsonData(const FString & 
 	return data;
 }
 
-void FOnlineSubsystemBrainCloud::RegisterCallbackObject(AssignableServerCallback* callback)
+void FOnlineSubsystemBrainCloud::RegisterCallbackObject(AssignableServerCallback *callback)
 {
 	_activeCallbacks.Add(callback);
 }
 
 void FOnlineSubsystemBrainCloud::CleanupCallbackObjects()
 {
-	if (_activeCallbacks.Num() <= 0) return;
+	if (_activeCallbacks.Num() <= 0)
+		return;
 
 	for (int32 i = _activeCallbacks.Num() - 1; i >= 0; i--)
 	{

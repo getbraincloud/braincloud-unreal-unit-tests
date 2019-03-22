@@ -88,7 +88,7 @@ void BrainCloudRTTComms::enableRTT(eBCRTTConnectionType in_connectionType, IServ
 void BrainCloudRTTComms::disableRTT()
 {
 	if (isRTTEnabled())
-		processRegisteredListeners(ServiceName::RTTRegistration.getValue(), "disconnect", "{\"error\":\"DisableRTT Called\"}");
+		processRegisteredListeners(ServiceName::RTTRegistration.getValue().ToLower(), "disconnect", "{\"error\":\"DisableRTT Called\"}");
 }
 
 bool BrainCloudRTTComms::isRTTEnabled()
@@ -197,18 +197,18 @@ int BrainCloudRTTComms::callback_echo(struct lws *wsi, enum lws_callback_reasons
 void BrainCloudRTTComms::registerRTTCallback(ServiceName in_serviceName, UBCBlueprintRTTCallProxyBase *callback)
 {
 	callback->AddToRoot();
-	m_registeredRTTBluePrintCallbacks.Emplace(in_serviceName.getValue(), callback);
+	m_registeredRTTBluePrintCallbacks.Emplace(in_serviceName.getValue().ToLower(), callback);
 }
 
 // regular c++ overtyped, does nothing memory wise
 void BrainCloudRTTComms::registerRTTCallback(ServiceName in_serviceName, IRTTCallback *callback)
 {
-	m_registeredRTTCallbacks.Emplace(in_serviceName.getValue(), callback);
+	m_registeredRTTCallbacks.Emplace(in_serviceName.getValue().ToLower(), callback);
 }
 
 void BrainCloudRTTComms::deregisterRTTCallback(ServiceName in_serviceName)
 {
-	FString serviceName = in_serviceName.getValue();
+	FString serviceName = in_serviceName.getValue().ToLower();
 	if (m_registeredRTTBluePrintCallbacks.Contains(serviceName))
 	{
 		m_registeredRTTBluePrintCallbacks[serviceName]->RemoveFromRoot();
@@ -340,7 +340,7 @@ void BrainCloudRTTComms::processRegisteredListeners(const FString &in_service, c
 		m_registeredRTTCallbacks[in_service]->rttCallback(in_jsonMessage);
 	}
 	// are we actually connected? only pump this back, when the server says we've connected
-	else if (in_operation == TEXT("CONNECT"))
+	else if (in_operation == TEXT("connect"))
 	{
 		m_bIsConnected = true;
 		m_lastNowMS = FPlatformTime::Seconds();
@@ -435,7 +435,7 @@ void BrainCloudRTTComms::webSocket_OnClose()
 	if (m_client->isLoggingEnabled())
 		UE_LOG(LogBrainCloudComms, Log, TEXT("Connection closed"));
 
-	processRegisteredListeners(ServiceName::RTTRegistration.getValue(), "error", "{\"error\":\"Could not connect at this time\"}");
+	processRegisteredListeners(ServiceName::RTTRegistration.getValue().ToLower(), "error", "{\"error\":\"Could not connect at this time\"}");
 }
 
 void BrainCloudRTTComms::websocket_OnOpen()
@@ -454,7 +454,7 @@ void BrainCloudRTTComms::webSocket_OnError(const FString &in_message)
 	if (m_client->isLoggingEnabled())
 		UE_LOG(LogBrainCloudComms, Log, TEXT("Error: %s"), *in_message);
 
-	processRegisteredListeners(ServiceName::RTTRegistration.getValue(), "disconnect", "{\"error\":" + in_message + "}");
+	processRegisteredListeners(ServiceName::RTTRegistration.getValue().ToLower(), "disconnect", "{\"error\":" + in_message + "}");
 }
 
 void BrainCloudRTTComms::onRecv(const FString &in_message)
@@ -498,7 +498,7 @@ void BrainCloudRTTComms::onRecv(const FString &in_message)
 		}
 	}
 
-	processRegisteredListeners(service, operation, in_message);
+	processRegisteredListeners(service.ToLower(), operation.ToLower(), in_message);
 }
 
 void BrainCloudRTTComms::setEndpointFromType(TArray<TSharedPtr<FJsonValue>> in_endpoints, FString in_socketType)

@@ -23,15 +23,13 @@ class AssignableServerCallback;
 /**
 *   OnlineSubsystemBrainCloud - Implementation of the online subsystem for BrainCloud services
 */
-class ONLINESUBSYSTEMBRAINCLOUD_API FOnlineSubsystemBrainCloud :
-    public FOnlineSubsystemImpl
+class ONLINESUBSYSTEMBRAINCLOUD_API FOnlineSubsystemBrainCloud : public FOnlineSubsystemImpl
 {
 
-public:
-
+  public:
     FOnlineSubsystemBrainCloud();
     virtual ~FOnlineSubsystemBrainCloud();
-    
+
     // IOnlineSubsystem
 
     virtual IOnlineSessionPtr GetSessionInterface() const override;
@@ -60,15 +58,17 @@ public:
     virtual IOnlinePresencePtr GetPresenceInterface() const override;
     virtual IOnlineChatPtr GetChatInterface() const override;
     virtual IOnlineTurnBasedPtr GetTurnBasedInterface() const override;
+#if ENGINE_MINOR_VERSION >= 21
     virtual IOnlineTournamentPtr GetTournamentInterface() const override;
+#endif
 #if ENGINE_MINOR_VERSION >= 17
-	virtual FText GetOnlineServiceName() const override;
+    virtual FText GetOnlineServiceName() const override;
 #endif
 
     virtual bool Init() override;
     virtual bool Shutdown() override;
     virtual FString GetAppId() const override;
-    virtual bool Exec(class UWorld* InWorld, const TCHAR* Cmd, FOutputDevice& Ar) override;
+    virtual bool Exec(class UWorld *InWorld, const TCHAR *Cmd, FOutputDevice &Ar) override;
 
     // FTickerObjectBase
 
@@ -79,10 +79,10 @@ public:
     * Adds all objects to tracked list to ensure proper cleanup
     */
     template <typename T, typename... Args>
-    T* GetCallbackObject(Args... args)
+    T *GetCallbackObject(Args... args)
     {
-        T* cb = new T(args...);
-        AssignableServerCallback* acb = static_cast<AssignableServerCallback*>(cb);
+        T *cb = new T(args...);
+        AssignableServerCallback *acb = static_cast<AssignableServerCallback *>(cb);
         _activeCallbacks.Add(acb);
         return cb;
     }
@@ -90,12 +90,12 @@ public:
     /**
     * Adds an AssignableServerCallback object to tracked list to ensure proper cleanup
     */
-    void RegisterCallbackObject(AssignableServerCallback* callback);
+    void RegisterCallbackObject(AssignableServerCallback *callback);
 
-    BrainCloudClient* GetClient();
+    BrainCloudClient *GetClient();
     FString GetConfigPath() { return _configPath; }
 
-    static TSharedPtr<FJsonObject> GetJsonData(const FString& jsonString);
+    static TSharedPtr<FJsonObject> GetJsonData(const FString &jsonString);
 
     /**
     * Is the BrainCloud API available for use
@@ -103,17 +103,12 @@ public:
     */
     virtual bool IsEnabled() const override;
 
-PACKAGE_SCOPE:
+    PACKAGE_SCOPE :
 
-    /** Only the factory makes instances */
-#if ENGINE_MINOR_VERSION >= 16
-    FOnlineSubsystemBrainCloud(FName InSubsystemName, FName InInstanceName);
-#else
-	FOnlineSubsystemBrainCloud(FName InSubsystemName, FName InInstanceName);
-#endif
+        /** Only the factory makes instances */
+        FOnlineSubsystemBrainCloud(FName InSubsystemName, FName InInstanceName);
 
-private:
-
+  private:
     /** Interface to the leaderboard services */
     FOnlineLeaderboardsBrainCloudPtr LeaderboardsInterface = nullptr;
 
@@ -134,11 +129,10 @@ private:
 
     void CleanupCallbackObjects();
 
-    TArray<AssignableServerCallback*> _activeCallbacks = TArray<AssignableServerCallback*>();
-    
-    BrainCloudClient* _clientPtr = nullptr;
+    TArray<AssignableServerCallback *> _activeCallbacks = TArray<AssignableServerCallback *>();
+
+    BrainCloudClient *_clientPtr = nullptr;
     FString _configPath = "";
 };
 
 typedef TSharedPtr<FOnlineSubsystemBrainCloud, ESPMode::ThreadSafe> FOnlineSubsystemBrainCloudPtr;
-
