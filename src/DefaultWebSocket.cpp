@@ -169,7 +169,7 @@ namespace BrainCloud
             }
             case LWS_CALLBACK_CLIENT_CONNECTION_ERROR:
             {
-                if (!pWebSocket)
+                if (!pWebSocket || !in)
                 {
                     return -1;
                 }
@@ -187,7 +187,7 @@ namespace BrainCloud
             }
             case LWS_CALLBACK_CLIENT_RECEIVE:
             {
-                if (!pWebSocket)
+                if (!pWebSocket || !in)
                 {
                     return -1;
                 }
@@ -196,7 +196,7 @@ namespace BrainCloud
             }
             case LWS_CALLBACK_CLIENT_APPEND_HANDSHAKE_HEADER:
             {
-                if (!pWebSocket)
+                if (!pWebSocket || !in)
                 {
                     return -1;
                 }
