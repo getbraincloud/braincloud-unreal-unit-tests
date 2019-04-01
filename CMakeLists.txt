@@ -2,6 +2,10 @@ if (CMAKE_SYSTEM_NAME STREQUAL WindowsStore)
     set(UWP 1)
 endif()
 
+if (CMAKE_SYSTEM_NAME STREQUAL Android)
+    set(ANDROID 1)
+endif()
+
 if (UWP)
     # We require 3.4.0 for UWP generation
     cmake_minimum_required(VERSION 3.4.0)
@@ -16,7 +20,7 @@ set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH}
     "${CMAKE_CURRENT_SOURCE_DIR}/cmake/")
 
 # Usefull flags
-if (UNIX AND NOT APPLE)
+if (UNIX AND NOT APPLE AND NOT ANDROID)
     set(LINUX 1)
 endif()
 if (WIN32 AND MSVC AND MSVC_VERSION)
@@ -65,7 +69,7 @@ if (NOT USE_CPPREST AND NOT VS2013_OR_HIGHER AND NOT APPLE)
 endif()
 
 # lets use libwebsockets by default
-if (NOT UWP)
+if (NOT UWP AND NOT ANDROID)
     set(USE_LIBWEBSOCKETS 1)
 endif()
 
@@ -130,7 +134,7 @@ else()
     list(APPEND OS_SPECIFIC_SRCS "src/DefaultBrainCloudComms.cpp")
 endif()
 
-if (USE_LIBWEBSOCKETS)
+if (USE_LIBWEBSOCKETS OR ANDROID)
     list(APPEND OS_SPECIFIC_INCS
         "include/braincloud/internal/DefaultWebSocket.h")
     list(APPEND OS_SPECIFIC_SRCS
@@ -176,6 +180,15 @@ elseif (LINUX)
         "src/DefaultTCPSocket.cpp"
         "src/nix/LinuxDevice.cpp"
         "src/nix/LinuxGUID.cpp")
+elseif (ANDROID)
+    list(APPEND OS_SPECIFIC_SRCS
+        "include/braincloud/internal/DefaultSaveDataHelper.h"
+        "include/braincloud/internal/android/com_bitheads_braincloud_AndroidBridge.h"
+        "src/DefaultSaveDataHelper.cpp"
+        "src/DefaultTCPSocket.cpp"
+        "src/android/AndroidDevice.cpp"
+        "src/android/com_bitheads_braincloud_AndroidBridge.cpp"
+        "src/DefaultGUID.cpp")
 else()
     list(APPEND OS_SPECIFIC_SRCS
         "include/braincloud/internal/DefaultSaveDataHelper.h"
@@ -188,8 +201,8 @@ if (NOT UWP)
     list(APPEND OS_SPECIFIC_SRCS "src/md5x.c") # UWP doesn't like c files
 endif()
 
-include_directories("${BC_DIR}/include")
-include_directories("${BC_DIR}/lib/jsoncpp-1.0.0")
+list(APPEND includes PUBLIC "${BC_DIR}/include")
+list(APPEND includes PUBLIC "${BC_DIR}/lib/jsoncpp-1.0.0")
 
 add_library(brainCloud STATIC
     # public headers
@@ -367,6 +380,25 @@ elseif (LINUX)
     list(APPEND libs
         ${CURL_LIBRARIES}
         ${UUID_LIBRARIES})
+elseif (ANDROID)
+    list(APPEND includes PUBLIC "${BC_DIR}/lib/android/include/${ANDROID_ABI}")
+
+    SET(CMAKE_FIND_ROOT_PATH_MODE_LIBRARY BOTH)
+    find_library(BC_CURL_LIB NAMES curl HINTS "${BC_DIR}/lib/android/libs/${ANDROID_ABI}")
+    find_library(BC_LWS_LIB NAMES websockets HINTS "${BC_DIR}/lib/android/libs/${ANDROID_ABI}")
+    find_library(BC_UV_LIB NAMES uv_a HINTS "${BC_DIR}/lib/android/libs/${ANDROID_ABI}")
+    find_library(BC_CRYPTO_LIB NAMES crypto HINTS "${BC_DIR}/lib/android/libs/${ANDROID_ABI}")
+    find_library(BC_SSL_LIB NAMES ssl HINTS "${BC_DIR}/lib/android/libs/${ANDROID_ABI}")
+    find_package(ZLIB REQUIRED)
+
+    list(APPEND libs PUBLIC 
+        ${BC_CURL_LIB} 
+        ${BC_LWS_LIB} 
+        ${BC_UV_LIB} 
+        ${BC_SSL_LIB} 
+        ${BC_CRYPTO_LIB} 
+        ${ZLIB_LIBRARIES}
+    )
 elseif (WIN32)
     if (${USE_CPPREST})
         # TODO: the cpprestsdk-static is *not* built by the CMake project.
@@ -423,15 +455,13 @@ elseif (WIN32)
 endif()
 
 if (USE_LIBWEBSOCKETS)
-    # mbedtls
+    # TLS
     option(ENABLE_TESTING "" OFF)
     option(ENABLE_PROGRAMS "" OFF)
     add_subdirectory(./lib/mbedtls/)
     list(APPEND libs PUBLIC mbedtls mbedx509 mbedcrypto)
     list(APPEND includes 
         PUBLIC ${CMAKE_CURRENT_BINARY_DIR}/lib/mbedtls/include/)
-    
-    # LibWebSockets
     option(LWS_WITH_MBEDTLS "" ON)
     set(LWS_MBEDTLS_INCLUDE_DIRS
         "${CMAKE_CURRENT_BINARY_DIR}/lib/mbedtls/include/")
@@ -444,6 +474,8 @@ if (USE_LIBWEBSOCKETS)
         set(LWS_MBEDTLS_LIBRARIES 
             "${CMAKE_CURRENT_BINARY_DIR}/lib/mbedtls/library/")
     endif()
+    
+    # LibWebSockets
     option(LWS_WITHOUT_SERVER "" ON)
     option(LWS_WITHOUT_TESTAPPS "" ON)
     option(LWS_WITHOUT_TEST_SERVER "" ON)

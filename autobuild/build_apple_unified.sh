@@ -123,6 +123,9 @@ function build_app()
 
   cp -r ../include/braincloud brainCloud/include
 
+  #update the libwebsocket dependencies
+  git submodule update --init
+
   # copy in the thirdparty dependencies
   cp -r ../lib/jsoncpp-1.0.0 brainCloud/thirdparty
 
