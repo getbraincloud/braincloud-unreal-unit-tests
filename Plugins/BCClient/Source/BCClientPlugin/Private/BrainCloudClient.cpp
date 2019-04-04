@@ -18,14 +18,6 @@
 #include "BCPlatform.h"
 
 // Define all static member variables.
-
-bool BrainCloudClient::EnableSoftErrorMode = false;
-bool BrainCloudClient::EnableSingletonMode = false;
-
-const FString BrainCloudClient::SINGLETON_USE_ERROR_MESSAGE = TEXT("Singleton usage is disabled. If called by mistake, use your own variable that holds an instance of the bcWrapper/bcClient.");
-
-BrainCloudClient *BrainCloudClient::_instance = nullptr;
-
 FString BrainCloudClient::s_brainCloudClientVersion = TEXT("3.11.0");
 
 ////////////////////////////////////////////////////
@@ -85,37 +77,11 @@ BrainCloudClient::~BrainCloudClient()
 	destroyService(_lobbyService);
 	destroyService(_chatService);
 	destroyService(_messagingService);
-
-	_instance = nullptr;
 }
 
 ////////////////////////////////////////////////////
 // Public Methods
 ////////////////////////////////////////////////////
-
-/**
-* Retrieve the pointer to the singleton BrainCloudClient instance.
-*/
-BrainCloudClient *BrainCloudClient::getInstance()
-{
-	if (EnableSingletonMode == false)
-	{
-		if (EnableSoftErrorMode)
-		{
-			UE_LOG(LogTemp, Warning, TEXT("%s"), *SINGLETON_USE_ERROR_MESSAGE);
-		}
-		else
-		{
-			UE_LOG(LogTemp, Fatal, TEXT("%s"), *SINGLETON_USE_ERROR_MESSAGE);
-		}
-	}
-
-	if (_instance == nullptr)
-	{
-		_instance = new BrainCloudClient();
-	}
-	return _instance;
-}
 
 void BrainCloudClient::initialize(
 	const FString &serverUrl,

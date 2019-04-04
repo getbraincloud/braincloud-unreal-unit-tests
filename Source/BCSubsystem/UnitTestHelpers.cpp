@@ -32,37 +32,37 @@ FBrainCloudInitParams UUnitTestHelpers::InitializeFromFile()
 			if (line.StartsWith("serverUrl"))
 			{
 				line.Split(TEXT("="), nullptr, &params.ServerUrl);
-				params.ServerUrl.TrimEnd();
+				params.ServerUrl.TrimEndInline();
 			}
 			else if (line.StartsWith("appId"))
 			{
 				line.Split(TEXT("="), nullptr, &params.AppId);
-				params.AppId.TrimEnd();
+				params.AppId.TrimEndInline();
 			}
 			else if (line.StartsWith("secret"))
 			{
 				line.Split(TEXT("="), nullptr, &params.Secret);
-				params.Secret.TrimEnd();
+				params.Secret.TrimEndInline();
 			}
 			else if (line.StartsWith("version"))
 			{
 				line.Split(TEXT("="), nullptr, &params.Version);
-				params.Version.TrimEnd();
+				params.Version.TrimEndInline();
 			}
 			else if (line.StartsWith("childAppId"))
 			{
 				line.Split(TEXT("="), nullptr, &params.ChildAppId);
-				params.ChildAppId.TrimEnd();
+				params.ChildAppId.TrimEndInline();
 			}
 			else if (line.StartsWith("parentLevelName"))
 			{
 				line.Split(TEXT("="), nullptr, &params.ParentLevelName);
-				params.ParentLevelName.TrimEnd();
+				params.ParentLevelName.TrimEndInline();
 			}
 			else if (line.StartsWith("peerName"))
 			{
 				line.Split(TEXT("="), nullptr, &params.PeerName);
-				params.PeerName.TrimEnd();
+				params.PeerName.TrimEndInline();
 			}
 		}
 	}
