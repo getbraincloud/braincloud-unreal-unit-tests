@@ -592,7 +592,6 @@ class BCCLIENTPLUGIN_API BrainCloudClient
 
   protected:
 	void initializeComms(const char *serverUrl, const char *appId, const TMap<FString, FString> &secretMap);
-	
 	BrainCloudComms *_brainCloudComms = nullptr;
 	BrainCloudRTTComms *_brainCloudRTTComms = nullptr;
 
