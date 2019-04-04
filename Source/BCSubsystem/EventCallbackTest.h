@@ -8,12 +8,14 @@
 #include "IServerCallback.h"
 #include "EventCallbackTest.generated.h"
 
+class UBrainCloudWrapper;
+
 UCLASS()
 class BCSUBSYSTEM_API AEventCallbackTest : public AActor, public IEventCallback, public IServerCallback, public IRewardCallback
 {
     GENERATED_BODY()
 
-public:
+  public:
     // Sets default values for this actor's properties
     AEventCallbackTest();
 
@@ -24,10 +26,13 @@ public:
     virtual void Tick(float DeltaSeconds) override;
 
     // IServerCallback interface
-    void serverCallback(ServiceName serviceName, ServiceOperation serviceOperation, const FString& jsonData);
-    void serverError(ServiceName serviceName, ServiceOperation serviceOperation, int32 statusCode, int32 reasonCode, const FString& jsonError);
+    void serverCallback(ServiceName serviceName, ServiceOperation serviceOperation, const FString &jsonData);
+    void serverError(ServiceName serviceName, ServiceOperation serviceOperation, int32 statusCode, int32 reasonCode, const FString &jsonError);
     // End of IServerCallback interface
 
-    virtual void eventCallback(const FString& jsonData);
-    virtual void rewardCallback(const FString& jsonData);
+    virtual void eventCallback(const FString &jsonData);
+    virtual void rewardCallback(const FString &jsonData);
+
+  private:
+    UBrainCloudWrapper *m_wrapper;
 };

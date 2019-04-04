@@ -47,12 +47,10 @@ UBrainCloudWrapper *UBCWrapperProxy::GetBrainCloudInstance(UBrainCloudWrapper *b
 	{
 		return DefaultBrainCloudInstance;
 	}
-	// Using the brainCloud singleton (not recommended)
+	// nullptr! wrapper isn't set!
 	else
 	{
-//C
-#pragma warning(suppress : 4996)
-		return UBrainCloudWrapper::getInstance();
+		return nullptr;
 	}
 }
 

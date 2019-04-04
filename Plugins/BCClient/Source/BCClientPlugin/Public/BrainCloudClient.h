@@ -73,24 +73,9 @@ class BCCLIENTPLUGIN_API BrainCloudClient
 	/** Public constants */
 	static bool SINGLE_THREADED;
 
-	static bool EnableSoftErrorMode;
-	static bool EnableSingletonMode;
-	static const FString SINGLETON_USE_ERROR_MESSAGE;
-
 	BrainCloudClient();
 	//  void BeginDestroy() override;
 	~BrainCloudClient();
-
-	/**
-	 * BrainCloudClient is a singleton object. This method gives the caller access
-	 * to the singleton object in order to use the class.
-	 *
-	 * @return BrainCloudClient * - pointer to the singleton BrainCloudClient object
-	 *
-	 * @deprecated Use of the *singleton* has been deprecated. We recommend that you create your own *variable* to hold an instance of the UBrainCloudWrapper. Explanation here: http://getbraincloud.com/apidocs/release-3-6-5/
-	 */
-	DEPRECATED("3.6.5", "Use of the *singleton* has been deprecated. We recommend that you create your own *variable* to hold an instance of the UBrainCloudWrapper. Explanation here: http://getbraincloud.com/apidocs/release-3-6-5/")
-	static BrainCloudClient *getInstance();
 
 	/**
 	* Method initializes the BrainCloudClient.
@@ -607,8 +592,6 @@ class BCCLIENTPLUGIN_API BrainCloudClient
 
   protected:
 	void initializeComms(const char *serverUrl, const char *appId, const TMap<FString, FString> &secretMap);
-	static BrainCloudClient *_instance;
-
 	BrainCloudComms *_brainCloudComms = nullptr;
 	BrainCloudRTTComms *_brainCloudRTTComms = nullptr;
 
