@@ -346,7 +346,7 @@ public:
   UFUNCTION(BlueprintCallable, meta = (BlueprintInternalUseOnly = "true"), Category = "BrainCloud|Wrapper")
   static UBCWrapperProxy *SmartSwitchAuthenticateUniversal(UBrainCloudWrapper *brainCloudWrapper, const FString &userid, const FString &password, bool forceCreate);
 
-    /**
+  /**
     * Reset Email password - Sends a password reset email to the specified address
     *
     * Service Name - Authenticate
@@ -358,10 +358,10 @@ public:
     * Note the follow error reason codes:
     * SECURITY_ERROR (40209) - If the email address cannot be found.
     */
-    UFUNCTION(BlueprintCallable, meta = (BlueprintInternalUseOnly = "true"), Category = "BrainCloud|Wrapper")
-    static UBCWrapperProxy *ResetEmailPassword(UBrainCloudWrapper *brainCloudWrapper, const FString &email);
-    
-    /**
+  UFUNCTION(BlueprintCallable, meta = (BlueprintInternalUseOnly = "true"), Category = "BrainCloud|Wrapper")
+  static UBCWrapperProxy *ResetEmailPassword(UBrainCloudWrapper *brainCloudWrapper, const FString &email);
+
+  /**
     * Reset Email password with service parameters- Sends a password reset email to the specified address
     *
     * Service Name - Authenticate
