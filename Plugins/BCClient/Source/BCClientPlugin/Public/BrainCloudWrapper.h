@@ -64,15 +64,6 @@ class BCCLIENTPLUGIN_API UBrainCloudWrapper : public UObject, public IServerCall
     virtual void BeginDestroy() override;
 
     /**
-     * Method returns a singleton instance of the UBrainCloudWrapper.
-     * @return A singleton instance of the UBrainCloudWrapper.
-	 *
-	 * @deprecated Use of the *singleton* has been deprecated. We recommend that you create your own *variable* to hold an instance of the UBrainCloudWrapper. Explanation here: http://getbraincloud.com/apidocs/release-3-6-5/
-     */
-    DEPRECATED("3.6.5", "Use of the *singleton* has been deprecated. We recommend that you create your own *variable* to hold an instance of the UBrainCloudWrapper. Explanation here: http://getbraincloud.com/apidocs/release-3-6-5/")
-    static UBrainCloudWrapper *getInstance();
-
-    /**
      * Method initializes the BrainCloudClient.
      *
      * @param serverURL The url to the brainCloud server
@@ -476,18 +467,9 @@ class BCCLIENTPLUGIN_API UBrainCloudWrapper : public UObject, public IServerCall
     BrainCloudChat *getChatService() { return _client->getChatService(); }
     BrainCloudMessaging *getMessagingService() { return _client->getMessagingService(); }
 
-/**
-     * Returns a singleton instance of the BrainCloudClient.
-     * @return A singleton instance of the BrainCloudClient.
-     */
-#pragma warning(suppress : 4996)
-    static BrainCloudClient *getBC()
-    {
-        return getInstance()->_client;
-    }
     /**
-     * Returns a singleton instance of the BrainCloudClient.
-     * @return A singleton instance of the BrainCloudClient.
+     * Returns the instance of the BrainCloudClient.
+     * @return The instance of the BrainCloudClient.
      */
     BrainCloudClient *getBCClient() { return _client; }
 
@@ -571,7 +553,6 @@ class BCCLIENTPLUGIN_API UBrainCloudWrapper : public UObject, public IServerCall
     void loadData();
     void saveData();
 
-    static UBrainCloudWrapper *_instance;
     BrainCloudClient *_client = nullptr;
 
     FString _lastUrl;

@@ -14,26 +14,6 @@ class UBCClientProxy : public UBCBlueprintCallProxyBase
 	UBCClientProxy(const FObjectInitializer &ObjectInitializer);
 
 	/**
-	* Set Soft Error Handling Mode. Disabled by default
-	* If enabled, brainCloud will Log errors without an editor crash 
-	*
-	* Param - isEnabled The state of the soft error handling
-	*/
-	UFUNCTION(BlueprintCallable, Category = "BrainCloud|Client")
-	static void SoftErrorHandlingMode(
-		const bool isEnabled);
-
-	/**
-	* Set whether the brainCloud singleton should be able to be used
-	* Disabling it will log a Error or Fatal log based on SoftErrorHandlingMode
-	*
-	* Param - isEnabled The state of the singleton usage mode
-	*/
-	UFUNCTION(BlueprintCallable, Category = "BrainCloud|Client")
-	static void SingletonMode(
-		const bool isEnabled);
-
-	/**
 	* Method initializes the BrainCloudClient.
 	*
 	* Param - serverURL The url to the brainCloud server

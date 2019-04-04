@@ -2,7 +2,7 @@
 
 #include "BCSubsystem.h"
 #include "BrainCloudTestActor.h"
-#include "BrainCloudClient.h"
+#include "BrainCloudWrapper.h"
 #include "ServiceName.h"
 #include "ServiceOperation.h"
 
@@ -11,72 +11,37 @@ ABrainCloudTestActor::ABrainCloudTestActor()
 {
     // Set this actor to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
     PrimaryActorTick.bCanEverTick = true;
+    m_wrapper = NewObject<UBrainCloudWrapper>();
 }
 
 // Called when the game starts or when spawned
 void ABrainCloudTestActor::BeginPlay()
 {
     Super::BeginPlay();
-    #pragma warning(suppress: 4996)
-    BrainCloudClient *bcClient = BrainCloudClient::getInstance();
-
-    bcClient->initialize(
-        "https://internal.braincloudservers.com/dispatcherv2", 
-        "91c3a097-4697-4787-ba1c-ff6e737ff8b3", 
-        "10299", 
+    m_wrapper->initialize(
+        "https://internal.braincloudservers.com/dispatcherv2",
+        "91c3a097-4697-4787-ba1c-ff6e737ff8b3",
+        "10299",
         "1.0.0");
 
-    bcClient->getAuthenticationService()->authenticateUniversal("UnrealUser", "UnrealUser", true, this);
-
-    //JSON TEST
-    //FString writeJsonStr;
-    //TSharedRef<TJsonWriter<>> writer = TJsonWriterFactory<>::Create(&writeJsonStr);
-
-    //TSharedRef<FJsonObject> jsonWriteObject = MakeShareable(new FJsonObject());
-
-    //TArray<TSharedPtr<FJsonValue>> testArray;
-
-    //for (int16 i = 0; i < 5; i++)
-    //{
-    //    TSharedPtr<FJsonValue> val = MakeShareable(new FJsonValueString("test"));
-    //    testArray.Add(val);
-    //}
-
-    //jsonWriteObject->SetArrayField("testArray", testArray);
-
-    //FJsonSerializer::Serialize(jsonWriteObject, writer);
-    //UE_LOG(LogTemp, Display, TEXT("%s"), *writeJsonStr);
-
-    //FString readJsonStr = TEXT("[\"test\", \"test\", \"test\", \"test\", \"test\"]");
-    //TSharedRef<TJsonReader<>> reader = TJsonReaderFactory<>::Create(readJsonStr);
-
-
-    //TSharedPtr<FJsonValue> jsonReadObject;
-
-    //bool res = FJsonSerializer::Deserialize(reader, jsonReadObject);
-
-    //TArray<TSharedPtr<FJsonValue>> arrayDes = jsonReadObject->AsArray();
-
-    //bool a = true;
+    m_wrapper->getBCClient()->getAuthenticationService()->authenticateUniversal("UnrealUser", "UnrealUser", true, this);
 }
 
 // Called every frame
 void ABrainCloudTestActor::Tick(float DeltaTime)
 {
     Super::Tick(DeltaTime);
-    #pragma warning(suppress: 4996)
-    BrainCloudClient::getInstance()->runCallbacks();
+    m_wrapper->runCallbacks();
 }
 
-void ABrainCloudTestActor::serverCallback(ServiceName serviceName, ServiceOperation serviceOperation, const FString& jsonData)
+void ABrainCloudTestActor::serverCallback(ServiceName serviceName, ServiceOperation serviceOperation, const FString &jsonData)
 {
     if (serviceName == ServiceName::AuthenticateV2) //authenticate return handling
     {
         UE_LOG(LogTemp, Display, TEXT("Authenticated!"));
 
         //send our next request
-        #pragma warning(suppress: 4996)
-        BrainCloudClient::getInstance()->getTimeService()->readServerTime(this);
+        m_wrapper->getTimeService()->readServerTime(this);
     }
     else if (serviceName == ServiceName::Time) //time return handling
     {
@@ -99,7 +64,6 @@ void ABrainCloudTestActor::serverCallback(ServiceName serviceName, ServiceOperat
     }
 }
 
-void ABrainCloudTestActor::serverError(ServiceName serviceName, ServiceOperation serviceOperation, int32 statusCode, int32 reasonCode, const FString& jsonError)
+void ABrainCloudTestActor::serverError(ServiceName serviceName, ServiceOperation serviceOperation, int32 statusCode, int32 reasonCode, const FString &jsonError)
 {
-
 }
