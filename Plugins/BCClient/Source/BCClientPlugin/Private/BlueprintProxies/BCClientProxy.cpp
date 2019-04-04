@@ -5,6 +5,7 @@
 #include "ServerCall.h"
 #include "BrainCloudWrapper.h"
 #include "BCClientProxy.h"
+#include "BCWrapperProxy.h"
 
 UBCClientProxy::UBCClientProxy(const FObjectInitializer &ObjectInitializer)
 	: Super(ObjectInitializer)
