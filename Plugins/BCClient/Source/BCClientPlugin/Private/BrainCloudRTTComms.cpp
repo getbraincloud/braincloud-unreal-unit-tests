@@ -28,8 +28,6 @@
 #if PLATFORM_UWP
 #elif PLATFORM_HTML5
 #else
-#include "libwebsockets.h"
-
 static struct lws_protocols protocols[] = {
 	/* first protocol must always be HTTP handler */
 

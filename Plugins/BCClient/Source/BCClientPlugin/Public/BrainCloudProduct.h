@@ -7,10 +7,10 @@ class IServerCallback;
 
 class BCCLIENTPLUGIN_API BrainCloudProduct
 {
-  public:
-    BrainCloudProduct(BrainCloudClient *client);
+public:
+  BrainCloudProduct(BrainCloudClient *client);
 
-    /**
+  /**
      * Gets the player's currency for the given currency type
      * or all currency types if null passed in.
      *
@@ -22,33 +22,45 @@ class BCCLIENTPLUGIN_API BrainCloudProduct
      *
      * @param callback The method to be invoked when the server response is received
      */
-    void getCurrency(const FString &currencyType, IServerCallback *callback);
+  void getCurrency(const FString &currencyType, IServerCallback *callback);
 
-    /**
+  /**
 	* @warning Method is recommended to be used in Cloud Code only for security
 	*
 	 * If you need to use it client side, enable 'Allow Currency Calls from Client' on the brainCloud dashboard
 	*/
-    DEPRECATED("3.2.0", "Warning: Method is recommended to be used in Cloud Code only for security. If you need to use it client side, enable 'Allow Currency Calls from Client' on the brainCloud dashboard.")
-    void awardCurrency(const FString &currencyType, int32 amount, IServerCallback *callback);
+#if ENGINE_MINOR_VERSION >= 22
+  UE_DEPRECATED("3.2.0", "Warning: Method is recommended to be used in Cloud Code only for security. If you need to use it client side, enable 'Allow Currency Calls from Client' on the brainCloud dashboard.")
+#else
+  DEPRECATED("3.2.0", "Warning: Method is recommended to be used in Cloud Code only for security. If you need to use it client side, enable 'Allow Currency Calls from Client' on the brainCloud dashboard.")
+#endif
+  void awardCurrency(const FString &currencyType, int32 amount, IServerCallback *callback);
 
-    /**
+  /**
 	* @warning Method is recommended to be used in Cloud Code only for security
-	 *
+	*
 	* If you need to use it client side, enable 'Allow Currency Calls from Client' on the brainCloud dashboard
 	*/
-    DEPRECATED("3.2.0", "Warning: Method is recommended to be used in Cloud Code only for security. If you need to use it client side, enable 'Allow Currency Calls from Client' on the brainCloud dashboard.")
-    void consumeCurrency(const FString &currencyType, int32 amount, IServerCallback *callback);
+#if ENGINE_MINOR_VERSION >= 22
+  UE_DEPRECATED("3.2.0", "Warning: Method is recommended to be used in Cloud Code only for security. If you need to use it client side, enable 'Allow Currency Calls from Client' on the brainCloud dashboard.")
+#else
+  DEPRECATED("3.2.0", "Warning: Method is recommended to be used in Cloud Code only for security. If you need to use it client side, enable 'Allow Currency Calls from Client' on the brainCloud dashboard.")
+#endif
+  void consumeCurrency(const FString &currencyType, int32 amount, IServerCallback *callback);
 
-    /**
+  /**
 	* @warning Method is recommended to be used in Cloud Code only for security
-	 *
+	*
 	* If you need to use it client side, enable 'Allow Currency Calls from Client' on the brainCloud dashboard
 	*/
-    DEPRECATED("3.2.0", "Warning: Method is recommended to be used in Cloud Code only for security. If you need to use it client side, enable 'Allow Currency Calls from Client' on the brainCloud dashboard.")
-    void resetCurrency(IServerCallback *callback);
+#if ENGINE_MINOR_VERSION >= 22
+  UE_DEPRECATED("3.2.0", "Warning: Method is recommended to be used in Cloud Code only for security. If you need to use it client side, enable 'Allow Currency Calls from Client' on the brainCloud dashboard.")
+#else
+  DEPRECATED("3.2.0", "Warning: Method is recommended to be used in Cloud Code only for security. If you need to use it client side, enable 'Allow Currency Calls from Client' on the brainCloud dashboard.")
+#endif
+  void resetCurrency(IServerCallback *callback);
 
-    /**
+  /**
     * Method gets the active sales inventory for the passed-in platform and
     * currency type.
     *
@@ -67,9 +79,9 @@ class BCCLIENTPLUGIN_API BrainCloudProduct
     * inventory for. This is only used for Steam and Facebook stores.
     * @param callback The method to be invoked when the server response is received
     */
-    void getSalesInventory(const FString &platform, const FString &userCurrency, IServerCallback *callback);
+  void getSalesInventory(const FString &platform, const FString &userCurrency, IServerCallback *callback);
 
-    /**
+  /**
     * Method gets the active sales inventory for the passed-in platform,
     * currency type and category.
     *
@@ -89,9 +101,9 @@ class BCCLIENTPLUGIN_API BrainCloudProduct
     * @param category Inventory category to retrieve
     * @param callback The method to be invoked when the server response is received
     */
-    void getSalesInventoryByCategory(const FString &platform, const FString &userCurrency, const FString &category, IServerCallback *callback);
+  void getSalesInventoryByCategory(const FString &platform, const FString &userCurrency, const FString &category, IServerCallback *callback);
 
-    /**
+  /**
     * Method verifies an iTunes receipt and awards the items related to this receipt.
     *
     * Service Name - Product
@@ -100,9 +112,9 @@ class BCCLIENTPLUGIN_API BrainCloudProduct
     * @param base64EncReceiptData The iTunes receipt
     * @param callback The method to be invoked when the server response is received
     */
-    void verifyItunesReceipt(const FString &base64EncReceiptData, IServerCallback *callback);
+  void verifyItunesReceipt(const FString &base64EncReceiptData, IServerCallback *callback);
 
-    /**
+  /**
      * Initialize Steam Transaction
      *
      * Service Name - Product
@@ -112,9 +124,9 @@ class BCCLIENTPLUGIN_API BrainCloudProduct
      * @param items Items to purchase
      * @param callback The method to be invoked when the server response is received
      */
-    void startSteamTransaction(const FString &language, const FString &itemId, IServerCallback *callback);
+  void startSteamTransaction(const FString &language, const FString &itemId, IServerCallback *callback);
 
-    /**
+  /**
      * Finalize Steam Transaction
      *
      * Service Name - Product
@@ -123,9 +135,9 @@ class BCCLIENTPLUGIN_API BrainCloudProduct
      * @param transId Steam transaction id
      * @param callback The method to be invoked when the server response is received
      */
-    void finalizeSteamTransaction(const FString &transId, IServerCallback *callback);
+  void finalizeSteamTransaction(const FString &transId, IServerCallback *callback);
 
-    /**
+  /**
      * Verify Microsoft Receipt
      *
      * Service Name - Product
@@ -134,9 +146,9 @@ class BCCLIENTPLUGIN_API BrainCloudProduct
      * @param receipt Receipt XML
      * @param callback The method to be invoked when the server response is received
      */
-    void verifyMicrosoftReceipt(const FString &receipt, IServerCallback *callback);
+  void verifyMicrosoftReceipt(const FString &receipt, IServerCallback *callback);
 
-    /**
+  /**
     * Confirms a google play purchase. On success, the player will be awarded the
     * associated currencies.
     *
@@ -148,9 +160,9 @@ class BCCLIENTPLUGIN_API BrainCloudProduct
     * @param token Google Play token string
     * @param callback The method to be invoked when the server response is received
     */
-    void confirmGooglePlayPurchase(const FString &orderId, const FString &productId, const FString &token, IServerCallback *callback);
+  void confirmGooglePlayPurchase(const FString &orderId, const FString &productId, const FString &token, IServerCallback *callback);
 
-    /**
+  /**
     * Get Eligible Promotions
     *
     * Service Name - Product
@@ -158,8 +170,8 @@ class BCCLIENTPLUGIN_API BrainCloudProduct
     *
     * @param callback The method to be invoked when the server response is received
     */
-    void getEligiblePromotions(IServerCallback *callback);
+  void getEligiblePromotions(IServerCallback *callback);
 
-  private:
-    BrainCloudClient *_client = nullptr;
+private:
+  BrainCloudClient *_client = nullptr;
 };

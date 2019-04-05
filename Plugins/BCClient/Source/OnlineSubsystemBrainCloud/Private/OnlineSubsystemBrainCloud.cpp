@@ -146,6 +146,14 @@ IOnlineTurnBasedPtr FOnlineSubsystemBrainCloud::GetTurnBasedInterface() const
 {
 	return nullptr;
 }
+#if ENGINE_MINOR_VERSION >= 22
+IOnlineStatsPtr FOnlineSubsystemBrainCloud::GetStatsInterface(void) const
+{
+    // should we return the stats service ?
+	return nullptr;
+}
+#endif
+
 #if ENGINE_MINOR_VERSION >= 21
 IOnlineTournamentPtr FOnlineSubsystemBrainCloud::GetTournamentInterface() const
 {
