@@ -6,10 +6,11 @@
 #include "ReasonCodes.h"
 #include "HttpCodes.h"
 
-BCFileUploader::BCFileUploader(int32 lowTransferRateTimeoutSecs, int32 lowTransferRateThresholdBytes, int32 overallTimeoutSecs, bool loggingEnabled) : _lowTransferRateTimeout(lowTransferRateTimeoutSecs),
-                                                                                                                                                       _lowTransferRateThreshold(lowTransferRateThresholdBytes),
-                                                                                                                                                       _overallTimeout(overallTimeoutSecs),
-                                                                                                                                                       _isLoggingEnabled(loggingEnabled)
+BCFileUploader::BCFileUploader(int32 lowTransferRateTimeoutSecs, int32 lowTransferRateThresholdBytes, int32 overallTimeoutSecs, bool loggingEnabled) 
+: _isLoggingEnabled(loggingEnabled)
+, _lowTransferRateTimeout(lowTransferRateTimeoutSecs)    
+, _lowTransferRateThreshold(lowTransferRateThresholdBytes)  
+, _overallTimeout(overallTimeoutSecs)
 {
     _status = UPLOAD_STATUS_PENDING;
 }
