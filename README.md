@@ -96,6 +96,8 @@ Attaching email authenticate would look like this.
 There are many authentication types. You can also merge profiles and detach idenities. See the brainCloud documentation for more information:
 http://getbraincloud.com/apidocs/apiref/?cpp#capi-auth
 
+## Building for Android
+For developers looking to build their project for Android, note that you can only package one architecture at a time (ex.ARM64, ARMv7, etc.)
 
 ## Change Notes
 3.5.3

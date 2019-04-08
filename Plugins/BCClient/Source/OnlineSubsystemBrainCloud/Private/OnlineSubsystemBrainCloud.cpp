@@ -146,6 +146,7 @@ IOnlineTurnBasedPtr FOnlineSubsystemBrainCloud::GetTurnBasedInterface() const
 {
 	return nullptr;
 }
+
 #if ENGINE_MINOR_VERSION >= 22
 IOnlineStatsPtr FOnlineSubsystemBrainCloud::GetStatsInterface(void) const
 {
