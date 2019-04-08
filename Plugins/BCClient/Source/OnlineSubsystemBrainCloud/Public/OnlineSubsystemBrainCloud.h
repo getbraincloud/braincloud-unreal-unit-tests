@@ -55,7 +55,7 @@ class ONLINESUBSYSTEMBRAINCLOUD_API FOnlineSubsystemBrainCloud : public FOnlineS
     virtual IOnlinePresencePtr GetPresenceInterface() const override;
     virtual IOnlineChatPtr GetChatInterface() const override;
     virtual IOnlineTurnBasedPtr GetTurnBasedInterface() const override;
-    
+
 #if ENGINE_MINOR_VERSION >= 22
     virtual IOnlineStatsPtr GetStatsInterface() const override;
 #endif
