@@ -25,7 +25,11 @@
 #if PLATFORM_UWP
 #elif PLATFORM_HTML5
 #else
-#include "libwebsockets.h"
+ #define UI UI_ST
+ THIRD_PARTY_INCLUDES_START
+ #include "libwebsockets.h"
+ THIRD_PARTY_INCLUDES_END
+ #undef UI
 #endif
 
 #define MAX_ECHO_PAYLOAD 64 * 1024
