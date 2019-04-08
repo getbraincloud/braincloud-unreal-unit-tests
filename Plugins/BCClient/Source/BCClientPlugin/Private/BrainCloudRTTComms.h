@@ -7,10 +7,11 @@
 #if PLATFORM_UWP
 #elif PLATFORM_HTML5
 #else
-class libwebsockets;
-struct lws_context;
-struct lws;
-enum lws_callback_reasons : int;
+ #define UI UI_ST
+ THIRD_PARTY_INCLUDES_START
+ #include "libwebsockets.h"
+ THIRD_PARTY_INCLUDES_END
+ #undef UI
 #endif
 
 enum class eBCRTTConnectionType : uint8;

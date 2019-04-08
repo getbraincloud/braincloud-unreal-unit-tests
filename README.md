@@ -99,16 +99,6 @@ http://getbraincloud.com/apidocs/apiref/?cpp#capi-auth
 ## Building for Android
 For developers looking to build their project for Android, note that you can only package one architecture at a time (ex.ARM64, ARMv7, etc.)
 
-BCClient plugin builds ARMv7 by default.
-If another architecture is required, continue with these steps:
-
-1. Go to the BCClient plugin and open Source/BCClientPlugin/BCClientPlugin.Build.cs.
-2. At the top of the file, uncomment the #define of the architecture you intend to build and make sure the others are commented.
-3. Ensure the Engine.ini file is also appropriately set. Set only the architecture you are trying to build to true. In the editor's project settings under the Android platform, you can also affect your Engine.ini file by checking off the architecture you're trying to build.
-4. Build your apk!
-
-***If you have trouble building, make sure you have the appropriate sdk and tools to build for your desired android architecture. You can check this with your android sdk manager.***
-
 ## Change Notes
 3.5.3
 - toPlayerId in SendNormalizedPushNotificationToGroup blueprint has been corrected to groupId. Be sure to reenter/reconnect those values
