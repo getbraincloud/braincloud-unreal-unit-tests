@@ -360,7 +360,7 @@ void BrainCloudComms::CreateAndSendNextRequestBundle()
 	}
 	else
 	{
-		FakeErrorResponse(900, ReasonCode::CLIENT_DISABLED, "Client disabled due to repeated errors from a single API call");
+		FakeErrorResponse(900, ReasonCodes::CLIENT_DISABLED, "Client disabled due to repeated errors from a single API call");
 	}
 
 	_retryCount = 0;
@@ -451,7 +451,7 @@ void BrainCloudComms::RunCallbacks()
 							ReportError(
 								_currentPacket.ToSharedRef(),
 								HttpCode::CLIENT_NETWORK_ERROR,
-								ReasonCode::CLIENT_NETWORK_ERROR_TIMEOUT,
+								ReasonCodes::CLIENT_NETWORK_ERROR_TIMEOUT,
 								"Timeout trying to reach brainCloud server");
 						}
 					}
@@ -497,7 +497,7 @@ void BrainCloudComms::HandleResponse(int32 statusCode, FString responseBody)
 		}
 		else //couldnt deserialize the response body
 		{
-			ReportError(_currentPacket.ToSharedRef(), HttpCode::CLIENT_NETWORK_ERROR, ReasonCode::JSON_PARSING_ERROR, TEXT("Unable to parse response"));
+			ReportError(_currentPacket.ToSharedRef(), HttpCode::CLIENT_NETWORK_ERROR, ReasonCodes::JSON_PARSING_ERROR, TEXT("Unable to parse response"));
 		}
 	}
 	else
@@ -529,7 +529,7 @@ void BrainCloudComms::FlushCachedMessages(bool sendApiErrorCallbacks)
 		ReportError(
 			_currentPacket.ToSharedRef(),
 			HttpCode::CLIENT_NETWORK_ERROR,
-			ReasonCode::CLIENT_NETWORK_ERROR_TIMEOUT,
+			ReasonCodes::CLIENT_NETWORK_ERROR_TIMEOUT,
 			"Timeout trying to reach brainCloud server");
 	}
 
@@ -664,7 +664,7 @@ void BrainCloudComms::ReportResults(PacketRef requestPacket, TSharedRef<FJsonObj
 			if (respObj->HasField(TEXT("reason_code")))
 			{
 				reasonCode = respObj->GetNumberField(TEXT("reason_code"));
-				if (reasonCode == ReasonCode::PLAYER_SESSION_EXPIRED || reasonCode == ReasonCode::NO_SESSION || reasonCode == ReasonCode::PLAYER_SESSION_LOGGED_OUT || sc->getOperation() == ServiceOperation::Logout || sc->getOperation() == ServiceOperation::FullReset)
+				if (reasonCode == ReasonCodes::PLAYER_SESSION_EXPIRED || reasonCode == ReasonCodes::NO_SESSION || reasonCode == ReasonCodes::PLAYER_SESSION_LOGGED_OUT || sc->getOperation() == ServiceOperation::Logout || sc->getOperation() == ServiceOperation::FullReset)
 				{
 					_isAuthenticated = false;
 					_sessionId = TEXT("");
@@ -910,7 +910,7 @@ void BrainCloudComms::ResetCommunication()
 void BrainCloudComms::ResetErrorCache()
 {
 	_statusCodeCache = HttpCode::FORBIDDEN;
-	_reasonCodeCache = ReasonCode::NO_SESSION;
+	_reasonCodeCache = ReasonCodes::NO_SESSION;
 	_statusMessageCache = TEXT("No session");
 }
 

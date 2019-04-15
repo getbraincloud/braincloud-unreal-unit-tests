@@ -86,7 +86,7 @@ void BrainCloudRTTComms::enableRTT(eBCRTTConnectionType in_connectionType, IServ
 void BrainCloudRTTComms::disableRTT()
 {
 	if (isRTTEnabled())
-		processRegisteredListeners(ServiceName::RTTRegistration.getValue().ToLower(), "disconnect", "{\"error\":\"DisableRTT Called\"}");
+		processRegisteredListeners(ServiceName::RTTRegistration.getValue().ToLower(), "disconnect", buildRTTRequestError("DisableRTT Called"));
 }
 
 bool BrainCloudRTTComms::isRTTEnabled()
@@ -283,7 +283,7 @@ FString BrainCloudRTTComms::buildConnectionRequest()
 {
 	TSharedRef<FJsonObject> sysJson = MakeShareable(new FJsonObject());
 	sysJson->SetStringField("platform", m_client->getReleasePlatform());
-	sysJson->SetStringField("protocol", "ws"); // "tcp"
+	sysJson->SetStringField("protocol", "ws");
 
 	TSharedRef<FJsonObject> jsonData = MakeShareable(new FJsonObject());
 	jsonData->SetStringField("appId", m_client->getAppId());
@@ -433,7 +433,7 @@ void BrainCloudRTTComms::webSocket_OnClose()
 	if (m_client->isLoggingEnabled())
 		UE_LOG(LogBrainCloudComms, Log, TEXT("Connection closed"));
 
-	processRegisteredListeners(ServiceName::RTTRegistration.getValue().ToLower(), "error", "{\"error\":\"Could not connect at this time\"}");
+	processRegisteredListeners(ServiceName::RTTRegistration.getValue().ToLower(), "error", buildRTTRequestError("Could not connect at this time"));
 }
 
 void BrainCloudRTTComms::websocket_OnOpen()
@@ -497,6 +497,22 @@ void BrainCloudRTTComms::onRecv(const FString &in_message)
 	}
 
 	processRegisteredListeners(service.ToLower(), operation.ToLower(), in_message);
+}
+
+FString BrainCloudRTTComms::buildRTTRequestError(FString in_statusMessage)
+{
+	TSharedRef<FJsonObject> json = MakeShareable(new FJsonObject());
+	
+    json->SetNumberField("status", 403);
+	json->SetNumberField("reason_code", ReasonCodes::RTT_CLIENT_ERROR);
+	json->SetStringField("status_message", in_statusMessage);
+	json->SetStringField("severity", "ERROR");
+
+	FString response;
+    TSharedRef<TJsonWriter<>> writer = TJsonWriterFactory<>::Create(&response);
+    FJsonSerializer::Serialize(json, writer);
+
+	return response;
 }
 
 void BrainCloudRTTComms::setEndpointFromType(TArray<TSharedPtr<FJsonValue>> in_endpoints, FString in_socketType)
@@ -566,16 +582,8 @@ void BrainCloudRTTComms::serverCallback(ServiceName serviceName, ServiceOperatio
 		TArray<TSharedPtr<FJsonValue>> endpoints = jsonData->GetArrayField(TEXT("endpoints"));
 		m_rttHeaders = jsonData->GetObjectField(TEXT("auth"));
 
-		if (m_connectionType == eBCRTTConnectionType::WEBSOCKET)
-		{
-			setEndpointFromType(endpoints, TEXT("ws"));
-			connectWebSocket();
-		}
-		else
-		{
-			setEndpointFromType(endpoints, TEXT("tcp"));
-			connect();
-		}
+		setEndpointFromType(endpoints, TEXT("ws"));
+		connectWebSocket();
 	}
 }
 
