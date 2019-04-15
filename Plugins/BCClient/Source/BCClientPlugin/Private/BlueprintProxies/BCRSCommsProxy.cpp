@@ -1,15 +1,15 @@
 // Copyright 2018 bitHeads, Inc. All Rights Reserved.
 
 #include "BCClientPluginPrivatePCH.h"
-#include "BrainCloudRTTComms.h"
-#include "BCRTTCommsProxy.h"
+#include "BrainCloudRSComms.h"
+#include "BCRSCommsProxy.h"
 
-UBCRTTCommsProxy::UBCRTTCommsProxy(const FObjectInitializer &ObjectInitializer)
+UBCRSCommsProxy::UBCRSCommsProxy(const FObjectInitializer &ObjectInitializer)
     : Super(ObjectInitializer)
 {
 }
 
-void UBCRTTCommsProxy::BeginDestroy()
+void UBCRSCommsProxy::BeginDestroy()
 {
     Super::BeginDestroy();
     if (!this->IsValidLowLevel())
@@ -21,27 +21,27 @@ void UBCRTTCommsProxy::BeginDestroy()
     m_commsPtr = nullptr;
 }
 
-void UBCRTTCommsProxy::SetRTTComms(BrainCloudRTTComms *in_comms)
+void UBCRSCommsProxy::SetRSComms(BrainCloudRSComms *in_comms)
 {
     m_commsPtr = in_comms;
 }
 
-void UBCRTTCommsProxy::WebSocket_OnClose()
+void UBCRSCommsProxy::WebSocket_OnClose()
 {
     m_commsPtr->webSocket_OnClose();
 }
 
-void UBCRTTCommsProxy::Websocket_OnOpen()
+void UBCRSCommsProxy::Websocket_OnOpen()
 {
     m_commsPtr->websocket_OnOpen();
 }
 
-void UBCRTTCommsProxy::WebSocket_OnMessage(const FString &in_data)
+void UBCRSCommsProxy::WebSocket_OnMessage(const FString &in_data)
 {
     m_commsPtr->webSocket_OnMessage(in_data);
 }
 
-void UBCRTTCommsProxy::WebSocket_OnError(const FString &in_error)
+void UBCRSCommsProxy::WebSocket_OnError(const FString &in_error)
 {
     m_commsPtr->webSocket_OnError(in_error);
 }

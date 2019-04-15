@@ -41,6 +41,7 @@
 
 class BrainCloudComms;
 class BrainCloudRTTComms;
+class BrainCloudRSComms;
 class ServerCall;
 class IEventCallback;
 class IRewardCallback;
@@ -56,14 +57,22 @@ enum class eBCUpdateType : uint8
 {
 	ALL UMETA(DisplayName = "ALL"),
 	REST UMETA(DisplayName = "REST"),
-	RTT UMETA(DisplayName = "RTT")
+	RTT UMETA(DisplayName = "RTT"),
+	RS UMETA(DisplayName = "RS")
 };
 
 UENUM(BlueprintType)
 enum class eBCRTTConnectionType : uint8
 {
+	WEBSOCKET UMETA(DisplayName = "WEBSOCKET")
+};
+
+UENUM(BlueprintType)
+enum class eBCRSConnectionType : uint8
+{
 	WEBSOCKET UMETA(DisplayName = "WEBSOCKET"),
-	TCP UMETA(DisplayName = "TCP")
+	TCP UMETA(DisplayName = "TCP"),
+	UDP UMETA(DisplayName = "UDP"),
 };
 
 class BCCLIENTPLUGIN_API BrainCloudClient
@@ -594,6 +603,7 @@ class BCCLIENTPLUGIN_API BrainCloudClient
 	void initializeComms(const char *serverUrl, const char *appId, const TMap<FString, FString> &secretMap);
 	BrainCloudComms *_brainCloudComms = nullptr;
 	BrainCloudRTTComms *_brainCloudRTTComms = nullptr;
+	BrainCloudRSComms *_brainCloudRSComms = nullptr;
 
 	BrainCloudAuthentication *_authenticationService = nullptr;
 	BrainCloudLeaderboard *_leaderboardService = nullptr;

@@ -78,6 +78,9 @@ class BrainCloudRTTComms : public IServerCallback
 
 	void setEndpointFromType(TArray<TSharedPtr<FJsonValue>> in_endpoints, FString in_socketType);
 	void onRecv(const FString &in_message);
+
+	FString buildRTTRequestError(FString in_statusMessage);
+	
 	// IServerCallback
 	void serverCallback(ServiceName serviceName, ServiceOperation serviceOperation, const FString &jsonData);
 	void serverError(ServiceName serviceName, ServiceOperation serviceOperation, int32 statusCode, int32 reasonCode, const FString &jsonError);

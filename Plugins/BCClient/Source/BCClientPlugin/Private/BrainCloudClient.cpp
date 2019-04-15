@@ -6,6 +6,7 @@
 #include "GameDelegates.h"
 #include "BrainCloudComms.h"
 #include "BrainCloudRTTComms.h"
+#include "BrainCloudRSComms.h"
 #include "ServerCall.h"
 #include "JsonUtil.h"
 #include "IServerCallback.h"
@@ -15,6 +16,7 @@
 #include "IGlobalErrorCallback.h"
 #include "INetworkErrorCallback.h"
 #include "IRTTCallback.h"
+#include "IRSCallback.h"
 #include "BCPlatform.h"
 
 // Define all static member variables.
@@ -31,6 +33,7 @@ BrainCloudClient::BrainCloudClient()
 {
 	_brainCloudComms = new BrainCloudComms(this);
 	_brainCloudRTTComms = new BrainCloudRTTComms(this);
+	_brainCloudRSComms = new BrainCloudRSComms(this);
 }
 
 /**
@@ -40,6 +43,7 @@ BrainCloudClient::~BrainCloudClient()
 {
 	destroyService(_brainCloudComms);
 	destroyService(_brainCloudRTTComms);
+	destroyService(_brainCloudRSComms);
 
 	destroyService(_authenticationService);
 	destroyService(_leaderboardService);
@@ -181,6 +185,13 @@ void BrainCloudClient::runCallbacks(eBCUpdateType in_updateType /*= eBCUpdateTyp
 	}
 	break;
 
+	case eBCUpdateType::RS:
+	{
+		if (_brainCloudRSComms)
+			_brainCloudRSComms->RunCallbacks();
+	}
+	break;
+
 	default:
 	case eBCUpdateType::ALL:
 	{
@@ -189,6 +200,9 @@ void BrainCloudClient::runCallbacks(eBCUpdateType in_updateType /*= eBCUpdateTyp
 
 		if (_brainCloudRTTComms)
 			_brainCloudRTTComms->RunCallbacks();
+
+		if (_brainCloudRSComms)
+			_brainCloudRSComms->RunCallbacks();
 	}
 	break;
 	}
@@ -303,6 +317,7 @@ void BrainCloudClient::resetCommunication()
 {
 	_brainCloudComms->ResetCommunication();
 	_brainCloudRTTComms->disableRTT();
+	_brainCloudRSComms->disconnect();
 
 	if (_authenticationService)
 		_authenticationService->clearSavedProfileId();
