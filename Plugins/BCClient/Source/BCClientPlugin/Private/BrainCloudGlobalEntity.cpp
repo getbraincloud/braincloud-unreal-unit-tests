@@ -163,6 +163,17 @@ void BrainCloudGlobalEntity::getRandomEntitiesMatching(const FString &where, int
     _client->sendRequest(sc);
 }
 
+void BrainCloudGlobalEntity::updateEntityIndexedId(const FString &entityId, int32 version, const FString &entityIndexedId, IServerCallback *callback)
+{
+    TSharedRef<FJsonObject> message = MakeShareable(new FJsonObject());
+    message->SetStringField(OperationParam::GlobalEntityServiceEntityId.getValue(), entityId);
+    message->SetNumberField(OperationParam::GlobalEntityServiceVersion.getValue(), version);
+    message->SetStringField(OperationParam::GlobalEntityServiceIndexedId.getValue(), entityIndexedId);
+
+    ServerCall *sc = new ServerCall(ServiceName::GlobalEntity, ServiceOperation::UpdateEntityIndexedId, message, callback);
+    _client->sendRequest(sc);
+}
+
 void BrainCloudGlobalEntity::updateEntityOwnerAndAcl(const FString &entityId, int32 version, const FString &ownerId, IAcl *jsonEntityAcl, IServerCallback *callback)
 {
     TSharedRef<FJsonObject> message = MakeShareable(new FJsonObject());
