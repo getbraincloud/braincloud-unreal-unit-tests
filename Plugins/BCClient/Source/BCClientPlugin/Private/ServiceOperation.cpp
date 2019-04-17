@@ -75,7 +75,7 @@ const ServiceOperation ServiceOperation::UpdateSummary = ServiceOperation(TEXT("
 const ServiceOperation ServiceOperation::UpdateSetMinimum = ServiceOperation(TEXT("UPDATE_SET_MINIMUM"));
 const ServiceOperation ServiceOperation::UpdateIncrementToMaximum = ServiceOperation(TEXT("UPDATE_INCREMENT_TO_MAXIMUM"));
 const ServiceOperation ServiceOperation::ProcessStatistics = ServiceOperation(TEXT("PROCESS_STATISTICS"));
-const ServiceOperation ServiceOperation::UpdateEntityIndexedId = ServiceOperation(TEXT("UPDATE_ENTITY_INDEXED_ID"));
+const ServiceOperation ServiceOperation::UpdateEntityIndexedId = ServiceOperation(TEXT("UPDATE_INDEXED_ID"));
 const ServiceOperation ServiceOperation::UpdateEntityOwnerAndAcl = ServiceOperation(TEXT("UPDATE_ENTITY_OWNER_AND_ACL"));
 const ServiceOperation ServiceOperation::MakeSystemEntity = ServiceOperation(TEXT("MAKE_SYSTEM_ENTITY"));
 
