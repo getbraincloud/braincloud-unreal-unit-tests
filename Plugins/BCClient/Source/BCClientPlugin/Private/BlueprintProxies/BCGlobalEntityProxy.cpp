@@ -111,6 +111,13 @@ UBCGlobalEntityProxy *UBCGlobalEntityProxy::GetRandomEntitiesMatching(UBrainClou
 	return Proxy;
 }
 
+UBCGlobalEntityProxy *UBCGlobalEntityProxy::UpdateEntityIndexedId(UBrainCloudWrapper *brainCloudWrapper, const FString &entityId, int32 version, const FString &entityIndexedId)
+{
+	UBCGlobalEntityProxy *Proxy = NewObject<UBCGlobalEntityProxy>();
+	UBCWrapperProxy::GetBrainCloudInstance(brainCloudWrapper)->getGlobalEntityService()->updateEntityIndexedId(entityId, version, entityIndexedId, Proxy);
+	return Proxy;
+}
+
 UBCGlobalEntityProxy *UBCGlobalEntityProxy::UpdateEntityOwnerAndAcl(UBrainCloudWrapper *brainCloudWrapper, const FString &entityId, int32 version, const FString &ownerId, UBrainCloudACL *entityAcl)
 {
 	UBCGlobalEntityProxy *Proxy = NewObject<UBCGlobalEntityProxy>();

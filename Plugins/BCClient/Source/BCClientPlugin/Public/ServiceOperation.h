@@ -72,6 +72,7 @@ class BCCLIENTPLUGIN_API ServiceOperation
 	static const ServiceOperation UpdateSetMinimum;
 	static const ServiceOperation UpdateIncrementToMaximum;
 	static const ServiceOperation ProcessStatistics;
+	static const ServiceOperation UpdateEntityIndexedId;
 	static const ServiceOperation UpdateEntityOwnerAndAcl;
 	static const ServiceOperation MakeSystemEntity;
 

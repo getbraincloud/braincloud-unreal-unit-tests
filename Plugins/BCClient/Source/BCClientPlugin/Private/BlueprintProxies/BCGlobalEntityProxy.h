@@ -201,6 +201,20 @@ class UBCGlobalEntityProxy : public UBCBlueprintCallProxyBase
 	*
 	* Param - entityId The entity ID
 	* Param - version The version of the entity to update
+	* Param - entityIndexedId the id index of the entity
+	*/
+	UFUNCTION(BlueprintCallable, meta = (BlueprintInternalUseOnly = "true"), Category = "BrainCloud|Global Entity")
+	static UBCGlobalEntityProxy *UpdateEntityIndexedId(UBrainCloudWrapper *brainCloudWrapper, const FString &entityId, int32 version, const FString &entityIndexedId);
+
+
+	/**
+	* Method updates an existing entity's Owner and ACL on the server.
+	*
+	* Service Name - globalEntity
+	* Service Operation - UPDATE_ENTITY_OWNER_AND_ACL
+	*
+	* Param - entityId The entity ID
+	* Param - version The version of the entity to update
 	* Param - ownerId The owner ID
 	* Param - entityAcl The entity's access control list
 	*/
