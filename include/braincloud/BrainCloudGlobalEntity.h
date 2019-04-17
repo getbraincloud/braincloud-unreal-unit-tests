@@ -197,6 +197,19 @@ namespace BrainCloud
 		void getRandomEntitiesMatching(const std::string& in_where, int64_t in_maxReturn, IServerCallback * in_callback);
 
 		/**
+		* Method updates an existing entity's Indexed Id
+		*
+		* Service Name - globalEntity
+		* Service Operation - UPDATE_ENTITY_OWNER_AND_ACL
+		*
+		* @param in_entityId The entity ID
+		* @param in_version The version of the entity to update
+		* @param in_entityIndexedId the id index of the entity
+		* @param in_callback The callback object
+		*/
+		void updateEntityIndexedId(const char * in_entityId, int64_t in_version, const char * in_entityIndexedId, IServerCallback * in_callback = NULL);
+
+		/**
 		* Method updates an existing entity's Owner and ACL on the server.
 		*
 		* Service Name - globalEntity

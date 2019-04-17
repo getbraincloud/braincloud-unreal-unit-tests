@@ -75,6 +75,7 @@ namespace BrainCloud {
 		static const ServiceOperation UpdateSummary;
 		static const ServiceOperation UpdateSetMinimum;
 		static const ServiceOperation UpdateIncrementToMaximum;
+		static const ServiceOperation UpdateEntityIndexedId;
 		static const ServiceOperation UpdateEntityOwnerAndAcl;
 		static const ServiceOperation MakeSystemEntity;
 

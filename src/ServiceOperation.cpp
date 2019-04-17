@@ -68,6 +68,7 @@ namespace BrainCloud
 	const ServiceOperation ServiceOperation::UpdateSummary = ServiceOperation("UPDATE_SUMMARY");
 	const ServiceOperation ServiceOperation::UpdateSetMinimum = ServiceOperation("UPDATE_SET_MINIMUM");
 	const ServiceOperation ServiceOperation::UpdateIncrementToMaximum = ServiceOperation("UPDATE_INCREMENT_TO_MAXIMUM");
+	const ServiceOperation ServiceOperation::UpdateEntityIndexedId = ServiceOperation("UPDATE_INDEXED_ID");
 	const ServiceOperation ServiceOperation::UpdateEntityOwnerAndAcl = ServiceOperation("UPDATE_ENTITY_OWNER_AND_ACL");
 	const ServiceOperation ServiceOperation::MakeSystemEntity = ServiceOperation("MAKE_SYSTEM_ENTITY");
 
