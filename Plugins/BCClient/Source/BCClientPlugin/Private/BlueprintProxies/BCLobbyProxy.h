@@ -139,6 +139,21 @@ class UBCLobbyProxy : public UBCBlueprintCallProxyBase
     UFUNCTION(BlueprintCallable, meta = (BlueprintInternalUseOnly = "true"), Category = "BrainCloud|Lobby")
     static UBCLobbyProxy *LeaveLobby(UBrainCloudWrapper *brainCloud, const FString &in_lobbyID);
 
+
+    /**
+    * Service Name - lobby
+	* Service Operation - JOIN_LOBBY
+    *
+    * @param in_lobbyID the lobbyId
+    * @param in_isReady status of user joining
+    * @param in_extraJson is the extra constraints
+    * @param in_teamCode team code
+    * @param in_otherUserCxIds is a list of other players who re part of the lobby
+	* @param in_callback Method to be invoked when the server response is received.
+    */
+    UFUNCTION(BlueprintCallable, meta = (BlueprintInternalUseOnly = "true"), Category = "BrainCloud|Lobby")
+    static UBCLobbyProxy *JoinLobby(UBrainCloudWrapper *brainCloud, const FString &in_lobbyID, bool in_isReady, const FString &in_extraJson, const FString &in_teamCode, const TArray<FString> &in_otherUserCxIds);
+
     /**
     *  Only valid from the owner of the lobby -- removes the specified member from the lobby
     * 

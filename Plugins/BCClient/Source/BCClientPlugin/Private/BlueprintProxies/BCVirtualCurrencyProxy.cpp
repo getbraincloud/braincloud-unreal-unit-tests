@@ -34,6 +34,13 @@ UBCVirtualCurrencyProxy *UBCVirtualCurrencyProxy::GetPeerCurrency(UBrainCloudWra
     return Proxy;
 }
 
+UBCVirtualCurrencyProxy *UBCVirtualCurrencyProxy::ResetCurrency(UBrainCloudWrapper *brainCloudWrapper)
+{
+    UBCVirtualCurrencyProxy *Proxy = NewObject<UBCVirtualCurrencyProxy>();
+    UBCWrapperProxy::GetBrainCloudInstance(brainCloudWrapper)->getVirtualCurrencyService()->resetCurrency(Proxy);
+    return Proxy;
+}
+
 UBCVirtualCurrencyProxy *UBCVirtualCurrencyProxy::AwardCurrency(UBrainCloudWrapper *brainCloudWrapper, const FString &currencyType, int32 amount)
 {
     UBCVirtualCurrencyProxy *Proxy = NewObject<UBCVirtualCurrencyProxy>();

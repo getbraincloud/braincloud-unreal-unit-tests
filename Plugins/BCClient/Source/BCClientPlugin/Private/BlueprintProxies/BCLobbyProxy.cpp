@@ -70,6 +70,13 @@ UBCLobbyProxy *UBCLobbyProxy::SendSignal(UBrainCloudWrapper *brainCloud, const F
 	return Proxy;
 }
 
+UBCLobbyProxy *UBCLobbyProxy::JoinLobby(UBrainCloudWrapper *brainCloud, const FString &in_lobbyID, bool in_isReady, const FString &in_extraJson, const FString &in_teamCode, const TArray<FString> &in_otherUserCxIds)
+{
+	UBCLobbyProxy *Proxy = NewObject<UBCLobbyProxy>();
+	UBCWrapperProxy::GetBrainCloudInstance(brainCloud)->getLobbyService()->joinLobby(in_lobbyID, in_isReady, in_extraJson, in_teamCode, in_otherUserCxIds, Proxy);
+	return Proxy;
+}
+
 UBCLobbyProxy *UBCLobbyProxy::LeaveLobby(UBrainCloudWrapper *brainCloud, const FString &in_lobbyID)
 {
 	UBCLobbyProxy *Proxy = NewObject<UBCLobbyProxy>();
