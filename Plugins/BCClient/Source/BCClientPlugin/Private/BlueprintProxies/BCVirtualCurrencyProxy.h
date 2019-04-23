@@ -46,6 +46,16 @@ public:
   UFUNCTION(BlueprintCallable, meta = (BlueprintInternalUseOnly = "true"), Category = "BrainCloud|VirtualCurrency")
   static UBCVirtualCurrencyProxy *GetPeerCurrency(UBrainCloudWrapper *brainCloudWrapper, const FString &vcId, const FString &peerCode);
 
+    /**
+    * Reset the player's currency to 0. 
+    *
+    * Service Name - VirtualCurrency
+    * Service Operation - ResetCurrency
+    *
+    */
+  UFUNCTION(BlueprintCallable, meta = (BlueprintInternalUseOnly = "true"), Category = "BrainCloud|VirtualCurrency")
+  static UBCVirtualCurrencyProxy *ResetCurrency(UBrainCloudWrapper *brainCloudWrapper);
+
   /**
 	  * @warning Method is recommended to be used in Cloud Code only for security
 	  *
