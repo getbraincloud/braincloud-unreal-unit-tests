@@ -138,16 +138,17 @@ class BCCLIENTPLUGIN_API BrainCloudLobby
     void sendSignal(const FString &in_lobbyID, const FString &in_signalJson, IServerCallback *in_callback);
 
     /**
-    *  *** COMING SOON --- User joins the specified lobby.
-    * 
     * Service Name - lobby
 	* Service Operation - JOIN_LOBBY
     *
     * @param in_lobbyID the lobbyId
+    * @param in_isReady status of user joining
+    * @param in_extraJson is the extra constraints
     * @param in_teamCode team code
+    * @param in_otherUserCxIds is a list of other players who re part of the lobby
 	* @param in_callback Method to be invoked when the server response is received.
     */
-    //void joinLobby(const FString &in_lobbyID, const FString &in_teamCode, IServerCallback *in_callback);
+    void joinLobby(const FString &in_lobbyID, bool in_isReady, const FString &in_extraJson, const FString &in_teamCode, const TArray<FString> &in_otherUserCxIds, IServerCallback *in_callback);
 
     /**
     * User leaves the specified lobby. if the user was the owner, a new owner will be chosen

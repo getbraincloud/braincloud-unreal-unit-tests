@@ -120,18 +120,19 @@ void BrainCloudLobby::sendSignal(const FString &in_lobbyID, const FString &in_si
     ServerCall *sc = new ServerCall(ServiceName::Lobby, ServiceOperation::SendSignal, message, in_callback);
     _client->sendRequest(sc);
 }
-/*
-void BrainCloudLobby::joinLobby(const FString &in_lobbyID, const FString &in_teamCode, IServerCallback *in_callback)
+
+void BrainCloudLobby::joinLobby(const FString &in_lobbyID, bool in_isReady, const FString &in_extraJson, const FString &in_teamCode, const TArray<FString> &in_otherUserCxIds, IServerCallback *in_callback)
 {
     TSharedRef<FJsonObject> message = MakeShareable(new FJsonObject());
     message->SetStringField(OperationParam::LobbyIdentifier.getValue(), in_lobbyID);
     message->SetBoolField(OperationParam::LobbyIsReady.getValue(), in_isReady);
+    message->SetObjectField(OperationParam::LobbyExtraJson.getValue(), JsonUtil::jsonStringToValue(in_extraJson));
     message->SetStringField(OperationParam::LobbyTeamCode.getValue(), in_teamCode);
+    message->SetArrayField(OperationParam::LobbyOtherUserCxIds.getValue(), JsonUtil::arrayToJsonArray(in_otherUserCxIds));
 
     ServerCall *sc = new ServerCall(ServiceName::Lobby, ServiceOperation::JoinLobby, message, in_callback);
     _client->sendRequest(sc);
 }
-*/
 
 void BrainCloudLobby::leaveLobby(const FString &in_lobbyID, IServerCallback *in_callback)
 {
