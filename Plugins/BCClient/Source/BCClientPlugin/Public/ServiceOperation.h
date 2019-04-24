@@ -25,6 +25,8 @@ class BCCLIENTPLUGIN_API ServiceOperation
 	static const ServiceOperation AttachPeerProfile;
 	static const ServiceOperation DetachPeer;
 	static const ServiceOperation GetPeerProfiles;
+	static const ServiceOperation AttachNonLoginUniversalId;
+	static const ServiceOperation UpdateUniversalIdLogin;
 
 	static const ServiceOperation Create;
 	static const ServiceOperation CreateWithIndexedId;
@@ -326,6 +328,7 @@ class BCCLIENTPLUGIN_API ServiceOperation
 	static const ServiceOperation JoinTournament;
 	static const ServiceOperation LeaveTournament;
 	static const ServiceOperation PostTournamentScore;
+	static const ServiceOperation PostTournamentScoreWithResults;
 	static const ServiceOperation ViewCurrentReward;
 	static const ServiceOperation ViewReward;
 	static const ServiceOperation ClaimTournamentReward;

@@ -28,6 +28,8 @@ const ServiceOperation ServiceOperation::DetachParent = ServiceOperation(TEXT("D
 const ServiceOperation ServiceOperation::AttachPeerProfile = ServiceOperation(TEXT("ATTACH_PEER_PROFILE"));
 const ServiceOperation ServiceOperation::DetachPeer = ServiceOperation(TEXT("DETACH_PEER"));
 const ServiceOperation ServiceOperation::GetPeerProfiles = ServiceOperation(TEXT("GET_PEER_PROFILES"));
+const ServiceOperation ServiceOperation::AttachNonLoginUniversalId = ServiceOperation(TEXT("ATTACH_NONLOGIN_UNIVERSAL"));
+const ServiceOperation ServiceOperation::UpdateUniversalIdLogin = ServiceOperation(TEXT("UPDATE_UNIVERSAL_LOGIN"));
 
 const ServiceOperation ServiceOperation::Create = ServiceOperation(TEXT("CREATE"));
 const ServiceOperation ServiceOperation::CreateWithIndexedId = ServiceOperation(TEXT("CREATE_WITH_INDEXED_ID"));
@@ -340,6 +342,7 @@ const ServiceOperation ServiceOperation::JoinDivision = ServiceOperation(TEXT("J
 const ServiceOperation ServiceOperation::LeaveTournament = ServiceOperation(TEXT("LEAVE_TOURNAMENT"));
 const ServiceOperation ServiceOperation::LeaveDivisionInstance = ServiceOperation(TEXT("LEAVE_DIVISION_INSTANCE"));
 const ServiceOperation ServiceOperation::PostTournamentScore = ServiceOperation(TEXT("POST_TOURNAMENT_SCORE"));
+const ServiceOperation ServiceOperation::PostTournamentScoreWithResults = ServiceOperation(TEXT("POST_TOURNAMENT_SCORE_WITH_RESULTS"));
 const ServiceOperation ServiceOperation::ViewCurrentReward = ServiceOperation(TEXT("VIEW_CURRENT_REWARD"));
 const ServiceOperation ServiceOperation::ViewReward = ServiceOperation(TEXT("VIEW_REWARD"));
 const ServiceOperation ServiceOperation::ClaimTournamentReward = ServiceOperation(TEXT("CLAIM_TOURNAMENT_REWARD"));
