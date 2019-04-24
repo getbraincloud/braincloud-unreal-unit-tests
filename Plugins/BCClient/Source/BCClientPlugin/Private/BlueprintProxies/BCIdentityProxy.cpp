@@ -273,3 +273,17 @@ UBCIdentityProxy *UBCIdentityProxy::GetPeerProfiles(UBrainCloudWrapper *brainClo
 	UBCWrapperProxy::GetBrainCloudInstance(brainCloudWrapper)->getIdentityService()->getPeerProfiles(Proxy);
 	return Proxy;
 }
+
+UBCIdentityProxy *UBCIdentityProxy::AttachNonLoginUniversalId(UBrainCloudWrapper *brainCloudWrapper, const FString &externalId)
+{
+	UBCIdentityProxy *Proxy = NewObject<UBCIdentityProxy>();
+	UBCWrapperProxy::GetBrainCloudInstance(brainCloudWrapper)->getIdentityService()->attachNonLoginUniversalId(externalId, Proxy);
+	return Proxy;
+}
+
+UBCIdentityProxy *UBCIdentityProxy::UpdateUniversalIdLogin(UBrainCloudWrapper *brainCloudWrapper, const FString &externalId)
+{
+	UBCIdentityProxy *Proxy = NewObject<UBCIdentityProxy>();
+	UBCWrapperProxy::GetBrainCloudInstance(brainCloudWrapper)->getIdentityService()->updateUniversalIDLogin(externalId, Proxy);
+	return Proxy;
+}
