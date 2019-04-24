@@ -17,6 +17,8 @@ namespace BrainCloud {
 		static const ServiceOperation ResetEmailPasswordAdvanced;
 		static const ServiceOperation SwitchToChildProfile;
 		static const ServiceOperation SwitchToParentProfile;
+		static const ServiceOperation AttachNonLoginUniversalId;
+		static const ServiceOperation UpdateUniversalIdLogin;
 		static const ServiceOperation GetChildProfiles;
 		static const ServiceOperation GetIdentities;
 		static const ServiceOperation GetExpiredIdentities;
@@ -356,6 +358,7 @@ namespace BrainCloud {
 		static const ServiceOperation FindOrCreateLobby;
 		static const ServiceOperation GetLobbyData;
 		static const ServiceOperation LeaveLobby;
+		static const ServiceOperation JoinLobby;
 		static const ServiceOperation RemoveMember;
 		static const ServiceOperation SendSignal;
 		static const ServiceOperation SwitchTeam;
@@ -389,6 +392,7 @@ namespace BrainCloud {
         static const ServiceOperation VirtualCurrencyGetCurrency;
         static const ServiceOperation VirtualCurrencyGetParentCurrency;
         static const ServiceOperation VirtualCurrencyGetPeerCurrency;
+		static const ServiceOperation VirtualCurrencyResetCurrency;
 
         //appstore
         static const ServiceOperation AppStoreVerifyPurchase;

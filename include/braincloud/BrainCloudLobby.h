@@ -150,6 +150,22 @@ namespace BrainCloud
 		 * @param settings Configuration data for the room.
 		 */
 		void updateSettings(const std::string& in_lobbyId, const std::string& in_jsonSettings, IServerCallback* in_callback = NULL);
+				
+		/**
+		 * Join specified lobby
+		 *
+		 * Service Name - Lobby
+		 * Service Operation - JoinLobby
+		 *
+		 * @param lobbyId Id of the specfified lobby.
+		 * @param isReady Initial ready-status of this user.
+		 * @param extraJson Initial extra-data about this user.
+		 * @param toTeamCode Specified team code.
+		 * @param otherUserCxIds Array of other users (i.e. party members) to add to the lobby as well. Will constrain things so that only lobbies with room for all players will be considered.
+
+		 */
+		void joinLobby(const std::string in_lobbyId, bool in_isReady, const std::string& in_extraJson, std::string in_teamCode, const std::vector<std::string>& in_otherUserCxIds, IServerCallback* in_callback);
+
 
 	private:
 		BrainCloudClient* m_client;

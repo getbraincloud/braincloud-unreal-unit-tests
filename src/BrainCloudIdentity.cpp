@@ -321,4 +321,22 @@ namespace BrainCloud
 		ServerCall * sc = new ServerCall(ServiceName::Identity, ServiceOperation::Detach, message, in_callback);
 		m_client->sendRequest(sc);
 	}
+
+	void BrainCloudIdentity::attachNonLoginUniversalId(const char * in_externalId, IServerCallback * in_callback)
+	{
+		Json::Value message;
+		message[OperationParam::IdentityServiceExternalId.getValue()] = in_externalId;
+
+		ServerCall * sc = new ServerCall(ServiceName::Identity, ServiceOperation::AttachNonLoginUniversalId, message, in_callback);
+		m_client->sendRequest(sc);
+	}
+
+	void BrainCloudIdentity::updateUniversalIdLogin(const char * in_externalId, IServerCallback * in_callback)
+	{
+		Json::Value message;
+		message[OperationParam::IdentityServiceExternalId.getValue()] = in_externalId;
+
+		ServerCall * sc = new ServerCall(ServiceName::Identity, ServiceOperation::UpdateUniversalIdLogin, message, in_callback);
+		m_client->sendRequest(sc);
+	}
 }

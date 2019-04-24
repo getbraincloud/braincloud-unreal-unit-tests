@@ -18,6 +18,8 @@ namespace BrainCloud
 	const ServiceOperation ServiceOperation::RefreshIdentity = ServiceOperation("REFRESH_IDENTITY");
 	const ServiceOperation ServiceOperation::ChangeEmailIdentity = ServiceOperation("CHANGE_EMAIL_IDENTITY");
 	const ServiceOperation ServiceOperation::AttachParentWithIdentity = ServiceOperation("ATTACH_PARENT_WITH_IDENTITY");
+	const ServiceOperation ServiceOperation::AttachNonLoginUniversalId = ServiceOperation("ATTACH_NONLOGIN_UNIVERSAL");
+	const ServiceOperation ServiceOperation::UpdateUniversalIdLogin = ServiceOperation("UPDATE_UNIVERSAL_LOGIN");
 	const ServiceOperation ServiceOperation::AttachPeerProfile = ServiceOperation("ATTACH_PEER_PROFILE");
 	const ServiceOperation ServiceOperation::DetachPeer = ServiceOperation("DETACH_PEER");
 	const ServiceOperation ServiceOperation::GetPeerProfiles = ServiceOperation("GET_PEER_PROFILES");
@@ -348,6 +350,7 @@ namespace BrainCloud
 	const ServiceOperation ServiceOperation::FindOrCreateLobby = ServiceOperation("FIND_OR_CREATE_LOBBY");
 	const ServiceOperation ServiceOperation::GetLobbyData = ServiceOperation("GET_LOBBY_DATA");
 	const ServiceOperation ServiceOperation::LeaveLobby = ServiceOperation("LEAVE_LOBBY");
+	const ServiceOperation ServiceOperation::JoinLobby = ServiceOperation("JOIN_LOBBY");
 	const ServiceOperation ServiceOperation::RemoveMember = ServiceOperation("REMOVE_MEMBER");
 	const ServiceOperation ServiceOperation::SendSignal = ServiceOperation("SEND_SIGNAL");
 	const ServiceOperation ServiceOperation::SwitchTeam = ServiceOperation("SWITCH_TEAM");
@@ -381,6 +384,7 @@ namespace BrainCloud
 	const ServiceOperation ServiceOperation::VirtualCurrencyGetCurrency = ServiceOperation("GET_PLAYER_VC");
 	const ServiceOperation ServiceOperation::VirtualCurrencyGetParentCurrency = ServiceOperation("GET_PARENT_VC");
 	const ServiceOperation ServiceOperation::VirtualCurrencyGetPeerCurrency = ServiceOperation("GET_PEER_VC");
+	const ServiceOperation ServiceOperation::VirtualCurrencyResetCurrency = ServiceOperation("RESET_PLAYER_VC");
 
 	//app store
 	const ServiceOperation ServiceOperation::AppStoreVerifyPurchase = ServiceOperation("VERIFY_PURCHASE");

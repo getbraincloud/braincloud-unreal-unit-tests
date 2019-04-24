@@ -63,6 +63,16 @@ namespace BrainCloud
         */
         void getPeerCurrency(const char* in_vcId, const std::string& in_peerCode, IServerCallback * in_callback = NULL);
 
+        /**
+        * Reset player's currency to zero
+        *
+        * Service Name - VirtualCurrency
+        * Service Operation - ResetCurrency
+        *
+        * @param in_callback The method to be invoked when the server response is received
+        */
+        void resetCurrency(IServerCallback * in_callback = NULL);
+
     private:
         BrainCloudClient * m_client;
     };

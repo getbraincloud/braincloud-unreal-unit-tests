@@ -42,3 +42,10 @@ TEST_F(TestBCVirtualCurrency, GetPeerCurrency)
     m_bc->getVirtualCurrencyService()->getPeerCurrency(NULL, "_invalid_peer_code_", &tr);
     tr.runExpectFail(m_bc, HTTP_BAD_REQUEST, PROFILE_PEER_NOT_FOUND);
 }
+
+TEST_F(TestBCVirtualCurrency, ResetCurrency)
+{
+    TestResult tr;
+    m_bc->getVirtualCurrencyService()->resetCurrency(&tr);
+    tr.run(m_bc);
+}

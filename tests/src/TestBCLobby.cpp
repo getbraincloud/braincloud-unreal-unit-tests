@@ -60,6 +60,20 @@ TEST_F(TestBCLobby, LeaveLobby)
 	tr.runExpectFail(m_bc, HTTP_BAD_REQUEST, LOBBY_NOT_FOUND);
 }
 
+TEST_F(TestBCLobby, JoinLobby)
+{
+	TestResult tr;
+	std::vector<std::string> otherUserCxIds;
+	//otherUserCxIds.push_back("5555");
+	//otherUserCxIds.push_back("aaa-bbb-ccc-ddd");
+	//m_bc->getLobbyService()->createLobby("4v4", 76, otherUserCxIds, true, "{}", "red", "{}", &tr);
+	//m_bc->getLobbyService()->joinLobby("20001:4v4:1", true, "{}", "red", otherUserCxIds, &tr);
+	m_bc->getLobbyService()->joinLobby("wrongLobbyId", true, "{}", "red", otherUserCxIds, &tr);
+
+	tr.runExpectFail(m_bc, HTTP_BAD_REQUEST, LOBBY_NOT_FOUND);
+}
+
+
 TEST_F(TestBCLobby, RemoveMember)
 {
 	TestResult tr;

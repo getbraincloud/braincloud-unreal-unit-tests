@@ -16,6 +16,28 @@ namespace BrainCloud
 		BrainCloudIdentity(BrainCloudClient* in_client);
 
 		/**
+		 * Updates univeral id of the current profile.
+		 *
+		 * Service Name - identity
+		 * Service Operation - UpdateUniversalIdLogin
+		 *
+		 * @param in_externalId the id that's been connected with
+		 * @param in_callback The method to be invoked when the server response is received
+		 */
+		void updateUniversalIdLogin(const char * in_externalId, IServerCallback * in_callback = NULL);
+
+		/**
+		 * Attaches a univeral id to the current profile with no login capability.
+		 *
+		 * Service Name - identity
+		 * Service Operation - AttachNonLoginUniversalId
+		 *
+		 * @param in_externalId the id that's been connected with
+		 * @param in_callback The method to be invoked when the server response is received
+		 */
+		void attachNonLoginUniversalId(const char * in_externalId, IServerCallback * in_callback = NULL);
+
+		/**
 		 * Attach the user's Facebook credentials to the current profile.
 		 *
 		 * Service Name - identity
