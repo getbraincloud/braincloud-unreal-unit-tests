@@ -78,7 +78,8 @@ namespace BrainCloud
 		m_client->sendRequest(sc);
 	}
 
-	void BrainCloudLobby::joinLobby(const std::string in_lobbyId, bool in_isReady, const std::string& in_extraJson, std::string in_teamCode, const std::vector<std::string>& in_otherUserCxIds, IServerCallback* in_callback)
+	void BrainCloudLobby::joinLobby(const std::string in_lobbyId, bool in_isReady, const std::string& in_extraJson, std::string in_teamCode, 
+			const std::vector<std::string>& in_otherUserCxIds, IServerCallback* in_callback)
 	{
 		Json::Value message;
 		message[OperationParam::LobbyId.getValue()] = in_lobbyId;
