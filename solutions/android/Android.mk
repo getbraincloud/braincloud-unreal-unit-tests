@@ -32,7 +32,7 @@ local_src_files := \
     $(LOCAL_PATH)/../../src/BrainCloudProfanity.cpp \
     $(LOCAL_PATH)/../../src/BrainCloudPushNotification.cpp \
     $(LOCAL_PATH)/../../src/BrainCloudRedemptionCode.cpp \
-    $(LOCAL_PATH)/../../src/BrainCloudRTTRegistration.cpp \
+    $(LOCAL_PATH)/../../src/BrainCloudRTT.cpp \
     $(LOCAL_PATH)/../../src/BrainCloudS3Handling.cpp \
     $(LOCAL_PATH)/../../src/BrainCloudScript.cpp \
     $(LOCAL_PATH)/../../src/BrainCloudSocialLeaderboard.cpp \

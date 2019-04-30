@@ -55,7 +55,7 @@
 #include "braincloud/BrainCloudFile.h"
 #include "braincloud/BrainCloudGroup.h"
 #include "braincloud/BrainCloudMail.h"
-#include "braincloud/BrainCloudRTTRegistration.h"
+#include "braincloud/BrainCloudRTT.h"
 #include "braincloud/BrainCloudChat.h"
 #include "braincloud/BrainCloudLobby.h"
 #include "braincloud/BrainCloudMessaging.h"
@@ -355,7 +355,7 @@ namespace BrainCloud
 		BrainCloudFile * getFileService() { return _fileService; }
 		BrainCloudGroup * getGroupService() { return _groupService; }
 		BrainCloudMail * getMailService() { return _mailService; }
-		BrainCloudRTTRegistration * getRTTRegistrationService() { return _rttRegistrationService; }
+		BrainCloudRTT * getRTTService() { return _rttService; }
 		BrainCloudChat * getChatService() { return _chatService; }
 		BrainCloudLobby * getLobbyService() { return _lobbyService; }
 		BrainCloudMessaging * getMessagingService() { return _messagingService; }
@@ -382,8 +382,6 @@ namespace BrainCloud
 			static std::string noAppId;
 			return noAppId;
 		}
-
-		const std::string& getRTTConnectionId() const;
 
 		const std::string & getReleasePlatform() const { return _releasePlatform; };
 
@@ -602,79 +600,6 @@ namespace BrainCloud
 		*/
 		void overrideLanguageCode(const char * in_languageCode) { _languageCode = in_languageCode; }
 
-		/**
-		 * Enables Real Time event for this session.
-		 * Real Time events are disabled by default. Usually events
-		 * need to be polled using GET_EVENTS. By enabling this, events will
-		 * be received instantly when they happen through a TCP connection to an Event Server.
-		 *
-		 * This function will first call requestClientConnection, then connect to the address
-		 *
-		 * @param callback The callback.
-		 * @param useWebSocket Use web sockets instead of TCP for the internal connections. Default is true
-		 */
-		void enableRTT(IRTTConnectCallback* in_callback, bool in_useWebSocket = true);
-
-		/**
-		 * Disables Real Time event for this session.
-		 */
-		void disableRTT();
-
-		/**
-		 *returns true if RTT is enabled 
-		 */
-		bool getRTTEnabled();
-
-		/**
-		 * Listen to real time events.
-		 * 
-		 * Notes: RTT must be enabled for this app, and enableRTT must have been successfully called.
-		 * Only one event callback can be registered at a time. Calling this a second time will override the previous callback.
-		 */
-		void registerRTTEventCallback(IRTTCallback* in_callback);
-		void deregisterRTTEventCallback();
-
-		/**
-		 * Listen to real time chat messages.
-		 * 
-		 * Notes: RTT must be enabled for this app, and enableRTT must have been successfully called.
-		 * Only one chat callback can be registered at a time. Calling this a second time will override the previous callback.
-		 */
-		void registerRTTChatCallback(IRTTCallback* in_callback);
-		void deregisterRTTChatCallback();
-
-		/**
-		 * Listen to real time messaging.
-		 * 
-		 * Notes: RTT must be enabled for this app, and enableRTT must have been successfully called.
-		 * Only one messaging callback can be registered at a time. Calling this a second time will override the previous callback.
-		 */
-		void registerRTTMessagingCallback(IRTTCallback* in_callback);
-		void deregisterRTTMessagingCallback();
-
-		/**
-		 * Listen to real time lobby events.
-		 * 
-		 * Notes: RTT must be enabled for this app, and enableRTT must have been successfully called.
-		 * Only one lobby callback can be registered at a time. Calling this a second time will override the previous callback.
-		 */
-		void registerRTTLobbyCallback(IRTTCallback* in_callback);
-		void deregisterRTTLobbyCallback();
-
-		/**
-		 * Listen to real time presence events.
-		 * 
-		 * Notes: RTT must be enabled for this app, and enableRTT must have been successfully called.
-		 * Only one presence callback can be registered at a time. Calling this a second time will override the previous callback.
-		 */
-		void registerRTTPresenceCallback(IRTTCallback* in_callback);
-		void deregisterRTTPresenceCallback();
-
-		/**
-		 * Clear all set RTT callbacks
-		 */
-		void deregisterAllRTTCallbacks();
-
 	protected:
 		void initializeComms(const char * in_serverURL, const char * in_appId, const std::map<std::string, std::string>& in_secretMap);
 
@@ -714,7 +639,7 @@ namespace BrainCloud
 		BrainCloudFile * _fileService;
 		BrainCloudGroup * _groupService;
 		BrainCloudMail * _mailService;
-		BrainCloudRTTRegistration * _rttRegistrationService;
+		BrainCloudRTT * _rttService;
 		BrainCloudChat * _chatService;
 		BrainCloudLobby * _lobbyService;
 		BrainCloudMessaging * _messagingService;
