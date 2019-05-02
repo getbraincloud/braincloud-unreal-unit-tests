@@ -67,3 +67,27 @@ TEST_F(TestBCAuth, ResetEmailPasswordAdvanced)
     m_bc->getAuthenticationService()->resetEmailPasswordAdvanced(email, content, &tr);
     tr.runExpectFail(m_bc, HTTP_BAD_REQUEST, INVALID_FROM_ADDRESS);
 }
+
+TEST_F(TestBCAuth, ResetUniversalIdPassword)
+{
+    TestResult tr2;
+    m_bc->getAuthenticationService()->authenticateUniversal(GetUser(UserA)->m_id, GetUser(UserA)->m_password, true, &tr2);
+    tr2.run(m_bc);
+
+    TestResult tr;
+    m_bc->getAuthenticationService()->resetUniversalIdPassword(GetUser(UserA)->m_id, &tr);
+    tr.run(m_bc);
+}
+
+TEST_F(TestBCAuth, ResetUniversalIdPasswordAdvanced)
+{
+    TestResult tr2;
+    m_bc->getAuthenticationService()->authenticateUniversal(GetUser(UserA)->m_id, GetUser(UserA)->m_password, true, &tr2);
+    tr2.run(m_bc);
+
+    std::string content = "{\"templateId\": \"d-template-id-guid\", \"substitutions\": { \":name\": \"John Doe\",\":resetLink\": \"www.dummuyLink.io\"}, \"categories\": [\"category1\",\"category2\" ]}"; //"{\"fromAddress\": \"fromAddress\",\"fromName\": \"fromName\",\"replyToAddress\": \"replyToAddress\",\"replyToName\": \"replyToName\", \"templateId\": \"8f14c77d-61f4-4966-ab6d-0bee8b13d090\",\"subject\": \"subject\",\"body\": \"Body goes here\", \"substitutions\": { \":name\": \"John Doe\",\":resetLink\": \"www.dummuyLink.io\"}, \"categories\": [\"category1\",\"category2\" ]}";
+
+    TestResult tr;
+    m_bc->getAuthenticationService()->resetUniversalIdPasswordAdvanced(GetUser(UserA)->m_id, content, &tr);
+    tr.run(m_bc);
+}
