@@ -113,7 +113,7 @@ void FHtml5SocketHelper::Tick(float DeltaTime)
 
 		if (!mHostWebSocket->mConnectSuccess)
 		{
-			FString strError = UTF8_TO_TCHAR(szError);
+			FString strError = ANSI_TO_TCHAR(szError);
 			mHostWebSocket->OnConnectError.Broadcast(strError);
 		}
 		else
@@ -282,6 +282,32 @@ Concurrency::task<void> UWebSocketBase::SendAsync(Platform::String ^ message)
 		});
 }
 
+Concurrency::task<void> UWebSocketBase::SendAsyncData(uint8* message)
+{
+	int sizeOfData = sizeof(data)/sizeof(uint8_t);
+	if (sizeOfData == 0)
+	{
+		return task_from_result();
+	}
+	
+	// iterate over the data, and write the bytes to the stream
+	for (uint8_t i = 0; i < sizeOfData; ++i) {
+		messageWriter->WriteByte(message[i]);
+	}
+	// and write the stream
+	return create_task(messageWriter->StoreAsync())
+		.then([this](task<unsigned int> previousTask) {
+			try
+			{
+				previousTask.get();
+			}
+			catch (Exception ^ ex)
+			{
+				return;
+			}
+		});
+}
+
 #endif
 
 void UWebSocketBase::Connect(const FString &uri, const TMap<FString, FString> &header)
@@ -308,7 +334,7 @@ void UWebSocketBase::Connect(const FString &uri, const TMap<FString, FString> &h
 	});
 #elif PLATFORM_HTML5
 	mHtml5SocketHelper.Bind(this);
-	std::string strUrl = TCHAR_TO_UTF8(*uri);
+	std::string strUrl = TCHAR_TO_ANSI(*uri);
 	mWebSocketRef = SocketCreate(strUrl.c_str());
 
 #else
@@ -372,14 +398,14 @@ void UWebSocketBase::Connect(const FString &uri, const TMap<FString, FString> &h
 	struct lws_client_connect_info connectInfo;
 	memset(&connectInfo, 0, sizeof(connectInfo));
 
-	std::string stdAddress = TCHAR_TO_UTF8(*strAddress);
-	std::string stdPath = TCHAR_TO_UTF8(*strPath);
-	std::string stdHost = TCHAR_TO_UTF8(*strHost);
+	std::string stdAddress = TCHAR_TO_ANSI(*strAddress);
+	std::string stdPath = TCHAR_TO_ANSI(*strPath);
+	std::string stdHost = TCHAR_TO_ANSI(*strHost);
 
 	connectInfo.context = mlwsContext;
 	connectInfo.address = stdAddress.c_str();
 	connectInfo.port = iPort;
-	connectInfo.ssl_connection = LCCSCF_USE_SSL | LCCSCF_ALLOW_SELFSIGNED | LCCSCF_SKIP_SERVER_CERT_HOSTNAME_CHECK; //iUseSSL;
+	connectInfo.ssl_connection = iUseSSL ? (LCCSCF_USE_SSL | LCCSCF_ALLOW_SELFSIGNED | LCCSCF_SKIP_SERVER_CERT_HOSTNAME_CHECK) : 0; //iUseSSL;
 	connectInfo.path = stdPath.c_str();
 	connectInfo.host = stdHost.c_str();
 	connectInfo.origin = stdHost.c_str();
@@ -387,7 +413,7 @@ void UWebSocketBase::Connect(const FString &uri, const TMap<FString, FString> &h
 	connectInfo.userdata = this;
 
 	mlws = lws_client_connect_via_info(&connectInfo);
-	//mlws = lws_client_connect_extended(mlwsContext, TCHAR_TO_UTF8(*strAddress), iPort, iUseSSL, TCHAR_TO_UTF8(*strPath), TCHAR_TO_UTF8(*strHost), TCHAR_TO_UTF8(*strHost), NULL, -1, (void*)this);
+	//mlws = lws_client_connect_extended(mlwsContext, TCHAR_TO_ANSI(*strAddress), iPort, iUseSSL, TCHAR_TO_ANSI(*strPath), TCHAR_TO_ANSI(*strHost), TCHAR_TO_ANSI(*strHost), NULL, -1, (void*)this);
 	if (mlws == nullptr)
 	{
 		return;
@@ -399,6 +425,7 @@ void UWebSocketBase::Connect(const FString &uri, const TMap<FString, FString> &h
 
 bool UWebSocketBase::SendText(const FString &data)
 {
+
 	bool bSentMessage = false;
 #if PLATFORM_UWP
 	bSentMessage = true;
@@ -406,7 +433,7 @@ bool UWebSocketBase::SendText(const FString &data)
 	});
 
 #elif PLATFORM_HTML5
-	std::string strData = TCHAR_TO_UTF8(*data);
+	std::string strData = TCHAR_TO_ANSI(*data);
 	SocketSend(mWebSocketRef, strData.c_str(), (int)strData.size());
 	bSentMessage = true;
 #else
@@ -429,14 +456,60 @@ bool UWebSocketBase::SendText(const FString &data)
 	return bSentMessage;
 }
 
+bool UWebSocketBase::SendData(uint8* data)
+{
+	bool bSentMessage = false;
+	int sizeOfData = sizeof(data)/sizeof(uint8_t);
+#if PLATFORM_UWP
+	bSentMessage = true;
+	SendAsyncData(data).then([this]() {
+	});
+
+#elif PLATFORM_HTML5
+	SocketSend(mWebSocketRef, data, sizeOfData);
+	bSentMessage = true;
+#else
+	if (sizeOfData > MAX_ECHO_PAYLOAD)
+	{
+		UE_LOG(WebSocket, Error, TEXT("too large package to send > MAX_ECHO_PAYLOAD:%d > %d"), sizeOfData, MAX_ECHO_PAYLOAD);
+		return bSentMessage;
+	}
+
+	if (mlws != nullptr)
+	{
+		mSendQueueData.Add(data);
+		bSentMessage = true;
+	}
+	else
+	{
+		UE_LOG(WebSocket, Error, TEXT("the socket is closed, SendText fail"));
+	}
+#endif
+	return bSentMessage;
+}
+
 void UWebSocketBase::ProcessWriteable()
 {
 #if PLATFORM_UWP
 #elif PLATFORM_HTML5
 #else
+
+	// write data
+	while (mSendQueueData.Num() > 0)
+	{
+		uint8* data = mSendQueueData[0];
+		int sizeOfData = sizeof(data)/sizeof(uint8_t);
+		unsigned char buf[LWS_PRE + MAX_ECHO_PAYLOAD];
+		memcpy(&buf[LWS_PRE], data, sizeOfData);
+		lws_write(mlws, &buf[LWS_PRE], sizeOfData, LWS_WRITE_BINARY);
+
+		mSendQueueData.RemoveAt(0);
+	}
+
+	// write text
 	while (mSendQueue.Num() > 0)
 	{
-		std::string strData = TCHAR_TO_UTF8(*mSendQueue[0]);
+		std::string strData = TCHAR_TO_ANSI(*mSendQueue[0]);
 
 		unsigned char buf[LWS_PRE + MAX_ECHO_PAYLOAD];
 		memcpy(&buf[LWS_PRE], strData.c_str(), strData.size());
@@ -449,7 +522,7 @@ void UWebSocketBase::ProcessWriteable()
 
 void UWebSocketBase::ProcessRead(const char *in, int len)
 {
-	FString strData = UTF8_TO_TCHAR(in);
+	FString strData = ANSI_TO_TCHAR(in);
 	OnReceiveData.Broadcast(strData);
 }
 
@@ -465,8 +538,8 @@ bool UWebSocketBase::ProcessHeader(unsigned char **p, unsigned char *end)
 
 	for (auto &it : mHeaderMap)
 	{
-		std::string strKey = TCHAR_TO_UTF8(*(it.Key));
-		std::string strValue = TCHAR_TO_UTF8(*(it.Value));
+		std::string strKey = TCHAR_TO_ANSI(*(it.Key));
+		std::string strValue = TCHAR_TO_ANSI(*(it.Value));
 
 		if (lws_add_http_header_by_name(mlws, (const unsigned char *)strKey.c_str(), (const unsigned char *)strValue.c_str(), (int)strValue.size(), p, end))
 		{

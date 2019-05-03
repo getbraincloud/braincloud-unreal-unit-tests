@@ -58,6 +58,9 @@ public:
   static const ServiceName Messaging;
   static const ServiceName Lobby;
 
+  // RS
+  static const ServiceName RoomServer;
+
   FString getValue() const { return _value; }
 
   bool operator==(const ServiceName &s) const;

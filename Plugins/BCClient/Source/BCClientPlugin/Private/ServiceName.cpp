@@ -61,6 +61,9 @@ const ServiceName ServiceName::Chat = ServiceName("chat");
 const ServiceName ServiceName::Messaging = ServiceName("messaging");
 const ServiceName ServiceName::Lobby = ServiceName("lobby");
 
+// RS
+const ServiceName ServiceName::RoomServer = ServiceName("roomServer");
+
 bool ServiceName::operator==(const ServiceName &s) const
 {
     return _value == s.getValue();
