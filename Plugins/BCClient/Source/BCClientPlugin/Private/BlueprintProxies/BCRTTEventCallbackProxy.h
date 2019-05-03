@@ -16,12 +16,12 @@ class UBCRTTEventCallbackProxy : public UBCBlueprintRTTCallProxyBase
 	/**
 	* 	
 	*/
-	UFUNCTION(BlueprintCallable, meta = (BlueprintInternalUseOnly = "true"), Category = "BrainCloud|Client")
+	UFUNCTION(BlueprintCallable, meta = (BlueprintInternalUseOnly = "true"), Category = "BrainCloud|RTT")
 	static UBCRTTEventCallbackProxy *RegisterRTTEventCallback(UBrainCloudWrapper *brainCloudWrapper);
 
 	/**
 	* 	
 	*/
-	UFUNCTION(BlueprintCallable, Category = "BrainCloud|Client")
+	UFUNCTION(BlueprintCallable, Category = "BrainCloud|RTT")
 	static void DeregisterRTTEventCallback(UBrainCloudWrapper *brainCloudWrapper);
 };

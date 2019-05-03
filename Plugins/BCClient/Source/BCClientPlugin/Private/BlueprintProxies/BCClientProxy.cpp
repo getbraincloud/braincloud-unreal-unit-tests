@@ -62,28 +62,6 @@ void UBCClientProxy::ResetCommunication(UBrainCloudWrapper *brainCloudWrapper)
 	UBCWrapperProxy::GetBrainCloudInstance(brainCloudWrapper)->getBCClient()->resetCommunication();
 }
 
-UBCClientProxy *UBCClientProxy::EnableRTT(UBrainCloudWrapper *brainCloudWrapper, eBCRTTConnectionType in_type)
-{
-	UBCClientProxy *Proxy = NewObject<UBCClientProxy>();
-	UBCWrapperProxy::GetBrainCloudInstance(brainCloudWrapper)->getBCClient()->enableRTT(in_type, Proxy);
-	return Proxy;
-}
-
-void UBCClientProxy::DisableRTT(UBrainCloudWrapper *brainCloudWrapper)
-{
-	UBCWrapperProxy::GetBrainCloudInstance(brainCloudWrapper)->getBCClient()->disableRTT();
-}
-
-void UBCClientProxy::SetRTTHeartBeatSeconds(UBrainCloudWrapper *brainCloudWrapper, int32 in_value)
-{
-	UBCWrapperProxy::GetBrainCloudInstance(brainCloudWrapper)->getBCClient()->setRTTHeartBeatSeconds(in_value);
-}
-
-void UBCClientProxy::DeregisterAllRTTCallbacks(UBrainCloudWrapper *brainCloudWrapper)
-{
-	UBCWrapperProxy::GetBrainCloudInstance(brainCloudWrapper)->getBCClient()->deregisterAllRTTCallbacks();
-}
-
 void UBCClientProxy::Heartbeat(UBrainCloudWrapper *brainCloudWrapper)
 {
 	UBCWrapperProxy::GetBrainCloudInstance(brainCloudWrapper)->getBCClient()->heartbeat();

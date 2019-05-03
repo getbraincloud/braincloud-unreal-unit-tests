@@ -13,11 +13,11 @@ UBCRTTPresenceCallbackProxy::UBCRTTPresenceCallbackProxy(const FObjectInitialize
 UBCRTTPresenceCallbackProxy *UBCRTTPresenceCallbackProxy::RegisterRTTPresenceCallback(UBrainCloudWrapper *brainCloudWrapper)
 {
 	UBCRTTPresenceCallbackProxy *Proxy = NewObject<UBCRTTPresenceCallbackProxy>();
-	UBCWrapperProxy::GetBrainCloudInstance(brainCloudWrapper)->getBCClient()->registerRTTPresenceCallback(Proxy);
+	UBCWrapperProxy::GetBrainCloudInstance(brainCloudWrapper)->getRTTService()->registerRTTPresenceCallback(Proxy);
 	return Proxy;
 }
 
 void UBCRTTPresenceCallbackProxy::DeregisterRTTPresenceCallback(UBrainCloudWrapper *brainCloudWrapper)
 {
-	UBCWrapperProxy::GetBrainCloudInstance(brainCloudWrapper)->getBCClient()->deregisterRTTPresenceCallback();
+	UBCWrapperProxy::GetBrainCloudInstance(brainCloudWrapper)->getRTTService()->deregisterRTTPresenceCallback();
 }

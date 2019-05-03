@@ -1,0 +1,36 @@
+// Copyright 2018 bitHeads, Inc. All Rights Reserved.
+
+#include "BCClientPluginPrivatePCH.h"
+#include "BrainCloudClient.h"
+#include "ServerCall.h"
+
+#include "BCWrapperProxy.h"
+#include "BrainCloudWrapper.h"
+#include "BCRTTProxy.h"
+
+UBCRTTProxy::UBCRTTProxy(const FObjectInitializer &ObjectInitializer)
+    : Super(ObjectInitializer)
+{
+}
+
+UBCRTTProxy *UBCRTTProxy::EnableRTT(UBrainCloudWrapper *brainCloudWrapper, eBCRTTConnectionType in_type)
+{
+	UBCRTTProxy *Proxy = NewObject<UBCRTTProxy>();
+	UBCWrapperProxy::GetBrainCloudInstance(brainCloudWrapper)->getRTTService()->enableRTT(in_type, Proxy);
+	return Proxy;
+}
+
+void UBCRTTProxy::DisableRTT(UBrainCloudWrapper *brainCloudWrapper)
+{
+	UBCWrapperProxy::GetBrainCloudInstance(brainCloudWrapper)->getRTTService()->disableRTT();
+}
+
+void UBCRTTProxy::SetRTTHeartBeatSeconds(UBrainCloudWrapper *brainCloudWrapper, int32 in_value)
+{
+	UBCWrapperProxy::GetBrainCloudInstance(brainCloudWrapper)->getRTTService()->setRTTHeartBeatSeconds(in_value);
+}
+
+void UBCRTTProxy::DeregisterAllRTTCallbacks(UBrainCloudWrapper *brainCloudWrapper)
+{
+	UBCWrapperProxy::GetBrainCloudInstance(brainCloudWrapper)->getRTTService()->deregisterAllRTTCallbacks();
+}

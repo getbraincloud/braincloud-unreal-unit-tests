@@ -16,12 +16,12 @@ class UBCRTTPresenceCallbackProxy : public UBCBlueprintRTTCallProxyBase
 	/**
 	* 	
 	*/
-	UFUNCTION(BlueprintCallable, meta = (BlueprintInternalUseOnly = "true"), Category = "BrainCloud|Client")
+	UFUNCTION(BlueprintCallable, meta = (BlueprintInternalUseOnly = "true"), Category = "BrainCloud|RTT")
 	static UBCRTTPresenceCallbackProxy *RegisterRTTPresenceCallback(UBrainCloudWrapper *brainCloudWrapper);
 
 	/**
 	* 	
 	*/
-	UFUNCTION(BlueprintCallable, Category = "BrainCloud|Client")
+	UFUNCTION(BlueprintCallable, Category = "BrainCloud|RTT")
 	static void DeregisterRTTPresenceCallback(UBrainCloudWrapper *brainCloudWrapper);
 };

@@ -428,7 +428,7 @@ void BrainCloudRSComms::setupWebSocket(const FString &in_url)
 	m_connectedSocket->Connect(in_url, headersMap);
 
 	send(buildConnectionRequest());
-	send(buildConnectionRequestTest());
+	//send(buildConnectionRequestTest());
 }
 
 void BrainCloudRSComms::webSocket_OnClose()
