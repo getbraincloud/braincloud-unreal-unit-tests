@@ -13,11 +13,11 @@ UBCRTTLobbyCallbackProxy::UBCRTTLobbyCallbackProxy(const FObjectInitializer &Obj
 UBCRTTLobbyCallbackProxy *UBCRTTLobbyCallbackProxy::RegisterRTTLobbyCallback(UBrainCloudWrapper *brainCloudWrapper)
 {
 	UBCRTTLobbyCallbackProxy *Proxy = NewObject<UBCRTTLobbyCallbackProxy>();
-	UBCWrapperProxy::GetBrainCloudInstance(brainCloudWrapper)->getBCClient()->registerRTTLobbyCallback(Proxy);
+	UBCWrapperProxy::GetBrainCloudInstance(brainCloudWrapper)->getRTTService()->registerRTTLobbyCallback(Proxy);
 	return Proxy;
 }
 
 void UBCRTTLobbyCallbackProxy::DeregisterRTTLobbyCallback(UBrainCloudWrapper *brainCloudWrapper)
 {
-	UBCWrapperProxy::GetBrainCloudInstance(brainCloudWrapper)->getBCClient()->deregisterRTTLobbyCallback();
+	UBCWrapperProxy::GetBrainCloudInstance(brainCloudWrapper)->getRTTService()->deregisterRTTLobbyCallback();
 }
