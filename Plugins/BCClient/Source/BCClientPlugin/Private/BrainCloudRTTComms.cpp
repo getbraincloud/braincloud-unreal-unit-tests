@@ -22,7 +22,7 @@
 #include "WebSocketBase.h"
 #include <iostream>
 
-#define MAX_PAYLOAD 64 * 1024
+#define MAX_PAYLOAD_RTT 64 * 1024
 #define INITIAL_HEARTBEAT_TIME 10
 
 #if PLATFORM_UWP
@@ -32,10 +32,10 @@ static struct lws_protocols protocols[] = {
 	/* first protocol must always be HTTP handler */
 
 	{
-		"", /* name - can be overridden with -e */
+		"bcrtt",
 		&BrainCloudRTTComms::callback_echo,
-		MAX_PAYLOAD,
-		MAX_PAYLOAD,
+		MAX_PAYLOAD_RTT,
+		MAX_PAYLOAD_RTT,
 	},
 	{
 		NULL, NULL, 0 /* End of list */
@@ -51,19 +51,20 @@ static const struct lws_extension exts[] = {
 	{NULL, NULL, NULL /* terminator */}};
 #endif
 
-BrainCloudRTTComms::BrainCloudRTTComms(BrainCloudClient *client) : m_client(client),
-																   m_appCallback(nullptr),
-																   m_connectedSocket(nullptr),
-																   m_commsPtr(nullptr),
-																   m_cxId(TEXT("")),
-																   m_eventServer(TEXT("")),
-																   m_rttHeaders(nullptr),
-																   m_endpoint(nullptr),
-																   m_heartBeatSecs(INITIAL_HEARTBEAT_TIME),
-																   m_timeSinceLastRequest(0),
-																   m_lastNowMS(FPlatformTime::Seconds()),
-																   m_bIsConnected(false),
-																   m_lwsContext(nullptr)
+BrainCloudRTTComms::BrainCloudRTTComms(BrainCloudClient *client) 
+: m_client(client)
+, m_appCallback(nullptr)
+, m_connectedSocket(nullptr)
+, m_commsPtr(nullptr)
+, m_cxId(TEXT(""))
+, m_eventServer(TEXT(""))
+, m_rttHeaders(nullptr)
+, m_endpoint(nullptr)
+, m_heartBeatSecs(INITIAL_HEARTBEAT_TIME)
+, m_timeSinceLastRequest(0)
+, m_lastNowMS(FPlatformTime::Seconds())
+, m_bIsConnected(false)
+, m_lwsContext(nullptr)
 {
 }
 
@@ -395,9 +396,8 @@ void BrainCloudRTTComms::setupWebSocket(const FString &in_url)
 		info.port = -1;
 		info.gid = -1;
 		info.uid = -1;
-		info.extensions = exts;
 		info.options = LWS_SERVER_OPTION_VALIDATE_UTF8;
-		info.options |= LWS_SERVER_OPTION_DO_SSL_GLOBAL_INIT;
+        info.options |= LWS_SERVER_OPTION_DO_SSL_GLOBAL_INIT;
 
 		m_lwsContext = lws_create_context(&info);
 	}

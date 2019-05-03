@@ -120,6 +120,9 @@ class BCCLIENTPLUGIN_API UWebSocketBase : public UObject
 	UFUNCTION(BlueprintCallable, Category = WebSocket)
 	bool SendText(const FString &data);
 
+	//UFUNCTION(BlueprintCallable, Category = WebSocket)
+	bool SendData(uint8* data);
+
 	UFUNCTION(BlueprintCallable, Category = WebSocket)
 	void Close();
 
@@ -157,5 +160,6 @@ class BCCLIENTPLUGIN_API UWebSocketBase : public UObject
 #endif
 
 	TArray<FString> mSendQueue;
+	TArray<uint8*> mSendQueueData;
 	TMap<FString, FString> mHeaderMap;
 };
