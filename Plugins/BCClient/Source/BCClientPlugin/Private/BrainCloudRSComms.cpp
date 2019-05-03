@@ -36,7 +36,7 @@ static struct lws_protocols protocolsRS[] = {
 	},
 	{
 		NULL, NULL, 0 /* End of list */
-	}};
+	} };
 
 static const struct lws_extension extsRS[] = {
 	{"permessage-deflate",
@@ -45,11 +45,18 @@ static const struct lws_extension extsRS[] = {
 	{"deflate-frame",
 	 lws_extension_callback_pm_deflate,
 	 "deflate_frame"},
-	{NULL, NULL, NULL /* terminator */}};
+	{NULL, NULL, NULL /* terminator */} };
 #endif
 
 BrainCloudRSComms::BrainCloudRSComms(BrainCloudClient *client)
-	: m_client(client), m_appCallback(nullptr), m_commsPtr(nullptr), m_registeredRSCallbacks(nullptr), m_registeredRSBluePrintCallbacks(nullptr), m_connectedSocket(nullptr), m_bIsConnected(false), m_lwsContext(nullptr)
+	: m_client(client)
+	, m_appCallback(nullptr)
+	, m_commsPtr(nullptr)
+	, m_registeredRSCallbacks(nullptr)
+	, m_registeredRSBluePrintCallbacks(nullptr)
+	, m_connectedSocket(nullptr)
+	, m_bIsConnected(false)
+	, m_lwsContext(nullptr)
 {
 }
 
@@ -187,6 +194,7 @@ int BrainCloudRSComms::callback_echo(struct lws *wsi, enum lws_callback_reasons 
 }
 #endif
 
+
 void BrainCloudRSComms::connectWebSocket(FString in_host, int in_port, bool in_sslEnabled)
 {
 	FString url = (in_sslEnabled ? "wss://" : "ws://") + in_host + ":" + FString::FromInt(in_port);
@@ -248,6 +256,7 @@ bool BrainCloudRSComms::send(TArray<uint8> in_message, uint8 in_controlHeader /*
 	header.Add(in_controlHeader);
 	TArray<uint8> toReturn = concatenateByteArrays(header, in_message);
 
+
 	// append the size
 	TArray<uint8> toSendData = appendSizeBytes(toReturn);
 	bMessageSent = m_connectedSocket->SendData(toSendData.GetData());
@@ -266,6 +275,7 @@ bool BrainCloudRSComms::send(TArray<uint8> in_message, uint8 in_controlHeader /*
 
 void BrainCloudRSComms::ping()
 {
+
 }
 
 void BrainCloudRSComms::startReceivingRSConnectionAsync()
@@ -290,8 +300,7 @@ void BrainCloudRSComms::startReceivingRSConnectionAsync()
 		//connectUDPAsync(host, port);
 	}
 	break;
-	default:
-		break;
+	default: break;
 	}
 }
 
@@ -316,7 +325,7 @@ FString BrainCloudRSComms::buildConnectionRequest()
 {
 	TSharedRef<FJsonObject> json = MakeShareable(new FJsonObject());
 
-	json->SetStringField("profileId", "b09994cb-d91d-4060-876c-5430756ead7d"); //m_client->getProfileId());
+	json->SetStringField("profileId", "b09994cb-d91d-4060-876c-5430756ead7d");//m_client->getProfileId());
 	json->SetStringField("lobbyId", m_connectOptions["lobbyId"]);
 	json->SetStringField("passcode", m_connectOptions["passcode"]);
 
@@ -397,7 +406,7 @@ void BrainCloudRSComms::setupWebSocket(const FString &in_url)
 		info.gid = -1;
 		info.uid = -1;
 		info.extensions = extsRS;
-		info.options = 0; //LWS_SERVER_OPTION_DO_SSL_GLOBAL_INIT;
+		info.options = 0;//LWS_SERVER_OPTION_DO_SSL_GLOBAL_INIT;
 
 		m_lwsContext = lws_create_context(&info);
 	}
@@ -428,7 +437,6 @@ void BrainCloudRSComms::setupWebSocket(const FString &in_url)
 	m_connectedSocket->Connect(in_url, headersMap);
 
 	send(buildConnectionRequest());
-	//send(buildConnectionRequestTest());
 }
 
 void BrainCloudRSComms::webSocket_OnClose()
@@ -463,7 +471,7 @@ void BrainCloudRSComms::webSocket_OnError(const FString &in_message)
 void BrainCloudRSComms::onRecv(const FString &in_message)
 {
 	//if (m_client->isLoggingEnabled())
-	UE_LOG(LogBrainCloudComms, Log, TEXT("%s"), * in_message);
+	UE_LOG(LogBrainCloudComms, Log, TEXT("%s"), *in_message);
 }
 
 FString BrainCloudRSComms::buildRSRequestError(FString in_statusMessage)
