@@ -72,7 +72,7 @@ void BrainCloudChat::getRecentChatMessages(const FString &in_channelId, int32 in
 {
     TSharedRef<FJsonObject> message = MakeShareable(new FJsonObject());
     message->SetStringField(OperationParam::ChatChannelId.getValue(), in_channelId);
-    message->SetNumberField(OperationParam::ChatVersion.getValue(), in_maxToReturn);
+    message->SetNumberField(OperationParam::ChatMaxReturn.getValue(), in_maxToReturn);
 
     ServerCall *sc = new ServerCall(ServiceName::Chat, ServiceOperation::GetRecentChatMessages, message, in_callback);
     _client->sendRequest(sc);
