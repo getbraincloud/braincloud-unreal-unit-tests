@@ -134,7 +134,7 @@ class BCCLIENTPLUGIN_API BrainCloudFriend
 	void findPlayerByUniversalId(const FString &searchText, int32 maxResults, IServerCallback *callback = nullptr);
 
 	/**
-	* @deprecated Use readFriendUserState instead - removal after February 1 2017
+	* @deprecated Use findUserByExactUniversalId instead - removal after Feburary 1 2019
 	*/
 	void findUserByUniversalId(const FString &searchText, int32 maxResults, IServerCallback *callback = nullptr);
 
