@@ -173,6 +173,11 @@ class BCCLIENTPLUGIN_API BrainCloudLobby
     */
     void removeMember(const FString &in_lobbyID, const FString &in_connectionId, IServerCallback *in_callback);
 
+    /// <summary>
+    /// Cancel this members Find, Join and Searching of Lobbies
+    /// </summary>
+    void cancelFindRequest(const FString& in_lobbyType, IServerCallback* in_callback);
+
   private:
     BrainCloudClient *_client = nullptr;
 };
