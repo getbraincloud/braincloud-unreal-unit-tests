@@ -274,6 +274,8 @@ void BrainCloudRTTComms::disconnect()
 	m_eventServer = TEXT("");
 
 	m_bIsConnected = false;
+	
+	m_appCallback = nullptr;
 }
 
 void BrainCloudRTTComms::connect()
@@ -353,15 +355,16 @@ void BrainCloudRTTComms::processRegisteredListeners(const FString &in_service, c
 	}
 	else if (in_operation == TEXT("error") || in_operation == TEXT("disconnect"))
 	{
-		if (in_operation == TEXT("disconnect"))
-		{
-			disconnect();
-		}
-
 		// error callback!
 		if (m_appCallback != nullptr)
 		{
 			m_appCallback->serverError(ServiceName::RTTRegistration, ServiceOperation::Connect, 400, -1, in_jsonMessage);
+		}
+
+		if (in_operation == TEXT("disconnect"))
+		{
+			// this may remove the callback
+			disconnect();
 		}
 	}
 }
