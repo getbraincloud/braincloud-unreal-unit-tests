@@ -401,6 +401,7 @@ const ServiceOperation ServiceOperation::SendSignal = ServiceOperation("SEND_SIG
 const ServiceOperation ServiceOperation::JoinLobby = ServiceOperation("JOIN_LOBBY");
 const ServiceOperation ServiceOperation::LeaveLobby = ServiceOperation("LEAVE_LOBBY");
 const ServiceOperation ServiceOperation::RemoveMember = ServiceOperation("REMOVE_MEMBER");
+const ServiceOperation ServiceOperation::CancelFindRequest = ServiceOperation("CANCEL_FIND_REQUEST");
 
 bool ServiceOperation::operator==(const ServiceOperation &s) const
 {

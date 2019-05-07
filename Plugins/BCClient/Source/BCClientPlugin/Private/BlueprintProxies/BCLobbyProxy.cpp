@@ -97,3 +97,10 @@ UBCLobbyProxy *UBCLobbyProxy::UpdateLobbyConfig(UBrainCloudWrapper *brainCloud, 
 	UBCWrapperProxy::GetBrainCloudInstance(brainCloud)->getLobbyService()->updateLobbyConfig(in_lobbyID, in_configJson, Proxy);
 	return Proxy;
 }
+
+UBCLobbyProxy *UBCLobbyProxy::CancelFindRequest(UBrainCloudWrapper *brainCloud, const FString &in_lobbyType)
+{
+	UBCLobbyProxy *Proxy = NewObject<UBCLobbyProxy>();
+	UBCWrapperProxy::GetBrainCloudInstance(brainCloud)->getLobbyService()->cancelFindRequest(in_lobbyType, Proxy);
+	return Proxy;
+}
