@@ -91,10 +91,10 @@ UBCLobbyProxy *UBCLobbyProxy::RemoveMember(UBrainCloudWrapper *brainCloud, const
 	return Proxy;
 }
 
-UBCLobbyProxy *UBCLobbyProxy::UpdateLobbyConfig(UBrainCloudWrapper *brainCloud, const FString &in_lobbyID, const FString &in_configJson)
+UBCLobbyProxy *UBCLobbyProxy::UpdateSettings(UBrainCloudWrapper *brainCloud, const FString &in_lobbyID, const FString &in_configJson)
 {
 	UBCLobbyProxy *Proxy = NewObject<UBCLobbyProxy>();
-	UBCWrapperProxy::GetBrainCloudInstance(brainCloud)->getLobbyService()->updateLobbyConfig(in_lobbyID, in_configJson, Proxy);
+	UBCWrapperProxy::GetBrainCloudInstance(brainCloud)->getLobbyService()->updateSettings(in_lobbyID, in_configJson, Proxy);
 	return Proxy;
 }
 

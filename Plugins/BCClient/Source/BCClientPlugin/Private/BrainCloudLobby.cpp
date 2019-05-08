@@ -91,13 +91,13 @@ void BrainCloudLobby::updateReady(const FString &in_lobbyID, bool in_isReady, co
     _client->sendRequest(sc);
 }
 
-void BrainCloudLobby::updateLobbyConfig(const FString &in_lobbyID, const FString &in_configJson, IServerCallback *in_callback)
+void BrainCloudLobby::updateSettings(const FString &in_lobbyID, const FString &in_configJson, IServerCallback *in_callback)
 {
     TSharedRef<FJsonObject> message = MakeShareable(new FJsonObject());
     message->SetStringField(OperationParam::LobbyIdentifier.getValue(), in_lobbyID);
     message->SetObjectField(OperationParam::LobbySettings.getValue(), JsonUtil::jsonStringToValue(in_configJson));
 
-    ServerCall *sc = new ServerCall(ServiceName::Lobby, ServiceOperation::UpdateLobbyConfig, message, in_callback);
+    ServerCall *sc = new ServerCall(ServiceName::Lobby, ServiceOperation::UpdateSettings, message, in_callback);
     _client->sendRequest(sc);
 }
 
