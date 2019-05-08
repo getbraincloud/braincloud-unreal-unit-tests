@@ -74,7 +74,7 @@ BrainCloudRTTComms::~BrainCloudRTTComms()
 	deregisterAllRTTCallbacks();
 }
 
-void BrainCloudRTTComms::enableRTT(eBCRTTConnectionType in_connectionType, IServerCallback *callback)
+void BrainCloudRTTComms::enableRTT(BCRTTConnectionType in_connectionType, IServerCallback *callback)
 {
 	if (!m_bIsConnected)
 	{

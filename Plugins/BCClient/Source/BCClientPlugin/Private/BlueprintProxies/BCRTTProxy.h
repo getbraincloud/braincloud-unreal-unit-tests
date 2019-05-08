@@ -22,7 +22,7 @@ public:
 	* This function will first call requestClientConnection, then connect to the address
 	*/
 	UFUNCTION(BlueprintCallable, meta = (BlueprintInternalUseOnly = "true"), Category = "BrainCloud|RTT")
-	static UBCRTTProxy *EnableRTT(UBrainCloudWrapper *brainCloudWrapper, eBCRTTConnectionType in_type);
+	static UBCRTTProxy *EnableRTT(UBrainCloudWrapper *brainCloudWrapper, BCRTTConnectionType in_type);
 
 	/*
 	* Disables Real Time event for this session.

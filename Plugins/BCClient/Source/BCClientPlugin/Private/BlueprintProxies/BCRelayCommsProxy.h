@@ -3,17 +3,17 @@
 #pragma once
 
 #include "BCBlueprintCallProxyBase.h"
-#include "BCRSCommsProxy.generated.h"
+#include "BCRelayCommsProxy.generated.h"
 
 class BrainCloudRelayComms;
 
 UCLASS(MinimalAPI)
-class UBCRSCommsProxy : public UBCBlueprintCallProxyBase
+class UBCRelayCommsProxy : public UBCBlueprintCallProxyBase
 {
 	GENERATED_BODY()
 
 public:
-	UBCRSCommsProxy(const FObjectInitializer &ObjectInitializer);
+	UBCRelayCommsProxy(const FObjectInitializer &ObjectInitializer);
 	virtual void BeginDestroy() override;
 
 	void SetRelayComms(BrainCloudRelayComms *in_comms);

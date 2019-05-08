@@ -13,7 +13,7 @@ UBCRTTProxy::UBCRTTProxy(const FObjectInitializer &ObjectInitializer)
 {
 }
 
-UBCRTTProxy *UBCRTTProxy::EnableRTT(UBrainCloudWrapper *brainCloudWrapper, eBCRTTConnectionType in_type)
+UBCRTTProxy *UBCRTTProxy::EnableRTT(UBrainCloudWrapper *brainCloudWrapper, BCRTTConnectionType in_type)
 {
 	UBCRTTProxy *Proxy = NewObject<UBCRTTProxy>();
 	UBCWrapperProxy::GetBrainCloudInstance(brainCloudWrapper)->getRTTService()->enableRTT(in_type, Proxy);

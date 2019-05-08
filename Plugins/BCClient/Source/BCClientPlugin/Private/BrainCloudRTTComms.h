@@ -14,7 +14,7 @@
  #undef UI
 #endif
 
-enum class eBCRTTConnectionType : uint8;
+enum class BCRTTConnectionType : uint8;
 class IRTTCallback;
 class ServiceOperation;
 class ServiceName;
@@ -33,7 +33,7 @@ class BrainCloudRTTComms : public IServerCallback
 	BrainCloudRTTComms(BrainCloudClient *client);
 	~BrainCloudRTTComms();
 
-	void enableRTT(eBCRTTConnectionType in_connectionType, IServerCallback *callback);
+	void enableRTT(BCRTTConnectionType in_connectionType, IServerCallback *callback);
 	void disableRTT();
 	bool isRTTEnabled();
 	void RunCallbacks();
@@ -106,7 +106,7 @@ class BrainCloudRTTComms : public IServerCallback
 	float m_timeSinceLastRequest;
 	float m_lastNowMS;
 
-	eBCRTTConnectionType m_connectionType;
+	BCRTTConnectionType m_connectionType;
 	bool m_bIsConnected;
 
 	struct lws_context *m_lwsContext;

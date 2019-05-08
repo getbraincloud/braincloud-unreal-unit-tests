@@ -16,7 +16,7 @@
 #include "IGlobalErrorCallback.h"
 #include "INetworkErrorCallback.h"
 #include "IRTTCallback.h"
-#include "IRSCallback.h"
+#include "IRelayCallback.h"
 #include "BCPlatform.h"
 
 // Define all static member variables.
