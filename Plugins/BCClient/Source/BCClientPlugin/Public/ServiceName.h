@@ -59,7 +59,7 @@ public:
   static const ServiceName Lobby;
 
   // RS
-  static const ServiceName RoomServer;
+  static const ServiceName Relay;
 
   FString getValue() const { return _value; }
 

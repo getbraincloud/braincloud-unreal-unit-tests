@@ -38,6 +38,7 @@
 #include "BrainCloudPresence.h"
 #include "BrainCloudVirtualCurrency.h"
 #include "BrainCloudAppStore.h"
+#include "BrainCloudRelay.h"
 
 class BrainCloudComms;
 class BrainCloudRTTComms;
@@ -286,6 +287,7 @@ class BCCLIENTPLUGIN_API BrainCloudClient
 	BrainCloudLobby *getLobbyService();
 	BrainCloudChat *getChatService();
 	BrainCloudMessaging *getMessagingService();
+	BrainCloudRelay *getRelayService();
 
 	/**
 	* @deprecated Use getAppId instead - removal after September 1 2017
@@ -313,7 +315,6 @@ class BCCLIENTPLUGIN_API BrainCloudClient
 	const TArray<int32> &getPacketTimeouts();
 
 	BrainCloudComms *getBrainCloudComms() { return _brainCloudComms; }
-	BrainCloudRTTComms *getBrainCloudRTTComms() { return _brainCloudRTTComms; }
 
 	/**
 	* Gets the authentication packet timeout which is tracked separately
@@ -537,6 +538,8 @@ class BCCLIENTPLUGIN_API BrainCloudClient
 	BrainCloudLobby *_lobbyService = nullptr;
 	BrainCloudChat *_chatService = nullptr;
 	BrainCloudMessaging *_messagingService = nullptr;
+
+	BrainCloudRelay *_relayService = nullptr;
 
 	static FString s_brainCloudClientVersion;
 
