@@ -62,13 +62,13 @@ enum class eBCUpdateType : uint8
 };
 
 UENUM(BlueprintType)
-enum class eBCRTTConnectionType : uint8
+enum class BCRTTConnectionType : uint8
 {
 	WEBSOCKET UMETA(DisplayName = "WEBSOCKET")
 };
 
 UENUM(BlueprintType)
-enum class eBCRSConnectionType : uint8
+enum class BCRelayConnectionType : uint8
 {
 	WEBSOCKET UMETA(DisplayName = "WEBSOCKET"),
 	TCP UMETA(DisplayName = "TCP"),

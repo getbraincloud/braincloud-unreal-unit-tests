@@ -2,7 +2,7 @@
 
 #pragma once
 
-enum class eBCRTTConnectionType : uint8;
+enum class BCRTTConnectionType : uint8;
 class BrainCloudClient;
 class BrainCloudRTTComms;
 class UBCBlueprintRTTCallProxyBase;
@@ -27,7 +27,7 @@ class BCCLIENTPLUGIN_API BrainCloudRTT
 	*
 	* This function will first call requestClientConnection, then connect to the address
 	*/
-	void enableRTT(eBCRTTConnectionType in_type, IServerCallback *in_callback);
+	void enableRTT(BCRTTConnectionType in_type, IServerCallback *in_callback);
 
 	/*
 	* Disables Real Time event for this session.

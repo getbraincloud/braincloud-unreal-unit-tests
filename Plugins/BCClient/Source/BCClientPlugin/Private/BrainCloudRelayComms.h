@@ -17,8 +17,8 @@
  #undef UI
 #endif
 
-enum class eBCRSConnectionType : uint8;
-class IRSCallback;
+enum class BCRelayConnectionType : uint8;
+class IRelayCallback;
 class ServiceOperation;
 class ServiceName;
 class INetworkErrorCallback;
@@ -27,8 +27,8 @@ class BCFileUploader;
 class BrainCloudClient;
 class FJsonObject;
 class UWebSocketBase;
-class UBCRSCommsProxy;
-class UBCBlueprintRSCallProxyBase;
+class UBCRelayCommsProxy;
+class UBCBlueprintRelayCallProxyBase;
 
 class BrainCloudRelayComms
 {
@@ -46,10 +46,10 @@ class BrainCloudRelayComms
 	BrainCloudRelayComms(BrainCloudClient *client);
 	~BrainCloudRelayComms();
 
-	void connect(eBCRSConnectionType in_connectionType, const FString &in_connectOptionsJson, IServerCallback *callback);
+	void connect(BCRelayConnectionType in_connectionType, const FString &in_connectOptionsJson, IServerCallback *callback);
 	void disconnect();
-	void registerDataCallback(IRSCallback *callback);
-	void registerDataCallback(UBCBlueprintRSCallProxyBase *callback);
+	void registerDataCallback(IRelayCallback *callback);
+	void registerDataCallback(UBCBlueprintRelayCallProxyBase *callback);
 	void deregisterDataCallback();
 
 	bool send(const FString &in_message, const uint8 in_controlHeader = RECV_CTRL_RSMG);
@@ -86,15 +86,15 @@ class BrainCloudRelayComms
 	BrainCloudClient *m_client;
 	IServerCallback *m_appCallback;
 
-	UBCRSCommsProxy *m_commsPtr;
+	UBCRelayCommsProxy *m_commsPtr;
 
-	IRSCallback * m_registeredRSCallbacks;
-	UBCBlueprintRSCallProxyBase * m_registeredRSBluePrintCallbacks;
+	IRelayCallback * m_registeredRelayCallbacks;
+	UBCBlueprintRelayCallProxyBase * m_registeredRelayBluePrintCallbacks;
 
 	UWebSocketBase *m_connectedSocket;
 
 	bool m_bIsConnected;
-	eBCRSConnectionType m_connectionType;
+	BCRelayConnectionType m_connectionType;
 	TMap<FString, FString> m_connectOptions;
 
 	struct lws_context *m_lwsContext;

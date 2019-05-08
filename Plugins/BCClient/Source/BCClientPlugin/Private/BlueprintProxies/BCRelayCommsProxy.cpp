@@ -2,14 +2,14 @@
 
 #include "BCClientPluginPrivatePCH.h"
 #include "BrainCloudRelayComms.h"
-#include "BCRSCommsProxy.h"
+#include "BCRelayCommsProxy.h"
 
-UBCRSCommsProxy::UBCRSCommsProxy(const FObjectInitializer &ObjectInitializer)
+UBCRelayCommsProxy::UBCRelayCommsProxy(const FObjectInitializer &ObjectInitializer)
     : Super(ObjectInitializer)
 {
 }
 
-void UBCRSCommsProxy::BeginDestroy()
+void UBCRelayCommsProxy::BeginDestroy()
 {
     Super::BeginDestroy();
     if (!this->IsValidLowLevel())
@@ -21,27 +21,27 @@ void UBCRSCommsProxy::BeginDestroy()
     m_commsPtr = nullptr;
 }
 
-void UBCRSCommsProxy::SetRelayComms(BrainCloudRelayComms *in_comms)
+void UBCRelayCommsProxy::SetRelayComms(BrainCloudRelayComms *in_comms)
 {
     m_commsPtr = in_comms;
 }
 
-void UBCRSCommsProxy::WebSocket_OnClose()
+void UBCRelayCommsProxy::WebSocket_OnClose()
 {
     m_commsPtr->webSocket_OnClose();
 }
 
-void UBCRSCommsProxy::Websocket_OnOpen()
+void UBCRelayCommsProxy::Websocket_OnOpen()
 {
     m_commsPtr->websocket_OnOpen();
 }
 
-void UBCRSCommsProxy::WebSocket_OnMessage(const FString &in_data)
+void UBCRelayCommsProxy::WebSocket_OnMessage(const FString &in_data)
 {
     m_commsPtr->webSocket_OnMessage(in_data);
 }
 
-void UBCRSCommsProxy::WebSocket_OnError(const FString &in_error)
+void UBCRelayCommsProxy::WebSocket_OnError(const FString &in_error)
 {
     m_commsPtr->webSocket_OnError(in_error);
 }

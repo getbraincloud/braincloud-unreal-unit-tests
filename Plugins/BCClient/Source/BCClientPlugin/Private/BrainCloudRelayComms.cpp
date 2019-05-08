@@ -8,7 +8,7 @@
 #include "Serialization/JsonSerializer.h"
 
 #include "JsonUtil.h"
-#include "BCBlueprintRSCallProxyBase.h"
+#include "BCBlueprintRelayCallProxyBase.h"
 #include "IServerCallback.h"
 #include "ServerCall.h"
 #include "ServiceName.h"
@@ -18,7 +18,7 @@
 #include "ReasonCodes.h"
 #include "HttpCodes.h"
 
-#include "BCRSCommsProxy.h"
+#include "BCRelayCommsProxy.h"
 #include "WebSocketBase.h"
 #include <iostream>
 
@@ -52,8 +52,8 @@ BrainCloudRelayComms::BrainCloudRelayComms(BrainCloudClient *client)
 	: m_client(client)
 	, m_appCallback(nullptr)
 	, m_commsPtr(nullptr)
-	, m_registeredRSCallbacks(nullptr)
-	, m_registeredRSBluePrintCallbacks(nullptr)
+	, m_registeredRelayCallbacks(nullptr)
+	, m_registeredRelayBluePrintCallbacks(nullptr)
 	, m_connectedSocket(nullptr)
 	, m_bIsConnected(false)
 	, m_lwsContext(nullptr)
@@ -66,7 +66,7 @@ BrainCloudRelayComms::~BrainCloudRelayComms()
 	deregisterDataCallback();
 }
 
-void BrainCloudRelayComms::connect(eBCRSConnectionType in_connectionType, const FString &in_connectOptionsJson, IServerCallback *callback)
+void BrainCloudRelayComms::connect(BCRelayConnectionType in_connectionType, const FString &in_connectOptionsJson, IServerCallback *callback)
 {
 	if (!m_bIsConnected)
 	{
@@ -105,25 +105,25 @@ void BrainCloudRelayComms::disconnect()
 		processRegisteredListeners(ServiceName::RoomServer.getValue().ToLower(), "disconnect", buildRSRequestError("DisableRS Called"));
 }
 
-void BrainCloudRelayComms::registerDataCallback(IRSCallback *callback)
+void BrainCloudRelayComms::registerDataCallback(IRelayCallback *callback)
 {
-	m_registeredRSCallbacks = callback;
+	m_registeredRelayCallbacks = callback;
 }
 
-void BrainCloudRelayComms::registerDataCallback(UBCBlueprintRSCallProxyBase *callback)
+void BrainCloudRelayComms::registerDataCallback(UBCBlueprintRelayCallProxyBase *callback)
 {
-	m_registeredRSBluePrintCallbacks = callback;
+	m_registeredRelayBluePrintCallbacks = callback;
 }
 
 void BrainCloudRelayComms::deregisterDataCallback()
 {
-	m_registeredRSCallbacks = nullptr;
-	if (m_registeredRSBluePrintCallbacks->IsValidLowLevel())
+	m_registeredRelayCallbacks = nullptr;
+	if (m_registeredRelayBluePrintCallbacks->IsValidLowLevel())
 	{
-		m_registeredRSBluePrintCallbacks->RemoveFromRoot();
-		m_registeredRSBluePrintCallbacks->ConditionalBeginDestroy();
+		m_registeredRelayBluePrintCallbacks->RemoveFromRoot();
+		m_registeredRelayBluePrintCallbacks->ConditionalBeginDestroy();
 	}
-	m_registeredRSBluePrintCallbacks = nullptr;
+	m_registeredRelayBluePrintCallbacks = nullptr;
 }
 
 void BrainCloudRelayComms::RunCallbacks()
@@ -209,10 +209,10 @@ void BrainCloudRelayComms::disconnectImpl()
 	{
 		m_commsPtr->RemoveFromRoot();
 		m_connectedSocket->RemoveFromRoot();
-		m_connectedSocket->OnConnectError.RemoveDynamic(m_commsPtr, &UBCRSCommsProxy::WebSocket_OnError);
-		m_connectedSocket->OnClosed.RemoveDynamic(m_commsPtr, &UBCRSCommsProxy::WebSocket_OnClose);
-		m_connectedSocket->OnConnectComplete.RemoveDynamic(m_commsPtr, &UBCRSCommsProxy::Websocket_OnOpen);
-		m_connectedSocket->OnReceiveData.RemoveDynamic(m_commsPtr, &UBCRSCommsProxy::WebSocket_OnMessage);
+		m_connectedSocket->OnConnectError.RemoveDynamic(m_commsPtr, &UBCRelayCommsProxy::WebSocket_OnError);
+		m_connectedSocket->OnClosed.RemoveDynamic(m_commsPtr, &UBCRelayCommsProxy::WebSocket_OnClose);
+		m_connectedSocket->OnConnectComplete.RemoveDynamic(m_commsPtr, &UBCRelayCommsProxy::Websocket_OnOpen);
+		m_connectedSocket->OnReceiveData.RemoveDynamic(m_commsPtr, &UBCRelayCommsProxy::WebSocket_OnMessage);
 	}
 
 	delete m_commsPtr;
@@ -285,17 +285,17 @@ void BrainCloudRelayComms::startReceivingRSConnectionAsync()
 	int port = FCString::Atoi(*m_connectOptions["port"]);
 	switch (m_connectionType)
 	{
-	case eBCRSConnectionType::WEBSOCKET:
+	case BCRelayConnectionType::WEBSOCKET:
 	{
 		connectWebSocket(host, port, sslEnabled);
 	}
 	break;
-	case eBCRSConnectionType::TCP:
+	case BCRelayConnectionType::TCP:
 	{
 		//connectTCPAsync(host, port);
 	}
 	break;
-	case eBCRSConnectionType::UDP:
+	case BCRelayConnectionType::UDP:
 	{
 		//connectUDPAsync(host, port);
 	}
@@ -377,14 +377,14 @@ void BrainCloudRelayComms::processRegisteredListeners(const FString &in_service,
 	}
 
 	// does this go to one of our registered service listeners?
-	if (m_registeredRSBluePrintCallbacks != nullptr)
+	if (m_registeredRelayBluePrintCallbacks != nullptr)
 	{
-		m_registeredRSBluePrintCallbacks->rsCallback(in_jsonMessage);
+		m_registeredRelayBluePrintCallbacks->relayCallback(in_jsonMessage);
 	}
 
-	if (m_registeredRSCallbacks != nullptr)
+	if (m_registeredRelayCallbacks != nullptr)
 	{
-		m_registeredRSCallbacks->rsCallback(in_jsonMessage);
+		m_registeredRelayCallbacks->relayCallback(in_jsonMessage);
 	}
 }
 
@@ -422,14 +422,14 @@ void BrainCloudRelayComms::setupWebSocket(const FString &in_url)
 	// lazy load
 	if (m_commsPtr == nullptr)
 	{
-		m_commsPtr = NewObject<UBCRSCommsProxy>();
+		m_commsPtr = NewObject<UBCRelayCommsProxy>();
 		m_commsPtr->AddToRoot();
 	}
 	m_commsPtr->SetRelayComms(this);
-	m_connectedSocket->OnConnectError.AddDynamic(m_commsPtr, &UBCRSCommsProxy::WebSocket_OnError);
-	m_connectedSocket->OnClosed.AddDynamic(m_commsPtr, &UBCRSCommsProxy::WebSocket_OnClose);
-	m_connectedSocket->OnConnectComplete.AddDynamic(m_commsPtr, &UBCRSCommsProxy::Websocket_OnOpen);
-	m_connectedSocket->OnReceiveData.AddDynamic(m_commsPtr, &UBCRSCommsProxy::WebSocket_OnMessage);
+	m_connectedSocket->OnConnectError.AddDynamic(m_commsPtr, &UBCRelayCommsProxy::WebSocket_OnError);
+	m_connectedSocket->OnClosed.AddDynamic(m_commsPtr, &UBCRelayCommsProxy::WebSocket_OnClose);
+	m_connectedSocket->OnConnectComplete.AddDynamic(m_commsPtr, &UBCRelayCommsProxy::Websocket_OnOpen);
+	m_connectedSocket->OnReceiveData.AddDynamic(m_commsPtr, &UBCRelayCommsProxy::WebSocket_OnMessage);
 	m_connectedSocket->mlwsContext = m_lwsContext;
 
 	// no headers at the moment

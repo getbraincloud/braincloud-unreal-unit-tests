@@ -17,7 +17,7 @@ void BrainCloudRTT::requestClientConnection(IServerCallback *callback)
     _client->sendRequest(sc);
 }
 
-void BrainCloudRTT::enableRTT(eBCRTTConnectionType in_type, IServerCallback *in_callback)
+void BrainCloudRTT::enableRTT(BCRTTConnectionType in_type, IServerCallback *in_callback)
 {
 	_commsLayer->enableRTT(in_type, in_callback);
 }
