@@ -1,7 +1,7 @@
 // Copyright 2018 bitHeads, Inc. All Rights Reserved.
 
 #include "BCClientPluginPrivatePCH.h"
-#include "BrainCloudRSComms.h"
+#include "BrainCloudRelayComms.h"
 
 #include "Serialization/JsonTypes.h"
 #include "Serialization/JsonReader.h"
@@ -30,7 +30,7 @@ static struct lws_protocols protocolsRS[] = {
 
 	{
 		"bcrs",
-		&BrainCloudRSComms::callback_echo,
+		&BrainCloudRelayComms::callback_echo,
 		MAX_PAYLOAD,
 		MAX_PAYLOAD,
 	},
@@ -48,7 +48,7 @@ static const struct lws_extension extsRS[] = {
 	{NULL, NULL, NULL /* terminator */} };
 #endif
 
-BrainCloudRSComms::BrainCloudRSComms(BrainCloudClient *client)
+BrainCloudRelayComms::BrainCloudRelayComms(BrainCloudClient *client)
 	: m_client(client)
 	, m_appCallback(nullptr)
 	, m_commsPtr(nullptr)
@@ -60,13 +60,13 @@ BrainCloudRSComms::BrainCloudRSComms(BrainCloudClient *client)
 {
 }
 
-BrainCloudRSComms::~BrainCloudRSComms()
+BrainCloudRelayComms::~BrainCloudRelayComms()
 {
 	disconnectImpl();
 	deregisterDataCallback();
 }
 
-void BrainCloudRSComms::connect(eBCRSConnectionType in_connectionType, const FString &in_connectOptionsJson, IServerCallback *callback)
+void BrainCloudRelayComms::connect(eBCRSConnectionType in_connectionType, const FString &in_connectOptionsJson, IServerCallback *callback)
 {
 	if (!m_bIsConnected)
 	{
@@ -99,23 +99,23 @@ void BrainCloudRSComms::connect(eBCRSConnectionType in_connectionType, const FSt
 	}
 }
 
-void BrainCloudRSComms::disconnect()
+void BrainCloudRelayComms::disconnect()
 {
 	if (m_bIsConnected)
 		processRegisteredListeners(ServiceName::RoomServer.getValue().ToLower(), "disconnect", buildRSRequestError("DisableRS Called"));
 }
 
-void BrainCloudRSComms::registerDataCallback(IRSCallback *callback)
+void BrainCloudRelayComms::registerDataCallback(IRSCallback *callback)
 {
 	m_registeredRSCallbacks = callback;
 }
 
-void BrainCloudRSComms::registerDataCallback(UBCBlueprintRSCallProxyBase *callback)
+void BrainCloudRelayComms::registerDataCallback(UBCBlueprintRSCallProxyBase *callback)
 {
 	m_registeredRSBluePrintCallbacks = callback;
 }
 
-void BrainCloudRSComms::deregisterDataCallback()
+void BrainCloudRelayComms::deregisterDataCallback()
 {
 	m_registeredRSCallbacks = nullptr;
 	if (m_registeredRSBluePrintCallbacks->IsValidLowLevel())
@@ -126,7 +126,7 @@ void BrainCloudRSComms::deregisterDataCallback()
 	m_registeredRSBluePrintCallbacks = nullptr;
 }
 
-void BrainCloudRSComms::RunCallbacks()
+void BrainCloudRelayComms::RunCallbacks()
 {
 #if PLATFORM_UWP
 #elif PLATFORM_HTML5
@@ -142,7 +142,7 @@ void BrainCloudRSComms::RunCallbacks()
 #if PLATFORM_UWP
 #elif PLATFORM_HTML5
 #else
-int BrainCloudRSComms::callback_echo(struct lws *wsi, enum lws_callback_reasons reason, void *user, void *in, size_t len)
+int BrainCloudRelayComms::callback_echo(struct lws *wsi, enum lws_callback_reasons reason, void *user, void *in, size_t len)
 {
 	void *pUser = lws_wsi_user(wsi);
 	UWebSocketBase *pWebSocketBase = (UWebSocketBase *)pUser;
@@ -195,14 +195,14 @@ int BrainCloudRSComms::callback_echo(struct lws *wsi, enum lws_callback_reasons 
 #endif
 
 
-void BrainCloudRSComms::connectWebSocket(FString in_host, int in_port, bool in_sslEnabled)
+void BrainCloudRelayComms::connectWebSocket(FString in_host, int in_port, bool in_sslEnabled)
 {
 	FString url = (in_sslEnabled ? "wss://" : "ws://") + in_host + ":" + FString::FromInt(in_port);
 	UE_LOG(LogBrainCloudComms, Log, TEXT("connectWebSocket:  %s"), *url);
 	setupWebSocket(url);
 }
 
-void BrainCloudRSComms::disconnectImpl()
+void BrainCloudRelayComms::disconnectImpl()
 {
 	// clear everything
 	if (m_connectedSocket != nullptr && m_commsPtr != nullptr)
@@ -224,7 +224,7 @@ void BrainCloudRSComms::disconnectImpl()
 }
 
 // sends pure text
-bool BrainCloudRSComms::send(const FString &in_message, uint8 in_controlHeader /*= RECV_CTRL_RSMG*/)
+bool BrainCloudRelayComms::send(const FString &in_message, uint8 in_controlHeader /*= RECV_CTRL_RSMG*/)
 {
 	TArray<uint8> data;
 	data.AddUninitialized(in_message.Len());
@@ -234,7 +234,7 @@ bool BrainCloudRSComms::send(const FString &in_message, uint8 in_controlHeader /
 }
 
 // sends pure data
-bool BrainCloudRSComms::send(TArray<uint8> in_message, uint8 in_controlHeader /*= RECV_CTRL_RSMG*/)
+bool BrainCloudRelayComms::send(TArray<uint8> in_message, uint8 in_controlHeader /*= RECV_CTRL_RSMG*/)
 {
 	bool bMessageSent = false;
 	// early return
@@ -273,12 +273,12 @@ bool BrainCloudRSComms::send(TArray<uint8> in_message, uint8 in_controlHeader /*
 	return bMessageSent;
 }
 
-void BrainCloudRSComms::ping()
+void BrainCloudRelayComms::ping()
 {
 
 }
 
-void BrainCloudRSComms::startReceivingRSConnectionAsync()
+void BrainCloudRelayComms::startReceivingRSConnectionAsync()
 {
 	bool sslEnabled = m_connectOptions["ssl"] == "true";
 	FString host = m_connectOptions["host"];
@@ -304,7 +304,7 @@ void BrainCloudRSComms::startReceivingRSConnectionAsync()
 	}
 }
 
-TArray<uint8> BrainCloudRSComms::concatenateByteArrays(TArray<uint8> in_bufferA, TArray<uint8> in_bufferB)
+TArray<uint8> BrainCloudRelayComms::concatenateByteArrays(TArray<uint8> in_bufferA, TArray<uint8> in_bufferB)
 {
 	TArray<uint8> toReturn;
 	for (int i = 0; i < in_bufferA.Num(); ++i)
@@ -321,7 +321,7 @@ TArray<uint8> BrainCloudRSComms::concatenateByteArrays(TArray<uint8> in_bufferA,
 	return toReturn;
 }
 
-FString BrainCloudRSComms::buildConnectionRequest()
+FString BrainCloudRelayComms::buildConnectionRequest()
 {
 	TSharedRef<FJsonObject> json = MakeShareable(new FJsonObject());
 
@@ -336,7 +336,7 @@ FString BrainCloudRSComms::buildConnectionRequest()
 	return response;
 }
 
-TArray<uint8> BrainCloudRSComms::appendSizeBytes(TArray<uint8> in_message)
+TArray<uint8> BrainCloudRelayComms::appendSizeBytes(TArray<uint8> in_message)
 {
 	int sizeOfMessage = in_message.Num();
 
@@ -350,7 +350,7 @@ TArray<uint8> BrainCloudRSComms::appendSizeBytes(TArray<uint8> in_message)
 	return toSend;
 }
 
-void BrainCloudRSComms::processRegisteredListeners(const FString &in_service, const FString &in_operation, const FString &in_jsonMessage)
+void BrainCloudRelayComms::processRegisteredListeners(const FString &in_service, const FString &in_operation, const FString &in_jsonMessage)
 {
 	// process connect callback to app
 	if (in_operation == TEXT("connect") && m_bIsConnected && m_appCallback != nullptr)
@@ -388,7 +388,7 @@ void BrainCloudRSComms::processRegisteredListeners(const FString &in_service, co
 	}
 }
 
-void BrainCloudRSComms::setupWebSocket(const FString &in_url)
+void BrainCloudRelayComms::setupWebSocket(const FString &in_url)
 {
 #if PLATFORM_UWP
 #elif PLATFORM_HTML5
@@ -425,7 +425,7 @@ void BrainCloudRSComms::setupWebSocket(const FString &in_url)
 		m_commsPtr = NewObject<UBCRSCommsProxy>();
 		m_commsPtr->AddToRoot();
 	}
-	m_commsPtr->SetRSComms(this);
+	m_commsPtr->SetRelayComms(this);
 	m_connectedSocket->OnConnectError.AddDynamic(m_commsPtr, &UBCRSCommsProxy::WebSocket_OnError);
 	m_connectedSocket->OnClosed.AddDynamic(m_commsPtr, &UBCRSCommsProxy::WebSocket_OnClose);
 	m_connectedSocket->OnConnectComplete.AddDynamic(m_commsPtr, &UBCRSCommsProxy::Websocket_OnOpen);
@@ -439,7 +439,7 @@ void BrainCloudRSComms::setupWebSocket(const FString &in_url)
 	send(buildConnectionRequest());
 }
 
-void BrainCloudRSComms::webSocket_OnClose()
+void BrainCloudRelayComms::webSocket_OnClose()
 {
 	//if (m_client->isLoggingEnabled())
 	UE_LOG(LogBrainCloudComms, Log, TEXT("Connection closed"));
@@ -447,7 +447,7 @@ void BrainCloudRSComms::webSocket_OnClose()
 	processRegisteredListeners(ServiceName::RoomServer.getValue().ToLower(), "error", buildRSRequestError("Could not connect at this time"));
 }
 
-void BrainCloudRSComms::websocket_OnOpen()
+void BrainCloudRelayComms::websocket_OnOpen()
 {
 	//if (m_client->isLoggingEnabled())
 	UE_LOG(LogBrainCloudComms, Log, TEXT("Connection established."));
@@ -455,12 +455,12 @@ void BrainCloudRSComms::websocket_OnOpen()
 	processRegisteredListeners(ServiceName::RoomServer.getValue().ToLower(), "connect", "");
 }
 
-void BrainCloudRSComms::webSocket_OnMessage(const FString &in_message)
+void BrainCloudRelayComms::webSocket_OnMessage(const FString &in_message)
 {
 	onRecv(in_message);
 }
 
-void BrainCloudRSComms::webSocket_OnError(const FString &in_message)
+void BrainCloudRelayComms::webSocket_OnError(const FString &in_message)
 {
 	//if (m_client->isLoggingEnabled())
 	UE_LOG(LogBrainCloudComms, Log, TEXT("Error: %s"), *in_message);
@@ -468,13 +468,13 @@ void BrainCloudRSComms::webSocket_OnError(const FString &in_message)
 	processRegisteredListeners(ServiceName::RoomServer.getValue().ToLower(), "disconnect", buildRSRequestError(in_message));
 }
 
-void BrainCloudRSComms::onRecv(const FString &in_message)
+void BrainCloudRelayComms::onRecv(const FString &in_message)
 {
 	//if (m_client->isLoggingEnabled())
 	UE_LOG(LogBrainCloudComms, Log, TEXT("%s"), *in_message);
 }
 
-FString BrainCloudRSComms::buildRSRequestError(FString in_statusMessage)
+FString BrainCloudRelayComms::buildRSRequestError(FString in_statusMessage)
 {
 	TSharedRef<FJsonObject> json = MakeShareable(new FJsonObject());
 

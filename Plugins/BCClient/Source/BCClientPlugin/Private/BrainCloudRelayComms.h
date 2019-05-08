@@ -30,7 +30,7 @@ class UWebSocketBase;
 class UBCRSCommsProxy;
 class UBCBlueprintRSCallProxyBase;
 
-class BrainCloudRSComms
+class BrainCloudRelayComms
 {
   public:
     static const uint8 MAX_PLAYERS = 128;
@@ -43,8 +43,8 @@ class BrainCloudRSComms
     static const uint8 RECV_CTRL_PONG = RECV_CTRL_PING ;                    // PONG_HEADER = "PONG"
     static const uint8 RECV_CTRL_ACKN = INVALID_NET_ID + 6;                 // ACKN_HEADER = "ACKN"
 
-	BrainCloudRSComms(BrainCloudClient *client);
-	~BrainCloudRSComms();
+	BrainCloudRelayComms(BrainCloudClient *client);
+	~BrainCloudRelayComms();
 
 	void connect(eBCRSConnectionType in_connectionType, const FString &in_connectOptionsJson, IServerCallback *callback);
 	void disconnect();

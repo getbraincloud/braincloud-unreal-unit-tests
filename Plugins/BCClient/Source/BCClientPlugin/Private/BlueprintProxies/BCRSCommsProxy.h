@@ -5,7 +5,7 @@
 #include "BCBlueprintCallProxyBase.h"
 #include "BCRSCommsProxy.generated.h"
 
-class BrainCloudRSComms;
+class BrainCloudRelayComms;
 
 UCLASS(MinimalAPI)
 class UBCRSCommsProxy : public UBCBlueprintCallProxyBase
@@ -16,7 +16,7 @@ public:
 	UBCRSCommsProxy(const FObjectInitializer &ObjectInitializer);
 	virtual void BeginDestroy() override;
 
-	void SetRSComms(BrainCloudRSComms *in_comms);
+	void SetRelayComms(BrainCloudRelayComms *in_comms);
 
 	// expose web socket functions
 	UFUNCTION()
@@ -29,5 +29,5 @@ public:
 	void WebSocket_OnError(const FString &in_error);
 
 private:
-	BrainCloudRSComms *m_commsPtr;
+	BrainCloudRelayComms *m_commsPtr;
 };

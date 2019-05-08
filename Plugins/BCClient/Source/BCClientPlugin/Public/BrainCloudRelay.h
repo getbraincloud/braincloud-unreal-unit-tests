@@ -4,12 +4,12 @@
 #include "IServerCallback.h"
 
 enum class eBCRSConnectionType : uint8;
-class BrainCloudRSComms;
+class BrainCloudRelayComms;
 
-class BCCLIENTPLUGIN_API BrainCloudRoomServer
+class BCCLIENTPLUGIN_API BrainCloudRelay
 {
 public:
-  BrainCloudRoomServer(BrainCloudRSComms *in_comms);
+  BrainCloudRelay(BrainCloudRelayComms *in_comms);
 
   void connect(eBCRSConnectionType in_connectionType, const FString &in_connectOptionsJson, IServerCallback *callback);
 	void disconnect();
@@ -22,5 +22,5 @@ public:
 	void ping();
 
 private:
-  BrainCloudRSComms *_rsComms = nullptr;
+  BrainCloudRelayComms *_relayComms = nullptr;
 };

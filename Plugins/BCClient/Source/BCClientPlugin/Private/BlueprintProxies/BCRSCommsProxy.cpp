@@ -1,7 +1,7 @@
 // Copyright 2018 bitHeads, Inc. All Rights Reserved.
 
 #include "BCClientPluginPrivatePCH.h"
-#include "BrainCloudRSComms.h"
+#include "BrainCloudRelayComms.h"
 #include "BCRSCommsProxy.h"
 
 UBCRSCommsProxy::UBCRSCommsProxy(const FObjectInitializer &ObjectInitializer)
@@ -21,7 +21,7 @@ void UBCRSCommsProxy::BeginDestroy()
     m_commsPtr = nullptr;
 }
 
-void UBCRSCommsProxy::SetRSComms(BrainCloudRSComms *in_comms)
+void UBCRSCommsProxy::SetRelayComms(BrainCloudRelayComms *in_comms)
 {
     m_commsPtr = in_comms;
 }
