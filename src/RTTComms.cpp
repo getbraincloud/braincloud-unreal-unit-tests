@@ -140,8 +140,7 @@ namespace BrainCloud
 
     const std::string& RTTComms::getConnectionId()
     {
-        static std::string emptyConnId;
-        return emptyConnId;
+        return _connectionId;
     }
 
     void RTTComms::runCallbacks()

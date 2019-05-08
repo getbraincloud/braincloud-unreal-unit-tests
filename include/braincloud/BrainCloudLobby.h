@@ -166,6 +166,10 @@ namespace BrainCloud
 		 */
 		void joinLobby(const std::string in_lobbyId, bool in_isReady, const std::string& in_extraJson, std::string in_teamCode, const std::vector<std::string>& in_otherUserCxIds, IServerCallback* in_callback);
 
+		/// <summary>
+    	/// Cancel this members Find, Join and Searching of Lobbies
+    	/// </summary>
+		void cancelFindRequest(const std::string& in_lobbyType, const std::string& in_cxId, IServerCallback* in_callback);
 
 	private:
 		BrainCloudClient* m_client;

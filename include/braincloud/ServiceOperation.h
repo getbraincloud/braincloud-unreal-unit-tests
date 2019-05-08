@@ -366,6 +366,7 @@ namespace BrainCloud {
 		static const ServiceOperation SwitchTeam;
 		static const ServiceOperation UpdateReady;
 		static const ServiceOperation UpdateSettings;
+		static const ServiceOperation CancelFindRequest;
 
 		//messaging
 		static const ServiceOperation DeleteMessages;

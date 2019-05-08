@@ -600,6 +600,8 @@ namespace BrainCloud
 		*/
 		void overrideLanguageCode(const char * in_languageCode) { _languageCode = in_languageCode; }
 
+		const char * getRttConnectionId() const;
+
 	protected:
 		void initializeComms(const char * in_serverURL, const char * in_appId, const std::map<std::string, std::string>& in_secretMap);
 
