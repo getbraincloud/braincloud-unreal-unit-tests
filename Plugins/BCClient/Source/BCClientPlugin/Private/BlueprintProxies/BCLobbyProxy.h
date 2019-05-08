@@ -177,7 +177,7 @@ class UBCLobbyProxy : public UBCBlueprintCallProxyBase
 	* @param in_callback Method to be invoked when the server response is received.
     */
     UFUNCTION(BlueprintCallable, meta = (BlueprintInternalUseOnly = "true"), Category = "BrainCloud|Lobby")
-    static UBCLobbyProxy *UpdateLobbyConfig(UBrainCloudWrapper *brainCloud, const FString &in_lobbyID, const FString &in_configJson);
+    static UBCLobbyProxy *UpdateSettings(UBrainCloudWrapper *brainCloud, const FString &in_lobbyID, const FString &in_configJson);
 
     /// <summary>
     /// Cancel this members Find, Join and Searching of Lobbies

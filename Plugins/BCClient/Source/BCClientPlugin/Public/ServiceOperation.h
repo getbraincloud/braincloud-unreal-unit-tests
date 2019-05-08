@@ -392,7 +392,7 @@ class BCCLIENTPLUGIN_API ServiceOperation
 	static const ServiceOperation FindOrCreateLobby;
 	static const ServiceOperation GetLobbyData;
 	static const ServiceOperation UpdateReady;
-	static const ServiceOperation UpdateLobbyConfig;
+	static const ServiceOperation UpdateSettings;
 	static const ServiceOperation SwitchTeam;
 	static const ServiceOperation SendSignal;
 	static const ServiceOperation JoinLobby;

@@ -241,11 +241,15 @@ void BrainCloudRelayComms::disconnectImpl()
 	delete m_commsPtr;
 	m_commsPtr = nullptr;
 
-	m_appCallback = nullptr;
+	delete m_connectedSocket;
+	m_connectedSocket = nullptr;
 
 	lws_context_destroy(m_lwsContext);
 	m_lwsContext = nullptr;
+
 	m_bIsConnected = false;
+	
+	m_appCallback = nullptr;
 }
 
 // sends pure data
@@ -259,11 +263,10 @@ bool BrainCloudRelayComms::send(TArray<uint8> in_message, const uint8 in_target/
 		return bMessageSent;
 	}
 
-	//if (m_client->isLoggingEnabled())
+	if (m_client->isLoggingEnabled())
 	{
 		FString parsedMessage = BytesToString(in_message.GetData(), in_message.Num());
-		UE_LOG(LogBrainCloudComms, Log, TEXT("send: %s"), *parsedMessage);
-		UE_LOG(LogBrainCloudComms, Log, TEXT("RS SEND: size of message before %d"), in_message.Num());
+		UE_LOG(LogBrainCloudComms, Log, TEXT("relay send: %s"), *parsedMessage);
 	}
 
 	// add control header to message
@@ -274,15 +277,6 @@ bool BrainCloudRelayComms::send(TArray<uint8> in_message, const uint8 in_target/
 	// append the size
 	TArray<uint8> toSendData = appendSizeBytes(toReturn);
 	bMessageSent = m_connectedSocket->SendData(toSendData.GetData());
-
-	//if (m_client->isLoggingEnabled())
-	{
-		UE_LOG(LogBrainCloudComms, Log, TEXT("RS SEND: size[0] %d"), toSendData[0]);
-		UE_LOG(LogBrainCloudComms, Log, TEXT("RS SEND: size[1] %d"), toSendData[1]);
-		UE_LOG(LogBrainCloudComms, Log, TEXT("RS SEND: header %d"), toSendData[2]);
-
-		UE_LOG(LogBrainCloudComms, Log, TEXT("RS SEND: size of message After %d"), toSendData.Num());
-	}
 
 	return bMessageSent;
 }
@@ -376,15 +370,13 @@ TArray<uint8> BrainCloudRelayComms::appendSizeBytes(TArray<uint8> in_message)
 
 void BrainCloudRelayComms::processRegisteredListeners(const FString &in_service, const FString &in_operation, const FString &in_jsonMessage)
 {
-	UE_LOG(LogBrainCloudComms, Log, TEXT("processRegisteredListeners %s %s %s "), *in_service, *in_operation, *in_jsonMessage);
-
 	// process connect callback to app
 	if (in_operation == TEXT("connect") && m_bIsConnected && m_appCallback != nullptr)
 	{
 		m_appCallback->serverCallback(ServiceName::Relay, ServiceOperation::Connect, in_jsonMessage);
 	}
 	// process disconnect / errors to app
-	else if (m_bIsConnected && (in_operation == TEXT("error") || in_operation == TEXT("disconnect")))
+	else if (in_operation == TEXT("error") || in_operation == TEXT("disconnect"))
 	{
 		// error callback!
 		if (m_appCallback != nullptr)
@@ -479,15 +471,15 @@ void BrainCloudRelayComms::sendPing()
 void BrainCloudRelayComms::webSocket_OnClose()
 {
 	if (m_client->isLoggingEnabled())
-		UE_LOG(LogBrainCloudComms, Log, TEXT("Connection closed"));
+		UE_LOG(LogBrainCloudComms, Log, TEXT("Relay Connection closed"));
 
 	processRegisteredListeners(ServiceName::Relay.getValue().ToLower(), "error", buildRSRequestError("Could not connect at this time"));
 }
 
 void BrainCloudRelayComms::websocket_OnOpen()
 {
-	//if (m_client->isLoggingEnabled())
-		UE_LOG(LogBrainCloudComms, Log, TEXT("Connection established."));
+	if (m_client->isLoggingEnabled())
+		UE_LOG(LogBrainCloudComms, Log, TEXT("Relay Connection established."));
 
 	processRegisteredListeners(ServiceName::Relay.getValue().ToLower(), "connect", "");
 }
@@ -500,15 +492,15 @@ void BrainCloudRelayComms::webSocket_OnMessage(const FString &in_message)
 void BrainCloudRelayComms::webSocket_OnError(const FString &in_message)
 {
 	if (m_client->isLoggingEnabled())
-		UE_LOG(LogBrainCloudComms, Log, TEXT("Error: %s"), *in_message);
+		UE_LOG(LogBrainCloudComms, Log, TEXT("Relay Error: %s"), *in_message);
 
 	processRegisteredListeners(ServiceName::Relay.getValue().ToLower(), "disconnect", buildRSRequestError(in_message));
 }
 
 void BrainCloudRelayComms::onRecv(const FString &in_message)
 {
-	//if (m_client->isLoggingEnabled())
-	UE_LOG(LogBrainCloudComms, Log, TEXT("%s"), *in_message);
+	if (m_client->isLoggingEnabled())
+		UE_LOG(LogBrainCloudComms, Log, TEXT("Relay onRecv %s"), *in_message);
 }
 
 FString BrainCloudRelayComms::buildRSRequestError(FString in_statusMessage)

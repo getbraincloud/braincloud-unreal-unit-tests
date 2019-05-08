@@ -111,7 +111,7 @@ class BCCLIENTPLUGIN_API BrainCloudLobby
     * @param in_configJson json string of the lobby config
 	* @param in_callback Method to be invoked when the server response is received.
     */
-    void updateLobbyConfig(const FString &in_lobbyID, const FString &in_configJson, IServerCallback *in_callback);
+    void updateSettings(const FString &in_lobbyID, const FString &in_configJson, IServerCallback *in_callback);
 
     /**
     * Switches to the specified team (if allowed). Note - may be blocked by cloud code script
