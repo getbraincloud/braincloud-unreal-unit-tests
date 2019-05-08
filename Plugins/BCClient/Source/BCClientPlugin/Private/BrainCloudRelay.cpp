@@ -1,10 +1,20 @@
 #include "BCClientPluginPrivatePCH.h"
-#include "BrainCloudRelay.h"
 #include "BrainCloudRelayComms.h"
+#include "BrainCloudRelay.h"
 
 BrainCloudRelay::BrainCloudRelay(BrainCloudRelayComms *in_comms) 
 : _relayComms(in_comms)
 {
+}
+
+int64 BrainCloudRelay::ping()
+{
+    return _relayComms->ping();
+}
+
+uint8 BrainCloudRelay::netId()
+{
+    return _relayComms->netId();
 }
 
 void BrainCloudRelay::connect(BCRelayConnectionType in_connectionType, const FString &in_connectOptionsJson, IServerCallback *callback)
@@ -32,17 +42,14 @@ void BrainCloudRelay::deregisterDataCallback()
     _relayComms->deregisterDataCallback();
 }
 
-bool BrainCloudRelay::send(const FString &in_message)
+bool BrainCloudRelay::send(TArray<uint8> in_data, uint8 in_target, bool in_reliable/* = true*/, bool in_ordered/* = true*/, int in_channel/* = 0*/)
 {
-    return _relayComms->send(in_message);
+    return _relayComms->send(in_data, in_target, in_reliable, in_ordered, in_channel);
 }
 
-bool BrainCloudRelay::send(TArray<uint8> in_message)
+void BrainCloudRelay::setPingInterval(float in_interval)
 {
-    return _relayComms->send(in_message);
+    _relayComms->setPingInterval(in_interval);
 }
 
-void BrainCloudRelay::ping()
-{
-    _relayComms->ping();
-}
+

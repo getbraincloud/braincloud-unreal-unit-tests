@@ -20,7 +20,7 @@
 #include "BCPlatform.h"
 
 // Define all static member variables.
-FString BrainCloudClient::s_brainCloudClientVersion = TEXT("3.11.0");
+FString BrainCloudClient::s_brainCloudClientVersion = TEXT("4.0.0");
 
 ////////////////////////////////////////////////////
 // (De)Constructors
@@ -725,6 +725,16 @@ BrainCloudMessaging *BrainCloudClient::getMessagingService()
 		_messagingService = new BrainCloudMessaging(this);
 	}
 	return _messagingService;
+}
+
+
+BrainCloudRelay *BrainCloudClient::getRelayService()
+{
+	if (_relayService == nullptr)
+	{
+		_relayService = new BrainCloudRelay(_brainCloudRelayComms);
+	}
+	return _relayService;
 }
 
 const FString &BrainCloudClient::getSessionId()
