@@ -41,7 +41,7 @@
 
 class BrainCloudComms;
 class BrainCloudRTTComms;
-class BrainCloudRSComms;
+class BrainCloudRelayComms;
 class ServerCall;
 class IEventCallback;
 class IRewardCallback;
@@ -498,7 +498,7 @@ class BCCLIENTPLUGIN_API BrainCloudClient
 	void initializeComms(const char *serverUrl, const char *appId, const TMap<FString, FString> &secretMap);
 	BrainCloudComms *_brainCloudComms = nullptr;
 	BrainCloudRTTComms *_brainCloudRTTComms = nullptr;
-	BrainCloudRSComms *_brainCloudRSComms = nullptr;
+	BrainCloudRelayComms *_brainCloudRelayComms = nullptr;
 
 	BrainCloudAuthentication *_authenticationService = nullptr;
 	BrainCloudLeaderboard *_leaderboardService = nullptr;
