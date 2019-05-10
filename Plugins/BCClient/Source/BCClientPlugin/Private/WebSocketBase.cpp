@@ -21,6 +21,7 @@
 #include "BCClientPluginPrivatePCH.h"
 #include <iostream>
 #include "WebSocketBase.h"
+#include "BrainCloudRelay.h"
 
 #if PLATFORM_UWP
 #elif PLATFORM_HTML5
@@ -456,17 +457,17 @@ bool UWebSocketBase::SendText(const FString &data)
 	return bSentMessage;
 }
 
-bool UWebSocketBase::SendData(uint8* data)
+bool UWebSocketBase::SendData(TArray<uint8> data)
 {
 	bool bSentMessage = false;
-	int sizeOfData = sizeof(data)/sizeof(uint8_t);
+	int sizeOfData = data.Num();
 #if PLATFORM_UWP
 	bSentMessage = true;
-	SendAsyncData(data).then([this]() {
+	SendAsyncData(data.GetData()).then([this]() {
 	});
 
 #elif PLATFORM_HTML5
-	SocketSend(mWebSocketRef, data, sizeOfData);
+	SocketSend(mWebSocketRef, data.GetData(), sizeOfData);
 	bSentMessage = true;
 #else
 	if (sizeOfData > MAX_ECHO_PAYLOAD)
@@ -497,12 +498,12 @@ void UWebSocketBase::ProcessWriteable()
 	// write data
 	while (mSendQueueData.Num() > 0)
 	{
-		uint8* data = mSendQueueData[0];
-		int sizeOfData = sizeof(data)/sizeof(uint8_t);
+		uint8* data = mSendQueueData[0].GetData();
+		int sizeOfData = mSendQueueData[0].Num();
+		
 		unsigned char buf[LWS_PRE + MAX_ECHO_PAYLOAD];
 		memcpy(&buf[LWS_PRE], data, sizeOfData);
 		lws_write(mlws, &buf[LWS_PRE], sizeOfData, LWS_WRITE_BINARY);
-
 		mSendQueueData.RemoveAt(0);
 	}
 
@@ -522,8 +523,17 @@ void UWebSocketBase::ProcessWriteable()
 
 void UWebSocketBase::ProcessRead(const char *in, int len)
 {
-	FString strData = ANSI_TO_TCHAR(in);
-	OnReceiveData.Broadcast(strData);
+	TArray<uint8> dataArray;
+	int count = len;
+    while (count)
+	{
+		dataArray.Add(uint8(*in));
+		
+		++in;
+		--count;
+	}
+	
+	OnReceiveData.Broadcast(dataArray);
 }
 
 bool UWebSocketBase::ProcessHeader(unsigned char **p, unsigned char *end)

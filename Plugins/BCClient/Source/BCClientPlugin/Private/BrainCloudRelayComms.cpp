@@ -56,10 +56,12 @@ BrainCloudRelayComms::BrainCloudRelayComms(BrainCloudClient *client)
 	, m_registeredRelayBluePrintCallbacks(nullptr)
 	, m_connectedSocket(nullptr)
 	, m_bIsConnected(false)
-	, m_pingInterval(1.0f)
+	, m_pingInterval(10000000.0f)
 	, m_timeSinceLastPingRequest(0)
-	, m_lastNowMS(FPlatformTime::Seconds())
-	, m_sentPing(0)
+	, m_lastNowMS(FPlatformTime::Cycles64())
+	, m_sentPing(FPlatformTime::Cycles64())
+	, m_ping(99999L)
+	, m_netId(-1)
 	, m_lwsContext(nullptr)
 {
 }
@@ -108,7 +110,7 @@ void BrainCloudRelayComms::connect(BCRelayConnectionType in_connectionType, cons
 void BrainCloudRelayComms::disconnect()
 {
 	if (m_bIsConnected)
-		processRegisteredListeners(ServiceName::Relay.getValue().ToLower(), "disconnect", buildRSRequestError("DisableRS Called"));
+		processRegisteredListeners(ServiceName::Relay.getValue().ToLower(), "disconnect", buildRSRequestError("DisableRS Called"), TArray<uint8>() );
 }
 
 void BrainCloudRelayComms::registerDataCallback(IRelayCallback *callback)
@@ -147,7 +149,7 @@ void BrainCloudRelayComms::RunCallbacks()
 	// run ping 
 	if (m_bIsConnected)
     {
-        float nowMS = FPlatformTime::Seconds();
+        uint64 nowMS = FPlatformTime::Cycles64();
         // the heart beat
         m_timeSinceLastPingRequest += (nowMS - m_lastNowMS);
         m_lastNowMS = nowMS;
@@ -221,7 +223,7 @@ int BrainCloudRelayComms::callback_echo(struct lws *wsi, enum lws_callback_reaso
 void BrainCloudRelayComms::connectWebSocket(FString in_host, int in_port, bool in_sslEnabled)
 {
 	FString url = (in_sslEnabled ? "wss://" : "ws://") + in_host + ":" + FString::FromInt(in_port);
-	UE_LOG(LogBrainCloudComms, Log, TEXT("relay connectWebSocket:  %s"), *url);
+	
 	setupWebSocket(url);
 }
 
@@ -250,10 +252,14 @@ void BrainCloudRelayComms::disconnectImpl()
 	m_bIsConnected = false;
 	
 	m_appCallback = nullptr;
+
+	m_sentPing = 99999.0f;
+	m_netId = -1;
+	m_ping = 999999L;
 }
 
-// sends pure data
-bool BrainCloudRelayComms::send(TArray<uint8> in_message, const uint8 in_target/* = TO_ALL_PLAYERS*/, 
+// sends pure in_data
+bool BrainCloudRelayComms::send(TArray<uint8> in_message, const uint8 in_target, 
 								bool in_reliable /*= true*/, bool in_ordered/* = true*/, int in_channel/* = 0*/)
 {
 	bool bMessageSent = false;
@@ -263,37 +269,54 @@ bool BrainCloudRelayComms::send(TArray<uint8> in_message, const uint8 in_target/
 		return bMessageSent;
 	}
 
-	if (m_client->isLoggingEnabled())
-	{
-		FString parsedMessage = BytesToString(in_message.GetData(), in_message.Num());
-		UE_LOG(LogBrainCloudComms, Log, TEXT("relay send: %s"), *parsedMessage);
-	}
-
 	// add control header to message
 	TArray<uint8> header;
 	header.Add(in_target);
-	TArray<uint8> toReturn = concatenateByteArrays(header, in_message);
+	if (in_target == CL2RS_RELAY)
+    {
+        uint8 data1 = 0;
+        uint8 data2 = 0;
+		/*
+        if (m_connectionType == RelayConnectionType.UDP)
+        {
+            constructReliableHeader(out data1, out data2, in_reliable, in_ordered, in_channel);
+        }
+		*/
+		header.Add(data1);
+		header.Add(data2);
+    }
 
-	// append the size
+	// append header to message (HEADER|MESSAGE)
+    TArray<uint8> toReturn = concatenateByteArrays(header, in_message);
+
+	// append the size (SIZE|HEADER|MESSAGE)
 	TArray<uint8> toSendData = appendSizeBytes(toReturn);
-	bMessageSent = m_connectedSocket->SendData(toSendData.GetData());
+
+	// SEND IT
+	bMessageSent = m_connectedSocket->SendData(toSendData);
+
+	if (bMessageSent && m_client->isLoggingEnabled())
+	{
+		FString parsedMessage = BrainCloudRelay::BCBytesToString(toSendData.GetData(), toSendData.Num());
+		UE_LOG(LogBrainCloudComms, Log, TEXT("toSendData %d, %d, %d, %s"), toSendData[0], toSendData[1], toSendData[2], *parsedMessage);
+	}
 
 	return bMessageSent;
 }
 
 void BrainCloudRelayComms::setPingInterval(float in_interval)
 {
-    m_pingInterval = in_interval;
+    m_pingInterval = in_interval * 10000000.0f;
 }
 
 int64 BrainCloudRelayComms::ping()
 {
-	return 99999L;
+	return m_ping / 1000;
 }
 
 uint8 BrainCloudRelayComms::netId()
 {
-	return 0;
+	return (uint8)m_netId;
 }
 
 void BrainCloudRelayComms::startReceivingRSConnectionAsync()
@@ -337,11 +360,23 @@ TArray<uint8> BrainCloudRelayComms::concatenateByteArrays(TArray<uint8> in_buffe
 	return toReturn;
 }
 
+TArray<uint8> BrainCloudRelayComms::stripByteArray(TArray<uint8> in_data, int in_numFromLeft)
+{
+	// take off the 
+	TArray<uint8> data;
+	for (int i = in_numFromLeft; i < in_data.Num(); ++i)
+	{
+		data.Add(in_data[i]);
+	}
+
+	return data;
+}
+
 TArray<uint8> BrainCloudRelayComms::buildConnectionRequest()
 {
 	TSharedRef<FJsonObject> json = MakeShareable(new FJsonObject());
 
-	json->SetStringField("profileId", "b09994cb-d91d-4060-876c-5430756ead7d");//m_client->getProfileId());
+	json->SetStringField("profileId", m_client->getProfileId());//"b09994cb-d91d-4060-876c-5430756ead7d"); // 
 	json->SetStringField("lobbyId", m_connectOptions["lobbyId"]);
 	json->SetStringField("passcode", m_connectOptions["passcode"]);
 
@@ -349,16 +384,17 @@ TArray<uint8> BrainCloudRelayComms::buildConnectionRequest()
 	TSharedRef<TJsonWriter<>> writer = TJsonWriterFactory<>::Create(&response);
 	FJsonSerializer::Serialize(json, writer);
 
-	TArray<uint8> data;
-	data.AddUninitialized(response.Len());
-	StringToBytes(response, data.GetData(), response.Len());
+	TArray<uint8> in_data;
+	in_data.AddUninitialized(response.Len());
+	BrainCloudRelay::BCStringToBytes(response, in_data.GetData(), response.Len());
 
-	return data;
+	return in_data;
 }
 
 TArray<uint8> BrainCloudRelayComms::appendSizeBytes(TArray<uint8> in_message)
 {
-	int sizeOfMessage = in_message.Num();
+    // size of in_data is the incoming in_data, plus the two that we're adding
+	int sizeOfMessage = in_message.Num() + SIZE_OF_LENGTH_PREFIX_BYTE_ARRAY;
 
 	TArray<uint8> lengthPrefix;
 	lengthPrefix.Add(sizeOfMessage >> 8);
@@ -368,7 +404,8 @@ TArray<uint8> BrainCloudRelayComms::appendSizeBytes(TArray<uint8> in_message)
 	return toSend;
 }
 
-void BrainCloudRelayComms::processRegisteredListeners(const FString &in_service, const FString &in_operation, const FString &in_jsonMessage)
+// should be add registered listeners
+void BrainCloudRelayComms::processRegisteredListeners(const FString &in_service, const FString &in_operation, const FString &in_jsonMessage, TArray<uint8> in_data)
 {
 	// process connect callback to app
 	if (in_operation == TEXT("connect") && m_bIsConnected && m_appCallback != nullptr)
@@ -390,18 +427,17 @@ void BrainCloudRelayComms::processRegisteredListeners(const FString &in_service,
 
 	if (!m_bIsConnected && in_operation == TEXT("connect"))
 	{
-		m_bIsConnected = true;
-		send(buildConnectionRequest());
+		send(buildConnectionRequest(), CL2RS_CONNECTION);
 	}
 
 	// does this go to one of our registered service listeners?
 	if (m_registeredRelayBluePrintCallbacks != nullptr)
 	{
-		m_registeredRelayBluePrintCallbacks->relayCallback(in_jsonMessage);
+		m_registeredRelayBluePrintCallbacks->relayCallback(in_data);
 	}
 	else if (m_registeredRelayCallbacks != nullptr)
 	{
-		m_registeredRelayCallbacks->relayCallback(in_jsonMessage);
+		m_registeredRelayCallbacks->relayCallback(in_data);
 	}
 }
 
@@ -423,7 +459,7 @@ void BrainCloudRelayComms::setupWebSocket(const FString &in_url)
 		info.gid = -1;
 		info.uid = -1;
 		info.extensions = extsRS;
-		info.options = 0;//LWS_SERVER_OPTION_DO_SSL_GLOBAL_INIT;
+        info.options = 0;//LWS_SERVER_OPTION_DO_SSL_GLOBAL_INIT;
 
 		m_lwsContext = lws_create_context(&info);
 	}
@@ -452,19 +488,18 @@ void BrainCloudRelayComms::setupWebSocket(const FString &in_url)
 	// no headers at the moment
 	TMap<FString, FString> headersMap;
 	m_connectedSocket->Connect(in_url, headersMap);
-
-	send(buildConnectionRequest());
 }
 
 void BrainCloudRelayComms::sendPing()
 {
-	m_sentPing = FPlatformTime::Seconds();
-	uint64 localPing = ping();
+	m_sentPing = FPlatformTime::Cycles64();
+	
+	int64 localPing = ping();
 	// attach the local ping
 	TArray<uint8> dataArr;
 	dataArr.Add(localPing >> 8);
 	dataArr.Add(localPing);
-
+	
 	send(dataArr, CL2RS_PING);
 }
 
@@ -473,7 +508,7 @@ void BrainCloudRelayComms::webSocket_OnClose()
 	if (m_client->isLoggingEnabled())
 		UE_LOG(LogBrainCloudComms, Log, TEXT("Relay Connection closed"));
 
-	processRegisteredListeners(ServiceName::Relay.getValue().ToLower(), "error", buildRSRequestError("Could not connect at this time"));
+	processRegisteredListeners(ServiceName::Relay.getValue().ToLower(), "error", buildRSRequestError("Could not connect at this time"), TArray<uint8>() );
 }
 
 void BrainCloudRelayComms::websocket_OnOpen()
@@ -481,12 +516,15 @@ void BrainCloudRelayComms::websocket_OnOpen()
 	if (m_client->isLoggingEnabled())
 		UE_LOG(LogBrainCloudComms, Log, TEXT("Relay Connection established."));
 
-	processRegisteredListeners(ServiceName::Relay.getValue().ToLower(), "connect", "");
+	processRegisteredListeners(ServiceName::Relay.getValue().ToLower(), "connect", "", TArray<uint8>() );
 }
 
-void BrainCloudRelayComms::webSocket_OnMessage(const FString &in_message)
+void BrainCloudRelayComms::webSocket_OnMessage(TArray<uint8> in_data)
 {
-	onRecv(in_message);
+	// take off the length prefix
+	TArray<uint8> data = stripByteArray(in_data, SIZE_OF_LENGTH_PREFIX_BYTE_ARRAY);
+
+	onRecv(data);
 }
 
 void BrainCloudRelayComms::webSocket_OnError(const FString &in_message)
@@ -494,13 +532,51 @@ void BrainCloudRelayComms::webSocket_OnError(const FString &in_message)
 	if (m_client->isLoggingEnabled())
 		UE_LOG(LogBrainCloudComms, Log, TEXT("Relay Error: %s"), *in_message);
 
-	processRegisteredListeners(ServiceName::Relay.getValue().ToLower(), "disconnect", buildRSRequestError(in_message));
+	processRegisteredListeners(ServiceName::Relay.getValue().ToLower(), "disconnect", buildRSRequestError(in_message), TArray<uint8>() );
 }
 
-void BrainCloudRelayComms::onRecv(const FString &in_message)
+void BrainCloudRelayComms::onRecv(TArray<uint8> in_data)
 {
-	if (m_client->isLoggingEnabled())
-		UE_LOG(LogBrainCloudComms, Log, TEXT("Relay onRecv %s"), *in_message);
+	// the length prefix should be removed already 
+	if (in_data.Num() > 0)
+	{
+		uint8 controlByte = in_data[0];
+		if (controlByte == RS2CL_PONG)
+        {
+			m_ping = FPlatformTime::Cycles64() - m_sentPing;
+			if (m_client->isLoggingEnabled())
+				UE_LOG(LogBrainCloudComms, Log, TEXT("LastPing: %lld"), ping());
+        }
+		else
+		{
+			TArray<uint8> data = stripByteArray(in_data, 1);
+
+			// if netId is not setup yet
+			if (m_netId < 0)
+			{
+				FString parsedMessage = BrainCloudRelay::BCBytesToString(data.GetData(), data.Num());
+				
+				TSharedRef<TJsonReader<TCHAR>> reader = TJsonReaderFactory<TCHAR>::Create(parsedMessage);
+				TSharedPtr<FJsonObject> jsonPacket = MakeShareable(new FJsonObject());
+
+				bool res = FJsonSerializer::Deserialize(reader, jsonPacket);
+
+				if (res && jsonPacket->HasField(TEXT("netId")) && jsonPacket->HasField(TEXT("profileId")))
+				{
+					if (m_client->getProfileId() == jsonPacket->GetStringField(TEXT("profileId")))
+					{
+						m_netId = (short)jsonPacket->GetNumberField(TEXT("netId"));
+						m_bIsConnected = true;
+						
+						processRegisteredListeners(ServiceName::Relay.getValue().ToLower(), "connect", parsedMessage, data );
+					}
+				}
+			}
+			
+			// finally pass this onwards
+			processRegisteredListeners(ServiceName::Relay.getValue().ToLower(), "onrecv", "", data);
+		}
+	}
 }
 
 FString BrainCloudRelayComms::buildRSRequestError(FString in_statusMessage)

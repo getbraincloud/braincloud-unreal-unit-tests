@@ -57,7 +57,7 @@ class BrainCloudRTTComms : public IServerCallback
 
 	void webSocket_OnClose();
 	void websocket_OnOpen();
-	void webSocket_OnMessage(const FString &in_data);
+	void webSocket_OnMessage(TArray<uint8> in_data);
 	void webSocket_OnError(const FString &in_error);
 
   private:

@@ -59,7 +59,7 @@ public:
 	void registerDataCallback(UBCBlueprintRelayCallProxyBase *callback);
 	void deregisterDataCallback();
 
-	bool send(TArray<uint8> in_message, const uint8 in_target = TO_ALL_PLAYERS, bool in_reliable = true, bool in_ordered = true, int in_channel = 0);
+	bool send(TArray<uint8> in_message, const uint8 in_target, bool in_reliable = true, bool in_ordered = true, int in_channel = 0);
 	void setPingInterval(float in_interval);
 
 	void RunCallbacks();
@@ -73,21 +73,23 @@ public:
 
 	void webSocket_OnClose();
 	void websocket_OnOpen();
-	void webSocket_OnMessage(const FString &in_data);
+	void webSocket_OnMessage(TArray<uint8> in_data);
 	void webSocket_OnError(const FString &in_error);
 
 private:
 	void startReceivingRSConnectionAsync();
 	TArray<uint8> concatenateByteArrays(TArray<uint8> in_bufferA, TArray<uint8> in_bufferB);
+	TArray<uint8> stripByteArray(TArray<uint8> in_data, int in_numFromLeft);
 	TArray<uint8> appendSizeBytes(TArray<uint8> in_message);
 	TArray<uint8> buildConnectionRequest();
-	void processRegisteredListeners(const FString &in_service, const FString &in_operation, const FString &in_jsonMessage);
+	void processRegisteredListeners(const FString &in_service, const FString &in_operation, const FString &in_jsonMessage, TArray<uint8> in_data);
 	void connectWebSocket(FString in_host, int in_port, bool in_sslEnabled);
 	void disconnectImpl();
-	void onRecv(const FString &in_message);
+	void onRecv(TArray<uint8> data);
 	FString buildRSRequestError(FString in_statusMessage);
 	void setupWebSocket(const FString &in_url);
 	void sendPing();
+	void appendHeaderData();
 
 	BrainCloudClient *m_client;
 	IServerCallback *m_appCallback;
@@ -102,8 +104,12 @@ private:
 	bool m_bIsConnected;
 	float m_pingInterval;
 	float m_timeSinceLastPingRequest;
-	float m_lastNowMS;
-	float m_sentPing;
+	int64 m_lastNowMS;
+	int64 m_sentPing;
+	int64 m_ping;
+	short m_netId = -1;
+
+	const int SIZE_OF_LENGTH_PREFIX_BYTE_ARRAY = 2;
 
 	BCRelayConnectionType m_connectionType;
 	TMap<FString, FString> m_connectOptions;
