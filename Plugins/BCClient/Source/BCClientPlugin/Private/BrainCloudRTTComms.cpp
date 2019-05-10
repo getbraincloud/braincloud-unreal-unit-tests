@@ -445,9 +445,10 @@ void BrainCloudRTTComms::websocket_OnOpen()
 	send(buildConnectionRequest());
 }
 
-void BrainCloudRTTComms::webSocket_OnMessage(const FString &in_message)
+void BrainCloudRTTComms::webSocket_OnMessage(TArray<uint8> in_data)
 {
-	onRecv(in_message);
+	FString parsedMessage = BrainCloudRelay::BCBytesToString(in_data.GetData(), in_data.Num());
+	onRecv(parsedMessage);
 }
 
 void BrainCloudRTTComms::webSocket_OnError(const FString &in_message)
@@ -455,7 +456,7 @@ void BrainCloudRTTComms::webSocket_OnError(const FString &in_message)
 	if (m_client->isLoggingEnabled())
 		UE_LOG(LogBrainCloudComms, Log, TEXT("Error: %s"), *in_message);
 
-	processRegisteredListeners(ServiceName::RTTRegistration.getValue().ToLower(), "disconnect", "{\"error\":" + in_message + "}");
+	processRegisteredListeners(ServiceName::RTTRegistration.getValue().ToLower(), "disconnect", buildRTTRequestError(in_message));
 }
 
 void BrainCloudRTTComms::onRecv(const FString &in_message)

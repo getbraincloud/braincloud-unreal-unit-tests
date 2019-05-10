@@ -36,7 +36,7 @@ void UBCRelayCommsProxy::Websocket_OnOpen()
     m_commsPtr->websocket_OnOpen();
 }
 
-void UBCRelayCommsProxy::WebSocket_OnMessage(const FString &in_data)
+void UBCRelayCommsProxy::WebSocket_OnMessage(TArray<uint8> in_data)
 {
     m_commsPtr->webSocket_OnMessage(in_data);
 }
