@@ -115,11 +115,15 @@ void BrainCloudRelayComms::disconnect()
 
 void BrainCloudRelayComms::registerDataCallback(IRelayCallback *callback)
 {
+	// must ensure data callbacks are all removed first, since a blueprint one may be added without being removed properly
+	deregisterDataCallback();
 	m_registeredRelayCallbacks = callback;
 }
 
 void BrainCloudRelayComms::registerDataCallback(UBCBlueprintRelayCallProxyBase *callback)
 {
+	// must ensure data callbacks are all removed first, since a blueprint one may be added without being removed properly
+	deregisterDataCallback();
 	m_registeredRelayBluePrintCallbacks = callback;
 }
 
@@ -295,7 +299,7 @@ bool BrainCloudRelayComms::send(TArray<uint8> in_message, const uint8 in_target,
 	// SEND IT
 	bMessageSent = m_connectedSocket->SendData(toSendData);
 
-	if (bMessageSent && m_client->isLoggingEnabled())
+	if (in_target != CL2RS_PING && bMessageSent && m_client->isLoggingEnabled())
 	{
 		FString parsedMessage = BrainCloudRelay::BCBytesToString(toSendData.GetData(), toSendData.Num());
 		UE_LOG(LogBrainCloudComms, Log, TEXT("toSendData %d, %d, %d, %s"), toSendData[0], toSendData[1], toSendData[2], *parsedMessage);
@@ -411,6 +415,7 @@ void BrainCloudRelayComms::processRegisteredListeners(const FString &in_service,
 	if (in_operation == TEXT("connect") && m_bIsConnected && m_appCallback != nullptr)
 	{
 		m_appCallback->serverCallback(ServiceName::Relay, ServiceOperation::Connect, in_jsonMessage);
+		return;
 	}
 	// process disconnect / errors to app
 	else if (in_operation == TEXT("error") || in_operation == TEXT("disconnect"))
@@ -430,14 +435,17 @@ void BrainCloudRelayComms::processRegisteredListeners(const FString &in_service,
 		send(buildConnectionRequest(), CL2RS_CONNECTION);
 	}
 
-	// does this go to one of our registered service listeners?
-	if (m_registeredRelayBluePrintCallbacks != nullptr)
+	if (in_data.Num() > 0)
 	{
-		m_registeredRelayBluePrintCallbacks->relayCallback(in_data);
-	}
-	else if (m_registeredRelayCallbacks != nullptr)
-	{
-		m_registeredRelayCallbacks->relayCallback(in_data);
+		// does this go to one of our registered service listeners?
+		if (m_registeredRelayBluePrintCallbacks != nullptr)
+		{
+			m_registeredRelayBluePrintCallbacks->relayCallback(in_data);
+		}
+		else if (m_registeredRelayCallbacks != nullptr)
+		{
+			m_registeredRelayCallbacks->relayCallback(in_data);
+		}
 	}
 }
 
@@ -544,8 +552,6 @@ void BrainCloudRelayComms::onRecv(TArray<uint8> in_data)
 		if (controlByte == RS2CL_PONG)
         {
 			m_ping = FPlatformTime::Cycles64() - m_sentPing;
-			if (m_client->isLoggingEnabled())
-				UE_LOG(LogBrainCloudComms, Log, TEXT("LastPing: %lld"), ping());
         }
 		else
 		{
