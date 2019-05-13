@@ -51,4 +51,22 @@ public:
 	UFUNCTION(BlueprintCallable, Category = "BrainCloud|Relay")
 	static void SetPingInterval(UBrainCloudWrapper *brainCloudWrapper, float in_value);
 
+	/** 
+ 	* Convert an array of bytes to a TCHAR
+ 	* @param In byte array values to convert
+ 	* @param Count number of bytes to convert
+ 	* @return Valid FString representing bytes.
+ 	*/
+	UFUNCTION(BlueprintCallable, Category = "BrainCloud|Relay")
+	static FString BCBytesToString(const TArray<uint8>& in_data);
+
+	/** 
+ 	* Convert FString of bytes into the byte array.
+ 	* @param in_string		The FString of byte values
+ 	* @param in_maxBufferSize	Max buffer size of the out_bytes array, to prevent overflow
+ 	* @return	 Valid bytes from in_string
+ 	*/
+	UFUNCTION(BlueprintCallable, Category = "BrainCloud|Relay")
+	static TArray<uint8> BCStringToBytes(const FString &in_string);
+
 };
