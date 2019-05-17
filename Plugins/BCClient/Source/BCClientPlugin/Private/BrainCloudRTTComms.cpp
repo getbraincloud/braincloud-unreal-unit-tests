@@ -463,8 +463,8 @@ void BrainCloudRTTComms::onRecv(const FString &in_message)
 {
 	// deserialize and push broadcast to the correct m_registeredRTTCallbacks
 	TSharedPtr<FJsonObject> jsonData = JsonUtil::jsonStringToValue(in_message);
-	FString service = jsonData->GetStringField(TEXT("service"));
-	FString operation = jsonData->GetStringField(TEXT("operation"));
+	FString service = jsonData->HasField(TEXT("service")) ? jsonData->GetStringField(TEXT("service")) : "";
+	FString operation = jsonData->HasField(TEXT("operation")) ? jsonData->GetStringField(TEXT("operation")) : "";
 	TSharedPtr<FJsonObject> innerData = nullptr;
 	bool bIsInnerDataValid = jsonData->HasTypedField<EJson::Object>(TEXT("data"));
 	if (bIsInnerDataValid)

@@ -74,7 +74,7 @@ BrainCloudRelayComms::~BrainCloudRelayComms()
 
 void BrainCloudRelayComms::connect(BCRelayConnectionType in_connectionType, const FString &in_connectOptionsJson, IServerCallback *callback)
 {
-	if (!m_bIsConnected)
+	if (!isConnected())
 	{
 		// the callback
 		m_appCallback = callback;
@@ -109,8 +109,13 @@ void BrainCloudRelayComms::connect(BCRelayConnectionType in_connectionType, cons
 
 void BrainCloudRelayComms::disconnect()
 {
-	if (m_bIsConnected)
+	if (isConnected())
 		processRegisteredListeners(ServiceName::Relay.getValue().ToLower(), "disconnect", buildRSRequestError("DisableRS Called"), TArray<uint8>() );
+}
+
+bool BrainCloudRelayComms::isConnected()
+{
+	return m_bIsConnected;
 }
 
 void BrainCloudRelayComms::registerDataCallback(IRelayCallback *callback)
@@ -151,7 +156,7 @@ void BrainCloudRelayComms::RunCallbacks()
 #endif
 
 	// run ping 
-	if (m_bIsConnected)
+	if (isConnected())
     {
         uint64 nowMS = FPlatformTime::Cycles64();
         // the heart beat
@@ -412,7 +417,8 @@ TArray<uint8> BrainCloudRelayComms::appendSizeBytes(TArray<uint8> in_message)
 void BrainCloudRelayComms::processRegisteredListeners(const FString &in_service, const FString &in_operation, const FString &in_jsonMessage, TArray<uint8> in_data)
 {
 	// process connect callback to app
-	if (in_operation == TEXT("connect") && m_bIsConnected && m_appCallback != nullptr)
+	bool connected = isConnected();
+	if (in_operation == TEXT("connect") && connected && m_appCallback != nullptr)
 	{
 		m_appCallback->serverCallback(ServiceName::Relay, ServiceOperation::Connect, in_jsonMessage);
 		return;
@@ -430,7 +436,7 @@ void BrainCloudRelayComms::processRegisteredListeners(const FString &in_service,
 			disconnectImpl();
 	}
 
-	if (!m_bIsConnected && in_operation == TEXT("connect"))
+	if (!connected && in_operation == TEXT("connect"))
 	{
 		send(buildConnectionRequest(), CL2RS_CONNECTION);
 	}
