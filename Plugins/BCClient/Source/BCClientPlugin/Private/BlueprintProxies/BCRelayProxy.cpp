@@ -45,7 +45,7 @@ void UBCRelayProxy::DeregisterDataCallback(UBrainCloudWrapper *brainCloudWrapper
 	UBCWrapperProxy::GetBrainCloudInstance(brainCloudWrapper)->getRelayService()->deregisterDataCallback();
 }
 
-void UBCRelayProxy::Send(UBrainCloudWrapper *brainCloudWrapper, TArray<uint8> in_message, const uint8 in_target, bool in_reliable/* = true*/, bool in_ordered/* = true*/, int in_channel/* = 0*/)
+void UBCRelayProxy::Send(UBrainCloudWrapper *brainCloudWrapper, const TArray<uint8> &in_message, const uint8 in_target, bool in_reliable/* = true*/, bool in_ordered/* = true*/, int in_channel/* = 0*/)
 {
     UBCWrapperProxy::GetBrainCloudInstance(brainCloudWrapper)->getRelayService()->send(in_message, in_target, in_reliable, in_ordered, in_channel);
 }
