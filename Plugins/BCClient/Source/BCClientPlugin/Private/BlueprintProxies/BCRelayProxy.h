@@ -13,13 +13,13 @@ class UBCRelayProxy : public UBCBlueprintCallProxyBase
 
 public:
 	UBCRelayProxy(const FObjectInitializer &ObjectInitializer);
-	
-    /*
+
+	/*
 	*/
 	UFUNCTION(BlueprintCallable, Category = "BrainCloud|Relay")
 	static int64 Ping(UBrainCloudWrapper *brainCloudWrapper);
 
-    /*
+	/*
 	*/
 	UFUNCTION(BlueprintCallable, Category = "BrainCloud|Relay")
 	static uint8 NetId(UBrainCloudWrapper *brainCloudWrapper);
@@ -48,7 +48,7 @@ public:
 	* @param in_target: BrainCloudRelayComms::TO_ALL_PLAYERS, to relay to all, otherwise use target netId
 	*/
 	UFUNCTION(BlueprintCallable, Category = "BrainCloud|Relay")
-    void Send(UBrainCloudWrapper *brainCloudWrapper, TArray<uint8> in_message, const uint8 in_target, bool in_reliable = true, bool in_ordered = true, int in_channel = 0);
+	static void Send(UBrainCloudWrapper *brainCloudWrapper, const TArray<uint8> &in_message, const uint8 in_target, bool in_reliable = true, bool in_ordered = true, int in_channel = 0);
 
 	/**
 	* 
@@ -63,7 +63,7 @@ public:
  	* @return Valid FString representing bytes.
  	*/
 	UFUNCTION(BlueprintCallable, Category = "BrainCloud|Relay")
-	static FString BCBytesToString(const TArray<uint8>& in_data);
+	static FString BCBytesToString(const TArray<uint8> &in_data);
 
 	/** 
  	* Convert FString of bytes into the byte array.
@@ -73,5 +73,4 @@ public:
  	*/
 	UFUNCTION(BlueprintCallable, Category = "BrainCloud|Relay")
 	static TArray<uint8> BCStringToBytes(const FString &in_string);
-
 };
