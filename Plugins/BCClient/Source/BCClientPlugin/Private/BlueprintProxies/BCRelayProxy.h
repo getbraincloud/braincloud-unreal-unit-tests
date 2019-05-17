@@ -16,12 +16,12 @@ public:
 	
     /*
 	*/
-	UFUNCTION(BlueprintCallable, meta = (BlueprintInternalUseOnly = "true"), Category = "BrainCloud|Relay")
+	UFUNCTION(BlueprintCallable, Category = "BrainCloud|Relay")
 	static int64 Ping(UBrainCloudWrapper *brainCloudWrapper);
 
     /*
 	*/
-	UFUNCTION(BlueprintCallable, meta = (BlueprintInternalUseOnly = "true"), Category = "BrainCloud|Relay")
+	UFUNCTION(BlueprintCallable, Category = "BrainCloud|Relay")
 	static uint8 NetId(UBrainCloudWrapper *brainCloudWrapper);
 
 	/*
@@ -36,7 +36,7 @@ public:
 
 	/*
 	*/
-	UFUNCTION(BlueprintCallable, meta = (BlueprintInternalUseOnly = "true"), Category = "BrainCloud|Relay")
+	UFUNCTION(BlueprintCallable, Category = "BrainCloud|Relay")
 	static bool IsConnected(UBrainCloudWrapper *brainCloudWrapper);
 
 	/*
