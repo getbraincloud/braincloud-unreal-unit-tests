@@ -27,6 +27,11 @@ void BrainCloudRelay::disconnect()
     _relayComms->disconnect();
 }
 
+bool BrainCloudRelay::isConnected()
+{
+    return _relayComms->isConnected();
+}
+
 void BrainCloudRelay::registerDataCallback(IRelayCallback *callback)
 {
     _relayComms->registerDataCallback(callback);

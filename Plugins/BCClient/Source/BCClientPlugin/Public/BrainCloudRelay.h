@@ -17,6 +17,7 @@ public:
 
 	void connect(BCRelayConnectionType in_connectionType, const FString &in_connectOptionsJson, IServerCallback *callback);
 	void disconnect();
+	bool isConnected();
 	void registerDataCallback(IRelayCallback *callback);
 	void registerDataCallback(UBCBlueprintRelayCallProxyBase *callback);
 	void deregisterDataCallback();

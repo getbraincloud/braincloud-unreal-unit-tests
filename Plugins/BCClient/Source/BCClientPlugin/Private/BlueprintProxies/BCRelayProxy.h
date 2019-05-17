@@ -36,6 +36,11 @@ public:
 
 	/*
 	*/
+	UFUNCTION(BlueprintCallable, meta = (BlueprintInternalUseOnly = "true"), Category = "BrainCloud|Relay")
+	static bool IsConnected(UBrainCloudWrapper *brainCloudWrapper);
+
+	/*
+	*/
 	UFUNCTION(BlueprintCallable, Category = "BrainCloud|Relay")
 	static void DeregisterDataCallback(UBrainCloudWrapper *brainCloudWrapper);
 
