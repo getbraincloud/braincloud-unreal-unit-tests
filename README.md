@@ -52,7 +52,7 @@ It is recommended to use the wrapper by default.
 
 2. Store and set the wrapper - You will want a variable of type BrainCloudWrapper.
 
-3. Set the Default brainCloud instance to your wrapper - this allows Singleton functionality, and you won't need to pass it into each function call, unless needed.
+3. Set the Default brainCloud instance to your wrapper - this allows Singleton functionality, and you won't need to pass the wrapper into each function call, unless needed.
 
 4. Initialize brainCloud with your app credentials 
 
