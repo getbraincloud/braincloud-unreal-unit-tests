@@ -561,8 +561,16 @@ void BrainCloudRelayComms::onRecv(TArray<uint8> in_data)
         }
 		else
 		{
-			TArray<uint8> data = stripByteArray(in_data, 1);
+			bool bOppRSMG =  controlByte < MAX_PLAYERS ||
+                controlByte == CL2RS_CONNECTION ||
+                controlByte == CL2RS_RELAY;
 
+            //bool bUDPAcknowledge = isReceivedServerAck(controlByte);
+            int headerLength = CONTROL_BYTE_HEADER_LENGTH;
+            if (bOppRSMG)
+                headerLength += SIZE_OF_RELIABLE_FLAGS;
+				
+			TArray<uint8> data = stripByteArray(in_data, headerLength);
 			// if netId is not setup yet
 			if (m_netId < 0)
 			{
