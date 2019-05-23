@@ -111,6 +111,8 @@ private:
 	short m_netId = -1;
 
 	const int SIZE_OF_LENGTH_PREFIX_BYTE_ARRAY = 2;
+    const int CONTROL_BYTE_HEADER_LENGTH = 1;
+    const int SIZE_OF_RELIABLE_FLAGS = 2;
 
 	BCRelayConnectionType m_connectionType;
 	TMap<FString, FString> m_connectOptions;
