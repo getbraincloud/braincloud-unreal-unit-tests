@@ -28,7 +28,6 @@ public:
 
   /**
 	* Set a default brainCloud instance to be used when none is provided.
-	* When not set, the brainCloud Singleton will be used
 	* @param brainCloud - The brainCloud Wrapper
 	*/
   UFUNCTION(BlueprintCallable, Category = "BrainCloud")
