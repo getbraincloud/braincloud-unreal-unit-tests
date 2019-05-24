@@ -15,7 +15,7 @@ FString BCPlatform::EnumToString(EBCPlatform platform)
         return TEXT("FB");
     case EBCPlatform::IOS:
         return TEXT("IOS");
-    case EBCPlatform::LINUX:
+    case EBCPlatform::LINUX_PLATFORM:
         return TEXT("LINUX");
     case EBCPlatform::MAC:
         return TEXT("MAC");

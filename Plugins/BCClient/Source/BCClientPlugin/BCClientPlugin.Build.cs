@@ -1,11 +1,5 @@
 // Copyright 2018 bitHeads, Inc. All Rights Reserved.
 
-//Uncomment the android architecture you are building for.
-//#define ANDROID_ARM64
-#define ANDROID_ARMv7
-//#define ANDROID_x86
-//#define ANDROID_x86_64
-
 using System.Collections.Generic;
 using System;
 using System.IO;
