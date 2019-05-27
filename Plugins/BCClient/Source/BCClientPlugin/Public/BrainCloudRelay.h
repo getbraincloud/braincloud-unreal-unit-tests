@@ -22,7 +22,7 @@ public:
 	void registerDataCallback(UBCBlueprintRelayCallProxyBase *callback);
 	void deregisterDataCallback();
 
-	bool send(TArray<uint8> in_data, uint8 in_target, bool in_reliable = true, bool in_ordered = true, int in_channel = 0);
+	bool send(const TArray<uint8> &in_data, const uint8 in_target, bool in_reliable = true, bool in_ordered = true, int in_channel = 0);
 	void setPingInterval(float in_interval);
 
 	/** 

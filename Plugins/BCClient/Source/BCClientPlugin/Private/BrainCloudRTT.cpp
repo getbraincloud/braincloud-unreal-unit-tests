@@ -27,7 +27,7 @@ void BrainCloudRTT::disableRTT()
 	_commsLayer->disableRTT();
 }
 
-bool BrainCloudRTT::getRTTEnabled()
+bool BrainCloudRTT::isRTTEnabled()
 {
 	return _commsLayer->isRTTEnabled();
 }
