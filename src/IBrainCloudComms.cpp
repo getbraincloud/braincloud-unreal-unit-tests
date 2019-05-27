@@ -236,7 +236,11 @@ namespace BrainCloud {
 		//This is a hook to perform processing on any messages that come in, before they are sent to the calling application.
   
 		// A session id or a profile id could potentially come back in any messages
-		setCredentials(response);
+				//we want to make sure to update this on Authentication and Identity calls only
+		if (servercall->getService() == ServiceName::AuthenticateV2 || servercall->getService() == ServiceName::Identity)
+		{
+			setCredentials(response);
+		}
 
 		if (servercall->getService() == ServiceName::AuthenticateV2 &&
 			servercall->getOperation() == ServiceOperation::Authenticate &&
