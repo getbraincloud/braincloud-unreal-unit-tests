@@ -10,6 +10,8 @@ namespace BrainCloud
 	const ServiceOperation ServiceOperation::Detach = ServiceOperation("DETACH");
 	const ServiceOperation ServiceOperation::ResetEmailPassword = ServiceOperation("RESET_EMAIL_PASSWORD");
 	const ServiceOperation ServiceOperation::ResetEmailPasswordAdvanced = ServiceOperation("RESET_EMAIL_PASSWORD_ADVANCED");
+	const ServiceOperation ServiceOperation::ResetUniversalIdPassword = ServiceOperation("RESET_UNIVERSAL_ID_PASSWORD");
+	const ServiceOperation ServiceOperation::ResetUniversalIdPasswordAdvanced = ServiceOperation("RESET_UNIVERSAL_ID_PASSWORD_ADVANCED");
 	const ServiceOperation ServiceOperation::SwitchToChildProfile = ServiceOperation("SWITCH_TO_CHILD_PROFILE");
 	const ServiceOperation ServiceOperation::SwitchToParentProfile = ServiceOperation("SWITCH_TO_PARENT_PROFILE");
 	const ServiceOperation ServiceOperation::GetChildProfiles = ServiceOperation("GET_CHILD_PROFILES");
@@ -18,6 +20,8 @@ namespace BrainCloud
 	const ServiceOperation ServiceOperation::RefreshIdentity = ServiceOperation("REFRESH_IDENTITY");
 	const ServiceOperation ServiceOperation::ChangeEmailIdentity = ServiceOperation("CHANGE_EMAIL_IDENTITY");
 	const ServiceOperation ServiceOperation::AttachParentWithIdentity = ServiceOperation("ATTACH_PARENT_WITH_IDENTITY");
+	const ServiceOperation ServiceOperation::AttachNonLoginUniversalId = ServiceOperation("ATTACH_NONLOGIN_UNIVERSAL");
+	const ServiceOperation ServiceOperation::UpdateUniversalIdLogin = ServiceOperation("UPDATE_UNIVERSAL_LOGIN");
 	const ServiceOperation ServiceOperation::AttachPeerProfile = ServiceOperation("ATTACH_PEER_PROFILE");
 	const ServiceOperation ServiceOperation::DetachPeer = ServiceOperation("DETACH_PEER");
 	const ServiceOperation ServiceOperation::GetPeerProfiles = ServiceOperation("GET_PEER_PROFILES");
@@ -68,6 +72,7 @@ namespace BrainCloud
 	const ServiceOperation ServiceOperation::UpdateSummary = ServiceOperation("UPDATE_SUMMARY");
 	const ServiceOperation ServiceOperation::UpdateSetMinimum = ServiceOperation("UPDATE_SET_MINIMUM");
 	const ServiceOperation ServiceOperation::UpdateIncrementToMaximum = ServiceOperation("UPDATE_INCREMENT_TO_MAXIMUM");
+	const ServiceOperation ServiceOperation::UpdateEntityIndexedId = ServiceOperation("UPDATE_INDEXED_ID");
 	const ServiceOperation ServiceOperation::UpdateEntityOwnerAndAcl = ServiceOperation("UPDATE_ENTITY_OWNER_AND_ACL");
 	const ServiceOperation ServiceOperation::MakeSystemEntity = ServiceOperation("MAKE_SYSTEM_ENTITY");
 
@@ -347,11 +352,13 @@ namespace BrainCloud
 	const ServiceOperation ServiceOperation::FindOrCreateLobby = ServiceOperation("FIND_OR_CREATE_LOBBY");
 	const ServiceOperation ServiceOperation::GetLobbyData = ServiceOperation("GET_LOBBY_DATA");
 	const ServiceOperation ServiceOperation::LeaveLobby = ServiceOperation("LEAVE_LOBBY");
+	const ServiceOperation ServiceOperation::JoinLobby = ServiceOperation("JOIN_LOBBY");
 	const ServiceOperation ServiceOperation::RemoveMember = ServiceOperation("REMOVE_MEMBER");
 	const ServiceOperation ServiceOperation::SendSignal = ServiceOperation("SEND_SIGNAL");
 	const ServiceOperation ServiceOperation::SwitchTeam = ServiceOperation("SWITCH_TEAM");
 	const ServiceOperation ServiceOperation::UpdateReady = ServiceOperation("UPDATE_READY");
 	const ServiceOperation ServiceOperation::UpdateSettings = ServiceOperation("UPDATE_SETTINGS");
+	const ServiceOperation ServiceOperation::CancelFindRequest = ServiceOperation("CANCEL_FIND_REQUEST");
 
 	//messaging
 	const ServiceOperation ServiceOperation::DeleteMessages = ServiceOperation("DELETE_MESSAGES");
@@ -380,6 +387,7 @@ namespace BrainCloud
 	const ServiceOperation ServiceOperation::VirtualCurrencyGetCurrency = ServiceOperation("GET_PLAYER_VC");
 	const ServiceOperation ServiceOperation::VirtualCurrencyGetParentCurrency = ServiceOperation("GET_PARENT_VC");
 	const ServiceOperation ServiceOperation::VirtualCurrencyGetPeerCurrency = ServiceOperation("GET_PEER_VC");
+	const ServiceOperation ServiceOperation::VirtualCurrencyResetCurrency = ServiceOperation("RESET_PLAYER_VC");
 
 	//app store
 	const ServiceOperation ServiceOperation::AppStoreVerifyPurchase = ServiceOperation("VERIFY_PURCHASE");

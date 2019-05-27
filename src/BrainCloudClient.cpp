@@ -67,16 +67,17 @@ namespace BrainCloud
         _steamService(new BrainCloudSteam(this)),
         _timeService(new BrainCloudTime(this)),
         _tournamentService(new BrainCloudTournament(this)),
-        _rttRegistrationService(new BrainCloudRTTRegistration(this)),
         _releasePlatform(""),
         _appVersion(""),
         _timezoneOffset(0.0)
     {
+        //needed this here otherwise out of scope compiler error
+        _rttService = new BrainCloudRTT(_rttComms, this);
     }
 
     BrainCloudClient::~BrainCloudClient()
     {
-        delete _rttRegistrationService;
+        delete _rttService;
         delete _tournamentService;
         delete _timeService;
         delete _steamService;
@@ -121,18 +122,12 @@ namespace BrainCloud
     // Public Methods
     ////////////////////////////////////////////////////
 
-    const std::string& BrainCloudClient::getRTTConnectionId() const
-    {
-        if (_rttComms)
-        {
-            return _rttComms->getConnectionId();
-        }
-        static std::string noConnectionId;
-        return noConnectionId;
-    }
-
     const char * BrainCloudClient::getSessionId() const {
         return(_brainCloudComms->getSessionId().c_str());
+    }
+
+    const char * BrainCloudClient::getRttConnectionId() const{
+        return(_rttComms->getConnectionId().c_str());
     }
 
     void BrainCloudClient::initializeComms(const char * in_serverURL, const char * in_appId, const std::map<std::string, std::string>& in_secretMap)
@@ -429,77 +424,6 @@ namespace BrainCloud
     void BrainCloudClient::insertEndOfMessageBundleMarker()
     {
         _brainCloudComms->insertEndOfMessageBundleMarker();
-    }
-
-    // RTT stuff
-    void BrainCloudClient::enableRTT(IRTTConnectCallback* in_callback, bool in_useWebSocket)
-    {
-        _rttComms->enableRTT(in_callback, in_useWebSocket);
-    }
-
-    void BrainCloudClient::disableRTT()
-    {
-        _rttComms->disableRTT();
-    }
-
-    bool BrainCloudClient::getRTTEnabled()
-    {
-        return _rttComms->isRTTEnabled();
-    }
-
-    void BrainCloudClient::registerRTTEventCallback(IRTTCallback* in_callback)
-    {
-        _rttComms->registerRTTCallback(ServiceName::Event, in_callback);
-    }
-
-    void BrainCloudClient::deregisterRTTEventCallback()
-    {
-        _rttComms->deregisterRTTCallback(ServiceName::Event);
-    }
-
-    void BrainCloudClient::registerRTTChatCallback(IRTTCallback* in_callback)
-    {
-        _rttComms->registerRTTCallback(ServiceName::Chat, in_callback);
-    }
-
-    void BrainCloudClient::deregisterRTTChatCallback()
-    {
-        _rttComms->deregisterRTTCallback(ServiceName::Chat);
-    }
-
-    void BrainCloudClient::registerRTTMessagingCallback(IRTTCallback* in_callback)
-    {
-        _rttComms->registerRTTCallback(ServiceName::Messaging, in_callback);
-    }
-
-    void BrainCloudClient::deregisterRTTMessagingCallback()
-    {
-        _rttComms->deregisterRTTCallback(ServiceName::Messaging);
-    }
-
-    void BrainCloudClient::registerRTTLobbyCallback(IRTTCallback* in_callback)
-    {
-        _rttComms->registerRTTCallback(ServiceName::Lobby, in_callback);
-    }
-
-    void BrainCloudClient::deregisterRTTLobbyCallback()
-    {
-        _rttComms->deregisterRTTCallback(ServiceName::Lobby);
-    }
-
-    void BrainCloudClient::registerRTTPresenceCallback(IRTTCallback* in_callback)
-    {
-        _rttComms->registerRTTCallback(ServiceName::Presence, in_callback);
-    }
-
-    void BrainCloudClient::deregisterRTTPresenceCallback()
-    {
-        _rttComms->deregisterRTTCallback(ServiceName::Presence);
-    }
-
-    void BrainCloudClient::deregisterAllRTTCallbacks()
-    {
-        _rttComms->deregisterAllRTTCallbacks();
     }
 
     ////////////////////////////////////////////////////

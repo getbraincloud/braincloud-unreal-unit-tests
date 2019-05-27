@@ -233,7 +233,7 @@ add_library(brainCloud STATIC
     include/braincloud/BrainCloudProfanity.h
     include/braincloud/BrainCloudPushNotification.h
     include/braincloud/BrainCloudRedemptionCode.h
-    include/braincloud/BrainCloudRTTRegistration.h
+    include/braincloud/BrainCloudRTT.h
     include/braincloud/BrainCloudS3Handling.h
     include/braincloud/BrainCloudScript.h
     include/braincloud/BrainCloudSocialLeaderboard.h
@@ -312,7 +312,7 @@ add_library(brainCloud STATIC
     src/BrainCloudProfanity.cpp
     src/BrainCloudPushNotification.cpp
     src/BrainCloudRedemptionCode.cpp
-    src/BrainCloudRTTRegistration.cpp
+    src/BrainCloudRTT.cpp
     src/BrainCloudS3Handling.cpp
     src/BrainCloudScript.cpp
     src/BrainCloudSocialLeaderboard.cpp

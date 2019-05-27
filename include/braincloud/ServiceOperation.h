@@ -15,8 +15,12 @@ namespace BrainCloud {
 		static const ServiceOperation Detach;
 		static const ServiceOperation ResetEmailPassword;
 		static const ServiceOperation ResetEmailPasswordAdvanced;
+		static const ServiceOperation ResetUniversalIdPassword;
+		static const ServiceOperation ResetUniversalIdPasswordAdvanced;
 		static const ServiceOperation SwitchToChildProfile;
 		static const ServiceOperation SwitchToParentProfile;
+		static const ServiceOperation AttachNonLoginUniversalId;
+		static const ServiceOperation UpdateUniversalIdLogin;
 		static const ServiceOperation GetChildProfiles;
 		static const ServiceOperation GetIdentities;
 		static const ServiceOperation GetExpiredIdentities;
@@ -75,6 +79,7 @@ namespace BrainCloud {
 		static const ServiceOperation UpdateSummary;
 		static const ServiceOperation UpdateSetMinimum;
 		static const ServiceOperation UpdateIncrementToMaximum;
+		static const ServiceOperation UpdateEntityIndexedId;
 		static const ServiceOperation UpdateEntityOwnerAndAcl;
 		static const ServiceOperation MakeSystemEntity;
 
@@ -355,11 +360,13 @@ namespace BrainCloud {
 		static const ServiceOperation FindOrCreateLobby;
 		static const ServiceOperation GetLobbyData;
 		static const ServiceOperation LeaveLobby;
+		static const ServiceOperation JoinLobby;
 		static const ServiceOperation RemoveMember;
 		static const ServiceOperation SendSignal;
 		static const ServiceOperation SwitchTeam;
 		static const ServiceOperation UpdateReady;
 		static const ServiceOperation UpdateSettings;
+		static const ServiceOperation CancelFindRequest;
 
 		//messaging
 		static const ServiceOperation DeleteMessages;
@@ -388,6 +395,7 @@ namespace BrainCloud {
         static const ServiceOperation VirtualCurrencyGetCurrency;
         static const ServiceOperation VirtualCurrencyGetParentCurrency;
         static const ServiceOperation VirtualCurrencyGetPeerCurrency;
+		static const ServiceOperation VirtualCurrencyResetCurrency;
 
         //appstore
         static const ServiceOperation AppStoreVerifyPurchase;
