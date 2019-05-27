@@ -30,6 +30,12 @@ public:
 	UFUNCTION(BlueprintCallable, Category = "BrainCloud|RTT")
 	static void DisableRTT(UBrainCloudWrapper *brainCloudWrapper);
 
+	/*
+	* Disables Real Time event for this session.
+	*/
+	UFUNCTION(BlueprintCallable, Category = "BrainCloud|RTT")
+	static bool IsRTTEnabled(UBrainCloudWrapper *brainCloudWrapper);
+
 	/**
 	* 
 	*/
