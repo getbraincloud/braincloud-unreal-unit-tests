@@ -234,6 +234,33 @@ namespace BrainCloud
 		 */
 		void resetEmailPasswordAdvanced(const char * in_emailAddress, std::string in_serviceParams, IServerCallback * in_callback = NULL);
 
+		/**
+		 * Resets Universal ID password
+		 *
+		 * Service Name - Authenticate
+		 * Operation - ResetUniversalIdPassword
+		 *
+		 * @param appId the applicationId
+		 * @param in_universalId the universal Id in question
+		 * @param in_callback The method to be invoked when the server response is received
+		 *
+		 */
+		void resetUniversalIdPassword(const char * in_universalId, IServerCallback * in_callback = NULL);
+
+		/**
+		 * Advanced Universal ID password reset using templates
+		 *
+		 * Service Name - Authenticate
+		 * Operation - ResetUniversalIdPassword
+		 *
+		 * @param appId the applicationId
+		 * @param in_universalId the universal Id in question
+		 * @param in_serviceParams - parameters to send to the email service. 
+		 * @param in_callback The method to be invoked when the server response is received
+		 *
+		 */
+		void resetUniversalIdPasswordAdvanced(const char * in_universalId, std::string in_serviceParams, IServerCallback * in_callback = NULL);
+
 		const std::string & getAnonymousId() const { return _anonymousId; }
 		const std::string & getProfileId() const { return _profileId; }
 

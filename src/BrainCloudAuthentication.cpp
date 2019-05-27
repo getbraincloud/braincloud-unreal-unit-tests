@@ -130,6 +130,27 @@ namespace BrainCloud {
         m_client->sendRequest(sc);
     }
 
+	void BrainCloudAuthentication::resetUniversalIdPassword(const char * in_universalId, IServerCallback * in_callback)
+    {
+        Json::Value message;
+        message[OperationParam::AuthenticateServiceAuthenticateGameId.getValue()] = m_client->getAppId().c_str();
+        message[OperationParam::AuthenticateServiceAuthenticateUniversalId.getValue()] = in_universalId;
+
+        ServerCall * sc = new ServerCall(ServiceName::AuthenticateV2, ServiceOperation::ResetUniversalIdPassword, message, in_callback);
+        m_client->sendRequest(sc);
+    }
+
+	void BrainCloudAuthentication::resetUniversalIdPasswordAdvanced(const char * in_universalId, std::string in_serviceParams, IServerCallback * in_callback)
+    {
+        Json::Value message;
+        message[OperationParam::AuthenticateServiceAuthenticateGameId.getValue()] = m_client->getAppId().c_str();
+        message[OperationParam::AuthenticateServiceAuthenticateUniversalId.getValue()] = in_universalId;
+        message[OperationParam::AuthenticateServiceAuthenticateServiceParams.getValue()] = JsonUtil::jsonStringToValue(in_serviceParams);;
+
+        ServerCall * sc = new ServerCall(ServiceName::AuthenticateV2, ServiceOperation::ResetUniversalIdPasswordAdvanced, message, in_callback);
+        m_client->sendRequest(sc);
+    }
+
     void BrainCloudAuthentication::authenticate(
         const char * in_externalId,
         const char * in_authenticationToken,

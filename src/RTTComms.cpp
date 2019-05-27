@@ -115,7 +115,7 @@ namespace BrainCloud
         _sessionId = _client->getSessionId();
         _profileId = _client->getAuthenticationService()->getProfileId();
 
-        _client->getRTTRegistrationService()->requestClientConnection(this);
+        _client->getRTTService()->requestClientConnection(this);
     }
 
     void RTTComms::disableRTT()
@@ -140,8 +140,7 @@ namespace BrainCloud
 
     const std::string& RTTComms::getConnectionId()
     {
-        static std::string emptyConnId;
-        return emptyConnId;
+        return _connectionId;
     }
 
     void RTTComms::runCallbacks()

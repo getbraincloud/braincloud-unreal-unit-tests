@@ -69,7 +69,7 @@ TEST_F(TestBCRTTComms, RequestClientConnection)
 {
     TestResult tr;
 
-    m_bc->getRTTRegistrationService()->requestClientConnection(&tr);
+    m_bc->getRTTService()->requestClientConnection(&tr);
     tr.run(m_bc);
 }
 
@@ -77,8 +77,8 @@ TEST_F(TestBCRTTComms, EnableDisableRTTWithTCP)
 {
     TestResult tr;
     // disable, then re-enable. Should still succeed
-    m_bc->disableRTT();
-    m_bc->enableRTT(&tr, false);
+    m_bc->getRTTService()->disableRTT();
+    m_bc->getRTTService()->enableRTT(&tr, false);
     tr.run(m_bc);
 }
 
@@ -86,8 +86,8 @@ TEST_F(TestBCRTTComms, EnableDisableRTTWithWS)
 {
     TestResult tr;
     // disable, then re-enable. Should still succeed
-    m_bc->disableRTT();
-    m_bc->enableRTT(&tr, true);
+    m_bc->getRTTService()->disableRTT();
+    m_bc->getRTTService()->enableRTT(&tr, true);
     tr.run(m_bc);
 }
 
@@ -95,7 +95,7 @@ TEST_F(TestBCRTTComms, RTTChatCallback)
 {
     TestResult tr;
 
-    m_bc->enableRTT(&tr, true);
+    m_bc->getRTTService()->enableRTT(&tr, true);
     tr.run(m_bc);
 
     // Get channel Id
@@ -109,7 +109,7 @@ TEST_F(TestBCRTTComms, RTTChatCallback)
 
     // Register for RTT chat
     RTTCallback rttCallback(m_bc, "chat", "INCOMING", 10);
-    m_bc->registerRTTChatCallback(&rttCallback);
+    m_bc->getRTTService()->registerRTTChatCallback(&rttCallback);
 
     // Send a chat message
     m_bc->getChatService()->postChatMessageSimple(channelId, 
@@ -121,7 +121,7 @@ TEST_F(TestBCRTTComms, RTTChatCallback)
     rttCallback.reset();
 
     // Now deregister and make sure we don't receive it
-    m_bc->deregisterRTTChatCallback();
+    m_bc->getRTTService()->deregisterRTTChatCallback();
 
     // Send a chat message again
     m_bc->getChatService()->postChatMessageSimple(channelId, 
@@ -136,12 +136,12 @@ TEST_F(TestBCRTTComms, RTTLobbyCallback)
 {
     TestResult tr;
 
-    m_bc->enableRTT(&tr, true);
+    m_bc->getRTTService()->enableRTT(&tr, true);
     tr.run(m_bc);
 
     // Register for RTT lobby
     RTTCallback rttCallback(m_bc, "lobby", "", 60);
-    m_bc->registerRTTLobbyCallback(&rttCallback);
+    m_bc->getRTTService()->registerRTTLobbyCallback(&rttCallback);
 
     // Create a lobby
     std::vector<std::string> otherUserCxIds;
@@ -157,12 +157,12 @@ TEST_F(TestBCRTTComms, RTTEventCallback)
 {
     TestResult tr;
 
-    m_bc->enableRTT(&tr, true);
+    m_bc->getRTTService()->enableRTT(&tr, true);
     tr.run(m_bc);
 
     // Register for RTT lobby
     RTTCallback rttCallback(m_bc, "event");
-    m_bc->registerRTTEventCallback(&rttCallback);
+    m_bc->getRTTService()->registerRTTEventCallback(&rttCallback);
 
     // Create a lobby
     auto& profileId = m_bc->getAuthenticationService()->getProfileId();

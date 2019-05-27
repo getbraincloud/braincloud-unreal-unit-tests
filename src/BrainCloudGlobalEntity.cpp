@@ -186,6 +186,17 @@ namespace BrainCloud
 		ServerCall * sc = new ServerCall(ServiceName::GlobalEntity, ServiceOperation::GetRandomEntitiesMatching, message, in_callback);
 		m_client->sendRequest(sc);
 	}
+	
+	void BrainCloudGlobalEntity::updateEntityIndexedId(const char * in_entityId, int64_t in_version, const char * in_entityIndexedId, IServerCallback * in_callback)
+	{
+		Json::Value message;
+		message[OperationParam::GlobalEntityServiceEntityId.getValue()] = in_entityId;
+		message[OperationParam::GlobalEntityServiceVersion.getValue()] = (Json::Int64) in_version;
+		message[OperationParam::GlobalEntityServiceIndexedId.getValue()] = in_entityIndexedId;
+
+		ServerCall * sc = new ServerCall(ServiceName::GlobalEntity, ServiceOperation::UpdateEntityIndexedId, message, in_callback);
+		m_client->sendRequest(sc);
+	}
 
 	void BrainCloudGlobalEntity::updateEntityOwnerAndAcl(const char * in_entityId, int64_t in_version, const char * in_ownerId, const std::string & in_jsonEntityAcl, IServerCallback * in_callback)
 	{

@@ -38,6 +38,7 @@ namespace BrainCloud
 	const OperationParam OperationParam::AuthenticateServiceAuthenticateAuthenticationType = OperationParam("authenticationType");
 	const OperationParam OperationParam::AuthenticateServiceAuthenticateAuthenticationToken = OperationParam("authenticationToken");
 	const OperationParam OperationParam::AuthenticateServiceAuthenticateExternalId = OperationParam("externalId");
+		const OperationParam OperationParam::AuthenticateServiceAuthenticateUniversalId = OperationParam("universalId");
 	const OperationParam OperationParam::AuthenticateServiceAuthenticateEmailAddress = OperationParam("emailAddress");
 	const OperationParam OperationParam::AuthenticateServiceAuthenticateServiceParams = OperationParam("serviceParams");
 	const OperationParam OperationParam::AuthenticateServiceAuthenticateGameId = OperationParam("gameId");

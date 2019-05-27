@@ -182,6 +182,15 @@ TEST_F(TestBCGlobalEntity, GetRandomEntitiesMatching)
     tr.run(m_bc);
 }
 
+TEST_F(TestBCGlobalEntity, UpdateEntityIndexedId)
+{
+	CreateDefaultGlobalEntity(m_indexedId);
+
+	TestResult tr;
+	m_bc->getGlobalEntityService()->updateEntityIndexedId(m_entityId.c_str(), -1, m_indexedId.c_str(), &tr);
+	tr.run(m_bc);
+}
+
 TEST_F(TestBCGlobalEntity, UpdateEntityOwnerAndAcl)
 {
 	CreateDefaultGlobalEntity(m_indexedId);

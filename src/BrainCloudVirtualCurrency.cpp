@@ -69,4 +69,11 @@ namespace BrainCloud
         ServerCall * sc = new ServerCall(ServiceName::VirtualCurrency, ServiceOperation::VirtualCurrencyGetPeerCurrency, message, in_callback);
         m_client->sendRequest(sc);
     }
+
+    void BrainCloudVirtualCurrency::resetCurrency(IServerCallback * in_callback)
+    {
+        Json::Value message;
+        ServerCall * sc = new ServerCall(ServiceName::VirtualCurrency, ServiceOperation::VirtualCurrencyResetCurrency, message, in_callback);
+        m_client->sendRequest(sc);
+    }
 }

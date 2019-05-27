@@ -60,6 +60,20 @@ TEST_F(TestBCLobby, LeaveLobby)
 	tr.runExpectFail(m_bc, HTTP_BAD_REQUEST, LOBBY_NOT_FOUND);
 }
 
+TEST_F(TestBCLobby, JoinLobby)
+{
+	TestResult tr;
+	std::vector<std::string> otherUserCxIds;
+	//otherUserCxIds.push_back("5555");
+	//otherUserCxIds.push_back("aaa-bbb-ccc-ddd");
+	//m_bc->getLobbyService()->createLobby("4v4", 76, otherUserCxIds, true, "{}", "red", "{}", &tr);
+	//m_bc->getLobbyService()->joinLobby("20001:4v4:1", true, "{}", "red", otherUserCxIds, &tr);
+	m_bc->getLobbyService()->joinLobby("wrongLobbyId", true, "{}", "red", otherUserCxIds, &tr);
+
+	tr.runExpectFail(m_bc, HTTP_BAD_REQUEST, LOBBY_NOT_FOUND);
+}
+
+
 TEST_F(TestBCLobby, RemoveMember)
 {
 	TestResult tr;
@@ -103,4 +117,18 @@ TEST_F(TestBCLobby, UpdateSettings)
 	m_bc->getLobbyService()->updateSettings("wrongLobbyId", "{\"msg\":\"test\"}", &tr);
 
 	tr.runExpectFail(m_bc, HTTP_BAD_REQUEST, LOBBY_NOT_FOUND);
+}
+
+TEST_F(TestBCLobby, CancelFindRequest)
+{
+	TestResult tr;
+
+	//m_bc->getLobbyService()->cancelFindRequest("MATCH_UNRANKED", m_bc->getRttConnectionId(), &tr);
+	/////////////////////////////////////////////////////////////////////////////////////////////////////////////
+	//need to come back to this test. When I send a bad cxId, it actually sends the parameter cxId to the server. But when I send a proper 
+	//cxId, it only sends the lobbyType and no cxId parameter, so it always says that the cxId parameter is missing. 
+	//////////////////////////////////////////////////////////////////////////////////////////////////////////////
+	m_bc->getLobbyService()->cancelFindRequest("MATCH_UNRANKED", "badcxId", &tr);
+	//40653 is cxId must belong to caller
+	tr.runExpectFail(m_bc, HTTP_BAD_REQUEST, 40653);
 }
