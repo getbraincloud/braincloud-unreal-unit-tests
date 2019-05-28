@@ -27,7 +27,7 @@ void UK2Node_BrainCloudCall::GetMenuActions(FBlueprintActionDatabaseRegistrar &A
         UClass *Class = *ClassIt;
         if ((!Class->IsChildOf<UBCBlueprintCallProxyBase>() &&
              !Class->IsChildOf<UBCBlueprintRTTCallProxyBase>() &&
-             !Class->IsChildOf<UBCBlueprintRestCallProxyBase>() &&) ||
+             !Class->IsChildOf<UBCBlueprintRestCallProxyBase>()) ||
             Class->HasAnyClassFlags(CLASS_Abstract))
         {
             continue;
