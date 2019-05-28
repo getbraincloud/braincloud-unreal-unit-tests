@@ -797,7 +797,7 @@ void BrainCloudComms::FilterIncomingMessages(TSharedRef<ServerCall> servercall, 
 	bool isDataValid = Field->TryGetObject(data);
 	// A session id or a profile id could potentially come back in any messages
 	//Only allow it in Authenticate and Identity calls.
-	if ( isDataValid && operation == ServiceOperation::Authenticate || operation == ServiceOperation::Identity)
+	if ( isDataValid && (operation == ServiceOperation::Authenticate || operation == ServiceOperation::Identity))
 	{
 		(*data)->TryGetStringField(TEXT("sessionId"), _sessionId);
 
