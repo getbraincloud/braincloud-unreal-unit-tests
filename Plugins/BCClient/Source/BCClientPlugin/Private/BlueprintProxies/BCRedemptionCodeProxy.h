@@ -37,5 +37,5 @@ public:
     * Param - in_callback The method to be invoked when the server response is received
     */
   UFUNCTION(BlueprintCallable, meta = (BlueprintInternalUseOnly = "true"), Category = "BrainCloud|Redemption Code")
-  static UBCRedemptionCodeProxy *GetRedeemedCodes(UBrainCloudWrapper *brainCloud, const FString &codeType);
+  static UBCRedemptionCodeProxy *GetRedeemedCodes(UBrainCloudWrapper *brainCloudWrapper, const FString &codeType);
 };

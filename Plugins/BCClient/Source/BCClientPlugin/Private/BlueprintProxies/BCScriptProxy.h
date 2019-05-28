@@ -104,5 +104,5 @@ class UBCScriptProxy : public UBCBlueprintCallProxyBase
 	* Param - peer Peer the script belongs to
 	*/
 	UFUNCTION(BlueprintCallable, meta = (BlueprintInternalUseOnly = "true"), Category = "BrainCloud|Cloud Script")
-	static UBCScriptProxy *RunPeerScriptAsync(UBrainCloudWrapper *brainCloud, const FString &scriptName, const FString &jsonScriptData, const FString &peer);
+	static UBCScriptProxy *RunPeerScriptAsync(UBrainCloudWrapper *brainCloudWrapper, const FString &scriptName, const FString &jsonScriptData, const FString &peer);
 };

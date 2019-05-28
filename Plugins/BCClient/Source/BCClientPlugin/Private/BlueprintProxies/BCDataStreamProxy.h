@@ -38,5 +38,5 @@ public:
     * Param - eventProperties Properties of event
     */
   UFUNCTION(BlueprintCallable, meta = (BlueprintInternalUseOnly = "true"), Category = "BrainCloud|DataStream")
-  static UBCDataStreamProxy *CustomTrackEvent(UBrainCloudWrapper *brainCloud, const FString &eventName, const FString &jsonEventProperties);
+  static UBCDataStreamProxy *CustomTrackEvent(UBrainCloudWrapper *brainCloudWrapper, const FString &eventName, const FString &jsonEventProperties);
 };

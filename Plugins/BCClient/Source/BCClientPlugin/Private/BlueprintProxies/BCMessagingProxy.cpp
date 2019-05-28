@@ -13,65 +13,65 @@ UBCMessagingProxy::UBCMessagingProxy(const FObjectInitializer &ObjectInitializer
 {
 }
 
-UBCMessagingProxy *UBCMessagingProxy::DeleteMessages(UBrainCloudWrapper *brainCloud, const FString &in_msgBox, const TArray<FString> &in_msgsIds)
+UBCMessagingProxy *UBCMessagingProxy::DeleteMessages(UBrainCloudWrapper *brainCloudWrapper, const FString &in_msgBox, const TArray<FString> &in_msgsIds)
 {
 	UBCMessagingProxy *Proxy = NewObject<UBCMessagingProxy>();
-	UBCWrapperProxy::GetBrainCloudInstance(brainCloud)->getMessagingService()->deleteMessages(in_msgBox, in_msgsIds, Proxy);
+	UBCWrapperProxy::GetBrainCloudInstance(brainCloudWrapper)->getMessagingService()->deleteMessages(in_msgBox, in_msgsIds, Proxy);
 	return Proxy;
 }
 
-UBCMessagingProxy *UBCMessagingProxy::GetMessageBoxes(UBrainCloudWrapper *brainCloud)
+UBCMessagingProxy *UBCMessagingProxy::GetMessageBoxes(UBrainCloudWrapper *brainCloudWrapper)
 {
 	UBCMessagingProxy *Proxy = NewObject<UBCMessagingProxy>();
-	UBCWrapperProxy::GetBrainCloudInstance(brainCloud)->getMessagingService()->getMessageBoxes(Proxy);
+	UBCWrapperProxy::GetBrainCloudInstance(brainCloudWrapper)->getMessagingService()->getMessageBoxes(Proxy);
 	return Proxy;
 }
 
-UBCMessagingProxy *UBCMessagingProxy::GetMessageCounts(UBrainCloudWrapper *brainCloud)
+UBCMessagingProxy *UBCMessagingProxy::GetMessageCounts(UBrainCloudWrapper *brainCloudWrapper)
 {
 	UBCMessagingProxy *Proxy = NewObject<UBCMessagingProxy>();
-	UBCWrapperProxy::GetBrainCloudInstance(brainCloud)->getMessagingService()->getMessageCounts(Proxy);
+	UBCWrapperProxy::GetBrainCloudInstance(brainCloudWrapper)->getMessagingService()->getMessageCounts(Proxy);
 	return Proxy;
 }
 
-UBCMessagingProxy *UBCMessagingProxy::GetMessages(UBrainCloudWrapper *brainCloud, const FString &in_msgBox, const TArray<FString> &in_msgsIds, bool in_markAsRead)
+UBCMessagingProxy *UBCMessagingProxy::GetMessages(UBrainCloudWrapper *brainCloudWrapper, const FString &in_msgBox, const TArray<FString> &in_msgsIds, bool in_markAsRead)
 {
 	UBCMessagingProxy *Proxy = NewObject<UBCMessagingProxy>();
-	UBCWrapperProxy::GetBrainCloudInstance(brainCloud)->getMessagingService()->getMessages(in_msgBox, in_msgsIds, in_markAsRead, Proxy);
+	UBCWrapperProxy::GetBrainCloudInstance(brainCloudWrapper)->getMessagingService()->getMessages(in_msgBox, in_msgsIds, in_markAsRead, Proxy);
 	return Proxy;
 }
 
-UBCMessagingProxy *UBCMessagingProxy::GetMessagesPage(UBrainCloudWrapper *brainCloud, const FString &in_context)
+UBCMessagingProxy *UBCMessagingProxy::GetMessagesPage(UBrainCloudWrapper *brainCloudWrapper, const FString &in_context)
 {
 	UBCMessagingProxy *Proxy = NewObject<UBCMessagingProxy>();
-	UBCWrapperProxy::GetBrainCloudInstance(brainCloud)->getMessagingService()->getMessagesPage(in_context, Proxy);
+	UBCWrapperProxy::GetBrainCloudInstance(brainCloudWrapper)->getMessagingService()->getMessagesPage(in_context, Proxy);
 	return Proxy;
 }
 
-UBCMessagingProxy *UBCMessagingProxy::GetMessagesPageOffset(UBrainCloudWrapper *brainCloud, const FString &in_context, int32 in_pageOffset)
+UBCMessagingProxy *UBCMessagingProxy::GetMessagesPageOffset(UBrainCloudWrapper *brainCloudWrapper, const FString &in_context, int32 in_pageOffset)
 {
 	UBCMessagingProxy *Proxy = NewObject<UBCMessagingProxy>();
-	UBCWrapperProxy::GetBrainCloudInstance(brainCloud)->getMessagingService()->getMessagesPageOffset(in_context, in_pageOffset, Proxy);
+	UBCWrapperProxy::GetBrainCloudInstance(brainCloudWrapper)->getMessagingService()->getMessagesPageOffset(in_context, in_pageOffset, Proxy);
 	return Proxy;
 }
 
-UBCMessagingProxy *UBCMessagingProxy::MarkMessagesRead(UBrainCloudWrapper *brainCloud, const FString &in_msgBox, const TArray<FString> &in_msgsIds)
+UBCMessagingProxy *UBCMessagingProxy::MarkMessagesRead(UBrainCloudWrapper *brainCloudWrapper, const FString &in_msgBox, const TArray<FString> &in_msgsIds)
 {
 	UBCMessagingProxy *Proxy = NewObject<UBCMessagingProxy>();
-	UBCWrapperProxy::GetBrainCloudInstance(brainCloud)->getMessagingService()->markMessagesRead(in_msgBox, in_msgsIds, Proxy);
+	UBCWrapperProxy::GetBrainCloudInstance(brainCloudWrapper)->getMessagingService()->markMessagesRead(in_msgBox, in_msgsIds, Proxy);
 	return Proxy;
 }
 
-UBCMessagingProxy *UBCMessagingProxy::SendMessage(UBrainCloudWrapper *brainCloud, const TArray<FString> &in_toProfileIds, const FString &in_contentJson)
+UBCMessagingProxy *UBCMessagingProxy::SendMessage(UBrainCloudWrapper *brainCloudWrapper, const TArray<FString> &in_toProfileIds, const FString &in_contentJson)
 {
 	UBCMessagingProxy *Proxy = NewObject<UBCMessagingProxy>();
-	UBCWrapperProxy::GetBrainCloudInstance(brainCloud)->getMessagingService()->sendMessage(in_toProfileIds, in_contentJson, Proxy);
+	UBCWrapperProxy::GetBrainCloudInstance(brainCloudWrapper)->getMessagingService()->sendMessage(in_toProfileIds, in_contentJson, Proxy);
 	return Proxy;
 }
 
-UBCMessagingProxy *UBCMessagingProxy::SendMessageSimple(UBrainCloudWrapper *brainCloud, const TArray<FString> &in_toProfileIds, const FString &in_messageText)
+UBCMessagingProxy *UBCMessagingProxy::SendMessageSimple(UBrainCloudWrapper *brainCloudWrapper, const TArray<FString> &in_toProfileIds, const FString &in_messageText)
 {
 	UBCMessagingProxy *Proxy = NewObject<UBCMessagingProxy>();
-	UBCWrapperProxy::GetBrainCloudInstance(brainCloud)->getMessagingService()->sendMessageSimple(in_toProfileIds, in_messageText, Proxy);
+	UBCWrapperProxy::GetBrainCloudInstance(brainCloudWrapper)->getMessagingService()->sendMessageSimple(in_toProfileIds, in_messageText, Proxy);
 	return Proxy;
 }

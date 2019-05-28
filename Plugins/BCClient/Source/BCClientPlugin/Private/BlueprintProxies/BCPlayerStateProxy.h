@@ -182,5 +182,5 @@ class UBCPlayerStateProxy : public UBCBlueprintCallProxyBase
     * Param - contactEmail Updated email
     */
     UFUNCTION(BlueprintCallable, meta = (BlueprintInternalUseOnly = "true"), Category = "BrainCloud|Player State")
-    static UBCPlayerStateProxy *UpdateContactEmail(UBrainCloudWrapper *brainCloud, const FString &contactEmail);
+    static UBCPlayerStateProxy *UpdateContactEmail(UBrainCloudWrapper *brainCloudWrapper, const FString &contactEmail);
 };

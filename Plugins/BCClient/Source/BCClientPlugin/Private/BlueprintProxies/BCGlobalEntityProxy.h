@@ -232,5 +232,5 @@ class UBCGlobalEntityProxy : public UBCBlueprintCallProxyBase
 	* Param - entityAcl The entity's access control list
 	*/
 	UFUNCTION(BlueprintCallable, meta = (BlueprintInternalUseOnly = "true"), Category = "BrainCloud|Global Entity")
-	static UBCGlobalEntityProxy *MakeSystemEntity(UBrainCloudWrapper *brainCloud, const FString &entityId, int32 version, UBrainCloudACL *entityAcl);
+	static UBCGlobalEntityProxy *MakeSystemEntity(UBrainCloudWrapper *brainCloudWrapper, const FString &entityId, int32 version, UBrainCloudACL *entityAcl);
 };

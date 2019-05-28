@@ -561,7 +561,7 @@ class UBCIdentityProxy : public UBCBlueprintCallProxyBase
 	* @param callback The method to be invoked when the server response is received
 	*/
 	UFUNCTION(BlueprintCallable, meta = (BlueprintInternalUseOnly = "true"), Category = "BrainCloud|Identity")
-	static UBCIdentityProxy *AttachNonLoginUniversalId(UBrainCloudWrapper *brainCloud, const FString &externalId);
+	static UBCIdentityProxy *AttachNonLoginUniversalId(UBrainCloudWrapper *brainCloudWrapper, const FString &externalId);
 
 	/**
 	* update universal id of current profile
@@ -573,5 +573,5 @@ class UBCIdentityProxy : public UBCBlueprintCallProxyBase
 	* @param callback The method to be invoked when the server response is received
 	*/
 	UFUNCTION(BlueprintCallable, meta = (BlueprintInternalUseOnly = "true"), Category = "BrainCloud|Identity")
-	static UBCIdentityProxy *UpdateUniversalIdLogin(UBrainCloudWrapper *brainCloud, const FString &externalId);
+	static UBCIdentityProxy *UpdateUniversalIdLogin(UBrainCloudWrapper *brainCloudWrapper, const FString &externalId);
 };
