@@ -110,4 +110,6 @@ class BrainCloudRTTComms : public IServerCallback
 	bool m_bIsConnected;
 
 	struct lws_context *m_lwsContext;
+
+	FString BCBytesToString(const uint8* in, int32 count);
 };

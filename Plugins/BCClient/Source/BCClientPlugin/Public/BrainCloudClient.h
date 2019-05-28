@@ -38,11 +38,9 @@
 #include "BrainCloudPresence.h"
 #include "BrainCloudVirtualCurrency.h"
 #include "BrainCloudAppStore.h"
-#include "BrainCloudRelay.h"
 
 class BrainCloudComms;
 class BrainCloudRTTComms;
-class BrainCloudRelayComms;
 class ServerCall;
 class IEventCallback;
 class IRewardCallback;
@@ -66,14 +64,6 @@ UENUM(BlueprintType)
 enum class BCRTTConnectionType : uint8
 {
 	WEBSOCKET UMETA(DisplayName = "WEBSOCKET")
-};
-
-UENUM(BlueprintType)
-enum class BCRelayConnectionType : uint8
-{
-	WEBSOCKET UMETA(DisplayName = "WEBSOCKET"),
-	TCP UMETA(DisplayName = "TCP"),
-	UDP UMETA(DisplayName = "UDP"),
 };
 
 class BCCLIENTPLUGIN_API BrainCloudClient
@@ -287,7 +277,6 @@ class BCCLIENTPLUGIN_API BrainCloudClient
 	BrainCloudLobby *getLobbyService();
 	BrainCloudChat *getChatService();
 	BrainCloudMessaging *getMessagingService();
-	BrainCloudRelay *getRelayService();
 
 	/**
 	* @deprecated Use getAppId instead - removal after September 1 2017
@@ -499,7 +488,6 @@ class BCCLIENTPLUGIN_API BrainCloudClient
 	void initializeComms(const char *serverUrl, const char *appId, const TMap<FString, FString> &secretMap);
 	BrainCloudComms *_brainCloudComms = nullptr;
 	BrainCloudRTTComms *_brainCloudRTTComms = nullptr;
-	BrainCloudRelayComms *_brainCloudRelayComms = nullptr;
 
 	BrainCloudAuthentication *_authenticationService = nullptr;
 	BrainCloudLeaderboard *_leaderboardService = nullptr;
@@ -538,8 +526,6 @@ class BCCLIENTPLUGIN_API BrainCloudClient
 	BrainCloudLobby *_lobbyService = nullptr;
 	BrainCloudChat *_chatService = nullptr;
 	BrainCloudMessaging *_messagingService = nullptr;
-
-	BrainCloudRelay *_relayService = nullptr;
 
 	static FString s_brainCloudClientVersion;
 

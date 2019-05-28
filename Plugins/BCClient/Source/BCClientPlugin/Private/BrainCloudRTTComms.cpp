@@ -447,8 +447,22 @@ void BrainCloudRTTComms::websocket_OnOpen()
 
 void BrainCloudRTTComms::webSocket_OnMessage(TArray<uint8> in_data)
 {
-	FString parsedMessage = BrainCloudRelay::BCBytesToString(in_data.GetData(), in_data.Num());
+	FString parsedMessage = BrainCloudRTTComms::BCBytesToString(in_data.GetData(), in_data.Num());
 	onRecv(parsedMessage);
+}
+
+FString BrainCloudRTTComms::BCBytesToString(const uint8* in, int32 count)
+{
+	FString result2;
+	result2.Empty(count);
+	while (count)
+	{
+        result2 += ANSICHAR(*in);
+		++in;
+		--count;
+	}
+	
+	return result2;
 }
 
 void BrainCloudRTTComms::webSocket_OnError(const FString &in_message)

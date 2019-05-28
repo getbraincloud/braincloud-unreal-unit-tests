@@ -40,7 +40,6 @@ class BrainCloudClient;
 #include "BrainCloudPresence.h"
 #include "BrainCloudVirtualCurrency.h"
 #include "BrainCloudAppStore.h"
-#include "BrainCloudRelay.h"
 #include "BrainCloudWrapper.generated.h"
 
 class ServiceName;
@@ -466,7 +465,6 @@ class BCCLIENTPLUGIN_API UBrainCloudWrapper : public UObject, public IServerCall
     BrainCloudLobby *getLobbyService() { return _client->getLobbyService(); }
     BrainCloudChat *getChatService() { return _client->getChatService(); }
     BrainCloudMessaging *getMessagingService() { return _client->getMessagingService(); }
-    BrainCloudRelay *getRelayService() { return _client->getRelayService(); }
 
     /**
      * Returns the instance of the BrainCloudClient.

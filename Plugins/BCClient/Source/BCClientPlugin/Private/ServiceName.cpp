@@ -61,8 +61,6 @@ const ServiceName ServiceName::Chat = ServiceName("chat");
 const ServiceName ServiceName::Messaging = ServiceName("messaging");
 const ServiceName ServiceName::Lobby = ServiceName("lobby");
 
-// Relay
-const ServiceName ServiceName::Relay = ServiceName("relay");
 
 bool ServiceName::operator==(const ServiceName &s) const
 {
