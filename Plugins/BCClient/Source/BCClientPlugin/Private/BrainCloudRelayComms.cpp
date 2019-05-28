@@ -281,7 +281,7 @@ bool BrainCloudRelayComms::send(const TArray<uint8> &in_message, const uint8 in_
 	// add control header to message
 	TArray<uint8> header;
 	header.Add(in_target);
-	if (in_target == CL2RS_RELAY)//CL2RS_ACKNOWLEDGE)//)
+	if (in_target == CL2RS_RELAY)
     {
         uint8 data1 = 0;
         uint8 data2 = 0;
@@ -405,8 +405,17 @@ TArray<uint8> BrainCloudRelayComms::appendSizeBytes(TArray<uint8> in_message)
 	int sizeOfMessage = in_message.Num() + SIZE_OF_LENGTH_PREFIX_BYTE_ARRAY;
 
 	TArray<uint8> lengthPrefix;
-	lengthPrefix.Add(sizeOfMessage >> 8);
-	lengthPrefix.Add(sizeOfMessage);
+	
+	if (FGenericPlatformProperties::IsLittleEndian())
+	{
+		lengthPrefix.Add(sizeOfMessage >> 8);
+		lengthPrefix.Add(sizeOfMessage);
+	}
+	else
+	{
+		lengthPrefix.Add(sizeOfMessage);
+		lengthPrefix.Add(sizeOfMessage >> 8);
+	}
 
 	TArray<uint8> toSend = concatenateByteArrays(lengthPrefix, in_message);
 	return toSend;
@@ -510,8 +519,16 @@ void BrainCloudRelayComms::sendPing()
 	int64 localPing = ping();
 	// attach the local ping
 	TArray<uint8> dataArr;
-	dataArr.Add(localPing >> 8);
-	dataArr.Add(localPing);
+	if (FGenericPlatformProperties::IsLittleEndian())
+	{	
+		dataArr.Add(localPing);
+		dataArr.Add(localPing >> 8);
+	}
+	else
+	{
+		dataArr.Add(localPing >> 8);
+		dataArr.Add(localPing);
+	}
 	
 	send(dataArr, CL2RS_PING);
 }

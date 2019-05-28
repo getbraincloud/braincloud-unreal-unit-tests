@@ -160,5 +160,5 @@ class UBCPlayerStatisticsProxy : public UBCBlueprintCallProxyBase
 	* }
 	*/
     UFUNCTION(BlueprintCallable, meta = (BlueprintInternalUseOnly = "true"), Category = "BrainCloud|Player Statistics")
-    static UBCPlayerStatisticsProxy *ProcessStatistics(UBrainCloudWrapper *brainCloud, FString jsonData);
+    static UBCPlayerStatisticsProxy *ProcessStatistics(UBrainCloudWrapper *brainCloudWrapper, FString jsonData);
 };

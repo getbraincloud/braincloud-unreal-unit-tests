@@ -301,5 +301,5 @@ class UBCLeaderboardProxy : public UBCBlueprintCallProxyBase
 	* @Param - leaderboardIds A collection of leaderboardIds to retrieve scores from
 	*/
 	UFUNCTION(BlueprintCallable, meta = (BlueprintInternalUseOnly = "true"), Category = "BrainCloud|Leaderboard")
-	static UBCLeaderboardProxy *GetPlayerScoresFromLeaderboards(UBrainCloudWrapper *brainCloud, const TArray<FString> leaderboardIds);
+	static UBCLeaderboardProxy *GetPlayerScoresFromLeaderboards(UBrainCloudWrapper *brainCloudWrapper, const TArray<FString> leaderboardIds);
 };
