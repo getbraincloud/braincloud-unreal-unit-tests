@@ -37,7 +37,7 @@ class BCCLIENTPLUGIN_API BrainCloudRTT
 	/*
 	*Returns true id RTT is enabled
 	*/
-	bool getRTTEnabled();
+	bool isRTTEnabled();
 
 	/**
 	* 

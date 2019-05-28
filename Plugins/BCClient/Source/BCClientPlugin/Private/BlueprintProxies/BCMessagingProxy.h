@@ -23,7 +23,7 @@ class UBCMessagingProxy : public UBCBlueprintCallProxyBase
 	* @param in_msgsIds Array of msg Ids to delete	
     */
     UFUNCTION(BlueprintCallable, meta = (BlueprintInternalUseOnly = "true"), Category = "BrainCloud|Messaging")
-    static UBCMessagingProxy *DeleteMessages(UBrainCloudWrapper *brainCloud, const FString &in_msgBox, const TArray<FString> &in_msgsIds);
+    static UBCMessagingProxy *DeleteMessages(UBrainCloudWrapper *brainCloudWrapper, const FString &in_msgBox, const TArray<FString> &in_msgsIds);
 
     /**
     * Retrieve user's message boxes, including 'inbox', 'sent', etc.
@@ -55,7 +55,7 @@ class UBCMessagingProxy : public UBCBlueprintCallProxyBase
 	* @param in_msgsIds Array of msg Ids to delete	
     */
     UFUNCTION(BlueprintCallable, meta = (BlueprintInternalUseOnly = "true"), Category = "BrainCloud|Messaging")
-    static UBCMessagingProxy *GetMessages(UBrainCloudWrapper *brainCloud, const FString &in_msgBox, const TArray<FString> &in_msgsIds, bool markAsRead);
+    static UBCMessagingProxy *GetMessages(UBrainCloudWrapper *brainCloudWrapper, const FString &in_msgBox, const TArray<FString> &in_msgsIds, bool markAsRead);
 
     /**
     * Retrieves a page of messages.
@@ -66,7 +66,7 @@ class UBCMessagingProxy : public UBCBlueprintCallProxyBase
     * @param in_context 	
     */
     UFUNCTION(BlueprintCallable, meta = (BlueprintInternalUseOnly = "true"), Category = "BrainCloud|Messaging")
-    static UBCMessagingProxy *GetMessagesPage(UBrainCloudWrapper *brainCloud, const FString &in_context);
+    static UBCMessagingProxy *GetMessagesPage(UBrainCloudWrapper *brainCloudWrapper, const FString &in_context);
 
     /**
     * Retrieves a page of messages.
@@ -79,7 +79,7 @@ class UBCMessagingProxy : public UBCBlueprintCallProxyBase
 	
     */
     UFUNCTION(BlueprintCallable, meta = (BlueprintInternalUseOnly = "true"), Category = "BrainCloud|Messaging")
-    static UBCMessagingProxy *GetMessagesPageOffset(UBrainCloudWrapper *brainCloud, const FString &in_context, int32 in_pageOffset);
+    static UBCMessagingProxy *GetMessagesPageOffset(UBrainCloudWrapper *brainCloudWrapper, const FString &in_context, int32 in_pageOffset);
 
     /**
     * Retrieves a page of messages.
@@ -91,7 +91,7 @@ class UBCMessagingProxy : public UBCBlueprintCallProxyBase
 	* @param in_msgsIds Array of msg Ids to mark as read	
     */
     UFUNCTION(BlueprintCallable, meta = (BlueprintInternalUseOnly = "true"), Category = "BrainCloud|Messaging")
-    static UBCMessagingProxy *MarkMessagesRead(UBrainCloudWrapper *brainCloud, const FString &in_msgBox, const TArray<FString> &in_msgsIds);
+    static UBCMessagingProxy *MarkMessagesRead(UBrainCloudWrapper *brainCloudWrapper, const FString &in_msgBox, const TArray<FString> &in_msgsIds);
 
     /**
     *Sends a message with specified 'subject' and 'text' to list of users.
@@ -104,7 +104,7 @@ class UBCMessagingProxy : public UBCBlueprintCallProxyBase
     * @param in_messageSubject Messsage subject	
     */
     UFUNCTION(BlueprintCallable, meta = (BlueprintInternalUseOnly = "true"), Category = "BrainCloud|Messaging")
-    static UBCMessagingProxy *SendMessage(UBrainCloudWrapper *brainCloud, const TArray<FString> &in_toProfileIds, const FString &in_contentJson);
+    static UBCMessagingProxy *SendMessage(UBrainCloudWrapper *brainCloudWrapper, const TArray<FString> &in_toProfileIds, const FString &in_contentJson);
 
     /**
     *Sends a message with specified 'subject' and 'text' to list of users.
@@ -116,5 +116,5 @@ class UBCMessagingProxy : public UBCBlueprintCallProxyBase
 	* @param in_messageText Messsage Text	
     */
     UFUNCTION(BlueprintCallable, meta = (BlueprintInternalUseOnly = "true"), Category = "BrainCloud|Messaging")
-    static UBCMessagingProxy *SendMessageSimple(UBrainCloudWrapper *brainCloud, const TArray<FString> &in_toProfileIds, const FString &in_messageText);
+    static UBCMessagingProxy *SendMessageSimple(UBrainCloudWrapper *brainCloudWrapper, const TArray<FString> &in_toProfileIds, const FString &in_messageText);
 };

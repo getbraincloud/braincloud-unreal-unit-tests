@@ -47,7 +47,7 @@ void BrainCloudRelay::deregisterDataCallback()
     _relayComms->deregisterDataCallback();
 }
 
-bool BrainCloudRelay::send(TArray<uint8> in_data, uint8 in_target, bool in_reliable/* = true*/, bool in_ordered/* = true*/, int in_channel/* = 0*/)
+bool BrainCloudRelay::send(const TArray<uint8> &in_data, const uint8 in_target, bool in_reliable/* = true*/, bool in_ordered/* = true*/, int in_channel/* = 0*/)
 {
     return _relayComms->send(in_data, in_target, in_reliable, in_ordered, in_channel);
 }

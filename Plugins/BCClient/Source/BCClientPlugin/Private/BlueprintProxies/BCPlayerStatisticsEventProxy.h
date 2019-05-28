@@ -63,5 +63,5 @@ class UBCPlayerStatisticsEventProxy : public UBCBlueprintCallProxyBase
     *   ]
     */
     UFUNCTION(BlueprintCallable, meta = (BlueprintInternalUseOnly = "true"), Category = "BrainCloud|Player Statistics Event")
-    static UBCPlayerStatisticsEventProxy *TriggerStatsEvents(UBrainCloudWrapper *brainCloud, FString jsonData);
+    static UBCPlayerStatisticsEventProxy *TriggerStatsEvents(UBrainCloudWrapper *brainCloudWrapper, FString jsonData);
 };

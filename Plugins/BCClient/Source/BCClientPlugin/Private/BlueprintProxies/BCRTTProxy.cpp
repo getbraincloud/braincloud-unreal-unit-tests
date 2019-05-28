@@ -25,6 +25,11 @@ void UBCRTTProxy::DisableRTT(UBrainCloudWrapper *brainCloudWrapper)
 	UBCWrapperProxy::GetBrainCloudInstance(brainCloudWrapper)->getRTTService()->disableRTT();
 }
 
+bool UBCRTTProxy::IsRTTEnabled(UBrainCloudWrapper *brainCloudWrapper)
+{
+	return UBCWrapperProxy::GetBrainCloudInstance(brainCloudWrapper)->getRTTService()->isRTTEnabled();
+}
+
 void UBCRTTProxy::SetRTTHeartBeatSeconds(UBrainCloudWrapper *brainCloudWrapper, int32 in_value)
 {
 	UBCWrapperProxy::GetBrainCloudInstance(brainCloudWrapper)->getRTTService()->setRTTHeartBeatSeconds(in_value);

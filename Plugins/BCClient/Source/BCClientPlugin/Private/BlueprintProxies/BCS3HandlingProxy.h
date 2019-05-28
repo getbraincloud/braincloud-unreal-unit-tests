@@ -43,5 +43,5 @@ class UBCS3HandlingProxy : public UBCBlueprintCallProxyBase
 	* Param - fileId ID of file
 	*/
     UFUNCTION(BlueprintCallable, meta = (BlueprintInternalUseOnly = "true"), Category = "BrainCloud|S3 Handling")
-    static UBCS3HandlingProxy *GetCDNUrl(UBrainCloudWrapper *brainCloud, const FString &fileId);
+    static UBCS3HandlingProxy *GetCDNUrl(UBrainCloudWrapper *brainCloudWrapper, const FString &fileId);
 };
