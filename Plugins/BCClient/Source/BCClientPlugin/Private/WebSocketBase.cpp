@@ -25,11 +25,11 @@
 #if PLATFORM_UWP
 #elif PLATFORM_HTML5
 #else
- #define UI UI_ST
- THIRD_PARTY_INCLUDES_START
- #include "libwebsockets.h"
- THIRD_PARTY_INCLUDES_END
- #undef UI
+#define UI UI_ST
+THIRD_PARTY_INCLUDES_START
+#include "libwebsockets.h"
+THIRD_PARTY_INCLUDES_END
+#undef UI
 #endif
 
 #define MAX_ECHO_PAYLOAD 64 * 1024
@@ -282,16 +282,17 @@ Concurrency::task<void> UWebSocketBase::SendAsync(Platform::String ^ message)
 		});
 }
 
-Concurrency::task<void> UWebSocketBase::SendAsyncData(uint8* message)
+Concurrency::task<void> UWebSocketBase::SendAsyncData(uint8 *message)
 {
-	int sizeOfData = sizeof(data)/sizeof(uint8_t);
+	int sizeOfData = sizeof(data) / sizeof(uint8_t);
 	if (sizeOfData == 0)
 	{
 		return task_from_result();
 	}
-	
+
 	// iterate over the data, and write the bytes to the stream
-	for (uint8_t i = 0; i < sizeOfData; ++i) {
+	for (uint8_t i = 0; i < sizeOfData; ++i)
+	{
 		messageWriter->WriteByte(message[i]);
 	}
 	// and write the stream
@@ -497,9 +498,9 @@ void UWebSocketBase::ProcessWriteable()
 	// write data
 	while (mSendQueueData.Num() > 0)
 	{
-		uint8* data = mSendQueueData[0].GetData();
+		uint8 *data = mSendQueueData[0].GetData();
 		int sizeOfData = mSendQueueData[0].Num();
-		
+
 		unsigned char buf[LWS_PRE + MAX_ECHO_PAYLOAD];
 		memcpy(&buf[LWS_PRE], data, sizeOfData);
 		lws_write(mlws, &buf[LWS_PRE], sizeOfData, LWS_WRITE_BINARY);
@@ -524,14 +525,14 @@ void UWebSocketBase::ProcessRead(const char *in, int len)
 {
 	TArray<uint8> dataArray;
 	int count = len;
-    while (count)
+	while (count)
 	{
 		dataArray.Add(uint8(*in));
-		
+
 		++in;
 		--count;
 	}
-	
+
 	OnReceiveData.Broadcast(dataArray);
 }
 
