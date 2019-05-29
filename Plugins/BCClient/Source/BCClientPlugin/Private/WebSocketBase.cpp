@@ -21,7 +21,6 @@
 #include "BCClientPluginPrivatePCH.h"
 #include <iostream>
 #include "WebSocketBase.h"
-#include "BrainCloudRelay.h"
 
 #if PLATFORM_UWP
 #elif PLATFORM_HTML5
