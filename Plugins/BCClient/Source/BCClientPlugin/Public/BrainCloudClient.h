@@ -56,8 +56,7 @@ enum class eBCUpdateType : uint8
 {
 	ALL UMETA(DisplayName = "ALL"),
 	REST UMETA(DisplayName = "REST"),
-	RTT UMETA(DisplayName = "RTT"),
-	RS UMETA(DisplayName = "RS")
+	RTT UMETA(DisplayName = "RTT")
 };
 
 UENUM(BlueprintType)
