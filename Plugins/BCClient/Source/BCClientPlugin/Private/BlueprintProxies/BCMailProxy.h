@@ -50,5 +50,5 @@ class UBCMailProxy : public UBCBlueprintCallProxyBase
 	*	a full list. http://getbraincloud.com/apidocs/apiref/#capi-mail
 	*/
 	UFUNCTION(BlueprintCallable, meta = (BlueprintInternalUseOnly = "true"), Category = "BrainCloud|Mail")
-	static UBCMailProxy *SendAdvancedEmailByAddress(UBrainCloudWrapper *brainCloud, const FString &emailAddress, const FString &jsonServiceParams);
+	static UBCMailProxy *SendAdvancedEmailByAddress(UBrainCloudWrapper *brainCloudWrapper, const FString &emailAddress, const FString &jsonServiceParams);
 };

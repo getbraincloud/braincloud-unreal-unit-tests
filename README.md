@@ -46,19 +46,21 @@ It is recommended to use the wrapper by default.
 ![wrapper](/screenshots/bc-wrapper.png?raw=true)
 
 ## How do I initialize brainCloud?
-![wrapper](/screenshots/_bp-init.png?raw=true)
-Create a BrainCloudActor to store the instance of brainCloud.
+![wrapper](/screenshots/_bp-initWrapper.png?raw=true)
 
-Initialize your created brainCloud Instance.
+1. Create a BrainCloudWrapper - This will store an instance of brainCloud and give you a way of accessing the services we provide.
 
-Set the default instance, so you don't have to pass brainCloud into each function call, unless needed.
+2. Store and set the wrapper - You will want a variable of type BrainCloudWrapper.
 
+3. Set the Default brainCloud instance to your wrapper - this allows Singleton functionality, and you won't need to pass the wrapper into each function call, unless needed.
+
+4. Initialize brainCloud with your app credentials 
 
 Your Secret Key, and App Id, is set on the brainCloud dashboard. Under Design | Core App Info > Application IDs
 
 ![wrapper](/screenshots/bc-ids.png?raw=true)
 
-Wrapper Name prefixes saved operations that the wrapper will make. Use a Wrapper Name if you plan on having multiple instances of brainCloud running.
+Wrapper Name prefixes save operations that the wrapper will make. Use a Wrapper Name if you plan on having multiple instances of brainCloud running.
 
 
 ----------------

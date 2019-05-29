@@ -184,5 +184,5 @@ public:
     * Param - category The quest category
     */
   UFUNCTION(BlueprintCallable, meta = (BlueprintInternalUseOnly = "true"), Category = "BrainCloud|Gamification")
-  static UBCGamificationProxy *ReadQuestsByCategory(UBrainCloudWrapper *brainCloud, FString category, bool includeMetaData = false);
+  static UBCGamificationProxy *ReadQuestsByCategory(UBrainCloudWrapper *brainCloudWrapper, FString category, bool includeMetaData = false);
 };

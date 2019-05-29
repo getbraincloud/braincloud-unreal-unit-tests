@@ -259,6 +259,22 @@ void BrainCloudIdentity::getPeerProfiles(IServerCallback *callback)
 	_client->sendRequest(sc);
 }
 
+void BrainCloudIdentity::attachNonLoginUniversalId(const FString &externalId, IServerCallback *callback)
+{
+	TSharedRef<FJsonObject> message = MakeShareable(new FJsonObject());
+	message->SetStringField(OperationParam::IdentityServiceExternalId.getValue(), externalId);
+	ServerCall *sc = new ServerCall(ServiceName::Identity, ServiceOperation::AttachNonLoginUniversalId, message, callback);
+	_client->sendRequest(sc);
+}
+
+void BrainCloudIdentity::updateUniversalIDLogin(const FString &externalId, IServerCallback *callback)
+{
+	TSharedRef<FJsonObject> message = MakeShareable(new FJsonObject());
+	message->SetStringField(OperationParam::IdentityServiceExternalId.getValue(), externalId);
+	ServerCall *sc = new ServerCall(ServiceName::Identity, ServiceOperation::UpdateUniversalIdLogin, message, callback);
+	_client->sendRequest(sc);
+}
+
 //Private
 void BrainCloudIdentity::attachIdentity(const FString &externalId, const FString &authenticationToken, EBCAuthType authenticationType, IServerCallback *callback)
 {

@@ -56,14 +56,14 @@ enum class eBCUpdateType : uint8
 {
 	ALL UMETA(DisplayName = "ALL"),
 	REST UMETA(DisplayName = "REST"),
-	RTT UMETA(DisplayName = "RTT")
+	RTT UMETA(DisplayName = "RTT"),
+	RS UMETA(DisplayName = "RS")
 };
 
 UENUM(BlueprintType)
-enum class eBCRTTConnectionType : uint8
+enum class BCRTTConnectionType : uint8
 {
-	WEBSOCKET UMETA(DisplayName = "WEBSOCKET"),
-	TCP UMETA(DisplayName = "TCP")
+	WEBSOCKET UMETA(DisplayName = "WEBSOCKET")
 };
 
 class BCCLIENTPLUGIN_API BrainCloudClient
@@ -240,110 +240,6 @@ class BCCLIENTPLUGIN_API BrainCloudClient
 	*/
 	void resetCommunication();
 
-	/*
-	* Enables Real Time event for this session.
-	* Real Time events are disabled by default. Usually events
-	* need to be polled using GET_EVENTS. By enabling this, events will
-	* be received instantly when they happen through a TCP connection to an Event Server.
-	*
-	* This function will first call requestClientConnection, then connect to the address
-	*/
-	void enableRTT(eBCRTTConnectionType in_type, IServerCallback *in_callback);
-
-	/*
-	* Disables Real Time event for this session.
-	*/
-	void disableRTT();
-
-	/*
-	*Returns true id RTT is enabled
-	*/
-	bool getRTTEnabled();
-
-	/**
-	* 
-	*/
-	void setRTTHeartBeatSeconds(int32 in_value);
-
-	/**
-	* 
-	*/
-	void deregisterAllRTTCallbacks();
-
-	/**
-	* 
-	*/
-	void registerRTTEventCallback(UBCBlueprintRTTCallProxyBase *in_callback);
-
-	/**
-	* 
-	*/
-	void registerRTTEventCallback(IRTTCallback *in_callback);
-
-	/**
-	* 
-	*/
-	void deregisterRTTEventCallback();
-
-	/**
-	* 
-	*/
-	void registerRTTChatCallback(UBCBlueprintRTTCallProxyBase *in_callback);
-
-	/**
-	* 
-	*/
-	void registerRTTChatCallback(IRTTCallback *in_callback);
-
-	/**
-	* 
-	*/
-	void deregisterRTTChatCallback();
-
-	/**
-	* 
-	*/
-	void registerRTTMessagingCallback(UBCBlueprintRTTCallProxyBase *in_callback);
-
-	/**
-	* 
-	*/
-	void registerRTTMessagingCallback(IRTTCallback *in_callback);
-
-	/**
-	* 
-	*/
-	void deregisterRTTMessagingCallback();
-
-	/**
-	* 
-	*/
-	void registerRTTPresenceCallback(UBCBlueprintRTTCallProxyBase *in_callback);
-
-	/**
-	* 
-	*/
-	void registerRTTPresenceCallback(IRTTCallback *in_callback);
-
-	/**
-	* 
-	*/
-	void deregisterRTTPresenceCallback();
-	/**
-	* 
-	*/
-	void registerRTTLobbyCallback(UBCBlueprintRTTCallProxyBase *in_callback);
-
-	/**
-	* 
-	*/
-	void registerRTTLobbyCallback(IRTTCallback *in_callback);
-
-	/**
-	* 
-	*/
-	void deregisterRTTLobbyCallback();
-
 	//Getters
 	BrainCloudAuthentication *getAuthenticationService();
 	BrainCloudLeaderboard *getLeaderboardService();
@@ -377,7 +273,6 @@ class BCCLIENTPLUGIN_API BrainCloudClient
 	BrainCloudPresence *getPresenceService();
 	BrainCloudVirtualCurrency *getVirtualCurrencyService();
 	BrainCloudAppStore *getAppStoreService();
-
 	BrainCloudRTT *getRTTService();
 	BrainCloudLobby *getLobbyService();
 	BrainCloudChat *getChatService();
@@ -409,7 +304,6 @@ class BCCLIENTPLUGIN_API BrainCloudClient
 	const TArray<int32> &getPacketTimeouts();
 
 	BrainCloudComms *getBrainCloudComms() { return _brainCloudComms; }
-	BrainCloudRTTComms *getBrainCloudRTTComms() { return _brainCloudRTTComms; }
 
 	/**
 	* Gets the authentication packet timeout which is tracked separately

@@ -241,5 +241,5 @@ class UBCAuthenticationProxy : public UBCBlueprintCallProxyBase
     static void SetAnonymousId(UBrainCloudWrapper *brainCloudWrapper, FString anonymousId);
 
     UFUNCTION(BlueprintCallable, Category = "BrainCloud|Authentication")
-    static void SetProfileId(UBrainCloudWrapper *brainCloud, FString profileId);
+    static void SetProfileId(UBrainCloudWrapper *brainCloudWrapper, FString profileId);
 };

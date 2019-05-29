@@ -557,6 +557,29 @@ class BCCLIENTPLUGIN_API BrainCloudIdentity
 	*/
 	void getPeerProfiles(IServerCallback *callback);
 
+	/**
+	* Attachs universal id to current profile with no login
+	*
+	* Service Name - identity
+	* Service Operation - ATTACH_NON_LOGIN_UNIVERSAL_ID
+	*
+	* @param externalId the id connected with 
+	* @param callback The method to be invoked when the server response is received
+	*/
+	void attachNonLoginUniversalId(const FString &externalId, IServerCallback *callback);
+
+	/**
+	* update universal id of current profile
+	*
+	* Service Name - identity
+	* Service Operation - UPDATE_UNIVERSAL_ID_LOGIN
+	*
+	* @param externalId the id connected with 
+	* @param callback The method to be invoked when the server response is received
+	*/
+	void updateUniversalIDLogin(const FString &externalId, IServerCallback *callback);
+
+
   private:
 	BrainCloudClient *_client = nullptr;
 

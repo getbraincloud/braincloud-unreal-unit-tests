@@ -78,5 +78,5 @@ public:
     * 40424 - WebPurify not enabled
     */
   UFUNCTION(BlueprintCallable, meta = (BlueprintInternalUseOnly = "true"), Category = "BrainCloud|Profanity")
-  static UBCProfanityProxy *ProfanityIdentifyBadWords(UBrainCloudWrapper *brainCloud, const FString &text, const FString &languages, bool flagEmail, bool flagPhone, bool flagUrls);
+  static UBCProfanityProxy *ProfanityIdentifyBadWords(UBrainCloudWrapper *brainCloudWrapper, const FString &text, const FString &languages, bool flagEmail, bool flagPhone, bool flagUrls);
 };

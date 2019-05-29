@@ -83,5 +83,5 @@ class UBCGlobalStatisticsProxy : public UBCBlueprintCallProxyBase
 	* }
 	*/
     UFUNCTION(BlueprintCallable, meta = (BlueprintInternalUseOnly = "true"), Category = "BrainCloud|Global Statistics")
-    static UBCGlobalStatisticsProxy *ProcessStatistics(UBrainCloudWrapper *brainCloud, FString jsonData);
+    static UBCGlobalStatisticsProxy *ProcessStatistics(UBrainCloudWrapper *brainCloudWrapper, FString jsonData);
 };

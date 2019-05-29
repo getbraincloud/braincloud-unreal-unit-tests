@@ -31,7 +31,7 @@ DEFINE_LOG_CATEGORY_STATIC(WebSocket, Log, All);
 DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FWebSocketConnectError, const FString &, error);
 DECLARE_DYNAMIC_MULTICAST_DELEGATE(FWebSocketClosed);
 DECLARE_DYNAMIC_MULTICAST_DELEGATE(FWebSocketConnected);
-DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FWebSocketRecieve, const FString &, data);
+DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FWebSocketRecieve, TArray<uint8>, data);
 
 #if PLATFORM_UWP
 #include <collection.h>
@@ -120,6 +120,9 @@ class BCCLIENTPLUGIN_API UWebSocketBase : public UObject
 	UFUNCTION(BlueprintCallable, Category = WebSocket)
 	bool SendText(const FString &data);
 
+	//UFUNCTION(BlueprintCallable, Category = WebSocket)
+	bool SendData(TArray<uint8> data);
+
 	UFUNCTION(BlueprintCallable, Category = WebSocket)
 	void Close();
 
@@ -157,5 +160,6 @@ class BCCLIENTPLUGIN_API UWebSocketBase : public UObject
 #endif
 
 	TArray<FString> mSendQueue;
+	TArray<TArray<uint8>> mSendQueueData;
 	TMap<FString, FString> mHeaderMap;
 };

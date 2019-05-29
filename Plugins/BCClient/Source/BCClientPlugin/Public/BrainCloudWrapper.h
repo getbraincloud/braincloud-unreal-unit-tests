@@ -461,7 +461,6 @@ class BCCLIENTPLUGIN_API UBrainCloudWrapper : public UObject, public IServerCall
     BrainCloudPresence *getPresenceService() { return _client->getPresenceService(); }
     BrainCloudVirtualCurrency *getVirtualCurrencyService() { return _client->getVirtualCurrencyService(); }
     BrainCloudAppStore *getAppStoreService() { return _client->getAppStoreService(); }
-
     BrainCloudRTT *getRTTService() { return _client->getRTTService(); }
     BrainCloudLobby *getLobbyService() { return _client->getLobbyService(); }
     BrainCloudChat *getChatService() { return _client->getChatService(); }

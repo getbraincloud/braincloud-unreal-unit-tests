@@ -161,7 +161,7 @@ void BrainCloudFriend::findUserByUniversalId(const FString &searchText, int32 ma
 	message->SetStringField(OperationParam::FriendServiceSearchText.getValue(), searchText);
 	message->SetNumberField(OperationParam::FriendServiceMaxResults.getValue(), maxResults);
 
-	ServerCall *sc = new ServerCall(ServiceName::Friend, ServiceOperation::FindUserByUniversalId, message, callback);
+	ServerCall *sc = new ServerCall(ServiceName::Friend, ServiceOperation::FindPlayerByUniversalId, message, callback);
 	_client->sendRequest(sc);
 }
 

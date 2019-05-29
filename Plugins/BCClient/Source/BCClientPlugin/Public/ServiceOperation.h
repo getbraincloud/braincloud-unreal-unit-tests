@@ -25,6 +25,8 @@ class BCCLIENTPLUGIN_API ServiceOperation
 	static const ServiceOperation AttachPeerProfile;
 	static const ServiceOperation DetachPeer;
 	static const ServiceOperation GetPeerProfiles;
+	static const ServiceOperation AttachNonLoginUniversalId;
+	static const ServiceOperation UpdateUniversalIdLogin;
 
 	static const ServiceOperation Create;
 	static const ServiceOperation CreateWithIndexedId;
@@ -72,6 +74,7 @@ class BCCLIENTPLUGIN_API ServiceOperation
 	static const ServiceOperation UpdateSetMinimum;
 	static const ServiceOperation UpdateIncrementToMaximum;
 	static const ServiceOperation ProcessStatistics;
+	static const ServiceOperation UpdateEntityIndexedId;
 	static const ServiceOperation UpdateEntityOwnerAndAcl;
 	static const ServiceOperation MakeSystemEntity;
 
@@ -325,6 +328,7 @@ class BCCLIENTPLUGIN_API ServiceOperation
 	static const ServiceOperation JoinTournament;
 	static const ServiceOperation LeaveTournament;
 	static const ServiceOperation PostTournamentScore;
+	static const ServiceOperation PostTournamentScoreWithResults;
 	static const ServiceOperation ViewCurrentReward;
 	static const ServiceOperation ViewReward;
 	static const ServiceOperation ClaimTournamentReward;
@@ -388,12 +392,13 @@ class BCCLIENTPLUGIN_API ServiceOperation
 	static const ServiceOperation FindOrCreateLobby;
 	static const ServiceOperation GetLobbyData;
 	static const ServiceOperation UpdateReady;
-	static const ServiceOperation UpdateLobbyConfig;
+	static const ServiceOperation UpdateSettings;
 	static const ServiceOperation SwitchTeam;
 	static const ServiceOperation SendSignal;
 	static const ServiceOperation JoinLobby;
 	static const ServiceOperation LeaveLobby;
 	static const ServiceOperation RemoveMember;
+	static const ServiceOperation CancelFindRequest;
 
 	FString getValue() const { return _value; }
 

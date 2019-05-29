@@ -28,6 +28,8 @@ const ServiceOperation ServiceOperation::DetachParent = ServiceOperation(TEXT("D
 const ServiceOperation ServiceOperation::AttachPeerProfile = ServiceOperation(TEXT("ATTACH_PEER_PROFILE"));
 const ServiceOperation ServiceOperation::DetachPeer = ServiceOperation(TEXT("DETACH_PEER"));
 const ServiceOperation ServiceOperation::GetPeerProfiles = ServiceOperation(TEXT("GET_PEER_PROFILES"));
+const ServiceOperation ServiceOperation::AttachNonLoginUniversalId = ServiceOperation(TEXT("ATTACH_NONLOGIN_UNIVERSAL"));
+const ServiceOperation ServiceOperation::UpdateUniversalIdLogin = ServiceOperation(TEXT("UPDATE_UNIVERSAL_LOGIN"));
 
 const ServiceOperation ServiceOperation::Create = ServiceOperation(TEXT("CREATE"));
 const ServiceOperation ServiceOperation::CreateWithIndexedId = ServiceOperation(TEXT("CREATE_WITH_INDEXED_ID"));
@@ -75,6 +77,7 @@ const ServiceOperation ServiceOperation::UpdateSummary = ServiceOperation(TEXT("
 const ServiceOperation ServiceOperation::UpdateSetMinimum = ServiceOperation(TEXT("UPDATE_SET_MINIMUM"));
 const ServiceOperation ServiceOperation::UpdateIncrementToMaximum = ServiceOperation(TEXT("UPDATE_INCREMENT_TO_MAXIMUM"));
 const ServiceOperation ServiceOperation::ProcessStatistics = ServiceOperation(TEXT("PROCESS_STATISTICS"));
+const ServiceOperation ServiceOperation::UpdateEntityIndexedId = ServiceOperation(TEXT("UPDATE_INDEXED_ID"));
 const ServiceOperation ServiceOperation::UpdateEntityOwnerAndAcl = ServiceOperation(TEXT("UPDATE_ENTITY_OWNER_AND_ACL"));
 const ServiceOperation ServiceOperation::MakeSystemEntity = ServiceOperation(TEXT("MAKE_SYSTEM_ENTITY"));
 
@@ -95,7 +98,6 @@ const ServiceOperation ServiceOperation::AddFriends = ServiceOperation(TEXT("ADD
 const ServiceOperation ServiceOperation::GetUsersOnlineStatus = ServiceOperation(TEXT("GET_USERS_ONLINE_STATUS"));
 const ServiceOperation ServiceOperation::RemoveFriends = ServiceOperation(TEXT("REMOVE_FRIENDS"));
 const ServiceOperation ServiceOperation::FindPlayerByUniversalId = ServiceOperation(TEXT("FIND_PLAYER_BY_UNIVERSAL_ID"));
-const ServiceOperation ServiceOperation::FindUserByUniversalId = ServiceOperation(TEXT("FIND_USER_BY_UNIVERSAL_ID"));
 const ServiceOperation ServiceOperation::FindUserByExactUniversalId = ServiceOperation(TEXT("FIND_USER_BY_EXACT_UNIVERSAL_ID"));
 const ServiceOperation ServiceOperation::FindUsersByUniversalIdStartingWith = ServiceOperation(TEXT("FIND_USERS_BY_UNIVERSAL_ID_STARTING_WITH"));
 const ServiceOperation ServiceOperation::FindUsersByNameStartingWith = ServiceOperation(TEXT("FIND_USERS_BY_NAME_STARTING_WITH"));
@@ -339,6 +341,7 @@ const ServiceOperation ServiceOperation::JoinDivision = ServiceOperation(TEXT("J
 const ServiceOperation ServiceOperation::LeaveTournament = ServiceOperation(TEXT("LEAVE_TOURNAMENT"));
 const ServiceOperation ServiceOperation::LeaveDivisionInstance = ServiceOperation(TEXT("LEAVE_DIVISION_INSTANCE"));
 const ServiceOperation ServiceOperation::PostTournamentScore = ServiceOperation(TEXT("POST_TOURNAMENT_SCORE"));
+const ServiceOperation ServiceOperation::PostTournamentScoreWithResults = ServiceOperation(TEXT("POST_TOURNAMENT_SCORE_WITH_RESULTS"));
 const ServiceOperation ServiceOperation::ViewCurrentReward = ServiceOperation(TEXT("VIEW_CURRENT_REWARD"));
 const ServiceOperation ServiceOperation::ViewReward = ServiceOperation(TEXT("VIEW_REWARD"));
 const ServiceOperation ServiceOperation::ClaimTournamentReward = ServiceOperation(TEXT("CLAIM_TOURNAMENT_REWARD"));
@@ -391,12 +394,13 @@ const ServiceOperation ServiceOperation::CreateLobby = ServiceOperation("CREATE_
 const ServiceOperation ServiceOperation::FindOrCreateLobby = ServiceOperation("FIND_OR_CREATE_LOBBY");
 const ServiceOperation ServiceOperation::GetLobbyData = ServiceOperation("GET_LOBBY_DATA");
 const ServiceOperation ServiceOperation::UpdateReady = ServiceOperation("UPDATE_READY");
-const ServiceOperation ServiceOperation::UpdateLobbyConfig = ServiceOperation("UPDATE_SETTINGS");
+const ServiceOperation ServiceOperation::UpdateSettings = ServiceOperation("UPDATE_SETTINGS");
 const ServiceOperation ServiceOperation::SwitchTeam = ServiceOperation("SWITCH_TEAM");
 const ServiceOperation ServiceOperation::SendSignal = ServiceOperation("SEND_SIGNAL");
 const ServiceOperation ServiceOperation::JoinLobby = ServiceOperation("JOIN_LOBBY");
 const ServiceOperation ServiceOperation::LeaveLobby = ServiceOperation("LEAVE_LOBBY");
 const ServiceOperation ServiceOperation::RemoveMember = ServiceOperation("REMOVE_MEMBER");
+const ServiceOperation ServiceOperation::CancelFindRequest = ServiceOperation("CANCEL_FIND_REQUEST");
 
 bool ServiceOperation::operator==(const ServiceOperation &s) const
 {
