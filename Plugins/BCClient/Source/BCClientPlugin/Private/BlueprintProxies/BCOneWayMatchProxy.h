@@ -45,5 +45,5 @@ public:
     * Param - playbackStreamId The playback stream id returned in the initial start match
     */
   UFUNCTION(BlueprintCallable, meta = (BlueprintInternalUseOnly = "true"), Category = "BrainCloud|One Way Match")
-  static UBCOneWayMatchProxy *CompleteMatch(UBrainCloudWrapper *brainCloud, const FString &playbackStreamId);
+  static UBCOneWayMatchProxy *CompleteMatch(UBrainCloudWrapper *brainCloudWrapper, const FString &playbackStreamId);
 };

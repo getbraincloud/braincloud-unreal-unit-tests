@@ -66,3 +66,11 @@ void BrainCloudVirtualCurrency::consumeCurrency(const FString &currencyType, int
     ServerCall *sc = new ServerCall(ServiceName::VirtualCurrency, ServiceOperation::ConsumeVirtualCurrency, message, callback);
     _client->sendRequest(sc);
 }
+
+void BrainCloudVirtualCurrency::resetCurrency(IServerCallback *callback)
+{
+    TSharedRef<FJsonObject> message = MakeShareable(new FJsonObject());
+
+    ServerCall *sc = new ServerCall(ServiceName::VirtualCurrency, ServiceOperation::ResetPlayerVC, message, callback);
+    _client->sendRequest(sc);
+}

@@ -14,7 +14,7 @@
  #undef UI
 #endif
 
-enum class eBCRTTConnectionType : uint8;
+enum class BCRTTConnectionType : uint8;
 class IRTTCallback;
 class ServiceOperation;
 class ServiceName;
@@ -33,7 +33,7 @@ class BrainCloudRTTComms : public IServerCallback
 	BrainCloudRTTComms(BrainCloudClient *client);
 	~BrainCloudRTTComms();
 
-	void enableRTT(eBCRTTConnectionType in_connectionType, IServerCallback *callback);
+	void enableRTT(BCRTTConnectionType in_connectionType, IServerCallback *callback);
 	void disableRTT();
 	bool isRTTEnabled();
 	void RunCallbacks();
@@ -57,7 +57,7 @@ class BrainCloudRTTComms : public IServerCallback
 
 	void webSocket_OnClose();
 	void websocket_OnOpen();
-	void webSocket_OnMessage(const FString &in_data);
+	void webSocket_OnMessage(TArray<uint8> in_data);
 	void webSocket_OnError(const FString &in_error);
 
   private:
@@ -78,6 +78,9 @@ class BrainCloudRTTComms : public IServerCallback
 
 	void setEndpointFromType(TArray<TSharedPtr<FJsonValue>> in_endpoints, FString in_socketType);
 	void onRecv(const FString &in_message);
+
+	FString buildRTTRequestError(FString in_statusMessage);
+	
 	// IServerCallback
 	void serverCallback(ServiceName serviceName, ServiceOperation serviceOperation, const FString &jsonData);
 	void serverError(ServiceName serviceName, ServiceOperation serviceOperation, int32 statusCode, int32 reasonCode, const FString &jsonError);
@@ -103,8 +106,10 @@ class BrainCloudRTTComms : public IServerCallback
 	float m_timeSinceLastRequest;
 	float m_lastNowMS;
 
-	eBCRTTConnectionType m_connectionType;
+	BCRTTConnectionType m_connectionType;
 	bool m_bIsConnected;
 
 	struct lws_context *m_lwsContext;
+
+	FString BCBytesToString(const uint8* in, int32 count);
 };

@@ -24,7 +24,7 @@ public:
 	UFUNCTION()
 	void Websocket_OnOpen();
 	UFUNCTION()
-	void WebSocket_OnMessage(const FString &in_data);
+	void WebSocket_OnMessage(TArray<uint8> in_data);
 	UFUNCTION()
 	void WebSocket_OnError(const FString &in_error);
 

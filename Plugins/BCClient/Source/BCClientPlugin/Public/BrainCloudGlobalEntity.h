@@ -200,6 +200,19 @@ class BCCLIENTPLUGIN_API BrainCloudGlobalEntity
 	*
 	* @param entityId The entity ID
 	* @param version The version of the entity to update
+	* @param entityIndexedId the id index of the entity 
+	* @param callback The callback object
+	*/
+	void updateEntityIndexedId(const FString &entityId, int32 version, const FString &entityIndexedId, IServerCallback *callback = nullptr);
+
+	/**
+	* Method updates an existing entity's Owner and ACL on the server.
+	*
+	* Service Name - globalEntity
+	* Service Operation - UPDATE_ENTITY_OWNER_AND_ACL
+	*
+	* @param entityId The entity ID
+	* @param version The version of the entity to update
 	* @param ownerId The owner ID
 	* @param jsonEntityAcl The entity's access control list as JSON.
 	* @param callback The callback object

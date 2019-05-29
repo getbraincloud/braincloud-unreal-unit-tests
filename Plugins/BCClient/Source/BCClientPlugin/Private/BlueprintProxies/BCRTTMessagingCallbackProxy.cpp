@@ -13,11 +13,11 @@ UBCRTTMessagingCallbackProxy::UBCRTTMessagingCallbackProxy(const FObjectInitiali
 UBCRTTMessagingCallbackProxy *UBCRTTMessagingCallbackProxy::RegisterRTTMessagingCallback(UBrainCloudWrapper *brainCloudWrapper)
 {
 	UBCRTTMessagingCallbackProxy *Proxy = NewObject<UBCRTTMessagingCallbackProxy>();
-	UBCWrapperProxy::GetBrainCloudInstance(brainCloudWrapper)->getBCClient()->registerRTTMessagingCallback(Proxy);
+	UBCWrapperProxy::GetBrainCloudInstance(brainCloudWrapper)->getRTTService()->registerRTTMessagingCallback(Proxy);
 	return Proxy;
 }
 
 void UBCRTTMessagingCallbackProxy::DeregisterRTTMessagingCallback(UBrainCloudWrapper *brainCloudWrapper)
 {
-	UBCWrapperProxy::GetBrainCloudInstance(brainCloudWrapper)->getBCClient()->deregisterRTTMessagingCallback();
+	UBCWrapperProxy::GetBrainCloudInstance(brainCloudWrapper)->getRTTService()->deregisterRTTMessagingCallback();
 }

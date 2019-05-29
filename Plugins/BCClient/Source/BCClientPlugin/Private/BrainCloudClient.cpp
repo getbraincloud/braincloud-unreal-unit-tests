@@ -18,7 +18,7 @@
 #include "BCPlatform.h"
 
 // Define all static member variables.
-FString BrainCloudClient::s_brainCloudClientVersion = TEXT("3.11.0");
+FString BrainCloudClient::s_brainCloudClientVersion = TEXT("4.0.0");
 
 ////////////////////////////////////////////////////
 // (De)Constructors
@@ -306,106 +306,6 @@ void BrainCloudClient::resetCommunication()
 
 	if (_authenticationService)
 		_authenticationService->clearSavedProfileId();
-}
-
-void BrainCloudClient::enableRTT(eBCRTTConnectionType in_type, IServerCallback *in_callback)
-{
-	_brainCloudRTTComms->enableRTT(in_type, in_callback);
-}
-
-void BrainCloudClient::disableRTT()
-{
-	_brainCloudRTTComms->disableRTT();
-}
-
-bool BrainCloudClient::getRTTEnabled()
-{
-	return _brainCloudRTTComms->isRTTEnabled();
-}
-
-void BrainCloudClient::setRTTHeartBeatSeconds(int32 in_value)
-{
-	_brainCloudRTTComms->setRTTHeartBeatSeconds(in_value);
-}
-
-void BrainCloudClient::deregisterAllRTTCallbacks()
-{
-	_brainCloudRTTComms->deregisterAllRTTCallbacks();
-}
-
-void BrainCloudClient::registerRTTEventCallback(UBCBlueprintRTTCallProxyBase *in_callback)
-{
-	_brainCloudRTTComms->registerRTTCallback(ServiceName::Event, in_callback);
-}
-
-void BrainCloudClient::registerRTTEventCallback(IRTTCallback *in_callback)
-{
-	_brainCloudRTTComms->registerRTTCallback(ServiceName::Event, in_callback);
-}
-
-void BrainCloudClient::deregisterRTTEventCallback()
-{
-	_brainCloudRTTComms->deregisterRTTCallback(ServiceName::Event);
-}
-
-void BrainCloudClient::registerRTTChatCallback(UBCBlueprintRTTCallProxyBase *in_callback)
-{
-	_brainCloudRTTComms->registerRTTCallback(ServiceName::Chat, in_callback);
-}
-
-void BrainCloudClient::registerRTTChatCallback(IRTTCallback *in_callback)
-{
-	_brainCloudRTTComms->registerRTTCallback(ServiceName::Chat, in_callback);
-}
-
-void BrainCloudClient::deregisterRTTChatCallback()
-{
-	_brainCloudRTTComms->deregisterRTTCallback(ServiceName::Chat);
-}
-
-void BrainCloudClient::registerRTTMessagingCallback(UBCBlueprintRTTCallProxyBase *in_callback)
-{
-	_brainCloudRTTComms->registerRTTCallback(ServiceName::Messaging, in_callback);
-}
-
-void BrainCloudClient::registerRTTMessagingCallback(IRTTCallback *in_callback)
-{
-	_brainCloudRTTComms->registerRTTCallback(ServiceName::Messaging, in_callback);
-}
-
-void BrainCloudClient::deregisterRTTMessagingCallback()
-{
-	_brainCloudRTTComms->deregisterRTTCallback(ServiceName::Messaging);
-}
-
-void BrainCloudClient::registerRTTPresenceCallback(UBCBlueprintRTTCallProxyBase *in_callback)
-{
-	_brainCloudRTTComms->registerRTTCallback(ServiceName::Presence, in_callback);
-}
-
-void BrainCloudClient::registerRTTPresenceCallback(IRTTCallback *in_callback)
-{
-	_brainCloudRTTComms->registerRTTCallback(ServiceName::Presence, in_callback);
-}
-
-void BrainCloudClient::deregisterRTTPresenceCallback()
-{
-	_brainCloudRTTComms->deregisterRTTCallback(ServiceName::Presence);
-}
-
-void BrainCloudClient::registerRTTLobbyCallback(UBCBlueprintRTTCallProxyBase *in_callback)
-{
-	_brainCloudRTTComms->registerRTTCallback(ServiceName::Lobby, in_callback);
-}
-
-void BrainCloudClient::registerRTTLobbyCallback(IRTTCallback *in_callback)
-{
-	_brainCloudRTTComms->registerRTTCallback(ServiceName::Lobby, in_callback);
-}
-
-void BrainCloudClient::deregisterRTTLobbyCallback()
-{
-	_brainCloudRTTComms->deregisterRTTCallback(ServiceName::Lobby);
 }
 
 void BrainCloudClient::setHeartbeatInterval(int32 intervalInMilliseconds)
@@ -780,7 +680,7 @@ BrainCloudRTT *BrainCloudClient::getRTTService()
 {
 	if (_rttService == nullptr)
 	{
-		_rttService = new BrainCloudRTT(this);
+		_rttService = new BrainCloudRTT(_brainCloudRTTComms, this);
 	}
 	return _rttService;
 }

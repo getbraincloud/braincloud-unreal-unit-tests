@@ -550,4 +550,28 @@ class UBCIdentityProxy : public UBCBlueprintCallProxyBase
 	*/
 	UFUNCTION(BlueprintCallable, meta = (BlueprintInternalUseOnly = "true"), Category = "BrainCloud|Identity")
 	static UBCIdentityProxy *GetPeerProfiles(UBrainCloudWrapper *brainCloud);
+
+	/**
+	* Attachs universal id to current profile with no login
+	*
+	* Service Name - identity
+	* Service Operation - ATTACH_NON_LOGIN_UNIVERSAL_ID
+	*
+	* @param externalId the id connected with 
+	* @param callback The method to be invoked when the server response is received
+	*/
+	UFUNCTION(BlueprintCallable, meta = (BlueprintInternalUseOnly = "true"), Category = "BrainCloud|Identity")
+	static UBCIdentityProxy *AttachNonLoginUniversalId(UBrainCloudWrapper *brainCloudWrapper, const FString &externalId);
+
+	/**
+	* update universal id of current profile
+	*
+	* Service Name - identity
+	* Service Operation - UPDATE_UNIVERSAL_ID_LOGIN
+	*
+	* @param externalId the id connected with 
+	* @param callback The method to be invoked when the server response is received
+	*/
+	UFUNCTION(BlueprintCallable, meta = (BlueprintInternalUseOnly = "true"), Category = "BrainCloud|Identity")
+	static UBCIdentityProxy *UpdateUniversalIdLogin(UBrainCloudWrapper *brainCloudWrapper, const FString &externalId);
 };

@@ -46,6 +46,16 @@ class BCCLIENTPLUGIN_API BrainCloudVirtualCurrency
     void getPeerCurrency(const FString &in_vcId, const FString &in_peerCode, IServerCallback *callback = nullptr);
 
     /**
+    * Reset the player's currency to 0. 
+    *
+    * Service Name - VirtualCurrency
+    * Service Operation - ResetCurrency
+    * 
+    * @param in_callback The method to be invoked when the server response is received
+    */
+    void resetCurrency(IServerCallback *callback = nullptr);
+
+    /**
 	* @warning Method is recommended to be used in Cloud Code only for security
 	*
 	* For security reasons calling this API from the client is not recommended, and is rejected at the server by default. To over-ride, enable the 'Allow Currency Calls from Client" compatibility setting in the Design Portal.

@@ -78,7 +78,7 @@ void BCFileUploader::CancelUpload()
     _request->CancelRequest();
 
     FString message = FString::Printf(TEXT("Upload of %s canceled by user"), *_fileName);
-    ReportError(HttpCode::CLIENT_NETWORK_ERROR, ReasonCode::CLIENT_UPLOAD_FILE_CANCELLED, message);
+    ReportError(HttpCode::CLIENT_NETWORK_ERROR, ReasonCodes::CLIENT_UPLOAD_FILE_CANCELLED, message);
 
     if (_isLoggingEnabled)
         UE_LOG(LogBrainCloudComms, Log, TEXT("Upload of %s canceled by user"), *_fileName);
@@ -95,7 +95,7 @@ void BCFileUploader::OnProcessRequestComplete(FHttpRequestPtr request, FHttpResp
     else
     {
         _status = UPLOAD_STATUS_COMPLETE_FAILED;
-        _reasonCode = ReasonCode::CLIENT_UPLOAD_FILE_UNKNOWN;
+        _reasonCode = ReasonCodes::CLIENT_UPLOAD_FILE_UNKNOWN;
     }
 }
 
@@ -113,7 +113,7 @@ void BCFileUploader::OnRequestProgress(FHttpRequestPtr request, int32 bytesSent,
         FPlatformTime::Seconds() - _startTime > _overallTimeout)
     {
         FString message = FString::Printf(TEXT("Upload of %s timed out"), *_fileName);
-        ReportError(HttpCode::CLIENT_NETWORK_ERROR, ReasonCode::CLIENT_UPLOAD_FILE_TIMED_OUT, message);
+        ReportError(HttpCode::CLIENT_NETWORK_ERROR, ReasonCodes::CLIENT_UPLOAD_FILE_TIMED_OUT, message);
 
         UE_LOG(LogBrainCloudComms, Error, TEXT("%s"), *message);
         _request->CancelRequest();

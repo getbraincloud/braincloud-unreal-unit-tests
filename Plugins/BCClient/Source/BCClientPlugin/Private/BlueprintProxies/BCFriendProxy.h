@@ -215,5 +215,5 @@ class UBCFriendProxy : public UBCBlueprintCallProxyBase
 	* Param - profileIds Collection of profile IDs.
 	*/
 	UFUNCTION(BlueprintCallable, meta = (BlueprintInternalUseOnly = "true"), Category = "BrainCloud|Friend")
-	static UBCFriendProxy *GetUsersOnlineStatus(UBrainCloudWrapper *brainCloud, const TArray<FString> &profileIds);
+	static UBCFriendProxy *GetUsersOnlineStatus(UBrainCloudWrapper *brainCloudWrapper, const TArray<FString> &profileIds);
 };

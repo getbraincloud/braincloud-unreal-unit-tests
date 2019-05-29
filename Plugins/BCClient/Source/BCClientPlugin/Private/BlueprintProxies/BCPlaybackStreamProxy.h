@@ -107,5 +107,5 @@ class UBCPlaybackStreamProxy : public UBCBlueprintCallProxyBase
 	* Param - callback The callback.
 	*/
     UFUNCTION(BlueprintCallable, meta = (BlueprintInternalUseOnly = "true"), Category = "BrainCloud|Playback Stream")
-    static UBCPlaybackStreamProxy *GetRecentStreamsForTargetPlayer(UBrainCloudWrapper *brainCloud, const FString &targetPlayerId, int32 maxNumStreams);
+    static UBCPlaybackStreamProxy *GetRecentStreamsForTargetPlayer(UBrainCloudWrapper *brainCloudWrapper, const FString &targetPlayerId, int32 maxNumStreams);
 };

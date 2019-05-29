@@ -13,11 +13,11 @@ UBCRTTChatCallbackProxy::UBCRTTChatCallbackProxy(const FObjectInitializer &Objec
 UBCRTTChatCallbackProxy *UBCRTTChatCallbackProxy::RegisterRTTChatCallback(UBrainCloudWrapper *brainCloudWrapper)
 {
 	UBCRTTChatCallbackProxy *Proxy = NewObject<UBCRTTChatCallbackProxy>();
-	UBCWrapperProxy::GetBrainCloudInstance(brainCloudWrapper)->getBCClient()->registerRTTChatCallback(Proxy);
+	UBCWrapperProxy::GetBrainCloudInstance(brainCloudWrapper)->getRTTService()->registerRTTChatCallback(Proxy);
 	return Proxy;
 }
 
 void UBCRTTChatCallbackProxy::DeregisterRTTChatCallback(UBrainCloudWrapper *brainCloudWrapper)
 {
-	UBCWrapperProxy::GetBrainCloudInstance(brainCloudWrapper)->getBCClient()->deregisterRTTChatCallback();
+	UBCWrapperProxy::GetBrainCloudInstance(brainCloudWrapper)->getRTTService()->deregisterRTTChatCallback();
 }

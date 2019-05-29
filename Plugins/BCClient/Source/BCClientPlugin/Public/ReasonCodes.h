@@ -1,8 +1,7 @@
 // Copyright 2018 bitHeads, Inc. All Rights Reserved.
 
 #pragma once
-
-class BCCLIENTPLUGIN_API ReasonCode
+class BCCLIENTPLUGIN_API ReasonCodes
 {
   public:
     // Error codes
@@ -308,13 +307,7 @@ class BCCLIENTPLUGIN_API ReasonCode
 
     static const int32 MONGO_DB_EXCEPTION = 600001;
 
-    // Client defined value for a timeout detected client-side.
-    static const int32 CLIENT_NETWORK_ERROR_TIMEOUT = 90001;
-    static const int32 CLIENT_UPLOAD_FILE_CANCELLED = 90100;
-    static const int32 CLIENT_UPLOAD_FILE_TIMED_OUT = 90101;
-    static const int32 CLIENT_UPLOAD_FILE_UNKNOWN = 90102;
-    static const int32 CLIENT_DISABLED = 90200;
-
+    // RTT 
     static const int32 RTT_LEFT_BY_CHOICE = 80000;
     static const int32 RTT_EVICTED = 80001;
     static const int32 RTT_LOST_CONNECTION = 80002;
@@ -324,4 +317,14 @@ class BCCLIENTPLUGIN_API ReasonCode
     static const int32 RTT_ERROR_ASSIGNING_ROOM = 80103;
     static const int32 RTT_ERROR_LAUNCHING_ROOM = 80104;
     static const int32 RTT_NO_LOBBIES_FOUND = 80200;
+    static const int32 RTT_CLIENT_ERROR = 80300;
+
+    // Client defined value for a timeout detected client-side.
+    static const int32 CLIENT_NETWORK_ERROR_TIMEOUT = 90001;
+    static const int32 CLIENT_UPLOAD_FILE_CANCELLED = 90100;
+    static const int32 CLIENT_UPLOAD_FILE_TIMED_OUT = 90101;
+    static const int32 CLIENT_UPLOAD_FILE_UNKNOWN = 90102;
+    static const int32 CLIENT_DISABLED = 90200;
 };
+
+using ReasonCode = ReasonCodes;

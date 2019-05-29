@@ -223,5 +223,5 @@ class UBCPushNotificationProxy : public UBCBlueprintCallProxyBase
 	* Param - customData Optional custom data
 	*/
 	UFUNCTION(BlueprintCallable, meta = (BlueprintInternalUseOnly = "true"), Category = "BrainCloud|Push Notification")
-	static UBCPushNotificationProxy *SendNormalizedPushNotificationBatch(UBrainCloudWrapper *brainCloud, const TArray<FString> profileIds, const FString &alertContentJson, const FString &customDataJson);
+	static UBCPushNotificationProxy *SendNormalizedPushNotificationBatch(UBrainCloudWrapper *brainCloudWrapper, const TArray<FString> profileIds, const FString &alertContentJson, const FString &customDataJson);
 };

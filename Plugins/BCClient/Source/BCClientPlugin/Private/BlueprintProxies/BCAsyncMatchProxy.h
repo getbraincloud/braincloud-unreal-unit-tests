@@ -188,5 +188,5 @@ public:
     * Service Operation - Delete
     */
   UFUNCTION(BlueprintCallable, meta = (BlueprintInternalUseOnly = "true"), Category = "BrainCloud|Async Match")
-  static UBCAsyncMatchProxy *DeleteMatch(UBrainCloudWrapper *brainCloud, FString ownerId, FString matchId);
+  static UBCAsyncMatchProxy *DeleteMatch(UBrainCloudWrapper *brainCloudWrapper, FString ownerId, FString matchId);
 };
