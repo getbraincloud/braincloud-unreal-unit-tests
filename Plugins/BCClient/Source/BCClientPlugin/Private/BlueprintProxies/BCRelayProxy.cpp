@@ -11,6 +11,7 @@
 UBCRelayProxy::UBCRelayProxy(const FObjectInitializer &ObjectInitializer)
     : Super(ObjectInitializer)
 {
+	_bIsOneResponse = false;
 }
 
 int64 UBCRelayProxy::Ping(UBrainCloudWrapper *brainCloudWrapper)
@@ -63,10 +64,10 @@ FString UBCRelayProxy::BCBytesToString(const TArray<uint8>& in_data)
 
 TArray<uint8> UBCRelayProxy::BCStringToBytes(const FString &in_string)
 {
-	TArray<uint8> in_data;
-	in_data.AddUninitialized(in_string.Len());
-	BrainCloudRelay::BCStringToBytes(in_string, in_data.GetData(), in_string.Len());
+	TArray<uint8> data;
+	data.AddUninitialized(in_string.Len());
+	BrainCloudRelay::BCStringToBytes(in_string, data.GetData(), in_string.Len());
 
-	return in_data;
+	return data;
 }
 

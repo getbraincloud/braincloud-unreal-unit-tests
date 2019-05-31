@@ -7,6 +7,7 @@
 #include "BrainCloudRTTComms.h"
 #include "ServerCall.h"
 #include "JsonUtil.h"
+#include "BCRTTProxy.h"
 
 BrainCloudRTT::BrainCloudRTT(BrainCloudRTTComms *comms, BrainCloudClient *client) : _client(client), _commsLayer(comms){};
 
@@ -18,6 +19,11 @@ void BrainCloudRTT::requestClientConnection(IServerCallback *callback)
 }
 
 void BrainCloudRTT::enableRTT(BCRTTConnectionType in_type, IServerCallback *in_callback)
+{
+	_commsLayer->enableRTT(in_type, in_callback);
+}
+
+void BrainCloudRTT::enableRTT(BCRTTConnectionType in_type, UBCRTTProxy *in_callback)
 {
 	_commsLayer->enableRTT(in_type, in_callback);
 }

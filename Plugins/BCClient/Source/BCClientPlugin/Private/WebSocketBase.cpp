@@ -501,9 +501,10 @@ void UWebSocketBase::ProcessWriteable()
 	{
 		uint8 *data = mSendQueueData[0].GetData();
 		int sizeOfData = mSendQueueData[0].Num();
-
+		
 		unsigned char buf[LWS_PRE + MAX_ECHO_PAYLOAD];
 		memcpy(&buf[LWS_PRE], data, sizeOfData);
+
 		lws_write(mlws, &buf[LWS_PRE], sizeOfData, LWS_WRITE_BINARY);
 		mSendQueueData.RemoveAt(0);
 	}

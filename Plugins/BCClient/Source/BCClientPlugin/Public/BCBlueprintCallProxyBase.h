@@ -59,10 +59,12 @@ class UBCBlueprintCallProxyBase : public UObject, public IServerCallback
     {
         FBC_ReturnData returnData = FBC_ReturnData(serviceName.getValue(), serviceOperation.getValue(), 200, 0);
         OnSuccess.Broadcast(jsonData, returnData);
-        
-        // allow it to be removed, if no longer referenced
-        this->RemoveFromRoot();
-        ConditionalBeginDestroy();
+        if (_bIsOneResponse)
+        {
+            // allow it to be removed, if no longer referenced
+            this->RemoveFromRoot();
+            ConditionalBeginDestroy();
+        }
     }
 
     void serverError(ServiceName serviceName, ServiceOperation serviceOperation, int32 statusCode, int32 reasonCode, const FString &jsonError)
@@ -70,8 +72,14 @@ class UBCBlueprintCallProxyBase : public UObject, public IServerCallback
         FBC_ReturnData returnData = FBC_ReturnData(serviceName.getValue(), serviceOperation.getValue(), statusCode, reasonCode);
         OnFailure.Broadcast(jsonError, returnData);
         
-        // allow it to be removed, if no longer referenced
-        this->RemoveFromRoot();
-        ConditionalBeginDestroy();
+        if (_bIsOneResponse)
+        {
+            // allow it to be removed, if no longer referenced
+            this->RemoveFromRoot();
+            ConditionalBeginDestroy();
+        }
     }
+
+    protected:
+    bool _bIsOneResponse = true;
 };
