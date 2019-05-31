@@ -26,6 +26,7 @@ class FJsonObject;
 class UWebSocketBase;
 class UBCRTTCommsProxy;
 class UBCBlueprintRTTCallProxyBase;
+class UBCRTTProxy;
 
 class BrainCloudRTTComms : public IServerCallback
 {
@@ -34,12 +35,13 @@ class BrainCloudRTTComms : public IServerCallback
 	~BrainCloudRTTComms();
 
 	void enableRTT(BCRTTConnectionType in_connectionType, IServerCallback *callback);
+	void enableRTT(BCRTTConnectionType in_connectionType, UBCRTTProxy *callback);
 	void disableRTT();
 	bool isRTTEnabled();
 	void RunCallbacks();
 
-	void registerRTTCallback(ServiceName in_serviceName, UBCBlueprintRTTCallProxyBase *callback);
 	void registerRTTCallback(ServiceName in_serviceName, IRTTCallback *callback);
+	void registerRTTCallback(ServiceName in_serviceName, UBCBlueprintRTTCallProxyBase *callback);
 	void deregisterRTTCallback(ServiceName in_serviceName);
 	void deregisterAllRTTCallbacks();
 
@@ -63,7 +65,6 @@ class BrainCloudRTTComms : public IServerCallback
   private:
 	void connectWebSocket();
 	void disconnect();
-	void connect();
 
 	FString buildConnectionRequest();
 	FString buildHeartbeatRequest();
@@ -88,6 +89,7 @@ class BrainCloudRTTComms : public IServerCallback
 	// private vars
 	BrainCloudClient *m_client = nullptr;
 	IServerCallback *m_appCallback;
+	UBCRTTProxy *m_appCallbackBP;
 
 	TMap<FString, IRTTCallback *> m_registeredRTTCallbacks;
 	TMap<FString, UBCBlueprintRTTCallProxyBase *> m_registeredRTTBluePrintCallbacks;

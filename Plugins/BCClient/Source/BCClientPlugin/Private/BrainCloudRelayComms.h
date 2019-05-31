@@ -28,6 +28,8 @@ class FJsonObject;
 class UWebSocketBase;
 class UBCRelayCommsProxy;
 class UBCBlueprintRelayCallProxyBase;
+class UBCRelayProxy;
+struct RelayMessage;
 
 class BrainCloudRelayComms
 {
@@ -54,6 +56,7 @@ public:
 	uint8 netId();
 
 	void connect(BCRelayConnectionType in_connectionType, const FString &in_connectOptionsJson, IServerCallback *callback);
+	void connect(BCRelayConnectionType in_connectionType, const FString &in_connectOptionsJson, UBCRelayProxy *callback);
 	void disconnect();
 	bool isConnected();
 	void registerDataCallback(IRelayCallback *callback);
@@ -78,6 +81,7 @@ public:
 	void webSocket_OnError(const FString &in_error);
 
 private:
+	void connectHelper(BCRelayConnectionType in_connectionType, const FString &in_connectOptionsJson);
 	void startReceivingRSConnectionAsync();
 	TArray<uint8> concatenateByteArrays(TArray<uint8> in_bufferA, TArray<uint8> in_bufferB);
 	TArray<uint8> stripByteArray(TArray<uint8> in_data, int in_numFromLeft);
@@ -90,10 +94,12 @@ private:
 	FString buildRSRequestError(FString in_statusMessage);
 	void setupWebSocket(const FString &in_url);
 	void sendPing();
-	void appendHeaderData();
+	TArray<uint8> appendHeaderData(uint8 in_controlByte);
+	TArray<uint8> fromShortBE(short number);
 
 	BrainCloudClient *m_client;
 	IServerCallback *m_appCallback;
+	UBCRelayProxy *m_appCallbackBP;
 
 	UBCRelayCommsProxy *m_commsPtr;
 
