@@ -427,7 +427,6 @@ void UWebSocketBase::Connect(const FString &uri, const TMap<FString, FString> &h
 
 bool UWebSocketBase::SendText(const FString &data)
 {
-
 	bool bSentMessage = false;
 #if PLATFORM_UWP
 	bSentMessage = true;
@@ -447,7 +446,9 @@ bool UWebSocketBase::SendText(const FString &data)
 
 	if (mlws != nullptr)
 	{
+		m_mutex.Lock();
 		mSendQueue.Add(data);
+		m_mutex.Unlock();
 		bSentMessage = true;
 	}
 	else
@@ -466,9 +467,10 @@ bool UWebSocketBase::SendData(TArray<uint8> data)
 	bSentMessage = true;
 	SendAsyncData(data.GetData()).then([this]() {
 	});
-
 #elif PLATFORM_HTML5
-	SocketSend(mWebSocketRef, data.GetData(), sizeOfData);
+	FString parsedMessage = BrainCloudRelay::BCBytesToString(data.GetData(), data.Num());
+	std::string strData = TCHAR_TO_ANSI(*parsedMessage);
+	SocketSend(mWebSocketRef, strData.c_str(), (int)strData.size());
 	bSentMessage = true;
 #else
 	if (sizeOfData > MAX_ECHO_PAYLOAD)
@@ -479,7 +481,9 @@ bool UWebSocketBase::SendData(TArray<uint8> data)
 
 	if (mlws != nullptr)
 	{
+		m_mutex.Lock();
 		mSendQueueData.Add(data);
+		m_mutex.Unlock();
 		bSentMessage = true;
 	}
 	else
@@ -496,6 +500,7 @@ void UWebSocketBase::ProcessWriteable()
 #elif PLATFORM_HTML5
 #else
 
+m_mutex.Lock();
 	// write data
 	while (mSendQueueData.Num() > 0)
 	{
@@ -520,6 +525,7 @@ void UWebSocketBase::ProcessWriteable()
 
 		mSendQueue.RemoveAt(0);
 	}
+	m_mutex.Unlock();
 #endif
 }
 

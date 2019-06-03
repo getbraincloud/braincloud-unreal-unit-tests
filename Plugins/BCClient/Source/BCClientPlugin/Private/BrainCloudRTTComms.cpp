@@ -280,9 +280,12 @@ void BrainCloudRTTComms::disconnect()
 
 	delete m_connectedSocket;
 	m_connectedSocket = nullptr;
-
+#if PLATFORM_UWP
+#elif PLATFORM_HTML5
+#else
 	lws_context_destroy(m_lwsContext);
 	m_lwsContext = nullptr;
+#endif
 
 	m_cxId = TEXT("");
 	m_eventServer = TEXT("");
@@ -451,7 +454,11 @@ void BrainCloudRTTComms::setupWebSocket(const FString &in_url)
 	m_connectedSocket->OnClosed.AddDynamic(m_commsPtr, &UBCRTTCommsProxy::WebSocket_OnClose);
 	m_connectedSocket->OnConnectComplete.AddDynamic(m_commsPtr, &UBCRTTCommsProxy::Websocket_OnOpen);
 	m_connectedSocket->OnReceiveData.AddDynamic(m_commsPtr, &UBCRTTCommsProxy::WebSocket_OnMessage);
+#if PLATFORM_UWP
+#elif PLATFORM_HTML5
+#else
 	m_connectedSocket->mlwsContext = m_lwsContext;
+#endif
 
 	m_connectedSocket->Connect(in_url, m_rttHeadersMap);
 }
