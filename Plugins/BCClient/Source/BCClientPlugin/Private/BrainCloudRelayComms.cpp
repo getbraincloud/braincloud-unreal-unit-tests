@@ -249,8 +249,12 @@ void BrainCloudRelayComms::disconnectImpl()
 	delete m_connectedSocket;
 	m_connectedSocket = nullptr;
 
+#if PLATFORM_UWP
+#elif PLATFORM_HTML5
+#else
 	lws_context_destroy(m_lwsContext);
 	m_lwsContext = nullptr;
+#endif
 
 	m_bIsConnected = false;
 	
@@ -527,7 +531,12 @@ void BrainCloudRelayComms::setupWebSocket(const FString &in_url)
 	m_connectedSocket->OnClosed.AddDynamic(m_commsPtr, &UBCRelayCommsProxy::WebSocket_OnClose);
 	m_connectedSocket->OnConnectComplete.AddDynamic(m_commsPtr, &UBCRelayCommsProxy::Websocket_OnOpen);
 	m_connectedSocket->OnReceiveData.AddDynamic(m_commsPtr, &UBCRelayCommsProxy::WebSocket_OnMessage);
+	
+#if PLATFORM_UWP
+#elif PLATFORM_HTML5
+#else
 	m_connectedSocket->mlwsContext = m_lwsContext;
+#endif
 
 	// no headers at the moment
 	TMap<FString, FString> headersMap;

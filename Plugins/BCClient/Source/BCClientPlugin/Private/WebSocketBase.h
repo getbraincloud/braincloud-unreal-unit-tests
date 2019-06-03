@@ -162,4 +162,6 @@ class BCCLIENTPLUGIN_API UWebSocketBase : public UObject
 	TArray<FString> mSendQueue;
 	TArray<TArray<uint8>> mSendQueueData;
 	TMap<FString, FString> mHeaderMap;
+
+	FCriticalSection m_mutex;
 };
