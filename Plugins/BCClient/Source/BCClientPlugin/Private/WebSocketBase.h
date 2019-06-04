@@ -121,7 +121,7 @@ class BCCLIENTPLUGIN_API UWebSocketBase : public UObject
 	bool SendText(const FString &data);
 
 	//UFUNCTION(BlueprintCallable, Category = WebSocket)
-	bool SendData(TArray<uint8> data);
+	bool SendData(const TArray<uint8> &data);
 
 	UFUNCTION(BlueprintCallable, Category = WebSocket)
 	void Close();

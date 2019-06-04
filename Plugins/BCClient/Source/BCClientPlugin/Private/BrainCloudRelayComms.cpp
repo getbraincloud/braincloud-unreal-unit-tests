@@ -62,7 +62,7 @@ BrainCloudRelayComms::BrainCloudRelayComms(BrainCloudClient *client)
 	, m_timeSinceLastPingRequest(0)
 	, m_lastNowMS(FPlatformTime::Seconds())
 	, m_sentPing(FPlatformTime::Seconds())
-	, m_ping(99999L)
+	, m_ping(999)
 	, m_netId(-1)
 	, m_lwsContext(nullptr)
 {
@@ -137,20 +137,10 @@ void BrainCloudRelayComms::deregisterDataCallback()
 
 void BrainCloudRelayComms::RunCallbacks()
 {
-#if PLATFORM_UWP
-#elif PLATFORM_HTML5
-#else
-	if (m_lwsContext != nullptr)
-	{
-		lws_callback_on_writable_all_protocol(m_lwsContext, &protocolsRS[0]);
-		lws_service(m_lwsContext, 0);
-	}
-#endif
-
 	// run ping 
 	if (isConnected())
     {
-        uint64 nowMS = FPlatformTime::Seconds();
+        double nowMS = FPlatformTime::Seconds();
         // the heart beat
         m_timeSinceLastPingRequest += (nowMS - m_lastNowMS);
         m_lastNowMS = nowMS;
@@ -163,6 +153,16 @@ void BrainCloudRelayComms::RunCallbacks()
 
         //processReliableQueue();
     }
+
+#if PLATFORM_UWP
+#elif PLATFORM_HTML5
+#else
+	if (m_lwsContext != nullptr)
+	{
+		lws_callback_on_writable_all_protocol(m_lwsContext, &protocolsRS[0]);
+		lws_service(m_lwsContext, 0);
+	}
+#endif
 }
 
 #if PLATFORM_UWP
@@ -269,7 +269,7 @@ void BrainCloudRelayComms::disconnectImpl()
 
 	m_sentPing = FPlatformTime::Seconds();
 	m_netId = -1;
-	m_ping = 99999L;
+	m_ping = 999;
 }
 
 // sends pure in_data
@@ -313,14 +313,14 @@ void BrainCloudRelayComms::setPingInterval(float in_interval)
     m_pingInterval = in_interval;
 }
 
-int64 BrainCloudRelayComms::ping()
+int32 BrainCloudRelayComms::ping()
 {
 	return m_ping;
 }
 
 uint8 BrainCloudRelayComms::netId()
 {
-	return (uint8)m_netId;
+	return m_netId;
 }
 
 void BrainCloudRelayComms::connectHelper(BCRelayConnectionType in_connectionType, const FString &in_connectOptionsJson)
@@ -431,7 +431,7 @@ TArray<uint8> BrainCloudRelayComms::appendSizeBytes(TArray<uint8> in_message)
 {
     // size of in_data is the incoming in_data, plus the two that we're adding
 	int sizeOfMessage = in_message.Num() + SIZE_OF_LENGTH_PREFIX_BYTE_ARRAY;
-	TArray<uint8> lengthPrefix = fromShortBE((short)sizeOfMessage);
+	TArray<uint8> lengthPrefix = fromShortBE((int16)sizeOfMessage);
 	TArray<uint8> toSend = concatenateByteArrays(lengthPrefix, in_message);
 	return toSend;
 }
@@ -531,7 +531,7 @@ void BrainCloudRelayComms::setupWebSocket(const FString &in_url)
 	m_connectedSocket->OnClosed.AddDynamic(m_commsPtr, &UBCRelayCommsProxy::WebSocket_OnClose);
 	m_connectedSocket->OnConnectComplete.AddDynamic(m_commsPtr, &UBCRelayCommsProxy::Websocket_OnOpen);
 	m_connectedSocket->OnReceiveData.AddDynamic(m_commsPtr, &UBCRelayCommsProxy::WebSocket_OnMessage);
-	
+
 #if PLATFORM_UWP
 #elif PLATFORM_HTML5
 #else
@@ -546,7 +546,8 @@ void BrainCloudRelayComms::setupWebSocket(const FString &in_url)
 void BrainCloudRelayComms::sendPing()
 {
 	m_sentPing = FPlatformTime::Seconds();
-	int64 localPing = ping();
+	int32 longPing = ping();
+	int16 localPing = longPing >= 32767 ? 32767 : longPing;
 
 	// attach the local ping
 	TArray<uint8> dataArr = fromShortBE(localPing);
@@ -574,12 +575,13 @@ TArray<uint8> BrainCloudRelayComms::appendHeaderData(uint8 in_controlByte)
 	return header;
 }
 
-TArray<uint8> BrainCloudRelayComms::fromShortBE(short number)
+TArray<uint8> BrainCloudRelayComms::fromShortBE(int16 number)
 {
 	// attach the local ping
 	TArray<uint8> dataArr;
 	dataArr.Add(number >> 8);
-	dataArr.Add(number);
+	dataArr.Add(number >> 0);
+	
 	return dataArr;
 }
 
@@ -622,7 +624,7 @@ void BrainCloudRelayComms::onRecv(TArray<uint8> in_data)
 		uint8 controlByte = in_data[0]; // first should be the control byte
 		if (controlByte == RS2CL_PONG)
         {
-			m_ping = (FPlatformTime::Seconds() - m_sentPing) * 1000.0f;
+			m_ping = (FPlatformTime::Seconds() - m_sentPing) * 1000;
 			if (m_client->isLoggingEnabled())
 				UE_LOG(LogBrainCloudComms, Log, TEXT("Relay OnRecv Ping: %d"), ping());
         }
@@ -659,6 +661,7 @@ void BrainCloudRelayComms::onRecv(TArray<uint8> in_data)
 					{
 						m_netId = (short)jsonPacket->GetNumberField(TEXT("netId"));
 						m_bIsConnected = true;
+						m_lastNowMS = FPlatformTime::Seconds();
 						
 						processRegisteredListeners(ServiceName::Relay.getValue().ToLower(), "connect", parsedMessage, data );
 					}

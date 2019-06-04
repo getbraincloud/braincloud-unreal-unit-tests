@@ -459,7 +459,7 @@ bool UWebSocketBase::SendText(const FString &data)
 	return bSentMessage;
 }
 
-bool UWebSocketBase::SendData(TArray<uint8> data)
+bool UWebSocketBase::SendData(const TArray<uint8> &data)
 {
 	bool bSentMessage = false;
 	int sizeOfData = data.Num();
