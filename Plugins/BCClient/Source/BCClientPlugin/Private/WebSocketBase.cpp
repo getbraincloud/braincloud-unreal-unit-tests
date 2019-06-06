@@ -479,8 +479,6 @@ bool UWebSocketBase::SendData(const TArray<uint8> &data)
 
 	if (mlws != nullptr)
 	{
-		FString parsedMessage = BrainCloudRelay::BCBytesToString(data.GetData(), sizeOfData);
-		UE_LOG(WebSocket, Log, TEXT("SendData: %d '%s'"), sizeOfData, *parsedMessage);
 		mSendQueueData.Add(data);
 		bSentMessage = true;
 	}
