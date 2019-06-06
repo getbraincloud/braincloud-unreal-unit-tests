@@ -427,6 +427,17 @@ TArray<uint8> BrainCloudRelayComms::buildConnectionRequest()
 	return data;
 }
 
+void BrainCloudRelayComms::sendPing()
+{
+	m_sentPing = FPlatformTime::Seconds();
+	int32 longPing = ping();
+	int16 localPing = longPing >= 32767 ? 32767 : longPing;
+
+	// attach the local ping
+	TArray<uint8> dataArr = fromShortBE(localPing);
+	send(dataArr, CL2RS_PING);
+}
+
 TArray<uint8> BrainCloudRelayComms::appendSizeBytes(TArray<uint8> in_message)
 {
     // size of in_data is the incoming in_data, plus the two that we're adding
@@ -543,17 +554,6 @@ void BrainCloudRelayComms::setupWebSocket(const FString &in_url)
 	m_connectedSocket->Connect(in_url, headersMap);
 }
 
-void BrainCloudRelayComms::sendPing()
-{
-	m_sentPing = FPlatformTime::Seconds();
-	int32 longPing = ping();
-	int16 localPing = longPing >= 32767 ? 32767 : longPing;
-
-	// attach the local ping
-	TArray<uint8> dataArr = fromShortBE(localPing);
-	send(dataArr, CL2RS_PING);
-}
-
 TArray<uint8> BrainCloudRelayComms::appendHeaderData(uint8 in_controlByte)
 {
 	TArray<uint8> header;
@@ -581,7 +581,7 @@ TArray<uint8> BrainCloudRelayComms::fromShortBE(int16 number)
 	TArray<uint8> dataArr;
 	dataArr.Add(number >> 8);
 	dataArr.Add(number >> 0);
-	
+
 	return dataArr;
 }
 

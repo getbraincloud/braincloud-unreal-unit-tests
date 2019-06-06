@@ -446,9 +446,7 @@ bool UWebSocketBase::SendText(const FString &data)
 
 	if (mlws != nullptr)
 	{
-		m_mutex.Lock();
 		mSendQueue.Add(data);
-		m_mutex.Unlock();
 		bSentMessage = true;
 	}
 	else
@@ -481,9 +479,9 @@ bool UWebSocketBase::SendData(const TArray<uint8> &data)
 
 	if (mlws != nullptr)
 	{
-		m_mutex.Lock();
+		FString parsedMessage = BrainCloudRelay::BCBytesToString(data.GetData(), sizeOfData);
+		UE_LOG(WebSocket, Log, TEXT("SendData: %d '%s'"), sizeOfData, *parsedMessage);
 		mSendQueueData.Add(data);
-		m_mutex.Unlock();
 		bSentMessage = true;
 	}
 	else
@@ -499,33 +497,41 @@ void UWebSocketBase::ProcessWriteable()
 #if PLATFORM_UWP
 #elif PLATFORM_HTML5
 #else
-
-m_mutex.Lock();
 	// write data
-	while (mSendQueueData.Num() > 0)
+	if (mSendQueueData.Num() > 0)
 	{
-		uint8 *data = mSendQueueData[0].GetData();
-		int sizeOfData = mSendQueueData[0].Num();
+		int location = 0;
+		unsigned char *buf = (unsigned char*)FMemory::Malloc(LWS_PRE + MAX_ECHO_PAYLOAD);
+		while (mSendQueueData.Num() > 0)
+		{
+			uint8 *data = mSendQueueData[0].GetData();
+			int sizeOfData = mSendQueueData[0].Num();
+
+			FMemory::Memcpy(&buf[LWS_PRE + location], data, sizeOfData);
+
+			//unsigned char buf[LWS_PRE + MAX_ECHO_PAYLOAD];
+			//memcpy(&buf[LWS_PRE], data, sizeOfData);
+
+			lws_write(mlws, &buf[LWS_PRE + location], sizeOfData, LWS_WRITE_BINARY);
+
+			location = sizeOfData;
+			mSendQueueData.RemoveAt(0);
+		}
 		
-		unsigned char buf[LWS_PRE + MAX_ECHO_PAYLOAD];
-		memcpy(&buf[LWS_PRE], data, sizeOfData);
-
-		lws_write(mlws, &buf[LWS_PRE], sizeOfData, LWS_WRITE_BINARY);
-		mSendQueueData.RemoveAt(0);
+		FMemory::Free(buf);
 	}
-
+		
 	// write text
 	while (mSendQueue.Num() > 0)
 	{
 		std::string strData = TCHAR_TO_ANSI(*mSendQueue[0]);
 
-		unsigned char buf[LWS_PRE + MAX_ECHO_PAYLOAD];
-		memcpy(&buf[LWS_PRE], strData.c_str(), strData.size());
-		lws_write(mlws, &buf[LWS_PRE], strData.size(), LWS_WRITE_TEXT);
+		unsigned char buf2[LWS_PRE + MAX_ECHO_PAYLOAD];
+		memcpy(&buf2[LWS_PRE], strData.c_str(), strData.size());
+		lws_write(mlws, &buf2[LWS_PRE], strData.size(), LWS_WRITE_TEXT);
 
 		mSendQueue.RemoveAt(0);
 	}
-	m_mutex.Unlock();
 #endif
 }
 
