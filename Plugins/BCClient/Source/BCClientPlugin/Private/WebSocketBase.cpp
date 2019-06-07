@@ -498,36 +498,24 @@ void UWebSocketBase::ProcessWriteable()
 	// write data
 	if (mSendQueueData.Num() > 0)
 	{
-		int location = 0;
-		unsigned char *buf = (unsigned char*)FMemory::Malloc(LWS_PRE + MAX_ECHO_PAYLOAD);
-		while (mSendQueueData.Num() > 0)
-		{
-			uint8 *data = mSendQueueData[0].GetData();
-			int sizeOfData = mSendQueueData[0].Num();
+		uint8 *data = mSendQueueData[0].GetData();
+		int sizeOfData = mSendQueueData[0].Num();
 
-			FMemory::Memcpy(&buf[LWS_PRE + location], data, sizeOfData);
+		unsigned char *buf = (unsigned char*)FMemory::Malloc(LWS_PRE + sizeOfData);
+		FMemory::Memcpy(&buf[LWS_PRE], data, sizeOfData);
+		lws_write(mlws, &buf[LWS_PRE], sizeOfData, LWS_WRITE_BINARY);
 
-			//unsigned char buf[LWS_PRE + MAX_ECHO_PAYLOAD];
-			//memcpy(&buf[LWS_PRE], data, sizeOfData);
-
-			lws_write(mlws, &buf[LWS_PRE + location], sizeOfData, LWS_WRITE_BINARY);
-
-			location = sizeOfData;
-			mSendQueueData.RemoveAt(0);
-		}
-		
-		FMemory::Free(buf);
+		mSendQueueData.RemoveAt(0);	
 	}
 		
 	// write text
-	while (mSendQueue.Num() > 0)
+	if (mSendQueue.Num() > 0)
 	{
 		std::string strData = TCHAR_TO_ANSI(*mSendQueue[0]);
 
-		unsigned char buf2[LWS_PRE + MAX_ECHO_PAYLOAD];
-		memcpy(&buf2[LWS_PRE], strData.c_str(), strData.size());
-		lws_write(mlws, &buf2[LWS_PRE], strData.size(), LWS_WRITE_TEXT);
-
+		unsigned char *buf = (unsigned char*)FMemory::Malloc(LWS_PRE + strData.size());
+		FMemory::Memcpy(&buf[LWS_PRE], strData.c_str(), strData.size());
+		lws_write(mlws, &buf[LWS_PRE], strData.size(), LWS_WRITE_TEXT);
 		mSendQueue.RemoveAt(0);
 	}
 #endif
