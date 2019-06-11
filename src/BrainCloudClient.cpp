@@ -130,6 +130,11 @@ namespace BrainCloud
         return(_rttComms->getConnectionId().c_str());
     }
 
+    const char * BrainCloudClient::getReceivedPacketId()
+    {
+        return _brainCloudComms->getReceivedPacketId();
+    }
+
     void BrainCloudClient::initializeComms(const char * in_serverURL, const char * in_appId, const std::map<std::string, std::string>& in_secretMap)
     {
         if (_brainCloudComms)

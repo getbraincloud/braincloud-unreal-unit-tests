@@ -69,6 +69,8 @@ namespace BrainCloud
         // returns true if packet requires a retry
         bool handleResult( URLResponse const & );
 
+        long getReceivedPacketId();
+
     protected:
         friend class IBrainCloudComms;
 
@@ -86,6 +88,8 @@ namespace BrainCloud
         std::list<std::string> _rewardCallbackQueue;
         std::list<URLResponse> _responses;
         std::vector<ServerCall*> _inProgress;
+
+        long receivedPacketIdChecker = 0;
 
         RecursiveMutex _loaderMutex;
         RecursiveMutex _queueMutex;

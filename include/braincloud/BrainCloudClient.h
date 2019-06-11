@@ -175,6 +175,11 @@ namespace BrainCloud
 		RTTComms * getRTTComms() const { return _rttComms; }
 
 		/**
+		 * Return most recently handled packet id
+		 */
+		long getReceivedPacketId();
+
+		/**
 		 * Run callbacks, to be called once per frame from your main thread
 		 */
 		void runCallbacks();
