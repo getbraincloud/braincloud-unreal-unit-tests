@@ -336,7 +336,6 @@ namespace BrainCloud
 		Json::Value messages = root["responses"];
 		Json::Value apiRewards(Json::nullValue);
 		int64_t receivedPacketId = root["packetId"].asInt64();
-		receivedPacketIdChecker = receivedPacketId;
 		if (receivedPacketId != NO_PACKET_EXPECTED && (_expectedPacketId == NO_PACKET_EXPECTED || _expectedPacketId != receivedPacketId))
 		{
 			// drop the packet - this is the wrong packet id
@@ -756,12 +755,6 @@ namespace BrainCloud
 
 		return (int)_packetTimeouts.size();
 	}
-
-	long DefaultBrainCloudComms::getReceivedPacketId()
-	{
-		return receivedPacketIdChecker;
-	}
-
 
 	void DefaultBrainCloudComms::handleError(URLResponse const & response)
 	{

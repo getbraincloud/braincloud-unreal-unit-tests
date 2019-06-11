@@ -25,6 +25,65 @@ TEST_F(TestBCAuth, AuthenticateEmailPassword)
     Logout();
 }
 
+TEST_F(TestBCAuth, AuthBadSig)
+{
+    //our problem is that users who refresh their app secret via the portal, the client would fail to read the response, and would retry infinitely.
+    //This threatens our servers, because huge numbers of errors related to bad signature show up, and infinitely retry to get out of this error.
+    //Instead of updating the signature via the portal, we will mimic a bad signature from the client.
+    std::map<std::string, std::string> originalAppSecretMap;
+    originalAppSecretMap[m_appId] = m_secret;
+    originalAppSecretMap[m_childAppId] =  m_childSecret;
+    int numRepeatBadSigFailures = 0;
+
+    // mess up app 
+    std::map<std::string, std::string> updatedAppSecretMap;
+    updatedAppSecretMap[m_appId] = m_secret;
+    updatedAppSecretMap[m_childAppId] = m_childSecret;
+
+    std::map<std::string, std::string>::iterator it;
+    for (it=updatedAppSecretMap.begin(); it!=updatedAppSecretMap.end(); it++)
+    {
+        std::string key = it->first;
+        std::string value = it->second;
+        updatedAppSecretMap.at(key) = value + "123";
+    }       
+/////////////////////Phase 1
+    //first auth
+    TestResult tr1;
+    m_bc->getAuthenticationService()->authenticateUniversal(GetUser(UserA)->m_id, GetUser(UserA)->m_password, true, &tr1);
+    tr1.run(m_bc);
+
+    //check state
+    TestResult tr2;
+    m_bc->getPlayerStateService()->readUserState(&tr2);
+    tr2.run(m_bc);
+
+//////////////////////////Phase 2
+    TestResult tr3;
+    m_bc->initializeWithApps(m_serverUrl.c_str(), m_appId.c_str(), updatedAppSecretMap, m_version.c_str());
+    m_bc->getAuthenticationService()->authenticateUniversal(GetUser(UserA)->m_id, GetUser(UserA)->m_password, true, &tr3);
+    tr3.runExpectFail(m_bc, 403, 40301);
+
+    //check state
+    TestResult tr4;
+    m_bc->getPlayerStateService()->readUserState(&tr4);
+    tr4.runExpectFail(m_bc, 403, 40301);
+
+    //wait a while
+    TestResult::sleep(300);
+    
+    /////////////////////Phase 3
+    //TestResult tr5;
+    m_bc->initializeWithApps(m_serverUrl.c_str(), m_appId.c_str(), updatedAppSecretMap, m_version.c_str());
+    m_bc->getAuthenticationService()->authenticateUniversal(GetUser(UserA)->m_id, GetUser(UserA)->m_password, true, &tr1);
+    tr1.runExpectFail(m_bc, 403, 40301);
+
+    //check state
+    TestResult tr6;
+    m_bc->getPlayerStateService()->readUserState(&tr6);
+    tr6.runExpectFail(m_bc, 403, 40301);
+}
+
 TEST_F(TestBCAuth, AuthenticateUniversal)
 {
     TestResult tr;
@@ -91,122 +150,4 @@ TEST_F(TestBCAuth, ResetUniversalIdPasswordAdvanced)
     TestResult tr;
     m_bc->getAuthenticationService()->resetUniversalIdPasswordAdvanced(GetUser(UserA)->m_id, content, &tr);
     tr.run(m_bc);
-}
-
-TEST_F(TestBCAuth, BadSignature)
-{
-    //our problem is that users who refresh their app secret via the portal, the client would fail to read the response, and would retry infinitely.
-    //This threatens our servers, because huge numbers of errors related to bad signature show up, and infinitely retry to get out of this error.
-    //Instead of updating the signature via the portal, we will mimic a bad signature from the client.
-    std::map<std::string, std::string> originalAppSecretMap;
-    originalAppSecretMap.insert(m_appId, m_secret);
-    originalAppSecretMap.insert(m_childAppId, m_childSecret);
-    int numRepeatBadSigFailures = 0;
-
-    // mess up app 
-    std::map<std::string, std::string> updatedAppSecretMap;
-    std::map<std::string, std::string>::iterator it;
-
-    for ( it = updatedAppSecretMap.begin(); it != updatedAppSecretMap.end(); it++ )
-    {
-        std::string key = it->first;
-        std::string value = it->second;
-        updatedAppSecretMap.at(key) = value + "123";
-    }       
-/////////////////////Phase 1
-    //first auth
-    TestResult tr1;
-    m_bc->getAuthenticationService()->authenticateUniversal(GetUser(UserA)->m_id, GetUser(UserA)->m_password, true, &tr1);
-    if(tr1.run(m_bc))
-    {
-       //Check the packet coming in and compare it to the last recevied packet. if they're both -1, we may be in a repeating scenario.
-        if(mostRecentPacket == -1000000 && secondMostRecentPacket == -1000000)
-        {
-            mostRecentPacket = m_bc->getReceivedPacketId();
-        }
-        else
-        {
-            secondMostRecentPacket = mostRecentPacket;
-            mostRecentPacket = m_bc->getReceivedPacketId();
-        }
-
-        //Is there the sign of a repeat?
-        if(mostRecentPacket == -1 && secondMostRecentPacket == -1)
-        {
-            numRepeatBadSigFailures++;
-        }
-        //we shouldnt expect more than 2 times that most recent and second most recent are both bad sig errors for this test, else its repeating itself. 
-        EXPECT_FALSE(numRepeatBadSigFailures > 2);
-    }
-
-    //check state
-    TestResult tr2;
-    m_bc->getPlayerStateService()->readUserState(&tr2);
-    tr2.run(m_bc);
-
-//////////////////////////Phase 2
-    TestResult tr3;
-    m_bc->initializeWithApps(m_serverUrl.c_str(), m_appId.c_str(), updatedAppSecretMap, m_version.c_str());
-    m_bc->getAuthenticationService()->authenticateUniversal(GetUser(UserA)->m_id, GetUser(UserA)->m_password, true, &tr3);
-    if(tr3.run(m_bc))
-    {
-       //Check the packet coming in and compare it to the last recevied packet. if they're both -1, we may be in a repeating scenario.
-        if(mostRecentPacket == -1000000 && secondMostRecentPacket == -1000000)
-        {
-            mostRecentPacket = m_bc->getReceivedPacketId();
-        }
-        else
-        {
-            secondMostRecentPacket = mostRecentPacket;
-            mostRecentPacket = m_bc->getReceivedPacketId();
-        }
-
-        //Is there the sign of a repeat?
-        if(mostRecentPacket == -1 && secondMostRecentPacket == -1)
-        {
-            numRepeatBadSigFailures++;
-        }
-        //we shouldnt expect more than 2 times that most recent and second most recent are both bad sig errors for this test, else its repeating itself. 
-        EXPECT_FALSE(numRepeatBadSigFailures > 2);
-    }
-
-    //check state
-    TestResult tr4;
-    m_bc->getPlayerStateService()->readUserState(&tr4);
-    tr4.run(m_bc);
-
-    //wait a while
-    TestResult::sleep(300);
-    
-    /////////////////////Phase 3
-    //TestResult tr5;
-    m_bc->initializeWithApps(m_serverUrl.c_str(), m_appId.c_str(), updatedAppSecretMap, m_version.c_str());
-    m_bc->getAuthenticationService()->authenticateUniversal(GetUser(UserA)->m_id, GetUser(UserA)->m_password, true, &tr1);
-    if(tr1.run(m_bc))
-    {
-       //Check the packet coming in and compare it to the last recevied packet. if they're both -1, we may be in a repeating scenario.
-        if(mostRecentPacket == -1000000 && secondMostRecentPacket == -1000000)
-        {
-            mostRecentPacket = m_bc->getReceivedPacketId();
-        }
-        else
-        {
-            secondMostRecentPacket = mostRecentPacket;
-            mostRecentPacket = m_bc->getReceivedPacketId();
-        }
-
-        //Is there the sign of a repeat?
-        if(mostRecentPacket == -1 && secondMostRecentPacket == -1)
-        {
-            numRepeatBadSigFailures++;
-        }
-        //we shouldnt expect more than 2 times that most recent and second most recent are both bad sig errors for this test, else its repeating itself. 
-        EXPECT_FALSE(numRepeatBadSigFailures > 2);
-    }
-
-    //check state
-    TestResult tr6;
-    m_bc->getPlayerStateService()->readUserState(&tr6);
-    tr6.run(m_bc);
-
 }

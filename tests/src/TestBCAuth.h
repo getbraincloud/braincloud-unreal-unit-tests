@@ -13,9 +13,7 @@ protected:
     }
 
     void AuthEmailPassword();
-    
-    int mostRecentPacket = 1000000;
-    int secondMostRecentPacket = 1000000;
+
 };
 
 #endif

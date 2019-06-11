@@ -69,8 +69,6 @@ namespace BrainCloud
         // returns true if packet requires a retry
         bool handleResult( URLResponse const & );
 
-        long getReceivedPacketId();
-
     protected:
         friend class IBrainCloudComms;
 
