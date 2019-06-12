@@ -54,9 +54,7 @@ TEST_F(TestBCAuth, AuthBadSig)
     tr1.run(m_bc);
 
     //check state
-    TestResult tr2;
-    m_bc->getPlayerStateService()->readUserState(&tr2);
-    tr2.run(m_bc);
+    m_bc->getPlayerStateService()->readUserState(&tr1);
 
 //////////////////////////Phase 2
     TestResult tr3;
@@ -65,23 +63,19 @@ TEST_F(TestBCAuth, AuthBadSig)
     tr3.runExpectFail(m_bc, 403, 40301);
 
     //check state
-    TestResult tr4;
-    m_bc->getPlayerStateService()->readUserState(&tr4);
-    tr4.runExpectFail(m_bc, 403, 40301);
+    m_bc->getPlayerStateService()->readUserState(&tr3);
 
     //wait a while
     TestResult::sleep(300);
     
     /////////////////////Phase 3
-    //TestResult tr5;
-    m_bc->initializeWithApps(m_serverUrl.c_str(), m_appId.c_str(), updatedAppSecretMap, m_version.c_str());
-    m_bc->getAuthenticationService()->authenticateUniversal(GetUser(UserA)->m_id, GetUser(UserA)->m_password, true, &tr1);
-    tr1.runExpectFail(m_bc, 403, 40301);
+    TestResult tr5;
+    m_bc->initializeWithApps(m_serverUrl.c_str(), m_appId.c_str(), originalAppSecretMap, m_version.c_str());
+    m_bc->getAuthenticationService()->authenticateUniversal(GetUser(UserA)->m_id, GetUser(UserA)->m_password, true, &tr5);
+    tr5.run(m_bc);
 
     //check state
-    TestResult tr6;
-    m_bc->getPlayerStateService()->readUserState(&tr6);
-    tr6.runExpectFail(m_bc, 403, 40301);
+    m_bc->getPlayerStateService()->readUserState(&tr5);
 }
 
 TEST_F(TestBCAuth, AuthenticateUniversal)
