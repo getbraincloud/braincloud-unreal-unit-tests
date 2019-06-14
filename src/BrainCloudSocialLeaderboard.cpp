@@ -287,6 +287,58 @@ namespace BrainCloud
 		ServerCall * sc = new ServerCall(ServiceName::Leaderboard, ServiceOperation::GetPlayerScoresFromLeaderboards, message, in_callback);
 		m_client->getBrainCloudComms()->addToQueue(sc);
 	}
+	////////////////////////
+	void BrainCloudSocialLeaderboard::postScoreToGroupLeaderboard(const char * in_leaderboardId, const char * in_groupId, int32_t in_score, const std::string& in_jsonData, IServerCallback * in_callback)
+	{
+		Json::Value message;
+		message[OperationParam::SocialLeaderboardServiceLeaderboardId.getValue()] = in_leaderboardId;
+		message[OperationParam::GroupId.getValue()] = in_groupId;
+		message[OperationParam::SocialLeaderboardServiceScore.getValue()] = in_score;
+		message[OperationParam::SocialLeaderboardServiceData.getValue()] = JsonUtil::jsonStringToValue(in_jsonData);
+
+		ServerCall * sc = new ServerCall(ServiceName::Leaderboard, ServiceOperation::PostScoreToGroupLeaderboard, message, in_callback);
+		m_client->getBrainCloudComms()->addToQueue(sc);
+	}
+
+	void BrainCloudSocialLeaderboard::removeGroupScore(const char * in_leaderboardId, const char * in_groupId, int32_t in_versionId, IServerCallback * in_callback)
+	{
+		Json::Value message;
+		message[OperationParam::SocialLeaderboardServiceLeaderboardId.getValue()] = in_leaderboardId;
+		message[OperationParam::GroupId.getValue()]= in_groupId;
+		message[OperationParam::SocialLeaderboardServiceVersionId.getValue()] = in_versionId;
+
+		ServerCall * sc = new ServerCall(ServiceName::Leaderboard, ServiceOperation::RemoveGroupScore, message, in_callback);
+		m_client->getBrainCloudComms()->addToQueue(sc);
+	}
+
+	void BrainCloudSocialLeaderboard::getGroupLeaderboardView(const char * in_leaderboardId, const char * in_groupId, SortOrder in_sortOrder, int32_t in_beforeCount, int32_t in_afterCount, IServerCallback * in_callback)
+	{
+		Json::Value message;
+		message[OperationParam::SocialLeaderboardServiceLeaderboardId.getValue()] = in_leaderboardId;
+		message[OperationParam::GroupId.getValue()] = in_groupId;
+		std::string sortOrder = sortOrderToString(in_sortOrder);
+		message[OperationParam::SocialLeaderboardServiceSortOrder.getValue()] = sortOrder;
+		message[OperationParam::SocialLeaderboardServiceBeforeCount.getValue()] = in_beforeCount;
+		message[OperationParam::SocialLeaderboardServiceAfterCount.getValue()] = in_afterCount;
+
+		ServerCall * sc = new ServerCall(ServiceName::Leaderboard, ServiceOperation::GetGroupLeaderboardView, message, in_callback);
+		m_client->getBrainCloudComms()->addToQueue(sc);
+	}
+		
+	void BrainCloudSocialLeaderboard::getGroupLeaderboardViewByVersion(const char * in_leaderboardId, const char * in_groupId, int32_t in_versionId, SortOrder in_sortOrder, int32_t in_beforeCount, int32_t in_afterCount, IServerCallback * in_callback)
+	{
+		Json::Value message;
+		message[OperationParam::SocialLeaderboardServiceLeaderboardId.getValue()] = in_leaderboardId;
+		message[OperationParam::GroupId.getValue()] = in_groupId;
+		message[OperationParam::SocialLeaderboardServiceVersionId.getValue()] = in_versionId;
+		std::string sortOrder = sortOrderToString(in_sortOrder);
+		message[OperationParam::SocialLeaderboardServiceSortOrder.getValue()] = sortOrder;
+		message[OperationParam::SocialLeaderboardServiceBeforeCount.getValue()] = in_beforeCount;
+		message[OperationParam::SocialLeaderboardServiceAfterCount.getValue()] = in_afterCount;
+
+		ServerCall * sc = new ServerCall(ServiceName::Leaderboard, ServiceOperation::GetGroupLeaderboardView, message, in_callback);
+		m_client->getBrainCloudComms()->addToQueue(sc);
+	}
 
 	std::string BrainCloudSocialLeaderboard::leaderboardTypeToString(SocialLeaderboardType type)
 	{

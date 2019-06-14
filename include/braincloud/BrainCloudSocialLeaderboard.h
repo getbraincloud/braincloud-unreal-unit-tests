@@ -397,6 +397,64 @@ namespace BrainCloud
 		static std::string leaderboardRotationTypeToString(RotationType type);
 		static std::string sortOrderToString(SortOrder in_sortOrder);
 
+		/**
+		* Posts score to groups leaderboard - Note the user must be a member of the group
+		*
+		* Service Name - leaderboard
+		* Service Operation - POST_GROUP_SCORE
+		*
+		* @param in_leaderboardId A collection of leaderboardIds to retrieve scores from
+		* @param in_groupId the groups Id
+		* @param in_score the score you wish to post
+		* @param in_jsonData extra json Data
+		* @param in_callback The method to be invoked when the server response is received
+		*/
+		void postScoreToGroupLeaderboard(const char * in_leaderboardId, const char * in_groupId, int32_t in_score, const std::string& in_jsonData, IServerCallback * in_callback = NULL);
+
+		/**
+		* Removes score from group leaderboard
+		*
+		* Service Name - leaderboard
+		* Service Operation - REMOVE_GROUP_SCORE
+		*
+		* @param in_leaderboardId A collection of leaderboardIds to retrieve scores from
+		* @param in_groupId the groups Id
+		* @param in_versionId the score you wish to post
+		* @param in_callback The method to be invoked when the server response is received
+		*/
+		void removeGroupScore(const char * in_leaderboardId, const char * in_groupId, int32_t in_versionId, IServerCallback * in_callback = NULL);
+
+		/**
+		* Retrieve a view of the group leaderboardsurrounding the current group.
+		*
+		* Service Name - leaderboard
+		* Service Operation - GET_GROUP_LEADERBOARD_VIEW
+		*
+		* @param in_leaderboardId A collection of leaderboardIds to retrieve scores from
+		* @param in_groupId the groups Id
+		* @param in_sortOrder the sort order
+		* @param in_beforeCount count of players before current player to include
+		* @param in_afterCount count of players after current player to include
+		* @param in_callback The method to be invoked when the server response is received
+		*/
+		void getGroupLeaderboardView(const char * in_leaderboardId, const char * in_groupId, SortOrder in_sortOrder, int32_t in_beforeCount, int32_t in_afterCount, IServerCallback * in_callback = NULL);
+		
+		/**
+		* Retrieve a view of the group leaderboard surrounding the current group by the version
+		*
+		* Service Name - leaderboard
+		* Service Operation - GET_GROUP_LEADERBOARD_VIEW
+		*
+		* @param in_leaderboardId A collection of leaderboardIds to retrieve scores from
+		* @param in_groupId the groups Id
+		* @param in_versionId the version
+		* @param in_sortOrder the sort order
+		* @param in_beforeCount count of players before current player to include
+		* @param in_afterCount count of players after current player to include
+		* @param in_callback The method to be invoked when the server response is received
+		*/
+		void getGroupLeaderboardViewByVersion(const char * in_leaderboardId, const char * in_groupId, int32_t in_versionId, SortOrder in_sortOrder, int32_t in_beforeCount, int32_t in_afterCount, IServerCallback * in_callback = NULL);
+		
 	private:
 		BrainCloudClient * m_client;
 	};
