@@ -12,7 +12,7 @@ using namespace BrainCloud;
 #define SOCIAL_LB_ID "testSocialLeaderboard"
 #define DYNAMIC_LB_ID "testDynamicLeaderboard"
 #define REWARD_EVENT_ID "tournamentRewardId"
-#define GROUP_LB_ID "testGroupLeaderboard"
+#define GROUP_LB_ID "groupLeaderboardConfig"
 
 TEST_F(TestBCSocialLeaderboard, GetSocialLeaderboard)
 {
