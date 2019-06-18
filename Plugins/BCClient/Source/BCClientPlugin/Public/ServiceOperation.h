@@ -120,6 +120,9 @@ class BCCLIENTPLUGIN_API ServiceOperation
 	static const ServiceOperation RemovePlayerScore;
 	static const ServiceOperation GetPlayerScore;
 	static const ServiceOperation GetPlayerScoresFromLeaderboards;
+	static const ServiceOperation PostScoreToGroupLeaderboard;
+	static const ServiceOperation RemoveGroupScore;
+	static const ServiceOperation GetGroupLeaderboardView;
 
 	static const ServiceOperation InitThirdParty;
 	static const ServiceOperation PostThirdPartyLeaderboardScore;
