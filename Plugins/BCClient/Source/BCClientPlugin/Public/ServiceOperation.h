@@ -316,6 +316,8 @@ class BCCLIENTPLUGIN_API ServiceOperation
 	static const ServiceOperation UpdateGroupMember;
 	static const ServiceOperation UpdateGroupName;
 	static const ServiceOperation SetGroupOpen;
+	static const ServiceOperation UpdateGroupSummaryData;
+	static const ServiceOperation GetRandomGroupsMatching;
 
 	//mail
 	static const ServiceOperation SendBasicEmail;
