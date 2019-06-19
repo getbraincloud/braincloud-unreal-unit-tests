@@ -450,6 +450,7 @@ const OperationParam OperationParam::LobbyIdentifier = OperationParam("lobbyId")
 const OperationParam OperationParam::LobbyToTeamName = OperationParam("toTeamCode");
 const OperationParam OperationParam::LobbySignalData = OperationParam("signalData");
 const OperationParam OperationParam::LobbyConnectionId = OperationParam("cxId");
+const OperationParam OperationParam::PingData = OperationParam("pingData");
 
 bool OperationParam::operator==(const OperationParam &s) const
 {

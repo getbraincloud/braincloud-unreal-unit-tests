@@ -548,6 +548,9 @@ class BCCLIENTPLUGIN_API UBrainCloudWrapper : public UObject, public IServerCall
     virtual void serverCallback(ServiceName serviceName, ServiceOperation serviceOperation, FString const &jsonData);
     virtual void serverError(ServiceName serviceName, ServiceOperation serviceOperation, int32 statusCode, int32 reasonCode, const FString &message);
 
+    static FString buildErrorJson(int32 statusCode, int32 reasonCode, const FString &message);
+	static FString GetJsonString(TSharedRef<FJsonObject> jsonDataObject);
+
   protected:
     UBrainCloudWrapper(BrainCloudClient *client);
 

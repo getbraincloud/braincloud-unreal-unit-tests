@@ -14,6 +14,7 @@
 #include "ServerCall.h"
 #include "ServiceName.h"
 #include "ServiceOperation.h"
+#include "BrainCloudWrapper.h"
 #include "BrainCloudClient.h"
 #include "BCFileUploader.h"
 #include "ReasonCodes.h"
@@ -101,7 +102,7 @@ void BrainCloudRelayComms::disconnect()
 	{
 		TArray<uint8> empty;
 		send(empty, CL2RS_DISCONNECT);
-		m_relayResponse.Add(RelayMessage(ServiceName::Relay.getValue().ToLower(), "disconnect", buildRSRequestError("DisableRS Called"), TArray<uint8>()));
+		m_relayResponse.Add(RelayMessage(ServiceName::Relay.getValue().ToLower(), "disconnect", UBrainCloudWrapper::buildErrorJson(403, ReasonCodes::RS_CLIENT_ERROR, "DisableRS Called"), TArray<uint8>()));
 	}
 }
 
@@ -598,7 +599,7 @@ void BrainCloudRelayComms::webSocket_OnClose()
 	if (m_client->isLoggingEnabled())
 		UE_LOG(LogBrainCloudComms, Log, TEXT("Relay Connection closed"));
 
-	m_relayResponse.Add(RelayMessage(ServiceName::Relay.getValue().ToLower(), "error", buildRSRequestError("Could not connect at this time"), TArray<uint8>()));
+	m_relayResponse.Add(RelayMessage(ServiceName::Relay.getValue().ToLower(), "error", UBrainCloudWrapper::buildErrorJson(403, ReasonCodes::RS_CLIENT_ERROR,"Could not connect at this time"), TArray<uint8>()));
 }
 
 void BrainCloudRelayComms::websocket_OnOpen()
@@ -621,7 +622,7 @@ void BrainCloudRelayComms::webSocket_OnError(const FString &in_message)
 	if (m_client->isLoggingEnabled())
 		UE_LOG(LogBrainCloudComms, Log, TEXT("Relay Error: %s"), *in_message);
 
-	m_relayResponse.Add(RelayMessage(ServiceName::Relay.getValue().ToLower(), "disconnect", buildRSRequestError(in_message), TArray<uint8>()));
+	m_relayResponse.Add(RelayMessage(ServiceName::Relay.getValue().ToLower(), "disconnect", UBrainCloudWrapper::buildErrorJson(403, ReasonCodes::RS_CLIENT_ERROR, in_message), TArray<uint8>()));
 }
 
 void BrainCloudRelayComms::onRecv(TArray<uint8> in_data)
@@ -663,11 +664,11 @@ void BrainCloudRelayComms::onRecv(TArray<uint8> in_data)
 
 				bool res = FJsonSerializer::Deserialize(reader, jsonPacket);
 
-				if (res && jsonPacket->HasField(TEXT("netId")) && jsonPacket->HasField(TEXT("profileId")))
+				if (res && jsonPacket->HasField("netId") && jsonPacket->HasField("profileId"))
 				{
-					if (m_client->getProfileId() == jsonPacket->GetStringField(TEXT("profileId")))
+					if (m_client->getProfileId() == jsonPacket->GetStringField("profileId"))
 					{
-						m_netId = (short)jsonPacket->GetNumberField(TEXT("netId"));
+						m_netId = (short)jsonPacket->GetNumberField("netId");
 						m_bIsConnected = true;
 						m_lastNowMS = FPlatformTime::Seconds();
 						
@@ -680,20 +681,4 @@ void BrainCloudRelayComms::onRecv(TArray<uint8> in_data)
 			m_relayResponse.Add(RelayMessage(ServiceName::Relay.getValue().ToLower(), "onrecv", "", data));
 		}
 	}
-}
-
-FString BrainCloudRelayComms::buildRSRequestError(FString in_statusMessage)
-{
-	TSharedRef<FJsonObject> json = MakeShareable(new FJsonObject());
-
-	json->SetNumberField("status", 403);
-	json->SetNumberField("reason_code", ReasonCodes::RS_CLIENT_ERROR);
-	json->SetStringField("status_message", in_statusMessage);
-	json->SetStringField("severity", "ERROR");
-
-	FString response;
-	TSharedRef<TJsonWriter<>> writer = TJsonWriterFactory<>::Create(&response);
-	FJsonSerializer::Serialize(json, writer);
-
-	return response;
 }

@@ -391,14 +391,18 @@ class BCCLIENTPLUGIN_API ServiceOperation
 	static const ServiceOperation SendMessageSimple;
 	// lobby
 	static const ServiceOperation FindLobby;
+	static const ServiceOperation FindLobbyWithPingData;
 	static const ServiceOperation CreateLobby;
+	static const ServiceOperation CreateLobbyWithPingData;
 	static const ServiceOperation FindOrCreateLobby;
+	static const ServiceOperation FindOrCreateLobbyWithPingData;
 	static const ServiceOperation GetLobbyData;
 	static const ServiceOperation UpdateReady;
 	static const ServiceOperation UpdateSettings;
 	static const ServiceOperation SwitchTeam;
 	static const ServiceOperation SendSignal;
 	static const ServiceOperation JoinLobby;
+	static const ServiceOperation JoinLobbyWithPingData;
 	static const ServiceOperation LeaveLobby;
 	static const ServiceOperation RemoveMember;
 	static const ServiceOperation CancelFindRequest;

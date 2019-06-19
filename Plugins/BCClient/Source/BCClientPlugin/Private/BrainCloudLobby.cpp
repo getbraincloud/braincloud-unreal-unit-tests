@@ -3,11 +3,19 @@
 #include "BCClientPluginPrivatePCH.h"
 #include "BrainCloudLobby.h"
 
+#include "BrainCloudWrapper.h"
 #include "BrainCloudClient.h"
+#include "ReasonCodes.h"
 #include "ServerCall.h"
 #include "JsonUtil.h"
 
-BrainCloudLobby::BrainCloudLobby(BrainCloudClient *client) : _client(client){};
+BrainCloudLobby::BrainCloudLobby(BrainCloudClient *client)
+ : _client(client)
+ , _regionsForLobbiesCallback(nullptr)
+ , _pingRegionsCallback(nullptr)
+ , _regionPingData(nullptr)
+ , _lobbyTypeRegions(nullptr)
+ {}
 
 void BrainCloudLobby::findLobby(const FString &in_roomType, int32 in_rating, int32 in_maxSteps,
                                 const FString &in_algoJson, const FString &in_filterJson, int32 in_timeoutSecs,
@@ -47,9 +55,7 @@ void BrainCloudLobby::findLobbyWithPingData(const FString &in_roomType, int32 in
     message->SetStringField(OperationParam::LobbyTeamCode.getValue(), in_teamCode);
     message->SetArrayField(OperationParam::LobbyOtherUserCxIds.getValue(), JsonUtil::arrayToJsonArray(in_otherUserCxIds));
 
-    // TODO : append ping data and send, or return right away the failure!
-    ServerCall *sc = new ServerCall(ServiceName::Lobby, ServiceOperation::FindLobby, message, in_callback);
-    _client->sendRequest(sc);
+    attachPingDataAndSend(message, ServiceOperation::FindLobbyWithPingData, in_callback);
 }
 
 void BrainCloudLobby::createLobby(const FString &in_roomType, int32 in_rating, int32 in_maxSteps,
@@ -86,9 +92,7 @@ void BrainCloudLobby::createLobbyWithPingData(const FString &in_roomType, int32 
     message->SetObjectField(OperationParam::LobbySettings.getValue(), JsonUtil::jsonStringToValue(in_configJson));
     message->SetArrayField(OperationParam::LobbyOtherUserCxIds.getValue(), JsonUtil::arrayToJsonArray(in_otherUserCxIds));
 
-    // TODO : append ping data and send, or return right away the failure!
-    ServerCall *sc = new ServerCall(ServiceName::Lobby, ServiceOperation::CreateLobby, message, in_callback);
-    _client->sendRequest(sc);
+    attachPingDataAndSend(message, ServiceOperation::CreateLobbyWithPingData, in_callback);
 }
 
 void BrainCloudLobby::findOrCreateLobby(const FString &in_roomType, int32 in_rating, int32 in_maxSteps,
@@ -131,9 +135,7 @@ void BrainCloudLobby::findOrCreateLobbyWithPingData(const FString &in_roomType, 
     message->SetObjectField(OperationParam::LobbySettings.getValue(), JsonUtil::jsonStringToValue(in_configJson));
     message->SetArrayField(OperationParam::LobbyOtherUserCxIds.getValue(), JsonUtil::arrayToJsonArray(in_otherUserCxIds));
 
-// TODO : append ping data and send, or return right away the failure!
-    ServerCall *sc = new ServerCall(ServiceName::Lobby, ServiceOperation::FindOrCreateLobby, message, in_callback);
-    _client->sendRequest(sc);
+    attachPingDataAndSend(message, ServiceOperation::FindOrCreateLobbyWithPingData, in_callback);
 }
 
 void BrainCloudLobby::getLobbyData(const FString &in_lobbyID, IServerCallback *in_callback)
@@ -208,9 +210,7 @@ void BrainCloudLobby::joinLobbyWithPingData(const FString &in_lobbyID, bool in_i
     message->SetStringField(OperationParam::LobbyTeamCode.getValue(), in_teamCode);
     message->SetArrayField(OperationParam::LobbyOtherUserCxIds.getValue(), JsonUtil::arrayToJsonArray(in_otherUserCxIds));
 
-// TODO : append ping data and send, or return right away the failure!
-    ServerCall *sc = new ServerCall(ServiceName::Lobby, ServiceOperation::JoinLobby, message, in_callback);
-    _client->sendRequest(sc);
+    attachPingDataAndSend(message, ServiceOperation::JoinLobbyWithPingData, in_callback);
 }
 
 void BrainCloudLobby::leaveLobby(const FString &in_lobbyID, IServerCallback *in_callback)
@@ -244,15 +244,90 @@ void BrainCloudLobby::cancelFindRequest(const FString& in_lobbyType, IServerCall
 
 void BrainCloudLobby::getRegionsForLobbies(const TArray<FString> &in_roomTypes, IServerCallback *in_callback)
 {
+    _regionsForLobbiesCallback = in_callback;
     TSharedRef<FJsonObject> message = MakeShareable(new FJsonObject());
     message->SetArrayField(OperationParam::LobbyTypes.getValue(), JsonUtil::arrayToJsonArray(in_roomTypes));
 
-    ServerCall* sc = new ServerCall(ServiceName::Lobby, ServiceOperation::GetRegionsForLobbies, message, in_callback);
+    // pass in our own handler of this callback, 
+    ServerCall* sc = new ServerCall(ServiceName::Lobby, ServiceOperation::GetRegionsForLobbies, message, this);
     _client->sendRequest(sc);
-
 }
 
 void BrainCloudLobby::pingRegions(IServerCallback* in_callback)
 {
-    
+    _pingRegionsCallback = in_callback;
+    /*
+    if (false)
+    {
+        // iterate over pingable hosts, doing appropriate ping tests for each one
+    }
+    else 
+    */
+    {
+        // call the server error right away!
+        if (in_callback != nullptr)
+        {
+            FString messageJson = UBrainCloudWrapper::buildErrorJson(400, ReasonCodes::MISSING_REQUIRED_PARAMETER, 
+                "No Regions to Ping. Please call GetRegionsForLobbies and await the response before calling PingRegions.");
+            in_callback->serverError(ServiceName::Lobby, ServiceOperation::GetRegionsForLobbies, 400, ReasonCodes::MISSING_REQUIRED_PARAMETER, messageJson);
+        }
+    }
+}
+
+void BrainCloudLobby::serverCallback(ServiceName serviceName, ServiceOperation serviceOperation, FString const &jsonData)
+{
+    // get regions for lobbies complete success? 
+    if (serviceName == ServiceName::Lobby && serviceOperation == ServiceOperation::GetRegionsForLobbies)
+    {
+        TSharedRef<TJsonReader<TCHAR>> reader = TJsonReaderFactory<TCHAR>::Create(jsonData);
+        TSharedPtr<FJsonObject> jsonPacket = MakeShareable(new FJsonObject());
+        bool res = FJsonSerializer::Deserialize(reader, jsonPacket);
+
+        if (res)
+        {
+            TSharedPtr<FJsonObject> data = jsonPacket->GetObjectField("data");
+            _regionPingData = data->GetObjectField("regionPingData");
+            _lobbyTypeRegions = data->GetObjectField("lobbyTypeRegions");
+        }
+
+        if (_regionsForLobbiesCallback != nullptr)
+        {
+            _regionsForLobbiesCallback->serverCallback(serviceName, serviceOperation, jsonData);
+        }
+    }
+}
+
+void BrainCloudLobby::serverError(ServiceName serviceName, ServiceOperation serviceOperation,
+                                     int32 statusCode, int32 reasonCode, const FString &message)
+{
+    if (serviceName == ServiceName::Lobby && serviceOperation == ServiceOperation::GetRegionsForLobbies)
+    {
+        if (_regionsForLobbiesCallback != nullptr)
+        {
+            _regionsForLobbiesCallback->serverError(serviceName, serviceOperation, statusCode, reasonCode, message);
+        }
+    }
+}
+
+void BrainCloudLobby::attachPingDataAndSend(TSharedRef<FJsonObject> message, ServiceOperation serviceOperation, IServerCallback *in_callback)
+{
+    bool hasPingData = false;//PingData.Count > 0;
+    if (hasPingData)
+    {
+        // TODO ping data collected from response of pingRegions
+        //message->SetObjectField(OperationParam::PingData.getValue(), JsonUtil::jsonStringToValue());
+
+         ServerCall* sc = new ServerCall(ServiceName::Lobby, serviceOperation, message, in_callback);
+        _client->sendRequest(sc);
+    }
+    else 
+    {
+        // call the server error right away!
+        if (in_callback != nullptr)
+        {
+            FString messageJson = UBrainCloudWrapper::buildErrorJson(400, ReasonCodes::MISSING_REQUIRED_PARAMETER, 
+                "Processing exception (message): Required message parameter 'pingData' is missing.  Please ensure PingData exists by first calling GetRegionsForLobbies and PingRegions, and waiting for response before proceeding.");
+            in_callback->serverError(ServiceName::Lobby, serviceOperation, 400, ReasonCodes::MISSING_REQUIRED_PARAMETER, messageJson);
+        }
+    }
 }

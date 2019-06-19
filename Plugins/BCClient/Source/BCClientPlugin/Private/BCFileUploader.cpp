@@ -2,6 +2,7 @@
 
 #include "BCClientPluginPrivatePCH.h"
 #include "BCFileUploader.h"
+#include "BrainCloudWrapper.h"
 
 #include "ReasonCodes.h"
 #include "HttpCodes.h"
@@ -161,21 +162,7 @@ void BCFileUploader::ReportError(int32 statusCode, int32 reasonCode, FString &st
 {
     _statusCode = statusCode;
     _reasonCode = reasonCode;
-    _response = CreateErrorString(statusCode, reasonCode, statusMessage);
+    _response = UBrainCloudWrapper::buildErrorJson(statusCode, reasonCode, statusMessage);
     _status = UPLOAD_STATUS_COMPLETE_FAILED;
 }
 
-FString BCFileUploader::CreateErrorString(int32 statusCode, int32 reasonCode, FString &statusMessage)
-{
-    TSharedRef<FJsonObject> jsonObj = MakeShareable(new FJsonObject());
-
-    jsonObj->SetNumberField(TEXT("status"), statusCode);
-    jsonObj->SetNumberField(TEXT("reason_code"), reasonCode);
-    jsonObj->SetStringField(TEXT("status_message"), statusMessage);
-    jsonObj->SetStringField(TEXT("severity"), TEXT("ERROR"));
-
-    FString response;
-    TSharedRef<TJsonWriter<>> writer = TJsonWriterFactory<>::Create(&response);
-    FJsonSerializer::Serialize(jsonObj, writer);
-    return response;
-}

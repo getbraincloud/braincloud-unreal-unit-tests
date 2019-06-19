@@ -91,7 +91,6 @@ private:
 	void connectWebSocket(FString in_host, int in_port, bool in_sslEnabled);
 	void disconnectImpl();
 	void onRecv(TArray<uint8> data);
-	FString buildRSRequestError(FString in_statusMessage);
 	void setupWebSocket(const FString &in_url);
 	void sendPing();
 	TArray<uint8> appendHeaderData(uint8 in_controlByte);

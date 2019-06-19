@@ -2,10 +2,11 @@
 
 #pragma once
 
+#include "IServerCallback.h"
 class BrainCloudClient;
-class IServerCallback;
+class ServiceOperation;
 
-class BCCLIENTPLUGIN_API BrainCloudLobby
+class BCCLIENTPLUGIN_API BrainCloudLobby : public IServerCallback
 {
   public:
     BrainCloudLobby(BrainCloudClient *client);
@@ -286,7 +287,17 @@ class BCCLIENTPLUGIN_API BrainCloudLobby
 	* @param in_callback Method to be invoked when the server response is received.
     */
     void pingRegions( IServerCallback *in_callback);
+    
+    virtual void serverCallback(ServiceName serviceName, ServiceOperation serviceOperation, FString const &jsonData);
+    virtual void serverError(ServiceName serviceName, ServiceOperation serviceOperation, int32 statusCode, int32 reasonCode, const FString &message);
 
   private:
+    void attachPingDataAndSend(TSharedRef<FJsonObject> message, ServiceOperation serviceOperation, IServerCallback *in_callback);
+
     BrainCloudClient *_client = nullptr;
+    IServerCallback *_regionsForLobbiesCallback;
+    IServerCallback *_pingRegionsCallback;
+
+    TSharedPtr<FJsonObject> _regionPingData;
+    TSharedPtr<FJsonObject> _lobbyTypeRegions;
 };
