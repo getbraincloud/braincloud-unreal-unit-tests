@@ -428,6 +428,7 @@ class BCCLIENTPLUGIN_API OperationParam
 	static const OperationParam SentMessageType;
 
 	static const OperationParam LobbyRoomType;
+	static const OperationParam LobbyTypes;
 	static const OperationParam LobbyRating;
 	static const OperationParam LobbyAlgorithm;
 	static const OperationParam LobbyMaxSteps;

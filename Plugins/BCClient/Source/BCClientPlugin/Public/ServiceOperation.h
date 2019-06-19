@@ -402,6 +402,7 @@ class BCCLIENTPLUGIN_API ServiceOperation
 	static const ServiceOperation LeaveLobby;
 	static const ServiceOperation RemoveMember;
 	static const ServiceOperation CancelFindRequest;
+	static const ServiceOperation GetRegionsForLobbies;
 
 	FString getValue() const { return _value; }
 

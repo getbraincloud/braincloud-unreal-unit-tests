@@ -432,6 +432,7 @@ const OperationParam OperationParam::SentMessageType = OperationParam("sent");
 
 // lobby
 const OperationParam OperationParam::LobbyRoomType = OperationParam("lobbyType");
+const OperationParam OperationParam::LobbyTypes = OperationParam("lobbyTypes");
 const OperationParam OperationParam::LobbyRating = OperationParam("rating");
 const OperationParam OperationParam::LobbyAlgorithm = OperationParam("algo");
 const OperationParam OperationParam::LobbyMaxSteps = OperationParam("maxSteps");
