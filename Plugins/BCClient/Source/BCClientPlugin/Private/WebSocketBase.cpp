@@ -496,27 +496,39 @@ void UWebSocketBase::ProcessWriteable()
 #elif PLATFORM_HTML5
 #else
 	// write data
+	int location = LWS_PRE;
+	int sizeOfData  = 0;
 	if (mSendQueueData.Num() > 0)
 	{
-		uint8 *data = mSendQueueData[0].GetData();
-		int sizeOfData = mSendQueueData[0].Num();
+		unsigned char *buf = (unsigned char*)FMemory::Malloc(LWS_PRE + MAX_ECHO_PAYLOAD);
+		while (mSendQueueData.Num() > 0)
+		{
+			uint8 *data = mSendQueueData[0].GetData();
+			sizeOfData = mSendQueueData[0].Num();
 
-		unsigned char *buf = (unsigned char*)FMemory::Malloc(LWS_PRE + sizeOfData);
-		FMemory::Memcpy(&buf[LWS_PRE], data, sizeOfData);
-		lws_write(mlws, &buf[LWS_PRE], sizeOfData, LWS_WRITE_BINARY);
-
-		mSendQueueData.RemoveAt(0);	
+			FMemory::Memcpy(&buf[location], data, sizeOfData);
+			location += sizeOfData;
+			mSendQueueData.RemoveAt(0);	
+		}
+		lws_write(mlws, &buf[LWS_PRE], location - LWS_PRE, LWS_WRITE_BINARY);
 	}
 		
+	location = LWS_PRE;
 	// write text
 	if (mSendQueue.Num() > 0)
 	{
-		std::string strData = TCHAR_TO_ANSI(*mSendQueue[0]);
+		unsigned char *buf = (unsigned char*)FMemory::Malloc(LWS_PRE + MAX_ECHO_PAYLOAD);
+		while (mSendQueue.Num() > 0)
+		{
+			std::string strData = TCHAR_TO_ANSI(*mSendQueue[0]);
+			sizeOfData = strData.size();
 
-		unsigned char *buf = (unsigned char*)FMemory::Malloc(LWS_PRE + strData.size());
-		FMemory::Memcpy(&buf[LWS_PRE], strData.c_str(), strData.size());
-		lws_write(mlws, &buf[LWS_PRE], strData.size(), LWS_WRITE_TEXT);
-		mSendQueue.RemoveAt(0);
+			FMemory::Memcpy(&buf[location], strData.c_str(), sizeOfData);
+			location += sizeOfData;
+			mSendQueue.RemoveAt(0);
+		}
+		
+		lws_write(mlws, &buf[LWS_PRE], location - LWS_PRE, LWS_WRITE_TEXT);
 	}
 #endif
 }

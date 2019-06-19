@@ -124,4 +124,21 @@ private:
 	TMap<FString, FString> m_connectOptions;
 
 	struct lws_context *m_lwsContext;
+	TArray<RelayMessage> m_relayResponse;
+};
+
+struct RelayMessage
+{
+	RelayMessage(){}
+	RelayMessage(const FString &in_service, const FString &in_operation, const FString &in_jsonMessage, TArray<uint8> in_data)
+	{
+		Service = in_service;
+		Operation = in_operation;
+		JsonMessage = in_jsonMessage;
+		Data = in_data;
+	}
+	FString Service;
+	FString Operation;
+	FString JsonMessage;
+	TArray<uint8> Data;
 };
