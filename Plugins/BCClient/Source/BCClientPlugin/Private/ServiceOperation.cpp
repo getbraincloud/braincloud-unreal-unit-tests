@@ -404,6 +404,7 @@ const ServiceOperation ServiceOperation::JoinLobby = ServiceOperation("JOIN_LOBB
 const ServiceOperation ServiceOperation::LeaveLobby = ServiceOperation("LEAVE_LOBBY");
 const ServiceOperation ServiceOperation::RemoveMember = ServiceOperation("REMOVE_MEMBER");
 const ServiceOperation ServiceOperation::CancelFindRequest = ServiceOperation("CANCEL_FIND_REQUEST");
+const ServiceOperation ServiceOperation::GetRegionsForLobbies = ServiceOperation("GET_REGIONS_FOR_LOBBIES");
 
 bool ServiceOperation::operator==(const ServiceOperation &s) const
 {
