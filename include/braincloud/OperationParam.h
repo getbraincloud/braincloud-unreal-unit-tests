@@ -352,6 +352,7 @@ namespace BrainCloud {
 		static const OperationParam GroupPageOffset;
 		static const OperationParam GroupAutoJoinStrategy;
 		static const OperationParam GroupWhere;
+		static const OperationParam GroupSummaryData;
 
 		//mail
 		static const OperationParam OldEmailAddress;

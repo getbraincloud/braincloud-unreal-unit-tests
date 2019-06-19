@@ -344,6 +344,7 @@ namespace BrainCloud
 	const OperationParam OperationParam::GroupPageOffset = OperationParam("pageOffset");
 	const OperationParam OperationParam::GroupAutoJoinStrategy = OperationParam("autoJoinStrategy");
 	const OperationParam OperationParam::GroupWhere = OperationParam("where");
+	const OperationParam OperationParam::GroupSummaryData = OperationParam("summaryData");
 
 
 	//change mail

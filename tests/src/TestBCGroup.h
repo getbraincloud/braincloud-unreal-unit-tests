@@ -20,6 +20,7 @@ protected:
     void DeleteGroupAsUserA();
     void Authenticate(Users user);
     void CreateGroup(bool isOpen = false);
+    void CreateGroupWithSummaryData(bool isOpen = false);
     std::string CreateGroupEntity();
     void DeleteGroup();
     std::string CreateContext(int numItemsPerPage, int startPage, std::string searchKey, std::string searchValue);

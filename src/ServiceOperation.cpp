@@ -314,6 +314,8 @@ namespace BrainCloud
 	const ServiceOperation ServiceOperation::UpdateGroupMember = ServiceOperation("UPDATE_GROUP_MEMBER");
 	const ServiceOperation ServiceOperation::UpdateGroupName = ServiceOperation("UPDATE_GROUP_NAME");
 	const ServiceOperation ServiceOperation::SetGroupOpen = ServiceOperation("SET_GROUP_OPEN");
+	const ServiceOperation ServiceOperation::GetRandomGroupsMatching = ServiceOperation("GET_RANDOM_GROUPS_MATCHING");
+	const ServiceOperation ServiceOperation::UpdateGroupSummaryData = ServiceOperation("UPDATE_GROUP_SUMMARY_DATA");
 
 	//tournament
 	const ServiceOperation ServiceOperation::GetTournamentStatus = ServiceOperation("GET_TOURNAMENT_STATUS");
