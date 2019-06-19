@@ -14,6 +14,7 @@
 #include "ServerCall.h"
 #include "ServiceName.h"
 #include "ServiceOperation.h"
+#include "BrainCloudWrapper.h"
 #include "BrainCloudClient.h"
 #include "BCFileUploader.h"
 #include "ReasonCodes.h"
@@ -99,7 +100,7 @@ void BrainCloudRTTComms::enableRTT(BCRTTConnectionType in_connectionType, UBCRTT
 void BrainCloudRTTComms::disableRTT()
 {
 	if (isRTTEnabled())
-		processRegisteredListeners(ServiceName::RTTRegistration.getValue().ToLower(), "disconnect", buildRTTRequestError("DisableRTT Called"));
+		processRegisteredListeners(ServiceName::RTTRegistration.getValue().ToLower(), "disconnect", UBrainCloudWrapper::buildErrorJson(403, ReasonCodes::RTT_CLIENT_ERROR, "DisableRTT Called"));
 }
 
 bool BrainCloudRTTComms::isRTTEnabled()
@@ -468,7 +469,7 @@ void BrainCloudRTTComms::webSocket_OnClose()
 	if (m_client->isLoggingEnabled())
 		UE_LOG(LogBrainCloudComms, Log, TEXT("Connection closed"));
 
-	processRegisteredListeners(ServiceName::RTTRegistration.getValue().ToLower(), "error", buildRTTRequestError("Could not connect at this time"));
+	processRegisteredListeners(ServiceName::RTTRegistration.getValue().ToLower(), "error", UBrainCloudWrapper::buildErrorJson(403, ReasonCodes::RS_CLIENT_ERROR,"Could not connect at this time"));
 }
 
 void BrainCloudRTTComms::websocket_OnOpen()
@@ -488,7 +489,7 @@ void BrainCloudRTTComms::webSocket_OnError(const FString &in_message)
 	if (m_client->isLoggingEnabled())
 		UE_LOG(LogBrainCloudComms, Log, TEXT("Error: %s"), *in_message);
 
-	processRegisteredListeners(ServiceName::RTTRegistration.getValue().ToLower(), "disconnect", buildRTTRequestError(in_message));
+	processRegisteredListeners(ServiceName::RTTRegistration.getValue().ToLower(), "disconnect", UBrainCloudWrapper::buildErrorJson(403, ReasonCodes::RS_CLIENT_ERROR, in_message));
 }
 
 void BrainCloudRTTComms::onRecv(const FString &in_message)
@@ -533,22 +534,6 @@ void BrainCloudRTTComms::onRecv(const FString &in_message)
 	}
 
 	processRegisteredListeners(service.ToLower(), operation.ToLower(), in_message);
-}
-
-FString BrainCloudRTTComms::buildRTTRequestError(FString in_statusMessage)
-{
-	TSharedRef<FJsonObject> json = MakeShareable(new FJsonObject());
-	
-    json->SetNumberField("status", 403);
-	json->SetNumberField("reason_code", ReasonCodes::RTT_CLIENT_ERROR);
-	json->SetStringField("status_message", in_statusMessage);
-	json->SetStringField("severity", "ERROR");
-
-	FString response;
-    TSharedRef<TJsonWriter<>> writer = TJsonWriterFactory<>::Create(&response);
-    FJsonSerializer::Serialize(json, writer);
-
-	return response;
 }
 
 void BrainCloudRTTComms::setEndpointFromType(TArray<TSharedPtr<FJsonValue>> in_endpoints, FString in_socketType)

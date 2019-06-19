@@ -108,7 +108,6 @@ class BrainCloudComms
 	int16 GetMaxRetryAttempts();
 
 	FString GetDataString(PacketRef packet, uint64 packetId);
-	FString GetJsonString(TSharedRef<FJsonObject> jsonDataObject);
 	void ReportError(PacketRef requestPacket, uint32 statusCode, uint32 reasonCode, const FString statusMessage);
 	void ReportResults(PacketRef requestPacket, TSharedRef<FJsonObject> jsonPacket);
 

@@ -172,8 +172,8 @@ void FOnlineMessageBrainCloud::EnumerateMessagesSuccess(const FString& jsonData)
         }
 
         //header creation
-        FString fromId = messageObj->GetStringField(TEXT("fromPlayerId"));
-        FString messageId = FString::FromInt((int64)messageObj->GetNumberField(TEXT("eventId")));
+        FString fromId = messageObj->GetStringField("fromPlayerId");
+        FString messageId = FString::FromInt((int64)messageObj->GetNumberField("eventId"));
 
 
         #if ENGINE_MINOR_VERSION >= 18
@@ -188,15 +188,15 @@ void FOnlineMessageBrainCloud::EnumerateMessagesSuccess(const FString& jsonData)
         #endif
 
 
-        header->TimeStamp = FDateTime::FromUnixTimestamp((int64)messageObj->GetNumberField(TEXT("createdAt")) / 1000).ToString();
-        header->Type = messageObj->GetStringField(TEXT("eventType"));
+        header->TimeStamp = FDateTime::FromUnixTimestamp((int64)messageObj->GetNumberField("createdAt") / 1000).ToString();
+        header->Type = messageObj->GetStringField("eventType");
 
         _cachedMessageHeaders.Add(header);
 
         //message
         TSharedPtr<FOnlineMessage> message = MakeShareable(new FOnlineMessage(new FUniqueNetIdString(messageId)));
 
-        FString payloadStr = messageObj->GetObjectField(TEXT("eventData"))->GetStringField(TEXT("payload"));
+        FString payloadStr = messageObj->GetObjectField("eventData")->GetStringField("payload");
         TArray<uint8> bytes;
         FBase64::Decode(payloadStr, bytes);
         message->Payload.FromBytes(bytes);

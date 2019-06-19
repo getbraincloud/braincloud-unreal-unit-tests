@@ -40,7 +40,6 @@ public:
 private:
   TArray<uint8> CreateContent(FString &boundary, FString &sessionId, FString &fileUploadId, FString &fileName, TArray<uint8> &data);
   void ReportError(int32 statusCode, int32 reasonCode, FString &statusMessage);
-  FString CreateErrorString(int32 statusCode, int32 reasonCode, FString &statusMessage);
 
   bool _isLoggingEnabled = false;
 

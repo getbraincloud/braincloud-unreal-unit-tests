@@ -446,6 +446,7 @@ class BCCLIENTPLUGIN_API OperationParam
 	static const OperationParam LobbyToTeamName;
 	static const OperationParam LobbySignalData;
 	static const OperationParam LobbyConnectionId;
+	static const OperationParam PingData;
 
 	FString getValue() const { return _value; }
 
