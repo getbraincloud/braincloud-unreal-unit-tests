@@ -365,6 +365,8 @@ class BCCLIENTPLUGIN_API OperationParam
 	static const OperationParam GroupPageOffset;
 	static const OperationParam GroupAutoJoinStrategy;
 	static const OperationParam GroupWhere;
+	static const OperationParam GroupSummaryData;
+	static const OperationParam GroupMaxReturn;
 
 	//mail
 	static const OperationParam ProfileId;

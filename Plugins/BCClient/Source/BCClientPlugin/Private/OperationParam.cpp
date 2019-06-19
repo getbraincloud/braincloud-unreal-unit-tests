@@ -366,6 +366,8 @@ const OperationParam OperationParam::GroupContext = OperationParam("context");
 const OperationParam OperationParam::GroupPageOffset = OperationParam("pageOffset");
 const OperationParam OperationParam::GroupAutoJoinStrategy = OperationParam("autoJoinStrategy");
 const OperationParam OperationParam::GroupWhere = OperationParam("where");
+const OperationParam OperationParam::GroupSummaryData = OperationParam("summaryData");
+const OperationParam OperationParam::GroupMaxReturn = OperationParam("maxReturn");
 
 const OperationParam OperationParam::ProfileId = OperationParam("profileId");
 const OperationParam OperationParam::EmailAddress = OperationParam("emailAddress");

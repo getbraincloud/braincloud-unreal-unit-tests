@@ -64,6 +64,22 @@ UBCGroupProxy *UBCGroupProxy::CreateGroup(
     return Proxy;
 }
 
+UBCGroupProxy *UBCGroupProxy::CreateGroupWithSummaryData(
+    UBrainCloudWrapper *brainCloudWrapper,
+    const FString &name,
+    const FString &type,
+    bool isOpenGroup,
+    UBrainCloudGroupACL *acl,
+    const FString &jsonData,
+    const FString &jsonOwnerAttributes,
+    const FString &jsonDefaultMemberAttributes,
+    const FString &jsonSummaryData)
+{
+    UBCGroupProxy *Proxy = NewObject<UBCGroupProxy>();
+    UBCWrapperProxy::GetBrainCloudInstance(brainCloudWrapper)->getGroupService()->createGroup(name, type, isOpenGroup, acl, jsonData, jsonOwnerAttributes, jsonDefaultMemberAttributes, jsonSummaryData, Proxy);
+    return Proxy;
+}
+
 UBCGroupProxy *UBCGroupProxy::CreateGroupEntity(
     UBrainCloudWrapper *brainCloudWrapper,
     const FString &groupId,
@@ -249,5 +265,19 @@ UBCGroupProxy *UBCGroupProxy::SetGroupOpen(UBrainCloudWrapper *brainCloudWrapper
 {
     UBCGroupProxy *Proxy = NewObject<UBCGroupProxy>();
     UBCWrapperProxy::GetBrainCloudInstance(brainCloudWrapper)->getGroupService()->setGroupOpen(groupId, isOpenGroup, Proxy);
+    return Proxy;
+}
+
+UBCGroupProxy *UBCGroupProxy::UpdateGroupSummaryData(UBrainCloudWrapper *brainCloudWrapper, const FString &groupId, int32 version,  const FString &jsonSummaryData)
+{
+    UBCGroupProxy *Proxy = NewObject<UBCGroupProxy>();
+    UBCWrapperProxy::GetBrainCloudInstance(brainCloudWrapper)->getGroupService()->updateGroupSummaryData(groupId, version, jsonSummaryData, Proxy);
+    return Proxy;
+}
+
+UBCGroupProxy *UBCGroupProxy::GetRandomGroupsMatching(UBrainCloudWrapper *brainCloudWrapper, const FString &jsonWhere, int32 maxReturn)
+{
+    UBCGroupProxy *Proxy = NewObject<UBCGroupProxy>();
+    UBCWrapperProxy::GetBrainCloudInstance(brainCloudWrapper)->getGroupService()->getRandomGroupsMatching(jsonWhere, maxReturn, Proxy);
     return Proxy;
 }

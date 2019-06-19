@@ -317,6 +317,8 @@ const ServiceOperation ServiceOperation::UpdateGroupEntity = ServiceOperation(TE
 const ServiceOperation ServiceOperation::UpdateGroupMember = ServiceOperation(TEXT("UPDATE_GROUP_MEMBER"));
 const ServiceOperation ServiceOperation::UpdateGroupName = ServiceOperation(TEXT("UPDATE_GROUP_NAME"));
 const ServiceOperation ServiceOperation::SetGroupOpen = ServiceOperation(TEXT("SET_GROUP_OPEN"));
+const ServiceOperation ServiceOperation::UpdateGroupSummaryData = ServiceOperation(TEXT("UPDATE_GROUP_SUMMARY_DATA"));
+const ServiceOperation ServiceOperation::GetRandomGroupsMatching = ServiceOperation(TEXT("GET_RANDOM_GROUPS_MATCHING"));
 
 //mail
 const ServiceOperation ServiceOperation::SendBasicEmail = ServiceOperation(TEXT("SEND_BASIC_EMAIL"));
