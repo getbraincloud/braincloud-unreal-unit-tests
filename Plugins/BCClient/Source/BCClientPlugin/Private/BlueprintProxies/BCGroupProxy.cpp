@@ -76,7 +76,7 @@ UBCGroupProxy *UBCGroupProxy::CreateGroupWithSummaryData(
     const FString &jsonSummaryData)
 {
     UBCGroupProxy *Proxy = NewObject<UBCGroupProxy>();
-    UBCWrapperProxy::GetBrainCloudInstance(brainCloudWrapper)->getGroupService()->createGroup(name, type, isOpenGroup, acl, jsonData, jsonOwnerAttributes, jsonDefaultMemberAttributes, jsonSummaryData, Proxy);
+    UBCWrapperProxy::GetBrainCloudInstance(brainCloudWrapper)->getGroupService()->createGroupWithSummaryData(name, type, isOpenGroup, acl, jsonData, jsonOwnerAttributes, jsonDefaultMemberAttributes, jsonSummaryData, Proxy);
     return Proxy;
 }
 
