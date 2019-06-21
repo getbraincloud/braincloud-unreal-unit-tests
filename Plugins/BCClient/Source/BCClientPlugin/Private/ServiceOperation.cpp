@@ -411,6 +411,7 @@ const ServiceOperation ServiceOperation::LeaveLobby = ServiceOperation("LEAVE_LO
 const ServiceOperation ServiceOperation::RemoveMember = ServiceOperation("REMOVE_MEMBER");
 const ServiceOperation ServiceOperation::CancelFindRequest = ServiceOperation("CANCEL_FIND_REQUEST");
 const ServiceOperation ServiceOperation::GetRegionsForLobbies = ServiceOperation("GET_REGIONS_FOR_LOBBIES");
+const ServiceOperation ServiceOperation::PingData = ServiceOperation("PING_DATA");	// not an official API, but need it for proper calback
 
 bool ServiceOperation::operator==(const ServiceOperation &s) const
 {

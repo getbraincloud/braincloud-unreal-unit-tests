@@ -409,6 +409,7 @@ class BCCLIENTPLUGIN_API ServiceOperation
 	static const ServiceOperation RemoveMember;
 	static const ServiceOperation CancelFindRequest;
 	static const ServiceOperation GetRegionsForLobbies;
+	static const ServiceOperation PingData;
 
 	FString getValue() const { return _value; }
 

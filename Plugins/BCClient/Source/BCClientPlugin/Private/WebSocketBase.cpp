@@ -505,6 +505,11 @@ void UWebSocketBase::ProcessWriteable()
 		{
 			uint8 *data = mSendQueueData[0].GetData();
 			sizeOfData = mSendQueueData[0].Num();
+			
+			// we are about to go over the max send size, 
+			// keep them in the queue for later, stop processing
+			if (location + sizeOfData > MAX_ECHO_PAYLOAD)
+				break;
 
 			FMemory::Memcpy(&buf[location], data, sizeOfData);
 			location += sizeOfData;
@@ -523,6 +528,11 @@ void UWebSocketBase::ProcessWriteable()
 			std::string strData = TCHAR_TO_ANSI(*mSendQueue[0]);
 			sizeOfData = strData.size();
 
+			// we are about to go over the max send size, 
+			// keep them in the queue for later, stop processing
+			if (location + sizeOfData > MAX_ECHO_PAYLOAD)
+				break;
+				
 			FMemory::Memcpy(&buf[location], strData.c_str(), sizeOfData);
 			location += sizeOfData;
 			mSendQueue.RemoveAt(0);
