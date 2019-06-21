@@ -95,7 +95,7 @@ void BrainCloudGroup::createGroup(
 	_client->sendRequest(sc);
 }
 
-void BrainCloudGroup::createGroup(
+void BrainCloudGroup::createGroupWithSummaryData(
 	const FString &name,
 	const FString &groupType,
 	bool isOpenGroup,

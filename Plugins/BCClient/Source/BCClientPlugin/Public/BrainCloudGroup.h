@@ -132,7 +132,7 @@ class BCCLIENTPLUGIN_API BrainCloudGroup
      * @param jsonSummaryData a summary
      * @param callback The method to be invoked when the server response is received
      */
-    void createGroup(
+    void createGroupWithSummaryData(
         const FString &name,
         const FString &groupType,
         bool isOpenGroup,
