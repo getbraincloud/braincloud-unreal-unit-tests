@@ -278,6 +278,7 @@ class UBCLobbyProxy : public UBCBlueprintCallProxyBase
     * @param in_roomTypes List of roomtypes to request the ping regions
 	* @param in_callback Method to be invoked when the server response is received.
     */
+    UFUNCTION(BlueprintCallable, meta = (BlueprintInternalUseOnly = "true"), Category = "BrainCloud|Lobby")
     static UBCLobbyProxy *GetRegionsForLobbies(UBrainCloudWrapper *brainCloudWrapper, const TArray<FString> &in_roomTypes);
 
     /**
@@ -286,5 +287,6 @@ class UBCLobbyProxy : public UBCBlueprintCallProxyBase
     * 
 	* @param in_callback Method to be invoked when the server response is received.
     */
+    UFUNCTION(BlueprintCallable, meta = (BlueprintInternalUseOnly = "true"), Category = "BrainCloud|Lobby")
     static UBCLobbyProxy *PingRegions(UBrainCloudWrapper *brainCloudWrapper);
 };

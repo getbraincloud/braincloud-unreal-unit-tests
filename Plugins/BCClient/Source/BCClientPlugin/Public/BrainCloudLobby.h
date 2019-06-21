@@ -3,12 +3,14 @@
 #pragma once
 
 #include "IServerCallback.h"
+#include "Runtime/Online/HTTP/Public/Http.h"
 class BrainCloudClient;
 class ServiceOperation;
 
 class BCCLIENTPLUGIN_API BrainCloudLobby : public IServerCallback
 {
   public:
+	static const uint8 MAX_PING_CALLS = 4;
     BrainCloudLobby(BrainCloudClient *client);
 
     /**
@@ -288,16 +290,21 @@ class BCCLIENTPLUGIN_API BrainCloudLobby : public IServerCallback
     */
     void pingRegions( IServerCallback *in_callback);
     
-    virtual void serverCallback(ServiceName serviceName, ServiceOperation serviceOperation, FString const &jsonData);
+    virtual void serverCallback(ServiceName serviceName, ServiceOperation serviceOperation, const FString &jsonData);
     virtual void serverError(ServiceName serviceName, ServiceOperation serviceOperation, int32 statusCode, int32 reasonCode, const FString &message);
 
   private:
     void attachPingDataAndSend(TSharedRef<FJsonObject> message, ServiceOperation serviceOperation, IServerCallback *in_callback);
+    void pingHost(FString in_region, FString in_target, int in_index, bool in_bLastItem = false);
+    void onPingResponseReceived(FHttpRequestPtr Request, FHttpResponsePtr Response, bool bWasSuccessful);
+    
+    FHttpModule*_http;
 
     BrainCloudClient *_client = nullptr;
     IServerCallback *_regionsForLobbiesCallback;
     IServerCallback *_pingRegionsCallback;
 
     TSharedPtr<FJsonObject> _regionPingData;
-    TSharedPtr<FJsonObject> _lobbyTypeRegions;
+    TSharedPtr<FJsonObject> _pingData;
+    TMap<FString, TArray<double>> _cachedPingResponses;
 };

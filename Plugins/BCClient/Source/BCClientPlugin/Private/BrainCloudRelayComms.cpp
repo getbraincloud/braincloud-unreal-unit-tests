@@ -275,6 +275,7 @@ void BrainCloudRelayComms::disconnectImpl()
         m_appCallbackBP->RemoveFromRoot();
         m_appCallbackBP->ConditionalBeginDestroy();
 	}
+	m_appCallbackBP = nullptr;
 
 	m_sentPing = FPlatformTime::Seconds();
 	m_netId = -1;
