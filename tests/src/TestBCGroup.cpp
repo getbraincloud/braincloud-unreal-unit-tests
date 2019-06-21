@@ -670,7 +670,7 @@ void TestBCGroup::CreateGroup(bool isOpen)
 void TestBCGroup::CreateGroupWithSummaryData(bool isOpen)
 {
 	TestResult tr;
-	m_bc->getGroupService()->createGroup(
+	m_bc->getGroupService()->createGroupWithSummaryData(
 		"testGroup",
 		_groupType,
 		isOpen,

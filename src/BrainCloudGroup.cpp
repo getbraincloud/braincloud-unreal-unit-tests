@@ -105,7 +105,7 @@ namespace BrainCloud
 		m_client->getBrainCloudComms()->addToQueue(sc);
 	}
 
-		void BrainCloudGroup::createGroup(
+		void BrainCloudGroup::createGroupWithSummaryData(
 		const char * in_name,
 		const char * in_groupType,
 		bool in_isOpenGroup,

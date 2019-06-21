@@ -137,7 +137,7 @@ namespace BrainCloud
 		* @param in_jsonData Custom application data.
 		* @param in_callback The method to be invoked when the server response is received
 		*/
-		void createGroup(
+		void createGroupWithSummaryData(
 			const char* in_name,
 			const char* in_groupType,
 			bool in_isOpenGroup,
