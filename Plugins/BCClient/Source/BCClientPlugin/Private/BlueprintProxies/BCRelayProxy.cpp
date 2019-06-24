@@ -11,7 +11,7 @@
 UBCRelayProxy::UBCRelayProxy(const FObjectInitializer &ObjectInitializer)
     : Super(ObjectInitializer)
 {
-	_bIsOneResponse = false;
+	_bCleanupAfterFirstResponse = false;
 }
 
 int64 UBCRelayProxy::Ping(UBrainCloudWrapper *brainCloudWrapper)
