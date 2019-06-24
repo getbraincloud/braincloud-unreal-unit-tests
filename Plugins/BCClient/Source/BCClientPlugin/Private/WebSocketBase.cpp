@@ -498,28 +498,9 @@ void UWebSocketBase::ProcessWriteable()
 	// write data
 	int location = LWS_PRE;
 	int sizeOfData  = 0;
-	if (mSendQueueData.Num() > 0)
-	{
-		unsigned char *buf = (unsigned char*)FMemory::Malloc(LWS_PRE + MAX_ECHO_PAYLOAD);
-		while (mSendQueueData.Num() > 0)
-		{
-			uint8 *data = mSendQueueData[0].GetData();
-			sizeOfData = mSendQueueData[0].Num();
-			
-			// we are about to go over the max send size, 
-			// keep them in the queue for later, stop processing
-			if (location + sizeOfData > MAX_ECHO_PAYLOAD)
-				break;
-
-			FMemory::Memcpy(&buf[location], data, sizeOfData);
-			location += sizeOfData;
-			mSendQueueData.RemoveAt(0);	
-		}
-		lws_write(mlws, &buf[LWS_PRE], location - LWS_PRE, LWS_WRITE_BINARY);
-	}
-		
-	location = LWS_PRE;
-	// write text
+	
+	// default to write text, these are RTT type messages
+	// for the most part
 	if (mSendQueue.Num() > 0)
 	{
 		unsigned char *buf = (unsigned char*)FMemory::Malloc(LWS_PRE + MAX_ECHO_PAYLOAD);
@@ -539,7 +520,28 @@ void UWebSocketBase::ProcessWriteable()
 		}
 		
 		lws_write(mlws, &buf[LWS_PRE], location - LWS_PRE, LWS_WRITE_TEXT);
-	}
+	} 
+	// then try writing Data stream, these are Relay Requests
+	// since binary is the most optimal data sending type
+	else if (mSendQueueData.Num() > 0)
+	{
+		unsigned char *buf = (unsigned char*)FMemory::Malloc(LWS_PRE + MAX_ECHO_PAYLOAD);
+		while (mSendQueueData.Num() > 0)
+		{
+			uint8 *data = mSendQueueData[0].GetData();
+			sizeOfData = mSendQueueData[0].Num();
+			
+			// we are about to go over the max send size, 
+			// keep them in the queue for later, stop processing
+			if (location + sizeOfData > MAX_ECHO_PAYLOAD)
+				break;
+
+			FMemory::Memcpy(&buf[location], data, sizeOfData);
+			location += sizeOfData;
+			mSendQueueData.RemoveAt(0);	
+		}
+		lws_write(mlws, &buf[LWS_PRE], location - LWS_PRE, LWS_WRITE_BINARY);
+	} 
 #endif
 }
 

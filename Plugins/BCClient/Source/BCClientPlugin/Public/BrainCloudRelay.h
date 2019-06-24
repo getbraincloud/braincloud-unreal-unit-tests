@@ -12,17 +12,64 @@ class BCCLIENTPLUGIN_API BrainCloudRelay
 {
 public:
 	BrainCloudRelay(BrainCloudRelayComms *in_comms);
+	/** 
+ 	* Use SetPingInterval() in order to set the interval for which Ping is calculated
+	* does not average over the last N calls.  This is the value of the most recent Ping result
+ 	*/
 	int64 ping();
+	/** 
+ 	* NetId retrieved from the connected call
+ 	*/
 	uint8 netId();
-
-	void connect(BCRelayConnectionType in_connectionType, const FString &in_connectOptionsJson, IServerCallback *callback);
+	/** 
+ 	* Start off a connection, based off connection type to brainClouds Relay Servers.  
+	* Connect options come in from "ROOM_ASSIGNED" | "ROOM_READY" lobby callback
+	* @param in_connectionType 
+    * @param in_options
+    * 	     in_options["ssl"] = false;
+    * 	     in_options["host"] = "168.0.1.192";
+    * 	     in_options["port"] = 9000;
+    * 	     in_options["passcode"] = "somePasscode"
+    * 	     in_options["lobbyId"] = "55555:v5v:001";
+	* 
+    * @param callback
+ 	*/
+	void connect(BCRelayConnectionType in_connectionType, const FString &in_connectOptionsJson, IServerCallback *in_callback);
+	/** 
+ 	* Disables relay event for this session.
+ 	*/
 	void disconnect();
+	/** 
+ 	* Is Connected
+ 	*/
 	bool isConnected();
-	void registerDataCallback(IRelayCallback *callback);
-	void registerDataCallback(UBCBlueprintRelayCallProxyBase *callback);
+	/** 
+ 	* Register callback, so that data is received on the main thread
+	* @param callback
+ 	*/
+	void registerDataCallback(IRelayCallback *in_callback);
+	/** 
+ 	* Register callback, so that data is received on the main thread, support for Blueprint
+	* @param callback
+ 	*/
+	void registerDataCallback(UBCBlueprintRelayCallProxyBase *in_callback);
+	/** 
+ 	*  Deregister the data callback
+ 	*/
 	void deregisterDataCallback();
-
-	bool send(const TArray<uint8> &in_data, const uint8 in_target, bool in_reliable = true, bool in_ordered = true, int in_channel = 0);
+	/** 
+ 	* Send byte array representation of data
+	* @param in_message : message to be sent
+    * @param to_netId : the net id to send to, RelayComms.TO_ALL_PLAYERS to relay to all
+	* @param in_reliable : send this reliably or not
+	* @param in_ordered : received this ordered or not
+	* @param in_channel : 0,1,2,3 (max of four channels)
+ 	*/
+	bool send(const TArray<uint8> &in_data, const uint8 in_target, 
+				bool in_reliable = true, bool in_ordered = true, int in_channel = 0);
+	/** 
+ 	* Set the ping interval.
+ 	*/
 	void setPingInterval(float in_interval);
 
 	/** 
