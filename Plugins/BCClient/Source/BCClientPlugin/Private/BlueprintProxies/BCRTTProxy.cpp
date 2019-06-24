@@ -11,7 +11,7 @@
 UBCRTTProxy::UBCRTTProxy(const FObjectInitializer &ObjectInitializer)
     : Super(ObjectInitializer)
 {
-	_bIsOneResponse = false;
+	_bCleanupAfterFirstResponse = false;
 }
 
 UBCRTTProxy *UBCRTTProxy::EnableRTT(UBrainCloudWrapper *brainCloudWrapper, BCRTTConnectionType in_type)

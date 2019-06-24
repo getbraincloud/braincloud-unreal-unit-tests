@@ -159,8 +159,6 @@ void BrainCloudRelayComms::RunCallbacks()
             m_timeSinceLastPingRequest = 0;
             sendPing();
         }
-
-        //processReliableQueue();
     }
 
 #if PLATFORM_UWP
@@ -251,6 +249,8 @@ void BrainCloudRelayComms::disconnectImpl()
 		m_connectedSocket->OnConnectComplete.RemoveDynamic(m_commsPtr, &UBCRelayCommsProxy::Websocket_OnOpen);
 		m_connectedSocket->OnReceiveData.RemoveDynamic(m_commsPtr, &UBCRelayCommsProxy::WebSocket_OnMessage);
 	}
+
+	m_relayResponse.Empty();
 
 	delete m_commsPtr;
 	m_commsPtr = nullptr;
@@ -408,9 +408,12 @@ TArray<uint8> BrainCloudRelayComms::stripByteArray(TArray<uint8> in_data, int in
 {
 	// take off the 
 	TArray<uint8> data;
-	for (int i = in_numFromLeft; i < in_data.Num(); ++i)
+	if (in_numFromLeft <= in_data.Num())
 	{
-		data.Add(in_data[i]);
+		for (int i = in_numFromLeft; i < in_data.Num(); ++i)
+		{
+			data.Add(in_data[i]);
+		}
 	}
 
 	return data;
