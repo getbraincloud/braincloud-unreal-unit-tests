@@ -87,7 +87,7 @@ private:
 	TArray<uint8> stripByteArray(TArray<uint8> in_data, int in_numFromLeft);
 	TArray<uint8> appendSizeBytes(TArray<uint8> in_message);
 	TArray<uint8> buildConnectionRequest();
-	void processRegisteredListeners(const FString &in_service, const FString &in_operation, const FString &in_jsonMessage, TArray<uint8> in_data);
+	void processRegisteredListeners(const FString &in_service, const FString &in_operation, const FString &in_jsonMessage, const TArray<uint8> &in_data);
 	void connectWebSocket(FString in_host, int in_port, bool in_sslEnabled);
 	void disconnectImpl();
 	void onRecv(TArray<uint8> data);
@@ -113,23 +113,24 @@ private:
 	double m_lastNowMS;
 	double m_sentPing;
 	int16 m_ping;
-	short m_netId = -1;
-
-	const int SIZE_OF_LENGTH_PREFIX_BYTE_ARRAY = 2;
-    const int CONTROL_BYTE_HEADER_LENGTH = 1;
-    const int SIZE_OF_RELIABLE_FLAGS = 2;
+	short m_netId;
 
 	BCRelayConnectionType m_connectionType;
 	TMap<FString, FString> m_connectOptions;
 
 	struct lws_context *m_lwsContext;
 	TArray<RelayMessage> m_relayResponse;
+	FCriticalSection m_relayMutex;
+	
+	const int SIZE_OF_LENGTH_PREFIX_BYTE_ARRAY = 2;
+    const int CONTROL_BYTE_HEADER_LENGTH = 1;
+    const int SIZE_OF_RELIABLE_FLAGS = 2;
 };
 
 struct RelayMessage
 {
 	RelayMessage(){}
-	RelayMessage(const FString &in_service, const FString &in_operation, const FString &in_jsonMessage, TArray<uint8> in_data)
+	RelayMessage(const FString &in_service, const FString &in_operation, const FString &in_jsonMessage, const TArray<uint8> &in_data)
 	{
 		Service = in_service;
 		Operation = in_operation;
