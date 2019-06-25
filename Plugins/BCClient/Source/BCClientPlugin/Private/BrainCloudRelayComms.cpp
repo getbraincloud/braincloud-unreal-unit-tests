@@ -60,19 +60,19 @@ BrainCloudRelayComms::BrainCloudRelayComms(BrainCloudClient *client)
 	, m_connectedSocket(nullptr)
 	, m_bIsConnected(false)
 	, m_pingInterval(1.0f)
-	, m_timeSinceLastPingRequest(0)
+	, m_timeSinceLastPingRequest(0.0f)
 	, m_lastNowMS(FPlatformTime::Seconds())
 	, m_sentPing(FPlatformTime::Seconds())
 	, m_ping(999)
 	, m_netId(-1)
 	, m_lwsContext(nullptr)
 {
+	m_relayResponse.Empty();
 }
 
 BrainCloudRelayComms::~BrainCloudRelayComms()
 {
 	disconnectImpl();
-	deregisterDataCallback();
 }
 
 void BrainCloudRelayComms::connect(BCRelayConnectionType in_connectionType, const FString &in_connectOptionsJson, IServerCallback *callback)
@@ -102,7 +102,11 @@ void BrainCloudRelayComms::disconnect()
 	{
 		TArray<uint8> empty;
 		send(empty, CL2RS_DISCONNECT);
-		m_relayResponse.Add(RelayMessage(ServiceName::Relay.getValue().ToLower(), "disconnect", UBrainCloudWrapper::buildErrorJson(403, ReasonCodes::RS_CLIENT_ERROR, "DisableRS Called"), TArray<uint8>()));
+		// lock 
+		{
+    		FScopeLock Lock(&m_relayMutex);
+			m_relayResponse.Add(RelayMessage(ServiceName::Relay.getValue().ToLower(), "disconnect", UBrainCloudWrapper::buildErrorJson(403, ReasonCodes::RS_CLIENT_ERROR, "DisableRS Called"), TArray<uint8>()));
+		}
 	}
 }
 
@@ -138,13 +142,17 @@ void BrainCloudRelayComms::deregisterDataCallback()
 
 void BrainCloudRelayComms::RunCallbacks()
 {
-	RelayMessage toProcess;
-	for (int i = 0; i < m_relayResponse.Num(); ++i)
+	// lock 
 	{
-		toProcess = m_relayResponse[i];
-		processRegisteredListeners(toProcess.Service, toProcess.Operation, toProcess.JsonMessage, toProcess.Data);
+    	FScopeLock Lock(&m_relayMutex);
+		RelayMessage toProcess;
+		for (int i = 0; i < m_relayResponse.Num(); ++i)
+		{
+			toProcess = m_relayResponse[i];
+			processRegisteredListeners(toProcess.Service, toProcess.Operation, toProcess.JsonMessage, toProcess.Data);
+		}
+		m_relayResponse.Empty();
 	}
-	m_relayResponse.Empty();
 
 	// run ping 
 	if (isConnected())
@@ -249,8 +257,12 @@ void BrainCloudRelayComms::disconnectImpl()
 		m_connectedSocket->OnConnectComplete.RemoveDynamic(m_commsPtr, &UBCRelayCommsProxy::Websocket_OnOpen);
 		m_connectedSocket->OnReceiveData.RemoveDynamic(m_commsPtr, &UBCRelayCommsProxy::WebSocket_OnMessage);
 	}
-
-	m_relayResponse.Empty();
+	
+	// lock 
+	{
+    	FScopeLock Lock(&m_relayMutex);
+		m_relayResponse.Empty();
+	}
 
 	delete m_commsPtr;
 	m_commsPtr = nullptr;
@@ -266,6 +278,8 @@ void BrainCloudRelayComms::disconnectImpl()
 #endif
 
 	m_bIsConnected = false;
+
+	deregisterDataCallback();
 	
 	m_appCallback = nullptr;
 
@@ -461,17 +475,19 @@ TArray<uint8> BrainCloudRelayComms::appendSizeBytes(TArray<uint8> in_message)
 }
 
 // should be add registered listeners
-void BrainCloudRelayComms::processRegisteredListeners(const FString &in_service, const FString &in_operation, const FString &in_jsonMessage, TArray<uint8> in_data)
+void BrainCloudRelayComms::processRegisteredListeners(const FString &in_service, const FString &in_operation, const FString &in_jsonMessage, const TArray<uint8> &in_data)
 {
 	// process connect callback to app
 	bool connected = isConnected();
 	if (in_operation == TEXT("connect") && connected && (m_appCallback != nullptr || m_appCallbackBP != nullptr))
 	{
+		// do the callbacks
 		if (m_appCallback != nullptr)
 		{
 			m_appCallback->serverCallback(ServiceName::Relay, ServiceOperation::Connect, in_jsonMessage);
 		}
-		else if (m_appCallbackBP != nullptr)
+		
+		if (m_appCallbackBP != nullptr)
 		{
 			m_appCallbackBP->serverCallback(ServiceName::Relay, ServiceOperation::Connect, in_jsonMessage);
 		}
@@ -485,7 +501,8 @@ void BrainCloudRelayComms::processRegisteredListeners(const FString &in_service,
 		{
 			m_appCallback->serverError(ServiceName::Relay, ServiceOperation::Connect, 400, -1, in_jsonMessage);
 		}
-		else if (m_appCallbackBP != nullptr)
+		
+		if (m_appCallbackBP != nullptr)
 		{
 			m_appCallbackBP->serverError(ServiceName::Relay, ServiceOperation::Connect, 400, -1, in_jsonMessage);
 		}
@@ -500,15 +517,16 @@ void BrainCloudRelayComms::processRegisteredListeners(const FString &in_service,
 	}
 
 	if (in_data.Num() > 0)
-	{
+	{	
 		// does this go to one of our registered service listeners?
+		if (m_registeredRelayCallbacks != nullptr)
+		{
+			m_registeredRelayCallbacks->relayCallback(in_data);
+		}
+		
 		if (m_registeredRelayBluePrintCallbacks != nullptr)
 		{
 			m_registeredRelayBluePrintCallbacks->relayCallback(in_data);
-		}
-		else if (m_registeredRelayCallbacks != nullptr)
-		{
-			m_registeredRelayCallbacks->relayCallback(in_data);
 		}
 	}
 }
@@ -603,7 +621,11 @@ void BrainCloudRelayComms::webSocket_OnClose()
 	if (m_client->isLoggingEnabled())
 		UE_LOG(LogBrainCloudComms, Log, TEXT("Relay Connection closed"));
 
-	m_relayResponse.Add(RelayMessage(ServiceName::Relay.getValue().ToLower(), "error", UBrainCloudWrapper::buildErrorJson(403, ReasonCodes::RS_CLIENT_ERROR,"Could not connect at this time"), TArray<uint8>()));
+	// lock 
+	{
+    	FScopeLock Lock(&m_relayMutex);
+    	m_relayResponse.Add(RelayMessage(ServiceName::Relay.getValue().ToLower(), "error", UBrainCloudWrapper::buildErrorJson(403, ReasonCodes::RS_CLIENT_ERROR,"Could not connect at this time"), TArray<uint8>()));
+   	}
 }
 
 void BrainCloudRelayComms::websocket_OnOpen()
@@ -611,7 +633,11 @@ void BrainCloudRelayComms::websocket_OnOpen()
 	if (m_client->isLoggingEnabled())
 		UE_LOG(LogBrainCloudComms, Log, TEXT("Relay Connection established."));
 
-	m_relayResponse.Add(RelayMessage(ServiceName::Relay.getValue().ToLower(), "connect", "", TArray<uint8>()));
+	// lock 
+	{
+    	FScopeLock Lock(&m_relayMutex);
+		m_relayResponse.Add(RelayMessage(ServiceName::Relay.getValue().ToLower(), "connect", "", TArray<uint8>()));
+	}
 }
 
 void BrainCloudRelayComms::webSocket_OnMessage(TArray<uint8> in_data)
@@ -625,8 +651,11 @@ void BrainCloudRelayComms::webSocket_OnError(const FString &in_message)
 {
 	if (m_client->isLoggingEnabled())
 		UE_LOG(LogBrainCloudComms, Log, TEXT("Relay Error: %s"), *in_message);
-
-	m_relayResponse.Add(RelayMessage(ServiceName::Relay.getValue().ToLower(), "disconnect", UBrainCloudWrapper::buildErrorJson(403, ReasonCodes::RS_CLIENT_ERROR, in_message), TArray<uint8>()));
+	// lock 
+	{
+    	FScopeLock Lock(&m_relayMutex);
+		m_relayResponse.Add(RelayMessage(ServiceName::Relay.getValue().ToLower(), "disconnect", UBrainCloudWrapper::buildErrorJson(403, ReasonCodes::RS_CLIENT_ERROR, in_message), TArray<uint8>()));
+	}	
 }
 
 void BrainCloudRelayComms::onRecv(TArray<uint8> in_data)
@@ -675,14 +704,20 @@ void BrainCloudRelayComms::onRecv(TArray<uint8> in_data)
 						m_netId = (short)jsonPacket->GetNumberField("netId");
 						m_bIsConnected = true;
 						m_lastNowMS = FPlatformTime::Seconds();
-						
-						m_relayResponse.Add(RelayMessage(ServiceName::Relay.getValue().ToLower(), "connect", parsedMessage, data ));
+						// lock 
+						{
+    						FScopeLock Lock(&m_relayMutex);
+							m_relayResponse.Add(RelayMessage(ServiceName::Relay.getValue().ToLower(), "connect", parsedMessage, data ));
+						}
 					}
 				}
 			}
-			
-			// finally pass this onwards, no parsed data
-			m_relayResponse.Add(RelayMessage(ServiceName::Relay.getValue().ToLower(), "onrecv", "", data));
+			// lock 
+			{
+    			FScopeLock Lock(&m_relayMutex);
+				// finally pass this onwards, no parsed data
+				m_relayResponse.Add(RelayMessage(ServiceName::Relay.getValue().ToLower(), "onrecv", "", data));
+			}
 		}
 	}
 }
