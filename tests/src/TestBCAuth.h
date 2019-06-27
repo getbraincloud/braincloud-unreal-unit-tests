@@ -13,6 +13,7 @@ protected:
     }
 
     void AuthEmailPassword();
+
 };
 
 #endif

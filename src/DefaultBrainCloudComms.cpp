@@ -336,7 +336,7 @@ namespace BrainCloud
 		Json::Value messages = root["responses"];
 		Json::Value apiRewards(Json::nullValue);
 		int64_t receivedPacketId = root["packetId"].asInt64();
-		if (_expectedPacketId == NO_PACKET_EXPECTED || receivedPacketId != _expectedPacketId)
+		if (receivedPacketId != NO_PACKET_EXPECTED && (_expectedPacketId == NO_PACKET_EXPECTED || _expectedPacketId != receivedPacketId))
 		{
 			// drop the packet - this is the wrong packet id
 			if (_loggingEnabled)
@@ -755,7 +755,6 @@ namespace BrainCloud
 
 		return (int)_packetTimeouts.size();
 	}
-
 
 	void DefaultBrainCloudComms::handleError(URLResponse const & response)
 	{

@@ -87,6 +87,8 @@ namespace BrainCloud
         std::list<URLResponse> _responses;
         std::vector<ServerCall*> _inProgress;
 
+        long receivedPacketIdChecker = 0;
+
         RecursiveMutex _loaderMutex;
         RecursiveMutex _queueMutex;
         RecursiveMutex _mutex;

@@ -122,6 +122,33 @@ namespace BrainCloud
 			IServerCallback* in_callback = NULL);
 
 		/**
+		* Create a group with Summary Data.
+		*
+		* Service Name - group
+		* Service Operation - CREATE_GROUP
+		*
+		* @param in_name Name of the group.
+		* @param in_groupType Name of the type of group.
+		* @param in_isOpenGroup true if group is open; false if closed.
+		* @param in_acl The group's access control list. A null ACL implies default.
+		* @param in_jsonOwnerAttributes Attributes for the group owner (current user).
+		* @param in_jsonDefaultMemberAttributes Default attributes for group members.
+		* @param in_jsonSummaryData the summary.
+		* @param in_jsonData Custom application data.
+		* @param in_callback The method to be invoked when the server response is received
+		*/
+		void createGroupWithSummaryData(
+			const char* in_name,
+			const char* in_groupType,
+			bool in_isOpenGroup,
+			const std::string& in_acl,
+			const std::string& in_jsonData,
+			const std::string& in_jsonOwnerAttributes,
+			const std::string& in_jsonDefaultMemberAttributes,
+			const std::string& in_jsonSummaryData,
+			IServerCallback* in_callback = NULL);
+
+		/**
 		* Create a group entity.
 		*
 		* Service Name - group
@@ -438,6 +465,31 @@ namespace BrainCloud
 		 * @param callback The method to be invoked when the server response is received
 		 */
 		void setGroupOpen(const char* in_groupId, bool in_isOpenGroup, IServerCallback *callback = nullptr);
+
+		/**
+		 * Update a group's summary data
+		 *
+		 * Service Name - group
+		 * Service Operation - UPDATE_GROUP_SUMMARY_DATA
+		 *
+		 * @param groupId ID of the group.
+		 * @param version the version of the group
+		 * @param jsonSummaryData custom application data
+		 * @param callback The method to be invoked when the server response is received
+		 */
+		void updateGroupSummaryData(const char* in_groupId, int in_version, const std::string& in_jsonSummaryData, IServerCallback *callback = nullptr);
+
+		/**
+		 * Gets a list of up to maxReturn randomly selected groups from the server based on the where condition.
+		 *
+		 * Service Name - group
+		 * Service Operation - GET_RANDOM_GROUPS_MATCHING
+		 *
+		 * @param jsonWhere where to search
+		 * @param maxReturn # of groups to search
+		 * @param callback The method to be invoked when the server response is received
+		 */
+		void getRandomGroupsMatching(std::string in_jsonWhere, int in_maxReturn, IServerCallback *callback = nullptr);
 
 	private:
 		BrainCloudClient * m_client;

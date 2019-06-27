@@ -12,6 +12,7 @@ using namespace BrainCloud;
 #define SOCIAL_LB_ID "testSocialLeaderboard"
 #define DYNAMIC_LB_ID "testDynamicLeaderboard"
 #define REWARD_EVENT_ID "tournamentRewardId"
+#define GROUP_LB_ID "groupLeaderboardConfig"
 
 TEST_F(TestBCSocialLeaderboard, GetSocialLeaderboard)
 {
@@ -262,5 +263,76 @@ void TestBCSocialLeaderboard::PostScoreToNonDynamic()
     TestResult tr;
 
     m_bc->getSocialLeaderboardService()->postScoreToLeaderboard(LB_ID, 100, "", &tr);
+    tr.run(m_bc);
+}
+
+TEST_F(TestBCSocialLeaderboard, PostScoreToGroupLeaderboard)
+{
+    TestResult tr; 
+    m_bc->getGroupService()->createGroup("testGroup", "test", false, "", "", "", "", &tr);
+    tr.run(m_bc);
+
+    std::string groupId = tr.m_response["data"]["groupId"].asString();
+
+    Json::FastWriter fw;
+    Json::Value jsonData;
+    jsonData["testKey"] = "TestValue";
+
+    m_bc->getSocialLeaderboardService()->postScoreToGroupLeaderboard(GROUP_LB_ID, groupId.c_str(), 0, fw.write(jsonData), &tr);
+    tr.run(m_bc);
+
+    m_bc->getGroupService()->deleteGroup(groupId.c_str(), -1, &tr);
+    tr.run(m_bc);
+}
+
+TEST_F(TestBCSocialLeaderboard, RemoveGroupScore)
+{
+    TestResult tr; 
+    m_bc->getGroupService()->createGroup("testGroup", "test", false, "", "", "", "", &tr);
+    tr.run(m_bc);
+
+    std::string groupId = tr.m_response["data"]["groupId"].asString();
+
+    Json::FastWriter fw;
+    Json::Value jsonData;
+    jsonData["testKey"] = "TestValue";
+
+    m_bc->getSocialLeaderboardService()->postScoreToGroupLeaderboard(GROUP_LB_ID, groupId.c_str(), 100, fw.write(jsonData), &tr);
+    tr.run(m_bc);
+
+    m_bc->getSocialLeaderboardService()->removeGroupScore(GROUP_LB_ID, groupId.c_str(), -1, &tr);
+    tr.run(m_bc);
+
+    m_bc->getGroupService()->deleteGroup(groupId.c_str(), -1, &tr);
+    tr.run(m_bc);
+}
+
+TEST_F(TestBCSocialLeaderboard, GetGroupLeaderboardView)
+{
+    TestResult tr; 
+    m_bc->getGroupService()->createGroup("testGroup", "test", false, "", "", "", "", &tr);
+    tr.run(m_bc);
+
+    std::string groupId = tr.m_response["data"]["groupId"].asString();
+
+    m_bc->getSocialLeaderboardService()->getGroupLeaderboardView(GROUP_LB_ID, groupId.c_str(), HIGH_TO_LOW, 5, 5, &tr);
+    tr.run(m_bc);
+
+    m_bc->getGroupService()->deleteGroup(groupId.c_str(), -1, &tr);
+    tr.run(m_bc);
+}
+
+TEST_F(TestBCSocialLeaderboard, GetGroupLeaderboardViewByVersion)
+{
+    TestResult tr; 
+    m_bc->getGroupService()->createGroup("testGroup", "test", false, "", "", "", "", &tr);
+    tr.run(m_bc);
+
+    std::string groupId = tr.m_response["data"]["groupId"].asString();
+
+    m_bc->getSocialLeaderboardService()->getGroupLeaderboardViewByVersion(GROUP_LB_ID, groupId.c_str(), 1, HIGH_TO_LOW, 5, 5, &tr);
+    tr.run(m_bc);
+
+    m_bc->getGroupService()->deleteGroup(groupId.c_str(), -1, &tr);
     tr.run(m_bc);
 }

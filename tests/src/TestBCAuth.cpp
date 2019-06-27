@@ -2,6 +2,7 @@
 #include "braincloud/http_codes.h"
 #include "braincloud/reason_codes.h"
 #include "json/json.h"
+#include <map>
 
 TEST_F(TestBCAuth, AaaRunFirst)
 {
@@ -22,6 +23,59 @@ TEST_F(TestBCAuth, AuthenticateEmailPassword)
     m_bc->getAuthenticationService()->authenticateEmailPassword(GetUser(UserA)->m_email, GetUser(UserA)->m_password, true, &tr);
     tr.run(m_bc);
     Logout();
+}
+
+TEST_F(TestBCAuth, AuthBadSig)
+{
+    //our problem is that users who refresh their app secret via the portal, the client would fail to read the response, and would retry infinitely.
+    //This threatens our servers, because huge numbers of errors related to bad signature show up, and infinitely retry to get out of this error.
+    //Instead of updating the signature via the portal, we will mimic a bad signature from the client.
+    std::map<std::string, std::string> originalAppSecretMap;
+    originalAppSecretMap[m_appId] = m_secret;
+    originalAppSecretMap[m_childAppId] =  m_childSecret;
+    int numRepeatBadSigFailures = 0;
+
+    // mess up app 
+    std::map<std::string, std::string> updatedAppSecretMap;
+    updatedAppSecretMap[m_appId] = m_secret;
+    updatedAppSecretMap[m_childAppId] = m_childSecret;
+
+    std::map<std::string, std::string>::iterator it;
+    for (it=updatedAppSecretMap.begin(); it!=updatedAppSecretMap.end(); it++)
+    {
+        std::string key = it->first;
+        std::string value = it->second;
+        updatedAppSecretMap.at(key) = value + "123";
+    }       
+/////////////////////Phase 1
+    //first auth
+    TestResult tr1;
+    m_bc->getAuthenticationService()->authenticateUniversal(GetUser(UserA)->m_id, GetUser(UserA)->m_password, true, &tr1);
+    tr1.run(m_bc);
+
+    //check state
+    m_bc->getPlayerStateService()->readUserState(&tr1);
+
+//////////////////////////Phase 2
+    TestResult tr3;
+    m_bc->initializeWithApps(m_serverUrl.c_str(), m_appId.c_str(), updatedAppSecretMap, m_version.c_str());
+    m_bc->getAuthenticationService()->authenticateUniversal(GetUser(UserA)->m_id, GetUser(UserA)->m_password, true, &tr3);
+    tr3.runExpectFail(m_bc, 403, 40301);
+
+    //check state
+    m_bc->getPlayerStateService()->readUserState(&tr3);
+
+    //wait a while
+    TestResult::sleep(300);
+    
+    /////////////////////Phase 3
+    TestResult tr5;
+    m_bc->initializeWithApps(m_serverUrl.c_str(), m_appId.c_str(), originalAppSecretMap, m_version.c_str());
+    m_bc->getAuthenticationService()->authenticateUniversal(GetUser(UserA)->m_id, GetUser(UserA)->m_password, true, &tr5);
+    tr5.run(m_bc);
+
+    //check state
+    m_bc->getPlayerStateService()->readUserState(&tr5);
 }
 
 TEST_F(TestBCAuth, AuthenticateUniversal)

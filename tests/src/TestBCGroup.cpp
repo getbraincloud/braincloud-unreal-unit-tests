@@ -130,6 +130,14 @@ TEST_F(TestBCGroup, CreateGroup)
 	Logout();
 }
 
+TEST_F(TestBCGroup, CreateGroupWithSummaryData)
+{
+	Authenticate(UserA);
+	CreateGroupWithSummaryData();
+	DeleteGroup();
+	Logout();
+}
+
 TEST_F(TestBCGroup, CreateGroupEntity)
 {
 	Authenticate(UserA);
@@ -580,6 +588,39 @@ TEST_F(TestBCGroup, SetGroupOpen)
 	Logout();
 }
 
+TEST_F(TestBCGroup, UpdateGroupSummaryData)
+{
+	Authenticate(UserA);
+	CreateGroup();
+
+	TestResult tr;
+	m_bc->getGroupService()->updateGroupSummaryData(
+		_groupId.c_str(),
+		1,
+		_testJsonPair,
+		&tr);
+	tr.run(m_bc);
+
+	DeleteGroup();
+	Logout();
+}
+
+TEST_F(TestBCGroup, GetRandomGroupsMatching)
+{
+	Authenticate(UserA);
+	CreateGroup();
+
+	TestResult tr;
+	m_bc->getGroupService()->getRandomGroupsMatching(
+	"{\"groupType\": \"BLUE\"}",
+	2,
+	&tr);
+	tr.run(m_bc);
+
+	DeleteGroup();
+	Logout();
+}
+
 /*
  * Helpers
  */
@@ -617,6 +658,24 @@ void TestBCGroup::CreateGroup(bool isOpen)
 		_groupType,
 		isOpen,
 		_testAcl,
+		_testJsonPair,
+		_testJsonPair,
+		_testJsonPair,
+		&tr);
+	tr.run(m_bc);
+
+	_groupId = tr.m_response["data"]["groupId"].asString();
+}
+
+void TestBCGroup::CreateGroupWithSummaryData(bool isOpen)
+{
+	TestResult tr;
+	m_bc->getGroupService()->createGroupWithSummaryData(
+		"testGroup",
+		_groupType,
+		isOpen,
+		_testAcl,
+		_testJsonPair,
 		_testJsonPair,
 		_testJsonPair,
 		_testJsonPair,

@@ -105,6 +105,37 @@ namespace BrainCloud
 		m_client->getBrainCloudComms()->addToQueue(sc);
 	}
 
+		void BrainCloudGroup::createGroupWithSummaryData(
+		const char * in_name,
+		const char * in_groupType,
+		bool in_isOpenGroup,
+		const std::string& in_acl,
+		const std::string& in_jsonData,
+		const std::string& in_jsonOwnerAttributes,
+		const std::string& in_jsonDefaultMemberAttributes,
+		const std::string& in_jsonSummaryData,
+		IServerCallback * in_callback)
+	{
+		Json::Value message;
+		if (StringUtil::IsOptionalParameterValid(in_name))
+			message[OperationParam::GroupName.getValue()] = in_name;
+		message[OperationParam::GroupType.getValue()] = in_groupType;
+		message[OperationParam::GroupIsOpenGroup.getValue()] = in_isOpenGroup;
+		if (StringUtil::IsOptionalParameterValid(in_acl))
+			message[OperationParam::GroupAcl.getValue()] = JsonUtil::jsonStringToValue(in_acl);
+		if (StringUtil::IsOptionalParameterValid(in_jsonData))
+			message[OperationParam::GroupData.getValue()] = JsonUtil::jsonStringToValue(in_jsonData);
+		if (StringUtil::IsOptionalParameterValid(in_jsonOwnerAttributes))
+			message[OperationParam::GroupOwnerAttributes.getValue()] = JsonUtil::jsonStringToValue(in_jsonOwnerAttributes);
+		if (StringUtil::IsOptionalParameterValid(in_jsonDefaultMemberAttributes))
+			message[OperationParam::GroupDefaultMemberAttributes.getValue()] = JsonUtil::jsonStringToValue(in_jsonDefaultMemberAttributes);
+		if (StringUtil::IsOptionalParameterValid(in_jsonSummaryData))
+			message[OperationParam::GroupSummaryData.getValue()] = JsonUtil::jsonStringToValue(in_jsonSummaryData);
+
+		ServerCall * sc = new ServerCall(ServiceName::Group, ServiceOperation::CreateGroup, message, in_callback);
+		m_client->getBrainCloudComms()->addToQueue(sc);
+	}
+
 	void BrainCloudGroup::createGroupEntity(
 		const char * in_groupId,
 		const char * in_entityType,
@@ -375,6 +406,31 @@ namespace BrainCloud
 		message[OperationParam::GroupIsOpenGroup.getValue()] = in_isOpenGroup;
 
 		ServerCall * sc = new ServerCall(ServiceName::Group, ServiceOperation::SetGroupOpen, message, in_callback);
+		m_client->getBrainCloudComms()->addToQueue(sc);
+	}
+
+	void BrainCloudGroup::updateGroupSummaryData(const char* in_groupId, int in_version, const std::string& in_jsonSummaryData, IServerCallback *in_callback)
+	{
+		Json::Value message;
+		message[OperationParam::GroupId.getValue()] = in_groupId;
+		message[OperationParam::GroupVersion.getValue()] = in_version;
+		if (StringUtil::IsOptionalParameterValid(in_jsonSummaryData))
+			message[OperationParam::GroupSummaryData.getValue()] = JsonUtil::jsonStringToValue(in_jsonSummaryData);
+
+
+		ServerCall * sc = new ServerCall(ServiceName::Group, ServiceOperation::UpdateGroupSummaryData, message, in_callback);
+		m_client->getBrainCloudComms()->addToQueue(sc);
+	}
+
+
+	void BrainCloudGroup::getRandomGroupsMatching(std::string in_jsonWhere, int in_maxReturn, IServerCallback *in_callback)
+	{
+		Json::Value message;
+		if (StringUtil::IsOptionalParameterValid(in_jsonWhere))
+			message[OperationParam::GroupWhere.getValue()] = JsonUtil::jsonStringToValue(in_jsonWhere);
+		message[OperationParam::MaxReturn.getValue()] = in_maxReturn;
+
+		ServerCall * sc = new ServerCall(ServiceName::Group, ServiceOperation::GetRandomGroupsMatching, message, in_callback);
 		m_client->getBrainCloudComms()->addToQueue(sc);
 	}
 
