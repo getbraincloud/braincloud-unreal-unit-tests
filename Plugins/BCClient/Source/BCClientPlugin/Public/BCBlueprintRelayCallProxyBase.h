@@ -13,7 +13,7 @@ class UBCBlueprintRelayCallProxyBase : public UObject, public IRelayCallback
     GENERATED_BODY()
 
   public:
-    UBCBlueprintRelayCallProxyBase(const FObjectInitializer &ObjectInitializer) {}
+    UBCBlueprintRelayCallProxyBase(const FObjectInitializer &ObjectInitializer) { this->AddToRoot(); }
 
     //Response delegates
     UPROPERTY(BlueprintAssignable)

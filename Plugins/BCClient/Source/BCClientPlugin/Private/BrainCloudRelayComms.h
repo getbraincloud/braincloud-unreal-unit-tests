@@ -102,8 +102,8 @@ private:
 
 	UBCRelayCommsProxy *m_commsPtr;
 
-	IRelayCallback *m_registeredRelayCallbacks;
-	UBCBlueprintRelayCallProxyBase *m_registeredRelayBluePrintCallbacks;
+	IRelayCallback *m_registeredRelayCallback;
+	UBCBlueprintRelayCallProxyBase *m_registeredRelayBluePrintCallback;
 
 	UWebSocketBase *m_connectedSocket;
 

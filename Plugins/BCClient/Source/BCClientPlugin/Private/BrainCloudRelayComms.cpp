@@ -55,8 +55,8 @@ BrainCloudRelayComms::BrainCloudRelayComms(BrainCloudClient *client)
 	, m_appCallback(nullptr)
 	, m_appCallbackBP(nullptr)
 	, m_commsPtr(nullptr)
-	, m_registeredRelayCallbacks(nullptr)
-	, m_registeredRelayBluePrintCallbacks(nullptr)
+	, m_registeredRelayCallback(nullptr)
+	, m_registeredRelayBluePrintCallback(nullptr)
 	, m_connectedSocket(nullptr)
 	, m_bIsConnected(false)
 	, m_pingInterval(1.0f)
@@ -119,25 +119,26 @@ void BrainCloudRelayComms::registerDataCallback(IRelayCallback *callback)
 {
 	// must ensure data callbacks are all removed first, since a blueprint one may be added without being removed properly
 	deregisterDataCallback();
-	m_registeredRelayCallbacks = callback;
+	m_registeredRelayCallback = callback;
 }
 
 void BrainCloudRelayComms::registerDataCallback(UBCBlueprintRelayCallProxyBase *callback)
 {
 	// must ensure data callbacks are all removed first, since a blueprint one may be added without being removed properly
 	deregisterDataCallback();
-	m_registeredRelayBluePrintCallbacks = callback;
+	m_registeredRelayBluePrintCallback = callback;
 }
 
 void BrainCloudRelayComms::deregisterDataCallback()
 {
-	m_registeredRelayCallbacks = nullptr;
-	if (m_registeredRelayBluePrintCallbacks->IsValidLowLevel())
+	if (m_registeredRelayBluePrintCallback->IsValidLowLevel())
 	{
-		m_registeredRelayBluePrintCallbacks->RemoveFromRoot();
-		m_registeredRelayBluePrintCallbacks->ConditionalBeginDestroy();
+		m_registeredRelayBluePrintCallback->RemoveFromRoot();
+		m_registeredRelayBluePrintCallback->ConditionalBeginDestroy();
 	}
-	m_registeredRelayBluePrintCallbacks = nullptr;
+
+	m_registeredRelayCallback = nullptr;
+	m_registeredRelayBluePrintCallback = nullptr;
 }
 
 void BrainCloudRelayComms::RunCallbacks()
@@ -172,10 +173,13 @@ void BrainCloudRelayComms::RunCallbacks()
 #if PLATFORM_UWP
 #elif PLATFORM_HTML5
 #else
-	if (m_lwsContext != nullptr)
 	{
-		lws_callback_on_writable_all_protocol(m_lwsContext, &protocolsRS[0]);
-		lws_service(m_lwsContext, 0);
+    	FScopeLock Lock(&m_relayMutex);
+		if (m_lwsContext != nullptr)
+		{
+			lws_callback_on_writable_all_protocol(m_lwsContext, &protocolsRS[0]);
+			lws_service(m_lwsContext, 0);
+		}
 	}
 #endif
 }
@@ -257,7 +261,7 @@ void BrainCloudRelayComms::disconnectImpl()
 		m_connectedSocket->OnConnectComplete.RemoveDynamic(m_commsPtr, &UBCRelayCommsProxy::Websocket_OnOpen);
 		m_connectedSocket->OnReceiveData.RemoveDynamic(m_commsPtr, &UBCRelayCommsProxy::WebSocket_OnMessage);
 	}
-	
+
 	// lock 
 	{
     	FScopeLock Lock(&m_relayMutex);
@@ -519,14 +523,14 @@ void BrainCloudRelayComms::processRegisteredListeners(const FString &in_service,
 	if (in_data.Num() > 0)
 	{	
 		// does this go to one of our registered service listeners?
-		if (m_registeredRelayCallbacks != nullptr)
+		if (m_registeredRelayCallback != nullptr)
 		{
-			m_registeredRelayCallbacks->relayCallback(in_data);
+			m_registeredRelayCallback->relayCallback(in_data);
 		}
 		
-		if (m_registeredRelayBluePrintCallbacks != nullptr)
+		if (m_registeredRelayBluePrintCallback != nullptr && m_registeredRelayBluePrintCallback->IsValidLowLevel())
 		{
-			m_registeredRelayBluePrintCallbacks->relayCallback(in_data);
+			m_registeredRelayBluePrintCallback->relayCallback(in_data);
 		}
 	}
 }
