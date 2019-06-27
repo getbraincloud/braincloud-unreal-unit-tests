@@ -65,6 +65,29 @@ private:
     bool m_receivedCallback = false;
 };
 
+TEST_F(TestBCRTTComms, RTTRegisterWithoutEnableRTT)
+{
+    TestResult tr;
+
+    // Register for RTT lobby
+    RTTCallback rttCallback(m_bc, "event");
+    m_bc->getRTTService()->registerRTTEventCallback(&rttCallback);
+
+
+    m_bc->getRTTService()->enableRTT(&tr, true);
+    tr.run(m_bc);
+    
+    // Create a lobby
+    auto& profileId = m_bc->getAuthenticationService()->getProfileId();
+    m_bc->getEventService()->sendEvent(
+        profileId.c_str(), "test", "{\"testData\":42}", &tr);
+    tr.run(m_bc);
+
+    // Now check if we get the chat message
+    // Wait 60sec, creating lobby can take time
+    EXPECT_TRUE(rttCallback.receivedCallback());
+}
+
 TEST_F(TestBCRTTComms, RequestClientConnection)
 {
     TestResult tr;
@@ -174,3 +197,4 @@ TEST_F(TestBCRTTComms, RTTEventCallback)
     // Wait 60sec, creating lobby can take time
     EXPECT_TRUE(rttCallback.receivedCallback());
 }
+
