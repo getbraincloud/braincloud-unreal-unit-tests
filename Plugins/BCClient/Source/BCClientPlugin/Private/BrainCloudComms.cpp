@@ -12,6 +12,7 @@
 #include "ServerCall.h"
 #include "ServiceName.h"
 #include "ServiceOperation.h"
+#include "BrainCloudWrapper.h"
 #include "BrainCloudClient.h"
 #include "BCFileUploader.h"
 
@@ -308,10 +309,10 @@ FString BrainCloudComms::GetDataString(PacketRef packet, uint64 packetId)
 	}
 
 	TSharedRef<FJsonObject> jsonDataObject = MakeShareable(new FJsonObject());
-	jsonDataObject->SetArrayField(TEXT("messages"), messages);
-	jsonDataObject->SetStringField(TEXT("sessionId"), _sessionId);
-	jsonDataObject->SetStringField(TEXT("gameId"), _appId);
-	jsonDataObject->SetNumberField(TEXT("packetId"), packetId);
+	jsonDataObject->SetArrayField("messages", messages);
+	jsonDataObject->SetStringField("sessionId", _sessionId);
+	jsonDataObject->SetStringField("gameId", _appId);
+	jsonDataObject->SetNumberField("packetId", packetId);
 
 	FJsonSerializer::Serialize(jsonDataObject, writer);
 	return jsonStr;
@@ -484,14 +485,14 @@ void BrainCloudComms::HandleResponse(int32 statusCode, FString responseBody)
 			ReportResults(_currentPacket.ToSharedRef(), jsonPacket.ToSharedRef());
 			IEventCallback *eventCallback = _eventCallback != nullptr ? _eventCallback : m_registeredRestBluePrintCallbacks.Contains(ServiceName::Event.getValue()) ? m_registeredRestBluePrintCallbacks[ServiceName::Event.getValue()] : nullptr;
 
-			if (eventCallback && jsonPacket->HasField(TEXT("events")))
+			if (eventCallback && jsonPacket->HasField("events"))
 			{
-				TArray<TSharedPtr<FJsonValue>> events = jsonPacket->GetArrayField(TEXT("events"));
+				TArray<TSharedPtr<FJsonValue>> events = jsonPacket->GetArrayField("events");
 				if (events.Num() > 0)
 				{
 					TSharedRef<FJsonObject> eventsRoot = MakeShareable(new FJsonObject);
-					eventsRoot->SetArrayField(TEXT("events"), events);
-					eventCallback->eventCallback(GetJsonString(eventsRoot));
+					eventsRoot->SetArrayField("events", events);
+					eventCallback->eventCallback(UBrainCloudWrapper::GetJsonString(eventsRoot));
 				}
 			}
 		}
@@ -634,7 +635,7 @@ void BrainCloudComms::FakeErrorResponse(uint32 statusCode, uint32 reasonCode, co
 
 void BrainCloudComms::ReportResults(PacketRef requestPacket, TSharedRef<FJsonObject> responsePacket)
 {
-	TArray<TSharedPtr<FJsonValue>> responses = responsePacket->GetArrayField(TEXT("responses"));
+	TArray<TSharedPtr<FJsonValue>> responses = responsePacket->GetArrayField("responses");
 
 	TArray<TSharedPtr<FJsonValue>> apiRewards;
 	UObject *tempCallback = nullptr;
@@ -645,11 +646,11 @@ void BrainCloudComms::ReportResults(PacketRef requestPacket, TSharedRef<FJsonObj
 		TSharedRef<ServerCall> sc = (*requestPacket)[i];
 		TSharedPtr<FJsonObject> respObj = responses[i]->AsObject();
 
-		uint32 statusCode = respObj->GetNumberField(TEXT("status"));
+		uint32 statusCode = respObj->GetNumberField("status");
 
 		IServerCallback *callback = sc->getCallback();
 
-		FString jsonRespStr = GetJsonString(respObj.ToSharedRef());
+		FString jsonRespStr = UBrainCloudWrapper::GetJsonString(respObj.ToSharedRef());
 
 		if (statusCode == HttpCode::OK || (!_errorCallbackOn202 && statusCode == 202))
 		{
@@ -661,23 +662,23 @@ void BrainCloudComms::ReportResults(PacketRef requestPacket, TSharedRef<FJsonObj
 		else
 		{
 			uint32 reasonCode = 0;
-			if (respObj->HasField(TEXT("reason_code")))
+			if (respObj->HasField("reason_code"))
 			{
-				reasonCode = respObj->GetNumberField(TEXT("reason_code"));
+				reasonCode = respObj->GetNumberField("reason_code");
 				if (reasonCode == ReasonCodes::PLAYER_SESSION_EXPIRED || reasonCode == ReasonCodes::NO_SESSION || reasonCode == ReasonCodes::PLAYER_SESSION_LOGGED_OUT || sc->getOperation() == ServiceOperation::Logout || sc->getOperation() == ServiceOperation::FullReset)
 				{
 					_isAuthenticated = false;
 					_sessionId = TEXT("");
 					_statusCodeCache = statusCode;
 					_reasonCodeCache = reasonCode;
-					_statusMessageCache = respObj->GetStringField(TEXT("status_message"));
+					_statusMessageCache = respObj->GetStringField("status_message");
 				}
 			}
 
 			FString errorString;
 			if (_useOldStatusMessage)
 			{
-				errorString = respObj->GetStringField(TEXT("status_message"));
+				errorString = respObj->GetStringField("status_message");
 			}
 			else
 			{
@@ -705,8 +706,8 @@ void BrainCloudComms::ReportResults(PacketRef requestPacket, TSharedRef<FJsonObj
 			// authenticate
 			if (service == ServiceName::AuthenticateV2 && operation == ServiceOperation::Authenticate)
 			{
-				TSharedPtr<FJsonObject> rewardData = respObj->GetObjectField(TEXT("data"))->GetObjectField(TEXT("rewards"));
-				if (rewardData->GetObjectField(TEXT("rewards"))->Values.Num() > 0)
+				TSharedPtr<FJsonObject> rewardData = respObj->GetObjectField("data")->GetObjectField("rewards");
+				if (rewardData->GetObjectField("rewards")->Values.Num() > 0)
 				{
 					rewards = rewardData;
 				}
@@ -714,8 +715,8 @@ void BrainCloudComms::ReportResults(PacketRef requestPacket, TSharedRef<FJsonObj
 			// player stat increment or statistics event trigger
 			else if ((service == ServiceName::PlayerStatistics && operation == ServiceOperation::Update) || (service == ServiceName::PlayerStatisticsEvent && (operation == ServiceOperation::Trigger || operation == ServiceOperation::TriggerMultiple)))
 			{
-				TSharedPtr<FJsonObject> data = respObj->GetObjectField(TEXT("data"));
-				if (data->GetObjectField(TEXT("rewards"))->Values.Num() > 0)
+				TSharedPtr<FJsonObject> data = respObj->GetObjectField("data");
+				if (data->GetObjectField("rewards")->Values.Num() > 0)
 				{
 					rewards = data;
 				}
@@ -724,9 +725,9 @@ void BrainCloudComms::ReportResults(PacketRef requestPacket, TSharedRef<FJsonObj
 			if (rewards.IsValid())
 			{
 				TSharedPtr<FJsonObject> apiReward = MakeShareable(new FJsonObject());
-				apiReward->SetStringField(TEXT("service"), service.getValue());
-				apiReward->SetStringField(TEXT("operation"), operation.getValue());
-				apiReward->SetObjectField(TEXT("rewards"), rewards);
+				apiReward->SetStringField("service", service.getValue());
+				apiReward->SetStringField("operation", operation.getValue());
+				apiReward->SetObjectField("rewards", rewards);
 				apiRewards.Add(MakeShareable(new FJsonValueObject(apiReward)));
 			}
 		}
@@ -735,7 +736,7 @@ void BrainCloudComms::ReportResults(PacketRef requestPacket, TSharedRef<FJsonObj
 	if (apiRewards.Num() > 0)
 	{
 		TSharedRef<FJsonObject> rewards = MakeShareable(new FJsonObject());
-		rewards->SetArrayField(TEXT("apiRewards"), apiRewards);
+		rewards->SetArrayField("apiRewards", apiRewards);
 
 		FString jsonString;
 		TSharedRef<TJsonWriter<>> writer = TJsonWriterFactory<>::Create(&jsonString);
@@ -766,14 +767,7 @@ void BrainCloudComms::ReportError(PacketRef requestPacket, uint32 statusCode, ui
 			}
 			else
 			{
-				TSharedRef<FJsonObject> jsonObj = MakeShareable(new FJsonObject());
-
-				jsonObj->SetNumberField(TEXT("status"), statusCode);
-				jsonObj->SetNumberField(TEXT("reason_code"), reasonCode);
-				jsonObj->SetStringField(TEXT("statusMessage"), statusMessage);
-				jsonObj->SetStringField(TEXT("severity"), TEXT("ERROR"));
-
-				errorString = GetJsonString(jsonObj);
+				errorString = UBrainCloudWrapper::buildErrorJson(statusCode, reasonCode, statusMessage);
 			}
 			callback->serverError(sc->getService(), sc->getOperation(), statusCode, reasonCode, *errorString);
 
@@ -792,17 +786,17 @@ void BrainCloudComms::FilterIncomingMessages(TSharedRef<ServerCall> servercall, 
 	ServiceName service = servercall->getService();
 	ServiceOperation operation = servercall->getOperation();
 
-	TSharedPtr<FJsonValue> Field = response->TryGetField(TEXT("data"));
+	TSharedPtr<FJsonValue> Field = response->TryGetField("data");
 	const TSharedPtr<FJsonObject>* data = nullptr;
 	bool isDataValid = Field->TryGetObject(data);
 	// A session id or a profile id could potentially come back in any messages
 	//Only allow it in Authenticate and Identity calls.
 	if ( isDataValid && (service == ServiceName::AuthenticateV2 || service == ServiceName::Identity))
 	{
-		(*data)->TryGetStringField(TEXT("sessionId"), _sessionId);
+		(*data)->TryGetStringField("sessionId", _sessionId);
 
 		FString profileIdOut;
-		(*data)->TryGetStringField(TEXT("profileId"), profileIdOut);
+		(*data)->TryGetStringField("profileId", profileIdOut);
 
 		if (!profileIdOut.IsEmpty())
 		{
@@ -810,7 +804,7 @@ void BrainCloudComms::FilterIncomingMessages(TSharedRef<ServerCall> servercall, 
 		}
 
 		FString appIdOut;
-		(*data)->TryGetStringField(TEXT("switchToAppId"), appIdOut);
+		(*data)->TryGetStringField("switchToAppId", appIdOut);
 		if (!appIdOut.IsEmpty())
 		{
 			_appId = (*data)->GetStringField("switchToAppId");
@@ -833,7 +827,7 @@ void BrainCloudComms::FilterIncomingMessages(TSharedRef<ServerCall> servercall, 
 		{
 			if (_heartbeatInterval == 0)
 			{
-				int32 sessionTimeout = (*data)->GetIntegerField(TEXT("playerSessionExpiry"));
+				int32 sessionTimeout = (*data)->GetIntegerField("playerSessionExpiry");
 				sessionTimeout = (int32)((double)sessionTimeout * 0.85);
 
 				// minimum 30 secs
@@ -841,13 +835,13 @@ void BrainCloudComms::FilterIncomingMessages(TSharedRef<ServerCall> servercall, 
 				_heartbeatInterval *= 1000; //to ms
 			}
 
-			_maxBundleMessages = (*data)->GetNumberField(TEXT("maxBundleMsgs"));
+			_maxBundleMessages = (*data)->GetNumberField("maxBundleMsgs");
 
 			if ((*data)->HasField("maxKillCount"))
-				_killSwitchThreshold = (*data)->GetNumberField(TEXT("maxKillCount"));
+				_killSwitchThreshold = (*data)->GetNumberField("maxKillCount");
 
 			//set player name
-			FString name = (*data)->GetStringField(TEXT("playerName"));
+			FString name = (*data)->GetStringField("playerName");
 			_client->getPlayerStateService()->setUserName(name);
 		}
 	}
@@ -864,7 +858,7 @@ void BrainCloudComms::FilterIncomingMessages(TSharedRef<ServerCall> servercall, 
 	{
 		if (isDataValid)
 		{
-			FString name = (*data)->GetStringField(TEXT("playerName"));
+			FString name = (*data)->GetStringField("playerName");
 			_client->getPlayerStateService()->setUserName(name);
 		}
 	}
@@ -872,7 +866,7 @@ void BrainCloudComms::FilterIncomingMessages(TSharedRef<ServerCall> servercall, 
 	{
 		if (isDataValid)
 		{
-			TSharedPtr<FJsonObject> fileInfo = (*data)->GetObjectField(TEXT("fileDetails"));
+			TSharedPtr<FJsonObject> fileInfo = (*data)->GetObjectField("fileDetails");
 
 			TSharedRef<BCFileUploader> uploader = MakeShareable(
 				new BCFileUploader(
@@ -881,8 +875,8 @@ void BrainCloudComms::FilterIncomingMessages(TSharedRef<ServerCall> servercall, 
 					_uploadOverallTimeout,
 					_isLoggingEnabled));
 
-			FString localPath = fileInfo->GetStringField(TEXT("localPath"));
-			FString uploadId = fileInfo->GetStringField(TEXT("uploadId"));
+			FString localPath = fileInfo->GetStringField("localPath");
+			FString uploadId = fileInfo->GetStringField("uploadId");
 
 			_fileUploads.Add(uploader);
 			uploader->UploadFile(localPath, _sessionId, uploadId, _uploadUrl);
@@ -982,12 +976,4 @@ double BrainCloudComms::GetRetryTimeoutSeconds(int16 retryAttempt)
 int16 BrainCloudComms::GetMaxRetryAttempts()
 {
 	return ShouldRetryPacket() ? (int16)_packetTimeouts.Num() - 1 : 0;
-}
-
-FString BrainCloudComms::GetJsonString(TSharedRef<FJsonObject> jsonDataObject)
-{
-	FString jsonStr;
-	TSharedRef<TJsonWriter<>> writer = TJsonWriterFactory<>::Create(&jsonStr);
-	FJsonSerializer::Serialize(jsonDataObject, writer);
-	return jsonStr;
 }

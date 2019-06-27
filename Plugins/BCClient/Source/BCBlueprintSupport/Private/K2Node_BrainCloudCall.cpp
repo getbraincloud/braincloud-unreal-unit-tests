@@ -4,6 +4,7 @@
 #include "BCBlueprintCallProxyBase.h"
 #include "BCBlueprintRTTCallProxyBase.h"
 #include "BCBlueprintRestCallProxyBase.h"
+#include "BCBlueprintRelayCallProxyBase.h"
 #include "BlueprintFunctionNodeSpawner.h"
 #include "BlueprintActionDatabaseRegistrar.h"
 
@@ -27,7 +28,8 @@ void UK2Node_BrainCloudCall::GetMenuActions(FBlueprintActionDatabaseRegistrar &A
         UClass *Class = *ClassIt;
         if ((!Class->IsChildOf<UBCBlueprintCallProxyBase>() &&
              !Class->IsChildOf<UBCBlueprintRTTCallProxyBase>() &&
-             !Class->IsChildOf<UBCBlueprintRestCallProxyBase>()) ||
+             !Class->IsChildOf<UBCBlueprintRestCallProxyBase>() &&
+             !Class->IsChildOf<UBCBlueprintRelayCallProxyBase>()) ||
             Class->HasAnyClassFlags(CLASS_Abstract))
         {
             continue;
@@ -55,7 +57,8 @@ void UK2Node_BrainCloudCall::GetMenuActions(FBlueprintActionDatabaseRegistrar &A
             bool const bIsProxyFactoryMethod = (ReturnProperty != nullptr) &&
                                                (ReturnProperty->PropertyClass->IsChildOf<UBCBlueprintCallProxyBase>() ||
                                                 ReturnProperty->PropertyClass->IsChildOf<UBCBlueprintRTTCallProxyBase>() ||
-                                                ReturnProperty->PropertyClass->IsChildOf<UBCBlueprintRestCallProxyBase>());
+                                                ReturnProperty->PropertyClass->IsChildOf<UBCBlueprintRestCallProxyBase>() ||
+                                                ReturnProperty->PropertyClass->IsChildOf<UBCBlueprintRelayCallProxyBase>());
 
             if (bIsProxyFactoryMethod)
             {

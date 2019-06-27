@@ -239,6 +239,57 @@ void BrainCloudLeaderboard::getPlayerScoresFromLeaderboards(const TArray<FString
 	_client->sendRequest(sc);
 }
 
+void BrainCloudLeaderboard::postScoreToGroupLeaderboard(const FString &leaderboardId, const FString &groupId, int32 score, const FString &jsonOtherData, IServerCallback *callback)
+{
+	TSharedRef<FJsonObject> message = MakeShareable(new FJsonObject());
+	message->SetStringField(OperationParam::LeaderboardServiceLeaderboardId.getValue(), leaderboardId);
+	message->SetStringField(OperationParam::GroupId.getValue(), groupId);
+	message->SetNumberField(OperationParam::LeaderboardServiceScore.getValue(), score);
+	message->SetObjectField(OperationParam::LeaderboardServiceData.getValue(), JsonUtil::jsonStringToValue(jsonOtherData));
+
+	ServerCall *sc = new ServerCall(ServiceName::Leaderboard, ServiceOperation::PostScoreToGroupLeaderboard, message, callback);
+	_client->sendRequest(sc);
+}
+
+void BrainCloudLeaderboard::removeGroupScore(const FString &leaderboardId, const FString &groupId, int32 score, int32 versionId, IServerCallback *callback)
+{
+	TSharedRef<FJsonObject> message = MakeShareable(new FJsonObject());
+	message->SetStringField(OperationParam::LeaderboardServiceLeaderboardId.getValue(), leaderboardId);
+	message->SetStringField(OperationParam::GroupId.getValue(), groupId);
+	message->SetNumberField(OperationParam::LeaderboardServiceScore.getValue(), score);
+	message->SetNumberField(OperationParam::LeaderboardServiceVersionId.getValue(), versionId);
+
+	ServerCall *sc = new ServerCall(ServiceName::Leaderboard, ServiceOperation::RemoveGroupScore, message, callback);
+	_client->sendRequest(sc);
+}
+
+void BrainCloudLeaderboard::getGroupLeaderboardView(const FString &leaderboardId, const FString &groupId, ESortOrder sortOrder, int32 beforeCount, int32 afterCount, IServerCallback *callback)
+{
+	TSharedRef<FJsonObject> message = MakeShareable(new FJsonObject());
+	message->SetStringField(OperationParam::LeaderboardServiceLeaderboardId.getValue(), leaderboardId);
+	message->SetStringField(OperationParam::GroupId.getValue(), groupId);
+	message->SetStringField(OperationParam::LeaderboardServiceSortOrder.getValue(), leaderboardSortOrderToString(sortOrder));
+	message->SetNumberField(OperationParam::LeaderboardServiceBeforeCount.getValue(), beforeCount);
+	message->SetNumberField(OperationParam::LeaderboardServiceAfterCount.getValue(), afterCount);
+
+	ServerCall *sc = new ServerCall(ServiceName::Leaderboard, ServiceOperation::GetGroupLeaderboardView, message, callback);
+	_client->sendRequest(sc);
+}
+
+void BrainCloudLeaderboard::getGroupLeaderboardViewByVersion(const FString &leaderboardId, const FString &groupId, int32 versionId, ESortOrder sortOrder, int32 beforeCount, int32 afterCount, IServerCallback *callback)
+{
+	TSharedRef<FJsonObject> message = MakeShareable(new FJsonObject());
+	message->SetStringField(OperationParam::LeaderboardServiceLeaderboardId.getValue(), leaderboardId);
+	message->SetStringField(OperationParam::GroupId.getValue(), groupId);
+	message->SetNumberField(OperationParam::LeaderboardServiceVersionId.getValue(), versionId);
+	message->SetStringField(OperationParam::LeaderboardServiceSortOrder.getValue(), leaderboardSortOrderToString(sortOrder));
+	message->SetNumberField(OperationParam::LeaderboardServiceBeforeCount.getValue(), beforeCount);
+	message->SetNumberField(OperationParam::LeaderboardServiceAfterCount.getValue(), afterCount);
+
+	ServerCall *sc = new ServerCall(ServiceName::Leaderboard, ServiceOperation::GetGroupLeaderboardView, message, callback);
+	_client->sendRequest(sc);
+}
+
 FString BrainCloudLeaderboard::leaderboardTypeToString(ESocialLeaderboardType type)
 {
 	switch (type)

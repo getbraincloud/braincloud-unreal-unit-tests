@@ -120,6 +120,9 @@ class BCCLIENTPLUGIN_API ServiceOperation
 	static const ServiceOperation RemovePlayerScore;
 	static const ServiceOperation GetPlayerScore;
 	static const ServiceOperation GetPlayerScoresFromLeaderboards;
+	static const ServiceOperation PostScoreToGroupLeaderboard;
+	static const ServiceOperation RemoveGroupScore;
+	static const ServiceOperation GetGroupLeaderboardView;
 
 	static const ServiceOperation InitThirdParty;
 	static const ServiceOperation PostThirdPartyLeaderboardScore;
@@ -313,6 +316,8 @@ class BCCLIENTPLUGIN_API ServiceOperation
 	static const ServiceOperation UpdateGroupMember;
 	static const ServiceOperation UpdateGroupName;
 	static const ServiceOperation SetGroupOpen;
+	static const ServiceOperation UpdateGroupSummaryData;
+	static const ServiceOperation GetRandomGroupsMatching;
 
 	//mail
 	static const ServiceOperation SendBasicEmail;
@@ -388,17 +393,23 @@ class BCCLIENTPLUGIN_API ServiceOperation
 	static const ServiceOperation SendMessageSimple;
 	// lobby
 	static const ServiceOperation FindLobby;
+	static const ServiceOperation FindLobbyWithPingData;
 	static const ServiceOperation CreateLobby;
+	static const ServiceOperation CreateLobbyWithPingData;
 	static const ServiceOperation FindOrCreateLobby;
+	static const ServiceOperation FindOrCreateLobbyWithPingData;
 	static const ServiceOperation GetLobbyData;
 	static const ServiceOperation UpdateReady;
 	static const ServiceOperation UpdateSettings;
 	static const ServiceOperation SwitchTeam;
 	static const ServiceOperation SendSignal;
 	static const ServiceOperation JoinLobby;
+	static const ServiceOperation JoinLobbyWithPingData;
 	static const ServiceOperation LeaveLobby;
 	static const ServiceOperation RemoveMember;
 	static const ServiceOperation CancelFindRequest;
+	static const ServiceOperation GetRegionsForLobbies;
+	static const ServiceOperation PingData;
 
 	FString getValue() const { return _value; }
 

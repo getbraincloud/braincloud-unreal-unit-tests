@@ -117,6 +117,33 @@ class BCCLIENTPLUGIN_API BrainCloudGroup
         IServerCallback *callback = nullptr);
 
     /**
+     * Create a group with summary data.
+     *
+     * Service Name - group
+     * Service Operation - CREATE_GROUP
+     *
+     * @param name Name of the group.
+     * @param groupType Name of the type of group.
+     * @param isOpenGroup true if group is open; false if closed.
+     * @param acl The group's access control list. A null ACL implies default.
+     * @param jsonOwnerAttributes Attributes for the group owner (current player).
+     * @param jsonDefaultMemberAttributes Default attributes for group members.
+     * @param jsonData Custom application data.
+     * @param jsonSummaryData a summary
+     * @param callback The method to be invoked when the server response is received
+     */
+    void createGroupWithSummaryData(
+        const FString &name,
+        const FString &groupType,
+        bool isOpenGroup,
+        UBrainCloudGroupACL *acl,
+        const FString &jsonData,
+        const FString &jsonOwnerAttributes,
+        const FString &jsonDefaultMemberAttributes,
+        const FString &jsonSummaryData,
+        IServerCallback *callback = nullptr);
+
+    /**
      * Create a group entity.
      *
      * Service Name - group
@@ -433,6 +460,31 @@ class BCCLIENTPLUGIN_API BrainCloudGroup
      * @param callback The method to be invoked when the server response is received
      */
     void setGroupOpen(const FString &groupId, bool isOpenGroup, IServerCallback *callback = nullptr);
+
+    /**
+     * Update a froup's summary data
+     *
+     * Service Name - group
+     * Service Operation - UPDATE_GROUP_SUMMARY_DATA
+     *
+     * @param groupId ID of the group.
+     * @param version the version
+     * @param jsonSummaryData custom application data 
+     * @param callback The method to be invoked when the server response is received
+     */
+    void updateGroupSummaryData(const FString &groupId, int32 version,  const FString &jsonSummaryData, IServerCallback *callback = nullptr);
+    
+    /**
+     * Get a list of up to maxReturn randomly selected groups from the server based on where condition
+     *
+     * Service Name - group
+     * Service Operation - GET_RANDOM_GROUPS_MATCHING
+     *
+     * @param jsonWhere where to search.
+     * @param maxReturn #of groups to search 
+     * @param callback The method to be invoked when the server response is received
+     */
+    void getRandomGroupsMatching(const FString &jsonWhere, int32 maxReturn, IServerCallback *callback = nullptr);
 
   private:
     BrainCloudClient *_client = nullptr;

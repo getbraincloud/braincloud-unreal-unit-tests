@@ -365,6 +365,8 @@ class BCCLIENTPLUGIN_API OperationParam
 	static const OperationParam GroupPageOffset;
 	static const OperationParam GroupAutoJoinStrategy;
 	static const OperationParam GroupWhere;
+	static const OperationParam GroupSummaryData;
+	static const OperationParam GroupMaxReturn;
 
 	//mail
 	static const OperationParam ProfileId;
@@ -428,6 +430,7 @@ class BCCLIENTPLUGIN_API OperationParam
 	static const OperationParam SentMessageType;
 
 	static const OperationParam LobbyRoomType;
+	static const OperationParam LobbyTypes;
 	static const OperationParam LobbyRating;
 	static const OperationParam LobbyAlgorithm;
 	static const OperationParam LobbyMaxSteps;
@@ -445,6 +448,7 @@ class BCCLIENTPLUGIN_API OperationParam
 	static const OperationParam LobbyToTeamName;
 	static const OperationParam LobbySignalData;
 	static const OperationParam LobbyConnectionId;
+	static const OperationParam PingData;
 
 	FString getValue() const { return _value; }
 
