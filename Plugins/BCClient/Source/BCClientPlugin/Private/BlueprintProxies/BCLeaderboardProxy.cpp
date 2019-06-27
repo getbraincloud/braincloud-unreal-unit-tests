@@ -157,3 +157,31 @@ UBCLeaderboardProxy *UBCLeaderboardProxy::GetPlayerScoresFromLeaderboards(UBrain
 	UBCWrapperProxy::GetBrainCloudInstance(brainCloudWrapper)->getLeaderboardService()->getPlayerScoresFromLeaderboards(leaderboardIds, Proxy);
 	return Proxy;
 }
+
+UBCLeaderboardProxy *UBCLeaderboardProxy::PostScoreToGroupLeaderboard(UBrainCloudWrapper *brainCloudWrapper, const FString &leaderboardId, const FString &groupId, int32 score, const FString &jsonOtherData)
+{
+	UBCLeaderboardProxy *Proxy = NewObject<UBCLeaderboardProxy>();
+	UBCWrapperProxy::GetBrainCloudInstance(brainCloudWrapper)->getLeaderboardService()->postScoreToGroupLeaderboard(leaderboardId, groupId, score, jsonOtherData, Proxy);
+	return Proxy;
+}
+
+UBCLeaderboardProxy *UBCLeaderboardProxy::RemoveGroupScore(UBrainCloudWrapper *brainCloudWrapper, const FString &leaderboardId, const FString &groupId, int32 score, int32 versionId)
+{
+	UBCLeaderboardProxy *Proxy = NewObject<UBCLeaderboardProxy>();
+	UBCWrapperProxy::GetBrainCloudInstance(brainCloudWrapper)->getLeaderboardService()->removeGroupScore(leaderboardId, groupId, score, versionId, Proxy);
+	return Proxy;
+}
+
+UBCLeaderboardProxy *UBCLeaderboardProxy::GetGroupLeaderboardView(UBrainCloudWrapper *brainCloudWrapper, const FString &leaderboardId, const FString &groupId, ESortOrder sortOrder, int32 beforeCount, int32 afterCount)
+{
+	UBCLeaderboardProxy *Proxy = NewObject<UBCLeaderboardProxy>();
+	UBCWrapperProxy::GetBrainCloudInstance(brainCloudWrapper)->getLeaderboardService()->getGroupLeaderboardView(leaderboardId, groupId, sortOrder, beforeCount, afterCount, Proxy);
+	return Proxy;
+}
+
+UBCLeaderboardProxy *UBCLeaderboardProxy::GetGroupLeaderboardViewByVersion(UBrainCloudWrapper *brainCloudWrapper, const FString &leaderboardId, const FString &groupId, int32 versionId, ESortOrder sortOrder, int32 beforeCount, int32 afterCount)
+{
+	UBCLeaderboardProxy *Proxy = NewObject<UBCLeaderboardProxy>();
+	UBCWrapperProxy::GetBrainCloudInstance(brainCloudWrapper)->getLeaderboardService()->getGroupLeaderboardViewByVersion(leaderboardId, groupId, versionId, sortOrder, beforeCount, afterCount, Proxy);
+	return Proxy;
+}

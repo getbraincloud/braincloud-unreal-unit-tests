@@ -325,6 +325,9 @@ class BCCLIENTPLUGIN_API ReasonCodes
     static const int32 CLIENT_UPLOAD_FILE_TIMED_OUT = 90101;
     static const int32 CLIENT_UPLOAD_FILE_UNKNOWN = 90102;
     static const int32 CLIENT_DISABLED = 90200;
+
+    // RS
+    static const int32 RS_CLIENT_ERROR = 90300;
 };
 
 using ReasonCode = ReasonCodes;

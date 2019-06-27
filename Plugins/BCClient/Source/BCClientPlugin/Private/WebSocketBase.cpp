@@ -21,6 +21,7 @@
 #include "BCClientPluginPrivatePCH.h"
 #include <iostream>
 #include "WebSocketBase.h"
+#include "BrainCloudRelay.h"
 
 #if PLATFORM_UWP
 #elif PLATFORM_HTML5
@@ -426,7 +427,6 @@ void UWebSocketBase::Connect(const FString &uri, const TMap<FString, FString> &h
 
 bool UWebSocketBase::SendText(const FString &data)
 {
-
 	bool bSentMessage = false;
 #if PLATFORM_UWP
 	bSentMessage = true;
@@ -457,7 +457,7 @@ bool UWebSocketBase::SendText(const FString &data)
 	return bSentMessage;
 }
 
-bool UWebSocketBase::SendData(TArray<uint8> data)
+bool UWebSocketBase::SendData(const TArray<uint8> &data)
 {
 	bool bSentMessage = false;
 	int sizeOfData = data.Num();
@@ -465,9 +465,10 @@ bool UWebSocketBase::SendData(TArray<uint8> data)
 	bSentMessage = true;
 	SendAsyncData(data.GetData()).then([this]() {
 	});
-
 #elif PLATFORM_HTML5
-	SocketSend(mWebSocketRef, data.GetData(), sizeOfData);
+	FString parsedMessage = BrainCloudRelay::BCBytesToString(data.GetData(), data.Num());
+	std::string strData = TCHAR_TO_ANSI(*parsedMessage);
+	SocketSend(mWebSocketRef, strData.c_str(), (int)strData.size());
 	bSentMessage = true;
 #else
 	if (sizeOfData > MAX_ECHO_PAYLOAD)
@@ -494,30 +495,53 @@ void UWebSocketBase::ProcessWriteable()
 #if PLATFORM_UWP
 #elif PLATFORM_HTML5
 #else
-
 	// write data
-	while (mSendQueueData.Num() > 0)
+	int location = LWS_PRE;
+	int sizeOfData  = 0;
+	
+	// default to write text, these are RTT type messages
+	// for the most part
+	if (mSendQueue.Num() > 0)
 	{
-		uint8 *data = mSendQueueData[0].GetData();
-		int sizeOfData = mSendQueueData[0].Num();
+		unsigned char *buf = (unsigned char*)FMemory::Malloc(LWS_PRE + MAX_ECHO_PAYLOAD);
+		while (mSendQueue.Num() > 0)
+		{
+			std::string strData = TCHAR_TO_ANSI(*mSendQueue[0]);
+			sizeOfData = strData.size();
 
-		unsigned char buf[LWS_PRE + MAX_ECHO_PAYLOAD];
-		memcpy(&buf[LWS_PRE], data, sizeOfData);
-		lws_write(mlws, &buf[LWS_PRE], sizeOfData, LWS_WRITE_BINARY);
-		mSendQueueData.RemoveAt(0);
-	}
-
-	// write text
-	while (mSendQueue.Num() > 0)
+			// we are about to go over the max send size, 
+			// keep them in the queue for later, stop processing
+			if (location + sizeOfData > MAX_ECHO_PAYLOAD)
+				break;
+				
+			FMemory::Memcpy(&buf[location], strData.c_str(), sizeOfData);
+			location += sizeOfData;
+			mSendQueue.RemoveAt(0);
+		}
+		
+		lws_write(mlws, &buf[LWS_PRE], location - LWS_PRE, LWS_WRITE_TEXT);
+	} 
+	// then try writing Data stream, these are Relay Requests
+	// since binary is the most optimal data sending type
+	else if (mSendQueueData.Num() > 0)
 	{
-		std::string strData = TCHAR_TO_ANSI(*mSendQueue[0]);
+		unsigned char *buf = (unsigned char*)FMemory::Malloc(LWS_PRE + MAX_ECHO_PAYLOAD);
+		while (mSendQueueData.Num() > 0)
+		{
+			uint8 *data = mSendQueueData[0].GetData();
+			sizeOfData = mSendQueueData[0].Num();
+			
+			// we are about to go over the max send size, 
+			// keep them in the queue for later, stop processing
+			if (location + sizeOfData > MAX_ECHO_PAYLOAD)
+				break;
 
-		unsigned char buf[LWS_PRE + MAX_ECHO_PAYLOAD];
-		memcpy(&buf[LWS_PRE], strData.c_str(), strData.size());
-		lws_write(mlws, &buf[LWS_PRE], strData.size(), LWS_WRITE_TEXT);
-
-		mSendQueue.RemoveAt(0);
-	}
+			FMemory::Memcpy(&buf[location], data, sizeOfData);
+			location += sizeOfData;
+			mSendQueueData.RemoveAt(0);	
+		}
+		lws_write(mlws, &buf[LWS_PRE], location - LWS_PRE, LWS_WRITE_BINARY);
+	} 
 #endif
 }
 

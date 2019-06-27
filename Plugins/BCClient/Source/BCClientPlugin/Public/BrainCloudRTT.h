@@ -8,6 +8,7 @@ class BrainCloudRTTComms;
 class UBCBlueprintRTTCallProxyBase;
 class IRTTCallback;
 class IServerCallback;
+class UBCRTTProxy;
 
 class BCCLIENTPLUGIN_API BrainCloudRTT
 {
@@ -28,6 +29,16 @@ class BCCLIENTPLUGIN_API BrainCloudRTT
 	* This function will first call requestClientConnection, then connect to the address
 	*/
 	void enableRTT(BCRTTConnectionType in_type, IServerCallback *in_callback);
+
+	/*
+	* Enables Real Time event for this session.
+	* Real Time events are disabled by default. Usually events
+	* need to be polled using GET_EVENTS. By enabling this, events will
+	* be received instantly when they happen through a TCP connection to an Event Server.
+	*
+	* This function will first call requestClientConnection, then connect to the address
+	*/
+	void enableRTT(BCRTTConnectionType in_type, UBCRTTProxy *in_callback);
 
 	/*
 	* Disables Real Time event for this session.

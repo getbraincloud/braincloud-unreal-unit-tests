@@ -302,6 +302,26 @@ void UBrainCloudWrapper::serverError(ServiceName serviceName, ServiceOperation s
     }
 }
 
+FString UBrainCloudWrapper::buildErrorJson(int32 statusCode, int32 reasonCode, const FString &statusMessage)
+{
+    TSharedRef<FJsonObject> jsonObj = MakeShareable(new FJsonObject());
+	jsonObj->SetNumberField(TEXT("status"), statusCode);
+	jsonObj->SetNumberField(TEXT("reason_code"), reasonCode);
+	jsonObj->SetStringField(TEXT("statusMessage"), statusMessage);
+	jsonObj->SetStringField(TEXT("severity"), TEXT("ERROR"));
+
+    FString errorStr = UBrainCloudWrapper::GetJsonString(jsonObj);
+	return errorStr;
+}
+
+FString UBrainCloudWrapper::GetJsonString(TSharedRef<FJsonObject> jsonDataObject)
+{
+	FString jsonStr;
+	TSharedRef<TJsonWriter<>> writer = TJsonWriterFactory<>::Create(&jsonStr);
+	FJsonSerializer::Serialize(jsonDataObject, writer);
+	return jsonStr;
+}
+
 void UBrainCloudWrapper::loadData()
 {
     UBrainCloudSave *LoadGameInstance = Cast<UBrainCloudSave>(UGameplayStatics::CreateSaveGameObject(UBrainCloudSave::StaticClass()));

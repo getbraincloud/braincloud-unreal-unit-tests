@@ -106,6 +106,34 @@ class UBCGroupProxy : public UBCBlueprintCallProxyBase
 		const FString &jsonDefaultMemberAttributes);
 
 	/**
+	 * Create a group with summary data.
+	 *
+	 * Service Name - group
+	 * Service Operation - CREATE_GROUP
+	 *
+	 * Param - name Name of the group.
+	 * Param - groupType Name of the type of group.
+	 * Param - isOpenGroup true if group is open; false if closed.
+	 * Param - acl The group's access control list. A null ACL implies default.
+	 * Param - jsonOwnerAttributes Attributes for the group owner (current player).
+	 * Param - jsonDefaultMemberAttributes Default attributes for group members.
+	 * Param - jsonData Custom application data.
+	 * Param - jsonSummaryData Custom application data.
+	 */
+	UFUNCTION(BlueprintCallable, meta = (BlueprintInternalUseOnly = "true"), Category = "BrainCloud|Group")
+	static UBCGroupProxy *CreateGroupWithSummaryData(
+		UBrainCloudWrapper *brainCloudWrapper,
+		const FString &name,
+		const FString &type,
+		bool isOpenGroup,
+		UBrainCloudGroupACL *acl,
+		const FString &jsonData,
+		const FString &jsonOwnerAttributes,
+		const FString &jsonDefaultMemberAttributes,
+		const FString &jsonSummaryData);
+
+
+	/**
 	 * Create a group entity.
 	 *
 	 * Service Name - group
@@ -422,4 +450,32 @@ class UBCGroupProxy : public UBCBlueprintCallProxyBase
      */
 	UFUNCTION(BlueprintCallable, meta = (BlueprintInternalUseOnly = "true"), Category = "BrainCloud|Group")
 	static UBCGroupProxy *SetGroupOpen(UBrainCloudWrapper *brainCloudWrapper, const FString &groupId, bool isOpenGroup);
+
+	/**
+     * Update a froup's summary data
+     *
+     * Service Name - group
+     * Service Operation - UPDATE_GROUP_SUMMARY_DATA
+     *
+     * @param groupId ID of the group.
+     * @param version the version
+     * @param jsonSummaryData custom application data 
+     * @param callback The method to be invoked when the server response is received
+     */
+	UFUNCTION(BlueprintCallable, meta = (BlueprintInternalUseOnly = "true"), Category = "BrainCloud|Group")
+	static UBCGroupProxy *UpdateGroupSummaryData(UBrainCloudWrapper *brainCloudWrapper, const FString &groupId, int32 version,  const FString &jsonSummaryData);
+    
+    /**
+     * Get a list of up to maxReturn randomly selected groups from the server based on where condition
+     *
+     * Service Name - group
+     * Service Operation - GET_RANDOM_GROUPS_MATCHING
+     *
+     * @param jsonWhere where to search.
+     * @param maxReturn #of groups to search 
+     * @param callback The method to be invoked when the server response is received
+     */
+	UFUNCTION(BlueprintCallable, meta = (BlueprintInternalUseOnly = "true"), Category = "BrainCloud|Group")
+	static UBCGroupProxy *GetRandomGroupsMatching(UBrainCloudWrapper *brainCloudWrapper, const FString &jsonWhere, int32 maxReturn);
+    
 };

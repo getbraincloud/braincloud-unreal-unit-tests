@@ -366,6 +366,8 @@ const OperationParam OperationParam::GroupContext = OperationParam("context");
 const OperationParam OperationParam::GroupPageOffset = OperationParam("pageOffset");
 const OperationParam OperationParam::GroupAutoJoinStrategy = OperationParam("autoJoinStrategy");
 const OperationParam OperationParam::GroupWhere = OperationParam("where");
+const OperationParam OperationParam::GroupSummaryData = OperationParam("summaryData");
+const OperationParam OperationParam::GroupMaxReturn = OperationParam("maxReturn");
 
 const OperationParam OperationParam::ProfileId = OperationParam("profileId");
 const OperationParam OperationParam::EmailAddress = OperationParam("emailAddress");
@@ -432,6 +434,7 @@ const OperationParam OperationParam::SentMessageType = OperationParam("sent");
 
 // lobby
 const OperationParam OperationParam::LobbyRoomType = OperationParam("lobbyType");
+const OperationParam OperationParam::LobbyTypes = OperationParam("lobbyTypes");
 const OperationParam OperationParam::LobbyRating = OperationParam("rating");
 const OperationParam OperationParam::LobbyAlgorithm = OperationParam("algo");
 const OperationParam OperationParam::LobbyMaxSteps = OperationParam("maxSteps");
@@ -449,6 +452,7 @@ const OperationParam OperationParam::LobbyIdentifier = OperationParam("lobbyId")
 const OperationParam OperationParam::LobbyToTeamName = OperationParam("toTeamCode");
 const OperationParam OperationParam::LobbySignalData = OperationParam("signalData");
 const OperationParam OperationParam::LobbyConnectionId = OperationParam("cxId");
+const OperationParam OperationParam::PingData = OperationParam("pingData");
 
 bool OperationParam::operator==(const OperationParam &s) const
 {

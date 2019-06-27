@@ -6,6 +6,7 @@
 #include "GameDelegates.h"
 #include "BrainCloudComms.h"
 #include "BrainCloudRTTComms.h"
+#include "BrainCloudRelayComms.h"
 #include "ServerCall.h"
 #include "JsonUtil.h"
 #include "IServerCallback.h"
@@ -15,10 +16,11 @@
 #include "IGlobalErrorCallback.h"
 #include "INetworkErrorCallback.h"
 #include "IRTTCallback.h"
+#include "IRelayCallback.h"
 #include "BCPlatform.h"
 
 // Define all static member variables.
-FString BrainCloudClient::s_brainCloudClientVersion = TEXT("4.0.0");
+FString BrainCloudClient::s_brainCloudClientVersion = TEXT("4.1.0");
 
 ////////////////////////////////////////////////////
 // (De)Constructors
@@ -31,6 +33,7 @@ BrainCloudClient::BrainCloudClient()
 {
 	_brainCloudComms = new BrainCloudComms(this);
 	_brainCloudRTTComms = new BrainCloudRTTComms(this);
+	_brainCloudRelayComms = new BrainCloudRelayComms(this);
 }
 
 /**
@@ -40,6 +43,7 @@ BrainCloudClient::~BrainCloudClient()
 {
 	destroyService(_brainCloudComms);
 	destroyService(_brainCloudRTTComms);
+	destroyService(_brainCloudRelayComms);
 
 	destroyService(_authenticationService);
 	destroyService(_leaderboardService);
@@ -181,6 +185,13 @@ void BrainCloudClient::runCallbacks(eBCUpdateType in_updateType /*= eBCUpdateTyp
 	}
 	break;
 
+	case eBCUpdateType::RS:
+	{
+		if (_brainCloudRelayComms)
+			_brainCloudRelayComms->RunCallbacks();
+	}
+	break;
+
 	default:
 	case eBCUpdateType::ALL:
 	{
@@ -189,6 +200,9 @@ void BrainCloudClient::runCallbacks(eBCUpdateType in_updateType /*= eBCUpdateTyp
 
 		if (_brainCloudRTTComms)
 			_brainCloudRTTComms->RunCallbacks();
+
+		if (_brainCloudRelayComms)
+			_brainCloudRelayComms->RunCallbacks();
 	}
 	break;
 	}
@@ -303,6 +317,7 @@ void BrainCloudClient::resetCommunication()
 {
 	_brainCloudComms->ResetCommunication();
 	_brainCloudRTTComms->disableRTT();
+	_brainCloudRelayComms->disconnect();
 
 	if (_authenticationService)
 		_authenticationService->clearSavedProfileId();
@@ -710,6 +725,16 @@ BrainCloudMessaging *BrainCloudClient::getMessagingService()
 		_messagingService = new BrainCloudMessaging(this);
 	}
 	return _messagingService;
+}
+
+
+BrainCloudRelay *BrainCloudClient::getRelayService()
+{
+	if (_relayService == nullptr)
+	{
+		_relayService = new BrainCloudRelay(_brainCloudRelayComms);
+	}
+	return _relayService;
 }
 
 const FString &BrainCloudClient::getSessionId()

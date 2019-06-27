@@ -95,6 +95,37 @@ void BrainCloudGroup::createGroup(
 	_client->sendRequest(sc);
 }
 
+void BrainCloudGroup::createGroupWithSummaryData(
+	const FString &name,
+	const FString &groupType,
+	bool isOpenGroup,
+	UBrainCloudGroupACL *acl,
+	const FString &jsonData,
+	const FString &jsonOwnerAttributes,
+	const FString &jsonDefaultMemberAttributes,
+	const FString &jsonSummaryData,
+	IServerCallback *callback)
+{
+	TSharedRef<FJsonObject> message = MakeShareable(new FJsonObject());
+	if (OperationParam::isOptionalParamValid(name))
+		message->SetStringField(OperationParam::GroupName.getValue(), name);
+	message->SetStringField(OperationParam::GroupType.getValue(), groupType);
+	message->SetBoolField(OperationParam::GroupIsOpenGroup.getValue(), isOpenGroup);
+	if (acl != nullptr)
+		message->SetObjectField(OperationParam::GroupAcl.getValue(), acl->toJsonObject());
+	if (OperationParam::isOptionalParamValid(jsonData))
+		message->SetObjectField(OperationParam::GroupData.getValue(), JsonUtil::jsonStringToValue(jsonData));
+	if (OperationParam::isOptionalParamValid(jsonOwnerAttributes))
+		message->SetObjectField(OperationParam::GroupOwnerAttributes.getValue(), JsonUtil::jsonStringToValue(jsonOwnerAttributes));
+	if (OperationParam::isOptionalParamValid(jsonDefaultMemberAttributes))
+		message->SetObjectField(OperationParam::GroupDefaultMemberAttributes.getValue(), JsonUtil::jsonStringToValue(jsonDefaultMemberAttributes));
+	if (OperationParam::isOptionalParamValid(jsonSummaryData))
+		message->SetObjectField(OperationParam::GroupSummaryData.getValue(), JsonUtil::jsonStringToValue(jsonSummaryData));
+
+	ServerCall *sc = new ServerCall(ServiceName::Group, ServiceOperation::CreateGroup, message, callback);
+	_client->sendRequest(sc);
+}
+
 void BrainCloudGroup::createGroupEntity(
 	const FString &groupId,
 	const FString &entityType,
@@ -363,6 +394,29 @@ void BrainCloudGroup::setGroupOpen(const FString &groupId, bool isOpenGroup, ISe
 	message->SetBoolField(OperationParam::GroupIsOpenGroup.getValue(), isOpenGroup);
 
 	ServerCall *sc = new ServerCall(ServiceName::Group, ServiceOperation::SetGroupOpen, message, callback);
+	_client->sendRequest(sc);
+}
+
+void BrainCloudGroup::updateGroupSummaryData(const FString &groupId, int32 version,  const FString &jsonSummaryData, IServerCallback *callback)
+{
+	TSharedRef<FJsonObject> message = MakeShareable(new FJsonObject());
+	message->SetStringField(OperationParam::GroupId.getValue(), groupId);
+	message->SetNumberField(OperationParam::GroupVersion.getValue(), version);
+	if (OperationParam::isOptionalParamValid(jsonSummaryData))
+		message->SetObjectField(OperationParam::GroupSummaryData.getValue(), JsonUtil::jsonStringToValue(jsonSummaryData));
+
+	ServerCall *sc = new ServerCall(ServiceName::Group, ServiceOperation::UpdateGroupSummaryData, message, callback);
+	_client->sendRequest(sc);
+}
+    
+void BrainCloudGroup::getRandomGroupsMatching(const FString &jsonWhere, int32 maxReturn, IServerCallback *callback)
+{
+	TSharedRef<FJsonObject> message = MakeShareable(new FJsonObject());
+	if (OperationParam::isOptionalParamValid(jsonWhere))
+		message->SetObjectField(OperationParam::GroupWhere.getValue(), JsonUtil::jsonStringToValue(jsonWhere));
+	message->SetNumberField(OperationParam::GroupMaxReturn.getValue(), maxReturn);
+	
+	ServerCall *sc = new ServerCall(ServiceName::Group, ServiceOperation::GetRandomGroupsMatching, message, callback);
 	_client->sendRequest(sc);
 }
 

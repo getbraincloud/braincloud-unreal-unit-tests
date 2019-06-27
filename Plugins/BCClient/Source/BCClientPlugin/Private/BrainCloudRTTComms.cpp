@@ -9,10 +9,12 @@
 
 #include "JsonUtil.h"
 #include "BCBlueprintRTTCallProxyBase.h"
+#include "BCRTTProxy.h"
 #include "IServerCallback.h"
 #include "ServerCall.h"
 #include "ServiceName.h"
 #include "ServiceOperation.h"
+#include "BrainCloudWrapper.h"
 #include "BrainCloudClient.h"
 #include "BCFileUploader.h"
 #include "ReasonCodes.h"
@@ -54,6 +56,7 @@ static const struct lws_extension exts[] = {
 BrainCloudRTTComms::BrainCloudRTTComms(BrainCloudClient *client) 
 : m_client(client)
 , m_appCallback(nullptr)
+, m_appCallbackBP(nullptr)
 , m_connectedSocket(nullptr)
 , m_commsPtr(nullptr)
 , m_cxId(TEXT(""))
@@ -84,10 +87,20 @@ void BrainCloudRTTComms::enableRTT(BCRTTConnectionType in_connectionType, IServe
 	}
 }
 
+void BrainCloudRTTComms::enableRTT(BCRTTConnectionType in_connectionType, UBCRTTProxy *callback)
+{
+	if (!m_bIsConnected)
+	{
+		m_connectionType = in_connectionType;
+		m_appCallbackBP = callback;
+		m_client->getRTTService()->requestClientConnection(this);
+	}
+}
+
 void BrainCloudRTTComms::disableRTT()
 {
 	if (isRTTEnabled())
-		processRegisteredListeners(ServiceName::RTTRegistration.getValue().ToLower(), "disconnect", buildRTTRequestError("DisableRTT Called"));
+		processRegisteredListeners(ServiceName::RTTRegistration.getValue().ToLower(), "disconnect", UBrainCloudWrapper::buildErrorJson(403, ReasonCodes::RTT_CLIENT_ERROR, "DisableRTT Called"));
 }
 
 bool BrainCloudRTTComms::isRTTEnabled()
@@ -221,9 +234,10 @@ void BrainCloudRTTComms::deregisterRTTCallback(ServiceName in_serviceName)
 
 void BrainCloudRTTComms::deregisterAllRTTCallbacks()
 {
+	UBCBlueprintRTTCallProxyBase *pObject;
 	for (auto iterator = m_registeredRTTBluePrintCallbacks.CreateIterator(); iterator; ++iterator)
 	{
-		UBCBlueprintRTTCallProxyBase *pObject = iterator.Value();
+		pObject = iterator.Value();
 		if (pObject->IsValidLowLevel())
 		{
 			pObject->RemoveFromRoot();
@@ -250,6 +264,8 @@ void BrainCloudRTTComms::connectWebSocket()
 
 void BrainCloudRTTComms::disconnect()
 {
+	if (!m_bIsConnected) return;
+
 	// clear everything
 	if (m_connectedSocket != nullptr && m_commsPtr != nullptr)
 	{
@@ -266,20 +282,26 @@ void BrainCloudRTTComms::disconnect()
 
 	delete m_connectedSocket;
 	m_connectedSocket = nullptr;
-
+#if PLATFORM_UWP
+#elif PLATFORM_HTML5
+#else
 	lws_context_destroy(m_lwsContext);
 	m_lwsContext = nullptr;
+#endif
 
 	m_cxId = TEXT("");
 	m_eventServer = TEXT("");
 
 	m_bIsConnected = false;
-	
-	m_appCallback = nullptr;
-}
 
-void BrainCloudRTTComms::connect()
-{
+	m_appCallback = nullptr;
+
+	if (m_appCallbackBP != nullptr)
+	{
+		// allow it to be removed, if no longer referenced
+        m_appCallbackBP->RemoveFromRoot();
+        m_appCallbackBP->ConditionalBeginDestroy();
+	}
 }
 
 FString BrainCloudRTTComms::buildConnectionRequest()
@@ -352,6 +374,10 @@ void BrainCloudRTTComms::processRegisteredListeners(const FString &in_service, c
 		{
 			m_appCallback->serverCallback(ServiceName::RTTRegistration, ServiceOperation::Connect, in_jsonMessage);
 		}
+		else if (m_appCallbackBP != nullptr)
+		{
+			m_appCallbackBP->serverCallback(ServiceName::RTTRegistration, ServiceOperation::Connect, in_jsonMessage);
+		}
 	}
 	else if (in_operation == TEXT("error") || in_operation == TEXT("disconnect"))
 	{
@@ -359,6 +385,10 @@ void BrainCloudRTTComms::processRegisteredListeners(const FString &in_service, c
 		if (m_appCallback != nullptr)
 		{
 			m_appCallback->serverError(ServiceName::RTTRegistration, ServiceOperation::Connect, 400, -1, in_jsonMessage);
+		}
+		else if (m_appCallbackBP != nullptr)
+		{
+			m_appCallbackBP->serverError(ServiceName::RTTRegistration, ServiceOperation::Connect, 400, -1, in_jsonMessage);
 		}
 
 		if (in_operation == TEXT("disconnect"))
@@ -426,7 +456,11 @@ void BrainCloudRTTComms::setupWebSocket(const FString &in_url)
 	m_connectedSocket->OnClosed.AddDynamic(m_commsPtr, &UBCRTTCommsProxy::WebSocket_OnClose);
 	m_connectedSocket->OnConnectComplete.AddDynamic(m_commsPtr, &UBCRTTCommsProxy::Websocket_OnOpen);
 	m_connectedSocket->OnReceiveData.AddDynamic(m_commsPtr, &UBCRTTCommsProxy::WebSocket_OnMessage);
+#if PLATFORM_UWP
+#elif PLATFORM_HTML5
+#else
 	m_connectedSocket->mlwsContext = m_lwsContext;
+#endif
 
 	m_connectedSocket->Connect(in_url, m_rttHeadersMap);
 }
@@ -436,7 +470,7 @@ void BrainCloudRTTComms::webSocket_OnClose()
 	if (m_client->isLoggingEnabled())
 		UE_LOG(LogBrainCloudComms, Log, TEXT("Connection closed"));
 
-	processRegisteredListeners(ServiceName::RTTRegistration.getValue().ToLower(), "error", buildRTTRequestError("Could not connect at this time"));
+	processRegisteredListeners(ServiceName::RTTRegistration.getValue().ToLower(), "error", UBrainCloudWrapper::buildErrorJson(403, ReasonCodes::RS_CLIENT_ERROR,"Could not connect at this time"));
 }
 
 void BrainCloudRTTComms::websocket_OnOpen()
@@ -447,22 +481,8 @@ void BrainCloudRTTComms::websocket_OnOpen()
 
 void BrainCloudRTTComms::webSocket_OnMessage(TArray<uint8> in_data)
 {
-	FString parsedMessage = BrainCloudRTTComms::BCBytesToString(in_data.GetData(), in_data.Num());
+	FString parsedMessage = BrainCloudRelay::BCBytesToString(in_data.GetData(), in_data.Num());
 	onRecv(parsedMessage);
-}
-
-FString BrainCloudRTTComms::BCBytesToString(const uint8* in, int32 count)
-{
-	FString result2;
-	result2.Empty(count);
-	while (count)
-	{
-        result2 += ANSICHAR(*in);
-		++in;
-		--count;
-	}
-	
-	return result2;
 }
 
 void BrainCloudRTTComms::webSocket_OnError(const FString &in_message)
@@ -470,7 +490,7 @@ void BrainCloudRTTComms::webSocket_OnError(const FString &in_message)
 	if (m_client->isLoggingEnabled())
 		UE_LOG(LogBrainCloudComms, Log, TEXT("Error: %s"), *in_message);
 
-	processRegisteredListeners(ServiceName::RTTRegistration.getValue().ToLower(), "disconnect", buildRTTRequestError(in_message));
+	processRegisteredListeners(ServiceName::RTTRegistration.getValue().ToLower(), "disconnect", UBrainCloudWrapper::buildErrorJson(403, ReasonCodes::RS_CLIENT_ERROR, in_message));
 }
 
 void BrainCloudRTTComms::onRecv(const FString &in_message)
@@ -607,9 +627,15 @@ void BrainCloudRTTComms::serverCallback(ServiceName serviceName, ServiceOperatio
 
 void BrainCloudRTTComms::serverError(ServiceName serviceName, ServiceOperation serviceOperation, int32 statusCode, int32 reasonCode, const FString &jsonError)
 {
-	disconnect();
-
 	// server callback rtt connected with data!
 	if (m_appCallback != nullptr)
+	{
 		m_appCallback->serverError(serviceName, serviceOperation, statusCode, reasonCode, jsonError);
+	}
+	else if (m_appCallbackBP != nullptr)
+	{
+		m_appCallbackBP->serverError(serviceName, serviceOperation, statusCode, reasonCode, jsonError);
+	}
+
+	disconnect();
 }
