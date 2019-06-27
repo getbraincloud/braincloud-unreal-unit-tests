@@ -234,9 +234,10 @@ void BrainCloudRTTComms::deregisterRTTCallback(ServiceName in_serviceName)
 
 void BrainCloudRTTComms::deregisterAllRTTCallbacks()
 {
+	UBCBlueprintRTTCallProxyBase *pObject;
 	for (auto iterator = m_registeredRTTBluePrintCallbacks.CreateIterator(); iterator; ++iterator)
 	{
-		UBCBlueprintRTTCallProxyBase *pObject = iterator.Value();
+		pObject = iterator.Value();
 		if (pObject->IsValidLowLevel())
 		{
 			pObject->RemoveFromRoot();
