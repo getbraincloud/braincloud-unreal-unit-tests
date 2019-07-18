@@ -8,6 +8,7 @@
 #include "ReasonCodes.h"
 #include "ServerCall.h"
 #include "JsonUtil.h"
+#include "JsonObjectConverter.h"
 
 
 BrainCloudLobby::BrainCloudLobby(BrainCloudClient *client)
@@ -256,19 +257,30 @@ void BrainCloudLobby::getRegionsForLobbies(const TArray<FString> &in_roomTypes, 
     _client->sendRequest(sc);
 }
 
+/////////////////////////////////////////////////////////////////////////////////
 void BrainCloudLobby::pingRegions(IServerCallback* in_callback)
 {
+    UE_LOG(LogBrainCloudComms, Log, TEXT("PIIIIIIIINGINNNNNNNNNNG REGIONSSSSSSS"));
     _pingRegionsCallback = in_callback;
     _pingData = MakeShareable(new FJsonObject());
     _cachedPingResponses.Empty();
+    FString targetStr;
+
+
+    //Are there regions?
     if (_regionPingData.IsValid())
     {
+        UE_LOG(LogBrainCloudComms, Log, TEXT("THERE ARE REGIONS!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!"));
+
         // iterate over pingable hosts, doing appropriate ping tests for each one
         FString name;
         TSharedPtr<FJsonValue> value;
         TSharedPtr<FJsonObject> valueObj;
         
+        //keep track of the number of regions we've processed. 
         int numRegionProcessed = 0;
+
+        //iterate over the regionPingData
         for (auto currJsonValue = _regionPingData->Values.CreateConstIterator(); currJsonValue; ++currJsonValue)
         {
             // Get the key name
@@ -276,18 +288,35 @@ void BrainCloudLobby::pingRegions(IServerCallback* in_callback)
             // Get the value as a FJsonValue object
             value = (*currJsonValue).Value;
             valueObj = value->AsObject();
+
+            //we've processed one more region
             ++numRegionProcessed;
+
+            //is the region of Ping type?
             if (valueObj->HasField("type") && valueObj->GetStringField("type") == "PING")
             {
+                //cache the regionPing info
 	            TArray<double> newArray;
                 _cachedPingResponses.Emplace(name, newArray);
-                pingHost(name, "http://" + valueObj->GetStringField("target"), 0, numRegionProcessed == _regionPingData->Values.Num());
+
+                //update the string of the target 
+                targetStr = "http://" + valueObj->GetStringField("target");
+
+                Mutex.Lock();
+                //ping that region 4 times. 
+                for (int i = 0; i < MAX_PING_CALLS; i++)
+                {
+                    TMap<FString, FString> pair;
+                    pair.Add(name, targetStr);
+                    m_regionTargetsToProcess.Emplace(pair);
+                }
+                Mutex.Unlock();
             }
         }
+        pingNextItemToProcess();
     }
     else 
     {
-        
         UE_LOG(LogBrainCloudComms, Log, TEXT("calling error"));
         // call the server error right away!
         if (in_callback != nullptr)
@@ -298,6 +327,33 @@ void BrainCloudLobby::pingRegions(IServerCallback* in_callback)
             in_callback->serverError(ServiceName::Lobby, ServiceOperation::GetRegionsForLobbies, 400, ReasonCodes::MISSING_REQUIRED_PARAMETER, messageJson);
         }
     }
+}
+
+void BrainCloudLobby::pingNextItemToProcess()
+{
+    UE_LOG(LogBrainCloudComms, Log, TEXT("WE HIT PING NEXT ITEM TO PROCESS!!!!!!!!!!!!!!!!!!"));
+    Mutex.Lock();
+    if(m_regionTargetsToProcess.Num() > 0)
+    {
+        for(int i = 0; i < NUM_PING_CALLS_IN_PARALLEL && m_regionTargetsToProcess.Num() > 0; i++)
+        {
+            TMap<FString, FString> pair = m_regionTargetsToProcess[0];
+            m_regionTargetsToProcess.RemoveAt(0);
+
+            //there is only one element in the map, but this is only effective way I could isolate key
+            for (auto& Element : pair)
+            {
+                UE_LOG(LogBrainCloudComms, Log,TEXT("AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAPinging %s and %s"), *Element.Key, *Element.Value);
+                pingHost(Element.Key, Element.Value, 0);
+            }
+        }
+
+        if (_pingRegionsCallback != nullptr)
+        {
+            _pingRegionsCallback->serverCallback(ServiceName::Lobby, ServiceOperation::PingData, "");
+        }
+    }
+    Mutex.Unlock();
 }
 
 void BrainCloudLobby::serverCallback(ServiceName serviceName, ServiceOperation serviceOperation, FString const &jsonData)
@@ -319,6 +375,11 @@ void BrainCloudLobby::serverCallback(ServiceName serviceName, ServiceOperation s
             _regionsForLobbiesCallback->serverCallback(serviceName, serviceOperation, jsonData);
         }
     }
+
+    if (serviceName == ServiceName::Lobby && serviceOperation == ServiceOperation::PingData)
+    {
+        //do I want something in here?
+    }
 }
 
 void BrainCloudLobby::serverError(ServiceName serviceName, ServiceOperation serviceOperation,
@@ -337,6 +398,7 @@ void BrainCloudLobby::serverError(ServiceName serviceName, ServiceOperation serv
 
 void BrainCloudLobby::attachPingDataAndSend(TSharedRef<FJsonObject> message, ServiceOperation serviceOperation, IServerCallback *in_callback)
 {
+    //if isValid doesnt work use hasPingData = PingData != null && PingData.Count > 0
     bool hasPingData = _pingData.IsValid();
     if (hasPingData)
     {
@@ -357,9 +419,8 @@ void BrainCloudLobby::attachPingDataAndSend(TSharedRef<FJsonObject> message, Ser
     }
 }
 
-void BrainCloudLobby::pingHost(FString in_region, FString in_target, int in_index, bool in_bLastItem /*= false*/)
+void BrainCloudLobby::pingHost(FString in_region, FString in_target, int in_index)
 {
-    //for (int i = 0; i < MAX_PING_CALLS; ++i)
     {
         TSharedRef<IHttpRequest> Request = _http->CreateRequest();
 	    Request->OnProcessRequestComplete().BindRaw(this, &BrainCloudLobby::onPingResponseReceived);
@@ -369,7 +430,7 @@ void BrainCloudLobby::pingHost(FString in_region, FString in_target, int in_inde
 	    Request->SetVerb("GET");
         Request->SetHeader("region", in_region);
         Request->SetHeader("index", FString::FromInt(in_index));
-        Request->SetHeader("lastItem", in_bLastItem ? "true" : "false");
+        //Request->SetHeader("lastItem", in_bLastItem ? "true" : "false");
         
         // set the time so that the resonse can have the proper diff
         _cachedPingResponses[in_region].Add(FPlatformTime::Seconds());
@@ -407,15 +468,10 @@ void BrainCloudLobby::onPingResponseReceived(FHttpRequestPtr Request, FHttpRespo
         // accumulated ALL, now subtract the highest value
         totalAccumulated -= highestValue;
         _pingData->SetNumberField(region, totalAccumulated / (numElements - 1));
-
-        if (bLastItem && _pingRegionsCallback != nullptr)
-        {
-            _pingRegionsCallback->serverCallback(ServiceName::Lobby, ServiceOperation::PingData, "");
-        }
     }
     else
     {
-        pingHost(region, Request->GetURL(), index + 1, bLastItem);
+        pingNextItemToProcess();
     }
 }
 
