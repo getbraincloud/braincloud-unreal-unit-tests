@@ -306,8 +306,7 @@ void BrainCloudLobby::pingRegions(IServerCallback* in_callback)
                 //ping that region 4 times. 
                 for (int i = 0; i < MAX_PING_CALLS; i++)
                 {
-                    TPair<FString, FString> pair;
-                    pair = MakeTuple(name, targetStr);
+                    TPair<FString, FString> pair = MakeTuple(name, targetStr);
                     //pair.Emplace(name, targetStr);
                     m_regionTargetsToProcess.Emplace(pair);
                 }
@@ -349,6 +348,7 @@ void BrainCloudLobby::pingNextItemToProcess()
 		TSharedRef<TJsonWriter<>> writer = TJsonWriterFactory<>::Create(&serializedPingData);
         if(FJsonSerializer::Serialize(_pingData.ToSharedRef(), writer))
         {
+            //could remove this and put a log instead to better track the region's successes, but im not getting logs :/
             _pingRegionsCallback->serverCallback(ServiceName::Lobby, ServiceOperation::PingData, serializedPingData);
         }
     }
