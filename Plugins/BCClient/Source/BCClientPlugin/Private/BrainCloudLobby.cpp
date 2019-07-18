@@ -266,7 +266,6 @@ void BrainCloudLobby::pingRegions(IServerCallback* in_callback)
     _cachedPingResponses.Empty();
     FString targetStr;
 
-
     //Are there regions?
     if (_regionPingData.IsValid())
     {
@@ -328,10 +327,19 @@ void BrainCloudLobby::pingRegions(IServerCallback* in_callback)
         }
     }
 }
+/////////////////////////////////////////////////////////////////////
 
+/////////////////////////////////////////////////////////////////////
 void BrainCloudLobby::pingNextItemToProcess()
 {
-    UE_LOG(LogBrainCloudComms, Log, TEXT("WE HIT PING NEXT ITEM TO PROCESS!!!!!!!!!!!!!!!!!!"));
+    //need to deserialize the Jsons to get their sizes
+    TSharedPtr<FJsonValue> regionPingDataParsed;
+    TSharedRef<TJsonReader<TCHAR>> regionPingDataReader = TJsonReaderFactory<TCHAR>::Create(_regionPingData);
+    TSharedPtr<FJsonValue> pingDataParsed;
+    TSharedRef<TJsonReader<TCHAR>> pingDataReader = TJsonReaderFactory<TCHAR>::Create(_pingData);
+    FJsonSerializer::Deserialize(regionPingDataReader, regionPingDataParsed);
+    FJsonSerializer::Deserialize(pingDataReader, pingDataParsed)
+
     Mutex.Lock();
     if(m_regionTargetsToProcess.Num() > 0)
     {
@@ -339,19 +347,16 @@ void BrainCloudLobby::pingNextItemToProcess()
         {
             TMap<FString, FString> pair = m_regionTargetsToProcess[0];
             m_regionTargetsToProcess.RemoveAt(0);
-
             //there is only one element in the map, but this is only effective way I could isolate key
             for (auto& Element : pair)
             {
-                UE_LOG(LogBrainCloudComms, Log,TEXT("AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAPinging %s and %s"), *Element.Key, *Element.Value);
-                pingHost(Element.Key, Element.Value, 0);
+                pingHost(Element.Key, Element.Value);
             }
         }
-
-        if (_pingRegionsCallback != nullptr)
-        {
-            _pingRegionsCallback->serverCallback(ServiceName::Lobby, ServiceOperation::PingData, "");
-        }
+    }
+    else if (regionPingDataParsed->TryGetArray()->GetTypeSize() == pingDataParsed->TryGetArray()->GetTypeSize() && _pingRegionsCallback != nullptr)
+    {
+        _pingRegionsCallback->serverCallback(ServiceName::Lobby, ServiceOperation::PingData, "");
     }
     Mutex.Unlock();
 }
@@ -374,11 +379,6 @@ void BrainCloudLobby::serverCallback(ServiceName serviceName, ServiceOperation s
         {
             _regionsForLobbiesCallback->serverCallback(serviceName, serviceOperation, jsonData);
         }
-    }
-
-    if (serviceName == ServiceName::Lobby && serviceOperation == ServiceOperation::PingData)
-    {
-        //do I want something in here?
     }
 }
 
@@ -419,7 +419,7 @@ void BrainCloudLobby::attachPingDataAndSend(TSharedRef<FJsonObject> message, Ser
     }
 }
 
-void BrainCloudLobby::pingHost(FString in_region, FString in_target, int in_index)
+void BrainCloudLobby::pingHost(FString in_region, FString in_target)
 {
     {
         TSharedRef<IHttpRequest> Request = _http->CreateRequest();
@@ -429,7 +429,7 @@ void BrainCloudLobby::pingHost(FString in_region, FString in_target, int in_inde
 	    Request->SetURL(in_target);
 	    Request->SetVerb("GET");
         Request->SetHeader("region", in_region);
-        Request->SetHeader("index", FString::FromInt(in_index));
+        //Request->SetHeader("index", FString::FromInt(in_index));
         //Request->SetHeader("lastItem", in_bLastItem ? "true" : "false");
         
         // set the time so that the resonse can have the proper diff
@@ -442,8 +442,8 @@ void BrainCloudLobby::pingHost(FString in_region, FString in_target, int in_inde
 void BrainCloudLobby::onPingResponseReceived(FHttpRequestPtr Request, FHttpResponsePtr Response, bool bWasSuccessful)
 {
     FString region = Request->GetHeader("region");
-    int index = FCString::Atoi(*Request->GetHeader("index"));
-    bool bLastItem = Request->GetHeader("lastItem") == "true";
+    //int index = FCString::Atoi(*Request->GetHeader("index"));
+    //bool bLastItem = Request->GetHeader("lastItem") == "true";
     double origValue = _cachedPingResponses[region][index];
 
     // update it to be the diff
@@ -469,9 +469,7 @@ void BrainCloudLobby::onPingResponseReceived(FHttpRequestPtr Request, FHttpRespo
         totalAccumulated -= highestValue;
         _pingData->SetNumberField(region, totalAccumulated / (numElements - 1));
     }
-    else
-    {
-        pingNextItemToProcess();
-    }
+    
+    pingNextItemToProcess();
 }
 
