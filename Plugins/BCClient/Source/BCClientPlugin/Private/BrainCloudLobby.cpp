@@ -306,8 +306,9 @@ void BrainCloudLobby::pingRegions(IServerCallback* in_callback)
                 //ping that region 4 times. 
                 for (int i = 0; i < MAX_PING_CALLS; i++)
                 {
-                    TMap<FString, FString> pair;
-                    pair.Add(name, targetStr);
+                    TPair<FString, FString> pair;
+                    pair = MakeTuple(name, targetStr);
+                    //pair.Emplace(name, targetStr);
                     m_regionTargetsToProcess.Emplace(pair);
                 }
                 Mutex.Unlock();
@@ -338,13 +339,8 @@ void BrainCloudLobby::pingNextItemToProcess()
     {
         for(int i = 0; i < NUM_PING_CALLS_IN_PARALLEL && m_regionTargetsToProcess.Num() > 0; i++)
         {
-            TMap<FString, FString> pair = m_regionTargetsToProcess[0];
+            pingHost(m_regionTargetsToProcess[0].Get<0>(), m_regionTargetsToProcess[0].Get<1>(), 0);
             m_regionTargetsToProcess.RemoveAt(0);
-            //there is only one element in the map, but this is only effective way I could isolate key
-            for (auto& Element : pair)
-            {
-                pingHost(Element.Key, Element.Value, 0);
-            }
         }
     }
     else if (_regionPingData->Values.Num() == _pingData->Values.Num() && _pingRegionsCallback != nullptr)

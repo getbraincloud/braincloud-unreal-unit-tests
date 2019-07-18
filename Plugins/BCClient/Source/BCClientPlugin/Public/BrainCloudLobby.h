@@ -4,6 +4,7 @@
 
 #include "IServerCallback.h"
 #include "Runtime/Online/HTTP/Public/Http.h"
+#include "Runtime/Core/Public/Containers/Map.h"
 class BrainCloudClient;
 class ServiceOperation;
 class FPThreadsCriticalSection;
@@ -310,7 +311,7 @@ class BCCLIENTPLUGIN_API BrainCloudLobby : public IServerCallback
     TSharedPtr<FJsonObject> _regionPingData;
     TSharedPtr<FJsonObject> _pingData;
     TMap<FString, TArray<double>> _cachedPingResponses;
-    TArray<TMap<FString, FString>> m_regionTargetsToProcess;
+    TArray<TPair<FString, FString>> m_regionTargetsToProcess;
     
     FCriticalSection Mutex;
 };
