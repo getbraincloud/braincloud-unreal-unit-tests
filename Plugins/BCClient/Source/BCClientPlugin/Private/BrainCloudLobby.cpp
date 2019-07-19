@@ -271,9 +271,6 @@ void BrainCloudLobby::pingRegions(IServerCallback* in_callback)
         FString name;
         TSharedPtr<FJsonValue> value;
         TSharedPtr<FJsonObject> valueObj;
-        
-        //keep track of the number of regions we've processed. 
-        int numRegionProcessed = 0;
 
         //iterate over the regionPingData
         for (auto currJsonValue = _regionPingData->Values.CreateConstIterator(); currJsonValue; ++currJsonValue)
@@ -284,13 +281,9 @@ void BrainCloudLobby::pingRegions(IServerCallback* in_callback)
             value = (*currJsonValue).Value;
             valueObj = value->AsObject();
 
-            //we've processed one more region
-            ++numRegionProcessed;
-
             //is the region of Ping type?
             if (valueObj->HasField("type") && valueObj->GetStringField("type") == "PING")
             {
-                //cache the regionPing info
 	            TArray<double> newArray;
                 _cachedPingResponses.Emplace(name, newArray);
 
@@ -302,7 +295,6 @@ void BrainCloudLobby::pingRegions(IServerCallback* in_callback)
                 for (int i = 0; i < MAX_PING_CALLS; i++)
                 {
                     TPair<FString, FString> pair = MakeTuple(name, targetStr);
-                    //pair.Emplace(name, targetStr);
                     m_regionTargetsToProcess.Emplace(pair);
                 }
                 Mutex.Unlock();
@@ -328,9 +320,10 @@ void BrainCloudLobby::pingNextItemToProcess()
     Mutex.Lock();
     if(m_regionTargetsToProcess.Num() > 0)
     {
+        FString region;
         for(int i = 0; i < NUM_PING_CALLS_IN_PARALLEL && m_regionTargetsToProcess.Num() > 0; i++)
         {
-            FString region = m_regionTargetsToProcess[0].Key;
+            region = m_regionTargetsToProcess[0].Key;
             pingHost(region, m_regionTargetsToProcess[0].Value,_cachedPingResponses[region].Num() );
             m_regionTargetsToProcess.RemoveAt(0);
         }
@@ -384,7 +377,6 @@ void BrainCloudLobby::serverError(ServiceName serviceName, ServiceOperation serv
 
 void BrainCloudLobby::attachPingDataAndSend(TSharedRef<FJsonObject> message, ServiceOperation serviceOperation, IServerCallback *in_callback)
 {
-    //if isValid doesnt work use hasPingData = PingData != null && PingData.Count > 0
     bool hasPingData = _pingData.IsValid();
     if (hasPingData)
     {
