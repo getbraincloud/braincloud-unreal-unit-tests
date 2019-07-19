@@ -6,11 +6,13 @@
 #include "Runtime/Online/HTTP/Public/Http.h"
 class BrainCloudClient;
 class ServiceOperation;
+class FPThreadsCriticalSection;
 
 class BCCLIENTPLUGIN_API BrainCloudLobby : public IServerCallback
 {
   public:
 	static const uint8 MAX_PING_CALLS = 4;
+    static const uint8 NUM_PING_CALLS_IN_PARALLEL = 2;
     BrainCloudLobby(BrainCloudClient *client);
 
     /**
@@ -295,8 +297,9 @@ class BCCLIENTPLUGIN_API BrainCloudLobby : public IServerCallback
 
   private:
     void attachPingDataAndSend(TSharedRef<FJsonObject> message, ServiceOperation serviceOperation, IServerCallback *in_callback);
-    void pingHost(FString in_region, FString in_target, int in_index, bool in_bLastItem = false);
+    void pingHost(FString in_region, FString in_target, int in_index);
     void onPingResponseReceived(FHttpRequestPtr Request, FHttpResponsePtr Response, bool bWasSuccessful);
+    void pingNextItemToProcess();
     
     FHttpModule*_http;
 
@@ -307,4 +310,7 @@ class BCCLIENTPLUGIN_API BrainCloudLobby : public IServerCallback
     TSharedPtr<FJsonObject> _regionPingData;
     TSharedPtr<FJsonObject> _pingData;
     TMap<FString, TArray<double>> _cachedPingResponses;
+    TArray<TPair<FString, FString>> m_regionTargetsToProcess;
+    
+    FCriticalSection Mutex;
 };
