@@ -13,7 +13,7 @@ class BCCLIENTPLUGIN_API BrainCloudLobby : public IServerCallback
 {
   public:
 	static const uint8 MAX_PING_CALLS = 4;
-    static const uint8 NUM_PING_CALLS_IN_PARALLEL = 1;
+    static const uint8 NUM_PING_CALLS_IN_PARALLEL = 2;
     BrainCloudLobby(BrainCloudClient *client);
 
     /**

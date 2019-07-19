@@ -257,10 +257,8 @@ void BrainCloudLobby::getRegionsForLobbies(const TArray<FString> &in_roomTypes, 
     _client->sendRequest(sc);
 }
 
-/////////////////////////////////////////////////////////////////////////////////
 void BrainCloudLobby::pingRegions(IServerCallback* in_callback)
 {
-    UE_LOG(LogBrainCloudComms, Log, TEXT("PINGING REGIONS!!!!!!!!!"));
     _pingRegionsCallback = in_callback;
     _pingData = MakeShareable(new FJsonObject());
     _cachedPingResponses.Empty();
@@ -269,8 +267,6 @@ void BrainCloudLobby::pingRegions(IServerCallback* in_callback)
     //Are there regions?
     if (_regionPingData.IsValid())
     {
-        UE_LOG(LogBrainCloudComms, Log, TEXT("THERE ARE REGIONS!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!"));
-
         // iterate over pingable hosts, doing appropriate ping tests for each one
         FString name;
         TSharedPtr<FJsonValue> value;
@@ -291,15 +287,9 @@ void BrainCloudLobby::pingRegions(IServerCallback* in_callback)
             //we've processed one more region
             ++numRegionProcessed;
 
-            UE_LOG(LogBrainCloudComms, Log, TEXT("REGION: %i"), numRegionProcessed);
-
-            UE_LOG(LogBrainCloudComms, Log, TEXT("REGION: %s"), *name);
-
             //is the region of Ping type?
             if (valueObj->HasField("type") && valueObj->GetStringField("type") == "PING")
             {
-
-                UE_LOG(LogBrainCloudComms, Log, TEXT("REGION: %s has PING field"), *name);
                 //cache the regionPing info
 	            TArray<double> newArray;
                 _cachedPingResponses.Emplace(name, newArray);
@@ -311,7 +301,6 @@ void BrainCloudLobby::pingRegions(IServerCallback* in_callback)
                 //ping that region 4 times. 
                 for (int i = 0; i < MAX_PING_CALLS; i++)
                 {
-                    UE_LOG(LogBrainCloudComms, Log, TEXT("pinging %s 4 times"), *name);
                     TPair<FString, FString> pair = MakeTuple(name, targetStr);
                     //pair.Emplace(name, targetStr);
                     m_regionTargetsToProcess.Emplace(pair);
@@ -323,7 +312,6 @@ void BrainCloudLobby::pingRegions(IServerCallback* in_callback)
     }
     else 
     {
-        UE_LOG(LogBrainCloudComms, Log, TEXT("calling error"));
         // call the server error right away!
         if (in_callback != nullptr)
         {
@@ -334,9 +322,7 @@ void BrainCloudLobby::pingRegions(IServerCallback* in_callback)
         }
     }
 }
-/////////////////////////////////////////////////////////////////////
 
-/////////////////////////////////////////////////////////////////////
 void BrainCloudLobby::pingNextItemToProcess()
 {
     Mutex.Lock();
@@ -344,24 +330,18 @@ void BrainCloudLobby::pingNextItemToProcess()
     {
         for(int i = 0; i < NUM_PING_CALLS_IN_PARALLEL && m_regionTargetsToProcess.Num() > 0; i++)
         {
-            UE_LOG(LogBrainCloudComms, Log, TEXT("PINGING HOST WITH Key: %s, Value: %s"), *m_regionTargetsToProcess[0].Key, *m_regionTargetsToProcess[0].Value);
-            //pingHost(m_regionTargetsToProcess[0].Get<0>(), m_regionTargetsToProcess[0].Get<1>(), 0);
-            pingHost(m_regionTargetsToProcess[0].Key, m_regionTargetsToProcess[0].Value, i);
+            FString region = m_regionTargetsToProcess[0].Key;
+            pingHost(region, m_regionTargetsToProcess[0].Value,_cachedPingResponses[region].Num() );
             m_regionTargetsToProcess.RemoveAt(0);
         }
-        
-        UE_LOG(LogBrainCloudComms, Log, TEXT("Check regionPingData: %i"), _regionPingData->Values.Num());
-        UE_LOG(LogBrainCloudComms, Log, TEXT("Check pingData: %i"), _pingData->Values.Num());
     }
     else if (_regionPingData->Values.Num() == _pingData->Values.Num() && _pingRegionsCallback != nullptr)
     {
-        UE_LOG(LogBrainCloudComms, Log, TEXT("LOOKS LIKE ALL IS GOOD, LET'S SERIALIZE THE PING DATA"));
         FString serializedPingData;
 		TSharedRef<TJsonWriter<>> writer = TJsonWriterFactory<>::Create(&serializedPingData);
         if(FJsonSerializer::Serialize(_pingData.ToSharedRef(), writer))
         {
-            UE_LOG(LogBrainCloudComms, Log, TEXT("SERIALIZED AND PINGED"));
-            //_pingRegionsCallback->serverCallback(ServiceName::Lobby, ServiceOperation::PingData, serializedPingData);
+            _pingRegionsCallback->serverCallback(ServiceName::Lobby, ServiceOperation::PingData, serializedPingData);
         }
     }
     Mutex.Unlock();
@@ -436,7 +416,6 @@ void BrainCloudLobby::pingHost(FString in_region, FString in_target, int in_inde
 	    Request->SetVerb("GET");
         Request->SetHeader("region", in_region);
         Request->SetHeader("index", FString::FromInt(in_index));
-        //Request->SetHeader("lastItem", in_bLastItem ? "true" : "false");
         
         // set the time so that the resonse can have the proper diff
         _cachedPingResponses[in_region].Add(FPlatformTime::Seconds());
@@ -449,9 +428,7 @@ void BrainCloudLobby::onPingResponseReceived(FHttpRequestPtr Request, FHttpRespo
 {
     FString region = Request->GetHeader("region");
     int index = FCString::Atoi(*Request->GetHeader("index"));
-    //bool bLastItem = Request->GetHeader("lastItem") == "true";
     double origValue = _cachedPingResponses[region][index];
-    UE_LOG(LogBrainCloudComms, Log, TEXT("PING RECEIVED FROM %s"), *region);
 
     // update it to be the diff
     _cachedPingResponses[region][index] = (FPlatformTime::Seconds() - origValue) * 1000;
@@ -475,7 +452,6 @@ void BrainCloudLobby::onPingResponseReceived(FHttpRequestPtr Request, FHttpRespo
         // accumulated ALL, now subtract the highest value
         totalAccumulated -= highestValue;
         _pingData->SetNumberField(region, totalAccumulated / (numElements - 1));
-        UE_LOG(LogBrainCloudComms, Log, TEXT("CHECK RECEIVED PING - Region: %s Ping: %f"), *region, totalAccumulated / (numElements - 1));
     }
     
     pingNextItemToProcess();
