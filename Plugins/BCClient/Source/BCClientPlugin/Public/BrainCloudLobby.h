@@ -4,7 +4,7 @@
 
 #include "IServerCallback.h"
 #include "Runtime/Online/HTTP/Public/Http.h"
-#include "Runtime/Core/Public/Containers/Map.h"
+//#include "Runtime/Core/Public/Containers/Map.h"
 class BrainCloudClient;
 class ServiceOperation;
 class FPThreadsCriticalSection;
@@ -13,7 +13,7 @@ class BCCLIENTPLUGIN_API BrainCloudLobby : public IServerCallback
 {
   public:
 	static const uint8 MAX_PING_CALLS = 4;
-    static const uint8 NUM_PING_CALLS_IN_PARALLEL = 2;
+    static const uint8 NUM_PING_CALLS_IN_PARALLEL = 1;
     BrainCloudLobby(BrainCloudClient *client);
 
     /**

@@ -11,7 +11,6 @@
 #include "JsonObjectConverter.h"
 #include "Serialization/JsonSerializer.h"
 
-
 BrainCloudLobby::BrainCloudLobby(BrainCloudClient *client)
  : _client(client)
  , _regionsForLobbiesCallback(nullptr)
@@ -261,7 +260,7 @@ void BrainCloudLobby::getRegionsForLobbies(const TArray<FString> &in_roomTypes, 
 /////////////////////////////////////////////////////////////////////////////////
 void BrainCloudLobby::pingRegions(IServerCallback* in_callback)
 {
-    UE_LOG(LogBrainCloudComms, Log, TEXT("PIIIIIIIINGINNNNNNNNNNG REGIONSSSSSSS"));
+    UE_LOG(LogTemp, Warning, TEXT("Your message"));
     _pingRegionsCallback = in_callback;
     _pingData = MakeShareable(new FJsonObject());
     _cachedPingResponses.Empty();
