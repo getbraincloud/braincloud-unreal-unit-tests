@@ -83,6 +83,25 @@ const OperationParam OperationParam::IdentityServiceOldEmailAddress = OperationP
 const OperationParam OperationParam::IdentityServiceNewEmailAddress = OperationParam("newEmailAddress");
 const OperationParam OperationParam::IdentityServiceUpdateContactEmail = OperationParam("updateContactEmail");
 
+//item Catalog
+const OperationParam OperationParam::ItemCatalogServiceDefId = OperationParam("defId");
+const OperationParam OperationParam::ItemCatalogServiceContext = OperationParam("context");
+const OperationParam OperationParam::ItemCatalogServicePageOffset = OperationParam("pageOffset");
+
+//UserInventoryManagement
+const OperationParam OperationParam::UserInventoryManagementDefId = OperationParam("defId");
+const OperationParam OperationParam::UserInventoryManagementQuantity = OperationParam("quantity");
+const OperationParam OperationParam::UserInventoryManagementIncludeDef = OperationParam("includeDef");
+const OperationParam OperationParam::UserInventoryManagementItemId = OperationParam("itemId");
+const OperationParam OperationParam::UserInventoryManagementCriteria = OperationParam("criteria");
+const OperationParam OperationParam::UserInventoryManagementContext = OperationParam("context");
+const OperationParam OperationParam::UserInventoryManagementPageOffset = OperationParam("pageOffset");
+const OperationParam OperationParam::UserInventoryManagementProfileId = OperationParam("profileId");
+const OperationParam OperationParam::UserInventoryManagementImmediate = OperationParam("immediate");
+const OperationParam OperationParam::UserInventoryManagementVersion = OperationParam("version");
+const OperationParam OperationParam::UserInventoryManagementShopId = OperationParam("shopId");
+const OperationParam OperationParam::UserInventoryManagementNewItemData = OperationParam("newItemData");
+
 // Async Match Service - Async Match Params
 const OperationParam OperationParam::AsyncMatchServicePlayers = OperationParam("players");
 const OperationParam OperationParam::AsyncMatchServiceMatchState = OperationParam("matchState");

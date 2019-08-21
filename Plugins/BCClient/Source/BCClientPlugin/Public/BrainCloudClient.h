@@ -14,6 +14,8 @@
 #include "BrainCloudPlayerStatisticsEvent.h"
 #include "BrainCloudProduct.h"
 #include "BrainCloudIdentity.h"
+#include "BrainCloudItemCatalog.h"
+#include "BrainCloudUserInventoryManagement.h"
 #include "BrainCloudEvent.h"
 #include "BrainCloudS3Handling.h"
 #include "BrainCloudScript.h"
@@ -263,6 +265,8 @@ class BCCLIENTPLUGIN_API BrainCloudClient
 	BrainCloudPlayerStatisticsEvent *getPlayerStatisticsEventService();
 	BrainCloudProduct *getProductService();
 	BrainCloudIdentity *getIdentityService();
+	BrainCloudItemCatalog *getItemCatalogService();
+	BrainCloudUserInventoryManagement *getUserInventoryManagementService();
 	BrainCloudEvent *getEventService();
 	BrainCloudS3Handling *getS3HandlingService();
 	BrainCloudScript *getScriptService();
@@ -513,6 +517,8 @@ class BCCLIENTPLUGIN_API BrainCloudClient
 	BrainCloudPlayerStatisticsEvent *_playerStatisticsEventService = nullptr;
 	BrainCloudProduct *_productService = nullptr;
 	BrainCloudIdentity *_identityService = nullptr;
+	BrainCloudItemCatalog *_itemCatalogService = nullptr;
+	BrainCloudUserInventoryManagement *_userInventoryManagementService = nullptr;
 	BrainCloudEvent *_eventService = nullptr;
 	BrainCloudS3Handling *_s3HandlingService = nullptr;
 	BrainCloudScript *_scriptService = nullptr;
