@@ -12,6 +12,8 @@ const ServiceName ServiceName::None = ServiceName("None");
 
 const ServiceName ServiceName::AuthenticateV2 = ServiceName("authenticationV2");
 const ServiceName ServiceName::Identity = ServiceName("identity");
+const ServiceName ServiceName::ItemCatalog = ServiceName("itemCatalog");
+const ServiceName ServiceName::UserInventoryManagement = ServiceName("userInventoryManagement");
 const ServiceName ServiceName::Currency = ServiceName("currency");
 const ServiceName ServiceName::FriendData = ServiceName("friendData");
 const ServiceName ServiceName::HeartBeat = ServiceName("heartbeat");
