@@ -57,6 +57,8 @@ BrainCloudClient::~BrainCloudClient()
 	destroyService(_playerStatisticsEventService);
 	destroyService(_productService);
 	destroyService(_identityService);
+	destroyService(_itemCatalogService);
+	destroyService(_userInventoryManagementService);
 	destroyService(_eventService);
 	destroyService(_s3HandlingService);
 	destroyService(_scriptService);
@@ -518,6 +520,24 @@ BrainCloudIdentity *BrainCloudClient::getIdentityService()
 		_identityService = new BrainCloudIdentity(this);
 	}
 	return _identityService;
+}
+
+BrainCloudItemCatalog *BrainCloudClient::getItemCatalogService()
+{
+	if (_itemCatalogService == nullptr)
+	{
+		_itemCatalogService = new BrainCloudItemCatalog(this);
+	}
+	return _itemCatalogService;
+}
+
+BrainCloudUserInventoryManagement *BrainCloudClient::getUserInventoryManagementService()
+{
+	if (_userInventoryManagementService == nullptr)
+	{
+		_userInventoryManagementService = new BrainCloudUserInventoryManagement(this);
+	}
+	return _userInventoryManagementService;
 }
 
 BrainCloudEvent *BrainCloudClient::getEventService()

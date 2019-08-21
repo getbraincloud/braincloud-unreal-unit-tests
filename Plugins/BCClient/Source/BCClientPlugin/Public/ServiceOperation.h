@@ -411,6 +411,25 @@ class BCCLIENTPLUGIN_API ServiceOperation
 	static const ServiceOperation GetRegionsForLobbies;
 	static const ServiceOperation PingData;
 
+	//Item Catalog
+	static const ServiceOperation GetCatalogItemDefinition;
+	static const ServiceOperation GetCatalogItemsPage;
+	static const ServiceOperation GetCatalogItemsPageOffset;
+
+	//UserInventoryManagement
+	static const ServiceOperation AwardUserItem;
+	static const ServiceOperation DropUserItem;
+	static const ServiceOperation GetUserInventory;
+	static const ServiceOperation GetUserInventoryPage;
+	static const ServiceOperation GetUserInventoryPageOffset;
+	static const ServiceOperation GetUserItem;
+	static const ServiceOperation GiveUserItemTo;
+	static const ServiceOperation PurchaseUserItem;
+	static const ServiceOperation ReceiveUserItemFrom;
+	static const ServiceOperation SellUserItem;
+	static const ServiceOperation UpdateUserItemData;
+	static const ServiceOperation UseUserItem;
+
 	FString getValue() const { return _value; }
 
 	bool operator==(const ServiceOperation &s) const;

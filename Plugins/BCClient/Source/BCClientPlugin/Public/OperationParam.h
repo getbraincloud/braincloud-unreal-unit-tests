@@ -319,6 +319,25 @@ class BCCLIENTPLUGIN_API OperationParam
 	static const OperationParam PlayerStateServiceIncludeSummaryData;
 	static const OperationParam IdentityServiceForceSingleton;
 
+	//item Catalog
+	static const OperationParam ItemCatalogServiceDefId;
+	static const OperationParam ItemCatalogServiceContext;
+	static const OperationParam ItemCatalogServicePageOffset;
+
+	//UserInventoryManagement
+	static const OperationParam UserInventoryManagementDefId;
+	static const OperationParam UserInventoryManagementQuantity;
+	static const OperationParam UserInventoryManagementIncludeDef;
+	static const OperationParam UserInventoryManagementItemId;
+	static const OperationParam UserInventoryManagementCriteria;
+	static const OperationParam UserInventoryManagementContext;
+	static const OperationParam UserInventoryManagementPageOffset;
+	static const OperationParam UserInventoryManagementProfileId;
+	static const OperationParam UserInventoryManagementImmediate;
+	static const OperationParam UserInventoryManagementVersion;
+	static const OperationParam UserInventoryManagementShopId;
+	static const OperationParam UserInventoryManagementNewItemData;
+
 	// Redemption Code
 	static const OperationParam RedemptionCodeServiceScanCode;
 	static const OperationParam RedemptionCodeServiceCodeType;
