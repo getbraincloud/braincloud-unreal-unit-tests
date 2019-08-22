@@ -199,5 +199,5 @@ class UBCUserInventoryManagementProxy : public UBCBlueprintCallProxyBase
     * @param callback The method to be invoked when the server response is received
     */
 	UFUNCTION(BlueprintCallable, meta = (BlueprintInternalUseOnly = "true"), Category = "BrainCloud|UserInventoryManagement")
-	static UBCUserInventoryManagementProxy *UseUserItem(UBrainCloudWrapper *brainCloudWrapper, const FString &itemId, int version, const FString &newItemData);
+	static UBCUserInventoryManagementProxy *UseUserItem(UBrainCloudWrapper *brainCloudWrapper, const FString &itemId, int version, const FString &newItemData, bool includeDef);
 };
