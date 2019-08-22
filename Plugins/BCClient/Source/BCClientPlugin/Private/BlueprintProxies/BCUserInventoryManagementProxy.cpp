@@ -90,9 +90,9 @@ UBCUserInventoryManagementProxy::UBCUserInventoryManagementProxy(const FObjectIn
 		return Proxy;
 	}
 
-	UBCUserInventoryManagementProxy *UBCUserInventoryManagementProxy::UseUserItem(UBrainCloudWrapper *brainCloudWrapper, const FString &itemId, int version, const FString &newItemData)
+	UBCUserInventoryManagementProxy *UBCUserInventoryManagementProxy::UseUserItem(UBrainCloudWrapper *brainCloudWrapper, const FString &itemId, int version, const FString &newItemData, bool includeDef)
 	{
 		UBCUserInventoryManagementProxy *Proxy = NewObject<UBCUserInventoryManagementProxy>();
-		UBCWrapperProxy::GetBrainCloudInstance(brainCloudWrapper)->getUserInventoryManagementService()->useUserItem(itemId, version, newItemData, Proxy);
+		UBCWrapperProxy::GetBrainCloudInstance(brainCloudWrapper)->getUserInventoryManagementService()->useUserItem(itemId, version, newItemData, includeDef, Proxy);
 		return Proxy;
 	}

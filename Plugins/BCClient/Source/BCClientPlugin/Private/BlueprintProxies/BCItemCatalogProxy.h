@@ -57,5 +57,5 @@ class UBCItemCatalogProxy : public UBCBlueprintCallProxyBase
 	 * @param callback The method to be invoked when the server response is received
 	 */
 	UFUNCTION(BlueprintCallable, meta = (BlueprintInternalUseOnly = "true"), Category = "BrainCloud|ItemCatalog")
-	static UBCItemCatalogProxy *GetCatalogItemsPageOffset(UBrainCloudWrapper *brainCloudWrapper, const FString &defId, int pageOffset);
+	static UBCItemCatalogProxy *GetCatalogItemsPageOffset(UBrainCloudWrapper *brainCloudWrapper, const FString &context, int pageOffset);
 };

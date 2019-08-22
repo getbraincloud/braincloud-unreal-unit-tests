@@ -22,8 +22,7 @@ BrainCloudItemCatalog::BrainCloudItemCatalog(BrainCloudClient *client) : _client
 	void BrainCloudItemCatalog::getCatalogItemsPage(const FString &context, IServerCallback *callback)
 	{
 		TSharedRef<FJsonObject> message = MakeShareable(new FJsonObject());
-
-		//needs to turn into map
+		
 		message->SetObjectField(OperationParam::ItemCatalogServiceContext.getValue(), JsonUtil::jsonStringToValue(context));
 		
 		ServerCall *sc = new ServerCall(ServiceName::ItemCatalog, ServiceOperation::GetCatalogItemsPage, message, callback);

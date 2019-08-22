@@ -34,7 +34,7 @@ BrainCloudUserInventoryManagement::BrainCloudUserInventoryManagement(BrainCloudC
 	void BrainCloudUserInventoryManagement::getUserInventory(const FString &criteria, bool includeDef, IServerCallback *callback)
     {
         TSharedRef<FJsonObject> message = MakeShareable(new FJsonObject());
-        message->SetStringField(OperationParam::UserInventoryManagementCriteria.getValue(), criteria);
+        message->SetObjectField(OperationParam::UserInventoryManagementCriteria.getValue(), JsonUtil::jsonStringToValue(criteria));
         message->SetBoolField(OperationParam::UserInventoryManagementIncludeDef.getValue(), includeDef);
 
         ServerCall *sc = new ServerCall(ServiceName::UserInventoryManagement, ServiceOperation::GetUserInventory, message, callback);
@@ -44,7 +44,7 @@ BrainCloudUserInventoryManagement::BrainCloudUserInventoryManagement(BrainCloudC
 	void BrainCloudUserInventoryManagement::getUserInventoryPage(const FString &context, bool includeDef, IServerCallback *callback)
     {
         TSharedRef<FJsonObject> message = MakeShareable(new FJsonObject());
-        message->SetStringField(OperationParam::UserInventoryManagementContext.getValue(), context);
+        message->SetObjectField(OperationParam::UserInventoryManagementContext.getValue(), JsonUtil::jsonStringToValue(context));
         message->SetBoolField(OperationParam::UserInventoryManagementIncludeDef.getValue(), includeDef);
 
         ServerCall *sc = new ServerCall(ServiceName::UserInventoryManagement, ServiceOperation::GetUserInventoryPage, message, callback);
@@ -54,7 +54,7 @@ BrainCloudUserInventoryManagement::BrainCloudUserInventoryManagement(BrainCloudC
 	void BrainCloudUserInventoryManagement::getUserInventoryPageOffset(const FString &context, int pageOffest, bool includeDef, IServerCallback *callback)
     {
         TSharedRef<FJsonObject> message = MakeShareable(new FJsonObject());
-        message->SetStringField(OperationParam::UserInventoryManagementCriteria.getValue(), context);
+        message->SetStringField(OperationParam::UserInventoryManagementContext.getValue(), context);
         message->SetNumberField(OperationParam::UserInventoryManagementPageOffset.getValue(), pageOffest);
         message->SetBoolField(OperationParam::UserInventoryManagementIncludeDef.getValue(), includeDef);
 
@@ -124,7 +124,7 @@ BrainCloudUserInventoryManagement::BrainCloudUserInventoryManagement(BrainCloudC
         TSharedRef<FJsonObject> message = MakeShareable(new FJsonObject());
         message->SetStringField(OperationParam::UserInventoryManagementItemId.getValue(), itemId);
         message->SetNumberField(OperationParam::UserInventoryManagementVersion.getValue(), version);
-        message->SetStringField(OperationParam::UserInventoryManagementNewItemData.getValue(), newItemData);
+        message->SetObjectField(OperationParam::UserInventoryManagementNewItemData.getValue(), JsonUtil::jsonStringToValue(newItemData));
 
         ServerCall *sc = new ServerCall(ServiceName::UserInventoryManagement, ServiceOperation::UpdateUserItemData, message, callback);
         _client->sendRequest(sc);
@@ -135,7 +135,7 @@ BrainCloudUserInventoryManagement::BrainCloudUserInventoryManagement(BrainCloudC
         TSharedRef<FJsonObject> message = MakeShareable(new FJsonObject());
         message->SetStringField(OperationParam::UserInventoryManagementItemId.getValue(), itemId);
         message->SetNumberField(OperationParam::UserInventoryManagementVersion.getValue(), version);
-        message->SetStringField(OperationParam::UserInventoryManagementNewItemData.getValue(), newItemData);
+        message->SetObjectField(OperationParam::UserInventoryManagementNewItemData.getValue(), JsonUtil::jsonStringToValue(newItemData));
         message->SetBoolField(OperationParam::UserInventoryManagementIncludeDef.getValue(), includeDef);
 
         ServerCall *sc = new ServerCall(ServiceName::UserInventoryManagement, ServiceOperation::UseUserItem, message, callback);
