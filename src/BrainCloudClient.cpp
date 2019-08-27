@@ -67,6 +67,8 @@ namespace BrainCloud
         _steamService(new BrainCloudSteam(this)),
         _timeService(new BrainCloudTime(this)),
         _tournamentService(new BrainCloudTournament(this)),
+        _itemCatalogService(new BrainCloudItemCatalog(this)),
+        _userInventoryManagementService(new BrainCloudUserInventoryManagement(this)),
         _releasePlatform(""),
         _appVersion(""),
         _timezoneOffset(0.0)
@@ -79,6 +81,7 @@ namespace BrainCloud
     {
         delete _rttService;
         delete _tournamentService;
+        delete _itemCatalogService;
         delete _timeService;
         delete _steamService;
         delete _socialLeaderboardService;

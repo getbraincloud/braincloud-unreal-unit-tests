@@ -432,6 +432,25 @@ namespace BrainCloud {
 		static const OperationParam AppStoreTransactionId;
 		static const OperationParam AppStoreTransactionData;
 
+		//item catalog
+		static const OperationParam ItemCatalogServiceDefId;
+		static const OperationParam ItemCatalogServiceContext;
+		static const OperationParam ItemCatalogServicePageOffset;
+		
+		//userInventory
+		static const OperationParam UserInventoryManagementServiceDefId;
+		static const OperationParam UserInventoryManagementServiceQuantity;
+		static const OperationParam UserInventoryManagementServiceIncludeDef;
+		static const OperationParam UserInventoryManagementServiceItemId;
+		static const OperationParam UserInventoryManagementServiceCriteria;
+		static const OperationParam UserInventoryManagementServiceContext;
+		static const OperationParam UserInventoryManagementServicePageOffset;
+		static const OperationParam UserInventoryManagementServiceVersion;
+		static const OperationParam UserInventoryManagementServiceImmediate;
+		static const OperationParam UserInventoryManagementServiceProfileId;
+		static const OperationParam UserInventoryManagementServiceShopId;
+		static const OperationParam UserInventoryManagementServiceNewItemData;
+
 		std::string getValue() const { return _value; }
 
 		bool operator== (const OperationParam& s) const;

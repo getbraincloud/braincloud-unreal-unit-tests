@@ -344,6 +344,25 @@ namespace BrainCloud {
 		static const ServiceOperation ViewReward;
 		static const ServiceOperation ClaimTournamentReward;
 
+		//UserInventoryManagement
+		static const ServiceOperation AwardUserItem;
+		static const ServiceOperation DropUserItem;
+		static const ServiceOperation GetUserInventory;
+		static const ServiceOperation GetUserInventoryPage;
+		static const ServiceOperation GetUserInventoryPageOffset;
+		static const ServiceOperation GetUserItem;
+		static const ServiceOperation GiveUserItemTo;
+		static const ServiceOperation PurchaseUserItem;
+		static const ServiceOperation ReceiveUserItemFrom;
+		static const ServiceOperation SellUserItem;
+		static const ServiceOperation UpdateUserItemData;
+		static const ServiceOperation UseUserItem;
+
+		//itemCatalog
+		static const ServiceOperation GetCatalogItemDefinition;
+		static const ServiceOperation GetCatalogItemsPage;
+		static const ServiceOperation GetCatalogItemsPageOffset;
+
 		//rtt Registration
 		static const ServiceOperation RequestClientConnection;
 

@@ -426,6 +426,24 @@ namespace BrainCloud
 	const OperationParam OperationParam::AppStoreTransactionId = OperationParam("transactionId");
 	const OperationParam OperationParam::AppStoreTransactionData = OperationParam("transactionData");
 
+    //item catalog
+	const OperationParam OperationParam::ItemCatalogServiceDefId = OperationParam("defId");
+	const OperationParam OperationParam::ItemCatalogServiceContext = OperationParam("context");
+	const OperationParam OperationParam::ItemCatalogServicePageOffset = OperationParam("pageOffset");
+    //userInventory
+	const OperationParam OperationParam::UserInventoryManagementServiceDefId = OperationParam("defId");
+	const OperationParam OperationParam::UserInventoryManagementServiceQuantity = OperationParam("quantity");
+	const OperationParam OperationParam::UserInventoryManagementServiceIncludeDef = OperationParam("includeDef");
+	const OperationParam OperationParam::UserInventoryManagementServiceItemId = OperationParam("itemId");
+	const OperationParam OperationParam::UserInventoryManagementServiceCriteria = OperationParam("criteria");
+	const OperationParam OperationParam::UserInventoryManagementServiceContext = OperationParam("context");
+	const OperationParam OperationParam::UserInventoryManagementServicePageOffset = OperationParam("pageOffset");
+	const OperationParam OperationParam::UserInventoryManagementServiceVersion = OperationParam("version");
+	const OperationParam OperationParam::UserInventoryManagementServiceImmediate = OperationParam("immediate");
+	const OperationParam OperationParam::UserInventoryManagementServiceProfileId = OperationParam("profileId");
+	const OperationParam OperationParam::UserInventoryManagementServiceShopId = OperationParam("shopId");
+	const OperationParam OperationParam::UserInventoryManagementServiceNewItemData = OperationParam("newItemData");
+
 	OperationParam::OperationParam(const char * value)
 	{
 		_value = value;
