@@ -185,6 +185,28 @@ class BCCLIENTPLUGIN_API BrainCloudUserInventoryManagement
     */
 	void useUserItem(const FString &itemId, int version, const FString &newItemData, bool includeDef, IServerCallback *callback = nullptr);
 
+    /*
+    * Publishes the specified item to the item management attached blockchain. Results are reported asynchronously via an RTT event.
+    *
+    * Service Name - UserInventoryManagement
+    * Service Operation - PUBLISH_USER_ITEM_TO_BLOCKCHAIN
+    *
+    * @param itemId
+    * @param version
+    * @param callback The method to be invoked when the server response is received
+    */
+	void publishUserItemToBlockchain(const FString &itemId, int version, IServerCallback *callback = nullptr);
+
+    /*
+    * Syncs the caller's user items with the item management attached blockchain. Results are reported asynchronously via an RTT event.
+    *
+    * Service Name - UserInventoryManagement
+    * Service Operation - REFRESH_BLOCKCHAIN_USER_ITEMS
+    *
+    * @param callback The method to be invoked when the server response is received
+    */
+	void refreshBlockchainUserItems(IServerCallback *callback = nullptr);
+
   private:
 	BrainCloudClient *_client = nullptr;
 };

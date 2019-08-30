@@ -429,6 +429,8 @@ class BCCLIENTPLUGIN_API ServiceOperation
 	static const ServiceOperation SellUserItem;
 	static const ServiceOperation UpdateUserItemData;
 	static const ServiceOperation UseUserItem;
+	static const ServiceOperation PublishUserItemToBlackchain;
+	static const ServiceOperation RefreshBlockchainUserItems;
 
 	FString getValue() const { return _value; }
 

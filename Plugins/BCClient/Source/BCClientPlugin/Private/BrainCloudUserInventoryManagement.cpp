@@ -142,3 +142,20 @@ BrainCloudUserInventoryManagement::BrainCloudUserInventoryManagement(BrainCloudC
         _client->sendRequest(sc);
     }
 	
+	void BrainCloudUserInventoryManagement::publishUserItemToBlockchain(const FString &itemId, int version, IServerCallback *callback)
+    {
+        TSharedRef<FJsonObject> message = MakeShareable(new FJsonObject());
+        message->SetStringField(OperationParam::UserInventoryManagementItemId.getValue(), itemId);
+        message->SetNumberField(OperationParam::UserInventoryManagementVersion.getValue(), version);
+
+        ServerCall *sc = new ServerCall(ServiceName::UserInventoryManagement, ServiceOperation::PublishUserItemToBlackchain, message, callback);
+        _client->sendRequest(sc);
+    }
+
+	void BrainCloudUserInventoryManagement::refreshBlockchainUserItems(IServerCallback *callback)
+    {
+        TSharedRef<FJsonObject> message = MakeShareable(new FJsonObject());
+
+        ServerCall *sc = new ServerCall(ServiceName::UserInventoryManagement, ServiceOperation::RefreshBlockchainUserItems, message, callback);
+        _client->sendRequest(sc);
+    }

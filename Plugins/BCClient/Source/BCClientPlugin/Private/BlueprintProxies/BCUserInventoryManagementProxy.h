@@ -200,4 +200,28 @@ class UBCUserInventoryManagementProxy : public UBCBlueprintCallProxyBase
     */
 	UFUNCTION(BlueprintCallable, meta = (BlueprintInternalUseOnly = "true"), Category = "BrainCloud|UserInventoryManagement")
 	static UBCUserInventoryManagementProxy *UseUserItem(UBrainCloudWrapper *brainCloudWrapper, const FString &itemId, int version, const FString &newItemData, bool includeDef);
+
+    /*
+    * Publishes the specified item to the item management attached blockchain. Results are reported asynchronously via an RTT event.
+    *
+    * Service Name - UserInventoryManagement
+    * Service Operation - PUBLISH_USER_ITEM_TO_BLOCKCHAIN
+    *
+    * @param itemId
+    * @param version
+    * @param callback The method to be invoked when the server response is received
+    */
+	UFUNCTION(BlueprintCallable, meta = (BlueprintInternalUseOnly = "true"), Category = "BrainCloud|UserInventoryManagement")
+	static UBCUserInventoryManagementProxy *PublishUserItemToBlockchain(UBrainCloudWrapper *brainCloudWrapper, const FString &itemId, int version);
+    
+    /*
+    * Syncs the caller's user items with the item management attached blockchain. Results are reported asynchronously via an RTT event.
+    *
+    * Service Name - UserInventoryManagement
+    * Service Operation - REFRESH_BLOCKCHAIN_USER_ITEMS
+    *
+    * @param callback The method to be invoked when the server response is received
+    */
+	UFUNCTION(BlueprintCallable, meta = (BlueprintInternalUseOnly = "true"), Category = "BrainCloud|UserInventoryManagement")
+	static UBCUserInventoryManagementProxy *RefreshBlockchainUserItems(UBrainCloudWrapper *brainCloudWrapper);
 };
