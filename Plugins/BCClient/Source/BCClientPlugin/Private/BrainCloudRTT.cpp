@@ -122,3 +122,13 @@ void BrainCloudRTT::deregisterRTTLobbyCallback()
 {
 	_commsLayer->deregisterRTTCallback(ServiceName::Lobby);
 }
+
+void BrainCloudRTT::registerRTTBlockchainRefresh(IRTTCallback *in_callback)
+{
+	_commsLayer->registerRTTCallback(ServiceName::UserInventoryManagement, in_callback);
+}
+
+void BrainCloudRTT::deregisterRTTBlockchainRefresh()
+{
+	_commsLayer->deregisterRTTCallback(ServiceName::UserInventoryManagement);
+}

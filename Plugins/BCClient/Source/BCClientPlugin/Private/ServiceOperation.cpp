@@ -426,6 +426,8 @@ const ServiceOperation ServiceOperation::ReceiveUserItemFrom = ServiceOperation(
 const ServiceOperation ServiceOperation::SellUserItem = ServiceOperation("SELL_USER_ITEM");
 const ServiceOperation ServiceOperation::UpdateUserItemData = ServiceOperation("UPDATE_USER_ITEM_DATA");
 const ServiceOperation ServiceOperation::UseUserItem = ServiceOperation("USE_USER_ITEM");
+const ServiceOperation ServiceOperation::PublishUserItemToBlackchain = ServiceOperation("PUBLISH_USER_ITEMTO_BLOCKCHAIN");
+const ServiceOperation ServiceOperation::RefreshBlockchainUserItems = ServiceOperation("REFRESH_BLOCKCHAIN_USER_ITEMS");
 
 //item catalog
 const ServiceOperation ServiceOperation::GetCatalogItemDefinition = ServiceOperation("GET_CATALOG_ITEM_DEFINITION");

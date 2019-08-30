@@ -96,3 +96,17 @@ UBCUserInventoryManagementProxy::UBCUserInventoryManagementProxy(const FObjectIn
 		UBCWrapperProxy::GetBrainCloudInstance(brainCloudWrapper)->getUserInventoryManagementService()->useUserItem(itemId, version, newItemData, includeDef, Proxy);
 		return Proxy;
 	}
+
+	UBCUserInventoryManagementProxy *UBCUserInventoryManagementProxy::PublishUserItemToBlockchain(UBrainCloudWrapper *brainCloudWrapper, const FString &itemId, int version)
+	{
+		UBCUserInventoryManagementProxy *Proxy = NewObject<UBCUserInventoryManagementProxy>();
+		UBCWrapperProxy::GetBrainCloudInstance(brainCloudWrapper)->getUserInventoryManagementService()->publishUserItemToBlockchain(itemId, version, Proxy);
+		return Proxy;
+	}
+
+	UBCUserInventoryManagementProxy *UBCUserInventoryManagementProxy::RefreshBlockchainUserItems(UBrainCloudWrapper *brainCloudWrapper)
+	{
+		UBCUserInventoryManagementProxy *Proxy = NewObject<UBCUserInventoryManagementProxy>();
+		UBCWrapperProxy::GetBrainCloudInstance(brainCloudWrapper)->getUserInventoryManagementService()->refreshBlockchainUserItems(Proxy);
+		return Proxy;
+	}
