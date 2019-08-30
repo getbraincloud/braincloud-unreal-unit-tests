@@ -190,6 +190,26 @@ namespace BrainCloud
 	 */
         void useUserItem(const std::string& in_itemId, int32_t in_version, const std::string&  in_newItemData, bool in_includeDef, IServerCallback * in_callback = NULL);
 
+			/**
+	 * Publishes the specified item to the item management attached blockchain. Results are reported asynchronously via an RTT event.
+	 *
+	 * Service Name - userInventoryManagement
+	 * Service Operation - PUBLISH_USER_ITEM_TO_BLOCKCHAIN
+	 *
+	 * @param itemId
+	 * @param version
+	 * @param newItemData
+	 */
+        void publishUserItemToBlockchain(const std::string& in_itemId, int32_t in_version, IServerCallback * in_callback = NULL);
+
+	/**
+	 * Syncs the caller's user items with the item management attached blockchain. Results are reported asynchronously via an RTT event.
+	 *
+	 * Service Name - userInventoryManagement
+	 * Service Operation - REFRESH_BLOCKCHAIN_USER_ITEMS
+	 */
+        void refreshBlockchainUserItems(IServerCallback * in_callback = NULL);
+
     private:
         BrainCloudClient * m_client;
     };

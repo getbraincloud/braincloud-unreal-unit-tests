@@ -149,4 +149,22 @@ namespace BrainCloud
         ServerCall * sc = new ServerCall(ServiceName::UserInventoryManagement, ServiceOperation::UseUserItem, message, in_callback);
         m_client->sendRequest(sc);
     }
+
+    void BrainCloudUserInventoryManagement::publishUserItemToBlockchain(const std::string& in_itemId, int32_t in_version, IServerCallback * in_callback)
+    {
+        Json::Value message;
+        message[OperationParam::UserInventoryManagementServiceItemId.getValue()] = in_itemId;
+        message[OperationParam::UserInventoryManagementServiceVersion.getValue()] = in_version;
+
+        ServerCall * sc = new ServerCall(ServiceName::UserInventoryManagement, ServiceOperation::PublishUserItemToBlockchain, message, in_callback);
+        m_client->sendRequest(sc);
+    }
+
+
+    void BrainCloudUserInventoryManagement::refreshBlockchainUserItems(IServerCallback * in_callback)
+    {
+        Json::Value message;
+        ServerCall * sc = new ServerCall(ServiceName::UserInventoryManagement, ServiceOperation::RefreshBlockchainUserItems, message, in_callback);
+        m_client->sendRequest(sc);
+    }
 }

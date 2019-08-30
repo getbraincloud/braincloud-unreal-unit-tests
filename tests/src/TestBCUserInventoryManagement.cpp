@@ -97,3 +97,17 @@ TEST_F(TestBCUserInventoryManagement, UseUserItem)
     m_bc->getUserInventoryManagementService()->useUserItem("invalidForNow", 1, newItemData, true, &tr);
     tr.runExpectFail(m_bc, HTTP_BAD_REQUEST, ITEM_NOT_FOUND);
 }
+
+TEST_F(TestBCUserInventoryManagement, PublishUserItemToBlockchain)
+{
+    TestResult tr;
+    m_bc->getUserInventoryManagementService()->publishUserItemToBlockchain("invalidForNow", 1, &tr);
+    tr.runExpectFail(m_bc, HTTP_BAD_REQUEST, ITEM_NOT_FOUND);
+}
+
+TEST_F(TestBCUserInventoryManagement, RefreshBlockchainUserItems)
+{
+    TestResult tr;
+    m_bc->getUserInventoryManagementService()->refreshBlockchainUserItems(&tr);
+    tr.run(m_bc);
+}

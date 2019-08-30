@@ -95,6 +95,15 @@ namespace BrainCloud
 		void deregisterRTTPresenceCallback();
 
 		/**
+		 * Listen to real time blockchain events.
+		 * 
+		 * Notes: RTT must be enabled for this app, and enableRTT must have been successfully called.
+		 * Only one presence callback can be registered at a time. Calling this a second time will override the previous callback.
+		 */
+		void registerRTTBlockchainRefresh(IRTTCallback* in_callback);
+		void deregisterRTTBlockchainRefresh();
+
+		/**
 		 * Clear all set RTT callbacks
 		 */
 		void deregisterAllRTTCallbacks();

@@ -414,6 +414,8 @@ namespace BrainCloud
 	const ServiceOperation ServiceOperation::SellUserItem = ServiceOperation("SELL_USER_ITEM");
 	const ServiceOperation ServiceOperation::UpdateUserItemData = ServiceOperation("UPDATE_USER_ITEM_DATA");
 	const ServiceOperation ServiceOperation::UseUserItem = ServiceOperation("USE_USER_ITEM");
+	const ServiceOperation ServiceOperation::PublishUserItemToBlockchain = ServiceOperation("PUBLISH_USER_ITEM_TO_BLOCKCHAIN");
+	const ServiceOperation ServiceOperation::RefreshBlockchainUserItems = ServiceOperation("REFRESH_BLOCKCHAIN_USER_ITEMS");
 
 	//itemCatalog
 	const ServiceOperation ServiceOperation::GetCatalogItemDefinition = ServiceOperation("GET_CATALOG_ITEM_DEFINITION");
