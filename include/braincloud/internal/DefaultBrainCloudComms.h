@@ -107,6 +107,8 @@ namespace BrainCloud
         void createAndSendBundle();
         void startHttpRequest();
 
+        void ProcessSwitchResponse(Json::Value in_data);
+
         void resetErrorCache();
         void fakeErrorResponse(int32_t statusCode, int32_t reasonCode, const std::string & statusMessage);
 
