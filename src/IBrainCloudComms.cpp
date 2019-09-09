@@ -61,14 +61,14 @@ namespace BrainCloud {
     {
         _secretMap = secretMap;
 
-        std::string secretKey("MISSING");
+        _secretKey = "MISSING";
         std::map<std::string, std::string>::const_iterator it = _secretMap.find(defaultAppId);
         if (it != _secretMap.end())
         {
-            secretKey = it->second;
+            _secretKey = it->second;
         }
 
-        initialize(serverURL, defaultAppId, secretKey.c_str());
+        initialize(serverURL, defaultAppId, _secretKey.c_str());
     }
 
 	void IBrainCloudComms::enableLogging(bool shouldEnable)

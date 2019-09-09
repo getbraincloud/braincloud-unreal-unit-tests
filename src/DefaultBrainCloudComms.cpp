@@ -55,9 +55,11 @@ namespace BrainCloud
 			_uploadUrl = _uploadUrl.substr(0, index);
 		}
 		_uploadUrl += "/uploader";
+
 		_appId = appId;
 		_secretKey = secretKey;
-		_secretMap[appId] = _secretKey;
+		_secretMap[_appId] = _secretKey;
+
 		_isInitialized = true;
 	}
 
@@ -884,18 +886,17 @@ namespace BrainCloud
 	{
 		Json::FastWriter fastWriter;
 		std::string switchToAppId = fastWriter.write(in_responses["switchToAppId"]);
-		std::cout << switchToAppId;
 		//if the response data contains a switchToAppId
 		if(switchToAppId != "" || switchToAppId != "unknown")
 		{
-			//std::cout << _appId;
 			_appId = switchToAppId;
-			//std::cout << _appId;
 
 			//update secretKey
-			//std::cout << _secretKey;
-			_secretKey = _secretMap[_appId];
-			//std::cout << _secretKey;
+			std::map<std::string, std::string>::const_iterator it = _secretMap.find(_appId);
+			if (it != _secretMap.end())
+			{
+				_secretKey = it->second;
+			}
 		}
 	}
 
