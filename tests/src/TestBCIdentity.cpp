@@ -18,10 +18,13 @@ TEST_F(TestBCIdentity, SwitchToChildProfile)
 	m_bc->getAuthenticationService()->authenticateUniversal(GetUser(UserC)->m_id, GetUser(UserC)->m_password, true, &tr);
 	tr.run(m_bc);
 
-	m_bc->getIdentityService()->switchToChildProfile(NULL, m_childAppId.c_str(), true, &tr);
-	tr.run(m_bc);
-	
-	m_bc->getIdentityService()->switchToParentProfile("Master");
+	TestResult tr2;
+	m_bc->getIdentityService()->switchToChildProfile(NULL, m_childAppId.c_str(), true, &tr2);
+	tr2.run(m_bc);
+
+	TestResult tr3;
+	m_bc->getIdentityService()->switchToParentProfile(m_parentLevelName.c_str(), &tr3);
+	tr3.run(m_bc);
 }
 
 TEST_F(TestBCIdentity, SwitchToSingletonChildProfile)
@@ -70,6 +73,10 @@ TEST_F(TestBCIdentity, SwitchToParentProfile)
 	TestResult tr2;
 	m_bc->getIdentityService()->switchToChildProfile(NULL, m_childAppId.c_str(), true, &tr2);
 	tr2.run(m_bc);
+
+	TestResult tr3;
+	m_bc->getIdentityService()->switchToParentProfile(m_parentLevelName.c_str(), &tr3);
+	tr3.run(m_bc);
 }
 
 TEST_F(TestBCIdentity, GetChildProfiles)

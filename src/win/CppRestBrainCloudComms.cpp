@@ -63,7 +63,7 @@ namespace BrainCloud
             _uploadUrl += "/uploader";
             _appId = appId;
             _secretKey = secretKey;
-            _secretMap[appId] = _secretKey;
+            _secretMap[_appId] = _secretKey;
 
             _processQueue = std::thread(&CppRestBrainCloudComms::processQueue, this);
         }
