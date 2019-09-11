@@ -198,6 +198,10 @@ class BCCLIENTPLUGIN_API OperationParam
 	// Player State Service - Atributes
 	static const OperationParam PlayerStateServicePictureUrl;
 	static const OperationParam PlayerStateServiceContactEmail;
+	static const OperationParam PlayerStateServiceStatusName;
+	static const OperationParam PlayerStateServiceAdditionalSecs;
+	static const OperationParam PlayerStateServiceDetails;
+	static const OperationParam PlayerStateServiceDurationSecs;
 
 	// Player Statistics Service - Update Increment Params
 	static const OperationParam PlayerStatisticsServiceStats;
@@ -342,10 +346,18 @@ class BCCLIENTPLUGIN_API OperationParam
 	static const OperationParam RedemptionCodeServiceScanCode;
 	static const OperationParam RedemptionCodeServiceCodeType;
 	static const OperationParam RedemptionCodeServiceCustomRedemptionInfo;
-
+	
 	// DataStream
 	static const OperationParam DataStreamEventName;
 	static const OperationParam DataStreamEventProperties;
+	static const OperationParam DataStreamCrashType;
+	static const OperationParam DataStreamErrorMsg;
+	static const OperationParam DataStreamCrashJson;
+	static const OperationParam DataStreamCrashLog;
+	static const OperationParam DataStreamUserName;
+	static const OperationParam DataStreamUserEmail;
+	static const OperationParam DataStreamUserNotes;
+	static const OperationParam DataStreamUserSubmitted;
 
 	// Profanity
 	static const OperationParam ProfanityText;

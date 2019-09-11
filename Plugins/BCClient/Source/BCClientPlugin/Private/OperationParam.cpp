@@ -218,6 +218,11 @@ const OperationParam OperationParam::PlayerStateServiceWipeExisting = OperationP
 const OperationParam OperationParam::PlayerStateServicePictureUrl = OperationParam("playerPictureUrl");
 const OperationParam OperationParam::PlayerStateServiceContactEmail = OperationParam("contactEmail");
 
+const OperationParam OperationParam::PlayerStateServiceStatusName = OperationParam("statusName");;
+const OperationParam OperationParam::PlayerStateServiceAdditionalSecs = OperationParam("additionalSecs");;
+const OperationParam OperationParam::PlayerStateServiceDetails = OperationParam("details");;
+const OperationParam OperationParam::PlayerStateServiceDurationSecs = OperationParam("durationSecs");;
+
 // Player Statistics Service - Update Increment Params
 const OperationParam OperationParam::PlayerStatisticsServiceStats = OperationParam("statistics");
 const OperationParam OperationParam::PlayerStatisticsServiceStatNames = OperationParam("statNames");
@@ -347,6 +352,14 @@ const OperationParam OperationParam::RedemptionCodeServiceCustomRedemptionInfo =
 // DataStream
 const OperationParam OperationParam::DataStreamEventName = OperationParam("eventName");
 const OperationParam OperationParam::DataStreamEventProperties = OperationParam("eventProperties");
+const OperationParam OperationParam::DataStreamCrashType = OperationParam("crashType");
+const OperationParam OperationParam::DataStreamErrorMsg = OperationParam("errorMsg");
+const OperationParam OperationParam::DataStreamCrashJson = OperationParam("crashJson");
+const OperationParam OperationParam::DataStreamCrashLog = OperationParam("crashLog");
+const OperationParam OperationParam::DataStreamUserName = OperationParam("userName");
+const OperationParam OperationParam::DataStreamUserEmail = OperationParam("userEmail");
+const OperationParam OperationParam::DataStreamUserNotes = OperationParam("userNotes");
+const OperationParam OperationParam::DataStreamUserSubmitted = OperationParam("userSubmitted");
 
 // Profanity
 const OperationParam OperationParam::ProfanityText = OperationParam("text");

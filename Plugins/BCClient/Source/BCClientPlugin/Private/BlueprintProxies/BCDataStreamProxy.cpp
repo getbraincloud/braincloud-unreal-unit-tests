@@ -33,3 +33,10 @@ UBCDataStreamProxy *UBCDataStreamProxy::CustomTrackEvent(UBrainCloudWrapper *bra
     UBCWrapperProxy::GetBrainCloudInstance(brainCloudWrapper)->getDataStreamService()->customTrackEvent(eventName, jsonEventProperties, Proxy);
     return Proxy;
 }
+
+UBCDataStreamProxy *UBCDataStreamProxy::SubmitCrashReport(UBrainCloudWrapper *brainCloudWrapper, const FString &crashType, const FString &errorMsg, const FString &crashJson, const FString &crashLog, const FString &userName, const FString &userEmail, const FString &userNotes, bool userSubmitted)
+{
+    UBCDataStreamProxy *Proxy = NewObject<UBCDataStreamProxy>();
+    UBCWrapperProxy::GetBrainCloudInstance(brainCloudWrapper)->getDataStreamService()->submitCrashReport(crashType, errorMsg, crashJson, crashLog, userName, userEmail, userNotes, userSubmitted, Proxy);
+    return Proxy;
+}

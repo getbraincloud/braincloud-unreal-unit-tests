@@ -184,6 +184,54 @@ class BCCLIENTPLUGIN_API BrainCloudPlayerState
     void updateContactEmail(const FString &contactEmail, IServerCallback *callback);
 
     /**
+    * Delete's the specified status
+    *
+    * Service Name - PlayerState
+    * Service Operation - CLEAR_USER_STATUS
+    *
+    * @param statusName a status name of the user
+    * @param callback The method to be invoked when the server response is received
+    */
+    void clearUserStatus(const FString &statusName, IServerCallback *callback);
+
+    /**
+    * Stack user's statuses
+    *
+    * Service Name - PlayerState
+    * Service Operation - EXTEND_USER_STATUS
+    *
+    * @param statusName a status name of the user
+    * @param additionalSecs time
+    * @param details json of details of user status
+    * @param callback The method to be invoked when the server response is received
+    */
+    void extendUserStatus(const FString &statusName, int additionalSecs, const FString &details, IServerCallback *callback);
+
+    /**
+    * Get user status
+    *
+    * Service Name - PlayerState
+    * Service Operation - GET_USER_STATUS
+    *
+    * @param statusName a status name of the user
+    * @param callback The method to be invoked when the server response is received
+    */
+    void getUserStatus(const FString &statusName, IServerCallback *callback);
+
+    /**
+    * Get user status
+    *
+    * Service Name - PlayerState
+    * Service Operation - GET_USER_STATUS
+    *
+    * @param statusName a status name of the user
+    * @param durationSecs the time
+    * @param details the user details
+    * @param callback The method to be invoked when the server response is received
+    */
+    void setUserStatus(const FString &statusName, int durationSecs, const FString &details, IServerCallback *callback);
+
+    /**
 	* @deprecated Use getUserName instead - removal after September 1 2017
 	*/
     const FString &getPlayerName();

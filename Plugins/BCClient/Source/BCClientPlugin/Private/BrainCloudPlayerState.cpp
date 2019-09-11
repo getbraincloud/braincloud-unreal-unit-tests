@@ -158,6 +158,47 @@ void BrainCloudPlayerState::updateContactEmail(const FString &contactEmail, ISer
     _client->sendRequest(sc);
 }
 
+
+void BrainCloudPlayerState::clearUserStatus(const FString &statusName, IServerCallback *callback)
+{
+    TSharedRef<FJsonObject> message = MakeShareable(new FJsonObject());
+    message->SetStringField(OperationParam::PlayerStateServiceStatusName.getValue(), statusName);
+
+    ServerCall *sc = new ServerCall(ServiceName::PlayerState, ServiceOperation::ClearUserStatus, message, callback);
+    _client->sendRequest(sc);
+}
+
+void BrainCloudPlayerState::extendUserStatus(const FString &statusName, int additionalSecs, const FString &details, IServerCallback *callback)
+{
+    TSharedRef<FJsonObject> message = MakeShareable(new FJsonObject());
+    message->SetStringField(OperationParam::PlayerStateServiceStatusName.getValue(), statusName);
+    message->SetNumberField(OperationParam::PlayerStateServiceAdditionalSecs.getValue(), additionalSecs);
+    message->SetObjectField(OperationParam::PlayerStateServiceDetails.getValue(), JsonUtil::jsonStringToValue(details));
+
+    ServerCall *sc = new ServerCall(ServiceName::PlayerState, ServiceOperation::ExtendUserStatus, message, callback);
+    _client->sendRequest(sc);
+}
+
+void BrainCloudPlayerState::getUserStatus(const FString &statusName, IServerCallback *callback)
+{
+    TSharedRef<FJsonObject> message = MakeShareable(new FJsonObject());
+    message->SetStringField(OperationParam::PlayerStateServiceStatusName.getValue(), statusName);
+
+    ServerCall *sc = new ServerCall(ServiceName::PlayerState, ServiceOperation::GetUserStatus, message, callback);
+    _client->sendRequest(sc);
+}
+
+void BrainCloudPlayerState::setUserStatus(const FString &statusName, int durationSecs, const FString &details, IServerCallback *callback)
+{
+    TSharedRef<FJsonObject> message = MakeShareable(new FJsonObject());
+    message->SetStringField(OperationParam::PlayerStateServiceStatusName.getValue(), statusName);
+    message->SetNumberField(OperationParam::PlayerStateServiceDurationSecs.getValue(), durationSecs);
+    message->SetObjectField(OperationParam::PlayerStateServiceDetails.getValue(), JsonUtil::jsonStringToValue(details));
+
+    ServerCall *sc = new ServerCall(ServiceName::PlayerState, ServiceOperation::SetUserStatus, message, callback);
+    _client->sendRequest(sc);
+}
+
 const FString &BrainCloudPlayerState::getPlayerName()
 {
     return _userName;
