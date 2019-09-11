@@ -61,6 +61,7 @@ class BCCLIENTPLUGIN_API ServiceOperation
 
 	static const ServiceOperation FullReset;
 	static const ServiceOperation DataReset;
+	static const ServiceOperation SubmitCrashReport;
 
 	static const ServiceOperation Update;
 	static const ServiceOperation UpdatePartial;
@@ -252,6 +253,10 @@ class BCCLIENTPLUGIN_API ServiceOperation
 	static const ServiceOperation RemoveAttributes;
 	static const ServiceOperation UpdatePlayerPicture;
 	static const ServiceOperation UpdateContactEmail;
+	static const ServiceOperation ClearUserStatus;
+	static const ServiceOperation ExtendUserStatus;
+	static const ServiceOperation GetUserStatus;
+	static const ServiceOperation SetUserStatus;
 
 	static const ServiceOperation ReadProperties;
 

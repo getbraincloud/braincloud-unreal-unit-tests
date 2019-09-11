@@ -64,6 +64,7 @@ const ServiceOperation ServiceOperation::TriggerGrantExperience = ServiceOperati
 
 const ServiceOperation ServiceOperation::FullReset = ServiceOperation(TEXT("FULL_PLAYER_RESET"));
 const ServiceOperation ServiceOperation::DataReset = ServiceOperation(TEXT("GAME_DATA_RESET"));
+const ServiceOperation ServiceOperation::SubmitCrashReport = ServiceOperation(TEXT("SEND_CRASH_REPORT"));
 
 const ServiceOperation ServiceOperation::Update = ServiceOperation(TEXT("UPDATE"));
 const ServiceOperation ServiceOperation::UpdatePartial = ServiceOperation(TEXT("UPDATE_PARTIAL"));
@@ -253,6 +254,10 @@ const ServiceOperation ServiceOperation::UpdateAttributes = ServiceOperation(TEX
 const ServiceOperation ServiceOperation::RemoveAttributes = ServiceOperation(TEXT("REMOVE_ATTRIBUTES"));
 const ServiceOperation ServiceOperation::UpdatePlayerPicture = ServiceOperation(TEXT("UPDATE_PICTURE_URL"));
 const ServiceOperation ServiceOperation::UpdateContactEmail = ServiceOperation(TEXT("UPDATE_CONTACT_EMAIL"));
+const ServiceOperation ServiceOperation::ClearUserStatus = ServiceOperation(TEXT("CLEAR_USER_STATUS"));
+const ServiceOperation ServiceOperation::ExtendUserStatus = ServiceOperation(TEXT("EXTEND_USER_STATUS"));
+const ServiceOperation ServiceOperation::GetUserStatus = ServiceOperation(TEXT("GET_USER_STATUS"));
+const ServiceOperation ServiceOperation::SetUserStatus = ServiceOperation(TEXT("SET_USER_STATUS"));
 
 const ServiceOperation ServiceOperation::ReadProperties = ServiceOperation(TEXT("READ_PROPERTIES"));
 
