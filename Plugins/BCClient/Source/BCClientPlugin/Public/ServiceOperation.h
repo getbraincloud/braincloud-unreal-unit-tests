@@ -78,6 +78,8 @@ class BCCLIENTPLUGIN_API ServiceOperation
 	static const ServiceOperation UpdateEntityIndexedId;
 	static const ServiceOperation UpdateEntityOwnerAndAcl;
 	static const ServiceOperation MakeSystemEntity;
+	static const ServiceOperation AbandonMatchWithSummaryData;
+	static const ServiceOperation CompleteMatchWithSummaryData;
 
 	static const ServiceOperation GetFriendProfileInfoForExternalId;
 	static const ServiceOperation GetProfileInfoForCredential;
