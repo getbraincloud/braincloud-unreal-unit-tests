@@ -328,19 +328,19 @@ class BCCLIENTPLUGIN_API OperationParam
 	static const OperationParam ItemCatalogServiceContext;
 	static const OperationParam ItemCatalogServicePageOffset;
 
-	//UserInventoryManagement
-	static const OperationParam UserInventoryManagementDefId;
-	static const OperationParam UserInventoryManagementQuantity;
-	static const OperationParam UserInventoryManagementIncludeDef;
-	static const OperationParam UserInventoryManagementItemId;
-	static const OperationParam UserInventoryManagementCriteria;
-	static const OperationParam UserInventoryManagementContext;
-	static const OperationParam UserInventoryManagementPageOffset;
-	static const OperationParam UserInventoryManagementProfileId;
-	static const OperationParam UserInventoryManagementImmediate;
-	static const OperationParam UserInventoryManagementVersion;
-	static const OperationParam UserInventoryManagementShopId;
-	static const OperationParam UserInventoryManagementNewItemData;
+	//UserItems
+	static const OperationParam UserItemsDefId;
+	static const OperationParam UserItemsQuantity;
+	static const OperationParam UserItemsIncludeDef;
+	static const OperationParam UserItemsItemId;
+	static const OperationParam UserItemsCriteria;
+	static const OperationParam UserItemsContext;
+	static const OperationParam UserItemsPageOffset;
+	static const OperationParam UserItemsProfileId;
+	static const OperationParam UserItemsImmediate;
+	static const OperationParam UserItemsVersion;
+	static const OperationParam UserItemsShopId;
+	static const OperationParam UserItemsNewItemData;
 
 	// Redemption Code
 	static const OperationParam RedemptionCodeServiceScanCode;
@@ -480,6 +480,23 @@ class BCCLIENTPLUGIN_API OperationParam
 	static const OperationParam LobbySignalData;
 	static const OperationParam LobbyConnectionId;
 	static const OperationParam PingData;
+
+	//customEntity
+	static const OperationParam CustomEntityServiceEntityType;
+	static const OperationParam CustomEntityServiceJsonEntityData;
+	static const OperationParam CustomEntityServiceAcl;
+	static const OperationParam CustomEntityServiceTimeToLive;
+	static const OperationParam CustomEntityServiceEntityId;
+	static const OperationParam CustomEntityServiceVersion;
+	static const OperationParam CustomEntityServiceWhereJson;
+	static const OperationParam CustomEntityServiceRowsPerPage;
+	static const OperationParam CustomEntityServiceSearchJson;
+	static const OperationParam CustomEntityServiceSortJson;
+	static const OperationParam CustomEntityServiceDoCount;
+	static const OperationParam CustomEntityServiceContext;
+	static const OperationParam CustomEntityServicePageOffset;
+	static const OperationParam CustomEntityServiceFieldsJson;
+	static const OperationParam CustomEntityServiceDataJson;
 
 	FString getValue() const { return _value; }
 

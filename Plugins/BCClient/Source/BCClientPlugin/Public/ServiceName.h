@@ -10,7 +10,7 @@ public:
   static const ServiceName AuthenticateV2;
   static const ServiceName Identity;
   static const ServiceName ItemCatalog;
-  static const ServiceName UserInventoryManagement;
+  static const ServiceName UserItems;
   static const ServiceName Currency;
   static const ServiceName FriendData;
   static const ServiceName HeartBeat;
@@ -28,6 +28,7 @@ public:
   static const ServiceName Friend;
   static const ServiceName Time;
   static const ServiceName Tournament;
+  static const ServiceName CustomEntity;
   static const ServiceName VirtualCurrency;
   static const ServiceName AppStore;
 

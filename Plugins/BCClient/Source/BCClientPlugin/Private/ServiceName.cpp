@@ -13,7 +13,7 @@ const ServiceName ServiceName::None = ServiceName("None");
 const ServiceName ServiceName::AuthenticateV2 = ServiceName("authenticationV2");
 const ServiceName ServiceName::Identity = ServiceName("identity");
 const ServiceName ServiceName::ItemCatalog = ServiceName("itemCatalog");
-const ServiceName ServiceName::UserInventoryManagement = ServiceName("userInventoryManagement");
+const ServiceName ServiceName::UserItems = ServiceName("userItems");
 const ServiceName ServiceName::Currency = ServiceName("currency");
 const ServiceName ServiceName::FriendData = ServiceName("friendData");
 const ServiceName ServiceName::HeartBeat = ServiceName("heartbeat");
@@ -31,6 +31,7 @@ const ServiceName ServiceName::GlobalEntity = ServiceName("globalEntity");
 const ServiceName ServiceName::Friend = ServiceName("friend");
 const ServiceName ServiceName::Time = ServiceName("time");
 const ServiceName ServiceName::Tournament = ServiceName("tournament");
+const ServiceName ServiceName::CustomEntity = ServiceName("customEntity");
 const ServiceName ServiceName::VirtualCurrency = ServiceName("virtualCurrency");
 const ServiceName ServiceName::AppStore = ServiceName("appStore");
 

@@ -88,19 +88,19 @@ const OperationParam OperationParam::ItemCatalogServiceDefId = OperationParam("d
 const OperationParam OperationParam::ItemCatalogServiceContext = OperationParam("context");
 const OperationParam OperationParam::ItemCatalogServicePageOffset = OperationParam("pageOffset");
 
-//UserInventoryManagement
-const OperationParam OperationParam::UserInventoryManagementDefId = OperationParam("defId");
-const OperationParam OperationParam::UserInventoryManagementQuantity = OperationParam("quantity");
-const OperationParam OperationParam::UserInventoryManagementIncludeDef = OperationParam("includeDef");
-const OperationParam OperationParam::UserInventoryManagementItemId = OperationParam("itemId");
-const OperationParam OperationParam::UserInventoryManagementCriteria = OperationParam("criteria");
-const OperationParam OperationParam::UserInventoryManagementContext = OperationParam("context");
-const OperationParam OperationParam::UserInventoryManagementPageOffset = OperationParam("pageOffset");
-const OperationParam OperationParam::UserInventoryManagementProfileId = OperationParam("profileId");
-const OperationParam OperationParam::UserInventoryManagementImmediate = OperationParam("immediate");
-const OperationParam OperationParam::UserInventoryManagementVersion = OperationParam("version");
-const OperationParam OperationParam::UserInventoryManagementShopId = OperationParam("shopId");
-const OperationParam OperationParam::UserInventoryManagementNewItemData = OperationParam("newItemData");
+//UserItems
+const OperationParam OperationParam::UserItemsDefId = OperationParam("defId");
+const OperationParam OperationParam::UserItemsQuantity = OperationParam("quantity");
+const OperationParam OperationParam::UserItemsIncludeDef = OperationParam("includeDef");
+const OperationParam OperationParam::UserItemsItemId = OperationParam("itemId");
+const OperationParam OperationParam::UserItemsCriteria = OperationParam("criteria");
+const OperationParam OperationParam::UserItemsContext = OperationParam("context");
+const OperationParam OperationParam::UserItemsPageOffset = OperationParam("pageOffset");
+const OperationParam OperationParam::UserItemsProfileId = OperationParam("profileId");
+const OperationParam OperationParam::UserItemsImmediate = OperationParam("immediate");
+const OperationParam OperationParam::UserItemsVersion = OperationParam("version");
+const OperationParam OperationParam::UserItemsShopId = OperationParam("shopId");
+const OperationParam OperationParam::UserItemsNewItemData = OperationParam("newItemData");
 
 // Async Match Service - Async Match Params
 const OperationParam OperationParam::AsyncMatchServicePlayers = OperationParam("players");
@@ -422,6 +422,23 @@ const OperationParam OperationParam::VirtualCurrencyLevelName = OperationParam("
 const OperationParam OperationParam::VirtualCurrencyPeerCode = OperationParam("peerCode");
 const OperationParam OperationParam::VirtualCurrencyPriceInfoCriteria = OperationParam("priceInfoCriteria");
 const OperationParam OperationParam::VirtualCurrencyAmount = OperationParam("vcAmount");
+
+//custom entity
+const OperationParam OperationParam::CustomEntityServiceEntityType = OperationParam("entityType");
+const OperationParam OperationParam::CustomEntityServiceJsonEntityData = OperationParam("jsonEntityData");
+const OperationParam OperationParam::CustomEntityServiceAcl = OperationParam("acl");
+const OperationParam OperationParam::CustomEntityServiceTimeToLive = OperationParam("timeToLive");
+const OperationParam OperationParam::CustomEntityServiceEntityId = OperationParam("entityId");
+const OperationParam OperationParam::CustomEntityServiceVersion = OperationParam("version");
+const OperationParam OperationParam::CustomEntityServiceWhereJson = OperationParam("whereJson");
+const OperationParam OperationParam::CustomEntityServiceRowsPerPage = OperationParam("rowsPerPage");
+const OperationParam OperationParam::CustomEntityServiceSearchJson = OperationParam("searchJson");
+const OperationParam OperationParam::CustomEntityServiceSortJson = OperationParam("sortJson");
+const OperationParam OperationParam::CustomEntityServiceDoCount = OperationParam("doCount");
+const OperationParam OperationParam::CustomEntityServiceContext = OperationParam("context");
+const OperationParam OperationParam::CustomEntityServicePageOffset = OperationParam("pageOffset");
+const OperationParam OperationParam::CustomEntityServiceFieldsJson = OperationParam("fieldsJson");
+const OperationParam OperationParam::CustomEntityServiceDataJson = OperationParam("dataJson");
 
 //app store
 const OperationParam OperationParam::AppStoreId = OperationParam("storeId");
