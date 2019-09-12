@@ -241,8 +241,8 @@ class BCCLIENTPLUGIN_API ServiceOperation
 	static const ServiceOperation GetList;
 	static const ServiceOperation GetListByIndexedId;
 	static const ServiceOperation GetListCount;
-	static const ServiceOperation GetPage;
-	static const ServiceOperation GetPageOffset;
+	static const ServiceOperation CustomEntityGetPage;
+	static const ServiceOperation CustomEntityGetPageOffset;
 	static const ServiceOperation IncrementUserEntityData;
 	static const ServiceOperation IncrementSharedUserEntityData;
 	static const ServiceOperation IncrementGlobalEntityData;
@@ -343,6 +343,16 @@ class BCCLIENTPLUGIN_API ServiceOperation
 	static const ServiceOperation ViewReward;
 	static const ServiceOperation ClaimTournamentReward;
 
+	//CustomEntity
+	static const ServiceOperation CreateEntity;
+	static const ServiceOperation DeleteEntity;
+	static const ServiceOperation GetCount;
+	static const ServiceOperation GetPage;
+	static const ServiceOperation GetPageOffset;
+	static const ServiceOperation ReadEntity;
+	static const ServiceOperation UpdateEntity;
+	static const ServiceOperation UpdateEntityFields;
+	
 	//presence
 	static const ServiceOperation ForcePush;
 	static const ServiceOperation GetPresenceOfFriends;
@@ -421,12 +431,11 @@ class BCCLIENTPLUGIN_API ServiceOperation
 	static const ServiceOperation GetCatalogItemsPage;
 	static const ServiceOperation GetCatalogItemsPageOffset;
 
-	//UserInventoryManagement
+	//UserItemsManagement
 	static const ServiceOperation AwardUserItem;
 	static const ServiceOperation DropUserItem;
-	static const ServiceOperation GetUserInventory;
-	static const ServiceOperation GetUserInventoryPage;
-	static const ServiceOperation GetUserInventoryPageOffset;
+	static const ServiceOperation GetUserItemsPage;
+	static const ServiceOperation GetUserItemsPageOffset;
 	static const ServiceOperation GetUserItem;
 	static const ServiceOperation GiveUserItemTo;
 	static const ServiceOperation PurchaseUserItem;

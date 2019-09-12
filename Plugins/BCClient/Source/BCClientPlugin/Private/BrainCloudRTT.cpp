@@ -125,10 +125,10 @@ void BrainCloudRTT::deregisterRTTLobbyCallback()
 
 void BrainCloudRTT::registerRTTBlockchainRefresh(IRTTCallback *in_callback)
 {
-	_commsLayer->registerRTTCallback(ServiceName::UserInventoryManagement, in_callback);
+	_commsLayer->registerRTTCallback(ServiceName::UserItems, in_callback);
 }
 
 void BrainCloudRTT::deregisterRTTBlockchainRefresh()
 {
-	_commsLayer->deregisterRTTCallback(ServiceName::UserInventoryManagement);
+	_commsLayer->deregisterRTTCallback(ServiceName::UserItems);
 }

@@ -21,7 +21,7 @@ class BrainCloudClient;
 #include "BrainCloudProduct.h"
 #include "BrainCloudIdentity.h"
 #include "BrainCloudItemCatalog.h"
-#include "BrainCloudUserInventoryManagement.h"
+#include "BrainCloudUserItems.h"
 #include "BrainCloudEvent.h"
 #include "BrainCloudS3Handling.h"
 #include "BrainCloudScript.h"
@@ -39,6 +39,7 @@ class BrainCloudClient;
 #include "BrainCloudGroup.h"
 #include "BrainCloudMail.h"
 #include "BrainCloudTournament.h"
+#include "BrainCloudCustomEntity.h"
 #include "BrainCloudPresence.h"
 #include "BrainCloudVirtualCurrency.h"
 #include "BrainCloudAppStore.h"
@@ -445,7 +446,7 @@ class BCCLIENTPLUGIN_API UBrainCloudWrapper : public UObject, public IServerCall
     BrainCloudProduct *getProductService() { return _client->getProductService(); }
     BrainCloudIdentity *getIdentityService() { return _client->getIdentityService(); }
     BrainCloudItemCatalog *getItemCatalogService() { return _client->getItemCatalogService(); }
-    BrainCloudUserInventoryManagement *getUserInventoryManagementService() { return _client->getUserInventoryManagementService(); }
+    BrainCloudUserItems *getUserItemsService() { return _client->getUserItemsService(); }
     BrainCloudEvent *getEventService() { return _client->getEventService(); }
     BrainCloudS3Handling *getS3HandlingService() { return _client->getS3HandlingService(); }
     BrainCloudScript *getScriptService() { return _client->getScriptService(); }
@@ -463,6 +464,7 @@ class BCCLIENTPLUGIN_API UBrainCloudWrapper : public UObject, public IServerCall
     BrainCloudGroup *getGroupService() { return _client->getGroupService(); }
     BrainCloudMail *getMailService() { return _client->getMailService(); }
     BrainCloudTournament *getTournamentService() { return _client->getTournamentService(); }
+    BrainCloudCustomEntity *getCustomEntityService() { return _client->getCustomEntityService(); }
     BrainCloudPresence *getPresenceService() { return _client->getPresenceService(); }
     BrainCloudVirtualCurrency *getVirtualCurrencyService() { return _client->getVirtualCurrencyService(); }
     BrainCloudAppStore *getAppStoreService() { return _client->getAppStoreService(); }

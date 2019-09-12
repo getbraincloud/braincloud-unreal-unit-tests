@@ -421,9 +421,8 @@ const ServiceOperation ServiceOperation::PingData = ServiceOperation("PING_DATA"
 // user inventory management
 const ServiceOperation ServiceOperation::AwardUserItem = ServiceOperation("AWARD_USER_ITEM");
 const ServiceOperation ServiceOperation::DropUserItem = ServiceOperation("DROP_USER_ITEM");
-const ServiceOperation ServiceOperation::GetUserInventory = ServiceOperation("GET_USER_INVENTORY");
-const ServiceOperation ServiceOperation::GetUserInventoryPage = ServiceOperation("GET_USER_INVENTORY_PAGE");
-const ServiceOperation ServiceOperation::GetUserInventoryPageOffset = ServiceOperation("GET_USER_INVENTORY_PAGE_OFFSET");
+const ServiceOperation ServiceOperation::GetUserItemsPage = ServiceOperation("GET_USER_ITEMS_PAGE");
+const ServiceOperation ServiceOperation::GetUserItemsPageOffset = ServiceOperation("GET_USER_ITEMS_PAGE_OFFSET");
 const ServiceOperation ServiceOperation::GetUserItem = ServiceOperation("GET_USER_ITEM");
 const ServiceOperation ServiceOperation::GiveUserItemTo = ServiceOperation("GIVE_USER_ITEM_TO");
 const ServiceOperation ServiceOperation::PurchaseUserItem = ServiceOperation("PURCHASE_USER_ITEM");
@@ -431,13 +430,23 @@ const ServiceOperation ServiceOperation::ReceiveUserItemFrom = ServiceOperation(
 const ServiceOperation ServiceOperation::SellUserItem = ServiceOperation("SELL_USER_ITEM");
 const ServiceOperation ServiceOperation::UpdateUserItemData = ServiceOperation("UPDATE_USER_ITEM_DATA");
 const ServiceOperation ServiceOperation::UseUserItem = ServiceOperation("USE_USER_ITEM");
-const ServiceOperation ServiceOperation::PublishUserItemToBlackchain = ServiceOperation("PUBLISH_USER_ITEMTO_BLOCKCHAIN");
+const ServiceOperation ServiceOperation::PublishUserItemToBlackchain = ServiceOperation("PUBLISH_USER_ITEM_TO_BLOCKCHAIN");
 const ServiceOperation ServiceOperation::RefreshBlockchainUserItems = ServiceOperation("REFRESH_BLOCKCHAIN_USER_ITEMS");
 
 //item catalog
 const ServiceOperation ServiceOperation::GetCatalogItemDefinition = ServiceOperation("GET_CATALOG_ITEM_DEFINITION");
 const ServiceOperation ServiceOperation::GetCatalogItemsPage = ServiceOperation("GET_CATALOG_ITEMS_PAGE");
 const ServiceOperation ServiceOperation::GetCatalogItemsPageOffset = ServiceOperation("GET_CATALOG_ITEMS_PAGE_OFFSET");
+
+//custom entities
+const ServiceOperation ServiceOperation::CreateEntity = ServiceOperation("CREATE_ENTITY");
+const ServiceOperation ServiceOperation::DeleteEntity = ServiceOperation("DELETE_ENTITY");
+const ServiceOperation ServiceOperation::GetCount = ServiceOperation("GET_COUNT");
+const ServiceOperation ServiceOperation::CustomEntityGetPage = ServiceOperation("GET_PAGE");
+const ServiceOperation ServiceOperation::CustomEntityGetPageOffset = ServiceOperation("GET_PAGE_BY_OFFSET");
+const ServiceOperation ServiceOperation::ReadEntity = ServiceOperation("READ_ENTITY");
+const ServiceOperation ServiceOperation::UpdateEntity = ServiceOperation("UPDATE_ENTITY");
+const ServiceOperation ServiceOperation::UpdateEntityFields = ServiceOperation("UPDATE_ENTITY_FIELDS");
 
 bool ServiceOperation::operator==(const ServiceOperation &s) const
 {

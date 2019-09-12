@@ -2,27 +2,32 @@
 
 #pragma once
 
-class BrainCloudClient;
-class IServerCallback;
+#include "BCBlueprintCallProxyBase.h"
+#include "BCAuthType.h"
+#include "BCUserItemsProxy.generated.h"
 
-class BCCLIENTPLUGIN_API BrainCloudUserInventoryManagement
+UCLASS(MinimalAPI)
+class UBCUserItemsProxy : public UBCBlueprintCallProxyBase
 {
-  public:
-    BrainCloudUserInventoryManagement(BrainCloudClient *client);
+	GENERATED_BODY()
 
-  /*
+  public:
+	UBCUserItemsProxy(const FObjectInitializer &ObjectInitializer);
+
+	/*
     * Allows item(s) to be awarded to a user without collecting
-	  * the purchase amount. If includeDef is true, response 
-	  * includes associated itemDef with language fields limited
-	  * to the current or default language.
+	* the purchase amount. If includeDef is true, response 
+	* includes associated itemDef with language fields limited
+	* to the current or default language.
     *
-    * Service Name - UserInventoryManagement
+    * Service Name - UserItems
     * Service Operation - AWARD_USER_ITEM
     *
     * @param defId
     * @param callback The method to be invoked when the server response is received
     */
-	void awardUserItem(const FString &defId, int quantity, bool includeDef, IServerCallback *callback = nullptr);
+	UFUNCTION(BlueprintCallable, meta = (BlueprintInternalUseOnly = "true"), Category = "BrainCloud|UserItems")
+	static UBCUserItemsProxy *AwardUserItem(UBrainCloudWrapper *brainCloudWrapper, const FString &defId, int quantity, bool includeDef);
 
     /*
     * Allows a quantity of a specified user item to be dropped, 
@@ -31,7 +36,7 @@ class BCCLIENTPLUGIN_API BrainCloudUserInventoryManagement
     * with the associated itemDef (with language fields limited to the 
     * current or default language).
     *
-    * Service Name - UserInventoryManagement
+    * Service Name - UserItems
     * Service Operation - DROP_USER_ITEM
     *
     * @param itemId
@@ -39,21 +44,8 @@ class BCCLIENTPLUGIN_API BrainCloudUserInventoryManagement
     * @param includeDef
     * @param callback The method to be invoked when the server response is received
     */
-	void dropUserItem(const FString &itemId, int quantity, bool includeDef, IServerCallback *callback = nullptr);
-
-  /*
-    * Retrieves the user's inventory from the server (or inventory specified by criteria). 
-    * If includeDef is true, response includes associated itemDef with each user item, with
-    * language fields limited to the current or default language.
-    *
-    * Service Name - UserInventoryManagement
-    * Service Operation - GET_USER_INVENTORY
-    *
-    * @param criteria
-    * @param includeDef
-    * @param callback The method to be invoked when the server response is received
-    */
-	void getUserInventory(const FString &criteria, bool includeDef, IServerCallback *callback = nullptr);
+	UFUNCTION(BlueprintCallable, meta = (BlueprintInternalUseOnly = "true"), Category = "BrainCloud|UserItems")
+	static UBCUserItemsProxy *DropUserItem(UBrainCloudWrapper *brainCloudWrapper, const FString &itemId, int quantity, bool includeDef);
 
   /*
     * Retrieves the page of user's inventory from the server 
@@ -61,14 +53,15 @@ class BCCLIENTPLUGIN_API BrainCloudUserInventoryManagement
     * associated itemDef with each user item, with language fields 
     * limited to the current or default language.
     *
-    * Service Name - UserInventoryManagement
-    * Service Operation - GET_USER_INVENTORY_PAGE
+    * Service Name - UserItems
+    * Service Operation - GET_USER_ITEMS_PAGE
     *
     * @param criteria
     * @param includeDef
     * @param callback The method to be invoked when the server response is received
     */
-	void getUserInventoryPage(const FString &context, bool includeDef, IServerCallback *callback = nullptr);
+	UFUNCTION(BlueprintCallable, meta = (BlueprintInternalUseOnly = "true"), Category = "BrainCloud|UserItems")
+	static UBCUserItemsProxy *GetUserItemsPage(UBrainCloudWrapper *brainCloudWrapper, const FString &context, bool includeDef);
 
   /*
     * Retrieves the page of user's inventory 
@@ -77,68 +70,73 @@ class BCCLIENTPLUGIN_API BrainCloudUserInventoryManagement
     * itemDef with each user item, with language fields limited 
     * to the current or default language.
     *
-    * Service Name - UserInventoryManagement
-    * Service Operation - GET_USER_INVENTORY_PAGE_OFFSET
+    * Service Name - UserItems
+    * Service Operation - GET_USER_ITEMS_PAGE_OFFSET
     *
     * @param criteria
     * @param pageOffset
     * @param includeDef
     * @param callback The method to be invoked when the server response is received
     */
-	void getUserInventoryPageOffset(const FString &context, int pageOffest, bool includeDef, IServerCallback *callback = nullptr);
-
-    /*
+	UFUNCTION(BlueprintCallable, meta = (BlueprintInternalUseOnly = "true"), Category = "BrainCloud|UserItems")
+	static UBCUserItemsProxy *GetUserItemsPageOffset(UBrainCloudWrapper *brainCloudWrapper, const FString &context, int pageOffset, bool includeDef);
+    
+	/*
     * Retrieves the identified user item from the server.
     * If includeDef is true, response includes associated
     * itemDef with language fields limited to the current 
     * or default language.
     *
-    * Service Name - UserInventoryManagement
+    * Service Name - UserItems
     * Service Operation - GET_USER_ITEM
     *
     * @param itemId
     * @param includeDef
     * @param callback The method to be invoked when the server response is received
     */
-	void getUserItem(const FString &itemId, bool includeDef, IServerCallback *callback = nullptr);
+	UFUNCTION(BlueprintCallable, meta = (BlueprintInternalUseOnly = "true"), Category = "BrainCloud|UserItems")
+	static UBCUserItemsProxy *GetUserItem(UBrainCloudWrapper *brainCloudWrapper, const FString &itemId, bool includeDef);
 
     /*
     * Gifts item to the specified player.
     *
-    * Service Name - UserInventoryManagement
+    * Service Name - UserItems
     * Service Operation - GIVE_USER_ITEM_TO
     *
     * @param itemId
     * @param includeDef
     * @param callback The method to be invoked when the server response is received
     */
-	void giveUserItemTo(const FString &profileId, const FString &itemId, int version, bool immediate, IServerCallback *callback = nullptr);
-
-    /*
+	UFUNCTION(BlueprintCallable, meta = (BlueprintInternalUseOnly = "true"), Category = "BrainCloud|UserItems")
+	static UBCUserItemsProxy *GiveUserItemTo(UBrainCloudWrapper *brainCloudWrapper, const FString &profileId, const FString &itemId, int version, int quantity, bool immediate);
+    
+	/*
     * Gifts item to the specified player.
     *
-    * Service Name - UserInventoryManagement
+    * Service Name - UserItems
     * Service Operation - PURCHASE_USER_ITEM
     *
     * @param itemId
     * @param includeDef
     * @param callback The method to be invoked when the server response is received
     */
-	void purchaseUserItem(const FString &defId, int quantity, const FString &shopId, bool includeDef, IServerCallback *callback = nullptr);
-
+	UFUNCTION(BlueprintCallable, meta = (BlueprintInternalUseOnly = "true"), Category = "BrainCloud|UserItems")
+	static UBCUserItemsProxy *PurchaseUserItem(UBrainCloudWrapper *brainCloudWrapper, const FString &defId, int quantity, const FString &shopId, bool includeDef);
+   
     /*
     * Retrieves and transfers the gift item from the specified player, 
     * who must have previously called giveUserItemTo.
     *
-    * Service Name - UserInventoryManagement
+    * Service Name - UserItems
     * Service Operation - RECEIVE_USER_ITEM_FROM
     *
     * @param profileId
     * @param itemId
     * @param callback The method to be invoked when the server response is received
     */
-	void receiveUserItemFrom(const FString &profileId, const FString &itemId, IServerCallback *callback = nullptr);
-
+	UFUNCTION(BlueprintCallable, meta = (BlueprintInternalUseOnly = "true"), Category = "BrainCloud|UserItems")
+	static UBCUserItemsProxy *ReceiveUserItemFrom(UBrainCloudWrapper *brainCloudWrapper, const FString &profileId, const FString &itemId);
+   
     /*
     * Allows a quantity of a specified user item to be sold. 
     * If any quantity of the user item remains, 
@@ -147,7 +145,7 @@ class BCCLIENTPLUGIN_API BrainCloudUserInventoryManagement
     * or default language), along with the currency refunded 
     * and currency balances.
     *
-    * Service Name - UserInventoryManagement
+    * Service Name - UserItems
     * Service Operation - SELL_USER_ITEM
     *
     * @param itemId
@@ -157,12 +155,13 @@ class BCCLIENTPLUGIN_API BrainCloudUserInventoryManagement
     * @param includeDef
     * @param callback The method to be invoked when the server response is received
     */
-	void sellUserItem(const FString &itemId, int version, int quantity, const FString &shopId, bool includeDef, IServerCallback *callback = nullptr);
-
-    /*
+	UFUNCTION(BlueprintCallable, meta = (BlueprintInternalUseOnly = "true"), Category = "BrainCloud|UserItems")
+	static UBCUserItemsProxy *SellUserItem(UBrainCloudWrapper *brainCloudWrapper, const FString &itemId, int version, int quantity,const FString &shopId, bool includeDef);
+    
+	/*
     * Updates the item data on the specified user item.
     *
-    * Service Name - UserInventoryManagement
+    * Service Name - UserItems
     * Service Operation - UPDATE_USER_ITEM_DATA
     *
     * @param itemId
@@ -170,12 +169,13 @@ class BCCLIENTPLUGIN_API BrainCloudUserInventoryManagement
     * @param newItemData
     * @param callback The method to be invoked when the server response is received
     */
-	void updateUserItemData(const FString &itemId, int version, const FString &newItemData, IServerCallback *callback = nullptr);
-
-    /*
+	UFUNCTION(BlueprintCallable, meta = (BlueprintInternalUseOnly = "true"), Category = "BrainCloud|UserItems")
+	static UBCUserItemsProxy *UpdateUserItemData(UBrainCloudWrapper *brainCloudWrapper, const FString &itemId, int version, const FString &newItemData);
+    
+	/*
     * Uses the specified item, potentially consuming it.
     *
-    * Service Name - UserInventoryManagement
+    * Service Name - UserItems
     * Service Operation - USE_USER_ITEM
     *
     * @param itemId
@@ -183,30 +183,30 @@ class BCCLIENTPLUGIN_API BrainCloudUserInventoryManagement
     * @param newItemData
     * @param callback The method to be invoked when the server response is received
     */
-	void useUserItem(const FString &itemId, int version, const FString &newItemData, bool includeDef, IServerCallback *callback = nullptr);
+	UFUNCTION(BlueprintCallable, meta = (BlueprintInternalUseOnly = "true"), Category = "BrainCloud|UserItems")
+	static UBCUserItemsProxy *UseUserItem(UBrainCloudWrapper *brainCloudWrapper, const FString &itemId, int version, const FString &newItemData, bool includeDef);
 
     /*
     * Publishes the specified item to the item management attached blockchain. Results are reported asynchronously via an RTT event.
     *
-    * Service Name - UserInventoryManagement
+    * Service Name - UserItems
     * Service Operation - PUBLISH_USER_ITEM_TO_BLOCKCHAIN
     *
     * @param itemId
     * @param version
     * @param callback The method to be invoked when the server response is received
     */
-	void publishUserItemToBlockchain(const FString &itemId, int version, IServerCallback *callback = nullptr);
-
+	UFUNCTION(BlueprintCallable, meta = (BlueprintInternalUseOnly = "true"), Category = "BrainCloud|UserItems")
+	static UBCUserItemsProxy *PublishUserItemToBlockchain(UBrainCloudWrapper *brainCloudWrapper, const FString &itemId, int version);
+    
     /*
     * Syncs the caller's user items with the item management attached blockchain. Results are reported asynchronously via an RTT event.
     *
-    * Service Name - UserInventoryManagement
+    * Service Name - UserItems
     * Service Operation - REFRESH_BLOCKCHAIN_USER_ITEMS
     *
     * @param callback The method to be invoked when the server response is received
     */
-	void refreshBlockchainUserItems(IServerCallback *callback = nullptr);
-
-  private:
-	BrainCloudClient *_client = nullptr;
+	UFUNCTION(BlueprintCallable, meta = (BlueprintInternalUseOnly = "true"), Category = "BrainCloud|UserItems")
+	static UBCUserItemsProxy *RefreshBlockchainUserItems(UBrainCloudWrapper *brainCloudWrapper);
 };
