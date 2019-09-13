@@ -241,7 +241,7 @@ add_library(brainCloud STATIC
     include/braincloud/BrainCloudTime.h
     include/braincloud/BrainCloudTournament.h
     include/braincloud/BrainCloudItemCatalog.h
-    include/braincloud/BrainCloudUserInventoryManagement.h
+    include/braincloud/BrainCloudUserItems.h
     include/braincloud/BrainCloudTypes.h
     include/braincloud/BrainCloudVirtualCurrency.h
     include/braincloud/BrainCloudWrapper.h
@@ -322,7 +322,7 @@ add_library(brainCloud STATIC
     src/BrainCloudTime.cpp
     src/BrainCloudTournament.cpp
     src/BrainCloudItemCatalog.cpp
-    src/BrainCloudUserInventoryManagement.cpp
+    src/BrainCloudUserItems.cpp
     src/BrainCloudVirtualCurrency.cpp
     src/BrainCloudWrapper.cpp
     src/FriendPlatform.cpp

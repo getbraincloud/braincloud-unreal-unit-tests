@@ -89,12 +89,12 @@ namespace BrainCloud
 
     void BrainCloudRTT::registerRTTBlockchainRefresh(IRTTCallback* in_callback)
     {
-        m_commsLayer->registerRTTCallback(ServiceName::UserInventoryManagement, in_callback);
+        m_commsLayer->registerRTTCallback(ServiceName::UserItems, in_callback);
     }
     
     void BrainCloudRTT::deregisterRTTBlockchainRefresh()
     {
-        m_commsLayer->deregisterRTTCallback(ServiceName::UserInventoryManagement);
+        m_commsLayer->deregisterRTTCallback(ServiceName::UserItems);
     }
 
     void BrainCloudRTT::deregisterAllRTTCallbacks()

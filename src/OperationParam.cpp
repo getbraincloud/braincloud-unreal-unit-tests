@@ -430,19 +430,19 @@ namespace BrainCloud
 	const OperationParam OperationParam::ItemCatalogServiceDefId = OperationParam("defId");
 	const OperationParam OperationParam::ItemCatalogServiceContext = OperationParam("context");
 	const OperationParam OperationParam::ItemCatalogServicePageOffset = OperationParam("pageOffset");
-    //userInventory
-	const OperationParam OperationParam::UserInventoryManagementServiceDefId = OperationParam("defId");
-	const OperationParam OperationParam::UserInventoryManagementServiceQuantity = OperationParam("quantity");
-	const OperationParam OperationParam::UserInventoryManagementServiceIncludeDef = OperationParam("includeDef");
-	const OperationParam OperationParam::UserInventoryManagementServiceItemId = OperationParam("itemId");
-	const OperationParam OperationParam::UserInventoryManagementServiceCriteria = OperationParam("criteria");
-	const OperationParam OperationParam::UserInventoryManagementServiceContext = OperationParam("context");
-	const OperationParam OperationParam::UserInventoryManagementServicePageOffset = OperationParam("pageOffset");
-	const OperationParam OperationParam::UserInventoryManagementServiceVersion = OperationParam("version");
-	const OperationParam OperationParam::UserInventoryManagementServiceImmediate = OperationParam("immediate");
-	const OperationParam OperationParam::UserInventoryManagementServiceProfileId = OperationParam("profileId");
-	const OperationParam OperationParam::UserInventoryManagementServiceShopId = OperationParam("shopId");
-	const OperationParam OperationParam::UserInventoryManagementServiceNewItemData = OperationParam("newItemData");
+    //UserItems
+	const OperationParam OperationParam::UserItemsServiceDefId = OperationParam("defId");
+	const OperationParam OperationParam::UserItemsServiceQuantity = OperationParam("quantity");
+	const OperationParam OperationParam::UserItemsServiceIncludeDef = OperationParam("includeDef");
+	const OperationParam OperationParam::UserItemsServiceItemId = OperationParam("itemId");
+	const OperationParam OperationParam::UserItemsServiceCriteria = OperationParam("criteria");
+	const OperationParam OperationParam::UserItemsServiceContext = OperationParam("context");
+	const OperationParam OperationParam::UserItemsServicePageOffset = OperationParam("pageOffset");
+	const OperationParam OperationParam::UserItemsServiceVersion = OperationParam("version");
+	const OperationParam OperationParam::UserItemsServiceImmediate = OperationParam("immediate");
+	const OperationParam OperationParam::UserItemsServiceProfileId = OperationParam("profileId");
+	const OperationParam OperationParam::UserItemsServiceShopId = OperationParam("shopId");
+	const OperationParam OperationParam::UserItemsServiceNewItemData = OperationParam("newItemData");
 
 	OperationParam::OperationParam(const char * value)
 	{

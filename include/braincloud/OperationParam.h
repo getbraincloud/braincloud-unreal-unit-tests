@@ -437,19 +437,19 @@ namespace BrainCloud {
 		static const OperationParam ItemCatalogServiceContext;
 		static const OperationParam ItemCatalogServicePageOffset;
 		
-		//userInventory
-		static const OperationParam UserInventoryManagementServiceDefId;
-		static const OperationParam UserInventoryManagementServiceQuantity;
-		static const OperationParam UserInventoryManagementServiceIncludeDef;
-		static const OperationParam UserInventoryManagementServiceItemId;
-		static const OperationParam UserInventoryManagementServiceCriteria;
-		static const OperationParam UserInventoryManagementServiceContext;
-		static const OperationParam UserInventoryManagementServicePageOffset;
-		static const OperationParam UserInventoryManagementServiceVersion;
-		static const OperationParam UserInventoryManagementServiceImmediate;
-		static const OperationParam UserInventoryManagementServiceProfileId;
-		static const OperationParam UserInventoryManagementServiceShopId;
-		static const OperationParam UserInventoryManagementServiceNewItemData;
+		//UserItems
+		static const OperationParam UserItemsServiceDefId;
+		static const OperationParam UserItemsServiceQuantity;
+		static const OperationParam UserItemsServiceIncludeDef;
+		static const OperationParam UserItemsServiceItemId;
+		static const OperationParam UserItemsServiceCriteria;
+		static const OperationParam UserItemsServiceContext;
+		static const OperationParam UserItemsServicePageOffset;
+		static const OperationParam UserItemsServiceVersion;
+		static const OperationParam UserItemsServiceImmediate;
+		static const OperationParam UserItemsServiceProfileId;
+		static const OperationParam UserItemsServiceShopId;
+		static const OperationParam UserItemsServiceNewItemData;
 
 		std::string getValue() const { return _value; }
 

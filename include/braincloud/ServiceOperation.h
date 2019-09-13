@@ -344,12 +344,11 @@ namespace BrainCloud {
 		static const ServiceOperation ViewReward;
 		static const ServiceOperation ClaimTournamentReward;
 
-		//UserInventoryManagement
+		//UserItems
 		static const ServiceOperation AwardUserItem;
 		static const ServiceOperation DropUserItem;
-		static const ServiceOperation GetUserInventory;
-		static const ServiceOperation GetUserInventoryPage;
-		static const ServiceOperation GetUserInventoryPageOffset;
+		static const ServiceOperation GetUserItemsPage;
+		static const ServiceOperation GetUserItemsPageOffset;
 		static const ServiceOperation GetUserItem;
 		static const ServiceOperation GiveUserItemTo;
 		static const ServiceOperation PurchaseUserItem;

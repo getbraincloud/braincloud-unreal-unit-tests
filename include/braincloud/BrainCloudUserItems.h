@@ -10,17 +10,17 @@ namespace BrainCloud
 	class BrainCloudClient;
 	class AuthenticationType;
 
-	class BrainCloudUserInventoryManagement
+	class BrainCloudUserItems
 	{
 	public:
-		BrainCloudUserInventoryManagement(BrainCloudClient* in_client);
+		BrainCloudUserItems(BrainCloudClient* in_client);
 	/**
 	 * Allows item(s) to be awarded to a user without collecting
 	 *  the purchase amount. If includeDef is true, response 
 	 * includes associated itemDef with language fields limited
 	 *  to the current or default language.
 	 *
-	 * Service Name - userInventoryManagement
+	 * Service Name - userItems
 	 * Service Operation - AWARD_USER_ITEM
 	 *
 	 * @param defId 
@@ -36,7 +36,7 @@ namespace BrainCloud
 	 * potentially with the associated itemDef (with language fields 
 	 * limited to the current or default language).
 	 *
-	 * Service Name - userInventoryManagement
+	 * Service Name - userItems
 	 * Service Operation - DROP_USER_ITEM
 	 *
 	 * @param defId 
@@ -45,34 +45,19 @@ namespace BrainCloud
 	 */
         void dropUserItem(const std::string& in_defId, int32_t in_quantity, bool in_includeDef, IServerCallback * in_callback = NULL);
 
-	/**
-	 * Retrieves the user's inventory from the 
-	 * server (or inventory specified by criteria). 
-	 * If includeDef is true, response includes associated 
-	 * itemDef with each user item, with language fields 
-	 * limited to the current or default language.
-	 *
-	 * Service Name - userInventoryManagement
-	 * Service Operation - GET_USER_INVENTORY
-	 *
-	 * @param criteria 
-	 * @param includeDef 
-	 */
-        void getUserInventory(const std::string& in_criteria, bool in_includeDef, IServerCallback * in_callback = NULL);
-	
     /**
 	 * Retrieves the page of user's inventory from the server 
 	 * based on the context. If includeDef is true, response
 	 *  includes associated itemDef with each user item, with 
 	 * language fields limited to the current or default language.
 	 *
-	 * Service Name - userInventoryManagement
+	 * Service Name - userItems
 	 * Service Operation - GET_USER_INVENTORY_PAGE
 	 *
 	 * @param context
 	 * @param includeDef 
 	 */
-        void getUserInventoryPage(const std::string& in_context, bool in_includeDef, IServerCallback * in_callback = NULL);
+        void getUserItemsPage(const std::string& in_context, bool in_includeDef, IServerCallback * in_callback = NULL);
 
 	/**
 	 * Retrieves the page of user's inventory from the server
@@ -81,14 +66,14 @@ namespace BrainCloud
 	 * with language fields limited to the current or default
 	 * language.
 	 *
-	 * Service Name - userInventoryManagement
+	 * Service Name - userItems
 	 * Service Operation - GET_USER_INVENTORY_PAGE_OFFSET
 	 *
 	 * @param context
 	 * @param pageOffset
 	 * @param includeDef 
 	 */
-        void getUserInventoryPageOffset(const std::string& in_context, int32_t in_pageOffset, bool in_includeDef, IServerCallback * in_callback = NULL);
+        void getUserItemsPageOffset(const std::string& in_context, int32_t in_pageOffset, bool in_includeDef, IServerCallback * in_callback = NULL);
 
 	/**
 	 * Retrieves the identified user item from the server. 
@@ -96,7 +81,7 @@ namespace BrainCloud
 	 * itemDef with language fields limited to the current 
 	 * or default language.
 	 *
-	 * Service Name - userInventoryManagement
+	 * Service Name - userItems
 	 * Service Operation - GET_USER_ITEM
 	 *
 	 * @param itemId
@@ -108,7 +93,7 @@ namespace BrainCloud
 	/**
 	 * Gifts item to the specified player.
 	 *
-	 * Service Name - userInventoryManagement
+	 * Service Name - userItems
 	 * Service Operation - GIVE_USER_ITEM_TO
 	 *
 	 * @param profileId
@@ -116,7 +101,7 @@ namespace BrainCloud
 	 * @param version
 	 * @param immediate 
 	 */
-        void giveUserItemTo(const std::string& in_profileId, const std::string& in_itemId, int32_t in_version, bool in_immediate, IServerCallback * in_callback = NULL);
+        void giveUserItemTo(const std::string& in_profileId, const std::string& in_itemId, int32_t in_version, int32_t in_quantity, bool in_immediate, IServerCallback * in_callback = NULL);
 
 	/**
 	 * Retrieves the identified user item from the server. 
@@ -124,7 +109,7 @@ namespace BrainCloud
 	 * itemDef with language fields limited to the current 
 	 * or default language.
 	 *
-	 * Service Name - userInventoryManagement
+	 * Service Name - userItems
 	 * Service Operation - PURCHASE_USER_ITEM
 	 *
 	 * @param defId
@@ -139,7 +124,7 @@ namespace BrainCloud
 	 * the specified player, who must have previously 
 	 * called giveUserItemTo.
 	 *
-	 * Service Name - userInventoryManagement
+	 * Service Name - userItems
 	 * Service Operation - RECEVIE_USER_ITEM_FROM
 	 *
 	 * @param profileId
@@ -154,7 +139,7 @@ namespace BrainCloud
 	 * limited to the current or default language), along with the 
 	 * currency refunded and currency balances.
 	 *
-	 * Service Name - userInventoryManagement
+	 * Service Name - userItems
 	 * Service Operation - SELL_USER_ITEM
 	 *
 	 * @param itemId
@@ -168,7 +153,7 @@ namespace BrainCloud
 	/**
 	 * Updates the item data on the specified user item.
 	 *
-	 * Service Name - userInventoryManagement
+	 * Service Name - userItems
 	 * Service Operation - UPDATE_USER_ITEM_DATA
 	 *
 	 * @param itemId
@@ -180,7 +165,7 @@ namespace BrainCloud
 	/**
 	 * Uses the specified item, potentially consuming it.
 	 *
-	 * Service Name - userInventoryManagement
+	 * Service Name - userItems
 	 * Service Operation - USE_USER_ITEM
 	 *
 	 * @param itemId
@@ -193,7 +178,7 @@ namespace BrainCloud
 			/**
 	 * Publishes the specified item to the item management attached blockchain. Results are reported asynchronously via an RTT event.
 	 *
-	 * Service Name - userInventoryManagement
+	 * Service Name - userItems
 	 * Service Operation - PUBLISH_USER_ITEM_TO_BLOCKCHAIN
 	 *
 	 * @param itemId
@@ -205,7 +190,7 @@ namespace BrainCloud
 	/**
 	 * Syncs the caller's user items with the item management attached blockchain. Results are reported asynchronously via an RTT event.
 	 *
-	 * Service Name - userInventoryManagement
+	 * Service Name - userItems
 	 * Service Operation - REFRESH_BLOCKCHAIN_USER_ITEMS
 	 */
         void refreshBlockchainUserItems(IServerCallback * in_callback = NULL);

@@ -401,12 +401,11 @@ namespace BrainCloud
 	const ServiceOperation ServiceOperation::AppStoreStartPurchase = ServiceOperation("START_PURCHASE");
 	const ServiceOperation ServiceOperation::AppStoreFinalizePurchase = ServiceOperation("FINALIZE_PURCHASE");
 
-	//UserInventoryManagement
+	//UserItems
 	const ServiceOperation ServiceOperation::AwardUserItem = ServiceOperation("AWARD_USER_ITEM");
 	const ServiceOperation ServiceOperation::DropUserItem = ServiceOperation("DROP_USER_ITEM");
-	const ServiceOperation ServiceOperation::GetUserInventory = ServiceOperation("GET_USER_INVENTORY");
-	const ServiceOperation ServiceOperation::GetUserInventoryPage = ServiceOperation("GET_USER_INVENTORY_PAGE");
-	const ServiceOperation ServiceOperation::GetUserInventoryPageOffset = ServiceOperation("GET_USER_INVENTORY_PAGE_OFFSET");
+	const ServiceOperation ServiceOperation::GetUserItemsPage = ServiceOperation("GET_USER_ITEMS_PAGE");
+	const ServiceOperation ServiceOperation::GetUserItemsPageOffset = ServiceOperation("GET_USER_ITEMS_PAGE_OFFSET");
 	const ServiceOperation ServiceOperation::GetUserItem = ServiceOperation("GET_USER_ITEM");
 	const ServiceOperation ServiceOperation::GiveUserItemTo = ServiceOperation("GIVE_USER_ITEM_TO");
 	const ServiceOperation ServiceOperation::PurchaseUserItem = ServiceOperation("PURCHASE_USER_ITEM");

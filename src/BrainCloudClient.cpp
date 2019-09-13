@@ -68,7 +68,7 @@ namespace BrainCloud
         _timeService(new BrainCloudTime(this)),
         _tournamentService(new BrainCloudTournament(this)),
         _itemCatalogService(new BrainCloudItemCatalog(this)),
-        _userInventoryManagementService(new BrainCloudUserInventoryManagement(this)),
+        _userItemsService(new BrainCloudUserItems(this)),
         _releasePlatform(""),
         _appVersion(""),
         _timezoneOffset(0.0)

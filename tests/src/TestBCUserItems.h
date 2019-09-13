@@ -8,7 +8,7 @@
 
 using namespace BrainCloud;
 
-class TestBCUserInventoryManagement: public TestFixtureBase
+class TestBCUserItems: public TestFixtureBase
 {
 };
 
