@@ -28,7 +28,7 @@ class UBCCustomEntityProxy : public UBCBlueprintCallProxyBase
      * @param callback The method to be invoked when the server response is received
      */
   UFUNCTION(BlueprintCallable, meta = (BlueprintInternalUseOnly = "true"), Category = "BrainCloud|CustomEntity")
-  static UBCCustomEntityProxy *CreateEntity(UBrainCloudWrapper *brainCloudWrapper, const FString &entityType, const FString &jsonEntityData, UBrainCloudACL *jsonEntityAcl, const FString &timeToLive);
+  static UBCCustomEntityProxy *CreateEntity(UBrainCloudWrapper *brainCloudWrapper, const FString &entityType, const FString &jsonEntityData, UBrainCloudACL *jsonEntityAcl, const FString &timeToLive, bool isOwned);
 
   /**
      * Deletes the specified custom entity on the server.

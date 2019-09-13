@@ -9,6 +9,25 @@
 
 BrainCloudIdentity::BrainCloudIdentity(BrainCloudClient *client) : _client(client){};
 
+void BrainCloudIdentity::attachBlockchainIdentity(const FString &blockchainConfig, const FString &publicKey, IServerCallback *callback)
+{
+	TSharedRef<FJsonObject> message = MakeShareable(new FJsonObject());
+	message->SetStringField(OperationParam::IdentityServiceBlockchainConfig.getValue(), blockchainConfig);
+	message->SetStringField(OperationParam::IdentityServicePublicKey.getValue(), publicKey);
+
+	ServerCall *sc = new ServerCall(ServiceName::Identity, ServiceOperation::AttachBlockchainIdentity, message, callback);
+	_client->sendRequest(sc);
+}
+
+void BrainCloudIdentity::detachBlockchainIdentity(const FString &blockchainConfig, IServerCallback *callback)
+{
+	TSharedRef<FJsonObject> message = MakeShareable(new FJsonObject());
+	message->SetStringField(OperationParam::IdentityServiceBlockchainConfig.getValue(), blockchainConfig);
+
+	ServerCall *sc = new ServerCall(ServiceName::Identity, ServiceOperation::DetachBlockchainIdentity, message, callback);
+	_client->sendRequest(sc);
+}
+
 void BrainCloudIdentity::attachFacebookIdentity(const FString &facebookId, const FString &authenticationToken, IServerCallback *callback)
 {
 	attachIdentity(facebookId, authenticationToken, EBCAuthType::Facebook, callback);
