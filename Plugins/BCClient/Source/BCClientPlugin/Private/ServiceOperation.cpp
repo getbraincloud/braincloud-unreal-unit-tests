@@ -251,6 +251,8 @@ const ServiceOperation ServiceOperation::GetRandomEntitiesMatching = ServiceOper
 const ServiceOperation ServiceOperation::AbandonMatchWithSummaryData = ServiceOperation(TEXT("ABANDON_MATCH_WITH_SUMMARY_DATA"));
 const ServiceOperation ServiceOperation::CompleteMatchWithSummaryData = ServiceOperation(TEXT("COMPLETE_MATCH_WITH_SUMMARY_DATA"));
 
+const ServiceOperation ServiceOperation::AttachBlockchainIdentity = ServiceOperation(TEXT("ATTACH_BLOCKCHAIN_IDENTITY"));
+const ServiceOperation ServiceOperation::DetachBlockchainIdentity = ServiceOperation(TEXT("DETACH_BLOCKCHAIN_IDENTITY")); 
 
 const ServiceOperation ServiceOperation::GetAttributes = ServiceOperation(TEXT("GET_ATTRIBUTES"));
 const ServiceOperation ServiceOperation::UpdateAttributes = ServiceOperation(TEXT("UPDATE_ATTRIBUTES"));

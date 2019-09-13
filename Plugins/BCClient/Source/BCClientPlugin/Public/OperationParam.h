@@ -82,6 +82,10 @@ class BCCLIENTPLUGIN_API OperationParam
 	static const OperationParam IdentityServiceOldEmailAddress;
 	static const OperationParam IdentityServiceNewEmailAddress;
 	static const OperationParam IdentityServiceUpdateContactEmail;
+	static const OperationParam IdentityServiceBlockchainConfig;
+	static const OperationParam IdentityServicePublicKey;
+
+	static const OperationParam CustomEntityServiceIsOwned;
 
 	// Async Match Service - Async Match Params
 	static const OperationParam AsyncMatchServicePlayers;

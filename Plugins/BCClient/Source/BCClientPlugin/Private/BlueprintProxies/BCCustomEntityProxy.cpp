@@ -13,10 +13,10 @@ UBCCustomEntityProxy::UBCCustomEntityProxy(const FObjectInitializer &ObjectIniti
 {
 }
 
-UBCCustomEntityProxy *UBCCustomEntityProxy::CreateEntity(UBrainCloudWrapper *brainCloudWrapper, const FString &entityType, const FString &jsonEntityData, UBrainCloudACL *jsonEntityAcl, const FString &timeToLive)
+UBCCustomEntityProxy *UBCCustomEntityProxy::CreateEntity(UBrainCloudWrapper *brainCloudWrapper, const FString &entityType, const FString &jsonEntityData, UBrainCloudACL *jsonEntityAcl, const FString &timeToLive, bool isOwned)
 {
     UBCCustomEntityProxy *Proxy = NewObject<UBCCustomEntityProxy>();
-    UBCWrapperProxy::GetBrainCloudInstance(brainCloudWrapper)->getCustomEntityService()->createEntity(entityType, jsonEntityData, jsonEntityAcl, timeToLive.IsEmpty() ? 0 : FCString::Atoi64(*timeToLive), Proxy);
+    UBCWrapperProxy::GetBrainCloudInstance(brainCloudWrapper)->getCustomEntityService()->createEntity(entityType, jsonEntityData, jsonEntityAcl, timeToLive.IsEmpty() ? 0 : FCString::Atoi64(*timeToLive), isOwned, Proxy);
     return Proxy;
 }
 

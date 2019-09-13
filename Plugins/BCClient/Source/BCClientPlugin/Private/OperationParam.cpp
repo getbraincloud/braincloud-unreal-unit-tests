@@ -114,6 +114,11 @@ const OperationParam OperationParam::AsyncMatchServiceVersion = OperationParam("
 const OperationParam OperationParam::AsyncMatchServiceStatistics = OperationParam("statistics");
 const OperationParam OperationParam::AsyncMatchServiceMatchStatus = OperationParam("status");
 
+const OperationParam OperationParam::CustomEntityServiceIsOwned = OperationParam("isOwned");
+//blockchain
+const OperationParam OperationParam::IdentityServiceBlockchainConfig = OperationParam("blockchainConfig");
+const OperationParam OperationParam::IdentityServicePublicKey = OperationParam("publicKey");
+
 // Entity Service
 const OperationParam OperationParam::EntityServiceEntityId = OperationParam("entityId");
 const OperationParam OperationParam::EntityServiceEntityType = OperationParam("entityType");

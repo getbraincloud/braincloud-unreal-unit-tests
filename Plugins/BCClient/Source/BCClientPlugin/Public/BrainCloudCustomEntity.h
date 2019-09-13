@@ -24,7 +24,7 @@ public:
      * @param timeToLive
      * @param callback The method to be invoked when the server response is received
      */
-  void createEntity(const FString &entityType, const FString &jsonEntityData, IAcl *jsonEntityAcl, int64 timeToLive, IServerCallback *callback);
+  void createEntity(const FString &entityType, const FString &jsonEntityData, IAcl *jsonEntityAcl, int64 timeToLive, bool isOwned, IServerCallback *callback);
 
   /**
      * Deletes the specified custom entity on the server.

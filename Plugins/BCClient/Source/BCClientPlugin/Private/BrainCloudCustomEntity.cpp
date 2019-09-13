@@ -10,13 +10,14 @@
 
 BrainCloudCustomEntity::BrainCloudCustomEntity(BrainCloudClient *client) : _client(client){};
 
-void BrainCloudCustomEntity::createEntity(const FString &entityType, const FString &jsonEntityData, IAcl *jsonEntityAcl, int64 timeToLive, IServerCallback *callback)
+void BrainCloudCustomEntity::createEntity(const FString &entityType, const FString &jsonEntityData, IAcl *jsonEntityAcl, int64 timeToLive, bool isOwned, IServerCallback *callback)
 {
     TSharedRef<FJsonObject> message = MakeShareable(new FJsonObject());
     message->SetStringField(OperationParam::CustomEntityServiceEntityType.getValue(), entityType);
     message->SetObjectField(OperationParam::CustomEntityServiceJsonEntityData.getValue(), JsonUtil::jsonStringToValue(jsonEntityData));
     message->SetObjectField(OperationParam::CustomEntityServiceAcl.getValue(), jsonEntityAcl->toJsonObject());
     message->SetNumberField(OperationParam::CustomEntityServiceTimeToLive.getValue(), timeToLive);
+    message->SetBoolField(OperationParam::CustomEntityServiceIsOwned.getValue(), isOwned);
 
     ServerCall *sc = new ServerCall(ServiceName::CustomEntity, ServiceOperation::CreateEntity, message, callback);
     _client->sendRequest(sc);
