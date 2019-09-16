@@ -1,5 +1,5 @@
-#ifndef _TESTBCENTITY_H_
-#define _TESTBCENTITY_H_
+#ifndef _TESTBCSOCIALLEADERBOARD_H_
+#define _TESTBCSOCIALLEADERBOARD_H_
 
 #include "gtest/gtest.h"
 #include "braincloud/BrainCloudClient.h"

@@ -421,6 +421,18 @@ namespace BrainCloud
 	const ServiceOperation ServiceOperation::GetCatalogItemsPage = ServiceOperation("GET_CATALOG_ITEMS_PAGE");
 	const ServiceOperation ServiceOperation::GetCatalogItemsPageOffset = ServiceOperation("GET_CATALOG_ITEMS_PAGE_OFFSET");
 
+	//custom entity
+	const ServiceOperation ServiceOperation::CreateEntity = ServiceOperation("CREATE_ENTITY");
+	const ServiceOperation ServiceOperation::DeleteEntity = ServiceOperation("DELETE_ENTITY");
+	const ServiceOperation ServiceOperation::GetCount = ServiceOperation("GET_COUNT");
+	const ServiceOperation ServiceOperation::ReadEntity = ServiceOperation("READ_ENTITY");
+	const ServiceOperation ServiceOperation::UpdateEntity = ServiceOperation("UPDATE_ENTITY");
+	const ServiceOperation ServiceOperation::UpdateEntityFields = ServiceOperation("UPDATE_ENTITY_FIELDS");
+	const ServiceOperation ServiceOperation::GetEntityPage = ServiceOperation("GET_PAGE");
+	const ServiceOperation ServiceOperation::GetEntityPageOffset = ServiceOperation("GET_PAGE_BY_OFFSET");
+
+	const ServiceOperation ServiceOperation::SubmitCrashReport = ServiceOperation("SEND_CRASH_REPORT");
+
 	ServiceOperation::ServiceOperation(const char * value)
 	{
 		_value = value;

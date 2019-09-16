@@ -46,6 +46,7 @@ namespace BrainCloud {
         BrainCloudGamification * getGamificationService() { return client->getGamificationService(); }
         BrainCloudTime * getTimeService() { return client->getTimeService(); }
         BrainCloudTournament * getTournamentService() { return client->getTournamentService(); }
+        BrainCloudCustomEntity * getCustomEntityService() { return client->getCustomEntityService(); }
         BrainCloudItemCatalog* getItemCatalogService() { return client->getItemCatalogService(); }
         BrainCloudUserItems* getUserItemsService() { return client->getUserItemsService(); }
         BrainCloudPushNotification * getPushNotificationService() { return client->getPushNotificationService(); }

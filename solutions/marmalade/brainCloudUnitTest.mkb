@@ -43,6 +43,8 @@ files
     TestBCDataStream.h
     TestBCEntity.cpp
     TestBCEntity.h
+    TestBCCustomEntity.cpp
+    TestBCCustomEntity.h
     TestBCEvent.cpp
     TestBCEvent.h
     TestBCFile.cpp

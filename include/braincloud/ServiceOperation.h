@@ -364,6 +364,16 @@ namespace BrainCloud {
 		static const ServiceOperation GetCatalogItemsPage;
 		static const ServiceOperation GetCatalogItemsPageOffset;
 
+		//custom entity
+		static const ServiceOperation CreateEntity;
+		static const ServiceOperation DeleteEntity;
+		static const ServiceOperation GetCount;
+		static const ServiceOperation ReadEntity;
+		static const ServiceOperation UpdateEntity;
+		static const ServiceOperation UpdateEntityFields;
+		static const ServiceOperation GetEntityPage;
+		static const ServiceOperation GetEntityPageOffset;
+
 		//rtt Registration
 		static const ServiceOperation RequestClientConnection;
 
@@ -392,6 +402,8 @@ namespace BrainCloud {
 		static const ServiceOperation UpdateReady;
 		static const ServiceOperation UpdateSettings;
 		static const ServiceOperation CancelFindRequest;
+
+		static const ServiceOperation SubmitCrashReport;
 
 		//messaging
 		static const ServiceOperation DeleteMessages;

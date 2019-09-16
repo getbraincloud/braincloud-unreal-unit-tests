@@ -55,4 +55,20 @@ namespace BrainCloud
         ServerCall * sc = new ServerCall(ServiceName::DataStream, ServiceOperation::CustomTrackEvent, message, in_callback);
         m_client->getBrainCloudComms()->addToQueue(sc);
     }
+
+    void BrainCloudDataStream::submitCrashReport(const char * in_crashType, const char * in_errorMsg, const std::string&  in_crashJson, const char * in_crashLog, const char * in_username, const char * in_userEmail, const char * in_userNotes, bool in_userSubmitted, IServerCallback * in_callback)
+    {
+        Json::Value message;
+        message[OperationParam::DataStreamCrashType.getValue()] = in_crashType;
+        message[OperationParam::DataStreamErrorMsg.getValue()] = in_errorMsg;
+        message[OperationParam::DataStreamCrashJson.getValue()] = JsonUtil::jsonStringToValue(in_crashJson);
+        message[OperationParam::DataStreamCrashLog.getValue()] = in_crashLog;
+        message[OperationParam::DataStreamUsername.getValue()] = in_username;
+        message[OperationParam::DataStreamUserEmail.getValue()] = in_userEmail;
+        message[OperationParam::DataStreamUserNotes.getValue()] = in_userNotes;
+        message[OperationParam::DataStreamUserSubmitted.getValue()] = in_userSubmitted;
+
+        ServerCall * sc = new ServerCall(ServiceName::DataStream, ServiceOperation::SubmitCrashReport, message, in_callback);
+        m_client->getBrainCloudComms()->addToQueue(sc);
+    }
 }

@@ -375,6 +375,22 @@ namespace BrainCloud {
 		static const OperationParam RoundStartedEpoch;
 		static const OperationParam Data;
 
+		//Custom Entity
+		static const OperationParam CustomEntityServiceEntityType;
+		static const OperationParam CustomEntityServiceData;
+		static const OperationParam CustomEntityServiceAcl;
+		static const OperationParam CustomEntityServiceTimeToLive;
+		static const OperationParam CustomEntityServiceIsOwned;
+		static const OperationParam CustomEntityServiceVersion;
+		static const OperationParam CustomEntityServiceRowsPerPage;
+		static const OperationParam CustomEntityServiceSearchJson;
+		static const OperationParam CustomEntityServiceSortJson;
+		static const OperationParam CustomEntityServiceDoCount;
+		static const OperationParam CustomEntityServiceContext;
+		static const OperationParam CustomEntityServicePageOffset;
+		static const OperationParam CustomEntityServiceEntityId;
+		static const OperationParam CustomEntityFieldsJson;
+
 		//chat
 		static const OperationParam ChannelId;
 		static const OperationParam MsgId;
@@ -450,6 +466,16 @@ namespace BrainCloud {
 		static const OperationParam UserItemsServiceProfileId;
 		static const OperationParam UserItemsServiceShopId;
 		static const OperationParam UserItemsServiceNewItemData;
+
+		//Datastream
+		static const OperationParam DataStreamCrashType;
+		static const OperationParam DataStreamErrorMsg;
+		static const OperationParam DataStreamCrashJson;
+		static const OperationParam DataStreamCrashLog;
+		static const OperationParam DataStreamUsername;
+		static const OperationParam DataStreamUserEmail;
+		static const OperationParam DataStreamUserNotes;
+		static const OperationParam DataStreamUserSubmitted;
 
 		std::string getValue() const { return _value; }
 

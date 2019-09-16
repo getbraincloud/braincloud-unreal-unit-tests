@@ -67,6 +67,7 @@ namespace BrainCloud
         _steamService(new BrainCloudSteam(this)),
         _timeService(new BrainCloudTime(this)),
         _tournamentService(new BrainCloudTournament(this)),
+        _customEntityService(new BrainCloudCustomEntity(this)),
         _itemCatalogService(new BrainCloudItemCatalog(this)),
         _userItemsService(new BrainCloudUserItems(this)),
         _releasePlatform(""),
@@ -81,6 +82,7 @@ namespace BrainCloud
     {
         delete _rttService;
         delete _tournamentService;
+        delete _customEntityService;
         delete _itemCatalogService;
         delete _timeService;
         delete _steamService;
