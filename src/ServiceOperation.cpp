@@ -433,6 +433,11 @@ namespace BrainCloud
 
 	const ServiceOperation ServiceOperation::SubmitCrashReport = ServiceOperation("SEND_CRASH_REPORT");
 
+	const ServiceOperation ServiceOperation::ClearUserStatus = ServiceOperation("CLEAR_USER_STATUS");
+	const ServiceOperation ServiceOperation::ExtendUserStatus = ServiceOperation("EXTEND_USER_STATUS");
+	const ServiceOperation ServiceOperation::GetUserStatus = ServiceOperation("GET_USER_STATUS");
+	const ServiceOperation ServiceOperation::SetUserStatus = ServiceOperation("SET_USER_STATUS"); 
+
 	ServiceOperation::ServiceOperation(const char * value)
 	{
 		_value = value;

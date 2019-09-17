@@ -477,6 +477,11 @@ namespace BrainCloud {
 		static const OperationParam DataStreamUserNotes;
 		static const OperationParam DataStreamUserSubmitted;
 
+		static const OperationParam PlayerStateServiceStatusName;
+		static const OperationParam PlayerStateServiceAdditionalSecs;
+		static const OperationParam PlayerStateServiceDetails;
+		static const OperationParam PlayerStateServiceDurationSecs;
+
 		std::string getValue() const { return _value; }
 
 		bool operator== (const OperationParam& s) const;

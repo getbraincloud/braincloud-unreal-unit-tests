@@ -254,6 +254,10 @@ namespace BrainCloud {
 		static const ServiceOperation IncrementGlobalEntityData;
 		static const ServiceOperation GetRandomEntitiesMatching;
 
+		static const ServiceOperation ClearUserStatus;
+		static const ServiceOperation ExtendUserStatus;
+		static const ServiceOperation GetUserStatus;
+		static const ServiceOperation SetUserStatus;
 
 		static const ServiceOperation GetAttributes;
 		static const ServiceOperation UpdateAttributes;

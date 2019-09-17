@@ -470,6 +470,11 @@ namespace BrainCloud
 	const OperationParam OperationParam::DataStreamUserNotes = OperationParam("userNotes");
 	const OperationParam OperationParam::DataStreamUserSubmitted = OperationParam("userSubmitted");
 
+	const OperationParam OperationParam::PlayerStateServiceStatusName = OperationParam("statusName");
+	const OperationParam OperationParam::PlayerStateServiceAdditionalSecs = OperationParam("additionalSecs");
+	const OperationParam OperationParam::PlayerStateServiceDetails = OperationParam("details");
+	const OperationParam OperationParam::PlayerStateServiceDurationSecs = OperationParam("durationSecs");
+
 	OperationParam::OperationParam(const char * value)
 	{
 		_value = value;

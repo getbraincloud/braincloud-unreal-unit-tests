@@ -194,6 +194,55 @@ namespace BrainCloud
          */
         void updateContactEmail(const char * in_contactEmail, IServerCallback * in_callback = NULL);
 
+
+        /**
+         * Delete's the specified status
+         *
+         * Service Name - PlayerState
+         * Service Operation - CLEAR_USER_STATUS
+         *
+         * @param in_statusName Updated email
+         * @param in_callback The method to be invoked when the server response is received
+         */
+        void clearUserStatus(const char * in_statusName, IServerCallback * in_callback = NULL);
+
+        /**
+         * Stack user's statuses
+         *
+         * Service Name - PlayerState
+         * Service Operation - EXTEND_USER_STATUS
+         *
+         * @param in_statusName Updated email
+         * @param additionalSecs
+         * @param details
+         * @param in_callback The method to be invoked when the server response is received
+         */
+        void extendUserStatus(const char * in_statusName, int32_t in_additionalSecs, const std::string& in_details, IServerCallback * in_callback = NULL);
+         
+        /**
+         * Get user status
+         *
+         * Service Name - PlayerState
+         * Service Operation - GET_USER_STATUS
+         *
+         * @param in_statusName Updated email
+         * @param in_callback The method to be invoked when the server response is received
+         */
+        void getUserStatus(const char * in_statusName, IServerCallback * in_callback = NULL);
+   
+        /**
+         * Set timed status for a user
+         *
+         * Service Name - PlayerState
+         * Service Operation - SET_USER_STATUS
+         *
+         * @param in_statusName Updated email
+         * @param in_durationSecs
+         * @param in_details
+         * @param in_callback The method to be invoked when the server response is received
+         */
+        void setUserStatus(const char * in_statusName, int32_t in_durationSecs, const std::string& in_details, IServerCallback * in_callback = NULL);
+   
     private:
         BrainCloudClient * m_client;
     };
