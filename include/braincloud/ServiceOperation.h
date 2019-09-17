@@ -194,6 +194,8 @@ namespace BrainCloud {
 		static const ServiceOperation FindMatches;
 		static const ServiceOperation FindMatchesCompleted;
 		static const ServiceOperation DeleteMatch;
+		static const ServiceOperation CompleteMatchWithSummaryData;
+		static const ServiceOperation AbandonMatchWithSummaryData;
 
 		static const ServiceOperation LastUploadStatus;
 
@@ -258,6 +260,9 @@ namespace BrainCloud {
 		static const ServiceOperation ExtendUserStatus;
 		static const ServiceOperation GetUserStatus;
 		static const ServiceOperation SetUserStatus;
+
+		static const ServiceOperation AttachBlockchainIdentity;
+		static const ServiceOperation DetachBlockchainIdentity;
 
 		static const ServiceOperation GetAttributes;
 		static const ServiceOperation UpdateAttributes;
@@ -362,6 +367,7 @@ namespace BrainCloud {
 		static const ServiceOperation UseUserItem;
 		static const ServiceOperation PublishUserItemToBlockchain;
 		static const ServiceOperation RefreshBlockchainUserItems;
+		static const ServiceOperation RemoveUserItemFromBlockchain;
 
 		//itemCatalog
 		static const ServiceOperation GetCatalogItemDefinition;

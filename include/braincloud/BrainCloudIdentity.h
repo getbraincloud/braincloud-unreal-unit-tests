@@ -594,6 +594,33 @@ namespace BrainCloud
 		 */
 		void getPeerProfiles(IServerCallback * in_callback = NULL);
 
+		/**
+		 * Attaches the given block chain public key identity to the current profile.
+		 *
+		 * Service Name - identity
+		 * Service Operation - ATTACH_BLOCKCHAIN_IDENTITY
+		 *
+		 * @param blockchainConfig
+		 * @param publicKey
+		 * @param successCallback The success callback
+		 * @param errorCallback The failure callback.
+		 * @param cbObject The user object sent to the callback
+		 */
+		void attachBlockchainIdentity(const char* in_blockchainConfig, const char* in_publicKey, IServerCallback * in_callback = NULL);
+
+		/**
+		 * Detaches the blockchain identity to the current profile.
+		 *
+		 * Service Name - identity
+		 * Service Operation - ATTACH_BLOCKCHAIN_IDENTITY
+		 *
+		 * @param blockchainConfig
+		 * @param successCallback The success callback
+		 * @param errorCallback The failure callback.
+		 * @param cbObject The user object sent to the callback
+		 */
+		void detachBlockchainIdentity(const char* in_blockchainConfig, IServerCallback * in_callback = NULL);
+
 	private:
 		BrainCloudClient * m_client;
 

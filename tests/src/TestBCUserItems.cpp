@@ -102,3 +102,10 @@ TEST_F(TestBCUserItems, RefreshBlockchainUserItems)
     m_bc->getUserItemsService()->refreshBlockchainUserItems(&tr);
     tr.run(m_bc);
 }
+
+TEST_F(TestBCUserItems, removeUserItemFromBlockchain)
+{
+    TestResult tr;
+    m_bc->getUserItemsService()->removeUserItemFromBlockchain("invalidForNow", 1, &tr);
+    tr.runExpectFail(m_bc, HTTP_BAD_REQUEST, ITEM_NOT_FOUND);
+}

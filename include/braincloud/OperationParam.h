@@ -482,6 +482,9 @@ namespace BrainCloud {
 		static const OperationParam PlayerStateServiceDetails;
 		static const OperationParam PlayerStateServiceDurationSecs;
 
+		static const OperationParam IdentityServiceBlockchainConfig;
+		static const OperationParam IdentityServicePublicKey;
+
 		std::string getValue() const { return _value; }
 
 		bool operator== (const OperationParam& s) const;

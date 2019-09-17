@@ -475,6 +475,9 @@ namespace BrainCloud
 	const OperationParam OperationParam::PlayerStateServiceDetails = OperationParam("details");
 	const OperationParam OperationParam::PlayerStateServiceDurationSecs = OperationParam("durationSecs");
 
+	const OperationParam OperationParam::IdentityServiceBlockchainConfig = OperationParam("blockchainConfig");
+	const OperationParam OperationParam::IdentityServicePublicKey = OperationParam("publicKey");
+
 	OperationParam::OperationParam(const char * value)
 	{
 		_value = value;

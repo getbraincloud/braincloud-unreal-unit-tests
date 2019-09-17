@@ -415,6 +415,7 @@ namespace BrainCloud
 	const ServiceOperation ServiceOperation::UseUserItem = ServiceOperation("USE_USER_ITEM");
 	const ServiceOperation ServiceOperation::PublishUserItemToBlockchain = ServiceOperation("PUBLISH_USER_ITEM_TO_BLOCKCHAIN");
 	const ServiceOperation ServiceOperation::RefreshBlockchainUserItems = ServiceOperation("REFRESH_BLOCKCHAIN_USER_ITEMS");
+	const ServiceOperation ServiceOperation::RemoveUserItemFromBlockchain = ServiceOperation("REMOVE_USER_ITEM_FROM_BLOCKCHAIN");
 
 	//itemCatalog
 	const ServiceOperation ServiceOperation::GetCatalogItemDefinition = ServiceOperation("GET_CATALOG_ITEM_DEFINITION");
@@ -436,7 +437,12 @@ namespace BrainCloud
 	const ServiceOperation ServiceOperation::ClearUserStatus = ServiceOperation("CLEAR_USER_STATUS");
 	const ServiceOperation ServiceOperation::ExtendUserStatus = ServiceOperation("EXTEND_USER_STATUS");
 	const ServiceOperation ServiceOperation::GetUserStatus = ServiceOperation("GET_USER_STATUS");
-	const ServiceOperation ServiceOperation::SetUserStatus = ServiceOperation("SET_USER_STATUS"); 
+	const ServiceOperation ServiceOperation::SetUserStatus = ServiceOperation("SET_USER_STATUS");
+
+	const ServiceOperation ServiceOperation::AttachBlockchainIdentity = ServiceOperation("ATTACH_BLOCKCHAIN_IDENTITY");
+	const ServiceOperation ServiceOperation::DetachBlockchainIdentity = ServiceOperation("DETACH_BLOCKCHAIN_IDENTITY");
+	const ServiceOperation ServiceOperation::CompleteMatchWithSummaryData = ServiceOperation("COMPLETE_MATCH_WITH_SUMMARY_DATA");
+	const ServiceOperation ServiceOperation::AbandonMatchWithSummaryData = ServiceOperation("ABANDON_MATCH_WITH_SUMMARY_DATA");
 
 	ServiceOperation::ServiceOperation(const char * value)
 	{

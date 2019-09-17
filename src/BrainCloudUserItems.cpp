@@ -151,11 +151,20 @@ namespace BrainCloud
         m_client->sendRequest(sc);
     }
 
-
     void BrainCloudUserItems::refreshBlockchainUserItems(IServerCallback * in_callback)
     {
         Json::Value message;
         ServerCall * sc = new ServerCall(ServiceName::UserItems, ServiceOperation::RefreshBlockchainUserItems, message, in_callback);
+        m_client->sendRequest(sc);
+    }
+
+    void BrainCloudUserItems::removeUserItemFromBlockchain(const std::string& in_itemId, int32_t in_version, IServerCallback * in_callback)
+    {
+        Json::Value message;
+        message[OperationParam::UserItemsServiceItemId.getValue()] = in_itemId;
+        message[OperationParam::UserItemsServiceVersion.getValue()] = in_version;
+
+        ServerCall * sc = new ServerCall(ServiceName::UserItems, ServiceOperation::RemoveUserItemFromBlockchain, message, in_callback);
         m_client->sendRequest(sc);
     }
 }

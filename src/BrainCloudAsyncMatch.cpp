@@ -192,4 +192,28 @@ namespace BrainCloud
 		m_client->getBrainCloudComms()->addToQueue(sc);
 	}
 
+    void BrainCloudAsyncMatch::completeMatchWithSummaryData( const char * in_ownerId, const char * in_matchId, const char* in_pushContent, const std::string& in_summary, IServerCallback * in_callback)
+	{
+		Json::Value message;
+		message[OperationParam::AsyncMatchServiceOwnerId.getValue()] = in_ownerId;
+		message[OperationParam::AsyncMatchServiceMatchId.getValue()] = in_matchId;
+		message[OperationParam::AsyncMatchServicePushMessage.getValue()] = in_pushContent;
+		message[OperationParam::AsyncMatchServiceMatchSummary.getValue()] = JsonUtil::jsonStringToValue(in_summary);
+
+		ServerCall * sc = new ServerCall(ServiceName::AsyncMatch, ServiceOperation::CompleteMatchWithSummaryData, message, in_callback);
+		m_client->getBrainCloudComms()->addToQueue(sc);
+	}
+        
+    void BrainCloudAsyncMatch::abandonMatchWithSummaryData( const char * in_ownerId, const char * in_matchId, const char* in_pushContent, const std::string& in_summary, IServerCallback * in_callback)
+	{
+		Json::Value message;
+		message[OperationParam::AsyncMatchServiceOwnerId.getValue()] = in_ownerId;
+		message[OperationParam::AsyncMatchServiceMatchId.getValue()] = in_matchId;
+		message[OperationParam::AsyncMatchServicePushMessage.getValue()] = in_pushContent;
+		message[OperationParam::AsyncMatchServiceMatchSummary.getValue()] = JsonUtil::jsonStringToValue(in_summary);
+
+		ServerCall * sc = new ServerCall(ServiceName::AsyncMatch, ServiceOperation::AbandonMatchWithSummaryData, message, in_callback);
+		m_client->getBrainCloudComms()->addToQueue(sc);
+	}
+
 }  // end namespace

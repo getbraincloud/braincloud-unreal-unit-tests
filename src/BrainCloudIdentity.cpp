@@ -339,4 +339,24 @@ namespace BrainCloud
 		ServerCall * sc = new ServerCall(ServiceName::Identity, ServiceOperation::UpdateUniversalIdLogin, message, in_callback);
 		m_client->sendRequest(sc);
 	}
+
+	void BrainCloudIdentity::attachBlockchainIdentity(const char* in_blockchainConfig, const char* in_publicKey, IServerCallback * in_callback)
+	{
+		Json::Value message;
+		message[OperationParam::IdentityServiceBlockchainConfig.getValue()] = in_blockchainConfig;
+		message[OperationParam::IdentityServicePublicKey.getValue()] = in_publicKey;
+
+		ServerCall * sc = new ServerCall(ServiceName::Identity, ServiceOperation::AttachBlockchainIdentity, message, in_callback);
+		m_client->sendRequest(sc);
+	}
+	
+	void BrainCloudIdentity::detachBlockchainIdentity(const char* in_blockchainConfig, IServerCallback * in_callback)
+	{
+		Json::Value message;
+		message[OperationParam::IdentityServiceBlockchainConfig.getValue()] = in_blockchainConfig;
+
+		ServerCall * sc = new ServerCall(ServiceName::Identity, ServiceOperation::DetachBlockchainIdentity, message, in_callback);
+		m_client->sendRequest(sc);
+	}
+
 }

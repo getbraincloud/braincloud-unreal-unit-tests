@@ -194,6 +194,14 @@ namespace BrainCloud
 	 * Service Operation - REFRESH_BLOCKCHAIN_USER_ITEMS
 	 */
         void refreshBlockchainUserItems(IServerCallback * in_callback = NULL);
+	
+	/**
+	 * Removes the specified item from the item management attached blockchain. Results are reported asynchronously via an RTT event.
+	 * 
+	 * Service Name - userItems
+	 * Service Operation - REMOVE_USER_ITEM_FROM_BLOCKCHAIN
+	 */
+		void removeUserItemFromBlockchain(const std::string& in_itemId, int32_t in_version, IServerCallback * in_callback = NULL);
 
     private:
         BrainCloudClient * m_client;
