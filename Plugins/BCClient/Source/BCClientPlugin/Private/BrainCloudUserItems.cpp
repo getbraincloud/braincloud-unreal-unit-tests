@@ -149,3 +149,13 @@ BrainCloudUserItems::BrainCloudUserItems(BrainCloudClient *client) : _client(cli
         ServerCall *sc = new ServerCall(ServiceName::UserItems, ServiceOperation::RefreshBlockchainUserItems, message, callback);
         _client->sendRequest(sc);
     }
+
+	void BrainCloudUserItems::removeUserItemFromBlockchain(const FString &itemId, int version, IServerCallback *callback)
+    {
+        TSharedRef<FJsonObject> message = MakeShareable(new FJsonObject());
+        message->SetStringField(OperationParam::UserItemsItemId.getValue(), itemId);
+        message->SetNumberField(OperationParam::UserItemsVersion.getValue(), version);
+
+        ServerCall *sc = new ServerCall(ServiceName::UserItems, ServiceOperation::RemoveUserItemFromBlockchain, message, callback);
+        _client->sendRequest(sc);
+    }

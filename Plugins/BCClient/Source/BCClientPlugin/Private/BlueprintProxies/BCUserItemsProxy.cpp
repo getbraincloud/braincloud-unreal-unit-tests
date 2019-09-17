@@ -103,3 +103,11 @@ UBCUserItemsProxy::UBCUserItemsProxy(const FObjectInitializer &ObjectInitializer
 		UBCWrapperProxy::GetBrainCloudInstance(brainCloudWrapper)->getUserItemsService()->refreshBlockchainUserItems(Proxy);
 		return Proxy;
 	}
+
+	UBCUserItemsProxy *UBCUserItemsProxy::RemoveUserItemFromBlockchain(UBrainCloudWrapper *brainCloudWrapper, const FString &itemId, int version)
+	{
+		UBCUserItemsProxy *Proxy = NewObject<UBCUserItemsProxy>();
+		UBCWrapperProxy::GetBrainCloudInstance(brainCloudWrapper)->getUserItemsService()->removeUserItemFromBlockchain(itemId, version, Proxy);
+		return Proxy;
+	}
+	

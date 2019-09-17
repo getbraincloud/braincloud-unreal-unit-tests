@@ -193,6 +193,17 @@ class BCCLIENTPLUGIN_API BrainCloudUserItems
     */
 	void refreshBlockchainUserItems(IServerCallback *callback = nullptr);
 
+    /*
+    * Removes the specified item from the item management attached blockchain. Results are reported asynchronously via an RTT event.    *
+    * Service Name - UserItems
+    * Service Operation - REMOVE_USER_ITEM_FROM_BLOCKCHAIN
+    *
+    * @param itemId
+    * @param version
+    * @param callback The method to be invoked when the server response is received
+    */
+	void removeUserItemFromBlockchain(const FString &itemId, int version, IServerCallback *callback = nullptr);
+
   private:
 	BrainCloudClient *_client = nullptr;
 };
