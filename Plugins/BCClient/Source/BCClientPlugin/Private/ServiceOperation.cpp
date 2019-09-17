@@ -253,6 +253,7 @@ const ServiceOperation ServiceOperation::CompleteMatchWithSummaryData = ServiceO
 
 const ServiceOperation ServiceOperation::AttachBlockchainIdentity = ServiceOperation(TEXT("ATTACH_BLOCKCHAIN_IDENTITY"));
 const ServiceOperation ServiceOperation::DetachBlockchainIdentity = ServiceOperation(TEXT("DETACH_BLOCKCHAIN_IDENTITY")); 
+const ServiceOperation ServiceOperation::RemoveUserItemFromBlockchain = ServiceOperation(TEXT("REMOVE_USER_ITEM_FROM_BLOCKCHAIN"));
 
 const ServiceOperation ServiceOperation::GetAttributes = ServiceOperation(TEXT("GET_ATTRIBUTES"));
 const ServiceOperation ServiceOperation::UpdateAttributes = ServiceOperation(TEXT("UPDATE_ATTRIBUTES"));

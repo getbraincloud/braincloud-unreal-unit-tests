@@ -83,6 +83,7 @@ class BCCLIENTPLUGIN_API ServiceOperation
 
 	static const ServiceOperation AttachBlockchainIdentity;
 	static const ServiceOperation DetachBlockchainIdentity;
+	static const ServiceOperation RemoveUserItemFromBlockchain;
 
 	static const ServiceOperation GetFriendProfileInfoForExternalId;
 	static const ServiceOperation GetProfileInfoForCredential;

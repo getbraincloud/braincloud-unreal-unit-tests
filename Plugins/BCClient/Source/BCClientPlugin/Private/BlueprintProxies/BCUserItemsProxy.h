@@ -209,4 +209,17 @@ class UBCUserItemsProxy : public UBCBlueprintCallProxyBase
     */
 	UFUNCTION(BlueprintCallable, meta = (BlueprintInternalUseOnly = "true"), Category = "BrainCloud|UserItems")
 	static UBCUserItemsProxy *RefreshBlockchainUserItems(UBrainCloudWrapper *brainCloudWrapper);
+
+    /*
+    * Removes the specified item from the item management attached blockchain. Results are reported asynchronously via an RTT event.    *
+    * Service Name - UserItems
+    * Service Operation - REMOVE_USER_ITEM_FROM_BLOCKCHAIN
+    *
+    * @param itemId
+    * @param version
+    * @param callback The method to be invoked when the server response is received
+    */
+    UFUNCTION(BlueprintCallable, meta = (BlueprintInternalUseOnly = "true"), Category = "BrainCloud|UserItems")
+	static UBCUserItemsProxy *RemoveUserItemFromBlockchain(UBrainCloudWrapper *brainCloudWrapper, const FString &itemId, int version);
+
 };
