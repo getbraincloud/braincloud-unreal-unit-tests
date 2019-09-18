@@ -91,3 +91,17 @@ UBCAsyncMatchProxy *UBCAsyncMatchProxy::DeleteMatch(UBrainCloudWrapper *brainClo
     UBCWrapperProxy::GetBrainCloudInstance(brainCloudWrapper)->getAsyncMatchService()->deleteMatch(ownerId, matchId, Proxy);
     return Proxy;
 }
+
+UBCAsyncMatchProxy *UBCAsyncMatchProxy::AbandonMatchWithSummaryData(UBrainCloudWrapper *brainCloudWrapper, const FString &ownerId, const FString &matchId, const FString &pushContent, const FString &summary)
+{
+    UBCAsyncMatchProxy *Proxy = NewObject<UBCAsyncMatchProxy>();
+    UBCWrapperProxy::GetBrainCloudInstance(brainCloudWrapper)->getAsyncMatchService()->abandonMatchWithSummaryData(ownerId, matchId, pushContent, summary, Proxy);
+    return Proxy;
+}
+
+UBCAsyncMatchProxy *UBCAsyncMatchProxy::CompleteMatchWithSummaryData(UBrainCloudWrapper *brainCloudWrapper, const FString &ownerId, const FString &matchId, const FString &pushContent, const FString &summary)
+{
+    UBCAsyncMatchProxy *Proxy = NewObject<UBCAsyncMatchProxy>();
+    UBCWrapperProxy::GetBrainCloudInstance(brainCloudWrapper)->getAsyncMatchService()->completeMatchWithSummaryData(ownerId, matchId, pushContent, summary, Proxy);
+    return Proxy;
+}

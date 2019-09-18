@@ -201,6 +201,34 @@ public:
     */
   void deleteMatch(const FString &ownerId, const FString &matchId, IServerCallback *callback);
 
+  /**
+    * Marks the given match as abandoned. This call can send a notification message.
+    *
+    * Service Name - AsyncMatch
+    * Service Operation - ABANDON_MATCH_WITH_SUMMARY_DATA
+    *
+    * @param ownerId   Match owner identifier
+    * @param matchId   Match identifier
+    * @param pushContent
+    * @param summary
+    * @param callback  Optional instance of IServerCallback to call when the server response is received.
+    */
+  void abandonMatchWithSummaryData(const FString &ownerId, const FString &matchId, const FString &pushContent, const FString &summary, IServerCallback *callback);
+  
+  /**
+    * Marks the given match as complete. This call can send a notification message.
+    * 
+    * Service Name - AsyncMatch
+    * Service Operation - COMPLETE_MATCH_WITH_SUMMARY_DATA
+    *
+    * @param ownerId   Match owner identifier
+    * @param matchId   Match identifier
+    * @param pushContent
+    * @param summary
+    * @param callback  Optional instance of IServerCallback to call when the server response is received.
+    */
+  void completeMatchWithSummaryData(const FString &ownerId, const FString &matchId, const FString &pushContent, const FString &summary, IServerCallback *callback);
+
 private:
   BrainCloudClient *_client = nullptr;
 };

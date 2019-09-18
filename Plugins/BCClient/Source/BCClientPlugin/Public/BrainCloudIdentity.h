@@ -13,6 +13,29 @@ class BCCLIENTPLUGIN_API BrainCloudIdentity
 	BrainCloudIdentity(BrainCloudClient *client);
 
 	/*
+	 * Attaches the given block chain public key identity to the current profile.
+	 *
+	 * Service Name - Identity
+	 * Service Operation - AttachBlockchainIdentity
+	 *
+	 * @param blockchainConfig The block chains configuration
+	 * @param publicKey The key associated with the config
+	 * @param callback The method to be invoked when the server response is received
+	 */
+	void attachBlockchainIdentity(const FString &blockchainConfig, const FString &publicKey, IServerCallback *callback = nullptr);
+
+	/*
+	 * Detach the Facebook identity from this profile.
+	 *
+	 * Service Name - Identity
+	 * Service Operation - DetachBlockchainIdentity
+	 *
+	 * @param blockchainId The facebook id of the user
+	 * @param callback The method to be invoked when the server response is received
+	 */
+	void detachBlockchainIdentity(const FString &blockchainId, IServerCallback *callback = nullptr);
+
+	/*
 	 * Attach the user's Facebook credentials to the current profile.
 	 *
 	 * Service Name - Identity

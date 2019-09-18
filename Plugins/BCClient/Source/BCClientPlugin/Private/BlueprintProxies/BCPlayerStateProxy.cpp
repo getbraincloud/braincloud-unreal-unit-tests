@@ -127,3 +127,31 @@ UBCPlayerStateProxy *UBCPlayerStateProxy::UpdateContactEmail(UBrainCloudWrapper 
     UBCWrapperProxy::GetBrainCloudInstance(brainCloudWrapper)->getPlayerStateService()->updateContactEmail(contactEmail, Proxy);
     return Proxy;
 }
+
+UBCPlayerStateProxy *UBCPlayerStateProxy::ClearUserStatus(UBrainCloudWrapper *brainCloudWrapper, const FString &statusName)
+{
+    UBCPlayerStateProxy *Proxy = NewObject<UBCPlayerStateProxy>();
+    UBCWrapperProxy::GetBrainCloudInstance(brainCloudWrapper)->getPlayerStateService()->clearUserStatus(statusName, Proxy);
+    return Proxy;
+}
+
+UBCPlayerStateProxy *UBCPlayerStateProxy::ExtendUserStatus(UBrainCloudWrapper *brainCloudWrapper, const FString &statusName, int additionalSecs, const FString &details)
+{
+    UBCPlayerStateProxy *Proxy = NewObject<UBCPlayerStateProxy>();
+    UBCWrapperProxy::GetBrainCloudInstance(brainCloudWrapper)->getPlayerStateService()->extendUserStatus(statusName, additionalSecs, details, Proxy);
+    return Proxy;
+}
+
+UBCPlayerStateProxy *UBCPlayerStateProxy::GetUserStatus(UBrainCloudWrapper *brainCloudWrapper, const FString &statusName)
+{
+    UBCPlayerStateProxy *Proxy = NewObject<UBCPlayerStateProxy>();
+    UBCWrapperProxy::GetBrainCloudInstance(brainCloudWrapper)->getPlayerStateService()->getUserStatus(statusName, Proxy);
+    return Proxy;
+}
+
+UBCPlayerStateProxy *UBCPlayerStateProxy::SetUserStatus(UBrainCloudWrapper *brainCloudWrapper, const FString &statusName, int durationSecs, const FString &details)
+{
+    UBCPlayerStateProxy *Proxy = NewObject<UBCPlayerStateProxy>();
+    UBCWrapperProxy::GetBrainCloudInstance(brainCloudWrapper)->getPlayerStateService()->setUserStatus(statusName, durationSecs, details, Proxy);
+    return Proxy;
+}
