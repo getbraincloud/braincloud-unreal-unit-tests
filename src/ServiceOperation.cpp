@@ -401,6 +401,49 @@ namespace BrainCloud
 	const ServiceOperation ServiceOperation::AppStoreStartPurchase = ServiceOperation("START_PURCHASE");
 	const ServiceOperation ServiceOperation::AppStoreFinalizePurchase = ServiceOperation("FINALIZE_PURCHASE");
 
+	//UserItems
+	const ServiceOperation ServiceOperation::AwardUserItem = ServiceOperation("AWARD_USER_ITEM");
+	const ServiceOperation ServiceOperation::DropUserItem = ServiceOperation("DROP_USER_ITEM");
+	const ServiceOperation ServiceOperation::GetUserItemsPage = ServiceOperation("GET_USER_ITEMS_PAGE");
+	const ServiceOperation ServiceOperation::GetUserItemsPageOffset = ServiceOperation("GET_USER_ITEMS_PAGE_OFFSET");
+	const ServiceOperation ServiceOperation::GetUserItem = ServiceOperation("GET_USER_ITEM");
+	const ServiceOperation ServiceOperation::GiveUserItemTo = ServiceOperation("GIVE_USER_ITEM_TO");
+	const ServiceOperation ServiceOperation::PurchaseUserItem = ServiceOperation("PURCHASE_USER_ITEM");
+	const ServiceOperation ServiceOperation::ReceiveUserItemFrom = ServiceOperation("RECEIVE_USER_ITEM_FROM");
+	const ServiceOperation ServiceOperation::SellUserItem = ServiceOperation("SELL_USER_ITEM");
+	const ServiceOperation ServiceOperation::UpdateUserItemData = ServiceOperation("UPDATE_USER_ITEM_DATA");
+	const ServiceOperation ServiceOperation::UseUserItem = ServiceOperation("USE_USER_ITEM");
+	const ServiceOperation ServiceOperation::PublishUserItemToBlockchain = ServiceOperation("PUBLISH_USER_ITEM_TO_BLOCKCHAIN");
+	const ServiceOperation ServiceOperation::RefreshBlockchainUserItems = ServiceOperation("REFRESH_BLOCKCHAIN_USER_ITEMS");
+	const ServiceOperation ServiceOperation::RemoveUserItemFromBlockchain = ServiceOperation("REMOVE_USER_ITEM_FROM_BLOCKCHAIN");
+
+	//itemCatalog
+	const ServiceOperation ServiceOperation::GetCatalogItemDefinition = ServiceOperation("GET_CATALOG_ITEM_DEFINITION");
+	const ServiceOperation ServiceOperation::GetCatalogItemsPage = ServiceOperation("GET_CATALOG_ITEMS_PAGE");
+	const ServiceOperation ServiceOperation::GetCatalogItemsPageOffset = ServiceOperation("GET_CATALOG_ITEMS_PAGE_OFFSET");
+
+	//custom entity
+	const ServiceOperation ServiceOperation::CreateEntity = ServiceOperation("CREATE_ENTITY");
+	const ServiceOperation ServiceOperation::DeleteEntity = ServiceOperation("DELETE_ENTITY");
+	const ServiceOperation ServiceOperation::GetCount = ServiceOperation("GET_COUNT");
+	const ServiceOperation ServiceOperation::ReadEntity = ServiceOperation("READ_ENTITY");
+	const ServiceOperation ServiceOperation::UpdateEntity = ServiceOperation("UPDATE_ENTITY");
+	const ServiceOperation ServiceOperation::UpdateEntityFields = ServiceOperation("UPDATE_ENTITY_FIELDS");
+	const ServiceOperation ServiceOperation::GetEntityPage = ServiceOperation("GET_PAGE");
+	const ServiceOperation ServiceOperation::GetEntityPageOffset = ServiceOperation("GET_PAGE_BY_OFFSET");
+
+	const ServiceOperation ServiceOperation::SubmitCrashReport = ServiceOperation("SEND_CRASH_REPORT");
+
+	const ServiceOperation ServiceOperation::ClearUserStatus = ServiceOperation("CLEAR_USER_STATUS");
+	const ServiceOperation ServiceOperation::ExtendUserStatus = ServiceOperation("EXTEND_USER_STATUS");
+	const ServiceOperation ServiceOperation::GetUserStatus = ServiceOperation("GET_USER_STATUS");
+	const ServiceOperation ServiceOperation::SetUserStatus = ServiceOperation("SET_USER_STATUS");
+
+	const ServiceOperation ServiceOperation::AttachBlockchainIdentity = ServiceOperation("ATTACH_BLOCKCHAIN_IDENTITY");
+	const ServiceOperation ServiceOperation::DetachBlockchainIdentity = ServiceOperation("DETACH_BLOCKCHAIN_IDENTITY");
+	const ServiceOperation ServiceOperation::CompleteMatchWithSummaryData = ServiceOperation("COMPLETE_MATCH_WITH_SUMMARY_DATA");
+	const ServiceOperation ServiceOperation::AbandonMatchWithSummaryData = ServiceOperation("ABANDON_MATCH_WITH_SUMMARY_DATA");
+
 	ServiceOperation::ServiceOperation(const char * value)
 	{
 		_value = value;

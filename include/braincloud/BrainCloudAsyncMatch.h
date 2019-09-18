@@ -214,6 +214,34 @@ namespace BrainCloud {
          */
         void deleteMatch( const char * in_ownerId, const char * in_matchId, IServerCallback * in_callback = NULL );
     
+        /**
+         * Marks the given match as complete. This call can send a notification message.
+         *
+         * Service Name - AsyncMatch
+         * Service Operation - CompleteMatchWithSumamryData
+         *
+         * @param in_ownerId   Match owner identifier
+         * @param in_matchId   Match identifier
+         * @param in_pushContent
+         * @param in_summary
+         * @param in_callback  Optional instance of IServerCallback to call when the server response is received.
+         */
+        void completeMatchWithSummaryData( const char * in_ownerId, const char * in_matchId, const char* in_pushContent, const std::string& in_summary, IServerCallback * in_callback = NULL );
+        
+        /**
+         * Marks the given match as abandoned. This call can send a notification message.
+         *
+         * Service Name - AsyncMatch
+         * Service Operation - AbandonMatchWithSumamryData
+         *
+         * @param in_ownerId   Match owner identifier
+         * @param in_matchId   Match identifier
+         * @param in_pushContent
+         * @param in_summary
+         * @param in_callback  Optional instance of IServerCallback to call when the server response is received.
+         */
+        void abandonMatchWithSummaryData( const char * in_ownerId, const char * in_matchId, const char* in_pushContent, const std::string& in_summary, IServerCallback * in_callback = NULL );
+
     private:
         void createMatchInternal(
             const char * in_jsonOpponentIds,

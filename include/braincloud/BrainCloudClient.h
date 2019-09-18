@@ -43,6 +43,9 @@
 #include "braincloud/BrainCloudGamification.h"
 #include "braincloud/BrainCloudTime.h"
 #include "braincloud/BrainCloudTournament.h"
+#include "braincloud/BrainCloudCustomEntity.h"
+#include "braincloud/BrainCloudItemCatalog.h"
+#include "braincloud/BrainCloudUserItems.h"
 #include "braincloud/BrainCloudAuthentication.h"
 #include "braincloud/BrainCloudPushNotification.h"
 #include "braincloud/BrainCloudPlayerStatisticsEvent.h"
@@ -343,6 +346,9 @@ namespace BrainCloud
 		BrainCloudGamification * getGamificationService() { return _gamificationService; }
 		BrainCloudTime * getTimeService() { return _timeService; }
 		BrainCloudTournament * getTournamentService() { return _tournamentService; }
+		BrainCloudCustomEntity * getCustomEntityService() { return _customEntityService; }
+		BrainCloudItemCatalog* getItemCatalogService() { return _itemCatalogService; }
+		BrainCloudUserItems* getUserItemsService() { return _userItemsService; }
 		BrainCloudAuthentication * getAuthenticationService() { return _authenticationService; }
 		BrainCloudPushNotification * getPushNotificationService() { return _pushNotificationService; }
 		BrainCloudPlayerStatisticsEvent * getPlayerStatisticsEventService() { return _playerStatisticsEventService; }
@@ -629,6 +635,9 @@ namespace BrainCloud
 		BrainCloudGamification * _gamificationService;
 		BrainCloudTime * _timeService;
 		BrainCloudTournament * _tournamentService;
+		BrainCloudCustomEntity * _customEntityService;
+		BrainCloudItemCatalog * _itemCatalogService;
+		BrainCloudUserItems * _userItemsService;
 		BrainCloudAuthentication * _authenticationService;
 		BrainCloudPushNotification * _pushNotificationService;
 		BrainCloudPlayerStatisticsEvent * _playerStatisticsEventService;

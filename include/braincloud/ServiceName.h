@@ -53,6 +53,9 @@ namespace BrainCloud {
         static const ServiceName Group;
 		static const ServiceName Mail;
 		static const ServiceName Tournament;
+        static const ServiceName CustomEntity;
+        static const ServiceName ItemCatalog;
+        static const ServiceName UserItems;
 
 		static const ServiceName RTTRegistration;
 		static const ServiceName Chat;

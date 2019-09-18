@@ -164,4 +164,47 @@ namespace BrainCloud
         ServerCall * sc = new ServerCall(ServiceName::PlayerState, ServiceOperation::UpdateContactEmail, data, in_callback);
         m_client->getBrainCloudComms()->addToQueue(sc);
     }
+
+
+    void BrainCloudPlayerState::clearUserStatus(const char * in_statusName, IServerCallback * in_callback)
+    {
+        Json::Value data;
+        data[OperationParam::PlayerStateServiceStatusName.getValue()] = in_statusName;
+
+        ServerCall * sc = new ServerCall(ServiceName::PlayerState, ServiceOperation::ClearUserStatus, data, in_callback);
+        m_client->getBrainCloudComms()->addToQueue(sc);
+    }
+
+    void BrainCloudPlayerState::extendUserStatus(const char * in_statusName, int32_t in_additionalSecs, const std::string& in_details, IServerCallback * in_callback)
+    {
+        Json::Value data;
+        data[OperationParam::PlayerStateServiceStatusName.getValue()] = in_statusName;
+        data[OperationParam::PlayerStateServiceAdditionalSecs.getValue()] = in_additionalSecs;
+        data[OperationParam::PlayerStateServiceDetails.getValue()] = JsonUtil::jsonStringToValue(in_details);
+
+        ServerCall * sc = new ServerCall(ServiceName::PlayerState, ServiceOperation::ExtendUserStatus, data, in_callback);
+        m_client->getBrainCloudComms()->addToQueue(sc);
+    }
+
+    void BrainCloudPlayerState::getUserStatus(const char * in_statusName, IServerCallback * in_callback)
+    {
+        Json::Value data;
+        data[OperationParam::PlayerStateServiceStatusName.getValue()] = in_statusName;
+
+        ServerCall * sc = new ServerCall(ServiceName::PlayerState, ServiceOperation::GetUserStatus, data, in_callback);
+        m_client->getBrainCloudComms()->addToQueue(sc);
+    }
+
+    void BrainCloudPlayerState::setUserStatus(const char * in_statusName, int32_t in_durationSecs, const std::string& in_details, IServerCallback * in_callback)
+    {
+        Json::Value data;
+        data[OperationParam::PlayerStateServiceStatusName.getValue()] = in_statusName;
+        data[OperationParam::PlayerStateServiceDurationSecs.getValue()] = in_durationSecs;
+        data[OperationParam::PlayerStateServiceDetails.getValue()] = JsonUtil::jsonStringToValue(in_details);
+
+
+        ServerCall * sc = new ServerCall(ServiceName::PlayerState, ServiceOperation::SetUserStatus, data, in_callback);
+        m_client->getBrainCloudComms()->addToQueue(sc);
+    }
+
 }
