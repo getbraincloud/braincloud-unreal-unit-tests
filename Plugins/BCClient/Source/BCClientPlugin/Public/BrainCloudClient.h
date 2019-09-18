@@ -14,6 +14,8 @@
 #include "BrainCloudPlayerStatisticsEvent.h"
 #include "BrainCloudProduct.h"
 #include "BrainCloudIdentity.h"
+#include "BrainCloudItemCatalog.h"
+#include "BrainCloudUserItems.h"
 #include "BrainCloudEvent.h"
 #include "BrainCloudS3Handling.h"
 #include "BrainCloudScript.h"
@@ -31,6 +33,7 @@
 #include "BrainCloudGroup.h"
 #include "BrainCloudMail.h"
 #include "BrainCloudTournament.h"
+#include "BrainCloudCustomEntity.h"
 #include "BrainCloudRTT.h"
 #include "BrainCloudLobby.h"
 #include "BrainCloudChat.h"
@@ -263,6 +266,8 @@ class BCCLIENTPLUGIN_API BrainCloudClient
 	BrainCloudPlayerStatisticsEvent *getPlayerStatisticsEventService();
 	BrainCloudProduct *getProductService();
 	BrainCloudIdentity *getIdentityService();
+	BrainCloudItemCatalog *getItemCatalogService();
+	BrainCloudUserItems *getUserItemsService();
 	BrainCloudEvent *getEventService();
 	BrainCloudS3Handling *getS3HandlingService();
 	BrainCloudScript *getScriptService();
@@ -280,6 +285,7 @@ class BCCLIENTPLUGIN_API BrainCloudClient
 	BrainCloudGroup *getGroupService();
 	BrainCloudMail *getMailService();
 	BrainCloudTournament *getTournamentService();
+	BrainCloudCustomEntity *getCustomEntityService();
 	BrainCloudPresence *getPresenceService();
 	BrainCloudVirtualCurrency *getVirtualCurrencyService();
 	BrainCloudAppStore *getAppStoreService();
@@ -513,6 +519,8 @@ class BCCLIENTPLUGIN_API BrainCloudClient
 	BrainCloudPlayerStatisticsEvent *_playerStatisticsEventService = nullptr;
 	BrainCloudProduct *_productService = nullptr;
 	BrainCloudIdentity *_identityService = nullptr;
+	BrainCloudItemCatalog *_itemCatalogService = nullptr;
+	BrainCloudUserItems *_userItemsService = nullptr;
 	BrainCloudEvent *_eventService = nullptr;
 	BrainCloudS3Handling *_s3HandlingService = nullptr;
 	BrainCloudScript *_scriptService = nullptr;
@@ -530,6 +538,7 @@ class BCCLIENTPLUGIN_API BrainCloudClient
 	BrainCloudGroup *_groupService = nullptr;
 	BrainCloudMail *_mailService = nullptr;
 	BrainCloudTournament *_tournamentService = nullptr;
+	BrainCloudCustomEntity *_customEntityService = nullptr;
 	BrainCloudPresence *_presenceService = nullptr;
 	BrainCloudVirtualCurrency *_virtualCurrencyService = nullptr;
 	BrainCloudAppStore *_appStoreService = nullptr;

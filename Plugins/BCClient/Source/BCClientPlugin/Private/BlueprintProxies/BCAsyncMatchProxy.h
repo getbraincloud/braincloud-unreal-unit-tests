@@ -189,4 +189,34 @@ public:
     */
   UFUNCTION(BlueprintCallable, meta = (BlueprintInternalUseOnly = "true"), Category = "BrainCloud|Async Match")
   static UBCAsyncMatchProxy *DeleteMatch(UBrainCloudWrapper *brainCloudWrapper, FString ownerId, FString matchId);
+
+  /**
+    * Marks the given match as abandoned. This call can send a notification message.
+    *
+    * Service Name - AsyncMatch
+    * Service Operation - ABANDON_MATCH_WITH_SUMMARY_DATA
+    *
+    * @param ownerId   Match owner identifier
+    * @param matchId   Match identifier
+    * @param pushContent
+    * @param summary
+    * @param callback  Optional instance of IServerCallback to call when the server response is received.
+    */
+  UFUNCTION(BlueprintCallable, meta = (BlueprintInternalUseOnly = "true"), Category = "BrainCloud|Async Match")
+  static UBCAsyncMatchProxy *AbandonMatchWithSummaryData(UBrainCloudWrapper *brainCloudWrapper, const FString &ownerId, const FString &matchId, const FString &pushContent, const FString &summary);
+  /**
+    * Marks the given match as complete. This call can send a notification message.
+    * 
+    * Service Name - AsyncMatch
+    * Service Operation - COMPLETE_MATCH_WITH_SUMMARY_DATA
+    *
+    * @param ownerId   Match owner identifier
+    * @param matchId   Match identifier
+    * @param pushContent
+    * @param summary
+    * @param callback  Optional instance of IServerCallback to call when the server response is received.
+    */
+  UFUNCTION(BlueprintCallable, meta = (BlueprintInternalUseOnly = "true"), Category = "BrainCloud|Async Match")
+  static UBCAsyncMatchProxy *CompleteMatchWithSummaryData(UBrainCloudWrapper *brainCloudWrapper, const FString &ownerId, const FString &matchId, const FString &pushContent, const FString &summary);
+
 };
