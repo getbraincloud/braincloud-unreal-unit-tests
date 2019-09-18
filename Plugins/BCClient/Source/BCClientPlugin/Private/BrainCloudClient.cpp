@@ -57,6 +57,8 @@ BrainCloudClient::~BrainCloudClient()
 	destroyService(_playerStatisticsEventService);
 	destroyService(_productService);
 	destroyService(_identityService);
+	destroyService(_itemCatalogService);
+	destroyService(_userItemsService);
 	destroyService(_eventService);
 	destroyService(_s3HandlingService);
 	destroyService(_scriptService);
@@ -74,6 +76,7 @@ BrainCloudClient::~BrainCloudClient()
 	destroyService(_groupService);
 	destroyService(_mailService);
 	destroyService(_tournamentService);
+	destroyService(_customEntityService);
 	destroyService(_presenceService);
 	destroyService(_virtualCurrencyService);
 	destroyService(_appStoreService);
@@ -520,6 +523,24 @@ BrainCloudIdentity *BrainCloudClient::getIdentityService()
 	return _identityService;
 }
 
+BrainCloudItemCatalog *BrainCloudClient::getItemCatalogService()
+{
+	if (_itemCatalogService == nullptr)
+	{
+		_itemCatalogService = new BrainCloudItemCatalog(this);
+	}
+	return _itemCatalogService;
+}
+
+BrainCloudUserItems *BrainCloudClient::getUserItemsService()
+{
+	if (_userItemsService == nullptr)
+	{
+		_userItemsService = new BrainCloudUserItems(this);
+	}
+	return _userItemsService;
+}
+
 BrainCloudEvent *BrainCloudClient::getEventService()
 {
 	if (_eventService == nullptr)
@@ -671,6 +692,15 @@ BrainCloudTournament *BrainCloudClient::getTournamentService()
 		_tournamentService = new BrainCloudTournament(this);
 	}
 	return _tournamentService;
+}
+
+BrainCloudCustomEntity *BrainCloudClient::getCustomEntityService()
+{
+	if (_customEntityService == nullptr)
+	{
+		_customEntityService = new BrainCloudCustomEntity(this);
+	}
+	return _customEntityService;
 }
 
 BrainCloudVirtualCurrency *BrainCloudClient::getVirtualCurrencyService()

@@ -134,6 +134,16 @@ class BCCLIENTPLUGIN_API BrainCloudRTT
 	*/
 	void deregisterRTTLobbyCallback();
 
+		/**
+	* 
+	*/
+	void registerRTTBlockchainRefresh(IRTTCallback *in_callback);
+
+	/**
+	* 
+	*/
+	void deregisterRTTBlockchainRefresh();
+
   private:
 	BrainCloudClient *_client = nullptr;
 	BrainCloudRTTComms *_commsLayer = nullptr;

@@ -82,6 +82,10 @@ class BCCLIENTPLUGIN_API OperationParam
 	static const OperationParam IdentityServiceOldEmailAddress;
 	static const OperationParam IdentityServiceNewEmailAddress;
 	static const OperationParam IdentityServiceUpdateContactEmail;
+	static const OperationParam IdentityServiceBlockchainConfig;
+	static const OperationParam IdentityServicePublicKey;
+
+	static const OperationParam CustomEntityServiceIsOwned;
 
 	// Async Match Service - Async Match Params
 	static const OperationParam AsyncMatchServicePlayers;
@@ -198,6 +202,10 @@ class BCCLIENTPLUGIN_API OperationParam
 	// Player State Service - Atributes
 	static const OperationParam PlayerStateServicePictureUrl;
 	static const OperationParam PlayerStateServiceContactEmail;
+	static const OperationParam PlayerStateServiceStatusName;
+	static const OperationParam PlayerStateServiceAdditionalSecs;
+	static const OperationParam PlayerStateServiceDetails;
+	static const OperationParam PlayerStateServiceDurationSecs;
 
 	// Player Statistics Service - Update Increment Params
 	static const OperationParam PlayerStatisticsServiceStats;
@@ -319,14 +327,41 @@ class BCCLIENTPLUGIN_API OperationParam
 	static const OperationParam PlayerStateServiceIncludeSummaryData;
 	static const OperationParam IdentityServiceForceSingleton;
 
+	//item Catalog
+	static const OperationParam ItemCatalogServiceDefId;
+	static const OperationParam ItemCatalogServiceContext;
+	static const OperationParam ItemCatalogServicePageOffset;
+
+	//UserItems
+	static const OperationParam UserItemsDefId;
+	static const OperationParam UserItemsQuantity;
+	static const OperationParam UserItemsIncludeDef;
+	static const OperationParam UserItemsItemId;
+	static const OperationParam UserItemsCriteria;
+	static const OperationParam UserItemsContext;
+	static const OperationParam UserItemsPageOffset;
+	static const OperationParam UserItemsProfileId;
+	static const OperationParam UserItemsImmediate;
+	static const OperationParam UserItemsVersion;
+	static const OperationParam UserItemsShopId;
+	static const OperationParam UserItemsNewItemData;
+
 	// Redemption Code
 	static const OperationParam RedemptionCodeServiceScanCode;
 	static const OperationParam RedemptionCodeServiceCodeType;
 	static const OperationParam RedemptionCodeServiceCustomRedemptionInfo;
-
+	
 	// DataStream
 	static const OperationParam DataStreamEventName;
 	static const OperationParam DataStreamEventProperties;
+	static const OperationParam DataStreamCrashType;
+	static const OperationParam DataStreamErrorMsg;
+	static const OperationParam DataStreamCrashJson;
+	static const OperationParam DataStreamCrashLog;
+	static const OperationParam DataStreamUserName;
+	static const OperationParam DataStreamUserEmail;
+	static const OperationParam DataStreamUserNotes;
+	static const OperationParam DataStreamUserSubmitted;
 
 	// Profanity
 	static const OperationParam ProfanityText;
@@ -449,6 +484,23 @@ class BCCLIENTPLUGIN_API OperationParam
 	static const OperationParam LobbySignalData;
 	static const OperationParam LobbyConnectionId;
 	static const OperationParam PingData;
+
+	//customEntity
+	static const OperationParam CustomEntityServiceEntityType;
+	static const OperationParam CustomEntityServiceJsonEntityData;
+	static const OperationParam CustomEntityServiceAcl;
+	static const OperationParam CustomEntityServiceTimeToLive;
+	static const OperationParam CustomEntityServiceEntityId;
+	static const OperationParam CustomEntityServiceVersion;
+	static const OperationParam CustomEntityServiceWhereJson;
+	static const OperationParam CustomEntityServiceRowsPerPage;
+	static const OperationParam CustomEntityServiceSearchJson;
+	static const OperationParam CustomEntityServiceSortJson;
+	static const OperationParam CustomEntityServiceDoCount;
+	static const OperationParam CustomEntityServiceContext;
+	static const OperationParam CustomEntityServicePageOffset;
+	static const OperationParam CustomEntityServiceFieldsJson;
+	static const OperationParam CustomEntityServiceDataJson;
 
 	FString getValue() const { return _value; }
 

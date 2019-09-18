@@ -61,6 +61,7 @@ class BCCLIENTPLUGIN_API ServiceOperation
 
 	static const ServiceOperation FullReset;
 	static const ServiceOperation DataReset;
+	static const ServiceOperation SubmitCrashReport;
 
 	static const ServiceOperation Update;
 	static const ServiceOperation UpdatePartial;
@@ -77,6 +78,12 @@ class BCCLIENTPLUGIN_API ServiceOperation
 	static const ServiceOperation UpdateEntityIndexedId;
 	static const ServiceOperation UpdateEntityOwnerAndAcl;
 	static const ServiceOperation MakeSystemEntity;
+	static const ServiceOperation AbandonMatchWithSummaryData;
+	static const ServiceOperation CompleteMatchWithSummaryData;
+
+	static const ServiceOperation AttachBlockchainIdentity;
+	static const ServiceOperation DetachBlockchainIdentity;
+	static const ServiceOperation RemoveUserItemFromBlockchain;
 
 	static const ServiceOperation GetFriendProfileInfoForExternalId;
 	static const ServiceOperation GetProfileInfoForCredential;
@@ -240,8 +247,8 @@ class BCCLIENTPLUGIN_API ServiceOperation
 	static const ServiceOperation GetList;
 	static const ServiceOperation GetListByIndexedId;
 	static const ServiceOperation GetListCount;
-	static const ServiceOperation GetPage;
-	static const ServiceOperation GetPageOffset;
+	static const ServiceOperation CustomEntityGetPage;
+	static const ServiceOperation CustomEntityGetPageOffset;
 	static const ServiceOperation IncrementUserEntityData;
 	static const ServiceOperation IncrementSharedUserEntityData;
 	static const ServiceOperation IncrementGlobalEntityData;
@@ -252,6 +259,10 @@ class BCCLIENTPLUGIN_API ServiceOperation
 	static const ServiceOperation RemoveAttributes;
 	static const ServiceOperation UpdatePlayerPicture;
 	static const ServiceOperation UpdateContactEmail;
+	static const ServiceOperation ClearUserStatus;
+	static const ServiceOperation ExtendUserStatus;
+	static const ServiceOperation GetUserStatus;
+	static const ServiceOperation SetUserStatus;
 
 	static const ServiceOperation ReadProperties;
 
@@ -338,6 +349,16 @@ class BCCLIENTPLUGIN_API ServiceOperation
 	static const ServiceOperation ViewReward;
 	static const ServiceOperation ClaimTournamentReward;
 
+	//CustomEntity
+	static const ServiceOperation CreateEntity;
+	static const ServiceOperation DeleteEntity;
+	static const ServiceOperation GetCount;
+	static const ServiceOperation GetPage;
+	static const ServiceOperation GetPageOffset;
+	static const ServiceOperation ReadEntity;
+	static const ServiceOperation UpdateEntity;
+	static const ServiceOperation UpdateEntityFields;
+	
 	//presence
 	static const ServiceOperation ForcePush;
 	static const ServiceOperation GetPresenceOfFriends;
@@ -410,6 +431,26 @@ class BCCLIENTPLUGIN_API ServiceOperation
 	static const ServiceOperation CancelFindRequest;
 	static const ServiceOperation GetRegionsForLobbies;
 	static const ServiceOperation PingData;
+
+	//Item Catalog
+	static const ServiceOperation GetCatalogItemDefinition;
+	static const ServiceOperation GetCatalogItemsPage;
+	static const ServiceOperation GetCatalogItemsPageOffset;
+
+	//UserItemsManagement
+	static const ServiceOperation AwardUserItem;
+	static const ServiceOperation DropUserItem;
+	static const ServiceOperation GetUserItemsPage;
+	static const ServiceOperation GetUserItemsPageOffset;
+	static const ServiceOperation GetUserItem;
+	static const ServiceOperation GiveUserItemTo;
+	static const ServiceOperation PurchaseUserItem;
+	static const ServiceOperation ReceiveUserItemFrom;
+	static const ServiceOperation SellUserItem;
+	static const ServiceOperation UpdateUserItemData;
+	static const ServiceOperation UseUserItem;
+	static const ServiceOperation PublishUserItemToBlackchain;
+	static const ServiceOperation RefreshBlockchainUserItems;
 
 	FString getValue() const { return _value; }
 

@@ -13,6 +13,20 @@ UBCIdentityProxy::UBCIdentityProxy(const FObjectInitializer &ObjectInitializer)
 {
 }
 
+UBCIdentityProxy *UBCIdentityProxy::AttachBlockchainIdentity(UBrainCloudWrapper *brainCloudWrapper, const FString &blockchainConfig, const FString &publicKey)
+{
+	UBCIdentityProxy *Proxy = NewObject<UBCIdentityProxy>();
+	UBCWrapperProxy::GetBrainCloudInstance(brainCloudWrapper)->getIdentityService()->attachBlockchainIdentity(blockchainConfig, publicKey, Proxy);
+	return Proxy;
+}
+
+UBCIdentityProxy *UBCIdentityProxy::DetachBlockchainIdentity(UBrainCloudWrapper *brainCloudWrapper, const FString &blockchainConfig)
+{
+	UBCIdentityProxy *Proxy = NewObject<UBCIdentityProxy>();
+	UBCWrapperProxy::GetBrainCloudInstance(brainCloudWrapper)->getIdentityService()->detachBlockchainIdentity(blockchainConfig, Proxy);
+	return Proxy;
+}
+
 UBCIdentityProxy *UBCIdentityProxy::AttachFacebookIdentity(UBrainCloudWrapper *brainCloudWrapper, const FString &facebookId, const FString &authenticationToken)
 {
 	UBCIdentityProxy *Proxy = NewObject<UBCIdentityProxy>();
