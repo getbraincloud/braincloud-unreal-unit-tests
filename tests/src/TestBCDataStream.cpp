@@ -48,3 +48,10 @@ TEST_F(TestBCDataStream, CustomTrackEvent)
     tr.run(m_bc);
 }
 
+TEST_F(TestBCDataStream, SubmitCrashReport)
+{
+    TestResult tr;
+    m_bc->getDataStreamService()->submitCrashReport("test", "test", "{\"testReport\": \"Testing\"}", "test", "test", "test", "test", true, &tr);
+    tr.run(m_bc);
+}
+

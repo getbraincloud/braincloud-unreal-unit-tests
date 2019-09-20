@@ -194,6 +194,8 @@ namespace BrainCloud {
 		static const ServiceOperation FindMatches;
 		static const ServiceOperation FindMatchesCompleted;
 		static const ServiceOperation DeleteMatch;
+		static const ServiceOperation CompleteMatchWithSummaryData;
+		static const ServiceOperation AbandonMatchWithSummaryData;
 
 		static const ServiceOperation LastUploadStatus;
 
@@ -254,6 +256,13 @@ namespace BrainCloud {
 		static const ServiceOperation IncrementGlobalEntityData;
 		static const ServiceOperation GetRandomEntitiesMatching;
 
+		static const ServiceOperation ClearUserStatus;
+		static const ServiceOperation ExtendUserStatus;
+		static const ServiceOperation GetUserStatus;
+		static const ServiceOperation SetUserStatus;
+
+		static const ServiceOperation AttachBlockchainIdentity;
+		static const ServiceOperation DetachBlockchainIdentity;
 
 		static const ServiceOperation GetAttributes;
 		static const ServiceOperation UpdateAttributes;
@@ -344,6 +353,37 @@ namespace BrainCloud {
 		static const ServiceOperation ViewReward;
 		static const ServiceOperation ClaimTournamentReward;
 
+		//UserItems
+		static const ServiceOperation AwardUserItem;
+		static const ServiceOperation DropUserItem;
+		static const ServiceOperation GetUserItemsPage;
+		static const ServiceOperation GetUserItemsPageOffset;
+		static const ServiceOperation GetUserItem;
+		static const ServiceOperation GiveUserItemTo;
+		static const ServiceOperation PurchaseUserItem;
+		static const ServiceOperation ReceiveUserItemFrom;
+		static const ServiceOperation SellUserItem;
+		static const ServiceOperation UpdateUserItemData;
+		static const ServiceOperation UseUserItem;
+		static const ServiceOperation PublishUserItemToBlockchain;
+		static const ServiceOperation RefreshBlockchainUserItems;
+		static const ServiceOperation RemoveUserItemFromBlockchain;
+
+		//itemCatalog
+		static const ServiceOperation GetCatalogItemDefinition;
+		static const ServiceOperation GetCatalogItemsPage;
+		static const ServiceOperation GetCatalogItemsPageOffset;
+
+		//custom entity
+		static const ServiceOperation CreateEntity;
+		static const ServiceOperation DeleteEntity;
+		static const ServiceOperation GetCount;
+		static const ServiceOperation ReadEntity;
+		static const ServiceOperation UpdateEntity;
+		static const ServiceOperation UpdateEntityFields;
+		static const ServiceOperation GetEntityPage;
+		static const ServiceOperation GetEntityPageOffset;
+
 		//rtt Registration
 		static const ServiceOperation RequestClientConnection;
 
@@ -372,6 +412,8 @@ namespace BrainCloud {
 		static const ServiceOperation UpdateReady;
 		static const ServiceOperation UpdateSettings;
 		static const ServiceOperation CancelFindRequest;
+
+		static const ServiceOperation SubmitCrashReport;
 
 		//messaging
 		static const ServiceOperation DeleteMessages;

@@ -115,6 +115,38 @@ TEST_F(TestBCPlayerState, UpdateContactEmail)
     tr.run(m_bc);
 }
 
+TEST_F(TestBCPlayerState, ClearUserStatus)
+{
+    Authenticate();
+    TestResult tr;
+    m_bc->getPlayerStateService()->clearUserStatus("OKAY", &tr);
+    tr.run(m_bc);
+}
+
+TEST_F(TestBCPlayerState, ExtendUserStatus)
+{
+    Authenticate();
+    TestResult tr;
+    m_bc->getPlayerStateService()->extendUserStatus("OKAY", 5, "{\"test\": \"Testing\"}", &tr);
+    tr.run(m_bc);
+}
+
+TEST_F(TestBCPlayerState, GetUserStatus)
+{
+    Authenticate();
+    TestResult tr;
+    m_bc->getPlayerStateService()->getUserStatus("OKAY", &tr);
+    tr.run(m_bc);
+}
+
+TEST_F(TestBCPlayerState, SetUserStatus)
+{
+    Authenticate();
+    TestResult tr;
+    m_bc->getPlayerStateService()->setUserStatus("OKAY", 5, "{\"test\": \"Testing\"}", &tr);
+    tr.run(m_bc);
+}
+
 void TestBCPlayerState::Authenticate()
 {
     TestResult tr;
@@ -128,4 +160,5 @@ void TestBCPlayerState::Logout()
     m_bc->getPlayerStateService()->logout(&tr);
     tr.run(m_bc);
 }
+
 

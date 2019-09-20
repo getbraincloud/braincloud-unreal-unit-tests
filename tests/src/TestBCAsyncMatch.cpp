@@ -107,6 +107,66 @@ TEST_F(TestBCAsyncMatch, UpdateMatchSummaryData)
     TestBCAsyncMatch::AbandonMatch();
 }
 
+TEST_F(TestBCAsyncMatch, CompleteMatchWithSummaryData)
+{
+    //create match and submit turn
+    TestBCAsyncMatch::CreateMatch();
+    TestResult tr;
+    
+    Json::Value matchState;
+    matchState["map"] = "level01";
+    Json::FastWriter fw;
+    
+    m_bc->getAsyncMatchService()->submitTurn(GetUser(UserA)->m_profileId,
+                                             m_matchId.c_str(),
+                                             0,
+                                             fw.write(matchState).c_str(),
+                                             NULL,
+                                             GetUser(UserB)->m_profileId,
+                                             fw.write(matchState).c_str(),
+                                             fw.write(matchState).c_str(),
+                                             &tr);
+    tr.run(m_bc);
+
+    //COMPLETE
+        m_bc->getAsyncMatchService()->completeMatchWithSummaryData(GetUser(UserA)->m_profileId,
+                                             m_matchId.c_str(),
+                                             "",
+                                             "{\"test\": \"Testing\"}",
+                                             &tr);
+    tr.run(m_bc);
+}
+
+TEST_F(TestBCAsyncMatch, AbandonMatchWithSummaryData)
+{
+    //create match and submit turn
+    TestBCAsyncMatch::CreateMatch();
+    TestResult tr;
+    
+    Json::Value matchState;
+    matchState["map"] = "level01";
+    Json::FastWriter fw;
+    
+    m_bc->getAsyncMatchService()->submitTurn(GetUser(UserA)->m_profileId,
+                                             m_matchId.c_str(),
+                                             0,
+                                             fw.write(matchState).c_str(),
+                                             NULL,
+                                             GetUser(UserB)->m_profileId,
+                                             fw.write(matchState).c_str(),
+                                             fw.write(matchState).c_str(),
+                                             &tr);
+    tr.run(m_bc);
+
+    //COMPLETE
+        m_bc->getAsyncMatchService()->abandonMatchWithSummaryData(GetUser(UserA)->m_profileId,
+                                             m_matchId.c_str(),
+                                             "",
+                                             "{\"test\": \"Testing\"}",
+                                             &tr);
+    tr.run(m_bc);
+}
+
 void TestBCAsyncMatch::CreateMatch()
 {
     TestResult tr;

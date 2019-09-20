@@ -124,6 +124,7 @@ namespace BrainCloud
 
     void CppRestBrainCloudComms::addToQueue(ServerCall *serverCall)
     {
+        std::cout << "HNIJO BNEUOBNUOFBN EOENFIOEF IOENF IEJNF OFE N";
 #ifdef VERBOSE
         std::cout << "Entering addToQueue()" << std::endl;
 #endif
@@ -153,6 +154,7 @@ namespace BrainCloud
 
     void CppRestBrainCloudComms::processQueue()
     {
+        std::cout << "ONOFINOWEN FEN OIN EFIONEFI NEIP FEIFN F";
 #ifdef VERBOSE
         std::cout << "Entering processQueue()" << std::endl;
 #endif
@@ -200,6 +202,7 @@ namespace BrainCloud
 
     void CppRestBrainCloudComms::fillInProgress()
     {
+        std::cout << "KONFIOE NFEIONF OENFOF OEFNOEN ONFOIFN OFNIEO INOFE 0";
 #ifdef VERBOSE
         std::cout << "Entering fillInProgress()" << std::endl;
 #endif
@@ -250,6 +253,7 @@ namespace BrainCloud
 
     bool CppRestBrainCloudComms::processMessages()
     {
+        std::cout<< "ON EWPID WIDHWIP HONJ NFMBNBFMNBFMNWBMFBW ";
         try
         {
             std::string dataString = getDataString();

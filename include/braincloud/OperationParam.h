@@ -375,6 +375,22 @@ namespace BrainCloud {
 		static const OperationParam RoundStartedEpoch;
 		static const OperationParam Data;
 
+		//Custom Entity
+		static const OperationParam CustomEntityServiceEntityType;
+		static const OperationParam CustomEntityServiceData;
+		static const OperationParam CustomEntityServiceAcl;
+		static const OperationParam CustomEntityServiceTimeToLive;
+		static const OperationParam CustomEntityServiceIsOwned;
+		static const OperationParam CustomEntityServiceVersion;
+		static const OperationParam CustomEntityServiceRowsPerPage;
+		static const OperationParam CustomEntityServiceSearchJson;
+		static const OperationParam CustomEntityServiceSortJson;
+		static const OperationParam CustomEntityServiceDoCount;
+		static const OperationParam CustomEntityServiceContext;
+		static const OperationParam CustomEntityServicePageOffset;
+		static const OperationParam CustomEntityServiceEntityId;
+		static const OperationParam CustomEntityFieldsJson;
+
 		//chat
 		static const OperationParam ChannelId;
 		static const OperationParam MsgId;
@@ -431,6 +447,43 @@ namespace BrainCloud {
 		static const OperationParam AppStorePurchaseData;
 		static const OperationParam AppStoreTransactionId;
 		static const OperationParam AppStoreTransactionData;
+
+		//item catalog
+		static const OperationParam ItemCatalogServiceDefId;
+		static const OperationParam ItemCatalogServiceContext;
+		static const OperationParam ItemCatalogServicePageOffset;
+		
+		//UserItems
+		static const OperationParam UserItemsServiceDefId;
+		static const OperationParam UserItemsServiceQuantity;
+		static const OperationParam UserItemsServiceIncludeDef;
+		static const OperationParam UserItemsServiceItemId;
+		static const OperationParam UserItemsServiceCriteria;
+		static const OperationParam UserItemsServiceContext;
+		static const OperationParam UserItemsServicePageOffset;
+		static const OperationParam UserItemsServiceVersion;
+		static const OperationParam UserItemsServiceImmediate;
+		static const OperationParam UserItemsServiceProfileId;
+		static const OperationParam UserItemsServiceShopId;
+		static const OperationParam UserItemsServiceNewItemData;
+
+		//Datastream
+		static const OperationParam DataStreamCrashType;
+		static const OperationParam DataStreamErrorMsg;
+		static const OperationParam DataStreamCrashJson;
+		static const OperationParam DataStreamCrashLog;
+		static const OperationParam DataStreamUsername;
+		static const OperationParam DataStreamUserEmail;
+		static const OperationParam DataStreamUserNotes;
+		static const OperationParam DataStreamUserSubmitted;
+
+		static const OperationParam PlayerStateServiceStatusName;
+		static const OperationParam PlayerStateServiceAdditionalSecs;
+		static const OperationParam PlayerStateServiceDetails;
+		static const OperationParam PlayerStateServiceDurationSecs;
+
+		static const OperationParam IdentityServiceBlockchainConfig;
+		static const OperationParam IdentityServicePublicKey;
 
 		std::string getValue() const { return _value; }
 

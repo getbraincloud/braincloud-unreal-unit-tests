@@ -369,6 +369,22 @@ namespace BrainCloud
 	const OperationParam OperationParam::RoundStartedEpoch = OperationParam("roundStartedEpoch");
 	const OperationParam OperationParam::Data = OperationParam("data");
 
+	//customEntity
+	const OperationParam OperationParam::CustomEntityServiceEntityType = OperationParam("entityType");
+	const OperationParam OperationParam::CustomEntityServiceData = OperationParam("entityData");
+	const OperationParam OperationParam::CustomEntityServiceAcl = OperationParam("entityAcl");
+	const OperationParam OperationParam::CustomEntityServiceTimeToLive = OperationParam("timeToLive");
+	const OperationParam OperationParam::CustomEntityServiceIsOwned = OperationParam("isOwned");
+	const OperationParam OperationParam::CustomEntityServiceVersion =OperationParam("version"); 
+	const OperationParam OperationParam::CustomEntityServiceRowsPerPage= OperationParam("rowsPerPage");
+	const OperationParam OperationParam::CustomEntityServiceSearchJson = OperationParam("searchJson");
+	const OperationParam OperationParam::CustomEntityServiceSortJson = OperationParam("sortJson");
+	const OperationParam OperationParam::CustomEntityServiceDoCount = OperationParam("doCount");
+	const OperationParam OperationParam::CustomEntityServiceContext = OperationParam("context");
+	const OperationParam OperationParam::CustomEntityServicePageOffset = OperationParam("pageOffset");
+	const OperationParam OperationParam::CustomEntityServiceEntityId = OperationParam("entityId");
+	const OperationParam OperationParam::CustomEntityFieldsJson = OperationParam("fieldsJson");
+
 	//chat
 	const OperationParam OperationParam::ChannelId = OperationParam("channelId");
 	const OperationParam OperationParam::MsgId = OperationParam("msgId");
@@ -425,6 +441,42 @@ namespace BrainCloud
 	const OperationParam OperationParam::AppStorePurchaseData = OperationParam("purchaseData");
 	const OperationParam OperationParam::AppStoreTransactionId = OperationParam("transactionId");
 	const OperationParam OperationParam::AppStoreTransactionData = OperationParam("transactionData");
+
+    //item catalog
+	const OperationParam OperationParam::ItemCatalogServiceDefId = OperationParam("defId");
+	const OperationParam OperationParam::ItemCatalogServiceContext = OperationParam("context");
+	const OperationParam OperationParam::ItemCatalogServicePageOffset = OperationParam("pageOffset");
+    //UserItems
+	const OperationParam OperationParam::UserItemsServiceDefId = OperationParam("defId");
+	const OperationParam OperationParam::UserItemsServiceQuantity = OperationParam("quantity");
+	const OperationParam OperationParam::UserItemsServiceIncludeDef = OperationParam("includeDef");
+	const OperationParam OperationParam::UserItemsServiceItemId = OperationParam("itemId");
+	const OperationParam OperationParam::UserItemsServiceCriteria = OperationParam("criteria");
+	const OperationParam OperationParam::UserItemsServiceContext = OperationParam("context");
+	const OperationParam OperationParam::UserItemsServicePageOffset = OperationParam("pageOffset");
+	const OperationParam OperationParam::UserItemsServiceVersion = OperationParam("version");
+	const OperationParam OperationParam::UserItemsServiceImmediate = OperationParam("immediate");
+	const OperationParam OperationParam::UserItemsServiceProfileId = OperationParam("profileId");
+	const OperationParam OperationParam::UserItemsServiceShopId = OperationParam("shopId");
+	const OperationParam OperationParam::UserItemsServiceNewItemData = OperationParam("newItemData");
+
+	//Datastream
+	const OperationParam OperationParam::DataStreamCrashType = OperationParam("crashType");
+	const OperationParam OperationParam::DataStreamErrorMsg = OperationParam("errorMsg");
+	const OperationParam OperationParam::DataStreamCrashJson = OperationParam("crashJson");
+	const OperationParam OperationParam::DataStreamCrashLog = OperationParam("crashLog");
+	const OperationParam OperationParam::DataStreamUsername = OperationParam("playerName");
+	const OperationParam OperationParam::DataStreamUserEmail = OperationParam("userEmail");
+	const OperationParam OperationParam::DataStreamUserNotes = OperationParam("userNotes");
+	const OperationParam OperationParam::DataStreamUserSubmitted = OperationParam("userSubmitted");
+
+	const OperationParam OperationParam::PlayerStateServiceStatusName = OperationParam("statusName");
+	const OperationParam OperationParam::PlayerStateServiceAdditionalSecs = OperationParam("additionalSecs");
+	const OperationParam OperationParam::PlayerStateServiceDetails = OperationParam("details");
+	const OperationParam OperationParam::PlayerStateServiceDurationSecs = OperationParam("durationSecs");
+
+	const OperationParam OperationParam::IdentityServiceBlockchainConfig = OperationParam("blockchainConfig");
+	const OperationParam OperationParam::IdentityServicePublicKey = OperationParam("publicKey");
 
 	OperationParam::OperationParam(const char * value)
 	{

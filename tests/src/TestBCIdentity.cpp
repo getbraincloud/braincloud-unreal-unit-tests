@@ -177,6 +177,19 @@ TEST_F(TestBCIdentity, UpdateUniversalIdLogin)
 	tr.runExpectFail(m_bc, 400, NEW_CREDENTIAL_IN_USE);
 }
 
+TEST_F(TestBCIdentity, AttachAndDetachBlockchain)
+{
+	TestResult tr;
+	m_bc->getIdentityService()->attachBlockchainIdentity("config", "ragfjahfje", &tr);
+	//after this test is run once, the universal Id will always be in use, but changing the universal Id to something not in use passes. 
+	tr.run(m_bc);
+
+	TestResult tr2;
+	m_bc->getIdentityService()->detachBlockchainIdentity("config", &tr2);
+	//after this test is run once, the universal Id will always be in use, but changing the universal Id to something not in use passes. 
+	tr2.run(m_bc);
+}
+
 void TestBCIdentity::detachParent()
 {
 	TestResult tr;
