@@ -12,6 +12,7 @@ namespace BrainCloud
     const AuthenticationType & AuthenticationType::Twitter = AuthenticationType("Twitter");
     const AuthenticationType & AuthenticationType::Parse = AuthenticationType("Parse");
     const AuthenticationType & AuthenticationType::Handoff = AuthenticationType("Handoff");
+    const AuthenticationType & AuthenticationType::SettopHandoff = AuthenticationType("SettopHandoff");
     const AuthenticationType & AuthenticationType::External = AuthenticationType("External");
     const AuthenticationType & AuthenticationType::Unknown = AuthenticationType("Unknown");
 

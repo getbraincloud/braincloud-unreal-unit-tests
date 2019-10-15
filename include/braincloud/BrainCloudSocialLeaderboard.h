@@ -412,6 +412,39 @@ namespace BrainCloud
 		void postScoreToGroupLeaderboard(const char * in_leaderboardId, const char * in_groupId, int32_t in_score, const std::string& in_jsonData, IServerCallback * in_callback = NULL);
 
 		/**
+		* Posts score to groups leaderboard - Note the user must be a member of the group
+		*
+		* Service Name - leaderboard
+		* Service Operation - POST_GROUP_SCORE
+		*
+		* @param in_leaderboardId A collection of leaderboardIds to retrieve scores from
+		* @param in_groupId the groups Id
+		* @param in_score the score you wish to post
+		* @param in_jsonData extra json Data
+		* @param in_callback The method to be invoked when the server response is received
+		*/
+		void postScoreToDynamicGroupLeaderboard(const char * in_leaderboardId, const char * in_groupId, int32_t in_score, const std::string& in_jsonData, IServerCallback * in_callback = NULL);
+
+		/**
+		* Posts score to gorup leaderbopard and dynamically creates if necessary. leaderboardType, rotationReset, retainedCount and rotationType are required.
+		*
+		* Service Name - leaderboard
+		* Service Operation - POST_GROUP_SCORE
+		*
+		* @param in_leaderboardId
+		* @param in_groupId
+		* @param in_score
+		* @param in_data
+		* @param in_leaderboardType
+		* @param in_rotationType
+		* @param in_rotationResetTime 
+		* @param in_retainedCount
+		* @param in_callback The method to be invoked when the server response is received
+		*/
+		void postScoreToDynamicGroupLeaderboard(const char * in_leaderboardId, const char * in_groupId, int32_t in_score, const std::string& in_jsonData, const char * in_leaderboardType, 
+			const char * in_rotationType, int64_t in_rotationResetTime, int32_t in_retainedCount,  IServerCallback * in_callback = NULL);
+
+		/**
 		* Removes score from group leaderboard
 		*
 		* Service Name - leaderboard

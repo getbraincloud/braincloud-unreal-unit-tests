@@ -160,6 +160,29 @@ namespace BrainCloud {
          * @returns   performs the in_success callback on success, in_failure callback on failure
          */
         void authenticateExternal(const char * in_userid, const char * in_token, const char * in_externalAuthName, bool in_forceCreate, IServerCallback * in_callback = NULL);
+        		
+        /*
+		* Authenticate the user using a handoffId and authentication token
+		*
+		* Service Name - Authenticate
+		* Service Operation - Authenticate
+		*
+		* @param in_handoffId braincloud handoff id generated from cloud script
+		* @param in_securityToken The authentication token
+		* @param in_callback The method to be invoked when the server response is received
+		*/
+		void authenticateHandoff(const char * in_handoffId, const char * in_securityToken, IServerCallback * in_callback = NULL);
+
+		/*
+		* Authenticate the user using a handoffCode 
+		*
+		* Service Name - Authenticate
+		* Service Operation - Authenticate
+		*
+		* @param in_handoffCode the code we generate in cloudcode
+		* @param in_callback The method to be invoked when the server response is received
+		*/
+		void authenticateSettopHandoff(const char * in_handoffCode, IServerCallback * in_callback = NULL);
 
         /*
          * Authenticate the user with brainCloud using their Facebook Credentials

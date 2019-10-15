@@ -185,6 +185,17 @@ namespace BrainCloud
 		*/
 		void authenticateHandoff(const char * in_handoffId, const char * in_securityToken, IServerCallback * in_callback = NULL);
 
+		/*
+		* Authenticate the user using a handoffCode 
+		*
+		* Service Name - Authenticate
+		* Service Operation - Authenticate
+		*
+		* @param in_handoffCode the code we generate in cloudcode
+		* @param in_callback The method to be invoked when the server response is received
+		*/
+		void authenticateSettopHandoff(const char * in_handoffCode, IServerCallback * in_callback = NULL);
+
 		/**
 		 * Authenticate the user via cloud code (which in turn validates the supplied credentials against an external system).
 		 * This allows the developer to extend brainCloud authentication to support other backend authentication systems.

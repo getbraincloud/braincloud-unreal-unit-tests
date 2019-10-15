@@ -97,10 +97,44 @@ TEST_F(TestBCAuth, AuthenticateParse)
 
 TEST_F(TestBCAuth, AuthenticateHandoff)
 {
-    TestResult tr;
-    m_bc->getAuthenticationService()->authenticateHandoff("invalid_handoffId", "invalid_securityToken", &tr);
-    tr.runExpectFail(m_bc, HTTP_FORBIDDEN, TOKEN_DOES_NOT_MATCH_USER);
-    Logout();
+    std::string handoffId;
+    std::string handoffToken;
+
+    TestResult tr1;
+    m_bc->getAuthenticationService()->authenticateUniversal(GetUser(UserA)->m_id, GetUser(UserA)->m_password, true, &tr1);
+    tr1.run(m_bc);
+
+    TestResult tr2;
+    m_bc->getScriptService()->runScript("createHandoffId", "{}", &tr2);
+	if (tr2.run(m_bc))
+	{
+		handoffId = tr2.m_response["data"]["response"]["handoffId"].asString();
+        handoffToken = tr2.m_response["data"]["response"]["securityToken"].asString();
+	}
+
+    TestResult tr3;
+    m_bc->getAuthenticationService()->authenticateHandoff(handoffId.c_str(), handoffToken.c_str(), &tr3);
+    tr3.run(m_bc);
+}
+
+TEST_F(TestBCAuth, AuthenticateSettopHandoff)
+{
+    std::string handoffCode;
+
+    TestResult tr1;
+    m_bc->getAuthenticationService()->authenticateUniversal(GetUser(UserA)->m_id, GetUser(UserA)->m_password, true, &tr1);
+    tr1.run(m_bc);
+
+    TestResult tr2;
+    m_bc->getScriptService()->runScript("CreateSettopHandoffCode", "{}", &tr2);
+	if (tr2.run(m_bc))
+	{
+		handoffCode = tr2.m_response["data"]["response"]["handoffCode"].asString();
+	}
+
+    TestResult tr3;
+    m_bc->getAuthenticationService()->authenticateSettopHandoff(handoffCode.c_str(), &tr3);
+    tr3.run(m_bc);
 }
 
 TEST_F(TestBCAuth, ResetEmailPassword)

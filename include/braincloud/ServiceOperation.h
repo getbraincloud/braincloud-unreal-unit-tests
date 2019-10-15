@@ -117,6 +117,7 @@ namespace BrainCloud {
 		static const ServiceOperation GetGroupSocialLeaderboard;
 		static const ServiceOperation GetGroupSocialLeaderboardByVersion;
 		static const ServiceOperation PostScoreToGroupLeaderboard;
+		static const ServiceOperation PostScoreToDynamicGroupLeaderboard;
 		static const ServiceOperation RemoveGroupScore;
 		static const ServiceOperation GetGroupLeaderboardView;
 		static const ServiceOperation GetSummaryDataForProfileId;

@@ -287,7 +287,7 @@ namespace BrainCloud
 		ServerCall * sc = new ServerCall(ServiceName::Leaderboard, ServiceOperation::GetPlayerScoresFromLeaderboards, message, in_callback);
 		m_client->getBrainCloudComms()->addToQueue(sc);
 	}
-	////////////////////////
+
 	void BrainCloudSocialLeaderboard::postScoreToGroupLeaderboard(const char * in_leaderboardId, const char * in_groupId, int32_t in_score, const std::string& in_jsonData, IServerCallback * in_callback)
 	{
 		Json::Value message;
@@ -297,6 +297,23 @@ namespace BrainCloud
 		message[OperationParam::SocialLeaderboardServiceData.getValue()] = JsonUtil::jsonStringToValue(in_jsonData);
 
 		ServerCall * sc = new ServerCall(ServiceName::Leaderboard, ServiceOperation::PostScoreToGroupLeaderboard, message, in_callback);
+		m_client->getBrainCloudComms()->addToQueue(sc);
+	}
+
+	void BrainCloudSocialLeaderboard::postScoreToDynamicGroupLeaderboard(const char * in_leaderboardId, const char * in_groupId, int32_t in_score, const std::string& in_jsonData, const char * in_leaderboardType, 
+		const char * in_rotationType, int64_t in_rotationResetTime, int32_t in_retainedCount,  IServerCallback * in_callback)
+	{
+		Json::Value message;
+		message[OperationParam::SocialLeaderboardServiceLeaderboardId.getValue()] = in_leaderboardId;
+		message[OperationParam::GroupId.getValue()] = in_groupId;
+		message[OperationParam::SocialLeaderboardServiceScore.getValue()] = in_score;
+		message[OperationParam::SocialLeaderboardServiceData.getValue()] = JsonUtil::jsonStringToValue(in_jsonData);
+		message[OperationParam::SocialLeaderboardServiceLeaderboardType.getValue()] = in_leaderboardType;
+		message[OperationParam::SocialLeaderboardServiceRotationType.getValue()] = in_rotationType;
+		message[OperationParam::SocialLeaderboardServiceRotationResetTime.getValue()] = (Json::Int64) in_rotationResetTime;
+		message[OperationParam::SocialLeaderboardServiceRetainedCount.getValue()] = in_retainedCount;
+
+		ServerCall * sc = new ServerCall(ServiceName::Leaderboard, ServiceOperation::PostScoreToDynamicGroupLeaderboard, message, in_callback);
 		m_client->getBrainCloudComms()->addToQueue(sc);
 	}
 
