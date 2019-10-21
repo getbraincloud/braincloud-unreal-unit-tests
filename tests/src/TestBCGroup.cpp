@@ -2,7 +2,7 @@
 #include "braincloud/BrainCloudClient.h"
 #include "TestResult.h"
 #include "TestBCGroup.h"
-
+#include <vector>
 using namespace BrainCloud;
 
 TestBCGroup::TestBCGroup() :
@@ -90,6 +90,26 @@ TEST_F(TestBCGroup, AutoJoinGroup)
 	TestResult tr;
 	m_bc->getGroupService()->autoJoinGroup(
 		_groupType,
+		eAutoJoinStrategy::JoinFirstGroup,
+		"",
+		&tr);
+	tr.run(m_bc);
+
+	Logout();
+	DeleteGroupAsUserA();
+}
+
+TEST_F(TestBCGroup, AutoJoinGroupMulti)
+{
+	CreateGroupAsUserA(true);
+	Authenticate(UserB);
+
+	std::vector<std::string>  groupTypes;
+	groupTypes.push_back(_groupType); 
+
+	TestResult tr;
+	m_bc->getGroupService()->autoJoinGroupMulti(
+		groupTypes,
 		eAutoJoinStrategy::JoinFirstGroup,
 		"",
 		&tr);

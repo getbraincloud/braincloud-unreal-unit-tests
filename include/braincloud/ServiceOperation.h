@@ -303,6 +303,7 @@ namespace BrainCloud {
 		static const ServiceOperation AddGroupMember;
 		static const ServiceOperation ApproveGroupJoinRequest;
 		static const ServiceOperation AutoJoinGroup;
+		static const ServiceOperation AutoJoinGroupMulti;
 		static const ServiceOperation CancelGroupInvitation;
 		static const ServiceOperation CreateGroup;
 		static const ServiceOperation CreateGroupEntity;

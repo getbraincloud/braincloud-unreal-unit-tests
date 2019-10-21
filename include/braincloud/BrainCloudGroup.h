@@ -2,6 +2,7 @@
 
 #pragma once
 
+#include <vector>
 #include <string>
 #include "BrainCloudTypes.h"
 
@@ -83,6 +84,18 @@ namespace BrainCloud
 		* @param in_callback The method to be invoked when the server response is received
 		*/
 		void autoJoinGroup(const char* in_groupType, eAutoJoinStrategy::Strategy in_autoJoinStrategy, std::string in_dataQueryJson, IServerCallback* in_callback = NULL);
+
+		/**
+        * Find and join an open group in the pool of groups in multiple group types provided as input arguments.		*
+		* Service Name - group
+		* Service Operation - AUTO_JOIN_GROUP_MULTI
+		*
+		* @param in_groupTypes Name of the associated group type.
+		* @param in_autoJoinStrategy Selection strategy to employ when there are multiple matches
+		* @param in_where Query parameters (optional)
+		* @param in_callback The method to be invoked when the server response is received
+		*/
+		void autoJoinGroupMulti(const std::vector<std::string>& in_groupTypes, eAutoJoinStrategy::Strategy in_autoJoinStrategy, std::string in_where, IServerCallback* in_callback = NULL);
 
 		/**
 		* Cancel an outstanding invitation to the group.

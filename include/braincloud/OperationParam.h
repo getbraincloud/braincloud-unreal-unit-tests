@@ -339,6 +339,7 @@ namespace BrainCloud {
 		static const OperationParam GroupAttributes;
 		static const OperationParam GroupName;
 		static const OperationParam GroupType;
+		static const OperationParam GroupTypes;
 		static const OperationParam GroupIsOpenGroup;
 		static const OperationParam GroupAcl;
 		static const OperationParam GroupData;

@@ -331,6 +331,7 @@ namespace BrainCloud
 	const OperationParam OperationParam::GroupAttributes = OperationParam("attributes");
 	const OperationParam OperationParam::GroupName = OperationParam("name");
 	const OperationParam OperationParam::GroupType = OperationParam("groupType");
+	const OperationParam OperationParam::GroupTypes = OperationParam("groupTypes");
 	const OperationParam OperationParam::GroupIsOpenGroup = OperationParam("isOpenGroup");
 	const OperationParam OperationParam::GroupAcl = OperationParam("acl");
 	const OperationParam OperationParam::GroupData = OperationParam("data");

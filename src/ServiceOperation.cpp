@@ -286,6 +286,7 @@ namespace BrainCloud
 	const ServiceOperation ServiceOperation::AddGroupMember = ServiceOperation("ADD_GROUP_MEMBER");
 	const ServiceOperation ServiceOperation::ApproveGroupJoinRequest = ServiceOperation("APPROVE_GROUP_JOIN_REQUEST");
 	const ServiceOperation ServiceOperation::AutoJoinGroup = ServiceOperation("AUTO_JOIN_GROUP");
+	const ServiceOperation ServiceOperation::AutoJoinGroupMulti = ServiceOperation("AUTO_JOIN_GROUP_MULTI");
 	const ServiceOperation ServiceOperation::CancelGroupInvitation = ServiceOperation("CANCEL_GROUP_INVITATION");
 	const ServiceOperation ServiceOperation::CreateGroup = ServiceOperation("CREATE_GROUP");
 	const ServiceOperation ServiceOperation::CreateGroupEntity = ServiceOperation("CREATE_GROUP_ENTITY");
