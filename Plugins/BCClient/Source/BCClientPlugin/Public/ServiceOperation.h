@@ -128,6 +128,7 @@ class BCCLIENTPLUGIN_API ServiceOperation
 	static const ServiceOperation GetPlayerScore;
 	static const ServiceOperation GetPlayerScoresFromLeaderboards;
 	static const ServiceOperation PostScoreToGroupLeaderboard;
+	static const ServiceOperation PostScoreToDynamicGroupLeaderboard;
 	static const ServiceOperation RemoveGroupScore;
 	static const ServiceOperation GetGroupLeaderboardView;
 
@@ -298,6 +299,7 @@ class BCCLIENTPLUGIN_API ServiceOperation
 	static const ServiceOperation AddGroupMember;
 	static const ServiceOperation ApproveGroupJoinRequest;
 	static const ServiceOperation AutoJoinGroup;
+	static const ServiceOperation AutoJoinGroupMulti;
 	static const ServiceOperation CancelGroupInvitation;
 	static const ServiceOperation CreateGroup;
 	static const ServiceOperation CreateGroupEntity;

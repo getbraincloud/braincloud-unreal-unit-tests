@@ -219,4 +219,8 @@ public:
   UFUNCTION(BlueprintCallable, meta = (BlueprintInternalUseOnly = "true"), Category = "BrainCloud|Async Match")
   static UBCAsyncMatchProxy *CompleteMatchWithSummaryData(UBrainCloudWrapper *brainCloudWrapper, const FString &ownerId, const FString &matchId, const FString &pushContent, const FString &summary);
 
+  
+  UFUNCTION(BlueprintCallable, meta = (BlueprintInternalUseOnly = "true"), Category = "BrainCloud|Async Match")
+  static UBCAsyncMatchProxy *MyFunction(UBrainCloudWrapper *brainCloudWrapper, const FString &ownerId, const FString &matchId, const FString &pushContent, const FString &summary);
+
 };

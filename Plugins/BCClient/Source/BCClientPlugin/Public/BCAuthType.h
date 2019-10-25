@@ -15,6 +15,7 @@ enum class EBCAuthType : uint8
 	Twitter UMETA(DisplayName = "Twitter"),
 	Parse UMETA(DisplayName = "Parse"),
 	Handoff UMETA(DisplayName = "Handoff"),
+	SettopHandoff UMETA(DisplayName = "SettopHandoff"),
 	External UMETA(DisplayName = "External"),
 	Unknown UMETA(DisplayName = "Unknown")
 };
