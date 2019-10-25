@@ -98,6 +98,11 @@ void BrainCloudAuthentication::authenticateHandoff(const FString &handoffId, con
 {
 	authenticate(handoffId, securityToken, EBCAuthType::Handoff, "", forceCreate, callback);
 }
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+void BrainCloudAuthentication::authenticateSettopHandoff(const FString &handoffCode, IServerCallback *callback)
+{
+	authenticate(handoffCode,"", EBCAuthType::SettopHandoff, "", false, callback);
+}
 
 void BrainCloudAuthentication::authenticateExternal(const FString &userid, const FString &token, const FString &externalAuthName, bool forceCreate, IServerCallback *callback)
 {

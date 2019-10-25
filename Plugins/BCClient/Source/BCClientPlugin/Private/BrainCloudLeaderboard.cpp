@@ -251,6 +251,26 @@ void BrainCloudLeaderboard::postScoreToGroupLeaderboard(const FString &leaderboa
 	_client->sendRequest(sc);
 }
 
+void BrainCloudLeaderboard::postScoreToDynamicGroupLeaderboard(const FString &leaderboardId, const FString &groupId, int32 score, const FString &jsonOtherData,ESocialLeaderboardType leaderboardType, 
+																ERotationType rotationType, const FDateTime &rotationStart, int32 retainedCount, IServerCallback *callback)
+{
+	TSharedRef<FJsonObject> message = MakeShareable(new FJsonObject());
+	message->SetStringField(OperationParam::LeaderboardServiceLeaderboardId.getValue(), leaderboardId);
+	message->SetStringField(OperationParam::GroupId.getValue(), groupId);
+	message->SetNumberField(OperationParam::LeaderboardServiceScore.getValue(), score);
+	message->SetObjectField(OperationParam::LeaderboardServiceData.getValue(), JsonUtil::jsonStringToValue(jsonOtherData));
+	message->SetStringField(OperationParam::LeaderboardServiceLeaderboardType.getValue(), *leaderboardTypeToString(leaderboardType));
+
+	if (rotationStart > FDateTime::Now())
+	message->SetStringField(OperationParam::LeaderboardServiceRotationType.getValue(), *leaderboardRotationTypeToString(rotationType));
+
+	message->SetNumberField(OperationParam::LeaderboardServiceRotationResetTime.getValue(), rotationStart.ToUnixTimestamp() * 1000);
+	message->SetNumberField(OperationParam::LeaderboardServiceScore.getValue(), retainedCount);
+
+	ServerCall *sc = new ServerCall(ServiceName::Leaderboard, ServiceOperation::PostScoreToDynamicGroupLeaderboard, message, callback);
+	_client->sendRequest(sc);
+}
+
 void BrainCloudLeaderboard::removeGroupScore(const FString &leaderboardId, const FString &groupId, int32 score, int32 versionId, IServerCallback *callback)
 {
 	TSharedRef<FJsonObject> message = MakeShareable(new FJsonObject());

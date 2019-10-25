@@ -124,6 +124,7 @@ class BCCLIENTPLUGIN_API BrainCloudGamification
     * @param milestoneIds List of milestones to reset
     * @param callback Method to be invoked when the server response is received.
     */
+    [[deprecated]]
     void resetMilestones(const TArray<FString> &milestoneIds, IServerCallback *callback);
 
     /**

@@ -27,6 +27,8 @@ FString BCAuthType::EnumToString(EBCAuthType type)
         return TEXT("Parse");
     case EBCAuthType::Handoff:
         return TEXT("Handoff");
+    case EBCAuthType::SettopHandoff:
+        return TEXT("SettopHandoff");
     case EBCAuthType::External:
         return TEXT("External");
     case EBCAuthType::Unknown:
