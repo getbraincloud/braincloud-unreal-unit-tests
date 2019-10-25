@@ -209,6 +209,29 @@ class UBCLeaderboardProxy : public UBCBlueprintCallProxyBase
 	* Service Operation - PostScoreDynamic
 	*
 	* Param - leaderboardId The leaderboard to post to
+	* Param - in_groupId the groups Id
+	* Param - score The score to post
+	* Param - data Optional user-defined data to post with the score
+	* Param - leaderboardType leaderboard type
+	* Param - rotationType Type of rotation
+	* Param - rotationStart Date to start rotation calculations (Date is converted to "dd-mm-yyyy hh:mm" format)
+	* Param - retainedCount How many rotations to keep
+	*/
+	UFUNCTION(BlueprintCallable, meta = (BlueprintInternalUseOnly = "true"), Category = "BrainCloud|Leaderboard")
+	static UBCLeaderboardProxy *PostScoreToDynamicGroupLeaderboard(UBrainCloudWrapper *brainCloudWrapper, FString leaderboardId, const FString &groupId, int32 score, FString jsonData,
+															  ESocialLeaderboardType leaderboardType, ERotationType rotationType, FDateTime rotationStart, int32 retainedCount);
+
+	/**
+	* Post the players score to the given social leaderboard.
+	* Pass leaderboard config data to dynamically create if necessary.
+	* You can optionally send a user-defined json string of data
+	* with the posted score. This string could include information
+	* relevant to the posted score.
+	*
+	* Service Name - SocialLeaderboard
+	* Service Operation - PostScoreDynamic
+	*
+	* Param - leaderboardId The leaderboard to post to
 	* Param - score The score to post
 	* Param - data Optional user-defined data to post with the score
 	* Param - leaderboardType leaderboard type
