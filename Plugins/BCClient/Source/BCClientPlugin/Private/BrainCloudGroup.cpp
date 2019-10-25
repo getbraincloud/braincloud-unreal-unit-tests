@@ -57,6 +57,18 @@ void BrainCloudGroup::autoJoinGroup(const FString &groupType, EAutoJoinStrategy 
 	_client->sendRequest(sc);
 }
 
+void BrainCloudGroup::autoJoinGroupMulti(const TArray<FString> &groupTypes, EAutoJoinStrategy autoJoinStrategy, const FString &dataQueryJson, IServerCallback *callback)
+{
+	TSharedRef<FJsonObject> message = MakeShareable(new FJsonObject());
+	message->SetArrayField(OperationParam::GroupTypes.getValue(), JsonUtil::arrayToJsonArray(groupTypes));
+	message->SetStringField(OperationParam::GroupAutoJoinStrategy.getValue(), AutoJoinStrategyToString(autoJoinStrategy));
+	if (OperationParam::isOptionalParamValid(dataQueryJson))
+		message->SetObjectField(OperationParam::GroupWhere.getValue(), JsonUtil::jsonStringToValue(dataQueryJson));
+
+	ServerCall *sc = new ServerCall(ServiceName::Group, ServiceOperation::AutoJoinGroupMulti, message, callback);
+	_client->sendRequest(sc);
+}
+
 void BrainCloudGroup::cancelGroupInvitation(const FString &groupId, const FString &profileId, IServerCallback *callback)
 {
 	TSharedRef<FJsonObject> message = MakeShareable(new FJsonObject());

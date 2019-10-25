@@ -68,6 +68,19 @@ class UBCGroupProxy : public UBCBlueprintCallProxyBase
 	UFUNCTION(BlueprintCallable, meta = (BlueprintInternalUseOnly = "true"), Category = "BrainCloud|Group")
 	static UBCGroupProxy *AutoJoinGroup(UBrainCloudWrapper *brainCloudWrapper, const FString &groupType, EAutoJoinStrategy autoJoinStrategy, const FString &dataQueryJson);
 
+		/**
+	* Automatically join an open group that matches the search criteria and has space available.
+	*
+	* Service Name - group
+	* Service Operation - AUTO_JOIN_GROUP_MULTI
+	*
+	* Param - groupType Name of the associated group type.
+	* Param - autoJoinStrategy Selection strategy to employ when there are multiple matches
+	* Param - dataQueryJson Query parameters (optional)
+	*/
+	UFUNCTION(BlueprintCallable, meta = (BlueprintInternalUseOnly = "true"), Category = "BrainCloud|Group")
+	static UBCGroupProxy *AutoJoinGroupMulti(UBrainCloudWrapper *brainCloudWrapper, const TArray<FString> &groupTypes, EAutoJoinStrategy autoJoinStrategy, const FString &dataQueryJson);
+
 	/**
 	 * Cancel an outstanding invitation to the group.
 	 *

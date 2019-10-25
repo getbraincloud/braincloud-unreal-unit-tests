@@ -124,6 +124,7 @@ const ServiceOperation ServiceOperation::RemovePlayerScore = ServiceOperation(TE
 const ServiceOperation ServiceOperation::GetPlayerScore = ServiceOperation(TEXT("GET_PLAYER_SCORE"));
 const ServiceOperation ServiceOperation::GetPlayerScoresFromLeaderboards = ServiceOperation(TEXT("GET_PLAYER_SCORES_FROM_LEADERBOARDS"));
 const ServiceOperation ServiceOperation::PostScoreToGroupLeaderboard = ServiceOperation(TEXT("POST_GROUP_SCORE"));
+const ServiceOperation ServiceOperation::PostScoreToDynamicGroupLeaderboard = ServiceOperation(TEXT("POST_GROUP_SCORE_DYNAMIC"));
 const ServiceOperation ServiceOperation::RemoveGroupScore = ServiceOperation(TEXT("REMOVE_GROUP_SCORE"));
 const ServiceOperation ServiceOperation::GetGroupLeaderboardView = ServiceOperation(TEXT("GET_GROUP_LEADERBOARD_VIEW"));
 
@@ -299,6 +300,7 @@ const ServiceOperation ServiceOperation::AcceptGroupInvitation = ServiceOperatio
 const ServiceOperation ServiceOperation::AddGroupMember = ServiceOperation(TEXT("ADD_GROUP_MEMBER"));
 const ServiceOperation ServiceOperation::ApproveGroupJoinRequest = ServiceOperation(TEXT("APPROVE_GROUP_JOIN_REQUEST"));
 const ServiceOperation ServiceOperation::AutoJoinGroup = ServiceOperation(TEXT("AUTO_JOIN_GROUP"));
+const ServiceOperation ServiceOperation::AutoJoinGroupMulti = ServiceOperation(TEXT("AUTO_JOIN_GROUP_MULTI"));
 const ServiceOperation ServiceOperation::CancelGroupInvitation = ServiceOperation(TEXT("CANCEL_GROUP_INVITATION"));
 const ServiceOperation ServiceOperation::CreateGroup = ServiceOperation(TEXT("CREATE_GROUP"));
 const ServiceOperation ServiceOperation::CreateGroupEntity = ServiceOperation(TEXT("CREATE_GROUP_ENTITY"));
