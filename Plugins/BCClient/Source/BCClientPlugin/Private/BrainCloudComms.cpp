@@ -69,10 +69,11 @@ void BrainCloudComms::InitializeWithApps(const FString &serverURL, const TMap<FS
 
 void BrainCloudComms::SetPacketTimeoutsToDefault()
 {
-	_packetTimeouts.Empty();
+    _packetTimeouts.Empty();
 	_packetTimeouts.Add(15);
-	_packetTimeouts.Add(10);
-	_packetTimeouts.Add(10);
+	_packetTimeouts.Add(20);
+	_packetTimeouts.Add(35);
+	_packetTimeouts.Add(50);
 }
 
 void BrainCloudComms::AddToQueue(ServerCall *serverCall)
