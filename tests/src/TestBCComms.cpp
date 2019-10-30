@@ -341,5 +341,5 @@ TEST_F(TestBCCommsWithAuth, TimeoutAutoRetry45sec)
 	TestResult tr;
 
 	m_bc->getScriptService()->runScript("TestTimeoutRetry45", "{}", &tr);
-	tr.runExpectFail(m_bc, HTTP_CLIENT_NETWORK_ERROR, CLIENT_NETWORK_ERROR_TIMEOUT);
+	tr.run(m_bc);
 }
