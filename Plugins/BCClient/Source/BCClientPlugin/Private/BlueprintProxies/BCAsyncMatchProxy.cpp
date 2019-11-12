@@ -105,10 +105,3 @@ UBCAsyncMatchProxy *UBCAsyncMatchProxy::CompleteMatchWithSummaryData(UBrainCloud
     UBCWrapperProxy::GetBrainCloudInstance(brainCloudWrapper)->getAsyncMatchService()->completeMatchWithSummaryData(ownerId, matchId, pushContent, summary, Proxy);
     return Proxy;
 }
-
-UBCAsyncMatchProxy *UBCAsyncMatchProxy::MyFunction(UBrainCloudWrapper *brainCloudWrapper, const FString &ownerId, const FString &matchId, const FString &pushContent, const FString &summary)
-{
-    UBCAsyncMatchProxy *Proxy = NewObject<UBCAsyncMatchProxy>();
-    //UBCWrapperProxy::GetBrainCloudInstance(brainCloudWrapper)->getAsyncMatchService()->completeMatchWithSummaryData(ownerId, matchId, pushContent, summary, Proxy);
-    return Proxy;
-}
