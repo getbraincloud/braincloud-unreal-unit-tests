@@ -196,6 +196,33 @@ public:
   UFUNCTION(BlueprintCallable, meta = (BlueprintInternalUseOnly = "true"), Category = "BrainCloud|Wrapper")
   static UBCWrapperProxy *AuthenticateUniversal(UBrainCloudWrapper *brainCloudWrapper, FString userid, FString password, bool forceCreate);
 
+    /*
+    * Authenticate the user using a handoffId and a token 
+    *
+    * Service Name - Authenticate
+    * Service Operation - Authenticate
+    *
+    * @param handoffId braincloud handoff id generated from cloud script
+    * @param securityToken The security token entered byt the user
+    * @param callback The method to be invoked when the server response is received
+    */
+    UFUNCTION(BlueprintCallable, meta = (BlueprintInternalUseOnly = "true"), Category = "BrainCloud|Wrapper")
+    static UBCWrapperProxy *AuthenticateHandoff(UBrainCloudWrapper *brainCloudWrapper, FString handoffId, FString securityToken, bool forceCreate);
+
+        /*
+    * Authenticate the user using a handoffId and a token 
+    *
+    * Service Name - Authenticate
+    * Service Operation - Authenticate
+    *
+    * @param handoffCode braincloud handoff id generated from cloud script
+    * @param securityToken The security token entered byt the user
+    * @param callback The method to be invoked when the server response is received
+    */
+    UFUNCTION(BlueprintCallable, meta = (BlueprintInternalUseOnly = "true"), Category = "BrainCloud|Wrapper")
+    static UBCWrapperProxy *AuthenticateSettopHandoff(UBrainCloudWrapper *brainCloudWrapper, FString handoffCode);
+
+
   /*
      * Smart Switch Authenticate will logout of the current profile, and switch to the new authentication type.
      * In event the current session was previously an anonymous account, the smart switch will delete that profile.

@@ -132,6 +132,20 @@ UBCWrapperProxy *UBCWrapperProxy::AuthenticateUniversal(UBrainCloudWrapper *brai
 	return Proxy;
 }
 
+UBCWrapperProxy *UBCWrapperProxy::AuthenticateHandoff(UBrainCloudWrapper *brainCloudWrapper, FString handoffId, FString securityToken, bool forceCreate)
+{
+	UBCWrapperProxy *Proxy = NewObject<UBCWrapperProxy>();
+	UBCWrapperProxy::GetBrainCloudInstance(brainCloudWrapper)->authenticateHandoff(handoffId, securityToken, forceCreate, Proxy);
+	return Proxy;
+}
+
+UBCWrapperProxy *UBCWrapperProxy::AuthenticateSettopHandoff(UBrainCloudWrapper *brainCloudWrapper, FString handoffCode)
+{
+	UBCWrapperProxy *Proxy = NewObject<UBCWrapperProxy>();
+	UBCWrapperProxy::GetBrainCloudInstance(brainCloudWrapper)->authenticateSettopHandoff(handoffCode, Proxy);
+	return Proxy;
+}
+
 UBCWrapperProxy *UBCWrapperProxy::SmartSwitchAuthenticateEmailPassword(UBrainCloudWrapper *brainCloudWrapper, const FString &email, const FString &password, bool forceCreate)
 {
 	UBCWrapperProxy *Proxy = NewObject<UBCWrapperProxy>();

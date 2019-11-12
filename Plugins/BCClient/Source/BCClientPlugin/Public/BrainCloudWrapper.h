@@ -222,6 +222,30 @@ class BCCLIENTPLUGIN_API UBrainCloudWrapper : public UObject, public IServerCall
      */
     void authenticateUniversal(FString userid, FString password, bool forceCreate, IServerCallback *callback = nullptr);
 
+  /*
+    * Authenticate the user using a handoffId and a token 
+    *
+    * Service Name - Authenticate
+    * Service Operation - Authenticate
+    *
+    * @param handoffId braincloud handoff id generated from cloud script
+    * @param securityToken The security token entered byt the user
+    * @param callback The method to be invoked when the server response is received
+    */
+  void authenticateHandoff(FString &handoffId, FString &securityToken, bool forceCreate, IServerCallback *callback = nullptr);
+
+    /*
+    * Authenticate the user using a handoffCode and a token 
+    *
+    * Service Name - Authenticate
+    * Service Operation - Authenticate
+    *
+    * @param handoffId braincloud handoff code generated from cloud script
+    * @param securityToken The security token entered byt the user
+    * @param callback The method to be invoked when the server response is received
+    */
+  void authenticateSettopHandoff(FString &handoffCode, IServerCallback *callback = nullptr);
+
     /*
      * Smart Switch Authenticate will logout of the current profile, and switch to the new authentication type.
      * In event the current session was previously an anonymous account, the smart switch will delete that profile.
