@@ -172,6 +172,19 @@ public:
     */
   void authenticateHandoff(const FString &handoffId, const FString &securityToken, bool forceCreate, IServerCallback *callback);
 
+    /*
+    * Authenticate the user using a handoffCode and a token 
+    *
+    * Service Name - Authenticate
+    * Service Operation - Authenticate
+    *
+    * @param handoffId braincloud handoff code generated from cloud script
+    * @param securityToken The security token entered byt the user
+    * @param callback The method to be invoked when the server response is received
+    */
+  void authenticateSettopHandoff(const FString &handoffCode, IServerCallback *callback);
+  ////////////////////////////////////////////////////////////this/////////////////////////////////////////////////////////////////////
+
   /**
     * Authenticate the user via cloud code (which in turn validates the supplied credentials against an external system).
     * This allows the developer to extend brainCloud authentication to support other backend authentication systems.

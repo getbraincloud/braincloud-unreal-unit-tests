@@ -42,6 +42,13 @@ UBCGroupProxy *UBCGroupProxy::AutoJoinGroup(UBrainCloudWrapper *brainCloudWrappe
     return Proxy;
 }
 
+UBCGroupProxy *UBCGroupProxy::AutoJoinGroupMulti(UBrainCloudWrapper *brainCloudWrapper, const TArray<FString> &groupTypes, EAutoJoinStrategy autoJoinStrategy, const FString &dataQueryJson)
+{
+    UBCGroupProxy *Proxy = NewObject<UBCGroupProxy>();
+    UBCWrapperProxy::GetBrainCloudInstance(brainCloudWrapper)->getGroupService()->autoJoinGroupMulti(groupTypes, autoJoinStrategy, dataQueryJson, Proxy);
+    return Proxy;
+}
+
 UBCGroupProxy *UBCGroupProxy::CancelGroupInvitation(UBrainCloudWrapper *brainCloudWrapper, const FString &groupId, const FString &profileId)
 {
     UBCGroupProxy *Proxy = NewObject<UBCGroupProxy>();

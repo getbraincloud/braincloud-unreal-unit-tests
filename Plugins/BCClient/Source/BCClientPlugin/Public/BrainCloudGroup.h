@@ -79,6 +79,19 @@ class BCCLIENTPLUGIN_API BrainCloudGroup
 	*/
     void autoJoinGroup(const FString &groupType, EAutoJoinStrategy autoJoinStrategy, const FString &dataQueryJson, IServerCallback *callback = nullptr);
 
+        /**
+	* Automatically join an open group that matches the search criteria and has space available.
+	*
+	* Service Name - group
+	* Service Operation - AUTO_JOIN_GROUP_MULTI
+	*
+	* @param groupType Name of the associated group type.
+	* @param autoJoinStrategy Selection strategy to employ when there are multiple matches
+	* @param dataQueryJson Query parameters (optional)
+	* @param callback The method to be invoked when the server response is received
+	*/
+    void autoJoinGroupMulti(const TArray<FString> &groupType, EAutoJoinStrategy autoJoinStrategy, const FString &dataQueryJson, IServerCallback *callback = nullptr);
+
     /**
      * Cancel an outstanding invitation to the group.
      *

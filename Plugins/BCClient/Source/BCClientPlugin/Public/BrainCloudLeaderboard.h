@@ -366,6 +366,27 @@ class BCCLIENTPLUGIN_API BrainCloudLeaderboard
 	*/
 	void postScoreToGroupLeaderboard(const FString &leaderboardId, const FString &groupId, int32 score, const FString &jsonOtherData, IServerCallback *callback = nullptr);
 	
+		/**
+	* Post the group score to the given group leaderboard and dynamically create if necessary. LeaderboardType, rotationType, rotationReset, and retainedCount are required.
+	*
+	* Service Name - leaderboard
+	* Service Operation - POST_GROUP_SCORE
+	*
+	* @param in_leaderboardId A collection of leaderboardIds to retrieve scores from
+	* @param in_groupId the groups Id
+	* @param in_score the score you wish to post
+	* @param rotationType Type of rotation
+	* @param rotationStart Date to start rotation calculations (Date is converted to "dd-mm-yyyy" format)
+	* @param retainedCount How many rotations to keep
+	* @param callback The method to be invoked when the server response is received
+	* @param in_jsonData extra json Data
+	* @param in_callback The method to be invoked when the server response is received
+	*/
+	void postScoreToDynamicGroupLeaderboard(const FString &leaderboardId, const FString &groupId, int32 score, const FString &jsonOtherData,ESocialLeaderboardType leaderboardType, ERotationType rotationType, const FDateTime &rotationStart, int32 retainedCount, IServerCallback *callback = nullptr);
+
+	//void postScoreToDynamicLeaderboard(const FString &leaderboardId, int32 score, const FString &jsonData,
+									   //ESocialLeaderboardType leaderboardType, ERotationType rotationType, const FDateTime &rotationStart, int32 retainedCount, IServerCallback *callback = nullptr);
+
 	/**
 	* Removes score from group leaderboard
 	*
