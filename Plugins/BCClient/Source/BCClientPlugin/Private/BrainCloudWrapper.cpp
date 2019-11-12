@@ -174,6 +174,20 @@ void UBrainCloudWrapper::authenticateUniversal(FString userid, FString password,
     _client->getAuthenticationService()->authenticateUniversal(userid, password, forceCreate, this);
 }
 
+void UBrainCloudWrapper::authenticateHandoff(FString &handoffId, FString &securityToken, bool forceCreate, IServerCallback *callback)
+{
+    _authenticateCallback = callback;
+    initializeIdentity();
+    _client->getAuthenticationService()->authenticateHandoff(handoffId, securityToken, forceCreate, this);
+}
+
+void UBrainCloudWrapper::authenticateSettopHandoff(FString &handoffCode, IServerCallback *callback)
+{
+    _authenticateCallback = callback;
+    initializeIdentity();
+    _client->getAuthenticationService()->authenticateSettopHandoff(handoffCode, this);
+}
+
 void UBrainCloudWrapper::smartSwitchAuthenticateEmailPassword(const FString &in_email, const FString &in_password, bool in_forceCreate, IServerCallback *in_callback)
 {
     SmartSwitchAuthenticateCallback *smartCallback = new SmartSwitchAuthenticateCallback(this, EBCAuthType::Email, in_email, in_password, in_forceCreate, in_callback);

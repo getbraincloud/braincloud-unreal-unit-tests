@@ -116,6 +116,7 @@ class BCCLIENTPLUGIN_API BrainCloudGamification
     void achievementAwardedCallback(ServiceName serviceName, ServiceOperation serviceOperation, const TCHAR *jsonData);
 
     /**
+    * @deprecated 
     * Resets the specified milestones' statuses to LOCKED.
     *
     * Service Name - Gamification
@@ -124,7 +125,6 @@ class BCCLIENTPLUGIN_API BrainCloudGamification
     * @param milestoneIds List of milestones to reset
     * @param callback Method to be invoked when the server response is received.
     */
-    [[deprecated]]
     void resetMilestones(const TArray<FString> &milestoneIds, IServerCallback *callback);
 
     /**
