@@ -23,19 +23,12 @@ set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH}
 if (UNIX AND NOT APPLE AND NOT ANDROID)
     set(LINUX 1)
 endif()
-if (WIN32 AND MSVC AND MSVC_VERSION)
-    if (MSVC_VERSION LESS 1800)
-        set(VS2013_OR_HIGHER 0)
-    else()
-        set(VS2013_OR_HIGHER 1)
-    endif()
-endif()
 
 #=============================================================================
 # CMake options
 #=============================================================================
-option(USE_CPPREST "Use CPPREST instead of CURL (Ignored in VS2013+)" OFF)
 option(BUILD_TESTS "brainCloud Unit Tests" OFF)
+option(USE_CURL "Force use libCurl on Win32" OFF)
 
 #=============================================================================
 # Definitions
@@ -54,20 +47,6 @@ if (UWP)
     endif()
 endif()
 
-# On VS2013+, lets not use CURL but straight Windows' IXMLHttpRequest2, 
-# unless specified otherwise
-if (NOT USE_CPPREST AND NOT VS2013_OR_HIGHER AND NOT APPLE)
-    add_definitions(-DUSE_CURL)
-    set(USE_CURL 1)
-endif()
-
-# On VS2013+, lets not use CURL but straight Windows' IXMLHttpRequest2, 
-# unless specified otherwise
-if (NOT USE_CPPREST AND NOT VS2013_OR_HIGHER AND NOT APPLE)
-    add_definitions(-DUSE_PTHREAD)
-    set(USE_PTHREAD 1)
-endif()
-
 # lets use libwebsockets by default
 if (NOT UWP AND NOT ANDROID)
     set(USE_LIBWEBSOCKETS 1)
@@ -76,10 +55,8 @@ endif()
 #=============================================================================
 # Compiler flags
 #=============================================================================
-# We want to use C++11 flag on the compiler for std::thread
-if (NOT WIN32 OR VS2013_OR_HIGHER)
-    set(CMAKE_CXX_STANDARD 11)
-endif()
+# We want to use C++11 flag on the compiler
+set(CMAKE_CXX_STANDARD 11)
 
 #=============================================================================
 # Unit Tests
@@ -91,7 +68,6 @@ endif()
 #=============================================================================
 # Braincloud client
 #=============================================================================
-
 set (BC_DIR "${PROJECT_SOURCE_DIR}")
 set (OS_SPECIFIC_SRCS "")
 set (OS_SPECIFIC_INCS "")
@@ -99,102 +75,107 @@ set (OS_SPECIFIC_INCS "")
 file(GLOB_RECURSE JSONCPP_FILES "${BC_DIR}/lib/jsoncpp-1.0.0/*.*")
 
 # HTTP related files
-if (WIN32 AND ${USE_CPPREST})
+if (APPLE)
     list(APPEND OS_SPECIFIC_INCS
-        "include/braincloud/internal/win/CppRestBrainCloudComms.h"
-        "include/braincloud/internal/win/CppRestFileUploader.h"
-        "include/braincloud/internal/win/MD5.h")
+        "include/braincloud/internal/apple/nsFileUploader.h"
+        "include/braincloud/internal/apple/nsPinger.h"
+        "include/braincloud/internal/apple/nsURLLoader.h")
     list(APPEND OS_SPECIFIC_SRCS
-        "src/win/CppRestBrainCloudComms.cpp"
-        "src/win/CppRestFileUploader.cpp"
-        "src/win/MD5.cpp")
-elseif (USE_CURL)
-    list(APPEND OS_SPECIFIC_INCS 
-        "include/braincloud/internal/DefaultBrainCloudComms.h"
-        "include/braincloud/internal/nix/cURLFileUploader.h"
-        "include/braincloud/internal/nix/cURLLoader.h")
-    list(APPEND OS_SPECIFIC_SRCS 
-        "src/DefaultBrainCloudComms.cpp"
-        "src/nix/cURLFileUploader.cpp"
-        "src/nix/cURLLoader.cpp")
-elseif (VS2013_OR_HIGHER)
+        "src/apple/nsFileUploader.mm"
+        "src/apple/nsPinger.mm"
+        "src/apple/nsURLLoader.mm")
+elseif (MSVC AND NOT USE_CURL)
     list(APPEND OS_SPECIFIC_INCS
-        "include/braincloud/internal/DefaultBrainCloudComms.h"
         "include/braincloud/internal/win/XMLHTTPRequestCallback.h"
         "include/braincloud/internal/win/XMLHTTPRequestFileUploader.h"
-        "include/braincloud/internal/win/XMLHTTPRequestLoader.h")
+        "include/braincloud/internal/win/XMLHTTPRequestLoader.h"
+        "include/braincloud/internal/win/XMLHTTPRequestPinger.h")
     list(APPEND OS_SPECIFIC_SRCS
-        "src/DefaultBrainCloudComms.cpp"
         "src/win/XMLHTTPRequestCallback.cpp"
         "src/win/XMLHTTPRequestFileUploader.cpp"
-        "src/win/XMLHTTPRequestLoader.cpp")
+        "src/win/XMLHTTPRequestLoader.cpp"
+        "src/win/XMLHTTPRequestPinger.cpp")
 else()
-    list(APPEND OS_SPECIFIC_INCS
-        "include/braincloud/internal/DefaultBrainCloudComms.h")
-    list(APPEND OS_SPECIFIC_SRCS "src/DefaultBrainCloudComms.cpp")
+    list(APPEND OS_SPECIFIC_INCS 
+        "include/braincloud/internal/nix/cURLFileUploader.h"
+        "include/braincloud/internal/nix/cURLLoader.h"
+        "include/braincloud/internal/nix/cURLPinger.h")
+    list(APPEND OS_SPECIFIC_SRCS 
+        "src/nix/cURLFileUploader.cpp"
+        "src/nix/cURLLoader.cpp"
+        "src/nix/cURLPinger.cpp")
 endif()
 
+# Sockets
 if (USE_LIBWEBSOCKETS OR ANDROID)
     list(APPEND OS_SPECIFIC_INCS
         "include/braincloud/internal/DefaultWebSocket.h")
+    list(APPEND OS_SPECIFIC_SRCS "src/DefaultWebSocket.cpp")
+endif()
+if (WIN32)
+    list(APPEND OS_SPECIFIC_SRCS "src/win/Win32TCPSocket.cpp")
+    if (UWP)
+        list(APPEND OS_SPECIFIC_INCS
+            "include/braincloud/internal/win/UWPWebSocket.h")
+        list(APPEND OS_SPECIFIC_SRCS "src/win/UWPWebSocket.cpp")
+    endif()
+else()
+    list(APPEND OS_SPECIFIC_SRCS "src/DefaultTCPSocket.cpp")
+endif()
+
+# Guid
+if (APPLE)
+    list(APPEND OS_SPECIFIC_SRCS "src/apple/GUID.mm")
+elseif (WIN32)
+    list(APPEND OS_SPECIFIC_SRCS "src/win/WindowsGUID.cpp")
+elseif (LINUX)
+    list(APPEND OS_SPECIFIC_SRCS "src/nix/LinuxGUID.cpp")
+else()
+    list(APPEND OS_SPECIFIC_SRCS "src/DefaultGUID.cpp")
+endif()
+
+# Save data helper
+if (APPLE)
+    list(APPEND OS_SPECIFIC_INCS
+        "include/braincloud/internal/apple/AppleSaveDataHelper.h")
+    list(APPEND OS_SPECIFIC_SRCS "src/apple/AppleSaveDataHelper.mm")
+elseif (WIN32)
+    list(APPEND OS_SPECIFIC_INCS
+        "include/braincloud/internal/win/WindowsSaveDataHelper.h")
+    list(APPEND OS_SPECIFIC_SRCS "src/win/WindowsSaveDataHelper.cpp")
+else()
     list(APPEND OS_SPECIFIC_SRCS
-        "src/DefaultWebSocket.cpp")
+        "include/braincloud/internal/DefaultSaveDataHelper.h"
+        "src/DefaultSaveDataHelper.cpp")
+endif()
+
+# Device
+if (APPLE)
+    list(APPEND OS_SPECIFIC_SRCS "src/apple/AppleDevice.cpp")
+elseif (WIN32)
+    list(APPEND OS_SPECIFIC_SRCS "src/win/WindowsDevice.cpp")
+elseif (LINUX)
+    list(APPEND OS_SPECIFIC_SRCS "src/nix/LinuxDevice.cpp")
+elseif (ANDROID)
+    list(APPEND OS_SPECIFIC_SRCS "src/android/AndroidDevice.cpp")
 endif()
 
 # other platform specific srcs/includes
 if (APPLE)
-    list(APPEND OS_SPECIFIC_INCS
-        "include/braincloud/internal/apple/AppleSaveDataHelper.h"
-        "include/braincloud/internal/apple/nsFileUploader.h"
-        "include/braincloud/internal/apple/nsURLLoader.h")
     list(APPEND OS_SPECIFIC_SRCS
-        "src/apple/GUID.mm"
-        "src/apple/nsFileUploader.mm"
-        "src/apple/nsURLLoader.mm"
-        "src/apple/AppleSaveDataHelper.mm"
         "lib/apple/sskeychain/SSKeychain/SSKeychain.m"
-        "lib/apple/sskeychain/SSKeychain/SSKeychainQuery.m"
-        "src/apple/AppleDevice.cpp"
-        "src/DefaultTCPSocket.cpp")
+        "lib/apple/sskeychain/SSKeychain/SSKeychainQuery.m")
     include_directories("${BC_DIR}/lib/apple/sskeychain")
 elseif (WIN32)
-    list(APPEND OS_SPECIFIC_INCS
-        "include/braincloud/internal/win/WindowsSaveDataHelper.h")
-    list(APPEND OS_SPECIFIC_SRCS
-        "src/win/Win32TCPSocket.cpp"
-        "src/win/WindowsDevice.cpp"
-        "src/win/WindowsGUID.cpp"
-        "src/win/WindowsSaveDataHelper.cpp")
     if (UWP)
         list(APPEND OS_SPECIFIC_INCS
-            "include/braincloud/internal/win/UWPWebSocket.h"
             "include/braincloud/internal/win/MD5.h")
-        list(APPEND OS_SPECIFIC_SRCS
-            "src/win/UWPWebSocket.cpp"
-            "src/win/MD5.cpp")
+        list(APPEND OS_SPECIFIC_SRCS "src/win/MD5.cpp")
     endif()
-elseif (LINUX)
-    list(APPEND OS_SPECIFIC_SRCS
-        "include/braincloud/internal/DefaultSaveDataHelper.h"
-        "src/DefaultSaveDataHelper.cpp"
-        "src/DefaultTCPSocket.cpp"
-        "src/nix/LinuxDevice.cpp"
-        "src/nix/LinuxGUID.cpp")
 elseif (ANDROID)
     list(APPEND OS_SPECIFIC_SRCS
-        "include/braincloud/internal/DefaultSaveDataHelper.h"
         "include/braincloud/internal/android/com_bitheads_braincloud_AndroidBridge.h"
-        "src/DefaultSaveDataHelper.cpp"
-        "src/DefaultTCPSocket.cpp"
-        "src/android/AndroidDevice.cpp"
-        "src/android/com_bitheads_braincloud_AndroidBridge.cpp"
-        "src/DefaultGUID.cpp")
-else()
-    list(APPEND OS_SPECIFIC_SRCS
-        "include/braincloud/internal/DefaultSaveDataHelper.h"
-        "src/DefaultGUID.cpp"
-        "src/DefaultSaveDataHelper.cpp"
-        "src/DefaultTCPSocket.cpp")
+        "src/android/com_bitheads_braincloud_AndroidBridge.cpp")
 endif()
 
 if (NOT UWP)
@@ -267,7 +248,9 @@ add_library(brainCloud STATIC
     include/braincloud/internal/GUID.h
     include/braincloud/internal/IBrainCloudComms.h
     include/braincloud/internal/IFileUploader.h
+    include/braincloud/internal/IPinger.h
     include/braincloud/internal/ITCPSocket.h
+    include/braincloud/internal/DefaultBrainCloudComms.h
     include/braincloud/internal/JsonUtil.h
     include/braincloud/internal/RTTComms.h
     include/braincloud/internal/SaveDataHelper.h
@@ -327,6 +310,7 @@ add_library(brainCloud STATIC
     src/BrainCloudUserItems.cpp
     src/BrainCloudVirtualCurrency.cpp
     src/BrainCloudWrapper.cpp
+    src/DefaultBrainCloudComms.cpp
     src/FriendPlatform.cpp
     src/GUID.cpp
     src/IBrainCloudComms.cpp
@@ -406,57 +390,28 @@ elseif (ANDROID)
         ${ZLIB_LIBRARIES}
     )
 elseif (WIN32)
-    if (${USE_CPPREST})
-        # TODO: the cpprestsdk-static is *not* built by the CMake project.
-        # You will need to manually load up the project and build the 
-        # various libs
+    if (USE_CURL)
         include_directories(
-            "${BC_DIR}/lib/win32/cpprestsdk-static/Release/include")
-        add_definitions(-D_NO_ASYNCRTIMP -DUSE_NEW_COMMS)
-        find_library(BC_CPPREST_RELEASE_LIB cpprest120_2_0.lib
-            "${BC_DIR}/lib/win32/cpprestsdk-static/Binaries/Win32/Release")
-        find_library(BC_CPPREST_DEBUG_LIB cpprest120d_2_0.lib
-            "${BC_DIR}/lib/win32/cpprestsdk-static/Binaries/Win32/Debug")
+            "${BC_DIR}/lib/win32/pthread-w32-2-8-0/Pre-built.2/include")
 
-        # additional libs required by cpprestsdk
-        set(WIN_PLATFORM_DIR
-            "C:/Program Files (x86)/Windows Kits/8.1/Lib/winv6.3/um/x86")
-        find_library(BC_WINHTTP_LIB winhttp.lib ${WIN_PLATFORM_DIR})
-        find_library(BC_BCRYPT_LIB bcrypt.lib ${WIN_PLATFORM_DIR})
-        find_library(BC_CRYPT32_LIB crypt32.lib ${WIN_PLATFORM_DIR})
+        add_definitions(-DWIN32 -D_LIB -DPTW32_STATIC_LIB)
+        find_library(BC_PTHREADW32_LIB pthreadVCE2
+            "${BC_DIR}/lib/win32/pthread-w32-2-8-0/Pre-built.2/lib")
 
+        add_definitions(-DCURL_STATICLIB)
+        include_directories("${BC_DIR}/lib/win32/curl-7.44.0/include")
+        find_library(BC_CURL_LIB_RELEASE libcurl_a.lib
+            "${BC_DIR}/lib/win32/curl-7.44.0/lib")
+        find_library(BC_CURL_LIB_DEBUG libcurl_a_debug.lib
+            "${BC_DIR}/lib/win32/curl-7.44.0/lib")
         list(APPEND libs general
-            ${BC_WINHTTP_LIB}
-            ${BC_BCRYPT_LIB}
-            ${BC_CRYPT32_LIB}
-            debug ${BC_CPPREST_DEBUG_LIB}
-            optimized ${BC_CPPREST_RELEASE_LIB})
+            ${Socket_LIBRARIES}
+            ${BC_PTHREADW32_LIB}
+            optimized ${BC_CURL_LIB_RELEASE}
+            debug ${BC_CURL_LIB_DEBUG})
     else()
-        if (VS2013_OR_HIGHER)
-            find_package(Socket)
-            list(APPEND libs
-                msxml6
-                ${Socket_LIBRARIES})
-        else()
-            include_directories(
-                "${BC_DIR}/lib/win32/pthread-w32-2-8-0/Pre-built.2/include")
-
-            add_definitions(-DWIN32 -D_LIB -DPTW32_STATIC_LIB)
-            find_library(BC_PTHREADW32_LIB pthreadVCE2
-                "${BC_DIR}/lib/win32/pthread-w32-2-8-0/Pre-built.2/lib")
-
-            add_definitions(-DCURL_STATICLIB)
-            include_directories("${BC_DIR}/lib/win32/curl-7.44.0/include")
-            find_library(BC_CURL_LIB_RELEASE libcurl_a.lib
-                "${BC_DIR}/lib/win32/curl-7.44.0/lib")
-            find_library(BC_CURL_LIB_DEBUG libcurl_a_debug.lib
-                "${BC_DIR}/lib/win32/curl-7.44.0/lib")
-            list(APPEND libs general
-                ${Socket_LIBRARIES}
-                ${BC_PTHREADW32_LIB}
-                optimized ${BC_CURL_LIB_RELEASE}
-                debug ${BC_CURL_LIB_DEBUG})
-        endif()
+        find_package(Socket)
+        list(APPEND libs msxml6 ${Socket_LIBRARIES})
     endif()
 endif()
 

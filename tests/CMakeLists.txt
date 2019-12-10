@@ -1,4 +1,8 @@
-cmake_minimum_required (VERSION 3.16.0)
+if (MSVC)
+    cmake_minimum_required (VERSION 3.16.0)
+else()
+    cmake_minimum_required (VERSION 3.10.0)
+endif()
 
 project (brainCloudUnitTest)
 
