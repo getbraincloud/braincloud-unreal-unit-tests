@@ -8,8 +8,6 @@
 
 #include "braincloud/internal/IPinger.h"
 
-#include <msxml6.h>
-
 namespace BrainCloud
 {
     class XMLHTTPRequestPinger final : public IPinger

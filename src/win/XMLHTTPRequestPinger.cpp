@@ -1,6 +1,8 @@
 #include "braincloud/internal/win/XMLHTTPRequestCallback.h"
 #include "braincloud/internal/win/XMLHTTPRequestPinger.h"
 
+#include <msxml6.h>
+
 #include <condition_variable>
 #include <chrono>
 #include <codecvt>
@@ -21,7 +23,6 @@ namespace BrainCloud
     }
 
     XMLHTTPRequestPinger::XMLHTTPRequestPinger()
-        : _pRequest(nullptr)
     {
     }
 
