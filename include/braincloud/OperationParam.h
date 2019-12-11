@@ -405,6 +405,7 @@ namespace BrainCloud {
 
 		//lobby
 		static const OperationParam LobbyType;
+		static const OperationParam LobbyTypes;
 		static const OperationParam Rating;
 		static const OperationParam OtherUserCxIds;
 		static const OperationParam IsReady;
@@ -418,6 +419,7 @@ namespace BrainCloud {
 		static const OperationParam CxId;
 		static const OperationParam SignalData;
 		static const OperationParam ToTeamCode;
+		static const OperationParam PingData;
 
 		//messaging
 		static const OperationParam MessagingMsgbox;

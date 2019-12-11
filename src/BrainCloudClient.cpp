@@ -234,6 +234,7 @@ namespace BrainCloud
     void BrainCloudClient::runCallbacks()
     {
         _brainCloudComms->runCallbacks();
+        _lobbyService->runPingCallbacks();
         _rttComms->runCallbacks();
     }
 
@@ -290,6 +291,7 @@ namespace BrainCloud
     void BrainCloudClient::enableLogging(bool shouldEnable)
     {
         _brainCloudComms->enableLogging(shouldEnable);
+        _lobbyService->enableLogging(shouldEnable);
         _rttComms->enableLogging(shouldEnable);
     }
 
