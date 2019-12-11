@@ -399,6 +399,7 @@ namespace BrainCloud
 
 	//lobby
 	const OperationParam OperationParam::LobbyType = OperationParam("lobbyType");
+	const OperationParam OperationParam::LobbyTypes = OperationParam("lobbyTypes");
 	const OperationParam OperationParam::Rating = OperationParam("rating");
 	const OperationParam OperationParam::OtherUserCxIds = OperationParam("otherUserCxIds");
 	const OperationParam OperationParam::IsReady = OperationParam("isReady");
@@ -412,6 +413,7 @@ namespace BrainCloud
 	const OperationParam OperationParam::CxId = OperationParam("cxId");
 	const OperationParam OperationParam::SignalData = OperationParam("signalData");
 	const OperationParam OperationParam::ToTeamCode = OperationParam("toTeamCode");
+	const OperationParam OperationParam::PingData = OperationParam("pingData");
 
 	//messaging
 	const OperationParam OperationParam::MessagingMsgbox = OperationParam("msgbox");
@@ -433,7 +435,7 @@ namespace BrainCloud
 	const OperationParam OperationParam::PresenceVisible = OperationParam("visible");
 	const OperationParam OperationParam::PresenceActivity = OperationParam("activity");
 
-    //appstore
+	//appstore
 	const OperationParam OperationParam::AppStoreStoreId = OperationParam("storeId");
 	const OperationParam OperationParam::AppStoreReceiptData = OperationParam("receiptData");
 	const OperationParam OperationParam::AppStorePriceInfoCriteria = OperationParam("priceInfoCriteria");
@@ -443,11 +445,11 @@ namespace BrainCloud
 	const OperationParam OperationParam::AppStoreTransactionId = OperationParam("transactionId");
 	const OperationParam OperationParam::AppStoreTransactionData = OperationParam("transactionData");
 
-    //item catalog
+	//item catalog
 	const OperationParam OperationParam::ItemCatalogServiceDefId = OperationParam("defId");
 	const OperationParam OperationParam::ItemCatalogServiceContext = OperationParam("context");
 	const OperationParam OperationParam::ItemCatalogServicePageOffset = OperationParam("pageOffset");
-    //UserItems
+	//UserItems
 	const OperationParam OperationParam::UserItemsServiceDefId = OperationParam("defId");
 	const OperationParam OperationParam::UserItemsServiceQuantity = OperationParam("quantity");
 	const OperationParam OperationParam::UserItemsServiceIncludeDef = OperationParam("includeDef");

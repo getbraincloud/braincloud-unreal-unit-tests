@@ -402,12 +402,18 @@ namespace BrainCloud {
 		static const ServiceOperation UpdateChatMessage;
 
 		//lobby
+		static const ServiceOperation GetRegionsForLobbies;
+		static const ServiceOperation PingRegions;
 		static const ServiceOperation CreateLobby;
+		static const ServiceOperation CreateLobbyWithPingData;
 		static const ServiceOperation FindLobby;
+		static const ServiceOperation FindLobbyWithPingData;
 		static const ServiceOperation FindOrCreateLobby;
+		static const ServiceOperation FindOrCreateLobbyWithPingData;
 		static const ServiceOperation GetLobbyData;
 		static const ServiceOperation LeaveLobby;
 		static const ServiceOperation JoinLobby;
+		static const ServiceOperation JoinLobbyWithPingData;
 		static const ServiceOperation RemoveMember;
 		static const ServiceOperation SendSignal;
 		static const ServiceOperation SwitchTeam;

@@ -132,3 +132,48 @@ TEST_F(TestBCLobby, CancelFindRequest)
 	//40653 is cxId must belong to caller
 	tr.runExpectFail(m_bc, HTTP_BAD_REQUEST, 40653);
 }
+
+// We include all tests regarding pings in there
+TEST_F(TestBCLobby, PingRegions)
+{
+    TestResult tr;
+
+    std::vector<std::string> otherUserCxIds;
+
+    // Test trying to call a function <>withPingData without having fetched pings
+    m_bc->getLobbyService()->findOrCreateLobbyWithPingData("MATCH_UNRANKED", 0, 1, "{\"strategy\":\"ranged-absolute\",\"alignment\":\"center\",\"ranges\":[1000]}", "{}", otherUserCxIds, "{}", true, "{}", "all", &tr);
+    tr.runExpectFail(m_bc, HTTP_BAD_REQUEST, MISSING_REQUIRED_PARAMETER);
+
+    // Fetch pings
+    m_bc->getLobbyService()->getRegionsForLobbies({ "MATCH_UNRANKED" }, & tr);
+    tr.run(m_bc);
+
+    // Ping regions 2 times to make sure we see in the log there's no caching happening and that they don't all end up at 0 on the second or third time
+    m_bc->getLobbyService()->pingRegions(&tr);
+    tr.run(m_bc);
+    m_bc->getLobbyService()->pingRegions(&tr);
+    tr.run(m_bc);
+    auto pingData = m_bc->getLobbyService()->getPingData();
+    int total = 0;
+    for (auto kv : pingData)
+    {
+        total += kv.second;
+    }
+    if (total == 0)
+    {
+        EXPECT_TRUE(false);
+    }
+
+    // Call all the <>WithPingData functions and make sure they go through braincloud
+    m_bc->getLobbyService()->findOrCreateLobbyWithPingData("MATCH_UNRANKED", 0, 1, "{\"strategy\":\"ranged-absolute\",\"alignment\":\"center\",\"ranges\":[1000]}", "{}", otherUserCxIds, "{}", true, "{}", "all", &tr);
+    tr.run(m_bc);
+
+    m_bc->getLobbyService()->findLobbyWithPingData("MATCH_UNRANKED", 0, 1, "{\"strategy\":\"ranged-absolute\",\"alignment\":\"center\",\"ranges\":[1000]}", "{}", otherUserCxIds, true, "{}", "all", &tr);
+    tr.run(m_bc);
+
+    m_bc->getLobbyService()->createLobbyWithPingData("MATCH_UNRANKED", 0, otherUserCxIds, true, "{}", "all", "{}", &tr);
+    tr.run(m_bc);
+
+    m_bc->getLobbyService()->joinLobbyWithPingData("wrongLobbyId", true, "{}", "red", otherUserCxIds, &tr);
+    tr.runExpectFail(m_bc, HTTP_BAD_REQUEST, LOBBY_NOT_FOUND);
+}
