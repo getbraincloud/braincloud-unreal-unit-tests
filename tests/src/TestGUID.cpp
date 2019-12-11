@@ -4,22 +4,18 @@
 
 void validateGUID(const std::string& guid)
 {
-    EXPECT_EQ(guid.size(), 36);
-    for (int i = 0; i < 36; ++i)
+    int count = 0;
+    for (auto c : guid)
     {
-        char c = guid[i];
-        if (i == 8 ||
-            i == 13 ||
-            i == 18 ||
-            i == 23)
+        if (c == '-') continue;
+        if ((c >= '0' && c <= '9') ||
+            (c >= 'A' && c <= 'F') ||
+            (c >= 'a' && c <= 'f'))
         {
-            EXPECT_EQ('-', c);
-        }
-        else
-        {
-            EXPECT_TRUE((c >= 'a' && c <= 'f') || (c >= '0' && c <= '9'));
+            count++;
         }
     }
+    EXPECT_EQ(count, 32);
 }
 
 TEST_F(TestGUID, GenerateGUID)
@@ -28,20 +24,24 @@ TEST_F(TestGUID, GenerateGUID)
     std::string prevGuid;
     
     guid = BrainCloud::GUID::generateGUID();
+    std::cout << guid << std::endl;
     validateGUID(guid);
     prevGuid = guid;
 
     guid = BrainCloud::GUID::generateGUID();
+    std::cout << guid << std::endl;
     EXPECT_NE(guid, prevGuid);
     validateGUID(guid);
     prevGuid = guid;
 
     guid = BrainCloud::GUID::generateGUID();
+    std::cout << guid << std::endl;
     EXPECT_NE(guid, prevGuid);
     validateGUID(guid);
     prevGuid = guid;
 
     guid = BrainCloud::GUID::generateGUID();
+    std::cout << guid << std::endl;
     EXPECT_NE(guid, prevGuid);
     validateGUID(guid);
 }
