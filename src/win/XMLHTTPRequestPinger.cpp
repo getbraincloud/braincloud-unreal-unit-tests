@@ -17,7 +17,7 @@ static std::wstring utf8ToUtf16(const std::string& utf8)
 
 namespace BrainCloud
 {
-    IPinger* IPinger::create()
+    IPinger* IPinger::create(BrainCloudClient* pClient)
     {
         return new XMLHTTPRequestPinger();
     }
