@@ -5,10 +5,12 @@
 
 namespace BrainCloud
 {
+    class BrainCloudClient;
+    
     class IPinger
     {
     public:
-        static IPinger* create();
+        static IPinger* create(BrainCloudClient* pClient);
 
         virtual ~IPinger() {}
 

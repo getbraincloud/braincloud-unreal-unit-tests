@@ -121,15 +121,15 @@ namespace BrainCloud
 	class ActivePing final
 	{
 	public:
-		ActivePing(std::string region, std::string url, std::mutex* pMutex, std::condition_variable* pCondition)
+		ActivePing(std::string region, std::string url, std::mutex* pMutex, std::condition_variable* pCondition, BrainCloudClient* pClient)
 			: m_region(region)
 		{
 			m_ping = -1; // -1 means it's still going
 
-			std::thread thread([this, url, pMutex, pCondition]
+			std::thread thread([this, url, pMutex, pCondition, pClient]
 			{
 				// Create our cross-platform pinger helper
-				auto pPinger = std::unique_ptr<IPinger>(IPinger::create());
+				auto pPinger = std::unique_ptr<IPinger>(IPinger::create(pClient));
 
 				// Ping as many times as required (MAX_PING_CALLS)
 				std::vector<int> pings;
@@ -196,7 +196,7 @@ namespace BrainCloud
 					auto regionName = it->first;
 					auto regionURL = it->second;
 					regionsToPing.erase(it);
-					activePings.push_back(std::make_shared<ActivePing>(regionName, regionURL, &m_mutex, &m_condition));
+					activePings.push_back(std::make_shared<ActivePing>(regionName, regionURL, &m_mutex, &m_condition, m_pBrainCloudLobby->m_client));
 				}
 
 				// Check for completed active pings

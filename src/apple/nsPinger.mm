@@ -8,7 +8,7 @@
 
 namespace BrainCloud
 {
-    IPinger* IPinger::create()
+    IPinger* IPinger::create(BrainCloudClient* pClient)
     {
         return new nsPinger();
     }
