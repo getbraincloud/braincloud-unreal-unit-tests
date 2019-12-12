@@ -44,6 +44,7 @@ void BrainCloudCustomEntity::getCount(const FString &entityType, const FString &
     _client->sendRequest(sc);
 }
 
+//deprecated
 void BrainCloudCustomEntity::getPage(const FString &entityType, int rowsPerPage, const FString &searchJson, const FString &sortJson, bool doCount, IServerCallback *callback)
 {
     TSharedRef<FJsonObject> message = MakeShareable(new FJsonObject());
@@ -57,6 +58,17 @@ void BrainCloudCustomEntity::getPage(const FString &entityType, int rowsPerPage,
     _client->sendRequest(sc);
 }
 
+void BrainCloudCustomEntity::getEntityPage(const FString &entityType, const FString &context, IServerCallback *callback)
+{
+    TSharedRef<FJsonObject> message = MakeShareable(new FJsonObject());
+    message->SetStringField(OperationParam::CustomEntityServiceEntityType.getValue(), entityType);
+    message->SetObjectField(OperationParam::CustomEntityServiceContext.getValue(), JsonUtil::jsonStringToValue(context));
+
+    ServerCall *sc = new ServerCall(ServiceName::CustomEntity, ServiceOperation::CustomEntityGetEntityPage, message, callback);
+    _client->sendRequest(sc);
+}
+
+//deprecated
 void BrainCloudCustomEntity::getPageOffset(const FString &entityType, const FString &context, int pageOffset, IServerCallback *callback)
 {
     TSharedRef<FJsonObject> message = MakeShareable(new FJsonObject());
@@ -65,6 +77,17 @@ void BrainCloudCustomEntity::getPageOffset(const FString &entityType, const FStr
     message->SetNumberField(OperationParam::CustomEntityServicePageOffset.getValue(), pageOffset);
 
     ServerCall *sc = new ServerCall(ServiceName::CustomEntity, ServiceOperation::CustomEntityGetPageOffset, message, callback);
+    _client->sendRequest(sc);
+}
+
+void BrainCloudCustomEntity::getEntityPageOffset(const FString &entityType, const FString &context, int pageOffset, IServerCallback *callback)
+{
+    TSharedRef<FJsonObject> message = MakeShareable(new FJsonObject());
+    message->SetStringField(OperationParam::CustomEntityServiceEntityType.getValue(), entityType);
+    message->SetStringField(OperationParam::CustomEntityServiceContext.getValue(), context);
+    message->SetNumberField(OperationParam::CustomEntityServicePageOffset.getValue(), pageOffset);
+
+    ServerCall *sc = new ServerCall(ServiceName::CustomEntity, ServiceOperation::CustomEntityGetEntityPageOffset, message, callback);
     _client->sendRequest(sc);
 }
 

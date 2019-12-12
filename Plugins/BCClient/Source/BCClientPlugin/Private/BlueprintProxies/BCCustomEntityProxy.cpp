@@ -41,10 +41,24 @@ UBCCustomEntityProxy *UBCCustomEntityProxy::GetPage(UBrainCloudWrapper *brainClo
     return Proxy;
 }
 
+UBCCustomEntityProxy *UBCCustomEntityProxy::GetEntityPage(UBrainCloudWrapper *brainCloudWrapper, const FString &entityType, const FString &context)
+{
+    UBCCustomEntityProxy *Proxy = NewObject<UBCCustomEntityProxy>();
+    UBCWrapperProxy::GetBrainCloudInstance(brainCloudWrapper)->getCustomEntityService()->getEntityPage(entityType, context, Proxy);
+    return Proxy;
+}
+
 UBCCustomEntityProxy *UBCCustomEntityProxy::GetPageOffset(UBrainCloudWrapper *brainCloudWrapper, const FString &entityType, const FString &context, int pageOffset)
 {
     UBCCustomEntityProxy *Proxy = NewObject<UBCCustomEntityProxy>();
     UBCWrapperProxy::GetBrainCloudInstance(brainCloudWrapper)->getCustomEntityService()->getPageOffset(entityType, context, pageOffset, Proxy);
+    return Proxy;
+}
+
+UBCCustomEntityProxy *UBCCustomEntityProxy::GetEntityPageOffset(UBrainCloudWrapper *brainCloudWrapper, const FString &entityType, const FString &context, int pageOffset)
+{
+    UBCCustomEntityProxy *Proxy = NewObject<UBCCustomEntityProxy>();
+    UBCWrapperProxy::GetBrainCloudInstance(brainCloudWrapper)->getCustomEntityService()->getEntityPageOffset(entityType, context, pageOffset, Proxy);
     return Proxy;
 }
 
