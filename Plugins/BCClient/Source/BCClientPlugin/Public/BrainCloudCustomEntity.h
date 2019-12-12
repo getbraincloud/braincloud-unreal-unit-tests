@@ -63,7 +63,22 @@ public:
      * @param doCount whether to count
      * @param callback The method to be invoked when the server response is received
      */
+    /**
+    * @deprecated Use getEntityPage instead
+    */
   void getPage(const FString &entityType, int rowsPerPage, const FString &searchJson, const FString &sortJson, bool doCount, IServerCallback *callback);
+
+    /**
+     * Retrieves first page of custom entities from the server based on the custom entity type and specified query context
+     *
+     * Service Name - CustomEntity
+     * Service Operation - GetEntityPage
+     *
+     * @param entityType The entity type as defined by the user
+     * @param context
+     * @param callback The method to be invoked when the server response is received
+     */
+  void getEntityPage(const FString &entityType, const FString &context, IServerCallback *callback);
 
     /**
      * Gets the page of custom entities from the server based on the encoded context and specified page offset.
@@ -76,7 +91,23 @@ public:
      * @param pageOffset number
      * @param callback The method to be invoked when the server response is received
      */
+    /**
+    * @deprecated Use getEntityPageOffset instead
+    */
   void getPageOffset(const FString &entityType, const FString &context, int pageOffset, IServerCallback *callback);
+
+    /**
+     * Gets the page of custom entities from the server based on the encoded context and specified page offset.
+     * 
+     * Service Name - CustomEntity
+     * Service Operation - GetEntityPageOffset
+     *
+     * @param entityType The entity type as defined by the user
+     * @param context the page context
+     * @param pageOffset number
+     * @param callback The method to be invoked when the server response is received
+     */
+  void getEntityPageOffset(const FString &entityType, const FString &context, int pageOffset, IServerCallback *callback);
 
     /**
      * Reads a custom entity.
@@ -85,7 +116,7 @@ public:
      * Service Operation - ReadEntity
      *
      * @param entityType The entity type as defined by the user
-     * @param entityId
+     * @param entityId 
      * @param callback The method to be invoked when the server response is received
      */
   void readEntity(const FString &entityType, const FString &entityId, IServerCallback *callback);
