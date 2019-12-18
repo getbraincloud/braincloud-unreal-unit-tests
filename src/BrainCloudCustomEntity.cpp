@@ -78,7 +78,7 @@ namespace BrainCloud
 		ServerCall * sc = new ServerCall(ServiceName::CustomEntity, ServiceOperation::GetCustomEntityPage, message, in_callback);
 		m_client->sendRequest(sc);
 	}
-
+  
 	void BrainCloudCustomEntity::getEntityPageOffset(const char * in_entityType, const std::string& in_context, int32_t in_pageOffset, IServerCallback * in_callback)
 	{
 		Json::Value message;

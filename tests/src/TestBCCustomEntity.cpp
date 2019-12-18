@@ -27,7 +27,6 @@ TEST_F(TestBCCustomEntity, CreateCustomEntity)
 
 TEST_F(TestBCCustomEntity, GetEntityPage)
 {
-	//GenerateDefaultEntites(25);
 	TestResult tr;
     Json::Value context;
 	Json::FastWriter fw;
@@ -152,28 +151,6 @@ TEST_F(TestBCCustomEntity, DeleteEntity)
 	m_bc->getCustomEntityService()->deleteEntity(m_entityType, id.c_str(), "{\"test\": \"Testing\"}", 1, &tr2);
 	tr2.run(m_bc);
 }
-
-// void TestBCCustomEntity::GenerateDefaultEntites(int numToGenerate)
-// {
-//     TestResult tr;
-
-//     Json::FastWriter fw;
-//     Json::Value searchType;
-//     searchType["entityType"] = m_entityType;
-//     std::string searchTypeStr = fw.write(searchType);
-
-//     m_bc->getGlobalEntityService()->getListCount(searchTypeStr, &tr);
-//     tr.run(m_bc);
-
-//     numToGenerate -= tr.m_response["data"]["entityListCount"].asInt();
-
-//     if (numToGenerate <= 0) return;
-
-//     for (int i = 0; i < numToGenerate; i++) {
-//         CreateDefaultGlobalEntity("");
-//     }
-// }
-
 
 
 

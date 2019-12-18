@@ -450,6 +450,7 @@ namespace BrainCloud
 	const OperationParam OperationParam::ItemCatalogServiceContext = OperationParam("context");
 	const OperationParam OperationParam::ItemCatalogServicePageOffset = OperationParam("pageOffset");
 	//UserItems
+  
 	const OperationParam OperationParam::UserItemsServiceDefId = OperationParam("defId");
 	const OperationParam OperationParam::UserItemsServiceQuantity = OperationParam("quantity");
 	const OperationParam OperationParam::UserItemsServiceIncludeDef = OperationParam("includeDef");
