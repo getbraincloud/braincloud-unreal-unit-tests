@@ -151,7 +151,3 @@ TEST_F(TestBCCustomEntity, DeleteEntity)
 	m_bc->getCustomEntityService()->deleteEntity(m_entityType, id.c_str(), "{\"test\": \"Testing\"}", 1, &tr2);
 	tr2.run(m_bc);
 }
-
-
-
-
