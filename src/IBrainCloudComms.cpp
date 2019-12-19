@@ -147,8 +147,9 @@ namespace BrainCloud {
 	{
 		_packetTimeouts.clear();
 		_packetTimeouts.push_back(15);
-		_packetTimeouts.push_back(10);
-		_packetTimeouts.push_back(10);
+		_packetTimeouts.push_back(20);
+		_packetTimeouts.push_back(35);
+		_packetTimeouts.push_back(50);
 	}
 
 	void IBrainCloudComms::setAuthenticationPacketTimeout(int in_timeoutSecs)

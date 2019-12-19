@@ -28,9 +28,13 @@ TEST_F(TestBCCustomEntity, CreateCustomEntity)
 TEST_F(TestBCCustomEntity, GetEntityPage)
 {
 	TestResult tr;
-
+    Json::Value context;
 	Json::FastWriter fw;
-	m_bc->getCustomEntityService()->getEntityPage(m_entityType, 20, "{\"data.position\": \"defense\"}", "{\"createdAt\": 1 }", false, &tr);
+
+	context["pagination"]["rowsPerPage"] = 15;
+    context["pagination"]["pageNumber"] = 1;
+
+	m_bc->getCustomEntityService()->getEntityPage(m_entityType, fw.write(context).c_str(), &tr);
 	tr.run(m_bc);
 }
 
@@ -147,8 +151,3 @@ TEST_F(TestBCCustomEntity, DeleteEntity)
 	m_bc->getCustomEntityService()->deleteEntity(m_entityType, id.c_str(), "{\"test\": \"Testing\"}", 1, &tr2);
 	tr2.run(m_bc);
 }
-
-
-
-
-

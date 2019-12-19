@@ -1,4 +1,8 @@
-cmake_minimum_required (VERSION 3.0)
+if (MSVC)
+    cmake_minimum_required (VERSION 3.16.0)
+else()
+    cmake_minimum_required (VERSION 3.10.0)
+endif()
 
 project (brainCloudUnitTest)
 
@@ -8,7 +12,7 @@ endif()
 
 # Multi core compilation in VS
 if (MSVC)
-    SET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS}" "/MP")
+    SET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS}" "/MP /FS") # Issue with VS2019. Things don't build if generated from cmake without the /FS flag
 endif()
 
 ################################

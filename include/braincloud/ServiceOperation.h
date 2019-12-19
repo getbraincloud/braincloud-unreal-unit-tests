@@ -117,6 +117,7 @@ namespace BrainCloud {
 		static const ServiceOperation GetGroupSocialLeaderboard;
 		static const ServiceOperation GetGroupSocialLeaderboardByVersion;
 		static const ServiceOperation PostScoreToGroupLeaderboard;
+		static const ServiceOperation PostScoreToDynamicGroupLeaderboard;
 		static const ServiceOperation RemoveGroupScore;
 		static const ServiceOperation GetGroupLeaderboardView;
 		static const ServiceOperation GetSummaryDataForProfileId;
@@ -302,6 +303,7 @@ namespace BrainCloud {
 		static const ServiceOperation AddGroupMember;
 		static const ServiceOperation ApproveGroupJoinRequest;
 		static const ServiceOperation AutoJoinGroup;
+		static const ServiceOperation AutoJoinGroupMulti;
 		static const ServiceOperation CancelGroupInvitation;
 		static const ServiceOperation CreateGroup;
 		static const ServiceOperation CreateGroupEntity;
@@ -382,6 +384,8 @@ namespace BrainCloud {
 		static const ServiceOperation UpdateEntity;
 		static const ServiceOperation UpdateEntityFields;
 		static const ServiceOperation GetEntityPage;
+		static const ServiceOperation GetCustomEntityPage;
+
 		static const ServiceOperation GetEntityPageOffset;
 
 		//rtt Registration
@@ -400,12 +404,18 @@ namespace BrainCloud {
 		static const ServiceOperation UpdateChatMessage;
 
 		//lobby
+		static const ServiceOperation GetRegionsForLobbies;
+		static const ServiceOperation PingRegions;
 		static const ServiceOperation CreateLobby;
+		static const ServiceOperation CreateLobbyWithPingData;
 		static const ServiceOperation FindLobby;
+		static const ServiceOperation FindLobbyWithPingData;
 		static const ServiceOperation FindOrCreateLobby;
+		static const ServiceOperation FindOrCreateLobbyWithPingData;
 		static const ServiceOperation GetLobbyData;
 		static const ServiceOperation LeaveLobby;
 		static const ServiceOperation JoinLobby;
+		static const ServiceOperation JoinLobbyWithPingData;
 		static const ServiceOperation RemoveMember;
 		static const ServiceOperation SendSignal;
 		static const ServiceOperation SwitchTeam;

@@ -149,9 +149,13 @@ TEST_F(TestBCEntity, UpdateSingleton)
 
 	entityData["address"] = "1309a Carling Ave, Ottawa ON";
 	m_bc->getEntityService()->updateSingleton(m_entityType, fw.write(entityData), "", -1, &tr);
-	tr.run(m_bc);
+	if (tr.run(m_bc))
+	{
+		m_entityId = tr.m_response["data"]["entityId"].asString();
+		ASSERT_NE("", m_entityId);
+	}
 
-	DeleteEntity();
+	DeleteEntity(m_entityId);
 }
 
 TEST_F(TestBCEntity, GetList)

@@ -66,6 +66,20 @@ namespace BrainCloud
 		ServerCall * sc = new ServerCall(ServiceName::Group, ServiceOperation::AutoJoinGroup, message, in_callback);
 		m_client->getBrainCloudComms()->addToQueue(sc);
 	}
+	
+	void BrainCloudGroup::autoJoinGroupMulti(const std::vector<std::string>& in_groupTypes, eAutoJoinStrategy::Strategy in_autoJoinStrategy, std::string in_where, IServerCallback* in_callback)
+	{
+		Json::Value message;
+		message[OperationParam::GroupTypes.getValue()] = JsonUtil::stringVectorToJson(in_groupTypes);
+		message[OperationParam::GroupAutoJoinStrategy.getValue()] = autoJoinStrategyToString(in_autoJoinStrategy);
+
+		if (StringUtil::IsOptionalParameterValid(in_where))
+			message[OperationParam::GroupWhere.getValue()] = JsonUtil::jsonStringToValue(in_where);
+
+		ServerCall * sc = new ServerCall(ServiceName::Group, ServiceOperation::AutoJoinGroupMulti, message, in_callback);
+		m_client->getBrainCloudComms()->addToQueue(sc);
+	}
+
 
 	void BrainCloudGroup::cancelGroupInvitation(const char * in_groupId, const char * in_profileId, IServerCallback * in_callback)
 	{

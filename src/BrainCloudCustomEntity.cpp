@@ -65,6 +65,20 @@ namespace BrainCloud
 		m_client->sendRequest(sc);
 	}
 
+	void BrainCloudCustomEntity::getEntityPage(const char * in_entityType, const char * in_context, IServerCallback * in_callback)
+	{
+		Json::Value message;
+		Json::Reader reader;
+
+		message[OperationParam::CustomEntityServiceEntityType.getValue()] = in_entityType;
+		Json::Value parsedContext;
+		reader.parse(in_context, parsedContext);
+		message[OperationParam::CustomEntityServiceContext.getValue()] = parsedContext;
+
+		ServerCall * sc = new ServerCall(ServiceName::CustomEntity, ServiceOperation::GetCustomEntityPage, message, in_callback);
+		m_client->sendRequest(sc);
+	}
+  
 	void BrainCloudCustomEntity::getEntityPageOffset(const char * in_entityType, const std::string& in_context, int32_t in_pageOffset, IServerCallback * in_callback)
 	{
 		Json::Value message;

@@ -110,6 +110,7 @@ namespace BrainCloud
 	const ServiceOperation ServiceOperation::GetGroupSocialLeaderboard = ServiceOperation("GET_GROUP_SOCIAL_LEADERBOARD");
 	const ServiceOperation ServiceOperation::GetGroupSocialLeaderboardByVersion = ServiceOperation("GET_GROUP_SOCIAL_LEADERBOARD_BY_VERSION");
 	const ServiceOperation ServiceOperation::PostScoreToGroupLeaderboard = ServiceOperation("POST_GROUP_SCORE");
+	const ServiceOperation ServiceOperation::PostScoreToDynamicGroupLeaderboard = ServiceOperation("POST_GROUP_SCORE_DYNAMIC");
 	const ServiceOperation ServiceOperation::RemoveGroupScore = ServiceOperation("REMOVE_GROUP_SCORE");
 	const ServiceOperation ServiceOperation::GetGroupLeaderboardView = ServiceOperation("GET_GROUP_LEADERBOARD_VIEW");
 	const ServiceOperation ServiceOperation::GetSummaryDataForProfileId = ServiceOperation("GET_SUMMARY_DATA_FOR_PROFILE_ID");
@@ -285,6 +286,7 @@ namespace BrainCloud
 	const ServiceOperation ServiceOperation::AddGroupMember = ServiceOperation("ADD_GROUP_MEMBER");
 	const ServiceOperation ServiceOperation::ApproveGroupJoinRequest = ServiceOperation("APPROVE_GROUP_JOIN_REQUEST");
 	const ServiceOperation ServiceOperation::AutoJoinGroup = ServiceOperation("AUTO_JOIN_GROUP");
+	const ServiceOperation ServiceOperation::AutoJoinGroupMulti = ServiceOperation("AUTO_JOIN_GROUP_MULTI");
 	const ServiceOperation ServiceOperation::CancelGroupInvitation = ServiceOperation("CANCEL_GROUP_INVITATION");
 	const ServiceOperation ServiceOperation::CreateGroup = ServiceOperation("CREATE_GROUP");
 	const ServiceOperation ServiceOperation::CreateGroupEntity = ServiceOperation("CREATE_GROUP_ENTITY");
@@ -352,12 +354,18 @@ namespace BrainCloud
 	const ServiceOperation ServiceOperation::UpdateChatMessage = ServiceOperation("UPDATE_CHAT_MESSAGE");
 
 	//lobby
+	const ServiceOperation ServiceOperation::GetRegionsForLobbies = ServiceOperation("GET_REGIONS_FOR_LOBBIES");
+	const ServiceOperation ServiceOperation::PingRegions = ServiceOperation("PING_REGIONS");
 	const ServiceOperation ServiceOperation::CreateLobby = ServiceOperation("CREATE_LOBBY");
+	const ServiceOperation ServiceOperation::CreateLobbyWithPingData = ServiceOperation("CREATE_LOBBY_WITH_PING_DATA");
 	const ServiceOperation ServiceOperation::FindLobby = ServiceOperation("FIND_LOBBY");
+	const ServiceOperation ServiceOperation::FindLobbyWithPingData = ServiceOperation("FIND_LOBBY_WITH_PING_DATA");
 	const ServiceOperation ServiceOperation::FindOrCreateLobby = ServiceOperation("FIND_OR_CREATE_LOBBY");
+	const ServiceOperation ServiceOperation::FindOrCreateLobbyWithPingData = ServiceOperation("FIND_OR_CREATE_LOBBY_WITH_PING_DATA");
 	const ServiceOperation ServiceOperation::GetLobbyData = ServiceOperation("GET_LOBBY_DATA");
 	const ServiceOperation ServiceOperation::LeaveLobby = ServiceOperation("LEAVE_LOBBY");
 	const ServiceOperation ServiceOperation::JoinLobby = ServiceOperation("JOIN_LOBBY");
+	const ServiceOperation ServiceOperation::JoinLobbyWithPingData = ServiceOperation("JOIN_LOBBY_WITH_PING_DATA");
 	const ServiceOperation ServiceOperation::RemoveMember = ServiceOperation("REMOVE_MEMBER");
 	const ServiceOperation ServiceOperation::SendSignal = ServiceOperation("SEND_SIGNAL");
 	const ServiceOperation ServiceOperation::SwitchTeam = ServiceOperation("SWITCH_TEAM");
@@ -430,7 +438,8 @@ namespace BrainCloud
 	const ServiceOperation ServiceOperation::UpdateEntity = ServiceOperation("UPDATE_ENTITY");
 	const ServiceOperation ServiceOperation::UpdateEntityFields = ServiceOperation("UPDATE_ENTITY_FIELDS");
 	const ServiceOperation ServiceOperation::GetEntityPage = ServiceOperation("GET_PAGE");
-	const ServiceOperation ServiceOperation::GetEntityPageOffset = ServiceOperation("GET_PAGE_BY_OFFSET");
+	const ServiceOperation ServiceOperation::GetCustomEntityPage = ServiceOperation("GET_ENTITY_PAGE");
+	const ServiceOperation ServiceOperation::GetEntityPageOffset = ServiceOperation("GET_ENTITY_PAGE_OFFSET");
 
 	const ServiceOperation ServiceOperation::SubmitCrashReport = ServiceOperation("SEND_CRASH_REPORT");
 

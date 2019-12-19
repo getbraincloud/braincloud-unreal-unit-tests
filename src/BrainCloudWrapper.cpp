@@ -225,7 +225,23 @@ namespace BrainCloud {
         client->getAuthenticationService()->authenticateUniversal(in_userid, in_password, in_forceCreate, this);
     }
 
+    void BrainCloudWrapper::authenticateHandoff(const char * in_handoffId, const char * in_securityToken, IServerCallback * in_callback)
+    {
+        m_authenticateCallback = in_callback;
 
+        initializeIdentity();
+
+        client->getAuthenticationService()->authenticateHandoff(in_handoffId, in_securityToken, in_callback);
+    }
+
+	void BrainCloudWrapper::authenticateSettopHandoff(const char * in_handoffCode, IServerCallback * in_callback)
+    {
+        m_authenticateCallback = in_callback;
+
+        initializeIdentity();
+
+        client->getAuthenticationService()->authenticateSettopHandoff(in_handoffCode, in_callback);
+    }
 
 	/**
 	*	Callbacks used for the smart switches
