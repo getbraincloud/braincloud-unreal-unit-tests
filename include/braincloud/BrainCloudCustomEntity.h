@@ -73,6 +73,7 @@ namespace BrainCloud {
 
 		//Deprecated use overload with in_entityType, and in_context
 		void getEntityPage(const char * in_entityType, int32_t in_rowsPerPage, const std::string& in_searchJson, const std::string& in_sortJson, bool in_doCount, IServerCallback * in_callback = NULL);
+		 /**
 		 * Method uses a paging system to iterate through Custom Entities
 		 * After retrieving a page of Custom Entities with this method,
 		 * use GetEntityPageOffset() to retrieve previous or next pages.
