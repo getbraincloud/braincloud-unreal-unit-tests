@@ -19,7 +19,7 @@ public class BCBlueprintSupport : ModuleRules
         PrivatePCHHeaderFile = "Private/BCBlueprintSupportPrivatePCH.h";
 
         MinFilesUsingPrecompiledHeaderOverride = 1;
-        bFasterWithoutUnity = true;
+        bUseUnity=true;
 
         PrivateDependencyModuleNames.AddRange(
             new string[] { 
