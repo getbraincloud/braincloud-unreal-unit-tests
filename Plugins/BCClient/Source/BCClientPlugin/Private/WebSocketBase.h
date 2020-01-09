@@ -52,8 +52,8 @@ ref class FUWPSocketHelper sealed
   private:
 	int64 Parent;
 };
-
-#elif PLATFORM_HTML5
+#if ENGINE_MINOR_VERSION <24
+#if PLATFORM_HTML5
 #include "Tickable.h"
 
 extern "C"
@@ -99,6 +99,8 @@ class FHtml5SocketHelper : public FTickableGameObject
   private:
 	UWebSocketBase *mHostWebSocket;
 };
+#endif
+#endif
 
 #else
 struct lws_context;
@@ -149,11 +151,14 @@ class BCCLIENTPLUGIN_API UWebSocketBase : public UObject
 	Windows::Networking::Sockets::MessageWebSocket ^ messageWebSocket;
 	Windows::Storage::Streams::DataWriter ^ messageWriter;
 	FUWPSocketHelper ^ uwpSocketHelper;
-#elif PLATFORM_HTML5
+#if ENGINE_MINOR_VERSION <24	
+#if PLATFORM_HTML5
 	int mWebSocketRef;
 	bool mConnectSuccess;
 	bool mIsError;
 	FHtml5SocketHelper mHtml5SocketHelper;
+	#endif
+	#endif
 #else
 	struct lws_context *mlwsContext;
 	struct lws *mlws;
