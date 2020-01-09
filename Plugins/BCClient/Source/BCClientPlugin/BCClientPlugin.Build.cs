@@ -4,7 +4,6 @@ using System.Collections.Generic;
 using System;
 using System.IO;
 using UnrealBuildTool;
-
 public class BCClientPlugin : ModuleRules
 {
     private string ModulePath
@@ -49,11 +48,6 @@ public class BCClientPlugin : ModuleRules
             PrivateDependencyModuleNames.Add("zlib");
             PublicDependencyModuleNames.Add("libWebSockets");
         }
-        else if (Target.Platform == UnrealTargetPlatform.HTML5)
-        {
-            PublicLibraryPaths.Add(Path.Combine(ModulePath, "ThirdParty/lib/HTML5"));
-            PublicAdditionalLibraries.Add(Path.Combine(ModulePath,"ThirdParty/lib/HTML5/WebSocket.js"));
-        }
         else if (Target.Platform == UnrealTargetPlatform.Mac)
         {           
             PublicDependencyModuleNames.Add("libWebSockets");
@@ -70,5 +64,12 @@ public class BCClientPlugin : ModuleRules
         {
             PublicDependencyModuleNames.Add("libWebSockets");
         }
+        //PublicAdditionalLibraries.pu
+        // else
+        // {
+            
+        //     PublicLibraryPaths.Add(Path.Combine(ModulePath, "ThirdParty/lib/HTML5"));
+        //     PublicAdditionalLibraries.Add(Path.Combine(ModulePath,"ThirdParty/lib/HTML5/WebSocket.js"));
+        // }
     }
 }
