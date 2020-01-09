@@ -25,11 +25,11 @@
     _callback = callback;
 
     NSString* url = [NSString stringWithUTF8String:address.c_str()];
-    auto pos = address.find_first_of(':');
+    auto pos = address.find_first_of(':', 6);
     if (pos == std::string::npos)
     {
         pos = std::min<size_t>(address.size(), address.find_first_of('?'));
-        url = [NSString stringWithFormat:@"%s%i%s", address.substr(0, pos).c_str(), port, address.substr(pos).c_str()];
+        url = [NSString stringWithFormat:@"%s:%i%s", address.substr(0, pos).c_str(), port, address.substr(pos).c_str()];
     }
     
     _webSocket = [[SRWebSocket alloc] initWithURL:[NSURL URLWithString:url]];
