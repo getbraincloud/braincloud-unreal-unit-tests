@@ -22,9 +22,13 @@
 #include <iostream>
 #include "WebSocketBase.h"
 #include "BrainCloudRelay.h"
+#include "Runtime/Launch/Resources/Version.h"
 
 #if PLATFORM_UWP
-#elif PLATFORM_HTML5
+#if ENGINE_MINOR_VERSION <24
+ #if PLATFORM_HTML5
+ #endif
+ #endif
 #else
 #define UI UI_ST
 THIRD_PARTY_INCLUDES_START
@@ -80,7 +84,8 @@ void FUWPSocketHelper::OnUWPClosed(Windows::Networking::Sockets::IWebSocket ^ se
 		p->OnUWPClosed(sender, args);
 	}
 }
-#elif PLATFORM_HTML5
+#if ENGINE_MINOR_VERSION <24
+#if PLATFORM_HTML5
 
 void FHtml5SocketHelper::Tick(float DeltaTime)
 {
@@ -146,6 +151,8 @@ TStatId FHtml5SocketHelper::GetStatId() const
 {
 	return TStatId();
 }
+#endif
+#endif
 
 #endif
 
@@ -155,10 +162,13 @@ UWebSocketBase::UWebSocketBase()
 	messageWebSocket = nullptr;
 	uwpSocketHelper = ref new FUWPSocketHelper();
 	uwpSocketHelper->SetParent((int64)this);
-#elif PLATFORM_HTML5
+#if ENGINE_MINOR_VERSION <24
+#if PLATFORM_HTML5
 	mWebSocketRef = -1;
 	mConnectSuccess = false;
 	mIsError = false;
+	#endif
+	#endif
 
 #else
 	mlwsContext = nullptr;
@@ -179,8 +189,11 @@ void UWebSocketBase::BeginDestroy()
 		delete messageWebSocket;
 		messageWebSocket = nullptr;
 	}
-#elif PLATFORM_HTML5
-	mHtml5SocketHelper.UnBind();
+#if ENGINE_MINOR_VERSION <24
+#if PLATFORM_HTML5
+mHtml5SocketHelper.UnBind();
+#endif
+#endif
 #else
 	if (mlws != nullptr)
 	{
@@ -334,10 +347,13 @@ void UWebSocketBase::Connect(const FString &uri, const TMap<FString, FString> &h
 				}
 			}));
 	});
-#elif PLATFORM_HTML5
+	#if ENGINE_MINOR_VERSION <24
+#if PLATFORM_HTML5
 	mHtml5SocketHelper.Bind(this);
 	std::string strUrl = TCHAR_TO_ANSI(*uri);
 	mWebSocketRef = SocketCreate(strUrl.c_str());
+	#endif
+	#endif
 
 #else
 
@@ -432,11 +448,13 @@ bool UWebSocketBase::SendText(const FString &data)
 	bSentMessage = true;
 	SendAsync(ref new String(*data)).then([this]() {
 	});
-
-#elif PLATFORM_HTML5
+#if ENGINE_MINOR_VERSION <24
+#if PLATFORM_HTML5
 	std::string strData = TCHAR_TO_ANSI(*data);
 	SocketSend(mWebSocketRef, strData.c_str(), (int)strData.size());
 	bSentMessage = true;
+	#endif
+	#endif
 #else
 	if (data.Len() > MAX_ECHO_PAYLOAD)
 	{
@@ -465,11 +483,14 @@ bool UWebSocketBase::SendData(const TArray<uint8> &data)
 	bSentMessage = true;
 	SendAsyncData(data.GetData()).then([this]() {
 	});
-#elif PLATFORM_HTML5
+	#if ENGINE_MINOR_VERSION <24
+#if PLATFORM_HTML5
 	FString parsedMessage = BrainCloudRelay::BCBytesToString(data.GetData(), data.Num());
 	std::string strData = TCHAR_TO_ANSI(*parsedMessage);
 	SocketSend(mWebSocketRef, strData.c_str(), (int)strData.size());
 	bSentMessage = true;
+	#endif
+	#endif
 #else
 	if (sizeOfData > MAX_ECHO_PAYLOAD)
 	{
@@ -493,7 +514,10 @@ bool UWebSocketBase::SendData(const TArray<uint8> &data)
 void UWebSocketBase::ProcessWriteable()
 {
 #if PLATFORM_UWP
-#elif PLATFORM_HTML5
+#if ENGINE_MINOR_VERSION <24
+#if PLATFORM_HTML5
+#endif
+#endif
 #else
 	// write data
 	int location = LWS_PRE;
@@ -563,7 +587,10 @@ void UWebSocketBase::ProcessRead(const char *in, int len)
 bool UWebSocketBase::ProcessHeader(unsigned char **p, unsigned char *end)
 {
 #if PLATFORM_UWP
-#elif PLATFORM_HTML5
+#if ENGINE_MINOR_VERSION <24
+#if PLATFORM_HTML5
+#endif
+#endif
 #else
 	if (mHeaderMap.Num() == 0)
 	{
@@ -593,10 +620,13 @@ void UWebSocketBase::Close()
 		delete messageWriter;
 		messageWriter = nullptr;
 	}
-#elif PLATFORM_HTML5
+	#if ENGINE_MINOR_VERSION <24
+#if PLATFORM_HTML5
 	SocketClose(mWebSocketRef);
 	mWebSocketRef = -1;
 	OnClosed.Broadcast();
+	#endif
+	#endif
 #else
 	if (mlws != nullptr)
 	{
@@ -611,7 +641,10 @@ void UWebSocketBase::Close()
 void UWebSocketBase::Cleanlws()
 {
 #if PLATFORM_UWP
-#elif PLATFORM_HTML5
+#if ENGINE_MINOR_VERSION <24
+#if PLATFORM_HTML5
+#endif
+#endif
 #else
 	if (mlws != nullptr)
 	{
