@@ -7,7 +7,6 @@ using System.Collections.Generic;
 using System;
 using System.IO;
 using UnrealBuildTool;
-
 public class BCClientPlugin : ModuleRules
 {
     private string ModulePath
@@ -69,6 +68,7 @@ public class BCClientPlugin : ModuleRules
             PublicDependencyModuleNames.Add("libWebSockets");
         }
 <<<<<<< HEAD
+<<<<<<< HEAD
     #if UE_4_24_OR_LATER
         else 
         {
@@ -97,5 +97,14 @@ public class BCClientPlugin : ModuleRules
             PublicAdditionalLibraries.Add(Path.Combine(ModulePath,"ThirdParty/lib/HTML5/WebSocket.js"));
         }
 >>>>>>> 6164133... last few fixes for UE4.24
+=======
+        //PublicAdditionalLibraries.pu
+        // else
+        // {
+            
+        //     PublicLibraryPaths.Add(Path.Combine(ModulePath, "ThirdParty/lib/HTML5"));
+        //     PublicAdditionalLibraries.Add(Path.Combine(ModulePath,"ThirdParty/lib/HTML5/WebSocket.js"));
+        // }
+>>>>>>> d1ada00... added a few more fixes on some warnings
     }
 }
