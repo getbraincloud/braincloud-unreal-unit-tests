@@ -64,12 +64,11 @@ public class BCClientPlugin : ModuleRules
         {
             PublicDependencyModuleNames.Add("libWebSockets");
         }
-        //PublicAdditionalLibraries.pu
-        // else
-        // {
+       else
+        {
             
-        //     PublicLibraryPaths.Add(Path.Combine(ModulePath, "ThirdParty/lib/HTML5"));
-        //     PublicAdditionalLibraries.Add(Path.Combine(ModulePath,"ThirdParty/lib/HTML5/WebSocket.js"));
-        // }
+            PublicLibraryPaths.Add(Path.Combine(ModulePath, "ThirdParty/lib/HTML5"));
+            PublicAdditionalLibraries.Add(Path.Combine(ModulePath,"ThirdParty/lib/HTML5/WebSocket.js"));
+        }
     }
 }
