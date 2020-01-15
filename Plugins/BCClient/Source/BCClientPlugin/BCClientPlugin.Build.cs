@@ -1,4 +1,7 @@
 // Copyright 2018 bitHeads, Inc. All Rights Reserved.
+#if !UE_4_24_OR_LATER
+#define EARLIER_THAN_4_23
+#endif
 
 using System.Collections.Generic;
 using System;
@@ -64,11 +67,25 @@ public class BCClientPlugin : ModuleRules
         {
             PublicDependencyModuleNames.Add("libWebSockets");
         }
-       else
+    #if UE_4_24_OR_LATER
+        else 
         {
-            
+            //PublicLibraryPaths.Add(Path.Combine(ModulePath, "ThirdParty/lib/HTML5"));
+            PublicAdditionalLibraries.Add(Path.Combine(ModulePath,"ThirdParty/lib/HTML5/WebSocket.js"));
+        }
+    #endif
+
+    #if EARLIER_THAN_4_23 
+    #if WITH_FORWARDED_MODULE_RULES_CTOR
+        
+        else if (Target.Platform ==UnrealTargetPlatform.HTML5)
+        {
             PublicLibraryPaths.Add(Path.Combine(ModulePath, "ThirdParty/lib/HTML5"));
             PublicAdditionalLibraries.Add(Path.Combine(ModulePath,"ThirdParty/lib/HTML5/WebSocket.js"));
         }
+    #endif
+    #endif
+
+
     }
 }
