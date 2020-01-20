@@ -9,6 +9,7 @@ namespace BrainCloud
     const AuthenticationType & AuthenticationType::GameCenter = AuthenticationType("GameCenter");
     const AuthenticationType & AuthenticationType::Steam = AuthenticationType("Steam");
     const AuthenticationType & AuthenticationType::Google = AuthenticationType("Google");
+    const AuthenticationType & AuthenticationType::GoogleOpenId = AuthenticationType("GoogleOpenId");
     const AuthenticationType & AuthenticationType::Twitter = AuthenticationType("Twitter");
     const AuthenticationType & AuthenticationType::Parse = AuthenticationType("Parse");
     const AuthenticationType & AuthenticationType::Handoff = AuthenticationType("Handoff");

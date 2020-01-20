@@ -139,12 +139,25 @@ namespace BrainCloud
 		* Service Name - Authenticate
 		* Service Operation - Authenticate
 		*
-		* @param in_userId  String representation of google+ userid (email)
-		* @param in_token  The authentication token derived via the google apis.
+		* @param in_googleUserId  String representation of google+ userid (email)
+		* @param in_serverAuthCode  The authentication token derived via the google apis.
 		* @param in_forceCreate Should a new profile be created for this user if the account does not exist?
 		* @param in_callback The method to be invoked when the server response is received
 		*/
-		void authenticateGoogle(const char * in_userId, const char * in_token, bool in_forceCreate, IServerCallback * in_callback = NULL);
+		void authenticateGoogle(const char * in_googleUserId, const char * in_serverAuthCode, bool in_forceCreate, IServerCallback * in_callback = NULL);
+
+		/*
+		* Authenticate the user using a google userid(email address) and google authentication token.
+		*
+		* Service Name - Authenticate
+		* Service Operation - Authenticate
+		*
+		* @param in_googleUserAccountEmail String representation of google+ userid (email)
+		* @param in_IdToken  The authentication token derived via the google apis.
+		* @param in_forceCreate Should a new profile be created for this user if the account does not exist?
+		* @param in_callback The method to be invoked when the server response is received
+		*/
+		void authenticateGoogleOpenId(const char * in_googleUserAccountEmail, const char * in_IdToken, bool in_forceCreate, IServerCallback * in_callback = NULL);
 
 		/*
 		 * Authenticate the user using a Twitter userid, authentication token, and secret from Twitter.

@@ -23,6 +23,7 @@ namespace BrainCloud
         static const AuthenticationType & GameCenter;
         static const AuthenticationType & Steam;
         static const AuthenticationType & Google;
+        static const AuthenticationType & GoogleOpenId;
         static const AuthenticationType & Twitter;
         static const AuthenticationType & Parse;
         static const AuthenticationType & Handoff;

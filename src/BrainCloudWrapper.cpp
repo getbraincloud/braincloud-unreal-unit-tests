@@ -189,13 +189,22 @@ namespace BrainCloud {
         client->getAuthenticationService()->authenticateGameCenter(in_gameCenterId, in_forceCreate, this);
     }
 
-    void BrainCloudWrapper::authenticateGoogle(const char * in_userid, const char * in_token, bool in_forceCreate, IServerCallback * in_callback)
+    void BrainCloudWrapper::authenticateGoogle(const char * in_googleUserId, const char * in_serverAuthCode, bool in_forceCreate, IServerCallback * in_callback)
     {
         m_authenticateCallback = in_callback;
 
         initializeIdentity();
 
-        client->getAuthenticationService()->authenticateGoogle(in_userid, in_token, in_forceCreate, this);
+        client->getAuthenticationService()->authenticateGoogle(in_googleUserId, in_serverAuthCode, in_forceCreate, this);
+    }
+
+    void BrainCloudWrapper::authenticateGoogleOpenId(const char * in_googleUserAccountEmail, const char * in_IdToken, bool in_forceCreate, IServerCallback * in_callback = NULL)
+    {
+        m_authenticateCallback = in_callback;
+
+        initializeIdentity();
+
+        client->getAuthenticationService()->authenticateGoogleOpenId(in_googleUserAccountEmail, in_IdToken, in_forceCreate, this);
     }
 
     void BrainCloudWrapper::authenticateSteam(const char * in_userid, const char * in_sessionticket, bool in_forceCreate, IServerCallback * in_callback)

@@ -76,9 +76,14 @@ namespace BrainCloud {
         authenticate(in_userid, in_sessionticket, AuthenticationType::Steam, NULL, in_forceCreate, in_callback);
     }
 
-    void BrainCloudAuthentication::authenticateGoogle(const char * in_userid, const char * in_token, bool in_forceCreate, IServerCallback * in_callback)
+    void BrainCloudAuthentication::authenticateGoogle(const char * in_googleUserId, const char * in_serverAuthToken, bool in_forceCreate, IServerCallback * in_callback)
     {
-        authenticate(in_userid, in_token, AuthenticationType::Google, NULL, in_forceCreate, in_callback);
+        authenticate(in_googleUserId, in_serverAuthToken, AuthenticationType::Google, NULL, in_forceCreate, in_callback);
+    }
+    
+    void BrainCloudAuthentication::authenticateGoogleOpenId(const char * in_googleUserAccountEmail, const char * in_IdToken, bool in_forceCreate, IServerCallback * in_callback)
+    {
+        authenticate(in_googleUserAccountEmail, in_IdToken, AuthenticationType::GoogleOpenId, NULL, in_forceCreate, in_callback);
     }
 
     void BrainCloudAuthentication::authenticateTwitter(const char * in_userid, const char * in_token, const char * in_secret, bool in_forceCreate, IServerCallback * in_callback)
