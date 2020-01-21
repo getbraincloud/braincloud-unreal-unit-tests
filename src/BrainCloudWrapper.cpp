@@ -207,7 +207,7 @@ namespace BrainCloud {
         client->getAuthenticationService()->authenticateGoogle(in_googleUserId, in_serverAuthCode, in_forceCreate, this);
     }
 
-    void BrainCloudWrapper::authenticateGoogleOpenId(const char * in_googleUserAccountEmail, const char * in_IdToken, bool in_forceCreate, IServerCallback * in_callback = NULL)
+    void BrainCloudWrapper::authenticateGoogleOpenId(const char * in_googleUserAccountEmail, const char * in_IdToken, bool in_forceCreate, IServerCallback * in_callback)
     {
         m_authenticateCallback = in_callback;
 
