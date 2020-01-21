@@ -8,6 +8,7 @@ namespace BrainCloud
     const AuthenticationType & AuthenticationType::Facebook = AuthenticationType("Facebook");
     const AuthenticationType & AuthenticationType::GameCenter = AuthenticationType("GameCenter");
     const AuthenticationType & AuthenticationType::Steam = AuthenticationType("Steam");
+    const AuthenticationType & AuthenticationType::Apple = AuthenticationType("Apple");
     const AuthenticationType & AuthenticationType::Google = AuthenticationType("Google");
     const AuthenticationType & AuthenticationType::GoogleOpenId = AuthenticationType("GoogleOpenId");
     const AuthenticationType & AuthenticationType::Twitter = AuthenticationType("Twitter");
@@ -54,9 +55,17 @@ namespace BrainCloud
         {
             return AuthenticationType::Steam;
         }
+        if (in_AuthenticationType == Apple)
+        {
+            return AuthenticationType::Apple;
+        }
         if (in_AuthenticationType == Google)
         {
             return AuthenticationType::Google;
+        }
+        if (in_AuthenticationType == GoogleOpenId)
+        {
+            return AuthenticationType::GoogleOpenId;
         }
         if (in_AuthenticationType == Twitter)
         {

@@ -215,6 +215,19 @@ namespace BrainCloud {
          */
         void authenticateGameCenter(const char * in_gameCenterId, bool in_forceCreate, IServerCallback * in_callback = NULL);
 
+		/*
+		* Authenticate the user using a google userid(email address) and google authentication token.
+		*
+		* Service Name - Authenticate
+		* Service Operation - Authenticate
+		*
+		* @param in_appleUserId  String of the apple accounts user Id OR email
+		* @param in_identityToken  The authentication token confirming users identity
+		* @param in_forceCreate Should a new profile be created for this user if the account does not exist?
+		* @param in_callback The method to be invoked when the server response is received
+		*/
+		void authenticateApple(const char * in_appleUserId, const char * in_identityToken, bool in_forceCreate, IServerCallback * in_callback = NULL);
+
         /*
          * Authenticate the user using a google userid(email address) and google authentication token.
          *

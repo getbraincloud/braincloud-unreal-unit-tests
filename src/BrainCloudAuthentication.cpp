@@ -76,6 +76,11 @@ namespace BrainCloud {
         authenticate(in_userid, in_sessionticket, AuthenticationType::Steam, NULL, in_forceCreate, in_callback);
     }
 
+    void BrainCloudAuthentication::authenticateApple(const char * in_appleUserId, const char * in_identityToken, bool in_forceCreate, IServerCallback * in_callback)
+    {
+        authenticate(in_appleUserId, in_identityToken, AuthenticationType::Apple, NULL, in_forceCreate, in_callback);
+    }
+
     void BrainCloudAuthentication::authenticateGoogle(const char * in_googleUserId, const char * in_serverAuthToken, bool in_forceCreate, IServerCallback * in_callback)
     {
         authenticate(in_googleUserId, in_serverAuthToken, AuthenticationType::Google, NULL, in_forceCreate, in_callback);
