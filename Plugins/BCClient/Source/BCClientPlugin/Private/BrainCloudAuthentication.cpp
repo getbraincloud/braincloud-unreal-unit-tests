@@ -76,9 +76,14 @@ void BrainCloudAuthentication::authenticateSteam(const FString &userid, const FS
 	authenticate(*userid, *sessionticket, EBCAuthType::Steam, "", forceCreate, callback);
 }
 
-void BrainCloudAuthentication::authenticateGoogle(const FString &userid, const FString &token, bool forceCreate, IServerCallback *callback)
+void BrainCloudAuthentication::authenticateGoogle(const FString &googleUserId, const FString &serverAuthCode, bool forceCreate, IServerCallback *callback)
 {
-	authenticate(userid, token, EBCAuthType::Google, "", forceCreate, callback);
+	authenticate(googleUserId, serverAuthCode, EBCAuthType::Google, "", forceCreate, callback);
+}
+
+void BrainCloudAuthentication::authenticateGoogleOpenId(const FString &googleUserAccountEmail, const FString &IdToken, bool forceCreate, IServerCallback *callback)
+{
+	authenticate(googleUserAccountEmail, IdToken, EBCAuthType::GoogleOpenId, "", forceCreate, callback);
 }
 
 void BrainCloudAuthentication::authenticateTwitter(const FString &userid, const FString &token, const FString &secret, bool forceCreate, IServerCallback *callback)
