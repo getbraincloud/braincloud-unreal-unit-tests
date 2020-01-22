@@ -12,6 +12,7 @@ enum class EBCAuthType : uint8
 	GameCenter UMETA(DisplayName = "GameCenter"),
 	Steam UMETA(DisplayName = "Steam"),
 	Google UMETA(DisplayName = "Google"),
+	GoogleOpenId UMETA(DisplayName = "GoogleOpenId"),
 	Twitter UMETA(DisplayName = "Twitter"),
 	Parse UMETA(DisplayName = "Parse"),
 	Handoff UMETA(DisplayName = "Handoff"),
