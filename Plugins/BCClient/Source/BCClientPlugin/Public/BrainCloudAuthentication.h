@@ -152,12 +152,12 @@ public:
     * Service Name - Authenticate
     * Service Operation - Authenticate
     *
-    * @param googleUserAccountEmail The email associated with the google user
-    * @param IdToken  The Id token of the google account. Can get with calls like requestIdToken
+    * @param appleUserId this can be user id OR the email of the user account
+    * @param identityToken  the token confirming the user's identity
     * @param forceCreate Should a new profile be created for this user if the account does not exist?
     * @param callback The method to be invoked when the server response is received
     */
-  void authenticateAppleOpenId(const FString &googleUserAccountEmail, const FString &IdToken, bool forceCreate, IServerCallback *callback);
+  void authenticateApple(const FString &appleUserId, const FString &identityToken, bool forceCreate, IServerCallback *callback);
 
   /*
     * Authenticate the user using a Twitter userid, authentication token, and secret from Twitter.

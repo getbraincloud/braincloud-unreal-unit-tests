@@ -23,6 +23,8 @@ FString BCAuthType::EnumToString(EBCAuthType type)
         return TEXT("Google");
     case EBCAuthType::GoogleOpenId:
         return TEXT("GoogleOpenId");
+    case EBCAuthType::Apple:
+        return TEXT("Apple");
     case EBCAuthType::Twitter:
         return TEXT("Twitter");
     case EBCAuthType::Parse:
