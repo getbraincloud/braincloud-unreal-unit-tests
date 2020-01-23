@@ -13,6 +13,7 @@ enum class EBCAuthType : uint8
 	Steam UMETA(DisplayName = "Steam"),
 	Google UMETA(DisplayName = "Google"),
 	GoogleOpenId UMETA(DisplayName = "GoogleOpenId"),
+	Apple UMETA(DisplayName = "Apple"),
 	Twitter UMETA(DisplayName = "Twitter"),
 	Parse UMETA(DisplayName = "Parse"),
 	Handoff UMETA(DisplayName = "Handoff"),

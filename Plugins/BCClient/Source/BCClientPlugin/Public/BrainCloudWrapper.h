@@ -195,6 +195,20 @@ class BCCLIENTPLUGIN_API UBrainCloudWrapper : public UObject, public IServerCall
     void authenticateGoogleOpenId(FString googleUserAccountEmail, FString IdToken, bool forceCreate, IServerCallback *callback = nullptr);
 
     /*
+     * Authenticate the user using a google openId.
+     *
+     * Service Name - Authenticate
+     * Service Operation - Authenticate
+     *
+     * @param appleUserId  this can be user id OR the email of the user account
+     * @param identityToken  the token confirming the user's identity
+     * @param forceCreate Should a new profile be created for this user if the account does not exist?
+     * @param callback The method to be invoked when the server response is received
+     *
+     */
+    void authenticateApple(FString appleUserId, FString identityToken, bool forceCreate, IServerCallback *callback = nullptr);
+
+    /*
      * Authenticate the user using a steam userid and session ticket (without any validation on the userid).
      *
      * Service Name - Authenticate

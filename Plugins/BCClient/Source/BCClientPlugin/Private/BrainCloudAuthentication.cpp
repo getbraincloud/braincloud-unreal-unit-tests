@@ -86,6 +86,11 @@ void BrainCloudAuthentication::authenticateGoogleOpenId(const FString &googleUse
 	authenticate(googleUserAccountEmail, IdToken, EBCAuthType::GoogleOpenId, "", forceCreate, callback);
 }
 
+void BrainCloudAuthentication::authenticateApple(const FString &appleUserId, const FString &identityToken, bool forceCreate, IServerCallback *callback)
+{
+	authenticate(appleUserId, identityToken, EBCAuthType::Apple, "", forceCreate, callback);
+}
+
 void BrainCloudAuthentication::authenticateTwitter(const FString &userid, const FString &token, const FString &secret, bool forceCreate, IServerCallback *callback)
 {
 	FString buffer(token);
