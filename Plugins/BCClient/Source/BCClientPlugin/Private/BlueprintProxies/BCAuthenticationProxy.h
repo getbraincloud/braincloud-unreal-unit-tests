@@ -134,6 +134,32 @@ class UBCAuthenticationProxy : public UBCBlueprintCallProxyBase
     UFUNCTION(BlueprintCallable, meta = (BlueprintInternalUseOnly = "true"), Category = "BrainCloud|Authentication")
     static UBCAuthenticationProxy *AuthenticateGoogle(UBrainCloudWrapper *brainCloudWrapper, FString googleId, FString token, bool forceCreate);
 
+        /*
+    * Authenticate the user using a google userid(email address) and google authentication token.
+    *
+    * Service Name - Authenticate
+    * Service Operation - Authenticate
+    *
+    * @param googleUserAccountEmail The email associated with the google user
+    * @param IdToken  The Id token of the google account. Can get with calls like requestIdToken
+    * Param - forceCreate Should a new profile be created for this user if the account does not exist?
+    */
+    UFUNCTION(BlueprintCallable, meta = (BlueprintInternalUseOnly = "true"), Category = "BrainCloud|Authentication")
+    static UBCAuthenticationProxy *AuthenticateGoogleOpenId(UBrainCloudWrapper *brainCloudWrapper, FString googleUserAccountEmail, FString IdToken, bool forceCreate);
+
+        /*
+    * Authenticate the user using a google userid(email address) and google authentication token.
+    *
+    * Service Name - Authenticate
+    * Service Operation - Authenticate
+    *
+    * @param appleUserId this can be user id OR the email of the user account
+    * @param identityToken  the token confirming the user's identity
+    * Param - forceCreate Should a new profile be created for this user if the account does not exist?
+    */
+    UFUNCTION(BlueprintCallable, meta = (BlueprintInternalUseOnly = "true"), Category = "BrainCloud|Authentication")
+    static UBCAuthenticationProxy *AuthenticateApple(UBrainCloudWrapper *brainCloudWrapper, FString appleUserId, FString identityToken, bool forceCreate);
+
     /*
     * Authenticate the user using a Twitter userid, authentication token, and secret from Twitter.
     *

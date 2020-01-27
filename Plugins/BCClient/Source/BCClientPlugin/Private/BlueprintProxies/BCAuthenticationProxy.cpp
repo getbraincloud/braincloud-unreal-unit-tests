@@ -76,6 +76,20 @@ UBCAuthenticationProxy *UBCAuthenticationProxy::AuthenticateGoogle(UBrainCloudWr
     return Proxy;
 }
 
+UBCAuthenticationProxy *UBCAuthenticationProxy::AuthenticateGoogleOpenId(UBrainCloudWrapper *brainCloudWrapper, FString googleUserAccountEmail, FString IdToken, bool forceCreate)
+{
+    UBCAuthenticationProxy *Proxy = NewObject<UBCAuthenticationProxy>();
+    UBCWrapperProxy::GetBrainCloudInstance(brainCloudWrapper)->getClient()->getAuthenticationService()->authenticateGoogleOpenId(googleUserAccountEmail, IdToken, forceCreate, Proxy);
+    return Proxy;
+}
+
+UBCAuthenticationProxy *UBCAuthenticationProxy::AuthenticateApple(UBrainCloudWrapper *brainCloudWrapper, FString appleUserId, FString identityToken, bool forceCreate)
+{
+    UBCAuthenticationProxy *Proxy = NewObject<UBCAuthenticationProxy>();
+    UBCWrapperProxy::GetBrainCloudInstance(brainCloudWrapper)->getClient()->getAuthenticationService()->authenticateGoogle(appleUserId, identityToken, forceCreate, Proxy);
+    return Proxy;
+}
+
 UBCAuthenticationProxy *UBCAuthenticationProxy::AuthenticateTwitter(UBrainCloudWrapper *brainCloudWrapper, FString twitterId, FString token, FString secret, bool forceCreate)
 {
     UBCAuthenticationProxy *Proxy = NewObject<UBCAuthenticationProxy>();
