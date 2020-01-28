@@ -23,12 +23,16 @@
 #include "BCRTTCommsProxy.h"
 #include "WebSocketBase.h"
 #include <iostream>
+#include "Runtime/Launch/Resources/Version.h"
 
 #define MAX_PAYLOAD_RTT 64 * 1024
 #define INITIAL_HEARTBEAT_TIME 10
 
 #if PLATFORM_UWP
-#elif PLATFORM_HTML5
+#if ENGINE_MINOR_VERSION <24
+#if PLATFORM_HTML5
+#endif
+#endif
 #else
 static struct lws_protocols protocols[] = {
 	/* first protocol must always be HTTP handler */
@@ -111,7 +115,10 @@ bool BrainCloudRTTComms::isRTTEnabled()
 void BrainCloudRTTComms::RunCallbacks()
 {
 #if PLATFORM_UWP
-#elif PLATFORM_HTML5
+#if ENGINE_MINOR_VERSION <24
+#if PLATFORM_HTML5
+#endif
+#endif
 #else
 	if (m_lwsContext != nullptr)
 	{
@@ -137,7 +144,10 @@ void BrainCloudRTTComms::RunCallbacks()
 }
 
 #if PLATFORM_UWP
-#elif PLATFORM_HTML5
+#if ENGINE_MINOR_VERSION <24
+#if PLATFORM_HTML5
+#endif
+#endif
 #else
 int BrainCloudRTTComms::callback_echo(struct lws *wsi, enum lws_callback_reasons reason, void *user, void *in, size_t len)
 {
@@ -283,7 +293,10 @@ void BrainCloudRTTComms::disconnect()
 	delete m_connectedSocket;
 	m_connectedSocket = nullptr;
 #if PLATFORM_UWP
-#elif PLATFORM_HTML5
+#if ENGINE_MINOR_VERSION <24
+#if PLATFORM_HTML5
+#endif
+#endif
 #else
 	lws_context_destroy(m_lwsContext);
 	m_lwsContext = nullptr;
@@ -415,7 +428,10 @@ void BrainCloudRTTComms::startReceivingWebSocket()
 void BrainCloudRTTComms::setupWebSocket(const FString &in_url)
 {
 #if PLATFORM_UWP
-#elif PLATFORM_HTML5
+#if ENGINE_MINOR_VERSION <24
+#if PLATFORM_HTML5
+#endif
+#endif
 #else
 	if (m_lwsContext == nullptr)
 	{
@@ -457,7 +473,10 @@ void BrainCloudRTTComms::setupWebSocket(const FString &in_url)
 	m_connectedSocket->OnConnectComplete.AddDynamic(m_commsPtr, &UBCRTTCommsProxy::Websocket_OnOpen);
 	m_connectedSocket->OnReceiveData.AddDynamic(m_commsPtr, &UBCRTTCommsProxy::WebSocket_OnMessage);
 #if PLATFORM_UWP
-#elif PLATFORM_HTML5
+#if ENGINE_MINOR_VERSION <24
+#if PLATFORM_HTML5
+#endif
+#endif
 #else
 	m_connectedSocket->mlwsContext = m_lwsContext;
 #endif
