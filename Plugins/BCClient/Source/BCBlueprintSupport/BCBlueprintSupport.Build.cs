@@ -19,7 +19,15 @@ public class BCBlueprintSupport : ModuleRules
         PrivatePCHHeaderFile = "Private/BCBlueprintSupportPrivatePCH.h";
 
         MinFilesUsingPrecompiledHeaderOverride = 1;
-        bFasterWithoutUnity = true;
+
+#if WITH_FORWARDED_MODULE_RULES_CTOR
+    #if UE_4_23_OR_EARLIER
+        bFasterWithoutUnity=true;
+    #if UE_4_24_OR_LATER
+        bUseUnity=true;
+    #endif
+    #endif
+#endif
 
         PrivateDependencyModuleNames.AddRange(
             new string[] { 

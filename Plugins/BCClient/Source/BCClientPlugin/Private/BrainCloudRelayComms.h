@@ -3,11 +3,15 @@
 #pragma once
 
 #include "IServerCallback.h"
+#include "Runtime/Launch/Resources/Version.h"
 
 #define MAX_PAYLOAD 1024
 
 #if PLATFORM_UWP
-#elif PLATFORM_HTML5
+#if ENGINE_MINOR_VERSION <24
+#if PLATFORM_HTML5
+#endif
+#endif
 #else
 #define UI UI_ST
 THIRD_PARTY_INCLUDES_START
@@ -70,7 +74,10 @@ public:
 
 // expose web socket functions
 #if PLATFORM_UWP
-#elif PLATFORM_HTML5
+#if ENGINE_MINOR_VERSION <24
+#if PLATFORM_HTML5
+#endif
+#endif
 #else
 	static int callback_echo(struct lws *wsi, enum lws_callback_reasons reason, void *user, void *in, size_t len);
 #endif

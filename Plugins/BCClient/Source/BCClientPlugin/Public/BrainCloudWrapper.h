@@ -172,13 +172,41 @@ class BCCLIENTPLUGIN_API UBrainCloudWrapper : public UObject, public IServerCall
      * Service Name - Authenticate
      * Service Operation - Authenticate
      *
-     * @param userid  String representation of google+ userid (email)
-     * @param token  The authentication token derived via the google apis.
+     * @param googleUserId  String representation of google+ userid. Gotten with calls like RequestUserId
+     * @param ServerAuthCode  The server authentication token derived via the google apis. Gotten with calls like RequestServerAuthCode
      * @param forceCreate Should a new profile be created for this user if the account does not exist?
      * @param callback The method to be invoked when the server response is received
      *
      */
-    void authenticateGoogle(FString userid, FString token, bool forceCreate, IServerCallback *callback = nullptr);
+    void authenticateGoogle(FString googleUserId, FString ServerAuthCode, bool forceCreate, IServerCallback *callback = nullptr);
+
+    /*
+     * Authenticate the user using a google openId.
+     *
+     * Service Name - Authenticate
+     * Service Operation - Authenticate
+     *
+     * @param googleUserAccountEmail  the email associated with the google user
+     * @param IdToken  The Id of the google account. Can get with calls like requestIdToken
+     * @param forceCreate Should a new profile be created for this user if the account does not exist?
+     * @param callback The method to be invoked when the server response is received
+     *
+     */
+    void authenticateGoogleOpenId(FString googleUserAccountEmail, FString IdToken, bool forceCreate, IServerCallback *callback = nullptr);
+
+    /*
+     * Authenticate the user using a google openId.
+     *
+     * Service Name - Authenticate
+     * Service Operation - Authenticate
+     *
+     * @param appleUserId  this can be user id OR the email of the user account
+     * @param identityToken  the token confirming the user's identity
+     * @param forceCreate Should a new profile be created for this user if the account does not exist?
+     * @param callback The method to be invoked when the server response is received
+     *
+     */
+    void authenticateApple(FString appleUserId, FString identityToken, bool forceCreate, IServerCallback *callback = nullptr);
 
     /*
      * Authenticate the user using a steam userid and session ticket (without any validation on the userid).

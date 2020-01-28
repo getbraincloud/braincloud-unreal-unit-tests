@@ -121,17 +121,43 @@ public:
   void authenticateSteam(const FString &userid, const FString &sessionticket, bool forceCreate, IServerCallback *callback);
 
   /*
-    * Authenticate the user using a google userid(email address) and google authentication token.
+    * Authenticate the user using a google userId and google server authentication code.
     *
     * Service Name - Authenticate
     * Service Operation - Authenticate
     *
-    * @param userid  String representation of google+ userid (email)
-    * @param token  The authentication token derived via the google apis.
+    * @param googleUserId String representation of google+ userid (email)
+    * @param serverAuthCode  The server authentication token derived via the google apis. Gotten with calls like RequestServerAuthCode
     * @param forceCreate Should a new profile be created for this user if the account does not exist?
     * @param callback The method to be invoked when the server response is received
     */
-  void authenticateGoogle(const FString &userid, const FString &token, bool forceCreate, IServerCallback *callback);
+  void authenticateGoogle(const FString &googleUserId, const FString &serverAuthCode, bool forceCreate, IServerCallback *callback);
+
+    /*
+    * Authenticate the user using a google userId and google server authentication code.
+    *
+    * Service Name - Authenticate
+    * Service Operation - Authenticate
+    *
+    * @param googleUserAccountEmail The email associated with the google user
+    * @param IdToken  The Id token of the google account. Can get with calls like requestIdToken
+    * @param forceCreate Should a new profile be created for this user if the account does not exist?
+    * @param callback The method to be invoked when the server response is received
+    */
+  void authenticateGoogleOpenId(const FString &googleUserAccountEmail, const FString &IdToken, bool forceCreate, IServerCallback *callback);
+
+    /*
+    * Authenticate the user using a google userId and google server authentication code.
+    *
+    * Service Name - Authenticate
+    * Service Operation - Authenticate
+    *
+    * @param appleUserId this can be user id OR the email of the user account
+    * @param identityToken  the token confirming the user's identity
+    * @param forceCreate Should a new profile be created for this user if the account does not exist?
+    * @param callback The method to be invoked when the server response is received
+    */
+  void authenticateApple(const FString &appleUserId, const FString &identityToken, bool forceCreate, IServerCallback *callback);
 
   /*
     * Authenticate the user using a Twitter userid, authentication token, and secret from Twitter.
