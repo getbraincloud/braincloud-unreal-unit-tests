@@ -1,10 +1,12 @@
 // Copyright 2018 bitHeads, Inc. All Rights Reserved.
+#if !UE_4_24_OR_LATER
+#define EARLIER_THAN_4_23
+#endif
 
 using System.Collections.Generic;
 using System;
 using System.IO;
 using UnrealBuildTool;
-
 public class BCClientPlugin : ModuleRules
 {
     private string ModulePath
@@ -49,11 +51,6 @@ public class BCClientPlugin : ModuleRules
             PrivateDependencyModuleNames.Add("zlib");
             PublicDependencyModuleNames.Add("libWebSockets");
         }
-        else if (Target.Platform == UnrealTargetPlatform.HTML5)
-        {
-            PublicLibraryPaths.Add(Path.Combine(ModulePath, "ThirdParty/lib/HTML5"));
-            PublicAdditionalLibraries.Add(Path.Combine(ModulePath,"ThirdParty/lib/HTML5/WebSocket.js"));
-        }
         else if (Target.Platform == UnrealTargetPlatform.Mac)
         {           
             PublicDependencyModuleNames.Add("libWebSockets");
@@ -70,5 +67,23 @@ public class BCClientPlugin : ModuleRules
         {
             PublicDependencyModuleNames.Add("libWebSockets");
         }
+    #if UE_4_24_OR_LATER
+        else 
+        {
+            //PublicLibraryPaths.Add(Path.Combine(ModulePath, "ThirdParty/lib/HTML5"));
+            PublicAdditionalLibraries.Add(Path.Combine(ModulePath,"ThirdParty/lib/HTML5/WebSocket.js"));
+        }
+    #endif
+
+    #if EARLIER_THAN_4_23 
+    #if WITH_FORWARDED_MODULE_RULES_CTOR
+        
+        else if (Target.Platform ==UnrealTargetPlatform.HTML5)
+        {
+            PublicLibraryPaths.Add(Path.Combine(ModulePath, "ThirdParty/lib/HTML5"));
+            PublicAdditionalLibraries.Add(Path.Combine(ModulePath,"ThirdParty/lib/HTML5/WebSocket.js"));
+        }
+    #endif
+    #endif
     }
 }
