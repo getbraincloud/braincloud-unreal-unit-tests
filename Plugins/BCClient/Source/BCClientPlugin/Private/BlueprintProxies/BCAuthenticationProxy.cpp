@@ -86,7 +86,7 @@ UBCAuthenticationProxy *UBCAuthenticationProxy::AuthenticateGoogleOpenId(UBrainC
 UBCAuthenticationProxy *UBCAuthenticationProxy::AuthenticateApple(UBrainCloudWrapper *brainCloudWrapper, FString appleUserId, FString identityToken, bool forceCreate)
 {
     UBCAuthenticationProxy *Proxy = NewObject<UBCAuthenticationProxy>();
-    UBCWrapperProxy::GetBrainCloudInstance(brainCloudWrapper)->getClient()->getAuthenticationService()->authenticateGoogle(appleUserId, identityToken, forceCreate, Proxy);
+    UBCWrapperProxy::GetBrainCloudInstance(brainCloudWrapper)->getClient()->getAuthenticationService()->authenticateApple(appleUserId, identityToken, forceCreate, Proxy);
     return Proxy;
 }
 

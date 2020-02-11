@@ -153,6 +153,20 @@ void UBrainCloudWrapper::authenticateGoogle(FString userid, FString token, bool 
     _client->getAuthenticationService()->authenticateGoogle(userid, token, forceCreate, this);
 }
 
+void UBrainCloudWrapper::authenticateGoogleOpenId(FString googleUserAccountEmail, FString IdToken, bool forceCreate, IServerCallback *callback)
+{
+    _authenticateCallback = callback;
+    initializeIdentity();
+	_client->getAuthenticationService()->authenticateGoogleOpenId(googleUserAccountEmail, IdToken, forceCreate, this);
+}
+
+void UBrainCloudWrapper::authenticateApple(FString appleUserId, FString identityToken, bool forceCreate, IServerCallback *callback)
+{
+    _authenticateCallback = callback;
+    initializeIdentity();
+	_client->getAuthenticationService()->authenticateApple(appleUserId, identityToken, forceCreate, this);
+}
+
 void UBrainCloudWrapper::authenticateSteam(FString userid, FString sessionticket, bool forceCreate, IServerCallback *callback)
 {
     _authenticateCallback = callback;
@@ -216,6 +230,18 @@ void UBrainCloudWrapper::smartSwitchAuthenticateGameCenter(const FString &gameCe
 void UBrainCloudWrapper::smartSwitchAuthenticateGoogle(const FString &userid, const FString &token, bool in_forceCreate, IServerCallback *in_callback)
 {
     SmartSwitchAuthenticateCallback *smartCallback = new SmartSwitchAuthenticateCallback(this, EBCAuthType::Google, userid, token, in_forceCreate, in_callback);
+    getIdentitiesCallback(smartCallback);
+}
+
+void UBrainCloudWrapper::smartSwitchAuthenticateGoogleOpenId(const FString &googleUserAccountEmail, const FString &IdToken, bool in_forceCreate, IServerCallback *in_callback)
+{
+    SmartSwitchAuthenticateCallback *smartCallback = new SmartSwitchAuthenticateCallback(this, EBCAuthType::GoogleOpenId, googleUserAccountEmail, IdToken, in_forceCreate, in_callback);
+    getIdentitiesCallback(smartCallback);
+}
+
+void UBrainCloudWrapper::smartSwitchAuthenticateApple(const FString &appleUserId, const FString &identityToken, bool in_forceCreate, IServerCallback *in_callback)
+{
+    SmartSwitchAuthenticateCallback *smartCallback = new SmartSwitchAuthenticateCallback(this, EBCAuthType::Apple, appleUserId, identityToken, in_forceCreate, in_callback);
     getIdentitiesCallback(smartCallback);
 }
 
