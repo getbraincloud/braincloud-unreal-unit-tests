@@ -287,7 +287,7 @@ class UBCIdentityProxy : public UBCBlueprintCallProxyBase
 	* To switch profiles, call ClearSavedProfileID() and call AuthenticateGoogle().
 	*/
 	UFUNCTION(BlueprintCallable, meta = (BlueprintInternalUseOnly = "true"), Category = "BrainCloud|Identity")
-	static UBCIdentityProxy *AttachGoogleIdentity(UBrainCloudWrapper *brainCloudWrapper, const FString &googleId, const FString &authenticationToken);
+	static UBCIdentityProxy *AttachGoogleIdentity(UBrainCloudWrapper *brainCloudWrapper, const FString &googleUserId, const FString &serverAuthCode);
 
 	/**
 	* Merge the profile associated with the provided Google credentials with the
@@ -301,7 +301,7 @@ class UBCIdentityProxy : public UBCBlueprintCallProxyBase
 	*   (that will be further validated when sent to the bC service)
 	*/
 	UFUNCTION(BlueprintCallable, meta = (BlueprintInternalUseOnly = "true"), Category = "BrainCloud|Identity")
-	static UBCIdentityProxy *MergeGoogleIdentity(UBrainCloudWrapper *brainCloudWrapper, const FString &googleId, const FString &authenticationToken);
+	static UBCIdentityProxy *MergeGoogleIdentity(UBrainCloudWrapper *brainCloudWrapper, const FString &googleUserId, const FString &serverAuthCode);
 
 	/*
 	* Detach the Google identity from this profile.
@@ -317,7 +317,109 @@ class UBCIdentityProxy : public UBCBlueprintCallProxyBase
 	* the profile wouldn't be retrievable if the user loses their device)
 	*/
 	UFUNCTION(BlueprintCallable, meta = (BlueprintInternalUseOnly = "true"), Category = "BrainCloud|Identity")
-	static UBCIdentityProxy *DetachGoogleIdentity(UBrainCloudWrapper *brainCloudWrapper, const FString &googleId, bool continueAnon);
+	static UBCIdentityProxy *DetachGoogleIdentity(UBrainCloudWrapper *brainCloudWrapper, const FString &googleUserId, bool continueAnon);
+
+	/**
+	* Attach the user's GoogleOpenId credentials to the current profile.
+    * Service Name - Identity
+    * Service Operation - Attach
+    *
+    * @param googleUserAccountEmail The email associated with the google user
+    * @param IdToken  The Id token of the google account. Can get with calls like requestIdToken
+    * @param forceCreate Should a new profile be created for this user if the account does not exist?
+    * @param callback The method to be invoked when the server response is received
+	* Errors to watch for:  SWITCHING_PROFILES - this means that the Google identity you provided
+	* already points to a different profile.  You will likely want to offer the player the
+	* choice to *SWITCH* to that profile, or *MERGE* the profiles.
+	*
+	* To switch profiles, call ClearSavedProfileID() and call AuthenticateGoogle().
+	*/
+	UFUNCTION(BlueprintCallable, meta = (BlueprintInternalUseOnly = "true"), Category = "BrainCloud|Identity")
+	static UBCIdentityProxy *AttachGoogleOpenIdIdentity(UBrainCloudWrapper *brainCloudWrapper, const FString &googleUserAccountEmail, const FString &IdToken);
+
+	/**
+	* Merge the profile associated with the provided GoogleOpenId credentials with the
+	* current profile.
+    * Service Name - Identity
+    * Service Operation - merge
+    *
+    * @param googleUserAccountEmail The email associated with the google user
+    * @param IdToken  The Id token of the google account. Can get with calls like requestIdToken
+    * @param forceCreate Should a new profile be created for this user if the account does not exist?
+    * @param callback The method to be invoked when the server response is received
+	*
+	*/
+	UFUNCTION(BlueprintCallable, meta = (BlueprintInternalUseOnly = "true"), Category = "BrainCloud|Identity")
+	static UBCIdentityProxy *MergeGoogleOpenIdIdentity(UBrainCloudWrapper *brainCloudWrapper, const FString &googleUserAccountEmail, const FString &IdToken);
+
+	/*
+	* Detach the GoogleOpenId identity from this profile.
+	*
+    * Service Name - Identity
+    * Service Operation - merge
+    *
+    * @param googleUserAccountEmail The email associated with the google user
+    * @param IdToken  The Id token of the google account. Can get with calls like requestIdToken
+    * @param forceCreate Should a new profile be created for this user if the account does not exist?
+    * @param callback The method to be invoked when the server response is received
+	*
+	* Watch for DOWNGRADING_TO_ANONYMOUS_ERROR - occurs if you set continueAnon to false, and
+	* disconnecting this identity would result in the profile being anonymous (which means that
+	* the profile wouldn't be retrievable if the user loses their device)
+	*/
+	UFUNCTION(BlueprintCallable, meta = (BlueprintInternalUseOnly = "true"), Category = "BrainCloud|Identity")
+	static UBCIdentityProxy *DetachGoogleOpenIdIdentity(UBrainCloudWrapper *brainCloudWrapper, const FString &googleUserAccountEmail, bool continueAnon);
+
+	/**
+	* Attach the user's Apple credentials to the current profile.
+    * Service Name - Identity
+    * Service Operation - attach
+    *
+    * @param appleUserId this can be user id OR the email of the user account
+    * @param identityToken  the token confirming the user's identity
+    * @param forceCreate Should a new profile be created for this user if the account does not exist?
+    * @param callback The method to be invoked when the server response is received
+	* Errors to watch for:  SWITCHING_PROFILES - this means that the Google identity you provided
+	* already points to a different profile.  You will likely want to offer the player the
+	* choice to *SWITCH* to that profile, or *MERGE* the profiles.
+	*
+	* To switch profiles, call ClearSavedProfileID() and call AuthenticateGoogle().
+	*/
+	UFUNCTION(BlueprintCallable, meta = (BlueprintInternalUseOnly = "true"), Category = "BrainCloud|Identity")
+	static UBCIdentityProxy *AttachAppleIdentity(UBrainCloudWrapper *brainCloudWrapper, const FString &appleUserId, const FString &identityToken);
+
+	/**
+	* Merge the profile associated with the provided Apple credentials with the
+	* current profile.
+    * Service Name - Identity
+    * Service Operation - merge
+    *
+    * @param appleUserId this can be user id OR the email of the user account
+    * @param identityToken  the token confirming the user's identity
+    * @param forceCreate Should a new profile be created for this user if the account does not exist?
+    * @param callback The method to be invoked when the server response is received
+	*
+	*/
+	UFUNCTION(BlueprintCallable, meta = (BlueprintInternalUseOnly = "true"), Category = "BrainCloud|Identity")
+	static UBCIdentityProxy *MergeAppleIdentity(UBrainCloudWrapper *brainCloudWrapper, const FString &appleUserId, const FString &identityToken);
+
+	/*
+	* Detach the Apple identity from this profile.
+	*
+    * Service Name - Identity
+    * Service Operation - detach
+    *
+    * @param appleUserId this can be user id OR the email of the user account
+    * @param identityToken  the token confirming the user's identity
+    * @param forceCreate Should a new profile be created for this user if the account does not exist?
+    * @param callback The method to be invoked when the server response is received
+	*
+	* Watch for DOWNGRADING_TO_ANONYMOUS_ERROR - occurs if you set continueAnon to false, and
+	* disconnecting this identity would result in the profile being anonymous (which means that
+	* the profile wouldn't be retrievable if the user loses their device)
+	*/
+	UFUNCTION(BlueprintCallable, meta = (BlueprintInternalUseOnly = "true"), Category = "BrainCloud|Identity")
+	static UBCIdentityProxy *DetachAppleIdentity(UBrainCloudWrapper *brainCloudWrapper, const FString &appleUserId, bool continueAnon);
 
 	/**
 	* Attach the user's Twitter credentials to the current profile.
