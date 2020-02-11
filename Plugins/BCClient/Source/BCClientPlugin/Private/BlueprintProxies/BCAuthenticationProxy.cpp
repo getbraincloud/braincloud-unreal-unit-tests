@@ -139,6 +139,48 @@ UBCAuthenticationProxy *UBCAuthenticationProxy::ResetEmailPasswordAdvanced(UBrai
     return Proxy;
 }
 
+UBCAuthenticationProxy *UBCAuthenticationProxy::ResetEmailPasswordWithExpiry(UBrainCloudWrapper *brainCloudWrapper, const FString &email, int32 in_tokenTtlInMinutes)
+{
+    UBCAuthenticationProxy *Proxy = NewObject<UBCAuthenticationProxy>();
+    UBCWrapperProxy::GetBrainCloudInstance(brainCloudWrapper)->getClient()->getAuthenticationService()->resetEmailPasswordWithExpiry(email, in_tokenTtlInMinutes, Proxy);
+    return Proxy;
+}
+
+UBCAuthenticationProxy *UBCAuthenticationProxy::ResetEmailPasswordAdvancedWithExpiry(UBrainCloudWrapper *brainCloudWrapper, const FString &email, const FString &in_serviceParams, int32 in_tokenTtlInMinutes)
+{
+    UBCAuthenticationProxy *Proxy = NewObject<UBCAuthenticationProxy>();
+    UBCWrapperProxy::GetBrainCloudInstance(brainCloudWrapper)->getClient()->getAuthenticationService()->resetEmailPasswordAdvancedWithExpiry(email, in_serviceParams, in_tokenTtlInMinutes, Proxy);
+    return Proxy;
+}
+
+UBCAuthenticationProxy *UBCAuthenticationProxy::ResetUniversalIdPassword(UBrainCloudWrapper *brainCloudWrapper, const FString &in_universalId)
+{
+    UBCAuthenticationProxy *Proxy = NewObject<UBCAuthenticationProxy>();
+    UBCWrapperProxy::GetBrainCloudInstance(brainCloudWrapper)->getClient()->getAuthenticationService()->resetUniversalIdPassword(in_universalId, Proxy);
+    return Proxy;
+}
+
+UBCAuthenticationProxy *UBCAuthenticationProxy::ResetUniversalIdPasswordAdvanced(UBrainCloudWrapper *brainCloudWrapper, const FString &in_universalId, const FString &in_serviceParams)
+{
+    UBCAuthenticationProxy *Proxy = NewObject<UBCAuthenticationProxy>();
+    UBCWrapperProxy::GetBrainCloudInstance(brainCloudWrapper)->getClient()->getAuthenticationService()->resetUniversalIdPasswordAdvanced(in_universalId, in_serviceParams, Proxy);
+    return Proxy;
+}
+
+UBCAuthenticationProxy *UBCAuthenticationProxy::ResetUniversalIdPasswordWithExpiry(UBrainCloudWrapper *brainCloudWrapper, const FString &in_universalId, int32 in_tokenTtlInMinutes)
+{
+    UBCAuthenticationProxy *Proxy = NewObject<UBCAuthenticationProxy>();
+    UBCWrapperProxy::GetBrainCloudInstance(brainCloudWrapper)->getClient()->getAuthenticationService()->resetUniversalIdPasswordWithExpiry(in_universalId, in_tokenTtlInMinutes, Proxy);
+    return Proxy;
+}
+
+UBCAuthenticationProxy *UBCAuthenticationProxy::ResetUniversalIdPasswordAdvancedWithExpiry(UBrainCloudWrapper *brainCloudWrapper, const FString &in_universalId, const FString &in_serviceParams, int32 in_tokenTtlInMinutes)
+{
+    UBCAuthenticationProxy *Proxy = NewObject<UBCAuthenticationProxy>();
+    UBCWrapperProxy::GetBrainCloudInstance(brainCloudWrapper)->getClient()->getAuthenticationService()->resetUniversalIdPasswordAdvancedWithExpiry(in_universalId, in_serviceParams, in_tokenTtlInMinutes, Proxy);
+    return Proxy;
+}
+
 //Getters
 const FString &UBCAuthenticationProxy::GetAnonymousId(UBrainCloudWrapper *brainCloudWrapper)
 {

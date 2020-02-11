@@ -13,6 +13,12 @@ class BCCLIENTPLUGIN_API ServiceOperation
 	static const ServiceOperation Detach;
 	static const ServiceOperation ResetEmailPassword;
 	static const ServiceOperation ResetEmailPasswordAdvanced;
+	static const ServiceOperation ResetEmailPasswordWithExpiry;
+	static const ServiceOperation ResetEmailPasswordAdvancedWithExpiry;
+	static const ServiceOperation ResetUniversalIdPassword;
+	static const ServiceOperation ResetUniversalIdPasswordAdvanced;
+	static const ServiceOperation ResetUniversalIdPasswordWithExpiry;
+	static const ServiceOperation ResetUniversalIdPasswordAdvancedWithExpiry;
 	static const ServiceOperation SwitchToChildProfile;
 	static const ServiceOperation SwitchToParentProfile;
 	static const ServiceOperation GetChildProfiles;
