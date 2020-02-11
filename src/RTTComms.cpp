@@ -31,6 +31,13 @@ namespace BrainCloud
     {
     }
 
+    RTTComms::RTTCallback::RTTCallback(RTTCallbackType type, const Json::Value& json, const std::string& message)
+        : _type(type)
+        , _message(message)
+        , _json(json)
+    {
+    }
+
     RTTComms::RTTComms(BrainCloudClient* in_client)
         : _isInitialized(false)
         , _client(in_client)
@@ -173,7 +180,7 @@ namespace BrainCloud
                     std::map<std::string, IRTTCallback*>::iterator it = _callbacks.find(serviceName);
                     if (it != _callbacks.end())
                     {
-                        it->second->rttCallback(callback._json);
+                        it->second->rttCallback(callback._message);
                     }
                     break;
                 }
@@ -511,10 +518,10 @@ namespace BrainCloud
 
         std::string serviceName = jsonData["service"].asString();
         printf("serviceName: %s", serviceName.c_str());
-        processRttMessage(jsonData);
+        processRttMessage(jsonData, message);
     }
 
-    void RTTComms::processRttMessage(const Json::Value& json)
+    void RTTComms::processRttMessage(const Json::Value& json, const std::string& message)
     {
         std::string serviceName = json["service"].asString();
         std::string operation = json["operation"].asString();
@@ -532,7 +539,7 @@ namespace BrainCloud
         else
         {
             _eventQueueMutex.lock();
-            _callbackEventQueue.push_back(RTTCallback(RTTCallbackType::Event, json));
+            _callbackEventQueue.push_back(RTTCallback(RTTCallbackType::Event, json, message));
             _eventQueueMutex.unlock();
         }
     }

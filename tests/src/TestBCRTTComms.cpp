@@ -22,8 +22,12 @@ public:
     {
     }
 
-    void rttCallback(const Json::Value& eventJson) override
+    void rttCallback(const std::string& jsonData) override
     {
+        Json::Value eventJson;
+        Json::Reader reader;
+        reader.parse(jsonData, eventJson);
+
         if (eventJson["service"].asString() == m_expectedServiceName &&
             (eventJson["operation"].asString() == m_expectedOperation ||
              m_expectedOperation.empty()))
