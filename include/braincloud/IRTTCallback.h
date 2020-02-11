@@ -10,8 +10,6 @@
 
 #include <string>
 
-#include <json/json.h>
-
 namespace BrainCloud {
     
     class IRTTCallback
@@ -24,7 +22,7 @@ namespace BrainCloud {
          *
          * @param eventJson - Data for the event.
          */
-        virtual void rttCallback(const Json::Value& eventJson) = 0;
+        virtual void rttCallback(const std::string& jsonData) = 0;
     };
     
 };

@@ -64,6 +64,7 @@ namespace BrainCloud
             RTTCallback(RTTCallbackType type);
             RTTCallback(RTTCallbackType type, const std::string& message);
             RTTCallback(RTTCallbackType type, const Json::Value& json);
+            RTTCallback(RTTCallbackType type, const Json::Value& json, const std::string& message);
         };
 
         // IServerCallback
@@ -85,7 +86,7 @@ namespace BrainCloud
         Json::Value buildConnectionRequest(const std::string& protocol);
         bool send(const Json::Value& jsonData);
         void onRecv(const std::string& message);
-        void processRttMessage(const Json::Value& json);
+        void processRttMessage(const Json::Value& json, const std::string& message);
 
         bool _isInitialized;
 
