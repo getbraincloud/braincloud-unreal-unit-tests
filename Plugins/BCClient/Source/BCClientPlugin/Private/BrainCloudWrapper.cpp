@@ -260,6 +260,36 @@ void UBrainCloudWrapper::resetEmailPasswordAdvanced(const FString &in_emailAddre
     _client->getAuthenticationService()->resetEmailPasswordAdvanced(in_emailAddress, in_serviceParams, in_callback);
 }
 
+void UBrainCloudWrapper::resetEmailPasswordWithExpiry(const FString &in_email, int32 in_tokenTtlInMinutes, IServerCallback *in_callback)
+{
+    _client->getAuthenticationService()->resetEmailPasswordWithExpiry(in_email, in_tokenTtlInMinutes, in_callback);
+}
+
+void UBrainCloudWrapper::resetEmailPasswordAdvancedWithExpiry(const FString &in_emailAddress, const FString &in_serviceParams, int32 in_tokenTtlInMinutes, IServerCallback *in_callback)
+{
+    _client->getAuthenticationService()->resetEmailPasswordAdvancedWithExpiry(in_emailAddress, in_serviceParams, in_tokenTtlInMinutes, in_callback);
+}
+
+void UBrainCloudWrapper::resetUniversalIdPassword(const FString &in_universalId, IServerCallback *in_callback)
+{
+    _client->getAuthenticationService()->resetUniversalIdPassword(in_universalId, in_callback);
+}
+
+void UBrainCloudWrapper::resetUniversalIdPasswordAdvanced(const FString &in_universalId, const FString &in_serviceParams, IServerCallback *in_callback)
+{
+    _client->getAuthenticationService()->resetUniversalIdPasswordAdvanced(in_universalId, in_serviceParams, in_callback);
+}
+
+void UBrainCloudWrapper::resetUniversalIdPasswordWithExpiry(const FString &in_universalId, int32 in_tokenTtlInMinutes, IServerCallback *in_callback)
+{
+    _client->getAuthenticationService()->resetUniversalIdPasswordWithExpiry(in_universalId, in_tokenTtlInMinutes, in_callback);
+}
+
+void UBrainCloudWrapper::resetUniversalIdPasswordAdvancedWithExpiry(const FString &in_universalId, const FString &in_serviceParams, int32 in_tokenTtlInMinutes, IServerCallback *in_callback)
+{
+    _client->getAuthenticationService()->resetUniversalIdPasswordAdvancedWithExpiry(in_universalId, in_serviceParams, in_tokenTtlInMinutes, in_callback);
+}
+
 void UBrainCloudWrapper::reconnect(IServerCallback *callback)
 {
     authenticateAnonymous(callback);

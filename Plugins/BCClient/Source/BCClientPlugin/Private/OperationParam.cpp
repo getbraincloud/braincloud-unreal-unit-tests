@@ -42,6 +42,8 @@ const OperationParam OperationParam::TwitterServiceTweetTweet = OperationParam("
 const OperationParam OperationParam::TwitterServiceTweetPic = OperationParam("pic");
 
 // Authenticate Service - Authenticate Params
+const OperationParam OperationParam::AuthenticateServiceAuthenticateUniversalId = OperationParam("universalId");
+const OperationParam OperationParam::AuthenticateServiceAuthenticateTokenTtlInMinutes = OperationParam("tokenTtlInMinutes");
 const OperationParam OperationParam::AuthenticateServiceAuthenticateAuthenticationType = OperationParam("authenticationType");
 const OperationParam OperationParam::AuthenticateServiceAuthenticateAuthenticationToken = OperationParam("authenticationToken");
 const OperationParam OperationParam::AuthenticateServiceAuthenticateExternalId = OperationParam("externalId");
