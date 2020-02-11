@@ -145,6 +145,29 @@ namespace BrainCloud {
         m_client->sendRequest(sc);
     }
 
+        void BrainCloudAuthentication::resetEmailPasswordWithExpiry(const char * in_externalId, std::string in_expiryInMin, IServerCallback * in_callback)
+    {
+        Json::Value message;
+        message[OperationParam::AuthenticateServiceAuthenticateExternalId.getValue()] = in_externalId;
+        message[OperationParam::AuthenticateServiceAuthenticateGameId.getValue()] = m_client->getAppId().c_str();
+        message[OperationParam::AuthenticateServiceAuthenticateExpiryInMin.getValue()] = in_expiryInMin;
+
+        ServerCall * sc = new ServerCall(ServiceName::AuthenticateV2, ServiceOperation::ResetEmailPasswordWithExpiry, message, in_callback);
+        m_client->sendRequest(sc);
+    }
+
+    void BrainCloudAuthentication::resetEmailPasswordAdvancedWithExpiry(const char * in_emailAddress, std::string in_serviceParams, std::string in_expiryInMin, IServerCallback * in_callback)
+    {
+        Json::Value message;
+        message[OperationParam::AuthenticateServiceAuthenticateGameId.getValue()] = m_client->getAppId().c_str();
+        message[OperationParam::AuthenticateServiceAuthenticateEmailAddress.getValue()] = in_emailAddress;
+        message[OperationParam::AuthenticateServiceAuthenticateServiceParams.getValue()] = JsonUtil::jsonStringToValue(in_serviceParams);;
+        message[OperationParam::AuthenticateServiceAuthenticateExpiryInMin.getValue()] = in_expiryInMin;
+
+        ServerCall * sc = new ServerCall(ServiceName::AuthenticateV2, ServiceOperation::ResetEmailPasswordAdvancedWithExpiry, message, in_callback);
+        m_client->sendRequest(sc);
+    }
+
 	void BrainCloudAuthentication::resetUniversalIdPassword(const char * in_universalId, IServerCallback * in_callback)
     {
         Json::Value message;
@@ -163,6 +186,29 @@ namespace BrainCloud {
         message[OperationParam::AuthenticateServiceAuthenticateServiceParams.getValue()] = JsonUtil::jsonStringToValue(in_serviceParams);;
 
         ServerCall * sc = new ServerCall(ServiceName::AuthenticateV2, ServiceOperation::ResetUniversalIdPasswordAdvanced, message, in_callback);
+        m_client->sendRequest(sc);
+    }
+
+    void BrainCloudAuthentication::resetUniversalIdPasswordWithExpiry(const char * in_universalId, std::string in_expiryInMin, IServerCallback * in_callback)
+    {
+        Json::Value message;
+        message[OperationParam::AuthenticateServiceAuthenticateGameId.getValue()] = m_client->getAppId().c_str();
+        message[OperationParam::AuthenticateServiceAuthenticateUniversalId.getValue()] = in_universalId;
+        message[OperationParam::AuthenticateServiceAuthenticateExpiryInMin.getValue()] = in_expiryInMin;
+
+        ServerCall * sc = new ServerCall(ServiceName::AuthenticateV2, ServiceOperation::ResetUniversalIdPasswordWithExpiry, message, in_callback);
+        m_client->sendRequest(sc);
+    }
+
+	void BrainCloudAuthentication::resetUniversalIdPasswordAdvancedWithExpiry(const char * in_universalId, std::string in_serviceParams, std::string in_expiryInMin, IServerCallback * in_callback)
+    {
+        Json::Value message;
+        message[OperationParam::AuthenticateServiceAuthenticateGameId.getValue()] = m_client->getAppId().c_str();
+        message[OperationParam::AuthenticateServiceAuthenticateUniversalId.getValue()] = in_universalId;
+        message[OperationParam::AuthenticateServiceAuthenticateServiceParams.getValue()] = JsonUtil::jsonStringToValue(in_serviceParams);;
+        message[OperationParam::AuthenticateServiceAuthenticateExpiryInMin.getValue()] = in_expiryInMin;
+
+        ServerCall * sc = new ServerCall(ServiceName::AuthenticateV2, ServiceOperation::ResetUniversalIdPasswordAdvancedWithExpiry, message, in_callback);
         m_client->sendRequest(sc);
     }
 

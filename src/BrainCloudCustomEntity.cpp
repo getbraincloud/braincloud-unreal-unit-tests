@@ -52,19 +52,6 @@ namespace BrainCloud
 		m_client->sendRequest(sc);
 	}
 
-	void BrainCloudCustomEntity::getEntityPage(const char * in_entityType, int32_t in_rowsPerPage, const std::string& in_searchJson, const std::string& in_sortJson, bool in_doCount, IServerCallback * in_callback)
-	{
-		Json::Value message;
-		message[OperationParam::CustomEntityServiceEntityType.getValue()] = in_entityType;
-		message[OperationParam::CustomEntityServiceRowsPerPage.getValue()] = in_rowsPerPage;
-		message[OperationParam::CustomEntityServiceSearchJson.getValue()] = JsonUtil::jsonStringToValue(in_searchJson);
-		message[OperationParam::CustomEntityServiceSortJson.getValue()] = JsonUtil::jsonStringToValue(in_sortJson);
-		message[OperationParam::CustomEntityServiceDoCount.getValue()] = in_doCount;
-
-		ServerCall * sc = new ServerCall(ServiceName::CustomEntity, ServiceOperation::GetEntityPage, message, in_callback);
-		m_client->sendRequest(sc);
-	}
-
 	void BrainCloudCustomEntity::getEntityPage(const char * in_entityType, const char * in_context, IServerCallback * in_callback)
 	{
 		Json::Value message;

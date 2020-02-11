@@ -57,23 +57,6 @@ namespace BrainCloud {
 		 */
 		void getCount(const char * in_entityType, const std::string& in_whereJson, IServerCallback * in_callback = NULL);
 
-		/**
-		 * Retrieves first page of custom entities from the server based on the custom entity type and specified query context
-		 *
-		 * Service Name - CustomEntity
-		 * Service Operation - GetPage
-		 *
-		 * @param in_entityType The entity type as defined by the user
-		 * @param in_rowsPerPage
-		 * @param in_searchJson
-		 * @param in_sortJson
-		 * @param in_doCount
-		 * @param in_callback The method to be invoked when the server response is received
-		 */
-
-		//Deprecated use overload with in_entityType, and in_context
-		void getEntityPage(const char * in_entityType, int32_t in_rowsPerPage, const std::string& in_searchJson, const std::string& in_sortJson, bool in_doCount, IServerCallback * in_callback = NULL);
-
 		 /**
 		 * Method uses a paging system to iterate through Custom Entities
 		 * After retrieving a page of Custom Entities with this method,

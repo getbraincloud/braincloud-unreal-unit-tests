@@ -270,7 +270,41 @@ namespace BrainCloud
 		 * SECURITY_ERROR (40209) - If the email address cannot be found.
 		 */
 		void resetEmailPasswordAdvanced(const char * in_emailAddress, std::string in_serviceParams, IServerCallback * in_callback = NULL);
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+		/**
+		 * Reset Email password - Sends a password reset email to the specified address
+		 *
+		 * Service Name - Authenticate
+		 * Operation - ResetEmailPassword
+		 *
+		 * @param in_externalId The email address to send the reset email to.
+		 * @param in_callback The method to be invoked when the server response is received
+		 *
+		 * Note the follow error reason codes:
+		 *
+		 * SECURITY_ERROR (40209) - If the email address cannot be found.
+		 */
+		void resetEmailPasswordWithExpiry(const char * in_externalId, std::string in_expiryInMin, IServerCallback * in_callback = NULL);
 
+		/**
+		 * Reset Email password with service parameters - Sends a password reset email to 
+		 * the specified address
+		 *
+		 * Service Name - Authenticate
+		 * Operation - ResetEmailPasswordAdvanced
+		 *
+		 * @param appId the applicationId
+		 * @param in_emailAddress The email address to send the reset email to.
+		 * @param in_serviceParams - parameters to send to the email service. See documentation for
+		 * full list. http://getbraincloud.com/apidocs/apiref/#capi-mail
+		 * @param in_callback The method to be invoked when the server response is received
+		 *
+		 * Note the follow error reason codes:
+		 *
+		 * SECURITY_ERROR (40209) - If the email address cannot be found.
+		 */
+		void resetEmailPasswordAdvancedWithExpiry(const char * in_emailAddress, std::string in_serviceParams, std::string in_expiryInMin, IServerCallback * in_callback = NULL);
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 		/**
 		 * Resets Universal ID password
 		 *
@@ -297,6 +331,35 @@ namespace BrainCloud
 		 *
 		 */
 		void resetUniversalIdPasswordAdvanced(const char * in_universalId, std::string in_serviceParams, IServerCallback * in_callback = NULL);
+
+		/////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+				/**
+		 * Resets Universal ID password
+		 *
+		 * Service Name - Authenticate
+		 * Operation - ResetUniversalIdPassword
+		 *
+		 * @param appId the applicationId
+		 * @param in_universalId the universal Id in question
+		 * @param in_callback The method to be invoked when the server response is received
+		 *
+		 */
+		void resetUniversalIdPasswordWithExpiry(const char * in_universalId, std::string in_expiryInMin, IServerCallback * in_callback = NULL);
+
+		/**
+		 * Advanced Universal ID password reset using templates
+		 *
+		 * Service Name - Authenticate
+		 * Operation - ResetUniversalIdPassword
+		 *
+		 * @param appId the applicationId
+		 * @param in_universalId the universal Id in question
+		 * @param in_serviceParams - parameters to send to the email service. 
+		 * @param in_callback The method to be invoked when the server response is received
+		 *
+		 */
+		void resetUniversalIdPasswordAdvancedWithExpiry(const char * in_universalId, std::string in_serviceParams, std::string in_expiryInMin, IServerCallback * in_callback = NULL);
+		////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 		const std::string & getAnonymousId() const { return _anonymousId; }
 		const std::string & getProfileId() const { return _profileId; }
