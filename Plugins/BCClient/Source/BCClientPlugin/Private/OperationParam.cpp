@@ -225,10 +225,12 @@ const OperationParam OperationParam::PlayerStateServiceWipeExisting = OperationP
 const OperationParam OperationParam::PlayerStateServicePictureUrl = OperationParam("playerPictureUrl");
 const OperationParam OperationParam::PlayerStateServiceContactEmail = OperationParam("contactEmail");
 
-const OperationParam OperationParam::PlayerStateServiceStatusName = OperationParam("statusName");;
-const OperationParam OperationParam::PlayerStateServiceAdditionalSecs = OperationParam("additionalSecs");;
-const OperationParam OperationParam::PlayerStateServiceDetails = OperationParam("details");;
-const OperationParam OperationParam::PlayerStateServiceDurationSecs = OperationParam("durationSecs");;
+const OperationParam OperationParam::PlayerStateServiceStatusName = OperationParam("statusName");
+const OperationParam OperationParam::PlayerStateServiceAdditionalSecs = OperationParam("additionalSecs");
+const OperationParam OperationParam::PlayerStateServiceDetails = OperationParam("details");
+const OperationParam OperationParam::PlayerStateServiceDurationSecs = OperationParam("durationSecs");
+const OperationParam OperationParam::PlayerStateServiceTimeZoneOffset = OperationParam("timeZoneOffset");
+const OperationParam OperationParam::PlayerStateServiceLanguageCode = OperationParam("languageCode"); 
 
 // Player Statistics Service - Update Increment Params
 const OperationParam OperationParam::PlayerStatisticsServiceStats = OperationParam("statistics");

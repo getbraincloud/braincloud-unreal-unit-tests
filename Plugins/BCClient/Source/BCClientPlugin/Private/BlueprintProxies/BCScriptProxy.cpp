@@ -61,3 +61,17 @@ UBCScriptProxy *UBCScriptProxy::RunPeerScriptAsync(UBrainCloudWrapper *brainClou
 	UBCWrapperProxy::GetBrainCloudInstance(brainCloudWrapper)->getScriptService()->runPeerScriptAsync(scriptName, jsonScriptData, peer, Proxy);
 	return Proxy;
 }
+
+UBCScriptProxy *UBCScriptProxy::GetRunningOrQueuedCloudScripts(UBrainCloudWrapper *brainCloudWrapper)
+{
+	UBCScriptProxy *Proxy = NewObject<UBCScriptProxy>();
+	UBCWrapperProxy::GetBrainCloudInstance(brainCloudWrapper)->getScriptService()->getRunningOrQueuedCloudScripts(Proxy);
+	return Proxy;
+}
+
+UBCScriptProxy *UBCScriptProxy::GetScheduledCloudScripts(UBrainCloudWrapper *brainCloudWrapper, FDateTime startDateInUTC)
+{
+	UBCScriptProxy *Proxy = NewObject<UBCScriptProxy>();
+	UBCWrapperProxy::GetBrainCloudInstance(brainCloudWrapper)->getScriptService()->getScheduledCloudScripts(startDateInUTC, Proxy);
+	return Proxy;
+}

@@ -232,6 +232,29 @@ class BCCLIENTPLUGIN_API BrainCloudPlayerState
     void setUserStatus(const FString &statusName, int durationSecs, const FString &details, IServerCallback *callback);
 
     /**
+    * Update user's time zone offset preference on their profile
+    *
+    * Service Name - PlayerState
+    * Service Operation - UPDATE_TIMEZONE_OFFSET
+    *
+    * @param timeZoneOffset the offset
+    * @param callback The method to be invoked when the server response is received
+    */
+    void updateTimeZoneOffset(int32 timeZoneOffset, IServerCallback *callback);
+
+    /**
+    * Update user's language code preference on their profile.
+    *
+    * Service Name - PlayerState
+    * Service Operation - UPDATE_LANGUAGE_CODE
+    *
+    * @param languageCode the offset
+    * @param callback The method to be invoked when the server response is received
+    */
+    void updateLanguageCode(const FString &languageCode, IServerCallback *callback);
+
+
+    /**
 	* @deprecated Use getUserName instead - removal after September 1 2017
 	*/
     const FString &getPlayerName();

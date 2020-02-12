@@ -88,6 +88,9 @@ const ServiceOperation ServiceOperation::UpdateEntityIndexedId = ServiceOperatio
 const ServiceOperation ServiceOperation::UpdateEntityOwnerAndAcl = ServiceOperation(TEXT("UPDATE_ENTITY_OWNER_AND_ACL"));
 const ServiceOperation ServiceOperation::MakeSystemEntity = ServiceOperation(TEXT("MAKE_SYSTEM_ENTITY"));
 
+const ServiceOperation ServiceOperation::GetScheduledCloudSripts = ServiceOperation(TEXT("GET_SCHEDULED_CLOUD_SCRIPTS"));
+const ServiceOperation ServiceOperation::GetRunningOrQueuedCloudScripts = ServiceOperation(TEXT("GET_RUNNING_OR_QUEUED_CLOUD_SCRIPTS"));
+
 const ServiceOperation ServiceOperation::GetFriendProfileInfoForExternalId = ServiceOperation(TEXT("GET_FRIEND_PROFILE_INFO_FOR_EXTERNAL_ID"));
 const ServiceOperation ServiceOperation::GetProfileInfoForCredential = ServiceOperation(TEXT("GET_PROFILE_INFO_FOR_CREDENTIAL"));
 const ServiceOperation ServiceOperation::GetProfileInfoForExternalAuthId = ServiceOperation(TEXT("GET_PROFILE_INFO_FOR_EXTERNAL_AUTH_ID"));
@@ -97,6 +100,8 @@ const ServiceOperation ServiceOperation::ReadFriendsEntities = ServiceOperation(
 const ServiceOperation ServiceOperation::ReadFriendsWithApplication = ServiceOperation(TEXT("READ_FRIENDS_WITH_APPLICATION"));
 const ServiceOperation ServiceOperation::ReadFriends = ServiceOperation(TEXT("READ_FRIENDS"));
 const ServiceOperation ServiceOperation::ReadFriendsPlayerState = ServiceOperation(TEXT("READ_FRIEND_PLAYER_STATE"));
+const ServiceOperation ServiceOperation::UpdateTimeZoneOffset = ServiceOperation(TEXT("UPDATE_TIMEZONE_OFFSET"));
+const ServiceOperation ServiceOperation::UpdateLanguageCode = ServiceOperation(TEXT("UPDATE_LANGUAGE_CODE"));
 const ServiceOperation ServiceOperation::FindPlayerByName = ServiceOperation(TEXT("FIND_PLAYER_BY_NAME"));
 const ServiceOperation ServiceOperation::FindUsersByExactName = ServiceOperation(TEXT("FIND_USERS_BY_EXACT_NAME"));
 const ServiceOperation ServiceOperation::FindUsersBySubstrName = ServiceOperation(TEXT("FIND_USERS_BY_SUBSTR_NAME"));

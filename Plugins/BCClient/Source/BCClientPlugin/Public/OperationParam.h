@@ -208,6 +208,8 @@ class BCCLIENTPLUGIN_API OperationParam
 	static const OperationParam PlayerStateServiceAdditionalSecs;
 	static const OperationParam PlayerStateServiceDetails;
 	static const OperationParam PlayerStateServiceDurationSecs;
+	static const OperationParam PlayerStateServiceTimeZoneOffset;
+	static const OperationParam PlayerStateServiceLanguageCode;
 
 	// Player Statistics Service - Update Increment Params
 	static const OperationParam PlayerStatisticsServiceStats;
