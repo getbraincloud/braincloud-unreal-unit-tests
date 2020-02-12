@@ -373,6 +373,56 @@ namespace BrainCloud
 		void detachGoogleIdentity(const char * in_googleId, bool in_continueAnon, IServerCallback * in_callback = NULL);
 
 		/**
+		 * Attach the user's Google credentials to the current profile.
+		 *
+		 * Service Name - identity
+		 * Service Operation - Attach
+		 *
+		 * @param in_googleId The Google id of the user
+		 * @param in_authenticationToken The validated token from the Google SDK
+		 *   (that will be further validated when sent to the bC service)
+		 * @param in_callback The method to be invoked when the server response is received
+		 *
+		 * Errors to watch for:  SWITCHING_PROFILES - this means that the Google identity you provided
+		 * already points to a different profile.  You will likely want to offer the user the
+		 * choice to *SWITCH* to that profile, or *MERGE* the profiles.
+		 *
+		 * To switch profiles, call ClearSavedProfileID() and call AuthenticateGoogle().
+		 */
+		void attachGoogleOpenIdentity(const char * in_googleId, const char * in_authenticationToken, IServerCallback * in_callback = NULL);
+
+		/**
+		 * Merge the profile associated with the provided Google credentials with the
+		 * current profile.
+		 *
+		 * Service Name - identity
+		 * Service Operation - Merge
+		 *
+		 * @param in_googleId The Google id of the user
+		 * @param in_authenticationToken The validated token from the Google SDK
+		 *   (that will be further validated when sent to the bC service)
+		 * @param in_callback The method to be invoked when the server response is received
+		 *
+		 */
+		void mergeGoogleOpenIdentity(const char * in_googleId, const char * in_authenticationToken, IServerCallback * in_callback = NULL);
+
+		/*
+		 * Detach the Google identity from this profile.
+		 *
+		 * Service Name - identity
+		 * Service Operation - Detach
+		 *
+		 * @param in_googleId The Google id of the user
+		 * @param in_continueAnon Proceed even if the profile will revert to anonymous?
+		 * @param in_callback The method to be invoked when the server response is received
+		 *
+		 * Watch for DOWNGRADING_TO_ANONYMOUS_ERROR - occurs if you set in_continueAnon to false, and
+		 * disconnecting this identity would result in the profile being anonymous (which means that
+		 * the profile wouldn't be retrievable if the user loses their device)
+		 */
+		void detachGoogleOpenIdentity(const char * in_googleId, bool in_continueAnon, IServerCallback * in_callback = NULL);
+
+		/**
 		 * Attach the user's Twitter credentials to the current profile.
 		 *
 		 * Service Name - identity

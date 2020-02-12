@@ -98,6 +98,25 @@ TEST_F(TestBCScript, RunPeerScript)
 	}
 }
 
+// TEST_F(TestBCScript, GetScheduledCloudScripts)
+// {
+// 	if (AttachPeer(UserA, AuthenticationType::Universal))
+// 	{
+// 		TestResult tr;
+// 		Json::Value scriptData;
+// 		scriptData["testParam1"] = 1;
+// 		m_bc->getScriptService()->getScheduledCloudScript(m_peerScriptName, &tr);
+// 		tr.run(m_bc);
+// 	}
+// }
+
+// TEST_F(TestBCScript, GetRunningOrQueuedScripts)
+// {
+// 		TestResult tr;
+// 		m_bc->getScriptService()->getRunningOrScheduledScripts(&tr);
+// 		tr.run(m_bc);
+// }
+
 TEST_F(TestBCScript, RunPeerScriptAsync)
 {
 	if (AttachPeer(UserA, AuthenticationType::Universal))

@@ -107,19 +107,34 @@ namespace BrainCloud
 		detachIdentity(in_steamId, AuthenticationType::Steam, in_continueAnon, in_callback);
 	}
 
-	void BrainCloudIdentity::attachGoogleIdentity(const char * in_googleId, const char * in_authenticationToken, IServerCallback * in_callback)
+	void BrainCloudIdentity::attachGoogleIdentity(const char * in_googleUserId, const char * in_serverAuthCode, IServerCallback * in_callback)
 	{
-		attachIdentity(in_googleId, in_authenticationToken, AuthenticationType::Google, in_callback);
+		attachIdentity(in_googleUserId, in_serverAuthCode, AuthenticationType::Google, in_callback);
 	}
 
-	void BrainCloudIdentity::mergeGoogleIdentity(const char * in_googleId, const char * in_authenticationToken, IServerCallback * in_callback)
+	void BrainCloudIdentity::mergeGoogleIdentity(const char * in_googleUserId, const char * in_serverAuthCode, IServerCallback * in_callback)
 	{
-		mergeIdentity(in_googleId, in_authenticationToken, AuthenticationType::Google, in_callback);
+		mergeIdentity(in_googleUserId, in_serverAuthCode, AuthenticationType::Google, in_callback);
 	}
 
-	void BrainCloudIdentity::detachGoogleIdentity(const char * in_googleId, bool in_continueAnon, IServerCallback * in_callback)
+	void BrainCloudIdentity::detachGoogleIdentity(const char * in_googleUserId, bool in_continueAnon, IServerCallback * in_callback)
 	{
-		detachIdentity(in_googleId, AuthenticationType::Google, in_continueAnon, in_callback);
+		detachIdentity(in_googleUserId, AuthenticationType::Google, in_continueAnon, in_callback);
+	}
+
+	void BrainCloudIdentity::attachGoogleOpenIdentity(const char * in_googleOpenId, const char * in_authenticationToken, IServerCallback * in_callback)
+	{
+		attachIdentity(in_googleOpenId, in_authenticationToken, AuthenticationType::Google, in_callback);
+	}
+
+	void BrainCloudIdentity::mergeGoogleOpenIdentity(const char * in_googleOpenId, const char * in_authenticationToken, IServerCallback * in_callback)
+	{
+		mergeIdentity(in_googleOpenId, in_authenticationToken, AuthenticationType::Google, in_callback);
+	}
+
+	void BrainCloudIdentity::detachGoogleOpenIdentity(const char * in_googleOpenId, bool in_continueAnon, IServerCallback * in_callback)
+	{
+		detachIdentity(in_googleOpenId, AuthenticationType::Google, in_continueAnon, in_callback);
 	}
 
 	void BrainCloudIdentity::attachTwitterIdentity(const char * in_twitterId, const char * in_authenticationToken, const char * in_secret, IServerCallback * in_callback)

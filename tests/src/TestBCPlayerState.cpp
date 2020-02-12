@@ -107,6 +107,22 @@ TEST_F(TestBCPlayerState, UpdatePlayerPictureUrl)
     tr.run(m_bc);
 }
 
+TEST_F(TestBCPlayerState, UpdateTimeZoneOffset)
+{
+    Authenticate();
+    TestResult tr;
+    m_bc->getPlayerStateService()->updateTimeZoneOffset(-2, &tr);
+    tr.run(m_bc);
+}
+
+TEST_F(TestBCPlayerState, UpdateLanguageCode)
+{
+    Authenticate();
+    TestResult tr;
+    m_bc->getPlayerStateService()->updateLanguageCode("fr", &tr);
+    tr.run(m_bc);
+}
+
 TEST_F(TestBCPlayerState, UpdateContactEmail)
 {
     Authenticate();

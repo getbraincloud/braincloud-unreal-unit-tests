@@ -147,6 +147,24 @@ namespace BrainCloud
         m_client->getBrainCloudComms()->addToQueue(sc);
     }
 
+    void BrainCloudPlayerState::updateTimeZoneOffset(int32_t in_timeZoneOffset, IServerCallback *in_callback)
+    {
+        Json::Value data;
+        data[OperationParam::PlayerStateServiceTimeZoneOffset.getValue()] = in_timeZoneOffset;
+
+        ServerCall * sc = new ServerCall(ServiceName::PlayerState, ServiceOperation::UpdateTimeZoneOffset, data, in_callback);
+        m_client->getBrainCloudComms()->addToQueue(sc);
+    }
+
+    void BrainCloudPlayerState::updateLanguageCode(const std::string& in_languageCode, IServerCallback *in_callback)
+    {
+        Json::Value data;
+        data[OperationParam::PlayerStateServiceLanguageCode.getValue()] = in_languageCode;
+
+        ServerCall * sc = new ServerCall(ServiceName::PlayerState, ServiceOperation::UpdateLanguageCode, data, in_callback);
+        m_client->getBrainCloudComms()->addToQueue(sc);
+    }
+
     void BrainCloudPlayerState::updateUserPictureUrl(const char *in_pictureUrl, IServerCallback *in_callback)
     {
         Json::Value data;

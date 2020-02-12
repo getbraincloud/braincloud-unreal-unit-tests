@@ -190,6 +190,9 @@ namespace BrainCloud {
 		static const OperationParam PlayerStateServicePictureUrl;
 		static const OperationParam PlayerStateServiceContactEmail;
 
+		static const OperationParam PlayerStateServiceTimeZoneOffset;
+		static const OperationParam PlayerStateServiceLanguageCode;
+
 		// Player Statistics Service - Update Increment Params
 		static const OperationParam PlayerStatisticsServiceStats;
 		static const OperationParam PlayerStatisticsServiceStatNames;

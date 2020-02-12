@@ -465,6 +465,56 @@ namespace BrainCloud {
 		getIdentitiesCallback(smartCallback);
 	}
 
+    	void BrainCloudWrapper::smartSwitchAuthenticateGoogleOpenId(const char * in_userid, const char * in_token, bool in_forceCreate, IServerCallback * in_callback)
+	{
+		class SmartSwitchAuthenticateCallback : public SmartSwitchCallback
+		{
+		public:
+			SmartSwitchAuthenticateCallback(BrainCloudWrapper *in_wrapper, const char * in_userid, const char * in_token, bool in_forceCreate, IServerCallback * in_callback) : SmartSwitchCallback(in_wrapper, in_callback) {
+				userid = in_userid;
+				token = in_token;
+				forceCreate = in_forceCreate;
+			}
+
+			const char * userid; const char * token; bool forceCreate;
+
+			void serverCallback(ServiceName serviceName, ServiceOperation serviceOperation, std::string const & jsonData)
+			{
+				clearIds();
+				wrapper->client->getAuthenticationService()->authenticateGoogle(userid, token, forceCreate, callback);
+				delete this;
+			}
+		};
+
+		SmartSwitchAuthenticateCallback *smartCallback = new SmartSwitchAuthenticateCallback(this, in_userid, in_token, in_forceCreate, in_callback);
+		getIdentitiesCallback(smartCallback);
+	}
+
+    	void BrainCloudWrapper::smartSwitchAuthenticateApple(const char * in_userid, const char * in_token, bool in_forceCreate, IServerCallback * in_callback)
+	{
+		class SmartSwitchAuthenticateCallback : public SmartSwitchCallback
+		{
+		public:
+			SmartSwitchAuthenticateCallback(BrainCloudWrapper *in_wrapper, const char * in_userid, const char * in_token, bool in_forceCreate, IServerCallback * in_callback) : SmartSwitchCallback(in_wrapper, in_callback) {
+				userid = in_userid;
+				token = in_token;
+				forceCreate = in_forceCreate;
+			}
+
+			const char * userid; const char * token; bool forceCreate;
+
+			void serverCallback(ServiceName serviceName, ServiceOperation serviceOperation, std::string const & jsonData)
+			{
+				clearIds();
+				wrapper->client->getAuthenticationService()->authenticateApple(userid, token, forceCreate, callback);
+				delete this;
+			}
+		};
+
+		SmartSwitchAuthenticateCallback *smartCallback = new SmartSwitchAuthenticateCallback(this, in_userid, in_token, in_forceCreate, in_callback);
+		getIdentitiesCallback(smartCallback);
+	}
+
 	void BrainCloudWrapper::smartSwitchAuthenticateSteam(const char * in_userid, const char * in_sessionticket, bool in_forceCreate, IServerCallback * in_callback)
 	{
 		class SmartSwitchAuthenticateCallback : public SmartSwitchCallback
@@ -562,6 +612,36 @@ namespace BrainCloud {
     void BrainCloudWrapper::resetEmailPasswordAdvanced(const char * in_emailAddress, std::string in_serviceParams, IServerCallback * in_callback)
     {
         client->getAuthenticationService()->resetEmailPasswordAdvanced(in_emailAddress, in_serviceParams, in_callback);
+    }
+
+    void BrainCloudWrapper::resetEmailPasswordWithExpiry(const char * in_externalId, std::string in_expiry, IServerCallback * in_callback)
+    {
+        client->getAuthenticationService()->resetEmailPasswordWithExpiry(in_externalId, in_expiry, in_callback);
+    }
+
+    void BrainCloudWrapper::resetEmailPasswordAdvancedWithExpiry(const char * in_emailAddress, std::string in_serviceParams, std::string in_expiry, IServerCallback * in_callback)
+    {
+        client->getAuthenticationService()->resetEmailPasswordAdvancedWithExpiry(in_emailAddress, in_serviceParams, in_expiry, in_callback);
+    }
+
+        void BrainCloudWrapper::resetUniversalIdPassword(const char * in_externalId, IServerCallback * in_callback)
+    {
+        client->getAuthenticationService()->resetUniversalIdPassword(in_externalId, in_callback);
+    }
+
+    void BrainCloudWrapper::resetUniversalIdPasswordAdvanced(const char * in_externalId, std::string in_serviceParams, IServerCallback * in_callback)
+    {
+        client->getAuthenticationService()->resetUniversalIdPasswordAdvanced(in_externalId, in_serviceParams, in_callback);
+    }
+
+    void BrainCloudWrapper::resetUniversalIdPasswordWithExpiry(const char * in_externalId, std::string in_expiry, IServerCallback * in_callback)
+    {
+        client->getAuthenticationService()->resetUniversalIdPasswordWithExpiry(in_externalId, in_expiry, in_callback);
+    }
+
+    void BrainCloudWrapper::resetUniversalIdPasswordAdvancedWithExpiry(const char * in_externalId, std::string in_serviceParams, std::string in_expiry, IServerCallback * in_callback)
+    {
+        client->getAuthenticationService()->resetUniversalIdPasswordAdvancedWithExpiry(in_externalId, in_serviceParams, in_expiry, in_callback);
     }
 
 	void BrainCloudWrapper::reconnect(IServerCallback * in_callback)

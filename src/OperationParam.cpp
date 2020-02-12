@@ -181,6 +181,9 @@ namespace BrainCloud
 	const OperationParam OperationParam::PlayerStateServicePictureUrl = OperationParam("playerPictureUrl");
 	const OperationParam OperationParam::PlayerStateServiceContactEmail = OperationParam("contactEmail");
 
+	const OperationParam OperationParam::PlayerStateServiceTimeZoneOffset= OperationParam("timeZoneOffset");
+	const OperationParam OperationParam::PlayerStateServiceLanguageCode = OperationParam("languageCode");
+
 	// Player Statistics Service - Update Increment Params
 	const OperationParam OperationParam::PlayerStatisticsServiceStats = OperationParam("statistics");
 	const OperationParam OperationParam::PlayerStatisticsServiceStatNames = OperationParam("statNames");

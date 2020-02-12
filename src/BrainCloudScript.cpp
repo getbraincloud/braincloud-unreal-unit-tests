@@ -91,6 +91,24 @@ namespace BrainCloud
 		m_client->sendRequest(sc);
 	}
 
+		void BrainCloudScript::getScheduledCloudScript(const char * in_jobId, IServerCallback * in_callback)
+	{
+		Json::Value message;
+		message[OperationParam::ScriptServiceJobId.getValue()] = in_jobId;
+
+		ServerCall * sc = new ServerCall(ServiceName::Script, ServiceOperation::GetScheduledCloudScripts, message, in_callback);
+		m_client->sendRequest(sc);
+	}
+
+		void BrainCloudScript::getRunningOrScheduledScripts(IServerCallback * in_callback)
+	{
+		// Json::Value message;
+		// message[OperationParam::ScriptServiceJobId.getValue()] = in_jobId;
+
+		ServerCall * sc = new ServerCall(ServiceName::Script, ServiceOperation::GetRunningOrQueuedCloudScripts, in_callback);
+		m_client->sendRequest(sc);
+	}
+
 	void BrainCloudScript::runPeerScript(const char * in_scriptName, const std::string & in_jsonScriptData, const char * in_peer, IServerCallback * in_callback)
 	{
 		Json::Value message;

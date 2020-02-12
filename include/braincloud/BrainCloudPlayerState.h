@@ -166,6 +166,28 @@ namespace BrainCloud
         void removeAttributes(const std::vector<std::string> & in_attributeNames, IServerCallback * in_callback = NULL);
 
         /**
+        * Remove user's attributes.
+        *
+        * Service Name - PlayerState
+        * Service Operation - RemoveAttributes
+        *
+        * @param in_attributeNames Collection of attribute names.
+        * @param in_callback The method to be invoked when the server response is received
+        */
+        void updateTimeZoneOffset(int32_t in_timeZoneOffset, IServerCallback * in_callback = NULL);
+
+                /**
+        * Remove user's attributes.
+        *
+        * Service Name - PlayerState
+        * Service Operation - RemoveAttribute
+        *
+        * @param in_attributeNames Collection of attribute names.
+        * @param in_callback The method to be invoked when the server response is received
+        */
+        void updateLanguageCode(const std::string& in_languageCode, IServerCallback * in_callback = NULL);
+
+        /**
 		* @deprecated Use updateUserPictureUrl() instead - Removal after September 1 2017
 		*/
         DEPRECATED

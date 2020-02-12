@@ -412,6 +412,46 @@ namespace BrainCloud {
          */
         void smartSwitchAuthenticateGoogle(const char * in_userid, const char * in_token, bool in_forceCreate, IServerCallback * in_callback = NULL);
 
+                /*
+         * Smart Switch Authenticate will logout of the current profile, and switch to the new authentication type.
+	     * In event the current session was previously an anonymous account, the smart switch will delete that profile.
+	     * Use this function to keep a clean designflow from anonymous to signed profiles
+         *
+         * Authenticate the user using a google userid(email address) and google authentication token.
+         *
+         * Service Name - Authenticate
+         * Service Operation - Authenticate
+         *
+         * @param in_userid  String representation of google+ userid (email)
+         * @param in_token  The authentication token derived via the google apis.
+         * @param in_forceCreate Should a new profile be created for this user if the account does not exist?
+         * @param in_callback The method to be invoked when the server response is received
+         *
+         * @returns   performs the in_success callback on success, in_failure callback on failure
+         *
+         */
+        void smartSwitchAuthenticateGoogleOpenId(const char * in_userid, const char * in_token, bool in_forceCreate, IServerCallback * in_callback = NULL);
+
+                /*
+         * Smart Switch Authenticate will logout of the current profile, and switch to the new authentication type.
+	     * In event the current session was previously an anonymous account, the smart switch will delete that profile.
+	     * Use this function to keep a clean designflow from anonymous to signed profiles
+         *
+         * Authenticate the user using a google userid(email address) and google authentication token.
+         *
+         * Service Name - Authenticate
+         * Service Operation - Authenticate
+         *
+         * @param in_userid  String representation of apple+ userid (email)
+         * @param in_token  The authentication token derived via the apple apis.
+         * @param in_forceCreate Should a new profile be created for this user if the account does not exist?
+         * @param in_callback The method to be invoked when the server response is received
+         *
+         * @returns   performs the in_success callback on success, in_failure callback on failure
+         *
+         */
+        void smartSwitchAuthenticateApple(const char * in_userid, const char * in_token, bool in_forceCreate, IServerCallback * in_callback = NULL);
+
         /*
          * Smart Switch Authenticate will logout of the current profile, and switch to the new authentication type.
 	     * In event the current session was previously an anonymous account, the smart switch will delete that profile.
@@ -506,6 +546,110 @@ namespace BrainCloud {
 		 * SECURITY_ERROR (40209) - If the email address cannot be found.
 		 */
 		void resetEmailPasswordAdvanced(const char * in_emailAddress, std::string in_serviceParams, IServerCallback * in_callback = NULL);
+
+        	    /**
+		 * Reset Email password - Sends a password reset email to the specified address
+		 *
+		 * Service Name - Authenticate
+		 * Operation - ResetEmailPassword
+		 *
+		 * @param in_externalId The email address to send the reset email to.
+		 * @param in_callback The method to be invoked when the server response is received
+		 *
+		 * Note the follow error reason codes:
+		 *
+		 * SECURITY_ERROR (40209) - If the email address cannot be found.
+		 */
+		void resetEmailPasswordWithExpiry(const char * in_externalId, std::string in_expiry, IServerCallback * in_callback = NULL);
+
+		/**
+		 * Reset Email password with service parameters - Sends a password reset email to 
+		 * the specified address
+		 *
+		 * Service Name - Authenticate
+		 * Operation - ResetEmailPasswordAdvanced
+		 *
+		 * @param appId the applicationId
+		 * @param in_emailAddress The email address to send the reset email to.
+		 * @param in_serviceParams - parameters to send to the email service. See documentation for
+		 * full list. http://getbraincloud.com/apidocs/apiref/#capi-mail
+		 * @param in_callback The method to be invoked when the server response is received
+		 *
+		 * Note the follow error reason codes:
+		 *
+		 * SECURITY_ERROR (40209) - If the email address cannot be found.
+		 */
+		void resetEmailPasswordAdvancedWithExpiry(const char * in_emailAddress, std::string in_serviceParams, std::string in_expiry, IServerCallback * in_callback = NULL);
+
+        
+
+	    /**
+		 * Reset Email password - Sends a password reset email to the specified address
+		 *
+		 * Service Name - Authenticate
+		 * Operation - ResetEmailPassword
+		 *
+		 * @param in_externalId The email address to send the reset email to.
+		 * @param in_callback The method to be invoked when the server response is received
+		 *
+		 * Note the follow error reason codes:
+		 *
+		 * SECURITY_ERROR (40209) - If the email address cannot be found.
+		 */
+		void resetUniversalIdPassword(const char * in_externalId, IServerCallback * in_callback = NULL);
+
+		/**
+		 * Reset Email password with service parameters - Sends a password reset email to 
+		 * the specified address
+		 *
+		 * Service Name - Authenticate
+		 * Operation - ResetEmailPasswordAdvanced
+		 *
+		 * @param appId the applicationId
+		 * @param in_emailAddress The email address to send the reset email to.
+		 * @param in_serviceParams - parameters to send to the email service. See documentation for
+		 * full list. http://getbraincloud.com/apidocs/apiref/#capi-mail
+		 * @param in_callback The method to be invoked when the server response is received
+		 *
+		 * Note the follow error reason codes:
+		 *
+		 * SECURITY_ERROR (40209) - If the email address cannot be found.
+		 */
+		void resetUniversalIdPasswordAdvanced(const char * in_emailAddress, std::string in_serviceParams, IServerCallback * in_callback = NULL);
+
+        	    /**
+		 * Reset Email password - Sends a password reset email to the specified address
+		 *
+		 * Service Name - Authenticate
+		 * Operation - ResetEmailPassword
+		 *
+		 * @param in_externalId The email address to send the reset email to.
+		 * @param in_callback The method to be invoked when the server response is received
+		 *
+		 * Note the follow error reason codes:
+		 *
+		 * SECURITY_ERROR (40209) - If the email address cannot be found.
+		 */
+		void resetUniversalIdPasswordWithExpiry(const char * in_externalId, std::string in_expiry, IServerCallback * in_callback = NULL);
+
+		/**
+		 * Reset Email password with service parameters - Sends a password reset email to 
+		 * the specified address
+		 *
+		 * Service Name - Authenticate
+		 * Operation - ResetEmailPasswordAdvanced
+		 *
+		 * @param appId the applicationId
+		 * @param in_emailAddress The email address to send the reset email to.
+		 * @param in_serviceParams - parameters to send to the email service. See documentation for
+		 * full list. http://getbraincloud.com/apidocs/apiref/#capi-mail
+		 * @param in_callback The method to be invoked when the server response is received
+		 *
+		 * Note the follow error reason codes:
+		 *
+		 * SECURITY_ERROR (40209) - If the email address cannot be found.
+		 */
+		void resetUniversalIdPasswordAdvancedWithExpiry(const char * in_emailAddress, std::string in_serviceParams, std::string in_expiry, IServerCallback * in_callback = NULL);
 
 		/**
 		* Re-authenticates the user with brainCloud
