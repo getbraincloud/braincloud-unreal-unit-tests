@@ -91,6 +91,11 @@ class BCCLIENTPLUGIN_API ServiceOperation
 	static const ServiceOperation DetachBlockchainIdentity;
 	static const ServiceOperation RemoveUserItemFromBlockchain;
 
+	static const ServiceOperation UpdateTimeZoneOffset;
+	static const ServiceOperation UpdateLanguageCode;
+	static const ServiceOperation GetScheduledCloudSripts;
+	static const ServiceOperation GetRunningOrQueuedCloudScripts;
+
 	static const ServiceOperation GetFriendProfileInfoForExternalId;
 	static const ServiceOperation GetProfileInfoForCredential;
 	static const ServiceOperation GetProfileInfoForExternalAuthId;
