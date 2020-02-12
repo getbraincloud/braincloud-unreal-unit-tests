@@ -155,3 +155,17 @@ UBCPlayerStateProxy *UBCPlayerStateProxy::SetUserStatus(UBrainCloudWrapper *brai
     UBCWrapperProxy::GetBrainCloudInstance(brainCloudWrapper)->getPlayerStateService()->setUserStatus(statusName, durationSecs, details, Proxy);
     return Proxy;
 }
+
+UBCPlayerStateProxy *UBCPlayerStateProxy::UpdateTimeZoneOffset(UBrainCloudWrapper *brainCloudWrapper, int32 timeZoneOffset)
+{
+    UBCPlayerStateProxy *Proxy = NewObject<UBCPlayerStateProxy>();
+    UBCWrapperProxy::GetBrainCloudInstance(brainCloudWrapper)->getPlayerStateService()->updateTimeZoneOffset(timeZoneOffset, Proxy);
+    return Proxy;
+}
+
+UBCPlayerStateProxy *UBCPlayerStateProxy::UpdateLanguageCode(UBrainCloudWrapper *brainCloudWrapper, const FString &languageCode)
+{
+    UBCPlayerStateProxy *Proxy = NewObject<UBCPlayerStateProxy>();
+    UBCWrapperProxy::GetBrainCloudInstance(brainCloudWrapper)->getPlayerStateService()->updateLanguageCode(languageCode, Proxy);
+    return Proxy;
+}
