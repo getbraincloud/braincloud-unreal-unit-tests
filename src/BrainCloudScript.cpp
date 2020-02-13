@@ -91,7 +91,7 @@ namespace BrainCloud
 		m_client->sendRequest(sc);
 	}
 
-		void BrainCloudScript::getScheduledCloudScript(const tm* in_startDateInUTC, IServerCallback * in_callback)
+		void BrainCloudScript::getScheduledCloudScripts(const tm* in_startDateInUTC, IServerCallback * in_callback)
 	{
 		Json::Value message;
 		message[OperationParam::ScriptServiceJobId.getValue()] = in_startDateInUTC;
