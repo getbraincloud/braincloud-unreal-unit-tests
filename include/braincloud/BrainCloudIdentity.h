@@ -389,7 +389,7 @@ namespace BrainCloud
 		 *
 		 * To switch profiles, call ClearSavedProfileID() and call AuthenticateGoogle().
 		 */
-		void attachGoogleOpenIdentity(const char * in_googleId, const char * in_authenticationToken, IServerCallback * in_callback = NULL);
+		void attachGoogleOpenIdIdentity(const char * in_googleId, const char * in_authenticationToken, IServerCallback * in_callback = NULL);
 
 		/**
 		 * Merge the profile associated with the provided Google credentials with the
@@ -404,7 +404,7 @@ namespace BrainCloud
 		 * @param in_callback The method to be invoked when the server response is received
 		 *
 		 */
-		void mergeGoogleOpenIdentity(const char * in_googleId, const char * in_authenticationToken, IServerCallback * in_callback = NULL);
+		void mergeGoogleOpenIdIdentity(const char * in_googleId, const char * in_authenticationToken, IServerCallback * in_callback = NULL);
 
 		/*
 		 * Detach the Google identity from this profile.
@@ -420,7 +420,7 @@ namespace BrainCloud
 		 * disconnecting this identity would result in the profile being anonymous (which means that
 		 * the profile wouldn't be retrievable if the user loses their device)
 		 */
-		void detachGoogleOpenIdentity(const char * in_googleId, bool in_continueAnon, IServerCallback * in_callback = NULL);
+		void detachGoogleOpenIdIdentity(const char * in_googleId, bool in_continueAnon, IServerCallback * in_callback = NULL);
 
 		/**
 		 * Attach the user's Twitter credentials to the current profile.

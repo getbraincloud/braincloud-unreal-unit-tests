@@ -91,20 +91,17 @@ namespace BrainCloud
 		m_client->sendRequest(sc);
 	}
 
-		void BrainCloudScript::getScheduledCloudScript(const char * in_jobId, IServerCallback * in_callback)
+		void BrainCloudScript::getScheduledCloudScript(const tm* in_startDateInUTC, IServerCallback * in_callback)
 	{
 		Json::Value message;
-		message[OperationParam::ScriptServiceJobId.getValue()] = in_jobId;
+		message[OperationParam::ScriptServiceJobId.getValue()] = in_startDateInUTC;
 
 		ServerCall * sc = new ServerCall(ServiceName::Script, ServiceOperation::GetScheduledCloudScripts, message, in_callback);
 		m_client->sendRequest(sc);
 	}
 
-		void BrainCloudScript::getRunningOrScheduledScripts(IServerCallback * in_callback)
+		void BrainCloudScript::getRunningOrQueuedCloudScripts(IServerCallback * in_callback)
 	{
-		// Json::Value message;
-		// message[OperationParam::ScriptServiceJobId.getValue()] = in_jobId;
-
 		ServerCall * sc = new ServerCall(ServiceName::Script, ServiceOperation::GetRunningOrQueuedCloudScripts, in_callback);
 		m_client->sendRequest(sc);
 	}

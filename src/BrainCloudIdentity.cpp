@@ -122,17 +122,17 @@ namespace BrainCloud
 		detachIdentity(in_googleUserId, AuthenticationType::Google, in_continueAnon, in_callback);
 	}
 
-	void BrainCloudIdentity::attachGoogleOpenIdentity(const char * in_googleOpenId, const char * in_authenticationToken, IServerCallback * in_callback)
+	void BrainCloudIdentity::attachGoogleOpenIdIdentity(const char * in_googleOpenId, const char * in_authenticationToken, IServerCallback * in_callback)
 	{
 		attachIdentity(in_googleOpenId, in_authenticationToken, AuthenticationType::Google, in_callback);
 	}
 
-	void BrainCloudIdentity::mergeGoogleOpenIdentity(const char * in_googleOpenId, const char * in_authenticationToken, IServerCallback * in_callback)
+	void BrainCloudIdentity::mergeGoogleOpenIdIdentity(const char * in_googleOpenId, const char * in_authenticationToken, IServerCallback * in_callback)
 	{
 		mergeIdentity(in_googleOpenId, in_authenticationToken, AuthenticationType::Google, in_callback);
 	}
 
-	void BrainCloudIdentity::detachGoogleOpenIdentity(const char * in_googleOpenId, bool in_continueAnon, IServerCallback * in_callback)
+	void BrainCloudIdentity::detachGoogleOpenIdIdentity(const char * in_googleOpenId, bool in_continueAnon, IServerCallback * in_callback)
 	{
 		detachIdentity(in_googleOpenId, AuthenticationType::Google, in_continueAnon, in_callback);
 	}

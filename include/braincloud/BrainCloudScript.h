@@ -84,10 +84,9 @@ namespace BrainCloud
 		* Service Name - Script
 		* Service Operation - CANCEL_SCHEDULED_SCRIPT
 		*
-		* @param in_jobId ID of script job to cancel
 		* @param in_callback The method to be invoked when the server response is received
 		*/
-		void getRunningOrScheduledScripts(IServerCallback * in_callback = NULL);
+		void getRunningOrQueuedCloudScripts(IServerCallback * in_callback = NULL);
 
 		/**
 		* Cancels a scheduled cloud code script
@@ -98,7 +97,7 @@ namespace BrainCloud
 		* @param in_jobId ID of script job to cancel
 		* @param in_callback The method to be invoked when the server response is received
 		*/
-		void getScheduledCloudScript(const char * in_jobId, IServerCallback * in_callback = NULL);
+		void getScheduledCloudScript(const struct tm* in_startDateInUTC, IServerCallback * in_callback = NULL);
 
 		/**
 		* Runs a script from the context of a peer
