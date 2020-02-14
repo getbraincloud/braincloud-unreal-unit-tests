@@ -614,14 +614,14 @@ namespace BrainCloud {
         client->getAuthenticationService()->resetEmailPasswordAdvanced(in_emailAddress, in_serviceParams, in_callback);
     }
 
-    void BrainCloudWrapper::resetEmailPasswordWithExpiry(const char * in_externalId, std::string in_expiry, IServerCallback * in_callback)
+    void BrainCloudWrapper::resetEmailPasswordWithExpiry(const char * in_externalId, int tokenTtlInMinutes , IServerCallback * in_callback)
     {
-        client->getAuthenticationService()->resetEmailPasswordWithExpiry(in_externalId, in_expiry, in_callback);
+        client->getAuthenticationService()->resetEmailPasswordWithExpiry(in_externalId, tokenTtlInMinutes , in_callback);
     }
 
-    void BrainCloudWrapper::resetEmailPasswordAdvancedWithExpiry(const char * in_emailAddress, std::string in_serviceParams, std::string in_expiry, IServerCallback * in_callback)
+    void BrainCloudWrapper::resetEmailPasswordAdvancedWithExpiry(const char * in_emailAddress, std::string in_serviceParams, int tokenTtlInMinutes , IServerCallback * in_callback)
     {
-        client->getAuthenticationService()->resetEmailPasswordAdvancedWithExpiry(in_emailAddress, in_serviceParams, in_expiry, in_callback);
+        client->getAuthenticationService()->resetEmailPasswordAdvancedWithExpiry(in_emailAddress, in_serviceParams, tokenTtlInMinutes , in_callback);
     }
 
         void BrainCloudWrapper::resetUniversalIdPassword(const char * in_externalId, IServerCallback * in_callback)
@@ -634,14 +634,14 @@ namespace BrainCloud {
         client->getAuthenticationService()->resetUniversalIdPasswordAdvanced(in_externalId, in_serviceParams, in_callback);
     }
 
-    void BrainCloudWrapper::resetUniversalIdPasswordWithExpiry(const char * in_externalId, std::string in_expiry, IServerCallback * in_callback)
+    void BrainCloudWrapper::resetUniversalIdPasswordWithExpiry(const char * in_externalId, int tokenTtlInMinutes , IServerCallback * in_callback)
     {
-        client->getAuthenticationService()->resetUniversalIdPasswordWithExpiry(in_externalId, in_expiry, in_callback);
+        client->getAuthenticationService()->resetUniversalIdPasswordWithExpiry(in_externalId, tokenTtlInMinutes , in_callback);
     }
 
-    void BrainCloudWrapper::resetUniversalIdPasswordAdvancedWithExpiry(const char * in_externalId, std::string in_serviceParams, std::string in_expiry, IServerCallback * in_callback)
+    void BrainCloudWrapper::resetUniversalIdPasswordAdvancedWithExpiry(const char * in_externalId, std::string in_serviceParams, int tokenTtlInMinutes , IServerCallback * in_callback)
     {
-        client->getAuthenticationService()->resetUniversalIdPasswordAdvancedWithExpiry(in_externalId, in_serviceParams, in_expiry, in_callback);
+        client->getAuthenticationService()->resetUniversalIdPasswordAdvancedWithExpiry(in_externalId, in_serviceParams, tokenTtlInMinutes , in_callback);
     }
 
 	void BrainCloudWrapper::reconnect(IServerCallback * in_callback)

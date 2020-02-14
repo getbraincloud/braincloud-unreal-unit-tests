@@ -145,7 +145,7 @@ namespace BrainCloud {
         m_client->sendRequest(sc);
     }
 
-        void BrainCloudAuthentication::resetEmailPasswordWithExpiry(const char * in_externalId, std::string in_tokenTtlInMinutes, IServerCallback * in_callback)
+        void BrainCloudAuthentication::resetEmailPasswordWithExpiry(const char * in_externalId, int in_tokenTtlInMinutes, IServerCallback * in_callback)
     {
         Json::Value message;
         message[OperationParam::AuthenticateServiceAuthenticateExternalId.getValue()] = in_externalId;
@@ -156,7 +156,7 @@ namespace BrainCloud {
         m_client->sendRequest(sc);
     }
 
-    void BrainCloudAuthentication::resetEmailPasswordAdvancedWithExpiry(const char * in_emailAddress, std::string in_serviceParams, std::string in_tokenTtlInMinutes, IServerCallback * in_callback)
+    void BrainCloudAuthentication::resetEmailPasswordAdvancedWithExpiry(const char * in_emailAddress, std::string in_serviceParams, int in_tokenTtlInMinutes, IServerCallback * in_callback)
     {
         Json::Value message;
         message[OperationParam::AuthenticateServiceAuthenticateGameId.getValue()] = m_client->getAppId().c_str();
@@ -189,7 +189,7 @@ namespace BrainCloud {
         m_client->sendRequest(sc);
     }
 
-    void BrainCloudAuthentication::resetUniversalIdPasswordWithExpiry(const char * in_universalId, std::string in_tokenTtlInMinutes, IServerCallback * in_callback)
+    void BrainCloudAuthentication::resetUniversalIdPasswordWithExpiry(const char * in_universalId, int in_tokenTtlInMinutes, IServerCallback * in_callback)
     {
         Json::Value message;
         message[OperationParam::AuthenticateServiceAuthenticateGameId.getValue()] = m_client->getAppId().c_str();
@@ -200,7 +200,7 @@ namespace BrainCloud {
         m_client->sendRequest(sc);
     }
 
-	void BrainCloudAuthentication::resetUniversalIdPasswordAdvancedWithExpiry(const char * in_universalId, std::string in_serviceParams, std::string in_tokenTtlInMinutes, IServerCallback * in_callback)
+	void BrainCloudAuthentication::resetUniversalIdPasswordAdvancedWithExpiry(const char * in_universalId, std::string in_serviceParams, int in_tokenTtlInMinutes, IServerCallback * in_callback)
     {
         Json::Value message;
         message[OperationParam::AuthenticateServiceAuthenticateGameId.getValue()] = m_client->getAppId().c_str();

@@ -159,14 +159,14 @@ TEST_F(TestBCAuth, ResetEmailPasswordAdvanced)
 TEST_F(TestBCAuth, ResetEmailPasswordWithExpiry)
 {
     const char* email = "braincloudunittest@gmail.com";
-    std::string expiryToken ="1";
+   
 
     TestResult tr1;
     m_bc->getAuthenticationService()->authenticateEmailPassword(GetUser(UserA)->m_email, GetUser(UserA)->m_password, true, &tr1);
     tr1.run(m_bc);
 
     TestResult tr;
-    m_bc->getAuthenticationService()->resetEmailPasswordWithExpiry(email, expiryToken, &tr);
+    m_bc->getAuthenticationService()->resetEmailPasswordWithExpiry(email, 1, &tr);
     tr.run(m_bc);
 }
 
@@ -174,14 +174,13 @@ TEST_F(TestBCAuth, ResetEmailPasswordAdvancedWithExpiry)
 {
     const char* email = "braincloudunittest@gmail.com";
     std::string content = "{\"fromAddress\": \"fromAddress\",\"fromName\": \"fromName\",\"replyToAddress\": \"replyToAddress\",\"replyToName\": \"replyToName\", \"templateId\": \"8f14c77d-61f4-4966-ab6d-0bee8b13d090\",\"subject\": \"subject\",\"body\": \"Body goes here\", \"substitutions\": { \":name\": \"John Doe\",\":resetLink\": \"www.dummuyLink.io\"}, \"categories\": [\"category1\",\"category2\" ]}";
-    std::string expiryToken ="1";
 
     TestResult tr1;
     m_bc->getAuthenticationService()->authenticateEmailPassword(GetUser(UserA)->m_email, GetUser(UserA)->m_password, true, &tr1);
     tr1.run(m_bc);
 
     TestResult tr;
-    m_bc->getAuthenticationService()->resetEmailPasswordAdvancedWithExpiry(email, content, expiryToken, &tr);
+    m_bc->getAuthenticationService()->resetEmailPasswordAdvancedWithExpiry(email, content, 1, &tr);
     tr.runExpectFail(m_bc, HTTP_BAD_REQUEST, INVALID_FROM_ADDRESS);
 }
 
@@ -215,10 +214,8 @@ TEST_F(TestBCAuth, ResetUniversalIdPasswordWithExpiry)
     m_bc->getAuthenticationService()->authenticateUniversal(GetUser(UserA)->m_id, GetUser(UserA)->m_password, true, &tr2);
     tr2.run(m_bc);
 
-    std::string expiry ="1";
-
     TestResult tr;
-    m_bc->getAuthenticationService()->resetUniversalIdPasswordWithExpiry(GetUser(UserA)->m_id, expiry, &tr);
+    m_bc->getAuthenticationService()->resetUniversalIdPasswordWithExpiry(GetUser(UserA)->m_id, 1, &tr);
     tr.run(m_bc);
 }
 
@@ -229,9 +226,8 @@ TEST_F(TestBCAuth, ResetUniversalIdPasswordAdvancedWithExpiry)
     tr2.run(m_bc);
 
     std::string content = "{\"templateId\": \"d-template-id-guid\", \"substitutions\": { \":name\": \"John Doe\",\":resetLink\": \"www.dummuyLink.io\"}, \"categories\": [\"category1\",\"category2\" ]}"; 
-    std::string expiry ="1";
 
     TestResult tr;
-    m_bc->getAuthenticationService()->resetUniversalIdPasswordAdvancedWithExpiry(GetUser(UserA)->m_id, content, expiry, &tr);
+    m_bc->getAuthenticationService()->resetUniversalIdPasswordAdvancedWithExpiry(GetUser(UserA)->m_id, content, 1, &tr);
     tr.run(m_bc);
 }

@@ -270,7 +270,7 @@ namespace BrainCloud
 		 * SECURITY_ERROR (40209) - If the email address cannot be found.
 		 */
 		void resetEmailPasswordAdvanced(const char * in_emailAddress, std::string in_serviceParams, IServerCallback * in_callback = NULL);
-///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
 		/**
 		 * Reset Email password - Sends a password reset email to the specified address
 		 *
@@ -284,7 +284,7 @@ namespace BrainCloud
 		 *
 		 * SECURITY_ERROR (40209) - If the email address cannot be found.
 		 */
-		void resetEmailPasswordWithExpiry(const char * in_externalId, std::string in_expiryInMin, IServerCallback * in_callback = NULL);
+		void resetEmailPasswordWithExpiry(const char * in_externalId, int in_tokenTtlInMinutes , IServerCallback * in_callback = NULL);
 
 		/**
 		 * Reset Email password with service parameters - Sends a password reset email to 
@@ -303,8 +303,8 @@ namespace BrainCloud
 		 *
 		 * SECURITY_ERROR (40209) - If the email address cannot be found.
 		 */
-		void resetEmailPasswordAdvancedWithExpiry(const char * in_emailAddress, std::string in_serviceParams, std::string in_expiryInMin, IServerCallback * in_callback = NULL);
-////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+		void resetEmailPasswordAdvancedWithExpiry(const char * in_emailAddress, std::string in_serviceParams, int in_tokenTtlInMinutes , IServerCallback * in_callback = NULL);
+
 		/**
 		 * Resets Universal ID password
 		 *
@@ -344,7 +344,7 @@ namespace BrainCloud
 		 * @param in_callback The method to be invoked when the server response is received
 		 *
 		 */
-		void resetUniversalIdPasswordWithExpiry(const char * in_universalId, std::string in_expiryInMin, IServerCallback * in_callback = NULL);
+		void resetUniversalIdPasswordWithExpiry(const char * in_universalId, int in_tokenTtlInMinutes , IServerCallback * in_callback = NULL);
 
 		/**
 		 * Advanced Universal ID password reset using templates
@@ -358,8 +358,8 @@ namespace BrainCloud
 		 * @param in_callback The method to be invoked when the server response is received
 		 *
 		 */
-		void resetUniversalIdPasswordAdvancedWithExpiry(const char * in_universalId, std::string in_serviceParams, std::string in_expiryInMin, IServerCallback * in_callback = NULL);
-		////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+		void resetUniversalIdPasswordAdvancedWithExpiry(const char * in_universalId, std::string in_serviceParams, int in_tokenTtlInMinutes , IServerCallback * in_callback = NULL);
+		
 
 		const std::string & getAnonymousId() const { return _anonymousId; }
 		const std::string & getProfileId() const { return _profileId; }

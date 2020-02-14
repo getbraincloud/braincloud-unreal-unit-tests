@@ -560,7 +560,7 @@ namespace BrainCloud {
 		 *
 		 * SECURITY_ERROR (40209) - If the email address cannot be found.
 		 */
-		void resetEmailPasswordWithExpiry(const char * in_externalId, std::string in_expiry, IServerCallback * in_callback = NULL);
+		void resetEmailPasswordWithExpiry(const char * in_externalId, int in_tokenTtlInMinutes , IServerCallback * in_callback = NULL);
 
 		/**
 		 * Reset Email password with service parameters - Sends a password reset email to 
@@ -579,7 +579,7 @@ namespace BrainCloud {
 		 *
 		 * SECURITY_ERROR (40209) - If the email address cannot be found.
 		 */
-		void resetEmailPasswordAdvancedWithExpiry(const char * in_emailAddress, std::string in_serviceParams, std::string in_expiry, IServerCallback * in_callback = NULL);
+		void resetEmailPasswordAdvancedWithExpiry(const char * in_emailAddress, std::string in_serviceParams, int in_tokenTtlInMinutes , IServerCallback * in_callback = NULL);
 
         
 
@@ -630,7 +630,7 @@ namespace BrainCloud {
 		 *
 		 * SECURITY_ERROR (40209) - If the email address cannot be found.
 		 */
-		void resetUniversalIdPasswordWithExpiry(const char * in_externalId, std::string in_expiry, IServerCallback * in_callback = NULL);
+		void resetUniversalIdPasswordWithExpiry(const char * in_externalId, int in_tokenTtlInMinutes , IServerCallback * in_callback = NULL);
 
 		/**
 		 * Reset Email password with service parameters - Sends a password reset email to 
@@ -649,7 +649,7 @@ namespace BrainCloud {
 		 *
 		 * SECURITY_ERROR (40209) - If the email address cannot be found.
 		 */
-		void resetUniversalIdPasswordAdvancedWithExpiry(const char * in_emailAddress, std::string in_serviceParams, std::string in_expiry, IServerCallback * in_callback = NULL);
+		void resetUniversalIdPasswordAdvancedWithExpiry(const char * in_emailAddress, std::string in_serviceParams, int in_tokenTtlInMinutes , IServerCallback * in_callback = NULL);
 
 		/**
 		* Re-authenticates the user with brainCloud
