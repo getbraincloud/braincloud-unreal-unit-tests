@@ -132,24 +132,66 @@ UBCIdentityProxy *UBCIdentityProxy::DetachSteamIdentity(UBrainCloudWrapper *brai
 	return Proxy;
 }
 
-UBCIdentityProxy *UBCIdentityProxy::AttachGoogleIdentity(UBrainCloudWrapper *brainCloudWrapper, const FString &googleId, const FString &authenticationToken)
+UBCIdentityProxy *UBCIdentityProxy::AttachGoogleIdentity(UBrainCloudWrapper *brainCloudWrapper, const FString &googleUserId, const FString &serverAuthCode)
 {
 	UBCIdentityProxy *Proxy = NewObject<UBCIdentityProxy>();
-	UBCWrapperProxy::GetBrainCloudInstance(brainCloudWrapper)->getIdentityService()->attachGoogleIdentity(googleId, authenticationToken, Proxy);
+	UBCWrapperProxy::GetBrainCloudInstance(brainCloudWrapper)->getIdentityService()->attachGoogleIdentity(googleUserId, serverAuthCode, Proxy);
 	return Proxy;
 }
 
-UBCIdentityProxy *UBCIdentityProxy::MergeGoogleIdentity(UBrainCloudWrapper *brainCloudWrapper, const FString &googleId, const FString &authenticationToken)
+UBCIdentityProxy *UBCIdentityProxy::MergeGoogleIdentity(UBrainCloudWrapper *brainCloudWrapper, const FString &googleUserId, const FString &serverAuthCode)
 {
 	UBCIdentityProxy *Proxy = NewObject<UBCIdentityProxy>();
-	UBCWrapperProxy::GetBrainCloudInstance(brainCloudWrapper)->getIdentityService()->mergeGoogleIdentity(googleId, authenticationToken, Proxy);
+	UBCWrapperProxy::GetBrainCloudInstance(brainCloudWrapper)->getIdentityService()->mergeGoogleIdentity(googleUserId, serverAuthCode, Proxy);
 	return Proxy;
 }
 
-UBCIdentityProxy *UBCIdentityProxy::DetachGoogleIdentity(UBrainCloudWrapper *brainCloudWrapper, const FString &googleId, bool continueAnon)
+UBCIdentityProxy *UBCIdentityProxy::DetachGoogleIdentity(UBrainCloudWrapper *brainCloudWrapper, const FString &googleUserId, bool continueAnon)
 {
 	UBCIdentityProxy *Proxy = NewObject<UBCIdentityProxy>();
-	UBCWrapperProxy::GetBrainCloudInstance(brainCloudWrapper)->getIdentityService()->detachGoogleIdentity(googleId, continueAnon, Proxy);
+	UBCWrapperProxy::GetBrainCloudInstance(brainCloudWrapper)->getIdentityService()->detachGoogleIdentity(googleUserId, continueAnon, Proxy);
+	return Proxy;
+}
+
+UBCIdentityProxy *UBCIdentityProxy::AttachGoogleOpenIdIdentity(UBrainCloudWrapper *brainCloudWrapper, const FString &googleUserAccountEmail, const FString &IdToken)
+{
+	UBCIdentityProxy *Proxy = NewObject<UBCIdentityProxy>();
+	UBCWrapperProxy::GetBrainCloudInstance(brainCloudWrapper)->getIdentityService()->attachGoogleOpenIdIdentity(googleUserAccountEmail, IdToken, Proxy);
+	return Proxy;
+}
+
+UBCIdentityProxy *UBCIdentityProxy::MergeGoogleOpenIdIdentity(UBrainCloudWrapper *brainCloudWrapper, const FString &googleUserAccountEmail, const FString &IdToken)
+{
+	UBCIdentityProxy *Proxy = NewObject<UBCIdentityProxy>();
+	UBCWrapperProxy::GetBrainCloudInstance(brainCloudWrapper)->getIdentityService()->mergeGoogleOpenIdIdentity(googleUserAccountEmail, IdToken, Proxy);
+	return Proxy;
+}
+
+UBCIdentityProxy *UBCIdentityProxy::DetachGoogleOpenIdIdentity(UBrainCloudWrapper *brainCloudWrapper, const FString &googleUserAccountEmail, bool continueAnon)
+{
+	UBCIdentityProxy *Proxy = NewObject<UBCIdentityProxy>();
+	UBCWrapperProxy::GetBrainCloudInstance(brainCloudWrapper)->getIdentityService()->detachGoogleOpenIdIdentity(googleUserAccountEmail, continueAnon, Proxy);
+	return Proxy;
+}
+
+UBCIdentityProxy *UBCIdentityProxy::AttachAppleIdentity(UBrainCloudWrapper *brainCloudWrapper, const FString &appleUserId, const FString &identityToken)
+{
+	UBCIdentityProxy *Proxy = NewObject<UBCIdentityProxy>();
+	UBCWrapperProxy::GetBrainCloudInstance(brainCloudWrapper)->getIdentityService()->attachAppleIdentity(appleUserId, identityToken, Proxy);
+	return Proxy;
+}
+
+UBCIdentityProxy *UBCIdentityProxy::MergeAppleIdentity(UBrainCloudWrapper *brainCloudWrapper, const FString &appleUserId, const FString &identityToken)
+{
+	UBCIdentityProxy *Proxy = NewObject<UBCIdentityProxy>();
+	UBCWrapperProxy::GetBrainCloudInstance(brainCloudWrapper)->getIdentityService()->mergeAppleIdentity(appleUserId, identityToken, Proxy);
+	return Proxy;
+}
+
+UBCIdentityProxy *UBCIdentityProxy::DetachAppleIdentity(UBrainCloudWrapper *brainCloudWrapper, const FString &appleUserId, bool continueAnon)
+{
+	UBCIdentityProxy *Proxy = NewObject<UBCIdentityProxy>();
+	UBCWrapperProxy::GetBrainCloudInstance(brainCloudWrapper)->getIdentityService()->detachAppleIdentity(appleUserId, continueAnon, Proxy);
 	return Proxy;
 }
 

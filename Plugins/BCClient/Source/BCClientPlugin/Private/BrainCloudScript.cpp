@@ -102,3 +102,19 @@ void BrainCloudScript::runPeerScriptAsync(const FString &scriptName, const FStri
     ServerCall *sc = new ServerCall(ServiceName::Script, ServiceOperation::RunPeerScriptAsync, message, callback);
     _client->sendRequest(sc);
 }
+
+void BrainCloudScript::getRunningOrQueuedCloudScripts(IServerCallback *callback)
+{
+    TSharedRef<FJsonObject> message = MakeShareable(new FJsonObject());
+    ServerCall *sc = new ServerCall(ServiceName::Script, ServiceOperation::GetRunningOrQueuedCloudScripts, message, callback);
+    _client->sendRequest(sc);
+}
+
+void BrainCloudScript::getScheduledCloudScripts(const struct FDateTime startDateInUTC, IServerCallback *callback)
+{
+    TSharedRef<FJsonObject> message = MakeShareable(new FJsonObject());
+    message->SetNumberField(OperationParam::ScriptServiceStartDateUTC.getValue(), startDateInUTC.ToUnixTimestamp() * 1000);
+    ServerCall *sc = new ServerCall(ServiceName::Script, ServiceOperation::GetScheduledCloudSripts, message, callback);
+    _client->sendRequest(sc);
+}
+

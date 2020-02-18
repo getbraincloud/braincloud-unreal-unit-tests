@@ -121,17 +121,43 @@ public:
   void authenticateSteam(const FString &userid, const FString &sessionticket, bool forceCreate, IServerCallback *callback);
 
   /*
-    * Authenticate the user using a google userid(email address) and google authentication token.
+    * Authenticate the user using a google userId and google server authentication code.
     *
     * Service Name - Authenticate
     * Service Operation - Authenticate
     *
-    * @param userid  String representation of google+ userid (email)
-    * @param token  The authentication token derived via the google apis.
+    * @param googleUserId String representation of google+ userid (email)
+    * @param serverAuthCode  The server authentication token derived via the google apis. Gotten with calls like RequestServerAuthCode
     * @param forceCreate Should a new profile be created for this user if the account does not exist?
     * @param callback The method to be invoked when the server response is received
     */
-  void authenticateGoogle(const FString &userid, const FString &token, bool forceCreate, IServerCallback *callback);
+  void authenticateGoogle(const FString &googleUserId, const FString &serverAuthCode, bool forceCreate, IServerCallback *callback);
+
+    /*
+    * Authenticate the user using a google userId and google server authentication code.
+    *
+    * Service Name - Authenticate
+    * Service Operation - Authenticate
+    *
+    * @param googleUserAccountEmail The email associated with the google user
+    * @param IdToken  The Id token of the google account. Can get with calls like requestIdToken
+    * @param forceCreate Should a new profile be created for this user if the account does not exist?
+    * @param callback The method to be invoked when the server response is received
+    */
+  void authenticateGoogleOpenId(const FString &googleUserAccountEmail, const FString &IdToken, bool forceCreate, IServerCallback *callback);
+
+    /*
+    * Authenticate the user using a google userId and google server authentication code.
+    *
+    * Service Name - Authenticate
+    * Service Operation - Authenticate
+    *
+    * @param appleUserId this can be user id OR the email of the user account
+    * @param identityToken  the token confirming the user's identity
+    * @param forceCreate Should a new profile be created for this user if the account does not exist?
+    * @param callback The method to be invoked when the server response is received
+    */
+  void authenticateApple(const FString &appleUserId, const FString &identityToken, bool forceCreate, IServerCallback *callback);
 
   /*
     * Authenticate the user using a Twitter userid, authentication token, and secret from Twitter.
@@ -199,7 +225,7 @@ public:
     */
   void authenticateExternal(const FString &userid, const FString &token, const FString &externalAuthName, bool forceCreate, IServerCallback *callback);
 
-  /**
+    /**
     * Reset Email password - Sends a password reset email to the specified address
     *
     * Service Name - Authenticate
@@ -241,6 +267,133 @@ public:
     * SECURITY_ERROR (40209) - If the email address cannot be found.
     */
   void resetEmailPasswordAdvanced(const FString &in_emailAddress, const FString &in_serviceParams, IServerCallback *in_callback);
+  
+  /**
+    * Reset Email password with a token expiry - Sends a password reset email to the specified address
+    *
+    * Service Name - Authenticate
+    * Operation - ResetEmailPassword
+    *
+    * @param email The email address to send the reset email to.
+    * @param in_tokenTtlInMinutes the token expiry value
+    * @param callback The method to be invoked when the server response is received
+    * @return The JSON returned in the callback is as follows:
+    * {
+    *   "status": 200,
+    *   "data": {}
+    * }
+    *
+    * Note the follow error reason codes:
+    *
+    * SECURITY_ERROR (40209) - If the email address cannot be found.
+    */
+  void resetEmailPasswordWithExpiry(const FString &in_email, int32 in_tokenTtlInMinutes, IServerCallback *in_callback);
+
+    /**
+    * Reset Email password with service parameters with token expiry- Sends a password reset email to the specified address
+    *
+    * Service Name - Authenticate
+    * Operation - ResetEmailPasswordAdvanced
+    *
+    * @param appId the application id
+    * @param emailAddress The email address to send the reset email to.
+    * @param serviceParams parameters to send to the email service see the doc for a full 
+    * @param in_tokenTtlInMinutes the expiry token value
+    * list. http://getbraincloud.com/apidocs/apiref/#capi-mail
+    * @param callback The method to be invoked when the server response is received
+    * @return The JSON returned in the callback is as follows:
+    * {
+    *   "status": 200,
+    *   "data": {}
+    * }
+    *
+    * Note the follow error reason codes:
+    *
+    * SECURITY_ERROR (40209) - If the email address cannot be found.
+    */
+  void resetEmailPasswordAdvancedWithExpiry(const FString &in_emailAddress, const FString &in_serviceParams, int32 in_tokenTtlInMinutes, IServerCallback *in_callback);
+
+    /**
+    * Reset Universal Id password with service parameters 
+    *
+    * Service Name - Authenticate
+    * Operation - ResetEmailPasswordAdvanced
+    *
+    * @param appId the application id
+    * @param universalId The email address to send the reset email to.
+    * @param in_tokenTtlInMinutes the expiry token value
+    * list. http://getbraincloud.com/apidocs/apiref/#capi-mail
+    * @param callback The method to be invoked when the server response is received
+    * @return The JSON returned in the callback is as follows:
+    * {
+    *   "status": 200,
+    *   "data": {}
+    * }
+    *
+    */ 
+  void resetUniversalIdPassword(const FString &in_universalId, IServerCallback *in_callback);
+
+      /**
+    * Reset Universal Id password with service parameters 
+    *
+    * Service Name - Authenticate
+    * Operation - ResetEmailPasswordAdvanced
+    *
+    * @param appId the application id
+    * @param universalId The email address to send the reset email to.
+    * @param serviceParams parameters to send to the email service see the doc for a full 
+    * list. http://getbraincloud.com/apidocs/apiref/#capi-mail
+    * @param callback The method to be invoked when the server response is received
+    * @return The JSON returned in the callback is as follows:
+    * {
+    *   "status": 200,
+    *   "data": {}
+    * }
+    *
+    */ 
+  void resetUniversalIdPasswordAdvanced(const FString &in_universalId, const FString &in_serviceParams, IServerCallback *in_callback);
+
+    /**
+    * Reset Universal Id password with service parameters and with expiry
+    *
+    * Service Name - Authenticate
+    * Operation - ResetEmailPasswordAdvanced
+    *
+    * @param appId the application id
+    * @param universalId The email address to send the reset email to.
+    * @param in_tokenTtlInMinutes the expiry token value
+    * list. http://getbraincloud.com/apidocs/apiref/#capi-mail
+    * @param callback The method to be invoked when the server response is received
+    * @return The JSON returned in the callback is as follows:
+    * {
+    *   "status": 200,
+    *   "data": {}
+    * }
+    *
+    */ 
+  void resetUniversalIdPasswordWithExpiry(const FString &in_universalId, int32 in_tokenTtlInMinutes, IServerCallback *in_callback);
+
+      /**
+    * Reset Universal Id password with service parameters and with expiry 
+    *
+    * Service Name - Authenticate
+    * Operation - ResetEmailPasswordAdvanced
+    *
+    * @param appId the application id
+    * @param universalId The email address to send the reset email to.
+    * @param in_tokenTtlInMinutes the expiry token value
+    * @param serviceParams parameters to send to the email service see the doc for a full 
+    * list. http://getbraincloud.com/apidocs/apiref/#capi-mail
+    * @param callback The method to be invoked when the server response is received
+    * @return The JSON returned in the callback is as follows:
+    * {
+    *   "status": 200,
+    *   "data": {}
+    * }
+    *
+    */ 
+  void resetUniversalIdPasswordAdvancedWithExpiry(const FString &in_universalId, const FString &in_serviceParams, int32 in_tokenTtlInMinutes, IServerCallback *in_callback);
+
 
   const FString &getAnonymousId() const;
   const FString &getProfileId() const;

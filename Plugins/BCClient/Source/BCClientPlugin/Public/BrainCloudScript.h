@@ -103,6 +103,26 @@ class BCCLIENTPLUGIN_API BrainCloudScript
 	*/
     void runPeerScriptAsync(const FString &scriptName, const FString &jsonScriptData, const FString &peer, IServerCallback *callback = nullptr);
 
+  /**
+	* Retrieves scripts currently running or queued.
+	*
+	* Service Name - Script
+	* Service Operation - GET_RUNNING_OR_QUEUED_CLOUD_SCRIPTS
+	*
+	* @param callback The method to be invoked when the server response is received
+	*/
+    void getRunningOrQueuedCloudScripts(IServerCallback *callback = nullptr);
+
+  /**
+	* Retrieves scripts scheduled to run up to and including the specified start time (UTC in ms).
+	*
+	* Service Name - Script
+	* Service Operation - GET_SCHEDULED_CLOUD_SCRIPTS
+	* @param startDateUTC 
+	* @param callback The method to be invoked when the server response is received
+	*/
+    void getScheduledCloudScripts(const struct FDateTime startDateInUTC, IServerCallback *callback = nullptr);
+
   private:
     BrainCloudClient *_client = nullptr;
 };
