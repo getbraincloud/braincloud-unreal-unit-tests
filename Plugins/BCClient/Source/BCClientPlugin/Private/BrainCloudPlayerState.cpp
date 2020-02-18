@@ -199,6 +199,25 @@ void BrainCloudPlayerState::setUserStatus(const FString &statusName, int duratio
     _client->sendRequest(sc);
 }
 
+void BrainCloudPlayerState::updateTimeZoneOffset(int32 timeZoneOffset, IServerCallback *callback)
+{
+    TSharedRef<FJsonObject> message = MakeShareable(new FJsonObject());
+    message->SetNumberField(OperationParam::PlayerStateServiceTimeZoneOffset.getValue(), timeZoneOffset);
+
+    ServerCall *sc = new ServerCall(ServiceName::PlayerState, ServiceOperation::UpdateTimeZoneOffset, message, callback);
+    _client->sendRequest(sc);
+}
+
+void BrainCloudPlayerState::updateLanguageCode(const FString &languageCode, IServerCallback *callback)
+{
+    TSharedRef<FJsonObject> message = MakeShareable(new FJsonObject());
+    message->SetStringField(OperationParam::PlayerStateServiceLanguageCode.getValue(), languageCode);
+
+    ServerCall *sc = new ServerCall(ServiceName::PlayerState, ServiceOperation::UpdateLanguageCode, message, callback);
+    _client->sendRequest(sc);
+}
+
+
 const FString &BrainCloudPlayerState::getPlayerName()
 {
     return _userName;

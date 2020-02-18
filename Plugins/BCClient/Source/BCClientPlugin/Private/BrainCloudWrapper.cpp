@@ -153,6 +153,20 @@ void UBrainCloudWrapper::authenticateGoogle(FString userid, FString token, bool 
     _client->getAuthenticationService()->authenticateGoogle(userid, token, forceCreate, this);
 }
 
+void UBrainCloudWrapper::authenticateGoogleOpenId(FString googleUserAccountEmail, FString IdToken, bool forceCreate, IServerCallback *callback)
+{
+    _authenticateCallback = callback;
+    initializeIdentity();
+	_client->getAuthenticationService()->authenticateGoogleOpenId(googleUserAccountEmail, IdToken, forceCreate, this);
+}
+
+void UBrainCloudWrapper::authenticateApple(FString appleUserId, FString identityToken, bool forceCreate, IServerCallback *callback)
+{
+    _authenticateCallback = callback;
+    initializeIdentity();
+	_client->getAuthenticationService()->authenticateApple(appleUserId, identityToken, forceCreate, this);
+}
+
 void UBrainCloudWrapper::authenticateSteam(FString userid, FString sessionticket, bool forceCreate, IServerCallback *callback)
 {
     _authenticateCallback = callback;
@@ -219,6 +233,18 @@ void UBrainCloudWrapper::smartSwitchAuthenticateGoogle(const FString &userid, co
     getIdentitiesCallback(smartCallback);
 }
 
+void UBrainCloudWrapper::smartSwitchAuthenticateGoogleOpenId(const FString &googleUserAccountEmail, const FString &IdToken, bool in_forceCreate, IServerCallback *in_callback)
+{
+    SmartSwitchAuthenticateCallback *smartCallback = new SmartSwitchAuthenticateCallback(this, EBCAuthType::GoogleOpenId, googleUserAccountEmail, IdToken, in_forceCreate, in_callback);
+    getIdentitiesCallback(smartCallback);
+}
+
+void UBrainCloudWrapper::smartSwitchAuthenticateApple(const FString &appleUserId, const FString &identityToken, bool in_forceCreate, IServerCallback *in_callback)
+{
+    SmartSwitchAuthenticateCallback *smartCallback = new SmartSwitchAuthenticateCallback(this, EBCAuthType::Apple, appleUserId, identityToken, in_forceCreate, in_callback);
+    getIdentitiesCallback(smartCallback);
+}
+
 void UBrainCloudWrapper::smartSwitchAuthenticateSteam(const FString &userid, const FString &sessionticket, bool in_forceCreate, IServerCallback *in_callback)
 {
     SmartSwitchAuthenticateCallback *smartCallback = new SmartSwitchAuthenticateCallback(this, EBCAuthType::Steam, userid, sessionticket, in_forceCreate, in_callback);
@@ -258,6 +284,36 @@ void UBrainCloudWrapper::resetEmailPassword(const FString &in_email, IServerCall
 void UBrainCloudWrapper::resetEmailPasswordAdvanced(const FString &in_emailAddress, const FString &in_serviceParams, IServerCallback *in_callback)
 {
     _client->getAuthenticationService()->resetEmailPasswordAdvanced(in_emailAddress, in_serviceParams, in_callback);
+}
+
+void UBrainCloudWrapper::resetEmailPasswordWithExpiry(const FString &in_email, int32 in_tokenTtlInMinutes, IServerCallback *in_callback)
+{
+    _client->getAuthenticationService()->resetEmailPasswordWithExpiry(in_email, in_tokenTtlInMinutes, in_callback);
+}
+
+void UBrainCloudWrapper::resetEmailPasswordAdvancedWithExpiry(const FString &in_emailAddress, const FString &in_serviceParams, int32 in_tokenTtlInMinutes, IServerCallback *in_callback)
+{
+    _client->getAuthenticationService()->resetEmailPasswordAdvancedWithExpiry(in_emailAddress, in_serviceParams, in_tokenTtlInMinutes, in_callback);
+}
+
+void UBrainCloudWrapper::resetUniversalIdPassword(const FString &in_universalId, IServerCallback *in_callback)
+{
+    _client->getAuthenticationService()->resetUniversalIdPassword(in_universalId, in_callback);
+}
+
+void UBrainCloudWrapper::resetUniversalIdPasswordAdvanced(const FString &in_universalId, const FString &in_serviceParams, IServerCallback *in_callback)
+{
+    _client->getAuthenticationService()->resetUniversalIdPasswordAdvanced(in_universalId, in_serviceParams, in_callback);
+}
+
+void UBrainCloudWrapper::resetUniversalIdPasswordWithExpiry(const FString &in_universalId, int32 in_tokenTtlInMinutes, IServerCallback *in_callback)
+{
+    _client->getAuthenticationService()->resetUniversalIdPasswordWithExpiry(in_universalId, in_tokenTtlInMinutes, in_callback);
+}
+
+void UBrainCloudWrapper::resetUniversalIdPasswordAdvancedWithExpiry(const FString &in_universalId, const FString &in_serviceParams, int32 in_tokenTtlInMinutes, IServerCallback *in_callback)
+{
+    _client->getAuthenticationService()->resetUniversalIdPasswordAdvancedWithExpiry(in_universalId, in_serviceParams, in_tokenTtlInMinutes, in_callback);
 }
 
 void UBrainCloudWrapper::reconnect(IServerCallback *callback)

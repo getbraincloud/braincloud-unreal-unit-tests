@@ -236,4 +236,28 @@ class UBCPlayerStateProxy : public UBCBlueprintCallProxyBase
     UFUNCTION(BlueprintCallable, meta = (BlueprintInternalUseOnly = "true"), Category = "BrainCloud|Player State")
     static UBCPlayerStateProxy *SetUserStatus(UBrainCloudWrapper *brainCloudWrapper, const FString &statusName, int durationSecs, const FString &details);
 
+    /**
+    * Update user's time zone offset preference on their profile
+    *
+    * Service Name - PlayerState
+    * Service Operation - UPDATE_TIMEZONE_OFFSET
+    *
+    * @param timeZoneOffset the offset
+    * @param callback The method to be invoked when the server response is received
+    */
+    UFUNCTION(BlueprintCallable, meta = (BlueprintInternalUseOnly = "true"), Category = "BrainCloud|Player State")
+    static UBCPlayerStateProxy *UpdateTimeZoneOffset(UBrainCloudWrapper *brainCloudWrapper, int32 timeZoneOffset);
+
+    /**
+    * Update user's language code preference on their profile.
+    *
+    * Service Name - PlayerState
+    * Service Operation - UPDATE_LANGUAGE_CODE
+    *
+    * @param languageCode the offset
+    * @param callback The method to be invoked when the server response is received
+    */
+    UFUNCTION(BlueprintCallable, meta = (BlueprintInternalUseOnly = "true"), Category = "BrainCloud|Player State")
+    static UBCPlayerStateProxy *UpdateLanguageCode(UBrainCloudWrapper *brainCloudWrapper, const FString &languageCode);
+
 };
