@@ -47,14 +47,28 @@ namespace BrainCloud
 
 	void DefaultBrainCloudComms::initialize(const char * serverURL, const char * appId, const char * secretKey)
 	{
-		_serverUrl = serverURL;
-		_uploadUrl = serverURL;
-		size_t index = _uploadUrl.find("/dispatcherv2");
-		if (index != std::string::npos)
-		{
-			_uploadUrl = _uploadUrl.substr(0, index);
-		}
-		_uploadUrl += "/uploader";
+        {
+            _serverUrl = serverURL;
+            size_t index = _serverUrl.find("/dispatcherv2");
+            if (index != std::string::npos)
+            {
+                _serverUrl = _serverUrl.substr(0, index);
+            }
+            while (!_serverUrl.empty() && _serverUrl[_serverUrl.length() - 1] == '/')
+            {
+                _serverUrl.resize(_serverUrl.length() - 1);
+            }
+            _serverUrl += "/dispatcherv2";
+        }
+        {
+            _uploadUrl = serverURL;
+            size_t index = _uploadUrl.find("/dispatcherv2");
+            if (index != std::string::npos)
+            {
+                _uploadUrl = _uploadUrl.substr(0, index);
+            }
+            _uploadUrl += "/uploader";
+        }
 
 		_appId = appId;
 		_secretKey = secretKey;
