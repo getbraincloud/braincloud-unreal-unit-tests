@@ -94,7 +94,7 @@ namespace BrainCloud
 		m_client->getBrainCloudComms()->addToQueue(sc);
 	}
 
-	void BrainCloudPushNotification::scheduleRawPushNotificationUTC(const char * in_profileId, std::string in_fcmContent, std::string in_iosContent, std::string in_facebookContent, int32_t in_startTime, IServerCallback * in_callback)
+	void BrainCloudPushNotification::scheduleRawPushNotificationUTC(const char * in_profileId, std::string in_fcmContent, std::string in_iosContent, std::string in_facebookContent, uint64_t in_startTimeUTC, IServerCallback * in_callback)
 	{
 		Json::Value message;
 		message[OperationParam::ProfileId.getValue()] = in_profileId;
@@ -111,7 +111,7 @@ namespace BrainCloud
 			message[OperationParam::FacebookContent.getValue()] = JsonUtil::jsonStringToValue(in_facebookContent);
 		}
 
-		message[OperationParam::StartDateUTC.getValue()] = in_startTime;
+		message[OperationParam::StartDateUTC.getValue()] = in_startTimeUTC;
 
 		ServerCall * sc = new ServerCall(ServiceName::PushNotification, ServiceOperation::ScheduleRawNotification, message, in_callback);
 		m_client->getBrainCloudComms()->addToQueue(sc);
@@ -203,7 +203,7 @@ namespace BrainCloud
 		m_client->getBrainCloudComms()->addToQueue(sc);
 	}
 
-	void BrainCloudPushNotification::scheduleNormalizedPushNotificationUTC(const char * in_toProfileId, std::string in_alertContentJson, std::string in_customDataJson, int32_t in_minutesFromNow, IServerCallback * in_callback)
+	void BrainCloudPushNotification::scheduleNormalizedPushNotificationUTC(const char * in_toProfileId, std::string in_alertContentJson, std::string in_customDataJson, uint64_t in_startTimeUTC, IServerCallback * in_callback)
 	{
 		Json::Value message;
 		message[OperationParam::ProfileId.getValue()] = in_toProfileId;
@@ -213,7 +213,7 @@ namespace BrainCloud
 			message[OperationParam::CustomData.getValue()] = JsonUtil::jsonStringToValue(in_customDataJson);
 		}
 
-		message[OperationParam::MinutesFromNow.getValue()] = in_minutesFromNow;
+		message[OperationParam::StartDateUTC.getValue()] = in_startTimeUTC;
 
 		ServerCall * sc = new ServerCall(ServiceName::PushNotification, ServiceOperation::ScheduleNormalizedNotification, message, in_callback);
 		m_client->getBrainCloudComms()->addToQueue(sc);
@@ -235,7 +235,7 @@ namespace BrainCloud
         m_client->getBrainCloudComms()->addToQueue(sc);
     }
 
-	void BrainCloudPushNotification::scheduleRichPushNotificationUTC(const char * in_toProfileId, int32_t in_notificationTemplateId, std::string in_substitutionsJson, int32_t in_startTime, IServerCallback * in_callback)
+	void BrainCloudPushNotification::scheduleRichPushNotificationUTC(const char * in_toProfileId, int32_t in_notificationTemplateId, std::string in_substitutionsJson, uint64_t in_startTimeUTC, IServerCallback * in_callback)
 	{
 		Json::Value message;
 		message[OperationParam::ProfileId.getValue()] = in_toProfileId;
@@ -245,7 +245,7 @@ namespace BrainCloud
 			message[OperationParam::PushNotificationSendParamSubstitution.getValue()] = JsonUtil::jsonStringToValue(in_substitutionsJson);
 		}
 
-		message[OperationParam::StartDateUTC.getValue()] = in_startTime;
+		message[OperationParam::StartDateUTC.getValue()] = in_startTimeUTC;
 
 		ServerCall * sc = new ServerCall(ServiceName::PushNotification, ServiceOperation::ScheduleRichNotification, message, in_callback);
 		m_client->getBrainCloudComms()->addToQueue(sc);
