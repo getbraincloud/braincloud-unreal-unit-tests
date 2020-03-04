@@ -225,7 +225,7 @@ namespace BrainCloud
 		 * @param in_data Optional user-defined data to post with the score
 		 * @param in_leaderboardType leaderboard type
 		 * @param in_rotationType Type of rotation
-		 * @param in_rotationReset Date to start rotation calculations
+		 * @param in_rotationResetUTC Date in UTC to start rotation calculations
 		 * @param in_retainedCount How many rotations to keep
 		 * @param in_callback The method to be invoked when the server response is received
 		 */
@@ -234,7 +234,7 @@ namespace BrainCloud
 			int64_t in_score,
 			const std::string& in_jsonData,
 			SocialLeaderboardType in_leaderboardType,
-			RotationType in_rotationType, struct tm* in_rotationReset,
+			RotationType in_rotationType, struct tm* in_rotationResetUTC,
 			int in_retainedCount,
 			IServerCallback * in_callback = NULL);
 
@@ -252,7 +252,7 @@ namespace BrainCloud
 		* @param in_score The score to post
 		* @param in_data Optional user-defined data to post with the score
 		* @param in_leaderboardType leaderboard type
-		* @param in_rotationReset Date to start rotation calculations
+		* @param in_rotationResetUTC Date in UTC to start rotation calculations
 		* @param in_retainedCount How many rotations to keep
 		* @param in_numDaysToRotate How many days between each rotation
 		* @param in_callback The method to be invoked when the server response is received
@@ -262,7 +262,7 @@ namespace BrainCloud
 			int64_t in_score,
 			const std::string& in_jsonData,
 			SocialLeaderboardType in_leaderboardType,
-			struct tm* in_rotationReset,
+			struct tm* in_rotationResetUTC,
 			int32_t in_retainedCount,
 			int32_t in_numDaysToRotate,
 			IServerCallback * in_callback = NULL);
@@ -437,12 +437,12 @@ namespace BrainCloud
 		* @param in_data
 		* @param in_leaderboardType
 		* @param in_rotationType
-		* @param in_rotationResetTime 
+		* @param in_rotationResetUTC
 		* @param in_retainedCount
 		* @param in_callback The method to be invoked when the server response is received
 		*/
 		void postScoreToDynamicGroupLeaderboard(const char * in_leaderboardId, const char * in_groupId, int32_t in_score, const std::string& in_jsonData, const char * in_leaderboardType, 
-			const char * in_rotationType, int64_t in_rotationResetTime, int32_t in_retainedCount,  IServerCallback * in_callback = NULL);
+			const char * in_rotationType, struct tm* in_rotationResetUTC, int32_t in_retainedCount,  IServerCallback * in_callback = NULL);
 
 		/**
 		* Removes score from group leaderboard

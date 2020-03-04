@@ -87,6 +87,21 @@ TEST_F(TestBCTournament, PostTournamentScore)
 	LeaveTournament();
 }
 
+TEST_F(TestBCTournament, PostTournamentScoreUTC)
+{
+	int32_t version = JoinTournament();
+
+	TestResult tr;
+	time_t t = time(NULL);
+	struct tm * time = gmtime(&t);
+	time->tm_hour +=1;
+
+	m_bc->getTournamentService()->postTournamentScoreUTC(_leaderboardId, 200, "", time, &tr);
+	tr.run(m_bc);
+
+	LeaveTournament();
+}
+
 TEST_F(TestBCTournament, PostTournamentScoreWithResults)
 {
 	int32_t version = JoinTournament();
@@ -96,6 +111,21 @@ TEST_F(TestBCTournament, PostTournamentScoreWithResults)
 	struct tm * time = gmtime(&t);
 
 	m_bc->getTournamentService()->postTournamentScoreWithResults(_leaderboardId, 200, "", time, HIGH_TO_LOW, 10, 10, 0, &tr);
+	tr.run(m_bc);
+
+	LeaveTournament();
+}
+
+TEST_F(TestBCTournament, PostTournamentScoreWithResultsUTC)
+{
+	int32_t version = JoinTournament();
+
+	TestResult tr;
+	time_t t = time(0);
+	struct tm * time = gmtime(&t);
+	time->tm_hour +=1;
+
+	m_bc->getTournamentService()->postTournamentScoreWithResultsUTC(_leaderboardId, 200, "", time, HIGH_TO_LOW, 10, 10, 0, &tr);
 	tr.run(m_bc);
 
 	LeaveTournament();

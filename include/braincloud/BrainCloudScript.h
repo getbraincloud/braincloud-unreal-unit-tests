@@ -29,17 +29,30 @@ namespace BrainCloud
 		void runScript(const char * in_scriptName, const std::string & in_jsonScriptData, IServerCallback * in_callback = NULL);
 
 		/**
-		 * Allows cloud script executions to be scheduled
+		 * Allows cloud script executions to be scheduled - CONVERTS UTC TIME TO LOCAL TIME
 		 *
 		 * Service Name - Script
 		 * Service Operation - ScheduleCloudScript
 		 *
 		 * @param in_scriptName The name of the script to be run
 		 * @param in_jsonScriptData Data to be sent to the script in json format
-		 * @param in_startDateInUTC The start date as a time struct
+		 * @param in_startDateInUTC The start date in UTC, IT GET CONVERTED TO LOCAL
 		 * @param in_callback The method to be invoked when the server response is received
 		 */
 		void scheduleRunScriptUTC(const char * in_scriptName, const char * in_jsonScriptData, const struct tm* in_startDateInUTC, IServerCallback * in_callback = NULL);
+
+		/**
+		 * Allows cloud script executions to be scheduled - DOES NOT convert to local time, keeps UTC time
+		 *
+		 * Service Name - Script
+		 * Service Operation - ScheduleCloudScript
+		 *
+		 * @param in_scriptName The name of the script to be run
+		 * @param in_jsonScriptData Data to be sent to the script in json format
+		 * @param in_startDateInUTC The start date in UTC, DOES NOT get converted to local
+		 * @param in_callback The method to be invoked when the server response is received
+		 */
+		void scheduleRunScriptUTCv2(const char * in_scriptName, const char * in_jsonScriptData, const struct tm* in_startDateInUTC, IServerCallback * in_callback = NULL);
 
 		/**
 		 * Allows cloud script executions to be scheduled

@@ -32,6 +32,21 @@ TEST_F(TestBCScript, ScheduleScriptUTC)
 	tr.run(m_bc);
 }
 
+TEST_F(TestBCScript, ScheduleScriptUTCv2)
+{
+	TestResult tr;
+	Json::FastWriter fw;
+	Json::Value scriptData;
+	scriptData["testParam1"] = 1;
+
+	time_t t = time(0);
+	struct tm * time = gmtime(&t);
+	time->tm_mday += 1;
+
+	m_bc->getScriptService()->scheduleRunScriptUTCv2(m_scriptName, fw.write(scriptData).c_str(), time, &tr);
+	tr.run(m_bc);
+}
+
 TEST_F(TestBCScript, ScheduleScriptMinutesFromNow)
 {
 	TestResult tr;

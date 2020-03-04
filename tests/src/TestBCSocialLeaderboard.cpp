@@ -297,7 +297,12 @@ TEST_F(TestBCSocialLeaderboard, PostScoreToDynamicGroupLeaderboard)
     Json::Value jsonData;
     jsonData["testKey"] = "TestValue";
 
-    m_bc->getSocialLeaderboardService()->postScoreToDynamicGroupLeaderboard(GROUP_LB_ID, groupId.c_str(), 0, fw.write(jsonData), "HIGH_VALUE", "WEEKLY", 157116287, 2, &tr);
+    time_t t = time(0);
+    struct tm * time = localtime(&t);
+    time->tm_mday += 1;
+    mktime(time);
+
+    m_bc->getSocialLeaderboardService()->postScoreToDynamicGroupLeaderboard(GROUP_LB_ID, groupId.c_str(), 0, fw.write(jsonData), "HIGH_VALUE", "WEEKLY", time, 2, &tr);
     tr.run(m_bc);
 
     m_bc->getGroupService()->deleteGroup(groupId.c_str(), -1, &tr);
