@@ -6,6 +6,7 @@
 #include "TestResult.h"
 #include "TestBCScript.h"
 #include <ctime>
+#include <chrono>
 
 using namespace BrainCloud;
 
@@ -39,11 +40,9 @@ TEST_F(TestBCScript, ScheduleScriptUTCv2)
 	Json::Value scriptData;
 	scriptData["testParam1"] = 1;
 
-	time_t t = time(0);
-	struct tm * time = gmtime(&t);
-	time->tm_mday += 1;
+	int64_t milliseconds_since_epoch = std::chrono::duration_cast<std::chrono::milliseconds>(std::chrono::system_clock::now().time_since_epoch()).count();
 
-	m_bc->getScriptService()->scheduleRunScriptUTCv2(m_scriptName, fw.write(scriptData).c_str(), time, &tr);
+	m_bc->getScriptService()->scheduleRunScriptUTCv2(m_scriptName, fw.write(scriptData).c_str(), milliseconds_since_epoch, &tr);
 	tr.run(m_bc);
 }
 

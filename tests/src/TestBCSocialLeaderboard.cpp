@@ -5,6 +5,7 @@
 #include "TestResult.h"
 #include "json/json.h"
 #include "TestBCSocialLeaderboard.h"
+#include <chrono>
 
 using namespace BrainCloud;
 
@@ -117,6 +118,23 @@ TEST_F(TestBCSocialLeaderboard, PostScoreToDynamicNullRotationTime)
     tr.run(m_bc);
 }
 
+TEST_F(TestBCSocialLeaderboard, PostScoreToDynamicUTC)
+{
+	srand(time(NULL));
+
+    TestResult tr;
+    Json::FastWriter fw;
+    Json::Value jsonData;
+    jsonData["testKey"] = "TestValue";
+
+    int64_t milliseconds_since_epoch = std::chrono::duration_cast<std::chrono::milliseconds>(std::chrono::system_clock::now().time_since_epoch()).count() + 1000; //add 1000 miliseconds so its within the time 
+
+	std::string name = DYNAMIC_LB_ID + std::to_string(rand());
+
+    m_bc->getSocialLeaderboardService()->postScoreToDynamicLeaderboardUTC(name.c_str(), 100, fw.write(jsonData), HIGH_VALUE, WEEKLY, milliseconds_since_epoch, 2, &tr);
+    tr.run(m_bc);
+}
+
 TEST_F(TestBCSocialLeaderboard, PostScoreToDynamicDays)
 {
 	TestResult tr;
@@ -125,6 +143,19 @@ TEST_F(TestBCSocialLeaderboard, PostScoreToDynamicDays)
 	jsonData["testKey"] = "TestValue";
 
 	m_bc->getSocialLeaderboardService()->postScoreToDynamicLeaderboardDays("TestDynamicDaysCpp", 100, fw.write(jsonData), HIGH_VALUE, NULL, 2, 3, &tr);
+	tr.run(m_bc);
+}
+
+TEST_F(TestBCSocialLeaderboard, PostScoreToDynamicDaysUTC)
+{
+	TestResult tr;
+	Json::FastWriter fw;
+	Json::Value jsonData;
+	jsonData["testKey"] = "TestValue";
+
+    int64_t milliseconds_since_epoch = std::chrono::duration_cast<std::chrono::milliseconds>(std::chrono::system_clock::now().time_since_epoch()).count();
+
+	m_bc->getSocialLeaderboardService()->postScoreToDynamicLeaderboardDaysUTC("TestDynamicDaysCpp", 100, fw.write(jsonData), HIGH_VALUE, milliseconds_since_epoch, 2, 3, &tr);
 	tr.run(m_bc);
 }
 
@@ -303,6 +334,27 @@ TEST_F(TestBCSocialLeaderboard, PostScoreToDynamicGroupLeaderboard)
     mktime(time);
 
     m_bc->getSocialLeaderboardService()->postScoreToDynamicGroupLeaderboard(GROUP_LB_ID, groupId.c_str(), 0, fw.write(jsonData), "HIGH_VALUE", "WEEKLY", time, 2, &tr);
+    tr.run(m_bc);
+
+    m_bc->getGroupService()->deleteGroup(groupId.c_str(), -1, &tr);
+    tr.run(m_bc);
+}
+
+TEST_F(TestBCSocialLeaderboard, PostScoreToDynamicGroupLeaderboardUTC)
+{
+    TestResult tr; 
+    m_bc->getGroupService()->createGroup("testGroup", "test", false, "", "", "", "", &tr);
+    tr.run(m_bc);
+
+    std::string groupId = tr.m_response["data"]["groupId"].asString();
+
+    Json::FastWriter fw;
+    Json::Value jsonData;
+    jsonData["testKey"] = "TestValue";
+
+    int64_t milliseconds_since_epoch = std::chrono::duration_cast<std::chrono::milliseconds>(std::chrono::system_clock::now().time_since_epoch()).count();
+
+    m_bc->getSocialLeaderboardService()->postScoreToDynamicGroupLeaderboardUTC(GROUP_LB_ID, groupId.c_str(), 0, fw.write(jsonData), "HIGH_VALUE", "WEEKLY", milliseconds_since_epoch, 2, &tr);
     tr.run(m_bc);
 
     m_bc->getGroupService()->deleteGroup(groupId.c_str(), -1, &tr);
