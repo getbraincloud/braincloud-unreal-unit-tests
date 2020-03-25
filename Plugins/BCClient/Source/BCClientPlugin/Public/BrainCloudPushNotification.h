@@ -116,7 +116,7 @@ class BCCLIENTPLUGIN_API BrainCloudPushNotification
 	* @param startTime Start time of sending the push notification
 	* @param callback The method to be invoked when the server response is received
 	*/
-	void scheduleRawPushNotificationUTC(const FString &profileId, const FString &fcmContent, const FString &iosContent, const FString &facebookContent, int32 startTime, IServerCallback *callback = NULL);
+	void scheduleRawPushNotificationUTC(const FString &profileId, const FString &fcmContent, const FString &iosContent, const FString &facebookContent, int64 startTime, IServerCallback *callback = NULL);
 
 	/**
 	* Schedules a normalized push notification to a user
@@ -172,7 +172,7 @@ class BCCLIENTPLUGIN_API BrainCloudPushNotification
 	* @param startTime Start time of sending the push notification
 	* @param callback The method to be invoked when the server response is received
 	*/
-	void scheduleNormalizedPushNotificationUTC(const FString &profileId, const FString &alertContentJson, const FString &customDataJson, const int32 startTime, IServerCallback *callback);
+	void scheduleNormalizedPushNotificationUTC(const FString &profileId, const FString &alertContentJson, const FString &customDataJson, const int64 startTime, IServerCallback *callback);
 
 	/**
 	* Schedules a normalized push notification to a user
@@ -194,7 +194,7 @@ class BCCLIENTPLUGIN_API BrainCloudPushNotification
 	* @param startTime Start time of sending the push notification
 	* @param callback The method to be invoked when the server response is received
 	*/
-	void scheduleRichPushNotificationUTC(const FString &profileId, const int32 notificationTemplateId, const FString &substitutionJson, const int32 startTime, IServerCallback *callback);
+	void scheduleRichPushNotificationUTC(const FString &profileId, const int32 notificationTemplateId, const FString &substitutionJson, const int64 startTime, IServerCallback *callback);
 
 	/**
 	* Schedules a rich push notification to a user

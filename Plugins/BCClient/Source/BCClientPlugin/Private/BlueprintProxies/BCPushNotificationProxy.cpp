@@ -63,7 +63,7 @@ UBCPushNotificationProxy *UBCPushNotificationProxy::SendTemplatedPushNotificatio
 	return Proxy;
 }
 
-UBCPushNotificationProxy *UBCPushNotificationProxy::ScheduleRawPushNotificationUTC(UBrainCloudWrapper *brainCloudWrapper, const FString &profileId, const FString &fcmContent, const FString &iosContent, const FString &facebookContent, int32 startTime)
+UBCPushNotificationProxy *UBCPushNotificationProxy::ScheduleRawPushNotificationUTC(UBrainCloudWrapper *brainCloudWrapper, const FString &profileId, const FString &fcmContent, const FString &iosContent, const FString &facebookContent, int64 startTime)
 {
 	UBCPushNotificationProxy *Proxy = NewObject<UBCPushNotificationProxy>();
 	UBCWrapperProxy::GetBrainCloudInstance(brainCloudWrapper)->getPushNotificationService()->scheduleRawPushNotificationUTC(profileId, fcmContent, iosContent, facebookContent, startTime, Proxy);
@@ -105,7 +105,7 @@ UBCPushNotificationProxy *UBCPushNotificationProxy::SendNormalizedPushNotificati
 	return Proxy;
 }
 
-UBCPushNotificationProxy *UBCPushNotificationProxy::ScheduleNormalizedPushNotificationUTC(UBrainCloudWrapper *brainCloudWrapper, const FString &profileId, const FString &alertContentJson, const FString &substitutionJson, const int32 startTime)
+UBCPushNotificationProxy *UBCPushNotificationProxy::ScheduleNormalizedPushNotificationUTC(UBrainCloudWrapper *brainCloudWrapper, const FString &profileId, const FString &alertContentJson, const FString &substitutionJson, const int64 startTime)
 {
 	UBCPushNotificationProxy *Proxy = NewObject<UBCPushNotificationProxy>();
 	UBCWrapperProxy::GetBrainCloudInstance(brainCloudWrapper)->getPushNotificationService()->scheduleNormalizedPushNotificationUTC(profileId, alertContentJson, substitutionJson, startTime, Proxy);
@@ -119,7 +119,7 @@ UBCPushNotificationProxy *UBCPushNotificationProxy::ScheduleNormalizedPushNotifi
 	return Proxy;
 }
 
-UBCPushNotificationProxy *UBCPushNotificationProxy::ScheduleRichPushNotificationUTC(UBrainCloudWrapper *brainCloudWrapper, const FString &profileId, const int32 notificationTemplateId, const FString &substitutionJson, const int32 startTime)
+UBCPushNotificationProxy *UBCPushNotificationProxy::ScheduleRichPushNotificationUTC(UBrainCloudWrapper *brainCloudWrapper, const FString &profileId, const int32 notificationTemplateId, const FString &substitutionJson, const int64 startTime)
 {
 	UBCPushNotificationProxy *Proxy = NewObject<UBCPushNotificationProxy>();
 	UBCWrapperProxy::GetBrainCloudInstance(brainCloudWrapper)->getPushNotificationService()->scheduleRichPushNotificationUTC(profileId, notificationTemplateId, substitutionJson, startTime, Proxy);
