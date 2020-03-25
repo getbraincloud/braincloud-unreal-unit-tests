@@ -120,6 +120,10 @@ class BCCLIENTPLUGIN_API BrainCloudTournament
 	* @param roundStartedTime Time the user started the match resulting in the score being posted in UTC.
 	* @param callback The method to be invoked when the server response is received
 	*/
+
+	/**
+	* @deprecated will be removed March 2021, Use postTournamentScoreUTC instead
+	*/
 	void postTournamentScore(const FString &leaderboardId, int32 score, const FString &jsonData, const struct FDateTime roundStartedTime, IServerCallback *callback = nullptr);
 	
 	/**
@@ -138,7 +142,44 @@ class BCCLIENTPLUGIN_API BrainCloudTournament
 	* @param initialScore
 	* @param callback The method to be invoked when the server response is received
 	*/
+
+	/**
+	* @deprecated will be removed March 2021, Use postTournamentScoreWithResultsUTC instead
+	*/
 	void postTournamentScoreWithResults(const FString &leaderboardId, int32 score, const FString &jsonData, const FDateTime roundStartedTime, ESortOrder sort, int32 beforeCount, int32 afterCount, float initialScore, IServerCallback *callback);
+
+	/**
+	* Post the users score to the leaderboard
+	*
+	* Service Name - tournament
+	* Service Operation - POST_TOURNAMENT_SCORE
+	*
+	* @param leaderboardId The leaderboard for the tournament
+	* @param score The score to post
+	* @param jsonData Optional data attached to the leaderboard entry
+	* @param roundStartTimeUTC Time the user started the match resulting in the score being posted in UTC.
+	* @param callback The method to be invoked when the server response is received
+	*/
+	void postTournamentScoreUTC(const FString &leaderboardId, int32 score, const FString &jsonData, int64 roundStartTimeUTC, IServerCallback *callback = nullptr);
+	
+	/**
+	* Post the users score to the leaderboard and the result for the score
+	*
+	* Service Name - tournament
+	* Service Operation - POST_TOURNAMENT_SCORE_WITH_RESULTS
+	*
+	* @param leaderboardId The leaderboard for the tournament
+	* @param score The score to post
+	* @param jsonData Optional data attached to the leaderboard entry
+	* @param roundStartTimeUTC Time the user started the match resulting in the score being posted in UTC.
+	* @param sort the sorting type
+	* @param beforeCount 
+	* @param afterCount
+	* @param initialScore
+	* @param callback The method to be invoked when the server response is received
+	*/
+	void postTournamentScoreWithResultsUTC(const FString &leaderboardId, int32 score, const FString &jsonData, int64 roundStartTimeUTC, ESortOrder sort, int32 beforeCount, int32 afterCount, float initialScore, IServerCallback *callback);
+
 
 	/**
 	* Returns the user's expected reward based on the current scores

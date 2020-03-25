@@ -121,6 +121,41 @@ void BrainCloudTournament::postTournamentScoreWithResults(const FString &leaderb
 	_client->sendRequest(sc);
 }
 
+void BrainCloudTournament::postTournamentScoreUTC(const FString &leaderboardId, int32 score, const FString &jsonData, int64 roundStartTimeUTC, IServerCallback *callback)
+{
+	TSharedRef<FJsonObject> message = MakeShareable(new FJsonObject());
+	message->SetStringField(OperationParam::LeaderboardId.getValue(), leaderboardId);
+	message->SetNumberField(OperationParam::Score.getValue(), score);
+	message->SetNumberField(OperationParam::RoundStartedEpoch.getValue(), roundStartTimeUTC);//.ToUnixTimestamp() * 1000);
+
+	if (OperationParam::isOptionalParamValid(jsonData))
+	{
+		message->SetObjectField(OperationParam::Data.getValue(), JsonUtil::jsonStringToValue(jsonData));
+	}
+
+	ServerCall *sc = new ServerCall(ServiceName::Tournament, ServiceOperation::PostTournamentScore, message, callback);
+	_client->sendRequest(sc);
+}
+
+void BrainCloudTournament::postTournamentScoreWithResultsUTC(const FString &leaderboardId, int32 score, const FString &jsonData, int64 roundStartTimeUTC, ESortOrder sort, int32 beforeCount, int32 afterCount, float initialScore, IServerCallback *callback)
+{
+	TSharedRef<FJsonObject> message = MakeShareable(new FJsonObject());
+	message->SetStringField(OperationParam::LeaderboardId.getValue(), leaderboardId);
+	message->SetNumberField(OperationParam::Score.getValue(), score);
+	if (OperationParam::isOptionalParamValid(jsonData))
+	{
+		message->SetObjectField(OperationParam::Data.getValue(), JsonUtil::jsonStringToValue(jsonData));
+	}
+	message->SetNumberField(OperationParam::RoundStartedEpoch.getValue(), roundStartTimeUTC);//.ToUnixTimestamp() * 1000);
+	message->SetStringField(OperationParam::LeaderboardServiceSortOrder.getValue(), tournamentSortOrderToString(sort));
+	message->SetNumberField(OperationParam::LeaderboardServiceBeforeCount.getValue(), beforeCount);
+	message->SetNumberField(OperationParam::LeaderboardServiceAfterCount.getValue(), afterCount);
+	message->SetNumberField(OperationParam::InitialScore.getValue(), initialScore);
+
+	ServerCall *sc = new ServerCall(ServiceName::Tournament, ServiceOperation::PostTournamentScoreWithResults, message, callback);
+	_client->sendRequest(sc);
+}
+
 void BrainCloudTournament::viewCurrentReward(const FString &leaderboardId, IServerCallback *callback)
 {
 	TSharedRef<FJsonObject> message = MakeShareable(new FJsonObject());

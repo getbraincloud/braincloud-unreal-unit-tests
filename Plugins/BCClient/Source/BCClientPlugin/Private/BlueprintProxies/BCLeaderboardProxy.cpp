@@ -110,6 +110,31 @@ UBCLeaderboardProxy *UBCLeaderboardProxy::PostScoreToDynamicLeaderboardDays(UBra
 	return Proxy;
 }
 
+UBCLeaderboardProxy *UBCLeaderboardProxy::PostScoreToDynamicLeaderboardUTC(UBrainCloudWrapper *brainCloudWrapper, FString leaderboardId, int32 score, FString jsonData,
+																		ESocialLeaderboardType leaderboardType, ERotationType rotationType, int64 rotationStart, int32 retainedCount)
+{
+	UBCLeaderboardProxy *Proxy = NewObject<UBCLeaderboardProxy>();
+	UBCWrapperProxy::GetBrainCloudInstance(brainCloudWrapper)->getLeaderboardService()->postScoreToDynamicLeaderboard(leaderboardId, score, jsonData, leaderboardType, rotationType, rotationStart, retainedCount, Proxy);
+	return Proxy;
+}
+
+UBCLeaderboardProxy *UBCLeaderboardProxy::PostScoreToDynamicGroupLeaderboardUTC(UBrainCloudWrapper *brainCloudWrapper, FString leaderboardId, const FString &groupId, int32 score, FString jsonData,
+																		ESocialLeaderboardType leaderboardType, ERotationType rotationType, int64 rotationStart, int32 retainedCount)
+{
+	UBCLeaderboardProxy *Proxy = NewObject<UBCLeaderboardProxy>();
+	UBCWrapperProxy::GetBrainCloudInstance(brainCloudWrapper)->getLeaderboardService()->postScoreToDynamicGroupLeaderboard(leaderboardId, groupId, score, jsonData, leaderboardType, rotationType, rotationStart, retainedCount, Proxy);
+	return Proxy;
+}
+
+UBCLeaderboardProxy *UBCLeaderboardProxy::PostScoreToDynamicLeaderboardDaysUTC(UBrainCloudWrapper *brainCloudWrapper, FString leaderboardId, int32 score, FString jsonData,
+																			ESocialLeaderboardType leaderboardType, int64 rotationStart, int32 retainedCount, int32 numDaysToRotate)
+{
+	UBCLeaderboardProxy *Proxy = NewObject<UBCLeaderboardProxy>();
+	UBCWrapperProxy::GetBrainCloudInstance(brainCloudWrapper)->getLeaderboardService()->postScoreToDynamicLeaderboardDays(leaderboardId, score, jsonData, leaderboardType, rotationStart, retainedCount, numDaysToRotate, Proxy);
+	return Proxy;
+}
+
+
 UBCLeaderboardProxy *UBCLeaderboardProxy::RemovePlayerScore(UBrainCloudWrapper *brainCloudWrapper, const FString &leaderboardId, int32 versionId)
 {
 	UBCLeaderboardProxy *Proxy = NewObject<UBCLeaderboardProxy>();

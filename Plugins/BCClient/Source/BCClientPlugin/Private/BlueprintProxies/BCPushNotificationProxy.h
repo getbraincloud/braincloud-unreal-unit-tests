@@ -110,7 +110,7 @@ class UBCPushNotificationProxy : public UBCBlueprintCallProxyBase
 	* Param - callback The method to be invoked when the server response is received
 	*/
 	UFUNCTION(BlueprintCallable, meta = (BlueprintInternalUseOnly = "true"), Category = "BrainCloud|Push Notification")
-	static UBCPushNotificationProxy *ScheduleRawPushNotificationUTC(UBrainCloudWrapper *brainCloudWrapper, const FString &profileId, const FString &fcmContent, const FString &iosContent, const FString &facebookContent, int32 startTime);
+	static UBCPushNotificationProxy *ScheduleRawPushNotificationUTC(UBrainCloudWrapper *brainCloudWrapper, const FString &profileId, const FString &fcmContent, const FString &iosContent, const FString &facebookContent, int64 startTime);
 
 	/**
 	* Schedules a normalized push notification to a user
@@ -170,7 +170,7 @@ class UBCPushNotificationProxy : public UBCBlueprintCallProxyBase
 	* Param - startTime Start time of sending the push notification
 	*/
 	UFUNCTION(BlueprintCallable, meta = (BlueprintInternalUseOnly = "true"), Category = "BrainCloud|Push Notification")
-	static UBCPushNotificationProxy *ScheduleNormalizedPushNotificationUTC(UBrainCloudWrapper *brainCloudWrapper, const FString &profileId, const FString &alertContentJson, const FString &customDataJson, const int32 startTime);
+	static UBCPushNotificationProxy *ScheduleNormalizedPushNotificationUTC(UBrainCloudWrapper *brainCloudWrapper, const FString &profileId, const FString &alertContentJson, const FString &customDataJson, const int64 startTime);
 
 	/**
 	* Schedules a normalized push notification to a user
@@ -192,7 +192,7 @@ class UBCPushNotificationProxy : public UBCBlueprintCallProxyBase
 	* Param - startTime Start time of sending the push notification
 	*/
 	UFUNCTION(BlueprintCallable, meta = (BlueprintInternalUseOnly = "true"), Category = "BrainCloud|Push Notification")
-	static UBCPushNotificationProxy *ScheduleRichPushNotificationUTC(UBrainCloudWrapper *brainCloudWrapper, const FString &profileId, int32 notificationTemplateId, const FString &substitutionJson, const int32 startTime);
+	static UBCPushNotificationProxy *ScheduleRichPushNotificationUTC(UBrainCloudWrapper *brainCloudWrapper, const FString &profileId, int32 notificationTemplateId, const FString &substitutionJson, const int64 startTime);
 
 	/**
 	* Schedules a rich push notification to a user
