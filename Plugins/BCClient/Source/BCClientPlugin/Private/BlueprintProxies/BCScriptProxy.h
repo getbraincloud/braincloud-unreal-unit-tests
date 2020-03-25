@@ -48,6 +48,21 @@ class UBCScriptProxy : public UBCBlueprintCallProxyBase
 	*
 	* Param - scriptName The name of the script to be run
 	* Param - jsonScriptData Data to be sent to the script in json format
+	* Param - startDateInUTC The start date as a time struct
+	* @see The API documentation site for more details on cloud code
+	*/
+	UFUNCTION(BlueprintCallable, meta = (BlueprintInternalUseOnly = "true"), Category = "BrainCloud|Cloud Script")
+	static UBCScriptProxy *ScheduleRunScriptUTCv2(UBrainCloudWrapper *brainCloudWrapper, FString scriptName, FString jsonScriptData, int64 startDateInUTC);
+
+
+	/**
+	* Allows cloud script executions to be scheduled
+	*
+	* Service Name - Script
+	* Service Operation - ScheduleCloudScript
+	*
+	* Param - scriptName The name of the script to be run
+	* Param - jsonScriptData Data to be sent to the script in json format
 	* Param - minutesFromNow Number of minutes from now to run script
 	* @see The API documentation site for more details on cloud code
 	*/

@@ -36,6 +36,20 @@ void BrainCloudScript::scheduleRunScriptUTC(const FString &scriptName, const FSt
     _client->sendRequest(sc);
 }
 
+void BrainCloudScript::scheduleRunScriptUTCv2(const FString &scriptName, const FString &jsonScriptData, int64 startDateInUTC, IServerCallback *callback)
+{
+    TSharedRef<FJsonObject> message = MakeShareable(new FJsonObject());
+    message->SetStringField(OperationParam::ScriptServiceRunScriptName.getValue(), scriptName);
+    if (OperationParam::isOptionalParamValid(jsonScriptData))
+    {
+        message->SetObjectField(OperationParam::ScriptServiceRunScriptData.getValue(), JsonUtil::jsonStringToValue(jsonScriptData));
+    }
+    message->SetNumberField(OperationParam::ScriptServiceStartDateUTC.getValue(), startDateInUTC);
+
+    ServerCall *sc = new ServerCall(ServiceName::Script, ServiceOperation::ScheduleCloudScript, message, callback);
+    _client->sendRequest(sc);
+}
+
 void BrainCloudScript::scheduleRunScriptMinutes(const FString &scriptName, const FString &jsonScriptData, int32 minutesFromNow, IServerCallback *callback)
 {
     TSharedRef<FJsonObject> message = MakeShareable(new FJsonObject());

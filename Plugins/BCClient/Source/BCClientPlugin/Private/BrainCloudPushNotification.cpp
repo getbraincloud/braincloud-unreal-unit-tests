@@ -102,7 +102,7 @@ void BrainCloudPushNotification::sendNormalizedPushNotificationToGroup(const FSt
 	_client->sendRequest(sc);
 }
 
-void BrainCloudPushNotification::scheduleRawPushNotificationUTC(const FString &profileId, const FString &fcmContent, const FString &iosContent, const FString &facebookContent, int32 startTime, IServerCallback *callback)
+void BrainCloudPushNotification::scheduleRawPushNotificationUTC(const FString &profileId, const FString &fcmContent, const FString &iosContent, const FString &facebookContent, int64 startTime, IServerCallback *callback)
 {
 	TSharedRef<FJsonObject> message = MakeShareable(new FJsonObject());
 	message->SetStringField(OperationParam::ProfileId.getValue(), profileId);
@@ -226,7 +226,7 @@ void BrainCloudPushNotification::sendRawPushNotificationToGroup(const FString &g
 	_client->sendRequest(sc);
 }
 
-void BrainCloudPushNotification::scheduleNormalizedPushNotificationUTC(const FString &profileId, const FString &alertContentJson, const FString &customDataJson, const int32 startTime, IServerCallback *callback)
+void BrainCloudPushNotification::scheduleNormalizedPushNotificationUTC(const FString &profileId, const FString &alertContentJson, const FString &customDataJson, const int64 startTime, IServerCallback *callback)
 {
 	TSharedRef<FJsonObject> message = MakeShareable(new FJsonObject());
 	message->SetStringField(OperationParam::PushNotificationSendParamProfileId.getValue(), profileId);
@@ -260,7 +260,7 @@ void BrainCloudPushNotification::scheduleNormalizedPushNotificationMinutes(const
 	_client->sendRequest(sc);
 }
 
-void BrainCloudPushNotification::scheduleRichPushNotificationUTC(const FString &profileId, const int32 notificationTemplateId, const FString &substitutionJson, const int32 startTime, IServerCallback *callback)
+void BrainCloudPushNotification::scheduleRichPushNotificationUTC(const FString &profileId, const int32 notificationTemplateId, const FString &substitutionJson, const int64 startTime, IServerCallback *callback)
 {
 	TSharedRef<FJsonObject> message = MakeShareable(new FJsonObject());
 	message->SetStringField(OperationParam::PushNotificationSendParamProfileId.getValue(), profileId);
