@@ -1,11 +1,11 @@
 // Copyright 2018 bitHeads, Inc. All Rights Reserved.
 
+#include "BCGlobalStatisticsProxy.h"
 #include "BCClientPluginPrivatePCH.h"
 #include "BrainCloudClient.h"
 #include "ServerCall.h"
 
 #include "BCWrapperProxy.h"
-#include "BCGlobalStatisticsProxy.h"
 #include "BrainCloudWrapper.h"
 
 UBCGlobalStatisticsProxy::UBCGlobalStatisticsProxy(const FObjectInitializer &ObjectInitializer)

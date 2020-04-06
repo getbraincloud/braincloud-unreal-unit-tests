@@ -1,12 +1,12 @@
 // Copyright 2018 bitHeads, Inc. All Rights Reserved.
 
+#include "BCEventProxy.h"
 #include "BCClientPluginPrivatePCH.h"
 #include "BrainCloudClient.h"
 #include "ServerCall.h"
 
 #include "BCWrapperProxy.h"
 #include "BrainCloudWrapper.h"
-#include "BCEventProxy.h"
 
 UBCEventProxy::UBCEventProxy(const FObjectInitializer &ObjectInitializer)
     : Super(ObjectInitializer)

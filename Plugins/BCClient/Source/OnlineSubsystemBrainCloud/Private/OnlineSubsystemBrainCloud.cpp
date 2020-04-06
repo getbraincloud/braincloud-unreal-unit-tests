@@ -1,8 +1,8 @@
 // Copyright 2018 bitHeads, Inc. All Rights Reserved.
 
+#include "OnlineSubsystemBrainCloud.h"
 #include "OnlineSubsystemBrainCloudPrivatePCH.h"
 
-#include "OnlineSubsystemBrainCloud.h"
 #include "BrainCloudWrapper.h"
 #include "BrainCloudClient.h"
 

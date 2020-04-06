@@ -2,7 +2,7 @@
 
 #pragma once
 
-#include "OnlineMessageInterface.h"
+#include "Interfaces/OnlineMessageInterface.h"
 #include "OnlineSubsystemBrainCloud.h"
 
 /**

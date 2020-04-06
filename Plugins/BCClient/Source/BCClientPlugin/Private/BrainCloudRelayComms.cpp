@@ -1,7 +1,7 @@
 // Copyright 2018 bitHeads, Inc. All Rights Reserved.
 
-#include "BCClientPluginPrivatePCH.h"
 #include "BrainCloudRelayComms.h"
+#include "BCClientPluginPrivatePCH.h"
 
 #include "Serialization/JsonTypes.h"
 #include "Serialization/JsonReader.h"

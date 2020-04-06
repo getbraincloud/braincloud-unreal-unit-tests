@@ -1,11 +1,11 @@
 // Copyright 2018 bitHeads, Inc. All Rights Reserved.
 
+#include "BCMailProxy.h"
 #include "BCClientPluginPrivatePCH.h"
 #include "BrainCloudClient.h"
 #include "ServerCall.h"
 
 #include "BCWrapperProxy.h"
-#include "BCMailProxy.h"
 #include "BrainCloudWrapper.h"
 
 UBCMailProxy::UBCMailProxy(const FObjectInitializer &ObjectInitializer)
