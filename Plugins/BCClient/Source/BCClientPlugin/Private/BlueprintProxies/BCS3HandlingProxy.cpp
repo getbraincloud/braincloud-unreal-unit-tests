@@ -1,12 +1,12 @@
 // Copyright 2018 bitHeads, Inc. All Rights Reserved.
 
+#include "BCS3HandlingProxy.h"
 #include "BCClientPluginPrivatePCH.h"
 #include "BrainCloudClient.h"
 #include "ServerCall.h"
 
 #include "BCWrapperProxy.h"
 #include "BrainCloudWrapper.h"
-#include "BCS3HandlingProxy.h"
 
 UBCS3HandlingProxy::UBCS3HandlingProxy(const FObjectInitializer &ObjectInitializer)
     : Super(ObjectInitializer)

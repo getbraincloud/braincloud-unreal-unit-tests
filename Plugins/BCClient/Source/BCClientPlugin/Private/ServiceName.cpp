@@ -1,7 +1,7 @@
 // Copyright 2018 bitHeads, Inc. All Rights Reserved.
 
-#include "BCClientPluginPrivatePCH.h"
 #include "ServiceName.h"
+#include "BCClientPluginPrivatePCH.h"
 
 ServiceName::ServiceName(const FString &name)
 {

@@ -1,5 +1,6 @@
 // Copyright 2018 bitHeads, Inc. All Rights Reserved.
 
+#include "LeaderboardCallback.h"
 #include "OnlineSubsystemBrainCloudPrivatePCH.h"
 #include "AssignableServerCallback.h"
 
@@ -8,7 +9,6 @@
 
 #include "OnlineLeaderboardInterfaceBrainCloud.h"
 
-#include "LeaderboardCallback.h"
 
 LeaderboardCallback::LeaderboardCallback(FOnlineLeaderboardReadRef leaderboardRead) : _leaderboardRead(leaderboardRead)
 {

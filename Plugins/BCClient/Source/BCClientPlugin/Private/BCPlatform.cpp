@@ -1,7 +1,7 @@
 // Copyright 2018 bitHeads, Inc. All Rights Reserved.
 
-#include "BCClientPluginPrivatePCH.h"
 #include "BCPlatform.h"
+#include "BCClientPluginPrivatePCH.h"
 
 FString BCPlatform::EnumToString(EBCPlatform platform)
 {

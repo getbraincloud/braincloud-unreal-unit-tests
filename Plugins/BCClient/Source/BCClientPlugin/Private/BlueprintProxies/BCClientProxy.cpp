@@ -1,10 +1,10 @@
 // Copyright 2018 bitHeads, Inc. All Rights Reserved.
 
+#include "BCClientProxy.h"
 #include "BCClientPluginPrivatePCH.h"
 #include "IRTTCallback.h"
 #include "ServerCall.h"
 #include "BrainCloudWrapper.h"
-#include "BCClientProxy.h"
 #include "BCWrapperProxy.h"
 
 UBCClientProxy::UBCClientProxy(const FObjectInitializer &ObjectInitializer)

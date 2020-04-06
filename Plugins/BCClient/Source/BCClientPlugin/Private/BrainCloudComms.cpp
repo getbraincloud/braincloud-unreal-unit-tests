@@ -1,7 +1,7 @@
 // Copyright 2018 bitHeads, Inc. All Rights Reserved.
 
-#include "BCClientPluginPrivatePCH.h"
 #include "BrainCloudComms.h"
+#include "BCClientPluginPrivatePCH.h"
 
 #include "IServerCallback.h"
 #include "IEventCallback.h"

@@ -1,11 +1,11 @@
 // Copyright 2018 bitHeads, Inc. All Rights Reserved.
 
+#include "BCAuthenticationProxy.h"
 #include "BCClientPluginPrivatePCH.h"
 #include "ServerCall.h"
 #include "BCWrapperProxy.h"
 #include "BrainCloudClient.h"
 #include "BrainCloudWrapper.h"
-#include "BCAuthenticationProxy.h"
 
 UBCAuthenticationProxy::UBCAuthenticationProxy(const FObjectInitializer &ObjectInitializer)
     : Super(ObjectInitializer)
