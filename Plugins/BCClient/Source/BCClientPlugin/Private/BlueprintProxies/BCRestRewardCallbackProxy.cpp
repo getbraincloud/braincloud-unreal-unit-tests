@@ -1,9 +1,9 @@
 // Copyright 2018 bitHeads, Inc. All Rights Reserved.
 
+#include "BCRestRewardCallbackProxy.h"
 #include "BCClientPluginPrivatePCH.h"
 #include "BCWrapperProxy.h"
 #include "BrainCloudWrapper.h"
-#include "BCRestRewardCallbackProxy.h"
 
 UBCRestRewardCallbackProxy::UBCRestRewardCallbackProxy(const FObjectInitializer &ObjectInitializer)
 	: Super(ObjectInitializer)

@@ -1,7 +1,7 @@
 // Copyright 2018 bitHeads, Inc. All Rights Reserved.
 
-#include "BCClientPluginPrivatePCH.h"
 #include "BrainCloudGroupACL.h"
+#include "BCClientPluginPrivatePCH.h"
 
 UBrainCloudGroupACL *UBrainCloudGroupACL::CreateNewGroupACL(EAcl other, EAcl member)
 {

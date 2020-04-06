@@ -2,7 +2,7 @@
 
 #pragma once
 
-#include "OnlineTimeInterface.h"
+#include "Interfaces/OnlineTimeInterface.h"
 #include "OnlineSubsystemBrainCloudPackage.h"
 
 /**

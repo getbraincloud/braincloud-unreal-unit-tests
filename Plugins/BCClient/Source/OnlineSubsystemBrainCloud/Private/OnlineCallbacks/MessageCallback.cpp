@@ -1,8 +1,8 @@
 // Copyright 2018 bitHeads, Inc. All Rights Reserved.
 
+#include "MessageCallback.h"
 #include "OnlineSubsystemBrainCloudPrivatePCH.h"
 #include "AssignableServerCallback.h"
-#include "MessageCallback.h"
 
 #include "ServiceOperation.h"
 #include "ServiceName.h"

@@ -1,11 +1,11 @@
 // Copyright 2018 bitHeads, Inc. All Rights Reserved.
 
+#include "BCGlobalEntityProxy.h"
 #include "BCClientPluginPrivatePCH.h"
 #include "BrainCloudClient.h"
 #include "ServerCall.h"
 
 #include "BCWrapperProxy.h"
-#include "BCGlobalEntityProxy.h"
 #include "BrainCloudWrapper.h"
 
 UBCGlobalEntityProxy::UBCGlobalEntityProxy(const FObjectInitializer &ObjectInitializer)

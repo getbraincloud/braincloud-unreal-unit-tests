@@ -1,11 +1,11 @@
 // Copyright 2018 bitHeads, Inc. All Rights Reserved.
 
+#include "BCGamificationProxy.h"
 #include "BCClientPluginPrivatePCH.h"
 #include "BrainCloudClient.h"
 #include "ServerCall.h"
 
 #include "BCWrapperProxy.h"
-#include "BCGamificationProxy.h"
 #include "BrainCloudWrapper.h"
 
 UBCGamificationProxy::UBCGamificationProxy(const FObjectInitializer &ObjectInitializer)

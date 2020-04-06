@@ -1,11 +1,11 @@
 // Copyright 2018 bitHeads, Inc. All Rights Reserved.
 
+#include "BCMatchmakingProxy.h"
 #include "BCClientPluginPrivatePCH.h"
 #include "BrainCloudClient.h"
 #include "ServerCall.h"
 
 #include "BCWrapperProxy.h"
-#include "BCMatchmakingProxy.h"
 #include "BrainCloudWrapper.h"
 
 UBCMatchmakingProxy::UBCMatchmakingProxy(const FObjectInitializer &ObjectInitializer)

@@ -1,9 +1,9 @@
 // Copyright 2015 bitHeads, Inc. All Rights Reserved.
 
+#include "BCWrapperProxy.h"
 #include "BCClientPluginPrivatePCH.h"
 #include "ServerCall.h"
 
-#include "BCWrapperProxy.h"
 #include "BrainCloudWrapper.h"
 
 UBrainCloudWrapper *UBCWrapperProxy::DefaultBrainCloudInstance = nullptr;

@@ -1,7 +1,7 @@
 // Copyright 2018 bitHeads, Inc. All Rights Reserved.
 
-#include "BCClientPluginPrivatePCH.h"
 #include "JsonUtil.h"
+#include "BCClientPluginPrivatePCH.h"
 
 TArray<TSharedPtr<FJsonValue>> JsonUtil::commaSepStringToJsonArray(const TCHAR *str)
 {

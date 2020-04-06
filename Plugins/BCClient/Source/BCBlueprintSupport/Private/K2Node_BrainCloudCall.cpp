@@ -1,5 +1,6 @@
 // Copyright 2018 bitHeads, Inc. All Rights Reserved.
 
+#include "K2Node_BrainCloudCall.h"
 #include "BCBlueprintSupportPrivatePCH.h"
 #include "BCBlueprintCallProxyBase.h"
 #include "BCBlueprintRTTCallProxyBase.h"
@@ -8,7 +9,6 @@
 #include "BlueprintFunctionNodeSpawner.h"
 #include "BlueprintActionDatabaseRegistrar.h"
 
-#include "K2Node_BrainCloudCall.h"
 
 #define LOCTEXT_NAMESPACE "K2Node"
 
