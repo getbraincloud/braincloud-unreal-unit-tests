@@ -1,5 +1,6 @@
 // Copyright 2018 bitHeads, Inc. All Rights Reserved.
 
+#include "BrainCloudItemCatalog.h"
 #include "BCClientPluginPrivatePCH.h"
 #include "BrainCloudIdentity.h"
 

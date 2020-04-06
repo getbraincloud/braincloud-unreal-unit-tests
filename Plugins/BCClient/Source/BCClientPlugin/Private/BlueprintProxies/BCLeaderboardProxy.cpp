@@ -1,11 +1,11 @@
 // Copyright 2018 bitHeads, Inc. All Rights Reserved.
 
+#include "BCLeaderboardProxy.h"
 #include "BCClientPluginPrivatePCH.h"
 #include "BrainCloudClient.h"
 #include "ServerCall.h"
 
 #include "BCWrapperProxy.h"
-#include "BCLeaderboardProxy.h"
 #include "BrainCloudWrapper.h"
 
 //////////////////////////////////////////////////////////////////////////

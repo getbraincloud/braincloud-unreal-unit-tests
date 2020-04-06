@@ -1,7 +1,7 @@
 // Copyright 2018 bitHeads, Inc. All Rights Reserved.
 
-#include "BCClientPluginPrivatePCH.h"
 #include "BCFileUploader.h"
+#include "BCClientPluginPrivatePCH.h"
 #include "BrainCloudWrapper.h"
 
 #include "ReasonCodes.h"

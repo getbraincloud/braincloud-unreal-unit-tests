@@ -1,11 +1,11 @@
 // Copyright 2018 bitHeads, Inc. All Rights Reserved.
 
+#include "BCFriendProxy.h"
 #include "BCClientPluginPrivatePCH.h"
+#include "BCWrapperProxy.h"
 #include "BrainCloudClient.h"
 #include "ServerCall.h"
 
-#include "BCWrapperProxy.h"
-#include "BCFriendProxy.h"
 #include "BrainCloudWrapper.h"
 
 UBCFriendProxy::UBCFriendProxy(const FObjectInitializer &ObjectInitializer)

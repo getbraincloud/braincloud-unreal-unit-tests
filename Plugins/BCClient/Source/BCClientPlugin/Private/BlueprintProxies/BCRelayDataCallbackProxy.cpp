@@ -1,9 +1,9 @@
 // Copyright 2018 bitHeads, Inc. All Rights Reserved.
 
+#include "BCRelayDataCallbackProxy.h"
 #include "BCClientPluginPrivatePCH.h"
 #include "BCWrapperProxy.h"
 #include "BrainCloudWrapper.h"
-#include "BCRelayDataCallbackProxy.h"
 
 UBCRelayDataCallbackProxy::UBCRelayDataCallbackProxy(const FObjectInitializer &ObjectInitializer)
 	: Super(ObjectInitializer)

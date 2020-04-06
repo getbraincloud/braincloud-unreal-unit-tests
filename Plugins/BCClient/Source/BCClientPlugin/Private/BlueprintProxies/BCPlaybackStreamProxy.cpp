@@ -1,11 +1,11 @@
 // Copyright 2018 bitHeads, Inc. All Rights Reserved.
 
+#include "BCPlaybackStreamProxy.h"
 #include "BCClientPluginPrivatePCH.h"
 #include "BrainCloudClient.h"
 #include "ServerCall.h"
 
 #include "BCWrapperProxy.h"
-#include "BCPlaybackStreamProxy.h"
 #include "BrainCloudWrapper.h"
 
 UBCPlaybackStreamProxy::UBCPlaybackStreamProxy(const FObjectInitializer &ObjectInitializer)

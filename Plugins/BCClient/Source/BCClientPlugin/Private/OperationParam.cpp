@@ -1,7 +1,7 @@
 // Copyright 2018 bitHeads, Inc. All Rights Reserved.
 
-#include "BCClientPluginPrivatePCH.h"
 #include "OperationParam.h"
+#include "BCClientPluginPrivatePCH.h"
 
 OperationParam::OperationParam(const FString &operation)
 {

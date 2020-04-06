@@ -2,11 +2,11 @@
 
 #pragma once
 
-#include "OnlineTitleFileInterface.h"
+#include "Interfaces/OnlineTitleFileInterface.h"
 #include "OnlineSubsystemBrainCloud.h"
 
-#include "IHttpRequest.h"
-#include "IHttpResponse.h"
+#include "Interfaces/IHttpRequest.h"
+#include "Interfaces/IHttpResponse.h"
 
 /** Holds metadata about a given downloadable file */
 struct FCloudFileHeaderBrainCloud : public FCloudFileHeader

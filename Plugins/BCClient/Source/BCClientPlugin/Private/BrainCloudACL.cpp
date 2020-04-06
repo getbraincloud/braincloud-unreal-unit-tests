@@ -1,7 +1,7 @@
 // Copyright 2018 bitHeads, Inc. All Rights Reserved.
 
-#include "BCClientPluginPrivatePCH.h"
 #include "BrainCloudACL.h"
+#include "BCClientPluginPrivatePCH.h"
 
 UBrainCloudACL *UBrainCloudACL::CreateNewACL(EAcl access)
 {
