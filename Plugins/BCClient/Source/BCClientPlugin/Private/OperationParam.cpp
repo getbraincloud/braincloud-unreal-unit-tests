@@ -426,6 +426,12 @@ const OperationParam OperationParam::Score = OperationParam("score");
 const OperationParam OperationParam::RoundStartedEpoch = OperationParam("roundStartedEpoch");
 const OperationParam OperationParam::Data = OperationParam("data");
 
+//Global File
+const OperationParam OperationParam::GlobalFileFileName = OperationParam("filename");
+const OperationParam OperationParam::GlobalFileFileId = OperationParam("fileId");
+const OperationParam OperationParam::GlobalFileFolderPath = OperationParam("folderPath");
+const OperationParam OperationParam::GlobalFileRecurse = OperationParam("recurse");
+
 //virtual currency
 const OperationParam OperationParam::VirtualCurrencyVcId = OperationParam("vcId");
 const OperationParam OperationParam::VirtualCurrencyLevelName = OperationParam("levelName");

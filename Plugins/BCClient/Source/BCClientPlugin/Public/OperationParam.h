@@ -424,6 +424,12 @@ class BCCLIENTPLUGIN_API OperationParam
 	static const OperationParam RoundStartedEpoch;
 	static const OperationParam Data;
 
+	//Global File
+	static const OperationParam GlobalFileFileName;
+	static const OperationParam GlobalFileFileId;
+	static const OperationParam GlobalFileFolderPath;
+	static const OperationParam GlobalFileRecurse;
+
 	//virtual currency
 	static const OperationParam VirtualCurrencyVcId;
 	static const OperationParam VirtualCurrencyLevelName;

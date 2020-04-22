@@ -143,6 +143,12 @@ class BCCLIENTPLUGIN_API ServiceOperation
 	static const ServiceOperation RemoveGroupScore;
 	static const ServiceOperation GetGroupLeaderboardView;
 
+	//Global File
+	static const ServiceOperation GetFileInfo;
+	static const ServiceOperation GetFileInfoSimple;
+	static const ServiceOperation GetGlobalCDNUrl;
+	static const ServiceOperation GetGlobalFileList;
+
 	static const ServiceOperation InitThirdParty;
 	static const ServiceOperation PostThirdPartyLeaderboardScore;
 	static const ServiceOperation IncrementThirdPartyLeaderboardScore;
