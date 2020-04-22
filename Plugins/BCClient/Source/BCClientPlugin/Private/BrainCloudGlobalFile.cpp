@@ -19,10 +19,10 @@ void BrainCloudGlobalFile::getFileInfo(const FString &fileId, IServerCallback *c
 	_client->sendRequest(sc);
 }
 
-void BrainCloudGlobalFile::getFileInfoSimple(const FString &fileId, const FString &folderPath, IServerCallback *callback)
+void BrainCloudGlobalFile::getFileInfoSimple(const FString &fileName, const FString &folderPath, IServerCallback *callback)
 {
 	TSharedRef<FJsonObject> message = MakeShareable(new FJsonObject());
-	message->SetStringField(OperationParam::GlobalFileFileId.getValue(), fileId);
+	message->SetStringField(OperationParam::GlobalFileFileName.getValue(), fileName);
     message->SetStringField(OperationParam::GlobalFileFolderPath.getValue(), folderPath);
 
 	ServerCall *sc = new ServerCall(ServiceName::GlobalFile, ServiceOperation::GetFileInfo, message, callback);

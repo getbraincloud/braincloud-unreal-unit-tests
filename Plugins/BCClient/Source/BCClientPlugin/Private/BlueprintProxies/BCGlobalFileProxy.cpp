@@ -20,10 +20,10 @@ UBCGlobalFileProxy *UBCGlobalFileProxy::GetFileInfo(UBrainCloudWrapper *brainClo
     return Proxy;
 }
 
-UBCGlobalFileProxy *UBCGlobalFileProxy::GetFileInfoSimple(UBrainCloudWrapper *brainCloudWrapper, const FString &fileId, const FString &folderPath)
+UBCGlobalFileProxy *UBCGlobalFileProxy::GetFileInfoSimple(UBrainCloudWrapper *brainCloudWrapper, const FString &fileName, const FString &folderPath)
 {
     UBCGlobalFileProxy *Proxy = NewObject<UBCGlobalFileProxy>();
-    UBCWrapperProxy::GetBrainCloudInstance(brainCloudWrapper)->getGlobalFileService()->getFileInfoSimple(fileId, folderPath, Proxy);
+    UBCWrapperProxy::GetBrainCloudInstance(brainCloudWrapper)->getGlobalFileService()->getFileInfoSimple(fileName, folderPath, Proxy);
     return Proxy;
 }
 

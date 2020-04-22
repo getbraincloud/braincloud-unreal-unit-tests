@@ -35,7 +35,7 @@ public:
      * @param - callback The method to be invoked when the server response is received
      */
     UFUNCTION(BlueprintCallable, meta = (BlueprintInternalUseOnly = "true"), Category = "BrainCloud|Global File")
-    static UBCGlobalFileProxy *GetFileInfoSimple(UBrainCloudWrapper *brainCloudWrapper, const FString &fileId, const FString &folderPath);
+    static UBCGlobalFileProxy *GetFileInfoSimple(UBrainCloudWrapper *brainCloudWrapper, const FString &fileName, const FString &folderPath);
     /**
      * Return CDN url for file for clients that cannot handle redirect.
      *
