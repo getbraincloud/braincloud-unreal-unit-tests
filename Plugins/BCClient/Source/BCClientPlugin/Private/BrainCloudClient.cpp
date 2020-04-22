@@ -76,6 +76,7 @@ BrainCloudClient::~BrainCloudClient()
 	destroyService(_groupService);
 	destroyService(_mailService);
 	destroyService(_tournamentService);
+	destroyService(_globalFileService);
 	destroyService(_customEntityService);
 	destroyService(_presenceService);
 	destroyService(_virtualCurrencyService);
@@ -692,6 +693,15 @@ BrainCloudTournament *BrainCloudClient::getTournamentService()
 		_tournamentService = new BrainCloudTournament(this);
 	}
 	return _tournamentService;
+}
+
+BrainCloudGlobalFile *BrainCloudClient::getGlobalFileService()
+{
+	if (_globalFileService == nullptr)
+	{
+		_globalFileService = new BrainCloudGlobalFile(this);
+	}
+	return _globalFileService;
 }
 
 BrainCloudCustomEntity *BrainCloudClient::getCustomEntityService()

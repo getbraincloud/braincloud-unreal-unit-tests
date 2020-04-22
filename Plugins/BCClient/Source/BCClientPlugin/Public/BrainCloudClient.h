@@ -33,6 +33,7 @@
 #include "BrainCloudGroup.h"
 #include "BrainCloudMail.h"
 #include "BrainCloudTournament.h"
+#include "BrainCloudGlobalFile.h"
 #include "BrainCloudCustomEntity.h"
 #include "BrainCloudRTT.h"
 #include "BrainCloudLobby.h"
@@ -285,6 +286,7 @@ class BCCLIENTPLUGIN_API BrainCloudClient
 	BrainCloudGroup *getGroupService();
 	BrainCloudMail *getMailService();
 	BrainCloudTournament *getTournamentService();
+	BrainCloudGlobalFile *getGlobalFileService();
 	BrainCloudCustomEntity *getCustomEntityService();
 	BrainCloudPresence *getPresenceService();
 	BrainCloudVirtualCurrency *getVirtualCurrencyService();
@@ -538,6 +540,7 @@ class BCCLIENTPLUGIN_API BrainCloudClient
 	BrainCloudGroup *_groupService = nullptr;
 	BrainCloudMail *_mailService = nullptr;
 	BrainCloudTournament *_tournamentService = nullptr;
+	BrainCloudGlobalFile *_globalFileService = nullptr;
 	BrainCloudCustomEntity *_customEntityService = nullptr;
 	BrainCloudPresence *_presenceService = nullptr;
 	BrainCloudVirtualCurrency *_virtualCurrencyService = nullptr;
