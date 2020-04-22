@@ -50,6 +50,7 @@ namespace BrainCloud {
         static const ServiceName DataStream;
         static const ServiceName Profanity;
         static const ServiceName File;
+        static const ServiceName GlobalFileV3;
         static const ServiceName Group;
 		static const ServiceName Mail;
 		static const ServiceName Tournament;

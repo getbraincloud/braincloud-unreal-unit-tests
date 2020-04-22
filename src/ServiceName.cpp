@@ -45,6 +45,7 @@ namespace BrainCloud
     const ServiceName ServiceName::DataStream = ServiceName("dataStream");
     const ServiceName ServiceName::Profanity = ServiceName("profanity");
     const ServiceName ServiceName::File = ServiceName("file");
+    const ServiceName ServiceName::GlobalFileV3 = ServiceName("globalFileV3");
     const ServiceName ServiceName::Group = ServiceName("group");
 	const ServiceName ServiceName::Mail = ServiceName("mail");
 	const ServiceName ServiceName::Tournament = ServiceName("tournament");

@@ -38,6 +38,7 @@ namespace BrainCloud
         _entityService(new BrainCloudEntity(this)),
         _eventService(new BrainCloudEvent(this)),
         _fileService(new BrainCloudFile(this)),
+        _globalFileService(new BrainCloudGlobalFile(this)),
         _friendService(new BrainCloudFriend(this)),
         _gamificationService(new BrainCloudGamification(this)),
         _globalAppService(new BrainCloudGlobalApp(this)),
@@ -113,6 +114,7 @@ namespace BrainCloud
         delete _gamificationService;
         delete _friendService;
         delete _fileService;
+        delete _globalFileService;
         delete _eventService;
         delete _entityService;
         delete _dataStreamService;

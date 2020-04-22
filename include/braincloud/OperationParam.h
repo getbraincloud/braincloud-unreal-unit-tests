@@ -304,6 +304,12 @@ namespace BrainCloud {
 		static const OperationParam S3HandlingServiceFileDetails;
 		static const OperationParam S3HandlingServiceFileId;
 
+		//GlobalFileV3
+		static const OperationParam GlobalFileV3ServiceFileId;
+		static const OperationParam GlobalFileV3ServiceFolderPath;
+		static const OperationParam GlobalFileV3ServiceFileName;
+		static const OperationParam GlobalFileV3ServiceRecurse;
+
 		// Shared Identity
 		static const OperationParam AuthenticationServiceAuthenticationLevelName;
 		static const OperationParam ScriptServiceParentLevelName;

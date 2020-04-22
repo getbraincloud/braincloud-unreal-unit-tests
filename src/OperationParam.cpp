@@ -296,6 +296,12 @@ namespace BrainCloud
 	const OperationParam OperationParam::S3HandlingServiceFileDetails = OperationParam("fileDetails");
 	const OperationParam OperationParam::S3HandlingServiceFileId = OperationParam("fileId");
 
+	// globalFileV3
+	const OperationParam OperationParam::GlobalFileV3ServiceFileId = OperationParam("fileId");
+	const OperationParam OperationParam::GlobalFileV3ServiceFolderPath = OperationParam("folderPath");
+	const OperationParam OperationParam::GlobalFileV3ServiceFileName = OperationParam("filename");
+	const OperationParam OperationParam::GlobalFileV3ServiceRecurse = OperationParam("recurse");
+
 	// Shared Identity params
 	const OperationParam OperationParam::AuthenticationServiceAuthenticationLevelName = OperationParam("levelName");
 	const OperationParam OperationParam::ScriptServiceParentLevelName = OperationParam("parentLevel");
