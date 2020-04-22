@@ -28,6 +28,7 @@ public:
   static const ServiceName Friend;
   static const ServiceName Time;
   static const ServiceName Tournament;
+  static const ServiceName GlobalFile;
   static const ServiceName CustomEntity;
   static const ServiceName VirtualCurrency;
   static const ServiceName AppStore;

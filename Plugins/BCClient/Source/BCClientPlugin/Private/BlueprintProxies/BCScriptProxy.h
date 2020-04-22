@@ -52,7 +52,7 @@ class UBCScriptProxy : public UBCBlueprintCallProxyBase
 	* @see The API documentation site for more details on cloud code
 	*/
 	UFUNCTION(BlueprintCallable, meta = (BlueprintInternalUseOnly = "true"), Category = "BrainCloud|Cloud Script")
-	static UBCScriptProxy *ScheduleRunScriptUTCv2(UBrainCloudWrapper *brainCloudWrapper, FString scriptName, FString jsonScriptData, int64 startDateInUTC);
+	static UBCScriptProxy *ScheduleRunScriptMillisUTC(UBrainCloudWrapper *brainCloudWrapper, FString scriptName, FString jsonScriptData, int64 startDateInUTC);
 
 
 	/**

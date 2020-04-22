@@ -49,7 +49,7 @@ class BCCLIENTPLUGIN_API BrainCloudScript
     * @param callback The method to be invoked when the server response is received
     * @see The API documentation site for more details on cloud code
     */
-    void scheduleRunScriptUTCv2(const FString &scriptName, const FString &jsonScriptData, int64 startDateInUTC, IServerCallback *callback = nullptr);
+    void scheduleRunScriptMillisUTC(const FString &scriptName, const FString &jsonScriptData, int64 startDateInUTC, IServerCallback *callback = nullptr);
 
 
     /**
