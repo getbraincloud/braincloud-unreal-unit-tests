@@ -10,7 +10,7 @@
 BrainCloudGlobalFile::BrainCloudGlobalFile(BrainCloudClient *client) : _client(client){};
 
 
-void BrainCloudGlobalFile::getFileInfo(const FString &fileId, IServerCallback *callback);
+void BrainCloudGlobalFile::getFileInfo(const FString &fileId, IServerCallback *callback)
 {
 	TSharedRef<FJsonObject> message = MakeShareable(new FJsonObject());
 	message->SetStringField(OperationParam::GlobalFileFileId.getValue(), fileId);

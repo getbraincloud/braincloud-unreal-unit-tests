@@ -3,7 +3,7 @@
 #pragma once
 
 #include "BCBlueprintCallProxyBase.h"
-#include "BCGlobalAppProxy.generated.h"
+#include "BCGlobalFileProxy.generated.h"
 
 UCLASS(MinimalAPI)
 class UBCGlobalFileProxy : public UBCBlueprintCallProxyBase
@@ -23,7 +23,7 @@ public:
      * @param - callback The method to be invoked when the server response is received
      */
     UFUNCTION(BlueprintCallable, meta = (BlueprintInternalUseOnly = "true"), Category = "BrainCloud|Global File")
-    static UBCGlobalFileProxy *GetFileInfo(UBrainCloudWrapper *brainCloud, const FString &fileId);
+    static UBCGlobalFileProxy *GetFileInfo(UBrainCloudWrapper *brainCloudWrapper, const FString &fileId);
     /**
      * Returns information on a file using path and name.
      *
@@ -35,7 +35,7 @@ public:
      * @param - callback The method to be invoked when the server response is received
      */
     UFUNCTION(BlueprintCallable, meta = (BlueprintInternalUseOnly = "true"), Category = "BrainCloud|Global File")
-    static UBCGlobalFileProxy *GetFileInfoSimple(UBrainCloudWrapper *brainCloud, const FString &fileId, const FString &folderPath);
+    static UBCGlobalFileProxy *GetFileInfoSimple(UBrainCloudWrapper *brainCloudWrapper, const FString &fileId, const FString &folderPath);
     /**
      * Return CDN url for file for clients that cannot handle redirect.
      *
@@ -46,7 +46,7 @@ public:
      * @param - callback The method to be invoked when the server response is received
      */
     UFUNCTION(BlueprintCallable, meta = (BlueprintInternalUseOnly = "true"), Category = "BrainCloud|Global File")
-    static UBCGlobalFileProxy *GetGlobalCDNUrl(UBrainCloudWrapper *brainCloud, const FString &fileId);
+    static UBCGlobalFileProxy *GetGlobalCDNUrl(UBrainCloudWrapper *brainCloudWrapper, const FString &fileId);
     /**
      * Returns a list of files.
      *
@@ -58,5 +58,5 @@ public:
      * @param - callback The method to be invoked when the server response is received
      */
     UFUNCTION(BlueprintCallable, meta = (BlueprintInternalUseOnly = "true"), Category = "BrainCloud|Global File")
-    static UBCGlobalFileProxy *GetGlobalFileList(UBrainCloudWrapper *brainCloud, const FString &folderPath, bool recurse);
+    static UBCGlobalFileProxy *GetGlobalFileList(UBrainCloudWrapper *brainCloudWrapper, const FString &folderPath, bool recurse);
 };
