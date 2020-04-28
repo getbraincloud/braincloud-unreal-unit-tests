@@ -24,10 +24,3 @@ FDateTime BrainCloudUtil::ToDateTimeFromEpoch(int64 utcDateTime)
     FDateTime myFDateTime= FDateTime(1970, 1, 1, 0, 0, 0, 0)+timeInTicks.GetTicks();
     return myFDateTime;
 }
-FDateTime BrainCloudUtil::ToDateTimeOffsetFromEpoch(int64 utcDateTime)
-{
-    FTimespan mySpan;
-    int64 timeInTicks = utcDateTime * mySpan.GetTicks();
-    FDateTime myDateTime= FDateTime(1970, 1, 1, 0, 0, 0).GetTicks()+timeInTicks;
-    return myDateTime;
-}
