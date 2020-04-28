@@ -6,19 +6,19 @@
 #include "BCUtilProxy.generated.h"
 
 UCLASS(MinimalAPI)
-class UBrainCloudUtilProxy : public BCBlueprintCallProxyBase
+class UBCUtilProxy : public UBCBlueprintCallProxyBase
 {
 	GENERATED_BODY()
 
   public:
-	UBrainCloudUtilProxy(const FObjectInitializer &ObjectInitializer);
+	UBCUtilProxy(const FObjectInitializer &ObjectInitializer);
 
     UFUNCTION(BlueprintCallable, meta = (BlueprintInternalUseOnly = "true"), Category = "BrainCloud|Util")
-	static UBrainCloudUtilProxy *ToEpochTime(UBrainCloudWrapper *brainCloudWrapper, FDateTime dateTime);
+	static UBCUtilProxy *ToEpochTime(UBrainCloudWrapper *brainCloudWrapper, FDateTime dateTime);
 
     UFUNCTION(BlueprintCallable, meta = (BlueprintInternalUseOnly = "true"), Category = "BrainCloud|Util")
-	static UBrainCloudUtilProxy  *ToDateTimeFromEpoch(UBrainCloudWrapper *brainCloudWrapper, long utcDateTime);
+	static UBCUtilProxy  *ToDateTimeFromEpoch(UBrainCloudWrapper *brainCloudWrapper, int64 utcDateTime);
 
     UFUNCTION(BlueprintCallable, meta = (BlueprintInternalUseOnly = "true"), Category = "BrainCloud|Util")
-	static UBrainCloudUtilProxy  *ToDateTimeOffsetFromEpoch(UBrainCloudWrapper *brainCloudWrapper, long utcDateTime);
+	static UBCUtilProxy  *ToDateTimeOffsetFromEpoch(UBrainCloudWrapper *brainCloudWrapper, int64 utcDateTime);
 };
