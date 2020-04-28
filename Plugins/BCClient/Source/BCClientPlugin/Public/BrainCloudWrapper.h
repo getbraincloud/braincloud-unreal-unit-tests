@@ -45,6 +45,7 @@ class BrainCloudClient;
 #include "BrainCloudVirtualCurrency.h"
 #include "BrainCloudAppStore.h"
 #include "BrainCloudRelay.h"
+#include "BrainCloudUtil.h"
 #include "BrainCloudWrapper.generated.h"
 
 class ServiceName;
@@ -644,6 +645,7 @@ class BCCLIENTPLUGIN_API UBrainCloudWrapper : public UObject, public IServerCall
     void runCallbacks();
 
     BrainCloudClient *getClient() { return _client; }
+    BrainCloudUtil *getUtil() { return _client->getUtil(); }
 
     //Service Getters
     BrainCloudLeaderboard *getLeaderboardService() { return _client->getLeaderboardService(); }
