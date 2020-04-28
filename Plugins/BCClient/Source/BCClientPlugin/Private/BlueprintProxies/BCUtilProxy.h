@@ -19,6 +19,4 @@ class UBCUtilProxy : public UBCBlueprintCallProxyBase
     UFUNCTION(BlueprintCallable, meta = (BlueprintInternalUseOnly = "true"), Category = "BrainCloud|Util")
 	static UBCUtilProxy  *ToDateTimeFromEpoch(UBrainCloudWrapper *brainCloudWrapper, int64 utcDateTime);
 
-    UFUNCTION(BlueprintCallable, meta = (BlueprintInternalUseOnly = "true"), Category = "BrainCloud|Util")
-	static UBCUtilProxy  *ToDateTimeOffsetFromEpoch(UBrainCloudWrapper *brainCloudWrapper, int64 utcDateTime);
 };

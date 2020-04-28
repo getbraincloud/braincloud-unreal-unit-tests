@@ -23,10 +23,3 @@ UBCUtilProxy *UBCUtilProxy::ToDateTimeFromEpoch(UBrainCloudWrapper *brainCloudWr
     UBCWrapperProxy::GetBrainCloudInstance(brainCloudWrapper)->getUtil()->ToDateTimeFromEpoch(utcDateTime);
     return Proxy;
 }
-
-UBCUtilProxy *UBCUtilProxy::ToDateTimeOffsetFromEpoch(UBrainCloudWrapper *brainCloudWrapper, int64 utcDateTime)
-{
-    UBCUtilProxy *Proxy = NewObject<UBCUtilProxy>();
-    UBCWrapperProxy::GetBrainCloudInstance(brainCloudWrapper)->getUtil()->ToDateTimeOffsetFromEpoch(utcDateTime);
-    return Proxy;
-}
