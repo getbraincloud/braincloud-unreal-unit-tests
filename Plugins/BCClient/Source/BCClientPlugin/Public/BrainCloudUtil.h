@@ -10,8 +10,8 @@ class BCCLIENTPLUGIN_API BrainCloudUtil
   public:
     BrainCloudUtil(BrainCloudClient *client);
 
-    static int64 ToEpochTime(FDateTime dateTime);
-    static FDateTime ToDateTimeFromEpoch(int64 utcDateTime);
+    static int64 ToUTCEpochTime(FDateTime dateTime);
+    static FDateTime ToDateTimeFromUTCEpoch(int64 utcDateTime);
       
   private:
     BrainCloudClient *_client = nullptr;
