@@ -7,7 +7,7 @@
 
 BrainCloudUtil::BrainCloudUtil(BrainCloudClient *client) : _client(client){};
 
-int64 BrainCloudUtil::ToEpochTime(FDateTime dateTime)
+int64 BrainCloudUtil::ToUTCEpochTime(FDateTime dateTime)
 {
     FTimespan mySpan;
     FDateTime date = dateTime.UtcNow();
@@ -17,7 +17,7 @@ int64 BrainCloudUtil::ToEpochTime(FDateTime dateTime)
     return ts;
 }
 
-FDateTime BrainCloudUtil::ToDateTimeFromEpoch(int64 utcDateTime)
+FDateTime BrainCloudUtil::ToDateTimeFromUTCEpoch(int64 utcDateTime)
 {
     FTimespan mySpan;
     FDateTime timeInTicks = utcDateTime * mySpan.GetTicks();
