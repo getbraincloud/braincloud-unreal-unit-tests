@@ -2,12 +2,18 @@
 
 #pragma once
 
+class BrainCloudClient;
+class IServerCallback;
+
 class BCCLIENTPLUGIN_API BrainCloudUtil
 {
   public:
     BrainCloudUtil(BrainCloudClient *client);
 
-    static long ToEpochTime(FDateTime dateTime);
-    static FDateTime ToDateTimeFromEpoch(long utcDateTime);
-    static FDateTime ToDateTimeOffsetFromEpoch(long utcDateTime);
+    static int64 ToEpochTime(FDateTime dateTime);
+    static FDateTime ToDateTimeFromEpoch(int64 utcDateTime);
+    static FDateTime ToDateTimeOffsetFromEpoch(int64 utcDateTime);
+      
+  private:
+    BrainCloudClient *_client = nullptr;
 };

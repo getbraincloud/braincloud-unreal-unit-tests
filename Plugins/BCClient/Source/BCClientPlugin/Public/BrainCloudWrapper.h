@@ -645,7 +645,7 @@ class BCCLIENTPLUGIN_API UBrainCloudWrapper : public UObject, public IServerCall
     void runCallbacks();
 
     BrainCloudClient *getClient() { return _client; }
-    BrainCloudRelay *getUtil() { return _client->getUtil(); }
+    BrainCloudUtil *getUtil() { return _client->getUtil(); }
 
     //Service Getters
     BrainCloudLeaderboard *getLeaderboardService() { return _client->getLeaderboardService(); }

@@ -412,7 +412,7 @@ BrainCloudUtil *BrainCloudClient::getUtil()
 {
 	if (_brainCloudUtil == nullptr)
 	{
-		_brainCloudUtil = new BrainCloudRTT(_brainCloudUtil, this);
+		_brainCloudUtil = new BrainCloudUtil(this);
 	}
 	return _brainCloudUtil;
 }
