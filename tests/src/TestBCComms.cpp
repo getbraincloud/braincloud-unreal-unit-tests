@@ -57,8 +57,9 @@ TEST_F(TestBCComms, Heartbeat)
 
 	if (tr.run(m_bc))
 	{
-		printf("\nWaiting for session to timeout...\n");
-		sleepForMillisAndRunCallbacks(62 * 1000);
+		auto expiryTimeout = tr.m_response["data"]["playerSessionExpiry"].asInt();
+		printf("\nWaiting for session to timeout... %isec\n", expiryTimeout + 10);
+		sleepForMillisAndRunCallbacks((expiryTimeout + 10) * 1000);
 	}
 
 	m_bc->getTimeService()->readServerTime(&tr);
@@ -80,8 +81,9 @@ TEST_F(TestBCComms, HeartbeatStops)
 
 	if (tr.run(m_bc))
 	{
-		printf("\nWaiting for session to timeout...\n");
-		sleepForMillisAndRunCallbacks(62 * 1000);
+		auto expiryTimeout = tr.m_response["data"]["playerSessionExpiry"].asInt();
+		printf("\nWaiting for session to timeout... %isec\n", expiryTimeout + 10);
+		sleepForMillisAndRunCallbacks((expiryTimeout + 10) * 1000);
 	}
 
 	m_bc->getTimeService()->readServerTime(&tr);
@@ -308,20 +310,20 @@ void TestBCComms::sleepForMillis(int millis)
 #endif
 }
 
+#include <chrono>
 void TestBCComms::sleepForMillisAndRunCallbacks(int millis)
 {
-	int slice = 500;
-	while (millis > 0)
+	auto startTime = std::chrono::steady_clock::now();
+	while (std::chrono::steady_clock::now() - startTime < std::chrono::milliseconds(millis))
 	{
 #if __cplusplus >= 201103L
 		auto sleep = std::chrono::milliseconds(slice);
 		std::this_thread::sleep_for(sleep);
 #elif WIN32
-		Sleep(slice);
+		Sleep(500);
 #else
-		usleep(slice * 1000);
+		usleep(500000);
 #endif
-		millis -= slice;
 		m_bc->runCallbacks();
 	}
 }
