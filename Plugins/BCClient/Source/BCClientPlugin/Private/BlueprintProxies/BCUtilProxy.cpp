@@ -10,16 +10,16 @@ UBCUtilProxy::UBCUtilProxy(const FObjectInitializer &ObjectInitializer)
 {
 }
 
-UBCUtilProxy *UBCUtilProxy::ToEpochTime(UBrainCloudWrapper *brainCloudWrapper, FDateTime dateTime)
+UBCUtilProxy *UBCUtilProxy::ToUTCEpochTime(UBrainCloudWrapper *brainCloudWrapper, FDateTime dateTime)
 {
     UBCUtilProxy *Proxy = NewObject<UBCUtilProxy>();
-    UBCWrapperProxy::GetBrainCloudInstance(brainCloudWrapper)->getUtil()->ToEpochTime(dateTime);
+    UBCWrapperProxy::GetBrainCloudInstance(brainCloudWrapper)->getUtil()->ToUTCEpochTime(dateTime);
     return Proxy;
 }
 
-UBCUtilProxy *UBCUtilProxy::ToDateTimeFromEpoch(UBrainCloudWrapper *brainCloudWrapper, int64 utcDateTime)
+UBCUtilProxy *UBCUtilProxy::ToDateTimeFromUTCEpoch(UBrainCloudWrapper *brainCloudWrapper, int64 utcDateTime)
 {
     UBCUtilProxy *Proxy = NewObject<UBCUtilProxy>();
-    UBCWrapperProxy::GetBrainCloudInstance(brainCloudWrapper)->getUtil()->ToDateTimeFromEpoch(utcDateTime);
+    UBCWrapperProxy::GetBrainCloudInstance(brainCloudWrapper)->getUtil()->ToDateTimeFromUTCEpoch(utcDateTime);
     return Proxy;
 }
