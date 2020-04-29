@@ -251,6 +251,10 @@ namespace BrainCloud
 	const ServiceOperation ServiceOperation::IncrementGlobalEntityData = ServiceOperation("INCREMENT_GLOBAL_ENTITY_DATA");
 	const ServiceOperation ServiceOperation::GetRandomEntitiesMatching = ServiceOperation("GET_RANDOM_ENTITIES_MATCHING");
 
+	const ServiceOperation ServiceOperation::GetFileInfo = ServiceOperation("GET_FILE_INFO");
+	const ServiceOperation ServiceOperation::GetFileInfoSimple = ServiceOperation("GET_FILE_INFO_SIMPLE");
+	const ServiceOperation ServiceOperation::GetGlobalCDNUrl = ServiceOperation("GET_GLOBAL_CDN_URL");
+	const ServiceOperation ServiceOperation::GetGlobalFileList = ServiceOperation("GET_GLOBAL_FILE_LIST");
 
 	const ServiceOperation ServiceOperation::GetAttributes = ServiceOperation("GET_ATTRIBUTES");
 	const ServiceOperation ServiceOperation::UpdateAttributes = ServiceOperation("UPDATE_ATTRIBUTES");

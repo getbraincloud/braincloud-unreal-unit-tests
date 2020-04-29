@@ -115,7 +115,7 @@ namespace BrainCloud
 		void leaveTournament(const char* in_leaderboardId, IServerCallback * in_callback = NULL);
 
 		/**
-		 * Post the users score to the leaderboard
+		 * Post the users score to the leaderboard - converts to LOCAL time
 		 *
 		 * Service Name - tournament
 		 * Service Operation - POST_TOURNAMENT_SCORE
@@ -123,13 +123,28 @@ namespace BrainCloud
 		 * @param in_leaderboardId The leaderboard for the tournament
 		 * @param in_score The score to post
 		 * @param in_jsonData Optional data attached to the leaderboard entry
-		 * @param in_roundStartedTime Time the user started the match resulting in the score being posted in UTC.
+		 * @param in_roundStartedTimeLocal Time the user started the match and is converted, resulting in the score being posted in LOCAL time.
 		 * @param in_callback The method to be invoked when the server response is received
 		 */
-		void postTournamentScore(const char* in_leaderboardId, int64_t in_score, const std::string& in_jsonData, const struct tm* in_roundStartedTime, IServerCallback * in_callback = NULL);
+		void postTournamentScore(const char* in_leaderboardId, int64_t in_score, const std::string& in_jsonData, const struct tm* in_roundStartedTimeLocal, IServerCallback * in_callback = NULL);
 
 		/**
-		* Post the users score to the leaderboard
+		 * Post the users score to the leaderboard - UTC time
+		 *
+		 * Service Name - tournament
+		 * Service Operation - POST_TOURNAMENT_SCORE
+		 *
+		 * @param in_leaderboardId The leaderboard for the tournament
+		 * @param in_score The score to post
+		 * @param in_jsonData Optional data attached to the leaderboard entry
+		 * @param in_roundStartedTimeUTC Time the user started the match resulting in the score being posted in UTC. Use UTC time in milliseconds since epoch
+		 * @param in_callback The method to be invoked when the server response is received
+		 */
+		void postTournamentScoreUTC(const char* in_leaderboardId, int64_t in_score, const std::string& in_jsonData, int64_t in_roundStartedTimeUTC, IServerCallback * in_callback = NULL);
+
+
+		/**
+		* Post the users score to the leaderboard - converts to LOCAL time
 		*
 		* Service Name - tournament
 		* Service Operation - POST_TOURNAMENT_SCORE_WITH_RESULTS
@@ -137,7 +152,7 @@ namespace BrainCloud
 		* @param in_leaderboardId The leaderboard for the tournament
 		* @param in_score The score to post
 		* @param in_jsonData Optional data attached to the leaderboard entry
-		* @param in_roundStartedTime Time the user started the match resulting in the score being posted in UTC.
+		* @param in_roundStartedTimeLocal Time the user started the match and is converted, resulting in the score being posted in LOCAL time.
 		* @param in_sort Sort key Sort order of page.
 		* @param in_beforeCount The count of number of players before the current player to include.
 		* @param in_afterCount The count of number of players after the current player to include.
@@ -149,7 +164,35 @@ namespace BrainCloud
 			const char* in_leaderboardId,
 			int64_t in_score,
 			const std::string& in_jsonData,
-			const struct tm* in_roundStartedTime,
+			const struct tm* in_roundStartedTimeLocal,
+			SortOrder in_sort,
+			int32_t in_beforeCount,
+			int32_t in_afterCount,
+			int64_t in_initialScore,
+			IServerCallback * in_callback = NULL);
+
+		/**
+		* Post the users score to the leaderboard - UTC time
+		*
+		* Service Name - tournament
+		* Service Operation - POST_TOURNAMENT_SCORE_WITH_RESULTS
+		*
+		* @param in_leaderboardId The leaderboard for the tournament
+		* @param in_score The score to post
+		* @param in_jsonData Optional data attached to the leaderboard entry
+		* @param in_roundStartedTimeUTC Time the user started the match resulting in the score being posted in UTC. Use UTC time in milliseconds since epoch
+		* @param in_sort Sort key Sort order of page.
+		* @param in_beforeCount The count of number of players before the current player to include.
+		* @param in_afterCount The count of number of players after the current player to include.
+		* @param in_initialScore The initial score for players first joining a tournament
+        *						 Usually 0, unless leaderboard is LOW_VALUE
+		* @param in_callback The method to be invoked when the server response is received
+		*/
+		void postTournamentScoreWithResultsUTC(
+			const char* in_leaderboardId,
+			int64_t in_score,
+			const std::string& in_jsonData,
+			int64_t in_roundStartedTimeUTC,
 			SortOrder in_sort,
 			int32_t in_beforeCount,
 			int32_t in_afterCount,

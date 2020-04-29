@@ -130,7 +130,7 @@ namespace BrainCloud
 		const std::string& in_jsonData,
 		SocialLeaderboardType in_leaderboardType,
 		RotationType in_rotationType,
-		struct tm* in_rotationReset,
+		struct tm* in_rotationResetUTC,
 		int in_retainedCount,
 		IServerCallback * in_callback)
 	{
@@ -142,12 +142,36 @@ namespace BrainCloud
 		message[OperationParam::SocialLeaderboardServiceLeaderboardType.getValue()] = leaderboardTypeToString(in_leaderboardType).c_str();
 		message[OperationParam::SocialLeaderboardServiceRotationType.getValue()] = leaderboardRotationTypeToString(in_rotationType).c_str();
 
-		if (in_rotationReset != NULL)
+		if (in_rotationResetUTC != NULL)
 		{
-			time_t timestamp = mktime(in_rotationReset);
+			time_t timestamp = mktime(in_rotationResetUTC);
 			int64_t time = (int64_t)timestamp * 1000;
 			message[OperationParam::SocialLeaderboardServiceRotationResetTime.getValue()] = (Json::UInt64)time;
 		}
+		message[OperationParam::SocialLeaderboardServiceRetainedCount.getValue()] = in_retainedCount;
+
+		ServerCall * sc = new ServerCall(ServiceName::Leaderboard, ServiceOperation::PostScoreDynamic, message, in_callback);
+		m_client->getBrainCloudComms()->addToQueue(sc);
+	}
+
+	void BrainCloudSocialLeaderboard::postScoreToDynamicLeaderboardUTC(
+		const char * in_leaderboardId,
+		int64_t in_score,
+		const std::string& in_jsonData,
+		SocialLeaderboardType in_leaderboardType,
+		RotationType in_rotationType,
+		int64_t in_rotationResetUTC,
+		int in_retainedCount,
+		IServerCallback * in_callback)
+	{
+		Json::Value message;
+		message[OperationParam::SocialLeaderboardServiceLeaderboardId.getValue()] = in_leaderboardId;
+		message[OperationParam::SocialLeaderboardServiceScore.getValue()] = (Json::Int64) in_score;
+		message[OperationParam::SocialLeaderboardServiceData.getValue()] = JsonUtil::jsonStringToValue(in_jsonData);
+
+		message[OperationParam::SocialLeaderboardServiceLeaderboardType.getValue()] = leaderboardTypeToString(in_leaderboardType).c_str();
+		message[OperationParam::SocialLeaderboardServiceRotationType.getValue()] = leaderboardRotationTypeToString(in_rotationType).c_str();
+		message[OperationParam::SocialLeaderboardServiceRotationResetTime.getValue()] = (Json::UInt64) in_rotationResetUTC;
 		message[OperationParam::SocialLeaderboardServiceRetainedCount.getValue()] = in_retainedCount;
 
 		ServerCall * sc = new ServerCall(ServiceName::Leaderboard, ServiceOperation::PostScoreDynamic, message, in_callback);
@@ -160,7 +184,7 @@ namespace BrainCloud
 		int64_t in_score,
 		const std::string& in_jsonData,
 		SocialLeaderboardType in_leaderboardType,
-		struct tm* in_rotationReset,
+		struct tm* in_rotationResetUTC,
 		int32_t in_retainedCount,
 		int32_t in_numDaysToRotate,
 		IServerCallback * in_callback)
@@ -174,12 +198,37 @@ namespace BrainCloud
 		message[OperationParam::SocialLeaderboardServiceRotationType.getValue()] = "DAYS";
 		message[OperationParam::NumDaysToRotate.getValue()] = in_numDaysToRotate;
 
-		if (in_rotationReset != NULL)
+		if (in_rotationResetUTC != NULL)
 		{
-			time_t timestamp = mktime(in_rotationReset);
+			time_t timestamp = mktime(in_rotationResetUTC);
 			int64_t time = (int64_t)timestamp * 1000;
 			message[OperationParam::SocialLeaderboardServiceRotationResetTime.getValue()] = (Json::UInt64)time;
 		}
+		message[OperationParam::SocialLeaderboardServiceRetainedCount.getValue()] = in_retainedCount;
+
+		ServerCall * sc = new ServerCall(ServiceName::Leaderboard, ServiceOperation::PostScoreDynamic, message, in_callback);
+		m_client->getBrainCloudComms()->addToQueue(sc);
+	}
+
+	void BrainCloudSocialLeaderboard::postScoreToDynamicLeaderboardDaysUTC(
+		const char * in_leaderboardId,
+		int64_t in_score,
+		const std::string& in_jsonData,
+		SocialLeaderboardType in_leaderboardType,
+		int64_t in_rotationResetUTC,
+		int32_t in_retainedCount,
+		int32_t in_numDaysToRotate,
+		IServerCallback * in_callback)
+	{
+		Json::Value message;
+		message[OperationParam::SocialLeaderboardServiceLeaderboardId.getValue()] = in_leaderboardId;
+		message[OperationParam::SocialLeaderboardServiceScore.getValue()] = (Json::Int64) in_score;
+		message[OperationParam::SocialLeaderboardServiceData.getValue()] = JsonUtil::jsonStringToValue(in_jsonData);
+
+		message[OperationParam::SocialLeaderboardServiceLeaderboardType.getValue()] = leaderboardTypeToString(in_leaderboardType).c_str();
+		message[OperationParam::SocialLeaderboardServiceRotationType.getValue()] = "DAYS";
+		message[OperationParam::NumDaysToRotate.getValue()] = in_numDaysToRotate;
+		message[OperationParam::SocialLeaderboardServiceRotationResetTime.getValue()] = (Json::UInt64)in_rotationResetUTC;
 		message[OperationParam::SocialLeaderboardServiceRetainedCount.getValue()] = in_retainedCount;
 
 		ServerCall * sc = new ServerCall(ServiceName::Leaderboard, ServiceOperation::PostScoreDynamic, message, in_callback);
@@ -301,7 +350,7 @@ namespace BrainCloud
 	}
 
 	void BrainCloudSocialLeaderboard::postScoreToDynamicGroupLeaderboard(const char * in_leaderboardId, const char * in_groupId, int32_t in_score, const std::string& in_jsonData, const char * in_leaderboardType, 
-		const char * in_rotationType, int64_t in_rotationResetTime, int32_t in_retainedCount,  IServerCallback * in_callback)
+		const char * in_rotationType, int64_t in_rotationResetUTC, int32_t in_retainedCount,  IServerCallback * in_callback)
 	{
 		Json::Value message;
 		message[OperationParam::SocialLeaderboardServiceLeaderboardId.getValue()] = in_leaderboardId;
@@ -310,7 +359,24 @@ namespace BrainCloud
 		message[OperationParam::SocialLeaderboardServiceData.getValue()] = JsonUtil::jsonStringToValue(in_jsonData);
 		message[OperationParam::SocialLeaderboardServiceLeaderboardType.getValue()] = in_leaderboardType;
 		message[OperationParam::SocialLeaderboardServiceRotationType.getValue()] = in_rotationType;
-		message[OperationParam::SocialLeaderboardServiceRotationResetTime.getValue()] = (Json::Int64) in_rotationResetTime;
+		message[OperationParam::SocialLeaderboardServiceRotationResetTime.getValue()] = (Json::Int64)in_rotationResetUTC;
+		message[OperationParam::SocialLeaderboardServiceRetainedCount.getValue()] = in_retainedCount;
+
+		ServerCall * sc = new ServerCall(ServiceName::Leaderboard, ServiceOperation::PostScoreToDynamicGroupLeaderboard, message, in_callback);
+		m_client->getBrainCloudComms()->addToQueue(sc);
+	}
+
+	void BrainCloudSocialLeaderboard::postScoreToDynamicGroupLeaderboardUTC(const char * in_leaderboardId, const char * in_groupId, int32_t in_score, const std::string& in_jsonData, const char * in_leaderboardType, 
+		const char * in_rotationType, int64_t in_rotationResetUTC, int32_t in_retainedCount,  IServerCallback * in_callback)
+	{
+		Json::Value message;
+		message[OperationParam::SocialLeaderboardServiceLeaderboardId.getValue()] = in_leaderboardId;
+		message[OperationParam::GroupId.getValue()] = in_groupId;
+		message[OperationParam::SocialLeaderboardServiceScore.getValue()] = in_score;
+		message[OperationParam::SocialLeaderboardServiceData.getValue()] = JsonUtil::jsonStringToValue(in_jsonData);
+		message[OperationParam::SocialLeaderboardServiceLeaderboardType.getValue()] = in_leaderboardType;
+		message[OperationParam::SocialLeaderboardServiceRotationType.getValue()] = in_rotationType;
+		message[OperationParam::SocialLeaderboardServiceRotationResetTime.getValue()] = (Json::UInt64)in_rotationResetUTC;
 		message[OperationParam::SocialLeaderboardServiceRetainedCount.getValue()] = in_retainedCount;
 
 		ServerCall * sc = new ServerCall(ServiceName::Leaderboard, ServiceOperation::PostScoreToDynamicGroupLeaderboard, message, in_callback);

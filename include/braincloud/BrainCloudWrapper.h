@@ -58,6 +58,7 @@ namespace BrainCloud {
         BrainCloudDataStream * getDataStreamService() { return client->getDataStreamService(); }
         BrainCloudProfanity * getProfanityService() { return client->getProfanityService(); }
         BrainCloudFile * getFileService() { return client->getFileService(); }
+        BrainCloudGlobalFile* getGlobalFileService() { return client->getGlobalFileService(); }
         BrainCloudGroup * getGroupService() { return client->getGroupService(); }
         BrainCloudMail * getMailService() { return client->getMailService(); }
         BrainCloudChat * getChatService() { return client->getChatService(); }

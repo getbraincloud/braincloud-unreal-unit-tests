@@ -103,9 +103,24 @@ TEST_F(TestBCPushNotifications, ScheduleRichPushNotificationUTC)
     data["body"] = "asdf";
     data["title"] = "asdf";
 
-    int32_t startTime = 0;
+    uint64_t startTime = 0;
 
     m_bc->getPushNotificationService()->scheduleRichPushNotificationUTC(GetUser(UserA)->m_profileId, 1, fw.write(data), startTime, &tr);
+    tr.run(m_bc);
+}
+
+TEST_F(TestBCPushNotifications, ScheduleNormalizedPushNotificationUTC)
+{
+    TestResult tr;
+
+    Json::FastWriter fw;
+    Json::Value data;
+    data["body"] = "asdf";
+    data["title"] = "asdf";
+
+    uint64_t startTime = 0;
+
+    m_bc->getPushNotificationService()->scheduleNormalizedPushNotificationUTC(GetUser(UserA)->m_profileId, fw.write(data), "", startTime, &tr);
     tr.run(m_bc);
 }
 
@@ -132,7 +147,7 @@ TEST_F(TestBCPushNotifications, ScheduleRawPushNotificationUTC)
     std::string iosContent = "{ \"aps\": { \"alert\": { \"body\": \"content of message\", \"title\": \"message title\" }, \"badge\": 0, \"sound\": \"gggg\" } }";
     std::string facebookContent = "{\"template\": \"content of message\"}";
 
-    int32_t startTime = 0;
+    uint64_t startTime = 0;
 
     m_bc->getPushNotificationService()->scheduleRawPushNotificationUTC(GetUser(UserA)->m_profileId, fcmContent, iosContent, facebookContent, startTime, &tr);
     tr.run(m_bc);

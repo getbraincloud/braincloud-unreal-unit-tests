@@ -200,6 +200,7 @@ add_library(brainCloud STATIC
     include/braincloud/BrainCloudGamification.h
     include/braincloud/BrainCloudGlobalApp.h
     include/braincloud/BrainCloudGlobalEntity.h
+    include/braincloud/BrainCloudGlobalFile.h
     include/braincloud/BrainCloudGlobalStatistics.h
     include/braincloud/BrainCloudGroup.h
     include/braincloud/BrainCloudIdentity.h
@@ -281,6 +282,7 @@ add_library(brainCloud STATIC
     src/BrainCloudGamification.cpp
     src/BrainCloudGlobalApp.cpp
     src/BrainCloudGlobalEntity.cpp
+    src/BrainCloudGlobalFile.cpp
     src/BrainCloudGlobalStatistics.cpp
     src/BrainCloudGroup.cpp
     src/BrainCloudIdentity.cpp

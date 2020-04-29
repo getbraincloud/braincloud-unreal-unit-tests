@@ -56,6 +56,7 @@
 #include "braincloud/BrainCloudDataStream.h"
 #include "braincloud/BrainCloudProfanity.h"
 #include "braincloud/BrainCloudFile.h"
+#include "braincloud/BrainCloudGlobalFile.h"
 #include "braincloud/BrainCloudGroup.h"
 #include "braincloud/BrainCloudMail.h"
 #include "braincloud/BrainCloudRTT.h"
@@ -358,7 +359,8 @@ namespace BrainCloud
 		BrainCloudRedemptionCode * getRedemptionCodeService() { return _redemptionCodeService; }
 		BrainCloudDataStream * getDataStreamService() { return _dataStreamService; }
 		BrainCloudProfanity * getProfanityService() { return _profanityService; }
-		BrainCloudFile * getFileService() { return _fileService; }
+		BrainCloudFile* getFileService() { return _fileService; }
+		BrainCloudGlobalFile* getGlobalFileService() { return _globalFileService; }
 		BrainCloudGroup * getGroupService() { return _groupService; }
 		BrainCloudMail * getMailService() { return _mailService; }
 		BrainCloudRTT * getRTTService() { return _rttService; }
@@ -648,6 +650,7 @@ namespace BrainCloud
 		BrainCloudDataStream * _dataStreamService;
 		BrainCloudProfanity * _profanityService;
 		BrainCloudFile * _fileService;
+		BrainCloudGlobalFile* _globalFileService;
 		BrainCloudGroup * _groupService;
 		BrainCloudMail * _mailService;
 		BrainCloudRTT * _rttService;
