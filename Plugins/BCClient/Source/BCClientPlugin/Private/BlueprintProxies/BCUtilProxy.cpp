@@ -10,16 +10,16 @@ UBCUtilProxy::UBCUtilProxy(const FObjectInitializer &ObjectInitializer)
 {
 }
 
-UBCUtilProxy *UBCUtilProxy::ToUTCEpochTime(UBrainCloudWrapper *brainCloudWrapper, FDateTime dateTime)
-{
-    UBCUtilProxy *Proxy = NewObject<UBCUtilProxy>();
-    UBCWrapperProxy::GetBrainCloudInstance(brainCloudWrapper)->getUtil()->ToUTCEpochTime(dateTime);
-    return Proxy;
-}
+// UBCUtilProxy *UBCUtilProxy::ToUTCEpochTime(UBrainCloudWrapper *brainCloudWrapper, FDateTime dateTime)
+// {
+//     UBCUtilProxy *Proxy = NewObject<UBCUtilProxy>();
+//     UBCWrapperProxy::GetBrainCloudInstance(brainCloudWrapper)->getUtil()->ToUTCEpochTime(dateTime);
+//     return Proxy;
+// }
 
-UBCUtilProxy *UBCUtilProxy::ToDateTimeFromUTCEpoch(UBrainCloudWrapper *brainCloudWrapper, int64 utcDateTime)
-{
-    UBCUtilProxy *Proxy = NewObject<UBCUtilProxy>();
-    UBCWrapperProxy::GetBrainCloudInstance(brainCloudWrapper)->getUtil()->ToDateTimeFromUTCEpoch(utcDateTime);
-    return Proxy;
-}
+// UBCUtilProxy *UBCUtilProxy::ToDateTimeFromUTCEpoch(UBrainCloudWrapper *brainCloudWrapper, int64 utcDateTime)
+// {
+//     UBCUtilProxy *Proxy = NewObject<UBCUtilProxy>();
+//     UBCWrapperProxy::GetBrainCloudInstance(brainCloudWrapper)->getUtil()->ToDateTimeFromUTCEpoch(utcDateTime);
+//     return Proxy;
+// }

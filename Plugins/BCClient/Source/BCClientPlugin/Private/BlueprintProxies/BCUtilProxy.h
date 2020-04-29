@@ -13,10 +13,10 @@ class UBCUtilProxy : public UBCBlueprintCallProxyBase
   public:
 	UBCUtilProxy(const FObjectInitializer &ObjectInitializer);
 
-    UFUNCTION(BlueprintCallable, meta = (BlueprintInternalUseOnly = "true"), Category = "BrainCloud|Util")
-	static UBCUtilProxy *ToUTCEpochTime(UBrainCloudWrapper *brainCloudWrapper, FDateTime dateTime);
+    // UFUNCTION(BlueprintCallable, meta = (BlueprintInternalUseOnly = "true"), Category = "BrainCloud|Util")
+	// static UBCUtilProxy *ToUTCEpochTime(UBrainCloudWrapper *brainCloudWrapper, FDateTime dateTime);
 
-    UFUNCTION(BlueprintCallable, meta = (BlueprintInternalUseOnly = "true"), Category = "BrainCloud|Util")
-	static UBCUtilProxy  *ToDateTimeFromUTCEpoch(UBrainCloudWrapper *brainCloudWrapper, int64 utcDateTime);
+    // UFUNCTION(BlueprintCallable, meta = (BlueprintInternalUseOnly = "true"), Category = "BrainCloud|Util")
+	// static UBCUtilProxy  *ToDateTimeFromUTCEpoch(UBrainCloudWrapper *brainCloudWrapper, int64 utcDateTime);
 
 };
