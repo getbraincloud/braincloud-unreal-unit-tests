@@ -43,7 +43,7 @@
 #include "BrainCloudVirtualCurrency.h"
 #include "BrainCloudAppStore.h"
 #include "BrainCloudRelay.h"
-#include "BrainCloudUtil.h"
+#include "BrainCloudTimeUtils.h"
 
 class BrainCloudComms;
 class BrainCloudRTTComms;
@@ -297,7 +297,7 @@ class BCCLIENTPLUGIN_API BrainCloudClient
 	BrainCloudChat *getChatService();
 	BrainCloudMessaging *getMessagingService();
 	BrainCloudRelay *getRelayService();
-	BrainCloudUtil *getUtil();
+	BrainCloudTimeUtils *getUtil();
 	
 	/**
 	* @deprecated Use getAppId instead - removal after September 1 2017
@@ -555,7 +555,7 @@ class BCCLIENTPLUGIN_API BrainCloudClient
 
 	BrainCloudRelay *_relayService = nullptr;
 
-	BrainCloudUtil *_brainCloudUtil = nullptr;
+	BrainCloudTimeUtils *_brainCloudTimeUtils = nullptr;
 
 	static FString s_brainCloudClientVersion;
 

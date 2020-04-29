@@ -1,13 +1,13 @@
 // Copyright 2018 bitHeads, Inc. All Rights Reserved.
 
-#include "BrainCloudUtil.h"
+#include "BrainCloudTimeUtils.h"
 #include "BCClientPluginPrivatePCH.h"
 #include "BrainCloudWrapper.h"
 #include "BCWrapperProxy.h"
 
-BrainCloudUtil::BrainCloudUtil(BrainCloudClient *client) : _client(client){};
+BrainCloudTimeUtils::BrainCloudTimeUtils(BrainCloudClient *client) : _client(client){};
 
-int64 BrainCloudUtil::UTCDateTimeToUTCMillis(FDateTime dateTime)
+int64 BrainCloudTimeUtils::UTCDateTimeToUTCMillis(FDateTime dateTime)
 {
     FTimespan mySpan;
     FDateTime date = dateTime.UtcNow();
@@ -17,7 +17,7 @@ int64 BrainCloudUtil::UTCDateTimeToUTCMillis(FDateTime dateTime)
     return ts;
 }
 
-FDateTime BrainCloudUtil::ToDateTimeFromUTCEpoch(int64 utcDateTime)
+FDateTime BrainCloudTimeUtils::ToDateTimeFromUTCEpoch(int64 utcDateTime)
 {
     FTimespan mySpan;
     FDateTime timeInTicks = utcDateTime * mySpan.GetTicks();
@@ -27,7 +27,7 @@ FDateTime BrainCloudUtil::ToDateTimeFromUTCEpoch(int64 utcDateTime)
 
 int64 UTimeUtilsBase::UTCDateTimeToUTCMillisBP(FDateTime utcDate)
 {
- return BrainCloudUtil::UTCDateTimeToUTCMillis(utcDate);
+ return BrainCloudTimeUtils::UTCDateTimeToUTCMillis(utcDate);
 }	
 
 UTimeUtilsBase::UTimeUtilsBase()
