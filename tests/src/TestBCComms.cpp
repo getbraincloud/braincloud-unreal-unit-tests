@@ -317,7 +317,7 @@ void TestBCComms::sleepForMillisAndRunCallbacks(int millis)
 	while (std::chrono::steady_clock::now() - startTime < std::chrono::milliseconds(millis))
 	{
 #if __cplusplus >= 201103L
-		auto sleep = std::chrono::milliseconds(slice);
+		auto sleep = std::chrono::milliseconds(500);
 		std::this_thread::sleep_for(sleep);
 #elif WIN32
 		Sleep(500);
