@@ -25,9 +25,37 @@ FDateTime BrainCloudTimeUtils::ToDateTimeFromUTCEpoch(int64 utcDateTime)
     return myFDateTime;
 }
 
+FDateTime BrainCloudTimeUtils::LocalTimeToUTCTime(FDateTime localDate)
+{
+return localDate.UtcNow();
+}
+    
+FDateTime BrainCloudTimeUtils::UTCTimeToLocalTime (FDateTime utcDate)
+{
+return utcDate.Now();
+}
+
+
+
+
 int64 UTimeUtilsBase::UTCDateTimeToUTCMillisBP(FDateTime utcDate)
 {
  return BrainCloudTimeUtils::UTCDateTimeToUTCMillis(utcDate);
+}	
+
+FDateTime UTimeUtilsBase::ToDateTimeFromUTCEpochBP(int64 utcDate)
+{
+ return BrainCloudTimeUtils::ToDateTimeFromUTCEpoch(utcDate);
+}	
+
+FDateTime UTimeUtilsBase::LocalTimeToUTCTimeBP(FDateTime utcDate)
+{
+ return BrainCloudTimeUtils::LocalTimeToUTCTime(utcDate);
+}	
+
+FDateTime UTimeUtilsBase::UTCTimeToLocalTimeBP(FDateTime utcDate)
+{
+ return BrainCloudTimeUtils::UTCTimeToLocalTime(utcDate);
 }	
 
 UTimeUtilsBase::UTimeUtilsBase()

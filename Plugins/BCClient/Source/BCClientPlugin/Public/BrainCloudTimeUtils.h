@@ -14,6 +14,8 @@ class BCCLIENTPLUGIN_API BrainCloudTimeUtils
 
     static int64 UTCDateTimeToUTCMillis(FDateTime dateTime);
     static FDateTime ToDateTimeFromUTCEpoch(int64 utcDateTime);
+    static FDateTime LocalTimeToUTCTime(FDateTime localDate);
+    static FDateTime UTCTimeToLocalTime(FDateTime utcDate);
       
   private:
     BrainCloudClient *_client = nullptr;
@@ -31,10 +33,16 @@ class BCCLIENTPLUGIN_API BrainCloudTimeUtils
     UTimeUtilsBase();
 	virtual void BeginDestroy() override;
 
-
-    //static FDateTime UTCMillisToUTCDateTime(int64 utcMillis);
-
 UFUNCTION(BlueprintCallable, meta = (BlueprintInternalUseOnly = "true"), Category = "BrainCloud|TimeUtils")
 static int64 UTCDateTimeToUTCMillisBP(FDateTime utcDate);	
+
+UFUNCTION(BlueprintCallable, meta = (BlueprintInternalUseOnly = "true"), Category = "BrainCloud|TimeUtils")
+static FDateTime ToDateTimeFromUTCEpochBP(int64 utcDateTime);
+
+UFUNCTION(BlueprintCallable, meta = (BlueprintInternalUseOnly = "true"), Category = "BrainCloud|TimeUtils")
+static FDateTime LocalTimeToUTCTimeBP(FDateTime localDate);
+
+UFUNCTION(BlueprintCallable, meta = (BlueprintInternalUseOnly = "true"), Category = "BrainCloud|TimeUtils")
+static FDateTime UTCTimeToLocalTimeBP(FDateTime utcDate);
 
  };
