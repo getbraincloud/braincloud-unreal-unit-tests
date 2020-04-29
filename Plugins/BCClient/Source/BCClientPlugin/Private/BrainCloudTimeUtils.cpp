@@ -27,35 +27,35 @@ FDateTime BrainCloudTimeUtils::ToDateTimeFromUTCEpoch(int64 utcDateTime)
 
 FDateTime BrainCloudTimeUtils::LocalTimeToUTCTime(FDateTime localDate)
 {
-return localDate.UtcNow();
+    return localDate.UtcNow();
 }
     
 FDateTime BrainCloudTimeUtils::UTCTimeToLocalTime (FDateTime utcDate)
 {
-return utcDate.Now();
+    return utcDate.Now();
+    utcDate.ToString();
 }
 
 
-
-
+///blueprint functions
 int64 UTimeUtilsBase::UTCDateTimeToUTCMillisBP(FDateTime utcDate)
 {
- return BrainCloudTimeUtils::UTCDateTimeToUTCMillis(utcDate);
+    return BrainCloudTimeUtils::UTCDateTimeToUTCMillis(utcDate);
 }	
 
 FDateTime UTimeUtilsBase::ToDateTimeFromUTCEpochBP(int64 utcDate)
 {
- return BrainCloudTimeUtils::ToDateTimeFromUTCEpoch(utcDate);
+    return BrainCloudTimeUtils::ToDateTimeFromUTCEpoch(utcDate);
 }	
 
 FDateTime UTimeUtilsBase::LocalTimeToUTCTimeBP(FDateTime utcDate)
 {
- return BrainCloudTimeUtils::LocalTimeToUTCTime(utcDate);
+    return BrainCloudTimeUtils::LocalTimeToUTCTime(utcDate);
 }	
 
 FDateTime UTimeUtilsBase::UTCTimeToLocalTimeBP(FDateTime utcDate)
 {
- return BrainCloudTimeUtils::UTCTimeToLocalTime(utcDate);
+    return BrainCloudTimeUtils::UTCTimeToLocalTime(utcDate);
 }	
 
 UTimeUtilsBase::UTimeUtilsBase()
@@ -67,23 +67,3 @@ void UTimeUtilsBase::BeginDestroy()
 {
 	Super::BeginDestroy();
 }
-
-// UWebSocketBase::UWebSocketBase()
-// {
-// #if PLATFORM_UWP
-// 	messageWebSocket = nullptr;
-// 	uwpSocketHelper = ref new FUWPSocketHelper();
-// 	uwpSocketHelper->SetParent((int64)this);
-// #if ENGINE_MINOR_VERSION <24
-// #if PLATFORM_HTML5
-// 	mWebSocketRef = -1;
-// 	mConnectSuccess = false;
-// 	mIsError = false;
-// 	#endif
-// 	#endif
-
-// #else
-// 	mlwsContext = nullptr;
-// 	mlws = nullptr;
-// #endif
-// }
