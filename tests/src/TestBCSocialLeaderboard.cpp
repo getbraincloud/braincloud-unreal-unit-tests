@@ -127,7 +127,7 @@ TEST_F(TestBCSocialLeaderboard, PostScoreToDynamicUTC)
     Json::Value jsonData;
     jsonData["testKey"] = "TestValue";
 
-    int64_t milliseconds_since_epoch = std::chrono::duration_cast<std::chrono::milliseconds>(std::chrono::system_clock::now().time_since_epoch()).count() + 1000; //add 1000 miliseconds so its within the time 
+    int64_t milliseconds_since_epoch = std::chrono::duration_cast<std::chrono::milliseconds>(std::chrono::system_clock::now().time_since_epoch()).count() + (2 * 60 * 1000); //add 2 minutes so its within the time 
 
 	std::string name = DYNAMIC_LB_ID + std::to_string(rand());
 

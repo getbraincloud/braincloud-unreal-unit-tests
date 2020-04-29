@@ -50,7 +50,7 @@ namespace BrainCloud
 		m_client->sendRequest(sc);
 	}
 
-	void BrainCloudScript::scheduleRunScriptUTCv2(const char * in_scriptName, const char * in_jsonScriptData, int64_t in_startDateInUTC, IServerCallback * in_callback)
+	void BrainCloudScript::scheduleRunScriptMillisUTC(const char * in_scriptName, const char * in_jsonScriptData, int64_t in_startDateInUTC, IServerCallback * in_callback)
 	{
 		Json::Value message;
 		message[OperationParam::ScriptServiceRunScriptName.getValue()] = in_scriptName;

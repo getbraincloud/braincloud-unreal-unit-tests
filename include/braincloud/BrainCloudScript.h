@@ -52,7 +52,7 @@ namespace BrainCloud
 		 * @param in_startDateInUTC The start date in UTC
 		 * @param in_callback The method to be invoked when the server response is received
 		 */
-		void scheduleRunScriptUTCv2(const char * in_scriptName, const char * in_jsonScriptData, int64_t in_startDateInUTC, IServerCallback * in_callback = NULL);
+		void scheduleRunScriptMillisUTC(const char * in_scriptName, const char * in_jsonScriptData, int64_t in_startDateInUTC, IServerCallback * in_callback = NULL);
 
 		/**
 		 * Allows cloud script executions to be scheduled
