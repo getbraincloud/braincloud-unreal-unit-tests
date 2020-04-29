@@ -350,7 +350,7 @@ namespace BrainCloud
 	}
 
 	void BrainCloudSocialLeaderboard::postScoreToDynamicGroupLeaderboard(const char * in_leaderboardId, const char * in_groupId, int32_t in_score, const std::string& in_jsonData, const char * in_leaderboardType, 
-		const char * in_rotationType, struct tm* in_rotationResetUTC, int32_t in_retainedCount,  IServerCallback * in_callback)
+		const char * in_rotationType, int64_t in_rotationResetUTC, int32_t in_retainedCount,  IServerCallback * in_callback)
 	{
 		Json::Value message;
 		message[OperationParam::SocialLeaderboardServiceLeaderboardId.getValue()] = in_leaderboardId;
@@ -359,12 +359,7 @@ namespace BrainCloud
 		message[OperationParam::SocialLeaderboardServiceData.getValue()] = JsonUtil::jsonStringToValue(in_jsonData);
 		message[OperationParam::SocialLeaderboardServiceLeaderboardType.getValue()] = in_leaderboardType;
 		message[OperationParam::SocialLeaderboardServiceRotationType.getValue()] = in_rotationType;
-		if (in_rotationResetUTC != NULL)
-		{
-			time_t timestamp = mktime(in_rotationResetUTC);
-			int64_t time = (int64_t)timestamp * 1000;
-			message[OperationParam::SocialLeaderboardServiceRotationResetTime.getValue()] = (Json::UInt64)time;
-		}
+		message[OperationParam::SocialLeaderboardServiceRotationResetTime.getValue()] = (Json::Int64)in_rotationResetUTC;
 		message[OperationParam::SocialLeaderboardServiceRetainedCount.getValue()] = in_retainedCount;
 
 		ServerCall * sc = new ServerCall(ServiceName::Leaderboard, ServiceOperation::PostScoreToDynamicGroupLeaderboard, message, in_callback);

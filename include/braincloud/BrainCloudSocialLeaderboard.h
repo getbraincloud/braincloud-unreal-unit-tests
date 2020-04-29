@@ -501,7 +501,7 @@ namespace BrainCloud
 		* @param in_callback The method to be invoked when the server response is received
 		*/
 		void postScoreToDynamicGroupLeaderboard(const char * in_leaderboardId, const char * in_groupId, int32_t in_score, const std::string& in_jsonData, const char * in_leaderboardType, 
-			const char * in_rotationType, struct tm* in_rotationResetUTC, int32_t in_retainedCount,  IServerCallback * in_callback = NULL);
+			const char * in_rotationType, int64_t in_rotationResetUTC, int32_t in_retainedCount,  IServerCallback * in_callback = NULL);
 
 		/**
 		* Posts score to gorup leaderbopard and dynamically creates if necessary. leaderboardType, rotationReset, retainedCount and rotationType are required. uses UTC time in milliseconds since epoch
