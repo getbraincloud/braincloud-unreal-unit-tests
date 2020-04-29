@@ -44,7 +44,7 @@ BrainCloudClient::~BrainCloudClient()
 	destroyService(_brainCloudComms);
 	destroyService(_brainCloudRTTComms);
 	destroyService(_brainCloudRelayComms);
-	destroyService(_brainCloudUtil);
+	destroyService(_brainCloudTimeUtils);
 
 	destroyService(_authenticationService);
 	destroyService(_leaderboardService);
@@ -408,13 +408,13 @@ void BrainCloudClient::insertEndOfMessageBundleMarker()
 	_brainCloudComms->InsertEndOfMessageBundleMarker();
 }
 
-BrainCloudUtil *BrainCloudClient::getUtil()
+BrainCloudTimeUtils *BrainCloudClient::getUtil()
 {
-	if (_brainCloudUtil == nullptr)
+	if (_brainCloudTimeUtils == nullptr)
 	{
-		_brainCloudUtil = new BrainCloudUtil(this);
+		_brainCloudTimeUtils = new BrainCloudTimeUtils(this);
 	}
-	return _brainCloudUtil;
+	return _brainCloudTimeUtils;
 }
 
 BrainCloudAuthentication *BrainCloudClient::getAuthenticationService()

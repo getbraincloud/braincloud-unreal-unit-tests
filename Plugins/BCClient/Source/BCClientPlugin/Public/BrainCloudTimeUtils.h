@@ -2,15 +2,15 @@
 
 #pragma once
 #include "Components/ActorComponent.h"
-#include "BrainCloudUtil.generated.h"
+#include "BrainCloudTimeUtils.generated.h"
 
 class BrainCloudClient;
 class IServerCallback;
 
-class BCCLIENTPLUGIN_API BrainCloudUtil
+class BCCLIENTPLUGIN_API BrainCloudTimeUtils
 {
   public:
-    BrainCloudUtil(BrainCloudClient *client);
+    BrainCloudTimeUtils(BrainCloudClient *client);
 
     static int64 UTCDateTimeToUTCMillis(FDateTime dateTime);
     static FDateTime ToDateTimeFromUTCEpoch(int64 utcDateTime);
