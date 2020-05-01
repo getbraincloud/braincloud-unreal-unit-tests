@@ -17,7 +17,7 @@ int64 BrainCloudTimeUtils::UTCDateTimeToUTCMillis(FDateTime dateTime)
     return ts;
 }
 
-FDateTime BrainCloudTimeUtils::ToDateTimeFromUTCEpoch(int64 utcDateTime)
+FDateTime BrainCloudTimeUtils::UTCMillisToUTCDateTime(int64 utcDateTime)
 {
     FTimespan mySpan;
     FDateTime timeInTicks = utcDateTime * mySpan.GetTicks();
@@ -34,36 +34,4 @@ FDateTime BrainCloudTimeUtils::UTCTimeToLocalTime (FDateTime utcDate)
 {
     return utcDate.Now();
     utcDate.ToString();
-}
-
-
-///blueprint functions
-int64 UTimeUtilsBase::UTCDateTimeToUTCMillisBP(FDateTime utcDate)
-{
-    return BrainCloudTimeUtils::UTCDateTimeToUTCMillis(utcDate);
-}	
-
-FDateTime UTimeUtilsBase::ToDateTimeFromUTCEpochBP(int64 utcDate)
-{
-    return BrainCloudTimeUtils::ToDateTimeFromUTCEpoch(utcDate);
-}	
-
-FDateTime UTimeUtilsBase::LocalTimeToUTCTimeBP(FDateTime utcDate)
-{
-    return BrainCloudTimeUtils::LocalTimeToUTCTime(utcDate);
-}	
-
-FDateTime UTimeUtilsBase::UTCTimeToLocalTimeBP(FDateTime utcDate)
-{
-    return BrainCloudTimeUtils::UTCTimeToLocalTime(utcDate);
-}	
-
-UTimeUtilsBase::UTimeUtilsBase()
-{
-
-}
-
-void UTimeUtilsBase::BeginDestroy()
-{
-	Super::BeginDestroy();
 }
