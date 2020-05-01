@@ -9,20 +9,12 @@ BrainCloudTimeUtils::BrainCloudTimeUtils(BrainCloudClient *client) : _client(cli
 
 int64 BrainCloudTimeUtils::UTCDateTimeToUTCMillis(FDateTime dateTime)
 {
-    FTimespan mySpan;
-    FDateTime date = dateTime.UtcNow();
-    FDateTime myFDateTime(1970, 1, 1, 0, 0, 0, 0);
-    int64 ticks = date.GetTicks() - myFDateTime.GetTicks();
-    int64 ts = ticks / mySpan.GetTicks();
-    return ts;
+    return (dateTime.GetTicks() - FDateTime(1970, 1, 1).GetTicks()) / ETimespan::TicksPerMillisecond;
 }
 
 FDateTime BrainCloudTimeUtils::UTCMillisToUTCDateTime(int64 utcDateTime)
 {
-    FTimespan mySpan;
-    FDateTime timeInTicks = utcDateTime * mySpan.GetTicks();
-    FDateTime myFDateTime= FDateTime(1970, 1, 1, 0, 0, 0, 0)+timeInTicks.GetTicks();
-    return myFDateTime;
+    return FDateTime(1970, 1, 1) + FTimespan(utcDateTime * ETimespan::TicksPerMillisecond);
 }
 
 FDateTime BrainCloudTimeUtils::LocalTimeToUTCTime(FDateTime localDate)
@@ -33,5 +25,4 @@ FDateTime BrainCloudTimeUtils::LocalTimeToUTCTime(FDateTime localDate)
 FDateTime BrainCloudTimeUtils::UTCTimeToLocalTime (FDateTime utcDate)
 {
     return utcDate.Now();
-    utcDate.ToString();
 }
