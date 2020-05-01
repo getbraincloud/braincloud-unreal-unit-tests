@@ -286,7 +286,7 @@ class BCCLIENTPLUGIN_API BrainCloudLeaderboard
 	* @param rotationStart Date to start rotation calculations (Date is converted to "dd-mm-yyyy" format)
 	* @param retainedCount How many rotations to keep
 	* @param numDaysToRotate How many days between each rotation
-	* @param callback The method to be invoked when the server response is received
+	* @param callback The method to be invoked when the server response is received/
 	*/
 	void postScoreToDynamicLeaderboardDaysUTC(const FString &leaderboardId, int32 score, const FString &jsonData,
 										   ESocialLeaderboardType leaderboardType, const int64 &rotationStart, int32 retainedCount, int32 numDaysToRotate, IServerCallback *callback = nullptr);

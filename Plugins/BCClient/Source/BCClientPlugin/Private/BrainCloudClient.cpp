@@ -44,6 +44,7 @@ BrainCloudClient::~BrainCloudClient()
 	destroyService(_brainCloudComms);
 	destroyService(_brainCloudRTTComms);
 	destroyService(_brainCloudRelayComms);
+	destroyService(_brainCloudTimeUtils);
 
 	destroyService(_authenticationService);
 	destroyService(_leaderboardService);
@@ -405,6 +406,15 @@ void BrainCloudClient::flushCachedMessages(bool sendApiErrorCallbacks)
 void BrainCloudClient::insertEndOfMessageBundleMarker()
 {
 	_brainCloudComms->InsertEndOfMessageBundleMarker();
+}
+
+BrainCloudTimeUtils *BrainCloudClient::getUtil()
+{
+	if (_brainCloudTimeUtils == nullptr)
+	{
+		_brainCloudTimeUtils = new BrainCloudTimeUtils(this);
+	}
+	return _brainCloudTimeUtils;
 }
 
 BrainCloudAuthentication *BrainCloudClient::getAuthenticationService()
