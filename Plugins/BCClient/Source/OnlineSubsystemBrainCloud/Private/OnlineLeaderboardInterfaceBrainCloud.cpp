@@ -1,7 +1,7 @@
 // Copyright 1998-2015 Epic Games, Inc. All Rights Reserved.
 
-#include "OnlineSubsystemBrainCloudPrivatePCH.h"
 #include "OnlineLeaderboardInterfaceBrainCloud.h"
+#include "OnlineSubsystemBrainCloudPrivatePCH.h"
 #include "Online.h"
 
 #include "BrainCloudClient.h"

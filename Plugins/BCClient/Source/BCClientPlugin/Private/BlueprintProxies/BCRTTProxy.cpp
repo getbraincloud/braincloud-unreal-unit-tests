@@ -1,12 +1,12 @@
 // Copyright 2018 bitHeads, Inc. All Rights Reserved.
 
+#include "BCRTTProxy.h"
 #include "BCClientPluginPrivatePCH.h"
 #include "BrainCloudClient.h"
 #include "ServerCall.h"
 
 #include "BCWrapperProxy.h"
 #include "BrainCloudWrapper.h"
-#include "BCRTTProxy.h"
 
 UBCRTTProxy::UBCRTTProxy(const FObjectInitializer &ObjectInitializer)
     : Super(ObjectInitializer)

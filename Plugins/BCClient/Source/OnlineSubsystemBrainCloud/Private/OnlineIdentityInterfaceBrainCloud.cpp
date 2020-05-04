@@ -1,7 +1,7 @@
 // Copyright 2018 bitHeads, Inc. All Rights Reserved.
 
-#include "OnlineSubsystemBrainCloudPrivatePCH.h"
 #include "OnlineIdentityInterfaceBrainCloud.h"
+#include "OnlineSubsystemBrainCloudPrivatePCH.h"
 #include "IPAddress.h"
 #include "SocketSubsystem.h"
 

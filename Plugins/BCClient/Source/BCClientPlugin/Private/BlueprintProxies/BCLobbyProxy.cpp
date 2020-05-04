@@ -1,11 +1,11 @@
 // Copyright 2018 bitHeads, Inc. All Rights Reserved.
 
+#include "BCLobbyProxy.h"
 #include "BCClientPluginPrivatePCH.h"
 #include "BrainCloudClient.h"
 #include "ServerCall.h"
 
 #include "BCWrapperProxy.h"
-#include "BCLobbyProxy.h"
 #include "BrainCloudWrapper.h"
 
 UBCLobbyProxy::UBCLobbyProxy(const FObjectInitializer &ObjectInitializer)

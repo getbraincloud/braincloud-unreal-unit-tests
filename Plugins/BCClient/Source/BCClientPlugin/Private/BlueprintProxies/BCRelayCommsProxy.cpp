@@ -1,8 +1,8 @@
 // Copyright 2018 bitHeads, Inc. All Rights Reserved.
 
+#include "BCRelayCommsProxy.h"
 #include "BCClientPluginPrivatePCH.h"
 #include "BrainCloudRelayComms.h"
-#include "BCRelayCommsProxy.h"
 
 UBCRelayCommsProxy::UBCRelayCommsProxy(const FObjectInitializer &ObjectInitializer)
     : Super(ObjectInitializer)

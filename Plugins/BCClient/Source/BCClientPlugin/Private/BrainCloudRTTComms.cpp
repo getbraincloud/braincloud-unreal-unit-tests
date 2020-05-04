@@ -1,7 +1,7 @@
 // Copyright 2018 bitHeads, Inc. All Rights Reserved.
 
-#include "BCClientPluginPrivatePCH.h"
 #include "BrainCloudRTTComms.h"
+#include "BCClientPluginPrivatePCH.h"
 
 #include "Serialization/JsonTypes.h"
 #include "Serialization/JsonReader.h"
@@ -25,7 +25,7 @@
 #include <iostream>
 #include "Runtime/Launch/Resources/Version.h"
 
-#define MAX_PAYLOAD_RTT 64 * 1024
+#define MAX_PAYLOAD_RTT 10 * 1024 * 1024
 #define INITIAL_HEARTBEAT_TIME 10
 
 #if PLATFORM_UWP
@@ -40,8 +40,9 @@ static struct lws_protocols protocols[] = {
 	{
 		"bcrtt",
 		&BrainCloudRTTComms::callback_echo,
+		0,
 		MAX_PAYLOAD_RTT,
-		MAX_PAYLOAD_RTT,
+        0, NULL, 0
 	},
 	{
 		NULL, NULL, 0 /* End of list */
@@ -447,7 +448,15 @@ void BrainCloudRTTComms::setupWebSocket(const FString &in_url)
 		info.uid = -1;
 		info.options = LWS_SERVER_OPTION_VALIDATE_UTF8;
         info.options |= LWS_SERVER_OPTION_DO_SSL_GLOBAL_INIT;
+        //info.options |= LWS_SERVER_OPTION_DISABLE_IPV6;
+        //info.options |= LWS_SERVER_OPTION_SSL_ECDH;
+        //info.options |= LWS_SERVER_OPTION_IGNORE_MISSING_CERT;
 
+        lws_set_log_level(0xFFFFFFFF, [](int level, const char* line)
+        {
+            FString lstr = line;
+            UE_LOG(LogBrainCloudComms, Log, TEXT("LWS: %s"), *lstr);
+        });
 		m_lwsContext = lws_create_context(&info);
 	}
 #endif

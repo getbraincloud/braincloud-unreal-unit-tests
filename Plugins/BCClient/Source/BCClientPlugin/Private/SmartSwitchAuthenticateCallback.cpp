@@ -1,6 +1,6 @@
 // Copyright 2018 bitHeads, Inc. All Rights Reserved.
-#include "BCClientPluginPrivatePCH.h"
 #include "SmartSwitchAuthenticateCallback.h"
+#include "BCClientPluginPrivatePCH.h"
 #include "ServerCall.h"
 
 #include "BrainCloudWrapper.h"

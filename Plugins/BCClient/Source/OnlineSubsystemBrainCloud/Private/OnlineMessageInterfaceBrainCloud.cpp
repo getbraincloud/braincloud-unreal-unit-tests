@@ -1,9 +1,9 @@
 // Copyright 2018 bitHeads, Inc. All Rights Reserved.
 
-#include "OnlineSubsystemBrainCloudPrivatePCH.h"
 #include "OnlineMessageInterfaceBrainCloud.h"
+#include "OnlineSubsystemBrainCloudPrivatePCH.h"
 
-#include "Base64.h"
+#include "Misc/Base64.h"
 #include "BrainCloudClient.h"
 #include "ServiceOperation.h"
 #include "ServiceName.h"

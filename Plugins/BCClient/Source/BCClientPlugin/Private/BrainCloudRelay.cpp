@@ -1,6 +1,6 @@
+#include "BrainCloudRelay.h"
 #include "BCClientPluginPrivatePCH.h"
 #include "BrainCloudRelayComms.h"
-#include "BrainCloudRelay.h"
 
 BrainCloudRelay::BrainCloudRelay(BrainCloudRelayComms *in_comms) 
 : _relayComms(in_comms)
