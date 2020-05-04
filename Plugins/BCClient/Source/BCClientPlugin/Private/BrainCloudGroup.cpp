@@ -1,7 +1,7 @@
 // Copyright 2018 bitHeads, Inc. All Rights Reserved.
 
-#include "BCClientPluginPrivatePCH.h"
 #include "BrainCloudGroup.h"
+#include "BCClientPluginPrivatePCH.h"
 
 #include "BrainCloudClient.h"
 #include "ServerCall.h"

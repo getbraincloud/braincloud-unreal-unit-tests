@@ -1,10 +1,10 @@
 // Copyright 2018 bitHeads, Inc. All Rights Reserved.
 
+#include "BCChatProxy.h"
 #include "BCClientPluginPrivatePCH.h"
 #include "BrainCloudClient.h"
 #include "ServerCall.h"
 #include "BCWrapperProxy.h"
-#include "BCChatProxy.h"
 #include "BrainCloudWrapper.h"
 
 UBCChatProxy::UBCChatProxy(const FObjectInitializer &ObjectInitializer)

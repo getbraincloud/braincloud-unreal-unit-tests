@@ -1,7 +1,7 @@
 // Copyright 2018 bitHeads, Inc. All Rights Reserved.
 
-#include "BCClientPluginPrivatePCH.h"
 #include "OperationParam.h"
+#include "BCClientPluginPrivatePCH.h"
 
 OperationParam::OperationParam(const FString &operation)
 {
@@ -425,6 +425,12 @@ const OperationParam OperationParam::InitialScore = OperationParam("initialScore
 const OperationParam OperationParam::Score = OperationParam("score");
 const OperationParam OperationParam::RoundStartedEpoch = OperationParam("roundStartedEpoch");
 const OperationParam OperationParam::Data = OperationParam("data");
+
+//Global File
+const OperationParam OperationParam::GlobalFileFileName = OperationParam("filename");
+const OperationParam OperationParam::GlobalFileFileId = OperationParam("fileId");
+const OperationParam OperationParam::GlobalFileFolderPath = OperationParam("folderPath");
+const OperationParam OperationParam::GlobalFileRecurse = OperationParam("recurse");
 
 //virtual currency
 const OperationParam OperationParam::VirtualCurrencyVcId = OperationParam("vcId");

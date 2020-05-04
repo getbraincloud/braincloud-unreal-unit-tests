@@ -1,13 +1,13 @@
 // Copyright 2018 bitHeads, Inc. All Rights Reserved.
 
+#include "BCAppStoreProxy.h"
+
 #include "BCClientPluginPrivatePCH.h"
 #include "BrainCloudClient.h"
 #include "ServerCall.h"
 
 #include "BCWrapperProxy.h"
 #include "BrainCloudWrapper.h"
-#include "BCAppStoreProxy.h"
-
 UBCAppStoreProxy::UBCAppStoreProxy(const FObjectInitializer &ObjectInitializer)
     : Super(ObjectInitializer)
 {

@@ -1,9 +1,9 @@
 // Copyright 2018 bitHeads, Inc. All Rights Reserved.
 
+#include "BCRTTChatCallbackProxy.h"
 #include "BCClientPluginPrivatePCH.h"
 #include "BCWrapperProxy.h"
 #include "BrainCloudWrapper.h"
-#include "BCRTTChatCallbackProxy.h"
 
 UBCRTTChatCallbackProxy::UBCRTTChatCallbackProxy(const FObjectInitializer &ObjectInitializer)
 	: Super(ObjectInitializer)

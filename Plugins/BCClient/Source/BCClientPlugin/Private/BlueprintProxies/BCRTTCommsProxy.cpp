@@ -1,8 +1,8 @@
 // Copyright 2018 bitHeads, Inc. All Rights Reserved.
 
+#include "BCRTTCommsProxy.h"
 #include "BCClientPluginPrivatePCH.h"
 #include "BrainCloudRTTComms.h"
-#include "BCRTTCommsProxy.h"
 
 UBCRTTCommsProxy::UBCRTTCommsProxy(const FObjectInitializer &ObjectInitializer)
     : Super(ObjectInitializer)

@@ -1,7 +1,7 @@
 // Copyright 2018 bitHeads, Inc. All Rights Reserved.
 
-#include "BCClientPluginPrivatePCH.h"
 #include "BrainCloudWrapper.h"
+#include "BCClientPluginPrivatePCH.h"
 
 #include "BCAuthType.h"
 #include "BrainCloudClient.h"

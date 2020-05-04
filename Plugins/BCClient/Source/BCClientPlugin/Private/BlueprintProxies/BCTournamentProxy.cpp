@@ -1,12 +1,12 @@
 // Copyright 2018 bitHeads, Inc. All Rights Reserved.
 
+#include "BCTournamentProxy.h"
 #include "BCClientPluginPrivatePCH.h"
 #include "BrainCloudClient.h"
 #include "ServerCall.h"
 
 #include "BCWrapperProxy.h"
 #include "BrainCloudWrapper.h"
-#include "BCTournamentProxy.h"
 
 UBCTournamentProxy::UBCTournamentProxy(const FObjectInitializer &ObjectInitializer)
 	: Super(ObjectInitializer)
@@ -70,6 +70,7 @@ UBCTournamentProxy *UBCTournamentProxy::LeaveTournament(UBrainCloudWrapper *brai
 	return Proxy;
 }
 
+
 UBCTournamentProxy *UBCTournamentProxy::PostTournamentScore(UBrainCloudWrapper *brainCloudWrapper, const FString &leaderboardId, int32 score, const FString &jsonData, const struct FDateTime roundStartedTime)
 {
 	UBCTournamentProxy *Proxy = NewObject<UBCTournamentProxy>();
@@ -81,6 +82,20 @@ UBCTournamentProxy *UBCTournamentProxy::PostTournamentScoreWithResults(UBrainClo
 {
 	UBCTournamentProxy *Proxy = NewObject<UBCTournamentProxy>();
 	UBCWrapperProxy::GetBrainCloudInstance(brainCloudWrapper)->getTournamentService()->postTournamentScoreWithResults(leaderboardId, score, jsonData, roundStartedTime, sort, beforeCount, afterCount, initialScore, Proxy);
+	return Proxy;
+}
+
+UBCTournamentProxy *UBCTournamentProxy::PostTournamentScoreUTC(UBrainCloudWrapper *brainCloudWrapper, const FString &leaderboardId, int32 score, const FString &jsonData, int64 roundStartTimeUTC)
+{
+	UBCTournamentProxy *Proxy = NewObject<UBCTournamentProxy>();
+	UBCWrapperProxy::GetBrainCloudInstance(brainCloudWrapper)->getTournamentService()->postTournamentScoreUTC(leaderboardId, score, jsonData, roundStartTimeUTC, Proxy);
+	return Proxy;
+}
+
+UBCTournamentProxy *UBCTournamentProxy::PostTournamentScoreWithResultsUTC(UBrainCloudWrapper *brainCloudWrapper, const FString &leaderboardId, int32 score, const FString &jsonData, int64 roundStartTimeUTC, ESortOrder sort, int32 beforeCount, int32 afterCount, float initialScore)
+{
+	UBCTournamentProxy *Proxy = NewObject<UBCTournamentProxy>();
+	UBCWrapperProxy::GetBrainCloudInstance(brainCloudWrapper)->getTournamentService()->postTournamentScoreWithResultsUTC(leaderboardId, score, jsonData, roundStartTimeUTC, sort, beforeCount, afterCount, initialScore, Proxy);
 	return Proxy;
 }
 

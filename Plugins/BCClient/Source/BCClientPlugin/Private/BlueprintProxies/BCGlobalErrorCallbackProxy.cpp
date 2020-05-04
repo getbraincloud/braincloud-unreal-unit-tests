@@ -1,9 +1,9 @@
 // Copyright 2018 bitHeads, Inc. All Rights Reserved.
 
+#include "BCGlobalErrorCallbackProxy.h"
 #include "BCClientPluginPrivatePCH.h"
 #include "BCWrapperProxy.h"
 #include "BrainCloudWrapper.h"
-#include "BCGlobalErrorCallbackProxy.h"
 
 UBCGlobalErrorCallbackProxy::UBCGlobalErrorCallbackProxy(const FObjectInitializer &ObjectInitializer)
 	: Super(ObjectInitializer)

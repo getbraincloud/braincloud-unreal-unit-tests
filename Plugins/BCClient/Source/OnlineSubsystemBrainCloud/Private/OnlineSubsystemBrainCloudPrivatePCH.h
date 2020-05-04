@@ -6,7 +6,7 @@
 #include "OnlineSubsystemBrainCloudModule.h"
 #include "OnlineSubsystemModule.h"
 #include "OnlineSubsystem.h"
-#include "ModuleManager.h"
+#include "Modules/ModuleManager.h"
 
 #define INVALID_INDEX -1
 

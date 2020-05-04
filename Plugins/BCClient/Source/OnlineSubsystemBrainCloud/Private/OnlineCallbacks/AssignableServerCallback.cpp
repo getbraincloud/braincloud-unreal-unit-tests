@@ -1,7 +1,7 @@
 // Copyright 2018 bitHeads, Inc. All Rights Reserved.
 
-#include "OnlineSubsystemBrainCloudPrivatePCH.h"
 #include "AssignableServerCallback.h"
+#include "OnlineSubsystemBrainCloudPrivatePCH.h"
 
 #include "ServiceOperation.h"
 #include "ServiceName.h"

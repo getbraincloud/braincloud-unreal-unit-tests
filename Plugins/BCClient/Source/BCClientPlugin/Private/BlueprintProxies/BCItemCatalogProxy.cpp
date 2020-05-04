@@ -1,11 +1,11 @@
 // Copyright 2018 bitHeads, Inc. All Rights Reserved.
 
+#include "BCItemCatalogProxy.h"
 #include "BCClientPluginPrivatePCH.h"
 #include "BrainCloudClient.h"
 #include "ServerCall.h"
 
 #include "BCWrapperProxy.h"
-#include "BCItemCatalogProxy.h"
 #include "BrainCloudWrapper.h"
 
 UBCItemCatalogProxy::UBCItemCatalogProxy(const FObjectInitializer &ObjectInitializer)

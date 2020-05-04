@@ -39,11 +39,13 @@ class BrainCloudClient;
 #include "BrainCloudGroup.h"
 #include "BrainCloudMail.h"
 #include "BrainCloudTournament.h"
+#include "BrainCloudGlobalFile.h"
 #include "BrainCloudCustomEntity.h"
 #include "BrainCloudPresence.h"
 #include "BrainCloudVirtualCurrency.h"
 #include "BrainCloudAppStore.h"
 #include "BrainCloudRelay.h"
+#include "BrainCloudTimeUtils.h"
 #include "BrainCloudWrapper.generated.h"
 
 class ServiceName;
@@ -643,6 +645,7 @@ class BCCLIENTPLUGIN_API UBrainCloudWrapper : public UObject, public IServerCall
     void runCallbacks();
 
     BrainCloudClient *getClient() { return _client; }
+    BrainCloudTimeUtils *getUtil() { return _client->getUtil(); }
 
     //Service Getters
     BrainCloudLeaderboard *getLeaderboardService() { return _client->getLeaderboardService(); }
@@ -675,6 +678,7 @@ class BCCLIENTPLUGIN_API UBrainCloudWrapper : public UObject, public IServerCall
     BrainCloudGroup *getGroupService() { return _client->getGroupService(); }
     BrainCloudMail *getMailService() { return _client->getMailService(); }
     BrainCloudTournament *getTournamentService() { return _client->getTournamentService(); }
+    BrainCloudGlobalFile *getGlobalFileService() { return _client->getGlobalFileService(); }
     BrainCloudCustomEntity *getCustomEntityService() { return _client->getCustomEntityService(); }
     BrainCloudPresence *getPresenceService() { return _client->getPresenceService(); }
     BrainCloudVirtualCurrency *getVirtualCurrencyService() { return _client->getVirtualCurrencyService(); }

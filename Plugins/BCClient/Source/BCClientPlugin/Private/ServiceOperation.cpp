@@ -1,7 +1,7 @@
 // Copyright 2018 bitHeads, Inc. All Rights Reserved.
 
-#include "BCClientPluginPrivatePCH.h"
 #include "ServiceOperation.h"
+#include "BCClientPluginPrivatePCH.h"
 
 ServiceOperation::ServiceOperation(const FString &operation)
 {
@@ -138,6 +138,12 @@ const ServiceOperation ServiceOperation::PostScoreToGroupLeaderboard = ServiceOp
 const ServiceOperation ServiceOperation::PostScoreToDynamicGroupLeaderboard = ServiceOperation(TEXT("POST_GROUP_SCORE_DYNAMIC"));
 const ServiceOperation ServiceOperation::RemoveGroupScore = ServiceOperation(TEXT("REMOVE_GROUP_SCORE"));
 const ServiceOperation ServiceOperation::GetGroupLeaderboardView = ServiceOperation(TEXT("GET_GROUP_LEADERBOARD_VIEW"));
+
+//Global File
+const ServiceOperation ServiceOperation::GetFileInfo = ServiceOperation(TEXT("GET_FILE_INFO"));
+const ServiceOperation ServiceOperation::GetFileInfoSimple = ServiceOperation(TEXT("GET_FILE_INFO_SIMPLE"));
+const ServiceOperation ServiceOperation::GetGlobalCDNUrl = ServiceOperation(TEXT("GET_GLOBAL_CDN_URL"));
+const ServiceOperation ServiceOperation::GetGlobalFileList = ServiceOperation(TEXT("GET_GLOBAL_FILE_LIST"));
 
 const ServiceOperation ServiceOperation::InitThirdParty = ServiceOperation(TEXT("initThirdParty"));
 const ServiceOperation ServiceOperation::PostThirdPartyLeaderboardScore = ServiceOperation(TEXT("postThirdPartyLeaderboardScore"));

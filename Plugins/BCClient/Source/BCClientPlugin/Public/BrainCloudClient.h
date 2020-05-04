@@ -33,6 +33,7 @@
 #include "BrainCloudGroup.h"
 #include "BrainCloudMail.h"
 #include "BrainCloudTournament.h"
+#include "BrainCloudGlobalFile.h"
 #include "BrainCloudCustomEntity.h"
 #include "BrainCloudRTT.h"
 #include "BrainCloudLobby.h"
@@ -42,6 +43,7 @@
 #include "BrainCloudVirtualCurrency.h"
 #include "BrainCloudAppStore.h"
 #include "BrainCloudRelay.h"
+#include "BrainCloudTimeUtils.h"
 
 class BrainCloudComms;
 class BrainCloudRTTComms;
@@ -285,6 +287,7 @@ class BCCLIENTPLUGIN_API BrainCloudClient
 	BrainCloudGroup *getGroupService();
 	BrainCloudMail *getMailService();
 	BrainCloudTournament *getTournamentService();
+	BrainCloudGlobalFile *getGlobalFileService();
 	BrainCloudCustomEntity *getCustomEntityService();
 	BrainCloudPresence *getPresenceService();
 	BrainCloudVirtualCurrency *getVirtualCurrencyService();
@@ -294,7 +297,8 @@ class BCCLIENTPLUGIN_API BrainCloudClient
 	BrainCloudChat *getChatService();
 	BrainCloudMessaging *getMessagingService();
 	BrainCloudRelay *getRelayService();
-
+	BrainCloudTimeUtils *getUtil();
+	
 	/**
 	* @deprecated Use getAppId instead - removal after September 1 2017
 	*/
@@ -538,6 +542,7 @@ class BCCLIENTPLUGIN_API BrainCloudClient
 	BrainCloudGroup *_groupService = nullptr;
 	BrainCloudMail *_mailService = nullptr;
 	BrainCloudTournament *_tournamentService = nullptr;
+	BrainCloudGlobalFile *_globalFileService = nullptr;
 	BrainCloudCustomEntity *_customEntityService = nullptr;
 	BrainCloudPresence *_presenceService = nullptr;
 	BrainCloudVirtualCurrency *_virtualCurrencyService = nullptr;
@@ -549,6 +554,8 @@ class BCCLIENTPLUGIN_API BrainCloudClient
 	BrainCloudMessaging *_messagingService = nullptr;
 
 	BrainCloudRelay *_relayService = nullptr;
+
+	BrainCloudTimeUtils *_brainCloudTimeUtils = nullptr;
 
 	static FString s_brainCloudClientVersion;
 

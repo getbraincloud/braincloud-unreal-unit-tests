@@ -18,9 +18,9 @@
 *  Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston,
 *  MA  02110-1301  USA
 */
+#include "WebSocketBase.h"
 #include "BCClientPluginPrivatePCH.h"
 #include <iostream>
-#include "WebSocketBase.h"
 #include "BrainCloudRelay.h"
 #include "Runtime/Launch/Resources/Version.h"
 

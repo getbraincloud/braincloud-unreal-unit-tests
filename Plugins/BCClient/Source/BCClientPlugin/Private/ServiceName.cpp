@@ -1,7 +1,7 @@
 // Copyright 2018 bitHeads, Inc. All Rights Reserved.
 
-#include "BCClientPluginPrivatePCH.h"
 #include "ServiceName.h"
+#include "BCClientPluginPrivatePCH.h"
 
 ServiceName::ServiceName(const FString &name)
 {
@@ -31,6 +31,7 @@ const ServiceName ServiceName::GlobalEntity = ServiceName("globalEntity");
 const ServiceName ServiceName::Friend = ServiceName("friend");
 const ServiceName ServiceName::Time = ServiceName("time");
 const ServiceName ServiceName::Tournament = ServiceName("tournament");
+const ServiceName ServiceName::GlobalFile = ServiceName("globalFileV3");
 const ServiceName ServiceName::CustomEntity = ServiceName("customEntity");
 const ServiceName ServiceName::VirtualCurrency = ServiceName("virtualCurrency");
 const ServiceName ServiceName::AppStore = ServiceName("appStore");
