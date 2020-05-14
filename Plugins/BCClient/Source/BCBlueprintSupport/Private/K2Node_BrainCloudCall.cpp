@@ -52,7 +52,13 @@ void UK2Node_BrainCloudCall::GetMenuActions(FBlueprintActionDatabaseRegistrar &A
                 continue;
             }
 
+            #if ENGINE_MINOR_VERSION <= 24
             UObjectProperty *ReturnProperty = Cast<UObjectProperty>(Function->GetReturnProperty());
+            #endif
+            #if ENGINE_MINOR_VERSION >= 25
+            FObjectProperty *ReturnProperty = Cast<FObjectProperty>(Function->GetReturnProperty());
+            #endif
+
             // see if the function is a static factory method for online proxies
             bool const bIsProxyFactoryMethod = (ReturnProperty != nullptr) &&
                                                (ReturnProperty->PropertyClass->IsChildOf<UBCBlueprintCallProxyBase>() ||
@@ -71,7 +77,12 @@ void UK2Node_BrainCloudCall::GetMenuActions(FBlueprintActionDatabaseRegistrar &A
                     if (FunctionPtr.IsValid())
                     {
                         UFunction *Func = FunctionPtr.Get();
+                        #if ENGINE_MINOR_VERSION <= 24
                         UObjectProperty *ReturnProp = CastChecked<UObjectProperty>(Func->GetReturnProperty());
+                        #endif
+                        #if ENGINE_MINOR_VERSION >= 25
+                        FObjectProperty *ReturnProp = CastChecked<FObjectProperty>(Func->GetReturnProperty());
+                        #endif
 
                         AsyncTaskNode->ProxyFactoryFunctionName = Func->GetFName();
                         AsyncTaskNode->ProxyFactoryClass = Func->GetOuterUClass();
