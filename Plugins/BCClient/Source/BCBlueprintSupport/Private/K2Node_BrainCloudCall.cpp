@@ -52,10 +52,10 @@ void UK2Node_BrainCloudCall::GetMenuActions(FBlueprintActionDatabaseRegistrar &A
                 continue;
             }
 
-            #if ENGINE_MINOR_VERSION <= 24
+            #if ENGINE_MAJOR_VERSION <= 4 && ENGINE_MINOR_VERSION <= 24
             UObjectProperty *ReturnProperty = Cast<UObjectProperty>(Function->GetReturnProperty());
             #endif
-            #if ENGINE_MINOR_VERSION >= 25
+            #if ENGINE_MAJOR_VERSION <= 4 && ENGINE_MINOR_VERSION >= 25
             FObjectProperty *ReturnProperty = Cast<FObjectProperty>(Function->GetReturnProperty());
             #endif
 
@@ -77,10 +77,10 @@ void UK2Node_BrainCloudCall::GetMenuActions(FBlueprintActionDatabaseRegistrar &A
                     if (FunctionPtr.IsValid())
                     {
                         UFunction *Func = FunctionPtr.Get();
-                        #if ENGINE_MINOR_VERSION <= 24
+                        #if ENGINE_MAJOR_VERSION <= 4 && ENGINE_MINOR_VERSION <= 24
                         UObjectProperty *ReturnProp = CastChecked<UObjectProperty>(Func->GetReturnProperty());
                         #endif
-                        #if ENGINE_MINOR_VERSION >= 25
+                        #if ENGINE_MAJOR_VERSION <= 4 && ENGINE_MINOR_VERSION >= 25
                         FObjectProperty *ReturnProp = CastChecked<FObjectProperty>(Func->GetReturnProperty());
                         #endif
 
