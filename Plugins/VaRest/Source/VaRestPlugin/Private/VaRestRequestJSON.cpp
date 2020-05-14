@@ -216,7 +216,7 @@ void UVaRestRequestJSON::SetURL(const FString& Url)
 	// Be sure to trim URL because it can break links on iOS
 	FString TrimmedUrl = Url;
 
-#if ENGINE_MINOR_VERSION >= 18
+#if ENGINE_MAJOR_VERSION <= 4 && ENGINE_MINOR_VERSION >= 18
 	TrimmedUrl.TrimStartInline();
 	TrimmedUrl.TrimEndInline();
 #else
@@ -238,7 +238,7 @@ void UVaRestRequestJSON::ApplyURL(const FString& Url, UVaRestJsonObject *&Result
 	// Be sure to trim URL because it can break links on iOS
 	FString TrimmedUrl = Url;
 
-#if ENGINE_MINOR_VERSION >= 18
+#if ENGINE_MAJOR_VERSION <= 4 && ENGINE_MINOR_VERSION >= 18
 	TrimmedUrl.TrimStartInline();
 	TrimmedUrl.TrimEndInline();
 #else

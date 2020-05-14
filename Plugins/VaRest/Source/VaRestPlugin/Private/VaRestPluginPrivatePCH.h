@@ -4,7 +4,7 @@
 
 #include "Runtime/Launch/Resources/Version.h"
 
-#if ENGINE_MINOR_VERSION >= 15
+#if ENGINE_MAJOR_VERSION <= 4 && ENGINE_MINOR_VERSION >= 15
 #include "CoreMinimal.h"
 #include "EngineDefines.h"
 #include "Engine/Engine.h"
