@@ -161,4 +161,18 @@ class UBCCustomEntityProxy : public UBCBlueprintCallProxyBase
   UFUNCTION(BlueprintCallable, meta = (BlueprintInternalUseOnly = "true"), Category = "BrainCloud|CustomEntity")
   static UBCCustomEntityProxy *UpdateEntityFields(UBrainCloudWrapper *brainCloudWrapper, const FString &entityType, const FString &entityId, int version, const FString &fieldsJson);
 
+    /**
+     * deletes entities based on the deleteCriteria
+     * 
+     * Service Name - CustomEntity
+     * Service Operation - DeleteEntities
+     *
+     * @param entityType The entity type as defined by the user
+     * @param deleteCriteria
+     * @param callback The method to be invoked when the server response is received
+     */
+  UFUNCTION(BlueprintCallable, meta = (BlueprintInternalUseOnly = "true"), Category = "BrainCloud|CustomEntity")
+  static UBCCustomEntityProxy *DeleteEntities(UBrainCloudWrapper *brainCloudWrapper, const FString &entityType, const FString &deleteCriteria);
+
+
 };
