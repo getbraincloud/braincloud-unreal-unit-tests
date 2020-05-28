@@ -455,6 +455,7 @@ const OperationParam OperationParam::CustomEntityServiceContext = OperationParam
 const OperationParam OperationParam::CustomEntityServicePageOffset = OperationParam("pageOffset");
 const OperationParam OperationParam::CustomEntityServiceFieldsJson = OperationParam("fieldsJson");
 const OperationParam OperationParam::CustomEntityServiceDataJson = OperationParam("dataJson");
+const OperationParam OperationParam::CustomEntityServiceDeleteCriteria = OperationParam("deleteCriteria");
 
 //app store
 const OperationParam OperationParam::AppStoreId = OperationParam("storeId");

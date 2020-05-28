@@ -82,3 +82,10 @@ UBCCustomEntityProxy *UBCCustomEntityProxy::UpdateEntityFields(UBrainCloudWrappe
     UBCWrapperProxy::GetBrainCloudInstance(brainCloudWrapper)->getCustomEntityService()->updateEntityFields(entityType, entityId, version, fieldsJson, Proxy);
     return Proxy;
 }
+
+UBCCustomEntityProxy *UBCCustomEntityProxy::DeleteEntities(UBrainCloudWrapper *brainCloudWrapper, const FString &entityType, const FString &deleteCriteria)
+{
+    UBCCustomEntityProxy *Proxy = NewObject<UBCCustomEntityProxy>();
+    UBCWrapperProxy::GetBrainCloudInstance(brainCloudWrapper)->getCustomEntityService()->deleteEntities(entityType, deleteCriteria, Proxy);
+    return Proxy;
+}
