@@ -126,3 +126,13 @@ void BrainCloudCustomEntity::updateEntityFields(const FString &entityType, const
     ServerCall *sc = new ServerCall(ServiceName::CustomEntity, ServiceOperation::UpdateEntityFields, message, callback);
     _client->sendRequest(sc);
 }
+
+void BrainCloudCustomEntity::deleteEntities(const FString &entityType, const FString &deleteCriteria, IServerCallback *callback)
+{
+    TSharedRef<FJsonObject> message = MakeShareable(new FJsonObject());
+    message->SetStringField(OperationParam::CustomEntityServiceEntityType.getValue(), entityType);
+    message->SetObjectField(OperationParam::CustomEntityServiceDeleteCriteria.getValue(), JsonUtil::jsonStringToValue(deleteCriteria));
+
+    ServerCall *sc = new ServerCall(ServiceName::CustomEntity, ServiceOperation::DeleteEntities, message, callback);
+    _client->sendRequest(sc);
+}
