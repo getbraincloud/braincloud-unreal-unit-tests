@@ -47,6 +47,7 @@ namespace BrainCloud
         : m_client(in_client)
         , m_isInitialized(false)
     {
+        m_receivingRunning = false;
         m_isConnected = false;
         m_isSocketConnected = false;
         m_pingInterval = std::chrono::milliseconds(1000);

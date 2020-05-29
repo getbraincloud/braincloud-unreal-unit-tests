@@ -110,7 +110,7 @@ namespace BrainCloud
 
         std::mutex m_socketMutex;
         ISocket* m_pSocket = nullptr;
-        std::atomic<bool> m_receivingRunning = false;
+        std::atomic<bool> m_receivingRunning;
         std::condition_variable m_threadsCondition;
 
         mutable std::mutex m_pingMutex;
