@@ -129,6 +129,18 @@ namespace BrainCloud {
 		void updateEntityFields(const char * in_entityType, const char * in_entityId, int32_t in_version, const std::string& in_fieldsJson, IServerCallback * in_callback = NULL);
 
 
+		/**
+		 * deletes entities based on the delete criteria.
+		 *
+		 * Service Name - CustomEntity
+		 * Service Operation - DeleteEntities
+		 *
+		 * @param in_entityType The entity type as defined by the user
+		 * @param in_deleteCriteria Json string of criteria wanted for deletion
+		 * @param in_callback The method to be invoked when the server response is received
+		 */
+		void deleteEntities(const char * in_entityType, const char * in_deleteCriteria, IServerCallback * in_callback = NULL);
+
 	private:
 		BrainCloudClient * m_client;
 	};

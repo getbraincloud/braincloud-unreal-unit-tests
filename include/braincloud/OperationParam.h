@@ -401,6 +401,7 @@ namespace BrainCloud {
 		static const OperationParam CustomEntityServicePageOffset;
 		static const OperationParam CustomEntityServiceEntityId;
 		static const OperationParam CustomEntityFieldsJson;
+		static const OperationParam CustomEntityServiceDeleteCriteria;
 
 		//chat
 		static const OperationParam ChannelId;

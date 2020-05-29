@@ -113,4 +113,14 @@ namespace BrainCloud
 		m_client->sendRequest(sc);
 	}
 
+	void BrainCloudCustomEntity::deleteEntities(const char * in_entityType, const char * in_deleteCriteria, IServerCallback * in_callback)
+	{
+		Json::Value message;
+		message[OperationParam::CustomEntityServiceEntityType.getValue()] = in_entityType;
+		message[OperationParam::CustomEntityServiceDeleteCriteria.getValue()] = JsonUtil::jsonStringToValue(in_deleteCriteria);
+		
+		ServerCall * sc = new ServerCall(ServiceName::CustomEntity, ServiceOperation::DeleteEntities, message, in_callback);
+		m_client->sendRequest(sc);
+	}
+
 }

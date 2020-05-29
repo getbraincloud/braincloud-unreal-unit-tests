@@ -395,6 +395,7 @@ namespace BrainCloud {
 		//custom entity
 		static const ServiceOperation CreateEntity;
 		static const ServiceOperation DeleteEntity;
+		static const ServiceOperation DeleteEntities;
 		static const ServiceOperation GetCount;
 		static const ServiceOperation ReadEntity;
 		static const ServiceOperation UpdateEntity;

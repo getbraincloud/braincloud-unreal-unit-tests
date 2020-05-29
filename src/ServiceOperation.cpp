@@ -447,6 +447,7 @@ namespace BrainCloud
 	//custom entity
 	const ServiceOperation ServiceOperation::CreateEntity = ServiceOperation("CREATE_ENTITY");
 	const ServiceOperation ServiceOperation::DeleteEntity = ServiceOperation("DELETE_ENTITY");
+	const ServiceOperation ServiceOperation::DeleteEntities = ServiceOperation("DELETE_ENTITIES");
 	const ServiceOperation ServiceOperation::GetCount = ServiceOperation("GET_COUNT");
 	const ServiceOperation ServiceOperation::ReadEntity = ServiceOperation("READ_ENTITY");
 	const ServiceOperation ServiceOperation::UpdateEntity = ServiceOperation("UPDATE_ENTITY");
