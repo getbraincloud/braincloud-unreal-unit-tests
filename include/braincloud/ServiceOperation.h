@@ -402,6 +402,7 @@ namespace BrainCloud {
 		static const ServiceOperation UpdateEntityFields;
 		static const ServiceOperation GetEntityPage;
 		static const ServiceOperation GetCustomEntityPage;
+		static const ServiceOperation UpdateSingletonFields;
 
 		static const ServiceOperation GetEntityPageOffset;
 

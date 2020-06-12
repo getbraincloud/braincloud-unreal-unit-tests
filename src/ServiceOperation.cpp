@@ -455,6 +455,7 @@ namespace BrainCloud
 	const ServiceOperation ServiceOperation::GetEntityPage = ServiceOperation("GET_PAGE");
 	const ServiceOperation ServiceOperation::GetCustomEntityPage = ServiceOperation("GET_ENTITY_PAGE");
 	const ServiceOperation ServiceOperation::GetEntityPageOffset = ServiceOperation("GET_ENTITY_PAGE_OFFSET");
+	const ServiceOperation ServiceOperation::UpdateSingletonFields = ServiceOperation("UPDATE_SINGLETON_FIELDS");
 
 	const ServiceOperation ServiceOperation::SubmitCrashReport = ServiceOperation("SEND_CRASH_REPORT");
 

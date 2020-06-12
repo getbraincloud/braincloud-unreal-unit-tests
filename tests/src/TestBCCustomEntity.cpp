@@ -162,3 +162,44 @@ TEST_F(TestBCCustomEntity, DeleteEntities)
 	m_bc->getCustomEntityService()->deleteEntities(m_entityType, "{\"entityId\": \"Testing\"}", &tr2);
 	tr2.run(m_bc);
 }
+
+TEST_F(TestBCCustomEntity, DeleteSingleton)
+{
+	TestResult tr;
+	std::string id;
+
+	TestResult tr2;
+	m_bc->getCustomEntityService()->deleteSingleton(m_entityType, -1, &tr2);
+	tr2.run(m_bc);
+}
+
+TEST_F(TestBCCustomEntity, UpdateSingleton)
+{
+	TestResult tr;
+	std::string id;
+
+	TestResult tr2;
+	m_bc->getCustomEntityService()->updateSingleton(m_entityType, -1, "{\"entityId\": \"Testing\"}", "{\"entityId\": \"Testing\"}", NULL, &tr2);
+	//(m_entityType, "{\"test\": \"Testing\"}", "{\"test\": \"Testing\"}", NULL, true, &tr);
+	tr2.run(m_bc);
+}
+
+TEST_F(TestBCCustomEntity, UpdateSingletonFields)
+{
+	TestResult tr;
+	std::string id;
+
+	TestResult tr2;
+	m_bc->getCustomEntityService()->updateSingletonFields(m_entityType, -1, "{\"entityId\": \"Testing\"}", &tr2);
+	tr2.run(m_bc);
+}
+
+TEST_F(TestBCCustomEntity, ReadSingleton)
+{
+	TestResult tr;
+	std::string id;
+
+	TestResult tr2;
+	m_bc->getCustomEntityService()->readSingleton(m_entityType,  &tr2);
+	tr2.run(m_bc);
+}

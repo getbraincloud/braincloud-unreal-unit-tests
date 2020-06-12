@@ -141,6 +141,61 @@ namespace BrainCloud {
 		 */
 		void deleteEntities(const char * in_entityType, const char * in_deleteCriteria, IServerCallback * in_callback = NULL);
 
+		/**
+		 * Deletes the specified custom entity singleton, owned by the session's user, 
+		 * for the specified entity type, on the server.
+		 *
+		 * Service Name - CustomEntity
+		 * Service Operation - DeleteSingleton
+		 *
+		 * @param in_entityType The entity type as defined by the user
+		 * @param in_version
+		 */
+		void deleteSingleton(const char * in_entityType, int32_t in_version, IServerCallback * in_callback = NULL);
+
+		/**
+		 * Updates the singleton owned by the user for the specified custom entity type on the server, 
+		 * creating the singleton if it does not exist. 
+		 * This operation results in the owned singleton's data being completely replaced by the passed in JSON object.
+		 *
+		 * Service Name - CustomEntity
+		 * Service Operation - UpdateSingleton
+		 *
+		 * @param in_entityType The entity type as defined by the user
+		 * @param in_version
+		 * @param in_dataJson 
+		 * @param in_acl 
+		 * @param in_timeToLive 
+		 * @param in_callback The method to be invoked when the server response is received
+		 */
+		void updateSingleton(const char * in_entityType, int32_t in_version, const std::string& in_dataJson, const std::string& in_acl, int64_t in_timeToLive, IServerCallback * in_callback = NULL);
+
+		/**
+		 * Partially updates the data, of the singleton owned by the user for the specified custom entity type, 
+		 * with the specified fields, on the server
+		 *
+		 * Service Name - CustomEntity
+		 * Service Operation - UpdateSingletonFields
+		 *
+		 * @param in_entityType The entity type as defined by the user
+		 * @param in_version
+		 * @param in_fieldsJson
+		 * @param in_callback The method to be invoked when the server response is received
+		 */
+		void updateSingletonFields(const char * in_entityType, int32_t in_version, const std::string& in_fieldsJson, IServerCallback * in_callback = NULL);
+
+		/**
+		 * Reads the custom entity singleton owned by the session's user.
+		 *
+		 * Service Name - CustomEntity
+		 * Service Operation - ReadSingleton
+		 *
+		 * @param in_entityType The entity type as defined by the user
+		 * @param in_callback The method to be invoked when the server response is received
+		 */
+		void readSingleton(const char * in_entityType, IServerCallback * in_callback = NULL);
+
+
 	private:
 		BrainCloudClient * m_client;
 	};

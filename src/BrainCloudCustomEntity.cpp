@@ -123,4 +123,47 @@ namespace BrainCloud
 		m_client->sendRequest(sc);
 	}
 
+	void BrainCloudCustomEntity::deleteSingleton(const char * in_entityType, int32_t in_version, IServerCallback * in_callback)
+	{
+		Json::Value message;
+		message[OperationParam::CustomEntityServiceEntityType.getValue()] = in_entityType;
+		message[OperationParam::CustomEntityServiceVersion.getValue()] = in_version;
+		
+		ServerCall * sc = new ServerCall(ServiceName::CustomEntity, ServiceOperation::DeleteSingleton, message, in_callback);
+		m_client->sendRequest(sc);
+	}
+
+		void BrainCloudCustomEntity::updateSingleton(const char * in_entityType, int32_t in_version, const std::string& in_dataJson, const std::string& in_acl, int64_t in_timeToLive, IServerCallback * in_callback)
+	{
+		Json::Value message;
+		message[OperationParam::CustomEntityServiceEntityType.getValue()] = in_entityType;
+		message[OperationParam::CustomEntityServiceVersion.getValue()] = in_version;
+		message[OperationParam::CustomEntityServiceData.getValue()] = JsonUtil::jsonStringToValue(in_dataJson);
+		message[OperationParam::CustomEntityServiceAcl.getValue()] = JsonUtil::jsonStringToValue(in_acl);
+		message[OperationParam::CustomEntityServiceTimeToLive.getValue()] = (Json::Int64) in_timeToLive;
+		
+		ServerCall * sc = new ServerCall(ServiceName::CustomEntity, ServiceOperation::UpdateSingleton, message, in_callback);
+		m_client->sendRequest(sc);
+	}
+
+		void BrainCloudCustomEntity::updateSingletonFields(const char * in_entityType, int32_t in_version, const std::string& in_fieldsJson, IServerCallback * in_callback)
+	{
+		Json::Value message;
+		message[OperationParam::CustomEntityServiceEntityType.getValue()] = in_entityType;
+		message[OperationParam::CustomEntityServiceVersion.getValue()] = in_version;
+		message[OperationParam::CustomEntityFieldsJson.getValue()] = JsonUtil::jsonStringToValue(in_fieldsJson);
+
+		ServerCall * sc = new ServerCall(ServiceName::CustomEntity, ServiceOperation::UpdateSingletonFields, message, in_callback);
+		m_client->sendRequest(sc);
+	}
+
+		void BrainCloudCustomEntity::readSingleton(const char * in_entityType, IServerCallback * in_callback)
+	{
+		Json::Value message;
+		message[OperationParam::CustomEntityServiceEntityType.getValue()] = in_entityType;
+				
+		ServerCall * sc = new ServerCall(ServiceName::CustomEntity, ServiceOperation::ReadSingleton, message, in_callback);
+		m_client->sendRequest(sc);
+	}
+
 }
