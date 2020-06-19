@@ -14,6 +14,9 @@
 #include <map>
 #include <mutex>
 #include <vector>
+#include <unordered_map>
+
+static const int MAX_RSMG_HISTORY = 50;
 
 namespace BrainCloud
 {
@@ -77,12 +80,66 @@ namespace BrainCloud
             std::string lobbyId;
         };
 
+        struct Packet
+        {
+            int id;
+            int netId;
+            std::vector<uint8_t> data;
+            double resendInterval;
+            std::chrono::time_point<std::chrono::system_clock> lastResendTime;
+            std::chrono::time_point<std::chrono::system_clock> timeSinceFirstSend;
+        };
+
+        template<typename T>
+        class Pool final
+        {
+        public:
+            ~Pool()
+            {
+                for (auto pT : m_all) delete pT;
+            }
+
+            T* alloc()
+            {
+                if (m_pool.empty())
+                {
+                    auto pT = new T();
+                    m_all.push_back(pT);
+                    return pT;
+                }
+                auto pT = m_pool.back();
+                m_pool.pop_back();
+                return pT;
+            }
+
+            size_t size() const
+            {
+                return m_all.size();
+            }
+
+            void free(T* pT)
+            {
+                m_pool.push_back(pT);
+            }
+
+            void reclaim()
+            {
+                m_pool = m_all;
+            }
+
+        private:
+            std::vector<T*> m_pool;
+            std::vector<T*> m_all;
+        };
+
         void queueConnectSuccessEvent(const std::string& jsonString);
         void queueErrorEvent(const std::string& message);
         void queueSystemEvent(const std::string& jsonString);
         void queueRelayEvent(int netId, const uint8_t* pData, int size);
         Json::Value buildConnectionRequest();
         void sendPing();
+        void sendRSMGAck(int rsmgPacketId);
+        void sendAck(int netId, int packetId, int channel);
         void send(const uint8_t* in_data, int in_size);
         void send(int netId, const Json::Value& json);
         void send(int netId, const std::string& text);
@@ -91,29 +148,37 @@ namespace BrainCloud
         void onRSMG(const uint8_t* in_data, int in_size);
         void onPONG();
         void onRelay(const uint8_t* in_data, int netId, int in_size);
+        void onAck(const uint8_t* in_data);
 
+        // Main objects/flags
         BrainCloudClient* m_client = nullptr;
+        IRelaySocket* m_pSocket = nullptr;
         bool m_isInitialized = false;
         bool m_loggingEnabled = false;
 
-        bool m_isConnected;
-        bool m_isSocketConnected;
+        // Connection
+        eRelayConnectionType m_connectionType;
+        ConnectOptions m_connectOptions;
+        bool m_isSocketConnected = false;
+        bool m_resendConnectRequest = false;
+        std::chrono::time_point<std::chrono::system_clock> m_lastConnectResendTime;
+        bool m_isConnected = false;
 
-        std::vector<Event> m_events;
+        // Events
+        std::vector<Event*> m_events;
+        std::vector<Event*> m_eventsCopy;
         IRelayConnectCallback* m_pRelayConnectCallback = nullptr;
         IRelayCallback* m_pRelayCallback = nullptr;
         IRelaySystemCallback* m_pSystemCallback = nullptr;
 
-        eRelayConnectionType m_connectionType;
-        ConnectOptions m_connectOptions;
-
-        IRelaySocket* m_pSocket = nullptr;
-
+        // Ping
         int m_ping = 999;
         bool m_pingInFlight = false;
         std::chrono::milliseconds m_pingInterval;
         std::chrono::time_point<std::chrono::system_clock> m_lastPingTime;
+        std::chrono::time_point<std::chrono::system_clock> m_lastRecvTime; // For UDP timeout
 
+        // Profile/Net IDs
         int m_netId = -1;
         std::string m_ownerProfileId = "";
         std::map<std::string, int> m_profileIdToNetId;
@@ -121,6 +186,14 @@ namespace BrainCloud
 
         // Packet ID/History
         int m_sendPacketId[CHANNEL_COUNT * 2]; // *2 here is for reliable vs unreliable
+        std::vector<int> m_rsmgHistory;
+        std::vector<Packet*> m_reliablesPerChannel[CHANNEL_COUNT];
+        std::vector<Packet*> m_orderedReliablePackets[CHANNEL_COUNT];
+        int m_recvPacketId[CHANNEL_COUNT];
+
+        // Memory
+        Pool<Event> m_eventPool;
+        Pool<Packet> m_packetPool;
     };
 };
 
