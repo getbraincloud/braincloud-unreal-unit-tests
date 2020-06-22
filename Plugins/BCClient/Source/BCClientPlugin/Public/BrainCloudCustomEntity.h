@@ -156,7 +156,7 @@ public:
      * 
      * Service Name - CustomEntity
      * Service Operation - deleteEntities
-     *
+     */
      * @param entityType The entity type as defined by the user
      * @param deleteCriteria
      * @param callback The method to be invoked when the server response is received
