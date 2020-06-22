@@ -122,6 +122,19 @@ public:
   void readEntity(const FString &entityType, const FString &entityId, IServerCallback *callback);
 
     /**
+     * Increments the specified fields by the specified amount within custom entity data on the server, enforcing ownership/ACL permissions.
+     * 
+     * Service Name - CustomEntity
+     * Service Operation - IncrementData
+     *
+     * @param entityType The entity type as defined by the user
+     * @param entityId 
+     * @param fieldJson
+     * @param callback The method to be invoked when the server response is received
+     */
+  void incrementData(const FString &entityType, const FString &entityId, const FString &fieldsJson, IServerCallback *callback);
+
+    /**
      * Reads a custom entity.
      * 
      * Service Name - CustomEntity
@@ -162,6 +175,57 @@ public:
      * @param callback The method to be invoked when the server response is received
      */
   void deleteEntities(const FString &entityType, const FString &deleteCriteria, IServerCallback *callback);
+
+  /**
+     * Reads the custom entity singleton owned by the session's user.
+     * 
+     * Service Name - CustomEntity
+     * Service Operation - readSingleton
+     *
+     * @param entityType The entity type as defined by the user
+     * @param callback The method to be invoked when the server response is received
+     */
+  void readSingleton(const FString &entityType, IServerCallback *callback);
+
+  /**
+     * Updates the singleton owned by the user for the specified custom entity type on the server, creating the singleton if it does not exist. This operation results in the owned singleton's data being completely replaced by the passed in JSON object.
+     * 
+     * Service Name - CustomEntity
+     * Service Operation - updateSingleton
+     *
+     * @param entityType The entity type as defined by the user
+     * @param version
+     * @param dataJson
+     * @param jsonEntityAcl
+     * @param timeToLive
+     * @param callback The method to be invoked when the server response is received
+     */
+  void updateSingleton(const FString &entityType, int version, const FString &dataJson, IAcl *jsonEntityAcl, int64 timeToLive, IServerCallback *callback);
+
+  /**
+     * Partially updates the data, of the singleton owned by the user for the specified custom entity type, with the specified fields, on the server
+     * 
+     * Service Name - CustomEntity
+     * Service Operation - updateSingletonFields
+     *
+     * @param entityType The entity type as defined by the user
+     * @param version
+     * @param fieldsJson
+     * @param callback The method to be invoked when the server response is received
+     */
+  void updateSingletonFields(const FString &entityType, int version, const FString &fieldsJson, IServerCallback *callback);
+
+  /**
+     * Deletes the specified custom entity singleton, owned by the session's user, for the specified entity type, on the server.
+     * 
+     * Service Name - CustomEntity
+     * Service Operation - deleteSingleton
+     *
+     * @param entityType The entity type as defined by the user
+     * @param version
+     * @param callback The method to be invoked when the server response is received
+     */
+  void deleteSingleton(const FString &entityType, int version, IServerCallback *callback);
 
 
 private:

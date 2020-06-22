@@ -101,6 +101,17 @@ void BrainCloudCustomEntity::readEntity(const FString &entityType, const FString
     _client->sendRequest(sc);
 }
 
+void BrainCloudCustomEntity::incrementData(const FString &entityType, const FString &entityId, const FString &fieldsJson, IServerCallback *callback)
+{
+    TSharedRef<FJsonObject> message = MakeShareable(new FJsonObject());
+    message->SetStringField(OperationParam::CustomEntityServiceEntityType.getValue(), entityType);
+    message->SetStringField(OperationParam::CustomEntityServiceEntityId.getValue(), entityId);
+    message->SetObjectField(OperationParam::CustomEntityServiceFieldsJson.getValue(), JsonUtil::jsonStringToValue(fieldsJson));
+
+    ServerCall *sc = new ServerCall(ServiceName::CustomEntity, ServiceOperation::IncrementData, message, callback);
+    _client->sendRequest(sc);
+}
+
 void BrainCloudCustomEntity::updateEntity(const FString &entityType, const FString &entityId, int version, const FString &dataJson, IAcl *jsonEntityAcl, int64 timeToLive, IServerCallback *callback)
 {
     TSharedRef<FJsonObject> message = MakeShareable(new FJsonObject());
@@ -134,5 +145,48 @@ void BrainCloudCustomEntity::deleteEntities(const FString &entityType, const FSt
     message->SetObjectField(OperationParam::CustomEntityServiceDeleteCriteria.getValue(), JsonUtil::jsonStringToValue(deleteCriteria));
 
     ServerCall *sc = new ServerCall(ServiceName::CustomEntity, ServiceOperation::DeleteEntities, message, callback);
+    _client->sendRequest(sc);
+}
+
+void BrainCloudCustomEntity::readSingleton(const FString &entityType, IServerCallback *callback)
+{
+    TSharedRef<FJsonObject> message = MakeShareable(new FJsonObject());
+    message->SetStringField(OperationParam::CustomEntityServiceEntityType.getValue(), entityType);
+
+    ServerCall *sc = new ServerCall(ServiceName::CustomEntity, ServiceOperation::ReadSingleton, message, callback);
+    _client->sendRequest(sc);
+}
+
+void BrainCloudCustomEntity::deleteSingleton(const FString &entityType, int version, IServerCallback *callback)
+{
+    TSharedRef<FJsonObject> message = MakeShareable(new FJsonObject());
+    message->SetStringField(OperationParam::CustomEntityServiceEntityType.getValue(), entityType);
+    message->SetNumberField(OperationParam::CustomEntityServiceVersion.getValue(), version);
+
+    ServerCall *sc = new ServerCall(ServiceName::CustomEntity, ServiceOperation::DeleteSingleton, message, callback);
+    _client->sendRequest(sc);
+}
+
+void BrainCloudCustomEntity::updateSingleton(const FString &entityType, int version, const FString &dataJson,  IAcl *jsonEntityAcl, int64 timeToLive, IServerCallback *callback)
+{
+    TSharedRef<FJsonObject> message = MakeShareable(new FJsonObject());
+    message->SetStringField(OperationParam::CustomEntityServiceEntityType.getValue(), entityType);
+    message->SetNumberField(OperationParam::CustomEntityServiceEntityId.getValue(), version);
+    message->SetObjectField(OperationParam::CustomEntityServiceDataJson.getValue(), JsonUtil::jsonStringToValue(dataJson));
+    message->SetObjectField(OperationParam::CustomEntityServiceAcl.getValue(), jsonEntityAcl->toJsonObject());
+    message->SetNumberField(OperationParam::CustomEntityServiceTimeToLive.getValue(), timeToLive);
+
+    ServerCall *sc = new ServerCall(ServiceName::CustomEntity, ServiceOperation::UpdateSingleton, message, callback);
+    _client->sendRequest(sc);
+}
+
+void BrainCloudCustomEntity::updateSingletonFields(const FString &entityType, int version, const FString &fieldsJson, IServerCallback *callback)
+{
+    TSharedRef<FJsonObject> message = MakeShareable(new FJsonObject());
+    message->SetStringField(OperationParam::CustomEntityServiceEntityType.getValue(), entityType);
+    message->SetNumberField(OperationParam::CustomEntityServiceEntityId.getValue(), version);
+    message->SetObjectField(OperationParam::CustomEntityServiceFieldsJson.getValue(), JsonUtil::jsonStringToValue(fieldsJson));
+
+    ServerCall *sc = new ServerCall(ServiceName::CustomEntity, ServiceOperation::UpdateSingletonFields, message, callback);
     _client->sendRequest(sc);
 }
