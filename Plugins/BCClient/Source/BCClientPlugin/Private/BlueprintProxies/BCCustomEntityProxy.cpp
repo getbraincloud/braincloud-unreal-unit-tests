@@ -69,6 +69,13 @@ UBCCustomEntityProxy *UBCCustomEntityProxy::ReadEntity(UBrainCloudWrapper *brain
     return Proxy;
 }
 
+UBCCustomEntityProxy *UBCCustomEntityProxy::IncrementData(UBrainCloudWrapper *brainCloudWrapper, const FString &entityType, const FString &entityId, const FString &fieldsJson)
+{
+    UBCCustomEntityProxy *Proxy = NewObject<UBCCustomEntityProxy>();
+    UBCWrapperProxy::GetBrainCloudInstance(brainCloudWrapper)->getCustomEntityService()->incrementData(entityType, entityId, fieldsJson, Proxy);
+    return Proxy;
+}
+
 UBCCustomEntityProxy *UBCCustomEntityProxy::UpdateEntity(UBrainCloudWrapper *brainCloudWrapper, const FString &entityType, const FString &entityId, int version, const FString &dataJson, UBrainCloudACL *jsonEntityAcl, const FString &timeToLive)
 {
     UBCCustomEntityProxy *Proxy = NewObject<UBCCustomEntityProxy>();
@@ -87,5 +94,33 @@ UBCCustomEntityProxy *UBCCustomEntityProxy::DeleteEntities(UBrainCloudWrapper *b
 {
     UBCCustomEntityProxy *Proxy = NewObject<UBCCustomEntityProxy>();
     UBCWrapperProxy::GetBrainCloudInstance(brainCloudWrapper)->getCustomEntityService()->deleteEntities(entityType, deleteCriteria, Proxy);
+    return Proxy;
+}
+
+UBCCustomEntityProxy *UBCCustomEntityProxy::ReadSingleton(UBrainCloudWrapper *brainCloudWrapper, const FString &entityType)
+{
+    UBCCustomEntityProxy *Proxy = NewObject<UBCCustomEntityProxy>();
+    UBCWrapperProxy::GetBrainCloudInstance(brainCloudWrapper)->getCustomEntityService()->readSingleton(entityType,Proxy);
+    return Proxy;
+}
+
+UBCCustomEntityProxy *UBCCustomEntityProxy::DeleteSingleton(UBrainCloudWrapper *brainCloudWrapper, const FString &entityType, int version)
+{
+    UBCCustomEntityProxy *Proxy = NewObject<UBCCustomEntityProxy>();
+    UBCWrapperProxy::GetBrainCloudInstance(brainCloudWrapper)->getCustomEntityService()->deleteSingleton(entityType, version, Proxy);
+    return Proxy;
+}
+
+UBCCustomEntityProxy *UBCCustomEntityProxy::UpdateSingleton(UBrainCloudWrapper *brainCloudWrapper, const FString &entityType, int version, const FString &dataJson, UBrainCloudACL *jsonEntityAcl, const FString &timeToLive)
+{
+    UBCCustomEntityProxy *Proxy = NewObject<UBCCustomEntityProxy>();
+    UBCWrapperProxy::GetBrainCloudInstance(brainCloudWrapper)->getCustomEntityService()->updateSingleton(entityType, version, dataJson, jsonEntityAcl, timeToLive.IsEmpty() ? 0 : FCString::Atoi64(*timeToLive), Proxy);
+    return Proxy;
+}
+
+UBCCustomEntityProxy *UBCCustomEntityProxy::UpdateSingletonFields(UBrainCloudWrapper *brainCloudWrapper, const FString &entityType, int version, const FString &fieldsJson)
+{
+    UBCCustomEntityProxy *Proxy = NewObject<UBCCustomEntityProxy>();
+    UBCWrapperProxy::GetBrainCloudInstance(brainCloudWrapper)->getCustomEntityService()->updateSingletonFields(entityType, version, fieldsJson, Proxy);
     return Proxy;
 }
