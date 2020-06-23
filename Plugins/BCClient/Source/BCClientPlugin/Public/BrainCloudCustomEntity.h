@@ -164,16 +164,16 @@ public:
      */
   void updateEntityFields(const FString &entityType, const FString &entityId, int version, const FString &fieldsJson, IServerCallback *callback);
 
-/**
-     * deletes entities defined within the deleteCriteria.
-     * 
-     * Service Name - CustomEntity
-     * Service Operation - deleteEntities
-     */
-     * @param entityType The entity type as defined by the user
-     * @param deleteCriteria
-     * @param callback The method to be invoked when the server response is received
-     */
+   /**
+    * deletes entities defined within the deleteCriteria.
+    * 
+    * Service Name - CustomEntity
+    * Service Operation - deleteEntities
+    *
+    * @param entityType The entity type as defined by the user
+    * @param deleteCriteria
+    * @param callback The method to be invoked when the server response is received
+    */
   void deleteEntities(const FString &entityType, const FString &deleteCriteria, IServerCallback *callback);
 
   /**
