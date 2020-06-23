@@ -441,7 +441,7 @@ const OperationParam OperationParam::VirtualCurrencyAmount = OperationParam("vcA
 
 //custom entity
 const OperationParam OperationParam::CustomEntityServiceEntityType = OperationParam("entityType");
-const OperationParam OperationParam::CustomEntityServiceJsonEntityData = OperationParam("jsonEntityData");
+const OperationParam OperationParam::CustomEntityServiceJsonEntityData = OperationParam("dataJson");
 const OperationParam OperationParam::CustomEntityServiceAcl = OperationParam("acl");
 const OperationParam OperationParam::CustomEntityServiceTimeToLive = OperationParam("timeToLive");
 const OperationParam OperationParam::CustomEntityServiceEntityId = OperationParam("entityId");
