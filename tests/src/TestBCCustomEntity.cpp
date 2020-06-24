@@ -203,3 +203,23 @@ TEST_F(TestBCCustomEntity, ReadSingleton)
 	m_bc->getCustomEntityService()->readSingleton(m_entityType,  &tr2);
 	tr2.run(m_bc);
 }
+
+TEST_F(TestBCCustomEntity, IncrementData)
+{
+	m_bc->getAuthenticationService()->authenticateAnonymous(true);
+	TestResult tr;
+	const char *id;
+	m_bc->getCustomEntityService()->createEntity(m_entityType, "{\"test\": \"Testing\"}", "{\"test\": \"Testing\"}", NULL, true, &tr);
+	if (tr.run(m_bc))
+	{
+		id = tr.m_response["data"]["entityId"].asCString();
+		ASSERT_NE("", id);
+	}
+	TestResult tr2;
+	m_bc->getCustomEntityService()->incrementData(m_entityType, id,  "{\"goals\":1, \"assists\":4}",   &tr2);
+	tr2.run(m_bc);
+
+	TestResult tr3;
+	m_bc->getCustomEntityService()->deleteEntity(m_entityType, id, "{\"test\": \"Testing\"}", -1, &tr3);
+	tr3.run(m_bc);
+}

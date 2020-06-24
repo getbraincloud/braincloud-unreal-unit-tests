@@ -195,6 +195,19 @@ namespace BrainCloud {
 		 */
 		void readSingleton(const char * in_entityType, IServerCallback * in_callback = NULL);
 
+		/**
+		 * Reads the custom entity singleton owned by the session's user.
+		 *
+		 * Service Name - CustomEntity
+		 * Service Operation - IncrementData
+		 *
+		 * @param in_entityType The entity type as defined by the user
+		 * @param in_entityId
+		 * @param in_fieldsJson
+		 * @param in_callback The method to be invoked when the server response is received
+		 */
+		void incrementData(const char * in_entityType, const char * in_entityId, const std::string& in_fieldsJson, IServerCallback * in_callback = NULL);
+
 
 	private:
 		BrainCloudClient * m_client;

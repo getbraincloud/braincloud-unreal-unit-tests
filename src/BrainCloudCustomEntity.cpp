@@ -133,7 +133,7 @@ namespace BrainCloud
 		m_client->sendRequest(sc);
 	}
 
-		void BrainCloudCustomEntity::updateSingleton(const char * in_entityType, int32_t in_version, const std::string& in_dataJson, const std::string& in_acl, int64_t in_timeToLive, IServerCallback * in_callback)
+	void BrainCloudCustomEntity::updateSingleton(const char * in_entityType, int32_t in_version, const std::string& in_dataJson, const std::string& in_acl, int64_t in_timeToLive, IServerCallback * in_callback)
 	{
 		Json::Value message;
 		message[OperationParam::CustomEntityServiceEntityType.getValue()] = in_entityType;
@@ -146,7 +146,7 @@ namespace BrainCloud
 		m_client->sendRequest(sc);
 	}
 
-		void BrainCloudCustomEntity::updateSingletonFields(const char * in_entityType, int32_t in_version, const std::string& in_fieldsJson, IServerCallback * in_callback)
+	void BrainCloudCustomEntity::updateSingletonFields(const char * in_entityType, int32_t in_version, const std::string& in_fieldsJson, IServerCallback * in_callback)
 	{
 		Json::Value message;
 		message[OperationParam::CustomEntityServiceEntityType.getValue()] = in_entityType;
@@ -157,12 +157,23 @@ namespace BrainCloud
 		m_client->sendRequest(sc);
 	}
 
-		void BrainCloudCustomEntity::readSingleton(const char * in_entityType, IServerCallback * in_callback)
+	void BrainCloudCustomEntity::readSingleton(const char * in_entityType, IServerCallback * in_callback)
 	{
 		Json::Value message;
 		message[OperationParam::CustomEntityServiceEntityType.getValue()] = in_entityType;
 				
 		ServerCall * sc = new ServerCall(ServiceName::CustomEntity, ServiceOperation::ReadSingleton, message, in_callback);
+		m_client->sendRequest(sc);
+	}
+
+	void BrainCloudCustomEntity::incrementData(const char * in_entityType, const char * in_entityId, const std::string& in_fieldsJson, IServerCallback * in_callback)
+	{
+		Json::Value message;
+		message[OperationParam::CustomEntityServiceEntityType.getValue()] = in_entityType;
+		message[OperationParam::CustomEntityServiceEntityId.getValue()] = in_entityId;
+		message[OperationParam::CustomEntityFieldsJson.getValue()] = JsonUtil::jsonStringToValue(in_fieldsJson);
+
+		ServerCall * sc = new ServerCall(ServiceName::CustomEntity, ServiceOperation::IncrementData, message, in_callback);
 		m_client->sendRequest(sc);
 	}
 
