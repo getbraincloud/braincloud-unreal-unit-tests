@@ -6,20 +6,16 @@
 #include <braincloud/IRelaySystemCallback.h>
 
 #include "braincloud/internal/IRelayTCPSocket.h"
-#include "braincloud/internal/IRelayUDPSocket.h"
 #if (TARGET_OS_WATCH != 1)
 #include "braincloud/internal/IWebSocket.h"
 #endif
 #include "braincloud/internal/RelayComms.h"
 
-#include <algorithm>
 #include <iostream>
 #include <cstring>
 #if !defined(WIN32)
 #include <arpa/inet.h>
 #endif
-
-#define VERBOSE_LOG 0
 
 static const int CONTROL_BYTES_SIZE = 1;
 static const int MAX_PACKET_ID_HISTORY = 128;
@@ -44,20 +40,12 @@ static const int RELIABLE_BIT = 0x8000;
 static const int ORDERED_BIT = 0x4000;
 
 static const long CONNECT_RESEND_INTERVAL_MS = 500;
-static const long MAX_RELIABLE_RESEND_INTERVAL_MS = 500;
 
 static const int MAX_PACKET_ID = 0xFFF;
 static const int PACKET_LOWER_THRESHOLD = MAX_PACKET_ID * 25 / 100;
 static const int PACKET_HIGHER_THRESHOLD = MAX_PACKET_ID * 75 / 100;
 
 static const int MAX_PACKET_SIZE = 1024;
-static const int TIMEOUT_SECONDS = 10;
-
-static const double RELIABLE_RESEND_INTERVALS[] = {
-    50.0, 50.0, // High priority 1 and 2
-    150.0,      // Normal priority
-    500.0       // Low priority
-};
 
 namespace BrainCloud
 {
@@ -125,23 +113,12 @@ namespace BrainCloud
         m_ownerProfileId.clear();
         m_profileIdToNetId.clear();
         m_netIdToProfileId.clear();
-        for (int i = 0; i < CHANNEL_COUNT; ++i) m_reliablesPerChannel[i].clear();
-        for (int i = 0; i < CHANNEL_COUNT; ++i) m_orderedReliablePackets[i].clear();
-        for (int i = 0; i < CHANNEL_COUNT; ++i) m_recvPacketId[i] = -1;
-        m_eventPool.reclaim();
-        m_packetPool.reclaim();
 
         switch (m_connectionType)
         {
             case eRelayConnectionType::TCP:
             {
                 m_pSocket = IRelayTCPSocket::create(host, port, MAX_PACKET_SIZE);
-                break;
-            }
-            case eRelayConnectionType::UDP:
-            {
-                m_pSocket = IRelayUDPSocket::create(host, port, MAX_PACKET_SIZE);
-                m_lastRecvTime = std::chrono::system_clock::now();
                 break;
             }
             default:
@@ -157,7 +134,6 @@ namespace BrainCloud
     {
         m_isConnected = false;
         m_isSocketConnected = false;
-        m_resendConnectRequest = false;
 
         // Close socket
         delete m_pSocket;
@@ -167,12 +143,6 @@ namespace BrainCloud
         {
             m_sendPacketId[i] = 0;
         }
-
-        m_rsmgHistory.clear();
-        for (int i = 0; i < CHANNEL_COUNT; ++i) m_reliablesPerChannel[i].clear();
-        for (int i = 0; i < CHANNEL_COUNT; ++i) m_orderedReliablePackets[i].clear();
-        for (int i = 0; i < CHANNEL_COUNT; ++i) m_recvPacketId[i] = -1;
-        m_packetPool.reclaim();
     }
 
     bool RelayComms::isConnected() const
@@ -248,15 +218,15 @@ namespace BrainCloud
     {
         // Allocate buffer
         auto totalSize = in_size + 5;
-        auto pPacket = m_packetPool.alloc();
-        pPacket->data.resize(totalSize);
+        static std::vector<uint8_t> buffer;
+        buffer.resize(totalSize);
 
         // Size
         auto len = htons((u_short)totalSize);
-        memcpy(pPacket->data.data(), &len, 2);
+        memcpy(buffer.data(), &len, 2);
 
         // NetId
-        pPacket->data[2] = (uint8_t)in_toNetId;
+        buffer[2] = (uint8_t)in_toNetId;
 
         // Reliable header
         uint16_t rh = 0;
@@ -268,44 +238,38 @@ namespace BrainCloud
         rh |= packetId;
         m_sendPacketId[channelIdx] = (packetId + 1) & 0xFFF;
         auto rhBE = htons((u_short)rh);
-        memcpy(pPacket->data.data() + 3, &rhBE, 2);
+        memcpy(buffer.data() + 3, &rhBE, 2);
 
         // Rest of data
-        memcpy(pPacket->data.data() + 5, in_data, in_size);
+        memcpy(buffer.data() + 5, in_data, in_size);
 
         // Send
-        send(pPacket->data.data(), (int)pPacket->data.size());
-
-        // UDP, store reliable in send map
-        if (in_reliable)
-        {
-            pPacket->id = packetId;
-            pPacket->lastResendTime = std::chrono::system_clock::now();
-            pPacket->timeSinceFirstSend = pPacket->lastResendTime;
-            pPacket->resendInterval = RELIABLE_RESEND_INTERVALS[(int)in_channel];
-            m_reliablesPerChannel[(int)in_channel].push_back(pPacket);
-        }
-        else
-        {
-            m_packetPool.free(pPacket);
-        }
+        send(buffer.data(), (int)buffer.size());
     }
 
     void RelayComms::sendPing()
     {
+        struct PingData
+        {
+            uint16_t size = (uint16_t)htons((u_short)5);
+            uint8_t netId = CL2RS_PING;
+            uint16_t ping = 999;
+        } pingData;
+
         if (m_pingInFlight)
         {
             return;
         }
-
+        pingData.ping = (uint16_t)htons((u_short)m_ping);;
         m_pingInFlight = true;
         m_lastPingTime = std::chrono::system_clock::now();
 
-        uint8_t data[5];
-        *(uint16_t*)(data) = (uint16_t)htons((u_short)5);
-        data[2] = CL2RS_PING;
-        *(uint16_t*)(data + 3) = (uint16_t)htons((u_short)m_ping);
-        send(data, 5);
+        if (m_loggingEnabled)
+        {
+            std::cout << "#RELAY SEND: PING " << std::endl;
+        }
+
+        send((uint8_t*)&pingData, 5);
     }
 
     void RelayComms::send(int netId, const Json::Value& json)
@@ -316,12 +280,10 @@ namespace BrainCloud
 
     void RelayComms::send(int netId, const std::string& text)
     {
-#if VERBOSE_LOG
         if (m_loggingEnabled)
         {
             std::cout << "RELAY SEND: " << text << std::endl;
         }
-#endif
 
         auto totalSize = text.length() + 3;
         std::vector<uint8_t> buffer(totalSize);
@@ -342,8 +304,6 @@ namespace BrainCloud
 
     void RelayComms::onRecv(const uint8_t* in_data, int in_size)
     {
-        m_lastRecvTime = std::chrono::system_clock::now();
-
         if (in_size < 3)
         {
             disconnect();
@@ -363,12 +323,6 @@ namespace BrainCloud
 
         if (netId == RS2CL_RSMG)
         {
-            if (size < 5)
-            {
-                disconnect();
-                queueErrorEvent("Relay Recv Error: RSMG cannot be smaller than 5 bytes");
-                return;
-            }
             onRSMG(in_data + 3, size - 3);
         }
         else if (netId == RS2CL_PONG)
@@ -385,7 +339,6 @@ namespace BrainCloud
             }
             if (m_connectionType == eRelayConnectionType::UDP)
             {
-                onAck(in_data + 3);
             }
         }
         else if (netId >= 0 && netId < MAX_PLAYERS)
@@ -405,70 +358,19 @@ namespace BrainCloud
         }
     }
 
-    void RelayComms::sendRSMGAck(int rsmgPacketId)
-    {
-#if VERBOSE_LOG
-        if (m_loggingEnabled)
-        {
-            std::cout << "#RELAY SEND: RSMG ACK" << std::endl;
-        }
-#endif
-
-        uint8_t data[5];
-        *(uint16_t*)(data) = (uint16_t)htons((u_short)5);
-        data[2] = CL2RS_RSMG_ACKNOWLEDGE;
-        *(uint16_t*)(data + 3) = (uint16_t)htons((u_short)rsmgPacketId);
-        send(data, 5);
-    }
-
-    void RelayComms::sendAck(int netId, int packetId, int channel)
-    {
-        uint8_t data[6];
-        *(uint16_t*)(data) = (uint16_t)htons((u_short)6);
-        data[2] = CL2RS_ACKNOWLEDGE;
-        *(uint16_t*)(data + 3) = (uint16_t)htons((u_short)((channel << 12) | packetId));
-        data[5] = (uint8_t)netId;
-        send(data, 6);
-    }
-
     void RelayComms::onRSMG(const uint8_t* in_data, int in_size)
     {
         int rsmgPacketId = (int)ntohs(*(u_short*)in_data);
+
+        if (m_connectionType == eRelayConnectionType::UDP)
+        {
+            // Ack
+        }
 
         std::string jsonString((char*)in_data + 2, (char*)in_data + in_size);
         if (m_loggingEnabled)
         {
             std::cout << "RELAY System Msg: " << jsonString << std::endl;
-        }
-
-        if (m_connectionType == eRelayConnectionType::UDP)
-        {
-            // Send ack, always. Even if we already received it
-            sendRSMGAck(rsmgPacketId);
-
-            // If already received, we ignore
-            for (int packetId : m_rsmgHistory)
-            {
-                if (packetId == rsmgPacketId)
-                {
-#if VERBOSE_LOG
-                    if (m_loggingEnabled)
-                    {
-                        std::cout << "RELAY Duplicated System Msg" << std::endl;
-                    }
-#endif
-                    return;
-                }
-            }
-
-            // Add to history
-            m_rsmgHistory.push_back(rsmgPacketId);
-
-            // Crop to max history
-            while ((int)m_rsmgHistory.size() > MAX_RSMG_HISTORY)
-            {
-                m_rsmgHistory.erase(m_rsmgHistory.begin());
-            }
         }
 
         Json::Value json;
@@ -490,7 +392,6 @@ namespace BrainCloud
                 m_ownerProfileId = json["ownerId"].asString();
                 m_lastPingTime = std::chrono::system_clock::now();
                 m_isConnected = true;
-                m_resendConnectRequest = false;
                 queueConnectSuccessEvent(jsonString);
             }
         }
@@ -507,18 +408,6 @@ namespace BrainCloud
             auto profileId = json["profileId"].asString();
             m_ownerProfileId = profileId;
         }
-        else if (op == "DISCONNECT")
-        {
-            auto profileId = json["profileId"].asString();
-            auto myProfileId = m_client->getAuthenticationService()->getProfileId();
-            if (myProfileId == profileId)
-            {
-                // We are the one that got disconnected!
-                disconnect();
-                queueErrorEvent("Disconnected by server");
-                return;
-            }
-        }
 
         queueSystemEvent(jsonString);
     }
@@ -529,47 +418,11 @@ namespace BrainCloud
         {
             m_pingInFlight = false;
             m_ping = (int)std::chrono::duration_cast<std::chrono::milliseconds>(std::chrono::system_clock::now() - m_lastPingTime).count();
-#if VERBOSE_LOG
             if (m_loggingEnabled)
             {
                 std::cout << "RELAY PONG: " << m_ping << std::endl;
             }
-#endif
         }
-    }
-
-    void RelayComms::onAck(const uint8_t* in_data)
-    {
-        auto rh = (int)ntohs(*(u_short*)in_data);
-        auto channel = (rh >> 12) & 0x3;
-        auto packetId = rh & 0xFFF;
-
-        auto& reliables = m_reliablesPerChannel[channel];
-        for (auto it = reliables.begin(); it != reliables.end(); ++it)
-        {
-            auto pPacket = *it;
-            if (pPacket->id == packetId)
-            {
-#if VERBOSE_LOG
-                if (m_loggingEnabled)
-                {
-                    std::cout << "Acked packet id: " << packetId << std::endl;
-                }
-#endif
-                m_packetPool.free(pPacket);
-                reliables.erase(it);
-                break;
-            }
-        }
-    }
-
-    static bool packetLE(int a, int b)
-    {
-        if (a > PACKET_HIGHER_THRESHOLD && b <= PACKET_LOWER_THRESHOLD)
-        {
-            return true;
-        }
-        return a <= b;
     }
 
     void RelayComms::onRelay(const uint8_t* in_data, int netId, int in_size)
@@ -581,66 +434,9 @@ namespace BrainCloud
         auto packetId = rh & 0xFFF;
         auto channelIdx = channel + (reliable ? 0 : CHANNEL_COUNT);
 
+        // Ack reliables, always. An ack might have been previously dropped.
         if (m_connectionType == eRelayConnectionType::UDP)
         {
-            // Ack reliables, always. An ack might have been previously dropped.
-            if (reliable)
-            {
-                sendAck(netId, packetId, channel);
-            }
-
-            // Drop out of order, unreliable packets
-            if (ordered)
-            {
-                if (reliable)
-                {
-                    // Check if it's out of order, then save it for later
-                    auto orderedReliablePackets = m_orderedReliablePackets[channel];
-                    if (packetId != (m_recvPacketId[channel] + 1) % MAX_PACKET_ID)
-                    {
-                        int insertIdx = 0;
-                        for (; insertIdx < (int)orderedReliablePackets.size(); ++insertIdx)
-                        {
-                            auto pPacket = orderedReliablePackets[insertIdx];
-                            if (pPacket->id <= packetId) break;
-                        }
-                        auto pNewPacket = m_packetPool.alloc();
-                        pNewPacket->id = packetId;
-                        pNewPacket->netId = netId;
-                        pNewPacket->data.assign(in_data + 2, in_data + in_size);
-                        orderedReliablePackets.insert(orderedReliablePackets.begin() + insertIdx, pNewPacket);
-                        return;
-                    }
-
-                    // It's in order, queue event
-                    m_recvPacketId[channel] = packetId;
-                    queueRelayEvent(netId, in_data + 2, in_size - 2);
-
-                    // Empty previously saved packets if they follow this one
-                    while (!orderedReliablePackets.empty())
-                    {
-                        auto pPacket = orderedReliablePackets.front();
-                        if (pPacket->id == (m_recvPacketId[channel] + 1) % MAX_PACKET_ID)
-                        {
-                            queueRelayEvent(pPacket->netId, pPacket->data.data(), (int)pPacket->data.size());
-                            orderedReliablePackets.erase(orderedReliablePackets.begin());
-                            m_packetPool.free(pPacket);
-                            continue;
-                        }
-                        break; // Out of order
-                    }
-                    return;
-                }
-                else
-                {
-                    if (packetLE(packetId, m_recvPacketId[channel]))
-                    {
-                        // Just drop out of order packets for unreliables
-                        return;
-                    }
-                    m_recvPacketId[channel] = packetId;
-                }
-            }
         }
 
         queueRelayEvent(netId, in_data + 2, in_size - 2);
@@ -648,8 +444,6 @@ namespace BrainCloud
 
     void RelayComms::runCallbacks()
     {
-        auto now = std::chrono::system_clock::now();
-
         // Update socket
         if (m_pSocket)
         {
@@ -658,62 +452,9 @@ namespace BrainCloud
                 // Peek messages
                 int packetSize;
                 const uint8_t* pPacketData;
-                while (m_pSocket && (pPacketData = m_pSocket->peek(packetSize)))
+                while (pPacketData = m_pSocket->peek(packetSize))
                 {
                     onRecv(pPacketData, packetSize);
-                }
-
-                // Check for connect request resend
-                if (m_connectionType == eRelayConnectionType::UDP &&
-                    m_resendConnectRequest &&
-                    now - m_lastConnectResendTime > std::chrono::milliseconds(CONNECT_RESEND_INTERVAL_MS))
-                {
-                    m_lastConnectResendTime = now;
-                    send(CL2RS_CONNECTION, buildConnectionRequest());
-                }
-
-                // Ping. Which also works as an heartbeat
-                if (now - m_lastPingTime >= m_pingInterval)
-                {
-                    sendPing();
-                }
-
-                // Process reliable resends
-                if (m_connectionType == eRelayConnectionType::UDP)
-                {
-                    for (int i = 0; i < CHANNEL_COUNT; ++i)
-                    {
-                        auto& reliables = m_reliablesPerChannel[i];
-                        for (auto pPacket : reliables)
-                        {
-                            if (pPacket->timeSinceFirstSend - now > std::chrono::seconds(10))
-                            {
-                                disconnect();
-                                queueErrorEvent("Relay disconnected, too many packet lost");
-                                break;
-                            }
-                            if (pPacket->lastResendTime - now >= std::chrono::milliseconds((int)pPacket->resendInterval))
-                            {
-                                pPacket->resendInterval = std::min<double>((double)pPacket->resendInterval * 1.25, (double)MAX_RELIABLE_RESEND_INTERVAL_MS);
-                                send(pPacket->data.data(), (int)pPacket->data.size());
-#if VERBOSE_LOG
-                                if (m_loggingEnabled)
-                                {
-                                    std::cout << "Resend reliable (" << pPacket->id << ", " << std::chrono::duration_cast<std::chrono::milliseconds>(pPacket->timeSinceFirstSend - now).count() << "ms)" << std::endl;
-                                }
-#endif
-                            }
-                        }
-                    }
-                }
-
-                // Check if we timeout
-                if (m_connectionType == eRelayConnectionType::UDP && 
-                    m_pSocket && 
-                    now - m_lastRecvTime > std::chrono::seconds(TIMEOUT_SECONDS))
-                {
-                    disconnect();
-                    queueErrorEvent("Relay Socket Timeout");
                 }
             }
             else if (!m_pSocket->isValid())
@@ -732,100 +473,84 @@ namespace BrainCloud
                         std::cout << "Relay Socket Connected" << std::endl;
                     }
                     send(CL2RS_CONNECTION, buildConnectionRequest());
-                    if (m_connectionType == eRelayConnectionType::UDP)
-                    {
-                        m_resendConnectRequest = true;
-                        m_lastConnectResendTime = now;
-                    }
                 }
             }
         }
 
         // Perform event callbacks
         {
-            m_eventsCopy = m_events;
+            auto eventsCopy = m_events;
             m_events.clear();
-            for (auto pEvent : m_eventsCopy)
+            for (const auto& evt : eventsCopy)
             {
-                switch (pEvent->type)
+                switch (evt.type)
                 {
                     case EventType::ConnectSuccess:
                         if (m_pRelayConnectCallback)
                         {
-                            m_pRelayConnectCallback->relayConnectSuccess(pEvent->message);
+                            m_pRelayConnectCallback->relayConnectSuccess(evt.message);
                         }
                         break;
                     case EventType::ConnectFailure:
                         if (m_pRelayConnectCallback)
                         {
-                            if (m_loggingEnabled)
-                            {
-                                std::cout << "Relay: " << pEvent->message << std::endl;
-                            }
-                            m_pRelayConnectCallback->relayConnectFailure(pEvent->message);
+                            m_pRelayConnectCallback->relayConnectFailure(evt.message);
                         }
                         break;
                     case EventType::System:
                         if (m_pSystemCallback)
                         {
-                            m_pSystemCallback->relaySystemCallback(pEvent->message);
+                            m_pSystemCallback->relaySystemCallback(evt.message);
                         }
                         break;
                     case EventType::Relay:
                         if (m_pRelayCallback)
                         {
-                            m_pRelayCallback->relayCallback(pEvent->netId, pEvent->data.data(), (int)pEvent->data.size());
+                            m_pRelayCallback->relayCallback(evt.netId, evt.data.data(), (int)evt.data.size());
                         }
                         break;
                 }
-                m_eventPool.free(pEvent);
             }
         }
 
-        // Report debug info on memory (Lets only do that when connected)
-#if VERBOSE_LOG
-        if (m_isConnected && m_loggingEnabled)
+        if (m_connectionType == eRelayConnectionType::UDP)
         {
-            static auto lastPoolReportingTime = now;
-            if (now - lastPoolReportingTime > std::chrono::seconds(5))
+            // Resend connection packet
+
+            // Resend reliables
+ 
+        }
+
+        // Ping. Which also works as an heartbeat
+        if (m_isConnected)
+        {
+            if (std::chrono::system_clock::now() - m_lastPingTime >= m_pingInterval)
             {
-                lastPoolReportingTime = now;
-                std::cout << "Relay Pool sizes: (Events = " << m_eventPool.size() << ") (Packets = " << m_packetPool.size() << ")" << std::endl;
+                sendPing();
             }
         }
-#endif
     }
 
     void RelayComms::queueConnectSuccessEvent(const std::string& jsonString)
     {
-        auto pEvent = m_eventPool.alloc();
-        pEvent->type = EventType::ConnectSuccess;
-        pEvent->message = jsonString;
-        m_events.push_back(pEvent);
+        m_events.push_back({ EventType::ConnectSuccess, jsonString });
     }
 
     void RelayComms::queueErrorEvent(const std::string& message)
     {
-        auto pEvent = m_eventPool.alloc();
-        pEvent->type = EventType::ConnectFailure;
-        pEvent->message = message;
-        m_events.push_back(pEvent);
+        m_events.push_back({ EventType::ConnectFailure, message });
     }
 
     void RelayComms::queueSystemEvent(const std::string& jsonString)
     {
-        auto pEvent = m_eventPool.alloc();
-        pEvent->type = EventType::System;
-        pEvent->message = jsonString;
-        m_events.push_back(pEvent);
+        m_events.push_back({ EventType::System, jsonString });
     }
 
     void RelayComms::queueRelayEvent(int netId, const uint8_t* pData, int size)
     {
-        auto pEvent = m_eventPool.alloc();
-        pEvent->type = EventType::Relay;
-        pEvent->netId = netId;
-        pEvent->data.assign(pData, pData + size);
-        m_events.push_back(pEvent);
+        m_events.push_back({ EventType::Relay });
+        auto& evt = m_events.back();
+        evt.netId = netId;
+        evt.data.assign(pData, pData + size);
     }
 };
