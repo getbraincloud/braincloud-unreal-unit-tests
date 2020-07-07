@@ -5,7 +5,6 @@
 
 #include "braincloud/RelayChannel.h"
 #include "braincloud/RelayConnectionType.h"
-#include "braincloud/internal/IRelaySocket.h"
 
 #include <atomic>
 #include <cinttypes>
@@ -82,6 +81,7 @@ namespace BrainCloud
         void queueSystemEvent(const std::string& jsonString);
         void queueRelayEvent(int netId, const uint8_t* pData, int size);
         Json::Value buildConnectionRequest();
+        void startReceiving();
         void sendPing();
         void send(const uint8_t* in_data, int in_size);
         void send(int netId, const Json::Value& json);
@@ -96,9 +96,10 @@ namespace BrainCloud
         bool m_isInitialized = false;
         bool m_loggingEnabled = false;
 
-        bool m_isConnected;
-        bool m_isSocketConnected;
+        std::atomic<bool> m_isConnected;
+        std::atomic<bool> m_isSocketConnected;
 
+        std::mutex m_eventsMutex;
         std::vector<Event> m_events;
         IRelayConnectCallback* m_pRelayConnectCallback = nullptr;
         IRelayCallback* m_pRelayCallback = nullptr;
@@ -107,13 +108,18 @@ namespace BrainCloud
         eRelayConnectionType m_connectionType;
         ConnectOptions m_connectOptions;
 
-        IRelaySocket* m_pSocket = nullptr;
+        std::mutex m_socketMutex;
+        ISocket* m_pSocket = nullptr;
+        std::atomic<bool> m_receivingRunning;
+        std::condition_variable m_threadsCondition;
 
+        mutable std::mutex m_pingMutex;
         int m_ping = 999;
         bool m_pingInFlight = false;
         std::chrono::milliseconds m_pingInterval;
         std::chrono::time_point<std::chrono::system_clock> m_lastPingTime;
 
+        mutable std::mutex m_idsMutex;
         int m_netId = -1;
         std::string m_ownerProfileId = "";
         std::map<std::string, int> m_profileIdToNetId;

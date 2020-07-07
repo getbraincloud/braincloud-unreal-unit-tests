@@ -5,17 +5,13 @@
 #include <braincloud/IRelayCallback.h>
 #include <braincloud/IRelaySystemCallback.h>
 
-#include "braincloud/internal/IRelayTCPSocket.h"
+#include "braincloud/internal/ITCPSocket.h"
 #if (TARGET_OS_WATCH != 1)
 #include "braincloud/internal/IWebSocket.h"
 #endif
 #include "braincloud/internal/RelayComms.h"
 
 #include <iostream>
-#include <cstring>
-#if !defined(WIN32)
-#include <arpa/inet.h>
-#endif
 
 static const int CONTROL_BYTES_SIZE = 1;
 static const int MAX_PACKET_ID_HISTORY = 128;
@@ -45,14 +41,13 @@ static const int MAX_PACKET_ID = 0xFFF;
 static const int PACKET_LOWER_THRESHOLD = MAX_PACKET_ID * 25 / 100;
 static const int PACKET_HIGHER_THRESHOLD = MAX_PACKET_ID * 75 / 100;
 
-static const int MAX_PACKET_SIZE = 1024;
-
 namespace BrainCloud
 {
     RelayComms::RelayComms(BrainCloudClient* in_client)
         : m_client(in_client)
         , m_isInitialized(false)
     {
+        m_receivingRunning = false;
         m_isConnected = false;
         m_isSocketConnected = false;
         m_pingInterval = std::chrono::milliseconds(1000);
@@ -114,20 +109,19 @@ namespace BrainCloud
         m_profileIdToNetId.clear();
         m_netIdToProfileId.clear();
 
-        switch (m_connectionType)
+        std::thread connectionThread([this]
         {
-            case eRelayConnectionType::TCP:
+            switch (m_connectionType)
             {
-                m_pSocket = IRelayTCPSocket::create(host, port, MAX_PACKET_SIZE);
-                break;
+                default:
+                {
+                    disconnect();
+                    queueErrorEvent("Protocol Unimplemented");
+                    break;
+                }
             }
-            default:
-            {
-                disconnect();
-                queueErrorEvent("Protocol Unimplemented");
-                break;
-            }
-        }
+        });
+        connectionThread.detach();
     }
 
     void RelayComms::disconnect()
@@ -136,8 +130,24 @@ namespace BrainCloud
         m_isSocketConnected = false;
 
         // Close socket
-        delete m_pSocket;
-        m_pSocket = nullptr;
+        {
+            std::unique_lock<std::mutex> lock(m_socketMutex);
+            if (m_pSocket)
+            {
+                m_pSocket->close();
+
+                if (m_receivingRunning)
+                {
+                    m_threadsCondition.wait(lock, [this]()
+                    {
+                        return !m_receivingRunning;
+                    });
+                }
+
+                delete m_pSocket;
+                m_pSocket = nullptr;
+            }
+        }
 
         for (int i = 0; i < CHANNEL_COUNT * 2; ++i)
         {
@@ -152,6 +162,7 @@ namespace BrainCloud
 
     int RelayComms::getPing() const
     {
+        std::unique_lock<std::mutex> lock(m_pingMutex);
         return m_ping;
     }
 
@@ -162,11 +173,13 @@ namespace BrainCloud
 
     const std::string& RelayComms::getOwnerProfileId() const
     {
+        std::unique_lock<std::mutex> lock(m_idsMutex);
         return m_ownerProfileId;
     }
 
     const std::string& RelayComms::getProfileIdForNetId(int in_netId) const
     {
+        std::unique_lock<std::mutex> lock(m_idsMutex);
         auto it = m_netIdToProfileId.find(in_netId);
         if (it == m_netIdToProfileId.end())
         {
@@ -178,6 +191,7 @@ namespace BrainCloud
 
     int RelayComms::getNetIdForProfileId(const std::string& in_profileId) const
     {
+        std::unique_lock<std::mutex> lock(m_idsMutex);
         auto it = m_profileIdToNetId.find(in_profileId);
         if (it == m_profileIdToNetId.end()) return INVALID_NET_ID;
         return it->second;
@@ -216,7 +230,7 @@ namespace BrainCloud
 
     void RelayComms::send(const uint8_t* in_data, int in_size, int in_toNetId, bool in_reliable, bool in_ordered, eRelayChannel in_channel)
     {
-        // Allocate buffer
+        // Allocate buffer (This is reused. Send should always be called from same thread anyway)
         auto totalSize = in_size + 5;
         static std::vector<uint8_t> buffer;
         buffer.resize(totalSize);
@@ -296,10 +310,44 @@ namespace BrainCloud
 
     void RelayComms::send(const uint8_t* in_data, int in_size)
     {
-        if (m_pSocket)
-        {
-            m_pSocket->send(in_data, in_size);
-        }
+        //if (m_pSocket)
+        //{
+        //    m_pSocket->send(in_data, in_size);
+        //}
+    }
+
+    void RelayComms::startReceiving()
+    {
+        // m_receivingRunning = true;
+        // std::thread receiveThread([this]
+        // {
+        //     while (m_isSocketConnected)
+        //     {
+        //         int size;
+        //         auto data = m_pSocket->recv(size);
+        //         if (!data)
+        //         {
+        //             break;
+        //         }
+        //         onRecv(data, size);
+        //     }
+
+        //     m_socketMutex.lock();
+        //     if (m_isConnected)
+        //     {
+        //         // The error comes from here
+        //         m_socketMutex.unlock();
+        //         disconnect();
+        //         queueErrorEvent("Relay Recv Error: Socket disconnected");
+        //     }
+        //     else
+        //     {
+        //         m_receivingRunning = false;
+        //         m_threadsCondition.notify_one();
+        //         m_socketMutex.unlock();
+        //     }
+        // });
+        // receiveThread.detach();
     }
 
     void RelayComms::onRecv(const uint8_t* in_data, int in_size)
@@ -383,14 +431,21 @@ namespace BrainCloud
             auto netId = json["netId"].asInt();
             auto profileId = json["profileId"].asString();
             {
+                std::unique_lock<std::mutex> lock(m_idsMutex);
                 m_netIdToProfileId[netId] = profileId;
                 m_profileIdToNetId[profileId] = netId;
             }
             if (profileId == m_client->getAuthenticationService()->getProfileId())
             {
-                m_netId = netId;
-                m_ownerProfileId = json["ownerId"].asString();
-                m_lastPingTime = std::chrono::system_clock::now();
+                {
+                    std::unique_lock<std::mutex> lock(m_idsMutex);
+                    m_netId = netId;
+                    m_ownerProfileId = json["ownerId"].asString();
+                }
+                {
+                    std::unique_lock<std::mutex> lock(m_pingMutex);
+                    m_lastPingTime = std::chrono::system_clock::now();
+                }
                 m_isConnected = true;
                 queueConnectSuccessEvent(jsonString);
             }
@@ -400,12 +455,14 @@ namespace BrainCloud
             auto netId = json["netId"].asInt();
             auto profileId = json["profileId"].asString();
 
+            std::unique_lock<std::mutex> lock(m_idsMutex);
             m_netIdToProfileId[netId] = profileId;
             m_profileIdToNetId[profileId] = netId;
         }
         else if (op == "MIGRATE_OWNER")
         {
             auto profileId = json["profileId"].asString();
+            std::unique_lock<std::mutex> lock(m_idsMutex);
             m_ownerProfileId = profileId;
         }
 
@@ -414,6 +471,7 @@ namespace BrainCloud
 
     void RelayComms::onPONG()
     {
+        std::unique_lock<std::mutex> lock(m_pingMutex);
         if (m_pingInFlight)
         {
             m_pingInFlight = false;
@@ -444,44 +502,10 @@ namespace BrainCloud
 
     void RelayComms::runCallbacks()
     {
-        // Update socket
-        if (m_pSocket)
-        {
-            if (m_pSocket->isConnected())
-            {
-                // Peek messages
-                int packetSize;
-                const uint8_t* pPacketData;
-                while (pPacketData = m_pSocket->peek(packetSize))
-                {
-                    onRecv(pPacketData, packetSize);
-                }
-            }
-            else if (!m_pSocket->isValid())
-            {
-                disconnect();
-                queueErrorEvent("Relay Socket Error: failed to connect");
-            }
-            else
-            {
-                m_pSocket->updateConnection();
-                if (m_pSocket->isConnected())
-                {
-                    m_isSocketConnected = true;
-                    if (m_loggingEnabled)
-                    {
-                        std::cout << "Relay Socket Connected" << std::endl;
-                    }
-                    send(CL2RS_CONNECTION, buildConnectionRequest());
-                }
-            }
-        }
-
         // Perform event callbacks
         {
-            auto eventsCopy = m_events;
-            m_events.clear();
-            for (const auto& evt : eventsCopy)
+            std::unique_lock<std::mutex> lock(m_eventsMutex);
+            for (const auto& evt : m_events)
             {
                 switch (evt.type)
                 {
@@ -511,6 +535,7 @@ namespace BrainCloud
                         break;
                 }
             }
+            m_events.clear();
         }
 
         if (m_connectionType == eRelayConnectionType::UDP)
@@ -524,6 +549,7 @@ namespace BrainCloud
         // Ping. Which also works as an heartbeat
         if (m_isConnected)
         {
+            std::unique_lock<std::mutex> lock(m_pingMutex);
             if (std::chrono::system_clock::now() - m_lastPingTime >= m_pingInterval)
             {
                 sendPing();
@@ -533,21 +559,25 @@ namespace BrainCloud
 
     void RelayComms::queueConnectSuccessEvent(const std::string& jsonString)
     {
+        std::unique_lock<std::mutex> lock(m_eventsMutex);
         m_events.push_back({ EventType::ConnectSuccess, jsonString });
     }
 
     void RelayComms::queueErrorEvent(const std::string& message)
     {
+        std::unique_lock<std::mutex> lock(m_eventsMutex);
         m_events.push_back({ EventType::ConnectFailure, message });
     }
 
     void RelayComms::queueSystemEvent(const std::string& jsonString)
     {
+        std::unique_lock<std::mutex> lock(m_eventsMutex);
         m_events.push_back({ EventType::System, jsonString });
     }
 
     void RelayComms::queueRelayEvent(int netId, const uint8_t* pData, int size)
     {
+        std::unique_lock<std::mutex> lock(m_eventsMutex);
         m_events.push_back({ EventType::Relay });
         auto& evt = m_events.back();
         evt.netId = netId;
