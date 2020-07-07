@@ -215,7 +215,6 @@ add_library(brainCloud STATIC
     include/braincloud/BrainCloudProfanity.h
     include/braincloud/BrainCloudPushNotification.h
     include/braincloud/BrainCloudRedemptionCode.h
-    include/braincloud/BrainCloudRelay.h
     include/braincloud/BrainCloudRTT.h
     include/braincloud/BrainCloudS3Handling.h
     include/braincloud/BrainCloudScript.h
@@ -235,14 +234,9 @@ add_library(brainCloud STATIC
     include/braincloud/IGlobalErrorCallback.h
     include/braincloud/INetworkErrorCallback.h
     include/braincloud/IRewardCallback.h
-    include/braincloud/IRelayCallback.h
-    include/braincloud/IRelayConnectCallback.h
-    include/braincloud/IRelaySystemCallback.h
     include/braincloud/IServerCallback.h
     include/braincloud/OperationParam.h
     include/braincloud/Platform.h
-    include/braincloud/RelayChannel.h
-    include/braincloud/RelayConnectionType.h
     include/braincloud/ServerCall.h
     include/braincloud/ServiceName.h
     include/braincloud/ServiceOperation.h
@@ -259,7 +253,6 @@ add_library(brainCloud STATIC
     include/braincloud/internal/ITCPSocket.h
     include/braincloud/internal/DefaultBrainCloudComms.h
     include/braincloud/internal/JsonUtil.h
-    include/braincloud/internal/RelayComms.h
     include/braincloud/internal/RTTComms.h
     include/braincloud/internal/SaveDataHelper.h
     include/braincloud/internal/StringUtil.h
@@ -307,7 +300,6 @@ add_library(brainCloud STATIC
     src/BrainCloudProfanity.cpp
     src/BrainCloudPushNotification.cpp
     src/BrainCloudRedemptionCode.cpp
-    src/BrainCloudRelay.cpp
     src/BrainCloudRTT.cpp
     src/BrainCloudS3Handling.cpp
     src/BrainCloudScript.cpp
@@ -327,7 +319,6 @@ add_library(brainCloud STATIC
     src/JsonUtil.cpp
     src/OperationParam.cpp
     src/Platform.cpp
-    src/RelayComms.cpp
     src/RTTComms.cpp
     src/SaveDataHelper.cpp
     src/ServerCall.cpp

@@ -153,13 +153,9 @@ namespace BrainCloud
     void RTTComms::runCallbacks()
     {
         _eventQueueMutex.lock();
-        auto eventsCopy = _callbackEventQueue;
-        _callbackEventQueue.clear();
-        _eventQueueMutex.unlock();
-
-        for (int i = 0; i < (int)eventsCopy.size(); ++i)
+        for (int i = 0; i < (int)_callbackEventQueue.size(); ++i)
         {
-            const RTTCallback& callback = eventsCopy[i];
+            const RTTCallback& callback = _callbackEventQueue[i];
             switch (callback._type)
             {
                 case RTTCallbackType::ConnectSuccess:
@@ -190,6 +186,8 @@ namespace BrainCloud
                 }
             }
         }
+        _callbackEventQueue.clear();
+        _eventQueueMutex.unlock();
     }
 
     void RTTComms::registerRTTCallback(const ServiceName& serviceName, IRTTCallback* in_callback)
