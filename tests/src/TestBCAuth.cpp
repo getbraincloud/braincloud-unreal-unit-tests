@@ -201,7 +201,7 @@ TEST_F(TestBCAuth, ResetUniversalIdPasswordAdvanced)
     m_bc->getAuthenticationService()->authenticateUniversal(GetUser(UserA)->m_id, GetUser(UserA)->m_password, true, &tr2);
     tr2.run(m_bc);
 
-    std::string content = "{\"templateId\": \"d-template-id-guid\", \"substitutions\": { \":name\": \"John Doe\",\":resetLink\": \"www.dummuyLink.io\"}, \"categories\": [\"category1\",\"category2\" ]}"; 
+    std::string content = "{\"templateId\": \"8f14c77d-61f4-4966-ab6d-0bee8b13d090\", \"substitutions\": { \":name\": \"John Doe\",\":resetLink\": \"www.dummuyLink.io\"}, \"categories\": [\"category1\",\"category2\" ]}"; 
 
     TestResult tr;
     m_bc->getAuthenticationService()->resetUniversalIdPasswordAdvanced(GetUser(UserA)->m_id, content, &tr);
@@ -225,7 +225,7 @@ TEST_F(TestBCAuth, ResetUniversalIdPasswordAdvancedWithExpiry)
     m_bc->getAuthenticationService()->authenticateUniversal(GetUser(UserA)->m_id, GetUser(UserA)->m_password, true, &tr2);
     tr2.run(m_bc);
 
-    std::string content = "{\"templateId\": \"d-template-id-guid\", \"substitutions\": { \":name\": \"John Doe\",\":resetLink\": \"www.dummuyLink.io\"}, \"categories\": [\"category1\",\"category2\" ]}"; 
+    std::string content = "{\"templateId\": \"8f14c77d-61f4-4966-ab6d-0bee8b13d090\", \"substitutions\": { \":name\": \"John Doe\",\":resetLink\": \"www.dummuyLink.io\"}, \"categories\": [\"category1\",\"category2\" ]}"; 
 
     TestResult tr;
     m_bc->getAuthenticationService()->resetUniversalIdPasswordAdvancedWithExpiry(GetUser(UserA)->m_id, content, 1, &tr);

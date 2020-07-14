@@ -197,7 +197,10 @@ namespace BrainCloud
 		Json::Value message;
 		message[OperationParam::AsyncMatchServiceOwnerId.getValue()] = in_ownerId;
 		message[OperationParam::AsyncMatchServiceMatchId.getValue()] = in_matchId;
+		if(in_pushContent !=NULL)
+		{
 		message[OperationParam::AsyncMatchServicePushMessage.getValue()] = in_pushContent;
+		}
 		message[OperationParam::AsyncMatchServiceMatchSummary.getValue()] = JsonUtil::jsonStringToValue(in_summary);
 
 		ServerCall * sc = new ServerCall(ServiceName::AsyncMatch, ServiceOperation::CompleteMatchWithSummaryData, message, in_callback);
@@ -209,7 +212,10 @@ namespace BrainCloud
 		Json::Value message;
 		message[OperationParam::AsyncMatchServiceOwnerId.getValue()] = in_ownerId;
 		message[OperationParam::AsyncMatchServiceMatchId.getValue()] = in_matchId;
+		if(in_pushContent != NULL)
+		{
 		message[OperationParam::AsyncMatchServicePushMessage.getValue()] = in_pushContent;
+		}
 		message[OperationParam::AsyncMatchServiceMatchSummary.getValue()] = JsonUtil::jsonStringToValue(in_summary);
 
 		ServerCall * sc = new ServerCall(ServiceName::AsyncMatch, ServiceOperation::AbandonMatchWithSummaryData, message, in_callback);

@@ -382,7 +382,7 @@ namespace BrainCloud
 
 	//customEntity
 	const OperationParam OperationParam::CustomEntityServiceEntityType = OperationParam("entityType");
-	const OperationParam OperationParam::CustomEntityServiceData = OperationParam("entityData");
+	const OperationParam OperationParam::CustomEntityServiceData = OperationParam("dataJson");
 	const OperationParam OperationParam::CustomEntityServiceAcl = OperationParam("entityAcl");
 	const OperationParam OperationParam::CustomEntityServiceTimeToLive = OperationParam("timeToLive");
 	const OperationParam OperationParam::CustomEntityServiceIsOwned = OperationParam("isOwned");
@@ -394,6 +394,7 @@ namespace BrainCloud
 	const OperationParam OperationParam::CustomEntityServiceContext = OperationParam("context");
 	const OperationParam OperationParam::CustomEntityServicePageOffset = OperationParam("pageOffset");
 	const OperationParam OperationParam::CustomEntityServiceEntityId = OperationParam("entityId");
+	const OperationParam OperationParam::CustomEntityServiceDeleteCriteria = OperationParam("deleteCriteria");
 	const OperationParam OperationParam::CustomEntityFieldsJson = OperationParam("fieldsJson");
 
 	//chat
