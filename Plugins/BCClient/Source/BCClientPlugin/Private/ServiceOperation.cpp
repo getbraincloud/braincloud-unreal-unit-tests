@@ -472,8 +472,11 @@ const ServiceOperation ServiceOperation::CustomEntityGetPageOffset = ServiceOper
 const ServiceOperation ServiceOperation::CustomEntityGetEntityPage = ServiceOperation("GET_ENTITY_PAGE");
 const ServiceOperation ServiceOperation::CustomEntityGetEntityPageOffset = ServiceOperation("GET_ENTITY_PAGE_OFFSET");
 const ServiceOperation ServiceOperation::ReadEntity = ServiceOperation("READ_ENTITY");
+const ServiceOperation ServiceOperation::IncrementData = ServiceOperation("INCREMENT_DATA");
 const ServiceOperation ServiceOperation::UpdateEntity = ServiceOperation("UPDATE_ENTITY");
 const ServiceOperation ServiceOperation::UpdateEntityFields = ServiceOperation("UPDATE_ENTITY_FIELDS");
+const ServiceOperation ServiceOperation::DeleteEntities = ServiceOperation("DELETE_ENTITIES");
+const ServiceOperation ServiceOperation::UpdateSingletonFields = ServiceOperation("UPDATE_SINGLETON_FIELDS");
 
 bool ServiceOperation::operator==(const ServiceOperation &s) const
 {
