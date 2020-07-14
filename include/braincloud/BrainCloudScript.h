@@ -2,6 +2,7 @@
 
 #pragma once
 
+#include "braincloud/BrainCloudTypes.h"
 #include <string>
 
 #include "braincloud/IServerCallback.h"
