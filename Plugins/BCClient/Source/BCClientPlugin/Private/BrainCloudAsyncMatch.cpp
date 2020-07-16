@@ -182,11 +182,7 @@ void BrainCloudAsyncMatch::abandonMatchWithSummaryData(const FString &ownerId, c
     TSharedRef<FJsonObject> message = MakeShareable(new FJsonObject());
     message->SetStringField(OperationParam::AsyncMatchServiceOwnerId.getValue(), ownerId);
     message->SetStringField(OperationParam::AsyncMatchServiceMatchId.getValue(), matchId);
-
-    if (OperationParam::isOptionalParamValid(pushContent))
-    {
-        message->SetStringField(OperationParam::AsyncMatchServicePushMessage.getValue(), pushContent);
-    }
+    message->SetStringField(OperationParam::AsyncMatchServicePushMessage.getValue(), pushContent);
     message->SetObjectField(OperationParam::AsyncMatchServiceMatchSummary.getValue(), JsonUtil::jsonStringToValue(summary));
     
     ServerCall *sc = new ServerCall(ServiceName::AsyncMatch, ServiceOperation::AbandonMatchWithSummaryData, message, callback);
@@ -198,10 +194,7 @@ void BrainCloudAsyncMatch::completeMatchWithSummaryData(const FString &ownerId, 
     TSharedRef<FJsonObject> message = MakeShareable(new FJsonObject());
     message->SetStringField(OperationParam::AsyncMatchServiceOwnerId.getValue(), ownerId);
     message->SetStringField(OperationParam::AsyncMatchServiceMatchId.getValue(), matchId);
-    if (OperationParam::isOptionalParamValid(pushContent))
-    {
-        message->SetStringField(OperationParam::AsyncMatchServicePushMessage.getValue(), pushContent);
-    }
+    message->SetStringField(OperationParam::AsyncMatchServicePushMessage.getValue(), pushContent);
     message->SetObjectField(OperationParam::AsyncMatchServiceMatchSummary.getValue(), JsonUtil::jsonStringToValue(summary));
 
     ServerCall *sc = new ServerCall(ServiceName::AsyncMatch, ServiceOperation::CompleteMatchWithSummaryData, message, callback);

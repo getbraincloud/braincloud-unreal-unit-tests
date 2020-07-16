@@ -183,7 +183,7 @@ void FOnlineTitleFileBrainCloud::EnumerateFilesSuccess(const FString & jsonData)
         _cachedFileHeaders.Add(fileHeader);
     }
 
-#if ENGINE_MAJOR_VERSION <= 4 && ENGINE_MINOR_VERSION >= 18
+#if ENGINE_MINOR_VERSION >= 18
     OnEnumerateFilesCompleteDelegates.Broadcast(true, TEXT("FOnlineTitleFileBrainCloud"));
 #else
     OnEnumerateFilesCompleteDelegates.Broadcast(false); 
@@ -192,7 +192,7 @@ void FOnlineTitleFileBrainCloud::EnumerateFilesSuccess(const FString & jsonData)
 
 void FOnlineTitleFileBrainCloud::EnumerateFilesFail(int32 returnCode, const FString & jsonData)
 {
-#if ENGINE_MAJOR_VERSION <= 4 && ENGINE_MINOR_VERSION >= 18
+#if ENGINE_MINOR_VERSION >= 18
     OnEnumerateFilesCompleteDelegates.Broadcast(false, TEXT("FOnlineTitleFileBrainCloud"));
 #else
     OnEnumerateFilesCompleteDelegates.Broadcast(false); 

@@ -512,7 +512,6 @@ class BCCLIENTPLUGIN_API OperationParam
 	static const OperationParam CustomEntityServicePageOffset;
 	static const OperationParam CustomEntityServiceFieldsJson;
 	static const OperationParam CustomEntityServiceDataJson;
-	static const OperationParam CustomEntityServiceDeleteCriteria;
 
 	FString getValue() const { return _value; }
 

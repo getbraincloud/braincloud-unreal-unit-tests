@@ -176,7 +176,7 @@ void FOnlineMessageBrainCloud::EnumerateMessagesSuccess(const FString& jsonData)
         FString messageId = FString::FromInt((int64)messageObj->GetNumberField("eventId"));
 
 
-        #if ENGINE_MAJOR_VERSION <= 4 && ENGINE_MINOR_VERSION >= 18
+        #if ENGINE_MINOR_VERSION >= 18
         const TSharedRef <FUniqueNetIdString> sref_fromId = MakeShareable(new FUniqueNetIdString(fromId));
         const TSharedRef <FUniqueNetIdString> sref_messageId = MakeShareable(new FUniqueNetIdString(messageId));
         FOnlineMessageHeader *fOnlineMessageHeader = new FOnlineMessageHeader(sref_fromId, sref_messageId);

@@ -52,7 +52,7 @@ ref class FUWPSocketHelper sealed
   private:
 	int64 Parent;
 };
-#if ENGINE_MAJOR_VERSION <= 4 && ENGINE_MINOR_VERSION <24
+#if ENGINE_MINOR_VERSION <24
 #if PLATFORM_HTML5
 #include "Tickable.h"
 
@@ -151,7 +151,7 @@ class BCCLIENTPLUGIN_API UWebSocketBase : public UObject
 	Windows::Networking::Sockets::MessageWebSocket ^ messageWebSocket;
 	Windows::Storage::Streams::DataWriter ^ messageWriter;
 	FUWPSocketHelper ^ uwpSocketHelper;
-#if ENGINE_MAJOR_VERSION <= 4 && ENGINE_MINOR_VERSION <24	
+#if ENGINE_MINOR_VERSION <24	
 #if PLATFORM_HTML5
 	int mWebSocketRef;
 	bool mConnectSuccess;

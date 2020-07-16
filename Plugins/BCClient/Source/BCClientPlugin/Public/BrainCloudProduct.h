@@ -29,7 +29,7 @@ public:
 	*
 	 * If you need to use it client side, enable 'Allow Currency Calls from Client' on the brainCloud dashboard
 	*/
-#if ENGINE_MAJOR_VERSION <= 4 && ENGINE_MINOR_VERSION >= 22
+#if ENGINE_MINOR_VERSION >= 22
   UE_DEPRECATED("3.2.0", "Warning: Method is recommended to be used in Cloud Code only for security. If you need to use it client side, enable 'Allow Currency Calls from Client' on the brainCloud dashboard.")
 #else
   DEPRECATED("3.2.0", "Warning: Method is recommended to be used in Cloud Code only for security. If you need to use it client side, enable 'Allow Currency Calls from Client' on the brainCloud dashboard.")
@@ -41,7 +41,7 @@ public:
 	*
 	* If you need to use it client side, enable 'Allow Currency Calls from Client' on the brainCloud dashboard
 	*/
-#if ENGINE_MAJOR_VERSION <= 4 && ENGINE_MINOR_VERSION >= 22
+#if ENGINE_MINOR_VERSION >= 22
   UE_DEPRECATED("3.2.0", "Warning: Method is recommended to be used in Cloud Code only for security. If you need to use it client side, enable 'Allow Currency Calls from Client' on the brainCloud dashboard.")
 #else
   DEPRECATED("3.2.0", "Warning: Method is recommended to be used in Cloud Code only for security. If you need to use it client side, enable 'Allow Currency Calls from Client' on the brainCloud dashboard.")
@@ -53,7 +53,7 @@ public:
 	*
 	* If you need to use it client side, enable 'Allow Currency Calls from Client' on the brainCloud dashboard
 	*/
-#if ENGINE_MAJOR_VERSION <= 4 && ENGINE_MINOR_VERSION >= 22
+#if ENGINE_MINOR_VERSION >= 22
   UE_DEPRECATED("3.2.0", "Warning: Method is recommended to be used in Cloud Code only for security. If you need to use it client side, enable 'Allow Currency Calls from Client' on the brainCloud dashboard.")
 #else
   DEPRECATED("3.2.0", "Warning: Method is recommended to be used in Cloud Code only for security. If you need to use it client side, enable 'Allow Currency Calls from Client' on the brainCloud dashboard.")

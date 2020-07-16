@@ -56,19 +56,19 @@ class ONLINESUBSYSTEMBRAINCLOUD_API FOnlineSubsystemBrainCloud : public FOnlineS
     virtual IOnlineChatPtr GetChatInterface() const override;
     virtual IOnlineTurnBasedPtr GetTurnBasedInterface() const override;
 
-#if ENGINE_MAJOR_VERSION <= 4 && ENGINE_MINOR_VERSION >= 22
+#if ENGINE_MINOR_VERSION >= 22
     virtual IOnlineStatsPtr GetStatsInterface() const override;
 #endif
 
-#if ENGINE_MAJOR_VERSION <= 4 && ENGINE_MINOR_VERSION >= 21
+#if ENGINE_MINOR_VERSION >= 21
     virtual IOnlineTournamentPtr GetTournamentInterface() const override;
 #endif
 
-#if ENGINE_MAJOR_VERSION <= 4 && ENGINE_MINOR_VERSION >= 17
+#if ENGINE_MINOR_VERSION >= 17
     virtual FText GetOnlineServiceName() const override;
 #endif
 
-#if ENGINE_MAJOR_VERSION <= 4 && ENGINE_MINOR_VERSION >= 11
+#if ENGINE_MINOR_VERSION >= 11
     virtual IOnlineStoreV2Ptr GetStoreV2Interface() const override;
     virtual IOnlinePurchasePtr GetPurchaseInterface() const override;
 #endif

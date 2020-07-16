@@ -441,7 +441,7 @@ const OperationParam OperationParam::VirtualCurrencyAmount = OperationParam("vcA
 
 //custom entity
 const OperationParam OperationParam::CustomEntityServiceEntityType = OperationParam("entityType");
-const OperationParam OperationParam::CustomEntityServiceJsonEntityData = OperationParam("dataJson");
+const OperationParam OperationParam::CustomEntityServiceJsonEntityData = OperationParam("jsonEntityData");
 const OperationParam OperationParam::CustomEntityServiceAcl = OperationParam("acl");
 const OperationParam OperationParam::CustomEntityServiceTimeToLive = OperationParam("timeToLive");
 const OperationParam OperationParam::CustomEntityServiceEntityId = OperationParam("entityId");
@@ -455,7 +455,6 @@ const OperationParam OperationParam::CustomEntityServiceContext = OperationParam
 const OperationParam OperationParam::CustomEntityServicePageOffset = OperationParam("pageOffset");
 const OperationParam OperationParam::CustomEntityServiceFieldsJson = OperationParam("fieldsJson");
 const OperationParam OperationParam::CustomEntityServiceDataJson = OperationParam("dataJson");
-const OperationParam OperationParam::CustomEntityServiceDeleteCriteria = OperationParam("deleteCriteria");
 
 //app store
 const OperationParam OperationParam::AppStoreId = OperationParam("storeId");
