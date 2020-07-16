@@ -549,7 +549,7 @@ int32 UVaRestJsonObject::DeserializeFromUTF8Bytes(const ANSICHAR* Bytes, int32 S
 {
 	FJSONReader Reader;
 
-#if ENGINE_MINOR_VERSION >= 19
+#if ENGINE_MAJOR_VERSION <= 4 && ENGINE_MINOR_VERSION >= 19
 	// Get destLen
 	int32 DestinationLength = FUTF8ToTCHAR_Convert::ConvertedLength(Bytes, Size);
 	TCHAR* DestinationBuffer = new TCHAR[DestinationLength];

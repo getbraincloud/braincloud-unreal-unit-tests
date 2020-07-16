@@ -8,7 +8,7 @@
 #define MAX_PAYLOAD 1024
 
 #if PLATFORM_UWP
-#if ENGINE_MINOR_VERSION <24
+#if ENGINE_MAJOR_VERSION <= 4 && ENGINE_MINOR_VERSION <24
 #if PLATFORM_HTML5
 #endif
 #endif
@@ -74,7 +74,7 @@ public:
 
 // expose web socket functions
 #if PLATFORM_UWP
-#if ENGINE_MINOR_VERSION <24
+#if ENGINE_MAJOR_VERSION <= 4 && ENGINE_MINOR_VERSION <24
 #if PLATFORM_HTML5
 #endif
 #endif
