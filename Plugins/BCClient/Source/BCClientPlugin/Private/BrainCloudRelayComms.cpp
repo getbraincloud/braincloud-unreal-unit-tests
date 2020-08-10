@@ -1,7 +1,7 @@
 // Copyright 2018 bitHeads, Inc. All Rights Reserved.
 
-#include "BrainCloudRelayComms.h"
 #include "BCClientPluginPrivatePCH.h"
+#include "BrainCloudRelayComms.h"
 
 #include "Serialization/JsonTypes.h"
 #include "Serialization/JsonReader.h"
@@ -278,10 +278,12 @@ void BrainCloudRelayComms::disconnectImpl()
 		m_relayResponse.Empty();
 	}
 
-	delete m_commsPtr;
+	if (m_commsPtr)
+		m_commsPtr->ConditionalBeginDestroy();
 	m_commsPtr = nullptr;
 
-	delete m_connectedSocket;
+	if (m_connectedSocket)
+		m_connectedSocket->ConditionalBeginDestroy();
 	m_connectedSocket = nullptr;
 
 #if PLATFORM_UWP
