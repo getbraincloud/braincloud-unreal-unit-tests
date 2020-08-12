@@ -6,6 +6,7 @@ UENUM(BlueprintType)
 enum class EBCPlatform : uint8
 {
     GOOGLE_PLAY_ANDROID UMETA(DisplayName = "Google Play Android"),
+    AMAZON_ANDROID UMETA(DisplayName = "Amazon Android"),
     BLACKBERRY UMETA(DisplayName = "BlackBerry"),
     FACEBOOK UMETA(DisplayName = "Facebook"),
     IOS UMETA(DisplayName = "iOS"),
