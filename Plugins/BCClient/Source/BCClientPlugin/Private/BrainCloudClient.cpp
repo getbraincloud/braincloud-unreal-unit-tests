@@ -817,7 +817,17 @@ void BrainCloudClient::determineReleasePlatform()
 	else if (platform == TEXT("IOS"))
 		_releasePlatform = BCPlatform::EnumToString(EBCPlatform::IOS);
 	else if (platform == TEXT("Android"))
-		_releasePlatform = BCPlatform::EnumToString(EBCPlatform::GOOGLE_PLAY_ANDROID);
+	{
+		#if PLATFORM_ANDROID
+		if(FAndroidMisc::GetDeviceMake() == TEXT("Amazon"))
+		{
+			_releasePlatform = BCPlatform::EnumToString(EBCPlatform::AMAZON_ANDROID);
+		}
+		else{
+			_releasePlatform = BCPlatform::EnumToString(EBCPlatform::GOOGLE_PLAY_ANDROID);
+		}
+		#endif
+	}
 	else if (platform == TEXT("Linux"))
 		_releasePlatform = BCPlatform::EnumToString(EBCPlatform::LINUX_PLATFORM);
 	else if (platform == TEXT("HTML5"))

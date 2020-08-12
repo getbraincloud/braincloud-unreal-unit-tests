@@ -9,6 +9,8 @@ FString BCPlatform::EnumToString(EBCPlatform platform)
     {
     case EBCPlatform::GOOGLE_PLAY_ANDROID:
         return TEXT("ANG");
+    case EBCPlatform::AMAZON_ANDROID:
+        return TEXT("Amazon");
     case EBCPlatform::BLACKBERRY:
         return TEXT("BB");
     case EBCPlatform::FACEBOOK:

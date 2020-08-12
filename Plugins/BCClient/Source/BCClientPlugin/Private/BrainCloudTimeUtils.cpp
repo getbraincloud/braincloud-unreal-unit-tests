@@ -26,3 +26,4 @@ FDateTime BrainCloudTimeUtils::UTCTimeToLocalTime (FDateTime utcDate)
 {
     return utcDate.Now();
 }
+
