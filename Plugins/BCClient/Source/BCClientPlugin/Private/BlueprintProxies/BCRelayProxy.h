@@ -27,6 +27,23 @@ public:
 	UFUNCTION(BlueprintCallable, Category = "BrainCloud|Relay")
 	static uint8 NetId(UBrainCloudWrapper *brainCloudWrapper);
 
+	/**
+	 * Get the lobby's owner profile Id.
+	 */
+	// const FString &getOwnerProfileId(UBrainCloudWrapper *brainCloudWrapper) const;
+
+	/**
+	 * Returns the profileId associated with a netId.
+	 */
+	UFUNCTION(BlueprintCallable, Category = "BrainCloud|Relay")
+	const FString &GetProfileIdForNetId(UBrainCloudWrapper *brainCloudWrapper, int in_netId) const;
+
+	/**
+	 * Returns the netId associated with a profileId.
+	 */
+	UFUNCTION(BlueprintCallable, Category = "BrainCloud|Relay")
+	int GetNetIdForProfileId(UBrainCloudWrapper *brainCloudWrapper, const FString &in_profileId) const;
+
 	/** 
  	* Start off a connection, based off connection type to brainClouds Relay Servers.  
 	* Connect options come in from "ROOM_ASSIGNED" | "ROOM_READY" lobby callback
@@ -48,6 +65,7 @@ public:
  	*/
 	UFUNCTION(BlueprintCallable, Category = "BrainCloud|Relay")
 	static void Disconnect(UBrainCloudWrapper *brainCloudWrapper);
+
 	/** 
  	* Is Connected
  	*/
@@ -63,13 +81,36 @@ public:
 	/** 	
  	* Send byte array representation of data
 	* @param in_message : message to be sent
-    * @param to_netId : the net id to send to, RelayComms.TO_ALL_PLAYERS to relay to all
+    * @param to_netId : the net id to send to, -1 to relay to all
 	* @param in_reliable : send this reliably or not
 	* @param in_ordered : received this ordered or not
 	* @param in_channel : 0,1,2,3 (max of four channels)
  	*/
 	UFUNCTION(BlueprintCallable, Category = "BrainCloud|Relay")
-	static void Send(UBrainCloudWrapper *brainCloudWrapper, const TArray<uint8> &in_message, const uint8 to_netId, bool in_reliable = true, bool in_ordered = true, int in_channel = 0);
+	static void Send(UBrainCloudWrapper *brainCloudWrapper, const TArray<uint8> &in_message, const int32 to_netId, bool in_reliable = true, bool in_ordered = true, int in_channel = 0);
+
+	/**
+	 * Send a packet to any players by using a mask
+	 *
+	 * @param in_data : message to be sent
+	 * @param playerMask Mask of the players to send to. 0001 = netId 0, 0010 = netId 1, etc. If you pass ALL_PLAYER_MASK you will be included and you will get an echo for your message. Use sendToAll instead, you will be filtered out. You can manually filter out by : ALL_PLAYER_MASK &= ~(1 << myNetId)
+	 * @param reliable Send this reliable or not.
+	 * @param ordered Receive this ordered or not.
+	 * @param channel One of: (CHANNEL_HIGH_PRIORITY_1, CHANNEL_HIGH_PRIORITY_2, CHANNEL_NORMAL_PRIORITY, CHANNEL_LOW_PRIORITY)
+	 */
+	// UFUNCTION(BlueprintCallable, Category = "BrainCloud|Relay")
+	// bool SendToPlayers(UBrainCloudWrapper *brainCloudWrapper, const TArray<uint8> &in_data, const uint64 in_playerMask, bool in_reliable = true, bool in_ordered = true, int in_channel = 0);
+
+	/**
+	 * Send a packet to all except yourself
+	 *
+	 * @param in_data : message to be sent
+	 * @param reliable Send this reliable or not.
+	 * @param ordered Receive this ordered or not.
+	 * @param channel One of: (CHANNEL_HIGH_PRIORITY_1, CHANNEL_HIGH_PRIORITY_2, CHANNEL_NORMAL_PRIORITY, CHANNEL_LOW_PRIORITY)
+	 */
+	// UFUNCTION(BlueprintCallable, Category = "BrainCloud|Relay")
+	// bool SendToAll(UBrainCloudWrapper *brainCloudWrapper, const TArray<uint8> &in_data, bool in_reliable = true, bool in_ordered = true, int in_channel = 0);
 
 	/** 
  	* Set the ping interval.
