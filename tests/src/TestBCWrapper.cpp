@@ -235,5 +235,43 @@ TEST_F(TestBCWrapper, SmartSwitchUniversalToEmail)
 	#endif
 }
 
+TEST_F(TestBCWrapper, ReInit)
+{
+	//case 1 multiple inits
+	int initCounter = 1;
+
+	m_bcWrapper->initialize(m_serverUrl.c_str(), m_secret.c_str(), m_appId.c_str(), m_version.c_str(), "wrapper", "unittest");
+	assert(initCounter == 1);
+	initCounter++;
+
+	m_bcWrapper->initialize(m_serverUrl.c_str(), m_secret.c_str(), m_appId.c_str(), m_version.c_str(), "wrapper", "unittest");
+	assert(initCounter == 2);
+	initCounter++;
+
+	m_bcWrapper->initialize(m_serverUrl.c_str(), m_secret.c_str(), m_appId.c_str(), m_version.c_str(), "wrapper", "unittest");
+	assert(initCounter == 3);
+	initCounter++;
+
+	//case 2 
+	//auth
+	TestResult tr1;
+    m_bcWrapper->authenticateAnonymous(&tr1);
+    tr1.run(m_bc);
+
+	//call
+	TestResult tr2;
+    m_bc->getTimeService()->readServerTime(&tr2);
+    tr2.run(m_bc);
+
+	//reinit
+	m_bcWrapper->initialize(m_serverUrl.c_str(), m_secret.c_str(), m_appId.c_str(), m_version.c_str(), "wrapper", "unittest");
+
+	//call - expect failure no session
+	TestResult tr3;
+    m_bc->getTimeService()->readServerTime(&tr3);
+    tr3.runExpectFail(m_bc, HTTP_FORBIDDEN, NO_SESSION);
+}
+
+
 #endif
 
