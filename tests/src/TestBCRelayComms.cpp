@@ -135,7 +135,7 @@ static void relayFullFlow(BrainCloudClient* bc, eRelayConnectionType connectionT
     {
         TestResult tr;
         vector<std::string> otherUserCxIds;
-        bc->getLobbyService()->findOrCreateLobby("READY_START", 0, 1, "{\"strategy\":\"ranged-absolute\",\"alignment\":\"center\",\"ranges\":[1000]}", "{}", otherUserCxIds, "{}", true, "{}", "all", &tr);
+        bc->getLobbyService()->findOrCreateLobby("READY_START_V2", 0, 1, "{\"strategy\":\"ranged-absolute\",\"alignment\":\"center\",\"ranges\":[1000]}", "{}", otherUserCxIds, "{}", true, "{}", "all", &tr);
         tr.run(bc);
     }
 
