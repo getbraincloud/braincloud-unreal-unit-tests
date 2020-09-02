@@ -3,6 +3,9 @@
 #include "braincloud/reason_codes.h"
 #include "braincloud/http_codes.h"
 #include "braincloud/IRTTCallback.h"
+#include "braincloud/IRelayConnectCallback.h"
+#include "braincloud/IRelayCallback.h"
+#include "braincloud/IRelaySystemCallback.h"
 
 #include <chrono>
 #include <thread>
