@@ -167,6 +167,7 @@ namespace BrainCloud
 
     void BrainCloudClient::initialize(const char * in_serverURL, const char * in_secretKey, const char * in_appId, const char * in_appVersion)
     {
+        resetCommunication();
         std::string error = "";
         if (in_serverURL == NULL || strlen(in_serverURL) <= 0)
             error = "serverURL was null or empty";
@@ -200,6 +201,7 @@ namespace BrainCloud
 
     void BrainCloudClient::initializeWithApps(const char * in_serverURL, const char * in_defaultAppId, const std::map<std::string, std::string>& in_secretMap, const char * in_appVersion)
     {
+        resetCommunication();
         std::string error = "";
         if (in_serverURL == NULL || strlen(in_serverURL) <= 0)
             error = "serverURL was null or empty";
