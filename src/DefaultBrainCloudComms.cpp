@@ -47,6 +47,7 @@ namespace BrainCloud
 
 	void DefaultBrainCloudComms::initialize(const char * serverURL, const char * appId, const char * secretKey)
 	{
+		resetCommunication();
         {
             _serverUrl = serverURL;
             size_t index = _serverUrl.find("/dispatcherv2");
@@ -680,6 +681,7 @@ namespace BrainCloud
 	{
 		_isAuthenticated = false;
 		_sessionId.clear();
+		_packetId = 0;
 
 		resetErrorCache();
 

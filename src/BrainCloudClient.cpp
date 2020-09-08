@@ -22,7 +22,7 @@ namespace BrainCloud
             "Singleton usage is disabled. If called by mistake, use your own variable that holds an instance of the bcWrapper/bcClient.";
 
     BrainCloudClient * BrainCloudClient::_instance = NULL;
-    std::string BrainCloudClient::s_brainCloudClientVersion = "4.5.5";
+    std::string BrainCloudClient::s_brainCloudClientVersion = "4.5.6";
     const char* BC_SERVER_URL = "https://sharedprod.braincloudservers.com/dispatcherv2"; 
 
     /**
@@ -31,6 +31,7 @@ namespace BrainCloud
     BrainCloudClient::BrainCloudClient() :
         _brainCloudComms(IBrainCloudComms::create(this)),
         _rttComms(new RTTComms(this)),
+        _relayComms(new RelayComms(this)),
         _asyncMatchService(new BrainCloudAsyncMatch(this)),
         _authenticationService(new BrainCloudAuthentication(this)),
         _chatService(new BrainCloudChat(this)),
@@ -77,10 +78,12 @@ namespace BrainCloud
     {
         //needed this here otherwise out of scope compiler error
         _rttService = new BrainCloudRTT(_rttComms, this);
+        _relayService = new BrainCloudRelay(_relayComms, this);
     }
 
     BrainCloudClient::~BrainCloudClient()
     {
+        delete _relayService;
         delete _rttService;
         delete _tournamentService;
         delete _customEntityService;
@@ -121,6 +124,7 @@ namespace BrainCloud
         delete _chatService;
         delete _authenticationService;
         delete _asyncMatchService;
+        delete _relayComms;
         delete _rttComms;
         delete _brainCloudComms;
     }
@@ -163,10 +167,16 @@ namespace BrainCloud
         {
             _rttComms->initialize();
         }
+
+        if (_relayComms)
+        {
+            _relayComms->initialize();
+        }
     }
 
     void BrainCloudClient::initialize(const char * in_serverURL, const char * in_secretKey, const char * in_appId, const char * in_appVersion)
     {
+        resetCommunication();
         std::string error = "";
         if (in_serverURL == NULL || strlen(in_serverURL) <= 0)
             error = "serverURL was null or empty";
@@ -200,6 +210,7 @@ namespace BrainCloud
 
     void BrainCloudClient::initializeWithApps(const char * in_serverURL, const char * in_defaultAppId, const std::map<std::string, std::string>& in_secretMap, const char * in_appVersion)
     {
+        resetCommunication();
         std::string error = "";
         if (in_serverURL == NULL || strlen(in_serverURL) <= 0)
             error = "serverURL was null or empty";
@@ -233,11 +244,30 @@ namespace BrainCloud
         _authenticationService->initialize(in_profileId, in_anonymousId);
     }
 
-    void BrainCloudClient::runCallbacks()
+
+    void BrainCloudClient::runCallbacks(eBrainCloudUpdateType updateType)
     {
-        _brainCloudComms->runCallbacks();
-        _lobbyService->runPingCallbacks();
-        _rttComms->runCallbacks();
+        switch (updateType)
+        {
+            case eBrainCloudUpdateType::REST:
+                _brainCloudComms->runCallbacks();
+                break;
+            case eBrainCloudUpdateType::PING:
+                _lobbyService->runPingCallbacks();
+                break;
+            case eBrainCloudUpdateType::RTT:
+                _rttComms->runCallbacks();
+                break;
+            case eBrainCloudUpdateType::RS:
+                _relayComms->runCallbacks();
+                break;
+            case eBrainCloudUpdateType::ALL:
+                _brainCloudComms->runCallbacks();
+                _lobbyService->runPingCallbacks();
+                _rttComms->runCallbacks();
+                _relayComms->runCallbacks();
+                break;
+        }
     }
 
     void BrainCloudClient::registerEventCallback(IEventCallback *in_eventCallback)
@@ -295,6 +325,7 @@ namespace BrainCloud
         _brainCloudComms->enableLogging(shouldEnable);
         _lobbyService->enableLogging(shouldEnable);
         _rttComms->enableLogging(shouldEnable);
+        _relayComms->enableLogging(shouldEnable);
     }
 
     /**
@@ -312,6 +343,7 @@ namespace BrainCloud
 
     void BrainCloudClient::resetCommunication()
     {
+        _relayComms->resetCommunication();
         _rttComms->resetCommunication();
         _brainCloudComms->resetCommunication();
         _brainCloudComms->setSessionId("");
@@ -320,6 +352,7 @@ namespace BrainCloud
 
     void BrainCloudClient::shutdown()
     {
+        _relayComms->shutdown();
         _rttComms->shutdown();
         _brainCloudComms->shutdown();
         _brainCloudComms->setSessionId("");
@@ -333,7 +366,7 @@ namespace BrainCloud
 
     bool BrainCloudClient::isInitialized()
     {
-        return _brainCloudComms->isInitialized() && _rttComms->isInitialized();
+        return _brainCloudComms->isInitialized() && _rttComms->isInitialized() && _relayComms->isInitialized();
     }
 
     void BrainCloudClient::setImmediateRetryOnError(bool value)
