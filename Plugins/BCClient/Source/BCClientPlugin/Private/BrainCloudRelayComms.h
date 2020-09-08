@@ -40,24 +40,36 @@ class BrainCloudRelayComms
 public:
 	static const int MAX_PACKETSIZE = 1024;
 
-	static const uint8 MAX_PLAYERS = 128;
-	static const uint8 INVALID_NET_ID = MAX_PLAYERS;
+	static const int MAX_PLAYERS = 40;
+	static const int INVALID_NET_ID = MAX_PLAYERS;
 
-	static const uint8 CL2RS_CONNECTION = 129;
-	static const uint8 CL2RS_DISCONNECT = 130;
-	static const uint8 CL2RS_RELAY = 131;
-	static const uint8 CL2RS_PING = 133;
-	static const uint8 RS2CL_PONG = CL2RS_PING;
-	static const uint8 CL2RS_RSMG_ACKNOWLEDGE = 134;
-	static const uint8 CL2RS_ACKNOWLEDGE = 135;
+	// Messages sent from Client to Relay-Server
+	static const int CL2RS_CONNECT = 0;
+	static const int CL2RS_DISCONNECT = 1;
+	static const int CL2RS_RELAY = 2;
+	static const int CL2RS_ACK = 3;
+	static const int CL2RS_PING = 4;
+	static const int CL2RS_RSMG_ACK = 5;
 
-	static const uint8 TO_ALL_PLAYERS = CL2RS_RELAY;
+	// Messages sent from Relay-Server to Client
+	static const int RS2CL_RSMG = 0;
+	static const int RS2CL_DISCONNECT = 1;
+	static const int RS2CL_RELAY = 2;
+	static const int RS2CL_ACK = 3;
+	static const int RS2CL_PONG = 4;
+
+	static const int MAX_PACKET_ID = 0xFFF;
+
+	static const uint64 TO_ALL_PLAYERS = 0x000000FFFFFFFFFF;
 
 	BrainCloudRelayComms(BrainCloudClient *client);
 	~BrainCloudRelayComms();
 
 	int32 ping();
 	uint8 netId();
+	const FString &getOwnerProfileId() const;
+	const FString &getProfileIdForNetId(int in_netId) const;
+	int getNetIdForProfileId(const FString &in_profileId) const;
 
 	void connect(BCRelayConnectionType in_connectionType, const FString &in_connectOptionsJson, IServerCallback *callback);
 	void connect(BCRelayConnectionType in_connectionType, const FString &in_connectOptionsJson, UBCRelayProxy *callback);
@@ -67,7 +79,7 @@ public:
 	void registerDataCallback(UBCBlueprintRelayCallProxyBase *callback);
 	void deregisterDataCallback();
 
-	bool send(const TArray<uint8> &in_message, const uint8 in_target, bool in_reliable = true, bool in_ordered = true, int in_channel = 0);
+	void sendRelay(const TArray<uint8> &in_data, const uint64 in_playerMask, bool in_reliable = true, bool in_ordered = true, int in_channel = 0);
 	void setPingInterval(float in_interval);
 
 	void RunCallbacks();
@@ -88,6 +100,7 @@ public:
 	void webSocket_OnError(const FString &in_error);
 
 private:
+	void send(const TArray<uint8> &in_data, const uint8 in_controlByte);
 	void connectHelper(BCRelayConnectionType in_connectionType, const FString &in_connectOptionsJson);
 	void startReceivingRSConnectionAsync();
 	TArray<uint8> concatenateByteArrays(TArray<uint8> in_bufferA, TArray<uint8> in_bufferB);
@@ -121,6 +134,7 @@ private:
 	double m_sentPing;
 	int16 m_ping;
 	short m_netId;
+	FString m_ownerProfileId;
 
 	BCRelayConnectionType m_connectionType;
 	TMap<FString, FString> m_connectOptions;
@@ -131,7 +145,10 @@ private:
 	
 	const int SIZE_OF_LENGTH_PREFIX_BYTE_ARRAY = 2;
     const int CONTROL_BYTE_HEADER_LENGTH = 1;
-    const int SIZE_OF_RELIABLE_FLAGS = 2;
+
+	TMap<FString, int> m_profileIdToNetId;
+	TMap<int, FString> m_netIdToProfileId;
+	TMap<uint64, int> m_sendPacketId;
 };
 
 struct RelayMessage

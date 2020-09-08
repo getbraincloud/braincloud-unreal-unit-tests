@@ -1,7 +1,7 @@
 // Copyright 2018 bitHeads, Inc. All Rights Reserved.
 
-#include "BrainCloudClient.h"
 #include "BCClientPluginPrivatePCH.h"
+#include "BrainCloudClient.h"
 
 #include "GameDelegates.h"
 #include "BrainCloudComms.h"
@@ -20,7 +20,7 @@
 #include "BCPlatform.h"
 
 // Define all static member variables.
-FString BrainCloudClient::s_brainCloudClientVersion = TEXT("4.4.1");
+FString BrainCloudClient::s_brainCloudClientVersion = TEXT("4.5.6");
 
 ////////////////////////////////////////////////////
 // (De)Constructors
@@ -784,7 +784,7 @@ BrainCloudRelay *BrainCloudClient::getRelayService()
 {
 	if (_relayService == nullptr)
 	{
-		_relayService = new BrainCloudRelay(_brainCloudRelayComms);
+		_relayService = new BrainCloudRelay(this, _brainCloudRelayComms);
 	}
 	return _relayService;
 }
