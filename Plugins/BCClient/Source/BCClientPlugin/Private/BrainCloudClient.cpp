@@ -98,6 +98,7 @@ void BrainCloudClient::initialize(
 	const FString &appId,
 	const FString &appVersion)
 {
+	resetCommunication();
 	FString error = "";
 	if (serverUrl.IsEmpty())
 		error = "serverURL was null or empty";
@@ -135,6 +136,7 @@ void BrainCloudClient::initializeWithApps(
 	const TMap<FString, FString> &secretMap,
 	const FString &appVersion)
 {
+	resetCommunication();
 	const FString &newAppId = secretMap[appId];
 	FString error = "";
 	if (serverUrl.IsEmpty())

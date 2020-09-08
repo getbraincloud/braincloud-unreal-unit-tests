@@ -1,7 +1,7 @@
 // Copyright 2018 bitHeads, Inc. All Rights Reserved.
 
-#include "BrainCloudComms.h"
 #include "BCClientPluginPrivatePCH.h"
+#include "BrainCloudComms.h"
 
 #include "IServerCallback.h"
 #include "IEventCallback.h"
@@ -901,6 +901,7 @@ void BrainCloudComms::ResetCommunication()
 	_queueMutex.Unlock();
 	_isAuthenticated = false;
 	_sessionId = TEXT("");
+	_packetId = 0;
 	ResetErrorCache();
 	_waitingForRetry = false;
 
