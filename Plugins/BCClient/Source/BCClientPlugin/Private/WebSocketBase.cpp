@@ -600,6 +600,7 @@ bool UWebSocketBase::ProcessHeader(unsigned char **p, unsigned char *end)
 	for (auto &it : mHeaderMap)
 	{
 		std::string strKey = TCHAR_TO_ANSI(*(it.Key));
+		strKey += ":";
 		std::string strValue = TCHAR_TO_ANSI(*(it.Value));
 
 		if (lws_add_http_header_by_name(mlws, (const unsigned char *)strKey.c_str(), (const unsigned char *)strValue.c_str(), (int)strValue.size(), p, end))

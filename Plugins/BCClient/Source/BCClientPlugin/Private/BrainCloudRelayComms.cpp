@@ -1,11 +1,12 @@
 // Copyright 2018 bitHeads, Inc. All Rights Reserved.
 
-#include "BrainCloudRelayComms.h"
 #include "BCClientPluginPrivatePCH.h"
+#include "BrainCloudRelayComms.h"
 
 #include "Serialization/JsonTypes.h"
 #include "Serialization/JsonReader.h"
 #include "Serialization/JsonSerializer.h"
+#include "GenericPlatform/GenericPlatformProperties.h"
 
 #include "JsonUtil.h"
 #include "BCBlueprintRelayCallProxyBase.h"
@@ -53,6 +54,9 @@ static const struct lws_extension extsRS[] = {
 	 "deflate_frame"},
 	{NULL, NULL, NULL /* terminator */} };
 #endif
+
+static const int RELIABLE_BIT = 0x8000;
+static const int ORDERED_BIT = 0x4000;
 
 BrainCloudRelayComms::BrainCloudRelayComms(BrainCloudClient *client)
 	: m_client(client)
@@ -278,10 +282,12 @@ void BrainCloudRelayComms::disconnectImpl()
 		m_relayResponse.Empty();
 	}
 
-	delete m_commsPtr;
+	if (m_commsPtr)
+		m_commsPtr->ConditionalBeginDestroy();
 	m_commsPtr = nullptr;
 
-	delete m_connectedSocket;
+	if (m_connectedSocket)
+		m_connectedSocket->ConditionalBeginDestroy();
 	m_connectedSocket = nullptr;
 
 #if PLATFORM_UWP
@@ -313,28 +319,104 @@ void BrainCloudRelayComms::disconnectImpl()
 	m_ping = 999;
 }
 
+static uint16 toBigEndian(uint16 val)
+{
+	if (!FGenericPlatformProperties::IsLittleEndian())
+		return val;
+
+	return (uint16)(((val >> 8) & 0x00FF) |
+		            ((val << 8) & 0xFF00));
+}
+
+void BrainCloudRelayComms::send(const TArray<uint8> &in_data, const uint8 in_controlByte)
+{
+	if (m_connectedSocket == nullptr)
+	{
+		return;
+	}
+
+	// [dsl] So.. many.. array reallocations
+	TArray<uint8> header;
+	header.Add(in_controlByte);
+    TArray<uint8> toSendData = concatenateByteArrays(header, in_data);
+	toSendData = appendSizeBytes(toSendData);
+	m_connectedSocket->SendData(toSendData);
+}
+
 // sends pure in_data
-bool BrainCloudRelayComms::send(const TArray<uint8> &in_message, const uint8 in_target, 
+void BrainCloudRelayComms::sendRelay(const TArray<uint8> &in_data, const uint64 in_playerMask, 
 								bool in_reliable /*= true*/, bool in_ordered/* = true*/, int in_channel/* = 0*/)
 {
-	bool bMessageSent = false;
 	// early return
 	if (m_connectedSocket == nullptr)
 	{
-		return bMessageSent;
+		return;
 	}
 
-	// add control header to message
-	TArray<uint8> header = appendHeaderData(in_target);
+	if (!m_bIsConnected)
+	{
+		return;
+	}
 
-	// append header to message (HEADER|MESSAGE)
-    TArray<uint8> toReturn = concatenateByteArrays(header, in_message);
+	// Allocate buffer
+	auto totalSize = in_data.Num() + 11;
+	TArray<uint8> toSendData;
+	toSendData.SetNum(totalSize);
 
-	// append the size (SIZE|HEADER|MESSAGE)
-	TArray<uint8> toSendData = appendSizeBytes(toReturn);
+	// Size
+	uint16 len = toBigEndian((uint16)totalSize);
+	memcpy(toSendData.GetData(), &len, 2);
+
+	// NetId
+	toSendData[2] = (uint8)CL2RS_RELAY;
+
+	// Reliable header
+	uint16 rh = 0;
+	if (in_reliable) rh |= RELIABLE_BIT;
+	if (in_ordered) rh |= ORDERED_BIT;
+	rh |= ((uint16)in_channel << 12) & 0x3000;
+
+	// Store inverted player mask
+	uint64 playerMask = 0;
+	for (uint64 i = 0, len = (uint64)MAX_PLAYERS; i < len; ++i)
+	{
+		playerMask |= ((in_playerMask >> ((uint64)MAX_PLAYERS - i - 1)) & 1) << i;
+	}
+	playerMask = (playerMask << 8) & 0x0000FFFFFFFFFF00;
+
+	// AckId without packet id
+	uint64 ackIdWithoutPacketId = (((uint64)rh << 48) & 0xFFFF000000000000) | playerMask;
+
+	// Packet Id
+	int packetId = 0;
+	if (m_sendPacketId.Contains(ackIdWithoutPacketId))
+	{
+		packetId = m_sendPacketId[ackIdWithoutPacketId];
+	}
+	else
+	{
+		m_sendPacketId.Add(ackIdWithoutPacketId, packetId);
+	}
+	m_sendPacketId[ackIdWithoutPacketId] = (packetId + 1) & MAX_PACKET_ID;
+
+	// Add packet id to the header, then encode
+	rh |= packetId;
+
+	uint16 rhBE = toBigEndian((uint16)rh);
+	uint16 playerMask0BE = toBigEndian((uint16)((playerMask >> 32) & 0xFFFF));
+	uint16 playerMask1BE = toBigEndian((uint16)((playerMask >> 16) & 0xFFFF));
+	uint16 playerMask2BE = toBigEndian((uint16)((playerMask)       & 0xFFFF));
+	memcpy(toSendData.GetData() + 3, &rhBE, 2);
+	memcpy(toSendData.GetData() + 5, &playerMask0BE, 2);
+	memcpy(toSendData.GetData() + 7, &playerMask1BE, 2);
+	memcpy(toSendData.GetData() + 9, &playerMask2BE, 2);
+
+	// Rest of data
+	memcpy(toSendData.GetData() + 11, in_data.GetData(), in_data.Num());
 
 	// SEND IT
-	bMessageSent = m_connectedSocket->SendData(toSendData);
+	m_connectedSocket->SendData(toSendData);
+
 	/*
 	if (in_target != CL2RS_PING && bMessageSent && m_client->isLoggingEnabled())
 	{
@@ -346,7 +428,6 @@ bool BrainCloudRelayComms::send(const TArray<uint8> &in_message, const uint8 in_
 												header.Num(), in_message.Num(), toSendData.Num() );
 	}
 	*/
-	return bMessageSent;
 }
 
 void BrainCloudRelayComms::setPingInterval(float in_interval)
@@ -362,6 +443,27 @@ int32 BrainCloudRelayComms::ping()
 uint8 BrainCloudRelayComms::netId()
 {
 	return m_netId;
+}
+
+const FString &BrainCloudRelayComms::getOwnerProfileId() const
+{
+	return m_ownerProfileId;
+}
+
+const FString &BrainCloudRelayComms::getProfileIdForNetId(int in_netId) const
+{
+	if (!m_netIdToProfileId.Contains(in_netId))
+	{
+		static FString empty;
+		return empty;
+	}
+	return m_netIdToProfileId[in_netId];
+}
+
+int BrainCloudRelayComms::getNetIdForProfileId(const FString &in_profileId) const
+{
+	if (!m_profileIdToNetId.Contains(in_profileId)) return INVALID_NET_ID;
+	return m_profileIdToNetId[in_profileId];
 }
 
 void BrainCloudRelayComms::connectHelper(BCRelayConnectionType in_connectionType, const FString &in_connectOptionsJson)
@@ -457,6 +559,7 @@ TArray<uint8> BrainCloudRelayComms::buildConnectionRequest()
 	json->SetStringField("profileId", m_client->getProfileId());
 	json->SetStringField("lobbyId", m_connectOptions["lobbyId"]);
 	json->SetStringField("passcode", m_connectOptions["passcode"]);
+	json->SetStringField("version", m_client->getBrainCloudClientVersion());
 
 	// serialize
 	FString response;
@@ -482,6 +585,7 @@ void BrainCloudRelayComms::sendPing()
 	send(dataArr, CL2RS_PING);
 }
 
+// [dsl] The function says "append", but it prepends...
 TArray<uint8> BrainCloudRelayComms::appendSizeBytes(TArray<uint8> in_message)
 {
     // size of in_data is the incoming in_data, plus the two that we're adding
@@ -496,6 +600,10 @@ void BrainCloudRelayComms::processRegisteredListeners(const FString &in_service,
 {
 	// process connect callback to app
 	bool connected = isConnected();
+
+	// [dsl] "connect", this is used twice here. Quite confusing. Used for 2 different purpose!
+	// First case hit, 40 lines bellow, after socket got openned.
+	// Second case, is when receiving connect comfirmation from server.
 	if (in_operation == TEXT("connect") && connected && (m_appCallback != nullptr || m_appCallbackBP != nullptr))
 	{
 		// do the callbacks
@@ -530,7 +638,7 @@ void BrainCloudRelayComms::processRegisteredListeners(const FString &in_service,
 
 	if (!connected && in_operation == TEXT("connect"))
 	{
-		send(buildConnectionRequest(), CL2RS_CONNECTION);
+		send(buildConnectionRequest(), CL2RS_CONNECT);
 	}
 
 	if (in_data.Num() > 0)
@@ -608,6 +716,8 @@ void BrainCloudRelayComms::setupWebSocket(const FString &in_url)
 	m_connectedSocket->Connect(in_url, headersMap);
 }
 
+// [dsl] This does not append anything. It builts an array of 3 bytes [controlByte, 0, 0]
+// None of this makes sense!
 TArray<uint8> BrainCloudRelayComms::appendHeaderData(uint8 in_controlByte)
 {
 	TArray<uint8> header;
@@ -683,64 +793,72 @@ void BrainCloudRelayComms::webSocket_OnError(const FString &in_message)
 
 void BrainCloudRelayComms::onRecv(TArray<uint8> in_data)
 {
-	// the length prefix should be removed already 
-	if (in_data.Num() > 0)
+	// the length prefix should be removed already [dsl] TODO, keep it all here. Too many array manipulation
+	if (in_data.Num() < 1)
 	{
-		uint8 controlByte = in_data[0]; // first should be the control byte
-		if (controlByte == RS2CL_PONG)
-        {
-			m_ping = (FPlatformTime::Seconds() - m_sentPing) * 1000;
-			if (m_client->isLoggingEnabled())
-				UE_LOG(LogBrainCloudComms, Log, TEXT("Relay OnRecv Ping: %d"), ping());
-        }
-		else
+    	FScopeLock Lock(&m_relayMutex);
+    	m_relayResponse.Add(RelayMessage(ServiceName::Relay.getValue().ToLower(), "error", UBrainCloudWrapper::buildErrorJson(403, ReasonCodes::RS_CLIENT_ERROR, "Relay: Packet should be at least 3 bytes"), TArray<uint8>()));
+		return;
+	}
+
+	uint8 controlByte = in_data[0]; // first should be the control byte
+	if (controlByte == RS2CL_DISCONNECT)
+	{
+    	FScopeLock Lock(&m_relayMutex);
+    	m_relayResponse.Add(RelayMessage(ServiceName::Relay.getValue().ToLower(), "error", UBrainCloudWrapper::buildErrorJson(403, ReasonCodes::RS_CLIENT_ERROR, "Relay: Disconnected by server"), TArray<uint8>()));
+	}
+	else if (controlByte == RS2CL_PONG)
+	{
+		m_ping = (FPlatformTime::Seconds() - m_sentPing) * 1000;
+		if (m_client->isLoggingEnabled())
+			UE_LOG(LogBrainCloudComms, Log, TEXT("Relay OnRecv Ping: %d"), ping());
+	}
+	else
+	{
+		int headerLength = CONTROL_BYTE_HEADER_LENGTH;
+
+		if (controlByte == RS2CL_RSMG) headerLength += 2;
+		else if (controlByte == RS2CL_RELAY) headerLength += 8;
+			
+		TArray<uint8> data = stripByteArray(in_data, headerLength);
+
+		//if (m_client->isLoggingEnabled())
+		//	UE_LOG(LogBrainCloudComms, Log, TEXT("Relay OnRecv: %s"), *BrainCloudRelay::BCBytesToString(data.GetData(), data.Num()));
+
+		// if netId is not setup yet
+		// [dsl] TODO don't do this here... queue a "rsmg" event instead and deal with it in the update loop
+		if (controlByte == RS2CL_RSMG)
 		{
-			// followed sometimes by the reliable flags 
-			bool bOppRSMG =  controlByte < MAX_PLAYERS ||
-                controlByte == CL2RS_CONNECTION ||
-                controlByte == CL2RS_RELAY;
+			FString parsedMessage = BrainCloudRelay::BCBytesToString(data.GetData(), data.Num());
+			
+			TSharedRef<TJsonReader<TCHAR>> reader = TJsonReaderFactory<TCHAR>::Create(parsedMessage);
+			TSharedPtr<FJsonObject> jsonPacket = MakeShareable(new FJsonObject());
 
-            //bool bUDPAcknowledge = isReceivedServerAck(controlByte);
-            int headerLength = CONTROL_BYTE_HEADER_LENGTH;
-            if (bOppRSMG)
-                headerLength += SIZE_OF_RELIABLE_FLAGS;
-				
-			TArray<uint8> data = stripByteArray(in_data, headerLength);
-
-			//if (m_client->isLoggingEnabled())
-			//	UE_LOG(LogBrainCloudComms, Log, TEXT("Relay OnRecv: %s"), *BrainCloudRelay::BCBytesToString(data.GetData(), data.Num()));
-
-			// if netId is not setup yet
-			if (m_netId < 0)
+			bool res = FJsonSerializer::Deserialize(reader, jsonPacket);
+			if (res && jsonPacket->HasField("netId") && jsonPacket->HasField("profileId"))
 			{
-				FString parsedMessage = BrainCloudRelay::BCBytesToString(data.GetData(), data.Num());
-				
-				TSharedRef<TJsonReader<TCHAR>> reader = TJsonReaderFactory<TCHAR>::Create(parsedMessage);
-				TSharedPtr<FJsonObject> jsonPacket = MakeShareable(new FJsonObject());
-
-				bool res = FJsonSerializer::Deserialize(reader, jsonPacket);
-
-				if (res && jsonPacket->HasField("netId") && jsonPacket->HasField("profileId"))
+				int netId = (int)jsonPacket->GetNumberField("netId");
+				FString profileId = jsonPacket->GetStringField("profileId");
+				if (!m_netIdToProfileId.Contains(netId)) m_netIdToProfileId.Add(netId, profileId);
+				if (!m_profileIdToNetId.Contains(profileId)) m_profileIdToNetId.Add(profileId, netId);
+				if (m_client->getProfileId() == profileId)
 				{
-					if (m_client->getProfileId() == jsonPacket->GetStringField("profileId"))
+					m_netId = (short)netId;
+					m_bIsConnected = true;
+					m_lastNowMS = FPlatformTime::Seconds();
+					// lock 
 					{
-						m_netId = (short)jsonPacket->GetNumberField("netId");
-						m_bIsConnected = true;
-						m_lastNowMS = FPlatformTime::Seconds();
-						// lock 
-						{
-    						FScopeLock Lock(&m_relayMutex);
-							m_relayResponse.Add(RelayMessage(ServiceName::Relay.getValue().ToLower(), "connect", parsedMessage, data ));
-						}
+						FScopeLock Lock(&m_relayMutex);
+						m_relayResponse.Add(RelayMessage(ServiceName::Relay.getValue().ToLower(), "connect", parsedMessage, data));
 					}
 				}
 			}
-			// lock 
-			{
-    			FScopeLock Lock(&m_relayMutex);
-				// finally pass this onwards, no parsed data
-				m_relayResponse.Add(RelayMessage(ServiceName::Relay.getValue().ToLower(), "onrecv", "", data));
-			}
+		}
+		// lock 
+		{
+			FScopeLock Lock(&m_relayMutex);
+			// finally pass this onwards, no parsed data
+			m_relayResponse.Add(RelayMessage(ServiceName::Relay.getValue().ToLower(), "onrecv", "", data));
 		}
 	}
 }

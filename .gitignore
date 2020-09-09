@@ -42,6 +42,7 @@ BCSubsystem.code-workspace
 *.sln
 *.VC.db
 *.VC.opendb
+*.pdb
 
 # Binary Files
 Binaries/
