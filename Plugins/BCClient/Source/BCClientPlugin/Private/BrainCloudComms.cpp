@@ -901,6 +901,7 @@ void BrainCloudComms::ResetCommunication()
 	_queueMutex.Unlock();
 	_isAuthenticated = false;
 	_sessionId = TEXT("");
+	_packetId = 0;
 	ResetErrorCache();
 	_waitingForRetry = false;
 

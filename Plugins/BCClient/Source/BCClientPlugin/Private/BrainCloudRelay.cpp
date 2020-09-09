@@ -1,9 +1,11 @@
-#include "BrainCloudRelay.h"
 #include "BCClientPluginPrivatePCH.h"
+#include "BrainCloudClient.h"
+#include "BrainCloudRelay.h"
 #include "BrainCloudRelayComms.h"
 
-BrainCloudRelay::BrainCloudRelay(BrainCloudRelayComms *in_comms) 
-: _relayComms(in_comms)
+BrainCloudRelay::BrainCloudRelay(BrainCloudClient *in_client, BrainCloudRelayComms *in_comms) 
+	: _client(in_client)
+	, _relayComms(in_comms)
 {
 }
 
@@ -47,9 +49,48 @@ void BrainCloudRelay::deregisterDataCallback()
     _relayComms->deregisterDataCallback();
 }
 
-bool BrainCloudRelay::send(const TArray<uint8> &in_data, const uint8 in_target, bool in_reliable/* = true*/, bool in_ordered/* = true*/, int in_channel/* = 0*/)
+void BrainCloudRelay::send(const TArray<uint8> &in_data, const uint64 in_target, bool in_reliable, bool in_ordered, int in_channel)
 {
-    return _relayComms->send(in_data, in_target, in_reliable, in_ordered, in_channel);
+	if (in_target == BrainCloudRelayComms::TO_ALL_PLAYERS)
+	{
+		sendToAll(in_data, in_reliable, in_ordered, in_channel);
+	}
+	else
+	{
+		uint64 playerMask = (uint64)1 << in_target;
+    	_relayComms->sendRelay(in_data, playerMask, in_reliable, in_ordered, in_channel);
+	}
+}
+
+void BrainCloudRelay::sendToPlayers(const TArray<uint8> &in_data, const uint64 in_playerMask, bool in_reliable, bool in_ordered, int in_channel)
+{
+    _relayComms->sendRelay(in_data, in_playerMask, in_reliable, in_ordered, in_channel);
+}
+
+void BrainCloudRelay::sendToAll(const TArray<uint8> &in_data, bool in_reliable, bool in_ordered, int in_channel)
+{
+	const auto& myProfileId = _client->getAuthenticationService()->getProfileId();
+	auto myNetId = _relayComms->getNetIdForProfileId(myProfileId);
+
+	uint64 myBit = (uint64)1 << (uint64)myNetId;
+	uint64 myInvertedBits = ~myBit;
+	uint64 playerMask = BrainCloudRelayComms::TO_ALL_PLAYERS & myInvertedBits;
+    _relayComms->sendRelay(in_data, playerMask, in_reliable, in_ordered, in_channel);
+}
+
+const FString &BrainCloudRelay::getOwnerProfileId() const
+{
+	return _relayComms->getOwnerProfileId();
+}
+
+const FString &BrainCloudRelay::getProfileIdForNetId(int in_netId) const
+{
+	return _relayComms->getProfileIdForNetId(in_netId);
+}
+
+int BrainCloudRelay::getNetIdForProfileId(const FString &in_profileId) const
+{
+	return _relayComms->getNetIdForProfileId(in_profileId);
 }
 
 void BrainCloudRelay::setPingInterval(float in_interval)

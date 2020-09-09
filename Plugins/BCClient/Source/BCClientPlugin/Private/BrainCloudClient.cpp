@@ -20,7 +20,7 @@
 #include "BCPlatform.h"
 
 // Define all static member variables.
-FString BrainCloudClient::s_brainCloudClientVersion = TEXT("4.4.1");
+FString BrainCloudClient::s_brainCloudClientVersion = TEXT("4.5.6");
 
 ////////////////////////////////////////////////////
 // (De)Constructors
@@ -98,6 +98,7 @@ void BrainCloudClient::initialize(
 	const FString &appId,
 	const FString &appVersion)
 {
+	resetCommunication();
 	FString error = "";
 	if (serverUrl.IsEmpty())
 		error = "serverURL was null or empty";
@@ -135,6 +136,7 @@ void BrainCloudClient::initializeWithApps(
 	const TMap<FString, FString> &secretMap,
 	const FString &appVersion)
 {
+	resetCommunication();
 	const FString &newAppId = secretMap[appId];
 	FString error = "";
 	if (serverUrl.IsEmpty())
@@ -782,7 +784,7 @@ BrainCloudRelay *BrainCloudClient::getRelayService()
 {
 	if (_relayService == nullptr)
 	{
-		_relayService = new BrainCloudRelay(_brainCloudRelayComms);
+		_relayService = new BrainCloudRelay(this, _brainCloudRelayComms);
 	}
 	return _relayService;
 }
@@ -817,7 +819,17 @@ void BrainCloudClient::determineReleasePlatform()
 	else if (platform == TEXT("IOS"))
 		_releasePlatform = BCPlatform::EnumToString(EBCPlatform::IOS);
 	else if (platform == TEXT("Android"))
-		_releasePlatform = BCPlatform::EnumToString(EBCPlatform::GOOGLE_PLAY_ANDROID);
+	{
+		#if PLATFORM_ANDROID
+		if(FAndroidMisc::GetDeviceMake() == TEXT("Amazon"))
+		{
+			_releasePlatform = BCPlatform::EnumToString(EBCPlatform::AMAZON_ANDROID);
+		}
+		else{
+			_releasePlatform = BCPlatform::EnumToString(EBCPlatform::GOOGLE_PLAY_ANDROID);
+		}
+		#endif
+	}
 	else if (platform == TEXT("Linux"))
 		_releasePlatform = BCPlatform::EnumToString(EBCPlatform::LINUX_PLATFORM);
 	else if (platform == TEXT("HTML5"))
