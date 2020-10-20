@@ -58,6 +58,20 @@ class UBCCustomEntityProxy : public UBCBlueprintCallProxyBase
   static UBCCustomEntityProxy *GetCount(UBrainCloudWrapper *brainCloudWrapper, const FString &entityType, const FString &whereJson);
 
     /**
+     * Creates new custom entity.
+     *
+     * Service Name - CustomEntity
+     * Service Operation - GetRandomEntitiesMatching
+     *
+     * @param entityType The entity type as defined by the user
+     * @param whereJson what to get count of
+     * @param maxReturn
+     * @param callback The method to be invoked when the server response is received
+     */
+  UFUNCTION(BlueprintCallable, meta = (BlueprintInternalUseOnly = "true"), Category = "BrainCloud|CustomEntity")
+  static UBCCustomEntityProxy *GetRandomEntitiesMatching(UBrainCloudWrapper *brainCloudWrapper, const FString &entityType, const FString &whereJson, const int64 &maxReturn);
+    
+    /**
      * Retrieves first page of custom entities from the server based on the custom entity type and specified query context
      *
      * Service Name - CustomEntity
