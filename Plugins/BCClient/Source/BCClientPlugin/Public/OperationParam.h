@@ -504,6 +504,7 @@ class BCCLIENTPLUGIN_API OperationParam
 	static const OperationParam CustomEntityServiceEntityId;
 	static const OperationParam CustomEntityServiceVersion;
 	static const OperationParam CustomEntityServiceWhereJson;
+	static const OperationParam CustomEntityServiceMaxReturn;
 	static const OperationParam CustomEntityServiceRowsPerPage;
 	static const OperationParam CustomEntityServiceSearchJson;
 	static const OperationParam CustomEntityServiceSortJson;
