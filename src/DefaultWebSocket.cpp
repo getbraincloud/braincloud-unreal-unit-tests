@@ -157,6 +157,7 @@ namespace BrainCloud
 
         switch (reason)
         {
+            case LWS_CALLBACK_WSI_DESTROY:
             case LWS_CALLBACK_CLOSED_CLIENT_HTTP:
             case LWS_CALLBACK_CLOSED:
             {
