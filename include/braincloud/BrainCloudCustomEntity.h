@@ -73,6 +73,19 @@ namespace BrainCloud {
 		void getEntityPage(const char * in_entityType, const char * in_context, IServerCallback * in_callback = NULL);
 
 		/**
+		 *
+		 * Service Name - CustomEntity
+		 * Service Operation - GetRandomEntitiesMatching
+		 *
+		 * @param in_entityType The entity type as defined by the user
+		 * @param in_whereJson
+		 * @param in_maxReturn
+		 * @param in_callback The method to be invoked when the server response is received
+		 */
+		void getRandomEntitiesMatching(const char * in_entityType, const std::string& in_whereJson, const int32_t in_maxReturn, IServerCallback * in_callback = NULL);
+
+
+		/**
 		 * Gets the page of custom entities from the server based on the encoded context and specified page offset.
 		 *
 		 * Service Name - CustomEntity

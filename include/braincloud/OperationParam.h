@@ -389,6 +389,7 @@ namespace BrainCloud {
 		//Custom Entity
 		static const OperationParam CustomEntityServiceEntityType;
 		static const OperationParam CustomEntityServiceData;
+		static const OperationParam CustomEntityServiceMaxReturn;
 		static const OperationParam CustomEntityServiceAcl;
 		static const OperationParam CustomEntityServiceTimeToLive;
 		static const OperationParam CustomEntityServiceIsOwned;
