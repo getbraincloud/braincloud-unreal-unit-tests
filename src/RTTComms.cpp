@@ -44,7 +44,7 @@ namespace BrainCloud
         , _loggingEnabled(false)
         , _connectCallback(NULL)
         , _socket(NULL)
-        , _isConnected(false)
+        , _rttConnectionStatus(RTTConnectionStatus::Disconnected)
         , _receivingRunning(false)
         , _heartbeatRunning(false)
         , _useWebSocket(true)
@@ -76,21 +76,20 @@ namespace BrainCloud
 
     void RTTComms::resetCommunication()
     {
-        if (_isConnected)
+        if (isRTTEnabled())
         {
-            _isConnected = false;
+            _rttConnectionStatus = RTTConnectionStatus::Disconnecting;
             closeSocket();
             _eventQueueMutex.lock();
             _callbackEventQueue.clear();
             _eventQueueMutex.unlock();
+            _rttConnectionStatus = RTTConnectionStatus::Disconnected;
         }
     }
 
     void RTTComms::closeSocket()
     {
         std::unique_lock<std::mutex> lock(_socketMutex);
-
-        _isConnected = false;
 
         if (_socket)
         {
@@ -115,24 +114,43 @@ namespace BrainCloud
 
     void RTTComms::enableRTT(IRTTConnectCallback* in_callback, bool in_useWebSocket)
     {
-        _connectCallback = in_callback;
-        _useWebSocket = in_useWebSocket;
+        if(isRTTEnabled())
+        {
+            return;
+        }
+        else
+        {               
+            _connectCallback = in_callback;
+            _useWebSocket = in_useWebSocket;
 
-        _appId = _client->getAppId();
-        _sessionId = _client->getSessionId();
-        _profileId = _client->getAuthenticationService()->getProfileId();
+            _appId = _client->getAppId();
+            _sessionId = _client->getSessionId();
+            _profileId = _client->getAuthenticationService()->getProfileId();
 
-        _client->getRTTService()->requestClientConnection(this);
+            _client->getRTTService()->requestClientConnection(this);
+        }
     }
 
     void RTTComms::disableRTT()
     {
-        resetCommunication();
+        if(!isRTTEnabled())
+        {
+            return;
+        }
+        else
+        {     
+            resetCommunication();   
+        }
     }
 
     bool RTTComms::isRTTEnabled()
     {
-        return _isConnected;
+        return _rttConnectionStatus == RTTConnectionStatus::Connected;
+    }
+
+    RTTComms::RTTConnectionStatus RTTComms::getConnectionStatus()
+    {
+        return _rttConnectionStatus;
     }
 
     bool RTTComms::getLoggingEnabled()
@@ -308,6 +326,7 @@ namespace BrainCloud
 
     void RTTComms::connect()
     {
+        _rttConnectionStatus = RTTConnectionStatus::Connecting;
 #if (TARGET_OS_WATCH != 1)
         std::thread connectionThread([this]
         {
@@ -363,10 +382,11 @@ namespace BrainCloud
                 {
                     closeSocket();
                     failedToConnect();
+                    _rttConnectionStatus = RTTConnectionStatus::Disconnected;
                     return;
                 }
 
-                _isConnected = true;
+                _rttConnectionStatus = RTTConnectionStatus::Connected;
             }
 
             _lastHeartbeatTime = TimeUtil::getCurrentTimeMillis();
@@ -442,7 +462,7 @@ namespace BrainCloud
         }
 
         std::unique_lock<std::mutex> lock(_socketMutex);
-        if (_isConnected)
+        if (isRTTEnabled())
         {
             _socket->send(message);
         }
@@ -455,7 +475,7 @@ namespace BrainCloud
         _receivingRunning = true;
         std::thread receiveThread([this]
         {
-            while (_isConnected)
+            while (isRTTEnabled())
             {
                 std::string message = _socket->recv();
                 if (message.empty())
@@ -483,7 +503,7 @@ namespace BrainCloud
 
             std::unique_lock<std::mutex> lock(_heartBeatMutex);
 
-            while (_isConnected)
+            while (isRTTEnabled())
             {
                 int64_t sleepTime = ((int64_t)_heartbeatSeconds * 1000) - (TimeUtil::getCurrentTimeMillis() - _lastHeartbeatTime);
                 if (sleepTime > 0)
