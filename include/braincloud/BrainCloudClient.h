@@ -27,7 +27,6 @@
 #include "braincloud/BrainCloudPlayerStatistics.h"
 #include "braincloud/BrainCloudGlobalStatistics.h"
 #include "braincloud/BrainCloudIdentity.h"
-#include "braincloud/BrainCloudProduct.h"
 #include "braincloud/BrainCloudVirtualCurrency.h"
 #include "braincloud/BrainCloudAppStore.h"
 #include "braincloud/BrainCloudEntity.h"
@@ -347,7 +346,6 @@ namespace BrainCloud
 		BrainCloudPlayerStatistics * getPlayerStatisticsService() { return _playerStatisticsService; }
 		BrainCloudGlobalStatistics * getGlobalStatisticsService() { return _globalStatisticsService; }
 		BrainCloudIdentity * getIdentityService() { return _identityService; }
-		BrainCloudProduct * getProductService() { return _productService; }
 		BrainCloudVirtualCurrency * getVirtualCurrencyService() { return _virtualCurrencyService; }
 		BrainCloudAppStore * getAppStoreService() { return _appStoreService; }
 		BrainCloudEntity * getEntityService() { return _entityService; }
@@ -639,7 +637,6 @@ namespace BrainCloud
 		BrainCloudPlayerStatistics * _playerStatisticsService;
 		BrainCloudGlobalStatistics * _globalStatisticsService;
 		BrainCloudIdentity * _identityService;
-		BrainCloudProduct * _productService;
 		BrainCloudVirtualCurrency * _virtualCurrencyService;
 		BrainCloudAppStore * _appStoreService;
 		BrainCloudEntity * _entityService;

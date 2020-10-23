@@ -215,7 +215,6 @@ add_library(brainCloud STATIC
     include/braincloud/BrainCloudPlayerState.h
     include/braincloud/BrainCloudPlayerStatistics.h
     include/braincloud/BrainCloudPlayerStatisticsEvent.h
-    include/braincloud/BrainCloudProduct.h
     include/braincloud/BrainCloudProfanity.h
     include/braincloud/BrainCloudPushNotification.h
     include/braincloud/BrainCloudRedemptionCode.h
@@ -306,7 +305,6 @@ add_library(brainCloud STATIC
     src/BrainCloudPlayerStatistics.cpp
     src/BrainCloudPlayerStatisticsEvent.cpp
     src/BrainCloudPresence.cpp
-    src/BrainCloudProduct.cpp
     src/BrainCloudProfanity.cpp
     src/BrainCloudPushNotification.cpp
     src/BrainCloudRedemptionCode.cpp
