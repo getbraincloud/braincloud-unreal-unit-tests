@@ -135,6 +135,20 @@ public:
   void incrementData(const FString &entityType, const FString &entityId, const FString &fieldsJson, IServerCallback *callback);
 
     /**
+     * Gets a list of up to maxReturn randomly selected custom entities from the server based on the entity type and where condition.
+     *
+     * Service Name - CustomEntity
+     * Service Operation - GetRandomEntitiesMatching
+     *
+     * @param entityType The entity type as defined by the user
+     * @param whereJson Mongo style query string
+     * @param maxReturn number of maxReturns
+     * @param callback The method to be invoked when the server response is received
+     */
+  void getRandomEntitiesMatching(const FString &entityType, const FString &whereJson, const int64 &maxReturn, IServerCallback *callback);
+
+
+    /**
      * Reads a custom entity.
      * 
      * Service Name - CustomEntity

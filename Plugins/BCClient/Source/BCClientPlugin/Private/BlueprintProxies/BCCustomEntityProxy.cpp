@@ -62,6 +62,13 @@ UBCCustomEntityProxy *UBCCustomEntityProxy::GetEntityPageOffset(UBrainCloudWrapp
     return Proxy;
 }
 
+UBCCustomEntityProxy *UBCCustomEntityProxy::GetRandomEntitiesMatching(UBrainCloudWrapper *brainCloudWrapper, const FString &entityType, const FString &whereJson, const int64 &maxReturn)
+{
+    UBCCustomEntityProxy *Proxy = NewObject<UBCCustomEntityProxy>();
+    UBCWrapperProxy::GetBrainCloudInstance(brainCloudWrapper)->getCustomEntityService()->getRandomEntitiesMatching(entityType, whereJson, maxReturn, Proxy);
+    return Proxy;
+}
+
 UBCCustomEntityProxy *UBCCustomEntityProxy::ReadEntity(UBrainCloudWrapper *brainCloudWrapper, const FString &entityType, const FString &entityId)
 {
     UBCCustomEntityProxy *Proxy = NewObject<UBCCustomEntityProxy>();
