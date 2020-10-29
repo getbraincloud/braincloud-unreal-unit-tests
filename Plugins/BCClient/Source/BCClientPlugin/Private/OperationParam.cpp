@@ -447,6 +447,7 @@ const OperationParam OperationParam::CustomEntityServiceTimeToLive = OperationPa
 const OperationParam OperationParam::CustomEntityServiceEntityId = OperationParam("entityId");
 const OperationParam OperationParam::CustomEntityServiceVersion = OperationParam("version");
 const OperationParam OperationParam::CustomEntityServiceWhereJson = OperationParam("whereJson");
+const OperationParam OperationParam::CustomEntityServiceMaxReturn = OperationParam("maxReturn");
 const OperationParam OperationParam::CustomEntityServiceRowsPerPage = OperationParam("rowsPerPage");
 const OperationParam OperationParam::CustomEntityServiceSearchJson = OperationParam("searchJson");
 const OperationParam OperationParam::CustomEntityServiceSortJson = OperationParam("sortJson");
