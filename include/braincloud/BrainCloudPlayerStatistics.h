@@ -57,6 +57,12 @@ namespace BrainCloud
          */
         void readUserStatsSubset(const std::vector<std::string> &in_statistics, IServerCallback *in_callback = NULL);
 
+        /**
+		* @deprecated Use readUserStatsForCategory() instead - Removal after September 1 2017
+		*/
+        DEPRECATED
+        void readPlayerStatsForCategory(const char * in_category, IServerCallback * in_callback = NULL);
+
 
         /**
          * Method retrieves the user statistics for the given category.
