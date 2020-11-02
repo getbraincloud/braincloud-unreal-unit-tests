@@ -114,7 +114,7 @@ namespace BrainCloud
 
     void RTTComms::enableRTT(IRTTConnectCallback* in_callback, bool in_useWebSocket)
     {
-        if(isRTTEnabled())
+        if(isRTTEnabled() || _rttConnectionStatus == RTTConnectionStatus::Connecting)
         {
             return;
         }
@@ -133,7 +133,7 @@ namespace BrainCloud
 
     void RTTComms::disableRTT()
     {
-        if(!isRTTEnabled())
+        if(!isRTTEnabled() || _rttConnectionStatus == RTTConnectionStatus::Disconnecting)
         {
             return;
         }
