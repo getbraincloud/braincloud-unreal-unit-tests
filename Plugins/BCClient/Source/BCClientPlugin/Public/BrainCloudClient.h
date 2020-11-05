@@ -81,6 +81,26 @@ enum class BCRelayConnectionType : uint8
 	UDP UMETA(DisplayName = "UDP"),
 };
 
+UENUM(BlueprintType)
+enum class BCRTTConnectionStatus: uint8
+{
+	CONNECTED UMETA(DisplayName = "CONNECTED"),
+	CONNECTING UMETA(DisplayName = "CONNECTING"),
+	DISCONNECTED UMETA(DisplayName = "DISCONNECTED"),
+	DISCONNECTING UMETA(DisplayName = "DISCONNECTING")
+};
+
+UENUM(BlueprintType)
+enum class BCWebsocketStatus: uint8
+{
+	OPEN UMETA(DisplayName = "OPEN"),
+	CLOSED UMETA(DisplayName = "CLOSED"),
+	MESSAGE UMETA(DisplayName = "MESSAGE"),
+	SOCKETERROR UMETA(DisplayName = "SOCKETERROR"),
+	NONE UMETA(DisplayName = "NONE")
+
+};
+
 class BCCLIENTPLUGIN_API BrainCloudClient
 {
 

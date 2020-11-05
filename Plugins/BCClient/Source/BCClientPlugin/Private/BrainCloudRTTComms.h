@@ -18,6 +18,8 @@
 #endif
 
 enum class BCRTTConnectionType : uint8;
+enum class BCRTTConnectionStatus : uint8;
+enum class BCWebsocketStatus : uint8;
 class IRTTCallback;
 class ServiceOperation;
 class ServiceName;
@@ -41,6 +43,7 @@ class BrainCloudRTTComms : public IServerCallback
 	void enableRTT(BCRTTConnectionType in_connectionType, UBCRTTProxy *callback);
 	void disableRTT();
 	bool isRTTEnabled();
+	BCRTTConnectionStatus getConnectionStatus();
 	void RunCallbacks();
 
 	void registerRTTCallback(ServiceName in_serviceName, IRTTCallback *callback);
@@ -115,6 +118,8 @@ class BrainCloudRTTComms : public IServerCallback
 	float m_lastNowMS;
 
 	BCRTTConnectionType m_connectionType;
+	BCRTTConnectionStatus m_rttConnectionStatus;
+	BCWebsocketStatus m_websocketStatus;
 	bool m_bIsConnected;
 
 	struct lws_context *m_lwsContext;
