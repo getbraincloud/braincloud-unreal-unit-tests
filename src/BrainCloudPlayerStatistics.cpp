@@ -20,26 +20,10 @@ namespace BrainCloud
 {
     BrainCloudPlayerStatistics::BrainCloudPlayerStatistics(BrainCloudClient* in_client) : m_client(in_client) { }
 
-    void BrainCloudPlayerStatistics::readAllPlayerStats(IServerCallback *in_callback)
-    {
-        Json::Value message;
-        ServerCall * sc = new ServerCall(ServiceName::PlayerStatistics, ServiceOperation::Read, message, in_callback);
-        m_client->sendRequest(sc);
-    }
-
     void BrainCloudPlayerStatistics::readAllUserStats(IServerCallback *in_callback)
     {
         Json::Value message;
         ServerCall * sc = new ServerCall(ServiceName::PlayerStatistics, ServiceOperation::Read, message, in_callback);
-        m_client->sendRequest(sc);
-    }
-
-    void BrainCloudPlayerStatistics::readPlayerStatsSubset(const std::vector<std::string> &in_statistics,
-                                                         IServerCallback *in_callback)
-    {
-        Json::Value message;
-        message[OperationParam::PlayerStatisticsServiceStats.getValue()] = JsonUtil::stringVectorToJson(in_statistics);
-        ServerCall * sc = new ServerCall(ServiceName::PlayerStatistics, ServiceOperation::ReadSubset, message, in_callback);
         m_client->sendRequest(sc);
     }
 
@@ -52,15 +36,6 @@ namespace BrainCloud
         m_client->sendRequest(sc);
     }
 
-    void BrainCloudPlayerStatistics::readPlayerStatsForCategory(const char *in_category, IServerCallback *in_callback)
-    {
-        Json::Value message;
-        message[OperationParam::GamificationServiceCategory.getValue()] = in_category;
-
-        ServerCall * sc = new ServerCall(ServiceName::PlayerStatistics, ServiceOperation::ReadForCategory, message, in_callback);
-        m_client->sendRequest(sc);
-    }
-
     void BrainCloudPlayerStatistics::readUserStatsForCategory(const char *in_category, IServerCallback *in_callback)
     {
         Json::Value message;
@@ -70,26 +45,10 @@ namespace BrainCloud
         m_client->sendRequest(sc);
     }
 
-    void BrainCloudPlayerStatistics::resetAllPlayerStats(IServerCallback *in_callback)
-    {
-        Json::Value message;
-        ServerCall * sc = new ServerCall(ServiceName::PlayerStatistics, ServiceOperation::Reset, message, in_callback);
-        m_client->sendRequest(sc);
-    }
-
     void BrainCloudPlayerStatistics::resetAllUserStats(IServerCallback *in_callback)
     {
         Json::Value message;
         ServerCall * sc = new ServerCall(ServiceName::PlayerStatistics, ServiceOperation::Reset, message, in_callback);
-        m_client->sendRequest(sc);
-    }
-
-    void BrainCloudPlayerStatistics::incrementPlayerStats(const std::string &in_jsonData, IServerCallback *in_callback)
-    {
-        Json::Value message;
-        message[OperationParam::PlayerStatisticsServiceStats.getValue()] = JsonUtil::jsonStringToValue(in_jsonData);
-
-        ServerCall * sc = new ServerCall(ServiceName::PlayerStatistics, ServiceOperation::Update, message, in_callback);
         m_client->sendRequest(sc);
     }
 

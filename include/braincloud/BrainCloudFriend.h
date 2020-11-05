@@ -19,17 +19,6 @@ namespace BrainCloud
 		BrainCloudFriend(BrainCloudClient* in_client);
 
 		/**
-		* @deprecated Use findUserByUniversalId() instead - Removal after September 1 2017
-		*/
-		DEPRECATED
-		void findPlayerByUniversalId(const char * in_searchText, int32_t in_maxResults, IServerCallback * in_callback = NULL);
-
-		/**
-		 * @deprecated Use findUserByUniversalId() instead use findUserByExactUniversalId
-		 */
-		void findUserByUniversalId(const char * in_searchText, int32_t in_maxResults, IServerCallback * in_callback = NULL);
-
-		/**
 		 * Retrieves profile information of the specified universal Id.
 		 *
 		 * @param in_searchText Universal ID text on which to search.
@@ -107,12 +96,6 @@ namespace BrainCloud
 		* @param in_callback Method to be invoked when the server response is received.
 		*/
 		void readFriendsEntities(const char* in_entityType, IServerCallback * in_callback = NULL);
-
-		/**
-		* @deprecated Use readFriendUserState() instead - Removal after September 1 2017
-		*/
-		DEPRECATED
-		void readFriendPlayerState(const char * in_friendId, IServerCallback * in_callback = NULL);
 		
 		/**
 		 * Read a friend's user state.

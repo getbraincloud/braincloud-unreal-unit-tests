@@ -110,20 +110,6 @@ namespace BrainCloud {
         void awardAchievements(const std::vector<std::string> & in_achievements, IServerCallback * in_callback = NULL);
 
         /**
-        * 
-		* @deprecated as of November 1, 2019
-        * Resets the specified milestones' statuses to LOCKED.
-        *
-        * Service Name - Gamification
-        * Service Operation - ResetMilestones
-        *
-        * @param in_milestoneIds Collection of milestones to reset
-        * @param in_callback Method to be invoked when the server response is received.
-        */
-       	DEPRECATED
-        void resetMilestones(const std::vector<std::string> & in_milestoneIds, IServerCallback * in_callback = NULL);
-
-        /**
          * Method retrieves all of the quests defined for the game.
          *
          * Service Name - Gamification

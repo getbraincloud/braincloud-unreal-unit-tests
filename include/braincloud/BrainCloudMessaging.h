@@ -57,8 +57,10 @@ namespace BrainCloud
 		 *
 		 * @param msgIds Arrays of message ids to get.
 		 * @param callback The method to be invoked when the server response is received
+		 * 
+		 * @deprecated Use method with new signature - Removal after september 1 2021
 		 */
-		void getMessages(const std::string& in_msgbox, const std::vector<std::string>& in_msgIds, IServerCallback* in_callback = NULL);
+		DEPRECATED void getMessages(const std::string& in_msgbox, const std::vector<std::string>& in_msgIds, IServerCallback* in_callback = NULL);
 
 		/**
 		 * Retrieves list of specified messages.

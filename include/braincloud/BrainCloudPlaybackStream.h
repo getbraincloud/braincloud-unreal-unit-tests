@@ -74,18 +74,6 @@ namespace BrainCloud
         void addEvent(const char * in_playbackStreamId, const char * in_jsonEventData, const char * in_jsonSummary, IServerCallback * in_callback = NULL);
 
         /**
-		* @deprecated Use getRecentStreamsForInitiatingPlayer() instead - Removal after September 1 2017
-		*/
-		DEPRECATED
-        void getStreamSummariesForInitiatingPlayer(const char * in_initiatingPlayerId, IServerCallback * in_callback = NULL);
-
-        /**
-		* @deprecated Use getRecentStreamsForTargetPlayer() instead - Removal after September 1 2017
-		*/
-		DEPRECATED
-        void getStreamSummariesForTargetPlayer(const char * in_targetPlayerId, IServerCallback * in_callback = NULL);
-
-        /**
         * Gets recent stream summaries for initiating player
         *
         * Service Name - PlaybackStream

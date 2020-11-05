@@ -66,13 +66,6 @@ TEST_F(TestBCGamification, ReadMilestonesByCategory)
     tr.run(m_bc);
 }
 
-TEST_F(TestBCGamification, ResetMilestone)
-{
-    TestResult tr;
-    m_bc->getGamificationService()->resetMilestones(m_milestoneIds, &tr);
-    tr.run(m_bc);
-}
-
 TEST_F(TestBCGamification, ReadCompletedQuests)
 {
     TestResult tr;

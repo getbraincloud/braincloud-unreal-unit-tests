@@ -91,7 +91,7 @@ TEST_F(TestBCEntity, GetSharedEntityForPlayerId)
 {
 	TestResult tr;
 	CreateDefaultEntity();
-	m_bc->getEntityService()->getSharedEntityForPlayerId(GetUser(UserA)->m_profileId, m_entityId.c_str(), &tr);
+	m_bc->getEntityService()->getSharedEntityForProfileId(GetUser(UserA)->m_profileId, m_entityId.c_str(), &tr);
 	tr.run(m_bc);
 	DeleteEntity();
 }
@@ -103,7 +103,7 @@ TEST_F(TestBCEntity, GetSharedEntitiesForPlayerId)
 {
 	TestResult tr;
 	CreateDefaultEntity();
-	m_bc->getEntityService()->getSharedEntitiesForPlayerId(GetUser(UserA)->m_profileId, &tr);
+	m_bc->getEntityService()->getSharedEntitiesForProfileId(GetUser(UserA)->m_profileId, &tr);
 	tr.run(m_bc);
 	DeleteEntity();
 }
@@ -182,7 +182,7 @@ TEST_F(TestBCEntity, GetSharedEntitiesListForPlayerId)
 	Json::Value whereJson;
 	whereJson["entityType"] = m_entityType;
 
-	m_bc->getEntityService()->getSharedEntitiesListForPlayerId(
+	m_bc->getEntityService()->getSharedEntitiesListForProfileId(
 		GetUser(UserA)->m_profileId,
 		fw.write(whereJson), "", 100, &tr);
 	tr.run(m_bc);

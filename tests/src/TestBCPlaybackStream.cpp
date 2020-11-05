@@ -37,30 +37,6 @@ TEST_F(TestBCPlaybackStream, AddEvent)
     EndStream();
 }
 
-#pragma clang diagnostic push
-#pragma clang diagnostic ignored "-Wdeprecated-declarations"
-TEST_F(TestBCPlaybackStream, GetStreamSummariesForTargetPlayer)
-{
-    StartStream();
-    TestResult tr;
-    m_bc->getPlaybackStreamService()->getStreamSummariesForTargetPlayer(GetUser(UserB)->m_profileId, &tr);
-    tr.run(m_bc);
-    EndStream();
-}
-
-#pragma clang diagnostic push
-#pragma clang diagnostic ignored "-Wdeprecated-declarations"
-#pragma clang diagnostic pop
-TEST_F(TestBCPlaybackStream, GetStreamSummariesForInitiatingPlayer)
-{
-    StartStream();
-    TestResult tr;
-    m_bc->getPlaybackStreamService()->getStreamSummariesForInitiatingPlayer(GetUser(UserA)->m_profileId, &tr);
-    tr.run(m_bc);
-    EndStream();
-}
-#pragma clang diagnostic pop
-
 TEST_F(TestBCPlaybackStream, GetRecentStreamsForTargetPlayer)
 {
     StartStream();
@@ -99,7 +75,7 @@ void TestBCPlaybackStream::StartStream()
     tr.run(m_bc);
     tr.reset();
     
-    m_bc->getPlaybackStreamService()->getStreamSummariesForTargetPlayer(GetUser(UserB)->m_profileId, &tr);
+    m_bc->getPlaybackStreamService()->getRecentStreamsForTargetPlayer(GetUser(UserB)->m_profileId, 1, &tr);
     tr.run(m_bc);
     
     Json::Value streams = tr.m_response["data"]["streams"];

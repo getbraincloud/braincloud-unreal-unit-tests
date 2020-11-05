@@ -385,19 +385,6 @@ namespace BrainCloud
 		BrainCloudMessaging * getMessagingService() { return _messagingService; }
 		BrainCloudPresence * getPresenceService() { return _presenceService; }
 
-		/**
-		* @deprecated Use getAppId() instead - Removal after September 1 2017
-		*/
-		DEPRECATED
-		const std::string & getGameId() const
-		{
-			if (_brainCloudComms != NULL) {
-				return _brainCloudComms->getAppId();
-			}
-			static std::string noAppId;
-			return noAppId;
-		}
-
 		const std::string & getAppId() const
 		{
 			if (_brainCloudComms != NULL) {
@@ -408,12 +395,6 @@ namespace BrainCloud
 		}
 
 		const std::string & getReleasePlatform() const { return _releasePlatform; };
-
-		/**
-		* @deprecated Use getAppVersion() instead - Removal after September 1 2017
-		*/
-		DEPRECATED
-		const std::string & getGameVersion() const { return _appVersion; }
 
 		const std::string & getAppVersion() const { return _appVersion; };
 		

@@ -228,8 +228,10 @@ namespace BrainCloud
 		 * @param in_rotationResetUTC Date in UTC to start rotation calculations
 		 * @param in_retainedCount How many rotations to keep
 		 * @param in_callback The method to be invoked when the server response is received
+		 * 
+		 * @deprecated Use postScoreToDynamicLeaderboardUTC instead - Removal after september 1 2021
 		 */
-		void postScoreToDynamicLeaderboard(
+		DEPRECATED void postScoreToDynamicLeaderboard(
 			const char * in_leaderboardId,
 			int64_t in_score,
 			const std::string& in_jsonData,
@@ -286,8 +288,10 @@ namespace BrainCloud
 		* @param in_retainedCount How many rotations to keep
 		* @param in_numDaysToRotate How many days between each rotation
 		* @param in_callback The method to be invoked when the server response is received
+		*
+		* @deprecated Use postScoreToDynamicLeaderboardDaysUTC instead - Removal after september 1 2021
 		*/
-		void postScoreToDynamicLeaderboardDays(
+		DEPRECATED void postScoreToDynamicLeaderboardDays(
 			const char * in_leaderboardId,
 			int64_t in_score,
 			const std::string& in_jsonData,
@@ -499,8 +503,10 @@ namespace BrainCloud
 		* @param in_rotationResetUTC date time in UTC
 		* @param in_retainedCount how long to keep rotation
 		* @param in_callback The method to be invoked when the server response is received
+		 * 
+		 * @deprecated Use postScoreToDynamicGroupLeaderboardUTC instead - Removal after september 1 2021
 		*/
-		void postScoreToDynamicGroupLeaderboard(const char * in_leaderboardId, const char * in_groupId, int32_t in_score, const std::string& in_jsonData, const char * in_leaderboardType, 
+		DEPRECATED void postScoreToDynamicGroupLeaderboard(const char * in_leaderboardId, const char * in_groupId, int32_t in_score, const std::string& in_jsonData, const char * in_leaderboardType, 
 			const char * in_rotationType, int64_t in_rotationResetUTC, int32_t in_retainedCount,  IServerCallback * in_callback = NULL);
 
 		/**
