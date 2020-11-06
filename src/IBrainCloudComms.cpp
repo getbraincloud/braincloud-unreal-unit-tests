@@ -101,11 +101,6 @@ namespace BrainCloud {
 		_immediateRetryOnError = value;
 	}
 
-	const std::string& IBrainCloudComms::getGameId() const
-	{
-		return _appId;
-	}
-
 	const std::string& IBrainCloudComms::getAppId() const
 	{
 		return _appId;

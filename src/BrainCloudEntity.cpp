@@ -100,16 +100,6 @@ namespace BrainCloud
 		m_client->sendRequest(sc);
 	}
 
-	void BrainCloudEntity::getSharedEntityForPlayerId(const char * in_profileId, const char * in_entityId, IServerCallback * in_callback)
-	{
-		Json::Value message;
-		message[OperationParam::EntityServiceTargetPlayerId.getValue()] = in_profileId;
-		message[OperationParam::EntityServiceEntityId.getValue()] = in_entityId;
-
-		ServerCall * sc = new ServerCall(ServiceName::Entity, ServiceOperation::ReadSharedEntity, message, in_callback);
-		m_client->sendRequest(sc);
-	}
-
 	void BrainCloudEntity::getSharedEntityForProfileId(const char * in_profileId, const char * in_entityId, IServerCallback * in_callback)
 	{
 		Json::Value message;
@@ -120,38 +110,12 @@ namespace BrainCloud
 		m_client->sendRequest(sc);
 	}
 
-	void BrainCloudEntity::getSharedEntitiesForPlayerId(const char * in_profileId, IServerCallback * in_callback)
-	{
-		Json::Value message;
-		message[OperationParam::EntityServiceTargetPlayerId.getValue()] = in_profileId;
-
-		ServerCall * sc = new ServerCall(ServiceName::Entity, ServiceOperation::ReadShared, message, in_callback);
-		m_client->sendRequest(sc);
-	}
-
 	void BrainCloudEntity::getSharedEntitiesForProfileId(const char * in_profileId, IServerCallback * in_callback)
 	{
 		Json::Value message;
 		message[OperationParam::EntityServiceTargetPlayerId.getValue()] = in_profileId;
 
 		ServerCall * sc = new ServerCall(ServiceName::Entity, ServiceOperation::ReadShared, message, in_callback);
-		m_client->sendRequest(sc);
-	}
-
-	void BrainCloudEntity::getSharedEntitiesListForPlayerId(const char * in_profileId, std::string in_whereJson, std::string in_orderByJson, int32_t in_maxReturn, IServerCallback * in_callback)
-	{
-		Json::Value message;
-
-		message[OperationParam::EntityServiceTargetPlayerId.getValue()] = in_profileId;
-		if (StringUtil::IsOptionalParameterValid(in_whereJson)) {
-			message[OperationParam::GlobalEntityServiceWhere.getValue()] = JsonUtil::jsonStringToValue(in_whereJson);
-		}
-		if (StringUtil::IsOptionalParameterValid(in_orderByJson)) {
-			message[OperationParam::GlobalEntityServiceOrderBy.getValue()] = JsonUtil::jsonStringToValue(in_orderByJson);
-		}
-		message[OperationParam::GlobalEntityServiceMaxReturn.getValue()] = (Json::Int64) in_maxReturn;
-
-		ServerCall * sc = new ServerCall(ServiceName::Entity, ServiceOperation::ReadSharedEntitesList, message, in_callback);
 		m_client->sendRequest(sc);
 	}
 

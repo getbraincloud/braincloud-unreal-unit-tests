@@ -34,9 +34,9 @@ void TestBCOneWayMatch::StartMatch()
     tr.run(m_bc);
     tr.reset();
     
-    m_bc->getPlaybackStreamService()->getStreamSummariesForTargetPlayer(GetUser(UserB)->m_profileId, &tr);
+    m_bc->getPlaybackStreamService()->getRecentStreamsForTargetPlayer(GetUser(UserB)->m_profileId, 1, &tr);
     tr.run(m_bc);
-    
+
     Json::Value streams = tr.m_response["data"]["streams"];
 
     m_streamId = streams[0u]["playbackStreamId"].asString();

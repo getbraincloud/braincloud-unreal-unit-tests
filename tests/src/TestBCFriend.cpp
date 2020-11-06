@@ -71,16 +71,6 @@ TEST_F(TestBCFriend, FindUsersBySubstrName)
 	tr.run(m_bc);
 }
 
-#pragma clang diagnostic push
-#pragma clang diagnostic ignored "-Wdeprecated-declarations"
-TEST_F(TestBCFriend, FindPlayerByUniversalId)
-{
-	TestResult tr;
-	m_bc->getFriendService()->findPlayerByUniversalId("search", 10, &tr);
-	tr.run(m_bc);
-}
-#pragma clang diagnostic pop
-
 TEST_F(TestBCFriend, GetSummaryDataForProfileId)
 {
 	TestResult tr;

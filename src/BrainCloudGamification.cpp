@@ -175,14 +175,4 @@ namespace BrainCloud
         ServerCall * sc = new ServerCall(ServiceName::Gamification, ServiceOperation::AwardAchievements, message, in_callback);
         m_client->sendRequest(sc);
     }
-
-    void BrainCloudGamification::resetMilestones(const std::vector<std::string> & in_milestoneIds, IServerCallback * in_callback)
-    {
-        Json::Value message;
-        Json::Value milestoneArray = JsonUtil::stringVectorToJson(in_milestoneIds);
-        message[OperationParam::GamificationServiceMilestonesName.getValue()] = milestoneArray;
-
-        ServerCall * sc = new ServerCall(ServiceName::Gamification, ServiceOperation::ResetMilestones, message, in_callback);
-        m_client->sendRequest(sc);
-    }
 }

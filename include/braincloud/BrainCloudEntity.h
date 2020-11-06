@@ -132,12 +132,6 @@ namespace BrainCloud {
 		void getEntitiesByType(const char * in_entityType, IServerCallback * in_callback = NULL);
 
 		/**
-		* @deprecated Use getSharedEntityForProfileId() instead - Removal after September 1 2017
-		*/
-		DEPRECATED
-		void getSharedEntityForPlayerId(const char * in_profileId, const char * in_entityId, IServerCallback * in_callback = NULL);
-
-		/**
 		* Method returns a shared entity for the given user and entity ID.
 		* An entity is shared if its ACL allows for the currently logged
 		* in user to read the data.
@@ -152,12 +146,6 @@ namespace BrainCloud {
 		void getSharedEntityForProfileId(const char * in_profileId, const char * in_entityId, IServerCallback * in_callback = NULL);
 
 		/**
-		* @deprecated Use getSharedEntitiesForProfileId() instead - Removal after September 1 2017
-		*/
-		DEPRECATED
-		void getSharedEntitiesForPlayerId(const char * in_profileId, IServerCallback * in_callback = NULL);
-
-		/**
 		 * Method returns all shared entities for the given profile id.
 		 * An entity is shared if its ACL allows for the currently logged
 		 * in user to read the data.
@@ -169,13 +157,6 @@ namespace BrainCloud {
 		 * @param in_callback The method to be invoked when the server response is received
 		 */
 		void getSharedEntitiesForProfileId(const char * in_profileId, IServerCallback * in_callback = NULL);
-
-		/**
-		* @deprecated Use getSharedEntitiesListForProfileId() instead - Removal after September 1 2017
-		*/
-		DEPRECATED
-		void getSharedEntitiesListForPlayerId(const char * in_profileId, std::string in_whereJson, std::string in_orderByJson, int32_t in_maxReturn, IServerCallback * in_callback = NULL);
-
 
 		/**
 		* Method gets list of shared entities for the specified user based on type and/or where clause

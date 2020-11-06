@@ -105,11 +105,6 @@ namespace BrainCloud
 		void setHeartbeatInterval(int milliseconds);
 		void setImmediateRetryOnError(bool value);
 
-		/**
-		* @deprecated Use getAppId() instead - Removal after September 1 2017
-		*/
-		DEPRECATED
-		const std::string& getGameId() const;
 		const std::string& getAppId() const;
 		void clearSessionId();
 		const std::string& getSessionId() const;

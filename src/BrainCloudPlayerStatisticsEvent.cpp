@@ -16,18 +16,6 @@ namespace BrainCloud
 {
     BrainCloudPlayerStatisticsEvent::BrainCloudPlayerStatisticsEvent(BrainCloudClient* in_client) : m_client(in_client) { }
 
-    void BrainCloudPlayerStatisticsEvent::triggerPlayerStatisticsEvent(const char *in_eventName, int32_t in_eventMultiplier,
-                                                            IServerCallback *in_callback)
-    {
-        Json::Value message;
-
-        message[OperationParam::PlayerStatisticEventServiceEventName.getValue()] = in_eventName;
-        message[OperationParam::PlayerStatisticEventServiceEventMultiplier.getValue()] = in_eventMultiplier;
-
-        ServerCall * sc = new ServerCall(ServiceName::PlayerStatisticsEvent, ServiceOperation::Trigger, message, in_callback);
-        m_client->getBrainCloudComms()->addToQueue(sc);
-    }
-
     void BrainCloudPlayerStatisticsEvent::triggerStatsEvent(const char *in_eventName, int32_t in_eventMultiplier,
                                                             IServerCallback *in_callback)
     {
@@ -40,7 +28,19 @@ namespace BrainCloud
         m_client->getBrainCloudComms()->addToQueue(sc);
     }
 
-    void BrainCloudPlayerStatisticsEvent::triggerPlayerStatisticsEvents(const std::string &in_jsonData,
+    void BrainCloudPlayerStatisticsEvent::triggerUserStatsEvent(const char *in_eventName, int32_t in_eventMultiplier,
+                                                                IServerCallback *in_callback)
+    {
+        Json::Value message;
+
+        message[OperationParam::PlayerStatisticEventServiceEventName.getValue()] = in_eventName;
+        message[OperationParam::PlayerStatisticEventServiceEventMultiplier.getValue()] = in_eventMultiplier;
+
+        ServerCall * sc = new ServerCall(ServiceName::PlayerStatisticsEvent, ServiceOperation::Trigger, message, in_callback);
+        m_client->getBrainCloudComms()->addToQueue(sc);
+    }
+
+    void BrainCloudPlayerStatisticsEvent::triggerStatsEvents(const std::string &in_jsonData,
                                                              IServerCallback *in_callback)
     {
         Json::Value message;
@@ -51,8 +51,8 @@ namespace BrainCloud
         m_client->getBrainCloudComms()->addToQueue(sc);
     }
 
-    void BrainCloudPlayerStatisticsEvent::triggerStatsEvents(const std::string &in_jsonData,
-                                                             IServerCallback *in_callback)
+    void BrainCloudPlayerStatisticsEvent::triggerUserStatsEvents(const std::string &in_jsonData,
+                                                                 IServerCallback *in_callback)
     {
         Json::Value message;
 

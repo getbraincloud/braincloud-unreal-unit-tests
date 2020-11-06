@@ -125,6 +125,8 @@ namespace BrainCloud
 		 * @param in_jsonData Optional data attached to the leaderboard entry
 		 * @param in_roundStartedTimeLocal Time the user started the match and is converted, resulting in the score being posted in LOCAL time.
 		 * @param in_callback The method to be invoked when the server response is received
+		 *
+		 * @deprecated Use PostTournamentScoreUTC instead - Removal after september 1 2021
 		 */
 		void postTournamentScore(const char* in_leaderboardId, int64_t in_score, const std::string& in_jsonData, const struct tm* in_roundStartedTimeLocal, IServerCallback * in_callback = NULL);
 
@@ -159,6 +161,8 @@ namespace BrainCloud
 		* @param in_initialScore The initial score for players first joining a tournament
         *						 Usually 0, unless leaderboard is LOW_VALUE
 		* @param in_callback The method to be invoked when the server response is received
+		*
+		* @deprecated Use PostTournamentScoreWithResultsUTC instead - Removal after september 1 2021
 		*/
 		void postTournamentScoreWithResults(
 			const char* in_leaderboardId,

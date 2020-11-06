@@ -78,7 +78,7 @@ namespace BrainCloud {
          * @param numRetries The number of retries of this message
          * @param statusMessage Any error messages related to the issue
          *
-         * @deprecated This callback will be removed in the future
+         * @deprecated This callback will be removed in the future - Will be removed after September 1 2021
          */
         virtual void serverWarning( ServiceName serviceName, ServiceOperation serviceOperation, int statusCode, int reasonCode, int numRetries, const std::string & statusMessage) = 0;
         

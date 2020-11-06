@@ -23,13 +23,6 @@ namespace BrainCloud
         BrainCloudPlayerStatistics(BrainCloudClient* in_client);
 
         /**
-		* @deprecated Use readAllUserStats() instead - Removal after September 1 2017
-		*/
-        DEPRECATED
-        void readAllPlayerStats(IServerCallback * in_callback = NULL);
-
-
-        /**
          * Read all available user statistics.
          *
          * Service Name - PlayerStatistics
@@ -38,12 +31,6 @@ namespace BrainCloud
          * @param in_callback The method to be invoked when the server response is received
          */
         void readAllUserStats(IServerCallback *in_callback = NULL);
-
-        /**
-		* @deprecated Use readUserStatsSubset() instead - Removal after September 1 2017
-		*/
-        DEPRECATED
-        void readPlayerStatsSubset(const std::vector<std::string> &in_statistics, IServerCallback *in_callback = NULL);
 
         /**
          * Reads a subset of user statistics as defined by the input collection.
@@ -58,13 +45,6 @@ namespace BrainCloud
         void readUserStatsSubset(const std::vector<std::string> &in_statistics, IServerCallback *in_callback = NULL);
 
         /**
-		* @deprecated Use readUserStatsForCategory() instead - Removal after September 1 2017
-		*/
-        DEPRECATED
-        void readPlayerStatsForCategory(const char * in_category, IServerCallback * in_callback = NULL);
-
-
-        /**
          * Method retrieves the user statistics for the given category.
          *
          * Service Name - PlayerStatistics
@@ -76,12 +56,6 @@ namespace BrainCloud
         void readUserStatsForCategory(const char *in_category, IServerCallback *in_callback = NULL);
 
         /**
-		* @deprecated Use resetAllUserStats() instead - Removal after September 1 2017
-		*/
-        DEPRECATED
-        void resetAllPlayerStats(IServerCallback * in_callback = NULL);
-
-        /**
          * Reset all of the statistics for this user back to their initial value.
          *
          * Service Name - PlayerStatistics
@@ -90,12 +64,6 @@ namespace BrainCloud
          * @param in_callback The method to be invoked when the server response is received
          */
         void resetAllUserStats(IServerCallback *in_callback = NULL);
-
-        /**
-		* @deprecated Use incrementUserStats() instead - Removal after September 1 2017
-		*/
-        DEPRECATED
-        void incrementPlayerStats(const std::string& in_jsonData, IServerCallback * in_callback = NULL);
 
         /**
          * Atomically increment (or decrement) user statistics.

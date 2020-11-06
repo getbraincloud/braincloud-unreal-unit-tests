@@ -19,26 +19,6 @@ namespace BrainCloud
 {
 	BrainCloudFriend::BrainCloudFriend(BrainCloudClient* in_client) : m_client(in_client) { }
 
-	void BrainCloudFriend::findPlayerByUniversalId(const char * in_searchText, int32_t in_maxResults, IServerCallback * in_callback)
-	{
-		Json::Value message;
-		message[OperationParam::FriendServiceSearchText.getValue()] = in_searchText;
-		message[OperationParam::FriendServiceMaxResults.getValue()] = in_maxResults;
-
-		ServerCall * sc = new ServerCall(ServiceName::Friend, ServiceOperation::FindPlayerByUniversalId, message, in_callback);
-		m_client->getBrainCloudComms()->addToQueue(sc);
-	}
-
-	void BrainCloudFriend::findUserByUniversalId(const char * in_searchText, int32_t in_maxResults, IServerCallback * in_callback)
-	{
-		Json::Value message;
-		message[OperationParam::FriendServiceSearchText.getValue()] = in_searchText;
-		message[OperationParam::FriendServiceMaxResults.getValue()] = in_maxResults;
-
-		ServerCall * sc = new ServerCall(ServiceName::Friend, ServiceOperation::FindPlayerByUniversalId, message, in_callback);
-		m_client->getBrainCloudComms()->addToQueue(sc);
-	}
-
 	void BrainCloudFriend::findUserByExactUniversalId(const char * in_searchText, IServerCallback * in_callback)
 	{
 		Json::Value message;
@@ -119,15 +99,6 @@ namespace BrainCloud
 		}
 
 		ServerCall * sc = new ServerCall(ServiceName::Friend, ServiceOperation::ReadFriendsEntities, message, in_callback);
-		m_client->getBrainCloudComms()->addToQueue(sc);
-	}
-
-	void BrainCloudFriend::readFriendPlayerState(const char * in_friendId, IServerCallback * in_callback)
-	{
-		Json::Value message;
-		message[OperationParam::FriendServiceReadPlayerStateFriendId.getValue()] = in_friendId;
-
-		ServerCall * sc = new ServerCall(ServiceName::Friend, ServiceOperation::ReadFriendsPlayerState, message, in_callback);
 		m_client->getBrainCloudComms()->addToQueue(sc);
 	}
 

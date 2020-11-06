@@ -23,7 +23,7 @@ void TestUser::Authenticate()
 	tr.run(m_client);
 	sprintf(m_profileId, "%s", m_client->getAuthenticationService()->getProfileId().c_str());
 
-	m_client->getPlayerStateService()->updateUserName(m_id, &tr);
+	m_client->getPlayerStateService()->updateName(m_id, &tr);
 	tr.run(m_client);
 
 	m_client->getPlayerStateService()->updateContactEmail("braincloudunittest@gmail.com", &tr);
