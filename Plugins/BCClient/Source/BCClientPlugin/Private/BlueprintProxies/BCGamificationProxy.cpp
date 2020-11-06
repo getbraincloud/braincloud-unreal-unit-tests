@@ -76,13 +76,6 @@ UBCGamificationProxy *UBCGamificationProxy::AwardAchievements(UBrainCloudWrapper
     return Proxy;
 }
 
-UBCGamificationProxy *UBCGamificationProxy::ResetMilestones(UBrainCloudWrapper *brainCloudWrapper, const TArray<FString> &milestoneIds)
-{
-    UBCGamificationProxy *Proxy = NewObject<UBCGamificationProxy>();
-    UBCWrapperProxy::GetBrainCloudInstance(brainCloudWrapper)->getGamificationService()->resetMilestones(milestoneIds, Proxy);
-    return Proxy;
-}
-
 UBCGamificationProxy *UBCGamificationProxy::ReadQuests(UBrainCloudWrapper *brainCloudWrapper, bool includeMetaData)
 {
     UBCGamificationProxy *Proxy = NewObject<UBCGamificationProxy>();

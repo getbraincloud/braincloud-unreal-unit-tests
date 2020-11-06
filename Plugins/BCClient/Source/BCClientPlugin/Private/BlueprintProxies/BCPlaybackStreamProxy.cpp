@@ -49,20 +49,6 @@ UBCPlaybackStreamProxy *UBCPlaybackStreamProxy::AddEvent(UBrainCloudWrapper *bra
     return Proxy;
 }
 
-UBCPlaybackStreamProxy *UBCPlaybackStreamProxy::GetStreamSummariesForInitiatingPlayer(UBrainCloudWrapper *brainCloudWrapper, const FString &targetPlayerId)
-{
-    UBCPlaybackStreamProxy *Proxy = NewObject<UBCPlaybackStreamProxy>();
-    UBCWrapperProxy::GetBrainCloudInstance(brainCloudWrapper)->getPlaybackStreamService()->getStreamSummariesForInitiatingPlayer(targetPlayerId, Proxy);
-    return Proxy;
-}
-
-UBCPlaybackStreamProxy *UBCPlaybackStreamProxy::GetStreamSummariesForTargetPlayer(UBrainCloudWrapper *brainCloudWrapper, const FString &targetPlayerId)
-{
-    UBCPlaybackStreamProxy *Proxy = NewObject<UBCPlaybackStreamProxy>();
-    UBCWrapperProxy::GetBrainCloudInstance(brainCloudWrapper)->getPlaybackStreamService()->getStreamSummariesForTargetPlayer(targetPlayerId, Proxy);
-    return Proxy;
-}
-
 UBCPlaybackStreamProxy *UBCPlaybackStreamProxy::GetRecentStreamsForInitiatingPlayer(UBrainCloudWrapper *brainCloudWrapper, const FString &targetPlayerId, int32 maxNumStreams)
 {
     UBCPlaybackStreamProxy *Proxy = NewObject<UBCPlaybackStreamProxy>();

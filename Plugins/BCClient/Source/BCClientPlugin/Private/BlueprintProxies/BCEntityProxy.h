@@ -112,33 +112,6 @@ class UBCEntityProxy : public UBCBlueprintCallProxyBase
     static UBCEntityProxy *GetEntitiesByType(UBrainCloudWrapper *brainCloudWrapper, const FString &entityType);
 
     /**
-    * Method returns a shared entity for the given player and entity ID.
-    * An entity is shared if its ACL allows for the currently logged
-    * in player to read the data.
-    *
-    * Service Name - Entity
-    * Service Operation - READ_SHARED_ENTITY
-    *
-    * Param - playerId The the profile ID of the player who owns the entity
-    * Param - entityId The ID of the entity that will be retrieved
-    */
-    UFUNCTION(BlueprintCallable, meta = (BlueprintInternalUseOnly = "true"), Category = "BrainCloud|Entity")
-    static UBCEntityProxy *GetSharedEntityForPlayerId(UBrainCloudWrapper *brainCloudWrapper, const FString &profileId, const FString &entityId);
-
-    /**
-    * Method returns all shared entities for the given player id.
-    * An entity is shared if its ACL allows for the currently logged
-    * in player to read the data.
-    *
-    * Service Name - Entity
-    * Service Operation - ReadShared
-    *
-    * Param - playerId The player id to retrieve shared entities for
-    */
-    UFUNCTION(BlueprintCallable, meta = (BlueprintInternalUseOnly = "true"), Category = "BrainCloud|Entity")
-    static UBCEntityProxy *GetSharedEntitiesForPlayerId(UBrainCloudWrapper *brainCloudWrapper, const FString &profileId);
-
-    /**
     * Method updates a shared entity owned by another player. This operation results in the entity
     * data being completely replaced by the passed in JSON string.
     *
@@ -218,17 +191,47 @@ class UBCEntityProxy : public UBCBlueprintCallProxyBase
     static UBCEntityProxy *IncrementUserEntityData(UBrainCloudWrapper *brainCloudWrapper, const FString &entityId, const FString &jsonData);
 
     /**
-	* Partial increment of entity data field items. Partial set of items incremented as specified.
-	*
-	* Service Name - entity
-	* Service Operation - INCREMENT_SHARED_USER_ENTITY_DATA
-	*
-	* Param - entityId The id of the entity to update
-	* Param - targetPlayerId Profile ID of the entity owner
-	* Param - jsonData The entity's data object
-	*/
+    * Partial increment of entity data field items. Partial set of items incremented as specified.
+    *
+    * Service Name - entity
+    * Service Operation - INCREMENT_SHARED_USER_ENTITY_DATA
+    *
+    * Param - entityId The id of the entity to update
+    * Param - targetPlayerId Profile ID of the entity owner
+    * Param - jsonData The entity's data object
+    */
     UFUNCTION(BlueprintCallable, meta = (BlueprintInternalUseOnly = "true"), Category = "BrainCloud|Entity")
     static UBCEntityProxy *IncrementSharedUserEntityData(UBrainCloudWrapper *brainCloudWrapper, const FString &entityId, const FString &targetProfileId, const FString &jsonData);
+
+    /**
+    * Method returns a shared entity for the given player and entity ID.
+    * An entity is shared if its ACL allows for the currently logged
+    * in player to read the data.
+    *
+    * Service Name - Entity
+    * Service Operation - READ_SHARED_ENTITY
+    *
+    * @param profileId The the profile ID of the player who owns the entity
+    * @param entityId The ID of the entity that will be retrieved
+    * @param callback The method to be invoked when the server response is received
+    */
+    UFUNCTION(BlueprintCallable, meta = (BlueprintInternalUseOnly = "true"), Category = "BrainCloud|Entity")
+    static UBCEntityProxy *GetSharedEntityForProfileId(UBrainCloudWrapper *brainCloudWrapper, const FString &entityId, const FString &profileId);
+
+    /**
+     * Method returns all shared entities for the given player id.
+     * An entity is shared if its ACL allows for the currently logged
+     * in player to read the data.
+     *
+     * Service Name - Entity
+     * Service Operation - ReadShared
+     *
+     * @param profileId The player id to retrieve shared entities for
+     * @param callback The method to be invoked when the server response is received
+     */
+    UFUNCTION(BlueprintCallable, meta = (BlueprintInternalUseOnly = "true"), Category = "BrainCloud|Entity")
+    static UBCEntityProxy *GetSharedEntitiesForProfileId(UBrainCloudWrapper *brainCloudWrapper, const FString &profileId);
+
 
     /**
     * Method gets list of shared entities for the specified player based on type and/or where clause
@@ -236,11 +239,12 @@ class UBCEntityProxy : public UBCBlueprintCallProxyBase
     * Service Name - Entity
     * Service Operation - READ_SHARED_ENTITIES_LIST
     *
-    * @param playerId The player ID to retrieve shared entities for
+    * @param profileId The player ID to retrieve shared entities for
     * @param whereJson Mongo style query
     * @param orderByJson Sort order
     * @param maxReturn The maximum number of entities to return
+    * @param callback The method to be invoked when the server response is received
     */
     UFUNCTION(BlueprintCallable, meta = (BlueprintInternalUseOnly = "true"), Category = "BrainCloud|Entity")
-    static UBCEntityProxy *GetSharedEntitiesListForPlayerId(UBrainCloudWrapper *brainCloudWrapper, const FString &profileId, const FString &whereJson, const FString &orderByJson, int32 maxReturn);
+    static UBCEntityProxy *GetSharedEntitiesListForProfileId(UBrainCloudWrapper *brainCloudWrapper, const FString &profileId, const FString &whereJson, const FString &orderByJson, int32 maxReturn);
 };

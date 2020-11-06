@@ -108,11 +108,6 @@ public:
   void getEntitiesByType(const FString &entityType, IServerCallback *callback);
 
   /**
-    * @deprecated Use getSharedEntityForProfileId instead - removal after September 1 2017
-    */
-  void getSharedEntityForPlayerId(const FString &profileId, const FString &entityId, IServerCallback *callback = nullptr);
-
-  /**
     * Method returns a shared entity for the given player and entity ID.
     * An entity is shared if its ACL allows for the currently logged
     * in player to read the data.
@@ -127,11 +122,6 @@ public:
   void getSharedEntityForProfileId(const FString &profileId, const FString &entityId, IServerCallback *callback = nullptr);
 
   /**
-    * @deprecated Use getSharedEntitiesForProfileId instead - removal after September 1 2017
-    */
-  void getSharedEntitiesForPlayerId(const FString &profileId, IServerCallback *callback);
-
-  /**
      * Method returns all shared entities for the given player id.
      * An entity is shared if its ACL allows for the currently logged
      * in player to read the data.
@@ -143,11 +133,6 @@ public:
      * @param callback The method to be invoked when the server response is received
      */
   void getSharedEntitiesForProfileId(const FString &profileId, IServerCallback *callback);
-
-  /**
-    * @deprecated Use getSharedEntitiesListForProfileId instead - removal after September 1 2017
-    */
-  void getSharedEntitiesListForPlayerId(const FString &profileId, const FString &whereJson, const FString &orderByJson, int32 maxReturn, IServerCallback *callback = nullptr);
 
   /**
     * Method gets list of shared entities for the specified player based on type and/or where clause

@@ -88,16 +88,6 @@ void BrainCloudEntity::deleteSingleton(const FString &entityType, IServerCallbac
     _client->sendRequest(sc);
 }
 
-void BrainCloudEntity::getSharedEntityForPlayerId(const FString &profileId, const FString &entityId, IServerCallback *callback)
-{
-    TSharedRef<FJsonObject> message = MakeShareable(new FJsonObject());
-    message->SetStringField(OperationParam::EntityServiceTargetPlayerId.getValue(), profileId);
-    message->SetStringField(OperationParam::EntityServiceEntityId.getValue(), entityId);
-
-    ServerCall *sc = new ServerCall(ServiceName::Entity, ServiceOperation::ReadSharedEntity, message, callback);
-    _client->sendRequest(sc);
-}
-
 void BrainCloudEntity::getSharedEntityForProfileId(const FString &profileId, const FString &entityId, IServerCallback *callback)
 {
     TSharedRef<FJsonObject> message = MakeShareable(new FJsonObject());
@@ -108,38 +98,12 @@ void BrainCloudEntity::getSharedEntityForProfileId(const FString &profileId, con
     _client->sendRequest(sc);
 }
 
-void BrainCloudEntity::getSharedEntitiesForPlayerId(const FString &profileId, IServerCallback *callback)
-{
-    TSharedRef<FJsonObject> message = MakeShareable(new FJsonObject());
-    message->SetStringField(OperationParam::EntityServiceTargetPlayerId.getValue(), profileId);
-
-    ServerCall *sc = new ServerCall(ServiceName::Entity, ServiceOperation::ReadShared, message, callback);
-    _client->sendRequest(sc);
-}
-
 void BrainCloudEntity::getSharedEntitiesForProfileId(const FString &profileId, IServerCallback *callback)
 {
     TSharedRef<FJsonObject> message = MakeShareable(new FJsonObject());
     message->SetStringField(OperationParam::EntityServiceTargetPlayerId.getValue(), profileId);
 
     ServerCall *sc = new ServerCall(ServiceName::Entity, ServiceOperation::ReadShared, message, callback);
-    _client->sendRequest(sc);
-}
-
-void BrainCloudEntity::getSharedEntitiesListForPlayerId(const FString &profileId, const FString &whereJson, const FString &orderByJson, int32 maxReturn, IServerCallback *callback)
-{
-    TSharedRef<FJsonObject> message = MakeShareable(new FJsonObject());
-
-    message->SetStringField(OperationParam::EntityServiceTargetPlayerId.getValue(), profileId);
-    if (OperationParam::isOptionalParamValid(whereJson))
-        message->SetObjectField(OperationParam::GlobalEntityServiceWhere.getValue(), JsonUtil::jsonStringToValue(whereJson));
-
-    if (OperationParam::isOptionalParamValid(orderByJson))
-        message->SetObjectField(OperationParam::GlobalEntityServiceOrderBy.getValue(), JsonUtil::jsonStringToValue(orderByJson));
-
-    message->SetNumberField(OperationParam::GlobalEntityServiceMaxReturn.getValue(), maxReturn);
-
-    ServerCall *sc = new ServerCall(ServiceName::Entity, ServiceOperation::ReadSharedEntitesList, message, callback);
     _client->sendRequest(sc);
 }
 

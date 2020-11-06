@@ -72,18 +72,6 @@ class UBCPlaybackStreamProxy : public UBCBlueprintCallProxyBase
     static UBCPlaybackStreamProxy *AddEvent(UBrainCloudWrapper *brainCloudWrapper, const FString &playbackStreamId, const FString &jsonEventData, const FString &jsonSummary);
 
     /**
-    * @deprecated Use GetRecentStreamsForInitiatingPlayer instead - removal after September 1 2017
-    */
-    UFUNCTION(BlueprintCallable, meta = (BlueprintInternalUseOnly = "true"), Category = "BrainCloud|Playback Stream")
-    static UBCPlaybackStreamProxy *GetStreamSummariesForInitiatingPlayer(UBrainCloudWrapper *brainCloudWrapper, const FString &targetPlayerId);
-
-    /**
-    * @deprecated Use GetRecentStreamsForTargetPlayer instead - removal after September 1 2017
-    */
-    UFUNCTION(BlueprintCallable, meta = (BlueprintInternalUseOnly = "true"), Category = "BrainCloud|Playback Stream")
-    static UBCPlaybackStreamProxy *GetStreamSummariesForTargetPlayer(UBrainCloudWrapper *brainCloudWrapper, const FString &targetPlayerId);
-
-    /**
 	* Gets recent stream summaries for initiating player
 	*
 	* Service Name - PlaybackStream

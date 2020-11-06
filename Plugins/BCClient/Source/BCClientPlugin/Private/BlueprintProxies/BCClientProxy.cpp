@@ -108,12 +108,6 @@ void UBCClientProxy::SetUploadLowTransferRateThreshold(UBrainCloudWrapper *brain
 	UBCWrapperProxy::GetBrainCloudInstance(brainCloudWrapper)->getBCClient()->setUploadLowTransferRateThreshold(bytesPerSec);
 }
 
-//Getters
-const FString &UBCClientProxy::GetGameId(UBrainCloudWrapper *brainCloudWrapper)
-{
-	return UBCWrapperProxy::GetBrainCloudInstance(brainCloudWrapper)->getBCClient()->getAppId();
-}
-
 const FString &UBCClientProxy::GetAppId(UBrainCloudWrapper *brainCloudWrapper)
 {
 	return UBCWrapperProxy::GetBrainCloudInstance(brainCloudWrapper)->getBCClient()->getAppId();
@@ -127,11 +121,6 @@ const FString &UBCClientProxy::GetSessionId(UBrainCloudWrapper *brainCloudWrappe
 const FString &UBCClientProxy::GetReleasePlatform(UBrainCloudWrapper *brainCloudWrapper)
 {
 	return UBCWrapperProxy::GetBrainCloudInstance(brainCloudWrapper)->getBCClient()->getReleasePlatform();
-}
-
-const FString &UBCClientProxy::GetGameVersion(UBrainCloudWrapper *brainCloudWrapper)
-{
-	return UBCWrapperProxy::GetBrainCloudInstance(brainCloudWrapper)->getBCClient()->getAppVersion();
 }
 
 const FString &UBCClientProxy::GetBrainCloudClientVersion(UBrainCloudWrapper *brainCloudWrapper)

@@ -14,12 +14,6 @@ class UBCPlayerStatisticsEventProxy : public UBCBlueprintCallProxyBase
     UBCPlayerStatisticsEventProxy(const FObjectInitializer &ObjectInitializer);
 
     /**
-	* @deprecated Use TriggerStatsEvent instead
-	*/
-    UFUNCTION(BlueprintCallable, meta = (BlueprintInternalUseOnly = "true"), Category = "BrainCloud|Player Statistics Event")
-    static UBCPlayerStatisticsEventProxy *TriggerPlayerStatisticsEvent(UBrainCloudWrapper *brainCloudWrapper, FString eventName, int32 eventMultiplier);
-
-    /**
     * Trigger an event server side that will increase the users statistics.
     * This may cause one or more awards to be sent back to the user -
     * could be achievements, experience, etc. Achievements will be sent by this
@@ -36,12 +30,6 @@ class UBCPlayerStatisticsEventProxy : public UBCBlueprintCallProxyBase
     */
     UFUNCTION(BlueprintCallable, meta = (BlueprintInternalUseOnly = "true"), Category = "BrainCloud|Player Statistics Event")
     static UBCPlayerStatisticsEventProxy *TriggerStatsEvent(UBrainCloudWrapper *brainCloudWrapper, FString eventName, int32 eventMultiplier);
-
-    /**
-	* @deprecated Use TriggerStatsEvents instead
-	*/
-    UFUNCTION(BlueprintCallable, meta = (BlueprintInternalUseOnly = "true"), Category = "BrainCloud|Player Statistics Event")
-    static UBCPlayerStatisticsEventProxy *TriggerPlayerStatisticsEvents(UBrainCloudWrapper *brainCloudWrapper, FString jsonData);
 
     /**
     * See documentation for TriggerStatsEvent for more

@@ -319,10 +319,6 @@ class BCCLIENTPLUGIN_API BrainCloudClient
 	BrainCloudRelay *getRelayService();
 	BrainCloudTimeUtils *getUtil();
 	
-	/**
-	* @deprecated Use getAppId instead - removal after September 1 2017
-	*/
-	const FString &getGameId() { return _appId; };
 	const FString &getAppId() { return _appId; };
 	const FString &getSessionId();
 	const FString &getReleasePlatform() { return _releasePlatform; };
@@ -331,10 +327,6 @@ class BCCLIENTPLUGIN_API BrainCloudClient
 	const FString &getRTTConnectionId();
 	const FString &getEventServer();
 
-	/**
-	* @deprecated Use getAppVersion instead - removal after September 1 2017
-	*/
-	const FString &getGameVersion() { return _appVersion; }
 	const FString &getAppVersion() { return _appVersion; };
 	const FString &getBrainCloudClientVersion() { return s_brainCloudClientVersion; };
 

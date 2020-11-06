@@ -55,13 +55,6 @@ UBCFriendProxy *UBCFriendProxy::ReadFriendsEntities(UBrainCloudWrapper *brainClo
 	return Proxy;
 }
 
-UBCFriendProxy *UBCFriendProxy::ReadFriendPlayerState(UBrainCloudWrapper *brainCloudWrapper, const FString &friendId)
-{
-	UBCFriendProxy *Proxy = NewObject<UBCFriendProxy>();
-	UBCWrapperProxy::GetBrainCloudInstance(brainCloudWrapper)->getFriendService()->readFriendUserState(friendId, Proxy);
-	return Proxy;
-}
-
 UBCFriendProxy *UBCFriendProxy::FindUsersByExactName(UBrainCloudWrapper *brainCloudWrapper, const FString &searchText, int32 maxResults)
 {
 	UBCFriendProxy *Proxy = NewObject<UBCFriendProxy>();
@@ -73,20 +66,6 @@ UBCFriendProxy *UBCFriendProxy::FindUsersBySubstrName(UBrainCloudWrapper *brainC
 {
 	UBCFriendProxy *Proxy = NewObject<UBCFriendProxy>();
 	UBCWrapperProxy::GetBrainCloudInstance(brainCloudWrapper)->getFriendService()->findUsersBySubstrName(searchText, maxResults, Proxy);
-	return Proxy;
-}
-
-UBCFriendProxy *UBCFriendProxy::FindPlayerByUniversalId(UBrainCloudWrapper *brainCloudWrapper, const FString &searchText, int32 maxResults)
-{
-	UBCFriendProxy *Proxy = NewObject<UBCFriendProxy>();
-	UBCWrapperProxy::GetBrainCloudInstance(brainCloudWrapper)->getFriendService()->findUserByUniversalId(searchText, maxResults, Proxy);
-	return Proxy;
-}
-
-UBCFriendProxy *UBCFriendProxy::FindUserByUniversalId(UBrainCloudWrapper *brainCloudWrapper, const FString &searchText, int32 maxResults)
-{
-	UBCFriendProxy *Proxy = NewObject<UBCFriendProxy>();
-	UBCWrapperProxy::GetBrainCloudInstance(brainCloudWrapper)->getFriendService()->findUserByUniversalId(searchText, maxResults, Proxy);
 	return Proxy;
 }
 
@@ -136,5 +115,12 @@ UBCFriendProxy *UBCFriendProxy::GetUsersOnlineStatus(UBrainCloudWrapper *brainCl
 {
 	UBCFriendProxy *Proxy = NewObject<UBCFriendProxy>();
 	UBCWrapperProxy::GetBrainCloudInstance(brainCloudWrapper)->getFriendService()->getUsersOnlineStatus(profileIds, Proxy);
+	return Proxy;
+}
+
+UBCFriendProxy *UBCFriendProxy::ReadFriendUserState(UBrainCloudWrapper *brainCloudWrapper, const FString &friendId)
+{
+	UBCFriendProxy *Proxy = NewObject<UBCFriendProxy>();
+	UBCWrapperProxy::GetBrainCloudInstance(brainCloudWrapper)->getFriendService()->readFriendUserState(friendId, Proxy);
 	return Proxy;
 }

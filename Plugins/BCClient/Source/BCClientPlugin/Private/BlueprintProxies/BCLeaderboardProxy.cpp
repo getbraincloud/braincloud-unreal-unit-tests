@@ -122,7 +122,7 @@ UBCLeaderboardProxy *UBCLeaderboardProxy::PostScoreToDynamicGroupLeaderboardUTC(
 																		ESocialLeaderboardType leaderboardType, ERotationType rotationType, int64 rotationStart, int32 retainedCount)
 {
 	UBCLeaderboardProxy *Proxy = NewObject<UBCLeaderboardProxy>();
-	UBCWrapperProxy::GetBrainCloudInstance(brainCloudWrapper)->getLeaderboardService()->postScoreToDynamicGroupLeaderboard(leaderboardId, groupId, score, jsonData, leaderboardType, rotationType, rotationStart, retainedCount, Proxy);
+	UBCWrapperProxy::GetBrainCloudInstance(brainCloudWrapper)->getLeaderboardService()->postScoreToDynamicGroupLeaderboardUTC(leaderboardId, groupId, score, jsonData, leaderboardType, rotationType, rotationStart, retainedCount, Proxy);
 	return Proxy;
 }
 
@@ -130,10 +130,9 @@ UBCLeaderboardProxy *UBCLeaderboardProxy::PostScoreToDynamicLeaderboardDaysUTC(U
 																			ESocialLeaderboardType leaderboardType, int64 rotationStart, int32 retainedCount, int32 numDaysToRotate)
 {
 	UBCLeaderboardProxy *Proxy = NewObject<UBCLeaderboardProxy>();
-	UBCWrapperProxy::GetBrainCloudInstance(brainCloudWrapper)->getLeaderboardService()->postScoreToDynamicLeaderboardDays(leaderboardId, score, jsonData, leaderboardType, rotationStart, retainedCount, numDaysToRotate, Proxy);
+	UBCWrapperProxy::GetBrainCloudInstance(brainCloudWrapper)->getLeaderboardService()->postScoreToDynamicLeaderboardDaysUTC(leaderboardId, score, jsonData, leaderboardType, rotationStart, retainedCount, numDaysToRotate, Proxy);
 	return Proxy;
 }
-
 
 UBCLeaderboardProxy *UBCLeaderboardProxy::RemovePlayerScore(UBrainCloudWrapper *brainCloudWrapper, const FString &leaderboardId, int32 versionId)
 {

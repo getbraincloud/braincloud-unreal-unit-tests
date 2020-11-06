@@ -78,15 +78,6 @@ void BrainCloudFriend::readFriendsEntities(const FString &entityType, IServerCal
 	_client->sendRequest(sc);
 }
 
-void BrainCloudFriend::readFriendPlayerState(const FString &friendId, IServerCallback *callback)
-{
-	TSharedRef<FJsonObject> message = MakeShareable(new FJsonObject());
-	message->SetStringField(OperationParam::FriendServiceReadPlayerStateFriendId.getValue(), friendId);
-
-	ServerCall *sc = new ServerCall(ServiceName::Friend, ServiceOperation::ReadFriendsPlayerState, message, callback);
-	_client->sendRequest(sc);
-}
-
 void BrainCloudFriend::readFriendUserState(const FString &friendId, IServerCallback *callback)
 {
 	TSharedRef<FJsonObject> message = MakeShareable(new FJsonObject());
@@ -116,16 +107,6 @@ void BrainCloudFriend::findUsersBySubstrName(const FString &searchText, int32 ma
 	_client->sendRequest(sc);
 }
 
-void BrainCloudFriend::findPlayerByUniversalId(const FString &searchText, int32 maxResults, IServerCallback *callback)
-{
-	TSharedRef<FJsonObject> message = MakeShareable(new FJsonObject());
-	message->SetStringField(OperationParam::FriendServiceSearchText.getValue(), searchText);
-	message->SetNumberField(OperationParam::FriendServiceMaxResults.getValue(), maxResults);
-
-	ServerCall *sc = new ServerCall(ServiceName::Friend, ServiceOperation::FindPlayerByUniversalId, message, callback);
-	_client->sendRequest(sc);
-}
-
 void BrainCloudFriend::findUserByExactUniversalId(const FString &searchText, IServerCallback *callback)
 {
 	TSharedRef<FJsonObject> message = MakeShareable(new FJsonObject());
@@ -152,16 +133,6 @@ void BrainCloudFriend::findUsersByNameStartingWith(const FString &searchText, in
 	message->SetNumberField(OperationParam::FriendServiceMaxResults.getValue(), maxResults);
 
 	ServerCall *sc = new ServerCall(ServiceName::Friend, ServiceOperation::FindUsersByNameStartingWith, message, callback);
-	_client->sendRequest(sc);
-}
-
-void BrainCloudFriend::findUserByUniversalId(const FString &searchText, int32 maxResults, IServerCallback *callback)
-{
-	TSharedRef<FJsonObject> message = MakeShareable(new FJsonObject());
-	message->SetStringField(OperationParam::FriendServiceSearchText.getValue(), searchText);
-	message->SetNumberField(OperationParam::FriendServiceMaxResults.getValue(), maxResults);
-
-	ServerCall *sc = new ServerCall(ServiceName::Friend, ServiceOperation::FindPlayerByUniversalId, message, callback);
 	_client->sendRequest(sc);
 }
 

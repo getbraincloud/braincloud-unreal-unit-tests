@@ -101,23 +101,6 @@ public:
   UFUNCTION(BlueprintCallable, meta = (BlueprintInternalUseOnly = "true"), Category = "BrainCloud|Gamification")
   static UBCGamificationProxy *AwardAchievements(UBrainCloudWrapper *brainCloudWrapper, const TArray<FString> &achievements);
 
-
-  /**
-	* @deprecated 
-	*/
-
-  /**
-    * Resets the specified milestones' statuses to LOCKED.
-    *
-    * Service Name - Gamification
-    * Service Operation - ResetMilestones
-    *
-    * Param - milestoneIds List of milestones to reset
-    */
-  UFUNCTION(BlueprintCallable, meta = (BlueprintInternalUseOnly = "true"), Category = "BrainCloud|Gamification")
-  static UBCGamificationProxy *ResetMilestones(UBrainCloudWrapper *brainCloudWrapper, const TArray<FString> &milestoneIds);
-
-
   /**
     * Method retrieves all of the quests defined for the game.
     *

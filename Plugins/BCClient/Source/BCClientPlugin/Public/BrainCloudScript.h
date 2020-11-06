@@ -35,20 +35,6 @@ class BCCLIENTPLUGIN_API BrainCloudScript
     * @param callback The method to be invoked when the server response is received
     * @see The API documentation site for more details on cloud code
     */
-    void scheduleRunScriptUTC(const FString &scriptName, const FString &jsonScriptData, const struct FDateTime startDateInUTC, IServerCallback *callback = nullptr);
-
-    /**
-    * Allows cloud script executions to be scheduled
-    *
-    * Service Name - Script
-    * Service Operation - ScheduleCloudScript
-    *
-    * @param scriptName The name of the script to be run
-    * @param jsonScriptData Data to be sent to the script in json format
-    * @param startDateInUTC The start date as a time struct
-    * @param callback The method to be invoked when the server response is received
-    * @see The API documentation site for more details on cloud code
-    */
     void scheduleRunScriptMillisUTC(const FString &scriptName, const FString &jsonScriptData, int64 startDateInUTC, IServerCallback *callback = nullptr);
 
 
