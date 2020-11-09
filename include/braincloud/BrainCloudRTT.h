@@ -17,6 +17,14 @@ namespace BrainCloud
 	public:
 		BrainCloudRTT(RTTComms* in_comms, BrainCloudClient* in_client);
 		
+		enum RTTConnectionStatus
+		{
+			Connected,
+			Disconnected,
+			Connecting,
+			Disconnecting
+		};
+
 		/**
 		 * Requests the event server address
 		 *
@@ -46,6 +54,11 @@ namespace BrainCloud
 		 *returns true if RTT is enabled 
 		 */
 		bool getRTTEnabled();
+
+		/**
+		 *returns rtt connection Status
+		 */
+		BrainCloudRTTRTTConnectionStatus getConnectionStatus();
 
 		const std::string& getRTTConnectionId() const;
 

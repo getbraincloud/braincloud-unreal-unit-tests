@@ -44,7 +44,7 @@ namespace BrainCloud
         , _loggingEnabled(false)
         , _connectCallback(NULL)
         , _socket(NULL)
-        , _rttConnectionStatus(RTTConnectionStatus::Disconnected)
+        , _rttConnectionStatus(BrainCloudRTT::RTTConnectionStatus::Disconnected)
         , _receivingRunning(false)
         , _heartbeatRunning(false)
         , _useWebSocket(true)
@@ -78,12 +78,12 @@ namespace BrainCloud
     {
         if (isRTTEnabled())
         {
-            _rttConnectionStatus = RTTConnectionStatus::Disconnecting;
+            _rttConnectionStatus = BrainCloudRTT::RTTConnectionStatus::Disconnecting;
             closeSocket();
             _eventQueueMutex.lock();
             _callbackEventQueue.clear();
             _eventQueueMutex.unlock();
-            _rttConnectionStatus = RTTConnectionStatus::Disconnected;
+            _rttConnectionStatus = BrainCloudRTT::RTTConnectionStatus::Disconnected;
         }
     }
 
@@ -114,7 +114,7 @@ namespace BrainCloud
 
     void RTTComms::enableRTT(IRTTConnectCallback* in_callback, bool in_useWebSocket)
     {
-        if(isRTTEnabled() || _rttConnectionStatus == RTTConnectionStatus::Connecting)
+        if(isRTTEnabled() || _rttConnectionStatus == BrainCloudRTT::RTTConnectionStatus::Connecting)
         {
             return;
         }
@@ -133,7 +133,7 @@ namespace BrainCloud
 
     void RTTComms::disableRTT()
     {
-        if(!isRTTEnabled() || _rttConnectionStatus == RTTConnectionStatus::Disconnecting)
+        if(!isRTTEnabled() || _rttConnectionStatus == BrainCloudRTT::RTTConnectionStatus::Disconnecting)
         {
             return;
         }
@@ -145,10 +145,10 @@ namespace BrainCloud
 
     bool RTTComms::isRTTEnabled()
     {
-        return _rttConnectionStatus == RTTConnectionStatus::Connected;
+        return _rttConnectionStatus == BrainCloudRTT::RTTConnectionStatus::Connected;
     }
 
-    RTTComms::RTTConnectionStatus RTTComms::getConnectionStatus()
+    BrainCloudRTT::RTTConnectionStatus RTTComms::getConnectionStatus()
     {
         return _rttConnectionStatus;
     }
@@ -326,7 +326,7 @@ namespace BrainCloud
 
     void RTTComms::connect()
     {
-        _rttConnectionStatus = RTTConnectionStatus::Connecting;
+        _rttConnectionStatus = BrainCloudRTT::RTTConnectionStatus::Connecting;
 #if (TARGET_OS_WATCH != 1)
         std::thread connectionThread([this]
         {
@@ -382,11 +382,11 @@ namespace BrainCloud
                 {
                     closeSocket();
                     failedToConnect();
-                    _rttConnectionStatus = RTTConnectionStatus::Disconnected;
+                    _rttConnectionStatus = BrainCloudRTT::RTTConnectionStatus::Disconnected;
                     return;
                 }
 
-                _rttConnectionStatus = RTTConnectionStatus::Connected;
+                _rttConnectionStatus = BrainCloudRTT::RTTConnectionStatus::Connected;
             }
 
             _lastHeartbeatTime = TimeUtil::getCurrentTimeMillis();

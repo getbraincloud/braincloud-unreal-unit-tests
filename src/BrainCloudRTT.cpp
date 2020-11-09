@@ -37,6 +37,11 @@ namespace BrainCloud
         return m_commsLayer->isRTTEnabled();
     }
 
+    BrainCloudRTT::RTTConnectionStatus BrainCloudRTT::getConnectionStatus()
+    {
+        return m_commsLayer->getConnectionStatus();
+    }
+
     void BrainCloudRTT::registerRTTEventCallback(IRTTCallback* in_callback)
     {
         m_commsLayer->registerRTTCallback(ServiceName::Event, in_callback);

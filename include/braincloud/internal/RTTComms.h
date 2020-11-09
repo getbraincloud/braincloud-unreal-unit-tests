@@ -2,6 +2,7 @@
 
 #include "braincloud/IServerCallback.h"
 #include "braincloud/ServiceName.h"
+#include "braincloud/BrainCloudRTT.h"
 
 #include <json/json.h>
 
@@ -29,14 +30,6 @@ namespace BrainCloud
         RTTComms(BrainCloudClient* in_client);
         virtual ~RTTComms();
 
-        enum RTTConnectionStatus
-        {
-            Connected,
-            Disconnected,
-            Connecting,
-            Disconnecting
-        };
-
         void initialize();
         bool isInitialized() const;
         void shutdown();
@@ -46,7 +39,7 @@ namespace BrainCloud
         void disableRTT();
         bool isRTTEnabled();
         bool getLoggingEnabled();
-        RTTConnectionStatus getConnectionStatus();
+        BrainCloudRTT::RTTConnectionStatus getConnectionStatus();
         void enableLogging(bool isEnabled);
         const std::string& getConnectionId();
 
@@ -112,7 +105,7 @@ namespace BrainCloud
         Json::Value _endpoint;
 
         ISocket* _socket;
-        RTTConnectionStatus _rttConnectionStatus;
+        BrainCloudRTT::RTTConnectionStatus _rttConnectionStatus;
         std::mutex _socketMutex;
         std::condition_variable _threadsCondition;
         std::mutex _heartBeatMutex;
