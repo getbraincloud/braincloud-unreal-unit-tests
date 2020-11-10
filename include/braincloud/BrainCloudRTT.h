@@ -58,7 +58,7 @@ namespace BrainCloud
 		/**
 		 *returns rtt connection Status
 		 */
-		BrainCloudRTTRTTConnectionStatus getConnectionStatus();
+		BrainCloudRTT::RTTConnectionStatus getConnectionStatus();
 
 		const std::string& getRTTConnectionId() const;
 
