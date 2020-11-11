@@ -12,7 +12,6 @@
 #include "BrainCloudPlayerStatistics.h"
 #include "BrainCloudTime.h"
 #include "BrainCloudPlayerStatisticsEvent.h"
-#include "BrainCloudProduct.h"
 #include "BrainCloudIdentity.h"
 #include "BrainCloudItemCatalog.h"
 #include "BrainCloudUserItems.h"
@@ -286,7 +285,6 @@ class BCCLIENTPLUGIN_API BrainCloudClient
 	BrainCloudPlayerStatistics *getPlayerStatisticsService();
 	BrainCloudTime *getTimeService();
 	BrainCloudPlayerStatisticsEvent *getPlayerStatisticsEventService();
-	BrainCloudProduct *getProductService();
 	BrainCloudIdentity *getIdentityService();
 	BrainCloudItemCatalog *getItemCatalogService();
 	BrainCloudUserItems *getUserItemsService();
@@ -533,7 +531,6 @@ class BCCLIENTPLUGIN_API BrainCloudClient
 	BrainCloudPlayerStatistics *_playerStatisticsService = nullptr;
 	BrainCloudTime *_timeService = nullptr;
 	BrainCloudPlayerStatisticsEvent *_playerStatisticsEventService = nullptr;
-	BrainCloudProduct *_productService = nullptr;
 	BrainCloudIdentity *_identityService = nullptr;
 	BrainCloudItemCatalog *_itemCatalogService = nullptr;
 	BrainCloudUserItems *_userItemsService = nullptr;

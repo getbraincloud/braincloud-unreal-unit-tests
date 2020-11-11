@@ -38,7 +38,6 @@ const ServiceName ServiceName::AppStore = ServiceName("appStore");
 
 const ServiceName ServiceName::Leaderboard = ServiceName("leaderboard");
 const ServiceName ServiceName::Event = ServiceName("event");
-const ServiceName ServiceName::Product = ServiceName("product");
 const ServiceName ServiceName::PlayerStatistics = ServiceName("playerStatistics");
 const ServiceName ServiceName::GlobalStatistics = ServiceName("globalGameStatistics");
 const ServiceName ServiceName::AsyncMatch = ServiceName("asyncMatch");

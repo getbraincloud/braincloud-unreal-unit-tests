@@ -18,7 +18,6 @@ class BrainCloudClient;
 #include "BrainCloudPlayerStatistics.h"
 #include "BrainCloudTime.h"
 #include "BrainCloudPlayerStatisticsEvent.h"
-#include "BrainCloudProduct.h"
 #include "BrainCloudIdentity.h"
 #include "BrainCloudItemCatalog.h"
 #include "BrainCloudUserItems.h"
@@ -657,7 +656,6 @@ class BCCLIENTPLUGIN_API UBrainCloudWrapper : public UObject, public IServerCall
     BrainCloudPlayerStatistics *getPlayerStatisticsService() { return _client->getPlayerStatisticsService(); }
     BrainCloudTime *getTimeService() { return _client->getTimeService(); }
     BrainCloudPlayerStatisticsEvent *getPlayerStatisticsEventService() { return _client->getPlayerStatisticsEventService(); }
-    BrainCloudProduct *getProductService() { return _client->getProductService(); }
     BrainCloudIdentity *getIdentityService() { return _client->getIdentityService(); }
     BrainCloudItemCatalog *getItemCatalogService() { return _client->getItemCatalogService(); }
     BrainCloudUserItems *getUserItemsService() { return _client->getUserItemsService(); }

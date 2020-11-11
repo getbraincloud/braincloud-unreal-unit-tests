@@ -35,7 +35,6 @@ public:
 
   static const ServiceName Leaderboard;
   static const ServiceName Event;
-  static const ServiceName Product;
   static const ServiceName PlayerStatistics;
   static const ServiceName GlobalStatistics;
   static const ServiceName AsyncMatch;
