@@ -200,10 +200,6 @@ class UBCClientProxy : public UBCBlueprintCallProxyBase
 	UFUNCTION(BlueprintCallable, Category = "BrainCloud|Client")
 	static void SetErrorCallbackOn202Status(UBrainCloudWrapper *brainCloudWrapper, bool isError);
 
-	//Getters
-	UFUNCTION(BlueprintCallable, Category = "BrainCloud|Client")
-	static const FString &GetGameId(UBrainCloudWrapper *brainCloudWrapper);
-
 	UFUNCTION(BlueprintCallable, Category = "BrainCloud|Client")
 	static const FString &GetAppId(UBrainCloudWrapper *brainCloudWrapper);
 
@@ -212,9 +208,6 @@ class UBCClientProxy : public UBCBlueprintCallProxyBase
 
 	UFUNCTION(BlueprintCallable, Category = "BrainCloud|Client")
 	static const FString &GetReleasePlatform(UBrainCloudWrapper *brainCloudWrapper);
-
-	UFUNCTION(BlueprintCallable, Category = "BrainCloud|Client")
-	static const FString &GetGameVersion(UBrainCloudWrapper *brainCloudWrapper);
 
 	UFUNCTION(BlueprintCallable, Category = "BrainCloud|Client")
 	static const FString &GetBrainCloudClientVersion(UBrainCloudWrapper *brainCloudWrapper);

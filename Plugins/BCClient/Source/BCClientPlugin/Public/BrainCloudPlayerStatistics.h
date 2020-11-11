@@ -10,10 +10,6 @@ class BCCLIENTPLUGIN_API BrainCloudPlayerStatistics
   public:
 	BrainCloudPlayerStatistics(BrainCloudClient *client);
 
-	/**
-	* @deprecated Use readAllUserStats instead - removal after September 1 2017
-	*/
-	void readAllPlayerStats(IServerCallback *callback = nullptr);
 
 	/**
 	 * Read all available player statistics.
@@ -24,11 +20,6 @@ class BCCLIENTPLUGIN_API BrainCloudPlayerStatistics
 	 * @param callback The method to be invoked when the server response is received
 	 */
 	void readAllUserStats(IServerCallback *callback = nullptr);
-
-	/**
-	* @deprecated Use readUserStatsSubset instead - removal after September 1 2017
-	*/
-	void readPlayerStatsSubset(const TArray<FString> &playerStats, IServerCallback *callback = nullptr);
 
 	/**
 	 * Reads a subset of user statistics.
@@ -42,11 +33,6 @@ class BCCLIENTPLUGIN_API BrainCloudPlayerStatistics
 	void readUserStatsSubset(const TArray<FString> &playerStats, IServerCallback *callback = nullptr);
 
 	/**
-	* @deprecated Use resetAllUserStats instead - removal after September 1 2017
-	*/
-	void resetAllPlayerStats(IServerCallback *callback = nullptr);
-
-	/**
 	 * Reset all of the statistics for this user back to their initial value.
 	 *
 	 * Service Name - PlayerStatistics
@@ -55,11 +41,6 @@ class BCCLIENTPLUGIN_API BrainCloudPlayerStatistics
 	 * @param callback The method to be invoked when the server response is received
 	 */
 	void resetAllUserStats(IServerCallback *callback = nullptr);
-
-	/**
-	* @deprecated Use readUserStatisticsByCategory instead - removal after September 1 2017
-	*/
-	void readPlayerStatisticsByCategory(const FString &category, IServerCallback *callback = nullptr);
 
 	/**
 	* Method retrieves the user statistics for the given category.
@@ -71,11 +52,6 @@ class BCCLIENTPLUGIN_API BrainCloudPlayerStatistics
 	* @param callback Method to be invoked when the server response is received.
 	*/
 	void readUserStatisticsByCategory(const FString &category, IServerCallback *callback = nullptr);
-
-	/**
-	* @deprecated Use incrementUserStats instead - removal after September 1 2017
-	*/
-	void incrementPlayerStats(const FString &jsonData, IServerCallback *callback = nullptr);
 
 	/**
 	 * Atomically increment (or decrement) user statistics.

@@ -177,23 +177,8 @@ class UBCLeaderboardProxy : public UBCBlueprintCallProxyBase
 	static UBCLeaderboardProxy *PostScore(UBrainCloudWrapper *brainCloudWrapper, FString leaderboardId, int32 score, FString jsonData);
 
 	/**
-	* Post the players score to the given social leaderboard.
-	* Pass leaderboard config data to dynamically create if necessary.
-	* You can optionally send a user-defined json string of data
-	* with the posted score. This string could include information
-	* relevant to the posted score.
-	*
-	* Service Name - SocialLeaderboard
-	* Service Operation - PostScoreDynamic
-	*
-	* Param - leaderboardId The leaderboard to post to
-	* Param - score The score to post
-	* Param - data Optional user-defined data to post with the score
-	* Param - leaderboardType leaderboard type
-	* Param - rotationType Type of rotation
-	* Param - rotationStart Date to start rotation calculations (Date is converted to "dd-mm-yyyy hh:mm" format)
-	* Param - retainedCount How many rotations to keep
-	*/
+	 * @deprecated Please use PostScoreToDynamicLeaderboardUTC instead. Will be removed March 2021
+	 */
 	UFUNCTION(BlueprintCallable, meta = (BlueprintInternalUseOnly = "true"), Category = "BrainCloud|Leaderboard")
 	static UBCLeaderboardProxy *PostScoreToDynamicLeaderboard(UBrainCloudWrapper *brainCloudWrapper, FString leaderboardId, int32 score, FString jsonData,
 															  ESocialLeaderboardType leaderboardType, ERotationType rotationType, FDateTime rotationStart, int32 retainedCount);
@@ -220,52 +205,12 @@ class UBCLeaderboardProxy : public UBCBlueprintCallProxyBase
 	static UBCLeaderboardProxy *PostScoreToDynamicLeaderboardUTC(UBrainCloudWrapper *brainCloudWrapper, FString leaderboardId, int32 score, FString jsonData,
 															  ESocialLeaderboardType leaderboardType, ERotationType rotationType, int64 rotationStart, int32 retainedCount);
 
-
 	/**
-	* Post the players score to the given social leaderboard.
-	* Pass leaderboard config data to dynamically create if necessary.
-	* You can optionally send a user-defined json string of data
-	* with the posted score. This string could include information
-	* relevant to the posted score.
-	*
-	* Service Name - SocialLeaderboard
-	* Service Operation - PostScoreDynamic
-	*
-	* Param - leaderboardId The leaderboard to post to
-	* Param - in_groupId the groups Id
-	* Param - score The score to post
-	* Param - data Optional user-defined data to post with the score
-	* Param - leaderboardType leaderboard type
-	* Param - rotationType Type of rotation
-	* Param - rotationStart Date to start rotation calculations (Date is converted to "dd-mm-yyyy hh:mm" format)
-	* Param - retainedCount How many rotations to keep
-	*/
+	 * @deprecated Please use PostScoreToDynamicGroupLeaderboardUTC instead. Will be removed March 2021
+	 */
 	UFUNCTION(BlueprintCallable, meta = (BlueprintInternalUseOnly = "true"), Category = "BrainCloud|Leaderboard")
 	static UBCLeaderboardProxy *PostScoreToDynamicGroupLeaderboard(UBrainCloudWrapper *brainCloudWrapper, FString leaderboardId, const FString &groupId, int32 score, FString jsonData,
 															  ESocialLeaderboardType leaderboardType, ERotationType rotationType, FDateTime rotationStart, int32 retainedCount);
-
-	/**
-	* Post the players score to the given social leaderboard.
-	* Pass leaderboard config data to dynamically create if necessary.
-	* You can optionally send a user-defined json string of data
-	* with the posted score. This string could include information
-	* relevant to the posted score.
-	*
-	* Service Name - SocialLeaderboard
-	* Service Operation - PostScoreDynamic
-	*
-	* Param - leaderboardId The leaderboard to post to
-	* Param - score The score to post
-	* Param - data Optional user-defined data to post with the score
-	* Param - leaderboardType leaderboard type
-	* Param - rotationType Type of rotation
-	* Param - rotationStart Date to start rotation calculations (Date is converted to "dd-mm-yyyy hh:mm" format)
-	* Param - retainedCount How many rotations to keep
-	* Param - numDaysToRotate How many days between each rotation
-	*/
-	UFUNCTION(BlueprintCallable, meta = (BlueprintInternalUseOnly = "true"), Category = "BrainCloud|Leaderboard")
-	static UBCLeaderboardProxy *PostScoreToDynamicLeaderboardDays(UBrainCloudWrapper *brainCloudWrapper, FString leaderboardId, int32 score, FString jsonData,
-																  ESocialLeaderboardType leaderboardType, FDateTime rotationStart, int32 retainedCount, int32 numDaysToRotate);
 
 	/**
 	* Post the players score to the given social leaderboard.
@@ -289,6 +234,13 @@ class UBCLeaderboardProxy : public UBCBlueprintCallProxyBase
 	UFUNCTION(BlueprintCallable, meta = (BlueprintInternalUseOnly = "true"), Category = "BrainCloud|Leaderboard")
 	static UBCLeaderboardProxy *PostScoreToDynamicGroupLeaderboardUTC(UBrainCloudWrapper *brainCloudWrapper, FString leaderboardId, const FString &groupId, int32 score, FString jsonData,
 															  ESocialLeaderboardType leaderboardType, ERotationType rotationType, int64 rotationStart, int32 retainedCount);
+	
+	/**
+	 * @deprecated Please use PostScoreToDynamicLeaderboardDaysUTC instead. Will be removed March 2021
+	 */
+	UFUNCTION(BlueprintCallable, meta = (BlueprintInternalUseOnly = "true"), Category = "BrainCloud|Leaderboard")
+	static UBCLeaderboardProxy *PostScoreToDynamicLeaderboardDays(UBrainCloudWrapper *brainCloudWrapper, FString leaderboardId, int32 score, FString jsonData,
+																  ESocialLeaderboardType leaderboardType, FDateTime rotationStart, int32 retainedCount, int32 numDaysToRotate);
 
 	/**
 	* Post the players score to the given social leaderboard.

@@ -14,12 +14,6 @@ class UBCPlayerStatisticsProxy : public UBCBlueprintCallProxyBase
     UBCPlayerStatisticsProxy(const FObjectInitializer &ObjectInitializer);
 
     /**
-	* @deprecated Use ReadAllUserStats instead - removal after September 1 2017
-	*/
-    UFUNCTION(BlueprintCallable, meta = (BlueprintInternalUseOnly = "true"), Category = "BrainCloud|Player Statistics")
-    static UBCPlayerStatisticsProxy *ReadAllPlayerStats(UBrainCloudWrapper *brainCloudWrapper);
-
-    /**
     * Read all available user statistics.
     *
     * Service Name - PlayerStatistics
@@ -27,12 +21,6 @@ class UBCPlayerStatisticsProxy : public UBCBlueprintCallProxyBase
     */
     UFUNCTION(BlueprintCallable, meta = (BlueprintInternalUseOnly = "true"), Category = "BrainCloud|Player Statistics")
     static UBCPlayerStatisticsProxy *ReadAllUserStats(UBrainCloudWrapper *brainCloudWrapper);
-
-    /**
-	* @deprecated Use ReadUserStatsSubset instead - removal after September 1 2017
-	*/
-    UFUNCTION(BlueprintCallable, meta = (BlueprintInternalUseOnly = "true"), Category = "BrainCloud|Player Statistics")
-    static UBCPlayerStatisticsProxy *ReadPlayerStatsSubset(UBrainCloudWrapper *brainCloudWrapper, const TArray<FString> &playerStats);
 
     /**
     * Reads a subset of user statistics.
@@ -47,12 +35,6 @@ class UBCPlayerStatisticsProxy : public UBCBlueprintCallProxyBase
     static UBCPlayerStatisticsProxy *ReadUserStatsSubset(UBrainCloudWrapper *brainCloudWrapper, const TArray<FString> &userStats);
 
     /**
-	* @deprecated Use ReadUserStatisticsByCategory instead - removal after September 1 2017
-	*/
-    UFUNCTION(BlueprintCallable, meta = (BlueprintInternalUseOnly = "true"), Category = "BrainCloud|Player Statistics")
-    static UBCPlayerStatisticsProxy *ReadPlayerStatisticsByCategory(UBrainCloudWrapper *brainCloudWrapper, FString category);
-
-    /**
     * Reset all of the statistics for this user back to their initial value.
     *
     * Service Name - PlayerStatistics
@@ -60,12 +42,6 @@ class UBCPlayerStatisticsProxy : public UBCBlueprintCallProxyBase
     */
     UFUNCTION(BlueprintCallable, meta = (BlueprintInternalUseOnly = "true"), Category = "BrainCloud|Player Statistics")
     static UBCPlayerStatisticsProxy *ReadUserStatisticsByCategory(UBrainCloudWrapper *brainCloudWrapper, FString category);
-
-    /**
-	* @deprecated Use ResetAllUserStats instead - removal after September 1 2017
-	*/
-    UFUNCTION(BlueprintCallable, meta = (BlueprintInternalUseOnly = "true"), Category = "BrainCloud|Player Statistics")
-    static UBCPlayerStatisticsProxy *ResetAllPlayerStats(UBrainCloudWrapper *brainCloudWrapper);
 
     /**
     * Method retrieves the user statistics for the given category.
@@ -77,12 +53,6 @@ class UBCPlayerStatisticsProxy : public UBCBlueprintCallProxyBase
     */
     UFUNCTION(BlueprintCallable, meta = (BlueprintInternalUseOnly = "true"), Category = "BrainCloud|Player Statistics")
     static UBCPlayerStatisticsProxy *ResetAllUserStats(UBrainCloudWrapper *brainCloudWrapper);
-
-    /**
-	* @deprecated Use IncrementUserStats instead - removal after September 1 2017
-	*/
-    UFUNCTION(BlueprintCallable, meta = (BlueprintInternalUseOnly = "true"), Category = "BrainCloud|Player Statistics")
-    static UBCPlayerStatisticsProxy *IncrementPlayerStats(UBrainCloudWrapper *brainCloudWrapper, FString jsonData);
 
     /**
     * Atomically increment (or decrement) user statistics.

@@ -200,12 +200,3 @@ void BrainCloudGamification::checkForAchievementsToAward(ServiceName serviceName
         }
     }
 }
-
-void BrainCloudGamification::resetMilestones(const TArray<FString> &milestoneIds, IServerCallback *callback)
-{
-    TSharedRef<FJsonObject> message = MakeShareable(new FJsonObject());
-    message->SetArrayField(OperationParam::GamificationServiceMilestonesName.getValue(), JsonUtil::arrayToJsonArray(milestoneIds));
-
-    ServerCall *sc = new ServerCall(ServiceName::Gamification, ServiceOperation::AwardAchievements, message, callback);
-    _client->sendRequest(sc);
-}

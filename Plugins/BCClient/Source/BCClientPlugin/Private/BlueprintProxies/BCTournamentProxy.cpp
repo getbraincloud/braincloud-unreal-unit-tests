@@ -70,7 +70,6 @@ UBCTournamentProxy *UBCTournamentProxy::LeaveTournament(UBrainCloudWrapper *brai
 	return Proxy;
 }
 
-
 UBCTournamentProxy *UBCTournamentProxy::PostTournamentScore(UBrainCloudWrapper *brainCloudWrapper, const FString &leaderboardId, int32 score, const FString &jsonData, const struct FDateTime roundStartedTime)
 {
 	UBCTournamentProxy *Proxy = NewObject<UBCTournamentProxy>();

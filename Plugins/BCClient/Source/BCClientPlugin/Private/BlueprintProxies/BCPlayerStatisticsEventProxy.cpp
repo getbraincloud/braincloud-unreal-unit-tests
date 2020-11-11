@@ -13,24 +13,10 @@ UBCPlayerStatisticsEventProxy::UBCPlayerStatisticsEventProxy(const FObjectInitia
 {
 }
 
-UBCPlayerStatisticsEventProxy *UBCPlayerStatisticsEventProxy::TriggerPlayerStatisticsEvent(UBrainCloudWrapper *brainCloudWrapper, FString eventName, int32 eventMultiplier)
-{
-    UBCPlayerStatisticsEventProxy *Proxy = NewObject<UBCPlayerStatisticsEventProxy>();
-    UBCWrapperProxy::GetBrainCloudInstance(brainCloudWrapper)->getPlayerStatisticsEventService()->triggerStatsEvent(eventName, eventMultiplier, Proxy);
-    return Proxy;
-}
-
 UBCPlayerStatisticsEventProxy *UBCPlayerStatisticsEventProxy::TriggerStatsEvent(UBrainCloudWrapper *brainCloudWrapper, FString eventName, int32 eventMultiplier)
 {
     UBCPlayerStatisticsEventProxy *Proxy = NewObject<UBCPlayerStatisticsEventProxy>();
     UBCWrapperProxy::GetBrainCloudInstance(brainCloudWrapper)->getPlayerStatisticsEventService()->triggerStatsEvent(eventName, eventMultiplier, Proxy);
-    return Proxy;
-}
-
-UBCPlayerStatisticsEventProxy *UBCPlayerStatisticsEventProxy::TriggerPlayerStatisticsEvents(UBrainCloudWrapper *brainCloudWrapper, FString jsonData)
-{
-    UBCPlayerStatisticsEventProxy *Proxy = NewObject<UBCPlayerStatisticsEventProxy>();
-    UBCWrapperProxy::GetBrainCloudInstance(brainCloudWrapper)->getPlayerStatisticsEventService()->triggerStatsEvents(jsonData, Proxy);
     return Proxy;
 }
 
