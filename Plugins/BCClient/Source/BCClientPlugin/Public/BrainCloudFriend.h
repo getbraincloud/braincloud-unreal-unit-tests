@@ -77,11 +77,6 @@ class BCCLIENTPLUGIN_API BrainCloudFriend
 	void readFriendsEntities(const FString &entityType, IServerCallback *callback = nullptr);
 
 	/**
-	* @deprecated Use readFriendUserState instead - removal after September 1 2017
-	*/
-	void readFriendPlayerState(const FString &friendId, IServerCallback *callback = nullptr);
-
-	/**
 	* Read a friend's user state.
 	*
 	* Service Name - PlayerState
@@ -127,16 +122,6 @@ class BCCLIENTPLUGIN_API BrainCloudFriend
 	* @param callback Method to be invoked when the server response is received.
 	*/
 	void findUsersBySubstrName(const FString &searchText, int32 maxResults, IServerCallback *callback = nullptr);
-
-	/**
-	* @deprecated Use findUserByUniversalId instead - removal after September 1 2017
-	*/
-	void findPlayerByUniversalId(const FString &searchText, int32 maxResults, IServerCallback *callback = nullptr);
-
-	/**
-	* @deprecated Use findUserByExactUniversalId instead - removal after Feburary 1 2019
-	*/
-	void findUserByUniversalId(const FString &searchText, int32 maxResults, IServerCallback *callback = nullptr);
 
 	/**
 	* Retrieves profile information for the partial matches of the specified text.

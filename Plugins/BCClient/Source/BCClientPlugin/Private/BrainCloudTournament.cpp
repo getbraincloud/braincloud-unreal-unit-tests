@@ -77,15 +77,6 @@ void BrainCloudTournament::leaveTournament(const FString &leaderboardId, IServer
 	_client->sendRequest(sc);
 }
 
-void BrainCloudTournament::leaveDivisionInstance(const FString &leaderboardId, IServerCallback *callback)
-{
-	TSharedRef<FJsonObject> message = MakeShareable(new FJsonObject());
-	message->SetStringField(OperationParam::LeaderboardId.getValue(), leaderboardId);
-
-	ServerCall *sc = new ServerCall(ServiceName::Tournament, ServiceOperation::LeaveDivisionInstance, message, callback);
-	_client->sendRequest(sc);
-}
-
 void BrainCloudTournament::postTournamentScore(const FString &leaderboardId, int32 score, const FString &jsonData, const FDateTime roundStartedTime, IServerCallback *callback)
 {
 	TSharedRef<FJsonObject> message = MakeShareable(new FJsonObject());
@@ -118,6 +109,15 @@ void BrainCloudTournament::postTournamentScoreWithResults(const FString &leaderb
 	message->SetNumberField(OperationParam::InitialScore.getValue(), initialScore);
 
 	ServerCall *sc = new ServerCall(ServiceName::Tournament, ServiceOperation::PostTournamentScoreWithResults, message, callback);
+	_client->sendRequest(sc);
+}
+
+void BrainCloudTournament::leaveDivisionInstance(const FString &leaderboardId, IServerCallback *callback)
+{
+	TSharedRef<FJsonObject> message = MakeShareable(new FJsonObject());
+	message->SetStringField(OperationParam::LeaderboardId.getValue(), leaderboardId);
+
+	ServerCall *sc = new ServerCall(ServiceName::Tournament, ServiceOperation::LeaveDivisionInstance, message, callback);
 	_client->sendRequest(sc);
 }
 

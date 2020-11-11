@@ -14,11 +14,6 @@ class BCCLIENTPLUGIN_API BrainCloudPlayerState
     BrainCloudPlayerState(BrainCloudClient *client);
 
     /**
-	* @deprecated Use readUserState instead - removal after September 1 2017
-	*/
-    void readPlayerState(IServerCallback *callback, const FString &entityTypeFilter = TEXT(""));
-
-    /**
      * Read the state of the currently logged in user.
      * This method returns a JSON object describing most of the
      * user's data: entities, statistics, level, currency.
@@ -33,11 +28,6 @@ class BCCLIENTPLUGIN_API BrainCloudPlayerState
     void readUserState(IServerCallback *callback, const FString &entityTypeFilter = TEXT(""));
 
     /**
-	* @deprecated Use deleteUser instead - removal after September 1 2017
-	*/
-    void deletePlayer(IServerCallback *callback);
-
-    /**
      * Completely deletes the user record and all data fully owned
      * by the user. After calling this method, the user will need
      * to re-authenticate and create a new profile.
@@ -49,11 +39,6 @@ class BCCLIENTPLUGIN_API BrainCloudPlayerState
      * @param callback The method to be invoked when the server response is received
      */
     void deleteUser(IServerCallback *callback);
-
-    /**
-	* @deprecated Use resetUserState instead - removal after September 1 2017
-	*/
-    void resetPlayerState(IServerCallback *callback);
 
     /**
      * This method will delete *most* data for the currently logged in user.
@@ -80,16 +65,6 @@ class BCCLIENTPLUGIN_API BrainCloudPlayerState
     void logout(IServerCallback *callback);
 
     /**
-	* @deprecated Use updateUserName instead - removal after September 1 2017
-	*/
-    void updatePlayerName(const FString &name, IServerCallback *callback);
-
-    /**
-	* @deprecated Use updateUserName instead
-	*/
-    void updateUserName(const FString &name, IServerCallback *callback);
-
-    /**
     * Sets the user's name.
     *
     * Service Name - playerState
@@ -97,6 +72,11 @@ class BCCLIENTPLUGIN_API BrainCloudPlayerState
     *
     * @param name The name of the user
     * @param callback The method to be invoked when the server response is received
+    */
+    void updateUserName(const FString &name, IServerCallback *callback);
+
+    /**
+    * @deprecated Use updateUserName instead - to be removed September 2021
     */
     void updateName(const FString &name, IServerCallback *callback);
 
@@ -154,11 +134,6 @@ class BCCLIENTPLUGIN_API BrainCloudPlayerState
     * @param callback The method to be invoked when the server response is received
     */
     void removeAttributes(const TArray<FString> &attributeNames, IServerCallback *callback);
-
-    /**
-	* @deprecated Use updateUserPictureUrl instead - removal after September 1 2017
-	*/
-    void updatePlayerPictureUrl(const FString &pictureUrl, IServerCallback *callback);
 
     /**
     * Update user's picture URL.

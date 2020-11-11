@@ -20,13 +20,6 @@ UBCScriptProxy *UBCScriptProxy::RunScript(UBrainCloudWrapper *brainCloudWrapper,
 	return Proxy;
 }
 
-UBCScriptProxy *UBCScriptProxy::ScheduleRunScriptUTC(UBrainCloudWrapper *brainCloudWrapper, FString scriptName, FString jsonScriptData, FDateTime startDateInUTC)
-{
-	UBCScriptProxy *Proxy = NewObject<UBCScriptProxy>();
-	UBCWrapperProxy::GetBrainCloudInstance(brainCloudWrapper)->getScriptService()->scheduleRunScriptUTC(scriptName, jsonScriptData, startDateInUTC, Proxy);
-	return Proxy;
-}
-
 UBCScriptProxy *UBCScriptProxy::ScheduleRunScriptMillisUTC(UBrainCloudWrapper *brainCloudWrapper, FString scriptName, FString jsonScriptData, int64 startDateInUTC)
 {
 	UBCScriptProxy *Proxy = NewObject<UBCScriptProxy>();
