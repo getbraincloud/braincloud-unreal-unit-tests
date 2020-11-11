@@ -20,7 +20,7 @@
 #include "BCPlatform.h"
 
 // Define all static member variables.
-FString BrainCloudClient::s_brainCloudClientVersion = TEXT("4.5.6");
+FString BrainCloudClient::s_brainCloudClientVersion = TEXT("4.6.0");
 
 ////////////////////////////////////////////////////
 // (De)Constructors
