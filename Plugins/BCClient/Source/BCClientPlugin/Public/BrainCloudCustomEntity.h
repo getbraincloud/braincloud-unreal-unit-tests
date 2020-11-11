@@ -55,23 +55,6 @@ public:
      * Retrieves first page of custom entities from the server based on the custom entity type and specified query context
      *
      * Service Name - CustomEntity
-     * Service Operation - GetPage
-     *
-     * @param entityType The entity type as defined by the user
-     * @param rowsPerPage num rows
-     * @param searchJson what to search
-     * @param doCount whether to count
-     * @param callback The method to be invoked when the server response is received
-     */
-    /**
-    * @deprecated Use getEntityPage instead
-    */
-  void getPage(const FString &entityType, int rowsPerPage, const FString &searchJson, const FString &sortJson, bool doCount, IServerCallback *callback);
-
-    /**
-     * Retrieves first page of custom entities from the server based on the custom entity type and specified query context
-     *
-     * Service Name - CustomEntity
      * Service Operation - GetEntityPage
      *
      * @param entityType The entity type as defined by the user
@@ -79,22 +62,6 @@ public:
      * @param callback The method to be invoked when the server response is received
      */
   void getEntityPage(const FString &entityType, const FString &context, IServerCallback *callback);
-
-    /**
-     * Gets the page of custom entities from the server based on the encoded context and specified page offset.
-     * 
-     * Service Name - CustomEntity
-     * Service Operation - GetPageOffset
-     *
-     * @param entityType The entity type as defined by the user
-     * @param context the page context
-     * @param pageOffset number
-     * @param callback The method to be invoked when the server response is received
-     */
-    /**
-    * @deprecated Use getEntityPageOffset instead
-    */
-  void getPageOffset(const FString &entityType, const FString &context, int pageOffset, IServerCallback *callback);
 
     /**
      * Gets the page of custom entities from the server based on the encoded context and specified page offset.
@@ -133,6 +100,20 @@ public:
      * @param callback The method to be invoked when the server response is received
      */
   void incrementData(const FString &entityType, const FString &entityId, const FString &fieldsJson, IServerCallback *callback);
+
+    /**
+     * Gets a list of up to maxReturn randomly selected custom entities from the server based on the entity type and where condition.
+     *
+     * Service Name - CustomEntity
+     * Service Operation - GetRandomEntitiesMatching
+     *
+     * @param entityType The entity type as defined by the user
+     * @param whereJson Mongo style query string
+     * @param maxReturn number of maxReturns
+     * @param callback The method to be invoked when the server response is received
+     */
+  void getRandomEntitiesMatching(const FString &entityType, const FString &whereJson, const int64 &maxReturn, IServerCallback *callback);
+
 
     /**
      * Reads a custom entity.

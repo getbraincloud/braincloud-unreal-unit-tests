@@ -58,21 +58,19 @@ class UBCCustomEntityProxy : public UBCBlueprintCallProxyBase
   static UBCCustomEntityProxy *GetCount(UBrainCloudWrapper *brainCloudWrapper, const FString &entityType, const FString &whereJson);
 
     /**
-     * Retrieves first page of custom entities from the server based on the custom entity type and specified query context
+     * Gets a list of up to maxReturn randomly selected custom entities from the server based on the entity type and where condition.
      *
      * Service Name - CustomEntity
-     * Service Operation - GetPage
+     * Service Operation - GetRandomEntitiesMatching
      *
      * @param entityType The entity type as defined by the user
-     * @param rowsPerPage num rows
-     * @param searchJson what to search
-     * @param doCount whether to count
+     * @param whereJson Mongostyle query string
+     * @param maxReturn number of max returns
      * @param callback The method to be invoked when the server response is received
      */
-  //UFUNCTION(BlueprintCallable, meta = (BlueprintInternalUseOnly = "true"), Category = "BrainCloud|CustomEntity")
-   UFUNCTION(BlueprintCallable, meta = (BlueprintInternalUseOnly = "true", DeprecatedFunction,DeprecatedMessage="Use GetEntityPage() instead"), Category = "BrainCloud|CustomEntity")
-  static UBCCustomEntityProxy *GetPage(UBrainCloudWrapper *brainCloudWrapper, const FString &entityType, int rowsPerPage, const FString &searchJson, const FString &sortJson, bool doCount);
-
+  UFUNCTION(BlueprintCallable, meta = (BlueprintInternalUseOnly = "true"), Category = "BrainCloud|CustomEntity")
+  static UBCCustomEntityProxy *GetRandomEntitiesMatching(UBrainCloudWrapper *brainCloudWrapper, const FString &entityType, const FString &whereJson, const int64 &maxReturn);
+    
 	/**
 	* Method uses a paging system to iterate through Custom Entities
 	* After retrieving a page of Custom Entities with this method,
@@ -85,21 +83,6 @@ class UBCCustomEntityProxy : public UBCBlueprintCallProxyBase
 	*/
 	UFUNCTION(BlueprintCallable, meta = (BlueprintInternalUseOnly = "true"), Category = "BrainCloud|Custom Entity")
 	static UBCCustomEntityProxy *GetEntityPage(UBrainCloudWrapper *brainCloudWrapper, const FString &entityType, const FString &context);
-
-    /**
-     * Gets the page of custom entities from the server based on the encoded context and specified page offset.
-     * 
-     * Service Name - CustomEntity
-     * Service Operation - GetPageOffset
-     *
-     * @param entityType The entity type as defined by the user
-     * @param context the page context
-     * @param pageOffset number
-     * @param callback The method to be invoked when the server response is received
-     */
-
-  UFUNCTION(BlueprintCallable, meta = (BlueprintInternalUseOnly = "true", DeprecatedFunction,DeprecatedMessage="Use GetEntityPageOffset() instead"), Category = "BrainCloud|CustomEntity")
-  static UBCCustomEntityProxy *GetPageOffset(UBrainCloudWrapper *brainCloudWrapper, const FString &entityType, const FString &context, int pageOffset);
 
   	/**
 	* Method to retrieve previous or next pages after having called the GetEntityPage method.

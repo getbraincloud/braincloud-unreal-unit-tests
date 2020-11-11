@@ -20,7 +20,7 @@
 #include "BCPlatform.h"
 
 // Define all static member variables.
-FString BrainCloudClient::s_brainCloudClientVersion = TEXT("4.5.6");
+FString BrainCloudClient::s_brainCloudClientVersion = TEXT("4.6.0");
 
 ////////////////////////////////////////////////////
 // (De)Constructors
@@ -56,7 +56,6 @@ BrainCloudClient::~BrainCloudClient()
 	destroyService(_playerStatisticsService);
 	destroyService(_timeService);
 	destroyService(_playerStatisticsEventService);
-	destroyService(_productService);
 	destroyService(_identityService);
 	destroyService(_itemCatalogService);
 	destroyService(_userItemsService);
@@ -516,15 +515,6 @@ BrainCloudPresence *BrainCloudClient::getPresenceService()
 		_presenceService = new BrainCloudPresence(this);
 	}
 	return _presenceService;
-}
-
-BrainCloudProduct *BrainCloudClient::getProductService()
-{
-	if (_productService == nullptr)
-	{
-		_productService = new BrainCloudProduct(this);
-	}
-	return _productService;
 }
 
 BrainCloudIdentity *BrainCloudClient::getIdentityService()

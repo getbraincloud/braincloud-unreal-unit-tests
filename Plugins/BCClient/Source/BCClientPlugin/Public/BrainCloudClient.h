@@ -12,7 +12,6 @@
 #include "BrainCloudPlayerStatistics.h"
 #include "BrainCloudTime.h"
 #include "BrainCloudPlayerStatisticsEvent.h"
-#include "BrainCloudProduct.h"
 #include "BrainCloudIdentity.h"
 #include "BrainCloudItemCatalog.h"
 #include "BrainCloudUserItems.h"
@@ -79,6 +78,26 @@ enum class BCRelayConnectionType : uint8
 	WEBSOCKET UMETA(DisplayName = "WEBSOCKET"),
 	TCP UMETA(DisplayName = "TCP"),
 	UDP UMETA(DisplayName = "UDP"),
+};
+
+UENUM(BlueprintType)
+enum class BCRTTConnectionStatus: uint8
+{
+	CONNECTED UMETA(DisplayName = "CONNECTED"),
+	CONNECTING UMETA(DisplayName = "CONNECTING"),
+	DISCONNECTED UMETA(DisplayName = "DISCONNECTED"),
+	DISCONNECTING UMETA(DisplayName = "DISCONNECTING")
+};
+
+UENUM(BlueprintType)
+enum class BCWebsocketStatus: uint8
+{
+	OPEN UMETA(DisplayName = "OPEN"),
+	CLOSED UMETA(DisplayName = "CLOSED"),
+	MESSAGE UMETA(DisplayName = "MESSAGE"),
+	SOCKETERROR UMETA(DisplayName = "SOCKETERROR"),
+	NONE UMETA(DisplayName = "NONE")
+
 };
 
 class BCCLIENTPLUGIN_API BrainCloudClient
@@ -266,7 +285,6 @@ class BCCLIENTPLUGIN_API BrainCloudClient
 	BrainCloudPlayerStatistics *getPlayerStatisticsService();
 	BrainCloudTime *getTimeService();
 	BrainCloudPlayerStatisticsEvent *getPlayerStatisticsEventService();
-	BrainCloudProduct *getProductService();
 	BrainCloudIdentity *getIdentityService();
 	BrainCloudItemCatalog *getItemCatalogService();
 	BrainCloudUserItems *getUserItemsService();
@@ -299,10 +317,6 @@ class BCCLIENTPLUGIN_API BrainCloudClient
 	BrainCloudRelay *getRelayService();
 	BrainCloudTimeUtils *getUtil();
 	
-	/**
-	* @deprecated Use getAppId instead - removal after September 1 2017
-	*/
-	const FString &getGameId() { return _appId; };
 	const FString &getAppId() { return _appId; };
 	const FString &getSessionId();
 	const FString &getReleasePlatform() { return _releasePlatform; };
@@ -311,10 +325,6 @@ class BCCLIENTPLUGIN_API BrainCloudClient
 	const FString &getRTTConnectionId();
 	const FString &getEventServer();
 
-	/**
-	* @deprecated Use getAppVersion instead - removal after September 1 2017
-	*/
-	const FString &getGameVersion() { return _appVersion; }
 	const FString &getAppVersion() { return _appVersion; };
 	const FString &getBrainCloudClientVersion() { return s_brainCloudClientVersion; };
 
@@ -521,7 +531,6 @@ class BCCLIENTPLUGIN_API BrainCloudClient
 	BrainCloudPlayerStatistics *_playerStatisticsService = nullptr;
 	BrainCloudTime *_timeService = nullptr;
 	BrainCloudPlayerStatisticsEvent *_playerStatisticsEventService = nullptr;
-	BrainCloudProduct *_productService = nullptr;
 	BrainCloudIdentity *_identityService = nullptr;
 	BrainCloudItemCatalog *_itemCatalogService = nullptr;
 	BrainCloudUserItems *_userItemsService = nullptr;

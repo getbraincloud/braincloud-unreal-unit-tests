@@ -34,13 +34,6 @@ UBCCustomEntityProxy *UBCCustomEntityProxy::GetCount(UBrainCloudWrapper *brainCl
     return Proxy;
 }
 
-UBCCustomEntityProxy *UBCCustomEntityProxy::GetPage(UBrainCloudWrapper *brainCloudWrapper, const FString &entityType, int rowsPerPage, const FString &searchJson, const FString &sortJson, bool doCount)
-{
-    UBCCustomEntityProxy *Proxy = NewObject<UBCCustomEntityProxy>();
-    UBCWrapperProxy::GetBrainCloudInstance(brainCloudWrapper)->getCustomEntityService()->getPage(entityType, rowsPerPage, searchJson, sortJson, doCount, Proxy);
-    return Proxy;
-}
-
 UBCCustomEntityProxy *UBCCustomEntityProxy::GetEntityPage(UBrainCloudWrapper *brainCloudWrapper, const FString &entityType, const FString &context)
 {
     UBCCustomEntityProxy *Proxy = NewObject<UBCCustomEntityProxy>();
@@ -48,17 +41,17 @@ UBCCustomEntityProxy *UBCCustomEntityProxy::GetEntityPage(UBrainCloudWrapper *br
     return Proxy;
 }
 
-UBCCustomEntityProxy *UBCCustomEntityProxy::GetPageOffset(UBrainCloudWrapper *brainCloudWrapper, const FString &entityType, const FString &context, int pageOffset)
-{
-    UBCCustomEntityProxy *Proxy = NewObject<UBCCustomEntityProxy>();
-    UBCWrapperProxy::GetBrainCloudInstance(brainCloudWrapper)->getCustomEntityService()->getPageOffset(entityType, context, pageOffset, Proxy);
-    return Proxy;
-}
-
 UBCCustomEntityProxy *UBCCustomEntityProxy::GetEntityPageOffset(UBrainCloudWrapper *brainCloudWrapper, const FString &entityType, const FString &context, int pageOffset)
 {
     UBCCustomEntityProxy *Proxy = NewObject<UBCCustomEntityProxy>();
     UBCWrapperProxy::GetBrainCloudInstance(brainCloudWrapper)->getCustomEntityService()->getEntityPageOffset(entityType, context, pageOffset, Proxy);
+    return Proxy;
+}
+
+UBCCustomEntityProxy *UBCCustomEntityProxy::GetRandomEntitiesMatching(UBrainCloudWrapper *brainCloudWrapper, const FString &entityType, const FString &whereJson, const int64 &maxReturn)
+{
+    UBCCustomEntityProxy *Proxy = NewObject<UBCCustomEntityProxy>();
+    UBCWrapperProxy::GetBrainCloudInstance(brainCloudWrapper)->getCustomEntityService()->getRandomEntitiesMatching(entityType, whereJson, maxReturn, Proxy);
     return Proxy;
 }
 
