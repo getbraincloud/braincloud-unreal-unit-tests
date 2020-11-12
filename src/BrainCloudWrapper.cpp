@@ -302,12 +302,6 @@ namespace BrainCloud {
 			authenticateCallback->serverError(serviceName, serviceOperation, statusCode, reasonCode, jsonError);
 			delete this;
 		}
-
-		void serverWarning(ServiceName serviceName, ServiceOperation serviceOperation, int statusCode, int reasonCode, int numRetries, const std::string & statusMessage)
-		{
-			authenticateCallback->serverWarning(serviceName, serviceOperation, statusCode, reasonCode, numRetries, statusMessage);
-			delete this;
-		}
 	};
 
 	class SmartSwitchCallback : public IServerCallback
@@ -330,12 +324,6 @@ namespace BrainCloud {
 		void serverError(ServiceName serviceName, ServiceOperation serviceOperation, int statusCode, int reasonCode, const std::string & jsonError)
 		{
 			callback->serverError(serviceName, serviceOperation, statusCode, reasonCode, jsonError);
-			delete this;
-		}
-
-		void serverWarning(ServiceName serviceName, ServiceOperation serviceOperation, int statusCode, int reasonCode, int numRetries, const std::string & statusMessage)
-		{
-			callback->serverWarning(serviceName, serviceOperation, statusCode, reasonCode, numRetries, statusMessage);
 			delete this;
 		}
 	};
@@ -741,15 +729,4 @@ namespace BrainCloud {
             m_authenticateCallback->serverError(serviceName, serviceOperation, statusCode, reasonCode, message);
         }
     }
-
-    void BrainCloudWrapper::serverWarning(BrainCloud::ServiceName serviceName,
-        BrainCloud::ServiceOperation serviceOperation,
-        int statusCode, int reasonCode, int retry, const std::string & message)
-    {
-        if (m_authenticateCallback != NULL)
-        {
-            m_authenticateCallback->serverWarning(serviceName, serviceOperation, statusCode, reasonCode, retry, message);
-        }
-    }
-
 }

@@ -174,11 +174,7 @@ namespace BrainCloud
 			// call the appropriate callback based on the type of response
 			if (event->callback != NULL)
 			{
-				if (event->m_retryCount != 0)
-				{
-					event->callback->serverWarning(event->m_service, event->m_operation, event->m_statusCode, event->m_reasonCode, event->m_retryCount, event->m_data);
-				}
-				else if (event->m_error)
+				if (event->m_error)
 				{
 					if (_globalErrorCallback != NULL)
 					{
@@ -190,7 +186,6 @@ namespace BrainCloud
 				else
 				{
 					event->callback->serverCallback(event->m_service, event->m_operation, event->m_data);
-
 				}
 			}
 

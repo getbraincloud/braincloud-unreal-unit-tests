@@ -737,9 +737,6 @@ namespace BrainCloud {
         virtual void serverError(BrainCloud::ServiceName serviceName,
             BrainCloud::ServiceOperation serviceOperation,
             int statusCode, int reasonCode, const std::string & message);
-        virtual void serverWarning(BrainCloud::ServiceName serviceName,
-            BrainCloud::ServiceOperation serviceOperation,
-            int statusCode, int reasonCode, int retry, const std::string & message);
 
     protected:
 

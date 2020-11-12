@@ -67,7 +67,6 @@ namespace BrainCloud {
         std::string getDataString();
         void reportParseError();
         void reportError(uint32_t statusCode, uint32_t reasonCode, const std::string data);
-        void reportWarning(uint32_t statusCode, uint32_t reasonCode, const std::string data, uint8_t retryCount);
         void reportResults(Json::Value& root);
         void log(const std::string & s);
 

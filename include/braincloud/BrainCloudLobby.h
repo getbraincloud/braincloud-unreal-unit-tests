@@ -287,7 +287,6 @@ namespace BrainCloud
 		private:
 			void serverCallback(ServiceName serviceName, ServiceOperation serviceOperation, std::string const& jsonData) override;
 			void serverError(ServiceName serviceName, ServiceOperation serviceOperation, int statusCode, int reasonCode, const std::string& jsonError) override;
-			void serverWarning(ServiceName serviceName, ServiceOperation serviceOperation, int statusCode, int reasonCode, int numRetries, const std::string& statusMessage) override;
 
 			BrainCloudLobby* m_pBrainCloudLobby;
 			IServerCallback* m_pExternalCallback;
