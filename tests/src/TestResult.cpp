@@ -195,10 +195,6 @@ void TestResult::serverError(ServiceName serviceName, ServiceOperation serviceOp
     }
 }
 
-void TestResult::serverWarning(ServiceName serviceName, ServiceOperation serviceOperation, int statusCode, int reasonCode, int numRetries, const std::string & statusMessage)
-{
-}
-
 void TestResult::globalError(ServiceName serviceName, ServiceOperation serviceOperation, int statusCode, int reasonCode, const std::string & jsonError)
 {
     m_statusCode = statusCode;

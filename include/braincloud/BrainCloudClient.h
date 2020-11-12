@@ -115,7 +115,7 @@ namespace BrainCloud
 		 *
 		 * @deprecated Use of the *singleton* has been deprecated. We recommend that you create your own *variable* to hold an instance of the brainCloudWrapper. Explanation here: http://getbraincloud.com/blog
 		 */
-		static BrainCloudClient * getInstance();
+		DEPRECATED static BrainCloudClient * getInstance();
 
 		/**
 		 * BrainCloudClient can be instantiated as a single object. Do not use getInstance() when

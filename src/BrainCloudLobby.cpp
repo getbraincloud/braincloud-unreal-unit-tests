@@ -84,14 +84,6 @@ namespace BrainCloud
 		}
 	}
 
-	void BrainCloudLobby::GetRegionsForLobbiesCallback::serverWarning(ServiceName serviceName, ServiceOperation serviceOperation, int statusCode, int reasonCode, int numRetries, const std::string& statusMessage)
-	{
-		if (m_pExternalCallback)
-		{
-			m_pExternalCallback->serverWarning(serviceName, serviceOperation, statusCode, reasonCode, numRetries, statusMessage);
-		}
-	}
-
 	BrainCloudLobby::PingRegionsThread::PingRegionsThread(BrainCloudLobby* pBrainCloudLobby)
 		: m_pBrainCloudLobby(pBrainCloudLobby)
 	{

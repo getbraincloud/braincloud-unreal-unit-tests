@@ -249,10 +249,6 @@ namespace BrainCloud
         }
     }
 
-    void RTTComms::serverWarning(ServiceName serviceName, ServiceOperation serviceOperation, int statusCode, int reasonCode, int numRetries, const std::string& statusMessage)
-    {
-    }
-
     void RTTComms::processRTTMessage(const ServiceOperation& serviceOperation, const Json::Value& jsonData)
     {
         if (serviceOperation == ServiceOperation::RequestClientConnection)

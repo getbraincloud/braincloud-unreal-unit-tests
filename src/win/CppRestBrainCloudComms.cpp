@@ -338,7 +338,6 @@ namespace BrainCloud
                     _retryCount++;
                     if (_retryCount < getMaxSendAttempts())
                     {
-                        reportWarning(statusCode, reasonCode, "Retrying", _retryCount);
                         return false;
                     }
                 }
@@ -532,19 +531,6 @@ namespace BrainCloud
             if (callback != NULL)
             {
                 callback->serverError((*it)->getService(), (*it)->getOperation(), errorStatusCode, errorReasonCode, jsonErrorStr);
-            }
-        }
-    }
-
-    void CppRestBrainCloudComms::reportWarning(uint32_t statusCode, uint32_t reasonCode, const std::string data, uint8_t retryCount)
-    {
-        std::deque<std::shared_ptr < ServerCall > >::iterator it = _inProgressQueue.begin();
-        for (; it != _inProgressQueue.end(); it++)
-        {
-            IServerCallback* callback = (*it)->getCallback();
-            if (callback != NULL)
-            {
-                callback->serverWarning((*it)->getService(), (*it)->getOperation(), statusCode, reasonCode, retryCount, data);
             }
         }
     }

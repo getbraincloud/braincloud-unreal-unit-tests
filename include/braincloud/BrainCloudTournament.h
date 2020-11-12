@@ -128,7 +128,7 @@ namespace BrainCloud
 		 *
 		 * @deprecated Use PostTournamentScoreUTC instead - Removal after september 1 2021
 		 */
-		void postTournamentScore(const char* in_leaderboardId, int64_t in_score, const std::string& in_jsonData, const struct tm* in_roundStartedTimeLocal, IServerCallback * in_callback = NULL);
+		DEPRECATED void postTournamentScore(const char* in_leaderboardId, int64_t in_score, const std::string& in_jsonData, const struct tm* in_roundStartedTimeLocal, IServerCallback * in_callback = NULL);
 
 		/**
 		 * Post the users score to the leaderboard - UTC time
@@ -164,7 +164,7 @@ namespace BrainCloud
 		*
 		* @deprecated Use PostTournamentScoreWithResultsUTC instead - Removal after september 1 2021
 		*/
-		void postTournamentScoreWithResults(
+		DEPRECATED void postTournamentScoreWithResults(
 			const char* in_leaderboardId,
 			int64_t in_score,
 			const std::string& in_jsonData,

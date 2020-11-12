@@ -72,7 +72,6 @@ namespace BrainCloud
         // IServerCallback
         void serverCallback(ServiceName serviceName, ServiceOperation serviceOperation, const std::string& jsonData);
         void serverError(ServiceName serviceName, ServiceOperation serviceOperation, int statusCode, int reasonCode, const std::string& jsonError);
-        void serverWarning(ServiceName serviceName, ServiceOperation serviceOperation, int statusCode, int reasonCode, int numRetries, const std::string& statusMessage);
 
         void processRTTMessage(const ServiceOperation& serviceOperation, const Json::Value& jsonData);
         Json::Value getEndpointToUse(const Json::Value& endpoints) const;
