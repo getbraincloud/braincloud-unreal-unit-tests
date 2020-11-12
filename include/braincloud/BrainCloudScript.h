@@ -39,10 +39,10 @@ namespace BrainCloud
 		 * @param in_jsonScriptData Data to be sent to the script in json format
 		 * @param in_startDateInLocal The start date, time is converted to LOCAL
 		 * @param in_callback The method to be invoked when the server response is received
-		*
-		* @deprecated Use scheduleRunScriptMillisUTC instead - Removal after september 1 2021
+		 *
+		 * @deprecated Use scheduleRunScriptMillisUTC instead - Removal after september 1 2021
 		 */
-		void scheduleRunScriptUTC(const char * in_scriptName, const char * in_jsonScriptData, const struct tm* in_startDateInLocal, IServerCallback * in_callback = NULL);
+		DEPRECATED void scheduleRunScriptUTC(const char * in_scriptName, const char * in_jsonScriptData, const struct tm* in_startDateInLocal, IServerCallback * in_callback = NULL);
 
 		/**
 		 * Allows cloud script executions to be scheduled - UTC time

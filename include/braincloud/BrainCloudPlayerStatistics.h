@@ -14,7 +14,7 @@ namespace BrainCloud
     /**
      * This class is used to directly update the user's statistics registered on the server.
      *  However the preferred mechanism is to use "PlayerStatisticsEvents" via the
-     *  BrainCloud.triggerPlayerStatisticsEvent() method. Using that method allows achivements,
+     *  BrainCloud.triggerStatisticsEvent() method. Using that method allows achivements,
      *  experience, and other award to be triggered in a manner set up on the server.
      */
     class BrainCloudPlayerStatistics

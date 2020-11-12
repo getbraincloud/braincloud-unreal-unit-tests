@@ -80,7 +80,7 @@ namespace BrainCloud {
          *
          * @deprecated This callback will be removed in the future - Will be removed after September 1 2021
          */
-        virtual void serverWarning( ServiceName serviceName, ServiceOperation serviceOperation, int statusCode, int reasonCode, int numRetries, const std::string & statusMessage) = 0;
+        virtual void serverWarning( ServiceName serviceName, ServiceOperation serviceOperation, int statusCode, int reasonCode, int numRetries, const std::string & statusMessage);
         
     protected:
 

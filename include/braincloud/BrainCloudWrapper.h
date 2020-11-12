@@ -73,7 +73,7 @@ namespace BrainCloud {
          *
 		 * @deprecated Use of the *singleton* has been deprecated. We recommend that you create your own *variable* to hold an instance of the brainCloudWrapper. Explanation here: http://getbraincloud.com/apidocs/wrappers-clients-and-inconvenient-singletons/
 		 */
-        static BrainCloudWrapper* getInstance();
+        DEPRECATED static BrainCloudWrapper* getInstance();
 
         /**
          * Instantiate a copy of the brainCloud wrapper. Don't use getInstance if creating your own copy.
@@ -672,7 +672,7 @@ namespace BrainCloud {
          *
 		 * @deprecated Use of the *singleton* has been deprecated. We recommend that you create your own *variable* to hold an instance of the brainCloudWrapper. Explanation here: http://getbraincloud.com/apidocs/wrappers-clients-and-inconvenient-singletons/
 		 */
-        static BrainCloud::BrainCloudClient* getBC() { return getInstance()->getBCClient(); }
+        DEPRECATED static BrainCloud::BrainCloudClient* getBC() { return getInstance()->getBCClient(); }
 
         /**
          * Returns a singleton instance of the BrainCloudClient.

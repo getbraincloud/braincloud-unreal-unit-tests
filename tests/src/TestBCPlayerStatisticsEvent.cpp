@@ -5,14 +5,14 @@
 
 using namespace BrainCloud;
 
-TEST_F(TestBCPlayerStatisticsEvent, TriggerPlayerStatisticsEvent)
+TEST_F(TestBCPlayerStatisticsEvent, triggerStatsEvent)
 {
     TestResult tr;
     m_bc->getPlayerStatisticsEventService()->triggerStatsEvent(m_eventId01, 10, &tr);
     tr.run(m_bc);
 }
 
-TEST_F(TestBCPlayerStatisticsEvent, TriggerPlayerStatisticsEvents)
+TEST_F(TestBCPlayerStatisticsEvent, triggerStatsEvents)
 {
     TestResult tr;
     Json::FastWriter fw;
