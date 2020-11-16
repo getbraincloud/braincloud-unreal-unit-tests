@@ -70,7 +70,6 @@ namespace BrainCloud
         _s3HandlingService(new BrainCloudS3Handling(this)),
         _scriptService(new BrainCloudScript(this)),
         _socialLeaderboardService(new BrainCloudSocialLeaderboard(this)),
-        _steamService(new BrainCloudSteam(this)),
         _timeService(new BrainCloudTime(this)),
         _tournamentService(new BrainCloudTournament(this)),
         _customEntityService(new BrainCloudCustomEntity(this)),
@@ -93,7 +92,6 @@ namespace BrainCloud
         delete _customEntityService;
         delete _itemCatalogService;
         delete _timeService;
-        delete _steamService;
         delete _socialLeaderboardService;
         delete _scriptService;
         delete _s3HandlingService;
