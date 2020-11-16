@@ -223,7 +223,6 @@ add_library(brainCloud STATIC
     include/braincloud/BrainCloudS3Handling.h
     include/braincloud/BrainCloudScript.h
     include/braincloud/BrainCloudSocialLeaderboard.h
-    include/braincloud/BrainCloudSteam.h
     include/braincloud/BrainCloudTime.h
     include/braincloud/BrainCloudTournament.h
     include/braincloud/BrainCloudCustomEntity.h
@@ -313,7 +312,6 @@ add_library(brainCloud STATIC
     src/BrainCloudS3Handling.cpp
     src/BrainCloudScript.cpp
     src/BrainCloudSocialLeaderboard.cpp
-    src/BrainCloudSteam.cpp
     src/BrainCloudTime.cpp
     src/BrainCloudTournament.cpp
     src/BrainCloudCustomEntity.cpp

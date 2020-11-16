@@ -50,7 +50,6 @@ namespace BrainCloud {
         BrainCloudUserItems* getUserItemsService() { return client->getUserItemsService(); }
         BrainCloudPushNotification * getPushNotificationService() { return client->getPushNotificationService(); }
         BrainCloudPlayerStatisticsEvent * getPlayerStatisticsEventService() { return client->getPlayerStatisticsEventService(); }
-        BrainCloudSteam * getSteamService() { return client->getSteamService(); }
         BrainCloudGlobalApp * getGlobalAppService() { return client->getGlobalAppService(); }
         BrainCloudS3Handling * getS3HandlingService() { return client->getS3HandlingService(); }
         BrainCloudRedemptionCode * getRedemptionCodeService() { return client->getRedemptionCodeService(); }

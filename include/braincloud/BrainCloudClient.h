@@ -49,7 +49,6 @@
 #include "braincloud/BrainCloudAuthentication.h"
 #include "braincloud/BrainCloudPushNotification.h"
 #include "braincloud/BrainCloudPlayerStatisticsEvent.h"
-#include "braincloud/BrainCloudSteam.h"
 #include "braincloud/BrainCloudGlobalApp.h"
 #include "braincloud/BrainCloudS3Handling.h"
 #include "braincloud/BrainCloudRedemptionCode.h"
@@ -368,7 +367,6 @@ namespace BrainCloud
 		BrainCloudAuthentication * getAuthenticationService() { return _authenticationService; }
 		BrainCloudPushNotification * getPushNotificationService() { return _pushNotificationService; }
 		BrainCloudPlayerStatisticsEvent * getPlayerStatisticsEventService() { return _playerStatisticsEventService; }
-		BrainCloudSteam * getSteamService() { return _steamService; }
 		BrainCloudGlobalApp * getGlobalAppService() { return _globalAppService; }
 		BrainCloudS3Handling * getS3HandlingService() { return _s3HandlingService; }
 		BrainCloudRedemptionCode * getRedemptionCodeService() { return _redemptionCodeService; }
@@ -640,7 +638,6 @@ namespace BrainCloud
 		BrainCloudAuthentication * _authenticationService;
 		BrainCloudPushNotification * _pushNotificationService;
 		BrainCloudPlayerStatisticsEvent * _playerStatisticsEventService;
-		BrainCloudSteam * _steamService;
 		BrainCloudGlobalApp * _globalAppService;
 		BrainCloudS3Handling * _s3HandlingService;
 		BrainCloudRedemptionCode * _redemptionCodeService;

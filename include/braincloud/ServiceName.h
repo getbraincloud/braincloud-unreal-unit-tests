@@ -21,7 +21,6 @@ namespace BrainCloud {
         static const ServiceName GlobalGameStatistics;
         static const ServiceName PlayerStatisticsEvent;
         static const ServiceName Twitter;
-        static const ServiceName Steam;
 
         static const ServiceName PlayerState;
         static const ServiceName Entity;
