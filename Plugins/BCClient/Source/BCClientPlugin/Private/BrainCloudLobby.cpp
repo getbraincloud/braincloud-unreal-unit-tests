@@ -400,7 +400,11 @@ void BrainCloudLobby::attachPingDataAndSend(TSharedRef<FJsonObject> message, Ser
 void BrainCloudLobby::pingHost(FString in_region, FString in_target, int in_index)
 {
     {
+        #if ENGINE_MINOR_VERSION > 25
+        TSharedRef<IHttpRequest,ESPMode::ThreadSafe> Request = _http->CreateRequest();
+        #else
         TSharedRef<IHttpRequest> Request = _http->CreateRequest();
+        #endif
 	    Request->OnProcessRequestComplete().BindRaw(this, &BrainCloudLobby::onPingResponseReceived);
 
 	    //This is the url on which to process the request
