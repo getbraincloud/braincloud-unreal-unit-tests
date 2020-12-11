@@ -99,7 +99,11 @@ class BrainCloudComms
 	void CreateAndSendNextRequestBundle();
 	PacketRef BuildPacket();
 	PacketRef BuildPacket(TSharedRef<ServerCall> sc);
+	#if ENGINE_MINOR_VERSION > 25
+	TSharedRef<IHttpRequest,ESPMode::ThreadSafe> SendPacket(PacketRef packet);
+	#else
 	TSharedRef<IHttpRequest> SendPacket(PacketRef packet);
+	#endif
 	void ResendActivePacket();
 	void FilterIncomingMessages(TSharedRef<ServerCall> servercall, TSharedRef<FJsonObject> response);
 

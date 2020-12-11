@@ -251,9 +251,18 @@ BrainCloudComms::PacketRef BrainCloudComms::BuildPacket(TSharedRef<ServerCall> s
 	return packet;
 }
 
+#if ENGINE_MINOR_VERSION > 25
+TSharedRef<IHttpRequest,ESPMode::ThreadSafe> BrainCloudComms::SendPacket(PacketRef packet)
+#else
 TSharedRef<IHttpRequest> BrainCloudComms::SendPacket(PacketRef packet)
+#endif
 {
+	#if ENGINE_MINOR_VERSION > 25
+	TSharedRef<IHttpRequest,ESPMode::ThreadSafe> httpRequest = FHttpModule::Get().CreateRequest();
+	#else
 	TSharedRef<IHttpRequest> httpRequest = FHttpModule::Get().CreateRequest();
+	#endif
+
 
 	FString packetIdStr = FString::FormatAsNumber(_packetId);
 	_currentPacket = packet;
@@ -287,7 +296,11 @@ void BrainCloudComms::ResendActivePacket()
 {
 	if (!_activeRequest.IsValid())
 		return;
+	#if ENGINE_MINOR_VERSION > 25
+	TSharedRef<IHttpRequest,ESPMode::ThreadSafe> httpRequest = FHttpModule::Get().CreateRequest();
+	#else
 	TSharedRef<IHttpRequest> httpRequest = FHttpModule::Get().CreateRequest();
+	#endif
 
 	httpRequest->SetURL(_serverUrl);
 	httpRequest->SetVerb(TEXT("POST"));
