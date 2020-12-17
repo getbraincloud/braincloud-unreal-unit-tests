@@ -109,6 +109,12 @@ namespace BrainCloud
 
             delete _socket;
             _socket = NULL;
+            if (_disconnectedWithReason == true)
+            {
+                Json::FastWriter myWriter;
+                std::string output ="\n" + myWriter.write(_msg); 
+                printf(output.c_str());
+            } 
         }
     }
 
@@ -324,6 +330,7 @@ namespace BrainCloud
     {
         _rttConnectionStatus = BrainCloudRTT::RTTConnectionStatus::Connecting;
 #if (TARGET_OS_WATCH != 1)
+        _disconnectedWithReason = false;
         std::thread connectionThread([this]
         {
             std::string host = _endpoint["host"].asString();
@@ -543,16 +550,28 @@ namespace BrainCloud
     {
         std::string serviceName = json["service"].asString();
         std::string operation = json["operation"].asString();
-        if (serviceName == "rtt" && operation == "CONNECT")
+        if (serviceName == "rtt")
         {
-            _heartbeatSeconds = json["data"].get("heartbeatSeconds", 30).asInt();
-            _connectionId = json["data"]["cxId"].asString();
+            if (operation == "CONNECT")
+            {
+                _heartbeatSeconds = json["data"].get("heartbeatSeconds", 30).asInt();
+                _connectionId = json["data"]["cxId"].asString();
 
-            startHeartbeat();
+                startHeartbeat();
 
-            _eventQueueMutex.lock();
-            _callbackEventQueue.push_back(RTTCallback(RTTCallbackType::ConnectSuccess));
-            _eventQueueMutex.unlock();
+                _eventQueueMutex.lock();
+                _callbackEventQueue.push_back(RTTCallback(RTTCallbackType::ConnectSuccess));
+                _eventQueueMutex.unlock();
+            }
+            else if (operation == "DISCONNECT")
+            {
+                _disconnectedWithReason = true;
+                _disconnectReasonMessage = json["data"]["reason"].asString();
+                _disconnectReasonCode = json["data"]["reasonCode"].asInt();
+
+			    _msg["reasonCode"] = _disconnectReasonCode;
+			    _msg["reason"] = _disconnectReasonMessage;
+            }
         }
         else
         {

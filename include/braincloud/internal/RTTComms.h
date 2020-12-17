@@ -99,9 +99,11 @@ namespace BrainCloud
         std::string _sessionId;
         std::string _profileId;
         std::string _connectionId;
+        std::string _disconnectReasonMessage;
 
         Json::Value _auth;
         Json::Value _endpoint;
+        Json::Value _msg;
 
         ISocket* _socket;
         BrainCloudRTT::RTTConnectionStatus _rttConnectionStatus;
@@ -116,6 +118,8 @@ namespace BrainCloud
 
         int _heartbeatSeconds;
         int64_t _lastHeartbeatTime;
+        bool _disconnectedWithReason = false;
+        int _disconnectReasonCode;
     
         std::mutex _eventQueueMutex;
         std::vector<RTTCallback> _callbackEventQueue;
