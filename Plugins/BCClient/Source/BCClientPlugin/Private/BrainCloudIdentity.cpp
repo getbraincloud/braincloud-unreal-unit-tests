@@ -43,6 +43,21 @@ void BrainCloudIdentity::detachFacebookIdentity(const FString &facebookId, bool 
 	detachIdentity(facebookId, EBCAuthType::Facebook, continueAnon, callback);
 }
 
+void BrainCloudIdentity::attachPSNIdentity(const FString &accountId, const FString &authenticationToken, IServerCallback *callback)
+{
+	attachIdentity(accountId, authenticationToken, EBCAuthType::Facebook, callback);
+}
+
+void BrainCloudIdentity::mergePSNIdentity(const FString &accountId, const FString &authenticationToken, IServerCallback *callback)
+{
+	mergeIdentity(accountId, authenticationToken, EBCAuthType::Facebook, callback);
+}
+
+void BrainCloudIdentity::detachPSNIdentity(const FString &accountId, bool continueAnon, IServerCallback *callback)
+{
+	detachIdentity(accountId, EBCAuthType::PlaystationNetwork, continueAnon, callback);
+}
+
 void BrainCloudIdentity::attachEmailIdentity(const FString &email, const FString &password, IServerCallback *callback)
 {
 	attachIdentity(email, password, EBCAuthType::Email, callback);
