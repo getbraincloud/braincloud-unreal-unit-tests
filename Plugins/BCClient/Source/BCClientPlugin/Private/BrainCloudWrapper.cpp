@@ -139,6 +139,13 @@ void UBrainCloudWrapper::authenticateFacebook(FString fbUserId, FString fbAuthTo
     _client->getAuthenticationService()->authenticateFacebook(fbUserId, fbAuthToken, forceCreate, this);
 }
 
+void UBrainCloudWrapper::authenticatePSN(FString psnAccountId, FString psnAuthToken, bool forceCreate, IServerCallback *callback)
+{
+    _authenticateCallback = callback;
+    initializeIdentity();
+    _client->getAuthenticationService()->authenticatePSN(psnAccountId, psnAuthToken, forceCreate, this);
+}
+
 void UBrainCloudWrapper::authenticateGameCenter(FString gameCenterId, bool forceCreate, IServerCallback *callback)
 {
     _authenticateCallback = callback;

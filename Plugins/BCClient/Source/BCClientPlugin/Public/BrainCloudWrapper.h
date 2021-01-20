@@ -155,6 +155,21 @@ class BCCLIENTPLUGIN_API UBrainCloudWrapper : public UObject, public IServerCall
     void authenticateFacebook(FString fbUserId, FString fbAuthToken, bool forceCreate, IServerCallback *callback = nullptr);
 
     /*
+     * Authenticate the user with brainCloud using their psn accountId and auth token
+     *
+     * Service Name - Authenticate
+     * Service Operation - Authenticate
+     *
+     * @param psnAccountId The account id of the user
+     * @param psnAuthToken The validated token from the Playstation SDK
+     *   (that will be further validated when sent to the bC service)
+     * @param forceCreate Should a new profile be created for this user if the account does not exist?
+     * @param callback The method to be invoked when the server response is received
+     *
+     */
+    void authenticatePSN(FString psnAccountId, FString psnAuthToken, bool forceCreate, IServerCallback *callback = nullptr);
+
+    /*
      * Authenticate the user using their Game Center id
      *
      * Service Name - Authenticate
