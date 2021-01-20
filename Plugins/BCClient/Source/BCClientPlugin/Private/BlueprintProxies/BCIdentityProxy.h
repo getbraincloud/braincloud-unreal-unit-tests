@@ -89,6 +89,53 @@ class UBCIdentityProxy : public UBCBlueprintCallProxyBase
 	static UBCIdentityProxy *DetachFacebookIdentity(UBrainCloudWrapper *brainCloudWrapper, const FString &facebookId, bool continueAnon);
 
 	/*
+	* Attach the user's PSN credentials to the current profile.
+	*
+	* Service Name - identity
+	* Service Operation - Attach
+	*
+	* Param - psnAccountId The psn account id of the user
+	* Param - authenticationToken The validated token from the Playstation SDK
+	*
+	* Errors to watch for:  SWITCHING_PROFILES - this means that the PSN identity you provided
+	* already points to a different profile.  You will likely want to offer the user the
+	* choice to *SWITCH* to that profile, or *MERGE* the profiles.
+	*
+	* To switch profiles, call ClearSavedProfileID() and call AuthenticatePSN().
+	*/
+	UFUNCTION(BlueprintCallable, meta = (BlueprintInternalUseOnly = "true"), Category = "BrainCloud|Identity")
+	static UBCIdentityProxy *AttachPSNIdentity(UBrainCloudWrapper *brainCloudWrapper, const FString &psnAccountId, const FString &authenticationToken);
+
+	/*
+	* Merge the profile associated with the provided PSN credentials with the
+	* current profile.
+	*
+	* Service Name - identity
+	* Service Operation - Merge
+	*
+	* Param - psnAccountId The psn account id of the user
+	* Param - authenticationToken The validated token from the Playstation SDK
+	*/
+	UFUNCTION(BlueprintCallable, meta = (BlueprintInternalUseOnly = "true"), Category = "BrainCloud|Identity")
+	static UBCIdentityProxy *MergePSNIdentity(UBrainCloudWrapper *brainCloudWrapper, const FString &psnAccountId, const FString &authenticationToken);
+
+	/*
+	* Detach the PSN identity from this profile.
+	*
+	* Service Name - identity
+	* Service Operation - Detach
+	*
+	* Param - psnAccountId The psn account id of the user
+	* Param - continueAnon Proceed even if the profile will revert to anonymous?
+	*
+	* Watch for DOWNGRADING_TO_ANONYMOUS_ERROR - occurs if you set in_continueAnon to false, and
+	* disconnecting this identity would result in the profile being anonymous (which means that
+	* the profile wouldn't be retrievable if the user loses their device)
+	*/
+	UFUNCTION(BlueprintCallable, meta = (BlueprintInternalUseOnly = "true"), Category = "BrainCloud|Identity")
+	static UBCIdentityProxy *DetachPSNIdentity(UBrainCloudWrapper *brainCloudWrapper, const FString &psnAccountId, bool continueAnon);
+	
+	/*
 	* Attach a Game Center identity to the current profile.
 	*
 	* Service Name - identity
