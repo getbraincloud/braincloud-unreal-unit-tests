@@ -56,6 +56,11 @@ void BrainCloudAuthentication::authenticateFacebook(const FString &externalId, c
 	authenticate(*externalId, *authenticationToken, EBCAuthType::Facebook, "", forceCreate, callback);
 }
 
+void BrainCloudAuthentication::authenticatePSN(const FString &accountId, const FString &authenticationToken, bool forceCreate, IServerCallback *callback)
+{
+	authenticate(*accountId, *authenticationToken, EBCAuthType::PlaystationNetwork, "", forceCreate, callback);
+}
+
 void BrainCloudAuthentication::authenticateGameCenter(const FString &gameCenterId, bool forceCreate, IServerCallback *callback)
 {
 	authenticate(*gameCenterId, TEXT(""), EBCAuthType::GameCenter, "", forceCreate, callback);

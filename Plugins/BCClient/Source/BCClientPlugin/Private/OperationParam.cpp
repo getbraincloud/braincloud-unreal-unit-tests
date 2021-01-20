@@ -57,6 +57,7 @@ const OperationParam OperationParam::AuthenticateServiceAuthenticateGameVersion 
 const OperationParam OperationParam::AuthenticateServiceAuthenticateBrainCloudVersion = OperationParam("clientLibVersion");
 const OperationParam OperationParam::AuthenticateServiceAuthenticateAuthFacebook = OperationParam("Facebook");
 const OperationParam OperationParam::AuthenticateServiceAuthenticateAuthEmail = OperationParam("Email");
+const OperationParam OperationParam::AuthenticateServiceAuthenticateAuthPlaystationNetwork = OperationParam("PlaystationNetwork");
 const OperationParam OperationParam::AuthenticateServiceAuthenticateAuthGameCenter = OperationParam("GameCenter");
 const OperationParam OperationParam::AuthenticateServiceAuthenticateAuthUniversal = OperationParam("Universal");
 const OperationParam OperationParam::AuthenticateServiceAuthenticateAuthSteam = OperationParam("Steam");

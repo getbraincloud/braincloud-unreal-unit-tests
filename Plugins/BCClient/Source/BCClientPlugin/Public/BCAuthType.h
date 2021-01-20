@@ -9,6 +9,7 @@ enum class EBCAuthType : uint8
 	Universal UMETA(DisplayName = "Universal"),
 	Email UMETA(DisplayName = "Email"),
 	Facebook UMETA(DisplayName = "Facebook"),
+	PlaystationNetwork UMETA(DisplayName = "PlaystationNetwork"),
 	GameCenter UMETA(DisplayName = "GameCenter"),
 	Steam UMETA(DisplayName = "Steam"),
 	Google UMETA(DisplayName = "Google"),
