@@ -86,6 +86,56 @@ class BCCLIENTPLUGIN_API BrainCloudIdentity
 	void detachFacebookIdentity(const FString &facebookId, bool continueAnon, IServerCallback *callback = nullptr);
 
 	/*
+	 * Attach the user's PSN credentials to the current profile.
+	 *
+	 * Service Name - Identity
+	 * Service Operation - Attach
+	 *
+	 * @param psnAccountId The psn account id of the user
+	 * @param authenticationToken The validated token from the Playstation SDK
+	 *   (that will be further validated when sent to the bC service)
+	 * @param callback The method to be invoked when the server response is received
+	 *
+	 * Errors to watch for:  SWITCHING_PROFILES - this means that the Facebook identity you provided
+	 * already points to a different profile.  You will likely want to offer the player the
+	 * choice to *SWITCH* to that profile, or *MERGE* the profiles.
+	 *
+	 * To switch profiles, call ClearSavedProfileID() and call AuthenticatePSN().
+	 */
+	void attachPSNIdentity(const FString &psnAccountId, const FString &authenticationToken, IServerCallback *callback = nullptr);
+
+	/*
+	 * Merge the profile associated with the provided PSN credentials with the
+	 * current profile.
+	 *
+	 * Service Name - Identity
+	 * Service Operation - Merge
+	 *
+	 * @param psnAccountId The psn account id of the user
+	 * @param authenticationToken The validated token from the Playstation SDK
+	 *   (that will be further validated when sent to the bC service)
+	 * @param callback The method to be invoked when the server response is received
+	 *
+	 */
+	void mergePSNIdentity(const FString &psnAccountId, const FString &authenticationToken, IServerCallback *callback = nullptr);
+
+	/*
+	 * Detach the PSN identity from this profile.
+	 *
+	 * Service Name - Identity
+	 * Service Operation - Detach
+	 *
+	 * @param psnAccountId The psn account id of the user
+	 * @param continueAnon Proceed even if the profile will revert to anonymous?
+	 * @param callback The method to be invoked when the server response is received
+	 *
+	 * Watch for DOWNGRADING_TO_ANONYMOUS_ERROR - occurs if you set continueAnon to false, and
+	 * disconnecting this identity would result in the profile being anonymous (which means that
+	 * the profile wouldn't be retrievable if the user loses their device)
+	 */
+	void detachPSNIdentity(const FString &psnAccountId, bool continueAnon, IServerCallback *callback = nullptr);
+
+	/*
 	 * Attach a Game Center identity to the current profile.
 	 *
 	 * Service Name - Identity

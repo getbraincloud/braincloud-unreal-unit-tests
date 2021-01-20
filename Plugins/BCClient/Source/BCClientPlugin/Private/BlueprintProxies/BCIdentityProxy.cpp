@@ -48,6 +48,27 @@ UBCIdentityProxy *UBCIdentityProxy::DetachFacebookIdentity(UBrainCloudWrapper *b
 	return Proxy;
 }
 
+UBCIdentityProxy *UBCIdentityProxy::AttachPSNIdentity(UBrainCloudWrapper *brainCloudWrapper, const FString &psnAccountId, const FString &authenticationToken)
+{
+	UBCIdentityProxy *Proxy = NewObject<UBCIdentityProxy>();
+	UBCWrapperProxy::GetBrainCloudInstance(brainCloudWrapper)->getIdentityService()->attachPSNIdentity(psnAccountId, authenticationToken, Proxy);
+	return Proxy;
+}
+
+UBCIdentityProxy *UBCIdentityProxy::MergePSNIdentity(UBrainCloudWrapper *brainCloudWrapper, const FString &psnAccountId, const FString &authenticationToken)
+{
+	UBCIdentityProxy *Proxy = NewObject<UBCIdentityProxy>();
+	UBCWrapperProxy::GetBrainCloudInstance(brainCloudWrapper)->getIdentityService()->mergePSNIdentity(psnAccountId, authenticationToken, Proxy);
+	return Proxy;
+}
+
+UBCIdentityProxy *UBCIdentityProxy::DetachPSNIdentity(UBrainCloudWrapper *brainCloudWrapper, const FString &psnAccountId, bool continueAnon)
+{
+	UBCIdentityProxy *Proxy = NewObject<UBCIdentityProxy>();
+	UBCWrapperProxy::GetBrainCloudInstance(brainCloudWrapper)->getIdentityService()->detachPSNIdentity(psnAccountId, continueAnon, Proxy);
+	return Proxy;
+}
+
 UBCIdentityProxy *UBCIdentityProxy::AttachGameCenterIdentity(UBrainCloudWrapper *brainCloudWrapper, const FString &gameCenterId)
 {
 	UBCIdentityProxy *Proxy = NewObject<UBCIdentityProxy>();
