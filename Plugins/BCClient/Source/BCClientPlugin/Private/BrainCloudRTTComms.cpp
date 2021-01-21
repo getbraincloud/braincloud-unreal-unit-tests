@@ -85,6 +85,8 @@ BrainCloudRTTComms::~BrainCloudRTTComms()
 
 void BrainCloudRTTComms::enableRTT(BCRTTConnectionType in_connectionType, IServerCallback *callback)
 {
+	m_disconnectedWithReason = false;
+	
 	if(isRTTEnabled() || m_rttConnectionStatus == BCRTTConnectionStatus::CONNECTING)
 	{
 		return;
@@ -536,7 +538,16 @@ void BrainCloudRTTComms::setupWebSocket(const FString &in_url)
 void BrainCloudRTTComms::webSocket_OnClose()
 {
 	if (m_client->isLoggingEnabled())
+	{
 		UE_LOG(LogBrainCloudComms, Log, TEXT("Connection closed"));
+		
+		if (m_disconnectedWithReason == true)
+		{
+			FString response;
+			TSharedRef<TJsonWriter<>> m_disconnectJson = TJsonWriterFactory<>::Create(&response);
+			UE_LOG(LogBrainCloudComms, Log, TEXT("RTT: Disconnect "), *response);
+		}
+	}
 
 	m_websocketStatus = BCWebsocketStatus::CLOSED;
 	processRegisteredListeners(ServiceName::RTTRegistration.getValue().ToLower(), "error", UBrainCloudWrapper::buildErrorJson(403, ReasonCodes::RS_CLIENT_ERROR,"Could not connect at this time"));
@@ -592,6 +603,13 @@ void BrainCloudRTTComms::onRecv(const FString &in_message)
 			heartBeat = innerData->GetIntegerField(TEXT("wsHeartbeatSecs"));
 		}
 		setRTTHeartBeatSeconds(heartBeat);
+	}
+	else if (operation == "DISCONNECT")
+	{
+		m_disconnectedWithReason = true;
+		m_disconnectJson->SetStringField("reason", jsonData->GetStringField(TEXT("reason")));
+		m_disconnectJson->SetNumberField("reasonCode", jsonData->GetNumberField(TEXT("reasonCode")));
+		m_disconnectJson->SetStringField("severity", "ERROR");
 	}
 
 	if (bIsInnerDataValid)
