@@ -271,6 +271,17 @@ void BrainCloudLeaderboard::getPlayerScore(const FString &leaderboardId, int32 v
 	_client->sendRequest(sc);
 }
 
+void BrainCloudLeaderboard::getPlayerScores(const FString &leaderboardId, int32 versionId, int32 maxResults, IServerCallback *callback)
+{
+	TSharedRef<FJsonObject> message = MakeShareable(new FJsonObject());
+	message->SetStringField(OperationParam::LeaderboardServiceLeaderboardId.getValue(), leaderboardId);
+	message->SetNumberField(OperationParam::ProfileIds.getValue(), versionId);
+	message->SetNumberField(OperationParam::LeaderboardServiceMaxResults.getValue(), maxResults);
+
+	ServerCall *sc = new ServerCall(ServiceName::Leaderboard, ServiceOperation::GetPlayerScores, message, callback);
+	_client->sendRequest(sc);
+}
+
 void BrainCloudLeaderboard::getPlayerScoresFromLeaderboards(const TArray<FString> leaderboardIds, IServerCallback *callback)
 {
 	TSharedRef<FJsonObject> message = MakeShareable(new FJsonObject());

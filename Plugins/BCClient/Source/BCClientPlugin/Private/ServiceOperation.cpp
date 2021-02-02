@@ -133,6 +133,7 @@ const ServiceOperation ServiceOperation::ListAllLeaderboards = ServiceOperation(
 const ServiceOperation ServiceOperation::GetGlobalLeaderboardEntryCount = ServiceOperation(TEXT("GET_GLOBAL_LEADERBOARD_ENTRY_COUNT"));
 const ServiceOperation ServiceOperation::RemovePlayerScore = ServiceOperation(TEXT("REMOVE_PLAYER_SCORE"));
 const ServiceOperation ServiceOperation::GetPlayerScore = ServiceOperation(TEXT("GET_PLAYER_SCORE"));
+const ServiceOperation ServiceOperation::GetPlayerScores = ServiceOperation(TEXT("GET_PLAYER_SCORES"));
 const ServiceOperation ServiceOperation::GetPlayerScoresFromLeaderboards = ServiceOperation(TEXT("GET_PLAYER_SCORES_FROM_LEADERBOARDS"));
 const ServiceOperation ServiceOperation::PostScoreToGroupLeaderboard = ServiceOperation(TEXT("POST_GROUP_SCORE"));
 const ServiceOperation ServiceOperation::PostScoreToDynamicGroupLeaderboard = ServiceOperation(TEXT("POST_GROUP_SCORE_DYNAMIC"));
