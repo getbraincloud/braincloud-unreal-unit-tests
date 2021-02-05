@@ -183,6 +183,13 @@ UBCLeaderboardProxy *UBCLeaderboardProxy::GetPlayerScore(UBrainCloudWrapper *bra
 	return Proxy;
 }
 
+UBCLeaderboardProxy *UBCLeaderboardProxy::GetPlayerScores(UBrainCloudWrapper *brainCloudWrapper, const FString &leaderboardId, int32 versionId, int32 maxResults)
+{
+	UBCLeaderboardProxy *Proxy = NewObject<UBCLeaderboardProxy>();
+	UBCWrapperProxy::GetBrainCloudInstance(brainCloudWrapper)->getLeaderboardService()->getPlayerScores(leaderboardId, versionId, maxResults, Proxy);
+	return Proxy;
+}
+
 UBCLeaderboardProxy *UBCLeaderboardProxy::GetPlayerScoresFromLeaderboards(UBrainCloudWrapper *brainCloudWrapper, const TArray<FString> leaderboardIds)
 {
 	UBCLeaderboardProxy *Proxy = NewObject<UBCLeaderboardProxy>();
