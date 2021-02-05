@@ -124,6 +124,7 @@ namespace BrainCloud
 	const ServiceOperation ServiceOperation::GetGlobalLeaderboardEntryCount = ServiceOperation("GET_GLOBAL_LEADERBOARD_ENTRY_COUNT");
 	const ServiceOperation ServiceOperation::RemovePlayerScore = ServiceOperation("REMOVE_PLAYER_SCORE");
 	const ServiceOperation ServiceOperation::GetPlayerScore = ServiceOperation("GET_PLAYER_SCORE");
+	const ServiceOperation ServiceOperation::GetPlayerScores = ServiceOperation("GET_PLAYER_SCORES");
 	const ServiceOperation ServiceOperation::GetPlayerScoresFromLeaderboards = ServiceOperation("GET_PLAYER_SCORES_FROM_LEADERBOARDS");
 
 	const ServiceOperation ServiceOperation::InitThirdParty = ServiceOperation("initThirdParty");

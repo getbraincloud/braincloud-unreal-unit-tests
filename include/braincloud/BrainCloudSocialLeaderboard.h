@@ -446,6 +446,20 @@ namespace BrainCloud
 		void getPlayerScore(const char * in_leaderboardId, int32_t in_versionId, IServerCallback * in_callback = NULL);
 
 		/**
+		* Gets a player's score from a leaderboard
+		*
+		* Service Name - leaderboard
+		* Service Operation - GET_PLAYER_SCORE
+		*
+		* @param in_leaderboardId The leaderboard ID
+		* @param in_versionId The version of the leaderboard. Use -1 for current.
+		* @param in_maxResults The max number of returned results
+		* @param in_callback The method to be invoked when the server response is received
+		*/
+		void getPlayerScores(const char * in_leaderboardId, int32_t in_versionId, int32_t in_maxResults, IServerCallback * in_callback = NULL);
+
+
+		/**
 		* Gets a player's score from multiple leaderboards
 		*
 		* Service Name - leaderboard

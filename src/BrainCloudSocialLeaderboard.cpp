@@ -328,6 +328,17 @@ namespace BrainCloud
 		m_client->getBrainCloudComms()->addToQueue(sc);
 	}
 
+	void BrainCloudSocialLeaderboard::getPlayerScores(const char * in_leaderboardId, int32_t in_versionId, int32_t in_maxResults, IServerCallback * in_callback)
+	{
+		Json::Value message;
+		message[OperationParam::SocialLeaderboardServiceLeaderboardId.getValue()] = in_leaderboardId;
+		if (in_versionId != -1) message[OperationParam::SocialLeaderboardServiceVersionId.getValue()] = in_versionId;
+		message[OperationParam::SocialLeaderboardServiceMaxResults.getValue()] = in_maxResults;
+
+		ServerCall * sc = new ServerCall(ServiceName::Leaderboard, ServiceOperation::GetPlayerScores, message, in_callback);
+		m_client->getBrainCloudComms()->addToQueue(sc);
+	}
+
 	void BrainCloudSocialLeaderboard::getPlayerScoresFromLeaderboards(const std::vector<std::string> & in_leaderboardIds, IServerCallback * in_callback)
 	{
 		Json::Value message;

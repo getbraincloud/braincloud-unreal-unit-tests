@@ -255,6 +255,15 @@ TEST_F(TestBCSocialLeaderboard, GetPlayerScore)
 	tr.run(m_bc);
 }
 
+TEST_F(TestBCSocialLeaderboard, GetPlayerScores)
+{
+	PostScoreToNonDynamic();
+
+	TestResult tr;
+	m_bc->getSocialLeaderboardService()->getPlayerScores(LB_ID, -1, 5, &tr);
+	tr.run(m_bc);
+}
+
 TEST_F(TestBCSocialLeaderboard, GetPlayerScoresFromLeaderboards)
 {
 	// post a few scores first so we have some data

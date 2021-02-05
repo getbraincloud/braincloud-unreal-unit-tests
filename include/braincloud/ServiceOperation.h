@@ -131,6 +131,7 @@ namespace BrainCloud {
 		static const ServiceOperation GetGlobalLeaderboardEntryCount;
 		static const ServiceOperation RemovePlayerScore;
 		static const ServiceOperation GetPlayerScore;
+		static const ServiceOperation GetPlayerScores;
 		static const ServiceOperation GetPlayerScoresFromLeaderboards;
 
 		static const ServiceOperation InitThirdParty;
