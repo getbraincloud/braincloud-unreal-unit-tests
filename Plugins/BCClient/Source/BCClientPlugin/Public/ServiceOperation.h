@@ -137,6 +137,7 @@ class BCCLIENTPLUGIN_API ServiceOperation
 	static const ServiceOperation GetGlobalLeaderboardEntryCount;
 	static const ServiceOperation RemovePlayerScore;
 	static const ServiceOperation GetPlayerScore;
+	static const ServiceOperation GetPlayerScores;
 	static const ServiceOperation GetPlayerScoresFromLeaderboards;
 	static const ServiceOperation PostScoreToGroupLeaderboard;
 	static const ServiceOperation PostScoreToDynamicGroupLeaderboard;
