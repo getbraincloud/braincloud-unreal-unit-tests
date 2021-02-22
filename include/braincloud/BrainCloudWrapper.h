@@ -42,6 +42,7 @@ namespace BrainCloud {
         BrainCloudFriend * getFriendService() { return client->getFriendService(); }
         BrainCloudEvent * getEventService() { return client->getEventService(); }
         BrainCloudSocialLeaderboard * getSocialLeaderboardService() { return client->getSocialLeaderboardService(); }
+         BrainCloudSocialLeaderboard * getLeaderboardService() { return client->getLeaderboardService(); }
         BrainCloudGamification * getGamificationService() { return client->getGamificationService(); }
         BrainCloudTime * getTimeService() { return client->getTimeService(); }
         BrainCloudTournament * getTournamentService() { return client->getTournamentService(); }
