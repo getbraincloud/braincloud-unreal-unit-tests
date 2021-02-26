@@ -56,6 +56,7 @@ const OperationParam OperationParam::AuthenticateServiceAuthenticateReleasePlatf
 const OperationParam OperationParam::AuthenticateServiceAuthenticateGameVersion = OperationParam("gameVersion");
 const OperationParam OperationParam::AuthenticateServiceAuthenticateBrainCloudVersion = OperationParam("clientLibVersion");
 const OperationParam OperationParam::AuthenticateServiceAuthenticateAuthFacebook = OperationParam("Facebook");
+const OperationParam OperationParam::AuthenticateServiceAuthenticateAuthOculus = OperationParam("Oculus");
 const OperationParam OperationParam::AuthenticateServiceAuthenticateAuthEmail = OperationParam("Email");
 const OperationParam OperationParam::AuthenticateServiceAuthenticateAuthPlaystationNetwork = OperationParam("PlaystationNetwork");
 const OperationParam OperationParam::AuthenticateServiceAuthenticateAuthGameCenter = OperationParam("GameCenter");
@@ -306,6 +307,7 @@ const OperationParam OperationParam::ReleasePlatformGoogleAndroid = OperationPar
 const OperationParam OperationParam::ReleasePlatformWindowsPhone = OperationParam("WINP");
 const OperationParam OperationParam::ReleasePlatformWindows = OperationParam("WINDOWS");
 const OperationParam OperationParam::ReleasePlatformMac = OperationParam("MAC");
+const OperationParam OperationParam::ReleasePlatformOculus = OperationParam("OCULUS");
 const OperationParam OperationParam::ReleasePlatformLinux = OperationParam("LINUX");
 
 const OperationParam OperationParam::ScriptServiceRunScriptName = OperationParam("scriptName");
