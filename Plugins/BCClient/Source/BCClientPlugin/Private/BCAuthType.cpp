@@ -15,6 +15,8 @@ FString BCAuthType::EnumToString(EBCAuthType type)
         return TEXT("Email");
     case EBCAuthType::Facebook:
         return TEXT("Facebook");
+    case EBCAuthType::Oculus:
+        return TEXT("Oculus");
     case EBCAuthType::PlaystationNetwork:
         return TEXT("PlaystationNetwork");
     case EBCAuthType::GameCenter:
