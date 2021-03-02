@@ -18,6 +18,7 @@ namespace BrainCloud
         static const Platform & AppleTVOS;
         static const Platform & BlackBerry;
         static const Platform & Facebook;
+        static const Platform & Oculus;
         static const Platform & GooglePlayAndroid;
         static const Platform & iOS;
         static const Platform & Linux;

@@ -20,6 +20,7 @@ namespace BrainCloud
         static const AuthenticationType & Universal;
         static const AuthenticationType & Email;
         static const AuthenticationType & Facebook;
+        static const AuthenticationType & Oculus;
         static const AuthenticationType & GameCenter;
         static const AuthenticationType & Steam;
         static const AuthenticationType & Apple;

@@ -6,6 +6,7 @@ namespace BrainCloud
     const AuthenticationType & AuthenticationType::Universal = AuthenticationType("Universal");
     const AuthenticationType & AuthenticationType::Email = AuthenticationType("Email");
     const AuthenticationType & AuthenticationType::Facebook = AuthenticationType("Facebook");
+    const AuthenticationType & AuthenticationType::Oculus = AuthenticationType("Oculus");
     const AuthenticationType & AuthenticationType::GameCenter = AuthenticationType("GameCenter");
     const AuthenticationType & AuthenticationType::Steam = AuthenticationType("Steam");
     const AuthenticationType & AuthenticationType::Apple = AuthenticationType("Apple");

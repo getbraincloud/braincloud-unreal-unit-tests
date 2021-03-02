@@ -49,6 +49,7 @@ namespace BrainCloud
 	const OperationParam OperationParam::AuthenticateServiceAuthenticateGameVersion = OperationParam("gameVersion");
 	const OperationParam OperationParam::AuthenticateServiceAuthenticateBrainCloudVersion = OperationParam("clientLibVersion");
 	const OperationParam OperationParam::AuthenticateServiceAuthenticateAuthFacebook = OperationParam("Facebook");
+	const OperationParam OperationParam::AuthenticateServiceAuthenticateAuthOculus = OperationParam("Oculus");
 	const OperationParam OperationParam::AuthenticateServiceAuthenticateAuthEmail = OperationParam("Email");
 	const OperationParam OperationParam::AuthenticateServiceAuthenticateAuthGameCenter = OperationParam("GameCenter");
 	const OperationParam OperationParam::AuthenticateServiceAuthenticateAuthUniversal = OperationParam("Universal");

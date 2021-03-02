@@ -57,6 +57,7 @@ namespace BrainCloud {
 		static const OperationParam AuthenticateServiceAuthenticateGameVersion;
 		static const OperationParam AuthenticateServiceAuthenticateBrainCloudVersion;
 		static const OperationParam AuthenticateServiceAuthenticateAuthFacebook;
+		static const OperationParam AuthenticateServiceAuthenticateAuthOculus;
 		static const OperationParam AuthenticateServiceAuthenticateAuthEmail;
 		static const OperationParam AuthenticateServiceAuthenticateAuthGameCenter;
 		static const OperationParam AuthenticateServiceAuthenticateAuthUniversal;

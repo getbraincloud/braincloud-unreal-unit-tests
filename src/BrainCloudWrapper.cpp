@@ -180,6 +180,15 @@ namespace BrainCloud {
         client->getAuthenticationService()->authenticateFacebook(in_fbUserId, in_fbAuthToken, in_forceCreate, this);
     }
 
+    void BrainCloudWrapper::authenticateOculus(const char * in_oculusUserId, const char * in_oculusNonce, bool in_forceCreate, IServerCallback * in_callback)
+    {
+        m_authenticateCallback = in_callback;
+
+        initializeIdentity();
+
+        client->getAuthenticationService()->authenticateOculus(in_oculusUserId, in_oculusNonce, in_forceCreate, this);
+    }
+
     void BrainCloudWrapper::authenticateGameCenter(const char * in_gameCenterId, bool in_forceCreate, IServerCallback * in_callback)
     {
         m_authenticateCallback = in_callback;
@@ -401,6 +410,31 @@ namespace BrainCloud {
 		};
 
 		SmartSwitchAuthenticateCallback *smartCallback = new SmartSwitchAuthenticateCallback(this, in_fbUserId, in_fbAuthToken, in_forceCreate, in_callback);
+		getIdentitiesCallback(smartCallback);
+	}
+
+    	void BrainCloudWrapper::smartSwitchAuthenticateOculus(const char * in_oculusUserId, const char * in_oculusNonce, bool in_forceCreate, IServerCallback * in_callback)
+	{
+		class SmartSwitchAuthenticateCallback : public SmartSwitchCallback
+		{
+		public:
+			SmartSwitchAuthenticateCallback(BrainCloudWrapper *in_wrapper, const char * in_oculusUserId, const char * in_oculusNonce, bool in_forceCreate, IServerCallback * in_callback) : SmartSwitchCallback(in_wrapper, in_callback) {
+				oculusUserId = in_oculusUserId;
+				oculusNonce = in_oculusNonce;
+				forceCreate = in_forceCreate;
+			}
+
+			const char * oculusUserId; const char * oculusNonce; bool forceCreate;
+
+			void serverCallback(ServiceName serviceName, ServiceOperation serviceOperation, std::string const & jsonData)
+			{
+				clearIds();
+				wrapper->client->getAuthenticationService()->authenticateOculus(oculusUserId, oculusNonce, forceCreate, callback);
+				delete this;
+			}
+		};
+
+		SmartSwitchAuthenticateCallback *smartCallback = new SmartSwitchAuthenticateCallback(this, in_oculusUserId, in_oculusNonce, in_forceCreate, in_callback);
 		getIdentitiesCallback(smartCallback);
 	}
 
