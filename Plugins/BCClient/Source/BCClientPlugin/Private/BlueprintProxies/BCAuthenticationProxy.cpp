@@ -41,6 +41,13 @@ UBCAuthenticationProxy *UBCAuthenticationProxy::AuthenticateFacebook(UBrainCloud
     return Proxy;
 }
 
+UBCAuthenticationProxy *UBCAuthenticationProxy::AuthenticateOculus(UBrainCloudWrapper *brainCloudWrapper, FString oculusId, FString oculusNonce, bool forceCreate)
+{
+    UBCAuthenticationProxy *Proxy = NewObject<UBCAuthenticationProxy>();
+    UBCWrapperProxy::GetBrainCloudInstance(brainCloudWrapper)->getClient()->getAuthenticationService()->authenticateOculus(oculusId, oculusNonce, forceCreate, Proxy);
+    return Proxy;
+}
+
 UBCAuthenticationProxy *UBCAuthenticationProxy::AuthenticatePSN(UBrainCloudWrapper *brainCloudWrapper, FString psnAccountId, FString psnAuthToken, bool forceCreate)
 {
     UBCAuthenticationProxy *Proxy = NewObject<UBCAuthenticationProxy>();
