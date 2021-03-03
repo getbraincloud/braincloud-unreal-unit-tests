@@ -60,6 +60,20 @@ public:
   void authenticateFacebook(const FString &externalId, const FString &authenticationToken, bool forceCreate, IServerCallback *callback);
 
   /*
+     * Authenticate the user with brainCloud using their Oculus Credentials
+     *
+     * Service Name - Authenticate
+     * Service Operation - Authenticate
+     *
+     * @param oculusId The oculus id of the user
+     * @param oculusNonce token from the Oculus SDK
+     * @param forceCreate Should a new profile be created for this user if the account does not exist?
+     * @param callback The method to be invoked when the server response is received
+     */
+  void authenticateOculus(const FString &oculusId, const FString &oculusNonce, bool forceCreate, IServerCallback *callback);
+
+
+  /*
      * Authenticate the user with brainCloud using their psn accountId and auth token
      *
      * Service Name - Authenticate
