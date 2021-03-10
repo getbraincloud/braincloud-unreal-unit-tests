@@ -32,6 +32,21 @@ namespace BrainCloud
 		detachIdentity(in_facebookId, AuthenticationType::Facebook, in_continueAnon, in_callback);
 	}
 
+		void BrainCloudIdentity::attachOculusIdentity(const char * in_oculusId, const char * in_oculusNonce, IServerCallback * in_callback)
+	{
+		attachIdentity(in_oculusId, in_oculusNonce, AuthenticationType::Oculus, in_callback);
+	}
+
+	void BrainCloudIdentity::mergeOculusIdentity(const char * in_oculusId, const char * in_oculusNonce, IServerCallback * in_callback)
+	{
+		mergeIdentity(in_oculusId, in_oculusNonce, AuthenticationType::Oculus, in_callback);
+	}
+
+	void BrainCloudIdentity::detachOculusIdentity(const char * in_oculusId, bool in_continueAnon, IServerCallback * in_callback)
+	{
+		detachIdentity(in_oculusId, AuthenticationType::Oculus, in_continueAnon, in_callback);
+	}
+
 		void BrainCloudIdentity::attachAppleIdentity(const char * in_appleId, const char * in_authenticationToken, IServerCallback * in_callback)
 	{
 		attachIdentity(in_appleId, in_authenticationToken, AuthenticationType::Apple, in_callback);
