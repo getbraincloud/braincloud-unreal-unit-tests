@@ -55,6 +55,7 @@ class BCCLIENTPLUGIN_API OperationParam
 	static const OperationParam AuthenticateServiceAuthenticateGameVersion;
 	static const OperationParam AuthenticateServiceAuthenticateBrainCloudVersion;
 	static const OperationParam AuthenticateServiceAuthenticateAuthFacebook;
+	static const OperationParam AuthenticateServiceAuthenticateAuthFacebookLimited;
 	static const OperationParam AuthenticateServiceAuthenticateAuthOculus;
 	static const OperationParam AuthenticateServiceAuthenticateAuthEmail;
 	static const OperationParam AuthenticateServiceAuthenticateAuthPlaystationNetwork;

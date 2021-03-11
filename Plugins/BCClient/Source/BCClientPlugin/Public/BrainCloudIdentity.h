@@ -86,6 +86,57 @@ class BCCLIENTPLUGIN_API BrainCloudIdentity
 	void detachFacebookIdentity(const FString &facebookId, bool continueAnon, IServerCallback *callback = nullptr);
 
 	/*
+	 * Attach the user's FacebookLimited credentials to the current profile.
+	 *
+	 * Service Name - Identity
+	 * Service Operation - Attach
+	 *
+	 * @param externalId The facebookLimited id of the user
+	 * @param authenticationToken The validated token from the Facebook SDK
+	 *   (that will be further validated when sent to the bC service)
+	 * @param callback The method to be invoked when the server response is received
+	 *
+	 * Errors to watch for:  SWITCHING_PROFILES - this means that the FacebookLimited identity you provided
+	 * already points to a different profile.  You will likely want to offer the player the
+	 * choice to *SWITCH* to that profile, or *MERGE* the profiles.
+	 *
+	 * To switch profiles, call ClearSavedProfileID() and call AuthenticateFacebookLimited().
+	 */
+	void attachFacebookLimitedIdentity(const FString &facebookLimitedId, const FString &authenticationToken, IServerCallback *callback = nullptr);
+
+	/*
+	 * Merge the profile associated with the provided FacebookLimited credentials with the
+	 * current profile.
+	 *
+	 * Service Name - Identity
+	 * Service Operation - Merge
+	 *
+	 * @param externalId The facebookLimited id of the user
+	 * @param authenticationToken The validated token from the Facebook SDK
+	 *   (that will be further validated when sent to the bC service)
+	 * @param callback The method to be invoked when the server response is received
+	 *
+	 */
+	void mergeFacebookLimitedIdentity(const FString &facebookLimitedId, const FString &authenticationToken, IServerCallback *callback = nullptr);
+
+	/*
+	 * Detach the FacebookLimited identity from this profile.
+	 *
+	 * Service Name - Identity
+	 * Service Operation - Detach
+	 *
+	 * @param externalId The facebookLimited id of the user
+	 * @param continueAnon Proceed even if the profile will revert to anonymous?
+	 * @param callback The method to be invoked when the server response is received
+	 *
+	 * Watch for DOWNGRADING_TO_ANONYMOUS_ERROR - occurs if you set continueAnon to false, and
+	 * disconnecting this identity would result in the profile being anonymous (which means that
+	 * the profile wouldn't be retrievable if the user loses their device)
+	 */
+	void detachFacebookLimitedIdentity(const FString &facebookLimitedId, bool continueAnon, IServerCallback *callback = nullptr);
+
+
+	/*
 	 * Attach the user's Oculus credentials to the current profile.
 	 *
 	 * Service Name - Identity
