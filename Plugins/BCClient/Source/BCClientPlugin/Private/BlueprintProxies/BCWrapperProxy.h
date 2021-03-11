@@ -126,6 +126,20 @@ public:
   UFUNCTION(BlueprintCallable, meta = (BlueprintInternalUseOnly = "true"), Category = "BrainCloud|Wrapper")
   static UBCWrapperProxy *AuthenticateFacebook(UBrainCloudWrapper *brainCloudWrapper, FString fbUserId, FString fbAuthToken, bool forceCreate);
 
+    /*
+     * Authenticate the user with brainCloud using their FacebookLimited Credentials
+     *
+     * Service Name - Authenticate
+     * Service Operation - Authenticate
+     *
+     * @param fbUserId The facebookLimited id of the user
+     * @param fbAuthToken The validated token from the Facebook SDK
+     *   (that will be further validated when sent to the bC service)
+     * @param forceCreate Should a new profile be created for this user if the account does not exist?
+     */
+  UFUNCTION(BlueprintCallable, meta = (BlueprintInternalUseOnly = "true"), Category = "BrainCloud|Wrapper")
+  static UBCWrapperProxy *AuthenticateFacebookLimited(UBrainCloudWrapper *brainCloudWrapper, FString fbLimitedUserId, FString fbAuthToken, bool forceCreate);
+
    /*
      * Authenticate the user with brainCloud using their Oculus Credentials
      *
@@ -340,6 +354,25 @@ public:
      */
   UFUNCTION(BlueprintCallable, meta = (BlueprintInternalUseOnly = "true"), Category = "BrainCloud|Wrapper")
   static UBCWrapperProxy *SmartSwitchAuthenticateFacebook(UBrainCloudWrapper *brainCloudWrapper, const FString &fbUserId, const FString &fbAuthToken, bool forceCreate);
+
+    /*
+     * Smart Switch Authenticate will logout of the current profile, and switch to the new authentication type.
+     * In event the current session was previously an anonymous account, the smart switch will delete that profile.
+     * Use this function to keep a clean designflow from anonymous to signed profiles
+     *
+     * Authenticate the user with brainCloud using their FacebookLIMITED Credentials
+     *
+     * Service Name - Authenticate
+     * Service Operation - Authenticate
+     *
+     * @param fbUserId The facebooklIMITED id of the user
+     * @param fbAuthToken The validated token from the Facebook SDK
+     *   (that will be further validated when sent to the bC service)
+     * @param forceCreate Should a new profile be created for this user if the account does not exist?
+     *
+     */
+  UFUNCTION(BlueprintCallable, meta = (BlueprintInternalUseOnly = "true"), Category = "BrainCloud|Wrapper")
+  static UBCWrapperProxy *SmartSwitchAuthenticateFacebookLimited(UBrainCloudWrapper *brainCloudWrapper, const FString &fbLimitedUserId, const FString &fbAuthToken, bool forceCreate);
 
    /*
      * Smart Switch Authenticate will logout of the current profile, and switch to the new authentication type.

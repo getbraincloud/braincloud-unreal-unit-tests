@@ -56,6 +56,7 @@ const OperationParam OperationParam::AuthenticateServiceAuthenticateReleasePlatf
 const OperationParam OperationParam::AuthenticateServiceAuthenticateGameVersion = OperationParam("gameVersion");
 const OperationParam OperationParam::AuthenticateServiceAuthenticateBrainCloudVersion = OperationParam("clientLibVersion");
 const OperationParam OperationParam::AuthenticateServiceAuthenticateAuthFacebook = OperationParam("Facebook");
+const OperationParam OperationParam::AuthenticateServiceAuthenticateAuthFacebookLimited = OperationParam("FacebookLimited");
 const OperationParam OperationParam::AuthenticateServiceAuthenticateAuthOculus = OperationParam("Oculus");
 const OperationParam OperationParam::AuthenticateServiceAuthenticateAuthEmail = OperationParam("Email");
 const OperationParam OperationParam::AuthenticateServiceAuthenticateAuthPlaystationNetwork = OperationParam("PlaystationNetwork");

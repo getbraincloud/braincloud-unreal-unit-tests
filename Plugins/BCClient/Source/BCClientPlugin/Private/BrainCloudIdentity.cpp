@@ -43,6 +43,21 @@ void BrainCloudIdentity::detachFacebookIdentity(const FString &facebookId, bool 
 	detachIdentity(facebookId, EBCAuthType::Facebook, continueAnon, callback);
 }
 
+void BrainCloudIdentity::attachFacebookLimitedIdentity(const FString &facebookLimitedId, const FString &authenticationToken, IServerCallback *callback)
+{
+	attachIdentity(facebookLimitedId, authenticationToken, EBCAuthType::FacebookLimited, callback);
+}
+
+void BrainCloudIdentity::mergeFacebookLimitedIdentity(const FString &facebookLimitedId, const FString &authenticationToken, IServerCallback *callback)
+{
+	mergeIdentity(facebookLimitedId, authenticationToken, EBCAuthType::FacebookLimited, callback);
+}
+
+void BrainCloudIdentity::detachFacebookLimitedIdentity(const FString &facebookLimitedId, bool continueAnon, IServerCallback *callback)
+{
+	detachIdentity(facebookLimitedId, EBCAuthType::FacebookLimited, continueAnon, callback);
+}
+
 void BrainCloudIdentity::attachOculusIdentity(const FString &oculusId, const FString &oculusNonce, IServerCallback *callback)
 {
 	attachIdentity(oculusId, oculusNonce, EBCAuthType::Oculus, callback);

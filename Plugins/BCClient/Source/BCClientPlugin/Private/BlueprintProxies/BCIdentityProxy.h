@@ -89,6 +89,56 @@ class UBCIdentityProxy : public UBCBlueprintCallProxyBase
 	static UBCIdentityProxy *DetachFacebookIdentity(UBrainCloudWrapper *brainCloudWrapper, const FString &facebookId, bool continueAnon);
 
 	/*
+	* Attach the user's FacebookLimited credentials to the current profile.
+	*
+	* Service Name - identity
+	* Service Operation - Attach
+	*
+	* Param - externalId The facebookLimited id of the user
+	* Param - authenticationToken The validated token from the Facebook SDK
+	*   (that will be further validated when sent to the bC service)
+	*
+	* Errors to watch for:  SWITCHING_PROFILES - this means that the Facebook identity you provided
+	* already points to a different profile.  You will likely want to offer the user the
+	* choice to *SWITCH* to that profile, or *MERGE* the profiles.
+	*
+	* To switch profiles, call ClearSavedProfileID() and call AuthenticateFacebook().
+	*/
+	UFUNCTION(BlueprintCallable, meta = (BlueprintInternalUseOnly = "true"), Category = "BrainCloud|Identity")
+	static UBCIdentityProxy *AttachFacebookLimitedIdentity(UBrainCloudWrapper *brainCloudWrapper, const FString &facebookLimitedId, const FString &authenticationToken);
+
+	/*
+	* Merge the profile associated with the provided FacebookLimited credentials with the
+	* current profile.
+	*
+	* Service Name - identity
+	* Service Operation - Merge
+	*
+	* Param - externalId The facebookLimited id of the user
+	* Param - authenticationToken The validated token from the Facebook SDK
+	*   (that will be further validated when sent to the bC service)
+	*/
+	UFUNCTION(BlueprintCallable, meta = (BlueprintInternalUseOnly = "true"), Category = "BrainCloud|Identity")
+	static UBCIdentityProxy *MergeFacebookLimitedIdentity(UBrainCloudWrapper *brainCloudWrapper, const FString &facebookLimitedId, const FString &authenticationToken);
+
+	/*
+	* Detach the FacebookLimited identity from this profile.
+	*
+	* Service Name - identity
+	* Service Operation - Detach
+	*
+	* Param - externalId The facebookLimited id of the user
+	* Param - continueAnon Proceed even if the profile will revert to anonymous?
+	*
+	* Watch for DOWNGRADING_TO_ANONYMOUS_ERROR - occurs if you set in_continueAnon to false, and
+	* disconnecting this identity would result in the profile being anonymous (which means that
+	* the profile wouldn't be retrievable if the user loses their device)
+	*/
+	UFUNCTION(BlueprintCallable, meta = (BlueprintInternalUseOnly = "true"), Category = "BrainCloud|Identity")
+	static UBCIdentityProxy *DetachFacebookLimitedIdentity(UBrainCloudWrapper *brainCloudWrapper, const FString &facebookLimitedId, bool continueAnon);
+
+
+	/*
 	* Attach the user's Oculus credentials to the current profile.
 	*
 	* Service Name - identity
