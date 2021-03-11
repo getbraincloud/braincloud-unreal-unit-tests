@@ -56,6 +56,11 @@ void BrainCloudAuthentication::authenticateFacebook(const FString &externalId, c
 	authenticate(*externalId, *authenticationToken, EBCAuthType::Facebook, "", forceCreate, callback);
 }
 
+void BrainCloudAuthentication::authenticateFacebookLimited(const FString &externalId, const FString &authenticationToken, bool forceCreate, IServerCallback *callback)
+{
+	authenticate(*externalId, *authenticationToken, EBCAuthType::FacebookLimited, "", forceCreate, callback);
+}
+
 void BrainCloudAuthentication::authenticateOculus(const FString &oculusId, const FString &oculusNonce, bool forceCreate, IServerCallback *callback)
 {
 	authenticate(*oculusId, *oculusNonce, EBCAuthType::Oculus, "", forceCreate, callback);
