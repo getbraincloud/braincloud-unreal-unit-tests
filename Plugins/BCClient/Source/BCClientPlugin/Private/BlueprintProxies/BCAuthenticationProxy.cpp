@@ -48,10 +48,10 @@ UBCAuthenticationProxy *UBCAuthenticationProxy::AuthenticateOculus(UBrainCloudWr
     return Proxy;
 }
 
-UBCAuthenticationProxy *UBCAuthenticationProxy::AuthenticatePSN(UBrainCloudWrapper *brainCloudWrapper, FString psnAccountId, FString psnAuthToken, bool forceCreate)
+UBCAuthenticationProxy *UBCAuthenticationProxy::AuthenticatePlaystationNetwork(UBrainCloudWrapper *brainCloudWrapper, FString psnAccountId, FString psnAuthToken, bool forceCreate)
 {
     UBCAuthenticationProxy *Proxy = NewObject<UBCAuthenticationProxy>();
-    UBCWrapperProxy::GetBrainCloudInstance(brainCloudWrapper)->getClient()->getAuthenticationService()->authenticatePSN(psnAccountId, psnAuthToken, forceCreate, Proxy);
+    UBCWrapperProxy::GetBrainCloudInstance(brainCloudWrapper)->getClient()->getAuthenticationService()->authenticatePlaystationNetwork(psnAccountId, psnAuthToken, forceCreate, Proxy);
     return Proxy;
 }
 

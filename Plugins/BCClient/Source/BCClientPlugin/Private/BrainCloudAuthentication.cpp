@@ -61,7 +61,7 @@ void BrainCloudAuthentication::authenticateOculus(const FString &oculusId, const
 	authenticate(*oculusId, *oculusNonce, EBCAuthType::Oculus, "", forceCreate, callback);
 }
 
-void BrainCloudAuthentication::authenticatePSN(const FString &accountId, const FString &authenticationToken, bool forceCreate, IServerCallback *callback)
+void BrainCloudAuthentication::authenticatePlaystationNetwork(const FString &accountId, const FString &authenticationToken, bool forceCreate, IServerCallback *callback)
 {
 	authenticate(*accountId, *authenticationToken, EBCAuthType::PlaystationNetwork, "", forceCreate, callback);
 }
