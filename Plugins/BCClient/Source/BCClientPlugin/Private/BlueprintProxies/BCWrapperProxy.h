@@ -152,7 +152,7 @@ public:
      * @param forceCreate Should a new profile be created for this user if the account does not exist?
      */
   UFUNCTION(BlueprintCallable, meta = (BlueprintInternalUseOnly = "true"), Category = "BrainCloud|Wrapper")
-  static UBCWrapperProxy *AuthenticatePSN(UBrainCloudWrapper *brainCloudWrapper, FString psnAccountId, FString psnAuthToken, bool forceCreate);
+  static UBCWrapperProxy *AuthenticatePlaystationNetwork(UBrainCloudWrapper *brainCloudWrapper, FString psnAccountId, FString psnAuthToken, bool forceCreate);
 
 
   /*

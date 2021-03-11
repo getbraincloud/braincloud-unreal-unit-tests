@@ -146,11 +146,11 @@ void UBrainCloudWrapper::authenticateOculus(FString oculusUserId, FString oculus
     _client->getAuthenticationService()->authenticateOculus(oculusUserId, oculusNonce, forceCreate, this);
 }
 
-void UBrainCloudWrapper::authenticatePSN(FString psnAccountId, FString psnAuthToken, bool forceCreate, IServerCallback *callback)
+void UBrainCloudWrapper::authenticatePlaystationNetwork(FString psnAccountId, FString psnAuthToken, bool forceCreate, IServerCallback *callback)
 {
     _authenticateCallback = callback;
     initializeIdentity();
-    _client->getAuthenticationService()->authenticatePSN(psnAccountId, psnAuthToken, forceCreate, this);
+    _client->getAuthenticationService()->authenticatePlaystationNetwork(psnAccountId, psnAuthToken, forceCreate, this);
 }
 
 void UBrainCloudWrapper::authenticateGameCenter(FString gameCenterId, bool forceCreate, IServerCallback *callback)
@@ -240,7 +240,7 @@ void UBrainCloudWrapper::smartSwitchAuthenticateOculus(const FString &oculusUser
     getIdentitiesCallback(smartCallback);
 }
 
-void UBrainCloudWrapper::smartSwitchAuthenticatePSN(const FString &psnAccountId, const FString &psnAuthToken, bool in_forceCreate, IServerCallback *in_callback)
+void UBrainCloudWrapper::smartSwitchAuthenticatePlaystationNetwork(const FString &psnAccountId, const FString &psnAuthToken, bool in_forceCreate, IServerCallback *in_callback)
 {
     SmartSwitchAuthenticateCallback *smartCallback = new SmartSwitchAuthenticateCallback(this, EBCAuthType::PlaystationNetwork, psnAccountId, psnAuthToken, in_forceCreate, in_callback);
     getIdentitiesCallback(smartCallback);

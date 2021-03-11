@@ -86,6 +86,55 @@ class BCCLIENTPLUGIN_API BrainCloudIdentity
 	void detachFacebookIdentity(const FString &facebookId, bool continueAnon, IServerCallback *callback = nullptr);
 
 	/*
+	 * Attach the user's Oculus credentials to the current profile.
+	 *
+	 * Service Name - Identity
+	 * Service Operation - Attach
+	 *
+	 * @param oculusId The oculus id of the user
+	 * @param oculusNonce token from the Oculus SDK
+	 * @param callback The method to be invoked when the server response is received
+	 *
+	 * Errors to watch for:  SWITCHING_PROFILES - this means that the Oculus identity you provided
+	 * already points to a different profile.  You will likely want to offer the player the
+	 * choice to *SWITCH* to that profile, or *MERGE* the profiles.
+	 *
+	 * To switch profiles, call ClearSavedProfileID() and call AuthenticateOculus().
+	 */
+	void attachOculusIdentity(const FString &oculusId, const FString &oculusNonce, IServerCallback *callback = nullptr);
+
+	/*
+	 * Merge the profile associated with the provided Oculus credentials with the
+	 * current profile.
+	 *
+	 * Service Name - Identity
+	 * Service Operation - Merge
+	 *
+	 * @param externalId The oculus id of the user
+	 * @param oculusNonce token from the Oculus SDK
+	 * @param callback The method to be invoked when the server response is received
+	 *
+	 */
+	void mergeOculusIdentity(const FString &oculusId, const FString &oculusNonce, IServerCallback *callback = nullptr);
+
+	/*
+	 * Detach the Oculus identity from this profile.
+	 *
+	 * Service Name - Identity
+	 * Service Operation - Detach
+	 *
+	 * @param externalId The oculus id of the user
+	 * @param continueAnon Proceed even if the profile will revert to anonymous?
+	 * @param callback The method to be invoked when the server response is received
+	 *
+	 * Watch for DOWNGRADING_TO_ANONYMOUS_ERROR - occurs if you set continueAnon to false, and
+	 * disconnecting this identity would result in the profile being anonymous (which means that
+	 * the profile wouldn't be retrievable if the user loses their device)
+	 */
+	void detachOculusIdentity(const FString &oculusId, bool continueAnon, IServerCallback *callback = nullptr);
+
+
+	/*
 	 * Attach the user's PSN credentials to the current profile.
 	 *
 	 * Service Name - Identity
@@ -100,9 +149,9 @@ class BCCLIENTPLUGIN_API BrainCloudIdentity
 	 * already points to a different profile.  You will likely want to offer the player the
 	 * choice to *SWITCH* to that profile, or *MERGE* the profiles.
 	 *
-	 * To switch profiles, call ClearSavedProfileID() and call AuthenticatePSN().
+	 * To switch profiles, call ClearSavedProfileID() and call AuthenticatePlaystationNetwork().
 	 */
-	void attachPSNIdentity(const FString &psnAccountId, const FString &authenticationToken, IServerCallback *callback = nullptr);
+	void attachPlaystationNetworkIdentity(const FString &psnAccountId, const FString &authenticationToken, IServerCallback *callback = nullptr);
 
 	/*
 	 * Merge the profile associated with the provided PSN credentials with the
@@ -117,7 +166,7 @@ class BCCLIENTPLUGIN_API BrainCloudIdentity
 	 * @param callback The method to be invoked when the server response is received
 	 *
 	 */
-	void mergePSNIdentity(const FString &psnAccountId, const FString &authenticationToken, IServerCallback *callback = nullptr);
+	void mergePlaystationNetworkIdentity(const FString &psnAccountId, const FString &authenticationToken, IServerCallback *callback = nullptr);
 
 	/*
 	 * Detach the PSN identity from this profile.
@@ -133,7 +182,7 @@ class BCCLIENTPLUGIN_API BrainCloudIdentity
 	 * disconnecting this identity would result in the profile being anonymous (which means that
 	 * the profile wouldn't be retrievable if the user loses their device)
 	 */
-	void detachPSNIdentity(const FString &psnAccountId, bool continueAnon, IServerCallback *callback = nullptr);
+	void detachPlaystationNetworkIdentity(const FString &psnAccountId, bool continueAnon, IServerCallback *callback = nullptr);
 
 	/*
 	 * Attach a Game Center identity to the current profile.

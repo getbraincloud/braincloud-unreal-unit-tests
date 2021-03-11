@@ -48,24 +48,45 @@ UBCIdentityProxy *UBCIdentityProxy::DetachFacebookIdentity(UBrainCloudWrapper *b
 	return Proxy;
 }
 
-UBCIdentityProxy *UBCIdentityProxy::AttachPSNIdentity(UBrainCloudWrapper *brainCloudWrapper, const FString &psnAccountId, const FString &authenticationToken)
+UBCIdentityProxy *UBCIdentityProxy::AttachOculusIdentity(UBrainCloudWrapper *brainCloudWrapper, const FString &oculusId, const FString &oculusNonce)
 {
 	UBCIdentityProxy *Proxy = NewObject<UBCIdentityProxy>();
-	UBCWrapperProxy::GetBrainCloudInstance(brainCloudWrapper)->getIdentityService()->attachPSNIdentity(psnAccountId, authenticationToken, Proxy);
+	UBCWrapperProxy::GetBrainCloudInstance(brainCloudWrapper)->getIdentityService()->attachOculusIdentity(oculusId, oculusNonce, Proxy);
 	return Proxy;
 }
 
-UBCIdentityProxy *UBCIdentityProxy::MergePSNIdentity(UBrainCloudWrapper *brainCloudWrapper, const FString &psnAccountId, const FString &authenticationToken)
+UBCIdentityProxy *UBCIdentityProxy::MergeOculusIdentity(UBrainCloudWrapper *brainCloudWrapper, const FString &oculusId, const FString &oculusNonce)
 {
 	UBCIdentityProxy *Proxy = NewObject<UBCIdentityProxy>();
-	UBCWrapperProxy::GetBrainCloudInstance(brainCloudWrapper)->getIdentityService()->mergePSNIdentity(psnAccountId, authenticationToken, Proxy);
+	UBCWrapperProxy::GetBrainCloudInstance(brainCloudWrapper)->getIdentityService()->mergeOculusIdentity(oculusId, oculusNonce, Proxy);
 	return Proxy;
 }
 
-UBCIdentityProxy *UBCIdentityProxy::DetachPSNIdentity(UBrainCloudWrapper *brainCloudWrapper, const FString &psnAccountId, bool continueAnon)
+UBCIdentityProxy *UBCIdentityProxy::DetachOculusIdentity(UBrainCloudWrapper *brainCloudWrapper, const FString &oculusId, bool continueAnon)
 {
 	UBCIdentityProxy *Proxy = NewObject<UBCIdentityProxy>();
-	UBCWrapperProxy::GetBrainCloudInstance(brainCloudWrapper)->getIdentityService()->detachPSNIdentity(psnAccountId, continueAnon, Proxy);
+	UBCWrapperProxy::GetBrainCloudInstance(brainCloudWrapper)->getIdentityService()->detachOculusIdentity(oculusId, continueAnon, Proxy);
+	return Proxy;
+}
+
+UBCIdentityProxy *UBCIdentityProxy::AttachPlaystationNetworkIdentity(UBrainCloudWrapper *brainCloudWrapper, const FString &psnAccountId, const FString &authenticationToken)
+{
+	UBCIdentityProxy *Proxy = NewObject<UBCIdentityProxy>();
+	UBCWrapperProxy::GetBrainCloudInstance(brainCloudWrapper)->getIdentityService()->attachPlaystationNetworkIdentity(psnAccountId, authenticationToken, Proxy);
+	return Proxy;
+}
+
+UBCIdentityProxy *UBCIdentityProxy::MergePlaystationNetworkIdentity(UBrainCloudWrapper *brainCloudWrapper, const FString &psnAccountId, const FString &authenticationToken)
+{
+	UBCIdentityProxy *Proxy = NewObject<UBCIdentityProxy>();
+	UBCWrapperProxy::GetBrainCloudInstance(brainCloudWrapper)->getIdentityService()->mergePlaystationNetworkIdentity(psnAccountId, authenticationToken, Proxy);
+	return Proxy;
+}
+
+UBCIdentityProxy *UBCIdentityProxy::DetachPlaystationNetworkIdentity(UBrainCloudWrapper *brainCloudWrapper, const FString &psnAccountId, bool continueAnon)
+{
+	UBCIdentityProxy *Proxy = NewObject<UBCIdentityProxy>();
+	UBCWrapperProxy::GetBrainCloudInstance(brainCloudWrapper)->getIdentityService()->detachPlaystationNetworkIdentity(psnAccountId, continueAnon, Proxy);
 	return Proxy;
 }
 
