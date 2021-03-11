@@ -64,7 +64,7 @@ void SmartSwitchAuthenticateCallback::serverCallback(ServiceName serviceName, Se
 
     case EBCAuthType::PlaystationNetwork:
     {
-        m_wrapper->getBCClient()->getAuthenticationService()->authenticatePSN(m_userId, m_token, m_forceCreate, m_callback);
+        m_wrapper->getBCClient()->getAuthenticationService()->authenticatePlaystationNetwork(m_userId, m_token, m_forceCreate, m_callback);
     }
     break;
 

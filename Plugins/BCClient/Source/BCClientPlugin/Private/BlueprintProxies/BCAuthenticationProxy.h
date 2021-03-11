@@ -88,7 +88,7 @@ class UBCAuthenticationProxy : public UBCBlueprintCallProxyBase
     * Param - forceCreate Should a new profile be created for this user if the account does not exist?
     */
     UFUNCTION(BlueprintCallable, meta = (BlueprintInternalUseOnly = "true"), Category = "BrainCloud|Authentication")
-    static UBCAuthenticationProxy *AuthenticatePSN(UBrainCloudWrapper *brainCloudWrapper, FString psnAccountId, FString psnAuthToken, bool forceCreate);
+    static UBCAuthenticationProxy *AuthenticatePlaystationNetwork(UBrainCloudWrapper *brainCloudWrapper, FString psnAccountId, FString psnAuthToken, bool forceCreate);
 
     /*
     * Authenticate the user using their Game Center id

@@ -85,7 +85,7 @@ public:
      * @param forceCreate Should a new profile be created for this user if the account does not exist?
      * @param callback The method to be invoked when the server response is received
      */
-  void authenticatePSN(const FString &psnAccountId, const FString &psnAuthToken, bool forceCreate, IServerCallback *callback);
+  void authenticatePlaystationNetwork(const FString &psnAccountId, const FString &psnAuthToken, bool forceCreate, IServerCallback *callback);
 
   /*
      * Authenticate the user using their Game Center id

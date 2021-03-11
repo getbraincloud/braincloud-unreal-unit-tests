@@ -182,7 +182,7 @@ class BCCLIENTPLUGIN_API UBrainCloudWrapper : public UObject, public IServerCall
      * @param callback The method to be invoked when the server response is received
      *
      */
-    void authenticatePSN(FString psnAccountId, FString psnAuthToken, bool forceCreate, IServerCallback *callback = nullptr);
+    void authenticatePlaystationNetwork(FString psnAccountId, FString psnAuthToken, bool forceCreate, IServerCallback *callback = nullptr);
 
     /*
      * Authenticate the user using their Game Center id
@@ -402,7 +402,7 @@ class BCCLIENTPLUGIN_API UBrainCloudWrapper : public UObject, public IServerCall
      * @param callback The method to be invoked when the server response is received
      *
      */
-    void smartSwitchAuthenticatePSN(const FString &psnAccountId, const FString &psnAuthToken, bool forceCreate, IServerCallback *callback = NULL);
+    void smartSwitchAuthenticatePlaystationNetwork(const FString &psnAccountId, const FString &psnAuthToken, bool forceCreate, IServerCallback *callback = NULL);
 
     /*
      * Smart Switch Authenticate will logout of the current profile, and switch to the new authentication type.
