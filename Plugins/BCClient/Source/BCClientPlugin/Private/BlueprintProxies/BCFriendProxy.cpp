@@ -97,6 +97,13 @@ UBCFriendProxy *UBCFriendProxy::ListFriends(UBrainCloudWrapper *brainCloudWrappe
 	return Proxy;
 }
 
+UBCFriendProxy *UBCFriendProxy::GetMySocialInfo(UBrainCloudWrapper *brainCloudWrapper, EFriendPlatform friendPlatform, bool includeSummaryData)
+{
+	UBCFriendProxy *Proxy = NewObject<UBCFriendProxy>();
+	UBCWrapperProxy::GetBrainCloudInstance(brainCloudWrapper)->getFriendService()->getMySocialInfo(friendPlatform, includeSummaryData, Proxy);
+	return Proxy;
+}
+
 UBCFriendProxy *UBCFriendProxy::AddFriends(UBrainCloudWrapper *brainCloudWrapper, const TArray<FString> &profileIds)
 {
 	UBCFriendProxy *Proxy = NewObject<UBCFriendProxy>();
