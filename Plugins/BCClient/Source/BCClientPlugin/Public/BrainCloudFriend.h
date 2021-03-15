@@ -168,6 +168,19 @@ class BCCLIENTPLUGIN_API BrainCloudFriend
 	void listFriends(EFriendPlatform friendPlatform, bool includeSummaryData, IServerCallback *callback = nullptr);
 
 	/**
+	* Retrieves the social information associated with the logged in user. Includes summary data if includeSummaryData is true.
+	*
+	* Service Name - Friend
+	* Service Operation - LIST_FRIENDS
+	*
+	* @param friendPlatform Friend platform to query.
+	* @param includeSummaryData  True if including summary data; false otherwise.
+	* @param callback Method to be invoked when the server response is received.
+	*/
+	void getMySocialInfo(EFriendPlatform friendPlatform, bool includeSummaryData, IServerCallback *callback = nullptr);
+
+
+	/**
 	* Links the current user and the specified users as brainCloud friends.
 	*
 	* Service Name - Friend

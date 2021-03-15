@@ -162,6 +162,19 @@ class UBCFriendProxy : public UBCBlueprintCallProxyBase
 	static UBCFriendProxy *ListFriends(UBrainCloudWrapper *brainCloudWrapper, EFriendPlatform friendPlatform, bool includeSummaryData);
 
 	/**
+	* Retrieves the social information associated with the logged in user. Includes summary data if includeSummaryData is true.
+	*
+	* Service Name - Friend
+	* Service Operation - LIST_FRIENDS
+	*
+	* Param - friendPlatform Friend platform to query.
+	* Param - includeSummaryData  True if including summary data; false otherwise.
+	*/
+	UFUNCTION(BlueprintCallable, meta = (BlueprintInternalUseOnly = "true"), Category = "BrainCloud|Friend")
+	static UBCFriendProxy *GetMySocialInfo(UBrainCloudWrapper *brainCloudWrapper, EFriendPlatform friendPlatform, bool includeSummaryData);
+
+
+	/**
 	* Links the current user and the specified users as brainCloud friends.
 	*
 	* Service Name - Friend
