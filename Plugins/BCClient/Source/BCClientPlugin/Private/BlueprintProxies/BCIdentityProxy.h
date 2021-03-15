@@ -147,7 +147,7 @@ class UBCIdentityProxy : public UBCBlueprintCallProxyBase
 	* Param - oculusId The oculus id of the user
 	* Param - oculusNonce token from the Oculus SDK
 	*
-	* Errors to watch for:  SWITCHING_PROFILES - this means that the Facebook identity you provided
+	* Errors to watch for:  SWITCHING_PROFILES - this means that the Oculus identity you provided
 	* already points to a different profile.  You will likely want to offer the user the
 	* choice to *SWITCH* to that profile, or *MERGE* the profiles.
 	*
