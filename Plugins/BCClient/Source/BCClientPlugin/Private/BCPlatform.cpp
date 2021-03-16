@@ -17,6 +17,8 @@ FString BCPlatform::EnumToString(EBCPlatform platform)
         return TEXT("FB");
     case EBCPlatform::OCULUS:
         return TEXT("Oculus");
+    case EBCPlatform::PLAYSTATIONNETWORK:
+        return TEXT("PlaystationNetwork");
     case EBCPlatform::IOS:
         return TEXT("IOS");
     case EBCPlatform::LINUX_PLATFORM:
