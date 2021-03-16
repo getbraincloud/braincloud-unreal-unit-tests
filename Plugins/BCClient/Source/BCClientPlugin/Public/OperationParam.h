@@ -55,7 +55,10 @@ class BCCLIENTPLUGIN_API OperationParam
 	static const OperationParam AuthenticateServiceAuthenticateGameVersion;
 	static const OperationParam AuthenticateServiceAuthenticateBrainCloudVersion;
 	static const OperationParam AuthenticateServiceAuthenticateAuthFacebook;
+	static const OperationParam AuthenticateServiceAuthenticateAuthFacebookLimited;
+	static const OperationParam AuthenticateServiceAuthenticateAuthOculus;
 	static const OperationParam AuthenticateServiceAuthenticateAuthEmail;
+	static const OperationParam AuthenticateServiceAuthenticateAuthPlaystationNetwork;
 	static const OperationParam AuthenticateServiceAuthenticateAuthGameCenter;
 	static const OperationParam AuthenticateServiceAuthenticateAuthUniversal;
 	static const OperationParam AuthenticateServiceAuthenticateAuthSteam;
@@ -278,6 +281,7 @@ class BCCLIENTPLUGIN_API OperationParam
 
 	static const OperationParam ReleasePlatformIos;
 	static const OperationParam ReleasePlatformFacebook;
+		static const OperationParam ReleasePlatformOculus;
 	static const OperationParam ReleasePlatformBlackberry;
 	static const OperationParam ReleasePlatformGoogleAndroid;
 	static const OperationParam ReleasePlatformWindowsPhone;
