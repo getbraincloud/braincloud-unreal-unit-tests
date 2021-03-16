@@ -354,6 +354,19 @@ class BCCLIENTPLUGIN_API BrainCloudLeaderboard
 	*/
 	void getPlayerScore(const FString &leaderboardId, int32 versionId, IServerCallback *callback = nullptr);
 
+		/**
+	* Gets a player's top scores from a leaderboard
+	*
+	* Service Name - leaderboard
+	* Service Operation - GET_PLAYER_SCORES
+	*
+	* @param leaderboardId The leaderboard ID
+	* @param versionId The version of the leaderboard. Use -1 for current.
+	* @param maxResults the maximum number of returned results
+	* @param callback The method to be invoked when the server response is received
+	*/
+	void getPlayerScores(const FString &leaderboardId, int32 versionId, int32 maxResults, IServerCallback *callback = nullptr);
+
 	/**
 	* Gets a player's score from multiple leaderboards
 	*

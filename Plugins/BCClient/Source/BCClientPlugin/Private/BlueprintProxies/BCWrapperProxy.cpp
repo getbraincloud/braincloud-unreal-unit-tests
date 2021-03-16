@@ -97,6 +97,27 @@ UBCWrapperProxy *UBCWrapperProxy::AuthenticateFacebook(UBrainCloudWrapper *brain
 	return Proxy;
 }
 
+UBCWrapperProxy *UBCWrapperProxy::AuthenticateFacebookLimited(UBrainCloudWrapper *brainCloudWrapper, FString fbLimitedUserId, FString fbAuthToken, bool forceCreate)
+{
+	UBCWrapperProxy *Proxy = NewObject<UBCWrapperProxy>();
+	UBCWrapperProxy::GetBrainCloudInstance(brainCloudWrapper)->authenticateFacebookLimited(fbLimitedUserId, fbAuthToken, forceCreate, Proxy);
+	return Proxy;
+}
+
+UBCWrapperProxy *UBCWrapperProxy::AuthenticateOculus(UBrainCloudWrapper *brainCloudWrapper, FString oculusUserId, FString oculusNonce, bool forceCreate)
+{
+	UBCWrapperProxy *Proxy = NewObject<UBCWrapperProxy>();
+	UBCWrapperProxy::GetBrainCloudInstance(brainCloudWrapper)->authenticateOculus(oculusUserId, oculusNonce, forceCreate, Proxy);
+	return Proxy;
+}
+
+UBCWrapperProxy *UBCWrapperProxy::AuthenticatePlaystationNetwork(UBrainCloudWrapper *brainCloudWrapper, FString psnAccountId, FString psnAuthToken, bool forceCreate)
+{
+	UBCWrapperProxy *Proxy = NewObject<UBCWrapperProxy>();
+	UBCWrapperProxy::GetBrainCloudInstance(brainCloudWrapper)->authenticatePlaystationNetwork(psnAccountId, psnAuthToken, forceCreate, Proxy);
+	return Proxy;
+}
+
 UBCWrapperProxy *UBCWrapperProxy::AuthenticateGameCenter(UBrainCloudWrapper *brainCloudWrapper, FString gameCenterId, bool forceCreate)
 {
 	UBCWrapperProxy *Proxy = NewObject<UBCWrapperProxy>();
@@ -178,6 +199,20 @@ UBCWrapperProxy *UBCWrapperProxy::SmartSwitchAuthenticateFacebook(UBrainCloudWra
 {
 	UBCWrapperProxy *Proxy = NewObject<UBCWrapperProxy>();
 	UBCWrapperProxy::GetBrainCloudInstance(brainCloudWrapper)->smartSwitchAuthenticateFacebook(fbUserId, fbAuthToken, forceCreate, Proxy);
+	return Proxy;
+}
+
+UBCWrapperProxy *UBCWrapperProxy::SmartSwitchAuthenticateFacebookLimited(UBrainCloudWrapper *brainCloudWrapper, const FString &fbLimitedUserId, const FString &fbAuthToken, bool forceCreate)
+{
+	UBCWrapperProxy *Proxy = NewObject<UBCWrapperProxy>();
+	UBCWrapperProxy::GetBrainCloudInstance(brainCloudWrapper)->smartSwitchAuthenticateFacebookLimited(fbLimitedUserId, fbAuthToken, forceCreate, Proxy);
+	return Proxy;
+}
+
+UBCWrapperProxy *UBCWrapperProxy::SmartSwitchAuthenticateOculus(UBrainCloudWrapper *brainCloudWrapper, const FString &oculusUserId, const FString &oculusNonce, bool forceCreate)
+{
+	UBCWrapperProxy *Proxy = NewObject<UBCWrapperProxy>();
+	UBCWrapperProxy::GetBrainCloudInstance(brainCloudWrapper)->smartSwitchAuthenticateOculus(oculusUserId, oculusNonce, forceCreate, Proxy);
 	return Proxy;
 }
 

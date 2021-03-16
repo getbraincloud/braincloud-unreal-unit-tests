@@ -338,6 +338,19 @@ class UBCLeaderboardProxy : public UBCBlueprintCallProxyBase
 	static UBCLeaderboardProxy *GetPlayerScore(UBrainCloudWrapper *brainCloudWrapper, const FString &leaderboardId, int32 versionId);
 
 	/**
+	* Gets a player's beat scores from a leaderboard
+	*
+	* Service Name - leaderboard
+	* Service Operation - GET_PLAYER_SCORES
+	*
+	* Param - leaderboardId The leaderboard ID
+	* Param - versionId The version of the leaderboard. Use -1 for current.
+	*/
+	UFUNCTION(BlueprintCallable, meta = (BlueprintInternalUseOnly = "true"), Category = "BrainCloud|Leaderboard")
+	static UBCLeaderboardProxy *GetPlayerScores(UBrainCloudWrapper *brainCloudWrapper, const FString &leaderboardId, int32 versionId, int32 maxResults);
+
+
+	/**
 	* Gets a player's score from multiple leaderboards
 	*
 	* Service Name - leaderboard

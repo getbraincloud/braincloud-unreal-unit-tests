@@ -63,6 +63,48 @@ class UBCAuthenticationProxy : public UBCBlueprintCallProxyBase
     static UBCAuthenticationProxy *AuthenticateFacebook(UBrainCloudWrapper *brainCloudWrapper, FString facebookId, FString password, bool forceCreate);
 
     /*
+    * Authenticate the user with brainCloud using their FacebookLimited Credentials
+    *
+    * Service Name - Authenticate
+    * Service Operation - Authenticate
+    *
+    * Param - externalId The facebookLimited id of the user
+    * Param - authenticationToken The validated token from the Facebook SDK
+    *   (that will be further validated when sent to the bC service)
+    * Param - forceCreate Should a new profile be created for this user if the account does not exist?
+    */
+    UFUNCTION(BlueprintCallable, meta = (BlueprintInternalUseOnly = "true"), Category = "BrainCloud|Authentication")
+    static UBCAuthenticationProxy *AuthenticateFacebookLimited(UBrainCloudWrapper *brainCloudWrapper, FString facebookLimitedId, FString password, bool forceCreate);
+
+    /*
+    * Authenticate the user with brainCloud using their Oculus Credentials
+    *
+    * Service Name - Authenticate
+    * Service Operation - Authenticate
+    *
+    * Param - oculusId The oculus id of the user
+    * Param - oculusNonce token from the Oculus SDK
+    * Param - forceCreate Should a new profile be created for this user if the account does not exist?
+    */
+    UFUNCTION(BlueprintCallable, meta = (BlueprintInternalUseOnly = "true"), Category = "BrainCloud|Authentication")
+    static UBCAuthenticationProxy *AuthenticateOculus(UBrainCloudWrapper *brainCloudWrapper, FString oculusId, FString oculusNonce, bool forceCreate);
+
+
+    /*
+    * Authenticate the user with brainCloud using their psn account id and auth token
+    *
+    * Service Name - Authenticate
+    * Service Operation - Authenticate
+    *
+    * Param - psnAccountId The account id of the user
+    * Param - psnAuthToken The validated token from the playstation sdk
+    *   (that will be further validated when sent to the bC service)
+    * Param - forceCreate Should a new profile be created for this user if the account does not exist?
+    */
+    UFUNCTION(BlueprintCallable, meta = (BlueprintInternalUseOnly = "true"), Category = "BrainCloud|Authentication")
+    static UBCAuthenticationProxy *AuthenticatePlaystationNetwork(UBrainCloudWrapper *brainCloudWrapper, FString psnAccountId, FString psnAuthToken, bool forceCreate);
+
+    /*
     * Authenticate the user using their Game Center id
     *
     * Service Name - Authenticate
