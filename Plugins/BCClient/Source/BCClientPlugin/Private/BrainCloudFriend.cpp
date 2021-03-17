@@ -146,6 +146,16 @@ void BrainCloudFriend::listFriends(EFriendPlatform friendPlatform, bool includeS
 	_client->sendRequest(sc);
 }
 
+void BrainCloudFriend::getMySocialInfo(EFriendPlatform friendPlatform, bool includeSummaryData, IServerCallback *callback)
+{
+	TSharedRef<FJsonObject> message = MakeShareable(new FJsonObject());
+	message->SetBoolField(OperationParam::FriendServiceIncludeSummaryData.getValue(), includeSummaryData);
+	message->SetStringField(OperationParam::FriendServiceFriendPlatform.getValue(), _platformStrings[friendPlatform]);
+
+	ServerCall *sc = new ServerCall(ServiceName::Friend, ServiceOperation::GetMySocialInfo, message, callback);
+	_client->sendRequest(sc);
+}
+
 void BrainCloudFriend::addFriends(const TArray<FString> &profileIds, IServerCallback *callback)
 {
 	TSharedRef<FJsonObject> message = MakeShareable(new FJsonObject());

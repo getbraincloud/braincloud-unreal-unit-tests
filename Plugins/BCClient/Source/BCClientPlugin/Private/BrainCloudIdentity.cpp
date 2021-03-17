@@ -43,6 +43,51 @@ void BrainCloudIdentity::detachFacebookIdentity(const FString &facebookId, bool 
 	detachIdentity(facebookId, EBCAuthType::Facebook, continueAnon, callback);
 }
 
+void BrainCloudIdentity::attachFacebookLimitedIdentity(const FString &facebookLimitedId, const FString &authenticationToken, IServerCallback *callback)
+{
+	attachIdentity(facebookLimitedId, authenticationToken, EBCAuthType::FacebookLimited, callback);
+}
+
+void BrainCloudIdentity::mergeFacebookLimitedIdentity(const FString &facebookLimitedId, const FString &authenticationToken, IServerCallback *callback)
+{
+	mergeIdentity(facebookLimitedId, authenticationToken, EBCAuthType::FacebookLimited, callback);
+}
+
+void BrainCloudIdentity::detachFacebookLimitedIdentity(const FString &facebookLimitedId, bool continueAnon, IServerCallback *callback)
+{
+	detachIdentity(facebookLimitedId, EBCAuthType::FacebookLimited, continueAnon, callback);
+}
+
+void BrainCloudIdentity::attachOculusIdentity(const FString &oculusId, const FString &oculusNonce, IServerCallback *callback)
+{
+	attachIdentity(oculusId, oculusNonce, EBCAuthType::Oculus, callback);
+}
+
+void BrainCloudIdentity::mergeOculusIdentity(const FString &oculusId, const FString &oculusNonce, IServerCallback *callback)
+{
+	mergeIdentity(oculusId, oculusNonce, EBCAuthType::Oculus, callback);
+}
+
+void BrainCloudIdentity::detachOculusIdentity(const FString &oculusId, bool continueAnon, IServerCallback *callback)
+{
+	detachIdentity(oculusId, EBCAuthType::Oculus, continueAnon, callback);
+}
+
+void BrainCloudIdentity::attachPlaystationNetworkIdentity(const FString &accountId, const FString &authenticationToken, IServerCallback *callback)
+{
+	attachIdentity(accountId, authenticationToken, EBCAuthType::Facebook, callback);
+}
+
+void BrainCloudIdentity::mergePlaystationNetworkIdentity(const FString &accountId, const FString &authenticationToken, IServerCallback *callback)
+{
+	mergeIdentity(accountId, authenticationToken, EBCAuthType::Facebook, callback);
+}
+
+void BrainCloudIdentity::detachPlaystationNetworkIdentity(const FString &accountId, bool continueAnon, IServerCallback *callback)
+{
+	detachIdentity(accountId, EBCAuthType::PlaystationNetwork, continueAnon, callback);
+}
+
 void BrainCloudIdentity::attachEmailIdentity(const FString &email, const FString &password, IServerCallback *callback)
 {
 	attachIdentity(email, password, EBCAuthType::Email, callback);

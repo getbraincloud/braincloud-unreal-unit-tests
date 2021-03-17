@@ -89,6 +89,152 @@ class UBCIdentityProxy : public UBCBlueprintCallProxyBase
 	static UBCIdentityProxy *DetachFacebookIdentity(UBrainCloudWrapper *brainCloudWrapper, const FString &facebookId, bool continueAnon);
 
 	/*
+	* Attach the user's FacebookLimited credentials to the current profile.
+	*
+	* Service Name - identity
+	* Service Operation - Attach
+	*
+	* Param - externalId The facebookLimited id of the user
+	* Param - authenticationToken The validated token from the Facebook SDK
+	*   (that will be further validated when sent to the bC service)
+	*
+	* Errors to watch for:  SWITCHING_PROFILES - this means that the Facebook identity you provided
+	* already points to a different profile.  You will likely want to offer the user the
+	* choice to *SWITCH* to that profile, or *MERGE* the profiles.
+	*
+	* To switch profiles, call ClearSavedProfileID() and call AuthenticateFacebook().
+	*/
+	UFUNCTION(BlueprintCallable, meta = (BlueprintInternalUseOnly = "true"), Category = "BrainCloud|Identity")
+	static UBCIdentityProxy *AttachFacebookLimitedIdentity(UBrainCloudWrapper *brainCloudWrapper, const FString &facebookLimitedId, const FString &authenticationToken);
+
+	/*
+	* Merge the profile associated with the provided FacebookLimited credentials with the
+	* current profile.
+	*
+	* Service Name - identity
+	* Service Operation - Merge
+	*
+	* Param - externalId The facebookLimited id of the user
+	* Param - authenticationToken The validated token from the Facebook SDK
+	*   (that will be further validated when sent to the bC service)
+	*/
+	UFUNCTION(BlueprintCallable, meta = (BlueprintInternalUseOnly = "true"), Category = "BrainCloud|Identity")
+	static UBCIdentityProxy *MergeFacebookLimitedIdentity(UBrainCloudWrapper *brainCloudWrapper, const FString &facebookLimitedId, const FString &authenticationToken);
+
+	/*
+	* Detach the FacebookLimited identity from this profile.
+	*
+	* Service Name - identity
+	* Service Operation - Detach
+	*
+	* Param - externalId The facebookLimited id of the user
+	* Param - continueAnon Proceed even if the profile will revert to anonymous?
+	*
+	* Watch for DOWNGRADING_TO_ANONYMOUS_ERROR - occurs if you set in_continueAnon to false, and
+	* disconnecting this identity would result in the profile being anonymous (which means that
+	* the profile wouldn't be retrievable if the user loses their device)
+	*/
+	UFUNCTION(BlueprintCallable, meta = (BlueprintInternalUseOnly = "true"), Category = "BrainCloud|Identity")
+	static UBCIdentityProxy *DetachFacebookLimitedIdentity(UBrainCloudWrapper *brainCloudWrapper, const FString &facebookLimitedId, bool continueAnon);
+
+
+	/*
+	* Attach the user's Oculus credentials to the current profile.
+	*
+	* Service Name - identity
+	* Service Operation - Attach
+	*
+	* Param - oculusId The oculus id of the user
+	* Param - oculusNonce token from the Oculus SDK
+	*
+	* Errors to watch for:  SWITCHING_PROFILES - this means that the Oculus identity you provided
+	* already points to a different profile.  You will likely want to offer the user the
+	* choice to *SWITCH* to that profile, or *MERGE* the profiles.
+	*
+	* To switch profiles, call ClearSavedProfileID() and call AuthenticateOculus().
+	*/
+	UFUNCTION(BlueprintCallable, meta = (BlueprintInternalUseOnly = "true"), Category = "BrainCloud|Identity")
+	static UBCIdentityProxy *AttachOculusIdentity(UBrainCloudWrapper *brainCloudWrapper, const FString &oculusId, const FString &oculusNonce);
+
+	/*
+	* Merge the profile associated with the provided Oculus credentials with the
+	* current profile.
+	*
+	* Service Name - identity
+	* Service Operation - Merge
+	*
+	* Param - oculusId The oculus id of the user
+	* Param - oculusNonce token from the Oculus SDK
+	*   (that will be further validated when sent to the bC service)
+	*/
+	UFUNCTION(BlueprintCallable, meta = (BlueprintInternalUseOnly = "true"), Category = "BrainCloud|Identity")
+	static UBCIdentityProxy *MergeOculusIdentity(UBrainCloudWrapper *brainCloudWrapper, const FString &oculusId, const FString &oculusNonce);
+
+	/*
+	* Detach the Oculus identity from this profile.
+	*
+	* Service Name - identity
+	* Service Operation - Detach
+	*
+	* Param - oculusId The oculus id of the user
+	* Param - continueAnon Proceed even if the profile will revert to anonymous?
+	*
+	* Watch for DOWNGRADING_TO_ANONYMOUS_ERROR - occurs if you set in_continueAnon to false, and
+	* disconnecting this identity would result in the profile being anonymous (which means that
+	* the profile wouldn't be retrievable if the user loses their device)
+	*/
+	UFUNCTION(BlueprintCallable, meta = (BlueprintInternalUseOnly = "true"), Category = "BrainCloud|Identity")
+	static UBCIdentityProxy *DetachOculusIdentity(UBrainCloudWrapper *brainCloudWrapper, const FString &oculusId, bool continueAnon);
+
+
+	/*
+	* Attach the user's PSN credentials to the current profile.
+	*
+	* Service Name - identity
+	* Service Operation - Attach
+	*
+	* Param - psnAccountId The psn account id of the user
+	* Param - authenticationToken The validated token from the Playstation SDK
+	*
+	* Errors to watch for:  SWITCHING_PROFILES - this means that the PSN identity you provided
+	* already points to a different profile.  You will likely want to offer the user the
+	* choice to *SWITCH* to that profile, or *MERGE* the profiles.
+	*
+	* To switch profiles, call ClearSavedProfileID() and call AuthenticatePlaystationNetwork().
+	*/
+	UFUNCTION(BlueprintCallable, meta = (BlueprintInternalUseOnly = "true"), Category = "BrainCloud|Identity")
+	static UBCIdentityProxy *AttachPlaystationNetworkIdentity(UBrainCloudWrapper *brainCloudWrapper, const FString &psnAccountId, const FString &authenticationToken);
+
+	/*
+	* Merge the profile associated with the provided PSN credentials with the
+	* current profile.
+	*
+	* Service Name - identity
+	* Service Operation - Merge
+	*
+	* Param - psnAccountId The psn account id of the user
+	* Param - authenticationToken The validated token from the Playstation SDK
+	*/
+	UFUNCTION(BlueprintCallable, meta = (BlueprintInternalUseOnly = "true"), Category = "BrainCloud|Identity")
+	static UBCIdentityProxy *MergePlaystationNetworkIdentity(UBrainCloudWrapper *brainCloudWrapper, const FString &psnAccountId, const FString &authenticationToken);
+
+	/*
+	* Detach the PSN identity from this profile.
+	*
+	* Service Name - identity
+	* Service Operation - Detach
+	*
+	* Param - psnAccountId The psn account id of the user
+	* Param - continueAnon Proceed even if the profile will revert to anonymous?
+	*
+	* Watch for DOWNGRADING_TO_ANONYMOUS_ERROR - occurs if you set in_continueAnon to false, and
+	* disconnecting this identity would result in the profile being anonymous (which means that
+	* the profile wouldn't be retrievable if the user loses their device)
+	*/
+	UFUNCTION(BlueprintCallable, meta = (BlueprintInternalUseOnly = "true"), Category = "BrainCloud|Identity")
+	static UBCIdentityProxy *DetachPlaystationNetworkIdentity(UBrainCloudWrapper *brainCloudWrapper, const FString &psnAccountId, bool continueAnon);
+	
+	/*
 	* Attach a Game Center identity to the current profile.
 	*
 	* Service Name - identity

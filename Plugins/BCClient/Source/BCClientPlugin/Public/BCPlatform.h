@@ -9,6 +9,8 @@ enum class EBCPlatform : uint8
     AMAZON_ANDROID UMETA(DisplayName = "Amazon Android"),
     BLACKBERRY UMETA(DisplayName = "BlackBerry"),
     FACEBOOK UMETA(DisplayName = "Facebook"),
+    OCULUS UMETA(DisplayName = "Oculus"),
+    PLAYSTATIONNETWORK UMETA(DisplayName = "PlaystationNetwork"),
     IOS UMETA(DisplayName = "iOS"),
     LINUX_PLATFORM UMETA(DisplayName = "Linux"),
     MAC UMETA(DisplayName = "Mac"),

@@ -109,6 +109,7 @@ class BCCLIENTPLUGIN_API ServiceOperation
 	static const ServiceOperation FindUsersByExactName;
 	static const ServiceOperation FindUsersBySubstrName;
 	static const ServiceOperation ListFriends;
+	static const ServiceOperation GetMySocialInfo;
 	static const ServiceOperation AddFriends;
 	static const ServiceOperation GetUsersOnlineStatus;
 	static const ServiceOperation RemoveFriends;
@@ -137,6 +138,7 @@ class BCCLIENTPLUGIN_API ServiceOperation
 	static const ServiceOperation GetGlobalLeaderboardEntryCount;
 	static const ServiceOperation RemovePlayerScore;
 	static const ServiceOperation GetPlayerScore;
+	static const ServiceOperation GetPlayerScores;
 	static const ServiceOperation GetPlayerScoresFromLeaderboards;
 	static const ServiceOperation PostScoreToGroupLeaderboard;
 	static const ServiceOperation PostScoreToDynamicGroupLeaderboard;
