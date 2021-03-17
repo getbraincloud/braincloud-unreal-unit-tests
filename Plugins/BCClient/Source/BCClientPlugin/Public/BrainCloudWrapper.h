@@ -155,6 +155,51 @@ class BCCLIENTPLUGIN_API UBrainCloudWrapper : public UObject, public IServerCall
     void authenticateFacebook(FString fbUserId, FString fbAuthToken, bool forceCreate, IServerCallback *callback = nullptr);
 
     /*
+     * Authenticate the user with brainCloud using their FacebookLimited Credentials
+     *
+     * Service Name - Authenticate
+     * Service Operation - Authenticate
+     *
+     * @param fbUserId The facebookLimited id of the user
+     * @param fbAuthToken The validated token from the Facebook SDK
+     *   (that will be further validated when sent to the bC service)
+     * @param forceCreate Should a new profile be created for this user if the account does not exist?
+     * @param callback The method to be invoked when the server response is received
+     *
+     */
+    void authenticateFacebookLimited(FString fbLimitedUserId, FString fbAuthToken, bool forceCreate, IServerCallback *callback = nullptr);
+
+    /*
+     * Authenticate the user with brainCloud using their Oculus Credentials
+     *
+     * Service Name - Authenticate
+     * Service Operation - Authenticate
+     *
+     * @param oculusUserId The oculus id of the user
+     * @param oculusNonce token from the Oculus SDK
+     * @param forceCreate Should a new profile be created for this user if the account does not exist?
+     * @param callback The method to be invoked when the server response is received
+     *
+     */
+    void authenticateOculus(FString oculusUserId, FString oculusNonce, bool forceCreate, IServerCallback *callback = nullptr);
+
+
+    /*
+     * Authenticate the user with brainCloud using their psn accountId and auth token
+     *
+     * Service Name - Authenticate
+     * Service Operation - Authenticate
+     *
+     * @param psnAccountId The account id of the user
+     * @param psnAuthToken The validated token from the Playstation SDK
+     *   (that will be further validated when sent to the bC service)
+     * @param forceCreate Should a new profile be created for this user if the account does not exist?
+     * @param callback The method to be invoked when the server response is received
+     *
+     */
+    void authenticatePlaystationNetwork(FString psnAccountId, FString psnAuthToken, bool forceCreate, IServerCallback *callback = nullptr);
+
+    /*
      * Authenticate the user using their Game Center id
      *
      * Service Name - Authenticate
@@ -335,6 +380,63 @@ class BCCLIENTPLUGIN_API UBrainCloudWrapper : public UObject, public IServerCall
      *
      */
     void smartSwitchAuthenticateFacebook(const FString &fbUserId, const FString &fbAuthToken, bool forceCreate, IServerCallback *callback = NULL);
+
+    /*
+     * Smart Switch Authenticate will logout of the current profile, and switch to the new authentication type.
+     * In event the current session was previously an anonymous account, the smart switch will delete that profile.
+     * Use this function to keep a clean designflow from anonymous to signed profiles
+     *
+     * Authenticate the user with brainCloud using their FacebookLimited Credentials
+     *
+     * Service Name - Authenticate
+     * Service Operation - Authenticate
+     *
+     * @param fbUserId The facebookLimited id of the user
+     * @param fbAuthToken The validated token from the Facebook SDK
+     *   (that will be further validated when sent to the bC service)
+     * @param forceCreate Should a new profile be created for this user if the account does not exist?
+     * @param callback The method to be invoked when the server response is received
+     *
+     */
+    void smartSwitchAuthenticateFacebookLimited(const FString &fbLimitedUserId, const FString &fbAuthToken, bool forceCreate, IServerCallback *callback = NULL);
+
+    /*
+     * Smart Switch Authenticate will logout of the current profile, and switch to the new authentication type.
+     * In event the current session was previously an anonymous account, the smart switch will delete that profile.
+     * Use this function to keep a clean designflow from anonymous to signed profiles
+     *
+     * Authenticate the user with brainCloud using their Oculus Credentials
+     *
+     * Service Name - Authenticate
+     * Service Operation - Authenticate
+     *
+     * @param oculusUserId The oculus id of the user
+     * @param oculusNonce token from the Oculus SDK
+     * @param forceCreate Should a new profile be created for this user if the account does not exist?
+     * @param callback The method to be invoked when the server response is received
+     *
+     */
+    void smartSwitchAuthenticateOculus(const FString &oculusUserId, const FString &oculusNonce, bool forceCreate, IServerCallback *callback = NULL);
+
+
+        /*
+     * Smart Switch Authenticate will logout of the current profile, and switch to the new authentication type.
+     * In event the current session was previously an anonymous account, the smart switch will delete that profile.
+     * Use this function to keep a clean designflow from anonymous to signed profiles
+     *
+     * Authenticate the user with brainCloud using their PSN Credentials
+     *
+     * Service Name - Authenticate
+     * Service Operation - Authenticate
+     *
+     * @param psnAccountId The PSN account id of the user
+     * @param psnAuthToken The validated token from the Playstation SDK
+     *   (that will be further validated when sent to the bC service)
+     * @param forceCreate Should a new profile be created for this user if the account does not exist?
+     * @param callback The method to be invoked when the server response is received
+     *
+     */
+    void smartSwitchAuthenticatePlaystationNetwork(const FString &psnAccountId, const FString &psnAuthToken, bool forceCreate, IServerCallback *callback = NULL);
 
     /*
      * Smart Switch Authenticate will logout of the current profile, and switch to the new authentication type.

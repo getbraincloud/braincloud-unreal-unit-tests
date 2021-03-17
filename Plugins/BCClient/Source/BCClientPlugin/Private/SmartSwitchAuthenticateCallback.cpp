@@ -56,6 +56,24 @@ void SmartSwitchAuthenticateCallback::serverCallback(ServiceName serviceName, Se
     }
     break;
 
+    case EBCAuthType::FacebookLimited:
+    {
+        m_wrapper->getBCClient()->getAuthenticationService()->authenticateFacebookLimited(m_userId, m_token, m_forceCreate, m_callback);
+    }
+    break;
+
+    case EBCAuthType::Oculus:
+    {
+        m_wrapper->getBCClient()->getAuthenticationService()->authenticateOculus(m_userId, m_token, m_forceCreate, m_callback);
+    }
+    break;
+
+    case EBCAuthType::PlaystationNetwork:
+    {
+        m_wrapper->getBCClient()->getAuthenticationService()->authenticatePlaystationNetwork(m_userId, m_token, m_forceCreate, m_callback);
+    }
+    break;
+
     case EBCAuthType::GameCenter:
     {
         m_wrapper->getBCClient()->getAuthenticationService()->authenticateGameCenter(m_userId, m_forceCreate, m_callback);
