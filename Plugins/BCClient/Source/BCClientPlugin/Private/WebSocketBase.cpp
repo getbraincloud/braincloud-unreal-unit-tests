@@ -423,7 +423,7 @@ void UWebSocketBase::Connect(const FString &uri, const TMap<FString, FString> &h
 	connectInfo.context = mlwsContext;
 	connectInfo.address = stdAddress.c_str();
 	connectInfo.port = iPort;
-	connectInfo.ssl_connection = iUseSSL ? (LCCSCF_USE_SSL | LCCSCF_ALLOW_SELFSIGNED | LCCSCF_SKIP_SERVER_CERT_HOSTNAME_CHECK) : 0; //iUseSSL;
+	connectInfo.ssl_connection = iUseSSL ? (LCCSCF_USE_SSL | LCCSCF_ALLOW_SELFSIGNED/* | LCCSCF_SKIP_SERVER_CERT_HOSTNAME_CHECK*/) : 0; //iUseSSL;
 	connectInfo.path = stdPath.c_str();
 	connectInfo.host = stdHost.c_str();
 	connectInfo.origin = stdHost.c_str();
