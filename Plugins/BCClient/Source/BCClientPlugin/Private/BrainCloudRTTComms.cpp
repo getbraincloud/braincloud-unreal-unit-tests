@@ -25,7 +25,7 @@
 #include <iostream>
 #include "Runtime/Launch/Resources/Version.h"
 
-#define MAX_PAYLOAD_RTT 10 * 1024 * 1024
+#define MAX_PAYLOAD_RTT (64 * 1024) // [dsl] This used to be set to 10MB, failed on mac SNDBUF too big for the TCP socket.
 #define INITIAL_HEARTBEAT_TIME 10
 
 #if PLATFORM_UWP
