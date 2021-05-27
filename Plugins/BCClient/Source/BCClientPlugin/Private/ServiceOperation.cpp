@@ -396,6 +396,7 @@ const ServiceOperation ServiceOperation::GetEligiblePromotions = ServiceOperatio
 const ServiceOperation ServiceOperation::GetSalesInventory = ServiceOperation(TEXT("GET_INVENTORY"));
 const ServiceOperation ServiceOperation::StartPurchase = ServiceOperation(TEXT("START_PURCHASE"));
 const ServiceOperation ServiceOperation::FinalizePurchase = ServiceOperation(TEXT("FINALIZE_PURCHASE"));
+const ServiceOperation ServiceOperation::RefreshPromotions = ServiceOperation(TEXT("REFRESH_PROMOTIONS"));
 
 // rtt
 const ServiceOperation ServiceOperation::RequestClientConnection = ServiceOperation(TEXT("REQUEST_CLIENT_CONNECTION"));
