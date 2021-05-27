@@ -54,3 +54,10 @@ UBCAppStoreProxy *UBCAppStoreProxy::FinalizePurchase(UBrainCloudWrapper *brainCl
     UBCWrapperProxy::GetBrainCloudInstance(brainCloudWrapper)->getAppStoreService()->finalizePurchase(storeId, transactionId, transactionData, Proxy);
     return Proxy;
 }
+
+UBCAppStoreProxy* UBCAppStoreProxy::RefreshPromotions(UBrainCloudWrapper* brainCloudWrapper)
+{
+    UBCAppStoreProxy *Proxy = NewObject<UBCAppStoreProxy>();
+    UBCWrapperProxy::GetBrainCloudInstance(brainCloudWrapper)->getAppStoreService()->refreshPromotions(Proxy);
+    return Proxy;
+}

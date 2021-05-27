@@ -414,6 +414,7 @@ class BCCLIENTPLUGIN_API ServiceOperation
 	static const ServiceOperation GetSalesInventoryByCategory;
 	static const ServiceOperation StartPurchase;
 	static const ServiceOperation FinalizePurchase;
+	static const ServiceOperation RefreshPromotions;
 
 	// rtt
 	static const ServiceOperation RequestClientConnection;
