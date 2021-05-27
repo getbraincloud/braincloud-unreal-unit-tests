@@ -53,7 +53,41 @@ class BCCLIENTPLUGIN_API BrainCloudEvent
 	 * @param callback The method to be invoked when the server response is received
 	 */
 	void deleteIncomingEvent(const FString &evId, IServerCallback *callback);
+	
+	/**
+	* Delete a list of events out of the user's incoming mailbox.
+	*
+	* Service Name - event
+	* Service Operation - DELETE_INCOMING_EVENTS
+	*
+	* @param eventIds Collection of event ids
+	* @param callback The method to be invoked when the server response is received
+	*/
+	void deleteIncomingEvents(const TArray<FString> & eventIds, IServerCallback *callback);
+	
+	/**
+	* Delete any events older than the given date out of the user's incoming mailbox.
+	*
+	* Service Name - event
+	* Service Operation - DELETE_INCOMING_EVENTS_OLDER_THAN
+	*
+	* @param dateMillis createdAt cut-off time whereby older events will be deleted (In UTC since Epoch)
+	* @param callback The method to be invoked when the server response is received
+	*/
+	void deleteIncomingEventsOlderThan(int64 dateMillis, IServerCallback * callback);
 
+	/**
+	* Delete any events of the given type older than the given date out of the user's incoming mailbox.
+	*
+	* Service Name - event
+	* Service Operation - DELETE_INCOMING_EVENTS_BY_TYPE_OLDER_THAN
+	*
+	* @param eventType The user-defined type of the event
+	* @param dateMillis createdAt cut-off time whereby older events will be deleted (In UTC since Epoch)
+	* @param callback The method to be invoked when the server response is received
+	*/
+	void deleteIncomingEventsByTypeOlderThan(const FString & eventType, int64 dateMillis, IServerCallback * callback);
+	
 	/**
 	* Get the events currently queued for the player.
 	*

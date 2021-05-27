@@ -44,6 +44,35 @@ void BrainCloudEvent::deleteIncomingEvent(const FString &evId, IServerCallback *
 	_client->sendRequest(sc);
 }
 
+void BrainCloudEvent::deleteIncomingEvents(const TArray<FString>& eventIds, IServerCallback* callback)
+{
+	TSharedRef<FJsonObject> message = MakeShareable(new FJsonObject());
+	message->SetArrayField(OperationParam::EventServiceEvIds.getValue(),JsonUtil::arrayToJsonArray(eventIds));
+
+	ServerCall *sc = new ServerCall(ServiceName::Event, ServiceOperation::DeleteIncomingEvents, message, callback);
+	_client->sendRequest(sc);
+}
+
+void BrainCloudEvent::deleteIncomingEventsOlderThan(int64 dateMillis, IServerCallback* callback)
+{
+	TSharedRef<FJsonObject> message = MakeShareable(new FJsonObject());
+	message->SetNumberField(OperationParam::EventServiceDateMillis.getValue(),dateMillis);
+
+	ServerCall *sc = new ServerCall(ServiceName::Event, ServiceOperation::DeleteIncomingEventsOlderThan, message, callback);
+	_client->sendRequest(sc);
+}
+
+void BrainCloudEvent::deleteIncomingEventsByTypeOlderThan(const FString& eventType, int64 dateMillis,
+	IServerCallback* callback)
+{
+	TSharedRef<FJsonObject> message = MakeShareable(new FJsonObject());
+	message->SetStringField(OperationParam::EventServiceEventType.getValue(),eventType);
+	message->SetNumberField(OperationParam::EventServiceDateMillis.getValue(),dateMillis);
+
+	ServerCall *sc = new ServerCall(ServiceName::Event, ServiceOperation::DeleteIncomingEventsByTypeOlderThan, message, callback);
+	_client->sendRequest(sc);
+}
+
 void BrainCloudEvent::getEvents(IServerCallback *callback)
 {
 	TSharedRef<FJsonObject> message = MakeShareable(new FJsonObject());
