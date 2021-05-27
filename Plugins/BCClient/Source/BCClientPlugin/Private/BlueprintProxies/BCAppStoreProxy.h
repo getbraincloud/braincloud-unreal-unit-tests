@@ -2,6 +2,8 @@
 #pragma once
 
 #include "BCBlueprintCallProxyBase.h"
+#include "BrainCloudWrapper.h"
+
 #include "BCAppStoreProxy.generated.h"
 
 UCLASS(MinimalAPI)
@@ -126,4 +128,13 @@ public:
     */
   UFUNCTION(BlueprintCallable, meta = (BlueprintInternalUseOnly = "true"), Category = "BrainCloud|AppStore")
   static UBCAppStoreProxy *FinalizePurchase(UBrainCloudWrapper *brainCloudWrapper, const FString &storeId, const FString &transactionId, const FString &transactionData);
+
+  /**
+  * Returns up-to-date eligible 'promotions' for the user and a 'promotionsRefreshed' flag indicating whether the user's promotion info required refreshing.
+  *
+  * Service Name - appStore
+  * Service Operation - REFRESH_PROMOTIONS
+  */
+  UFUNCTION(BlueprintCallable, meta = (BlueprintInternalUseOnly = "true"), Category = "BrainCloud|AppStore")
+  static UBCAppStoreProxy *RefreshPromotions(UBrainCloudWrapper *brainCloudWrapper);
 };

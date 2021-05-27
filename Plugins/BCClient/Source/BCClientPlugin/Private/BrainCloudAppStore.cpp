@@ -72,3 +72,11 @@ void BrainCloudAppStore::finalizePurchase(const FString &in_storeId, const FStri
     ServerCall *sc = new ServerCall(ServiceName::AppStore, ServiceOperation::FinalizePurchase, message, callback);
     _client->sendRequest(sc);
 }
+
+void BrainCloudAppStore::refreshPromotions(IServerCallback* callback)
+{
+    TSharedRef<FJsonObject> message = MakeShareable(new FJsonObject());
+
+    ServerCall *sc = new ServerCall(ServiceName::AppStore, ServiceOperation::RefreshPromotions, message, callback);
+    _client->sendRequest(sc);
+}
