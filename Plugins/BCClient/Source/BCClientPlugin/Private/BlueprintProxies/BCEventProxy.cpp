@@ -52,7 +52,7 @@ UBCEventProxy* UBCEventProxy::DeleteIncomingEventsByTypeOlderThan(UBrainCloudWra
     const FString& eventType, int64 dateMillis)
 {
     UBCEventProxy *Proxy = NewObject<UBCEventProxy>();
-    UBCWrapperProxy::GetBrainCloudInstance(brainCloudWrapper)->getEventService()->deleteIncomingEventsByTypeOlderThan(eventType,dateMillis, Proxy);
+    UBCWrapperProxy::GetBrainCloudInstance(brainCloudWrapper)->getEventService()->deleteIncomingEventsByTypeOlderThan(eventType, dateMillis, Proxy);
     return Proxy;
 }
 
