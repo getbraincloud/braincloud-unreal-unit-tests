@@ -34,6 +34,28 @@ UBCEventProxy *UBCEventProxy::DeleteIncomingEvent(UBrainCloudWrapper *brainCloud
     return Proxy;
 }
 
+UBCEventProxy* UBCEventProxy::DeleteIncomingEvents(UBrainCloudWrapper* brainCloudWrapper, const TArray<FString>& evIds)
+{
+    UBCEventProxy *Proxy = NewObject<UBCEventProxy>();
+    UBCWrapperProxy::GetBrainCloudInstance(brainCloudWrapper)->getEventService()->deleteIncomingEvents(evIds, Proxy);
+    return Proxy;
+}
+
+UBCEventProxy* UBCEventProxy::DeleteIncomingEventsOlderThan(UBrainCloudWrapper* brainCloudWrapper, int64 dateMillis)
+{
+    UBCEventProxy *Proxy = NewObject<UBCEventProxy>();
+    UBCWrapperProxy::GetBrainCloudInstance(brainCloudWrapper)->getEventService()->deleteIncomingEventsOlderThan(dateMillis, Proxy);
+    return Proxy;
+}
+
+UBCEventProxy* UBCEventProxy::DeleteIncomingEventsByTypeOlderThan(UBrainCloudWrapper* brainCloudWrapper,
+    const FString& eventType, int64 dateMillis)
+{
+    UBCEventProxy *Proxy = NewObject<UBCEventProxy>();
+    UBCWrapperProxy::GetBrainCloudInstance(brainCloudWrapper)->getEventService()->deleteIncomingEventsByTypeOlderThan(eventType, dateMillis, Proxy);
+    return Proxy;
+}
+
 UBCEventProxy *UBCEventProxy::GetEvents(UBrainCloudWrapper *brainCloudWrapper)
 {
     UBCEventProxy *Proxy = NewObject<UBCEventProxy>();

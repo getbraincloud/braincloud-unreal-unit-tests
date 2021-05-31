@@ -172,6 +172,9 @@ const ServiceOperation ServiceOperation::Send = ServiceOperation(TEXT("SEND"));
 const ServiceOperation ServiceOperation::UpdateEventData = ServiceOperation(TEXT("UPDATE_EVENT_DATA"));
 const ServiceOperation ServiceOperation::DeleteSent = ServiceOperation(TEXT("DELETE_SENT"));
 const ServiceOperation ServiceOperation::DeleteIncoming = ServiceOperation(TEXT("DELETE_INCOMING"));
+const ServiceOperation ServiceOperation::DeleteIncomingEvents = ServiceOperation("DELETE_INCOMING_EVENTS");
+const ServiceOperation ServiceOperation::DeleteIncomingEventsOlderThan = ServiceOperation("DELETE_INCOMING_EVENTS_OLDER_THAN");
+const ServiceOperation ServiceOperation::DeleteIncomingEventsByTypeOlderThan = ServiceOperation("DELETE_INCOMING_EVENTS_BY_TYPE_OLDER_THAN");
 const ServiceOperation ServiceOperation::GetEvents = ServiceOperation(TEXT("GET_EVENTS"));
 
 const ServiceOperation ServiceOperation::UpdateIncrement = ServiceOperation(TEXT("UPDATE_INCREMENT"));
