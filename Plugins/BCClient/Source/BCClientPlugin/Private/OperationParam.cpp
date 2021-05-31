@@ -162,6 +162,9 @@ const OperationParam OperationParam::EventServiceUpdateEventDataFromId = Operati
 const OperationParam OperationParam::EventServiceUpdateEventDataEventId = OperationParam("eventId");
 const OperationParam OperationParam::EventServiceUpdateEventDataData = OperationParam("eventData");
 const OperationParam OperationParam::EvId = OperationParam("evId");
+const OperationParam OperationParam::EventServiceEvIds = OperationParam("evIds");
+const OperationParam OperationParam::EventServiceDateMillis = OperationParam("dateMillis");
+const OperationParam OperationParam::EventServiceEventType = OperationParam("eventType");
 
 // Event Service - Delete Incoming Params
 const OperationParam OperationParam::EventServiceDeleteIncomingEventId = OperationParam("eventId");
