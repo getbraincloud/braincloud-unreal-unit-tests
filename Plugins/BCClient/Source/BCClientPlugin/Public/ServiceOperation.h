@@ -111,6 +111,7 @@ class BCCLIENTPLUGIN_API ServiceOperation
 	static const ServiceOperation ListFriends;
 	static const ServiceOperation GetMySocialInfo;
 	static const ServiceOperation AddFriends;
+	static const ServiceOperation AddFriendsFromPlatform;
 	static const ServiceOperation GetUsersOnlineStatus;
 	static const ServiceOperation RemoveFriends;
 	static const ServiceOperation FindUserByUniversalId;
