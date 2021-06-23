@@ -4,6 +4,7 @@
 
 #include "BCBlueprintCallProxyBase.h"
 #include "BrainCloudRelayComms.h"
+#include "BrainCloudWrapper.h"
 #include "BCRelayProxy.generated.h"
 
 UCLASS(MinimalAPI)

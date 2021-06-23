@@ -1,6 +1,7 @@
 // Copyright 2018 bitHeads, Inc. All Rights Reserved.
 
 #pragma once
+#include "IHttpRequest.h"
 
 class IEventCallback;
 class IRewardCallback;
@@ -11,7 +12,7 @@ class ServerCall;
 class BCFileUploader;
 class BrainCloudClient;
 class UBCBlueprintRestCallProxyBase;
-
+class IHttpRequest;
 class BrainCloudComms
 {
 	typedef TSharedRef<TArray<TSharedRef<ServerCall>>> PacketRef;
