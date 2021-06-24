@@ -160,7 +160,9 @@ class BCCLIENTPLUGIN_API OperationParam
 	static const OperationParam FriendServiceAuthenticationType;
 	static const OperationParam FriendServiceEntityId;
 	static const OperationParam FriendServiceExternalId;
+	static const OperationParam FriendServiceExternalIds;
 	static const OperationParam FriendServiceProfileId;
+	static const OperationParam FriendServiceMode;
 	static const OperationParam FriendServiceFriendId;
 	static const OperationParam FriendServiceEntityType;
 	static const OperationParam FriendServiceIncludeSummaryData;

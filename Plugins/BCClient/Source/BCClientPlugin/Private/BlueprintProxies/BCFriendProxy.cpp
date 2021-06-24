@@ -111,6 +111,14 @@ UBCFriendProxy *UBCFriendProxy::AddFriends(UBrainCloudWrapper *brainCloudWrapper
 	return Proxy;
 }
 
+UBCFriendProxy* UBCFriendProxy::AddFriendsFromPlatform(UBrainCloudWrapper* brainCloudWrapper,
+	EFriendPlatform friendPlatform, FString mode, const TArray<FString>& externalIds)
+{
+	UBCFriendProxy *Proxy = NewObject<UBCFriendProxy>();
+	UBCWrapperProxy::GetBrainCloudInstance(brainCloudWrapper)->getFriendService()->addFriendsFromPlatform(friendPlatform, mode, externalIds, Proxy);
+	return Proxy;
+}
+
 UBCFriendProxy *UBCFriendProxy::RemoveFriends(UBrainCloudWrapper *brainCloudWrapper, const TArray<FString> &profileIds)
 {
 	UBCFriendProxy *Proxy = NewObject<UBCFriendProxy>();
