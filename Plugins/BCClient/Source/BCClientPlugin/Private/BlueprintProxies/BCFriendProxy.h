@@ -186,6 +186,19 @@ class UBCFriendProxy : public UBCBlueprintCallProxyBase
 	static UBCFriendProxy *AddFriends(UBrainCloudWrapper *brainCloudWrapper, const TArray<FString> &profileIds);
 
 	/**
+	* Links the profiles for the specified externalIds for the given friend platform as internal friends.
+	*
+	* Service Name - Friend
+	* Service Operation - ADD_FRIENDS_FROM_PLATFORM
+	*
+	* Param - friendPlatform Platform to add from (i.e: FriendPlatform::Facebook)
+	* Param - mode ADD or SYNC
+	* Param - externalIds Collection of external IDs from the friend platform.
+	*/
+	UFUNCTION(BlueprintCallable, meta = (BlueprintInternalUseOnly = "true"), Category = "BrainCloud|Friend")
+    static UBCFriendProxy *AddFriendsFromPlatform(UBrainCloudWrapper *brainCloudWrapper,EFriendPlatform friendPlatform, FString mode, const TArray<FString> &externalIds);
+
+	/**
 	* Unlinks the current user and the specified users as brainCloud friends.
 	*
 	* Service Name - Friend

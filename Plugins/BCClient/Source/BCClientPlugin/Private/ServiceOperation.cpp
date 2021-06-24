@@ -108,6 +108,7 @@ const ServiceOperation ServiceOperation::FindUsersBySubstrName = ServiceOperatio
 const ServiceOperation ServiceOperation::ListFriends = ServiceOperation(TEXT("LIST_FRIENDS"));
 const ServiceOperation ServiceOperation::GetMySocialInfo = ServiceOperation(TEXT("GET_MY_SOCIAL_INFO"));
 const ServiceOperation ServiceOperation::AddFriends = ServiceOperation(TEXT("ADD_FRIENDS"));
+const ServiceOperation ServiceOperation::AddFriendsFromPlatform = ServiceOperation(TEXT("ADD_FRIENDS_FROM_PLATFORM"));
 const ServiceOperation ServiceOperation::GetUsersOnlineStatus = ServiceOperation(TEXT("GET_USERS_ONLINE_STATUS"));
 const ServiceOperation ServiceOperation::RemoveFriends = ServiceOperation(TEXT("REMOVE_FRIENDS"));
 const ServiceOperation ServiceOperation::FindPlayerByUniversalId = ServiceOperation(TEXT("FIND_PLAYER_BY_UNIVERSAL_ID"));
