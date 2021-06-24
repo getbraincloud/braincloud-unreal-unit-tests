@@ -12,7 +12,6 @@ class ServerCall;
 class BCFileUploader;
 class BrainCloudClient;
 class UBCBlueprintRestCallProxyBase;
-class IHttpRequest;
 class BrainCloudComms
 {
 	typedef TSharedRef<TArray<TSharedRef<ServerCall>>> PacketRef;
