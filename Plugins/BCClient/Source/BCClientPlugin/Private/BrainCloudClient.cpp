@@ -1,8 +1,8 @@
 // Copyright 2018 bitHeads, Inc. All Rights Reserved.
 
-#include "BCClientPluginPrivatePCH.h"
-#include "BrainCloudClient.h"
 
+#include "BrainCloudClient.h"
+#include "BCClientPluginPrivatePCH.h"
 #include "GameDelegates.h"
 #include "BrainCloudComms.h"
 #include "BrainCloudRTTComms.h"

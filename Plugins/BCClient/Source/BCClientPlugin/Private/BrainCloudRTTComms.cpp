@@ -2,7 +2,6 @@
 
 #include "BCClientPluginPrivatePCH.h"
 #include "BrainCloudRTTComms.h"
-
 #include "Serialization/JsonTypes.h"
 #include "Serialization/JsonReader.h"
 #include "Serialization/JsonSerializer.h"
@@ -544,7 +543,7 @@ void BrainCloudRTTComms::webSocket_OnClose()
 		if (m_disconnectedWithReason == true)
 		{
 			FString response;
-			TSharedRef<TJsonWriter<>> m_disconnectJson = TJsonWriterFactory<>::Create(&response);
+			TSharedRef<TJsonWriter<>> disconnectJson = TJsonWriterFactory<>::Create(&response);
 			UE_LOG(LogBrainCloudComms, Log, TEXT("RTT: Disconnect "), *response);
 		}
 	}
