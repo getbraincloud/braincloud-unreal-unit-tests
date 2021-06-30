@@ -165,6 +165,19 @@ void BrainCloudFriend::addFriends(const TArray<FString> &profileIds, IServerCall
 	_client->sendRequest(sc);
 }
 
+void BrainCloudFriend::addFriendsFromPlatform(const EFriendPlatform& friendPlatform, FString mode,
+	const TArray<FString>& externalIds, IServerCallback* callback)
+{
+	TSharedRef<FJsonObject> message = MakeShareable(new FJsonObject());
+
+	message->SetStringField(OperationParam::FriendServiceFriendPlatform.getValue(),_platformStrings[friendPlatform]);
+	message->SetStringField(OperationParam::FriendServiceMode.getValue(), mode);
+	message->SetArrayField(OperationParam::FriendServiceExternalIds.getValue(), JsonUtil::arrayToJsonArray(externalIds));
+
+	ServerCall *sc = new ServerCall(ServiceName::Friend, ServiceOperation::AddFriendsFromPlatform, message, callback);
+	_client->sendRequest(sc);
+}
+
 void BrainCloudFriend::removeFriends(const TArray<FString> &profileIds, IServerCallback *callback)
 {
 	TSharedRef<FJsonObject> message = MakeShareable(new FJsonObject());

@@ -2,9 +2,7 @@
 
 #include "BCClientPluginPrivatePCH.h"
 #include "BCRelayProxy.h"
-#include "BrainCloudClient.h"
 #include "ServerCall.h"
-
 #include "BCWrapperProxy.h"
 #include "BrainCloudWrapper.h"
 	

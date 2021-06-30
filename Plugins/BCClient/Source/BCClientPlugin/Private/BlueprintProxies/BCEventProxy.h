@@ -3,6 +3,7 @@
 #pragma once
 
 #include "BCBlueprintCallProxyBase.h"
+#include "BrainCloudWrapper.h"
 #include "BCEventProxy.generated.h"
 
 UCLASS(MinimalAPI)
@@ -57,6 +58,40 @@ public:
   UFUNCTION(BlueprintCallable, meta = (BlueprintInternalUseOnly = "true"), Category = "BrainCloud|Event")
   static UBCEventProxy *DeleteIncomingEvent(UBrainCloudWrapper *brainCloudWrapper, const FString &evId);
 
+  /**
+  * Delete a list of events out of the user's incoming mailbox
+  *
+  * Service Name - Event
+  * Service Operation - DELETE_INCOMING_EVENTS
+  *
+  * Param - evIds Collection of event ids
+  */
+  UFUNCTION(BlueprintCallable, meta = (BlueprintInternalUseOnly = "true"), Category = "BrainCloud|Event")
+  static UBCEventProxy *DeleteIncomingEvents(UBrainCloudWrapper *brainCloudWrapper, const TArray<FString> &evIds);
+
+  /**
+  * Delete any events older than the given date out of the user's incoming mailbox.
+  *
+  * Service Name - Event
+  * Service Operation - DELETE_INCOMING_EVENTS_OLDER_THAN
+  *
+  * Param - in_dateMillis createdAt cut-off time whereby older events will be deleted (In UTC since Epoch)
+  */
+  UFUNCTION(BlueprintCallable, meta = (BlueprintInternalUseOnly = "true"), Category = "BrainCloud|Event")
+  static UBCEventProxy *DeleteIncomingEventsOlderThan(UBrainCloudWrapper *brainCloudWrapper, int64 dateMillis);
+
+  /**
+  * Delete any events of the given type older than the given date out of the user's incoming mailbox.
+  *
+  * Service Name - Event
+  * Service Operation - DELETE_INCOMING_EVENTS_BY_TYPE_OLDER_THAN
+  *
+  * Param - eventType The user-defined type of the event
+  * Param - dateMillis createdAt cut-off time whereby older events will be deleted (In UTC since Epoch)
+  */
+  UFUNCTION(BlueprintCallable, meta = (BlueprintInternalUseOnly = "true"), Category = "BrainCloud|Event")
+  static UBCEventProxy *DeleteIncomingEventsByTypeOlderThan(UBrainCloudWrapper *brainCloudWrapper, const FString & eventType, int64 dateMillis);
+  
   /**
     * Get the events currently queued for the player.
     *

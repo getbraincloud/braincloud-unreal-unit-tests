@@ -119,6 +119,16 @@ public:
     */
   void finalizePurchase(const FString &in_storeId, const FString &in_transactionId, const FString &in_jsonTransactionData, IServerCallback *callback = nullptr);
 
+  /**
+  * Returns up-to-date eligible 'promotions' for the user and a 'promotionsRefreshed' flag indicating whether the user's promotion info required refreshing.
+  *
+  * Service Name - appStore
+  * Service Operation - REFRESH_PROMOTIONS
+  *
+  * @param callback The method to be invoked when the server response is received
+  */
+  void refreshPromotions(IServerCallback *callback = nullptr);
+
 private:
   BrainCloudClient *_client = nullptr;
 };

@@ -108,6 +108,7 @@ const ServiceOperation ServiceOperation::FindUsersBySubstrName = ServiceOperatio
 const ServiceOperation ServiceOperation::ListFriends = ServiceOperation(TEXT("LIST_FRIENDS"));
 const ServiceOperation ServiceOperation::GetMySocialInfo = ServiceOperation(TEXT("GET_MY_SOCIAL_INFO"));
 const ServiceOperation ServiceOperation::AddFriends = ServiceOperation(TEXT("ADD_FRIENDS"));
+const ServiceOperation ServiceOperation::AddFriendsFromPlatform = ServiceOperation(TEXT("ADD_FRIENDS_FROM_PLATFORM"));
 const ServiceOperation ServiceOperation::GetUsersOnlineStatus = ServiceOperation(TEXT("GET_USERS_ONLINE_STATUS"));
 const ServiceOperation ServiceOperation::RemoveFriends = ServiceOperation(TEXT("REMOVE_FRIENDS"));
 const ServiceOperation ServiceOperation::FindPlayerByUniversalId = ServiceOperation(TEXT("FIND_PLAYER_BY_UNIVERSAL_ID"));
@@ -172,6 +173,9 @@ const ServiceOperation ServiceOperation::Send = ServiceOperation(TEXT("SEND"));
 const ServiceOperation ServiceOperation::UpdateEventData = ServiceOperation(TEXT("UPDATE_EVENT_DATA"));
 const ServiceOperation ServiceOperation::DeleteSent = ServiceOperation(TEXT("DELETE_SENT"));
 const ServiceOperation ServiceOperation::DeleteIncoming = ServiceOperation(TEXT("DELETE_INCOMING"));
+const ServiceOperation ServiceOperation::DeleteIncomingEvents = ServiceOperation("DELETE_INCOMING_EVENTS");
+const ServiceOperation ServiceOperation::DeleteIncomingEventsOlderThan = ServiceOperation("DELETE_INCOMING_EVENTS_OLDER_THAN");
+const ServiceOperation ServiceOperation::DeleteIncomingEventsByTypeOlderThan = ServiceOperation("DELETE_INCOMING_EVENTS_BY_TYPE_OLDER_THAN");
 const ServiceOperation ServiceOperation::GetEvents = ServiceOperation(TEXT("GET_EVENTS"));
 
 const ServiceOperation ServiceOperation::UpdateIncrement = ServiceOperation(TEXT("UPDATE_INCREMENT"));
@@ -396,6 +400,7 @@ const ServiceOperation ServiceOperation::GetEligiblePromotions = ServiceOperatio
 const ServiceOperation ServiceOperation::GetSalesInventory = ServiceOperation(TEXT("GET_INVENTORY"));
 const ServiceOperation ServiceOperation::StartPurchase = ServiceOperation(TEXT("START_PURCHASE"));
 const ServiceOperation ServiceOperation::FinalizePurchase = ServiceOperation(TEXT("FINALIZE_PURCHASE"));
+const ServiceOperation ServiceOperation::RefreshPromotions = ServiceOperation(TEXT("REFRESH_PROMOTIONS"));
 
 // rtt
 const ServiceOperation ServiceOperation::RequestClientConnection = ServiceOperation(TEXT("REQUEST_CLIENT_CONNECTION"));
