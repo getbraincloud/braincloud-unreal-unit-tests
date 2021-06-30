@@ -2,7 +2,6 @@
 
 #include "BCClientPluginPrivatePCH.h"
 #include "BrainCloudRTTComms.h"
-
 #include "Serialization/JsonTypes.h"
 #include "Serialization/JsonReader.h"
 #include "Serialization/JsonSerializer.h"
@@ -25,7 +24,7 @@
 #include <iostream>
 #include "Runtime/Launch/Resources/Version.h"
 
-#define MAX_PAYLOAD_RTT 10 * 1024 * 1024
+#define MAX_PAYLOAD_RTT (64 * 1024) // [dsl] This used to be set to 10MB, failed on mac SNDBUF too big for the TCP socket.
 #define INITIAL_HEARTBEAT_TIME 10
 
 #if PLATFORM_UWP
@@ -544,7 +543,7 @@ void BrainCloudRTTComms::webSocket_OnClose()
 		if (m_disconnectedWithReason == true)
 		{
 			FString response;
-			TSharedRef<TJsonWriter<>> m_disconnectJson = TJsonWriterFactory<>::Create(&response);
+			TSharedRef<TJsonWriter<>> disconnectJson = TJsonWriterFactory<>::Create(&response);
 			UE_LOG(LogBrainCloudComms, Log, TEXT("RTT: Disconnect "), *response);
 		}
 	}

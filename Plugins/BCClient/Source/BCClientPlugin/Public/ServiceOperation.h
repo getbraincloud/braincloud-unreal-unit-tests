@@ -111,6 +111,7 @@ class BCCLIENTPLUGIN_API ServiceOperation
 	static const ServiceOperation ListFriends;
 	static const ServiceOperation GetMySocialInfo;
 	static const ServiceOperation AddFriends;
+	static const ServiceOperation AddFriendsFromPlatform;
 	static const ServiceOperation GetUsersOnlineStatus;
 	static const ServiceOperation RemoveFriends;
 	static const ServiceOperation FindUserByUniversalId;
@@ -176,6 +177,9 @@ class BCCLIENTPLUGIN_API ServiceOperation
 	static const ServiceOperation UpdateEventData;
 	static const ServiceOperation DeleteSent;
 	static const ServiceOperation DeleteIncoming;
+	static const ServiceOperation DeleteIncomingEvents;
+	static const ServiceOperation DeleteIncomingEventsOlderThan;
+	static const ServiceOperation DeleteIncomingEventsByTypeOlderThan;
 	static const ServiceOperation GetEvents;
 
 	static const ServiceOperation UpdateIncrement;
@@ -414,6 +418,7 @@ class BCCLIENTPLUGIN_API ServiceOperation
 	static const ServiceOperation GetSalesInventoryByCategory;
 	static const ServiceOperation StartPurchase;
 	static const ServiceOperation FinalizePurchase;
+	static const ServiceOperation RefreshPromotions;
 
 	// rtt
 	static const ServiceOperation RequestClientConnection;

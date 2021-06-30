@@ -190,6 +190,19 @@ class BCCLIENTPLUGIN_API BrainCloudFriend
 	* @param callback Method to be invoked when the server response is received.
 	*/
 	void addFriends(const TArray<FString> &profileIds, IServerCallback *callback = nullptr);
+	
+	/**
+	* Links the profiles for the specified externalIds for the given friend platform as internal friends.
+	*
+	* Service Name - Friend
+	* Service Operation - ADD_FRIENDS_FROM_PLATFORM
+	*
+	* @param friendPlatform Platform to add from (i.e: FriendPlatform::Facebook)
+	* @param mode ADD or SYNC
+	* @param externalIds Collection of external IDs from the friend platform.
+	* @param callback Method to be invoked when the server response is received.
+	*/
+	void addFriendsFromPlatform(const EFriendPlatform &friendPlatform, FString mode, const TArray<FString> &externalIds, IServerCallback *callback = nullptr);
 
 	/**
 	* Unlinks the current user and the specified users as brainCloud friends.
