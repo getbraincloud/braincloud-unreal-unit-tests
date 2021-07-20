@@ -23,7 +23,7 @@
     },
     {
       "Name": "BCBlueprintSupport",
-      "Type": "Editor",
+      "Type": "Runtime",
       "LoadingPhase": "PreDefault"
     },
     {
