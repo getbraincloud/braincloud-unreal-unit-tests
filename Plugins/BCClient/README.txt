@@ -8,7 +8,13 @@
 2.  Open the Plugins folder, or create it if it does not exist
 3.  Copy the BCClient folder into the Plugins folder
 4.  If your project is NOT Blueprint only, be sure to regenerate your code project files
-5.  Installation complete!
+5.  Navigate to Edit -> Plugins
+6.  Search for braincloud and enable plugin
+7.  Restart Unreal Editor
+8.  A dialog will pop up saying you're missing 3 modules, click no to rebuild.
+9.  Rebuild manually by deleting Intermediate folder, Binaries folder and .sln file 
+then right click on your .uproject and generate visual studio files
+10.  Installation complete!
 
 /* Documentation and Tutorials */
 
