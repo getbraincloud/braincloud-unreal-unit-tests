@@ -1,7 +1,7 @@
 // Copyright 2018 bitHeads, Inc. All Rights Reserved.
 
-#include "BCClientPluginPrivatePCH.h"
 #include "BrainCloudRelayComms.h"
+#include "BCClientPluginPrivatePCH.h"
 #include "Serialization/JsonTypes.h"
 #include "Serialization/JsonReader.h"
 #include "Serialization/JsonSerializer.h"
@@ -377,7 +377,7 @@ void BrainCloudRelayComms::sendRelay(const TArray<uint8> &in_data, const uint64 
 
 	// Store inverted player mask
 	uint64 playerMask = 0;
-	for (uint64 i = 0, len = (uint64)MAX_PLAYERS; i < len; ++i)
+	for (uint64 i = 0;i < (uint64)MAX_PLAYERS; ++i)
 	{
 		playerMask |= ((in_playerMask >> ((uint64)MAX_PLAYERS - i - 1)) & 1) << i;
 	}

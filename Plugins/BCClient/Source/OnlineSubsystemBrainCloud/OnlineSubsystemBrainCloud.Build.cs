@@ -17,7 +17,7 @@ public class OnlineSubsystemBrainCloud : ModuleRules
 #endif
     {
         PrivatePCHHeaderFile = "Private/OnlineSubsystemBrainCloudPrivatePCH.h";
-
+        PCHUsage = PCHUsageMode.UseExplicitOrSharedPCHs;
         PublicDefinitions.Add("ONLINESUBSYSTEMBRAINCLOUD_PACKAGE=1");
 
         PrivateIncludePaths.AddRange(
