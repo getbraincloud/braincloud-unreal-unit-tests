@@ -25,7 +25,7 @@ void BrainCloudGlobalFile::getFileInfoSimple(const FString &fileName, const FStr
 	message->SetStringField(OperationParam::GlobalFileFileName.getValue(), fileName);
     message->SetStringField(OperationParam::GlobalFileFolderPath.getValue(), folderPath);
 
-	ServerCall *sc = new ServerCall(ServiceName::GlobalFile, ServiceOperation::GetFileInfo, message, callback);
+	ServerCall *sc = new ServerCall(ServiceName::GlobalFile, ServiceOperation::GetFileInfoSimple, message, callback);
 	_client->sendRequest(sc);
 }
 
