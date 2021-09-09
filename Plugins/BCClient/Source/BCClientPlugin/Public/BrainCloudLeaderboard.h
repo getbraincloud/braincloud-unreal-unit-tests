@@ -262,16 +262,16 @@ class BCCLIENTPLUGIN_API BrainCloudLeaderboard
 										   ESocialLeaderboardType leaderboardType, const int64 &rotationStart, int32 retainedCount, int32 numDaysToRotate, IServerCallback *callback = nullptr);
 	
 	/**
-	* Post the players score to the given social leaderboard.
-	* Pass leaderboard config data to dynamically create if necessary.
-	* You can optionally send a user-defined json string of data
-	* with the posted score. This string could include information
-	* relevant to the posted score.
+	* Post the players score to the given social group leaderboard with a
+	* rotation type of DAYS. You can optionally send a user-defined
+	* JSON string of data with the posted score.
+	* This string could include information relevant to the posted score.
 	*
 	* Service Name - SocialLeaderboard
 	* Service Operation - PostScoreDynamic
 	*
 	* @param leaderboardId The leaderboard to post to
+	* @param groupId The ID of the group
 	* @param score The score to post
 	* @param data Optional user-defined data to post with the score
 	* @param leaderboardType leaderboard type
