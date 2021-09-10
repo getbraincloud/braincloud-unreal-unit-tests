@@ -210,7 +210,7 @@ void BrainCloudLeaderboard::postScoreToDynamicGroupLeaderboardDaysUTC(const FStr
 
 	message->SetNumberField(OperationParam::LeaderboardServiceRetainedCount.getValue(), retainedCount);
 
-	ServerCall *sc = new ServerCall(ServiceName::Leaderboard, ServiceOperation::PostScoreDynamic, message, callback);
+	ServerCall *sc = new ServerCall(ServiceName::Leaderboard, ServiceOperation::PostScoreToDynamicGroupLeaderboard, message, callback);
 	_client->sendRequest(sc);
 }
 

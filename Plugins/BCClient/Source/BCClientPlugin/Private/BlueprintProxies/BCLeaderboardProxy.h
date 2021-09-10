@@ -213,14 +213,12 @@ class UBCLeaderboardProxy : public UBCBlueprintCallProxyBase
 															  ESocialLeaderboardType leaderboardType, ERotationType rotationType, FDateTime rotationStart, int32 retainedCount);
 
 	/**
-	* Post the players score to the given social leaderboard.
-	* Pass leaderboard config data to dynamically create if necessary.
-	* You can optionally send a user-defined json string of data
-	* with the posted score. This string could include information
-	* relevant to the posted score.
+	* Posts score to group leaderbopard and dynamically creates if necessary.
+	* leaderboardType, rotationReset, retainedCount and rotationType are required.
+	* uses UTC time in milliseconds since epoch
 	*
 	* Service Name - SocialLeaderboard
-	* Service Operation - PostScoreDynamic
+	* Service Operation - POST_GROUP_SCORE_DYNAMIC
 	*
 	* Param - leaderboardId The leaderboard to post to
 	* Param - in_groupId the groups Id
