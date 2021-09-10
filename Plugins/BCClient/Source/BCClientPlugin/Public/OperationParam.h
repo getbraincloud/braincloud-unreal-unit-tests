@@ -504,7 +504,9 @@ class BCCLIENTPLUGIN_API OperationParam
 	static const OperationParam LobbySignalData;
 	static const OperationParam LobbyConnectionId;
 	static const OperationParam PingData;
-
+	static const OperationParam LobbyMinRating;
+	static const OperationParam LobbyMaxRating;
+	
 	//customEntity
 	static const OperationParam CustomEntityServiceEntityType;
 	static const OperationParam CustomEntityServiceJsonEntityData;

@@ -529,6 +529,8 @@ const OperationParam OperationParam::LobbyToTeamName = OperationParam("toTeamCod
 const OperationParam OperationParam::LobbySignalData = OperationParam("signalData");
 const OperationParam OperationParam::LobbyConnectionId = OperationParam("cxId");
 const OperationParam OperationParam::PingData = OperationParam("pingData");
+const OperationParam OperationParam::LobbyMinRating = OperationParam("minRating");
+const OperationParam OperationParam::LobbyMaxRating = OperationParam("maxRating");
 
 bool OperationParam::operator==(const OperationParam &s) const
 {

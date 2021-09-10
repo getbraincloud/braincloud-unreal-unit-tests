@@ -291,7 +291,19 @@ class BCCLIENTPLUGIN_API BrainCloudLobby : public IServerCallback
 	* @param in_callback Method to be invoked when the server response is received.
     */
     void pingRegions( IServerCallback *in_callback);
-    
+	
+	/**
+	* Gets a map keyed by rating of the visible lobby instances matching the given type and rating range.
+	*
+	* Service Name - Lobby
+	* Service Operation - GetVisibleLobbyInstances
+	*
+	* @param lobbyType The type of lobby to look for.
+	* @param minRating Minimum lobby rating.
+	* @param maxRating Maximum lobby rating.
+	*/
+	void getVisibleLobbyInstances(const FString &in_lobbyType, int in_minRating, int in_maxRating, IServerCallback* in_callback);
+	
     virtual void serverCallback(ServiceName serviceName, ServiceOperation serviceOperation, const FString &jsonData);
     virtual void serverError(ServiceName serviceName, ServiceOperation serviceOperation, int32 statusCode, int32 reasonCode, const FString &message);
 
