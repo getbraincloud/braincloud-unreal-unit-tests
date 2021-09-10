@@ -260,6 +260,28 @@ class BCCLIENTPLUGIN_API BrainCloudLeaderboard
 	*/
 	void postScoreToDynamicLeaderboardDaysUTC(const FString &leaderboardId, int32 score, const FString &jsonData,
 										   ESocialLeaderboardType leaderboardType, const int64 &rotationStart, int32 retainedCount, int32 numDaysToRotate, IServerCallback *callback = nullptr);
+	
+	/**
+	* Post the players score to the given social group leaderboard with a
+	* rotation type of DAYS. You can optionally send a user-defined
+	* JSON string of data with the posted score.
+	* This string could include information relevant to the posted score.
+	*
+	* Service Name - SocialLeaderboard
+	* Service Operation - PostScoreDynamic
+	*
+	* @param leaderboardId The leaderboard to post to
+	* @param groupId The ID of the group
+	* @param score The score to post
+	* @param data Optional user-defined data to post with the score
+	* @param leaderboardType leaderboard type
+	* @param rotationResetUTC Date to start rotation calculations (Date is converted to "dd-mm-yyyy" format)
+	* @param retainedCount How many rotations to keep
+	* @param numDaysToRotate How many days between each rotation
+	* @param callback The method to be invoked when the server response is received/
+	*/
+	void postScoreToDynamicGroupLeaderboardDaysUTC(const FString &leaderboardId, const FString &groupId, int32 score, const FString &jsonData,
+                                           ESocialLeaderboardType leaderboardType, const FDateTime &rotationStart, int32 retainedCount, int32 numDaysToRotate, IServerCallback *callback = nullptr);
 
 	/**
 	* Removes a player's score from the leaderboard
