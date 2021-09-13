@@ -156,7 +156,7 @@ Function ValidateArgs() {
 }
 
 Function RunRegexp {
-  $input_path = './index.json'
+  $input_path = './TestResults/index.json'
   $regex = $buildParams['regExp']
   return select-string -CaseSensitive -Path $input_path -Pattern $regex -AllMatches | % { $_.Matches } | % { $_.Value }
 }
@@ -177,37 +177,14 @@ Function RunRegexp {
     $buildParams.Add($args[$i], $args[$i+1])  
   }
   
- ValidateArgs
- GetLogFile
- $TestsDidFail=Select-String -Pattern "^.*Test Failure.*$" './testResults' #Finished: FAILURE
-  if($TestsDidFail) {
-    ReportFailure "Unreal Build Failed"
-    exit 1
-  }
-
- if($buildParams['cmakeFailed']) {
-    LogErrorToConsole('CMake Generation Failed')
-    ReportFailure "Unreal Build Failed"
-    exit 1
-  }
-
-  if($buildParams['buildFailed']) {
-    LogErrorToConsole('CMake Build Failed')
-    ReportFailure "Unreal Build Failed"
-    exit 1
-  }
-
-  
+  ValidateArgs
+ 
+  $TestsDidFail=Select-String -Pattern "^.*Test Failure.*$" './TestResults/index.json' #Finished: FAILURE
   
   $TestsDidFail=RunRegexp
 
-  # Split the results if any
-  #$TestResults=$TestsDidFail -split ' '
-
   $NotificationJSON=BuildMessageJSON($TestsDidFail)
 
-  #Write-Output($NotificationJSON)
-    
   if($NotificationJSON) {
     ReportFailure $NotificationJSON
     exit 1
