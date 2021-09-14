@@ -198,16 +198,13 @@ void BrainCloudLeaderboard::postScoreToDynamicGroupLeaderboardDaysUTC(const FStr
 {
 	TSharedRef<FJsonObject> message = MakeShareable(new FJsonObject());
 	message->SetStringField(OperationParam::LeaderboardServiceLeaderboardId.getValue(), leaderboardId);
-	message->SetStringField(OperationParam::PresenceServiceGroupId.getValue(),groupId);
+	message->SetStringField(OperationParam::GroupId.getValue(),groupId);
 	message->SetNumberField(OperationParam::LeaderboardServiceScore.getValue(), score);
 	message->SetObjectField(OperationParam::LeaderboardServiceData.getValue(), JsonUtil::jsonStringToValue(jsonData));
 	message->SetStringField(OperationParam::LeaderboardServiceLeaderboardType.getValue(), *leaderboardTypeToString(leaderboardType));
 	message->SetStringField(OperationParam::LeaderboardServiceRotationType.getValue(), "DAYS");
 	message->SetNumberField(OperationParam::NumDaysToRotate.getValue(), numDaysToRotate);
-
-	if (rotationStart > FDateTime::Now())
-		message->SetNumberField(OperationParam::LeaderboardServiceRotationResetTime.getValue(), rotationStart.ToUnixTimestamp() * 1000);
-
+	message->SetNumberField(OperationParam::LeaderboardServiceRotationResetTime.getValue(), rotationStart.ToUnixTimestamp() * -1000);
 	message->SetNumberField(OperationParam::LeaderboardServiceRetainedCount.getValue(), retainedCount);
 
 	ServerCall *sc = new ServerCall(ServiceName::Leaderboard, ServiceOperation::PostScoreToDynamicGroupLeaderboard, message, callback);
