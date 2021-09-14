@@ -315,6 +315,18 @@ void BrainCloudLobby::pingRegions(IServerCallback* in_callback)
     }
 }
 
+void BrainCloudLobby::getVisibleLobbyInstances(const FString& in_lobbyType, int in_minRating, int in_maxRating,
+    IServerCallback* in_callback)
+{
+    TSharedRef<FJsonObject> message = MakeShareable(new FJsonObject());
+    message->SetStringField(OperationParam::LobbyRoomType.getValue(),in_lobbyType);
+    message->SetNumberField(OperationParam::LobbyMinRating.getValue(),in_minRating);
+    message->SetNumberField(OperationParam::LobbyMaxRating.getValue(),in_maxRating);
+    
+    ServerCall* sc = new ServerCall(ServiceName::Lobby, ServiceOperation::GetVisibleLobbyInstances, message, in_callback);
+    _client->sendRequest(sc);
+}
+
 void BrainCloudLobby::pingNextItemToProcess()
 {
     Mutex.Lock();

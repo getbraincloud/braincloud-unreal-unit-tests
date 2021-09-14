@@ -153,3 +153,11 @@ UBCLobbyProxy *UBCLobbyProxy::PingRegions(UBrainCloudWrapper *brainCloudWrapper)
 	UBCWrapperProxy::GetBrainCloudInstance(brainCloudWrapper)->getLobbyService()->pingRegions(Proxy);
 	return Proxy;
 }
+
+UBCLobbyProxy* UBCLobbyProxy::GetVisibleLobbyInstances(UBrainCloudWrapper* brainCloudWrapper,
+	const FString& in_lobbyType, int in_minRating, int in_maxRating)
+{
+	UBCLobbyProxy *Proxy = NewObject<UBCLobbyProxy>();
+	UBCWrapperProxy::GetBrainCloudInstance(brainCloudWrapper)->getLobbyService()->getVisibleLobbyInstances(in_lobbyType,in_minRating,in_maxRating,Proxy);
+	return Proxy;
+}

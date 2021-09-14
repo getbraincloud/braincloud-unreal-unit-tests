@@ -465,7 +465,8 @@ class BCCLIENTPLUGIN_API ServiceOperation
 	static const ServiceOperation CancelFindRequest;
 	static const ServiceOperation GetRegionsForLobbies;
 	static const ServiceOperation PingData;
-
+	static const ServiceOperation GetVisibleLobbyInstances;
+	
 	//Item Catalog
 	static const ServiceOperation GetCatalogItemDefinition;
 	static const ServiceOperation GetCatalogItemsPage;
