@@ -289,4 +289,17 @@ class UBCLobbyProxy : public UBCBlueprintCallProxyBase
     */
     UFUNCTION(BlueprintCallable, meta = (BlueprintInternalUseOnly = "true"), Category = "BrainCloud|Lobby")
     static UBCLobbyProxy *PingRegions(UBrainCloudWrapper *brainCloudWrapper);
+
+	/**
+	* Gets a map keyed by rating of the visible lobby instances matching the given type and rating range.
+	*
+	* Service Name - Lobby
+	* Service Operation - GetVisibleLobbyInstances
+	*
+	* @param lobbyType The type of lobby to look for.
+	* @param minRating Minimum lobby rating.
+	* @param maxRating Maximum lobby rating.
+	*/
+	UFUNCTION(BlueprintCallable, meta = (BlueprintInternalUseOnly = "true"), Category = "BrainCloud|Lobby")
+    static UBCLobbyProxy *GetVisibleLobbyInstances(UBrainCloudWrapper *brainCloudWrapper, const FString &in_lobbyType, int in_minRating, int in_maxRating);
 };
