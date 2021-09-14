@@ -134,6 +134,15 @@ UBCLeaderboardProxy *UBCLeaderboardProxy::PostScoreToDynamicLeaderboardDaysUTC(U
 	return Proxy;
 }
 
+UBCLeaderboardProxy* UBCLeaderboardProxy::PostScoreToDynamicGroupLeaderboardDaysUTC(
+	UBrainCloudWrapper* brainCloudWrapper, FString leaderboardId, FString groupId, int32 score, FString jsonData,
+	ESocialLeaderboardType leaderboardType, FDateTime rotationResetUTC, int32 retainedCount, int32 numDaysToRotate)
+{
+	UBCLeaderboardProxy *Proxy = NewObject<UBCLeaderboardProxy>();
+	UBCWrapperProxy::GetBrainCloudInstance(brainCloudWrapper)->getLeaderboardService()->postScoreToDynamicGroupLeaderboardDaysUTC(leaderboardId, groupId, score, jsonData, leaderboardType, rotationResetUTC, retainedCount, numDaysToRotate, Proxy);
+	return Proxy;
+}
+
 UBCLeaderboardProxy *UBCLeaderboardProxy::RemovePlayerScore(UBrainCloudWrapper *brainCloudWrapper, const FString &leaderboardId, int32 versionId)
 {
 	UBCLeaderboardProxy *Proxy = NewObject<UBCLeaderboardProxy>();
