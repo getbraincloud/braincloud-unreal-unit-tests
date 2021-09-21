@@ -449,7 +449,8 @@ const ServiceOperation ServiceOperation::RemoveMember = ServiceOperation("REMOVE
 const ServiceOperation ServiceOperation::CancelFindRequest = ServiceOperation("CANCEL_FIND_REQUEST");
 const ServiceOperation ServiceOperation::GetRegionsForLobbies = ServiceOperation("GET_REGIONS_FOR_LOBBIES");
 const ServiceOperation ServiceOperation::PingData = ServiceOperation("PING_DATA");	// not an official API, but need it for proper calback
-const ServiceOperation ServiceOperation::GetVisibleLobbyInstances = ServiceOperation("GET_VISIBLE_LOBBY_INSTANCES");
+const ServiceOperation ServiceOperation::GetLobbyInstances = ServiceOperation("GET_LOBBY_INSTANCES");
+const ServiceOperation ServiceOperation::GetLobbyInstancesWithPingData = ServiceOperation("GET_LOBBY_INSTANCES_WITH_PING_DATA");
 
 // user inventory management
 const ServiceOperation ServiceOperation::AwardUserItem = ServiceOperation("AWARD_USER_ITEM");
