@@ -293,6 +293,8 @@ class BCCLIENTPLUGIN_API ServiceOperation
 	static const ServiceOperation SetUserStatus;
 
 	static const ServiceOperation ReadProperties;
+	static const ServiceOperation ReadSelectedProperties;
+	static const ServiceOperation ReadPropertiesInCategories;
 
 	static const ServiceOperation GetUpdatedFiles;
 	static const ServiceOperation GetFileList;
