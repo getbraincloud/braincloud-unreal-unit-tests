@@ -315,16 +315,23 @@ void BrainCloudLobby::pingRegions(IServerCallback* in_callback)
     }
 }
 
-void BrainCloudLobby::getVisibleLobbyInstances(const FString& in_lobbyType, int in_minRating, int in_maxRating,
-    IServerCallback* in_callback)
+void BrainCloudLobby::getLobbyInstances(const FString &in_lobbyType, const FString &in_criteriaJson, IServerCallback* in_callback)
 {
     TSharedRef<FJsonObject> message = MakeShareable(new FJsonObject());
     message->SetStringField(OperationParam::LobbyRoomType.getValue(),in_lobbyType);
-    message->SetNumberField(OperationParam::LobbyMinRating.getValue(),in_minRating);
-    message->SetNumberField(OperationParam::LobbyMaxRating.getValue(),in_maxRating);
+    message->SetObjectField(OperationParam::LobbyCriteria.getValue(),JsonUtil::jsonStringToValue(in_criteriaJson));
     
-    ServerCall* sc = new ServerCall(ServiceName::Lobby, ServiceOperation::GetVisibleLobbyInstances, message, in_callback);
+    ServerCall* sc = new ServerCall(ServiceName::Lobby, ServiceOperation::GetLobbyInstances, message, in_callback);
     _client->sendRequest(sc);
+}
+
+void BrainCloudLobby::getLobbyInstancesWithPingData(const FString& in_lobbyType, const FString& in_criteriaJson, IServerCallback* in_callback)
+{
+    TSharedRef<FJsonObject> message = MakeShareable(new FJsonObject());
+    message->SetStringField(OperationParam::LobbyRoomType.getValue(),in_lobbyType);
+    message->SetObjectField(OperationParam::LobbyCriteria.getValue(),JsonUtil::jsonStringToValue(in_criteriaJson));
+    
+    attachPingDataAndSend(message,ServiceOperation::GetLobbyInstancesWithPingData,in_callback);
 }
 
 void BrainCloudLobby::pingNextItemToProcess()

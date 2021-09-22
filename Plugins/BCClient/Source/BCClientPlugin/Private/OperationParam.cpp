@@ -531,6 +531,7 @@ const OperationParam OperationParam::LobbyConnectionId = OperationParam("cxId");
 const OperationParam OperationParam::PingData = OperationParam("pingData");
 const OperationParam OperationParam::LobbyMinRating = OperationParam("minRating");
 const OperationParam OperationParam::LobbyMaxRating = OperationParam("maxRating");
+const OperationParam OperationParam::LobbyCriteria = OperationParam("criteriaJson");
 
 bool OperationParam::operator==(const OperationParam &s) const
 {

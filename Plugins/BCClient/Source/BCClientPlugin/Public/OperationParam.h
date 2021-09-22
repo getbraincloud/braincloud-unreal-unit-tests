@@ -506,6 +506,7 @@ class BCCLIENTPLUGIN_API OperationParam
 	static const OperationParam PingData;
 	static const OperationParam LobbyMinRating;
 	static const OperationParam LobbyMaxRating;
+	static const OperationParam LobbyCriteria;
 	
 	//customEntity
 	static const OperationParam CustomEntityServiceEntityType;
