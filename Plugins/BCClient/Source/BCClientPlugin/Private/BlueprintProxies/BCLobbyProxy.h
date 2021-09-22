@@ -3,6 +3,7 @@
 #pragma once
 
 #include "BCBlueprintCallProxyBase.h"
+#include "BrainCloudWrapper.h"
 #include "BCLobbyProxy.generated.h"
 
 UCLASS(MinimalAPI)
@@ -292,14 +293,27 @@ class UBCLobbyProxy : public UBCBlueprintCallProxyBase
 
 	/**
 	* Gets a map keyed by rating of the visible lobby instances matching the given type and rating range.
+	* any ping data provided in the criteriaJson will be ignored.
 	*
 	* Service Name - Lobby
-	* Service Operation - GetVisibleLobbyInstances
+	* Service Operation - GetLobbyInstances
 	*
 	* @param lobbyType The type of lobby to look for.
-	* @param minRating Minimum lobby rating.
-	* @param maxRating Maximum lobby rating.
+	* @param criteriaJson A JSON object used to describe filter criteria.
 	*/
 	UFUNCTION(BlueprintCallable, meta = (BlueprintInternalUseOnly = "true"), Category = "BrainCloud|Lobby")
-    static UBCLobbyProxy *GetVisibleLobbyInstances(UBrainCloudWrapper *brainCloudWrapper, const FString &in_lobbyType, int in_minRating, int in_maxRating);
+    static UBCLobbyProxy *GetLobbyInstances(UBrainCloudWrapper *brainCloudWrapper, const FString &in_lobbyType, const FString &criteriaJson);
+
+	/**
+	* Gets a map keyed by rating of the visible lobby instances matching the given type and rating range.
+	* Only lobby instances in the regions that satisfy the ping portion of the criteriaJson (based on the values provided in pingData) will be returned.
+	*
+	* Service Name - Lobby
+	* Service Operation - GetLobbyInstancesWithPingData
+	*
+	* @param lobbyType The type of lobby to look for.
+	* @param criteriaJson A JSON object used to describe filter criteria.
+	*/
+	UFUNCTION(BlueprintCallable, meta = (BlueprintInternalUseOnly = "true"), Category = "BrainCloud|Lobby")
+	static UBCLobbyProxy *GetLobbyInstancesWithPingData(UBrainCloudWrapper *brainCloudWrapper, const FString& in_lobbyType, const FString& in_criteriaJson);
 };
