@@ -527,6 +527,10 @@ class BCCLIENTPLUGIN_API OperationParam
 	static const OperationParam CustomEntityServiceDataJson;
 	static const OperationParam CustomEntityServiceDeleteCriteria;
 
+	//global app
+	static const OperationParam GlobalAppReadSelectedProperties;
+	static const OperationParam GlobalAppReadPropertiesInCategories;
+
 	FString getValue() const { return _value; }
 
 	bool operator==(const OperationParam &s) const;

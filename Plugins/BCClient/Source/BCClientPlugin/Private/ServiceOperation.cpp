@@ -290,6 +290,8 @@ const ServiceOperation ServiceOperation::GetUserStatus = ServiceOperation(TEXT("
 const ServiceOperation ServiceOperation::SetUserStatus = ServiceOperation(TEXT("SET_USER_STATUS"));
 
 const ServiceOperation ServiceOperation::ReadProperties = ServiceOperation(TEXT("READ_PROPERTIES"));
+const ServiceOperation ServiceOperation::ReadSelectedProperties = ServiceOperation(TEXT("READ_SELECTED_PROPERTIES"));
+const ServiceOperation ServiceOperation::ReadPropertiesInCategories = ServiceOperation(TEXT("READ_PROPERTIES_IN_CATEGORIES"));
 
 const ServiceOperation ServiceOperation::GetUpdatedFiles = ServiceOperation(TEXT("GET_UPDATED_FILES"));
 const ServiceOperation ServiceOperation::GetFileList = ServiceOperation(TEXT("GET_FILE_LIST"));
