@@ -41,7 +41,8 @@ public class BCClientPlugin : ModuleRules
                     "Core",
                     "CoreUObject",
                     "Engine",
-                    "Json"
+                    "Json",
+                    "HTTP"
                 });
 
         // win64
