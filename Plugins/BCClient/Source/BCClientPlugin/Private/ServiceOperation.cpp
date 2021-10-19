@@ -290,6 +290,8 @@ const ServiceOperation ServiceOperation::GetUserStatus = ServiceOperation(TEXT("
 const ServiceOperation ServiceOperation::SetUserStatus = ServiceOperation(TEXT("SET_USER_STATUS"));
 
 const ServiceOperation ServiceOperation::ReadProperties = ServiceOperation(TEXT("READ_PROPERTIES"));
+const ServiceOperation ServiceOperation::ReadSelectedProperties = ServiceOperation(TEXT("READ_SELECTED_PROPERTIES"));
+const ServiceOperation ServiceOperation::ReadPropertiesInCategories = ServiceOperation(TEXT("READ_PROPERTIES_IN_CATEGORIES"));
 
 const ServiceOperation ServiceOperation::GetUpdatedFiles = ServiceOperation(TEXT("GET_UPDATED_FILES"));
 const ServiceOperation ServiceOperation::GetFileList = ServiceOperation(TEXT("GET_FILE_LIST"));
@@ -449,6 +451,8 @@ const ServiceOperation ServiceOperation::RemoveMember = ServiceOperation("REMOVE
 const ServiceOperation ServiceOperation::CancelFindRequest = ServiceOperation("CANCEL_FIND_REQUEST");
 const ServiceOperation ServiceOperation::GetRegionsForLobbies = ServiceOperation("GET_REGIONS_FOR_LOBBIES");
 const ServiceOperation ServiceOperation::PingData = ServiceOperation("PING_DATA");	// not an official API, but need it for proper calback
+const ServiceOperation ServiceOperation::GetLobbyInstances = ServiceOperation("GET_LOBBY_INSTANCES");
+const ServiceOperation ServiceOperation::GetLobbyInstancesWithPingData = ServiceOperation("GET_LOBBY_INSTANCES_WITH_PING_DATA");
 
 // user inventory management
 const ServiceOperation ServiceOperation::AwardUserItem = ServiceOperation("AWARD_USER_ITEM");

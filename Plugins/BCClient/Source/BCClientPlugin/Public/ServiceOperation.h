@@ -293,6 +293,8 @@ class BCCLIENTPLUGIN_API ServiceOperation
 	static const ServiceOperation SetUserStatus;
 
 	static const ServiceOperation ReadProperties;
+	static const ServiceOperation ReadSelectedProperties;
+	static const ServiceOperation ReadPropertiesInCategories;
 
 	static const ServiceOperation GetUpdatedFiles;
 	static const ServiceOperation GetFileList;
@@ -465,7 +467,9 @@ class BCCLIENTPLUGIN_API ServiceOperation
 	static const ServiceOperation CancelFindRequest;
 	static const ServiceOperation GetRegionsForLobbies;
 	static const ServiceOperation PingData;
-
+	static const ServiceOperation GetLobbyInstances;
+	static const ServiceOperation GetLobbyInstancesWithPingData;
+	
 	//Item Catalog
 	static const ServiceOperation GetCatalogItemDefinition;
 	static const ServiceOperation GetCatalogItemsPage;

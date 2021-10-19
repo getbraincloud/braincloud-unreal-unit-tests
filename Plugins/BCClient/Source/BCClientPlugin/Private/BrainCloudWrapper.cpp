@@ -440,7 +440,10 @@ void UBrainCloudWrapper::loadData()
 
     LoadGameInstance = Cast<UBrainCloudSave>(UGameplayStatics::LoadGameFromSlot(slotName, LoadGameInstance->UserIndex));
     if (LoadGameInstance == nullptr)
+    {
+        saveData();
         return;
+    }
 
     _client->getAuthenticationService()->setProfileId(LoadGameInstance->ProfileId);
     _client->getAuthenticationService()->setAnonymousId(LoadGameInstance->AnonymousId);

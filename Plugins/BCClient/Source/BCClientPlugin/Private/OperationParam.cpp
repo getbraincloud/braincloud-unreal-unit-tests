@@ -529,6 +529,13 @@ const OperationParam OperationParam::LobbyToTeamName = OperationParam("toTeamCod
 const OperationParam OperationParam::LobbySignalData = OperationParam("signalData");
 const OperationParam OperationParam::LobbyConnectionId = OperationParam("cxId");
 const OperationParam OperationParam::PingData = OperationParam("pingData");
+const OperationParam OperationParam::LobbyMinRating = OperationParam("minRating");
+const OperationParam OperationParam::LobbyMaxRating = OperationParam("maxRating");
+const OperationParam OperationParam::LobbyCriteria = OperationParam("criteriaJson");
+
+//global app
+const OperationParam OperationParam::GlobalAppReadSelectedProperties = OperationParam("propertyNames");
+const OperationParam OperationParam::GlobalAppReadPropertiesInCategories = OperationParam("categories");
 
 bool OperationParam::operator==(const OperationParam &s) const
 {
