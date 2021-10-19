@@ -1,7 +1,7 @@
 // Copyright 2018 bitHeads, Inc. All Rights Reserved.
 
 #pragma once
-#include "IHttpRequest.h"
+#include "Interfaces/IHttpRequest.h"
 
 class IEventCallback;
 class IRewardCallback;

@@ -504,7 +504,10 @@ class BCCLIENTPLUGIN_API OperationParam
 	static const OperationParam LobbySignalData;
 	static const OperationParam LobbyConnectionId;
 	static const OperationParam PingData;
-
+	static const OperationParam LobbyMinRating;
+	static const OperationParam LobbyMaxRating;
+	static const OperationParam LobbyCriteria;
+	
 	//customEntity
 	static const OperationParam CustomEntityServiceEntityType;
 	static const OperationParam CustomEntityServiceJsonEntityData;
@@ -523,6 +526,10 @@ class BCCLIENTPLUGIN_API OperationParam
 	static const OperationParam CustomEntityServiceFieldsJson;
 	static const OperationParam CustomEntityServiceDataJson;
 	static const OperationParam CustomEntityServiceDeleteCriteria;
+
+	//global app
+	static const OperationParam GlobalAppReadSelectedProperties;
+	static const OperationParam GlobalAppReadPropertiesInCategories;
 
 	FString getValue() const { return _value; }
 

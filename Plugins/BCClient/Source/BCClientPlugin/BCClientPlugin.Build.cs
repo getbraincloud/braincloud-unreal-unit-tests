@@ -21,7 +21,7 @@ public class BCClientPlugin : ModuleRules
 #endif
     {
         PrivatePCHHeaderFile = "Private/BCClientPluginPrivatePCH.h";
-
+        PCHUsage = PCHUsageMode.UseExplicitOrSharedPCHs;
         PrivateIncludePaths.AddRange(
             new string[] {
                     Path.Combine(ModulePath,"Private"),
@@ -41,7 +41,8 @@ public class BCClientPlugin : ModuleRules
                     "Core",
                     "CoreUObject",
                     "Engine",
-                    "Json"
+                    "Json",
+                    "HTTP"
                 });
 
         // win64
