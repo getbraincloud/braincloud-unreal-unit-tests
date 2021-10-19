@@ -14,6 +14,10 @@
 		{
 			"Name": "BCClient",
 			"Enabled": true
+		},
+		{
+			"Name": "AndroidDeviceProfileSelector",
+			"Enabled": false
 		}
 	]
 }
