@@ -132,3 +132,8 @@ void BrainCloudRTT::deregisterRTTBlockchainRefresh()
 {
 	_commsLayer->deregisterRTTCallback(ServiceName::UserItems);
 }
+
+const FString &BrainCloudRTT::getRTTConnectionId() const
+{
+	return _commsLayer->getConnectionId();
+}
