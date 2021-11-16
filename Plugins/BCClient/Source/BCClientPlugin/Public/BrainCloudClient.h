@@ -77,7 +77,16 @@ enum class BCRelayConnectionType : uint8
 {
 	WEBSOCKET UMETA(DisplayName = "WEBSOCKET"),
 	TCP UMETA(DisplayName = "TCP"),
-	UDP UMETA(DisplayName = "UDP"),
+	UDP UMETA(DisplayName = "UDP")
+};
+
+UENUM(BlueprintType)
+enum class BCRelayChannel : uint8
+{
+	HighPriority1 UMETA(DisplayName = "HighPriority1"),
+	HighPriority2 UMETA(DisplayName = "HighPriority2"),
+	NormalPriority UMETA(DisplayName = "NormalPriority"),
+	LowPriority UMETA(DisplayName = "LowPriority")
 };
 
 UENUM(BlueprintType)
@@ -322,7 +331,6 @@ class BCCLIENTPLUGIN_API BrainCloudClient
 	const FString &getReleasePlatform() { return _releasePlatform; };
 	const FString &getProfileId() { return getAuthenticationService()->getProfileId(); };
 
-	const FString &getRTTConnectionId();
 	const FString &getEventServer();
 
 	const FString &getAppVersion() { return _appVersion; };

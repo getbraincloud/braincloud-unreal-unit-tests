@@ -107,6 +107,16 @@ struct lws_context;
 struct lws;
 #endif
 
+// Interface to have a C++ only, non-blueprint callbacks
+class IWebSocketBaseCallbacks
+{
+public:
+    virtual void OnConnectError(const FString &error) = 0;
+    virtual void OnClosed() = 0;
+    virtual void OnConnectComplete() = 0;
+    virtual void OnReceiveData(const TArray<uint8> &data) = 0;
+};
+
 /**
  * 
  */
@@ -167,4 +177,5 @@ class BCCLIENTPLUGIN_API UWebSocketBase : public UObject
 	TArray<FString> mSendQueue;
 	TArray<TArray<uint8>> mSendQueueData;
 	TMap<FString, FString> mHeaderMap;
+    IWebSocketBaseCallbacks *mWebSocketBaseCallbacks;
 };

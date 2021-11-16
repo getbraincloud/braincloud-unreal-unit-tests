@@ -133,11 +133,6 @@ const FString &UBCClientProxy::GetProfileId(UBrainCloudWrapper *brainCloudWrappe
 	return UBCWrapperProxy::GetBrainCloudInstance(brainCloudWrapper)->getBCClient()->getProfileId();
 }
 
-const FString &UBCClientProxy::GetRTTConnectionId(UBrainCloudWrapper *brainCloudWrapper)
-{
-	return UBCWrapperProxy::GetBrainCloudInstance(brainCloudWrapper)->getBCClient()->getRTTConnectionId();
-}
-
 const FString &UBCClientProxy::GetEventServer(UBrainCloudWrapper *brainCloudWrapper)
 {
 	return UBCWrapperProxy::GetBrainCloudInstance(brainCloudWrapper)->getBCClient()->getEventServer();

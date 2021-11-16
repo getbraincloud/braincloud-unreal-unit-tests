@@ -216,9 +216,6 @@ class UBCClientProxy : public UBCBlueprintCallProxyBase
 	static const FString &GetProfileId(UBrainCloudWrapper *brainCloudWrapper);
 
 	UFUNCTION(BlueprintCallable, Category = "BrainCloud|Client")
-	static const FString &GetRTTConnectionId(UBrainCloudWrapper *brainCloudWrapper);
-
-	UFUNCTION(BlueprintCallable, Category = "BrainCloud|Client")
 	static const FString &GetEventServer(UBrainCloudWrapper *brainCloudWrapper);
 
 	/**

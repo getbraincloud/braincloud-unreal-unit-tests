@@ -144,6 +144,8 @@ class BCCLIENTPLUGIN_API BrainCloudRTT
 	*/
 	void deregisterRTTBlockchainRefresh();
 
+	const FString &getRTTConnectionId() const;
+
   private:
 	BrainCloudClient *_client = nullptr;
 	BrainCloudRTTComms *_commsLayer = nullptr;

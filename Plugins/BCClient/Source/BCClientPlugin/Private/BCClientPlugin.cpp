@@ -19,3 +19,4 @@ IMPLEMENT_MODULE(FBCClientPlugin, BCClientPlugin)
 
 DEFINE_LOG_CATEGORY(LogBrainCloud);
 DEFINE_LOG_CATEGORY(LogBrainCloudComms);
+DEFINE_LOG_CATEGORY(LogBrainCloudRelayComms);

@@ -240,7 +240,7 @@ void BrainCloudLobby::cancelFindRequest(const FString& in_lobbyType, IServerCall
 {
     TSharedRef<FJsonObject> message = MakeShareable(new FJsonObject());
     message->SetStringField(OperationParam::LobbyRoomType.getValue(), in_lobbyType);
-    message->SetStringField(OperationParam::LobbyConnectionId.getValue(), _client->getRTTConnectionId());
+    message->SetStringField(OperationParam::LobbyConnectionId.getValue(), _client->getRTTService()->getRTTConnectionId());
 
     ServerCall* sc = new ServerCall(ServiceName::Lobby, ServiceOperation::CancelFindRequest, message, in_callback);
     _client->sendRequest(sc);
