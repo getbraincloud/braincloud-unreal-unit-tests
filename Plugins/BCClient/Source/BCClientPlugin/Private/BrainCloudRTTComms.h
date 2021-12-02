@@ -53,7 +53,7 @@ class BrainCloudRTTComms : public IServerCallback
 
 	void setRTTHeartBeatSeconds(int32 in_value);
 
-	const FString &getConnectionId() { return m_cxId; }
+	const FString &getConnectionId() const { return m_cxId; }
 	const FString &getEventServer() { return m_eventServer; }
 
 // expose web socket functions
