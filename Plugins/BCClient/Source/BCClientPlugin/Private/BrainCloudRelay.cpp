@@ -3,25 +3,15 @@
 #include "BrainCloudClient.h"
 #include "BrainCloudRelayComms.h"
 
-BrainCloudRelay::BrainCloudRelay(BrainCloudClient *in_client, BrainCloudRelayComms *in_comms) 
+BrainCloudRelay::BrainCloudRelay(BrainCloudClient *in_client, BrainCloudRelayComms *in_comms)
 	: _client(in_client)
 	, _relayComms(in_comms)
 {
 }
 
-int64 BrainCloudRelay::ping()
+void BrainCloudRelay::connect(BCRelayConnectionType in_connectionType, const FString &host, int port, const FString &passcode, const FString &lobbyId, IRelayConnectCallback *in_callback)
 {
-    return _relayComms->ping();
-}
-
-uint8 BrainCloudRelay::netId()
-{
-    return _relayComms->netId();
-}
-
-void BrainCloudRelay::connect(BCRelayConnectionType in_connectionType, const FString &in_connectOptionsJson, IServerCallback *callback)
-{
-    _relayComms->connect(in_connectionType, in_connectOptionsJson, callback);
+    _relayComms->connect(in_connectionType, host, port, passcode, lobbyId, in_callback);
 }
 
 void BrainCloudRelay::disconnect()
@@ -29,58 +19,24 @@ void BrainCloudRelay::disconnect()
     _relayComms->disconnect();
 }
 
-bool BrainCloudRelay::isConnected()
+bool BrainCloudRelay::isConnected() const
 {
     return _relayComms->isConnected();
 }
 
-void BrainCloudRelay::registerDataCallback(IRelayCallback *callback)
+int BrainCloudRelay::getPing() const
 {
-    _relayComms->registerDataCallback(callback);
-}
-
-void BrainCloudRelay::registerDataCallback(UBCBlueprintRelayCallProxyBase *callback)
-{
-    _relayComms->registerDataCallback(callback);
-}
-
-void BrainCloudRelay::deregisterDataCallback()
-{
-    _relayComms->deregisterDataCallback();
-}
-
-void BrainCloudRelay::send(const TArray<uint8> &in_data, const uint64 in_target, bool in_reliable, bool in_ordered, int in_channel)
-{
-	if (in_target == BrainCloudRelayComms::TO_ALL_PLAYERS)
-	{
-		sendToAll(in_data, in_reliable, in_ordered, in_channel);
-	}
-	else
-	{
-		uint64 playerMask = (uint64)1 << in_target;
-    	_relayComms->sendRelay(in_data, playerMask, in_reliable, in_ordered, in_channel);
-	}
-}
-
-void BrainCloudRelay::sendToPlayers(const TArray<uint8> &in_data, const uint64 in_playerMask, bool in_reliable, bool in_ordered, int in_channel)
-{
-    _relayComms->sendRelay(in_data, in_playerMask, in_reliable, in_ordered, in_channel);
-}
-
-void BrainCloudRelay::sendToAll(const TArray<uint8> &in_data, bool in_reliable, bool in_ordered, int in_channel)
-{
-	const auto& myProfileId = _client->getAuthenticationService()->getProfileId();
-	auto myNetId = _relayComms->getNetIdForProfileId(myProfileId);
-
-	uint64 myBit = (uint64)1 << (uint64)myNetId;
-	uint64 myInvertedBits = ~myBit;
-	uint64 playerMask = BrainCloudRelayComms::TO_ALL_PLAYERS & myInvertedBits;
-    _relayComms->sendRelay(in_data, playerMask, in_reliable, in_ordered, in_channel);
+    return _relayComms->getPing();
 }
 
 const FString &BrainCloudRelay::getOwnerProfileId() const
 {
 	return _relayComms->getOwnerProfileId();
+}
+
+const FString &BrainCloudRelay::getOwnerCxId() const
+{
+	return _relayComms->getOwnerCxId();
 }
 
 const FString &BrainCloudRelay::getProfileIdForNetId(int in_netId) const
@@ -93,35 +49,71 @@ int BrainCloudRelay::getNetIdForProfileId(const FString &in_profileId) const
 	return _relayComms->getNetIdForProfileId(in_profileId);
 }
 
-void BrainCloudRelay::setPingInterval(float in_interval)
+const FString &BrainCloudRelay::getCxIdForNetId(int in_netId) const
 {
-    _relayComms->setPingInterval(in_interval);
+	return _relayComms->getCxIdForNetId(in_netId);
 }
 
-FString BrainCloudRelay::BCBytesToString(const uint8* in, int32 count)
+int BrainCloudRelay::getNetIdForCxId(const FString &in_cxId) const
 {
-	FString result2;
-	result2.Empty(count);
-	while (count)
-	{
-        result2 += ANSICHAR(*in);
-		++in;
-		--count;
-	}
-	
-	return result2;
+	return _relayComms->getNetIdForCxId(in_cxId);
 }
 
-int32 BrainCloudRelay::BCStringToBytes( const FString& in_string, uint8* out_bytes, int32 in_maxBufferSize )
+void BrainCloudRelay::registerRelayCallback(IRelayCallback *callback)
 {
-	int32 numBytes = 0;
-	const TCHAR* charPos = *in_string;
+    _relayComms->registerRelayCallback(callback);
+}
 
-	while( *charPos && numBytes < in_maxBufferSize)
+void BrainCloudRelay::registerRelayCallback(UBCBlueprintRelayCallProxyBase *callback)
+{
+    _relayComms->registerRelayCallback(callback);
+}
+
+void BrainCloudRelay::deregisterRelayCallback()
+{
+    _relayComms->deregisterRelayCallback();
+}
+
+void BrainCloudRelay::registerSystemCallback(IRelaySystemCallback *callback)
+{
+    _relayComms->registerSystemCallback(callback);
+}
+
+void BrainCloudRelay::registerSystemCallback(UBCBlueprintRelaySystemCallProxyBase *callback)
+{
+    _relayComms->registerSystemCallback(callback);
+}
+
+void BrainCloudRelay::deregisterSystemCallback()
+{
+    _relayComms->deregisterSystemCallback();
+}
+
+void BrainCloudRelay::send(const TArray<uint8> &in_data, uint64 toNetId, bool in_reliable, bool in_ordered, BCRelayChannel in_channel)
+{
+	if (toNetId == BrainCloudRelay::TO_ALL_PLAYERS)
 	{
-		out_bytes[ numBytes ] = (uint8)(*charPos);
-		charPos++;
-		++numBytes;
+		sendToAll(in_data, in_reliable, in_ordered, in_channel);
 	}
-	return numBytes;
+	else
+	{
+		uint64 playerMask = (uint64)1 << toNetId;
+    	_relayComms->send(in_data, playerMask, in_reliable, in_ordered, in_channel);
+	}
+}
+
+void BrainCloudRelay::sendToPlayers(const TArray<uint8> &in_data, uint64 in_playerMask, bool in_reliable, bool in_ordered, BCRelayChannel in_channel)
+{
+    _relayComms->send(in_data, in_playerMask, in_reliable, in_ordered, in_channel);
+}
+
+void BrainCloudRelay::sendToAll(const TArray<uint8> &in_data, bool in_reliable, bool in_ordered, BCRelayChannel in_channel)
+{
+	const auto& myProfileId = _client->getAuthenticationService()->getProfileId();
+	auto myNetId = _relayComms->getNetIdForProfileId(myProfileId);
+
+	uint64 myBit = (uint64)1 << (uint64)myNetId;
+	uint64 myInvertedBits = ~myBit;
+	uint64 playerMask = BrainCloudRelay::TO_ALL_PLAYERS & myInvertedBits;
+    _relayComms->send(in_data, playerMask, in_reliable, in_ordered, in_channel);
 }

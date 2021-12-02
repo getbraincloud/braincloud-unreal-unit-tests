@@ -1,168 +1,214 @@
-// Copyright 2018 bitHeads, Inc. All Rights Reserved.
+// Copyright 2021 bitHeads, Inc. All Rights Reserved.
 
 #pragma once
 
-#include "IServerCallback.h"
 #include "Runtime/Launch/Resources/Version.h"
 
-#define MAX_PAYLOAD 1024
-
-#if PLATFORM_UWP
-#if ENGINE_MAJOR_VERSION <= 4 && ENGINE_MINOR_VERSION <24
-#if PLATFORM_HTML5
-#endif
-#endif
-#else
-#define UI UI_ST
-THIRD_PARTY_INCLUDES_START
-#include "libwebsockets.h"
-THIRD_PARTY_INCLUDES_END
-#undef UI
-#endif
+static const int MAX_RSMG_HISTORY = 50;
 
 enum class BCRelayConnectionType : uint8;
-class IRelayCallback;
-class ServiceOperation;
-class ServiceName;
-class INetworkErrorCallback;
-class ServerCall;
-class BCFileUploader;
+enum class BCRelayChannel : uint8;
 class BrainCloudClient;
-class FJsonObject;
+class IRelayConnectCallback;
+class IRelayCallback;
+class IRelaySystemCallback;
 class UWebSocketBase;
 class UBCRelayCommsProxy;
+class UBCBlueprintRelayConnectCallProxyBase;
 class UBCBlueprintRelayCallProxyBase;
+class UBCBlueprintRelaySystemCallProxyBase;
 class UBCRelayProxy;
-struct RelayMessage;
+namespace BrainCloud
+{
+    class IRelaySocket;
+};
 
 class BrainCloudRelayComms
 {
 public:
-	static const int MAX_PACKETSIZE = 1024;
+    BrainCloudRelayComms(BrainCloudClient* in_client);
+    virtual ~BrainCloudRelayComms();
 
-	static const int MAX_PLAYERS = 40;
-	static const int INVALID_NET_ID = MAX_PLAYERS;
+    void initialize();
+    bool isInitialized();
+    void shutdown();
+    void resetCommunication();
+    void RunCallbacks();
 
-	// Messages sent from Client to Relay-Server
-	static const int CL2RS_CONNECT = 0;
-	static const int CL2RS_DISCONNECT = 1;
-	static const int CL2RS_RELAY = 2;
-	static const int CL2RS_ACK = 3;
-	static const int CL2RS_PING = 4;
-	static const int CL2RS_RSMG_ACK = 5;
-
-	// Messages sent from Relay-Server to Client
-	static const int RS2CL_RSMG = 0;
-	static const int RS2CL_DISCONNECT = 1;
-	static const int RS2CL_RELAY = 2;
-	static const int RS2CL_ACK = 3;
-	static const int RS2CL_PONG = 4;
-
-	static const int MAX_PACKET_ID = 0xFFF;
-
-	static const uint64 TO_ALL_PLAYERS = 0x000000FFFFFFFFFF;
-
-	BrainCloudRelayComms(BrainCloudClient *client);
-	~BrainCloudRelayComms();
-
-	int32 ping();
-	uint8 netId();
-	const FString &getOwnerProfileId() const;
-	const FString &getProfileIdForNetId(int in_netId) const;
-	int getNetIdForProfileId(const FString &in_profileId) const;
-
-	void connect(BCRelayConnectionType in_connectionType, const FString &in_connectOptionsJson, IServerCallback *callback);
-	void connect(BCRelayConnectionType in_connectionType, const FString &in_connectOptionsJson, UBCRelayProxy *callback);
-	void disconnect();
-	bool isConnected();
-	void registerDataCallback(IRelayCallback *callback);
-	void registerDataCallback(UBCBlueprintRelayCallProxyBase *callback);
-	void deregisterDataCallback();
-
-	void sendRelay(const TArray<uint8> &in_data, const uint64 in_playerMask, bool in_reliable = true, bool in_ordered = true, int in_channel = 0);
-	void setPingInterval(float in_interval);
-
-	void RunCallbacks();
-
-// expose web socket functions
-#if PLATFORM_UWP
-#if ENGINE_MAJOR_VERSION <= 4 && ENGINE_MINOR_VERSION <24
-#if PLATFORM_HTML5
-#endif
-#endif
-#else
-	static int callback_echo(struct lws *wsi, enum lws_callback_reasons reason, void *user, void *in, size_t len);
-#endif
-
-	void webSocket_OnClose();
-	void websocket_OnOpen();
-	void webSocket_OnMessage(TArray<uint8> in_data);
-	void webSocket_OnError(const FString &in_error);
+    void connect(BCRelayConnectionType in_connectionType, const FString& host, int port, const FString& passcode, const FString& lobbyId, IRelayConnectCallback* in_callback);
+    void connect(BCRelayConnectionType in_connectionType, const FString& host, int port, const FString& passcode, const FString& lobbyId, UBCRelayProxy* in_callback);
+    void disconnect();
+    bool isConnected() const;
+    int getPing() const;
+    void setPingInterval(int in_intervalMS);
+    const FString& getOwnerProfileId() const;
+    const FString& getProfileIdForNetId(int in_netId) const;
+    int getNetIdForProfileId(const FString& in_profileId) const;
+    const FString& getOwnerCxId() const;
+    const FString& getCxIdForNetId(int in_netId) const;
+    int getNetIdForCxId(const FString& in_cxId) const;
+    void registerRelayCallback(IRelayCallback* in_callback);
+    void registerRelayCallback(UBCBlueprintRelayCallProxyBase* in_callback);
+    void deregisterRelayCallback();
+    void registerSystemCallback(IRelaySystemCallback* in_callback);
+    void registerSystemCallback(UBCBlueprintRelaySystemCallProxyBase* in_callback);
+    void deregisterSystemCallback();
+    void send(const TArray<uint8> &in_data, uint64 in_playerMask, bool in_reliable, bool in_ordered, BCRelayChannel in_channel);
 
 private:
-	void send(const TArray<uint8> &in_data, const uint8 in_controlByte);
-	void connectHelper(BCRelayConnectionType in_connectionType, const FString &in_connectOptionsJson);
-	void startReceivingRSConnectionAsync();
-	TArray<uint8> concatenateByteArrays(TArray<uint8> in_bufferA, TArray<uint8> in_bufferB);
-	TArray<uint8> stripByteArray(TArray<uint8> in_data, int in_numFromLeft);
-	TArray<uint8> appendSizeBytes(TArray<uint8> in_message);
-	TArray<uint8> buildConnectionRequest();
-	void processRegisteredListeners(const FString &in_service, const FString &in_operation, const FString &in_jsonMessage, const TArray<uint8> &in_data);
-	void connectWebSocket(FString in_host, int in_port, bool in_sslEnabled);
-	void disconnectImpl();
-	void onRecv(TArray<uint8> data);
-	void setupWebSocket(const FString &in_url);
-	void sendPing();
-	TArray<uint8> appendHeaderData(uint8 in_controlByte);
-	TArray<uint8> fromShortBE(int16 number);
+    static const int CHANNEL_COUNT = 4;
 
-	BrainCloudClient *m_client;
-	IServerCallback *m_appCallback;
-	UBCRelayProxy *m_appCallbackBP;
+    enum class EventType
+    {
+        ConnectSuccess,
+        ConnectFailure,
+        Relay,
+        System
+    };
 
-	UBCRelayCommsProxy *m_commsPtr;
+    struct Event
+    {
+        EventType type;
+        FString message;
+        int netId;
+        TArray<uint8> data;
 
-	IRelayCallback *m_registeredRelayCallback;
-	UBCBlueprintRelayCallProxyBase *m_registeredRelayBluePrintCallback;
+        static int allocCount;
+        Event() { ++allocCount; }
+        ~Event() { --allocCount; }
+    };
 
-	UWebSocketBase *m_connectedSocket;
+    struct ConnectOptions
+    {
+        FString host;
+        int port = 0;
+        FString passcode;
+        FString lobbyId;
+    };
 
-	bool m_bIsConnected;
-	float m_pingInterval;
-	float m_timeSinceLastPingRequest;
-	double m_lastNowMS;
-	double m_sentPing;
-	int16 m_ping;
-	short m_netId;
-	FString m_ownerProfileId;
+    struct Packet
+    {
+        int id;
+        int netId;
+        TArray<uint8> data;
+        double resendInterval;
+        double lastResendTime;
+        double timeSinceFirstSend;
 
-	BCRelayConnectionType m_connectionType;
-	TMap<FString, FString> m_connectOptions;
+        static int allocCount;
+        Packet() { ++allocCount; }
+        ~Packet() { --allocCount; }
+    };
 
-	struct lws_context *m_lwsContext;
-	TArray<RelayMessage> m_relayResponse;
-	FCriticalSection m_relayMutex;
-	
-	const int SIZE_OF_LENGTH_PREFIX_BYTE_ARRAY = 2;
-    const int CONTROL_BYTE_HEADER_LENGTH = 1;
+    template<typename T>
+    class Pool final
+    {
+    public:
+        ~Pool()
+        {
+            for (auto pT : m_all) delete pT;
+        }
 
-	TMap<FString, int> m_profileIdToNetId;
-	TMap<int, FString> m_netIdToProfileId;
-	TMap<uint64, int> m_sendPacketId;
-};
+        T* alloc()
+        {
+            if (m_pool.Num() == 0)
+            {
+                auto pT = new T();
+                m_all.Add(pT);
+                return pT;
+            }
+            auto pT = m_pool[m_pool.Num() - 1];
+            m_pool.RemoveAt(m_pool.Num() - 1);
+            return pT;
+        }
 
-struct RelayMessage
-{
-	RelayMessage(){}
-	RelayMessage(const FString &in_service, const FString &in_operation, const FString &in_jsonMessage, const TArray<uint8> &in_data)
-	{
-		Service = in_service;
-		Operation = in_operation;
-		JsonMessage = in_jsonMessage;
-		Data = in_data;
-	}
-	FString Service;
-	FString Operation;
-	FString JsonMessage;
-	TArray<uint8> Data;
+        size_t size() const
+        {
+            return m_all.Num();
+        }
+
+        void free(T* pT)
+        {
+            m_pool.Add(pT);
+        }
+
+        void reclaim()
+        {
+            m_pool = m_all;
+        }
+
+    private:
+        TArray<T*> m_pool;
+        TArray<T*> m_all;
+    };
+
+    void connect(BCRelayConnectionType in_connectionType, const FString& host, int port, const FString& passcode, const FString& lobbyId);
+
+    void queueConnectSuccessEvent(const FString& jsonString);
+    void queueErrorEvent(const FString& message);
+    void queueSystemEvent(const FString& jsonString);
+    void queueRelayEvent(int netId, const uint8* pData, int size);
+    TSharedRef<FJsonObject> buildConnectionRequest();
+    void sendPing();
+    void sendRSMGAck(int rsmgPacketId);
+    void sendAck(const uint8* in_data);
+    void send(const uint8* in_data, int in_size);
+    void send(int netId, const TSharedRef<FJsonObject>& json);
+    void send(int netId, const FString& text);
+
+    void onRecv(const uint8* in_data, int in_size);
+    void onRSMG(const uint8* in_data, int in_size);
+    void onPONG();
+    void onRelay(const uint8* in_data, int in_size);
+    void onAck(const uint8* in_data);
+
+    // Main objects/flags
+    BrainCloudClient* m_client = nullptr;
+    BrainCloud::IRelaySocket* m_pSocket = nullptr;
+    bool m_isInitialized = false;
+
+    // Connection
+    BCRelayConnectionType m_connectionType;
+    ConnectOptions m_connectOptions;
+    bool m_isSocketConnected = false;
+    bool m_resendConnectRequest = false;
+    double m_lastConnectResendTime;
+    bool m_isConnected = false;
+
+    // Events
+    TArray<Event*> m_events;
+    TArray<Event*> m_eventsCopy;
+    IRelayConnectCallback* m_pRelayConnectCallback = nullptr;
+    UBCBlueprintRelayConnectCallProxyBase* m_pRelayConnectCallbackBP = nullptr;
+    IRelayCallback* m_pRelayCallback = nullptr;
+    UBCBlueprintRelayCallProxyBase* m_pRelayCallbackBP = nullptr;
+    IRelaySystemCallback* m_pSystemCallback = nullptr;
+    UBCBlueprintRelaySystemCallProxyBase* m_pSystemCallbackBP = nullptr;
+
+    // Ping
+    int m_ping = 999;
+    double m_pingInterval;
+    double m_lastPingTime;
+    double m_lastRecvTime; // For UDP timeout
+
+    // Profile/Cx/Net IDs
+    int32 m_netId = -1;
+    FString m_cxId = "";
+    FString m_ownerProfileId = "";
+    FString m_ownerCxId = "";
+    TMap<FString, int32> m_profileIdToNetId;
+    TMap<int32, FString> m_netIdToProfileId;
+    TMap<FString, int32> m_cxIdToNetId;
+    TMap<int32, FString> m_netIdToCxId;
+
+    // Packet ID/History
+    TArray<int> m_rsmgHistory;
+    TMap<uint64, int> m_sendPacketId;
+    TMap<uint64, int> m_recvPacketId;
+    TMap<uint64, Packet*> m_reliables;
+    TMap<uint64, TArray<Packet*>> m_orderedReliablePackets;
+
+    // Memory
+    Pool<Event> m_eventPool;
+    Pool<Packet> m_packetPool;
 };

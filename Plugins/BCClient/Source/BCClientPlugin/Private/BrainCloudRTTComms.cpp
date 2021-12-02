@@ -1,6 +1,7 @@
 // Copyright 2018 bitHeads, Inc. All Rights Reserved.
 
 #include "BrainCloudRTTComms.h"
+#include "ConvertUtilities.h"
 #include "BCClientPluginPrivatePCH.h"
 #include "Serialization/JsonTypes.h"
 #include "Serialization/JsonReader.h"
@@ -563,7 +564,7 @@ void BrainCloudRTTComms::websocket_OnOpen()
 void BrainCloudRTTComms::webSocket_OnMessage(TArray<uint8> in_data)
 {
 	m_websocketStatus = BCWebsocketStatus::MESSAGE;
-	FString parsedMessage = BrainCloudRelay::BCBytesToString(in_data.GetData(), in_data.Num());
+	FString parsedMessage = ConvertUtilities::BCBytesToString(in_data.GetData(), in_data.Num());
 	onRecv(parsedMessage);
 }
 
