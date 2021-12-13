@@ -443,6 +443,7 @@ void BrainCloudLobby::onPingResponseReceived(FHttpRequestPtr Request, FHttpRespo
 {
     FString region = Request->GetHeader("region");
     int index = FCString::Atoi(*Request->GetHeader("index"));
+    if(!ensure(_cachedPingResponses[region][index])) return;
     double origValue = _cachedPingResponses[region][index];
 
     // update it to be the diff
