@@ -251,21 +251,18 @@ BrainCloudComms::PacketRef BrainCloudComms::BuildPacket(TSharedRef<ServerCall> s
 	return packet;
 }
 
-#if ENGINE_MINOR_VERSION > 25
-TSharedRef<IHttpRequest,ESPMode::ThreadSafe> BrainCloudComms::SendPacket(PacketRef packet)
-#elif ENGINE_MAJOR_VERSION >= 5
+#if (ENGINE_MAJOR_VERSION == 4 && ENGINE_MINOR_VERSION > 25) || ENGINE_MAJOR_VERSION == 5
 TSharedRef<IHttpRequest,ESPMode::ThreadSafe> BrainCloudComms::SendPacket(PacketRef packet)
 #else
 TSharedRef<IHttpRequest> BrainCloudComms::SendPacket(PacketRef packet)
 #endif
 {
-	#if ENGINE_MINOR_VERSION > 25
+	
+#if (ENGINE_MAJOR_VERSION == 4 && ENGINE_MINOR_VERSION > 25) || ENGINE_MAJOR_VERSION == 5
 	TSharedRef<IHttpRequest,ESPMode::ThreadSafe> httpRequest = FHttpModule::Get().CreateRequest();
-	#elif ENGINE_MAJOR_VERSION >= 5
-	TSharedRef<IHttpRequest,ESPMode::ThreadSafe> httpRequest = FHttpModule::Get().CreateRequest();
-	#else
+#else
 	TSharedRef<IHttpRequest> httpRequest = FHttpModule::Get().CreateRequest();
-	#endif
+#endif
 
 
 	FString packetIdStr = FString::FormatAsNumber(_packetId);
@@ -302,13 +299,11 @@ void BrainCloudComms::ResendActivePacket()
 {
 	if (!_activeRequest.IsValid())
 		return;
-	#if ENGINE_MINOR_VERSION > 25
+#if (ENGINE_MAJOR_VERSION == 4 && ENGINE_MINOR_VERSION > 25) || ENGINE_MAJOR_VERSION == 5
 	TSharedRef<IHttpRequest,ESPMode::ThreadSafe> httpRequest = FHttpModule::Get().CreateRequest();
-	#elif ENGINE_MAJOR_VERSION >= 5
-	TSharedRef<IHttpRequest,ESPMode::ThreadSafe> httpRequest = FHttpModule::Get().CreateRequest();
-	#else
+#else
 	TSharedRef<IHttpRequest> httpRequest = FHttpModule::Get().CreateRequest();
-	#endif
+#endif
 
 	httpRequest->SetURL(_serverUrl);
 	httpRequest->SetVerb(TEXT("POST"));

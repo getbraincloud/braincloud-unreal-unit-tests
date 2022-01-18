@@ -56,31 +56,23 @@ class ONLINESUBSYSTEMBRAINCLOUD_API FOnlineSubsystemBrainCloud : public FOnlineS
     virtual IOnlineChatPtr GetChatInterface() const override;
     virtual IOnlineTurnBasedPtr GetTurnBasedInterface() const override;
 
-#if ENGINE_MAJOR_VERSION <= 4 && ENGINE_MINOR_VERSION >= 22
-    virtual IOnlineStatsPtr GetStatsInterface() const override;
-#elif ENGINE_MAJOR_VERSION >= 5
+#if (ENGINE_MAJOR_VERSION == 4 && ENGINE_MINOR_VERSION >= 22) || ENGINE_MAJOR_VERSION == 5
     virtual IOnlineStatsPtr GetStatsInterface() const override;
 #endif
 
-#if ENGINE_MAJOR_VERSION <= 4 && ENGINE_MINOR_VERSION >= 21
-    virtual IOnlineTournamentPtr GetTournamentInterface() const override;
-#elif ENGINE_MAJOR_VERSION >= 5
+#if (ENGINE_MAJOR_VERSION == 4 && ENGINE_MINOR_VERSION >= 21) || ENGINE_MAJOR_VERSION == 5
     virtual IOnlineTournamentPtr GetTournamentInterface() const override;
 #endif
 
-#if ENGINE_MAJOR_VERSION <= 4 && ENGINE_MINOR_VERSION >= 17
-    virtual FText GetOnlineServiceName() const override;
-#elif ENGINE_MAJOR_VERSION >= 5
+#if (ENGINE_MAJOR_VERSION == 4 && ENGINE_MINOR_VERSION >= 17) || ENGINE_MAJOR_VERSION == 5
     virtual FText GetOnlineServiceName() const override;
 #endif
 
-#if ENGINE_MAJOR_VERSION <= 4 && ENGINE_MINOR_VERSION >= 11
-    virtual IOnlineStoreV2Ptr GetStoreV2Interface() const override;
-    virtual IOnlinePurchasePtr GetPurchaseInterface() const override;
-#elif ENGINE_MAJOR_VERSION >= 5
+#if (ENGINE_MAJOR_VERSION == 4 && ENGINE_MINOR_VERSION >= 11) || ENGINE_MAJOR_VERSION == 5
     virtual IOnlineStoreV2Ptr GetStoreV2Interface() const override;
     virtual IOnlinePurchasePtr GetPurchaseInterface() const override;
 #endif
+    
     virtual bool Init() override;
     virtual bool Shutdown() override;
     virtual FString GetAppId() const override;

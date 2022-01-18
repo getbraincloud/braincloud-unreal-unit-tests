@@ -176,12 +176,7 @@ void FOnlineMessageBrainCloud::EnumerateMessagesSuccess(const FString& jsonData)
         FString messageId = FString::FromInt((int64)messageObj->GetNumberField("eventId"));
 
 
-#if ENGINE_MAJOR_VERSION <= 4 && ENGINE_MINOR_VERSION >= 18
-        const TSharedRef <FUniqueNetIdString> sref_fromId = MakeShareable(new FUniqueNetIdString(fromId));
-        const TSharedRef <FUniqueNetIdString> sref_messageId = MakeShareable(new FUniqueNetIdString(messageId));
-        FOnlineMessageHeader *fOnlineMessageHeader = new FOnlineMessageHeader(sref_fromId, sref_messageId);
-        TSharedPtr<FOnlineMessageHeader> header = MakeShareable(fOnlineMessageHeader);
-#elif ENGINE_MAJOR_VERSION >= 5
+#if (ENGINE_MAJOR_VERSION == 4 && ENGINE_MINOR_VERSION >= 18) || ENGINE_MAJOR_VERSION == 5
         const TSharedRef <FUniqueNetIdString> sref_fromId = MakeShareable(new FUniqueNetIdString(fromId));
         const TSharedRef <FUniqueNetIdString> sref_messageId = MakeShareable(new FUniqueNetIdString(messageId));
         FOnlineMessageHeader *fOnlineMessageHeader = new FOnlineMessageHeader(sref_fromId, sref_messageId);
@@ -197,7 +192,7 @@ void FOnlineMessageBrainCloud::EnumerateMessagesSuccess(const FString& jsonData)
 
         _cachedMessageHeaders.Add(header);
 
-#if ENGINE_MAJOR_VERSION == 4 && ENGINE_MINOR_VERSION >= 27
+#if (ENGINE_MAJOR_VERSION == 4 && ENGINE_MINOR_VERSION >= 27)
         //message
         TSharedPtr<FOnlineMessage> message = MakeShareable(new FOnlineMessage(_cachedMessageHeaders[0]->MessageId));
 #else

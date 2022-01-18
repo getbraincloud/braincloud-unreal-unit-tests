@@ -56,13 +56,13 @@ void UK2Node_BrainCloudCall::GetMenuActions(FBlueprintActionDatabaseRegistrar &A
                 continue;
             }
 
-            #if ENGINE_MAJOR_VERSION <= 4 && ENGINE_MINOR_VERSION <= 24
+#if ENGINE_MAJOR_VERSION == 4 && ENGINE_MINOR_VERSION <= 24
             UObjectProperty *ReturnProperty = CastField<UObjectProperty>(Function->GetReturnProperty());
-            #elif ENGINE_MAJOR_VERSION <= 4 && ENGINE_MINOR_VERSION >= 25
+#elif ENGINE_MAJOR_VERSION == 4 && ENGINE_MINOR_VERSION >= 25
             FObjectProperty *ReturnProperty = CastField<FObjectProperty>(Function->GetReturnProperty());
-            #elif  ENGINE_MAJOR_VERSION >=5
+#elif  ENGINE_MAJOR_VERSION == 5
             FObjectProperty *ReturnProperty = CastField<FObjectProperty>(Function->GetReturnProperty());
-            #endif
+#endif
 
             // see if the function is a static factory method for online proxies
             bool const bIsProxyFactoryMethod = (ReturnProperty != nullptr) &&
@@ -85,13 +85,13 @@ void UK2Node_BrainCloudCall::GetMenuActions(FBlueprintActionDatabaseRegistrar &A
                     if (FunctionPtr.IsValid())
                     {
                         UFunction *Func = FunctionPtr.Get();
-                        #if ENGINE_MAJOR_VERSION <= 4 && ENGINE_MINOR_VERSION <= 24
+#if ENGINE_MAJOR_VERSION == 4 && ENGINE_MINOR_VERSION <= 24
                         UObjectProperty *ReturnProp = CastChecked<UObjectProperty>(Func->GetReturnProperty());
-                        #elif ENGINE_MAJOR_VERSION <= 4 && ENGINE_MINOR_VERSION >= 25 
+#elif ENGINE_MAJOR_VERSION == 4 && ENGINE_MINOR_VERSION >= 25 
                         FObjectProperty *ReturnProp = CastChecked<FObjectProperty>(Func->GetReturnProperty());
-                        #elif ENGINE_MAJOR_VERSION >= 5
+#elif ENGINE_MAJOR_VERSION == 5
                         FObjectProperty *ReturnProp = CastChecked<FObjectProperty>(Func->GetReturnProperty());
-                        #endif
+#endif
 
                         AsyncTaskNode->ProxyFactoryFunctionName = Func->GetFName();
                         AsyncTaskNode->ProxyFactoryClass = Func->GetOuterUClass();

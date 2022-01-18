@@ -25,12 +25,10 @@
 #include "Runtime/Launch/Resources/Version.h"
 
 #if PLATFORM_UWP
-#if ENGINE_MAJOR_VERSION <= 4 && ENGINE_MINOR_VERSION <24
- #if PLATFORM_HTML5
-#if ENGINE_MAJOR_VERSION >=5
-#endif
- #endif
- #endif
+	#if ENGINE_MAJOR_VERSION == 4 && ENGINE_MINOR_VERSION <24
+		#if PLATFORM_HTML5
+		#endif
+	#endif
 #else
 #define UI UI_ST
 THIRD_PARTY_INCLUDES_START
@@ -356,13 +354,13 @@ void UWebSocketBase::Connect(const FString &uri, const TMap<FString, FString> &h
 				}
 			}));
 	});
-	#if ENGINE_MAJOR_VERSION <= 4 && ENGINE_MINOR_VERSION <24
+#if ENGINE_MAJOR_VERSION == 4 && ENGINE_MINOR_VERSION <24
 #if PLATFORM_HTML5
 	mHtml5SocketHelper.Bind(this);
 	std::string strUrl = TCHAR_TO_ANSI(*uri);
 	mWebSocketRef = SocketCreate(strUrl.c_str());
-	#endif
-	#endif
+#endif
+#endif
 
 #else
 

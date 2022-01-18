@@ -3,7 +3,6 @@
 #define EARLIER_THAN_4_23
 #endif
 
-
 using System.Collections.Generic;
 using System;
 using System.IO;

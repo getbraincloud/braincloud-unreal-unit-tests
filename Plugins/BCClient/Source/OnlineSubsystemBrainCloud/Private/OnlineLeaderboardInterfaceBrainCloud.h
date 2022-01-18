@@ -24,12 +24,9 @@ public:
     virtual bool ReadLeaderboards(const TArray< TSharedRef<const FUniqueNetId> >& Players, FOnlineLeaderboardReadRef& ReadObject) override;
     virtual bool ReadLeaderboardsForFriends(int32 LocalUserNum, FOnlineLeaderboardReadRef& ReadObject) override;
 
-#if ENGINE_MAJOR_VERSION <= 4 && ENGINE_MINOR_VERSION >= 16
+#if (ENGINE_MAJOR_VERSION == 4 && ENGINE_MINOR_VERSION >= 16) || ENGINE_MAJOR_VERSION == 5
     virtual bool ReadLeaderboardsAroundRank(int32 Rank, uint32 Range, FOnlineLeaderboardReadRef& ReadObject) override;
     virtual bool ReadLeaderboardsAroundUser(TSharedRef<const FUniqueNetId> Player, uint32 Range, FOnlineLeaderboardReadRef& ReadObject) override;
-#elif ENGINE_MAJOR_VERSION >= 5
-	virtual bool ReadLeaderboardsAroundRank(int32 Rank, uint32 Range, FOnlineLeaderboardReadRef& ReadObject) override;
-	virtual bool ReadLeaderboardsAroundUser(TSharedRef<const FUniqueNetId> Player, uint32 Range, FOnlineLeaderboardReadRef& ReadObject) override;
 #endif
 
     virtual void FreeStats(FOnlineLeaderboardRead& ReadObject) override;
