@@ -55,12 +55,11 @@ void UK2Node_BrainCloudCall::GetMenuActions(FBlueprintActionDatabaseRegistrar &A
             {
                 continue;
             }
-
+// Unreal Engine Version is <= 4.24
 #if ENGINE_MAJOR_VERSION == 4 && ENGINE_MINOR_VERSION <= 24
             UObjectProperty *ReturnProperty = CastField<UObjectProperty>(Function->GetReturnProperty());
-#elif ENGINE_MAJOR_VERSION == 4 && ENGINE_MINOR_VERSION >= 25
-            FObjectProperty *ReturnProperty = CastField<FObjectProperty>(Function->GetReturnProperty());
-#elif  ENGINE_MAJOR_VERSION == 5
+// Unreal Engine Version is >= 4.25 OR in Unreal Engine 5
+#elif (ENGINE_MAJOR_VERSION == 4 && ENGINE_MINOR_VERSION >= 25) || ENGINE_MAJOR_VERSION == 5
             FObjectProperty *ReturnProperty = CastField<FObjectProperty>(Function->GetReturnProperty());
 #endif
 
@@ -85,11 +84,11 @@ void UK2Node_BrainCloudCall::GetMenuActions(FBlueprintActionDatabaseRegistrar &A
                     if (FunctionPtr.IsValid())
                     {
                         UFunction *Func = FunctionPtr.Get();
+// Unreal Engine Version is <= 4.24
 #if ENGINE_MAJOR_VERSION == 4 && ENGINE_MINOR_VERSION <= 24
                         UObjectProperty *ReturnProp = CastChecked<UObjectProperty>(Func->GetReturnProperty());
-#elif ENGINE_MAJOR_VERSION == 4 && ENGINE_MINOR_VERSION >= 25 
-                        FObjectProperty *ReturnProp = CastChecked<FObjectProperty>(Func->GetReturnProperty());
-#elif ENGINE_MAJOR_VERSION == 5
+// Unreal Engine Version is >= 4.25 OR in Unreal Engine 5
+#elif (ENGINE_MAJOR_VERSION == 4 && ENGINE_MINOR_VERSION >= 25) || ENGINE_MAJOR_VERSION == 5 
                         FObjectProperty *ReturnProp = CastChecked<FObjectProperty>(Func->GetReturnProperty());
 #endif
 

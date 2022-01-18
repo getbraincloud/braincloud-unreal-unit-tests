@@ -183,6 +183,7 @@ void FOnlineTitleFileBrainCloud::EnumerateFilesSuccess(const FString & jsonData)
         _cachedFileHeaders.Add(fileHeader);
     }
 
+// Unreal Engine Version is >= 4.18 OR in Unreal Engine 5
 #if (ENGINE_MAJOR_VERSION == 4 && ENGINE_MINOR_VERSION >= 18) || ENGINE_MAJOR_VERSION == 5
     OnEnumerateFilesCompleteDelegates.Broadcast(true, TEXT("FOnlineTitleFileBrainCloud"));
 #else
@@ -192,6 +193,7 @@ void FOnlineTitleFileBrainCloud::EnumerateFilesSuccess(const FString & jsonData)
 
 void FOnlineTitleFileBrainCloud::EnumerateFilesFail(int32 returnCode, const FString & jsonData)
 {
+// Unreal Engine Version is >= 4.18 OR in Unreal Engine 5
 #if (ENGINE_MAJOR_VERSION == 4 && ENGINE_MINOR_VERSION >= 18) || ENGINE_MAJOR_VERSION == 5
     OnEnumerateFilesCompleteDelegates.Broadcast(false, TEXT("FOnlineTitleFileBrainCloud"));
 #else
