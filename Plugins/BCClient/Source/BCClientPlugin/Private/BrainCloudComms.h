@@ -99,7 +99,9 @@ class BrainCloudComms
 	void CreateAndSendNextRequestBundle();
 	PacketRef BuildPacket();
 	PacketRef BuildPacket(TSharedRef<ServerCall> sc);
-	#if ENGINE_MINOR_VERSION > 25
+	#if ENGINE_MAJOR_VERSION < 5 && ENGINE_MINOR_VERSION > 25
+	TSharedRef<IHttpRequest,ESPMode::ThreadSafe> SendPacket(PacketRef packet);
+	#elif ENGINE_MAJOR_VERSION >= 5
 	TSharedRef<IHttpRequest,ESPMode::ThreadSafe> SendPacket(PacketRef packet);
 	#else
 	TSharedRef<IHttpRequest> SendPacket(PacketRef packet);

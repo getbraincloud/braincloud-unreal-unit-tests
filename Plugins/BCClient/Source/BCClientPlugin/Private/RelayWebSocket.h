@@ -4,7 +4,9 @@
 
 #if PLATFORM_UWP
 #if ENGINE_MAJOR_VERSION <= 4 && ENGINE_MINOR_VERSION <24
+#if ENGINE_MAJOR_VERSION >=5
 #if PLATFORM_HTML5
+#endif
 #endif
 #endif
 #else

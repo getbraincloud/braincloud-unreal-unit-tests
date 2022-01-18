@@ -39,14 +39,23 @@ public:
     virtual FString GetAuthToken(int32 LocalUserNum) const override;
 #if ENGINE_MAJOR_VERSION <= 4 && ENGINE_MINOR_VERSION >= 18
     virtual void RevokeAuthToken(const FUniqueNetId& UserId, const FOnRevokeAuthTokenCompleteDelegate& Delegate);
+#elif ENGINE_MAJOR_VERSION >= 5
+    virtual void RevokeAuthToken(const FUniqueNetId& UserId, const FOnRevokeAuthTokenCompleteDelegate& Delegate);
 #endif
+
     virtual void GetUserPrivilege(const FUniqueNetId& UserId, EUserPrivileges::Type Privilege, const FOnGetUserPrivilegeCompleteDelegate& Delegate) override;
+    
 #if ENGINE_MAJOR_VERSION <= 4 && ENGINE_MINOR_VERSION >= 18
+    virtual FPlatformUserId GetPlatformUserIdFromUniqueNetId(const FUniqueNetId& UniqueNetId) const override;
+#elif ENGINE_MAJOR_VERSION >= 5
     virtual FPlatformUserId GetPlatformUserIdFromUniqueNetId(const FUniqueNetId& UniqueNetId) const override;
 #else
     virtual FPlatformUserId GetPlatformUserIdFromUniqueNetId(const FUniqueNetId& UniqueNetId) override;
 #endif
+    
 #if ENGINE_MAJOR_VERSION <= 4 && ENGINE_MINOR_VERSION >= 11
+    virtual FString GetAuthType() const override;
+#elif ENGINE_MAJOR_VERSION >= 5
     virtual FString GetAuthType() const override;
 #endif
     // End IOnlineIdentity interface

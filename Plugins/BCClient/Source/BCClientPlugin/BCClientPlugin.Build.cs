@@ -3,6 +3,7 @@
 #define EARLIER_THAN_4_23
 #endif
 
+
 using System.Collections.Generic;
 using System;
 using System.IO;
@@ -47,7 +48,9 @@ public class BCClientPlugin : ModuleRules
 
         // win64
         PublicDefinitions.Add("PLATFORM_UWP=0");
-        if (Target.Platform == UnrealTargetPlatform.Win64 || Target.Platform == UnrealTargetPlatform.Win32)
+      
+        //Uncomment Target Platform for Win32 if you're not using plugin for UE5. 
+        if (Target.Platform == UnrealTargetPlatform.Win64 /*|| Target.Platform == UnrealTargetPlatform.Win32*/)
         {
             PrivateDependencyModuleNames.Add("zlib");
             PublicDependencyModuleNames.Add("libWebSockets");

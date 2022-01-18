@@ -105,6 +105,16 @@ IOnlinePurchasePtr FOnlineSubsystemBrainCloud::GetPurchaseInterface() const
 {
 	return nullptr;
 }
+#elif ENGINE_MAJOR_VERSION >= 5
+IOnlineStoreV2Ptr FOnlineSubsystemBrainCloud::GetStoreV2Interface() const
+{
+	return nullptr;
+}
+
+IOnlinePurchasePtr FOnlineSubsystemBrainCloud::GetPurchaseInterface() const
+{
+	return nullptr;
+}
 #endif
 
 IOnlineEventsPtr FOnlineSubsystemBrainCloud::GetEventsInterface() const
@@ -150,12 +160,23 @@ IOnlineTurnBasedPtr FOnlineSubsystemBrainCloud::GetTurnBasedInterface() const
 #if ENGINE_MAJOR_VERSION <= 4 && ENGINE_MINOR_VERSION >= 22
 IOnlineStatsPtr FOnlineSubsystemBrainCloud::GetStatsInterface(void) const
 {
+	// should we return the stats service ?
+	return nullptr;
+}
+#elif ENGINE_MAJOR_VERSION >= 5
+IOnlineStatsPtr FOnlineSubsystemBrainCloud::GetStatsInterface(void) const
+{
     // should we return the stats service ?
 	return nullptr;
 }
 #endif
 
 #if ENGINE_MAJOR_VERSION <= 4 && ENGINE_MINOR_VERSION >= 21
+IOnlineTournamentPtr FOnlineSubsystemBrainCloud::GetTournamentInterface() const
+{
+	return nullptr;
+}
+#elif ENGINE_MAJOR_VERSION >= 5
 IOnlineTournamentPtr FOnlineSubsystemBrainCloud::GetTournamentInterface() const
 {
 	return nullptr;
@@ -177,6 +198,11 @@ bool FOnlineSubsystemBrainCloud::Tick(float DeltaTime)
 }
 
 #if ENGINE_MAJOR_VERSION <= 4 && ENGINE_MINOR_VERSION >= 16
+FOnlineSubsystemBrainCloud::FOnlineSubsystemBrainCloud(FName InSubsystemName, FName InInstanceName) : FOnlineSubsystemImpl(InSubsystemName, InInstanceName)
+{
+	_clientPtr = new BrainCloudClient();
+}
+#elif ENGINE_MAJOR_VERSION >= 5
 FOnlineSubsystemBrainCloud::FOnlineSubsystemBrainCloud(FName InSubsystemName, FName InInstanceName) : FOnlineSubsystemImpl(InSubsystemName, InInstanceName)
 {
 	_clientPtr = new BrainCloudClient();
@@ -203,6 +229,13 @@ bool FOnlineSubsystemBrainCloud::Init()
 		if (Configs)
 		{
 #if ENGINE_MAJOR_VERSION <= 4 && ENGINE_MINOR_VERSION >= 12
+			FString test = Configs->Find(TEXT("ServerURL"))->GetValue();
+			_clientPtr->initialize(
+				Configs->Find(TEXT("ServerURL"))->GetValue(),
+				Configs->Find(TEXT("Secret"))->GetValue(),
+				Configs->Find(TEXT("AppID"))->GetValue(),
+				Configs->Find(TEXT("Version"))->GetValue());
+#elif ENGINE_MAJOR_VERSION >= 5
 			FString test = Configs->Find(TEXT("ServerURL"))->GetValue();
 			_clientPtr->initialize(
 				Configs->Find(TEXT("ServerURL"))->GetValue(),
@@ -281,6 +314,11 @@ bool FOnlineSubsystemBrainCloud::Exec(UWorld *InWorld, const TCHAR *Cmd, FOutput
 	return false;
 }
 #if ENGINE_MAJOR_VERSION <= 4 && ENGINE_MINOR_VERSION >= 17
+FText FOnlineSubsystemBrainCloud::GetOnlineServiceName() const
+{
+	return NSLOCTEXT("brainCloud", "brainCloud", "brainCloud");
+}
+#elif ENGINE_MAJOR_VERSION >= 5
 FText FOnlineSubsystemBrainCloud::GetOnlineServiceName() const
 {
 	return NSLOCTEXT("brainCloud", "brainCloud", "brainCloud");

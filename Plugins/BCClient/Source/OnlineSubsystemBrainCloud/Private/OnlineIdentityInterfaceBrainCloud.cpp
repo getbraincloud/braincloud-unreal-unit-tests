@@ -194,6 +194,11 @@ void FOnlineIdentityBrainCloud::RevokeAuthToken(const FUniqueNetId& UserId, cons
 {
 
 }
+#elif ENGINE_MAJOR_VERSION >=5
+void FOnlineIdentityBrainCloud::RevokeAuthToken(const FUniqueNetId& UserId, const FOnRevokeAuthTokenCompleteDelegate& Delegate)
+{
+
+}
 #endif
 
 void FOnlineIdentityBrainCloud::GetUserPrivilege(const FUniqueNetId& UserId, EUserPrivileges::Type Privilege, const FOnGetUserPrivilegeCompleteDelegate& Delegate)
@@ -203,6 +208,8 @@ void FOnlineIdentityBrainCloud::GetUserPrivilege(const FUniqueNetId& UserId, EUs
 
 #if ENGINE_MAJOR_VERSION <= 4 && ENGINE_MINOR_VERSION >= 18
 FPlatformUserId FOnlineIdentityBrainCloud::GetPlatformUserIdFromUniqueNetId(const FUniqueNetId& _uniqueNetId) const
+#elif ENGINE_MAJOR_VERSION >= 5
+FPlatformUserId FOnlineIdentityBrainCloud::GetPlatformUserIdFromUniqueNetId(const FUniqueNetId& _uniqueNetId) const
 #else
 FPlatformUserId FOnlineIdentityBrainCloud::GetPlatformUserIdFromUniqueNetId(const FUniqueNetId& _uniqueNetId)
 #endif
@@ -211,6 +218,11 @@ FPlatformUserId FOnlineIdentityBrainCloud::GetPlatformUserIdFromUniqueNetId(cons
 }
 
 #if ENGINE_MAJOR_VERSION <= 4 && ENGINE_MINOR_VERSION >= 11
+FString FOnlineIdentityBrainCloud::GetAuthType() const
+{
+    return TEXT("BrainCloud");
+}
+#elif ENGINE_MAJOR_VERSION >= 5
 FString FOnlineIdentityBrainCloud::GetAuthType() const
 {
     return TEXT("BrainCloud");

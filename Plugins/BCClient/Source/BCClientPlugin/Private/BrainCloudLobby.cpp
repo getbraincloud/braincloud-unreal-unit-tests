@@ -421,6 +421,8 @@ void BrainCloudLobby::pingHost(FString in_region, FString in_target, int in_inde
     {
         #if ENGINE_MINOR_VERSION > 25
         TSharedRef<IHttpRequest,ESPMode::ThreadSafe> Request = _http->CreateRequest();
+        #elif ENGINE_MAJOR_VERSION >= 5
+        TSharedRef<IHttpRequest,ESPMode::ThreadSafe> Request = _http->CreateRequest();
         #else
         TSharedRef<IHttpRequest> Request = _http->CreateRequest();
         #endif

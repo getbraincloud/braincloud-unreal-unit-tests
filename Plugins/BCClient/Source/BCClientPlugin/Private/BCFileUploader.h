@@ -65,6 +65,8 @@ private:
   
   #if ENGINE_MINOR_VERSION > 25
   TSharedPtr<IHttpRequest,ESPMode::ThreadSafe> _request;
+  #elif ENGINE_MAJOR_VERSION >= 5
+  TSharedPtr<IHttpRequest,ESPMode::ThreadSafe> _request;
   #else
   TSharedPtr<IHttpRequest> _request;
   #endif
