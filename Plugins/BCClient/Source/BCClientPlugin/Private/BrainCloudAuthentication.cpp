@@ -48,62 +48,62 @@ void BrainCloudAuthentication::clearSavedProfileId()
 
 void BrainCloudAuthentication::authenticateAnonymous(bool forceCreate, IServerCallback *callback)
 {
-	authenticate(*_anonymousId, TEXT(""), EBCAuthType::Anonymous, "", forceCreate, callback);
+	authenticate(*_anonymousId, TEXT(""), EBCAuthType::Anonymous, "", forceCreate, "", callback);
 }
 
 void BrainCloudAuthentication::authenticateFacebook(const FString &externalId, const FString &authenticationToken, bool forceCreate, IServerCallback *callback)
 {
-	authenticate(*externalId, *authenticationToken, EBCAuthType::Facebook, "", forceCreate, callback);
+	authenticate(*externalId, *authenticationToken, EBCAuthType::Facebook, "", forceCreate, "", callback);
 }
 
 void BrainCloudAuthentication::authenticateFacebookLimited(const FString &externalId, const FString &authenticationToken, bool forceCreate, IServerCallback *callback)
 {
-	authenticate(*externalId, *authenticationToken, EBCAuthType::FacebookLimited, "", forceCreate, callback);
+	authenticate(*externalId, *authenticationToken, EBCAuthType::FacebookLimited, "", forceCreate, "", callback);
 }
 
 void BrainCloudAuthentication::authenticateOculus(const FString &oculusId, const FString &oculusNonce, bool forceCreate, IServerCallback *callback)
 {
-	authenticate(*oculusId, *oculusNonce, EBCAuthType::Oculus, "", forceCreate, callback);
+	authenticate(*oculusId, *oculusNonce, EBCAuthType::Oculus, "", forceCreate, "", callback);
 }
 
 void BrainCloudAuthentication::authenticatePlaystationNetwork(const FString &accountId, const FString &authenticationToken, bool forceCreate, IServerCallback *callback)
 {
-	authenticate(*accountId, *authenticationToken, EBCAuthType::PlaystationNetwork, "", forceCreate, callback);
+	authenticate(*accountId, *authenticationToken, EBCAuthType::PlaystationNetwork, "", forceCreate, "", callback);
 }
 
 void BrainCloudAuthentication::authenticateGameCenter(const FString &gameCenterId, bool forceCreate, IServerCallback *callback)
 {
-	authenticate(*gameCenterId, TEXT(""), EBCAuthType::GameCenter, "", forceCreate, callback);
+	authenticate(*gameCenterId, TEXT(""), EBCAuthType::GameCenter, "", forceCreate, "", callback);
 }
 
 void BrainCloudAuthentication::authenticateEmailPassword(const FString &email, const FString &password, bool forceCreate, IServerCallback *callback)
 {
-	authenticate(*email, *password, EBCAuthType::Email, "", forceCreate, callback);
+	authenticate(*email, *password, EBCAuthType::Email, "", forceCreate, "", callback);
 }
 
 void BrainCloudAuthentication::authenticateUniversal(const FString &userid, const FString &password, bool forceCreate, IServerCallback *callback)
 {
-	authenticate(*userid, *password, EBCAuthType::Universal, "", forceCreate, callback);
+	authenticate(*userid, *password, EBCAuthType::Universal, "", forceCreate, "", callback);
 }
 
 void BrainCloudAuthentication::authenticateSteam(const FString &userid, const FString &sessionticket, bool forceCreate, IServerCallback *callback)
 {
-	authenticate(*userid, *sessionticket, EBCAuthType::Steam, "", forceCreate, callback);
+	authenticate(*userid, *sessionticket, EBCAuthType::Steam, "", forceCreate, "", callback);
 }
 
 void BrainCloudAuthentication::authenticateGoogle(const FString &googleUserId, const FString &serverAuthCode, bool forceCreate, IServerCallback *callback)
 {
-	authenticate(googleUserId, serverAuthCode, EBCAuthType::Google, "", forceCreate, callback);
+	authenticate(googleUserId, serverAuthCode, EBCAuthType::Google, "", forceCreate, "", callback);
 }
 
 void BrainCloudAuthentication::authenticateGoogleOpenId(const FString &googleUserAccountEmail, const FString &IdToken, bool forceCreate, IServerCallback *callback)
 {
-	authenticate(googleUserAccountEmail, IdToken, EBCAuthType::GoogleOpenId, "", forceCreate, callback);
+	authenticate(googleUserAccountEmail, IdToken, EBCAuthType::GoogleOpenId, "", forceCreate, "", callback);
 }
 
 void BrainCloudAuthentication::authenticateApple(const FString &appleUserId, const FString &identityToken, bool forceCreate, IServerCallback *callback)
 {
-	authenticate(appleUserId, identityToken, EBCAuthType::Apple, "", forceCreate, callback);
+	authenticate(appleUserId, identityToken, EBCAuthType::Apple, "", forceCreate, "", callback);
 }
 
 void BrainCloudAuthentication::authenticateTwitter(const FString &userid, const FString &token, const FString &secret, bool forceCreate, IServerCallback *callback)
@@ -111,27 +111,33 @@ void BrainCloudAuthentication::authenticateTwitter(const FString &userid, const 
 	FString buffer(token);
 	buffer += ":";
 	buffer += secret;
-	authenticate(userid, buffer, EBCAuthType::Twitter, "", forceCreate, callback);
+	authenticate(userid, buffer, EBCAuthType::Twitter, "", forceCreate, "", callback);
 }
 
 void BrainCloudAuthentication::authenticateParse(const FString &userid, const FString &token, bool forceCreate, IServerCallback *callback)
 {
-	authenticate(userid, token, EBCAuthType::Parse, "", forceCreate, callback);
+	authenticate(userid, token, EBCAuthType::Parse, "", forceCreate, "", callback);
 }
 
 void BrainCloudAuthentication::authenticateHandoff(const FString &handoffId, const FString &securityToken, bool forceCreate, IServerCallback *callback)
 {
-	authenticate(handoffId, securityToken, EBCAuthType::Handoff, "", forceCreate, callback);
+	authenticate(handoffId, securityToken, EBCAuthType::Handoff, "", forceCreate, "", callback);
 }
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 void BrainCloudAuthentication::authenticateSettopHandoff(const FString &handoffCode, IServerCallback *callback)
 {
-	authenticate(handoffCode,"", EBCAuthType::SettopHandoff, "", false, callback);
+	authenticate(handoffCode,"", EBCAuthType::SettopHandoff, "", false, "", callback);
 }
 
 void BrainCloudAuthentication::authenticateExternal(const FString &userid, const FString &token, const FString &externalAuthName, bool forceCreate, IServerCallback *callback)
 {
-	authenticate(userid, token, EBCAuthType::External, externalAuthName, forceCreate, callback);
+	authenticate(userid, token, EBCAuthType::External, externalAuthName, forceCreate, "", callback);
+}
+
+void BrainCloudAuthentication::authenticateAdvanced(EBCAuthType in_authenticationType, const FAuthenticateAdvancedIds& in_ids, bool in_forceCreate,
+	const FString& in_extraJson, IServerCallback* in_callback)
+{
+	authenticate(in_ids.externalId, in_ids.authenticationToken, in_authenticationType, in_ids.authenticationSubType, in_forceCreate, in_extraJson, in_callback);
 }
 
 void BrainCloudAuthentication::resetEmailPassword(const FString &in_email, IServerCallback *in_callback)
@@ -246,6 +252,7 @@ void BrainCloudAuthentication::authenticate(
 	EBCAuthType authenticationType,
 	const FString &externalAuthName,
 	bool forceCreate,
+	const FString &in_extraJson,
 	IServerCallback *callback)
 {
 	BrainCloudClient *brainCloudClientRef = _client;
@@ -267,6 +274,11 @@ void BrainCloudAuthentication::authenticate(
 	if (OperationParam::isOptionalParamValid(externalAuthName))
 	{
 		message->SetStringField(OperationParam::AuthenticateServiceAuthenticateExternalAuthName.getValue(), externalAuthName);
+	}
+
+	if(OperationParam::isOptionalParamValid(in_extraJson))
+	{
+		message->SetStringField(OperationParam::AuthenticateServiceAuthenticateExtraJson.getValue(), in_extraJson);
 	}
 
 	ServerCall *sc = new ServerCall(ServiceName::AuthenticateV2, ServiceOperation::Authenticate, message, callback);

@@ -1,6 +1,7 @@
 // Copyright 2018 bitHeads, Inc. All Rights Reserved.
 
 #pragma once
+#include "BCAuthType.generated.h"
 
 UENUM(BlueprintType)
 enum class EBCAuthType : uint8
@@ -32,4 +33,26 @@ class BCCLIENTPLUGIN_API BCAuthType
 
   private:
 	BCAuthType(){};
+};
+
+USTRUCT(BlueprintType, Category = "BrainCloud")
+struct FAuthenticateAdvancedIds
+{
+	GENERATED_USTRUCT_BODY();
+
+	UPROPERTY(BlueprintReadWrite)
+	FString externalId = TEXT("");
+
+	UPROPERTY(BlueprintReadWrite)
+	FString authenticationToken = TEXT("");
+
+	UPROPERTY(BlueprintReadWrite)
+	FString authenticationSubType = TEXT("");
+
+	FAuthenticateAdvancedIds() {}
+
+	FAuthenticateAdvancedIds(FString in_externalId, FString in_authenticationToken, FString in_authenticationSubType)
+		: externalId(in_externalId), authenticationToken(in_authenticationToken), authenticationSubType(in_authenticationSubType)
+	{
+	}
 };

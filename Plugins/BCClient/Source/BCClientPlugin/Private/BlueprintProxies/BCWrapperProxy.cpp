@@ -265,6 +265,14 @@ UBCWrapperProxy *UBCWrapperProxy::SmartSwitchAuthenticateUniversal(UBrainCloudWr
 	return Proxy;
 }
 
+UBCWrapperProxy* UBCWrapperProxy::SmartSwitchAuthenticateAdvanced(UBrainCloudWrapper* brainCloudWrapper, EBCAuthType in_authenticationType,
+	const FAuthenticateAdvancedIds& in_ids, bool in_forceCreate, const FString& in_extraJson)
+{
+	UBCWrapperProxy *Proxy = NewObject<UBCWrapperProxy>();
+	GetBrainCloudInstance(brainCloudWrapper)->authenticateAdvanced(in_authenticationType, in_ids, in_forceCreate, in_extraJson, Proxy);
+	return Proxy;
+}
+
 UBCWrapperProxy *UBCWrapperProxy::ResetEmailPassword(UBrainCloudWrapper *brainCloudWrapper, const FString &in_email)
 {
 	UBCWrapperProxy *Proxy = NewObject<UBCWrapperProxy>();
