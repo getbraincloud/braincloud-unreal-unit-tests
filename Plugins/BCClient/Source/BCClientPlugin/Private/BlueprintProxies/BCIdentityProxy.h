@@ -4,6 +4,7 @@
 
 #include "BCBlueprintCallProxyBase.h"
 #include "BCAuthType.h"
+#include "BCAuthenticationIds.h"
 #include "BCIdentityProxy.generated.h"
 
 UCLASS(MinimalAPI)
@@ -137,7 +138,58 @@ class UBCIdentityProxy : public UBCBlueprintCallProxyBase
 	UFUNCTION(BlueprintCallable, meta = (BlueprintInternalUseOnly = "true"), Category = "BrainCloud|Identity")
 	static UBCIdentityProxy *DetachFacebookLimitedIdentity(UBrainCloudWrapper *brainCloudWrapper, const FString &facebookLimitedId, bool continueAnon);
 
+	/**
+	 * Attach the user's credentials to the current profile.
+	 *
+	 * Service Name - identity
+	 * Service Operation - Attach
+	 *
+	 * @param authenticationType Universal, Email, Facebook, etc
+	 * @param ids Auth IDs structure
+	 * @param extraJson Additional to piggyback along with the call, to be picked up by pre- or post- hooks. Leave empty string for no extraJson.
+	 *
+	 * Errors to watch for:  SWITCHING_PROFILES - this means that the identity you provided
+	 * already points to a different profile.  You will likely want to offer the user the
+	 * choice to *SWITCH* to that profile, or *MERGE* the profiles.
+	 *
+	 * To switch profiles, call ClearSavedProfileID() and call AuthenticateAdvanced().
+	 */
+	UFUNCTION(BlueprintCallable, meta = (BlueprintInternalUseOnly = "true"), Category = "BrainCloud|Identity")
+	static UBCIdentityProxy *AttachAdvancedIdentity(UBrainCloudWrapper *brainCloudWrapper, EBCAuthType authenticationType, const FAuthenticationIds &ids, const FString &extraJson);
 
+	/**
+	 * Merge the profile associated with the provided credentials with the
+	 * current profile.
+	 *
+	 * Service Name - identity
+	 * Service Operation - Merge
+	 *
+	 * @param authenticationType Universal, Email, Facebook, etc
+	 * @param ids Auth IDs structure
+	 * @param extraJson Additional to piggyback along with the call, to be picked up by pre- or post- hooks. Leave empty string for no extraJson.
+	 *
+	 */
+	UFUNCTION(BlueprintCallable, meta = (BlueprintInternalUseOnly = "true"), Category = "BrainCloud|Identity")
+	static UBCIdentityProxy *MergeAdvancedIdentity(UBrainCloudWrapper *brainCloudWrapper, EBCAuthType authenticationType, const FAuthenticationIds &ids, const FString &extraJson);
+	
+	/**
+	 * Detach the identity from this profile.
+	 *
+	 * Service Name - identity
+	 * Service Operation - Detach
+	 *
+	 * @param authenticationType Universal, Email, Facebook, etc
+	 * @param externalId User ID
+	 * @param continueAnon Proceed even if the profile will revert to anonymous?
+	 * @param extraJson Additional to piggyback along with the call, to be picked up by pre- or post- hooks. Leave empty string for no extraJson.
+	 *
+	 * Watch for DOWNGRADING_TO_ANONYMOUS_ERROR - occurs if you set in_continueAnon to false, and
+	 * disconnecting this identity would result in the profile being anonymous (which means that
+	 * the profile wouldn't be retrievable if the user loses their device)
+	 */
+	UFUNCTION(BlueprintCallable, meta = (BlueprintInternalUseOnly = "true"), Category = "BrainCloud|Identity")
+	static UBCIdentityProxy *DetachAdvancedIdentity(UBrainCloudWrapper *brainCloudWrapper, EBCAuthType authenticationType, const FString &externalId, bool continueAnon, const FString &extraJson);	
+	
 	/*
 	* Attach the user's Oculus credentials to the current profile.
 	*

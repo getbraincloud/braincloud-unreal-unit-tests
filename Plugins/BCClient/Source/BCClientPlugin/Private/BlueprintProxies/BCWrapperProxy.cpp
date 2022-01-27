@@ -266,7 +266,7 @@ UBCWrapperProxy *UBCWrapperProxy::SmartSwitchAuthenticateUniversal(UBrainCloudWr
 }
 
 UBCWrapperProxy* UBCWrapperProxy::SmartSwitchAuthenticateAdvanced(UBrainCloudWrapper* brainCloudWrapper, EBCAuthType in_authenticationType,
-	const FAuthenticateAdvancedIds& in_ids, bool in_forceCreate, const FString& in_extraJson)
+	const FAuthenticationIds& in_ids, bool in_forceCreate, const FString& in_extraJson)
 {
 	UBCWrapperProxy *Proxy = NewObject<UBCWrapperProxy>();
 	GetBrainCloudInstance(brainCloudWrapper)->authenticateAdvanced(in_authenticationType, in_ids, in_forceCreate, in_extraJson, Proxy);

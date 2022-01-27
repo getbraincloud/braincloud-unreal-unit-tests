@@ -134,10 +134,9 @@ void BrainCloudAuthentication::authenticateExternal(const FString &userid, const
 	authenticate(userid, token, EBCAuthType::External, externalAuthName, forceCreate, "", callback);
 }
 
-void BrainCloudAuthentication::authenticateAdvanced(EBCAuthType in_authenticationType, const FAuthenticateAdvancedIds& in_ids, bool in_forceCreate,
-	const FString& in_extraJson, IServerCallback* in_callback)
+void BrainCloudAuthentication::authenticateAdvanced(EBCAuthType authenticationType, const FAuthenticationIds& ids, bool forceCreate, const FString& in_extraJson, IServerCallback* in_callback)
 {
-	authenticate(in_ids.externalId, in_ids.authenticationToken, in_authenticationType, in_ids.authenticationSubType, in_forceCreate, in_extraJson, in_callback);
+	authenticate(ids.externalId, ids.authenticationToken, authenticationType, ids.authenticationSubType, forceCreate, in_extraJson, in_callback);
 }
 
 void BrainCloudAuthentication::resetEmailPassword(const FString &in_email, IServerCallback *in_callback)

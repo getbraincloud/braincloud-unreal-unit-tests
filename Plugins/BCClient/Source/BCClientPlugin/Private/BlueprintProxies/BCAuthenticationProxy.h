@@ -285,7 +285,7 @@ class UBCAuthenticationProxy : public UBCBlueprintCallProxyBase
 	 * @param in_callback The method to be invoked when the server response is received
 	 */
 	UFUNCTION(BlueprintCallable, meta = (BlueprintInternalUseOnly = "true"), Category = "BrainCloud|Authentication")
-	static UBCAuthenticationProxy *AuthenticateAdvanced(UBrainCloudWrapper *brainCloudWrapper, EBCAuthType in_authenticationType, const FAuthenticateAdvancedIds &in_ids, bool in_forceCreate, const FString &in_extraJson);
+	static UBCAuthenticationProxy *AuthenticateAdvanced(UBrainCloudWrapper *brainCloudWrapper, EBCAuthType in_authenticationType, const FAuthenticationIds &in_ids, bool in_forceCreate, const FString &in_extraJson);
 	
     /**
     * Reset Email password - Sends a password reset email to the specified address

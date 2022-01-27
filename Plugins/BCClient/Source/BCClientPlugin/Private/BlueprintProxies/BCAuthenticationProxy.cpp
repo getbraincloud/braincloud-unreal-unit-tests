@@ -146,7 +146,7 @@ UBCAuthenticationProxy *UBCAuthenticationProxy::AuthenticateExternal(UBrainCloud
     return Proxy;
 }
 
-UBCAuthenticationProxy *UBCAuthenticationProxy::AuthenticateAdvanced(UBrainCloudWrapper *brainCloudWrapper, EBCAuthType in_authenticationType, const FAuthenticateAdvancedIds &in_ids, bool in_forceCreate, const FString &in_extraJson)
+UBCAuthenticationProxy *UBCAuthenticationProxy::AuthenticateAdvanced(UBrainCloudWrapper *brainCloudWrapper, EBCAuthType in_authenticationType, const FAuthenticationIds &in_ids, bool in_forceCreate, const FString &in_extraJson)
 {
     UBCAuthenticationProxy *Proxy = NewObject<UBCAuthenticationProxy>();
     UBCWrapperProxy::GetBrainCloudInstance(brainCloudWrapper)->getClient()->getAuthenticationService()->authenticateAdvanced(in_authenticationType, in_ids, in_forceCreate, in_extraJson, Proxy);

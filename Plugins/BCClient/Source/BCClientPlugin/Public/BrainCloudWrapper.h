@@ -309,7 +309,7 @@ class BCCLIENTPLUGIN_API UBrainCloudWrapper : public UObject, public IServerCall
  * @param in_extraJson Additional to piggyback along with the call, to be picked up by pre- or post- hooks. Leave empty string for no extraJson.
  * @param in_callback The method to be invoked when the server response is received
  */
- void authenticateAdvanced(EBCAuthType in_authenticationType, const FAuthenticateAdvancedIds &in_ids, bool in_forceCreate, const FString &in_extraJson, IServerCallback * in_callback = NULL);
+ void authenticateAdvanced(EBCAuthType in_authenticationType, const FAuthenticationIds &in_ids, bool in_forceCreate, const FString &in_extraJson, IServerCallback * in_callback = NULL);
  
   /*
     * Authenticate the user using a handoffId and a token 
@@ -590,7 +590,7 @@ class BCCLIENTPLUGIN_API UBrainCloudWrapper : public UObject, public IServerCall
       * @param in_extraJson Additional to piggyback along with the call, to be picked up by pre- or post- hooks. Leave empty string for no extraJson.
       * @param in_callback The method to be invoked when the server response is received
       */
-    void smartSwitchAuthenticateAdvanced(EBCAuthType in_authenticationType, const FAuthenticateAdvancedIds &in_ids, bool in_forceCreate, const FString &in_extraJson, IServerCallback * in_callback = NULL);
+    void smartSwitchAuthenticateAdvanced(EBCAuthType in_authenticationType, const FAuthenticationIds &in_ids, bool in_forceCreate, const FString &in_extraJson, IServerCallback * in_callback = NULL);
     /**
     * Reset Email password - Sends a password reset email to the specified address
     *
