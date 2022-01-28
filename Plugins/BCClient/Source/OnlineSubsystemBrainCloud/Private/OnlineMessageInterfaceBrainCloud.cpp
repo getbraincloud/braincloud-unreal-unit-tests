@@ -175,17 +175,16 @@ void FOnlineMessageBrainCloud::EnumerateMessagesSuccess(const FString& jsonData)
         FString fromId = messageObj->GetStringField("fromPlayerId");
         FString messageId = FString::FromInt((int64)messageObj->GetNumberField("eventId"));
 
-
-        #if ENGINE_MAJOR_VERSION <= 4 && ENGINE_MINOR_VERSION >= 18
+// Unreal Engine Version is >= 4.18 OR in Unreal Engine 5
+#if (ENGINE_MAJOR_VERSION == 4 && ENGINE_MINOR_VERSION >= 18) || ENGINE_MAJOR_VERSION == 5
         const TSharedRef <FUniqueNetIdString> sref_fromId = MakeShareable(new FUniqueNetIdString(fromId));
         const TSharedRef <FUniqueNetIdString> sref_messageId = MakeShareable(new FUniqueNetIdString(messageId));
         FOnlineMessageHeader *fOnlineMessageHeader = new FOnlineMessageHeader(sref_fromId, sref_messageId);
-
         TSharedPtr<FOnlineMessageHeader> header = MakeShareable(fOnlineMessageHeader);
-        #else
+#else
         TSharedPtr<FOnlineMessageHeader> header = MakeShareable( 
             new FOnlineMessageHeader(new FUniqueNetIdString(fromId), new FUniqueNetIdString(messageId))); 
-        #endif
+#endif
 
 
         header->TimeStamp = FDateTime::FromUnixTimestamp((int64)messageObj->GetNumberField("createdAt") / 1000).ToString();
@@ -193,11 +192,12 @@ void FOnlineMessageBrainCloud::EnumerateMessagesSuccess(const FString& jsonData)
 
         _cachedMessageHeaders.Add(header);
 
-#if ENGINE_MINOR_VERSION >= 27
+// Unreal Engine Version is >= 4.27
+#if (ENGINE_MAJOR_VERSION == 4 && ENGINE_MINOR_VERSION >= 27)
         //message
         TSharedPtr<FOnlineMessage> message = MakeShareable(new FOnlineMessage(_cachedMessageHeaders[0]->MessageId));
 #else
-        TSharedPtr<FOnlineMessage> message = MakeShareable(new FOnlineMessage(new FUniqueNetIdString(messageId));
+        TSharedPtr<FOnlineMessage> message = MakeShareable(new FOnlineMessage(new FUniqueNetIdString(messageId)));
 #endif
 
         FString payloadStr = messageObj->GetObjectField("eventData")->GetStringField("payload");
