@@ -189,7 +189,8 @@ FString FOnlineIdentityBrainCloud::GetAuthToken(int32 LocalUserNum) const
     return TEXT("");
 }
 
-#if ENGINE_MAJOR_VERSION <= 4 && ENGINE_MINOR_VERSION >= 18
+// Unreal Engine Version is >= 4.18 OR in Unreal Engine 5
+#if (ENGINE_MAJOR_VERSION == 4 && ENGINE_MINOR_VERSION >= 18) || ENGINE_MAJOR_VERSION ==5
 void FOnlineIdentityBrainCloud::RevokeAuthToken(const FUniqueNetId& UserId, const FOnRevokeAuthTokenCompleteDelegate& Delegate)
 {
 
@@ -201,7 +202,8 @@ void FOnlineIdentityBrainCloud::GetUserPrivilege(const FUniqueNetId& UserId, EUs
     Delegate.ExecuteIfBound(UserId, Privilege, (uint32)EPrivilegeResults::NoFailures);
 }
 
-#if ENGINE_MAJOR_VERSION <= 4 && ENGINE_MINOR_VERSION >= 18
+// Unreal Engine Version is >= 4.18 OR in Unreal Engine 5
+#if (ENGINE_MAJOR_VERSION == 4 && ENGINE_MINOR_VERSION >= 18) || ENGINE_MAJOR_VERSION == 5
 FPlatformUserId FOnlineIdentityBrainCloud::GetPlatformUserIdFromUniqueNetId(const FUniqueNetId& _uniqueNetId) const
 #else
 FPlatformUserId FOnlineIdentityBrainCloud::GetPlatformUserIdFromUniqueNetId(const FUniqueNetId& _uniqueNetId)
@@ -210,7 +212,8 @@ FPlatformUserId FOnlineIdentityBrainCloud::GetPlatformUserIdFromUniqueNetId(cons
     return PLATFORMUSERID_NONE;
 }
 
-#if ENGINE_MAJOR_VERSION <= 4 && ENGINE_MINOR_VERSION >= 11
+// Unreal Engine Version is >= 4.11 OR in Unreal Engine 5
+#if (ENGINE_MAJOR_VERSION == 4 && ENGINE_MINOR_VERSION >= 11) || ENGINE_MAJOR_VERSION == 5 
 FString FOnlineIdentityBrainCloud::GetAuthType() const
 {
     return TEXT("BrainCloud");

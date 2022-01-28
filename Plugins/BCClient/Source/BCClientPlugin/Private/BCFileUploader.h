@@ -63,10 +63,10 @@ private:
   FString _fileName;
   FString _uploadId;
   
-  #if ENGINE_MINOR_VERSION > 25
+#if (ENGINE_MAJOR_VERSION == 4 && ENGINE_MINOR_VERSION > 25) || ENGINE_MAJOR_VERSION == 5 
   TSharedPtr<IHttpRequest,ESPMode::ThreadSafe> _request;
-  #else
+#else
   TSharedPtr<IHttpRequest> _request;
-  #endif
+#endif
 
 };
