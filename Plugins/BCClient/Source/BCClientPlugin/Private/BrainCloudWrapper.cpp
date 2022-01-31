@@ -209,6 +209,13 @@ void UBrainCloudWrapper::authenticateUniversal(FString userid, FString password,
     _client->getAuthenticationService()->authenticateUniversal(userid, password, forceCreate, this);
 }
 
+void UBrainCloudWrapper::authenticateAdvanced(EBCAuthType in_authenticationType, const FAuthenticationIds& in_ids, bool in_forceCreate, const FString& in_extraJson, IServerCallback* in_callback)
+{
+    _authenticateCallback = in_callback;
+    initializeIdentity();
+    _client->getAuthenticationService()->authenticateAdvanced(in_authenticationType, in_ids, in_forceCreate, in_extraJson, in_callback);
+}
+
 void UBrainCloudWrapper::authenticateHandoff(FString &handoffId, FString &securityToken, bool forceCreate, IServerCallback *callback)
 {
     _authenticateCallback = callback;
@@ -299,6 +306,12 @@ void UBrainCloudWrapper::smartSwitchAuthenticateTwitter(const FString &userid, c
 void UBrainCloudWrapper::smartSwitchAuthenticateUniversal(const FString &userid, const FString &password, bool in_forceCreate, IServerCallback *in_callback)
 {
     SmartSwitchAuthenticateCallback *smartCallback = new SmartSwitchAuthenticateCallback(this, EBCAuthType::Universal, userid, password, in_forceCreate, in_callback);
+    getIdentitiesCallback(smartCallback);
+}
+
+void UBrainCloudWrapper::smartSwitchAuthenticateAdvanced(EBCAuthType in_authenticationType, const FAuthenticationIds& in_ids, bool in_forceCreate, const FString& in_extraJson, IServerCallback* in_callback)
+{
+    SmartSwitchAuthenticateCallback* smartCallback = new SmartSwitchAuthenticateCallback(this, in_authenticationType, in_ids, in_extraJson, in_forceCreate, in_callback);
     getIdentitiesCallback(smartCallback);
 }
 

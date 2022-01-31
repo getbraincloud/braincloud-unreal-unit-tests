@@ -12,6 +12,7 @@ SmartSwitchAuthenticateCallback::SmartSwitchAuthenticateCallback(UBrainCloudWrap
     m_token = in_token;
     m_authType = in_authType;
     m_forceCreate = forceCreate;
+    m_advancedCallback = false;
 }
 
 SmartSwitchAuthenticateCallback::SmartSwitchAuthenticateCallback(UBrainCloudWrapper *in_wrapper, EBCAuthType in_authType, const FString &in_userId,
@@ -22,6 +23,18 @@ SmartSwitchAuthenticateCallback::SmartSwitchAuthenticateCallback(UBrainCloudWrap
     m_extraStringDetail = in_extraStringDetail;
     m_authType = in_authType;
     m_forceCreate = forceCreate;
+    m_advancedCallback = false;
+}
+
+SmartSwitchAuthenticateCallback::SmartSwitchAuthenticateCallback(UBrainCloudWrapper *in_wrapper, EBCAuthType in_authType,
+                                                                 const FAuthenticationIds in_ids, const FString &in_extraStringDetail, bool forceCreate, IServerCallback *in_callback) : BCIdentityCallback(in_wrapper, in_callback)
+{
+    m_ids = in_ids;
+    m_extraStringDetail = in_extraStringDetail;
+    m_authType = in_authType;
+    m_forceCreate = forceCreate;
+    m_callback = in_callback;
+    m_advancedCallback = true;
 }
 
 SmartSwitchAuthenticateCallback::~SmartSwitchAuthenticateCallback()
@@ -30,6 +43,13 @@ SmartSwitchAuthenticateCallback::~SmartSwitchAuthenticateCallback()
 
 void SmartSwitchAuthenticateCallback::serverCallback(ServiceName serviceName, ServiceOperation serviceOperation, FString const &jsonData)
 {
+    if(m_advancedCallback)
+    {
+        m_wrapper->getBCClient()->getAuthenticationService()->authenticateAdvanced(m_authType, m_ids, m_forceCreate, m_extraStringDetail, m_callback);
+        delete this;
+        return;
+    }
+    
     switch (m_authType)
     {
     default:
