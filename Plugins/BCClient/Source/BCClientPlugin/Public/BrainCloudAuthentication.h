@@ -3,10 +3,10 @@
 #pragma once
 
 #include "BCAuthType.h"
+#include "BCAuthenticationIds.h"
 
 class BrainCloudClient;
 class IServerCallback;
-
 class BCCLIENTPLUGIN_API BrainCloudAuthentication
 {
 public:
@@ -267,6 +267,22 @@ public:
     */
   void authenticateExternal(const FString &userid, const FString &token, const FString &externalAuthName, bool forceCreate, IServerCallback *callback);
 
+
+  /*
+   * A generic Authenticate method that translates to the same as calling a specific one, except it takes an extraJson
+   * that will be passed along to pre- or post- hooks.
+   *
+   * Service Name - Authenticate
+   * Service Operation - Authenticate
+   *
+   * @param authenticationType Universal, Email, Facebook, etc
+   * @param ids Auth IDs structure
+   * @param forceCreate Should a new profile be created for this user if the account does not exist?
+   * @param extraJson Additional to piggyback along with the call, to be picked up by pre- or post- hooks. Leave empty string for no extraJson.
+   * @param callback The method to be invoked when the server response is received
+   */
+  void authenticateAdvanced(EBCAuthType authenticationType, const FAuthenticationIds &ids, bool forceCreate, const FString &extraJson, IServerCallback * callback = NULL);
+  
     /**
     * Reset Email password - Sends a password reset email to the specified address
     *
@@ -448,5 +464,5 @@ private:
   FString _anonymousId;
   FString _profileId;
 
-  void authenticate(const FString &externalId, const FString &authenticationToken, EBCAuthType authenticationType, const FString &externalAuthName, bool forceCreate, IServerCallback *callback);
+  void authenticate(const FString &externalId, const FString &authenticationToken, EBCAuthType authenticationType, const FString &externalAuthName, bool forceCreate, const FString &in_extraJson, IServerCallback *callback);
 };
