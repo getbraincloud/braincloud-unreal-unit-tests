@@ -23,7 +23,7 @@ public:
   virtual void serverCallback(ServiceName serviceName, ServiceOperation serviceOperation, FString const &jsonData) override;
   virtual void serverError(ServiceName serviceName, ServiceOperation serviceOperation, int32 statusCode, int32 reasonCode, const FString &message) override;
 
-private:
+protected:
   FString m_userId;
   FString m_token;
   FString m_extraStringDetail;
