@@ -1,6 +1,6 @@
 #pragma once
 
-class ConvertUtilities
+class BCCLIENTPLUGIN_API ConvertUtilities
 {
 public:
     static FString BCBytesToString(const uint8 *in, int32 count);
