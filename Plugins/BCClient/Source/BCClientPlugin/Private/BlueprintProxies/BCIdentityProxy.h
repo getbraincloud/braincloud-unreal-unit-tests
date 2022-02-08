@@ -189,6 +189,54 @@ class UBCIdentityProxy : public UBCBlueprintCallProxyBase
 	 */
 	UFUNCTION(BlueprintCallable, meta = (BlueprintInternalUseOnly = "true"), Category = "BrainCloud|Identity")
 	static UBCIdentityProxy *DetachAdvancedIdentity(UBrainCloudWrapper *brainCloudWrapper, EBCAuthType authenticationType, const FString &externalId, bool continueAnon, const FString &extraJson);	
+
+	/**
+	* Attach the user's Ultra credentials to the current profile.
+	 *
+	 * Service Name - Identity
+	 * Service Operation - Attach
+	 *
+	 * @param in_ultraUsername {string} - it's what the user uses to log into the Ultra endpoint initially
+	 * @param in_ultraIdToken {string} - The "id_token" taken from Ultra's JWT.
+	 *
+	 * Errors to watch for:  SWITCHING_PROFILES - this means that the identity you provided
+	 * already points to a different profile.  You will likely want to offer the user the
+	 * choice to *SWITCH* to that profile, or *MERGE* the profiles.
+	 *
+	 * To switch profiles, call ClearSavedProfileID() and call AuthenticateUltra().
+	 */
+	UFUNCTION(BlueprintCallable, meta = (BlueprintInternalUseOnly = "true"), Category = "BrainCloud|Identity")
+	static UBCIdentityProxy *AttachUltraIdentity(UBrainCloudWrapper *brainCloudWrapper, const FString &in_ultraUsername,const FString &in_ultraIdToken);
+
+	/**
+	 * Merge the profile associated with the provided Ultra credentials with the
+	 * current profile.
+	 *
+	 * Service Name - Identity
+	 * Service Operation - Merge
+	 *
+	 * @param in_ultraUsername {string} - it's what the user uses to log into the Ultra endpoint initially
+	 * @param in_ultraIdToken {string} - The "id_token" taken from Ultra's JWT.
+	 *
+	 */
+	UFUNCTION(BlueprintCallable, meta = (BlueprintInternalUseOnly = "true"), Category = "BrainCloud|Identity")
+	static UBCIdentityProxy *MergeUltraIdentity(UBrainCloudWrapper *brainCloudWrapper, const FString &in_ultraUsername,const FString &in_ultraIdToken);
+	
+	/**
+	 * Detach the Ultra identity from this profile.
+	 *
+	 * Service Name - Identity
+	 * Service Operation - Detach
+	 *
+	 * @param in_ultraUsername {string} - it's what the user uses to log into the Ultra endpoint initially
+	 * @param in_continueAnon Proceed even if the profile will revert to anonymous?
+	 *
+	 * Watch for DOWNGRADING_TO_ANONYMOUS_ERROR - occurs if you set continueAnon to false, and
+	 * disconnecting this identity would result in the profile being anonymous (which means that
+	 * the profile wouldn't be retrievable if the user loses their device)
+	 */
+	UFUNCTION(BlueprintCallable, meta = (BlueprintInternalUseOnly = "true"), Category = "BrainCloud|Identity")
+	static UBCIdentityProxy *DetachUltraIdentity(UBrainCloudWrapper *brainCloudWrapper, const FString &in_ultraUsername, bool in_continueAnon);	
 	
 	/*
 	* Attach the user's Oculus credentials to the current profile.

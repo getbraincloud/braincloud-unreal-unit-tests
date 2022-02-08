@@ -153,6 +153,13 @@ UBCAuthenticationProxy *UBCAuthenticationProxy::AuthenticateAdvanced(UBrainCloud
     return Proxy;
 }
 
+UBCAuthenticationProxy *UBCAuthenticationProxy::AuthenticateUltra(UBrainCloudWrapper *brainCloudWrapper, FString in_ultraUsername, FString in_ultraIdToken, bool in_forceCreate)
+{
+    UBCAuthenticationProxy *Proxy = NewObject<UBCAuthenticationProxy>();
+    UBCWrapperProxy::GetBrainCloudInstance(brainCloudWrapper)->getClient()->getAuthenticationService()->authenticateUltra(in_ultraUsername, in_ultraIdToken, in_forceCreate, Proxy);
+    return Proxy;
+}
+
 UBCAuthenticationProxy *UBCAuthenticationProxy::ResetEmailPassword(UBrainCloudWrapper *brainCloudWrapper, const FString &in_email)
 {
     UBCAuthenticationProxy *Proxy = NewObject<UBCAuthenticationProxy>();
