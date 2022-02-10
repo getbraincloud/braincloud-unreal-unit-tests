@@ -90,6 +90,27 @@ UBCIdentityProxy* UBCIdentityProxy::DetachAdvancedIdentity(UBrainCloudWrapper* b
 	return Proxy;
 }
 
+UBCIdentityProxy* UBCIdentityProxy::AttachUltraIdentity(UBrainCloudWrapper* brainCloudWrapper, const FString& in_ultraUsername, const FString& in_ultraIdToken)
+{
+	UBCIdentityProxy *Proxy = NewObject<UBCIdentityProxy>();
+	UBCWrapperProxy::GetBrainCloudInstance(brainCloudWrapper)->getIdentityService()->attachUltraIdentity(in_ultraUsername, in_ultraIdToken, Proxy);
+	return Proxy;
+}
+
+UBCIdentityProxy* UBCIdentityProxy::MergeUltraIdentity(UBrainCloudWrapper* brainCloudWrapper, const FString& in_ultraUsername, const FString& in_ultraIdToken)
+{
+	UBCIdentityProxy *Proxy = NewObject<UBCIdentityProxy>();
+	UBCWrapperProxy::GetBrainCloudInstance(brainCloudWrapper)->getIdentityService()->mergeUltraIdentity(in_ultraUsername, in_ultraIdToken, Proxy);
+	return Proxy;
+}
+
+UBCIdentityProxy* UBCIdentityProxy::DetachUltraIdentity(UBrainCloudWrapper* brainCloudWrapper, const FString& in_ultraUsername, bool in_continueAnon)
+{
+	UBCIdentityProxy *Proxy = NewObject<UBCIdentityProxy>();
+	UBCWrapperProxy::GetBrainCloudInstance(brainCloudWrapper)->getIdentityService()->detachUltraIdentity(in_ultraUsername, in_continueAnon, Proxy);
+	return Proxy;
+}
+
 UBCIdentityProxy *UBCIdentityProxy::AttachOculusIdentity(UBrainCloudWrapper *brainCloudWrapper, const FString &oculusId, const FString &oculusNonce)
 {
 	UBCIdentityProxy *Proxy = NewObject<UBCIdentityProxy>();

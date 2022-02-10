@@ -123,6 +123,11 @@ void SmartSwitchAuthenticateCallback::serverCallback(ServiceName serviceName, Se
         m_wrapper->getBCClient()->getAuthenticationService()->authenticateUniversal(m_userId, m_token, m_forceCreate, m_callback);
     }
     break;
+    case EBCAuthType::Ultra:
+    {
+        m_wrapper->getBCClient()->getAuthenticationService()->authenticateUltra(m_userId, m_token, m_forceCreate, m_callback);        
+    }
+    break;
     }
 
     delete this;
