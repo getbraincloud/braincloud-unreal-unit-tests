@@ -296,7 +296,7 @@ class BCCLIENTPLUGIN_API UBrainCloudWrapper : public UObject, public IServerCall
      */
     void authenticateUniversal(FString userid, FString password, bool forceCreate, IServerCallback *callback = nullptr);
 
- /*
+ /**
  * A generic Authenticate method that translates to the same as calling a specific one, except it takes an extraJson
  * that will be passed along to pre- or post- hooks.
  *
@@ -310,6 +310,19 @@ class BCCLIENTPLUGIN_API UBrainCloudWrapper : public UObject, public IServerCall
  * @param in_callback The method to be invoked when the server response is received
  */
  void authenticateAdvanced(EBCAuthType in_authenticationType, const FAuthenticationIds &in_ids, bool in_forceCreate, const FString &in_extraJson, IServerCallback * in_callback = NULL);
+
+  /**
+  * Authenticate the user for Ultra.
+  *
+  * Service Name - Authenticate
+  * Service Operation - Authenticate
+  *
+  * @param in_ultraUsername It's what the user uses to log into the Ultra endpoint initially
+  * @param in_ultraIdToken The "id_token" taken from Ultra's JWT.
+  * @param in_forceCreate Should a new profile be created for this user if the account does not exist?
+  * @param in_callback The method to be invoked when the server response is received
+  */
+ void authenticateUltra(const FString& in_ultraUsername, const FString& in_ultraIdToken, bool in_forceCreate, IServerCallback * in_callback = NULL);
  
   /*
     * Authenticate the user using a handoffId and a token 
@@ -591,6 +604,24 @@ class BCCLIENTPLUGIN_API UBrainCloudWrapper : public UObject, public IServerCall
       * @param in_callback The method to be invoked when the server response is received
       */
     void smartSwitchAuthenticateAdvanced(EBCAuthType in_authenticationType, const FAuthenticationIds &in_ids, bool in_forceCreate, const FString &in_extraJson, IServerCallback * in_callback = NULL);
+
+      /**
+       * Smart Switch Authenticate will logout of the current profile, and switch to the new authentication type.
+       * In event the current session was previously an anonymous account, the smart switch will delete that profile.
+       * Use this function to keep a clean design flow from anonymous to signed profiles
+       *
+       * Authenticate the user for Ultra.
+       *
+       * Service Name - Authenticate
+       * Service Operation - Authenticate
+       *
+       * @param in_ultraUsername It's what the user uses to log into the Ultra endpoint initially
+       * @param in_ultraIdToken The "id_token" taken from Ultra's JWT.
+       * @param in_forceCreate Should a new profile be created for this user if the account does not exist?
+       * @param in_callback The method to be invoked when the server response is received
+       */
+     void smartSwitchAuthenticateUltra(const FString &in_ultraUsername,const FString &in_ultraIdToken, bool in_forceCreate, IServerCallback * in_callback = NULL);
+ 
     /**
     * Reset Email password - Sends a password reset email to the specified address
     *

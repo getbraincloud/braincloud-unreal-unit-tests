@@ -185,6 +185,54 @@ class BCCLIENTPLUGIN_API BrainCloudIdentity
 	 * the profile wouldn't be retrievable if the user loses their device)
 	 */
 	void detachAdvancedIdentity(EBCAuthType authenticationType, const FString &externalId, bool continueAnon, const FString &extraJson, IServerCallback *callback = nullptr);
+
+	/**
+	 * Attach the user's Ultra credentials to the current profile.
+	 *
+	 * Service Name - Identity
+	 * Service Operation - Attach
+	 *
+	 * @param in_ultraUsername {string} - it's what the user uses to log into the Ultra endpoint initially
+	 * @param in_ultraIdToken {string} - The "id_token" taken from Ultra's JWT.
+	 * @param in_callback The method to be invoked when the server response is received
+	 *
+	 * Errors to watch for:  SWITCHING_PROFILES - this means that the Ultra identity you provided
+	 * already points to a different profile.  You will likely want to offer the player the
+	 * choice to *SWITCH* to that profile, or *MERGE* the profiles.
+	 *
+	 * To switch profiles, call ClearSavedProfileID() and call AuthenticateUltra().
+	 */
+	void attachUltraIdentity(const FString &in_ultraUsername,const FString &in_ultraIdToken, IServerCallback *in_callback = nullptr);
+
+	/**
+	 * Merge the profile associated with the provided Ultra credentials with the
+	 * current profile.
+	 *
+	 * Service Name - Identity
+	 * Service Operation - Merge
+	 *
+	 * @param in_ultraUsername {string} - it's what the user uses to log into the Ultra endpoint initially
+	 * @param in_ultraIdToken {string} - The "id_token" taken from Ultra's JWT.
+	 * @param in_callback The method to be invoked when the server response is received
+	 *
+	 */
+	void mergeUltraIdentity(const FString &in_ultraUsername, const FString &in_ultraIdToken, IServerCallback *in_callback = nullptr);
+
+	/**
+	 * Detach the Ultra identity from this profile.
+	 *
+	 * Service Name - Identity
+	 * Service Operation - Detach
+	 *
+	 * @param in_ultraUsername {string} - it's what the user uses to log into the Ultra endpoint initially
+	 * @param in_continueAnon Proceed even if the profile will revert to anonymous?
+	 * @param in_callback The method to be invoked when the server response is received
+	 *
+	 * Watch for DOWNGRADING_TO_ANONYMOUS_ERROR - occurs if you set continueAnon to false, and
+	 * disconnecting this identity would result in the profile being anonymous (which means that
+	 * the profile wouldn't be retrievable if the user loses their device)
+	 */
+	void detachUltraIdentity(const FString &in_ultraUsername, bool in_continueAnon, IServerCallback *in_callback = nullptr);
 	
 	/*
 	 * Attach the user's Oculus credentials to the current profile.
