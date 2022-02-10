@@ -107,7 +107,7 @@ UBCIdentityProxy* UBCIdentityProxy::MergeUltraIdentity(UBrainCloudWrapper* brain
 UBCIdentityProxy* UBCIdentityProxy::DetachUltraIdentity(UBrainCloudWrapper* brainCloudWrapper, const FString& in_ultraUsername, bool in_continueAnon)
 {
 	UBCIdentityProxy *Proxy = NewObject<UBCIdentityProxy>();
-	UBCWrapperProxy::GetBrainCloudInstance(brainCloudWrapper)->getIdentityService()->detachUltraIdentity(in_ultraUsername, in_continueAnon);
+	UBCWrapperProxy::GetBrainCloudInstance(brainCloudWrapper)->getIdentityService()->detachUltraIdentity(in_ultraUsername, in_continueAnon, Proxy);
 	return Proxy;
 }
 

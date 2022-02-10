@@ -220,7 +220,7 @@ void UBrainCloudWrapper::authenticateUltra(const FString& in_ultraUsername, cons
 {
     _authenticateCallback = in_callback;
     initializeIdentity();
-    _client->getAuthenticationService()->authenticateUltra(in_ultraUsername, in_ultraIdToken, in_forceCreate, in_callback);
+    _client->getAuthenticationService()->authenticateUltra(in_ultraUsername, in_ultraIdToken, in_forceCreate, this);
 }
 
 void UBrainCloudWrapper::authenticateHandoff(FString &handoffId, FString &securityToken, bool forceCreate, IServerCallback *callback)
