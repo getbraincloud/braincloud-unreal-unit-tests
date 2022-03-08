@@ -392,6 +392,7 @@ class BCCLIENTPLUGIN_API ServiceOperation
 	static const ServiceOperation IncrementData;
 	static const ServiceOperation UpdateEntity;
 	static const ServiceOperation UpdateEntityFields;
+	static const ServiceOperation UpdateEntityFieldsShards;
 	static const ServiceOperation UpdateSingletonFields;
 	
 	//presence

@@ -159,6 +159,21 @@ class UBCCustomEntityProxy : public UBCBlueprintCallProxyBase
   UFUNCTION(BlueprintCallable, meta = (BlueprintInternalUseOnly = "true"), Category = "BrainCloud|CustomEntity")
   static UBCCustomEntityProxy *UpdateEntityFields(UBrainCloudWrapper *brainCloudWrapper, const FString &entityType, const FString &entityId, int version, const FString &fieldsJson);
 
+	/**
+	 * For sharded custom collection entities. Sets the specified fields within custom entity data on the server, enforcing ownership/ACL permissions.
+	 *
+	 * Service Name - CustomEntity
+	 * Service Operation - UpdateEntityFieldsSharded
+	 *
+	 * @param entityType The entity type as defined by the user
+	 * @param entityId
+	 * @param version
+	 * @param fieldsJson
+	 * @param shardKeyJson The shard key field(s) and value(s), as JSON, applicable to the entity being updated.
+	 * @param callback The method to be invoked when the server response is received
+	 */
+  UFUNCTION(BlueprintCallable, meta = (BlueprintInternalUseOnly = "true"), Category = "BrainCloud|CustomEntity")
+  static UBCCustomEntityProxy *UpdateEntityFieldsShard(UBrainCloudWrapper *brainCloudWrapper, const FString &entityType, const FString &entityId, int version, const FString &fieldsJson, const FString &shardKeyJson);
     /**
      * deletes entities based on the deleteCriteria
      * 
