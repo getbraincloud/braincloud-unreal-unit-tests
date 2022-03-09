@@ -118,7 +118,7 @@ UBCCustomEntityProxy *UBCCustomEntityProxy::UpdateSingletonFields(UBrainCloudWra
     return Proxy;
 }
 
-UBCCustomEntityProxy* UBCCustomEntityProxy::UpdateEntityFieldsShard(UBrainCloudWrapper* brainCloudWrapper, const FString& entityType,
+UBCCustomEntityProxy* UBCCustomEntityProxy::UpdateEntityFieldsSharded(UBrainCloudWrapper* brainCloudWrapper, const FString& entityType,
     const FString& entityId, int version, const FString& fieldsJson, const FString& shardKeyJson)
 {
     UBCCustomEntityProxy *Proxy = NewObject<UBCCustomEntityProxy>();
