@@ -486,6 +486,7 @@ const ServiceOperation ServiceOperation::ReadEntity = ServiceOperation("READ_ENT
 const ServiceOperation ServiceOperation::IncrementData = ServiceOperation("INCREMENT_DATA");
 const ServiceOperation ServiceOperation::UpdateEntity = ServiceOperation("UPDATE_ENTITY");
 const ServiceOperation ServiceOperation::UpdateEntityFields = ServiceOperation("UPDATE_ENTITY_FIELDS");
+const ServiceOperation ServiceOperation::UpdateEntityFieldsSharded = ServiceOperation("UPDATE_ENTITY_FIELDS_SHARDED");
 const ServiceOperation ServiceOperation::DeleteEntities = ServiceOperation("DELETE_ENTITIES");
 const ServiceOperation ServiceOperation::UpdateSingletonFields = ServiceOperation("UPDATE_SINGLETON_FIELDS");
 

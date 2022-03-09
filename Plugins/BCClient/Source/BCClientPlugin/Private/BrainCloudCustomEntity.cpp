@@ -123,6 +123,20 @@ void BrainCloudCustomEntity::updateEntityFields(const FString &entityType, const
     _client->sendRequest(sc);
 }
 
+void BrainCloudCustomEntity::updateEntityFieldsSharded(const FString& entityType, const FString& entityId, int version, const FString& fieldsJson,
+    const FString& shardKeyJson, IServerCallback* callback)
+{
+    TSharedRef<FJsonObject> message = MakeShareable(new FJsonObject());
+    message->SetStringField(OperationParam::CustomEntityServiceEntityType.getValue(), entityType);
+    message->SetStringField(OperationParam::CustomEntityServiceEntityId.getValue(), entityId);
+    message->SetNumberField(OperationParam::CustomEntityServiceVersion.getValue(), version);
+    message->SetObjectField(OperationParam::CustomEntityServiceFieldsJson.getValue(), JsonUtil::jsonStringToValue(fieldsJson));
+    message->SetObjectField(OperationParam::CustomEntityServiceShardKeyJson.getValue(), JsonUtil::jsonStringToValue(shardKeyJson));
+    
+    ServerCall *sc = new ServerCall(ServiceName::CustomEntity, ServiceOperation::UpdateEntityFieldsSharded, message, callback);
+    _client->sendRequest(sc);
+}
+
 void BrainCloudCustomEntity::deleteEntities(const FString &entityType, const FString &deleteCriteria, IServerCallback *callback)
 {
     TSharedRef<FJsonObject> message = MakeShareable(new FJsonObject());
