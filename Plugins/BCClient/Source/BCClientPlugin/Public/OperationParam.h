@@ -527,7 +527,8 @@ class BCCLIENTPLUGIN_API OperationParam
 	static const OperationParam CustomEntityServiceFieldsJson;
 	static const OperationParam CustomEntityServiceDataJson;
 	static const OperationParam CustomEntityServiceDeleteCriteria;
-
+	static const OperationParam CustomEntityServiceShardKeyJson;
+	
 	//global app
 	static const OperationParam GlobalAppReadSelectedProperties;
 	static const OperationParam GlobalAppReadPropertiesInCategories;
