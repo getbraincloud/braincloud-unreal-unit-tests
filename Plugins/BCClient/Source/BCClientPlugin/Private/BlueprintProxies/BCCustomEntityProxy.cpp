@@ -122,6 +122,6 @@ UBCCustomEntityProxy* UBCCustomEntityProxy::UpdateEntityFieldsShard(UBrainCloudW
     const FString& entityId, int version, const FString& fieldsJson, const FString& shardKeyJson)
 {
     UBCCustomEntityProxy *Proxy = NewObject<UBCCustomEntityProxy>();
-    UBCWrapperProxy::GetBrainCloudInstance(brainCloudWrapper)->getCustomEntityService()->updateEntityFieldsShard(entityType, entityId, version, fieldsJson, shardKeyJson, Proxy);
+    UBCWrapperProxy::GetBrainCloudInstance(brainCloudWrapper)->getCustomEntityService()->updateEntityFieldsSharded(entityType, entityId, version, fieldsJson, shardKeyJson, Proxy);
     return Proxy;
 }

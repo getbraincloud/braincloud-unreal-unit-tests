@@ -173,7 +173,7 @@ class UBCCustomEntityProxy : public UBCBlueprintCallProxyBase
 	 * @param callback The method to be invoked when the server response is received
 	 */
   UFUNCTION(BlueprintCallable, meta = (BlueprintInternalUseOnly = "true"), Category = "BrainCloud|CustomEntity")
-  static UBCCustomEntityProxy *UpdateEntityFieldsShard(UBrainCloudWrapper *brainCloudWrapper, const FString &entityType, const FString &entityId, int version, const FString &fieldsJson, const FString &shardKeyJson);
+  static UBCCustomEntityProxy *UpdateEntityFieldsSharded(UBrainCloudWrapper *brainCloudWrapper, const FString &entityType, const FString &entityId, int version, const FString &fieldsJson, const FString &shardKeyJson);
     /**
      * deletes entities based on the deleteCriteria
      * 

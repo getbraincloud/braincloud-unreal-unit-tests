@@ -158,7 +158,7 @@ public:
       * @param shardKeyJson The shard key field(s) and value(s), as JSON, applicable to the entity being updated.
       * @param callback The method to be invoked when the server response is received
       */
-    void updateEntityFieldsShard(const FString &entityType, const FString &entityId, int version, const FString &fieldsJson, const FString &shardKeyJson, IServerCallback *callback);
+    void updateEntityFieldsSharded(const FString &entityType, const FString &entityId, int version, const FString &fieldsJson, const FString &shardKeyJson, IServerCallback *callback);
 
    /**
     * deletes entities defined within the deleteCriteria.
