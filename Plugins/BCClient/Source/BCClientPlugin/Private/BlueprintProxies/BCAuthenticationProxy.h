@@ -2,6 +2,7 @@
 
 #pragma once
 
+#include "BCAuthType.h"
 #include "BCBlueprintCallProxyBase.h"
 #include "BCAuthenticationProxy.generated.h"
 
@@ -270,6 +271,36 @@ class UBCAuthenticationProxy : public UBCBlueprintCallProxyBase
     UFUNCTION(BlueprintCallable, meta = (BlueprintInternalUseOnly = "true"), Category = "BrainCloud|Authentication")
     static UBCAuthenticationProxy *AuthenticateExternal(UBrainCloudWrapper *brainCloudWrapper, FString userId, FString token, FString externalAuthName, bool forceCreate);
 
+	/*
+	 * A generic Authenticate method that translates to the same as calling a specific one, except it takes an extraJson
+	 * that will be passed along to pre- or post- hooks.
+	 *
+	 * Service Name - Authenticate
+	 * Service Operation - Authenticate
+	 *
+	 * @param in_authenticationType Universal, Email, Facebook, etc
+	 * @param in_ids Auth IDs structure
+	 * @param in_forceCreate Should a new profile be created for this user if the account does not exist?
+	 * @param in_extraJson Additional to piggyback along with the call, to be picked up by pre- or post- hooks. Leave empty string for no extraJson.
+	 * @param in_callback The method to be invoked when the server response is received
+	 */
+	UFUNCTION(BlueprintCallable, meta = (BlueprintInternalUseOnly = "true"), Category = "BrainCloud|Authentication")
+	static UBCAuthenticationProxy *AuthenticateAdvanced(UBrainCloudWrapper *brainCloudWrapper, EBCAuthType in_authenticationType, const FAuthenticationIds &in_ids, bool in_forceCreate, const FString &in_extraJson);
+
+	/**
+	 * Authenticate the user for Ultra.
+	 *
+	 * Service Name - authenticationV2
+	 * Service Operation - AUTHENTICATE
+	 *
+	 * @param in_ultraUsername {string} - it's what the user uses to log into the Ultra endpoint initially
+	 * @param in_ultraIdToken {string} - The "id_token" taken from Ultra's JWT.
+	 * @param in_forceCreate {boolean} - Should a new profile be created for this user if the account does not exist?
+	 * If set to false, you need to handle errors in the case of new players.
+	 */
+	UFUNCTION(BlueprintCallable, meta = (BlueprintInternalUseOnly = "true"), Category = "BrainCloud|Authentication")
+	static UBCAuthenticationProxy *AuthenticateUltra(UBrainCloudWrapper *brainCloudWrapper, FString in_ultraUsername, FString in_ultraIdToken, bool in_forceCreate);
+	
     /**
     * Reset Email password - Sends a password reset email to the specified address
     *
@@ -284,7 +315,6 @@ class UBCAuthenticationProxy : public UBCBlueprintCallProxyBase
     */
     UFUNCTION(BlueprintCallable, meta = (BlueprintInternalUseOnly = "true"), Category = "BrainCloud|Authentication")
     static UBCAuthenticationProxy *ResetEmailPassword(UBrainCloudWrapper *brainCloudWrapper, const FString &email);
-    
 
     /**
     * Reset Email password with service parameters- Sends a password reset email to the specified address

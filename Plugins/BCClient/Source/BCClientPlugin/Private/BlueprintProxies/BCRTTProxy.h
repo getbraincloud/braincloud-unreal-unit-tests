@@ -48,4 +48,7 @@ public:
 	UFUNCTION(BlueprintCallable, Category = "BrainCloud|RTT")
 	static void DeregisterAllRTTCallbacks(UBrainCloudWrapper *brainCloudWrapper);
 
+	UFUNCTION(BlueprintCallable, Category = "BrainCloud|RTT")
+	static const FString &GetRTTConnectionId(UBrainCloudWrapper *brainCloudWrapper);
+
 };

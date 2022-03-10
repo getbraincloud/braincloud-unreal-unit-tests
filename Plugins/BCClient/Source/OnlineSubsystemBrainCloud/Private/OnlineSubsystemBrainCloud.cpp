@@ -95,7 +95,7 @@ IOnlineStorePtr FOnlineSubsystemBrainCloud::GetStoreInterface() const
 	return nullptr;
 }
 
-#if ENGINE_MAJOR_VERSION <= 4 && ENGINE_MINOR_VERSION >= 11
+#if (ENGINE_MAJOR_VERSION == 4 && ENGINE_MINOR_VERSION >= 11) || ENGINE_MAJOR_VERSION == 5
 IOnlineStoreV2Ptr FOnlineSubsystemBrainCloud::GetStoreV2Interface() const
 {
 	return nullptr;
@@ -147,15 +147,15 @@ IOnlineTurnBasedPtr FOnlineSubsystemBrainCloud::GetTurnBasedInterface() const
 	return nullptr;
 }
 
-#if ENGINE_MAJOR_VERSION <= 4 && ENGINE_MINOR_VERSION >= 22
+#if (ENGINE_MAJOR_VERSION == 4 && ENGINE_MINOR_VERSION >= 22) || ENGINE_MAJOR_VERSION == 5
 IOnlineStatsPtr FOnlineSubsystemBrainCloud::GetStatsInterface(void) const
 {
-    // should we return the stats service ?
+	// should we return the stats service ?
 	return nullptr;
 }
 #endif
 
-#if ENGINE_MAJOR_VERSION <= 4 && ENGINE_MINOR_VERSION >= 21
+#if (ENGINE_MAJOR_VERSION == 4 && ENGINE_MINOR_VERSION >= 21) || ENGINE_MAJOR_VERSION == 5
 IOnlineTournamentPtr FOnlineSubsystemBrainCloud::GetTournamentInterface() const
 {
 	return nullptr;
@@ -176,12 +176,11 @@ bool FOnlineSubsystemBrainCloud::Tick(float DeltaTime)
 	return true;
 }
 
-#if ENGINE_MAJOR_VERSION <= 4 && ENGINE_MINOR_VERSION >= 16
+#if (ENGINE_MAJOR_VERSION == 4 && ENGINE_MINOR_VERSION >= 16) || ENGINE_MAJOR_VERSION == 5
 FOnlineSubsystemBrainCloud::FOnlineSubsystemBrainCloud(FName InSubsystemName, FName InInstanceName) : FOnlineSubsystemImpl(InSubsystemName, InInstanceName)
 {
 	_clientPtr = new BrainCloudClient();
 }
-
 #else
 FOnlineSubsystemBrainCloud::FOnlineSubsystemBrainCloud(FName InSubsystemName, FName InInstanceName) : FOnlineSubsystemImpl(InInstanceName)
 {
@@ -202,7 +201,9 @@ bool FOnlineSubsystemBrainCloud::Init()
 		FConfigSection *Configs = GConfig->GetSectionPrivate(TEXT("BrainCloud.Client"), false, true, _configPath);
 		if (Configs)
 		{
-#if ENGINE_MAJOR_VERSION <= 4 && ENGINE_MINOR_VERSION >= 12
+
+// Unreal Engine Version is >= 4.12 OR in Unreal Engine 5
+#if (ENGINE_MAJOR_VERSION == 4 && ENGINE_MINOR_VERSION >= 12) || ENGINE_MAJOR_VERSION == 5
 			FString test = Configs->Find(TEXT("ServerURL"))->GetValue();
 			_clientPtr->initialize(
 				Configs->Find(TEXT("ServerURL"))->GetValue(),
@@ -280,7 +281,9 @@ bool FOnlineSubsystemBrainCloud::Exec(UWorld *InWorld, const TCHAR *Cmd, FOutput
 {
 	return false;
 }
-#if ENGINE_MAJOR_VERSION <= 4 && ENGINE_MINOR_VERSION >= 17
+
+// Unreal Engine Version is >= 4.17 OR in Unreal Engine 5
+#if (ENGINE_MAJOR_VERSION == 4 && ENGINE_MINOR_VERSION >= 17) || ENGINE_MAJOR_VERSION == 5
 FText FOnlineSubsystemBrainCloud::GetOnlineServiceName() const
 {
 	return NSLOCTEXT("brainCloud", "brainCloud", "brainCloud");

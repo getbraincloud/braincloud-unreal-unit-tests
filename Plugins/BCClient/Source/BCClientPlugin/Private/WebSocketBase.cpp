@@ -25,10 +25,10 @@
 #include "Runtime/Launch/Resources/Version.h"
 
 #if PLATFORM_UWP
-#if ENGINE_MAJOR_VERSION <= 4 && ENGINE_MINOR_VERSION <24
- #if PLATFORM_HTML5
- #endif
- #endif
+	#if ENGINE_MAJOR_VERSION == 4 && ENGINE_MINOR_VERSION <24
+		#if PLATFORM_HTML5
+		#endif
+	#endif
 #else
 #define UI UI_ST
 THIRD_PARTY_INCLUDES_START
@@ -110,6 +110,7 @@ void FHtml5SocketHelper::Tick(float DeltaTime)
 	if ((checkError == 0) && !mHostWebSocket->mConnectSuccess && SocketState(mHostWebSocket->mWebSocketRef))
 	{
 		mHostWebSocket->mConnectSuccess = true;
+        if (mWebSocketBaseCallbacks) mWebSocketBaseCallbacks->OnConnectComplete();
 		mHostWebSocket->OnConnectComplete.Broadcast();
 	}
 
@@ -120,10 +121,12 @@ void FHtml5SocketHelper::Tick(float DeltaTime)
 		if (!mHostWebSocket->mConnectSuccess)
 		{
 			FString strError = ANSI_TO_TCHAR(szError);
+            if (mWebSocketBaseCallbacks) mWebSocketBaseCallbacks->OnConnectError(strError);
 			mHostWebSocket->OnConnectError.Broadcast(strError);
 		}
 		else
 		{
+            if (mWebSocketBaseCallbacks) mWebSocketBaseCallbacks->OnClosed();
 			mHostWebSocket->OnClosed.Broadcast();
 		}
 
@@ -216,6 +219,7 @@ void UWebSocketBase::MessageReceived(Windows::Networking::Sockets::MessageWebSoc
 			{
 				String ^ read = reader->ReadString(reader->UnconsumedBufferLength);
 				FString strData(read->Data(), read->Length());
+                if (mWebSocketBaseCallbacks) mWebSocketBaseCallbacks->OnReceiveData(strData);
 				OnReceiveData.Broadcast(strData);
 			}
 			catch (Exception ^ ex)
@@ -230,6 +234,7 @@ void UWebSocketBase::OnUWPClosed(Windows::Networking::Sockets::IWebSocket ^ send
 	Windows::ApplicationModel::Core::CoreApplication::MainView->Dispatcher->RunAsync(
 		Windows::UI::Core::CoreDispatcherPriority::Normal,
 		ref new Windows::UI::Core::DispatchedHandler([this]() {
+            if (mWebSocketBaseCallbacks) mWebSocketBaseCallbacks->OnClosed();
 			OnClosed.Broadcast();
 		}));
 }
@@ -339,21 +344,23 @@ void UWebSocketBase::Connect(const FString &uri, const TMap<FString, FString> &h
 			ref new Windows::UI::Core::DispatchedHandler([this]() {
 				if (messageWebSocket != nullptr)
 				{
+                    if (mWebSocketBaseCallbacks) mWebSocketBaseCallbacks->OnConnectComplete();
 					OnConnectComplete.Broadcast();
 				}
 				else
 				{
+                    if (mWebSocketBaseCallbacks) mWebSocketBaseCallbacks->OnConnectError(TEXT("connect error"));
 					OnConnectError.Broadcast(TEXT("connect error"));
 				}
 			}));
 	});
-	#if ENGINE_MAJOR_VERSION <= 4 && ENGINE_MINOR_VERSION <24
+#if ENGINE_MAJOR_VERSION == 4 && ENGINE_MINOR_VERSION <24
 #if PLATFORM_HTML5
 	mHtml5SocketHelper.Bind(this);
 	std::string strUrl = TCHAR_TO_ANSI(*uri);
 	mWebSocketRef = SocketCreate(strUrl.c_str());
-	#endif
-	#endif
+#endif
+#endif
 
 #else
 
@@ -581,6 +588,7 @@ void UWebSocketBase::ProcessRead(const char *in, int len)
 		--count;
 	}
 
+    if (mWebSocketBaseCallbacks) mWebSocketBaseCallbacks->OnReceiveData(dataArray);
 	OnReceiveData.Broadcast(dataArray);
 }
 
@@ -625,6 +633,7 @@ void UWebSocketBase::Close()
 #if PLATFORM_HTML5
 	SocketClose(mWebSocketRef);
 	mWebSocketRef = -1;
+    if (mWebSocketBaseCallbacks) mWebSocketBaseCallbacks->OnClosed();
 	OnClosed.Broadcast();
 	#endif
 	#endif
@@ -635,6 +644,7 @@ void UWebSocketBase::Close()
 		mlws = nullptr;
 	}
 
+    if (mWebSocketBaseCallbacks) mWebSocketBaseCallbacks->OnClosed();
 	OnClosed.Broadcast();
 #endif
 }
