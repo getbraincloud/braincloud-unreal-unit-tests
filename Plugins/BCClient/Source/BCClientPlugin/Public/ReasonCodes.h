@@ -22,7 +22,6 @@ class BCCLIENTPLUGIN_API ReasonCodes
     static const int32 MISSING_PROFILE_ERROR = 40208;
 
     static const int32 SECURITY_ERROR = 40209;
-
     static const int32 DOWNGRADING_TO_ANONYMOUS_ERROR = 40210;
     static const int32 DUPLICATE_IDENTITY_TYPE = 40211;
     static const int32 MERGE_PROFILES = 40212;
@@ -31,7 +30,9 @@ class BCCLIENTPLUGIN_API ReasonCodes
     static const int32 DATABASE_ERROR = 40215;
     static const int32 PROPERTY_NOT_OVERRIDEABLE = 40216;
     static const int32 UNKNOWN_AUTH_ERROR = 40217;
-
+	static const int32 DATABASE_DUP_KEY_ERROR = 40220;
+	static const int32 EMAIL_NOT_VALID = 40221;
+	
     // Forbidden (403)...
     static const int32 UNABLE_TO_GET_FRIENDS_FROM_FACEBOOK = 40300;
     static const int32 BAD_SIGNATURE = 40301;
@@ -44,11 +45,13 @@ class BCCLIENTPLUGIN_API ReasonCodes
     static const int32 USER_SESSION_MISMATCH = PLAYER_SESSION_MISMATCH;
     static const int32 OPERATION_REQUIRES_A_SESSION = 40306;
     static const int32 TOKEN_DOES_NOT_MATCH_USER = 40307;
+	static const int32 MANUAL_REDIRECT = 40308;
     static const int32 EVENT_CAN_ONLY_SEND_TO_FRIEND_OR_SELF = 40309;
     static const int32 NOT_FRIENDS = 40310;
     static const int32 VC_BALANCE_CANNOT_BE_SPECIFIED = 40311;
     static const int32 VC_LIMIT_EXCEEDED = 40312;
     static const int32 UNABLE_TO_GET_MY_DATA_FROM_FACEBOOK = 40313;
+	static const int32 TLS_VERSION_INVALID = 40314;
     static const int32 INVALID_AUTHENTICATION_TYPE = 40315;
     static const int32 INVALID_GAME_ID = 40316;
     static const int32 INVALID_APP_ID = INVALID_GAME_ID;
@@ -293,6 +296,34 @@ class BCCLIENTPLUGIN_API ReasonCodes
     static const int32 LEADERBOARD_SCORE_DOESNOT_EXIST = 40528;
     static const int32 INITIAL_SCORE_NULL = 40529;
 
+	static const int32 UPLOLAD_IN_PROGRESS = 40724;
+	static const int32 REFRESH_IN_PROGRESS = 40725;
+	static const int32 REFRESH_INTERRUPTED = 40726;
+	static const int32 GAMELIFT_ERROR = 40727;
+	static const int32 GAMELIFT_LAUNCH_ERROR = 40728;
+	static const int32 MAX_HOSTED_SERVERS_REACHED = 40729;
+	static const int32 DUPLICATE_PACKET_ID = 40730;
+	static const int32 FEATURE_NOT_SUPPORTED_BY_BILLING_PLAN = 40731;
+	static const int32 NO_FRIENDS_FOUND = 40740;
+	static const int32 PRODUCT_TRANSACTION_NOT_FOUND = 40741;
+	static const int32 ITEM_DEF_NOT_FOUND = 40742;
+	static const int32 ITEM_DEF_HAS_DEPENDENCIES = 40743;
+	static const int32 TRANSFER_JOB_IDLE_TIMEOUT = 40744;
+	static const int32 GROUP_MEMBER_ACL_MORE_RESTRICTIVE_THAN_OTHER = 40745;
+	static const int32 GROUP_MEMBER_ACL_MUST_BE_READ_WRITE_FOR_UNOWNED_ENTITY = 40746;
+	static const int32 GROUP_MEMBER_ACL_REQUIRED = 40747;
+	static const int32 GROUP_TYPE_MAX_MEMBERS_EXCEEDED = 40748;
+	
+	static const int32 INVALID_LEADERBOARD_TOURNAMENT_SETTING = 40840;
+	static const int32 LEADERBOARD_EDIT_TOURNAMENT_SETTINGS_ERROR = 40841;
+	static const int32 LEADERBOARD_SCORES_EXIST = 40842;
+	static const int32 TOURNAMENT_SCORES_EXIST = 40843;
+	static const int32 LEADERBOARD_DBVERSION_MISMATCH = 40844;
+	static const int32 LEADERBOARD_API_DOES_NOT_APPLY = 40845;
+
+	static const int32 SCRIPT_DUPLICATE_EXISTS = 40908;
+	static const int32 INVALID_UPLOAD_EXTENSION = 40909;
+
     static const int32 NO_TWITTER_CONSUMER_KEY = 500001;
     static const int32 NO_TWITTER_CONSUMER_SECRET = 500002;
     static const int32 INVALID_CONFIGURATION = 500003;
@@ -306,7 +337,8 @@ class BCCLIENTPLUGIN_API ReasonCodes
     static const int32 FACEBOOK_BAD_APPLICATION_TOKEN_SIGNATURE = 500014;
 
     static const int32 MONGO_DB_EXCEPTION = 600001;
-
+	static const int32 BUILDER_API_CREATED_AT_MISMATCH = 60111;
+	
     // RTT 
     static const int32 RTT_LEFT_BY_CHOICE = 80000;
     static const int32 RTT_EVICTED = 80001;
