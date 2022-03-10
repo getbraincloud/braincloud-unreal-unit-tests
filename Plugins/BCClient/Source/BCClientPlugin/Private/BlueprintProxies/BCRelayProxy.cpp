@@ -9,38 +9,12 @@
 UBCRelayProxy::UBCRelayProxy(const FObjectInitializer &ObjectInitializer)
     : Super(ObjectInitializer)
 {
-	_bCleanupAfterFirstResponse = false;
 }
 
-int64 UBCRelayProxy::Ping(UBrainCloudWrapper *brainCloudWrapper)
-{
-    return UBCWrapperProxy::GetBrainCloudInstance(brainCloudWrapper)->getRelayService()->ping();
-}
-
-uint8 UBCRelayProxy::NetId(UBrainCloudWrapper *brainCloudWrapper)
-{
-    return UBCWrapperProxy::GetBrainCloudInstance(brainCloudWrapper)->getRelayService()->netId();
-}
-
-// const FString &UBCRelayProxy::getOwnerProfileId(UBrainCloudWrapper *brainCloudWrapper) const
-// {
-//     return UBCWrapperProxy::GetBrainCloudInstance(brainCloudWrapper)->getOwnerProfileId();
-// }
-
-const FString &UBCRelayProxy::GetProfileIdForNetId(UBrainCloudWrapper *brainCloudWrapper, int in_netId) const
-{
-    return UBCWrapperProxy::GetBrainCloudInstance(brainCloudWrapper)->getRelayService()->getProfileIdForNetId(in_netId);
-}
-
-int UBCRelayProxy::GetNetIdForProfileId(UBrainCloudWrapper *brainCloudWrapper, const FString &in_profileId) const
-{
-    return UBCWrapperProxy::GetBrainCloudInstance(brainCloudWrapper)->getRelayService()->getNetIdForProfileId(in_profileId);
-}
-
-UBCRelayProxy *UBCRelayProxy::Connect(UBrainCloudWrapper *brainCloudWrapper, BCRelayConnectionType in_connectionType, const FString &in_connectOptionsJson)
+UBCRelayProxy *UBCRelayProxy::Connect(UBrainCloudWrapper *brainCloudWrapper, BCRelayConnectionType in_connectionType, const FString &host, int port, const FString &passcode, const FString &lobbyId)
 {
 	UBCRelayProxy *Proxy = NewObject<UBCRelayProxy>();
-	UBCWrapperProxy::GetBrainCloudInstance(brainCloudWrapper)->getRelayService()->connect(in_connectionType, in_connectOptionsJson, Proxy);
+	UBCWrapperProxy::GetBrainCloudInstance(brainCloudWrapper)->getRelayService()->connect(in_connectionType, host, port, passcode, lobbyId, Proxy);
 	return Proxy;
 }
 
@@ -54,36 +28,66 @@ bool UBCRelayProxy::IsConnected(UBrainCloudWrapper *brainCloudWrapper)
 	return UBCWrapperProxy::GetBrainCloudInstance(brainCloudWrapper)->getRelayService()->isConnected();
 }
 
-void UBCRelayProxy::DeregisterDataCallback(UBrainCloudWrapper *brainCloudWrapper)
+int64 UBCRelayProxy::GetPing(UBrainCloudWrapper *brainCloudWrapper)
 {
-	UBCWrapperProxy::GetBrainCloudInstance(brainCloudWrapper)->getRelayService()->deregisterDataCallback();
+    return UBCWrapperProxy::GetBrainCloudInstance(brainCloudWrapper)->getRelayService()->getPing();
 }
 
-void UBCRelayProxy::Send(UBrainCloudWrapper *brainCloudWrapper, const TArray<uint8> &in_message, const int32 in_netId, bool in_reliable/* = true*/, bool in_ordered/* = true*/, int in_channel/* = 0*/)
+const FString &UBCRelayProxy::GetOwnerProfileId(UBrainCloudWrapper *brainCloudWrapper)
 {
-	uint64 to_netId = (uint64)in_netId;
-	if (in_netId == -1) 
-		to_netId = BrainCloudRelayComms::TO_ALL_PLAYERS;
-    UBCWrapperProxy::GetBrainCloudInstance(brainCloudWrapper)->getRelayService()->send(in_message, to_netId, in_reliable, in_ordered, in_channel);
+    return UBCWrapperProxy::GetBrainCloudInstance(brainCloudWrapper)->getRelayService()->getOwnerProfileId();
 }
 
-void UBCRelayProxy::SetPingInterval(UBrainCloudWrapper *brainCloudWrapper, float in_value)
+const FString &UBCRelayProxy::GetOwnerCxId(UBrainCloudWrapper *brainCloudWrapper)
 {
-	UBCWrapperProxy::GetBrainCloudInstance(brainCloudWrapper)->getRelayService()->setPingInterval(in_value);
+    return UBCWrapperProxy::GetBrainCloudInstance(brainCloudWrapper)->getRelayService()->getOwnerCxId();
 }
 
-FString UBCRelayProxy::BCBytesToString(const TArray<uint8>& in_data)
+const FString &UBCRelayProxy::GetProfileIdForNetId(UBrainCloudWrapper *brainCloudWrapper, int in_netId)
 {
-	FString parsedMessage = BrainCloudRelay::BCBytesToString(in_data.GetData(), in_data.Num());
-	return parsedMessage;
+    return UBCWrapperProxy::GetBrainCloudInstance(brainCloudWrapper)->getRelayService()->getProfileIdForNetId(in_netId);
 }
 
-TArray<uint8> UBCRelayProxy::BCStringToBytes(const FString &in_string)
+int UBCRelayProxy::GetNetIdForProfileId(UBrainCloudWrapper *brainCloudWrapper, const FString &in_profileId)
 {
-	TArray<uint8> data;
-	data.AddUninitialized(in_string.Len());
-	BrainCloudRelay::BCStringToBytes(in_string, data.GetData(), in_string.Len());
-
-	return data;
+    return UBCWrapperProxy::GetBrainCloudInstance(brainCloudWrapper)->getRelayService()->getNetIdForProfileId(in_profileId);
 }
 
+const FString &UBCRelayProxy::GetCxIdForNetId(UBrainCloudWrapper *brainCloudWrapper, int in_netId)
+{
+    return UBCWrapperProxy::GetBrainCloudInstance(brainCloudWrapper)->getRelayService()->getCxIdForNetId(in_netId);
+}
+
+int UBCRelayProxy::GetNetIdForCxId(UBrainCloudWrapper *brainCloudWrapper, const FString &in_profileId)
+{
+    return UBCWrapperProxy::GetBrainCloudInstance(brainCloudWrapper)->getRelayService()->getNetIdForCxId(in_profileId);
+}
+
+void UBCRelayProxy::DeregisterRelayCallback(UBrainCloudWrapper *brainCloudWrapper)
+{
+	UBCWrapperProxy::GetBrainCloudInstance(brainCloudWrapper)->getRelayService()->deregisterRelayCallback();
+}
+
+void UBCRelayProxy::DeregisterSystemCallback(UBrainCloudWrapper *brainCloudWrapper)
+{
+	UBCWrapperProxy::GetBrainCloudInstance(brainCloudWrapper)->getRelayService()->deregisterSystemCallback();
+}
+
+void UBCRelayProxy::Send(UBrainCloudWrapper *brainCloudWrapper, const TArray<uint8> &data, int toNetId, bool reliable, bool ordered, BCRelayChannel channel)
+{
+	uint64 to_netId = (uint64)toNetId;
+	if (toNetId == -1) 
+		to_netId = BrainCloudRelay::TO_ALL_PLAYERS;
+    UBCWrapperProxy::GetBrainCloudInstance(brainCloudWrapper)->getRelayService()->send(data, to_netId, reliable, ordered, channel);
+}
+
+// void UBCRelayProxy::SendToPlayers(UBrainCloudWrapper *brainCloudWrapper, const TArray<uint8> &data, uint32 in_playerMaskLow, uint32 in_playerMaskHi, bool reliable, bool ordered, BCRelayChannel channel)
+// {
+//     uint64 playerMask = (uint64)in_playerMaskLow | ((uint64)in_playerMaskHi << 32);
+//     UBCWrapperProxy::GetBrainCloudInstance(brainCloudWrapper)->getRelayService()->sendToPlayers(data, playerMask, reliable, ordered, channel);
+// }
+
+void UBCRelayProxy::SendToAll(UBrainCloudWrapper *brainCloudWrapper, const TArray<uint8> &data, bool reliable, bool ordered, BCRelayChannel channel)
+{
+    UBCWrapperProxy::GetBrainCloudInstance(brainCloudWrapper)->getRelayService()->sendToAll(data, reliable, ordered, channel);
+}

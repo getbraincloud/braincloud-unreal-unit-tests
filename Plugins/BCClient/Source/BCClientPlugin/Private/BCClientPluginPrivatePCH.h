@@ -1,4 +1,4 @@
-// Copyright 2018 bitHeads, Inc. All Rights Reserved.
+// Copyright 2021 bitHeads, Inc. All Rights Reserved.
 
 #pragma once
 
@@ -16,6 +16,7 @@
 
 DECLARE_LOG_CATEGORY_EXTERN(LogBrainCloud, Log, All);
 DECLARE_LOG_CATEGORY_EXTERN(LogBrainCloudComms, Log, All);
+DECLARE_LOG_CATEGORY_EXTERN(LogBrainCloudRelayComms, Log, All);
 
 #include "IBCClientPlugin.h"
 

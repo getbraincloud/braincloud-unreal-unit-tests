@@ -58,6 +58,79 @@ void BrainCloudIdentity::detachFacebookLimitedIdentity(const FString &facebookLi
 	detachIdentity(facebookLimitedId, EBCAuthType::FacebookLimited, continueAnon, callback);
 }
 
+void BrainCloudIdentity::attachAdvancedIdentity(EBCAuthType authenticationType, const FAuthenticationIds& ids, const FString& extraJson, IServerCallback* callback)
+{
+	TSharedRef<FJsonObject> message = MakeShareable(new FJsonObject());
+	message->SetStringField(OperationParam::IdentityServiceExternalId.getValue(), ids.externalId);
+	message->SetStringField(OperationParam::IdentityServiceAuthenticationType.getValue(), BCAuthType::EnumToString(authenticationType));
+	message->SetStringField(OperationParam::AuthenticateServiceAuthenticateAuthenticationToken.getValue(), ids.authenticationToken);
+
+	if(OperationParam::isOptionalParamValid(extraJson))
+	{
+		message->SetStringField(OperationParam::AuthenticateServiceAuthenticateExtraJson.getValue(), extraJson);
+	}
+
+	if(OperationParam::isOptionalParamValid(ids.authenticationSubType))
+	{
+		message->SetStringField(OperationParam::AuthenticateServiceAuthenticateExternalAuthName.getValue(), ids.authenticationSubType);
+	}
+
+	ServerCall *sc = new ServerCall(ServiceName::Identity, ServiceOperation::Attach, message, callback);
+	_client->sendRequest(sc);
+}
+
+void BrainCloudIdentity::mergeAdvancedIdentity(EBCAuthType authenticationType, const FAuthenticationIds& ids, const FString& extraJson, IServerCallback* callback)
+{
+	TSharedRef<FJsonObject> message = MakeShareable(new FJsonObject());
+	message->SetStringField(OperationParam::IdentityServiceExternalId.getValue(), ids.externalId);
+	message->SetStringField(OperationParam::IdentityServiceAuthenticationType.getValue(), BCAuthType::EnumToString(authenticationType));
+	message->SetStringField(OperationParam::AuthenticateServiceAuthenticateAuthenticationToken.getValue(), ids.authenticationToken);
+
+	if(OperationParam::isOptionalParamValid(extraJson))
+	{
+		message->SetStringField(OperationParam::AuthenticateServiceAuthenticateExtraJson.getValue(), extraJson);
+	}
+
+	if(OperationParam::isOptionalParamValid(ids.authenticationSubType))
+	{
+		message->SetStringField(OperationParam::AuthenticateServiceAuthenticateExternalAuthName.getValue(), ids.authenticationSubType);
+	}
+
+	ServerCall *sc = new ServerCall(ServiceName::Identity, ServiceOperation::Merge, message, callback);
+	_client->sendRequest(sc);
+}
+
+void BrainCloudIdentity::detachAdvancedIdentity(EBCAuthType authenticationType, const FString& externalId, bool continueAnon, const FString& extraJson, IServerCallback* callback)
+{
+	TSharedRef<FJsonObject> message = MakeShareable(new FJsonObject());
+	message->SetStringField(OperationParam::IdentityServiceExternalId.getValue(), externalId);
+	message->SetStringField(OperationParam::IdentityServiceAuthenticationType.getValue(), BCAuthType::EnumToString(authenticationType));
+	message->SetBoolField(OperationParam::IdentityServiceConfirmAnonymous.getValue(), continueAnon);
+
+	if(OperationParam::isOptionalParamValid(extraJson))
+	{
+		message->SetStringField(OperationParam::AuthenticateServiceAuthenticateExtraJson.getValue(), extraJson);
+	}
+
+	ServerCall *sc = new ServerCall(ServiceName::Identity, ServiceOperation::Detach, message, callback);
+	_client->sendRequest(sc);
+}
+
+void BrainCloudIdentity::attachUltraIdentity(const FString& in_ultraUsername, const FString& in_ultraIdToken, IServerCallback* in_callback)
+{
+	attachIdentity(in_ultraUsername, in_ultraIdToken, EBCAuthType::Ultra, in_callback);
+}
+
+void BrainCloudIdentity::mergeUltraIdentity(const FString& in_ultraUsername, const FString& in_ultraIdToken, IServerCallback* in_callback)
+{
+	mergeIdentity(in_ultraUsername, in_ultraIdToken, EBCAuthType::Ultra, in_callback);
+}
+
+void BrainCloudIdentity::detachUltraIdentity(const FString& in_ultraUsername, bool in_continueAnon, IServerCallback* in_callback)
+{
+	detachIdentity(in_ultraUsername, EBCAuthType::Ultra, in_continueAnon, in_callback);
+}
+
 void BrainCloudIdentity::attachOculusIdentity(const FString &oculusId, const FString &oculusNonce, IServerCallback *callback)
 {
 	attachIdentity(oculusId, oculusNonce, EBCAuthType::Oculus, callback);

@@ -5,7 +5,9 @@
 #include "BCBlueprintCallProxyBase.h"
 #include "BCBlueprintRTTCallProxyBase.h"
 #include "BCBlueprintRestCallProxyBase.h"
+#include "BCBlueprintRelayConnectCallProxyBase.h"
 #include "BCBlueprintRelayCallProxyBase.h"
+#include "BCBlueprintRelaySystemCallProxyBase.h"
 #include "BlueprintFunctionNodeSpawner.h"
 #include "BlueprintActionDatabaseRegistrar.h"
 
@@ -29,7 +31,9 @@ void UK2Node_BrainCloudCall::GetMenuActions(FBlueprintActionDatabaseRegistrar &A
         if ((!Class->IsChildOf<UBCBlueprintCallProxyBase>() &&
              !Class->IsChildOf<UBCBlueprintRTTCallProxyBase>() &&
              !Class->IsChildOf<UBCBlueprintRestCallProxyBase>() &&
-             !Class->IsChildOf<UBCBlueprintRelayCallProxyBase>()) ||
+             !Class->IsChildOf<UBCBlueprintRelayConnectCallProxyBase>() &&
+             !Class->IsChildOf<UBCBlueprintRelayCallProxyBase>() &&
+             !Class->IsChildOf<UBCBlueprintRelaySystemCallProxyBase>()) ||
             Class->HasAnyClassFlags(CLASS_Abstract))
         {
             continue;
@@ -51,19 +55,22 @@ void UK2Node_BrainCloudCall::GetMenuActions(FBlueprintActionDatabaseRegistrar &A
             {
                 continue;
             }
-
-            #if ENGINE_MAJOR_VERSION <= 4 && ENGINE_MINOR_VERSION <= 24
-            UObjectProperty *ReturnProperty = Cast<UObjectProperty>(Function->GetReturnProperty());
-            #endif
-            #if ENGINE_MAJOR_VERSION <= 4 && ENGINE_MINOR_VERSION >= 25
-            FObjectProperty *ReturnProperty = Cast<FObjectProperty>(Function->GetReturnProperty());
-            #endif
+// Unreal Engine Version is <= 4.24
+#if ENGINE_MAJOR_VERSION == 4 && ENGINE_MINOR_VERSION <= 24
+            UObjectProperty *ReturnProperty = CastField<UObjectProperty>(Function->GetReturnProperty());
+// Unreal Engine Version is >= 4.25 OR in Unreal Engine 5
+#elif (ENGINE_MAJOR_VERSION == 4 && ENGINE_MINOR_VERSION >= 25) || ENGINE_MAJOR_VERSION == 5
+            FObjectProperty *ReturnProperty = CastField<FObjectProperty>(Function->GetReturnProperty());
+#endif
 
             // see if the function is a static factory method for online proxies
             bool const bIsProxyFactoryMethod = (ReturnProperty != nullptr) &&
                                                (ReturnProperty->PropertyClass->IsChildOf<UBCBlueprintCallProxyBase>() ||
                                                 ReturnProperty->PropertyClass->IsChildOf<UBCBlueprintRTTCallProxyBase>() ||
                                                 ReturnProperty->PropertyClass->IsChildOf<UBCBlueprintRestCallProxyBase>() ||
+                                                ReturnProperty->PropertyClass->IsChildOf<UBCBlueprintRelayConnectCallProxyBase>() ||
+                                                ReturnProperty->PropertyClass->IsChildOf<UBCBlueprintRelayCallProxyBase>() ||
+                                                ReturnProperty->PropertyClass->IsChildOf<UBCBlueprintRelaySystemCallProxyBase>() ||
                                                 ReturnProperty->PropertyClass->IsChildOf<UBCBlueprintRelayCallProxyBase>());
 
             if (bIsProxyFactoryMethod)
@@ -77,12 +84,13 @@ void UK2Node_BrainCloudCall::GetMenuActions(FBlueprintActionDatabaseRegistrar &A
                     if (FunctionPtr.IsValid())
                     {
                         UFunction *Func = FunctionPtr.Get();
-                        #if ENGINE_MAJOR_VERSION <= 4 && ENGINE_MINOR_VERSION <= 24
+// Unreal Engine Version is <= 4.24
+#if ENGINE_MAJOR_VERSION == 4 && ENGINE_MINOR_VERSION <= 24
                         UObjectProperty *ReturnProp = CastChecked<UObjectProperty>(Func->GetReturnProperty());
-                        #endif
-                        #if ENGINE_MAJOR_VERSION <= 4 && ENGINE_MINOR_VERSION >= 25
+// Unreal Engine Version is >= 4.25 OR in Unreal Engine 5
+#elif (ENGINE_MAJOR_VERSION == 4 && ENGINE_MINOR_VERSION >= 25) || ENGINE_MAJOR_VERSION == 5 
                         FObjectProperty *ReturnProp = CastChecked<FObjectProperty>(Func->GetReturnProperty());
-                        #endif
+#endif
 
                         AsyncTaskNode->ProxyFactoryFunctionName = Func->GetFName();
                         AsyncTaskNode->ProxyFactoryClass = Func->GetOuterUClass();

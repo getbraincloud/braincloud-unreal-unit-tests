@@ -40,3 +40,8 @@ void UBCRTTProxy::DeregisterAllRTTCallbacks(UBrainCloudWrapper *brainCloudWrappe
 {
 	UBCWrapperProxy::GetBrainCloudInstance(brainCloudWrapper)->getRTTService()->deregisterAllRTTCallbacks();
 }
+
+const FString &UBCRTTProxy::GetRTTConnectionId(UBrainCloudWrapper *brainCloudWrapper)
+{
+	return UBCWrapperProxy::GetBrainCloudInstance(brainCloudWrapper)->getRTTService()->getRTTConnectionId();
+}

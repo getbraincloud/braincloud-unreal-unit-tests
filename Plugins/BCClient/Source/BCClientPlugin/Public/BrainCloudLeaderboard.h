@@ -39,10 +39,11 @@ class BCCLIENTPLUGIN_API BrainCloudLeaderboard
 	/**
 	 * Method returns the social leaderboard. A player's social leaderboard is
 	 * comprised of players who are recognized as being your friend.
-	 * For now, this applies solely to Facebook connected players who are
-	 * friends with the logged in player (who also must be Facebook connected).
-	 * In the future this will expand to other identification means (such as
-	 * Game Center, Google circles etc).
+     * 
+     * The getSocialLeaderboard will retrieve all friends from all friend platforms, so
+     * - all external friends (Facebook, Steam, PlaystationNetwork)
+     * - all internal friends (brainCloud)
+     * - plus "self".
 	 *
 	 * Leaderboards entries contain the player's score and optionally, some user-defined
 	 * data associated with the score. The currently logged in player will also
@@ -62,10 +63,11 @@ class BCCLIENTPLUGIN_API BrainCloudLeaderboard
 	/**
 	 * Method returns the social leaderboard by its version. A player's social leaderboard is
 	 * comprised of players who are recognized as being your friend.
-	 * For now, this applies solely to Facebook connected players who are
-	 * friends with the logged in player (who also must be Facebook connected).
-	 * In the future this will expand to other identification means (such as
-	 * Game Center, Google circles etc).
+     * 
+     * The getSocialLeaderboard will retrieve all friends from all friend platforms, so
+     * - all external friends (Facebook, Steam, PlaystationNetwork)
+     * - all internal friends (brainCloud)
+     * - plus "self".
 	 *
 	 * Leaderboards entries contain the player's score and optionally, some user-defined
 	 * data associated with the score. The currently logged in player will also

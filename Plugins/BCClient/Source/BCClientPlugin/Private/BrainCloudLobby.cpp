@@ -240,7 +240,7 @@ void BrainCloudLobby::cancelFindRequest(const FString& in_lobbyType, IServerCall
 {
     TSharedRef<FJsonObject> message = MakeShareable(new FJsonObject());
     message->SetStringField(OperationParam::LobbyRoomType.getValue(), in_lobbyType);
-    message->SetStringField(OperationParam::LobbyConnectionId.getValue(), _client->getRTTConnectionId());
+    message->SetStringField(OperationParam::LobbyConnectionId.getValue(), _client->getRTTService()->getRTTConnectionId());
 
     ServerCall* sc = new ServerCall(ServiceName::Lobby, ServiceOperation::CancelFindRequest, message, in_callback);
     _client->sendRequest(sc);
@@ -419,11 +419,11 @@ void BrainCloudLobby::attachPingDataAndSend(TSharedRef<FJsonObject> message, Ser
 void BrainCloudLobby::pingHost(FString in_region, FString in_target, int in_index)
 {
     {
-        #if ENGINE_MINOR_VERSION > 25
+#if (ENGINE_MAJOR_VERSION == 4 && ENGINE_MINOR_VERSION > 25) || ENGINE_MAJOR_VERSION == 5
         TSharedRef<IHttpRequest,ESPMode::ThreadSafe> Request = _http->CreateRequest();
-        #else
+#else
         TSharedRef<IHttpRequest> Request = _http->CreateRequest();
-        #endif
+#endif
 	    Request->OnProcessRequestComplete().BindRaw(this, &BrainCloudLobby::onPingResponseReceived);
 
 	    //This is the url on which to process the request
