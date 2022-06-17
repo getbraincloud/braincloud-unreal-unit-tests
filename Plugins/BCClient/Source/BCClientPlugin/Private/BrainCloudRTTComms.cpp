@@ -180,6 +180,7 @@ int BrainCloudRTTComms::callback_echo(struct lws *wsi, enum lws_callback_reasons
 	{
 	case LWS_CALLBACK_CLOSED_CLIENT_HTTP:
 	case LWS_CALLBACK_CLOSED:
+	case LWS_CALLBACK_CLIENT_CLOSED:
 
 		if (!pWebSocketBase)
 			return -1;
@@ -548,7 +549,7 @@ void BrainCloudRTTComms::webSocket_OnClose()
 			UE_LOG(LogBrainCloudComms, Log, TEXT("RTT: Disconnect "), *response);
 		}
 	}
-
+	m_rttConnectionStatus = BCRTTConnectionStatus::DISCONNECTED;
 	m_websocketStatus = BCWebsocketStatus::CLOSED;
 	processRegisteredListeners(ServiceName::RTTRegistration.getValue().ToLower(), "error", UBrainCloudWrapper::buildErrorJson(403, ReasonCodes::RS_CLIENT_ERROR,"Could not connect at this time"));
 }
