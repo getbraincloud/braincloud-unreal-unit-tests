@@ -137,3 +137,8 @@ const FString &BrainCloudRTT::getRTTConnectionId() const
 {
 	return _commsLayer->getConnectionId();
 }
+
+BCRTTConnectionStatus BrainCloudRTT::getConnectionStatus()
+{
+	return _commsLayer->getConnectionStatus();
+}

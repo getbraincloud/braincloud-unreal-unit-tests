@@ -2,6 +2,7 @@
 
 #pragma once
 
+enum class BCRTTConnectionStatus : uint8;
 enum class BCRTTConnectionType : uint8;
 class BrainCloudClient;
 class BrainCloudRTTComms;
@@ -145,6 +146,8 @@ class BCCLIENTPLUGIN_API BrainCloudRTT
 	void deregisterRTTBlockchainRefresh();
 
 	const FString &getRTTConnectionId() const;
+
+	BCRTTConnectionStatus getConnectionStatus();
 
   private:
 	BrainCloudClient *_client = nullptr;
