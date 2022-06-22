@@ -24,7 +24,7 @@ class UBCClientProxy : public UBCBlueprintCallProxyBase
 	UFUNCTION(BlueprintCallable, Category = "BrainCloud|Client")
 	static void Initialize(
 		UBrainCloudWrapper *brainCloudWrapper,
-		const FString &serverUrl = "https://sharedprod.braincloudservers.com/dispatcherv2",
+		const FString &serverUrl = "https://api.braincloudservers.com/dispatcherv2",
 		const FString &secretKey = "",
 		const FString &appId = "",
 		const FString &version = "1.0.0");
@@ -41,7 +41,7 @@ class UBCClientProxy : public UBCBlueprintCallProxyBase
 	static void InitializeWithApps(
 		UBrainCloudWrapper *brainCloudWrapper,
 		const TMap<FString, FString> &secretMap,
-		const FString &serverUrl = "https://sharedprod.braincloudservers.com/dispatcherv2",
+		const FString &serverUrl = "https://api.braincloudservers.com/dispatcherv2",
 		const FString &appId = "",
 		const FString &version = "1.0.0");
 
