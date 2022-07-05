@@ -27,6 +27,7 @@
 
 #define MAX_PAYLOAD_RTT (64 * 1024) // [dsl] This used to be set to 10MB, failed on mac SNDBUF too big for the TCP socket.
 #define INITIAL_HEARTBEAT_TIME 10
+#define HEARTBEAT_IDLE_DELAY 2
 
 #if PLATFORM_UWP
 #if ENGINE_MINOR_VERSION <24
@@ -69,6 +70,7 @@ BrainCloudRTTComms::BrainCloudRTTComms(BrainCloudClient *client)
 , m_rttHeaders(nullptr)
 , m_endpoint(nullptr)
 , m_heartBeatSecs(INITIAL_HEARTBEAT_TIME)
+, m_heartBeatIdleSecs(HEARTBEAT_IDLE_DELAY)
 , m_timeSinceLastRequest(0)
 , m_lastNowMS(FPlatformTime::Seconds())
 , m_rttConnectionStatus(BCRTTConnectionStatus::DISCONNECTED)
@@ -158,10 +160,20 @@ void BrainCloudRTTComms::RunCallbacks()
 		// the heart beat
 		m_timeSinceLastRequest += (nowMS - m_lastNowMS);
 		m_lastNowMS = nowMS;
-		if (m_timeSinceLastRequest >= m_heartBeatSecs)
-		{
-			m_timeSinceLastRequest = 0;
-			send(buildHeartbeatRequest(), false);
+        if (m_heartBeatSent && m_timeSinceLastRequest >= m_heartBeatIdleSecs)
+        {
+            if(!m_heartBeatRecv){
+                UE_LOG(LogBrainCloudComms, Log, TEXT("RTT: lost heartbeat %f idle"), m_heartBeatIdleSecs);
+                processRegisteredListeners(ServiceName::RTTRegistration.getValue().ToLower(), "disconnect", UBrainCloudWrapper::buildErrorJson(403, ReasonCodes::RS_CLIENT_ERROR,"Could not connect at this time"));
+            }
+            m_heartBeatSent = false;
+        }
+        if (m_timeSinceLastRequest >= m_heartBeatSecs)
+        {
+            m_timeSinceLastRequest = 0;
+            m_heartBeatSent = true;
+            m_heartBeatRecv = false;
+            bool retval = send(buildHeartbeatRequest(), false);
 		}
 	}
 }
@@ -286,6 +298,7 @@ void BrainCloudRTTComms::deregisterAllRTTCallbacks()
 void BrainCloudRTTComms::setRTTHeartBeatSeconds(int32 in_value)
 {
 	m_heartBeatSecs = in_value;
+    if(m_heartBeatIdleSecs > m_heartBeatSecs) m_heartBeatIdleSecs = m_heartBeatSecs;
 }
 
 void BrainCloudRTTComms::connectWebSocket()
@@ -589,6 +602,10 @@ void BrainCloudRTTComms::onRecv(const FString &in_message)
 	if (bIsInnerDataValid)
 		innerData = jsonData->GetObjectField(TEXT("data"));
 
+    if(operation == "HEARTBEAT"){
+        m_heartBeatRecv = true;
+    }
+    
 	if (operation != "HEARTBEAT" && m_client->isLoggingEnabled())
 		UE_LOG(LogBrainCloudComms, Log, TEXT("RTT RECV:: %s"), *in_message);
 
