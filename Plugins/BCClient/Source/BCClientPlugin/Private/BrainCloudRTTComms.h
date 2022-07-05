@@ -114,16 +114,20 @@ class BrainCloudRTTComms : public IServerCallback
 	TSharedPtr<FJsonObject> m_endpoint;
 	TSharedRef<FJsonObject> m_disconnectJson = MakeShareable(new FJsonObject());
 
-	float m_heartBeatSecs;
+    float m_heartBeatSecs;
+    float m_heartBeatIdleSecs;
 	float m_timeSinceLastRequest;
 	float m_lastNowMS;
+    bool m_heartBeatRecv = true;
+    bool m_heartBeatSent = false;
 
+    
 	BCRTTConnectionType m_connectionType;
 	BCRTTConnectionStatus m_rttConnectionStatus;
 	BCWebsocketStatus m_websocketStatus;
 	bool m_bIsConnected;
 	bool m_disconnectedWithReason = false;
-
+    
 	struct lws_context *m_lwsContext;
 
 	FString BCBytesToString(const uint8* in, int32 count);
