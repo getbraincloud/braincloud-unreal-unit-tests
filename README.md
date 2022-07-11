@@ -4,7 +4,7 @@ This repository contains automated tests for all functionality of brainCloud. Fi
 
 ## Instructions
 
-###Clone:
+### Clone:
 
 The project includes the required plugins VaRest and BCClient as git submodules.
 
@@ -20,10 +20,10 @@ $ cd braincloud-unreal
 $ git submodule update --init --recursive
 ```
 
-###Build:
+### Build:
 
 Open the uproject file in UE 4.27. It will inform that VaRest and BCClient modules are missing or unbuilt. Click YES to build. Click Show Log to see progress.
 
-###Run:
+### Run:
 
 Select Windows > Developer Tools > Session Frontend. Find tests on Automation tab under Project > Functional Tests. Make sure to include **ids.txt** file to define input params.
