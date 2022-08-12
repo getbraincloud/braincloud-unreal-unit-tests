@@ -43,5 +43,5 @@ public:
 		static FBrainCloudInitParams InitializeFromFile();
 
 	UFUNCTION(BlueprintCallable, Category = "Unit Test Helpers")
-		static FBrainCloudInitParams InitializeFromHeader();
+		static FBrainCloudInitParams InitializeFromHeader(FString clientVersion);
 };
