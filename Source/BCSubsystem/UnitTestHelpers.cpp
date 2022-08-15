@@ -3,10 +3,27 @@
 #include "BCSubsystem.h"
 #include "UnitTestHelpers.h"
 #include "BrainCloudClient.h"
+#include "BrainCloudWrapper.h"
+#include "ids.h"
 
 UUnitTestHelpers::UUnitTestHelpers(const FObjectInitializer& ObjectInitializer)
 	: Super(ObjectInitializer)
 {
+}
+
+FBrainCloudInitParams UUnitTestHelpers::InitializeFromHeader(FString clientVersion)
+{
+	FBrainCloudInitParams params;
+
+    params.ServerUrl = BRAINCLOUD_SERVER_URL;
+    params.Secret = BRAINCLOUD_APP_SECRET;
+    params.AppId = BRAINCLOUD_APP_ID;
+	params.Version = clientVersion;
+	params.ChildAppId = BRAINCLOUD_CHILD_APP_ID;
+	params.ParentLevelName = BRAINCLOUD_PARENT_LEVEL_NAME;
+	params.PeerName= BRAINCLOUD_PEER_NAME;
+	
+	return params;
 }
 
 FBrainCloudInitParams UUnitTestHelpers::InitializeFromFile()
