@@ -2,6 +2,7 @@
 #define BRAINCLOUD_SERVER_URL "https://api.internal.braincloudservers.com/dispatcherv2"
 #define BRAINCLOUD_APP_ID ""
 #define BRAINCLOUD_APP_SECRET ""
+#define BRAINCLOUD_APP_VERSION "1.0"
 #define BRAINCLOUD_CHILD_APP_ID ""
 #define BRAINCLOUD_CHILD_APP_SECRET ""
 #define BRAINCLOUD_PARENT_LEVEL_NAME ""
