@@ -11,21 +11,22 @@ UUnitTestHelpers::UUnitTestHelpers(const FObjectInitializer& ObjectInitializer)
 {
 }
 
-FBrainCloudInitParams UUnitTestHelpers::InitializeFromHeader(FString clientVersion)
+FBrainCloudInitParams UUnitTestHelpers::InitializeFromHeader()
 {
 	FBrainCloudInitParams params;
 
     params.ServerUrl = BRAINCLOUD_SERVER_URL;
     params.Secret = BRAINCLOUD_APP_SECRET;
     params.AppId = BRAINCLOUD_APP_ID;
-	params.Version = clientVersion;
+	params.Version = BRAINCLOUD_APP_VERSION;
 	params.ChildAppId = BRAINCLOUD_CHILD_APP_ID;
 	params.ParentLevelName = BRAINCLOUD_PARENT_LEVEL_NAME;
 	params.PeerName= BRAINCLOUD_PEER_NAME;
 	
 	return params;
 }
-
+// deprecated: use ids.h and InitializeFromHeader above
+// this function exists because some Old Tests call it, the file ids.txt no longer exists in github.
 FBrainCloudInitParams UUnitTestHelpers::InitializeFromFile()
 {
 	FBrainCloudInitParams params;
