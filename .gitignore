@@ -69,10 +69,6 @@ DerivedDataCache/*
 *.swo
 .ctrlp_cache/
 
-# Plugins
-/ids.txt
-**/ids.h
-
 # VS
 .vs/
 
