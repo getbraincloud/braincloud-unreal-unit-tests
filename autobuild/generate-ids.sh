@@ -31,3 +31,6 @@ echo "#define TESTFILE_APP_SECRET \"\"" >>ids.h
 echo "File ids.h created in Source/$PROJECT_NAME"
 
 cat ids.h
+
+git update-index --skip-worktree ids.h
+echo "-- File ids.h excluded from git worktree"
