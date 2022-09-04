@@ -56,7 +56,16 @@ do
             echo "--- $i is up to date on branch $STR local copy has been updated"
          fi
     else
-        echo "--- $i is already up to date on branch $STR"
+        if [[ $(git diff --compact-summary $i) ]];
+        then
+            git add $i
+            git commit -m "automatic submodules update" .
+
+            needspush=1
+            echo "--- $i local is already up to date updating branch $STR"
+        else
+            echo "--- $i is already up to date on branch $STR"
+        fi
     fi
 done
 
