@@ -4,5 +4,5 @@
 	branch = 4.27
 [submodule "Plugins/BCClient"]
 	path = Plugins/BCClient
-	url = git@github.com:getbraincloud/braincloud-unreal-plugin-src.git
+	url = https://getbraincloud/braincloud-unreal-plugin-src.git
 	branch = develop
