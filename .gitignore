@@ -48,6 +48,7 @@ BCSubsystem.xcworkspace
 
 # Binary Files
 Binaries/
+Build/
 
 # Don't ignore icon files in Build
 !Build/**/*.ico
