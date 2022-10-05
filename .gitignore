@@ -50,6 +50,9 @@ BCSubsystem.xcworkspace
 Binaries/
 Build/
 
+# files written by tests
+Artifacts/
+
 # Don't ignore icon files in Build
 !Build/**/*.ico
 
