@@ -32,7 +32,7 @@ FBrainCloudInitParams UUnitTestHelpers::InitializeFromHeader()
     }
     
     if(params.ServerUrl==""){
-        char* env = getenv("BC_CLIENTUNIT_SERVER_INTERNAL");
+        char* env = getenv("BC_BRAINCLOUD_SERVER_URL");
         if(env != NULL)
             params.ServerUrl = env;
     }
