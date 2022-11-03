@@ -2,6 +2,8 @@
 .vscode/*
 BCSubsystem.code-workspace
 
+BCSubsystem.xcworkspace
+
 # Compiled Object files
 *.slo
 *.lo
@@ -46,6 +48,10 @@ BCSubsystem.code-workspace
 
 # Binary Files
 Binaries/
+Build/
+
+# files written by tests
+Artifacts/
 
 # Don't ignore icon files in Build
 !Build/**/*.ico
@@ -66,9 +72,6 @@ DerivedDataCache/*
 *.swp
 *.swo
 .ctrlp_cache/
-
-# Plugins
-/ids.txt
 
 # VS
 .vs/

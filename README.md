@@ -45,3 +45,14 @@ Open the uproject file in UE 4.27. It will inform that VaRest and BCClient modul
 ### Run:
 
 Select Windows > Developer Tools > Session Frontend. Find tests on Automation tab under Project > Functional Tests. Make sure to include **ids.txt** file to define input params.
+
+### UE 5.0:
+
+Unzip UE5.zip and replace existing files.
+
+```
+cd Plugins/VaRest
+git checkout 5.0
+```
+
+Open BCSubsystem.uproject in UE5.
