@@ -1,9 +1,9 @@
-.git
-.vscode
+saved
 Content
 DerivedDataCache
+.git
+.vscode
 Intermediate
-saved
-screenshots
+Plugins/BCClient/screenshots
 Plugins/BCClient/Intermediate
 Plugins/VaRest/Intermediate

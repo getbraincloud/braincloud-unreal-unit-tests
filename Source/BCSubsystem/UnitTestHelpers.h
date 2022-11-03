@@ -39,6 +39,14 @@ class UUnitTestHelpers : public UObject
 public:
 	UUnitTestHelpers(const FObjectInitializer& ObjectInitializer);
 
+    // deprecated: use ids.h and InitializeFromHeader below
 	UFUNCTION(BlueprintCallable, Category = "Unit Test Helpers")
 		static FBrainCloudInitParams InitializeFromFile();
+
+    /*
+     use this to initialize braincloud
+     modify the file at Source/[projectname]/ids.h
+     */
+	UFUNCTION(BlueprintCallable, Category = "Unit Test Helpers")
+		static FBrainCloudInitParams InitializeFromHeader();
 };

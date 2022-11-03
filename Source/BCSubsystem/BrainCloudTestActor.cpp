@@ -5,6 +5,7 @@
 #include "BrainCloudWrapper.h"
 #include "ServiceName.h"
 #include "ServiceOperation.h"
+#include "ids.h"
 
 // Sets default values
 ABrainCloudTestActor::ABrainCloudTestActor()
@@ -19,10 +20,10 @@ void ABrainCloudTestActor::BeginPlay()
 {
     Super::BeginPlay();
     m_wrapper->initialize(
-        "https://internal.braincloudservers.com/dispatcherv2",
-        "91c3a097-4697-4787-ba1c-ff6e737ff8b3",
-        "10299",
-        "1.0.0");
+		TESTFILE_SERVER_URL,
+		TESTFILE_APP_ID,
+		TESTFILE_APP_SECRET,
+		m_wrapper->getBCClient()->getBrainCloudClientVersion());
 
     m_wrapper->getBCClient()->getAuthenticationService()->authenticateUniversal("UnrealUser", "UnrealUser", true, this);
 }
