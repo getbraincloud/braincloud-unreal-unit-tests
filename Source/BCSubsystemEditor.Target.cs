@@ -9,5 +9,7 @@ public class BCSubsystemEditorTarget : TargetRules
     {
 		Type = TargetType.Editor;
         ExtraModuleNames.AddRange(new string[] { "BCSubsystem" });
+        bOverrideBuildEnvironment = true;
+        AdditionalCompilerArguments = "-Wno-unused-but-set-variable";
     }
 }
