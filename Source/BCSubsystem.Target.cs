@@ -9,5 +9,7 @@ public class BCSubsystemTarget : TargetRules
     {
 		Type = TargetType.Game;
         ExtraModuleNames.AddRange(new string[] { "BCSubsystem" });
+        bOverrideBuildEnvironment = true;
+        AdditionalCompilerArguments = "-Wno-unused-but-set-variable";
     }
 }
