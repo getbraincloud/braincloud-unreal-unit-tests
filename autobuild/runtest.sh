@@ -1,4 +1,4 @@
-#!bin/bash
+#!/bin/bash
 # usage:
 #      autobuild/runtest.sh /Volumes/Project/BrainCloudUnreal/tests-unreal-dev/ RunSet
 
