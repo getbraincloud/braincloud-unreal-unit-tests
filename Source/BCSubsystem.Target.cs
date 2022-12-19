@@ -17,4 +17,5 @@ public class BCSubsystemTarget : TargetRules
             bOverrideBuildEnvironment = true;
             AdditionalCompilerArguments = "-Wno-unused-but-set-variable";
         }
+	}
 }
