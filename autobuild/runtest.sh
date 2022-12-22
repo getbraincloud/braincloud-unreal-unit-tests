@@ -13,7 +13,7 @@ export TEST_NAME=${1}
 ./autobuild/cleanupunreal.sh
 
 # need to build c++ source code here
-"$UNREAL_RunUAT" BuildGame -project="$WORKSPACE/$PROJECT_NAME.uproject" -compile
+"$UNREAL_RunUAT" BuildCookRun -project="$WORKSPACE/$PROJECT_NAME.uproject"   -noP4 -platform=Mac -clientconfig=Development -build 
  #"$UNREAL_Build" -ModuleWithSuffix=$PROJECT_NAME,8348 $PROJECT_NAME Mac Development -Project="$WORKSPACE/$PROJECT_NAME.uproject" "$WORKSPACE/$PROJECT_NAME.uproject"  -IgnoreJunk
 
 # run specified test
