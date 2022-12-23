@@ -9,5 +9,14 @@ public class BCSubsystemTarget : TargetRules
     {
 		Type = TargetType.Game;
         ExtraModuleNames.AddRange(new string[] { "BCSubsystem" });
+
+        if (Target.Platform == UnrealTargetPlatform.Mac)
+        {
+            // use this compiler flag for Xcode 14 (Apple clang version 14.0.0)
+            // commandline option to avoid errors in Unreal source
+            // not available in Xcode 13.2 or less (Apple clang version 13.0.0)
+            bOverrideBuildEnvironment = true;
+            AdditionalCompilerArguments = "-Wno-unused-but-set-variable";
+        }
     }
 }
