@@ -4,6 +4,8 @@
 #include "GameFramework/Actor.h"
 #include "IServerCallback.h"
 #include "IFileUploadCallback.h"
+#include "Serialization/JsonReader.h"
+#include "Serialization/JsonSerializer.h"
 #include "FileUploadTestActor.generated.h"
 
 class UBrainCloudWrapper;
