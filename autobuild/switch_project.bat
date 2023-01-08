@@ -13,7 +13,7 @@ set WORKSPACE=%cd%
 
 ::autobuild\cleanupunreal.bat
 
-cd Plugins\VaRest
+pushd Plugins\VaRest
 if %UE_BRANCH% == 4.27 (
 	git checkout 4.27
 ) else if %UE_BRANCH% == 5.0  (
@@ -21,8 +21,7 @@ if %UE_BRANCH% == 4.27 (
 ) else (
 	git checkout develop
 )
-cd ..\..
-
+popd
 "%EPIC_LAUNCHER_DIR:"=%\Engine\Binaries\Win64\UnrealVersionSelector.exe" /switchversionsilent "%WORKSPACE%\%PROJECTNAME%.uproject" %UE_INSTALL_DIR%
 
-exit 0
+exit /B 0

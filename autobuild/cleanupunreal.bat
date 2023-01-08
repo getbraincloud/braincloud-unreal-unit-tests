@@ -8,4 +8,4 @@ rmdir /S /Q  Plugins\VaRest\Intermediate > null.txt
 del /s /f /q null.txt
 echo Unreal build file have been removed.
 
-exit 0
+exit /B 0

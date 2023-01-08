@@ -38,4 +38,4 @@ type ids.h
 
 cd ..\..
 
-exit 0
+exit /B 0
