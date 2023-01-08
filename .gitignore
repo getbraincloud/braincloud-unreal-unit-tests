@@ -77,3 +77,4 @@ DerivedDataCache/*
 .vs/
 
 /.idea/*
+.vsconfig

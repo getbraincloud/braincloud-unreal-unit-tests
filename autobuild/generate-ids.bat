@@ -37,3 +37,5 @@ echo File ids.h created in Source/%PROJECT_NAME%
 type ids.h
 
 cd ..\..
+
+exit 0
