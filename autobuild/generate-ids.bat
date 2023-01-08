@@ -9,7 +9,7 @@ set SERVER_SECRET_KEY=%6
 
 REM run from project root folder
 
-cd Source\%PROJECT_NAME%
+pushd Source\%PROJECT_NAME%
 
 
 echo #pragma once >ids.h
@@ -36,6 +36,5 @@ echo File ids.h created in Source/%PROJECT_NAME%
 
 type ids.h
 
-cd ..\..
-
+popd
 exit /B 0
