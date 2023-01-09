@@ -1,11 +1,11 @@
 @ echo OFF
-rmdir /S /Q  Binaries > null.txt
-rmdir /S /Q  Intermediate > null.txt
-rmdir /S /Q  Plugins\BCClient\Binaries > null.txt
-rmdir /S /Q  Plugins\BCClient\Intermediate > null.txt
-rmdir /S /Q  Plugins\VaRest\Binaries > null.txt
-rmdir /S /Q  Plugins\VaRest\Intermediate > null.txt
-del /s /f /q null.txt
+rmdir /S /Q  Binaries > nul
+rmdir /S /Q  Intermediate > nul
+rmdir /S /Q  Plugins\BCClient\Binaries > nul
+rmdir /S /Q  Plugins\BCClient\Intermediate > nul
+rmdir /S /Q  Plugins\VaRest\Binaries > nul
+rmdir /S /Q  Plugins\VaRest\Intermediate > nul
+
 echo Unreal build file have been removed.
 
 exit /B 0
