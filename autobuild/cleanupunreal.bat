@@ -8,4 +8,4 @@ rmdir /S /Q  Plugins\VaRest\Intermediate > nul
 
 echo Unreal build file have been removed.
 
-exit /B 0
+exit /B %errorlevel%
