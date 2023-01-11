@@ -2,7 +2,7 @@
 # usage:
 #      autobuild/runtest.sh RunSet
 
-export TEST_NAME=${1}
+TEST_NAME=${1}
 
 "${UE_INSTALL_PATH}/Engine/Build/BatchFiles/Mac/Build.sh" BCSubsystemEditor Mac Development -Project="$WORKSPACE/BCSubsystem.uproject" 
 
