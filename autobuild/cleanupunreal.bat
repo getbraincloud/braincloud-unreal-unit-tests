@@ -1,11 +1,13 @@
 @ echo OFF
-rmdir /S /Q  Binaries > nul
-rmdir /S /Q  Intermediate > nul
-rmdir /S /Q  Plugins\BCClient\Binaries > nul
-rmdir /S /Q  Plugins\BCClient\Intermediate > nul
-rmdir /S /Q  Plugins\VaRest\Binaries > nul
-rmdir /S /Q  Plugins\VaRest\Intermediate > nul
 
-echo Unreal build file have been removed.
+::"Binaries","Intermediate","Plugins\BCClient\Binaries",Plugins\BCClient\Intermediate","Plugins\VaRest\Binaries","Plugins\VaRest\Intermediate"
 
-exit /B %errorlevel%
+for /d %%a in ("Binaries","Intermediate") do (
+	if exist %%a ( 
+		set found=1
+		rmdir /S /Q  %%a
+	)
+)
+if [%found]==[1] echo Unreal build file have been removed.
+
+exit /b %errorlevel%
