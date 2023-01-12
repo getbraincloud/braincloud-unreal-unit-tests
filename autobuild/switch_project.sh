@@ -6,7 +6,7 @@
 #      autobuild/switch_project.bat 4.27
 
 UE_VERSION=$1
-if [ -z "${UE_VERSION}"]; then UE_VERSION="5.1"; fi
+if [ -z "${UE_VERSION}" ]; then UE_VERSION="5.1"; fi
 
 # old intermediate files will be out of date
 ./autobuild/cleanupunreal.sh
