@@ -1,7 +1,5 @@
 #!/bin/bash
-rm -rf Saved/Collections
-rm -rf Saved/Config
-rm -rf Saved/SaveGames
+find Saved -type d ! -name 'logs' | xargs rm -rf
 rm -rf $i/DerivedDataCache
 
 for i in . Plugins/BCClient Plugins/VaRest
