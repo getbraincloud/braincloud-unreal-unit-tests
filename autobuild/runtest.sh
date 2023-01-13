@@ -2,21 +2,20 @@
 # usage:
 #      autobuild/runtest.sh RunSet
 
-export UNREAL_RunUAT="/Users/Shared/Epic Games/UE_5.1/Engine/Build/BatchFiles/RunUAT.sh"
-export UNREAL_Build="/Users/Shared/Epic Games/UE_5.1/Engine/Build/BatchFiles/Mac/Build.sh"
-#export UNREAL_EditorCmd="/Users/Shared/Epic Games/UE_4.27/Engine/Binaries/Mac/ue4Editor-Cmd"
-export UNREAL_EditorCmd="/Users/Shared/Epic Games/UE_5.1/Engine/Binaries/Mac/UnrealEditor-Cmd"
-export PROJECT_NAME="BCSubsystem"
-export WORKSPACE=$PWD
-export TEST_NAME=${1}
+# SET VARS:
+# export UE_INSTALL_PATH='/Users/Shared/Epic Games/UE_5.1'
+# export UE_EDITOR_CMD='UnrealEditor-Cmd'
+# export WORKSPACE=$PWD
 
-./autobuild/cleanupunreal.sh
+TEST=${1}
 
 # need to build c++ source code here
-"$UNREAL_RunUAT" BuildCookRun -project="$WORKSPACE/$PROJECT_NAME.uproject"   -noP4 -platform=Mac -clientconfig=Development -build 
- #"$UNREAL_Build" -ModuleWithSuffix=$PROJECT_NAME,8348 $PROJECT_NAME Mac Development -Project="$WORKSPACE/$PROJECT_NAME.uproject" "$WORKSPACE/$PROJECT_NAME.uproject"  -IgnoreJunk
+"${UE_INSTALL_PATH}/Engine/Build/BatchFiles/Mac/Build.sh" BCSubsystemEditor Mac Development -Project="$WORKSPACE/BCSubsystem.uproject" 
+
+# need to build project here
+"${UE_INSTALL_PATH}/Engine/Build/BatchFiles/RunUAT.sh" BuildCookRun -project="$WORKSPACE/BCSubsystem.uproject"   -noP4 -platform=Mac -clientconfig=Development -build 
 
 # run specified test
-"$UNREAL_EditorCmd" "$WORKSPACE/$PROJECT_NAME.uproject" -game -nosplash -nosound -unattended -nopause -nocontentbrowser -NullRHI -ExecCmds=\"Automation RunTests $TEST_NAME\" -testexit=\"Automation Test Queue Empty\" -log=RunTests.log -ReportExportPath=\"$WORKSPACE/Artifacts\"
+"${UE_INSTALL_PATH}/Engine/Binaries/Mac/${UE_EDITOR_CMD}" "$WORKSPACE/BCSubsystem.uproject" -game -nosplash -nosound -unattended -nopause -nocontentbrowser -NullRHI -ExecCmds=\"Automation RunTests $TEST\" -testexit=\"Automation Test Queue Empty\" -log=RunTests.log -ReportExportPath=\"$WORKSPACE/Artifacts\" -ue4exe="/Users/Shared/Epic Games/UE_4.27/Engine/Binaries/Mac/UE4Editor.app/Contents/MacOS/UE4Editor"
 
 
