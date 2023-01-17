@@ -1,14 +1,21 @@
-#!bin/bash
+#!/bin/bash
 # usage:
-#      autobuild/runtest.sh /Volumes/Project/BrainCloudUnreal/tests-unreal-dev/ RunSet
+#      autobuild/runtest.sh RunSet
 
-export UNREAL_BIN="/Users/Shared/Epic Games/UE_4.27/Engine/Binaries/Mac"
-export PROJECT_NAME="BCSubsystem"
-export WORKSPACE=${1}
-export TEST_NAME=${2}
+# SET VARS:
+# export UE_INSTALL_PATH='/Users/Shared/Epic Games/UE_5.1'
+# export UE_EDITOR_CMD='UnrealEditor-Cmd'
+# export WORKSPACE=$PWD
+
+TEST=${1}
 
 # need to build c++ source code here
+"${UE_INSTALL_PATH}/Engine/Build/BatchFiles/Mac/Build.sh" BCSubsystemEditor Mac Development -Project="$WORKSPACE/BCSubsystem.uproject" 
 
-"$UNREAL_BIN/ue4Editor-Cmd" "$WORKSPACE/$PROJECT_NAME.uproject" -game -nosplash -nosound -unattended -nopause -nocontentbrowser -NullRHI -ExecCmds=\"Automation RunTests $TEST_NAME\" -testexit=\"Automation Test Queue Empty\" -log=RunTests.log -ReportExportPath=\"$WORKSPACE/Artifacts\"
+# need to build project here
+"${UE_INSTALL_PATH}/Engine/Build/BatchFiles/RunUAT.sh" BuildCookRun -project="$WORKSPACE/BCSubsystem.uproject"   -noP4 -platform=Mac -clientconfig=Development -build 
+
+# run specified test
+"${UE_INSTALL_PATH}/Engine/Binaries/Mac/${UE_EDITOR_CMD}" "$WORKSPACE/BCSubsystem.uproject" -game -nosplash -nosound -unattended -nopause -nocontentbrowser -NullRHI -ExecCmds=\"Automation RunTests $TEST\" -testexit=\"Automation Test Queue Empty\" -log=RunTests.log -ReportExportPath=\"$WORKSPACE/Artifacts\" -ue4exe="/Users/Shared/Epic Games/UE_4.27/Engine/Binaries/Mac/UE4Editor.app/Contents/MacOS/UE4Editor"
 
 
