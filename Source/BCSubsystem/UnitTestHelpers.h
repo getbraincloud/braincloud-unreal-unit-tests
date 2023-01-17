@@ -2,6 +2,11 @@
 
 #pragma once
 
+#include "Misc/Paths.h"
+#include "Modules/ModuleManager.h"
+#include "GenericPlatform/GenericPlatformFile.h"
+#include "HAL/PlatformFileManager.h"
+#include "Misc/FileHelper.h"
 #include "UnitTestHelpers.generated.h"
 
 USTRUCT(BlueprintType)

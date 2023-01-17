@@ -77,3 +77,7 @@ DerivedDataCache/*
 .vs/
 
 /.idea/*
+.vsconfig
+compile.log
+TestResults/index.html
+TestResults/index.json
