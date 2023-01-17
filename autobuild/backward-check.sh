@@ -12,7 +12,7 @@ do
     then
         if [[ $flagged == 0 ]];
         then
-            echo "--- ATTENTION REQUIRED! The following assets are not backwards compatible:"
+            echo "--- ATTENTION REQUIRED! The following assets are not UE4 compatible:"
         fi    
        flagged=$flagged+1
        needpush=1
@@ -27,7 +27,7 @@ do
     then
         if [[ $flagged == 0 ]];
         then
-            echo "--- ATTENTION REQUIRED! The following levels are not backwards compatible:"
+            echo "--- ATTENTION REQUIRED! The following levels are not UE4 compatible:"
         fi    
        flagged=$flagged+1
        needpush=1
@@ -35,10 +35,8 @@ do
     fi
 done
 
-if [[ $(strings BCSubsystem.uproject | grep "\"EngineAssociation\": \"4.27\",") ]];
+if [[ $(strings BCSubsystem.uproject | grep "\"EngineAssociation\": \"5") ]];
 then
-    echo Project file is ok.
-else
     needspush=1
     echo "--- ATTENTION REQUIRED! Check EngineAssociation in project:"
     echo BCSubsystem.uproject
