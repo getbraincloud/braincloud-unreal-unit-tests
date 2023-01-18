@@ -10,6 +10,7 @@
 echo UE_INSTALL_PATH is $UE_INSTALL_PATH
 echo UE_EDITOR_CMD is $UE_EDITOR_CMD
 echo WORKSPACE is $WORKSPACE
+echo UE_VERSION is $UE_VERSION
 
 TEST=${1}
 
@@ -20,8 +21,4 @@ TEST=${1}
 "${UE_INSTALL_PATH}/Engine/Build/BatchFiles/RunUAT.sh" BuildCookRun -project="$WORKSPACE/BCSubsystem.uproject"   -noP4 -platform=Mac -clientconfig=Development -build 
 
 # run specified test
-"${UE_INSTALL_PATH}/Engine/Binaries/Mac/${UE_EDITOR_CMD}" "$WORKSPACE/BCSubsystem.uproject" -game -nosplash -nosound -unattended -nopause -nocontentbrowser -NullRHI -ExecCmds="Automation RunTests $TEST" -testexit="Automation Test Queue Empty" -ReportOutputPath="$WORKSPACE/TestResults" -Log=RunTests.log
- # need this to build on 4.27
-#-ue4exe=\"/Users/Shared/Epic Games/UE_4.27/Engine/Binaries/Mac/UE4Editor.app/Contents/MacOS/UE4Editor\"
-
-
+"${UE_INSTALL_PATH}/Engine/Binaries/Mac/${UE_EDITOR_CMD}" "$WORKSPACE/BCSubsystem.uproject" -game -nosplash -nosound -unattended -nopause -nocontentbrowser -NullRHI -ExecCmds="Automation RunTests $TEST" -testexit="Automation Test Queue Empty" -ReportOutputPath="$WORKSPACE/TestResults" -Log=RunTests.log -ue4exe="/Users/Shared/Epic Games/UE_4.27/Engine/Binaries/Mac/UE4Editor.app/Contents/MacOS/UE4Editor"
