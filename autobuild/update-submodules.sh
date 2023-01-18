@@ -15,7 +15,7 @@ fi
 
 needspush=0
 
-for i in Plugins/BCClient
+for i in Plugins/BCClient Plugins/VaRest
 do
     echo
     git submodule status $i
