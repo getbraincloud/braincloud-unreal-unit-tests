@@ -1,5 +1,4 @@
 #!/bin/bash
-find Saved/* -type d ! -name 'logs' | xargs rm -rf
 rm -rf DerivedDataCache
 
 for i in . Plugins/BCClient Plugins/VaRest
