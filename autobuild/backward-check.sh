@@ -48,7 +48,7 @@ if [[ $needspush == 0 ]];
 then
     echo "--- Project ${PROJECT_NAME} verified UE4 compatible."
 else
-    echo "--- Please review git history and make necessary changes in UE4 editor."    
+    echo "--- UE4 CHECK FAILED: Please review git history and make necessary changes in UE4 editor."    
 fi
 
 exit $needspush
