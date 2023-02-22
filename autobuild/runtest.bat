@@ -1,4 +1,4 @@
-::@ echo OFF
+@ echo OFF
 :: Run commandline tests
 :: usage:
 ::      autobuild\runtest.bat

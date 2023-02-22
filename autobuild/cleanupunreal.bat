@@ -1,6 +1,6 @@
 @ echo OFF
 
-for /d %%a in ("Binaries","Intermediate","Plugins\BCClient\Binaries","Plugins\BCClient\Intermediate","Plugins\VaRest\Binaries","Plugins\VaRest\Intermediate") do (
+for /d %%a in ("Binaries","Intermediate","DerivedDataCache","Plugins\BCClient\Binaries","Plugins\BCClient\Intermediate","Plugins\VaRest\Binaries","Plugins\VaRest\Intermediate") do (
 	if exist %%a ( 
 		set found=1
 		rmdir /S /Q  %%a

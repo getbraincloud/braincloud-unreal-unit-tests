@@ -7,13 +7,13 @@
 
 :: example paths
 ::set EPIC_LAUNCHER_PATH="C:\Program Files (x86)\Epic Games\Launcher"
-::set UE_INSTALL_PATH="D:\Program Files\UE_%UE_VERSION%"
-::set UE_INSTALL_PATH="C:\Program Files\Epic Games\UE_5.1"
+::set UE_INSTALL_PATH="D:\Program Files"
+::set UE_INSTALL_PATH="C:\Program Files\Epic Games"
 
 if not defined EPIC_LAUNCHER_PATH goto Path_Error
 if not defined UE_INSTALL_PATH goto Path_Error
 
-if not defined UE_VERSION set UE_VERSION=%1
+set UE_VERSION=%1
 if not defined PROJECTNAME set PROJECTNAME=BCSubsystem
 if not defined WORKSPACE set WORKSPACE=%cd%
 
@@ -29,11 +29,17 @@ if %UE_VERSION% == 4.27 (
 	git checkout develop
 )
 popd
-"%EPIC_LAUNCHER_PATH:"=%\Engine\Binaries\Win64\UnrealVersionSelector.exe" /switchversionsilent "%WORKSPACE%\%PROJECTNAME%.uproject" %UE_INSTALL_PATH%
+
+echo Updated plugin VaRest.
+echo Generating project files for Engine at "%UE_INSTALL_PATH:"=%\UE_%UE_VERSION%"...
+
+"%EPIC_LAUNCHER_PATH:"=%\Engine\Binaries\Win64\UnrealVersionSelector.exe" /switchversionsilent "%WORKSPACE%\%PROJECTNAME%.uproject" "%UE_INSTALL_PATH:"=%\UE_%UE_VERSION%"
+
+echo Updated project files for UE %UE_VERSION%.
 
 exit /b 0
 
 :Path_Error
-echo "Set EPIC_LAUNCHER_PATH and UE_INSTALL_PATH."
+echo Set EPIC_LAUNCHER_PATH and UE_INSTALL_PATH.
 
 exit /B 1
