@@ -29,7 +29,17 @@ do
             continue
         fi
     fi
-
+    
+    if [[ ${1} == "master" ]] ; then
+        git submodule set-branch --default $i
+        git add .gitmodules
+    else
+        if [[ ${1} != "" ]] ; then
+            git submodule set-branch ${1} $i
+            git add .gitmodules
+        fi
+    fi
+    
     STR=$(git config -f .gitmodules --get submodule.$i.branch)
     STR=${STR:="default"}
     
