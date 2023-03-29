@@ -37,7 +37,7 @@ do
     else
         if [[ ${1} != "" ]] ; then
             echo modify branch to ${1}
-            git submodule set-branch ${1} $i
+            git submodule set-branch --branch ${1} $i
             git add .gitmodules
         fi
     fi
