@@ -20,6 +20,24 @@ $ cd braincloud-unreal
 $ git submodule update --init --recursive
 ```
 
+### Update:
+
+You can check which version of the plugin is installed under Edit > Plugins or by referring to the text file BCClient.uplugin.
+
+To make sure you have the latest version of the plugin and to update the SHA1 of the Plugin submodule:
+
+```
+$ cd braincloud-unreal
+$ git submodule update --remote
+```
+
+To work with a branch of the plugin
+
+```
+$ cd braincloud-unreal/Plugins/BCClient
+$ git checkout develop
+```
+
 ### Build:
 
 Open the uproject file in Unreal Engine. It will inform that VaRest and BCClient modules are missing or unbuilt. Click YES to build. Click Show Log to see progress.
