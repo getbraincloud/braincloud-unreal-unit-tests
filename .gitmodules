@@ -1,7 +1,3 @@
-[submodule "Plugins/VaRest"]
-	path = Plugins/VaRest
-	url = https://github.com/ufna/VaRest.git
-	branch = develop
 [submodule "Plugins/BCClient"]
 	path = Plugins/BCClient
 	url = https://github.com/getbraincloud/braincloud-unreal-plugin-src.git
