@@ -75,7 +75,7 @@ DerivedDataCache/*
 
 # VS
 .vs/
-
+Plugins/Developer/RiderLink/*
 /.idea/*
 .vsconfig
 compile.log
