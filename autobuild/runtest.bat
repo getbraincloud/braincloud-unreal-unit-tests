@@ -29,7 +29,8 @@ if [%TESTNAME%]==[] set TESTNAME=Test_
 call %UE_RUNUAT_PATH% BuildCookRun -project="%WORKSPACE%\%PROJECTNAME%.uproject" -noP4 -platform=Win64 -clientconfig=Development -build 
 
 :: run specified test
-call %UE_EDITOR_PATH% "%WORKSPACE%\%PROJECTNAME%.uproject" -nosplash -unattended -nopause -nosound -NullRHI -nocontentbrowser -ExecCmds="Automation RunTests %TESTNAME%" -TestExit="Automation Test Queue Empty" -ReportOutputPath="%WORKSPACE%\TestResults" -log=RunTests.log
+call %UE_EDITOR_PATH% "%WORKSPACE%\%PROJECTNAME%.uproject" -editortest -server -nosplash -unattended -nopause -nosound -NullRHI -nocontentbrowser -ExecCmds="Automation RunTests %TESTNAME%;quit" -TestExit="Automation Test Queue Empty" -ReportExportPath="%WORKSPACE%\TestResults" -log
+::=RunTests.log
 
 :: return code for tests
 exit /B %errorlevel%
