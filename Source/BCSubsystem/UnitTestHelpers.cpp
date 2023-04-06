@@ -23,34 +23,11 @@ FBrainCloudInitParams UUnitTestHelpers::InitializeFromHeader()
 	params.ChildAppId = BRAINCLOUD_CHILD_APP_ID;
 	params.ParentLevelName = BRAINCLOUD_PARENT_LEVEL_NAME;
 	params.PeerName= BRAINCLOUD_PEER_NAME;
-
-    // fall back on environment variables if not set in ids.h
-    if(params.AppId==""){
-        char* env = getenv("BC_CLIENTUNIT_APP_ID");
-        if(env != NULL)
-            params.AppId = env;
-    }
-    
-    if(params.ServerUrl==""){
-        char* env = getenv("BC_BRAINCLOUD_SERVER_URL");
-        if(env != NULL)
-            params.ServerUrl = env;
-    }
-    
-    if(params.Secret==""){
-        char* env = getenv("BC_CLIENTUNIT_APP_SECRET");
-        if(env != NULL)
-            params.Secret = env;
-    }
-
-    if(params.ChildAppId==""){
-        char* env = getenv("BC_CLIENTUNIT_CHILD_APP_ID");
-        if(env != NULL)
-            params.ChildAppId = env;
-    }
     
     return params;
 }
+
+
 // deprecated: use ids.h and InitializeFromHeader above
 // this function exists because some Old Tests call it, the file ids.txt no longer exists in github.
 FBrainCloudInitParams UUnitTestHelpers::InitializeFromFile()
