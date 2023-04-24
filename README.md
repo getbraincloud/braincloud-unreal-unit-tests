@@ -54,3 +54,6 @@ Use autobuild/generate-ids script to set server and app info in the ids.h header
 This project will not open in older versions of Unreal Engine (assets will appear to be missing). Make sure that VaRest is the correct version. You can get this third-party plugin through MarketPlace or GitHub.
 
 Open BCSubsystem.uproject by double-clicking or within engine. Build at command-line by exporting the correct paths in autobuild/runtest.sh or autobuild/runtest.bat.
+
+#### Older Versions
+There is a braincloud-unreal branch on github that runs in UE 4.27 using the same brainCloud plugin. https://github.com/getbraincloud/braincloud-unreal/tree/ue4-tests
