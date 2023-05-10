@@ -30,14 +30,15 @@ do
         fi
     fi
     
-    if [[ ${1} == "master" ]] ; then
-        echo modify branch to default
-        git submodule set-branch --default $i
-        git add .gitmodules
-    else
-        if [[ ${1} != "" ]] ; then
-            echo modify branch to ${1}
-            git submodule set-branch --branch ${1} $i
+    if [[ $1 == "--branch" ]];
+    then
+        if [ [ ${2} == "master" ] || [ ${2} == "" ] ] ; then
+            echo modifying .gitmodule branch to default
+            git submodule set-branch --default $i
+            git add .gitmodules
+        else
+            echo modifying .gitmodule branch to ${2}
+            git submodule set-branch  --branch ${2} $i
             git add .gitmodules
         fi
     fi
