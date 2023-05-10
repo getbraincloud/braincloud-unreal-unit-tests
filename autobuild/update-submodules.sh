@@ -32,7 +32,8 @@ do
     
     if [[ $1 == "--branch" ]];
     then
-        if [ [ ${2} == "master" ] || [ ${2} == "" ] ] ; then
+        if [ [ ${2} == "master" ] || [ ${2} == "" ] ] ; 
+        then
             echo modifying .gitmodule branch to default
             git submodule set-branch --default $i
             git add .gitmodules
