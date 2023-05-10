@@ -34,17 +34,23 @@ do
     then
         if [[ ${2} == "master" ]];
         then
-            echo modifying .gitmodule branch to default
             git submodule set-branch --default $i
-            git add .gitmodules
-            needspush=1
+            if [[ $(git diff --compact-summary .gitmodules) ]];
+            then
+                echo modifying .gitmodule branch to default
+                git add .gitmodules
+                needspush=1
+            fi
         else
-            echo modifying .gitmodule branch to ${2}
             git submodule set-branch  --branch ${2} $i
-            git add .gitmodules
-            needspush=1
+            if [[ $(git diff --compact-summary .gitmodules) ]];
+            then
+                echo modifying .gitmodule branch to ${2}
+                git add .gitmodules
+                needspush=1
+            fi
         fi
-    fi  
+    fi
     
     STR=$(git config -f .gitmodules --get submodule.$i.branch)
     STR=${STR:="default"}
