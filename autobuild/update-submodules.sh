@@ -50,7 +50,7 @@ do
         if [[ $(git diff --compact-summary $i) ]];
         then
             git add $i
-            git commit -m "automatic submodules update" .
+            git commit -m "automatic submodules update"
 
             needspush=1
 
@@ -64,7 +64,7 @@ do
         if [[ $(git diff --compact-summary $i) ]];
         then
             git add $i
-            git commit -m "automatic submodules update" .
+            git commit -m "automatic submodules update"
 
             needspush=1
             echo "--- $i local is already up to date updating branch $STR"
