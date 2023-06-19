@@ -1,7 +1,7 @@
 #!/bin/bash
 
-PROJECT_NAME=BCSubsystem
-PROJECT_ROOT=.
+PROJECT_NAME=${1:-"BCSubsystem"}
+PROJECT_ROOT=${1:-"."}
 ASSETS=$(find ${PROJECT_ROOT}/Content -type f -name "*.uasset")
 MAPS=$(find ${PROJECT_ROOT}/Content -type f -name "*.umap")
 
@@ -37,11 +37,11 @@ do
     fi
 done
 
-if [[ $(strings ${PROJECT_NAME}.uproject | grep "\"EngineAssociation\": \"5") ]];
+if [[ $(strings ${PROJECT_ROOT}/${PROJECT_NAME}.uproject | grep "\"EngineAssociation\": \"5") ]];
 then
     needspush=1
     echo "--- ATTENTION REQUIRED! Check EngineAssociation in project file:"
-    echo ${PROJECT_NAME}.uproject
+    echo ${PROJECT_ROOT}/${PROJECT_NAME}.uproject
 fi
 
 if [[ $needspush == 0 ]];
