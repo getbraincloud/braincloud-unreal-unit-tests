@@ -11,6 +11,7 @@ pipeline {
     }
     stages {
             
+            
         stage('Unit Tests on Mac') {
             agent {
                 label 'clientUnit'
@@ -23,19 +24,19 @@ pipeline {
                 BRANCH_NAME="develop"
   			}
             steps {
-                deleteDir()
+                //deleteDir()
                 checkout([$class: 'GitSCM', branches: [[name: '*/develop']], extensions: [[$class: 'SubmoduleOption', disableSubmodules: false, parentCredentials: false, recursiveSubmodules: true, reference: '', trackingSubmodules: false]], userRemoteConfigs: [[url: 'https://github.com/getbraincloud/braincloud-unreal.git']]])				
 			    sh 'autobuild/checkout-submodule.sh ${BC_LIB}'
                 sh '~/braincloud-bin/setupunrealtests.sh'
 			    sh 'autobuild/runtest.sh ${TEST_NAME}'
             }
             post {
-                success {
-					fileOperations([fileCopyOperation(excludes: '', flattenFiles: false, includes: '/Users/buildmaster/Library/Logs/Unreal Engine/BCSubsystemServer/RunTests.log', renameFiles: false, sourceCaptureExpression: '', targetLocation: 'Results-Mac', targetNameExpression: ''), fileCopyOperation(excludes: '', flattenFiles: false, includes: 'TestResults/index.json', renameFiles: false, sourceCaptureExpression: '', targetLocation: 'Results-Mac', targetNameExpression: '')])
-                    archiveArtifacts artifacts: 'Results-Mac/*.*', followSymlinks: false
-                }
+                always {
+                    sh 'cat ~/Library/Logs/Unreal\\ Engine/BCSubsystemEditor/RunTests.log'
+               }
             }
         } 
+             
                     
         stage('Unit Tests on Windows') {
             agent {
