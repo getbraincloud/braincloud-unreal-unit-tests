@@ -10,7 +10,7 @@ pushd %~dp0\..
 
 set WORKSPACE=%CD%
 
-call %BRAINCLOUD_TOOLS%\bin\copy-ids.bat Source/BCSubsystem test h %SERVER_ENVIRONMENT%
+call %BRAINCLOUD_TOOLS%\bin\copy-ids.bat Source\BCSubsystem test h %SERVER_ENVIRONMENT%
 
 popd
 
