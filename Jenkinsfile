@@ -50,6 +50,7 @@ pipeline {
                 UE_VERSION="5.2"
 			    UE_INSTALL_PATH="C:\\ProgramFiles\\UE_5.2"
                 UE_EDITOR_CMD="UnrealEditor"
+                BRAINCLOUD_TOOLS="C:\\Users\\buildmaster\\braincloud-client-master"
             }
             steps {
                 deleteDir()
@@ -75,6 +76,7 @@ pipeline {
                 UE_VERSION="4.27"
 			    UE_INSTALL_PATH="C:\\ProgramFiles\\UE_4.27"
                 UE_EDITOR_CMD="U4Editor-cmd"
+                BRAINCLOUD_TOOLS="C:\\Users\\buildmaster\\braincloud-client-master"
             }
             steps {
                 deleteDir()
