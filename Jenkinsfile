@@ -47,9 +47,9 @@ pipeline {
                 label 'unrealWindows'
             }
             environment {
-                UE_VERSION="5.1"
-			    UE_RUNUAT_PATH="\"C:\\ProgramFiles\\UE_5.2\\Engine\\Build\\BatchFiles\\RunUAT.bat\""
-                UE_EDITOR_PATH="\"C:\\ProgramFiles\\UE_5.2\\Engine\\Binaries\\Win64\\UnrealEditor-cmd.exe\""
+                UE_VERSION="5.2"
+			    UE_INSTALL_PATH="C:\\ProgramFiles\\UE_5.2"
+                UE_EDITOR_CMD="UnrealEditor"
             }
             steps {
                 deleteDir()
@@ -73,8 +73,8 @@ pipeline {
             }
             environment {
                 UE_VERSION="4.27"
-			    UE_RUNUAT_PATH="\"C:\\ProgramFiles\\UE_4.27\\Engine\\Build\\BatchFiles\\RunUAT.bat\""
-                UE_EDITOR_PATH="\"C:\\ProgramFiles\\UE_4.27\\Engine\\Binaries\\Win64\\UE4Editor-cmd.exe\""
+			    UE_INSTALL_PATH="C:\\ProgramFiles\\UE_4.27"
+                UE_EDITOR_CMD="U4Editor-cmd"
             }
             steps {
                 deleteDir()
@@ -85,9 +85,9 @@ pipeline {
             }
             post {
                 success {
-                    fileRenameOperation(destination: 'saved/logs/RunTests_UE5.log', source: 'saved/logs/RunTests.log')
-                    folderRenameOperation(destination: 'TestResults_UE5', source: 'TestResults/')
-                    archiveArtifacts artifacts: 'TestResults_UE5/index.json, saved/logs/RunTests_UE5.log', followSymlinks: false
+                    fileRenameOperation(destination: 'saved/logs/RunTests_UE4.log', source: 'saved/logs/RunTests.log')
+                    folderRenameOperation(destination: 'TestResults_UE4', source: 'TestResults/')
+                    archiveArtifacts artifacts: 'TestResults_UE4/index.json, saved/logs/RunTests_UE4.log', followSymlinks: false
                 }
             }
         } 
