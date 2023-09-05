@@ -56,7 +56,7 @@ pipeline {
                 deleteDir()
                 checkout([$class: 'GitSCM', branches: [[name: '*/develop']], extensions: [[$class: 'SubmoduleOption', disableSubmodules: false, parentCredentials: false, recursiveSubmodules: true, reference: '', trackingSubmodules: false]], userRemoteConfigs: [[url: 'https://github.com/getbraincloud/braincloud-unreal.git']]])				
                 bat 'autobuild\\checkout-submodule.bat %BC_LIB%'
-            	bat '%BRAINCLOUD_TOOLS%\bin\copy-ids.bat Source\BCSubsystem test h %SERVER_ENVIRONMENT%'
+            	bat '%BRAINCLOUD_TOOLS%\\bin\\copy-ids.bat Source\\BCSubsystem test h %SERVER_ENVIRONMENT%'
             	bat 'autobuild\\runtest.bat %TEST_NAME%'
             }
             post {
@@ -82,7 +82,7 @@ pipeline {
                 deleteDir()
                 checkout([$class: 'GitSCM', branches: [[name: '*/ue4-tests']], extensions: [[$class: 'SubmoduleOption', disableSubmodules: false, parentCredentials: false, recursiveSubmodules: true, reference: '', trackingSubmodules: false]], userRemoteConfigs: [[url: 'https://github.com/getbraincloud/braincloud-unreal.git']]])				
                 bat 'autobuild\\checkout-submodule.bat %BC_LIB%'
-            	bat '%BRAINCLOUD_TOOLS%\bin\copy-ids.bat Source\BCSubsystem test h %SERVER_ENVIRONMENT%'
+            	bat '%BRAINCLOUD_TOOLS%\\bin\\copy-ids.bat Source\\BCSubsystem test h %SERVER_ENVIRONMENT%'
             	bat 'autobuild\\runtest.bat %TEST_NAME%'
             }
             post {
