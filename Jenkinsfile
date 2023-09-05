@@ -33,9 +33,9 @@ pipeline {
             }
             post {
                 success {
-                    fileOperations([fileCopyOperation(excludes: '', flattenFiles: false, includes: '~/Library/Logs/Unreal\\ Engine/BCSubsystemEditor/RunTests.log', renameFiles: false, sourceCaptureExpression: '', targetLocation: 'saved/logs/RunTests.log', targetNameExpression: '')])
-                    fileRenameOperation(destination: 'saved/logs/RunTests_Mac.log', source: 'saved/logs/RunTests.log')
-                    folderRenameOperation(destination: 'TestResults_Mac/', source: 'TestResults/')
+                    //fileOperations([fileCopyOperation(excludes: '', flattenFiles: false, includes: '/Users/buildmaster/Library/Logs/Unreal\\ Engine/BCSubsystemEditor/RunTests.log', renameFiles: false, sourceCaptureExpression: '', targetLocation: 'saved/logs/RunTests.log', targetNameExpression: '')])
+                    //fileRenameOperation(destination: 'saved/logs/RunTests_Mac.log', source: 'saved/logs/RunTests.log')
+                    //folderRenameOperation(destination: 'TestResults_Mac/', source: 'TestResults/')
                     //archiveArtifacts artifacts: 'TestResults_Mac/index.json, saved/logs/RunTests_Mac.log', followSymlinks: false
                }
             }
@@ -61,8 +61,8 @@ pipeline {
             }
             post {
                 success {
-                    fileRenameOperation(destination: 'saved/logs/RunTests_UE5.log', source: 'saved/logs/RunTests.log')
-                    folderRenameOperation(destination: 'TestResults_UE5', source: 'TestResults/')
+                    //fileRenameOperation(destination: 'saved/logs/RunTests_UE5.log', source: 'saved/logs/RunTests.log')
+                    //folderRenameOperation(destination: 'TestResults_UE5', source: 'TestResults/')
                     //archiveArtifacts artifacts: 'TestResults_UE5/index.json, saved/logs/RunTests_UE5.log', followSymlinks: false
                 }
             }
@@ -87,8 +87,8 @@ pipeline {
             }
             post {
                 success {
-                    fileRenameOperation(destination: 'saved/logs/RunTests_UE4.log', source: 'saved/logs/RunTests.log')
-                    folderRenameOperation(destination: 'TestResults_UE4', source: 'TestResults/')
+                    //fileRenameOperation(destination: 'saved/logs/RunTests_UE4.log', source: 'saved/logs/RunTests.log')
+                    //folderRenameOperation(destination: 'TestResults_UE4', source: 'TestResults/')
                     //archiveArtifacts artifacts: 'TestResults_UE4/index.json, saved/logs/RunTests_UE4.log', followSymlinks: false
                 }
             }
