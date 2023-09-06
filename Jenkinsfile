@@ -28,7 +28,7 @@ pipeline {
                 deleteDir()
                 checkout([$class: 'GitSCM', branches: [[name: '*/develop']], extensions: [[$class: 'SubmoduleOption', disableSubmodules: false, parentCredentials: false, recursiveSubmodules: true, reference: '', trackingSubmodules: false]], userRemoteConfigs: [[url: 'https://github.com/getbraincloud/braincloud-unreal.git']]])				
 			    sh 'autobuild/checkout-submodule.sh ${BC_LIB}'
-                sh '${BRAINCLOUD_TOOLS}/bin/copy-ids.sh -o Source/BCSubsystem -p test -x h -s ${params.SERVER_ENVIRONMENT}'
+                sh "${BRAINCLOUD_TOOLS}/bin/copy-ids.sh -o Source/BCSubsystem -p test -x h -s ${params.SERVER_ENVIRONMENT}"
 			    sh 'autobuild/runtest.sh ${TEST_NAME}'
             }
             post {
