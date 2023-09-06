@@ -35,7 +35,7 @@ pipeline {
                 success {
                     //fileOperations([fileCopyOperation(excludes: '', flattenFiles: false, includes: '/Users/buildmaster/Library/Logs/Unreal\\ Engine/BCSubsystemEditor/RunTests.log', renameFiles: false, sourceCaptureExpression: '', targetLocation: 'saved/logs/RunTests.log', targetNameExpression: '')])
                     //fileRenameOperation(destination: 'saved/logs/RunTests_Mac.log', source: 'saved/logs/RunTests.log')
-                    folderRenameOperation(destination: 'TestResults_Mac/', source: 'TestResults')
+                    folderRenameOperation(destination: 'TestResults_Mac', source: 'TestResults')
                     archiveArtifacts artifacts: 'TestResults_Mac/index.json', followSymlinks: false
                }
             }
