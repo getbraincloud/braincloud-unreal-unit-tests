@@ -18,4 +18,6 @@ else
   SERVER_ENVIRONMENT=$1
 fi
 
+export WORKSPACE=$PWD
+
 ${BRAINCLOUD_TOOLS}/bin/copy-ids.sh -o Source/BCSubsystem -p test -x h -s $SERVER_ENVIRONMENT
