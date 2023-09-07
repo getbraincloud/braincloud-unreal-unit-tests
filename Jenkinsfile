@@ -33,8 +33,8 @@ pipeline {
             }
             post {
                 success {
-                    //fileOperations([fileCopyOperation(excludes: '', flattenFiles: false, includes: '/Users/buildmaster/Library/Logs/Unreal\\ Engine/BCSubsystemEditor/RunTests.log', renameFiles: false, sourceCaptureExpression: '', targetLocation: 'saved/logs/RunTests.log', targetNameExpression: '')])
-                    archiveArtifacts artifacts: 'TestResults_Mac/index.json', followSymlinks: false, allowEmptyArchive: true
+                    fileOperations([fileCopyOperation(excludes: '', flattenFiles: false, includes: '/Users/buildmaster/Library/Logs/Unreal\\ Engine/BCSubsystemServer/Mac_TestLog_UE_${UE_VERSION}.log', renameFiles: false, sourceCaptureExpression: '', targetLocation: 'saved/logs/Mac_TestLog_UE_${UE_VERSION}.log', targetNameExpression: '')])
+                    archiveArtifacts artifacts: 'Mac_TestResults_UE_${UE_VERSION}/index.json, saved/logs/Mac_TestLog_UE_${UE_VERSION}.log', followSymlinks: false, allowEmptyArchive: true
                }
             }
         }
@@ -57,7 +57,12 @@ pipeline {
             	bat '%BRAINCLOUD_TOOLS%\\bin\\copy-ids.bat Source\\BCSubsystem test h internal'
             	bat 'autobuild\\runtest.bat %TEST_NAME%'
             }
-        } 
+            post {
+                success {
+                    archiveArtifacts artifacts: 'Win64_TestResults_UE_${UE_VERSION}/index.json, saved/logs/Win64_TestLog_UE_${UE_VERSION}.log', followSymlinks: false, allowEmptyArchive: true
+               }
+            }
+        }
 
         stage('Tests on UE 4.27 Windows') {
             agent {
@@ -76,7 +81,12 @@ pipeline {
             	bat '%BRAINCLOUD_TOOLS%\\bin\\copy-ids.bat Source\\BCSubsystem test h internal'
             	bat 'autobuild\\runtest.bat %TEST_NAME%'
             }
-        } 
+            post {
+                success {
+                    archiveArtifacts artifacts: 'Win64_TestResults_UE_${UE_VERSION}/index.json, saved/logs/Win64_TestLog_UE_${UE_VERSION}.log', followSymlinks: false, allowEmptyArchive: true
+               }
+            }
+        }
         // end stages
     }
     // end pipeline

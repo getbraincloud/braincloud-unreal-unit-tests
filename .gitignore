@@ -79,5 +79,4 @@ Plugins/Developer/RiderLink/*
 /.idea/*
 .vsconfig
 compile.log
-TestResults/index.html
-TestResults/index.json
+**TestResults**/
