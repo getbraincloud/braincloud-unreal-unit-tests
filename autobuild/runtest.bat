@@ -5,19 +5,11 @@
 ::      autobuild\runtest.bat Authentication
 
 ::eg. Jenkins
-:: 		> set UE_RUNUAT_PATH="D:\Program Files\UE_5.0\Engine\Build\BatchFiles\RunUAT.bat"
-:: 		> set UE_EDITOR_PATH="D:\Program Files\UE_5.0\Engine\Binaries\Win64\UE4Editor-cmd.exe"
-
-::eg. Local
-::		> set UE_RUNUAT_PATH="C:\Program Files\Epic Games\UE_5.1\Engine\Build\BatchFiles\RunUAT.bat"
-:: 		> set UE_EDITOR_PATH="C:\Program Files\Epic Games\UE_5.1\Engine\Binaries\Win64\UnrealEditor-cmd.exe"
-
+:: 		> set UE_INSTALL_PATH=C:\ProgramFiles\UE_5.1
+::      > set UE_EDITOR_CMD=UnrealEditor
 :: 		> set WORKSPACE=%cd%
 
-if not defined UE_RUNUAT_PATH goto Path_Error
-if not defined UE_EDITOR_PATH goto Path_Error
-
-set PROJECTNAME=BCSubsystem
+if not defined UE_INSTALL_PATH goto Path_Error
 
 set TESTNAME=%1
 if [%TESTNAME%]==[] set TESTNAME=Test_
@@ -25,17 +17,16 @@ if [%TESTNAME%]==[] set TESTNAME=Test_
 :: make clean option
 ::cmd/c "autobuild\cleanupunreal.bat"
 
-:: need to build c++ source code here
-call %UE_RUNUAT_PATH% BuildCookRun -project="%WORKSPACE%\%PROJECTNAME%.uproject" -noP4 -platform=Win64 -clientconfig=Development -build 
+echo "Building project now."
+"%UE_INSTALL_PATH%\Engine\Build\BatchFiles\RunUAT.bat" BuildCookRun -project="%WORKSPACE%\BCSubsystem.uproject" -noP4 -platform=Win64 -serverconfig=Development -build
 
 :: run specified test
-call %UE_EDITOR_PATH% "%WORKSPACE%\%PROJECTNAME%.uproject" -editortest -server -nosplash -unattended -nopause -nosound -NullRHI -nocontentbrowser -ExecCmds="Automation RunTests %TESTNAME%;quit" -TestExit="Automation Test Queue Empty" -ReportExportPath="%WORKSPACE%\TestResults" -log
-::=RunTests.log
+"%UE_INSTALL_PATH%\Engine\Binaries\Win64\%UE_EDITOR_CMD%.exe" "%WORKSPACE%\BCSubsystem.uproject" -server -nosplash -unattended -nopause -nosound -NullRHI -nocontentbrowser -ExecCmds="Automation RunTests %TESTNAME%;quit" -TestExit="Automation Test Queue Empty" -ReportExportPath="%WORKSPACE%\TestResults" -log
 
 :: return code for tests
 exit /B %errorlevel%
 
 :Path_Error
-echo "Set UE_RUNUAT_PATH and UE_EDITOR_PATH."
+echo "Set UE_INSTALL_PATH."
 
 exit /B 1
