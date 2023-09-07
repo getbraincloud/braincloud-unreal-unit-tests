@@ -34,8 +34,6 @@ pipeline {
             post {
                 success {
                     //fileOperations([fileCopyOperation(excludes: '', flattenFiles: false, includes: '/Users/buildmaster/Library/Logs/Unreal\\ Engine/BCSubsystemEditor/RunTests.log', renameFiles: false, sourceCaptureExpression: '', targetLocation: 'saved/logs/RunTests.log', targetNameExpression: '')])
-                    //fileRenameOperation(destination: 'saved/logs/RunTests_Mac.log', source: 'saved/logs/RunTests.log')
-                    fileOperations([folderRenameOperation(destination: 'TestResults_Mac', source: 'TestResults')])
                     archiveArtifacts artifacts: 'TestResults_Mac/index.json', followSymlinks: false, allowEmptyArchive: true
                }
             }
@@ -59,13 +57,6 @@ pipeline {
             	bat '%BRAINCLOUD_TOOLS%\\bin\\copy-ids.bat Source\\BCSubsystem test h internal'
             	bat 'autobuild\\runtest.bat %TEST_NAME%'
             }
-            post {
-                success {
-                    //fileRenameOperation(destination: 'saved/logs/RunTests_UE5.log', source: 'saved/logs/RunTests.log')
-                    fileOperations([folderRenameOperation(destination: 'TestResults_UE5', source: 'TestResults')])
-                    archiveArtifacts artifacts: 'TestResults_UE5/index.json', followSymlinks: false, allowEmptyArchive: true
-                }
-            }
         } 
 
         stage('Tests on UE 4.27 Windows') {
@@ -84,13 +75,6 @@ pipeline {
                 bat 'autobuild\\checkout-submodule.bat %BC_LIB%'
             	bat '%BRAINCLOUD_TOOLS%\\bin\\copy-ids.bat Source\\BCSubsystem test h internal'
             	bat 'autobuild\\runtest.bat %TEST_NAME%'
-            }
-            post {
-                success {
-                    //fileRenameOperation(destination: 'saved/logs/RunTests_UE4.log', source: 'saved/logs/RunTests.log')
-                   fileOperations([folderRenameOperation(destination: 'TestResults_UE4', source: 'TestResults')])
-                   archiveArtifacts artifacts: 'TestResults_UE4/index.json', followSymlinks: false, allowEmptyArchive: true
-                }
             }
         } 
         // end stages
