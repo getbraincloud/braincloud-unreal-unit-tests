@@ -8,10 +8,11 @@ pipeline {
     parameters {
         string(name: 'BC_LIB', defaultValue: '', description: 'braincloud-unreal-plugin-src branch (blank for .gitmodules)')
         string(name: 'TEST_NAME', defaultValue: 'Authentication', description: 'test filter')
+        choice(name: 'SERVER_ENVIRONMENT', choices: ['internal', 'prod'], description: 'Where to run tests?')
     }
     stages {
-            
-            
+
+
         stage('Tests on UE 5.1 Mac') {
             agent {
                 label 'clientUnit'
@@ -22,26 +23,23 @@ pipeline {
                 UE_EDITOR_CMD="UnrealEditor-Cmd"
                 UE_VERSION="5.1"
                 BRAINCLOUD_TOOLS="/Users/buildmaster/braincloud-client-master"
-                SERVER_ENVIRONMENT="internal"
   			}
             steps {
                 deleteDir()
-                checkout([$class: 'GitSCM', branches: [[name: '*/develop']], extensions: [[$class: 'SubmoduleOption', disableSubmodules: false, parentCredentials: false, recursiveSubmodules: true, reference: '', trackingSubmodules: false]], userRemoteConfigs: [[url: 'https://github.com/getbraincloud/braincloud-unreal.git']]])				
+                checkout([$class: 'GitSCM', branches: [[name: '*/develop']], extensions: [[$class: 'SubmoduleOption', disableSubmodules: false, parentCredentials: false, recursiveSubmodules: true, reference: '', trackingSubmodules: false]], userRemoteConfigs: [[url: 'https://github.com/getbraincloud/braincloud-unreal.git']]])
 			    sh 'autobuild/checkout-submodule.sh ${BC_LIB}'
-                sh '${BRAINCLOUD_TOOLS}/bin/copy-ids.sh -o Source/BCSubsystem -p test -x h -s ${SERVER_ENVIRONMENT}'
+                sh "${BRAINCLOUD_TOOLS}/bin/copy-ids.sh -o Source/BCSubsystem -p test -x h -s ${params.SERVER_ENVIRONMENT}"
 			    sh 'autobuild/runtest.sh ${TEST_NAME}'
             }
             post {
                 success {
                     //fileOperations([fileCopyOperation(excludes: '', flattenFiles: false, includes: '/Users/buildmaster/Library/Logs/Unreal\\ Engine/BCSubsystemEditor/RunTests.log', renameFiles: false, sourceCaptureExpression: '', targetLocation: 'saved/logs/RunTests.log', targetNameExpression: '')])
-                    //fileRenameOperation(destination: 'saved/logs/RunTests_Mac.log', source: 'saved/logs/RunTests.log')
-                    //folderRenameOperation(destination: 'TestResults_Mac/', source: 'TestResults/')
-                    //archiveArtifacts artifacts: 'TestResults_Mac/index.json, saved/logs/RunTests_Mac.log', followSymlinks: false
+                    archiveArtifacts artifacts: 'TestResults_Mac/index.json', followSymlinks: false, allowEmptyArchive: true
                }
             }
-        } 
-             
-                    
+        }
+
+
         stage('Tests on UE 5.2 Windows') {
             agent {
                 label 'unrealWindows'
@@ -56,18 +54,11 @@ pipeline {
                 deleteDir()
                 checkout([$class: 'GitSCM', branches: [[name: '*/develop']], extensions: [[$class: 'SubmoduleOption', disableSubmodules: false, parentCredentials: false, recursiveSubmodules: true, reference: '', trackingSubmodules: false]], userRemoteConfigs: [[url: 'https://github.com/getbraincloud/braincloud-unreal.git']]])				
                 bat 'autobuild\\checkout-submodule.bat %BC_LIB%'
-            	bat '%BRAINCLOUD_TOOLS%\\bin\\copy-ids.bat Source\\BCSubsystem test h %SERVER_ENVIRONMENT%'
+            	bat '%BRAINCLOUD_TOOLS%\\bin\\copy-ids.bat Source\\BCSubsystem test h internal'
             	bat 'autobuild\\runtest.bat %TEST_NAME%'
             }
-            post {
-                success {
-                    //fileRenameOperation(destination: 'saved/logs/RunTests_UE5.log', source: 'saved/logs/RunTests.log')
-                    //folderRenameOperation(destination: 'TestResults_UE5', source: 'TestResults/')
-                    //archiveArtifacts artifacts: 'TestResults_UE5/index.json, saved/logs/RunTests_UE5.log', followSymlinks: false
-                }
-            }
         } 
-                            
+
         stage('Tests on UE 4.27 Windows') {
             agent {
                 label 'unrealWindows'
@@ -82,15 +73,8 @@ pipeline {
                 deleteDir()
                 checkout([$class: 'GitSCM', branches: [[name: '*/ue4-tests']], extensions: [[$class: 'SubmoduleOption', disableSubmodules: false, parentCredentials: false, recursiveSubmodules: true, reference: '', trackingSubmodules: false]], userRemoteConfigs: [[url: 'https://github.com/getbraincloud/braincloud-unreal.git']]])				
                 bat 'autobuild\\checkout-submodule.bat %BC_LIB%'
-            	bat '%BRAINCLOUD_TOOLS%\\bin\\copy-ids.bat Source\\BCSubsystem test h %SERVER_ENVIRONMENT%'
+            	bat '%BRAINCLOUD_TOOLS%\\bin\\copy-ids.bat Source\\BCSubsystem test h internal'
             	bat 'autobuild\\runtest.bat %TEST_NAME%'
-            }
-            post {
-                success {
-                    //fileRenameOperation(destination: 'saved/logs/RunTests_UE4.log', source: 'saved/logs/RunTests.log')
-                    //folderRenameOperation(destination: 'TestResults_UE4', source: 'TestResults/')
-                    //archiveArtifacts artifacts: 'TestResults_UE4/index.json, saved/logs/RunTests_UE4.log', followSymlinks: false
-                }
             }
         } 
         // end stages
