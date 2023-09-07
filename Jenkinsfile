@@ -33,8 +33,8 @@ pipeline {
             }
             post {
                 success {
-                    fileOperations([fileCopyOperation(excludes: '', flattenFiles: false, includes: '/Users/buildmaster/Library/Logs/Unreal\\ Engine/BCSubsystemServer/Mac_TestLog_UE_${UE_VERSION}.log', renameFiles: false, sourceCaptureExpression: '', targetLocation: 'saved/logs/Mac_TestLog_UE_${UE_VERSION}.log', targetNameExpression: '')])
-                    archiveArtifacts artifacts: 'Mac_TestResults_UE_${UE_VERSION}/index.json, saved/logs/Mac_TestLog_UE_${UE_VERSION}.log', followSymlinks: false, allowEmptyArchive: true
+                    fileOperations([fileCopyOperation(excludes: '', flattenFiles: false, includes: '/Users/buildmaster/Library/Logs/Unreal\\ Engine/BCSubsystemServer/Mac_TestLog_UE_5.1.log', renameFiles: false, sourceCaptureExpression: '', targetLocation: 'saved/logs/Mac_TestLog_UE_5.1.log', targetNameExpression: '')])
+                    archiveArtifacts artifacts: 'Mac_TestResults_UE_5.1/index.json, saved/logs/Mac_TestLog_UE_5.1.log', followSymlinks: false, allowEmptyArchive: true
                }
             }
         }
@@ -59,7 +59,7 @@ pipeline {
             }
             post {
                 success {
-                    archiveArtifacts artifacts: 'Win64_TestResults_UE_${UE_VERSION}/index.json, saved/logs/Win64_TestLog_UE_${UE_VERSION}.log', followSymlinks: false, allowEmptyArchive: true
+                    archiveArtifacts artifacts: 'Win64_TestResults_UE_5.2/index.json, saved/logs/Win64_TestLog_UE_5.2.log', followSymlinks: false, allowEmptyArchive: true
                }
             }
         }
@@ -83,7 +83,7 @@ pipeline {
             }
             post {
                 success {
-                    archiveArtifacts artifacts: 'Win64_TestResults_UE_${UE_VERSION}/index.json, saved/logs/Win64_TestLog_UE_${UE_VERSION}.log', followSymlinks: false, allowEmptyArchive: true
+                    archiveArtifacts artifacts: 'Win64_TestResults_UE_4.27/index.json, saved/logs/Win64_TestLog_UE_4.27.log', followSymlinks: false, allowEmptyArchive: true
                }
             }
         }
