@@ -21,7 +21,7 @@ echo "Building project now."
 "%UE_INSTALL_PATH%\Engine\Build\BatchFiles\RunUAT.bat" BuildCookRun -project="%WORKSPACE%\BCSubsystem.uproject" -noP4 -platform=Win64 -serverconfig=Development -build
 
 :: run specified test
-"%UE_INSTALL_PATH%\Engine\Binaries\Win64\%UE_EDITOR_CMD%.exe" "%WORKSPACE%\BCSubsystem.uproject" -server -nosplash -unattended -nopause -nosound -NullRHI -nocontentbrowser -ExecCmds="Automation RunTests %TESTNAME%;quit" -TestExit="Automation Test Queue Empty" -ReportExportPath="%WORKSPACE%\TestResults" -log
+"%UE_INSTALL_PATH%\Engine\Binaries\Win64\%UE_EDITOR_CMD%.exe" "%WORKSPACE%\BCSubsystem.uproject" -server -nosplash -unattended -nopause -nosound -NullRHI -nocontentbrowser -ExecCmds="Automation RunTests %TESTNAME%;quit" -TestExit="Automation Test Queue Empty" -ReportExportPath="%WORKSPACE%\Win64_TestResults_UE_%UE_VERSION%" -log=Win64_TestLog_UE_%UE_VERSION%.log
 
 :: return code for tests
 exit /B %errorlevel%
