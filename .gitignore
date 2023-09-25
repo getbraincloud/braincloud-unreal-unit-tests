@@ -80,3 +80,4 @@ Plugins/Developer/RiderLink/*
 .vsconfig
 compile.log
 **TestResults**/
+/Build/*
