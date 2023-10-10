@@ -26,18 +26,21 @@ pipeline {
                 BRAINCLOUD_TOOLS="/Users/buildmaster/braincloud-client-master"
   			}
             steps {
-                deleteDir()
-                checkout([$class: 'GitSCM', branches: [[name: '*/${TEST_BRANCH}']], extensions: [[$class: 'SubmoduleOption', disableSubmodules: false, parentCredentials: false, recursiveSubmodules: true, reference: '', trackingSubmodules: false]], userRemoteConfigs: [[url: 'https://github.com/getbraincloud/braincloud-unreal.git']]])
-			    sh 'autobuild/checkout-submodule.sh ${BC_LIB}'
-                sh "${BRAINCLOUD_TOOLS}/bin/copy-ids.sh -o Source/BCSubsystem -p test -x h -s ${params.SERVER_ENVIRONMENT}"
-			    sh 'autobuild/runtest.sh ${TEST_NAME}'
+                catchError(buildResult: 'SUCCESS', stageResult: 'FAILURE') {
+                    //deleteDir()
+                    checkout([$class: 'GitSCM', branches: [[name: '*/${TEST_BRANCH}']], extensions: [[$class: 'SubmoduleOption', disableSubmodules: false, parentCredentials: false, recursiveSubmodules: true, reference: '', trackingSubmodules: false]], userRemoteConfigs: [[url: 'https://github.com/getbraincloud/braincloud-unreal.git']]])
+                    sh 'autobuild/checkout-submodule.sh ${BC_LIB}'
+                    sh "${BRAINCLOUD_TOOLS}/bin/copy-ids.sh -o Source/BCSubsystem -p test -x h -s ${params.SERVER_ENVIRONMENT}"
+                    sh 'echo debugging $PWD $WORKSPACE'
+                    sh 'autobuild/runtest.sh ${TEST_NAME}'
+			    }
             }
-            post {
-                success {
-                    //fileOperations([fileCopyOperation(excludes: '', flattenFiles: false, includes: '/Users/buildmaster/Library/Logs/Unreal\\ Engine/BCSubsystemServer/Mac_TestLog_UE_5.1.log', renameFiles: false, sourceCaptureExpression: '', targetLocation: 'saved/logs/Mac_TestLog_UE_5.1.log', targetNameExpression: '')])
-                    archiveArtifacts artifacts: 'Mac_TestResults_UE_5.3/index.json', followSymlinks: false, allowEmptyArchive: true
-               }
-            }
+//             post {
+//                 success {
+//                     //fileOperations([fileCopyOperation(excludes: '', flattenFiles: false, includes: '/Users/buildmaster/Library/Logs/Unreal\\ Engine/BCSubsystemServer/Mac_TestLog_UE_5.1.log', renameFiles: false, sourceCaptureExpression: '', targetLocation: 'saved/logs/Mac_TestLog_UE_5.1.log', targetNameExpression: '')])
+//                     archiveArtifacts artifacts: 'Mac_TestResults_UE_5.3/index.json', followSymlinks: false, allowEmptyArchive: true
+//                }
+//             }
         }
 
         stage('Tests on UE 5.2 Windows') {
