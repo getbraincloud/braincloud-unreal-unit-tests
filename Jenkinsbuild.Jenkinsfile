@@ -9,7 +9,7 @@ pipeline {
         string(name: 'UE4_TEST_BRANCH', defaultValue: 'ue4-tests', description: 'branch with unreal 4 project files')
         string(name: 'BC_LIB', defaultValue: '', description: 'braincloud-unreal-plugin-src branch (blank for .gitmodules)')
         choice(name: 'SERVER_ENVIRONMENT', choices: ['internal', 'prod'], description: 'Where to run tests?')
-        string(name: 'GAME_MAP', defaultValue: 'DeviceTest', description: '')
+        string(name: 'GAME_MAP', defaultValue: 'AndroidTest', description: '')
         choice(name: 'PLATFORM', choices: ['all', 'Mac', 'Win64', 'iOS', 'Android'], description: 'Which platform to build?')
     }
     stages {
