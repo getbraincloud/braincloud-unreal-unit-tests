@@ -50,6 +50,10 @@ BCSubsystem**.xcworkspace
 Binaries/
 Build/
 
+# builds for device
+**/BCSubsystem-**
+
+
 # files written by tests
 Artifacts/
 

@@ -4,7 +4,7 @@
 #      autobuild/makebuild.sh BCSubsystem MAC -pack
 #      autobuild/makebuild.sh BCSubsystem IOS
 #      autobuild/makebuild.sh BCSubsystem ANDROID
-#      autobuild/makebuild.sh BCSubsystem ANDROID AndroidTest
+#      autobuild/makebuild.sh BCSubsystem ANDROID AndroidSpecificTesting
 
 # make sure to set the install path of your engine version
 #       export UE_INSTALL_PATH='/Users/Shared/Epic Games/UE_4.27'
@@ -16,7 +16,7 @@
 
 PROJECTNAME=${1}
 TARGET=${2}
-GAMEMAP=${3:-AndroidTest}
+GAMEMAP=${3:-DeviceTest}
 
 if [[ $UE_VERSION == "4.27" ]];
 then
