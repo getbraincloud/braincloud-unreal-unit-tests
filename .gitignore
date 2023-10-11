@@ -2,7 +2,7 @@
 .vscode/*
 BCSubsystem.code-workspace
 
-BCSubsystem.xcworkspace
+BCSubsystem**.xcworkspace
 
 # Compiled Object files
 *.slo
