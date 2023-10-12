@@ -43,9 +43,8 @@ pipeline {
                 }
                 post {
                     success {
-                        //sh "${BRAINCLOUD_TOOLS}/bin/upload_package.sh BCSubsystem-ANDROID/Android/BCSubsystem-arm64.apk"
-                        fileOperations([fileZipOperation(folderPath: "BCSubsystem-Mac", outputFolderPath: '.')])
-                        archiveArtifacts allowEmptyArchive: true, artifacts: "BCSubsystem-Mac.zip", followSymlinks: false, onlyIfSuccessful: true
+                        fileOperations([fileZipOperation(folderPath: "BCSubsystem_MAC_5.3", outputFolderPath: '.')])
+                        archiveArtifacts allowEmptyArchive: true, artifacts: "BCSubsystem_MAC_5.3.zip", followSymlinks: false, onlyIfSuccessful: true
                     }
                 }
            }
@@ -79,9 +78,9 @@ pipeline {
                 }
                 post {
                     success {
-                        sh "${BRAINCLOUD_TOOLS}/bin/upload_package.sh BCSubsystem-ANDROID/Android/BCSubsystem-arm64.apk"
-                        fileOperations([fileZipOperation(folderPath: "BCSubsystem-ANDROID", outputFolderPath: '.')])
-                        archiveArtifacts allowEmptyArchive: true, artifacts: "BCSubsystem-ANDROID.zip", followSymlinks: false, onlyIfSuccessful: true
+                        sh "${BRAINCLOUD_TOOLS}/bin/upload_package.sh BCSubsystem_ANDROID_5.3/Android/BCSubsystem-arm64.apk"
+                        fileOperations([fileZipOperation(folderPath: "BCSubsystem_ANDROID_5.3", outputFolderPath: '.')])
+                        archiveArtifacts allowEmptyArchive: true, artifacts: "BCSubsystem_ANDROID_5.3.zip", followSymlinks: false, onlyIfSuccessful: true
                     }
                 }
            }
@@ -113,8 +112,8 @@ pipeline {
             }
             post {
                 success {
-                    fileOperations([fileZipOperation(folderPath: "BCSubsystem-Win64_${UE_VERSION}", outputFolderPath: '.')])
-                    archiveArtifacts allowEmptyArchive: true, artifacts: "BCSubsystem-Win64_${UE_VERSION}.zip", followSymlinks: false, onlyIfSuccessful: true
+                    fileOperations([fileZipOperation(folderPath: "BCSubsystem_Win64_${UE_VERSION}", outputFolderPath: '.')])
+                    archiveArtifacts allowEmptyArchive: true, artifacts: "BCSubsystem_Win64_${UE_VERSION}.zip", followSymlinks: false, onlyIfSuccessful: true
                 }
             }
         }

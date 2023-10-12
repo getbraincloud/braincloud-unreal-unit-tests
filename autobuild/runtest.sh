@@ -22,8 +22,8 @@ TEST=${1:-Test_}
 "${UE_INSTALL_PATH}/Engine/Build/BatchFiles/RunUAT.sh" BuildCookRun -project="$PWD/BCSubsystem.uproject" -noP4 -platform=Mac -clientconfig=Development -build
 
 # run specified test
-"${UE_INSTALL_PATH}/Engine/Binaries/Mac/${UE_EDITOR_CMD}" "$PWD/BCSubsystem.uproject"  -editortest -server -nosplash -unattended -nopause -nosound -NullRHI -nocontentbrowser -ExecCmds="Automation RunTests $TEST;quit" -testexit="Automation Test Queue Empty" -ReportExportPath="$PWD/Mac_TestResults_UE_$UE_VERSION" -log=Mac_TestLog_UE_$UE_VERSION.log
+"${UE_INSTALL_PATH}/Engine/Binaries/Mac/${UE_EDITOR_CMD}" "$PWD/BCSubsystem.uproject"  -editortest -server -nosplash -unattended -nopause -nosound -NullRHI -nocontentbrowser -ExecCmds="Automation RunTests $TEST;quit" -testexit="Automation Test Queue Empty" -ReportExportPath="$PWD/TestResults_Mac_$UE_VERSION" -log=TestLog_Mac_$UE_VERSION.log
 
-cp ~/Library/Logs/Unreal\ Engine/BCSubsystemServer/Mac_TestLog_UE_$UE_VERSION.log saved/logs/
+cp ~/Library/Logs/Unreal\ Engine/BCSubsystemServer/TestLog_Mac_$UE_VERSION.log saved/logs/
 
 exit $?
