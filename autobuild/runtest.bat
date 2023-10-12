@@ -18,7 +18,7 @@ if [%TESTNAME%]==[] set TESTNAME=Test_
 ::cmd/c "autobuild\cleanupunreal.bat"
 
 echo -- Generating project files.
-call "%UE_INSTALL_PATH%\Engine\Binaries\DotNet\UnrealBuildTool\UnrealBuildTool.exe" -projectfiles -project="%WORKSPACE%\%PROJECTNAME%.uproject" -game -rocket -progress
+call "%UE_INSTALL_PATH%\Engine\Binaries\DotNet\UnrealBuildTool\UnrealBuildTool.exe" -projectfiles -project="%WORKSPACE%\BCSubsystem.uproject" -game -rocket -progress
 
 echo "-- Building project now."
 call "%UE_INSTALL_PATH%\Engine\Build\BatchFiles\RunUAT.bat" BuildCookRun -project="%WORKSPACE%\BCSubsystem.uproject" -unrealexe=%UE_EDITOR_CMD%.exe -noP4 -platform=Win64 -serverconfig=Development -build  -WaitMutex -FromMsBuild
