@@ -1,10 +1,10 @@
 
 pipeline {
     agent none
-    triggers {
-        cron('H 20 * * 1-5') // nightly around 8 pm
+    //triggers {
+        //cron('H 20 * * 1-5') // nightly around 8 pm
         //pollSCM('H/5 * * * *') // check git every five minutes
-    }
+    //}
     parameters {
         string(name: 'TEST_BRANCH', defaultValue: 'develop', description: 'braincloud-unreal branch (eg. release/5.0)')
         string(name: 'UE4_TEST_BRANCH', defaultValue: 'ue4-tests', description: 'branch with unreal 4 project files')
