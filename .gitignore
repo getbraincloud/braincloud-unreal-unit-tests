@@ -51,7 +51,8 @@ Binaries/
 Build/
 
 # builds for device
-**/BCSubsystem-**
+**/BCSubsystem_**
+**/BCClient_**
 
 
 # files written by tests
