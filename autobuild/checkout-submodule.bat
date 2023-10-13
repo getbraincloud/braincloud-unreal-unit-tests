@@ -1,18 +1,23 @@
-@ echo off
-:: && setlocal EnableDelayedExpansion
+@echo OFF
 
-if exist "Plugins\BCClient" (
-    for /f %%i in ('git config -f .gitmodules --get submodule.Plugins/BCClient.branch') do set BRANCH=%%i
-    pushd Plugins\BCClient
+:: use command argument
+set BRANCH=%1
 
-	for /f %%i in ('git diff --compact-summary .') do set FOO=%%i
-    if [%FOO%]==[] (
-		    if [%1]==[] ( git checkout %BRANCH% ) else ( git checkout %1 )
-			git pull
-	) else (
-		echo Folder has mods
-		git status
-	)
-	popd
-) else (echo Folder not exists)
+:: if that's not set, use submodule branch in .gitmodules file
+if [%BRANCH%]==[] (
+	for /f %%i in ('git config -f .gitmodules --get submodule.Plugins/BCClient.branch') do (set BRANCH=%%i)
+)
 
+:: if that's not set, use the default branch
+if [%BRANCH%]==[] (
+	set BRANCH=master
+)
+
+:: go into submodule directory and checkout latest code
+pushd Plugins\BCClient
+
+echo Checking out %BRANCH% to %CD%
+git checkout %BRANCH%
+git pull
+
+popd
