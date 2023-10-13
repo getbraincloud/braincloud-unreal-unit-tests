@@ -2,7 +2,7 @@
 .vscode/*
 BCSubsystem.code-workspace
 
-BCSubsystem.xcworkspace
+BCSubsystem**.xcworkspace
 
 # Compiled Object files
 *.slo
@@ -50,6 +50,11 @@ BCSubsystem.xcworkspace
 Binaries/
 Build/
 
+# builds for device
+**/BCSubsystem_**
+**/BCClient_**
+
+
 # files written by tests
 Artifacts/
 
@@ -79,5 +84,4 @@ Plugins/Developer/RiderLink/*
 /.idea/*
 .vsconfig
 compile.log
-TestResults/index.html
-TestResults/index.json
+**TestResults**/
