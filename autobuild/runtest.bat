@@ -17,6 +17,10 @@ if [%TESTNAME%]==[] set TESTNAME=Test_
 :: make clean option
 ::cmd/c "autobuild\cleanupunreal.bat"
 
+if %UE_VERSION% == 4.27 (
+    copy /Y Plugins\BCClient\Docs\WithoutBCWidget-BCClient.uplugin.txt Plugins\BCClient\BCClient.uplugin
+)
+
 echo -- Generating project files.
 call "%UE_INSTALL_PATH%\Engine\Binaries\DotNet\UnrealBuildTool\UnrealBuildTool.exe" -projectfiles -project="%WORKSPACE%\BCSubsystem.uproject" -game -rocket -progress
 

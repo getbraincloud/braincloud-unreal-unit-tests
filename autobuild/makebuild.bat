@@ -10,6 +10,9 @@ if not defined UE_INSTALL_PATH goto Path_Error
 set PROJECTNAME=%~1
 if "%PROJECTNAME%" == "" goto Proj_Error
 
+if %UE_VERSION% == 4.27 (
+    copy /Y Plugins\BCClient\Docs\WithoutBCWidget-BCClient.uplugin.txt Plugins\BCClient\BCClient.uplugin
+)
 if "%~3%" == "-pack" goto BuildPlugin
 
 :BuildApp
@@ -19,11 +22,13 @@ call "%UE_INSTALL_PATH%\Engine\Binaries\DotNet\UnrealBuildTool\UnrealBuildTool.e
 call "%UE_INSTALL_PATH%\Engine\Build\BatchFiles\Build.bat" %PROJECTNAME% Win64 Development -Project="%WORKSPACE%\%PROJECTNAME%.uproject" -WaitMutex -FromMsBuild
 
 echo -- Archive folder is %WORKSPACE%\%PROJECTNAME%_Win64_%UE_VERSION%
-call "%UE_INSTALL_PATH%\Engine\Build\BatchFiles\RunUAT.bat" BuildCookRun -rocket -nocompile -compileeditor -installed -nop4 -project="%WORKSPACE%\%PROJECTNAME%.uproject" -ue4exe=%UE_EDITOR_CMD%.exe -cook -stage -archive -archivedirectory="%WORKSPACE%\%PROJECTNAME%_Win64_%UE_VERSION%" -package -clientconfig=Development -clean -pak -prereqs -distribution -nodebuginfo -targetplatform=Win64 -build -utf8output
+call "%UE_INSTALL_PATH%\Engine\Build\BatchFiles\RunUAT.bat" BuildCookRun -rocket -nocompile -compileeditor -installed -nop4 -project="%WORKSPACE%\%PROJECTNAME%.uproject" -unrealexe=%UE_EDITOR_CMD%.exe -cook -stage -archive -archivedirectory="%WORKSPACE%\%PROJECTNAME%_Win64_%UE_VERSION%" -package -clientconfig=Development -clean -pak -prereqs -distribution -nodebuginfo -targetplatform=Win64 -build -utf8output
 
 goto Done
 
 :BuildPlugin
+:: platform specific build: copy /Y Plugins\BCClient\Docs\WindowsBuild-BCClient.uplugin.txt Plugins\BCClient\BCClient.uplugin
+
 echo -- Plugin package is %WORKSPACE%\BCClient_Win64_%UE_VERSION%
 call "%UE_INSTALL_PATH%\Engine\Build\BatchFiles\RunUAT.bat" BuildPlugin -rocket -plugin="%WORKSPACE%\Plugins\BCClient\BCClient.uplugin" -package="%WORKSPACE%\BCClient_Win64_%UE_VERSION%" -CreateSubFolder
 
