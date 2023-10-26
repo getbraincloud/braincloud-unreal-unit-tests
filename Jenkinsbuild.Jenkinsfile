@@ -9,7 +9,8 @@ pipeline {
         string(name: 'UE4_TEST_BRANCH', defaultValue: 'ue4-tests', description: 'branch with unreal 4 project files')
         string(name: 'BC_LIB', defaultValue: '', description: 'braincloud-unreal-plugin-src branch (blank for .gitmodules)')
         choice(name: 'SERVER_ENVIRONMENT', choices: ['internal', 'prod'], description: 'Where to run tests?')
-        choice(name: 'PLATFORM', choices: ['all', 'Mac', 'iOS', 'Win64', 'Android', 'Win64-UE4', 'Android-UE4'], description: 'Which platform to build?')
+        string(name: 'GAME_MAP', defaultValue: 'AndroidTest', description: '')
+        choice(name: 'PLATFORM', choices: ['all', 'Mac', 'Win64', 'iOS', 'Android'], description: 'Which platform to build?')
     }
     stages {
 
@@ -38,7 +39,7 @@ pipeline {
                     checkout([$class: 'GitSCM', branches: [[name: '*/${TEST_BRANCH}']], extensions: [[$class: 'SubmoduleOption', disableSubmodules: false, parentCredentials: false, recursiveSubmodules: true, reference: '', trackingSubmodules: false]], userRemoteConfigs: [[url: 'https://github.com/getbraincloud/braincloud-unreal.git']]])
                     sh 'autobuild/checkout-submodule.sh ${BC_LIB}'
                     sh "${BRAINCLOUD_TOOLS}/bin/copy-ids.sh -o Source/BCSubsystem -p test -x h -s ${params.SERVER_ENVIRONMENT}"
-                    sh "autobuild/makebuild.sh BCSubsystem MAC"
+                    sh "autobuild/makebuild.sh BCSubsystem MAC $GAME_MAP"
                 }
                 post {
                     success {
@@ -73,7 +74,7 @@ pipeline {
                     checkout([$class: 'GitSCM', branches: [[name: '*/${TEST_BRANCH}']], extensions: [[$class: 'SubmoduleOption', disableSubmodules: false, parentCredentials: false, recursiveSubmodules: true, reference: '', trackingSubmodules: false]], userRemoteConfigs: [[url: 'https://github.com/getbraincloud/braincloud-unreal.git']]])
                     sh 'autobuild/checkout-submodule.sh ${BC_LIB}'
                     sh "${BRAINCLOUD_TOOLS}/bin/copy-ids.sh -o Source/BCSubsystem -p test -x h -s ${params.SERVER_ENVIRONMENT}"
-                    sh "autobuild/makebuild.sh BCSubsystem ANDROID"
+                    sh "autobuild/makebuild.sh BCSubsystem ANDROID $GAME_MAP"
                 }
                 post {
                     success {
@@ -84,11 +85,11 @@ pipeline {
                 }
            }
 
-        stage('Windows UE4') {
+        stage('Windows UE 4.27') {
             when {
                 expression {
                     params.UE4_TEST_BRANCH != ''  &&
-                    params.PLATFORM == 'Win64-UE4' ||
+                    params.PLATFORM == 'Win64' ||
                     params.UE4_TEST_BRANCH != ''  &&
                     params.PLATFORM == 'all'
                 }
@@ -107,45 +108,12 @@ pipeline {
                 checkout([$class: 'GitSCM', branches: [[name: '*/${UE4_TEST_BRANCH}']], extensions: [[$class: 'SubmoduleOption', disableSubmodules: false, parentCredentials: false, recursiveSubmodules: true, reference: '', trackingSubmodules: false]], userRemoteConfigs: [[url: 'https://github.com/getbraincloud/braincloud-unreal.git']]])
                 bat 'autobuild\\checkout-submodule.bat %BC_LIB%'
             	bat '%BRAINCLOUD_TOOLS%\\bin\\copy-ids.bat Source\\BCSubsystem test h internal'
-            	bat 'autobuild\\makebuild.bat BCSubsystem Win64'
+            	bat 'autobuild\\makebuild.bat BCSubsystem Win64 %GAME_MAP%'
             }
             post {
                 success {
                     fileOperations([fileZipOperation(folderPath: "BCSubsystem_Win64_${UE_VERSION}", outputFolderPath: '.')])
                     archiveArtifacts allowEmptyArchive: true, artifacts: "BCSubsystem_Win64_${UE_VERSION}.zip", followSymlinks: false, onlyIfSuccessful: true
-                }
-            }
-        }
-
-        stage('Android UE4') {
-            when {
-                expression {
-                    params.UE4_TEST_BRANCH != ''  &&
-                    params.PLATFORM == 'Android-UE4' ||
-                    params.UE4_TEST_BRANCH != ''  &&
-                    params.PLATFORM == 'all'
-                }
-            }
-            agent {
-                label 'unrealWindows'
-            }
-            environment {
-                UE_VERSION="4.27"
-			    UE_INSTALL_PATH="C:\\ProgramFiles\\UE_4.27"
-                UE_EDITOR_CMD="U4Editor-cmd"
-                BRAINCLOUD_TOOLS="C:\\Users\\buildmaster\\braincloud-client-master"
-            }
-            steps {
-                deleteDir()
-                checkout([$class: 'GitSCM', branches: [[name: '*/${UE4_TEST_BRANCH}']], extensions: [[$class: 'SubmoduleOption', disableSubmodules: false, parentCredentials: false, recursiveSubmodules: true, reference: '', trackingSubmodules: false]], userRemoteConfigs: [[url: 'https://github.com/getbraincloud/braincloud-unreal.git']]])
-                bat 'autobuild\\checkout-submodule.bat %BC_LIB%'
-            	bat '%BRAINCLOUD_TOOLS%\\bin\\copy-ids.bat Source\\BCSubsystem test h internal'
-            	bat 'autobuild\\makebuild.bat BCSubsystem ANDROID'
-            }
-            post {
-                success {
-                    fileOperations([fileZipOperation(folderPath: "BCSubsystem_Android_${UE_VERSION}", outputFolderPath: '.')])
-                    archiveArtifacts allowEmptyArchive: true, artifacts: "BCSubsystem_Android_${UE_VERSION}.zip", followSymlinks: false, onlyIfSuccessful: true
                 }
             }
         }
