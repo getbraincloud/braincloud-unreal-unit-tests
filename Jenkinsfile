@@ -26,17 +26,17 @@ pipeline {
                 BRAINCLOUD_TOOLS="/Users/buildmaster/braincloud-client-master"
   			}
             steps {
-                catchError(buildResult: 'SUCCESS', stageResult: 'FAILURE') {
-                    //deleteDir()
+                //catchError(buildResult: 'SUCCESS', stageResult: 'FAILURE') {
+                    deleteDir()
                     checkout([$class: 'GitSCM', branches: [[name: '*/${TEST_BRANCH}']], extensions: [[$class: 'SubmoduleOption', disableSubmodules: false, parentCredentials: false, recursiveSubmodules: true, reference: '', trackingSubmodules: false]], userRemoteConfigs: [[url: 'https://github.com/getbraincloud/braincloud-unreal.git']]])
                     sh 'autobuild/checkout-submodule.sh ${BC_LIB}'
                     sh "${BRAINCLOUD_TOOLS}/bin/copy-ids.sh -o Source/BCSubsystem -p test -x h -s ${params.SERVER_ENVIRONMENT}"
                     sh 'autobuild/runtest.sh ${TEST_NAME}'
-			    }
+			    //}
             }
             post {
                 success {
-                    //fileOperations([fileCopyOperation(excludes: '', flattenFiles: false, includes: '/Users/buildmaster/Library/Logs/Unreal\\ Engine/BCSubsystemServer/Mac_TestLog_UE_5.1.log', renameFiles: false, sourceCaptureExpression: '', targetLocation: 'saved/logs/Mac_TestLog_UE_5.1.log', targetNameExpression: '')])
+                    fileOperations([fileCopyOperation(excludes: '', flattenFiles: false, includes: '/Users/buildmaster/Library/Logs/Unreal\\ Engine/BCSubsystemServer/TestLog_Mac_5.3.log', renameFiles: false, sourceCaptureExpression: '', targetLocation: 'saved/logs', targetNameExpression: '')])
                     archiveArtifacts artifacts: 'TestResults_Mac_5.3/index.json, saved/logs/TestLog_Mac_5.3.log', followSymlinks: false, allowEmptyArchive: true
                }
             }
@@ -86,7 +86,7 @@ pipeline {
             }
             post {
                 success {
-                    //fileOperations([fileCopyOperation(excludes: '', flattenFiles: false, includes: '/Users/buildmaster/Library/Logs/Unreal\\ Engine/BCSubsystemServer/Mac_TestLog_UE_5.1.log', renameFiles: false, sourceCaptureExpression: '', targetLocation: 'saved/logs/Mac_TestLog_UE_5.1.log', targetNameExpression: '')])
+                    fileOperations([fileCopyOperation(excludes: '', flattenFiles: false, includes: '/Users/buildmaster/Library/Logs/Unreal\\ Engine/BCSubsystemServer/Mac_TestLog_UE_5.1.log', renameFiles: false, sourceCaptureExpression: '', targetLocation: 'saved/logs', targetNameExpression: '')])
                     archiveArtifacts artifacts: 'TestResults_Mac_5.1/index.json, saved/logs/TestLog_Mac_5.1.log', followSymlinks: false, allowEmptyArchive: true
                }
             }
