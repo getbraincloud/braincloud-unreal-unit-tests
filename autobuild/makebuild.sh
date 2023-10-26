@@ -31,7 +31,7 @@ if [[ "$3" != "-pack" ]];
 then
   # optional: add commandline args for the game exe (saved in UECommandlLine.txt)
   # eg. -cmdline="${GAMEMAP} -Messaging"
-  "${UE_INSTALL_PATH}/Engine/Build/BatchFiles/RunUAT.sh" BuildCookRun -rocket -nocompile -nocompileeditor -nop4 -project="$WORKSPACE/$PROJECTNAME.uproject" -map=${GAMEMAP} -cook -stage -archive -archivedirectory="$WORKSPACE/${PROJECTNAME}_${TARGET}_${UE_VERSION}" -package -clientconfig=Development -clean -pak -prereqs  ${ModeString} -nodebuginfo -targetplatform=${TARGET} -build -target=${PROJECTNAME} -utf8output
+  "${UE_INSTALL_PATH}/Engine/Build/BatchFiles/RunUAT.sh" BuildCookRun -rocket -nocompile -installed -nop4 -project="$WORKSPACE/$PROJECTNAME.uproject" -map=${GAMEMAP} -cook -stage -archive -archivedirectory="$WORKSPACE/${PROJECTNAME}_${TARGET}_${UE_VERSION}" -package -clientconfig=Development -clean -pak -prereqs  ${ModeString} -nodebuginfo -targetplatform=${TARGET} -build -target=${PROJECTNAME} -utf8output
 else
   "${UE_INSTALL_PATH}/Engine/Build/BatchFiles/RunUAT.sh" BuildPlugin -rocket -plugin="$WORKSPACE/Plugins/BCClient/BCClient.uplugin" -package="$WORKSPACE/BCClient_${TARGET}_${UE_VERSION}" -CreateSubFolder
   # todo: copy Readme etc into folder
