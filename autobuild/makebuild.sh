@@ -29,16 +29,8 @@ fi
 
 if [[ "$3" != "-pack" ]];
 then
-  # replace GameDefaultMap in .uproject
-  sed -i '' "s/GameDefaultMap=.*$/GameDefaultMap=\/Game\/${GAMEMAP}.${GAMEMAP}/g" $WORKSPACE/Config/DefaultEngine.ini
 
-  #"${UE_INSTALL_PATH}/Engine/Build/BatchFiles/Mac/GenerateProjectFiles.sh" -projectfiles -project="$WORKSPACE/$PROJECTNAME.uproject" -game  -progress
-
-  #"${UE_INSTALL_PATH}/Engine/Build/BatchFiles/Mac/Build.sh" ${PROJECTNAME}Editor Mac Development -Project="$WORKSPACE/$PROJECTNAME.uproject"
-
-  "${UE_INSTALL_PATH}/Engine/Build/BatchFiles/RunUAT.sh" BuildCookRun -rocket -nocompile -compileeditor -installed -nop4 -project="$WORKSPACE/$PROJECTNAME.uproject" -cook -stage -archive -archivedirectory="$WORKSPACE/${PROJECTNAME}_${TARGET}_${UE_VERSION}" -package -clientconfig=Development -clean -pak -prereqs  ${ModeString} -nodebuginfo -targetplatform=${TARGET} -build -target=${PROJECTNAME} -utf8output
-
-  sed -i '' "s/GameDefaultMap=.*$/GameDefaultMap=\/Game\/EmptyWorld.EmptyWorld/g" $WORKSPACE/Config/DefaultEngine.ini
+  "${UE_INSTALL_PATH}/Engine/Build/BatchFiles/RunUAT.sh" BuildCookRun -rocket -nocompile -game -nocompileeditor -installed -nop4 -project="$WORKSPACE/$PROJECTNAME.uproject" -cook -stage -archive -archivedirectory="$WORKSPACE/${PROJECTNAME}_${TARGET}_${UE_VERSION}" -package -clientconfig=Development -clean -pak -prereqs  ${ModeString} -nodebuginfo -targetplatform=${TARGET} -build -target=${PROJECTNAME} -utf8output
 
 else
   "${UE_INSTALL_PATH}/Engine/Build/BatchFiles/RunUAT.sh" BuildPlugin -rocket -plugin="$WORKSPACE/Plugins/BCClient/BCClient.uplugin" -package="$WORKSPACE/BCClient_${TARGET}_${UE_VERSION}" -CreateSubFolder
