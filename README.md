@@ -1,6 +1,6 @@
 # brainCloud Unreal Subsystem
 
-This repository contains automated tests for all functionality of brainCloud. Find the latest releases of the Unreal brainCloud client plugin [here](https://github.com/getbraincloud/braincloud-unreal-plugin-src).
+This repository contains automated tests for all functionality of brainCloud. Find the latest releases of the Unreal brainCloud client plugin [here](https://github.com/getbraincloud/braincloud-unreal-plugin).
 
 ## Instructions
 
@@ -9,7 +9,7 @@ This repository contains automated tests for all functionality of brainCloud. Fi
 The project includes the required plugins VaRest and BCClient as git submodules.
 
 ```
-$ git clone --recurse-submodules git@github.com:getbraincloud/braincloud-unreal.git
+$ git clone --recurse-submodules https://github.com/getbraincloud/braincloud-unreal-unit-tests.git
 ```
 
 If you are updating an existing repository, or forget to --recurse-submodules, then just update the modules. 
@@ -34,7 +34,7 @@ $ git submodule update --remote
 To work with a branch of the plugin
 
 ```
-$ cd braincloud-unreal/Plugins/BCClient
+$ cd braincloud-unreal-unit-tests/Plugins/BCClient
 $ git checkout develop
 ```
 
@@ -56,4 +56,4 @@ This project will not open in older versions of Unreal Engine (assets will appea
 Open BCSubsystem.uproject by double-clicking or within engine. Build at command-line by exporting the correct paths in autobuild/runtest.sh or autobuild/runtest.bat.
 
 #### Older Versions
-There is a braincloud-unreal branch on github that runs in UE 4.27 using the same brainCloud plugin. https://github.com/getbraincloud/braincloud-unreal/tree/ue4-tests
+There is a braincloud-unreal branch on github that runs in UE 4.27 using the same brainCloud plugin. https://github.com/getbraincloud/braincloud-unreal-unit-tests/tree/ue4-tests
