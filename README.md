@@ -16,7 +16,7 @@ If you are updating an existing repository, or forget to --recurse-submodules, t
 Make sure you've done this if you get "missing plugin" error on load.
 
 ```
-$ cd braincloud-unreal
+$ cd braincloud-unreal-unit-tests
 $ git submodule update --init --recursive
 ```
 
@@ -27,7 +27,7 @@ You can check which version of the plugin is installed under Edit > Plugins or b
 To make sure you have the latest version of the plugin and to update the SHA1 of the Plugin submodule:
 
 ```
-$ cd braincloud-unreal
+$ cd braincloud-unreal-unit-tests
 $ git submodule update --remote
 ```
 
@@ -44,10 +44,10 @@ Open the uproject file in Unreal Engine. It will inform that BCClient modules ar
 
 ### Run:
 
-Select Windows > Developer Tools > Session Frontend. Find tests on Automation tab under Project > Functional Tests. Make sure to modify **ids.h** file to define input params.
+Select Windows > Developer Tools > Session Frontend. Find tests on Automation tab under Project > Functional Tests. Make sure to modify **BrainCloudConfig.ini** file to define input params.
 
 ### Commandline
-Use autobuild/generate-ids script to set server and app info in the ids.h header file. See autobuild/runtest script for commandline arguments to build and run tests (eg. for continuous integration or nightly tests on Jenkins).
+See autobuild/runtest script for commandline arguments to build and run tests (eg. for continuous integration or nightly tests on Jenkins).
 
 ### UE Version (5.1):
 
