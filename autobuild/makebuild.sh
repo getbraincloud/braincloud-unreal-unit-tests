@@ -1,10 +1,6 @@
 #!/bin/bash
 # usage:
-#      autobuild/makebuild.sh BCSubsystem MAC
-#      autobuild/makebuild.sh BCSubsystem MAC -pack
-#      autobuild/makebuild.sh BCSubsystem IOS
-#      autobuild/makebuild.sh BCSubsystem ANDROID
-#      autobuild/makebuild.sh BCSubsystem ANDROID AndroidTest
+#      autobuild/makebuild.sh
 
 # make sure to set the install path of your engine version
 #       export UE_INSTALL_PATH='/Users/Shared/Epic Games/UE_4.27'
