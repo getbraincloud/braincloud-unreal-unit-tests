@@ -8,6 +8,10 @@
 #include "Serialization/JsonSerializer.h"
 #include "BrainCloudTestActor.generated.h"
 
+#define TESTFILE_SERVER_URL ""
+#define TESTFILE_APP_ID ""
+#define TESTFILE_APP_SECRET ""
+
 class UBrainCloudWrapper;
 
 UCLASS()

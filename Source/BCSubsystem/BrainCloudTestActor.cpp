@@ -5,7 +5,6 @@
 #include "BrainCloudWrapper.h"
 #include "ServiceName.h"
 #include "ServiceOperation.h"
-#include "ids.h"
 
 // Sets default values
 ABrainCloudTestActor::ABrainCloudTestActor()
