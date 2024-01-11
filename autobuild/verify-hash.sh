@@ -27,7 +27,7 @@ echo -$LOCAL- submodule $1
 REMOTE=$(git rev-parse --verify origin/$2)
 echo -$REMOTE- on remote $2
 
-if [ $LOCAL == $REMOTE ]
+if [ $LOCAL == $REMOTE ];
 then
     echo Submodule $1 up to date with latest commit.
     CODE=0
