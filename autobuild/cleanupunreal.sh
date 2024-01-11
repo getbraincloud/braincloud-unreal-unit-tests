@@ -1,10 +1,11 @@
 #!/bin/bash
+
+rm -rf Binaries
+rm -rf Intermediate
+rm -rf Saved
 rm -rf DerivedDataCache
-
-for i in . Plugins/BCClient Plugins/VaRest
-do
-	rm -rf $i/Binaries
-	rm -rf $i/Intermediate
-done
-echo Unreal build file have been removed.
-
+rm -rf Plugins/BCClient/Binaries
+rm -rf Plugins/BCClient/Intermediate
+if [ -z $1 ] ; then
+	echo Done $PWD
+fi

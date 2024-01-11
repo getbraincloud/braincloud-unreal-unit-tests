@@ -1,20 +1,29 @@
 #!/bin/bash
 
-if [[ -d Plugins/BCClient  ]];
+SUBMODULE=$1
+BRANCH=$2
+
+if [[ -d ${SUBMODULE}  ]];
 then
 
-	STR=$(git config -f .gitmodules --get submodule.Plugins/BCClient.branch)
-	if [ -z $STR ];
-	then
-     STR=$(git remote show origin| sed -n '/HEAD branch/s/.*: //p')
-	 fi
-  pushd Plugins/BCClient
-   if [[ $(git diff --compact-summary .) ]];
+  if [ -z ${BRANCH} ];
+  then
+    BRANCH=$(git config -f .gitmodules --get submodule.${SUBMODULE}.branch)
+  fi
+  if [ -z ${BRANCH} ];
+  then
+      BRANCH=$(git remote show origin | sed -n '/HEAD branch/s/.*: //p')
+  fi
+
+  pushd ${SUBMODULE}
+
+  if [[ $(git diff --compact-summary .) ]];
    then
    echo "Folder has mods"
   else
-   echo "Checking out ${1:-$STR}"
-   git checkout ${1:-$STR}
+   echo "Checking out ${BRANCH} to ${SUBMODULE}"
+   git fetch
+   git checkout ${BRANCH}
    git pull
   fi
   popd
