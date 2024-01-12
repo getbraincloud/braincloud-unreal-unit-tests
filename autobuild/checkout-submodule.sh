@@ -1,6 +1,6 @@
 #!/bin/bash
 
-SUBMODULE=$1
+SUBMODULE=Plugins/BCClient
 BRANCH=$2
 
 if [[ -d ${SUBMODULE}  ]];
