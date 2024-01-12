@@ -31,4 +31,5 @@ then
 fi
 
 # run specified test
-"${UE_INSTALL_PATH}/Engine/Binaries/Mac/${UE_EDITOR_CMD}" "$WORKSPACE/BCSubsystem.uproject" -game -nosplash -unattended -nopause -nosound -NullRHI -nocontentbrowser -ExecCmds="Automation RunTests $TEST;quit" -testexit="Automation Test Queue Empty" -ReportExportPath="$WORKSPACE/TestResults_Mac_$UE_VERSION" -log -abslog=$WORKSPACE/Saved/logs/TestLog_Mac_$UE_VERSION.log
+"${UE_INSTALL_PATH}/Engine/Binaries/Mac/${UE_EDITOR_CMD}" "$WORKSPACE/BCSubsystem.uproject" -game -nosplash -unattended -nopause -nosound -NullRHI -nocontentbrowser -ExecCmds="Automation RunTests $TEST;quit" -testexit="Automation Test Queue Empty" -ReportExportPath="$WORKSPACE/TestResults_Mac_$UE_VERSION" -log -stdout
+#-abslog=$WORKSPACE/Saved/logs/TestLog_Mac_$UE_VERSION.log
