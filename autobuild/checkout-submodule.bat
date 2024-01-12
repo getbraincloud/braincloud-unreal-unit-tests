@@ -1,6 +1,6 @@
 @echo OFF
 
-set SUBMODULE=%1
+set SUBMODULE=Plugins/BCClient
 set BRANCH=%2
 
 if [%BRANCH%]==[] (
