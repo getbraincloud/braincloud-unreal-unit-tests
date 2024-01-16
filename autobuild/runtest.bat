@@ -27,7 +27,7 @@ call "%UE_INSTALL_PATH%\Engine\Build\BatchFiles\RunUAT.bat" BuildCookRun -projec
 echo -- Executing now. Automation RunTests %TESTNAME%
 echo Report path is %WORKSPACE%\artifacts\TestResults_Win64_%UE_VERSION%
 echo Log path is %WORKSPACE%\artifacts\TestLog_Win64_%UE_VERSION%.log
-call "%UE_INSTALL_PATH%\Engine\Binaries\Win64\%UE_EDITOR_CMD%.exe" "%WORKSPACE%\BCSubsystem.uproject" -game -nosplash -unattended -nopause -nosound -NullRHI -nocontentbrowser -ExecCmds="Automation RunTests %TESTNAME%;quit" -TestExit="Automation Test Queue Empty" -ReportExportPath="%WORKSPACE%\artifacts\TestResults_Win64_%UE_VERSION%" -stdout -abslog="%WORKSPACE%\artifacts\TestLog_Win64_%UE_VERSION%.log"
+"%UE_INSTALL_PATH%\Engine\Binaries\Win64\%UE_EDITOR_CMD%.exe" "%WORKSPACE%\BCSubsystem.uproject" -game -nosplash -unattended -nopause -nosound -NullRHI -nocontentbrowser -ExecCmds="Automation RunTests %TESTNAME%;quit" -TestExit="Automation Test Queue Empty" -ReportExportPath="%WORKSPACE%\artifacts\TestResults_Win64_%UE_VERSION%" -log -abslog="%WORKSPACE%\artifacts\TestLog_Win64_%UE_VERSION%.log"
 
 :: return code for tests
 exit /B %errorlevel%
