@@ -21,13 +21,13 @@ echo -- Generating project files.
 ::call "%UE_INSTALL_PATH%\Engine\Binaries\DotNet\UnrealBuildTool\UnrealBuildTool.exe" -projectfiles -project="%WORKSPACE%\BCSubsystem.uproject" -game -rocket -progress
 
 echo "-- Building project now."
-call "%UE_INSTALL_PATH%\Engine\Build\BatchFiles\RunUAT.bat" BuildCookRun -project="%WORKSPACE%\BCSubsystem.uproject" -unrealexe=%UE_EDITOR_CMD%.exe -rocket -noP4 -platform=Win64 -clientconfig=Development -serverconfig=Development -build  -WaitMutex
+call "%UE_INSTALL_PATH%\Engine\Build\BatchFiles\RunUAT.bat" BuildCookRun -project="%WORKSPACE%\BCSubsystem.uproject" -rocket -noP4 -platform=Win64 -clientconfig=Development -serverconfig=Development -build  -WaitMutex
 
 :: run specified test
 echo -- Executing now. Automation RunTests %TESTNAME%
 echo Report path is %WORKSPACE%\artifacts\TestResults_Win64_%UE_VERSION%
 echo Log path is %WORKSPACE%\artifacts\TestLog_Win64_%UE_VERSION%.log
-"%UE_INSTALL_PATH%\Engine\Binaries\Win64\%UE_EDITOR_CMD%.exe" "%WORKSPACE%\BCSubsystem.uproject" -client -nosplash -unattended -nopause -nosound -NullRHI -nocontentbrowser -ExecCmds="Automation RunTests %TESTNAME%;quit" -TestExit="Automation Test Queue Empty" -ReportExportPath="%WORKSPACE%\artifacts\TestResults_Win64_%UE_VERSION%" -stdout -abslog="%WORKSPACE%\artifacts\TestLog_Win64_%UE_VERSION%.log"
+"%UE_INSTALL_PATH%\Engine\Binaries\Win64\%UE_EDITOR_CMD%.exe" "%WORKSPACE%\BCSubsystem.uproject" -game -nosplash -unattended -nopause -nosound -NullRHI -nocontentbrowser -ExecCmds="Automation RunTests %TESTNAME%;quit" -TestExit="Automation Test Queue Empty" -ReportExportPath="%WORKSPACE%\artifacts\TestResults_Win64_%UE_VERSION%" -stdout -abslog="%WORKSPACE%\artifacts\TestLog_Win64_%UE_VERSION%.log"
 
 :: return code for tests
 exit /B %errorlevel%
