@@ -5,9 +5,9 @@
 ::      autobuild\runtest.bat Authentication
 
 ::eg. Jenkins
-:: 		> set UE_INSTALL_PATH=C:\ProgramFiles\UE_5.1
-::      > set UE_EDITOR_CMD=UnrealEditor
-:: 		> set WORKSPACE=%cd%
+set UE_INSTALL_PATH=C:\UE_5.3
+set UE_EDITOR_CMD=UnrealEditor
+set WORKSPACE=%cd%/../
 
 if not defined UE_INSTALL_PATH goto Path_Error
 
@@ -18,16 +18,17 @@ if [%TESTNAME%]==[] set TESTNAME=Test_
 ::call "autobuild\cleanupunreal.bat"
 
 echo -- Generating project files.
-::call "%UE_INSTALL_PATH%\Engine\Binaries\DotNet\UnrealBuildTool\UnrealBuildTool.exe" -projectfiles -project="%WORKSPACE%\BCSubsystem.uproject" -game -rocket -progress
+call "%UE_INSTALL_PATH%\Engine\Binaries\DotNet\UnrealBuildTool\UnrealBuildTool.exe" -projectfiles -project="%WORKSPACE%\BCSubsystem.uproject" -game -rocket -progress
+::call "%UE_INSTALL_PATH%\Engine\Binaries\DotNet\UnrealBuildTool\UnrealBuildTool.exe" BCSubsystem Win64 Development -run=AutomationTool -cmd=RunTests -path="%WORKSPACE%\BCSubsystem.uproject" -test="Test_"
 
-echo "-- Building project now."
+::echo "-- Building project now."
 call "%UE_INSTALL_PATH%\Engine\Build\BatchFiles\RunUAT.bat" BuildCookRun -project="%WORKSPACE%\BCSubsystem.uproject" -unrealexe=%UE_EDITOR_CMD%.exe -rocket -noP4 -platform=Win64 -clientconfig=Development -serverconfig=Development -build  -WaitMutex
 
 :: run specified test
 echo -- Executing now. Automation RunTests %TESTNAME%
 echo Report path is %WORKSPACE%\artifacts\TestResults_Win64_%UE_VERSION%
 echo Log path is %WORKSPACE%\artifacts\TestLog_Win64_%UE_VERSION%.log
-"%UE_INSTALL_PATH%\Engine\Binaries\Win64\%UE_EDITOR_CMD%.exe" "%WORKSPACE%\BCSubsystem.uproject" -game -nosplash -unattended -nopause -nosound -NullRHI -nocontentbrowser -ExecCmds="Automation RunTests %TESTNAME%;quit" -TestExit="Automation Test Queue Empty" -ReportExportPath="%WORKSPACE%\artifacts\TestResults_Win64_%UE_VERSION%" -log -abslog="%WORKSPACE%\artifacts\TestLog_Win64_%UE_VERSION%.log"
+"%UE_INSTALL_PATH%\Engine\Binaries\Win64\%UE_EDITOR_CMD%.exe" "%WORKSPACE%\BCSubsystem.uproject" -nosound -newconsole -unattended -nosplash -NullRHI -ExecCmds="Automation RunTests %TESTNAME%;quit" -TestExit="Automation Test Queue Empty" -ReportExportPath="%WORKSPACE%\artifacts\TestResults_Win64" -log -abslog="%WORKSPACE%\artifacts\TestLog_Win64.log"
 
 :: return code for tests
 exit /B %errorlevel%
