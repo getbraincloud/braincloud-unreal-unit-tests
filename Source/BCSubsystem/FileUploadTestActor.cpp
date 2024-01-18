@@ -1,7 +1,7 @@
 // Copyright 2015 bitHeads, Inc. All Rights Reserved.
 
-#include "BCSubsystem.h"
 #include "FileUploadTestActor.h"
+#include "BCSubsystem.h"
 #include "BrainCloudWrapper.h"
 #include "ServiceName.h"
 #include "ServiceOperation.h"
