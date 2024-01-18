@@ -1,7 +1,7 @@
 @echo OFF
 
 set SUBMODULE=Plugins/BCClient
-set BRANCH=%2
+set BRANCH=%1
 
 if [%BRANCH%]==[] (
 	for /f %%i in ('git config -f .gitmodules --get submodule.%SUBMODULE:\=/%.branch') do (set BRANCH=%%i)
