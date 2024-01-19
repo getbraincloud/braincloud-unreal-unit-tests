@@ -26,9 +26,9 @@ bash "${UE_INSTALL_PATH}/Engine/Build/BatchFiles/RunUAT.sh" BuildCookRun -projec
 if [[ "$TEST" == "ListAllTests" ]];
 then
   # tests are under: Project.Functional Tests.AutomatedTestMaps
-  "${UE_INSTALL_PATH}/Engine/Binaries/Mac/${UE_EDITOR_CMD}" "$WORKSPACE/BCSubsystem.uproject" -nosplash -unattended -nopause -nosound -NullRHI -nocontentbrowser -ExecCmds="Automation List;quit"
+  "${UE_INSTALL_PATH}/Engine/Binaries/Mac/${UE_EDITOR_CMD}" "$WORKSPACE/BCSubsystem.uproject" -game -nosplash -unattended -nopause -nosound -NullRHI -nocontentbrowser -ExecCmds="Automation List;quit"
   exit 0
 fi
 
 # run specified test
-"${UE_INSTALL_PATH}/Engine/Binaries/Mac/${UE_EDITOR_CMD}" "$WORKSPACE/BCSubsystem.uproject" -nosplash -unattended -nopause -nosound -NullRHI -nocontentbrowser -ExecCmds="Automation RunTests $TEST;quit" -testexit="Automation Test Queue Empty" -ReportExportPath="$WORKSPACE/artifacts/TestResults_Mac_$UE_VERSION" -stdout -FullStdOutLogOutput -abslog=$WORKSPACE/artifacts/TestLog_Mac_$UE_VERSION.log
+"${UE_INSTALL_PATH}/Engine/Binaries/Mac/${UE_EDITOR_CMD}" "$WORKSPACE/BCSubsystem.uproject" -game -nosplash -unattended -nopause -nosound -NullRHI -nocontentbrowser -ExecCmds="Automation RunTests $TEST;quit" -testexit="Automation Test Queue Empty" -ReportExportPath="$WORKSPACE/artifacts/TestResults_Mac_$UE_VERSION" -stdout -FullStdOutLogOutput -abslog=$WORKSPACE/artifacts/TestLog_Mac_$UE_VERSION.log
