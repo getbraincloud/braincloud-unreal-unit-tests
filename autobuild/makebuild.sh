@@ -12,4 +12,4 @@
 
 PROJECTNAME=${1}
 
-"${UE_INSTALL_PATH}/Engine/Build/BatchFiles/RunUAT.sh" BuildPlugin -rocket -plugin="$WORKSPACE/Plugins/BCClient/BCClient.uplugin" -package="$WORKSPACE/artifacts/BCClient_${UE_VERSION}" -CreateSubFolder
+"${UE_INSTALL_PATH}/Engine/Build/BatchFiles/RunUAT.sh" BuildPlugin -plugin="$WORKSPACE/Plugins/BCClient/BCClient.uplugin" -package="$WORKSPACE/artifacts/BCClient_${UE_VERSION}" -CreateSubFolder
