@@ -10,6 +10,7 @@
 
 # use options nosign for android and distribution for ios
 
-PROJECTNAME=${1}
+# eg. Mac+Android+IOS
+TARGETS=${1:-Mac}
 
-"${UE_INSTALL_PATH}/Engine/Build/BatchFiles/RunUAT.sh" BuildPlugin -plugin="$WORKSPACE/Plugins/BCClient/BCClient.uplugin" -package="$WORKSPACE/artifacts/BCClient_${UE_VERSION}" -CreateSubFolder
+"${UE_INSTALL_PATH}/Engine/Build/BatchFiles/RunUAT.sh" BuildPlugin -plugin="$WORKSPACE/Plugins/BCClient/BCClient.uplugin" -targetplatforms=$TARGETS -package="$WORKSPACE/artifacts/BCClient_${UE_VERSION}" -CreateSubFolder
