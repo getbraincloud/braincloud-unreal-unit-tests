@@ -7,7 +7,8 @@
 
 if not defined UE_INSTALL_PATH goto Path_Error
 
-set TARGETS=Win64
+set TARGETS=%1
+if [%TARGETS%]==[] set TARGETS=Win64
 
 :BuildPlugin
 echo -- Plugin package is %WORKSPACE%\artifacts\BCClient_%UE_VERSION%
