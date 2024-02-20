@@ -44,16 +44,16 @@ Open the uproject file in Unreal Engine. It will inform that BCClient modules ar
 
 ### Run:
 
-Select Windows > Developer Tools > Session Frontend. Find tests on Automation tab under Project > Functional Tests. Make sure to modify **BrainCloudConfig.ini** file to define input params.
+Select Windows > Developer Tools > Session Frontend. Find tests on Automation tab under Project > Functional Tests. Make sure to modify **BrainCloudSettings.ini** file to define input params.
 
-### Commandline
+### Commandline:
 See autobuild/runtest script for commandline arguments to build and run tests (eg. for continuous integration or nightly tests on Jenkins).
 
-### UE Version (5.1):
+### UE Version (5.3):
 
 This project will not open in older versions of Unreal Engine (assets will appear to be missing). Make sure that VaRest is the correct version. You can get this third-party plugin through MarketPlace or GitHub.
 
 Open BCSubsystem.uproject by double-clicking or within engine. Build at command-line by exporting the correct paths in autobuild/runtest.sh or autobuild/runtest.bat.
 
 #### Older Versions
-There is a braincloud-unreal branch on github that runs in UE 4.27 using the same brainCloud plugin. https://github.com/getbraincloud/braincloud-unreal-unit-tests/tree/ue4-tests
+There is a examples-unreal branch on github that runs in UE 4.27 using the same brainCloud plugin. https://github.com/getbraincloud/examples-unreal/tree/ue4-examples
