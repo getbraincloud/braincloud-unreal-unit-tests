@@ -15,19 +15,19 @@ set TESTNAME=%1
 if [%TESTNAME%]==[] set TESTNAME=Test_
 
 :: make clean option
-::cmd/c "autobuild\cleanupunreal.bat"
+::call "autobuild\cleanupunreal.bat"
 
 echo -- Generating project files.
-call "%UE_INSTALL_PATH%\Engine\Binaries\DotNet\UnrealBuildTool\UnrealBuildTool.exe" -projectfiles -project="%WORKSPACE%\BCSubsystem.uproject" -game -rocket -progress
+::call "%UE_INSTALL_PATH%\Engine\Binaries\DotNet\UnrealBuildTool\UnrealBuildTool.exe" -projectfiles -project="%WORKSPACE%\BCSubsystem.uproject" -game -rocket -progress
 
 echo "-- Building project now."
-call "%UE_INSTALL_PATH%\Engine\Build\BatchFiles\RunUAT.bat" BuildCookRun -project="%WORKSPACE%\BCSubsystem.uproject" -unrealexe=%UE_EDITOR_CMD%.exe -noP4 -platform=Win64 -serverconfig=Development -build  -WaitMutex -FromMsBuild
+call "%UE_INSTALL_PATH%\Engine\Build\BatchFiles\RunUAT.bat" BuildCookRun -project="%WORKSPACE%\BCSubsystem.uproject" -rocket -noP4 -platform=Win64 -clientconfig=Development -serverconfig=Development -build  -WaitMutex
 
 :: run specified test
-echo -- Extecuting now. Automation RunTests %TESTNAME%
-echo Report path is %WORKSPACE%\TestResults_Win64_%UE_VERSION%
-echo Log path is saved\logs\TestLog_Win64_%UE_VERSION%.log
-call "%UE_INSTALL_PATH%\Engine\Binaries\Win64\%UE_EDITOR_CMD%.exe" "%WORKSPACE%\BCSubsystem.uproject" -server -nosplash -unattended -nopause -nosound -NullRHI -nocontentbrowser -ExecCmds="Automation RunTests %TESTNAME%;quit" -TestExit="Automation Test Queue Empty" -ReportExportPath="%WORKSPACE%\TestResults_Win64_%UE_VERSION%" -log=TestLog_Win64_%UE_VERSION%.log
+echo -- Executing now. Automation RunTests %TESTNAME%
+echo Report path is %WORKSPACE%\artifacts\TestResults_Win64_%UE_VERSION%
+echo Log path is %WORKSPACE%\artifacts\TestLog_Win64_%UE_VERSION%.log
+"%UE_INSTALL_PATH%\Engine\Binaries\Win64\%UE_EDITOR_CMD%.exe" "%WORKSPACE%\BCSubsystem.uproject" -game -nosplash -unattended -nopause -nosound -NullRHI -nocontentbrowser -ExecCmds="Automation RunTests %TESTNAME%;quit" -TestExit="Automation Test Queue Empty" -ReportExportPath="%WORKSPACE%\artifacts\TestResults_Win64_%UE_VERSION%" -stdout -abslog="%WORKSPACE%\artifacts\TestLog_Win64_%UE_VERSION%.log"
 
 :: return code for tests
 exit /B %errorlevel%

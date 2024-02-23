@@ -9,6 +9,8 @@ public class BCSubsystemTarget : TargetRules
     {
 		Type = TargetType.Game;
         ExtraModuleNames.AddRange(new string[] { "BCSubsystem" });
+        //DefaultBuildSettings = BuildSettingsVersion.V4;
+        //IncludeOrderVersion = EngineIncludeOrderVersion.Latest;
 
         if (Target.Platform == UnrealTargetPlatform.Mac)
         {

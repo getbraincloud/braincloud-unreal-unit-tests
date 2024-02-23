@@ -1,11 +1,10 @@
 // Copyright 2015 bitHeads, Inc. All Rights Reserved.
 
-#include "BCSubsystem.h"
 #include "WrapperTestActor.h"
+#include "BCSubsystem.h"
 #include "BrainCloudWrapper.h"
 #include "ServiceName.h"
 #include "ServiceOperation.h"
-#include "ids.h"
 
 // Sets default values
 AWrapperTestActor::AWrapperTestActor()

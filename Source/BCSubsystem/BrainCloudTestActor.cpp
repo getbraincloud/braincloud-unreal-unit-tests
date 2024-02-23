@@ -1,11 +1,10 @@
 // Fill out your copyright notice in the Description page of Project Settings.
 
-#include "BCSubsystem.h"
 #include "BrainCloudTestActor.h"
+#include "BCSubsystem.h"
 #include "BrainCloudWrapper.h"
 #include "ServiceName.h"
 #include "ServiceOperation.h"
-#include "ids.h"
 
 // Sets default values
 ABrainCloudTestActor::ABrainCloudTestActor()

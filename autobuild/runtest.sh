@@ -15,15 +15,20 @@ echo UE_VERSION is $UE_VERSION
 
 TEST=${1:-Test_}
 
+
 # need to build c++ source code here
 #"${UE_INSTALL_PATH}/Engine/Build/BatchFiles/Mac/Build.sh" BCSubsystemEditor Mac Development -Project="$WORKSPACE/BCSubsystem.uproject"
 
 # need to build project here
-"${UE_INSTALL_PATH}/Engine/Build/BatchFiles/RunUAT.sh" BuildCookRun -project="$PWD/BCSubsystem.uproject" -noP4 -platform=Mac -clientconfig=Development -build
+bash "${UE_INSTALL_PATH}/Engine/Build/BatchFiles/RunUAT.sh" BuildCookRun -project="$WORKSPACE/BCSubsystem.uproject" -rocket -noP4 -platform=Mac -clientconfig=Development -serverconfig=Development -build -WaitMutex
+
+# option: list all tests
+if [[ "$TEST" == "ListAllTests" ]];
+then
+  # tests are under: Project.Functional Tests.AutomatedTestMaps
+  "${UE_INSTALL_PATH}/Engine/Binaries/Mac/${UE_EDITOR_CMD}" "$WORKSPACE/BCSubsystem.uproject" -game -nosplash -unattended -nopause -nosound -NullRHI -nocontentbrowser -ExecCmds="Automation List;quit"
+  exit 0
+fi
 
 # run specified test
-"${UE_INSTALL_PATH}/Engine/Binaries/Mac/${UE_EDITOR_CMD}" "$PWD/BCSubsystem.uproject"  -editortest -server -nosplash -unattended -nopause -nosound -NullRHI -nocontentbrowser -ExecCmds="Automation RunTests $TEST;quit" -testexit="Automation Test Queue Empty" -ReportExportPath="$PWD/TestResults_Mac_$UE_VERSION" -log=TestLog_Mac_$UE_VERSION.log
-
-cp ~/Library/Logs/Unreal\ Engine/BCSubsystemServer/TestLog_Mac_$UE_VERSION.log saved/logs/
-
-exit $?
+"${UE_INSTALL_PATH}/Engine/Binaries/Mac/${UE_EDITOR_CMD}" "$WORKSPACE/BCSubsystem.uproject" -game -nosplash -unattended -nopause -nosound -NullRHI -nocontentbrowser -ExecCmds="Automation RunTests $TEST;quit" -testexit="Automation Test Queue Empty" -ReportExportPath="$WORKSPACE/artifacts/TestResults_Mac_$UE_VERSION" -stdout -FullStdOutLogOutput -abslog=$WORKSPACE/artifacts/TestLog_Mac_$UE_VERSION.log
