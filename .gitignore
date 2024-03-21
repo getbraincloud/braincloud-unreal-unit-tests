@@ -65,6 +65,10 @@ Binaries/
 **/BCSubsystem_**
 **/BCClient_**
 
+Plugins/VaRest/
+CMakeLists.txt
+cmake-build-*/
+
 
 # files written by tests
 Artifacts/
