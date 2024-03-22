@@ -53,8 +53,8 @@ void ABrainCloudTestActor::serverCallback(ServiceName serviceName, ServiceOperat
 
         if (result == true) //if deserializing was successful
         {
-            TSharedPtr<FJsonObject> data = jsonReadObject->GetObjectField("data");
-            int64 serverTime = data->GetNumberField("server_time");
+            TSharedPtr<FJsonObject> data = jsonReadObject->GetObjectField(TEXT("data"));
+            int64 serverTime = data->GetNumberField(TEXT("server_time"));
             UE_LOG(LogTemp, Display, TEXT("The time is %d"), serverTime);
         }
         else
