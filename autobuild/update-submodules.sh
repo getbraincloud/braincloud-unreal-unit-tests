@@ -1,4 +1,6 @@
 #!/bin/bash
+git pull
+git submodule update --init
 if [[ $(git diff --compact-summary) ]];
 then
     if [[ $1 != "--force" ]];
