@@ -12,7 +12,8 @@ if [%TARGETS%]==[] set TARGETS=Win64
 
 :BuildPlugin
 echo -- Plugin package is %WORKSPACE%\artifacts\BCClient_%UE_VERSION%
-call "%UE_INSTALL_PATH%\Engine\Build\BatchFiles\RunUAT.bat" BuildPlugin -plugin="%WORKSPACE%\Plugins\BCClient\BCClient.uplugin" -targetplatforms=%TARGETS% -package="%WORKSPACE%\artifacts\BCClient_%UE_VERSION%" -CreateSubFolder
+if [%UE_VERSION%]==[4.27] set OPTS=-vs2019
+call "%UE_INSTALL_PATH%\Engine\Build\BatchFiles\RunUAT.bat" BuildPlugin -plugin="%WORKSPACE%\Plugins\BCClient\BCClient.uplugin" -targetplatforms=%TARGETS% %OPTS% -package="%WORKSPACE%\artifacts\BCClient_%UE_VERSION%" -CreateSubFolder
 
 goto Done
 

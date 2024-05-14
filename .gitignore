@@ -48,11 +48,26 @@ BCSubsystem**.xcworkspace
 
 # Binary Files
 Binaries/
-Build/
+
+# Don't ignore icon files in Build
+!**/Build/**/*.png
+!**/Build/**/*.icns
+!**/Build/**/PakBlacklist*.txt
+!**/Build/**/*.ico
+**/Build/**/*.log
+**/Build/**/*.properties
+**/Build/**/*.java
+**/Build/**/*.plist
+**/Build/**/*.entitlements
+**/Build/**/*.PackageVersionCounter
 
 # builds for device
 **/BCSubsystem_**
 **/BCClient_**
+
+Plugins/VaRest/
+CMakeLists.txt
+cmake-build-*/
 
 
 # files written by tests

@@ -55,5 +55,7 @@ This project will not open in older versions of Unreal Engine (assets will appea
 
 Open BCSubsystem.uproject by double-clicking or within engine. Build at command-line by exporting the correct paths in autobuild/runtest.sh or autobuild/runtest.bat.
 
-#### Older Versions
-There is a examples-unreal branch on github that runs in UE 4.27 using the same brainCloud plugin. https://github.com/getbraincloud/examples-unreal/tree/ue4-examples
+#### Older Versions:
+There is a examples-unreal branch on github that runs in UE 4.27 using the same brainCloud plugin. https://github.com/getbraincloud/examples-unreal
+
+The brainCloud plugin can be pre-built for any engine version.  https://github.com/getbraincloud/braincloud-unreal-plugin
