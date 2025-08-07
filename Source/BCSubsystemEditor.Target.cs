@@ -13,7 +13,7 @@ public class BCSubsystemEditorTarget : TargetRules
         //IncludeOrderVersion = EngineIncludeOrderVersion.Latest;
         //IncludeOrderVersion = EngineIncludeOrderVersion.Unreal5_6;
         bOverrideBuildEnvironment = true;
-        CppStandard = CppStandardVersion.Cpp20;
+		
         if (Target.Platform == UnrealTargetPlatform.Mac)
         {
             // use this compiler flag for Xcode 14 (Apple clang version 14.0.0)
