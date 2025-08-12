@@ -5,8 +5,8 @@
 #include "GameFramework/Actor.h"
 
 #include "OnlineSubsystem.h"
-#include "OnlineIdentityInterface.h"
-#include "OnlineMessageInterface.h"
+#include "Interfaces/OnlineIdentityInterface.h"
+#include "Interfaces/OnlineMessageInterface.h"
 
 #include "MessageSubsystemTestActor.generated.h"
 
