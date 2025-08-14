@@ -20,7 +20,7 @@ TEST=${1:-Test_}
 #"${UE_INSTALL_PATH}/Engine/Build/BatchFiles/Mac/Build.sh" BCSubsystemEditor Mac Development -Project="$WORKSPACE/BCSubsystem.uproject"
 
 # need to build project here
-bash "${UE_INSTALL_PATH}/Engine/Build/BatchFiles/RunUAT.sh" BuildCookRun -project="$WORKSPACE/BCSubsystem.uproject" -target=UE4Editor -noPCH -rocket -noP4 -platform=Mac -clientconfig=Development -serverconfig=Development -build -WaitMutex
+bash "${UE_INSTALL_PATH}/Engine/Build/BatchFiles/RunUAT.sh" BuildCookRun -project="$WORKSPACE/BCSubsystem.uproject" -noPCH -rocket -noP4 -platform=Mac -clientconfig=Development -serverconfig=Development -build -WaitMutex
 
 # option: list all tests
 if [[ "$TEST" == "ListAllTests" ]];
