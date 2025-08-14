@@ -21,7 +21,8 @@ public class BCSubsystemEditorTarget : TargetRules
             // not available in Xcode 13.2 or less (Apple clang version 13.0.0)
             bOverrideBuildEnvironment = true;
             AdditionalCompilerArguments = "-Wno-unused-but-set-variable";
-            AdditionalCompilerArguments += " -Wno-deprecated-builtins -Wno-bitwise-instead-of-logical";
+            AdditionalCompilerArguments = (AdditionalCompilerArguments ?? "") +
+    " -Wno-deprecated-builtins -Wno-bitwise-instead-of-logical -Wno-error=deprecated-builtins";
         }
     } 
 }
