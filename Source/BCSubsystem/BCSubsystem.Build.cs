@@ -13,9 +13,5 @@ public class BCSubsystem : ModuleRules
 
         // Uncomment if you are using Slate UI
         // PrivateDependencyModuleNames.AddRange(new string[] { "Slate", "SlateCore" });
-
-        //For MacOS newer clang to build on UE4
-        PublicCompileWarningsOverride.Add("deprecated-builtins");
-        PublicCompileWarningsOverride.Add("bitwise-instead-of-logical");
     }
 }
