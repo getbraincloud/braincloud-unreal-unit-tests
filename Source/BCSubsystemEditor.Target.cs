@@ -20,9 +20,7 @@ public class BCSubsystemEditorTarget : TargetRules
             // commandline option to avoid errors in Unreal source
             // not available in Xcode 13.2 or less (Apple clang version 13.0.0)
             bOverrideBuildEnvironment = true;
-            AdditionalCompilerArguments = "-Wno-unused-but-set-variable";
-            AdditionalCompilerArguments = (AdditionalCompilerArguments ?? "") +
-    " -Wno-deprecated-builtins -Wno-bitwise-instead-of-logical -Wno-error=deprecated-builtins";
+            AdditionalCompilerArguments = "-Wno-unused-const-variable";
         }
     } 
 }
