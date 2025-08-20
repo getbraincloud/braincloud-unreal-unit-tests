@@ -13,7 +13,7 @@ public class BCSubsystemEditorTarget : TargetRules
         //IncludeOrderVersion = EngineIncludeOrderVersion.Latest;
 		IncludeOrderVersion = EngineIncludeOrderVersion.Latest;
 		bOverrideBuildEnvironment = true;
-		CppStandard = CppStandardVersion.Cpp20
+		CppStandard = CppStandardVersion.Cpp20;
 
         if (Target.Platform == UnrealTargetPlatform.Mac)
         {
