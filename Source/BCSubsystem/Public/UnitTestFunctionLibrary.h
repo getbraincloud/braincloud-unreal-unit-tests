@@ -14,4 +14,6 @@ class BCSUBSYSTEM_API UUnitTestFunctionLibrary : public UBlueprintFunctionLibrar
 {
 	GENERATED_BODY()
 	
+	UFUNCTION(BlueprintCallable, Category = "Automation Testing")
+	static void ExportReport();
 };
