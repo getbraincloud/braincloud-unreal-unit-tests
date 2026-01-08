@@ -8,10 +8,11 @@ public class BCSubsystemEditorTarget : TargetRules
     public BCSubsystemEditorTarget(TargetInfo Target) : base(Target)
     {
 		Type = TargetType.Editor;
-        ExtraModuleNames.AddRange(new string[] { "BCSubsystem" });
         //DefaultBuildSettings = BuildSettingsVersion.V5;
-        //IncludeOrderVersion = EngineIncludeOrderVersion.Latest;
-		bOverrideBuildEnvironment = true;
+        IncludeOrderVersion = EngineIncludeOrderVersion.Latest;
+        bOverrideBuildEnvironment = true;
+        DefaultBuildSettings = BuildSettingsVersion.V6;
+        ExtraModuleNames.AddRange(new string[] { "BCSubsystem" });
 
         if (Target.Platform == UnrealTargetPlatform.Mac)
         {

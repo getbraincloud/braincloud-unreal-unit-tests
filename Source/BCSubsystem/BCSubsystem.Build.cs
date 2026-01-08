@@ -6,7 +6,8 @@ public class BCSubsystem : ModuleRules
 {
     public BCSubsystem(ReadOnlyTargetRules Target) : base(Target)
     {
-        PrivatePCHHeaderFile = "BCSubsystem.h";
+        //PrivatePCHHeaderFile = "BCSubsystem.h";
+        PCHUsage = PCHUsageMode.UseExplicitOrSharedPCHs;
 		PublicDependencyModuleNames.AddRange(new string[] { "Core", "CoreUObject", "Engine", "InputCore", "BCClientPlugin", "OnlineSubsystem", "OnlineSubsystemUtils", "Sockets" });
 
         PrivateDependencyModuleNames.AddRange(new string[] { "Json", "OnlineSubsystem" });
