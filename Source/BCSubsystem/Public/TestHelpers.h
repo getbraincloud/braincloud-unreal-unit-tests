@@ -17,4 +17,6 @@ class BCSUBSYSTEM_API UTestHelpers : public UBlueprintFunctionLibrary
 	UFUNCTION(BlueprintCallable, Category = "Test Utility")
 	static bool GetUseCompression();
 
+	UFUNCTION(BlueprintPure, Category = "Time")
+	static int64 DateTimeToUnixTimestampMs(const FDateTime& DateTime);
 };
