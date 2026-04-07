@@ -94,5 +94,6 @@
   "TargetPlatforms": [],
   "AdditionalRootDirectories": [],
   "AdditionalPluginDirectories": [],
+  "AdditionalCommandLineArguments": "-nullrhi -NoShaderCompile"
   "EpicSampleNameHash": ""
 }
