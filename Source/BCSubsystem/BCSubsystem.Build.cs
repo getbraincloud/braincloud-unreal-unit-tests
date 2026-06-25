@@ -7,6 +7,8 @@ public class BCSubsystem : ModuleRules
     public BCSubsystem(ReadOnlyTargetRules Target) : base(Target)
     {
         PrivatePCHHeaderFile = "BCSubsystem.h";
+        CppStandard = CppStandardVersion.Cpp20;
+        PrivateIncludePaths.Add(ModuleDirectory);
 		PublicDependencyModuleNames.AddRange(new string[] { "Core", "CoreUObject", "Engine", "InputCore", "BCClientPlugin", "OnlineSubsystem", "AutomationController", "OnlineSubsystemUtils", "Sockets" });
         PrivateDependencyModuleNames.AddRange(new string[] { "Json", "OnlineSubsystem" });
         

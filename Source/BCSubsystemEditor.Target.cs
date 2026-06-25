@@ -9,7 +9,7 @@ public class BCSubsystemEditorTarget : TargetRules
     {
 		Type = TargetType.Editor;
         ExtraModuleNames.AddRange(new string[] { "BCSubsystem" });
-        //DefaultBuildSettings = BuildSettingsVersion.V5;
+        DefaultBuildSettings = BuildSettingsVersion.Latest;
         //IncludeOrderVersion = EngineIncludeOrderVersion.Latest;
 		bOverrideBuildEnvironment = true;
 
@@ -20,7 +20,8 @@ public class BCSubsystemEditorTarget : TargetRules
             // not available in Xcode 13.2 or less (Apple clang version 13.0.0)
             bOverrideBuildEnvironment = true;
             AdditionalCompilerArguments = "-Wno-unused-but-set-variable";
-            CppStandard = CppStandardVersion.Cpp20;
+            
         }
+        CppStandard = CppStandardVersion.Cpp20;
     } 
 }
