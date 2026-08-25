@@ -47,9 +47,9 @@ void ASubsystemTestActor::LoginCallback(int32 LocalUserNum, bool bWasSuccessful,
 {
     UE_LOG(LogTemp, Log, TEXT("%s"), (_identity->GetLoginStatus(0) == ELoginStatus::LoggedIn) ? TEXT("true") : TEXT("false"));
 
-    _readObject->LeaderboardName = FString(TEXT("Test"));
-    _readObject->SortedColumn = FString(TEXT("score"));
-    new (_readObject->ColumnMetadata) FColumnMetaData(FString(TEXT("score")), EOnlineKeyValuePairDataType::Int32);
+    _readObject->LeaderboardName = FName(TEXT("Test"));
+    _readObject->SortedColumn = FName(TEXT("score"));
+    new (_readObject->ColumnMetadata) FColumnMetaData(FName(TEXT("score")), EOnlineKeyValuePairDataType::Int32);
 
     TArray< TSharedRef<const FUniqueNetId> > ListOfIDs;
     _id = _identity->GetUniquePlayerId(0);
@@ -70,7 +70,7 @@ void ASubsystemTestActor::LeaderboardCallback(bool bWasSuccessful)
 
         if (row != nullptr)
         {
-            FVariantData* Variant = row->Columns.Find(FString(TEXT("score")));
+            FVariantData* Variant = row->Columns.Find(FName(TEXT("score")));
 
             if (Variant != nullptr)
             {
