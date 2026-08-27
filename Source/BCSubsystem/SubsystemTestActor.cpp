@@ -47,8 +47,8 @@ void ASubsystemTestActor::LoginCallback(int32 LocalUserNum, bool bWasSuccessful,
 {
     UE_LOG(LogTemp, Log, TEXT("%s"), (_identity->GetLoginStatus(0) == ELoginStatus::LoggedIn) ? TEXT("true") : TEXT("false"));
 
-    // UE 5.7+ changed these fields from FName to FString/FNameDeprecationWrapper.
-#if ENGINE_MAJOR_VERSION == 5 && ENGINE_MINOR_VERSION >= 7
+    // FName deprecated in UE 5.5 in favour of FString; FString required from 5.5+.
+#if ENGINE_MAJOR_VERSION == 5 && ENGINE_MINOR_VERSION >= 5
     _readObject->LeaderboardName = FString(TEXT("Test"));
     _readObject->SortedColumn = FString(TEXT("score"));
     new (_readObject->ColumnMetadata) FColumnMetaData(FString(TEXT("score")), EOnlineKeyValuePairDataType::Int32);
@@ -77,8 +77,8 @@ void ASubsystemTestActor::LeaderboardCallback(bool bWasSuccessful)
 
         if (row != nullptr)
         {
-            // Columns key type changed from FName to FString in UE 5.7+.
-#if ENGINE_MAJOR_VERSION == 5 && ENGINE_MINOR_VERSION >= 7
+            // Columns key type changed from FName to FString in UE 5.5+.
+#if ENGINE_MAJOR_VERSION == 5 && ENGINE_MINOR_VERSION >= 5
             FVariantData* Variant = row->Columns.Find(FString(TEXT("score")));
 #else
             FVariantData* Variant = row->Columns.Find(FName(TEXT("score")));
