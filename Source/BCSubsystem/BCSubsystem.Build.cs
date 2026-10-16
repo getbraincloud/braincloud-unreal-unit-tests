@@ -9,10 +9,15 @@ public class BCSubsystem : ModuleRules
         PrivatePCHHeaderFile = "BCSubsystem.h";
         CppStandard = CppStandardVersion.Cpp20;
         PrivateIncludePaths.Add(ModuleDirectory);
-		PublicDependencyModuleNames.AddRange(new string[] { "Core", "CoreUObject", "Engine", "InputCore", "BCClientPlugin", "OnlineSubsystem", "AutomationController", "OnlineSubsystemUtils", "Sockets" });
+		PublicDependencyModuleNames.AddRange(new string[] { "Core", "CoreUObject", "Engine", "InputCore", "BCClientPlugin", "OnlineSubsystem", "OnlineSubsystemUtils", "Sockets" });
         PrivateDependencyModuleNames.AddRange(new string[] { "Json", "OnlineSubsystem" });
-        
-        // Uncomment if you are using Slate UI
-        // PrivateDependencyModuleNames.AddRange(new string[] { "Slate", "SlateCore" });
+        PrivateDependencyModuleNames.AddRange(new string[] { "Slate", "SlateCore", "AssetRegistry" });
+
+        // Test-only engine modules do not exist in Shipping builds.
+        if (Target.Configuration != UnrealTargetConfiguration.Shipping)
+        {
+            PublicDependencyModuleNames.Add("AutomationController");
+            PrivateDependencyModuleNames.Add("FunctionalTesting");
+        }
     }
 }
