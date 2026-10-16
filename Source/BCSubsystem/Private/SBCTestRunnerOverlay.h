@@ -22,7 +22,9 @@ public:
 	SLATE_END_ARGS()
 
 	void Construct(const FArguments& InArgs);
-	virtual void Tick(const FGeometry& AllottedGeometry, const double InCurrentTime, const float InDeltaTime) override;
+
+	/** Updates the counts, test list and log. Called by the runner every frame. */
+	void Refresh();
 
 private:
 	void RebuildTests();
@@ -39,6 +41,10 @@ private:
 	TSharedPtr<SScrollBox> TestList;
 	TSharedPtr<SScrollBox> LogList;
 	TSharedPtr<STextBlock> LogsButtonText;
+	TSharedPtr<STextBlock> StateText;
+	TSharedPtr<STextBlock> PassedText;
+	TSharedPtr<STextBlock> FailedText;
+	TSharedPtr<STextBlock> RemainingText;
 	TSharedPtr<STextBlock> ErrorsOnlyText;
 	TSet<FString> Expanded;
 	FString ScrolledTo;

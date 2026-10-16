@@ -439,6 +439,11 @@ bool UBCTestRunnerSubsystem::Tick(float DeltaTime)
 	{
 		ShowOverlay();
 	}
+	// Driven from here because Slate does not reliably tick viewport widgets on device.
+	if (Overlay.IsValid())
+	{
+		Overlay->Refresh();
+	}
 
 	if (!bDiscovered)
 	{
@@ -521,6 +526,8 @@ void UBCTestRunnerSubsystem::ShowOverlay()
 	}
 	GEngine->GameViewport->RemoveViewportWidgetContent(OverlayContainer.ToSharedRef());
 	GEngine->GameViewport->AddViewportWidgetContent(OverlayContainer.ToSharedRef(), 1000);
+	// Test maps print to the screen over the overlay; those lines are in the Logs panel instead.
+	GEngine->bEnableOnScreenDebugMessages = false;
 }
 
 void UBCTestRunnerSubsystem::HandlePostLoadMap(UWorld* World)

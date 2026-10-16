@@ -112,24 +112,19 @@ void SBCTestRunnerOverlay::Construct(const FArguments& InArgs)
 					SNew(SHorizontalBox)
 					+ SHorizontalBox::Slot().AutoWidth().Padding(0.f, 0.f, 16.f, 0.f)
 					[
-						SNew(STextBlock).Font(Font(16, true)).ColorAndOpacity(GRun)
-						.Text_Lambda([this]() { return FText::FromString(Runner.IsValid() && Runner->IsRunning() ? TEXT("Running") : TEXT("Idle")); })
+						SAssignNew(StateText, STextBlock).Font(Font(16, true)).ColorAndOpacity(GRun)
 					]
 					+ SHorizontalBox::Slot().AutoWidth().Padding(0.f, 0.f, 16.f, 0.f)
 					[
-						SNew(STextBlock).Font(Font(16, true)).ColorAndOpacity(GPass)
-						.Text_Lambda([this]() { return FText::FromString(FString::Printf(TEXT("Passed %d"), GetCount(EBCTestStatus::Passed))); })
+						SAssignNew(PassedText, STextBlock).Font(Font(16, true)).ColorAndOpacity(GPass)
 					]
 					+ SHorizontalBox::Slot().AutoWidth().Padding(0.f, 0.f, 16.f, 0.f)
 					[
-						SNew(STextBlock).Font(Font(16, true)).ColorAndOpacity(GFail)
-						.Text_Lambda([this]() { return FText::FromString(FString::Printf(TEXT("Failed %d"), GetCount(EBCTestStatus::Failed))); })
+						SAssignNew(FailedText, STextBlock).Font(Font(16, true)).ColorAndOpacity(GFail)
 					]
 					+ SHorizontalBox::Slot().AutoWidth()
 					[
-						SNew(STextBlock).Font(Font(16, true)).ColorAndOpacity(GText)
-						.Text_Lambda([this]() { return FText::FromString(FString::Printf(TEXT("Remaining %d"),
-							GetCount(EBCTestStatus::Pending) + GetCount(EBCTestStatus::Running))); })
+						SAssignNew(RemainingText, STextBlock).Font(Font(16, true)).ColorAndOpacity(GText)
 					]
 				]
 				+ SVerticalBox::Slot().AutoHeight().Padding(0.f, 0.f, 0.f, 8.f)
@@ -205,14 +200,21 @@ void SBCTestRunnerOverlay::Construct(const FArguments& InArgs)
 	];
 }
 
-void SBCTestRunnerOverlay::Tick(const FGeometry& AllottedGeometry, const double InCurrentTime, const float InDeltaTime)
+void SBCTestRunnerOverlay::Refresh()
 {
-	SCompoundWidget::Tick(AllottedGeometry, InCurrentTime, InDeltaTime);
-
 	UBCTestRunnerSubsystem* RunnerPtr = Runner.Get();
 	if (!RunnerPtr)
 	{
 		return;
+	}
+	const double InCurrentTime = FPlatformTime::Seconds();
+	if (StateText.IsValid())
+	{
+		StateText->SetText(FText::FromString(RunnerPtr->IsRunning() ? TEXT("Running") : TEXT("Idle")));
+		PassedText->SetText(FText::FromString(FString::Printf(TEXT("Passed %d"), GetCount(EBCTestStatus::Passed))));
+		FailedText->SetText(FText::FromString(FString::Printf(TEXT("Failed %d"), GetCount(EBCTestStatus::Failed))));
+		RemainingText->SetText(FText::FromString(FString::Printf(TEXT("Remaining %d"),
+			GetCount(EBCTestStatus::Pending) + GetCount(EBCTestStatus::Running))));
 	}
 	if (!bFilterInitialized && FilterBox.IsValid())
 	{
