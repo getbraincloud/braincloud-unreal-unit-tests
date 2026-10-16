@@ -9,6 +9,8 @@
 #include "Widgets/Input/SEditableTextBox.h"
 #include "Widgets/Layout/SBorder.h"
 #include "Widgets/Layout/SBox.h"
+#include "Widgets/Layout/SDPIScaler.h"
+#include "Widgets/Layout/SSafeZone.h"
 #include "Widgets/Layout/SScrollBox.h"
 #include "Widgets/SBoxPanel.h"
 #include "Widgets/SOverlay.h"
@@ -25,6 +27,12 @@ namespace
 	const FLinearColor GRun(0.98f, 0.80f, 0.25f);
 	const FLinearColor GWarningColor(0.95f, 0.65f, 0.20f);
 	const double GMinRebuildInterval = 0.25;
+#if PLATFORM_ANDROID || PLATFORM_IOS
+	// Phone screens are dense; scale up so text and buttons stay readable and tappable.
+	const float GScale = 1.5f;
+#else
+	const float GScale = 1.f;
+#endif
 
 	FSlateFontInfo Font(int32 Size, bool bBold = false)
 	{
@@ -75,27 +83,53 @@ void SBCTestRunnerOverlay::Construct(const FArguments& InArgs)
 	Runner = InArgs._Runner;
 	const FSlateBrush* WhiteBrush = FCoreStyle::Get().GetBrush("GenericWhiteBox");
 
+	// The background fills the screen; the content stays inside the notch and rounded-corner safe area.
 	ChildSlot
 	[
+		SNew(SBorder)
+		.BorderImage(WhiteBrush)
+		.BorderBackgroundColor(GBackground)
+		.Padding(0.f)
+		[
+		SNew(SSafeZone)
+		[
+		SNew(SDPIScaler)
+		.DPIScale(GScale)
+		[
 		SNew(SOverlay)
 		+ SOverlay::Slot()
 		[
-			SNew(SBorder)
-			.BorderImage(WhiteBrush)
-			.BorderBackgroundColor(GBackground)
+			SNew(SBox)
 			.Padding(FMargin(16.f))
 			[
 				SNew(SVerticalBox)
-				+ SVerticalBox::Slot().AutoHeight().Padding(0.f, 0.f, 0.f, 8.f)
+				+ SVerticalBox::Slot().AutoHeight()
+				[
+					SNew(STextBlock).Text(FText::FromString(TEXT("brainCloud Unit Tests"))).Font(Font(20, true)).ColorAndOpacity(GText)
+				]
+				+ SVerticalBox::Slot().AutoHeight().Padding(0.f, 4.f, 0.f, 8.f)
 				[
 					SNew(SHorizontalBox)
-					+ SHorizontalBox::Slot().FillWidth(1.f).VAlign(VAlign_Center)
+					+ SHorizontalBox::Slot().AutoWidth().Padding(0.f, 0.f, 16.f, 0.f)
 					[
-						SNew(STextBlock).Text(FText::FromString(TEXT("brainCloud Unit Tests"))).Font(Font(20, true)).ColorAndOpacity(GText)
+						SNew(STextBlock).Font(Font(16, true)).ColorAndOpacity(GRun)
+						.Text_Lambda([this]() { return FText::FromString(Runner.IsValid() && Runner->IsRunning() ? TEXT("Running") : TEXT("Idle")); })
 					]
-					+ SHorizontalBox::Slot().AutoWidth().VAlign(VAlign_Center)
+					+ SHorizontalBox::Slot().AutoWidth().Padding(0.f, 0.f, 16.f, 0.f)
 					[
-						SNew(STextBlock).Text(this, &SBCTestRunnerOverlay::GetSummaryText).Font(Font(14)).ColorAndOpacity(GText)
+						SNew(STextBlock).Font(Font(16, true)).ColorAndOpacity(GPass)
+						.Text_Lambda([this]() { return FText::FromString(FString::Printf(TEXT("Passed %d"), GetCount(EBCTestStatus::Passed))); })
+					]
+					+ SHorizontalBox::Slot().AutoWidth().Padding(0.f, 0.f, 16.f, 0.f)
+					[
+						SNew(STextBlock).Font(Font(16, true)).ColorAndOpacity(GFail)
+						.Text_Lambda([this]() { return FText::FromString(FString::Printf(TEXT("Failed %d"), GetCount(EBCTestStatus::Failed))); })
+					]
+					+ SHorizontalBox::Slot().AutoWidth()
+					[
+						SNew(STextBlock).Font(Font(16, true)).ColorAndOpacity(GText)
+						.Text_Lambda([this]() { return FText::FromString(FString::Printf(TEXT("Remaining %d"),
+							GetCount(EBCTestStatus::Pending) + GetCount(EBCTestStatus::Running))); })
 					]
 				]
 				+ SVerticalBox::Slot().AutoHeight().Padding(0.f, 0.f, 0.f, 8.f)
@@ -165,6 +199,9 @@ void SBCTestRunnerOverlay::Construct(const FArguments& InArgs)
 				]
 			]
 		]
+		]
+		]
+		]
 	];
 }
 
@@ -205,22 +242,17 @@ void SBCTestRunnerOverlay::Tick(const FGeometry& AllottedGeometry, const double 
 	}
 }
 
-FText SBCTestRunnerOverlay::GetSummaryText() const
+int32 SBCTestRunnerOverlay::GetCount(EBCTestStatus Status) const
 {
-	const UBCTestRunnerSubsystem* RunnerPtr = Runner.Get();
-	if (!RunnerPtr)
+	int32 Count = 0;
+	if (const UBCTestRunnerSubsystem* RunnerPtr = Runner.Get())
 	{
-		return FText::GetEmpty();
+		for (const FBCTestEntry& Entry : RunnerPtr->GetTests())
+		{
+			Count += Entry.Status == Status ? 1 : 0;
+		}
 	}
-	int32 Passed = 0, Failed = 0, Remaining = 0;
-	for (const FBCTestEntry& Entry : RunnerPtr->GetTests())
-	{
-		if (Entry.Status == EBCTestStatus::Passed) ++Passed;
-		else if (Entry.Status == EBCTestStatus::Failed) ++Failed;
-		else ++Remaining;
-	}
-	return FText::FromString(FString::Printf(TEXT("%s   Passed %d   Failed %d   Remaining %d"),
-		RunnerPtr->IsRunning() ? TEXT("Running") : TEXT("Idle"), Passed, Failed, Remaining));
+	return Count;
 }
 
 void SBCTestRunnerOverlay::RebuildTests()
@@ -252,9 +284,7 @@ void SBCTestRunnerOverlay::RebuildTests()
 			: FString::Printf(TEXT("%d/%d calls   %.1fs"), PassedOps, Entry.Operations.Num(),
 				Entry.Status == EBCTestStatus::Running ? FPlatformTime::Seconds() - Entry.StartTime : Entry.Duration);
 
-		TestList->AddSlot().Padding(0.f, 2.f)
-		[
-			SNew(SButton)
+		TSharedRef<SWidget> Row = SNew(SButton)
 			.ButtonStyle(&FCoreStyle::Get().GetWidgetStyle<FButtonStyle>("NoBorder"))
 			.OnClicked(FOnClicked::CreateSP(this, &SBCTestRunnerOverlay::HandleTestClicked, Entry.FullPath))
 			[
@@ -274,8 +304,17 @@ void SBCTestRunnerOverlay::RebuildTests()
 				[
 					SNew(STextBlock).Text(FText::FromString(Detail)).Font(Font(12)).ColorAndOpacity(GDim)
 				]
-			]
+			];
+		TestList->AddSlot().Padding(0.f, 2.f)
+		[
+			Row
 		];
+		// Follow the run so the current test stays on screen.
+		if (Entry.Status == EBCTestStatus::Running && Entry.FullPath != ScrolledTo)
+		{
+			ScrolledTo = Entry.FullPath;
+			TestList->ScrollDescendantIntoView(Row, true, EDescendantScrollDestination::Center);
+		}
 
 		if (!Expanded.Contains(Entry.FullPath))
 		{

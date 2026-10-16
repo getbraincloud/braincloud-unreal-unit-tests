@@ -6,6 +6,7 @@
 #include "Widgets/SCompoundWidget.h"
 
 class UBCTestRunnerSubsystem;
+enum class EBCTestStatus : uint8;
 class SEditableTextBox;
 class SScrollBox;
 class STextBlock;
@@ -26,7 +27,7 @@ public:
 private:
 	void RebuildTests();
 	void RebuildLog();
-	FText GetSummaryText() const;
+	int32 GetCount(EBCTestStatus Status) const;
 	FReply HandleRunClicked();
 	FReply HandleLogsClicked();
 	FReply HandleErrorsOnlyClicked();
@@ -40,6 +41,7 @@ private:
 	TSharedPtr<STextBlock> LogsButtonText;
 	TSharedPtr<STextBlock> ErrorsOnlyText;
 	TSet<FString> Expanded;
+	FString ScrolledTo;
 	uint32 ShownRevision = MAX_uint32;
 	double LastRebuildTime = 0.0;
 	bool bLogVisible = false;
