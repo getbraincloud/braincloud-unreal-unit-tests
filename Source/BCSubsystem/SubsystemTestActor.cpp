@@ -47,9 +47,16 @@ void ASubsystemTestActor::LoginCallback(int32 LocalUserNum, bool bWasSuccessful,
 {
     UE_LOG(LogTemp, Log, TEXT("%s"), (_identity->GetLoginStatus(0) == ELoginStatus::LoggedIn) ? TEXT("true") : TEXT("false"));
 
-    _readObject->LeaderboardName = TEXT("Test");
-    _readObject->SortedColumn = TEXT("score");
-    new (_readObject->ColumnMetadata) FColumnMetaData(TEXT("score"), EOnlineKeyValuePairDataType::Int32);
+    // FName deprecated in UE 5.5 in favour of FString; FString required from 5.5+.
+#if ENGINE_MAJOR_VERSION == 5 && ENGINE_MINOR_VERSION >= 5
+    _readObject->LeaderboardName = FString(TEXT("Test"));
+    _readObject->SortedColumn = FString(TEXT("score"));
+    new (_readObject->ColumnMetadata) FColumnMetaData(FString(TEXT("score")), EOnlineKeyValuePairDataType::Int32);
+#else
+    _readObject->LeaderboardName = FName(TEXT("Test"));
+    _readObject->SortedColumn = FName(TEXT("score"));
+    new (_readObject->ColumnMetadata) FColumnMetaData(FName(TEXT("score")), EOnlineKeyValuePairDataType::Int32);
+#endif
 
     TArray< TSharedRef<const FUniqueNetId> > ListOfIDs;
     _id = _identity->GetUniquePlayerId(0);
@@ -70,7 +77,12 @@ void ASubsystemTestActor::LeaderboardCallback(bool bWasSuccessful)
 
         if (row != nullptr)
         {
-            FVariantData* Variant = row->Columns.Find("score");
+            // Columns key type changed from FName to FString in UE 5.5+.
+#if ENGINE_MAJOR_VERSION == 5 && ENGINE_MINOR_VERSION >= 5
+            FVariantData* Variant = row->Columns.Find(FString(TEXT("score")));
+#else
+            FVariantData* Variant = row->Columns.Find(FName(TEXT("score")));
+#endif
 
             if (Variant != nullptr)
             {

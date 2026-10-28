@@ -5,9 +5,9 @@
 #include "GameFramework/Actor.h"
 
 #include "OnlineSubsystem.h"
-#include "OnlineIdentityInterface.h"
-#include "OnlineLeaderboardInterface.h"
-#include "OnlineAchievementsInterface.h"
+#include "Interfaces/OnlineIdentityInterface.h"
+#include "Interfaces/OnlineLeaderboardInterface.h"
+#include "Interfaces/OnlineAchievementsInterface.h"
 
 #include "SubsystemTestActor.generated.h"
 

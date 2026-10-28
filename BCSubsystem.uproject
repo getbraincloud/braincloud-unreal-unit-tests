@@ -84,8 +84,16 @@
 		},
 		{
 			"Name": "VaRest",
-			"Enabled": true,
-			"MarketplaceURL": "com.epicgames.launcher://ue/marketplace/content/e47be161e7a24e928560290abd5dcc4f"
+			"Enabled": false
+		},
+		{
+			"Name": "JsonBlueprintUtilities",
+			"Enabled": true
 		}
-	]
+	],
+	"TargetPlatforms": [],
+	"AdditionalRootDirectories": [],
+	"AdditionalPluginDirectories": [],
+	"AdditionalCommandLineArguments": "-nullrhi -NoShaderCompile",
+	"EpicSampleNameHash": ""
 }
